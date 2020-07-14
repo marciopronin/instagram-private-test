@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="../css/template.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-top-header"></header>
+    <header class="phpdocumentor-header">
+        <section class="phpdocumentor-section">
+            <h1 class="phpdocumentor-title">Documentation</h1>
+        </section>
+    </header>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/instagramapi.html"><abbr title="\InstagramAPI">InstagramAPI</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/instagramapi-devices.html"><abbr title="\InstagramAPI\Devices">Devices</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-exception.html"><abbr title="\InstagramAPI\Exception">Exception</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-media.html"><abbr title="\InstagramAPI\Media">Media</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-middleware.html"><abbr title="\InstagramAPI\Middleware">Middleware</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-push.html"><abbr title="\InstagramAPI\Push">Push</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-react.html"><abbr title="\InstagramAPI\React">React</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-settings.html"><abbr title="\InstagramAPI\Settings">Settings</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="nine phpdocumentor-columns phpdocumentor-content">
+                <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/instagramapi.html">InstagramAPI</a></li>
+                    <li><a href="../namespaces/instagramapi-realtime.html">Realtime</a></li>
+                    <li><a href="../namespaces/instagramapi-realtime-mqttot.html">Mqttot</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            RealtimeFlowFactory
+                                                        </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">18</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary"></p>
+        <section class="phpdocumentor-class__description"></section>
+                
+
+        <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#property__clientIdentifierGenerator">$_clientIdentifierGenerator</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\ClientIdentifierGenerator">ClientIdentifierGenerator</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#property__packetIdentifierGenerator">$_packetIdentifierGenerator</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\PacketIdentifierGenerator">PacketIdentifierGenerator</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#property__packetFactory">$_packetFactory</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\PacketFactory">PacketFactory</abbr></td>
+                </tr>
+                                                                <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#method___construct">__construct()</a></th>
+                    <td class="phpdocumentor-cell">Constructs an instance of this class.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#method_buildIncomingPingFlow">buildIncomingPingFlow()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\Flow\IncomingPingFlow">IncomingPingFlow</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#method_buildIncomingPublishFlow">buildIncomingPublishFlow()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\Flow\IncomingPublishFlow">IncomingPublishFlow</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#method_buildOutgoingConnectFlow">buildOutgoingConnectFlow()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeConnectFlow.html"><abbr title="\InstagramAPI\Realtime\Mqttot\RealtimeConnectFlow">RealtimeConnectFlow</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#method_buildOutgoingDisconnectFlow">buildOutgoingDisconnectFlow()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingDisconnectFlow">OutgoingDisconnectFlow</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#method_buildOutgoingPingFlow">buildOutgoingPingFlow()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingPingFlow">OutgoingPingFlow</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#method_buildOutgoingPublishFlow">buildOutgoingPublishFlow()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingPublishFlow">OutgoingPublishFlow</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#method_buildOutgoingSubscribeFlow">buildOutgoingSubscribeFlow()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingSubscribeFlow">OutgoingSubscribeFlow</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeFlowFactory.html#method_buildOutgoingUnsubscribeFlow">buildOutgoingUnsubscribeFlow()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingUnsubscribeFlow">OutgoingUnsubscribeFlow</abbr></td>
+                </tr>
+                                            </table>
+
+        
+                    <section>
+                <h3 class="phpdocumentor-properties__header">Properties</h3>
+                                    <a id="property__clientIdentifierGenerator"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_clientIdentifierGenerator</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">23</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\BinSoul\Net\Mqtt\ClientIdentifierGenerator">ClientIdentifierGenerator</abbr></span>
+        <span class="phpdocumentor-signature__name">$_clientIdentifierGenerator</span>
+            </code>
+            
+</article>
+                                    <a id="property__packetIdentifierGenerator"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_packetIdentifierGenerator</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">27</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\BinSoul\Net\Mqtt\PacketIdentifierGenerator">PacketIdentifierGenerator</abbr></span>
+        <span class="phpdocumentor-signature__name">$_packetIdentifierGenerator</span>
+            </code>
+            
+</article>
+                                    <a id="property__packetFactory"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_packetFactory</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">31</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\BinSoul\Net\Mqtt\PacketFactory">PacketFactory</abbr></span>
+        <span class="phpdocumentor-signature__name">$_packetFactory</span>
+            </code>
+            
+</article>
+                                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method___construct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__construct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">40</span>
+    </aside>
+        <p class="phpdocumentor-summary">Constructs an instance of this class.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__construct</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$clientIdentifierGenerator</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\ClientIdentifierGenerator">ClientIdentifierGenerator</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$packetIdentifierGenerator</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\PacketIdentifierGenerator">PacketIdentifierGenerator</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$packetFactory</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\PacketFactory">PacketFactory</abbr></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$clientIdentifierGenerator</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\ClientIdentifierGenerator">ClientIdentifierGenerator</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$packetIdentifierGenerator</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\PacketIdentifierGenerator">PacketIdentifierGenerator</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$packetFactory</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\PacketFactory">PacketFactory</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_buildIncomingPingFlow"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildIncomingPingFlow()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">50</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">buildIncomingPingFlow</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\IncomingPingFlow">IncomingPingFlow</abbr></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\IncomingPingFlow">IncomingPingFlow</abbr></span>
+            
+</article>
+                                    <a id="method_buildIncomingPublishFlow"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildIncomingPublishFlow()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">55</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">buildIncomingPublishFlow</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$message</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\Message">Message</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$identifier</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\IncomingPublishFlow">IncomingPublishFlow</abbr></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$message</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\Message">Message</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$identifier</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\IncomingPublishFlow">IncomingPublishFlow</abbr></span>
+            
+</article>
+                                    <a id="method_buildOutgoingConnectFlow"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildOutgoingConnectFlow()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">62</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">buildOutgoingConnectFlow</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$connection</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeConnection.html"><abbr title="\InstagramAPI\Realtime\Mqttot\RealtimeConnection">RealtimeConnection</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeConnectFlow.html"><abbr title="\InstagramAPI\Realtime\Mqttot\RealtimeConnectFlow">RealtimeConnectFlow</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$connection</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeConnection.html"><abbr title="\InstagramAPI\Realtime\Mqttot\RealtimeConnection">RealtimeConnection</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeConnectFlow.html"><abbr title="\InstagramAPI\Realtime\Mqttot\RealtimeConnectFlow">RealtimeConnectFlow</abbr></a></span>
+            
+</article>
+                                    <a id="method_buildOutgoingDisconnectFlow"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildOutgoingDisconnectFlow()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">68</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">buildOutgoingDisconnectFlow</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$connection</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\Connection">Connection</abbr></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingDisconnectFlow">OutgoingDisconnectFlow</abbr></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$connection</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\Connection">Connection</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingDisconnectFlow">OutgoingDisconnectFlow</abbr></span>
+            
+</article>
+                                    <a id="method_buildOutgoingPingFlow"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildOutgoingPingFlow()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">74</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">buildOutgoingPingFlow</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingPingFlow">OutgoingPingFlow</abbr></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingPingFlow">OutgoingPingFlow</abbr></span>
+            
+</article>
+                                    <a id="method_buildOutgoingPublishFlow"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildOutgoingPublishFlow()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">79</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">buildOutgoingPublishFlow</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$message</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\Message">Message</abbr></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingPublishFlow">OutgoingPublishFlow</abbr></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$message</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\Message">Message</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingPublishFlow">OutgoingPublishFlow</abbr></span>
+            
+</article>
+                                    <a id="method_buildOutgoingSubscribeFlow"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildOutgoingSubscribeFlow()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">85</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">buildOutgoingSubscribeFlow</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$subscriptions</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingSubscribeFlow">OutgoingSubscribeFlow</abbr></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$subscriptions</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingSubscribeFlow">OutgoingSubscribeFlow</abbr></span>
+            
+</article>
+                                    <a id="method_buildOutgoingUnsubscribeFlow"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">buildOutgoingUnsubscribeFlow()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqttot/RealtimeFlowFactory.php"><a href="../files/src-realtime-mqttot-realtimeflowfactory.html"><abbr title="src/Realtime/Mqttot/RealtimeFlowFactory.php">RealtimeFlowFactory.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">91</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">buildOutgoingUnsubscribeFlow</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$subscriptions</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingUnsubscribeFlow">OutgoingUnsubscribeFlow</abbr></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$subscriptions</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\BinSoul\Net\Mqtt\Flow\OutgoingUnsubscribeFlow">OutgoingUnsubscribeFlow</abbr></span>
+            
+</article>
+                                                            </section>
+            </article>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                    <h2>Search results</h2>
+                    <ul class="phpdocumentor-search-results__entries">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

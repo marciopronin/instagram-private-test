@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="../css/template.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-top-header"></header>
+    <header class="phpdocumentor-header">
+        <section class="phpdocumentor-section">
+            <h1 class="phpdocumentor-title">Documentation</h1>
+        </section>
+    </header>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/instagramapi.html"><abbr title="\InstagramAPI">InstagramAPI</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/instagramapi-devices.html"><abbr title="\InstagramAPI\Devices">Devices</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-exception.html"><abbr title="\InstagramAPI\Exception">Exception</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-media.html"><abbr title="\InstagramAPI\Media">Media</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-middleware.html"><abbr title="\InstagramAPI\Middleware">Middleware</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-push.html"><abbr title="\InstagramAPI\Push">Push</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-react.html"><abbr title="\InstagramAPI\React">React</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-settings.html"><abbr title="\InstagramAPI\Settings">Settings</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="nine phpdocumentor-columns phpdocumentor-content">
+                <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/instagramapi.html">InstagramAPI</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            Client
+                                                        </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">31</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary">This class handles core API network communication.</p>
+        <section class="phpdocumentor-class__description"><p>WARNING TO CONTRIBUTORS: This class is a wrapper for the HTTP client, and
+handles raw networking, cookies, HTTP requests and responses. Don't put
+anything related to high level API functions (such as file uploads) here.
+Most of the higher level code belongs in either the Request class or in the
+individual endpoint functions.</p></section>
+                    <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"><p>mgp25: Founder, Reversing, Project Leader (<a href="https://github.com/mgp25">https://github.com/mgp25</a>)</p></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"><p>SteveJobzniak (<a href="https://github.com/SteveJobzniak">https://github.com/SteveJobzniak</a>)</p></section>
+                </dd>
+                        </dl>
+
+
+        <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#constant_COOKIE_AUTOSAVE_INTERVAL">COOKIE_AUTOSAVE_INTERVAL</a></th>
+                    <td class="phpdocumentor-cell">How frequently we&#039;re allowed to auto-save the cookie jar, in seconds.</td>
+                    <td class="phpdocumentor-cell">45</td>
+                </tr>
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__parent">$_parent</a></th>
+                    <td class="phpdocumentor-cell">The Instagram class instance we belong to.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__userAgent">$_userAgent</a></th>
+                    <td class="phpdocumentor-cell">What user agent to identify our client as.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__verifySSL">$_verifySSL</a></th>
+                    <td class="phpdocumentor-cell">The SSL certificate verification behavior of requests.</td>
+                    <td class="phpdocumentor-cell">bool|string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__proxy">$_proxy</a></th>
+                    <td class="phpdocumentor-cell">Proxy to use for all requests. Optional.</td>
+                    <td class="phpdocumentor-cell">string|array|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__resolveHost">$_resolveHost</a></th>
+                    <td class="phpdocumentor-cell">Resolving host. Optional.</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__outputInterface">$_outputInterface</a></th>
+                    <td class="phpdocumentor-cell">Network interface override to use.</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__guzzleClient">$_guzzleClient</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\GuzzleHttp\Client">Client</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__fakeCookies">$_fakeCookies</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Middleware-FakeCookies.html"><abbr title="\InstagramAPI\Middleware\FakeCookies">FakeCookies</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__zeroRating">$_zeroRating</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Middleware-ZeroRating.html"><abbr title="\InstagramAPI\Middleware\ZeroRating">ZeroRating</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__cookieJar">$_cookieJar</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\GuzzleHttp\Cookie\CookieJar">CookieJar</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__cookieJarLastSaved">$_cookieJarLastSaved</a></th>
+                    <td class="phpdocumentor-cell">The timestamp of when we last saved our cookie jar to disk.</td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__resetConnection">$_resetConnection</a></th>
+                    <td class="phpdocumentor-cell">The flag to force cURL to reopen a fresh connection.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__lastRequest">$_lastRequest</a></th>
+                    <td class="phpdocumentor-cell">The most recent request processed.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__pigeonBatch">$_pigeonBatch</a></th>
+                    <td class="phpdocumentor-cell">The flag will use same pigeon Timestamp.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__pigeonTimestamp">$_pigeonTimestamp</a></th>
+                    <td class="phpdocumentor-cell">The Pigeon Timestamp.</td>
+                    <td class="phpdocumentor-cell">float</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__pigeonSession">$_pigeonSession</a></th>
+                    <td class="phpdocumentor-cell">The Pigeon Session ID.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__totalTime">$_totalTime</a></th>
+                    <td class="phpdocumentor-cell">Total time elapsed.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__totalBytes">$_totalBytes</a></th>
+                    <td class="phpdocumentor-cell">Total Bytes received.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__bandwidthB">$_bandwidthB</a></th>
+                    <td class="phpdocumentor-cell">Bytes received in the latest response.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__bandwidthM">$_bandwidthM</a></th>
+                    <td class="phpdocumentor-cell">Time elapsed in the latest response.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property_wwwClaim">$wwwClaim</a></th>
+                    <td class="phpdocumentor-cell">IG WWW Claim.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__directRegionHint">$_directRegionHint</a></th>
+                    <td class="phpdocumentor-cell">Direct Region Hint.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__shbid">$_shbid</a></th>
+                    <td class="phpdocumentor-cell">SHBID.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__shbts">$_shbts</a></th>
+                    <td class="phpdocumentor-cell">SHBTS.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__rur">$_rur</a></th>
+                    <td class="phpdocumentor-cell">RUR.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__dsUserId">$_dsUserId</a></th>
+                    <td class="phpdocumentor-cell">DS User ID.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                                                                <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method___construct">__construct()</a></th>
+                    <td class="phpdocumentor-cell">Constructor.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_updateFromCurrentSettings">updateFromCurrentSettings()</a></th>
+                    <td class="phpdocumentor-cell">Resets certain Client settings via the current Settings storage.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_loadCookieJar">loadCookieJar()</a></th>
+                    <td class="phpdocumentor-cell">Loads all cookies via the current Settings storage.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getPigeonSession">getPigeonSession()</a></th>
+                    <td class="phpdocumentor-cell">Retrieve Pigeon Session ID.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getToken">getToken()</a></th>
+                    <td class="phpdocumentor-cell">Retrieve the CSRF token from the current cookie jar.</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getMid">getMid()</a></th>
+                    <td class="phpdocumentor-cell">Retrieve the MID token from the current cookie jar.</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getCookie">getCookie()</a></th>
+                    <td class="phpdocumentor-cell">Searches for a specific cookie in the current jar.</td>
+                    <td class="phpdocumentor-cell"><abbr title="\GuzzleHttp\Cookie\SetCookie">SetCookie</abbr>|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getCookieJarAsJSON">getCookieJarAsJSON()</a></th>
+                    <td class="phpdocumentor-cell">Gives you all cookies in the Jar encoded as a JSON string.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_saveCookieJar">saveCookieJar()</a></th>
+                    <td class="phpdocumentor-cell">Tells current settings storage to store cookies if necessary.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_setVerifySSL">setVerifySSL()</a></th>
+                    <td class="phpdocumentor-cell">Controls the SSL verification behavior of the Client.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getVerifySSL">getVerifySSL()</a></th>
+                    <td class="phpdocumentor-cell">Gets the current SSL verification behavior of the Client.</td>
+                    <td class="phpdocumentor-cell">bool|string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_setProxy">setProxy()</a></th>
+                    <td class="phpdocumentor-cell">Set the proxy to use for requests.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getProxy">getProxy()</a></th>
+                    <td class="phpdocumentor-cell">Gets the current proxy used for requests.</td>
+                    <td class="phpdocumentor-cell">string|array|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_setResolveHost">setResolveHost()</a></th>
+                    <td class="phpdocumentor-cell">Set the resolving host.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getResolveHost">getResolveHost()</a></th>
+                    <td class="phpdocumentor-cell">Gets the current resolving host.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_setOutputInterface">setOutputInterface()</a></th>
+                    <td class="phpdocumentor-cell">Sets the network interface override to use.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getOutputInterface">getOutputInterface()</a></th>
+                    <td class="phpdocumentor-cell">Gets the current network interface override used for requests.</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method__printDebug">_printDebug()</a></th>
+                    <td class="phpdocumentor-cell">Output debugging information.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_mapServerResponse">mapServerResponse()</a></th>
+                    <td class="phpdocumentor-cell">Maps a server response onto a specific kind of result object.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method__buildGuzzleOptions">_buildGuzzleOptions()</a></th>
+                    <td class="phpdocumentor-cell">Helper which builds in the most important Guzzle options.</td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method__guzzleRequest">_guzzleRequest()</a></th>
+                    <td class="phpdocumentor-cell">Wraps Guzzle&#039;s request and adds special error handling and options.</td>
+                    <td class="phpdocumentor-cell"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method__apiRequest">_apiRequest()</a></th>
+                    <td class="phpdocumentor-cell">Internal wrapper around _guzzleRequest().</td>
+                    <td class="phpdocumentor-cell"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_api">api()</a></th>
+                    <td class="phpdocumentor-cell">Perform an Instagram API call.</td>
+                    <td class="phpdocumentor-cell"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_api_body_decode">api_body_decode()</a></th>
+                    <td class="phpdocumentor-cell">Decode a JSON reply from Instagram&#039;s API.</td>
+                    <td class="phpdocumentor-cell">object|array|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_fakeCookies">fakeCookies()</a></th>
+                    <td class="phpdocumentor-cell">Get the cookies middleware instance.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Middleware-FakeCookies.html"><abbr title="\InstagramAPI\Middleware\FakeCookies">FakeCookies</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_zeroRating">zeroRating()</a></th>
+                    <td class="phpdocumentor-cell">Get the zero rating rewrite middleware instance.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Middleware-ZeroRating.html"><abbr title="\InstagramAPI\Middleware\ZeroRating">ZeroRating</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_startEmulatingBatch">startEmulatingBatch()</a></th>
+                    <td class="phpdocumentor-cell">Start Pigeon batch requests.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_stopEmulatingBatch">stopEmulatingBatch()</a></th>
+                    <td class="phpdocumentor-cell">Stop Pigeon batch requests.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method__getPigeonRawClientTime">_getPigeonRawClientTime()</a></th>
+                    <td class="phpdocumentor-cell">Get Pigeon Client time.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_setLastRequest">setLastRequest()</a></th>
+                    <td class="phpdocumentor-cell">Sets the last processed request.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method_getLastRequest">getLastRequest()</a></th>
+                    <td class="phpdocumentor-cell">Gets the last processed point.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></td>
+                </tr>
+                                            </table>
+
+                    <section>
+                <h3 class="phpdocumentor-constants__header">Constants</h3>
+                                    <a id="constant_COOKIE_AUTOSAVE_INTERVAL"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">COOKIE_AUTOSAVE_INTERVAL</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">38</span>
+    </aside>
+            <p class="phpdocumentor-summary">How frequently we&#039;re allowed to auto-save the cookie jar, in seconds.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$COOKIE_AUTOSAVE_INTERVAL</span>
+        = <span class="phpdocumentor-signature__default-value">45</span>
+    </code>
+            
+</article>
+                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-properties__header">Properties</h3>
+                                    <a id="property__parent"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_parent</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">45</span>
+    </aside>
+            <p class="phpdocumentor-summary">The Instagram class instance we belong to.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_parent</span>
+            </code>
+            
+</article>
+                                    <a id="property__userAgent"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_userAgent</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">52</span>
+    </aside>
+            <p class="phpdocumentor-summary">What user agent to identify our client as.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_userAgent</span>
+            </code>
+            
+</article>
+                                    <a id="property__verifySSL"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_verifySSL</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">61</span>
+    </aside>
+            <p class="phpdocumentor-summary">The SSL certificate verification behavior of requests.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">bool|string</span>
+        <span class="phpdocumentor-signature__name">$_verifySSL</span>
+            </code>
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="http://docs.guzzlephp.org/en/latest/request-options.html#verify"><abbr title="http://docs.guzzlephp.org/en/latest/request-options.html#verify">http://docs.guzzlephp.org/en/latest/request-options.html#verify</abbr></a></span>
+                                                            <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+</article>
+                                    <a id="property__proxy"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_proxy</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">70</span>
+    </aside>
+            <p class="phpdocumentor-summary">Proxy to use for all requests. Optional.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string|array|null</span>
+        <span class="phpdocumentor-signature__name">$_proxy</span>
+            </code>
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="http://docs.guzzlephp.org/en/latest/request-options.html#proxy"><abbr title="http://docs.guzzlephp.org/en/latest/request-options.html#proxy">http://docs.guzzlephp.org/en/latest/request-options.html#proxy</abbr></a></span>
+                                                            <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+</article>
+                                    <a id="property__resolveHost"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_resolveHost</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">79</span>
+    </aside>
+            <p class="phpdocumentor-summary">Resolving host. Optional.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__name">$_resolveHost</span>
+            </code>
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html"><abbr title="https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html">https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html</abbr></a></span>
+                                                            <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+</article>
+                                    <a id="property__outputInterface"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_outputInterface</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">91</span>
+    </aside>
+            <p class="phpdocumentor-summary">Network interface override to use.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__name">$_outputInterface</span>
+            </code>
+        <section class="phpdocumentor-description"><p>Only works if Guzzle is using the cURL backend. But that's
+almost always the case, on most PHP installations.</p></section>
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="http://php.net/curl_setopt"><abbr title="http://php.net/curl_setopt">http://php.net/curl_setopt</abbr></a></span>
+                                                            <section class="phpdocumentor-description"><p>CURLOPT_INTERFACE</p></section>
+                </dd>
+                        </dl>
+
+</article>
+                                    <a id="property__guzzleClient"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_guzzleClient</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">96</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\GuzzleHttp\Client">Client</abbr></span>
+        <span class="phpdocumentor-signature__name">$_guzzleClient</span>
+            </code>
+            
+</article>
+                                    <a id="property__fakeCookies"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_fakeCookies</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">101</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Middleware-FakeCookies.html"><abbr title="\InstagramAPI\Middleware\FakeCookies">FakeCookies</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_fakeCookies</span>
+            </code>
+            
+</article>
+                                    <a id="property__zeroRating"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_zeroRating</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">106</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Middleware-ZeroRating.html"><abbr title="\InstagramAPI\Middleware\ZeroRating">ZeroRating</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_zeroRating</span>
+            </code>
+            
+</article>
+                                    <a id="property__cookieJar"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_cookieJar</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">111</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\GuzzleHttp\Cookie\CookieJar">CookieJar</abbr></span>
+        <span class="phpdocumentor-signature__name">$_cookieJar</span>
+            </code>
+            
+</article>
+                                    <a id="property__cookieJarLastSaved"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_cookieJarLastSaved</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">121</span>
+    </aside>
+            <p class="phpdocumentor-summary">The timestamp of when we last saved our cookie jar to disk.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$_cookieJarLastSaved</span>
+            </code>
+        <section class="phpdocumentor-description"><p>Used for automatically saving the jar after any API call, after enough
+time has elapsed since our last save.</p></section>
+            
+</article>
+                                    <a id="property__resetConnection"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_resetConnection</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">128</span>
+    </aside>
+            <p class="phpdocumentor-summary">The flag to force cURL to reopen a fresh connection.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">bool</span>
+        <span class="phpdocumentor-signature__name">$_resetConnection</span>
+            </code>
+            
+</article>
+                                    <a id="property__lastRequest"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_lastRequest</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">138</span>
+    </aside>
+            <p class="phpdocumentor-summary">The most recent request processed.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_lastRequest</span>
+            </code>
+        <section class="phpdocumentor-description"><p>Used for debugging failed requests in exceptions without needing to
+enable debug mode.</p></section>
+            
+</article>
+                                    <a id="property__pigeonBatch"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_pigeonBatch</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">145</span>
+    </aside>
+            <p class="phpdocumentor-summary">The flag will use same pigeon Timestamp.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">bool</span>
+        <span class="phpdocumentor-signature__name">$_pigeonBatch</span>
+            </code>
+            
+</article>
+                                    <a id="property__pigeonTimestamp"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_pigeonTimestamp</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">152</span>
+    </aside>
+            <p class="phpdocumentor-summary">The Pigeon Timestamp.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">float</span>
+        <span class="phpdocumentor-signature__name">$_pigeonTimestamp</span>
+            </code>
+            
+</article>
+                                    <a id="property__pigeonSession"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_pigeonSession</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">159</span>
+    </aside>
+            <p class="phpdocumentor-summary">The Pigeon Session ID.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_pigeonSession</span>
+            </code>
+            
+</article>
+                                    <a id="property__totalTime"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_totalTime</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">166</span>
+    </aside>
+            <p class="phpdocumentor-summary">Total time elapsed.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_totalTime</span>
+         = <span class="phpdocumentor-signature__default-value">""</span>    </code>
+            
+</article>
+                                    <a id="property__totalBytes"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_totalBytes</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">173</span>
+    </aside>
+            <p class="phpdocumentor-summary">Total Bytes received.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_totalBytes</span>
+         = <span class="phpdocumentor-signature__default-value">""</span>    </code>
+            
+</article>
+                                    <a id="property__bandwidthB"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_bandwidthB</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">180</span>
+    </aside>
+            <p class="phpdocumentor-summary">Bytes received in the latest response.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_bandwidthB</span>
+         = <span class="phpdocumentor-signature__default-value">""</span>    </code>
+            
+</article>
+                                    <a id="property__bandwidthM"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_bandwidthM</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">187</span>
+    </aside>
+            <p class="phpdocumentor-summary">Time elapsed in the latest response.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_bandwidthM</span>
+         = <span class="phpdocumentor-signature__default-value">""</span>    </code>
+            
+</article>
+                                    <a id="property_wwwClaim"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--public
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$wwwClaim</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">194</span>
+    </aside>
+            <p class="phpdocumentor-summary">IG WWW Claim.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$wwwClaim</span>
+         = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span>    </code>
+            
+</article>
+                                    <a id="property__directRegionHint"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_directRegionHint</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">201</span>
+    </aside>
+            <p class="phpdocumentor-summary">Direct Region Hint.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_directRegionHint</span>
+         = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span>    </code>
+            
+</article>
+                                    <a id="property__shbid"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_shbid</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">208</span>
+    </aside>
+            <p class="phpdocumentor-summary">SHBID.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_shbid</span>
+         = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span>    </code>
+            
+</article>
+                                    <a id="property__shbts"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_shbts</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">215</span>
+    </aside>
+            <p class="phpdocumentor-summary">SHBTS.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_shbts</span>
+         = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span>    </code>
+            
+</article>
+                                    <a id="property__rur"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_rur</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">222</span>
+    </aside>
+            <p class="phpdocumentor-summary">RUR.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_rur</span>
+         = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span>    </code>
+            
+</article>
+                                    <a id="property__dsUserId"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_dsUserId</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">229</span>
+    </aside>
+            <p class="phpdocumentor-summary">DS User ID.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_dsUserId</span>
+         = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span>    </code>
+            
+</article>
+                                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method___construct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__construct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">236</span>
+    </aside>
+        <p class="phpdocumentor-summary">Constructor.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__construct</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$parent</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$parent</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_updateFromCurrentSettings"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">updateFromCurrentSettings()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">288</span>
+    </aside>
+        <p class="phpdocumentor-summary">Resets certain Client settings via the current Settings storage.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">updateFromCurrentSettings</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$resetCookieJar</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Used whenever we switch active user, to configure our internal state.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$resetCookieJar</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(optional) Whether to clear current cookies.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_loadCookieJar"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">loadCookieJar()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">315</span>
+    </aside>
+        <p class="phpdocumentor-summary">Loads all cookies via the current Settings storage.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">loadCookieJar</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$resetCookieJar</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$resetCookieJar</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(optional) Whether to clear current cookies.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getPigeonSession"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getPigeonSession()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">348</span>
+    </aside>
+        <p class="phpdocumentor-summary">Retrieve Pigeon Session ID.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getPigeonSession</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_getToken"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getToken()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">363</span>
+    </aside>
+        <p class="phpdocumentor-summary">Retrieve the CSRF token from the current cookie jar.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getToken</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string|null</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Note that Instagram gives you a 1-year token expiration timestamp when
+you log in. But if you log out, they set its timestamp to &quot;0&quot; which means
+that the cookie is &quot;expired&quot; and invalid. We ignore token cookies if they
+have been logged out, or if they have expired naturally.</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash; <span class="phpdocumentor-description"><p>The token if found and non-expired, otherwise NULL.</p></span>
+            
+</article>
+                                    <a id="method_getMid"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getMid()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">378</span>
+    </aside>
+        <p class="phpdocumentor-summary">Retrieve the MID token from the current cookie jar.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getMid</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string|null</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash; <span class="phpdocumentor-description"><p>The MID if found and non-expired, otherwise NULL.</p></span>
+            
+</article>
+                                    <a id="method_getCookie"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getCookie()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">397</span>
+    </aside>
+        <p class="phpdocumentor-summary">Searches for a specific cookie in the current jar.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getCookie</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$name</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$domain</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$path</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\GuzzleHttp\Cookie\SetCookie">SetCookie</abbr>|null</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$name</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The name of the cookie.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$domain</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(optional) Require a specific domain match.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$path</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(optional) Require a specific path match.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GuzzleHttp\Cookie\SetCookie">SetCookie</abbr>|null</span>
+                    &mdash; <span class="phpdocumentor-description"><p>A cookie if found and non-expired, otherwise NULL.</p></span>
+            
+</article>
+                                    <a id="method_getCookieJarAsJSON"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getCookieJarAsJSON()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">434</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gives you all cookies in the Jar encoded as a JSON string.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getCookieJarAsJSON</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This allows custom Settings storages to retrieve all cookies for saving.</p></section>
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"><p>If the JSON cannot be encoded.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_saveCookieJar"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">saveCookieJar()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">462</span>
+    </aside>
+        <p class="phpdocumentor-summary">Tells current settings storage to store cookies if necessary.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">saveCookieJar</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>NOTE: This Client class is NOT responsible for calling this function!
+Instead, our parent &quot;Instagram&quot; instance takes care of it and saves the
+cookies &quot;onCloseUser&quot;, so that cookies are written to storage in a
+single, efficient write when the user's session is finished. We also call
+it during some important function calls such as login/logout. Client also
+automatically calls it when enough time has elapsed since last save.</p></section>
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"><p>If the JSON cannot be encoded.</p></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_setVerifySSL"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setVerifySSL()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">489</span>
+    </aside>
+        <p class="phpdocumentor-summary">Controls the SSL verification behavior of the Client.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setVerifySSL</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$state</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool|string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$state</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool|string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>TRUE to verify using PHP's default CA bundle,
+FALSE to disable SSL verification (this is
+insecure!), String to verify using this path to
+a custom CA bundle file.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="http://docs.guzzlephp.org/en/latest/request-options.html#verify"><abbr title="http://docs.guzzlephp.org/en/latest/request-options.html#verify">http://docs.guzzlephp.org/en/latest/request-options.html#verify</abbr></a></span>
+                                                            <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getVerifySSL"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getVerifySSL()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">500</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets the current SSL verification behavior of the Client.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getVerifySSL</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool|string</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|string</span>
+            
+</article>
+                                    <a id="method_setProxy"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setProxy()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">513</span>
+    </aside>
+        <p class="phpdocumentor-summary">Set the proxy to use for requests.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setProxy</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|array|null</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|array|null</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>String or Array specifying a proxy in
+Guzzle format, or NULL to disable proxying.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="http://docs.guzzlephp.org/en/latest/request-options.html#proxy"><abbr title="http://docs.guzzlephp.org/en/latest/request-options.html#proxy">http://docs.guzzlephp.org/en/latest/request-options.html#proxy</abbr></a></span>
+                                                            <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getProxy"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getProxy()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">525</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets the current proxy used for requests.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getProxy</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string|array|null</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|array|null</span>
+            
+</article>
+                                    <a id="method_setResolveHost"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setResolveHost()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">537</span>
+    </aside>
+        <p class="phpdocumentor-summary">Set the resolving host.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setResolveHost</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>String specifying the host used for resolving.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html"><abbr title="https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html">https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html</abbr></a></span>
+                                                            <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getResolveHost"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getResolveHost()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">548</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets the current resolving host.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getResolveHost</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_setOutputInterface"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setOutputInterface()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">564</span>
+    </aside>
+        <p class="phpdocumentor-summary">Sets the network interface override to use.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setOutputInterface</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Only works if Guzzle is using the cURL backend. But that's
+almost always the case, on most PHP installations.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Interface name, IP address or hostname, or NULL to
+disable override and let Guzzle use any interface.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="http://php.net/curl_setopt"><abbr title="http://php.net/curl_setopt">http://php.net/curl_setopt</abbr></a></span>
+                                                            <section class="phpdocumentor-description"><p>CURLOPT_INTERFACE</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getOutputInterface"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getOutputInterface()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">576</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets the current network interface override used for requests.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getOutputInterface</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string|null</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            
+</article>
+                                    <a id="method__printDebug"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_printDebug()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">594</span>
+    </aside>
+        <p class="phpdocumentor-summary">Output debugging information.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_printDebug</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$method</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$url</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$uploadedBody</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$uploadedBytes</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$response</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$responseBody</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$debug</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$method</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>&quot;GET&quot; or &quot;POST&quot;.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$url</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The URL or endpoint used for the request.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$uploadedBody</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>What was sent to the server. Use NULL to
+avoid displaying it.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$uploadedBytes</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>How many bytes were uploaded. Use NULL to
+avoid displaying it.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$response</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The Guzzle response object from the request.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$responseBody</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The actual text-body reply from the server.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$debug</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>CLI Debug.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_mapServerResponse"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">mapServerResponse()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">649</span>
+    </aside>
+        <p class="phpdocumentor-summary">Maps a server response onto a specific kind of result object.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">mapServerResponse</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$responseObject</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$rawResponse</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$httpResponse</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$silentFail</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The result is placed directly inside <code class="prettyprint">$responseObject</code>.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$responseObject</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>An instance of a class object whose
+properties to fill with the response.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$rawResponse</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>A raw JSON response string
+from Instagram's server.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$httpResponse</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>HTTP response object.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$silentFail</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Silent fail flag.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"><p>In case of invalid or failed API response.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__buildGuzzleOptions"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_buildGuzzleOptions()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">788</span>
+    </aside>
+        <p class="phpdocumentor-summary">Helper which builds in the most important Guzzle options.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_buildGuzzleOptions</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$guzzleOptions</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">array</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Takes care of adding all critical options that we need on every request.
+Such as cookies and the user's proxy. But don't call this function
+manually. It's automatically called by _guzzleRequest()!</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$guzzleOptions</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The options specific to the current request.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array</span>
+                    &mdash; <span class="phpdocumentor-description"><p>A guzzle options array.</p></span>
+            
+</article>
+                                    <a id="method__guzzleRequest"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_guzzleRequest()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">846</span>
+    </aside>
+        <p class="phpdocumentor-summary">Wraps Guzzle&#039;s request and adds special error handling and options.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_guzzleRequest</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$request</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$guzzleOptions</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Automatically throws exceptions on certain very serious HTTP errors. And
+re-wraps all Guzzle errors to our own internal exceptions instead. You
+must ALWAYS use this (or _apiRequest()) instead of the raw Guzzle Client!
+However, you can never assume the server response contains what you
+wanted. Be sure to validate the API reply too, since Instagram's API
+calls themselves may fail with a JSON message explaining what went wrong.</p>
+<p>WARNING: This is a semi-lowlevel handler which only applies critical
+options and HTTP connection handling! Most functions will want to call
+_apiRequest() instead. An even higher-level handler which takes care of
+debugging, server response checking and response decoding!</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$request</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>HTTP request to send.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$guzzleOptions</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Extra Guzzle options for this request.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-NetworkException.html"><abbr title="\InstagramAPI\Exception\NetworkException">NetworkException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"><p>For any network/socket related errors.</p></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-ThrottledException.html"><abbr title="\InstagramAPI\Exception\ThrottledException">ThrottledException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"><p>When we're throttled by server.</p></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-RequestHeadersTooLargeException.html"><abbr title="\InstagramAPI\Exception\RequestHeadersTooLargeException">RequestHeadersTooLargeException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"><p>When request is too large.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+            
+</article>
+                                    <a id="method__apiRequest"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_apiRequest()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">915</span>
+    </aside>
+        <p class="phpdocumentor-summary">Internal wrapper around _guzzleRequest().</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_apiRequest</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$request</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$guzzleOptions</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$libraryOptions</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This takes care of many common additional tasks needed by our library,
+so you should try to always use this instead of the raw _guzzleRequest()!</p>
+<p>Available library options are:</p>
+<ul>
+<li>'noDebug': Can be set to TRUE to forcibly hide debugging output for
+this request. The user controls debugging globally, but this is an
+override that prevents them from seeing certain requests that you may
+not want to trigger debugging (such as perhaps individual steps of a
+file upload process). However, debugging SHOULD be allowed in MOST cases!
+So only use this feature if you have a very good reason.</li>
+<li>'debugUploadedBody': Set to TRUE to make debugging display the data that
+was uploaded in the body of the request. DO NOT use this if your function
+uploaded binary data, since printing those bytes would kill the terminal!</li>
+<li>'debugUploadedBytes': Set to TRUE to make debugging display the size of
+the uploaded body data. Should ALWAYS be TRUE when uploading binary data.</li>
+</ul></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$request</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>HTTP request to send.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$guzzleOptions</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Extra Guzzle options for this request.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$libraryOptions</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Additional options for controlling Library features
+such as the debugging output.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-NetworkException.html"><abbr title="\InstagramAPI\Exception\NetworkException">NetworkException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"><p>For any network/socket related errors.</p></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-ThrottledException.html"><abbr title="\InstagramAPI\Exception\ThrottledException">ThrottledException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"><p>When we're throttled by server.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+            
+</article>
+                                    <a id="method_api"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">api()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">975</span>
+    </aside>
+        <p class="phpdocumentor-summary">Perform an Instagram API call.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">api</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$request</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$guzzleOptions</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$request</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>HTTP request to send.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$guzzleOptions</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Extra Guzzle options for this request.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+            
+</article>
+                                    <a id="method_api_body_decode"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                    phpdocumentor-element--static                    "
+>
+    <h4 class="phpdocumentor-method__name">api_body_decode()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1092</span>
+    </aside>
+        <p class="phpdocumentor-summary">Decode a JSON reply from Instagram&#039;s API.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                        <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">api_body_decode</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$json</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$assoc</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">object|array|null</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>WARNING: EXTREMELY IMPORTANT! NEVER, <em>EVER</em> USE THE BASIC &quot;json_decode&quot;
+ON API REPLIES! ALWAYS USE THIS METHOD INSTEAD, TO ENSURE PROPER DECODING
+OF BIG NUMBERS! OTHERWISE YOU'LL TRUNCATE VARIOUS INSTAGRAM API FIELDS!</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$json</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The body (JSON string) of the API response.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$assoc</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">true</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>When FALSE, decode to object instead of associative array.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">object|array|null</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Object if assoc false, Array if assoc true,
+or NULL if unable to decode JSON.</p></span>
+            
+</article>
+                                    <a id="method_fakeCookies"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">fakeCookies()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1104</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get the cookies middleware instance.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">fakeCookies</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Middleware-FakeCookies.html"><abbr title="\InstagramAPI\Middleware\FakeCookies">FakeCookies</abbr></a></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Middleware-FakeCookies.html"><abbr title="\InstagramAPI\Middleware\FakeCookies">FakeCookies</abbr></a></span>
+            
+</article>
+                                    <a id="method_zeroRating"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">zeroRating()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1114</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get the zero rating rewrite middleware instance.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">zeroRating</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Middleware-ZeroRating.html"><abbr title="\InstagramAPI\Middleware\ZeroRating">ZeroRating</abbr></a></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Middleware-ZeroRating.html"><abbr title="\InstagramAPI\Middleware\ZeroRating">ZeroRating</abbr></a></span>
+            
+</article>
+                                    <a id="method_startEmulatingBatch"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">startEmulatingBatch()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1122</span>
+    </aside>
+        <p class="phpdocumentor-summary">Start Pigeon batch requests.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">startEmulatingBatch</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_stopEmulatingBatch"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">stopEmulatingBatch()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1131</span>
+    </aside>
+        <p class="phpdocumentor-summary">Stop Pigeon batch requests.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">stopEmulatingBatch</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__getPigeonRawClientTime"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--private
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_getPigeonRawClientTime()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1142</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get Pigeon Client time.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                                <span class="phpdocumentor-signature__name">_getPigeonRawClientTime</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_setLastRequest"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setLastRequest()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1159</span>
+    </aside>
+        <p class="phpdocumentor-summary">Sets the last processed request.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setLastRequest</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$endpoint</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$endpoint</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The last processed request</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getLastRequest"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getLastRequest()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1170</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets the last processed point.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getLastRequest</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></span>
+            
+</article>
+                                                            </section>
+            </article>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                    <h2>Search results</h2>
+                    <ul class="phpdocumentor-search-results__entries">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

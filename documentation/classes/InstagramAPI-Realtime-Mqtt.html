@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="../css/template.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-top-header"></header>
+    <header class="phpdocumentor-header">
+        <section class="phpdocumentor-section">
+            <h1 class="phpdocumentor-title">Documentation</h1>
+        </section>
+    </header>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/instagramapi.html"><abbr title="\InstagramAPI">InstagramAPI</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/instagramapi-devices.html"><abbr title="\InstagramAPI\Devices">Devices</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-exception.html"><abbr title="\InstagramAPI\Exception">Exception</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-media.html"><abbr title="\InstagramAPI\Media">Media</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-middleware.html"><abbr title="\InstagramAPI\Middleware">Middleware</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-push.html"><abbr title="\InstagramAPI\Push">Push</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-react.html"><abbr title="\InstagramAPI\React">React</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-settings.html"><abbr title="\InstagramAPI\Settings">Settings</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="nine phpdocumentor-columns phpdocumentor-content">
+                <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/instagramapi.html">InstagramAPI</a></li>
+                    <li><a href="../namespaces/instagramapi-realtime.html">Realtime</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            Mqtt
+                                                    <span class="phpdocumentor-class__implements">
+                    implements
+                                            <a href="../classes/InstagramAPI-React-PersistentInterface.html"><abbr title="\InstagramAPI\React\PersistentInterface">PersistentInterface</abbr></a>                                    </span>
+                                        <span class="phpdocumentor-class__extends">
+                    Uses
+                                            <a href="../classes/InstagramAPI-React-PersistentTrait.html"><abbr title="\InstagramAPI\React\PersistentTrait">PersistentTrait</abbr></a>                                    </span>
+                    </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">28</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary"></p>
+        <section class="phpdocumentor-class__description"></section>
+                
+
+        <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#constant_REALTIME_CLIENT_TYPE">REALTIME_CLIENT_TYPE</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">&#039;mqtt&#039;</td>
+                </tr>
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__target">$_target</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\Evenement\EventEmitterInterface">EventEmitterInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__connector">$_connector</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\React\Socket\ConnectorInterface">ConnectorInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__auth">$_auth</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\Fbns\Auth">Auth</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__device">$_device</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Devices-DeviceInterface.html"><abbr title="\InstagramAPI\Devices\DeviceInterface">DeviceInterface</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__experiments">$_experiments</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-ExperimentsInterface.html"><abbr title="\InstagramAPI\ExperimentsInterface">ExperimentsInterface</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__loop">$_loop</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__additionalOptions">$_additionalOptions</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__keepaliveTimer">$_keepaliveTimer</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\React\EventLoop\Timer\TimerInterface">TimerInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__shutdown">$_shutdown</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__logger">$_logger</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__subscriptions">$_subscriptions</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">\InstagramAPI\Realtime\SubscriptionInterface[][]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__client">$_client</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Realtime-Mqttot-ReactMqttClient.html"><abbr title="\InstagramAPI\Realtime\Mqttot\ReactMqttClient">ReactMqttClient</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__parsers">$_parsers</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">\InstagramAPI\Realtime\ParserInterface[]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__handlers">$_handlers</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">\InstagramAPI\Realtime\HandlerInterface[]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__instagram">$_instagram</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></td>
+                </tr>
+                                                    <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-React-PersistentTrait.html#property__reconnectInterval">$_reconnectInterval</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-React-PersistentTrait.html#property__reconnectTimer">$_reconnectTimer</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\React\EventLoop\Timer\TimerInterface">TimerInterface</abbr></td>
+                </tr>
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method___construct">__construct()</a></th>
+                    <td class="phpdocumentor-cell">Constructor.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_getLoop">getLoop()</a></th>
+                    <td class="phpdocumentor-cell">Returns the loop instance.</td>
+                    <td class="phpdocumentor-cell"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_isActive">isActive()</a></th>
+                    <td class="phpdocumentor-cell">Returns whether persistence should be maintained.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_addSubscription">addSubscription()</a></th>
+                    <td class="phpdocumentor-cell">Add a subscription to the list.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_removeSubscription">removeSubscription()</a></th>
+                    <td class="phpdocumentor-cell">Remove a subscription from the list.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_setAdditionalOption">setAdditionalOption()</a></th>
+                    <td class="phpdocumentor-cell">Set an additional option.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__doAddSubscription">_doAddSubscription()</a></th>
+                    <td class="phpdocumentor-cell">Add a subscription to the list and send a command (optional).</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__doRemoveSubscription">_doRemoveSubscription()</a></th>
+                    <td class="phpdocumentor-cell">Remove a subscription from the list and send a command (optional).</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__cancelKeepaliveTimer">_cancelKeepaliveTimer()</a></th>
+                    <td class="phpdocumentor-cell">Cancel a keepalive timer (if any).</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__setKeepaliveTimer">_setKeepaliveTimer()</a></th>
+                    <td class="phpdocumentor-cell">Set up a new keepalive timer.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__connect">_connect()</a></th>
+                    <td class="phpdocumentor-cell">Try to establish a connection.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_start">start()</a></th>
+                    <td class="phpdocumentor-cell">Perform first connection in a row.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_isConnected">isConnected()</a></th>
+                    <td class="phpdocumentor-cell">Whether connection is established.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__disconnect">_disconnect()</a></th>
+                    <td class="phpdocumentor-cell">Disconnect from server.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_stop">stop()</a></th>
+                    <td class="phpdocumentor-cell">Proxy for _disconnect().</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_sendCommand">sendCommand()</a></th>
+                    <td class="phpdocumentor-cell">Send the command.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__loadExperiments">_loadExperiments()</a></th>
+                    <td class="phpdocumentor-cell">Load the experiments.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__initSubscriptions">_initSubscriptions()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__getClient">_getClient()</a></th>
+                    <td class="phpdocumentor-cell">Create a new MQTT client.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Realtime-Mqttot-ReactMqttClient.html"><abbr title="\InstagramAPI\Realtime\Mqttot\ReactMqttClient">ReactMqttClient</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__updateSubscriptions">_updateSubscriptions()</a></th>
+                    <td class="phpdocumentor-cell">Mass update subscriptions statuses.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__restoreAllSubscriptions">_restoreAllSubscriptions()</a></th>
+                    <td class="phpdocumentor-cell">Subscribe to all topics.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__removeAllSubscriptions">_removeAllSubscriptions()</a></th>
+                    <td class="phpdocumentor-cell">Unsubscribe from all topics.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__mapTopic">_mapTopic()</a></th>
+                    <td class="phpdocumentor-cell">Maps human readable topic to its identifier.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__unmapTopic">_unmapTopic()</a></th>
+                    <td class="phpdocumentor-cell">Maps topic ID to human readable name.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__publish">_publish()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__onReceive">_onReceive()</a></th>
+                    <td class="phpdocumentor-cell">Incoming message handler.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method__handleMessage">_handleMessage()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_getLogger">getLogger()</a></th>
+                    <td class="phpdocumentor-cell">Returns the logger instance.</td>
+                    <td class="phpdocumentor-cell"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></td>
+                </tr>
+                                                    <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-React-PersistentTrait.html#method__cancelReconnectTimer">_cancelReconnectTimer()</a></th>
+                    <td class="phpdocumentor-cell">Cancel a reconnect timer (if any).</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-React-PersistentTrait.html#method__setReconnectTimer">_setReconnectTimer()</a></th>
+                    <td class="phpdocumentor-cell">Set up a new reconnect timer with exponential backoff.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-React-PersistentTrait.html#method_getMinReconnectInterval">getMinReconnectInterval()</a></th>
+                    <td class="phpdocumentor-cell">{@inheritdoc}</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-React-PersistentTrait.html#method_getMaxReconnectInterval">getMaxReconnectInterval()</a></th>
+                    <td class="phpdocumentor-cell">{@inheritdoc}</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                    </table>
+
+                    <section>
+                <h3 class="phpdocumentor-constants__header">Constants</h3>
+                                    <a id="constant_REALTIME_CLIENT_TYPE"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">REALTIME_CLIENT_TYPE</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">32</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__name">$REALTIME_CLIENT_TYPE</span>
+        = <span class="phpdocumentor-signature__default-value">&#039;mqtt&#039;</span>
+    </code>
+            
+</article>
+                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-properties__header">Properties</h3>
+                                    <a id="property__target"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_target</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">35</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\Evenement\EventEmitterInterface">EventEmitterInterface</abbr></span>
+        <span class="phpdocumentor-signature__name">$_target</span>
+            </code>
+            
+</article>
+                                    <a id="property__connector"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_connector</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">38</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\React\Socket\ConnectorInterface">ConnectorInterface</abbr></span>
+        <span class="phpdocumentor-signature__name">$_connector</span>
+            </code>
+            
+</article>
+                                    <a id="property__auth"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_auth</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">41</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\Fbns\Auth">Auth</abbr></span>
+        <span class="phpdocumentor-signature__name">$_auth</span>
+            </code>
+            
+</article>
+                                    <a id="property__device"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_device</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">44</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Devices-DeviceInterface.html"><abbr title="\InstagramAPI\Devices\DeviceInterface">DeviceInterface</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_device</span>
+            </code>
+            
+</article>
+                                    <a id="property__experiments"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_experiments</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">47</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-ExperimentsInterface.html"><abbr title="\InstagramAPI\ExperimentsInterface">ExperimentsInterface</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_experiments</span>
+            </code>
+            
+</article>
+                                    <a id="property__loop"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_loop</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">50</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></span>
+        <span class="phpdocumentor-signature__name">$_loop</span>
+            </code>
+            
+</article>
+                                    <a id="property__additionalOptions"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_additionalOptions</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">53</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$_additionalOptions</span>
+            </code>
+            
+</article>
+                                    <a id="property__keepaliveTimer"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_keepaliveTimer</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">56</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\React\EventLoop\Timer\TimerInterface">TimerInterface</abbr></span>
+        <span class="phpdocumentor-signature__name">$_keepaliveTimer</span>
+            </code>
+            
+</article>
+                                    <a id="property__shutdown"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_shutdown</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">59</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">bool</span>
+        <span class="phpdocumentor-signature__name">$_shutdown</span>
+            </code>
+            
+</article>
+                                    <a id="property__logger"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_logger</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">62</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
+        <span class="phpdocumentor-signature__name">$_logger</span>
+            </code>
+            
+</article>
+                                    <a id="property__subscriptions"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_subscriptions</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">65</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">\InstagramAPI\Realtime\SubscriptionInterface[][]</span>
+        <span class="phpdocumentor-signature__name">$_subscriptions</span>
+            </code>
+            
+</article>
+                                    <a id="property__client"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_client</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">68</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Realtime-Mqttot-ReactMqttClient.html"><abbr title="\InstagramAPI\Realtime\Mqttot\ReactMqttClient">ReactMqttClient</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_client</span>
+            </code>
+            
+</article>
+                                    <a id="property__parsers"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_parsers</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">71</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">\InstagramAPI\Realtime\ParserInterface[]</span>
+        <span class="phpdocumentor-signature__name">$_parsers</span>
+            </code>
+            
+</article>
+                                    <a id="property__handlers"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_handlers</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">74</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">\InstagramAPI\Realtime\HandlerInterface[]</span>
+        <span class="phpdocumentor-signature__name">$_handlers</span>
+            </code>
+            
+</article>
+                                    <a id="property__instagram"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_instagram</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">77</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_instagram</span>
+            </code>
+            
+</article>
+                                                                    <a id="property__reconnectInterval"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_reconnectInterval</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/React/PersistentTrait.php"><a href="../files/src-react-persistenttrait.html"><abbr title="src/React/PersistentTrait.php">PersistentTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">14</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$_reconnectInterval</span>
+            </code>
+            
+</article>
+                                    <a id="property__reconnectTimer"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_reconnectTimer</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/React/PersistentTrait.php"><a href="../files/src-react-persistenttrait.html"><abbr title="src/React/PersistentTrait.php">PersistentTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">17</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\React\EventLoop\Timer\TimerInterface">TimerInterface</abbr></span>
+        <span class="phpdocumentor-signature__name">$_reconnectTimer</span>
+            </code>
+            
+</article>
+                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method___construct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__construct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">93</span>
+    </aside>
+        <p class="phpdocumentor-summary">Constructor.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__construct</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$target</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Evenement\EventEmitterInterface">EventEmitterInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$connector</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\React\Socket\ConnectorInterface">ConnectorInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$auth</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Fbns\Auth">Auth</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$device</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Devices-DeviceInterface.html"><abbr title="\InstagramAPI\Devices\DeviceInterface">DeviceInterface</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$instagram</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$loop</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$logger</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$additionalOptions</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$target</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Evenement\EventEmitterInterface">EventEmitterInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$connector</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\React\Socket\ConnectorInterface">ConnectorInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$auth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Fbns\Auth">Auth</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$device</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Devices-DeviceInterface.html"><abbr title="\InstagramAPI\Devices\DeviceInterface">DeviceInterface</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$instagram</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$loop</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$logger</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$additionalOptions</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Supported options:</p>
+<ul>
+<li>disable_presence</li>
+<li>datacenter</li>
+</ul></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getLoop"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getLoop()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">140</span>
+    </aside>
+        <p class="phpdocumentor-summary">Returns the loop instance.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getLoop</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></span>
+            
+</article>
+                                    <a id="method_isActive"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">isActive()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">146</span>
+    </aside>
+        <p class="phpdocumentor-summary">Returns whether persistence should be maintained.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">isActive</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method_addSubscription"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">addSubscription()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">156</span>
+    </aside>
+        <p class="phpdocumentor-summary">Add a subscription to the list.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">addSubscription</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$subscription</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-SubscriptionInterface.html"><abbr title="\InstagramAPI\Realtime\SubscriptionInterface">SubscriptionInterface</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$subscription</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-SubscriptionInterface.html"><abbr title="\InstagramAPI\Realtime\SubscriptionInterface">SubscriptionInterface</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_removeSubscription"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">removeSubscription()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">167</span>
+    </aside>
+        <p class="phpdocumentor-summary">Remove a subscription from the list.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">removeSubscription</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$subscription</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-SubscriptionInterface.html"><abbr title="\InstagramAPI\Realtime\SubscriptionInterface">SubscriptionInterface</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$subscription</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-SubscriptionInterface.html"><abbr title="\InstagramAPI\Realtime\SubscriptionInterface">SubscriptionInterface</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_setAdditionalOption"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setAdditionalOption()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">179</span>
+    </aside>
+        <p class="phpdocumentor-summary">Set an additional option.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setAdditionalOption</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$option</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$option</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__doAddSubscription"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_doAddSubscription()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">192</span>
+    </aside>
+        <p class="phpdocumentor-summary">Add a subscription to the list and send a command (optional).</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_doAddSubscription</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$subscription</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-SubscriptionInterface.html"><abbr title="\InstagramAPI\Realtime\SubscriptionInterface">SubscriptionInterface</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$sendCommand</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$subscription</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-SubscriptionInterface.html"><abbr title="\InstagramAPI\Realtime\SubscriptionInterface">SubscriptionInterface</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$sendCommand</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__doRemoveSubscription"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_doRemoveSubscription()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">224</span>
+    </aside>
+        <p class="phpdocumentor-summary">Remove a subscription from the list and send a command (optional).</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_doRemoveSubscription</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$subscription</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-SubscriptionInterface.html"><abbr title="\InstagramAPI\Realtime\SubscriptionInterface">SubscriptionInterface</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$sendCommand</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$subscription</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-SubscriptionInterface.html"><abbr title="\InstagramAPI\Realtime\SubscriptionInterface">SubscriptionInterface</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$sendCommand</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__cancelKeepaliveTimer"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_cancelKeepaliveTimer()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">253</span>
+    </aside>
+        <p class="phpdocumentor-summary">Cancel a keepalive timer (if any).</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_cancelKeepaliveTimer</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__setKeepaliveTimer"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_setKeepaliveTimer()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">271</span>
+    </aside>
+        <p class="phpdocumentor-summary">Set up a new keepalive timer.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_setKeepaliveTimer</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__connect"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_connect()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">285</span>
+    </aside>
+        <p class="phpdocumentor-summary">Try to establish a connection.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_connect</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_start"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">start()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">297</span>
+    </aside>
+        <p class="phpdocumentor-summary">Perform first connection in a row.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">start</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_isConnected"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">isConnected()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">309</span>
+    </aside>
+        <p class="phpdocumentor-summary">Whether connection is established.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">isConnected</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method__disconnect"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_disconnect()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">317</span>
+    </aside>
+        <p class="phpdocumentor-summary">Disconnect from server.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_disconnect</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_stop"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">stop()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">326</span>
+    </aside>
+        <p class="phpdocumentor-summary">Proxy for _disconnect().</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">stop</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_sendCommand"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">sendCommand()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">341</span>
+    </aside>
+        <p class="phpdocumentor-summary">Send the command.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">sendCommand</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$command</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-CommandInterface.html"><abbr title="\InstagramAPI\Realtime\CommandInterface">CommandInterface</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$command</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-CommandInterface.html"><abbr title="\InstagramAPI\Realtime\CommandInterface">CommandInterface</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\LogicException">LogicException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__loadExperiments"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_loadExperiments()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">360</span>
+    </aside>
+        <p class="phpdocumentor-summary">Load the experiments.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_loadExperiments</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$experiments</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-ExperimentsInterface.html"><abbr title="\InstagramAPI\ExperimentsInterface">ExperimentsInterface</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$experiments</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-ExperimentsInterface.html"><abbr title="\InstagramAPI\ExperimentsInterface">ExperimentsInterface</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__initSubscriptions"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_initSubscriptions()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">366</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_initSubscriptions</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__getClient"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_getClient()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">395</span>
+    </aside>
+        <p class="phpdocumentor-summary">Create a new MQTT client.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_getClient</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Realtime-Mqttot-ReactMqttClient.html"><abbr title="\InstagramAPI\Realtime\Mqttot\ReactMqttClient">ReactMqttClient</abbr></a></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Realtime-Mqttot-ReactMqttClient.html"><abbr title="\InstagramAPI\Realtime\Mqttot\ReactMqttClient">ReactMqttClient</abbr></a></span>
+            
+</article>
+                                    <a id="method__updateSubscriptions"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_updateSubscriptions()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">447</span>
+    </aside>
+        <p class="phpdocumentor-summary">Mass update subscriptions statuses.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_updateSubscriptions</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$topic</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$subscribe</span> :
+                <span class="phpdocumentor-signature__argument__return-type">\InstagramAPI\Realtime\SubscriptionInterface[]</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$unsubscribe</span> :
+                <span class="phpdocumentor-signature__argument__return-type">\InstagramAPI\Realtime\SubscriptionInterface[]</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$topic</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$subscribe</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">\InstagramAPI\Realtime\SubscriptionInterface[]</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$unsubscribe</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">\InstagramAPI\Realtime\SubscriptionInterface[]</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__restoreAllSubscriptions"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_restoreAllSubscriptions()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">469</span>
+    </aside>
+        <p class="phpdocumentor-summary">Subscribe to all topics.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_restoreAllSubscriptions</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__removeAllSubscriptions"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_removeAllSubscriptions()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">479</span>
+    </aside>
+        <p class="phpdocumentor-summary">Unsubscribe from all topics.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_removeAllSubscriptions</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__mapTopic"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_mapTopic()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">493</span>
+    </aside>
+        <p class="phpdocumentor-summary">Maps human readable topic to its identifier.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_mapTopic</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$topic</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$topic</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method__unmapTopic"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_unmapTopic()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">514</span>
+    </aside>
+        <p class="phpdocumentor-summary">Maps topic ID to human readable name.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_unmapTopic</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$topic</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$topic</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method__publish"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_publish()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">533</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_publish</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$topic</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$payload</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$qosLevel</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$topic</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$payload</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$qosLevel</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__onReceive"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_onReceive()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">550</span>
+    </aside>
+        <p class="phpdocumentor-summary">Incoming message handler.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_onReceive</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$msg</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\Message">Message</abbr></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$msg</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\BinSoul\Net\Mqtt\Message">Message</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__handleMessage"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_handleMessage()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">566</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_handleMessage</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$topic</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$payload</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$topic</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$payload</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getLogger"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getLogger()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">618</span>
+    </aside>
+        <p class="phpdocumentor-summary">Returns the logger instance.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getLogger</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
+            
+</article>
+                                                                    <a id="method__cancelReconnectTimer"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_cancelReconnectTimer()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/React/PersistentTrait.php"><a href="../files/src-react-persistenttrait.html"><abbr title="src/React/PersistentTrait.php">PersistentTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">22</span>
+    </aside>
+        <p class="phpdocumentor-summary">Cancel a reconnect timer (if any).</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_cancelReconnectTimer</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__setReconnectTimer"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_setReconnectTimer()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/React/PersistentTrait.php"><a href="../files/src-react-persistenttrait.html"><abbr title="src/React/PersistentTrait.php">PersistentTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">42</span>
+    </aside>
+        <p class="phpdocumentor-summary">Set up a new reconnect timer with exponential backoff.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_setReconnectTimer</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$callback</span> :
+                <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$callback</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getMinReconnectInterval"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getMinReconnectInterval()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/React/PersistentTrait.php"><a href="../files/src-react-persistenttrait.html"><abbr title="src/React/PersistentTrait.php">PersistentTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">73</span>
+    </aside>
+        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getMinReconnectInterval</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getMaxReconnectInterval"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getMaxReconnectInterval()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/React/PersistentTrait.php"><a href="../files/src-react-persistenttrait.html"><abbr title="src/React/PersistentTrait.php">PersistentTrait.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">79</span>
+    </aside>
+        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getMaxReconnectInterval</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                            </section>
+            </article>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                    <h2>Search results</h2>
+                    <ul class="phpdocumentor-search-results__entries">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

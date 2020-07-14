@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="../css/template.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-top-header"></header>
+    <header class="phpdocumentor-header">
+        <section class="phpdocumentor-section">
+            <h1 class="phpdocumentor-title">Documentation</h1>
+        </section>
+    </header>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/instagramapi.html"><abbr title="\InstagramAPI">InstagramAPI</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/instagramapi-devices.html"><abbr title="\InstagramAPI\Devices">Devices</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-exception.html"><abbr title="\InstagramAPI\Exception">Exception</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-media.html"><abbr title="\InstagramAPI\Media">Media</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-middleware.html"><abbr title="\InstagramAPI\Middleware">Middleware</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-push.html"><abbr title="\InstagramAPI\Push">Push</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-react.html"><abbr title="\InstagramAPI\React">React</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-settings.html"><abbr title="\InstagramAPI\Settings">Settings</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="nine phpdocumentor-columns phpdocumentor-content">
+                <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/instagramapi.html">InstagramAPI</a></li>
+            </ul>
+
+    <h2 class="phpdocumentor-content__title">Exception</h2>
+
+            <h3>Namespaces</h3>
+        <dl>
+                            <dt><a href="../namespaces/instagramapi-exception-checkpoint.html"><abbr title="\InstagramAPI\Exception\Checkpoint">Checkpoint</abbr></a></dt>
+                    </dl>
+    
+            <h3>Interfaces, Classes and Traits</h3>
+        <dl>
+            
+                            <dt><a href="../classes/InstagramAPI-Exception-AccountDisabledException.html"><abbr title="\InstagramAPI\Exception\AccountDisabledException">AccountDisabledException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-BadRequestException.html"><abbr title="\InstagramAPI\Exception\BadRequestException">BadRequestException</abbr></a></dt>
+                <dd>Used for endpoint calls that fail with HTTP code &quot;400 Bad Request&quot;, but only
+if no other more serious exception was found in the server response.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-ConsentRequiredException.html"><abbr title="\InstagramAPI\Exception\ConsentRequiredException">ConsentRequiredException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-EmptyResponseException.html"><abbr title="\InstagramAPI\Exception\EmptyResponseException">EmptyResponseException</abbr></a></dt>
+                <dd>Used for endpoint calls that returned an empty/invalid (non-JSON) response.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-EndpointException.html"><abbr title="\InstagramAPI\Exception\EndpointException">EndpointException</abbr></a></dt>
+                <dd>All general API function call &quot;server response&quot; failures use this exception.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-FeedbackRequiredException.html"><abbr title="\InstagramAPI\Exception\FeedbackRequiredException">FeedbackRequiredException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-IncorrectPasswordException.html"><abbr title="\InstagramAPI\Exception\IncorrectPasswordException">IncorrectPasswordException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></dt>
+                <dd>The core exception that ALL other library exceptions derive from.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-InternalException.html"><abbr title="\InstagramAPI\Exception\InternalException">InternalException</abbr></a></dt>
+                <dd>All internally generated non-server exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-InvalidSmsCodeException.html"><abbr title="\InstagramAPI\Exception\InvalidSmsCodeException">InvalidSmsCodeException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-InvalidUserException.html"><abbr title="\InstagramAPI\Exception\InvalidUserException">InvalidUserException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-LoginRequiredException.html"><abbr title="\InstagramAPI\Exception\LoginRequiredException">LoginRequiredException</abbr></a></dt>
+                <dd>Used when the server requires us to login again, and also used as a locally
+triggered exception when we know for sure that we aren&#039;t logged in.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-NetworkException.html"><abbr title="\InstagramAPI\Exception\NetworkException">NetworkException</abbr></a></dt>
+                <dd>This exception re-wraps ALL networking/socket exceptions.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-NotFoundException.html"><abbr title="\InstagramAPI\Exception\NotFoundException">NotFoundException</abbr></a></dt>
+                <dd>Used for endpoint calls that fail with HTTP code &quot;404 Not Found&quot;, but only
+if no other more serious exception was found in the server response.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-RequestException.html"><abbr title="\InstagramAPI\Exception\RequestException">RequestException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-RequestHeadersTooLargeException.html"><abbr title="\InstagramAPI\Exception\RequestHeadersTooLargeException">RequestHeadersTooLargeException</abbr></a></dt>
+                <dd>Means that request start-line and/or headers are too large
+to be processed by Instagram&#039;s server.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-SentryBlockException.html"><abbr title="\InstagramAPI\Exception\SentryBlockException">SentryBlockException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-ServerMessageThrower.html"><abbr title="\InstagramAPI\Exception\ServerMessageThrower">ServerMessageThrower</abbr></a></dt>
+                <dd>Parses Instagram&#039;s API error messages and throws an appropriate exception.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></dt>
+                <dd>Used for all problems with the Settings storage.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-ThrottledException.html"><abbr title="\InstagramAPI\Exception\ThrottledException">ThrottledException</abbr></a></dt>
+                <dd>Means that you have become throttled by Instagram&#039;s API server
+because of too many requests. You must slow yourself down!</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-UploadFailedException.html"><abbr title="\InstagramAPI\Exception\UploadFailedException">UploadFailedException</abbr></a></dt>
+                <dd>Used when we know for a fact that our uploads failed.</dd>
+            
+                    </dl>
+    
+    
+    
+                    <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                    <h2>Search results</h2>
+                    <ul class="phpdocumentor-search-results__entries">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

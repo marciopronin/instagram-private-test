@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="../css/template.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-top-header"></header>
+    <header class="phpdocumentor-header">
+        <section class="phpdocumentor-section">
+            <h1 class="phpdocumentor-title">Documentation</h1>
+        </section>
+    </header>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/instagramapi.html"><abbr title="\InstagramAPI">InstagramAPI</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/instagramapi-devices.html"><abbr title="\InstagramAPI\Devices">Devices</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-exception.html"><abbr title="\InstagramAPI\Exception">Exception</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-media.html"><abbr title="\InstagramAPI\Media">Media</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-middleware.html"><abbr title="\InstagramAPI\Middleware">Middleware</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-push.html"><abbr title="\InstagramAPI\Push">Push</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-react.html"><abbr title="\InstagramAPI\React">React</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-settings.html"><abbr title="\InstagramAPI\Settings">Settings</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="nine phpdocumentor-columns phpdocumentor-content">
+                <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/instagramapi.html">InstagramAPI</a></li>
+                    <li><a href="../namespaces/instagramapi-media.html">Media</a></li>
+                    <li><a href="../namespaces/instagramapi-media-video.html">Video</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            InstagramVideo
+                            <span class="phpdocumentor-class__extends">
+                    extends <a href="../classes/InstagramAPI-Media-InstagramMedia.html"><abbr title="\InstagramAPI\Media\InstagramMedia">InstagramMedia</abbr></a>
+                </span>
+                                                        </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">16</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary">Automatically prepares a video file according to Instagram&#039;s rules.</p>
+        <section class="phpdocumentor-class__description"><p>Validates, transcodes, resizes and crops/expands a media file to match
+Instagram's requirements, if necessary. You can also use this with your own
+parameters, to force your media into different aspects, ie square, or for
+adding colored borders to media, and so on... Read the constructor options!</p>
+<p>Usage:</p>
+<ul>
+<li>Create an instance of the appropriate subclass (such as <code class="prettyprint">InstagramPhoto</code> or
+<code class="prettyprint">InstagramVideo</code>) with your media file and requirements.</li>
+<li>Call <code class="prettyprint">getFile()</code> to get the path to a media file matching the requirements.
+This will be the same as the input file if no processing was required.</li>
+<li>Optionally, call <code class="prettyprint">deleteFile()</code> if you want to delete the temporary file
+ahead of time instead of automatically when PHP does its object garbage
+collection. This function is safe and won't delete the original input file.</li>
+</ul></section>
+                    <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">property</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Media-Video-VideoDetails.html"><abbr title="\InstagramAPI\Media\Video\VideoDetails">VideoDetails</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                                                                                    </dl>
+
+
+        <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#property__ffmpeg">$_ffmpeg</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Media-Video-FFmpeg.html"><abbr title="\InstagramAPI\Media\Video\FFmpeg">FFmpeg</abbr></a></td>
+                </tr>
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#property__details">$_details</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Media-Video-VideoDetails.html"><abbr title="\InstagramAPI\Media\Video\VideoDetails">VideoDetails</abbr></a></td>
+                </tr>
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property_defaultTmpPath">$defaultTmpPath</a></th>
+                    <td class="phpdocumentor-cell">Override for the default temp path used by all class instances.</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__debug">$_debug</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__inputFile">$_inputFile</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__minAspectRatio">$_minAspectRatio</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">float|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__maxAspectRatio">$_maxAspectRatio</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">float|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__allowNewAspectDeviation">$_allowNewAspectDeviation</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">float</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__horCropFocus">$_horCropFocus</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__verCropFocus">$_verCropFocus</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__bgColor">$_bgColor</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__operation">$_operation</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__tmpPath">$_tmpPath</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__constraints">$_constraints</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Media-ConstraintsInterface.html"><abbr title="\InstagramAPI\Media\ConstraintsInterface">ConstraintsInterface</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__outputFile">$_outputFile</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__details">$_details</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Media-MediaDetails.html"><abbr title="\InstagramAPI\Media\MediaDetails">MediaDetails</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__forceTargetAspectRatio">$_forceTargetAspectRatio</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">float|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#property__hasUserForceTargetAspectRatio">$_hasUserForceTargetAspectRatio</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#method___construct">__construct()</a></th>
+                    <td class="phpdocumentor-cell">Constructor.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#method__isMod2CanvasRequired">_isMod2CanvasRequired()</a></th>
+                    <td class="phpdocumentor-cell">Whether this processor requires Mod2 width and height canvas dimensions.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#method__createOutputFile">_createOutputFile()</a></th>
+                    <td class="phpdocumentor-cell">Create the new media file.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#method__processVideo">_processVideo()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#method__ffmpegMustRunAgain">_ffmpegMustRunAgain()</a></th>
+                    <td class="phpdocumentor-cell">Internal function to determine whether ffmpeg needs to run again.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#method__getInputFlags">_getInputFlags()</a></th>
+                    <td class="phpdocumentor-cell">Get the input flags (placed before the input filename).</td>
+                    <td class="phpdocumentor-cell">string[]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#method__getOutputFlags">_getOutputFlags()</a></th>
+                    <td class="phpdocumentor-cell">Get the output flags (placed before the output filename).</td>
+                    <td class="phpdocumentor-cell">string[]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-Video-InstagramVideo.html#method__getRotationFilters">_getRotationFilters()</a></th>
+                    <td class="phpdocumentor-cell">Get an array of filters needed to restore video orientation.</td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                                                    <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method___construct">__construct()</a></th>
+                    <td class="phpdocumentor-cell">Constructor.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method___destruct">__destruct()</a></th>
+                    <td class="phpdocumentor-cell">Destructor.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method_deleteFile">deleteFile()</a></th>
+                    <td class="phpdocumentor-cell">Removes the output file if it exists and differs from input file.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method_getFile">getFile()</a></th>
+                    <td class="phpdocumentor-cell">Gets the path to a media file matching the requirements.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__shouldProcess">_shouldProcess()</a></th>
+                    <td class="phpdocumentor-cell">Checks whether we should process the input file.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__isMod2CanvasRequired">_isMod2CanvasRequired()</a></th>
+                    <td class="phpdocumentor-cell">Whether this processor requires Mod2 width and height canvas dimensions.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__process">_process()</a></th>
+                    <td class="phpdocumentor-cell">Process the input file and create the new file.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__createOutputFile">_createOutputFile()</a></th>
+                    <td class="phpdocumentor-cell">Create the new media file.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__calculateNewCanvas">_calculateNewCanvas()</a></th>
+                    <td class="phpdocumentor-cell">Calculate a new canvas based on input size and requested modifications.</td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__accurateHeightRecalc">_accurateHeightRecalc()</a></th>
+                    <td class="phpdocumentor-cell">Calculates a new relative height using the target aspect ratio.</td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__calculateAdjustedMod2Canvas">_calculateAdjustedMod2Canvas()</a></th>
+                    <td class="phpdocumentor-cell">Adjusts dimensions to create a Mod2-compatible canvas.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Media-Geometry-Dimensions.html"><abbr title="\InstagramAPI\Media\Geometry\Dimensions">Dimensions</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__isNumberMod2">_isNumberMod2()</a></th>
+                    <td class="phpdocumentor-cell">Checks whether a number is Mod2.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__debugText">_debugText()</a></th>
+                    <td class="phpdocumentor-cell">Output debug text.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Media-InstagramMedia.html#method__debugDimensions">_debugDimensions()</a></th>
+                    <td class="phpdocumentor-cell">Debug current calculation dimensions and their ratio.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                    </table>
+
+        
+                    <section>
+                <h3 class="phpdocumentor-properties__header">Properties</h3>
+                                    <a id="property__ffmpeg"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_ffmpeg</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">19</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Media-Video-FFmpeg.html"><abbr title="\InstagramAPI\Media\Video\FFmpeg">FFmpeg</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_ffmpeg</span>
+            </code>
+            
+</article>
+                                                    <a id="property__details"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--public
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_details</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">0</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Media-Video-VideoDetails.html"><abbr title="\InstagramAPI\Media\Video\VideoDetails">VideoDetails</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_details</span>
+            </code>
+            
+</article>
+                                                    <a id="property_defaultTmpPath"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--public
+            phpdocumentor-property--static                    "
+>
+    <h4 class="phpdocumentor-property__name">$defaultTmpPath</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">53</span>
+    </aside>
+            <p class="phpdocumentor-summary">Override for the default temp path used by all class instances.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__name">$defaultTmpPath</span>
+         = <span class="phpdocumentor-signature__default-value">null</span>    </code>
+        <section class="phpdocumentor-description"><p>If you don't provide any tmpPath to the constructor, we'll use this value
+instead (if non-null). Otherwise we'll use the default system tmp folder.</p>
+<p>TIP: If your default system temp folder isn't writable, it's NECESSARY
+for you to set this value to another, writable path, like this:</p>
+<pre class="prettyprint"><code class="prettyprint">\InstagramAPI\InstagramMedia::$defaultTmpPath = '/home/example/foo/';</code></pre></section>
+            
+</article>
+                                    <a id="property__debug"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_debug</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">56</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">bool</span>
+        <span class="phpdocumentor-signature__name">$_debug</span>
+            </code>
+            
+</article>
+                                    <a id="property__inputFile"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_inputFile</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">59</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_inputFile</span>
+            </code>
+            
+</article>
+                                    <a id="property__minAspectRatio"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_minAspectRatio</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">62</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">float|null</span>
+        <span class="phpdocumentor-signature__name">$_minAspectRatio</span>
+            </code>
+            
+</article>
+                                    <a id="property__maxAspectRatio"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_maxAspectRatio</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">65</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">float|null</span>
+        <span class="phpdocumentor-signature__name">$_maxAspectRatio</span>
+            </code>
+            
+</article>
+                                    <a id="property__allowNewAspectDeviation"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_allowNewAspectDeviation</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">69</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">float</span>
+        <span class="phpdocumentor-signature__name">$_allowNewAspectDeviation</span>
+            </code>
+            
+</article>
+                                    <a id="property__horCropFocus"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_horCropFocus</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">72</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$_horCropFocus</span>
+            </code>
+            
+</article>
+                                    <a id="property__verCropFocus"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_verCropFocus</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">75</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$_verCropFocus</span>
+            </code>
+            
+</article>
+                                    <a id="property__bgColor"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_bgColor</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">78</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$_bgColor</span>
+            </code>
+            
+</article>
+                                    <a id="property__operation"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_operation</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">81</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$_operation</span>
+            </code>
+            
+</article>
+                                    <a id="property__tmpPath"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_tmpPath</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">84</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_tmpPath</span>
+            </code>
+            
+</article>
+                                    <a id="property__constraints"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_constraints</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">87</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Media-ConstraintsInterface.html"><abbr title="\InstagramAPI\Media\ConstraintsInterface">ConstraintsInterface</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_constraints</span>
+            </code>
+            
+</article>
+                                    <a id="property__outputFile"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_outputFile</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">90</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_outputFile</span>
+            </code>
+            
+</article>
+                                    <a id="property__details"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_details</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">93</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Media-MediaDetails.html"><abbr title="\InstagramAPI\Media\MediaDetails">MediaDetails</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_details</span>
+            </code>
+            
+</article>
+                                    <a id="property__forceTargetAspectRatio"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_forceTargetAspectRatio</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">98</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">float|null</span>
+        <span class="phpdocumentor-signature__name">$_forceTargetAspectRatio</span>
+            </code>
+            
+</article>
+                                    <a id="property__hasUserForceTargetAspectRatio"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_hasUserForceTargetAspectRatio</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">102</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">bool</span>
+        <span class="phpdocumentor-signature__name">$_hasUserForceTargetAspectRatio</span>
+            </code>
+            
+</article>
+                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method___construct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__construct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">33</span>
+    </aside>
+        <p class="phpdocumentor-summary">Constructor.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__construct</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$inputFile</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$options</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$ffmpeg</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Video-FFmpeg.html"><abbr title="\InstagramAPI\Media\Video\FFmpeg">FFmpeg</abbr></a>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Available <code class="prettyprint">$options</code> parameters:</p>
+<ul>
+<li>
+<p>&quot;targetFeed&quot; (int): One of the FEED_X constants. MUST be used if you're
+targeting stories. Defaults to <code class="prettyprint">Constants::FEED_TIMELINE</code>.</p>
+</li>
+<li>
+<p>&quot;horCropFocus&quot; (int): Crop focus position (-50 .. 50) when cropping
+horizontally (reducing width). Uses intelligent guess if not set.</p>
+</li>
+<li>
+<p>&quot;verCropFocus&quot; (int): Crop focus position (-50 .. 50) when cropping
+vertically (reducing height). Uses intelligent guess if not set.</p>
+</li>
+<li>
+<p>&quot;minAspectRatio&quot; (float): Minimum allowed aspect ratio. Uses
+auto-selected class constants (with the correct, legal Instagram
+aspect ratio limits for your chosen target feed) if not set.</p>
+</li>
+<li>
+<p>&quot;maxAspectRatio&quot; (float): Maximum allowed aspect ratio. Uses
+auto-selected class constants (with the correct, legal Instagram
+aspect ratio limits for your chosen target feed) if not set.</p>
+</li>
+<li>
+<p>&quot;forceAspectRatio&quot; (float|int): Tell the media processor to enforce a
+specific aspect ratio target. This custom value MUST be within the
+&quot;minAspectRatio&quot; to &quot;maxAspectRatio&quot; range! NOTE: When your goal is to
+generate a custom media aspect ratio, you should normally ONLY specify
+THIS parameter and should NEVER tamper with the min/max aspect ratio
+limits! Because when you're specifying a custom forced ratio here, we
+WILL ALWAYS verify/process the media as-necessary to fit your desired
+ratio (EVEN if the input media was &quot;already valid&quot; within the overall,
+larger legal min/max ratio ranges). ALSO NOTE: We WON'T process input
+media when it's already VERY close to the desired target ratio. The
+ONLY custom aspect ratio value that is 100% guaranteed to be FULLY
+ENFORCED is <code class="prettyprint">1.0</code> (square). If you specify ANY other ratio, we will
+accept a VERY SMALL deviation when the media is already almost exactly
+at the desired ratio. This is done to prevent pointless &quot;impossible
+processing&quot;, since achieving EXACT non-<code class="prettyprint">1.0</code> ratios is almost always
+IMPOSSIBLE, so it's not worth trying with media that's already very
+close. The reason why non-<code class="prettyprint">1.0</code> ratios are impossibly hard to hit in
+MOST cases, is because pixels cannot be subdivided into smaller
+fractions than &quot;1 whole pixel&quot;, so in most cases when we ask for
+something like <code class="prettyprint">1.25385</code> ratio and we have an input file such as
+<code class="prettyprint">640x512</code> (<code class="prettyprint">1.25</code> ratio), it is PHYSICALLY IMPOSSIBLE to achieve a
+<code class="prettyprint">1.25385</code> ratio with that input and we could AT BEST reach a tiny
+fraction away from that target; such as <code class="prettyprint">641x512</code> (<code class="prettyprint">1.251953125</code>
+ratio), <code class="prettyprint">639x512</code> (<code class="prettyprint">1.248046875</code> ratio), <code class="prettyprint">640x513</code> (<code class="prettyprint">1.247563353</code>
+ratio) or <code class="prettyprint">640x511</code> (<code class="prettyprint">1.252446184</code> ratio). So whether you CAN hit your
+EXACT desired non-<code class="prettyprint">1.0</code> ratio or NOT depends 100% on your input file's
+resolution! That's why we passthrough files that are already super
+close to the desired ratio. Either way, such a tiny difference in
+aspect ratio won't be visible to the eye, so if you are using this
+&quot;target ratio&quot; feature for creating Instagram albums where all media
+has the same aspect ratio, the final result WILL still look perfect.</p>
+</li>
+<li>
+<p>&quot;useRecommendedRatio&quot; (bool): Whether to use the recommended aspect
+ratio for your specific media type and target feed (such as using an
+appropriate <code class="prettyprint">9:16</code> portrait widescreen for stories). Some targets use
+the recommended ratio by default, and others disable this by default.
+Therefore, you do NOT need to set this option manually unless you have
+a VERY special reason to do so! NOTE: This will ALWAYS be set to
+<code class="prettyprint">FALSE</code> if you're using the &quot;forceAspectRatio&quot; parameter!</p>
+</li>
+<li>
+<p>&quot;allowNewAspectDeviation&quot; (bool): Whether to allow the new, final
+aspect ratio (during processing) to deviate slightly from the MIN/MAX
+limits. By setting this option to <code class="prettyprint">TRUE</code>, you will tell our processing
+to allow &quot;slightly too high/slightly too low&quot; final aspect ratios
+(instead of throwing an exception) and to still permit the final
+&quot;closest-possible canvas&quot; we've calculated anyway. You should NEVER
+need to use this feature, but if you have manually configured extremely
+narrow min/max aspect ratio parameters (which your input media CANNOT
+be tweaked to fit perfectly within) then you MAY want to enable this.</p>
+</li>
+<li>
+<p>&quot;bgColor&quot; (array) - Array with 3 color components <code class="prettyprint">[R, G, B]</code>
+(0-255/0x00-0xFF) for the background. Uses white if not set.</p>
+</li>
+<li>
+<p>&quot;operation&quot; (int) - Operation to perform on the media (CROP or EXPAND).
+Uses <code class="prettyprint">self::CROP</code> if not set.</p>
+</li>
+<li>
+<p>&quot;tmpPath&quot; (string) - Path to temp directory. Uses system temp location
+or the class-default (<code class="prettyprint">self::$defaultTmpPath</code>) if not set.</p>
+</li>
+<li>
+<p>&quot;debug&quot; (bool) - Whether to output debugging info during calculation
+steps.</p>
+</li>
+</ul></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$inputFile</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Path to an input file.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$options</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>An associative array of optional parameters.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$ffmpeg</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Video-FFmpeg.html"><abbr title="\InstagramAPI\Media\Video\FFmpeg">FFmpeg</abbr></a>|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Custom FFmpeg wrapper.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\RuntimeException">RuntimeException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="\InstagramAPI\Media\Video\InstagramMedia::__construct()"><abbr title="\InstagramAPI\Media\Video\InstagramMedia::__construct()">InstagramMedia::__construct()</abbr></a></span>
+                                                            <section class="phpdocumentor-description"><p>description for the list of parameters.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__isMod2CanvasRequired"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_isMod2CanvasRequired()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">48</span>
+    </aside>
+        <p class="phpdocumentor-summary">Whether this processor requires Mod2 width and height canvas dimensions.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_isMod2CanvasRequired</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If this returns FALSE, the calculated <code class="prettyprint">InstagramMedia</code> canvas passed to
+this processor <em>may</em> contain uneven width and/or height as the selected
+output dimensions.</p>
+<p>Therefore, this function must return TRUE if (and ONLY IF) perfectly even
+dimensions are necessary for this particular processor's output format.</p>
+<p>For example, JPEG images accept any dimensions and must therefore return
+FALSE. But H264 videos require EVEN dimensions and must return TRUE.</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method__createOutputFile"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_createOutputFile()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">54</span>
+    </aside>
+        <p class="phpdocumentor-summary">Create the new media file.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_createOutputFile</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$srcRect</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$dstRect</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$canvas</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Dimensions.html"><abbr title="\InstagramAPI\Media\Geometry\Dimensions">Dimensions</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$srcRect</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Rectangle to copy from the input.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$dstRect</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Destination place and scale of copied pixels.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$canvas</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Dimensions.html"><abbr title="\InstagramAPI\Media\Geometry\Dimensions">Dimensions</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The size of the destination canvas.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash; <span class="phpdocumentor-description"><p>The path to the output file.</p></span>
+            
+</article>
+                                    <a id="method__processVideo"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_processVideo()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">96</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_processVideo</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$srcRect</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$dstRect</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$canvas</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Dimensions.html"><abbr title="\InstagramAPI\Media\Geometry\Dimensions">Dimensions</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$outputFile</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$srcRect</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Rectangle to copy from the input.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$dstRect</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Destination place and scale of copied pixels.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$canvas</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Dimensions.html"><abbr title="\InstagramAPI\Media\Geometry\Dimensions">Dimensions</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The size of the destination canvas.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$outputFile</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\RuntimeException">RuntimeException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__ffmpegMustRunAgain"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_ffmpegMustRunAgain()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">163</span>
+    </aside>
+        <p class="phpdocumentor-summary">Internal function to determine whether ffmpeg needs to run again.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_ffmpegMustRunAgain</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$attempt</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$ffmpegOutput</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string[]</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$attempt</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Which ffmpeg attempt just executed.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$ffmpegOutput</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string[]</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Array of error strings from the attempt.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\RuntimeException">RuntimeException</abbr></span>
+                                                                                <section class="phpdocumentor-description"><p>If this function wants to give up and determines
+that we cannot succeed and should throw completely.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>TRUE to run again, FALSE to accept the current output.</p></span>
+            
+</article>
+                                    <a id="method__getInputFlags"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_getInputFlags()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">177</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get the input flags (placed before the input filename).</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_getInputFlags</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$attempt</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string[]</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$attempt</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The current ffmpeg execution attempt.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string[]</span>
+            
+</article>
+                                    <a id="method__getOutputFlags"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_getOutputFlags()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">190</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get the output flags (placed before the output filename).</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_getOutputFlags</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$attempt</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string[]</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$attempt</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The current ffmpeg execution attempt.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string[]</span>
+            
+</article>
+                                    <a id="method__getRotationFilters"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_getRotationFilters()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/Video/InstagramVideo.php"><a href="../files/src-media-video-instagramvideo.html"><abbr title="src/Media/Video/InstagramVideo.php">InstagramVideo.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">237</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get an array of filters needed to restore video orientation.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_getRotationFilters</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">array</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array</span>
+            
+</article>
+                                                                    <a id="method___construct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__construct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">194</span>
+    </aside>
+        <p class="phpdocumentor-summary">Constructor.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__construct</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$inputFile</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$options</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Available <code class="prettyprint">$options</code> parameters:</p>
+<ul>
+<li>
+<p>&quot;targetFeed&quot; (int): One of the FEED_X constants. MUST be used if you're
+targeting stories. Defaults to <code class="prettyprint">Constants::FEED_TIMELINE</code>.</p>
+</li>
+<li>
+<p>&quot;horCropFocus&quot; (int): Crop focus position (-50 .. 50) when cropping
+horizontally (reducing width). Uses intelligent guess if not set.</p>
+</li>
+<li>
+<p>&quot;verCropFocus&quot; (int): Crop focus position (-50 .. 50) when cropping
+vertically (reducing height). Uses intelligent guess if not set.</p>
+</li>
+<li>
+<p>&quot;minAspectRatio&quot; (float): Minimum allowed aspect ratio. Uses
+auto-selected class constants (with the correct, legal Instagram
+aspect ratio limits for your chosen target feed) if not set.</p>
+</li>
+<li>
+<p>&quot;maxAspectRatio&quot; (float): Maximum allowed aspect ratio. Uses
+auto-selected class constants (with the correct, legal Instagram
+aspect ratio limits for your chosen target feed) if not set.</p>
+</li>
+<li>
+<p>&quot;forceAspectRatio&quot; (float|int): Tell the media processor to enforce a
+specific aspect ratio target. This custom value MUST be within the
+&quot;minAspectRatio&quot; to &quot;maxAspectRatio&quot; range! NOTE: When your goal is to
+generate a custom media aspect ratio, you should normally ONLY specify
+THIS parameter and should NEVER tamper with the min/max aspect ratio
+limits! Because when you're specifying a custom forced ratio here, we
+WILL ALWAYS verify/process the media as-necessary to fit your desired
+ratio (EVEN if the input media was &quot;already valid&quot; within the overall,
+larger legal min/max ratio ranges). ALSO NOTE: We WON'T process input
+media when it's already VERY close to the desired target ratio. The
+ONLY custom aspect ratio value that is 100% guaranteed to be FULLY
+ENFORCED is <code class="prettyprint">1.0</code> (square). If you specify ANY other ratio, we will
+accept a VERY SMALL deviation when the media is already almost exactly
+at the desired ratio. This is done to prevent pointless &quot;impossible
+processing&quot;, since achieving EXACT non-<code class="prettyprint">1.0</code> ratios is almost always
+IMPOSSIBLE, so it's not worth trying with media that's already very
+close. The reason why non-<code class="prettyprint">1.0</code> ratios are impossibly hard to hit in
+MOST cases, is because pixels cannot be subdivided into smaller
+fractions than &quot;1 whole pixel&quot;, so in most cases when we ask for
+something like <code class="prettyprint">1.25385</code> ratio and we have an input file such as
+<code class="prettyprint">640x512</code> (<code class="prettyprint">1.25</code> ratio), it is PHYSICALLY IMPOSSIBLE to achieve a
+<code class="prettyprint">1.25385</code> ratio with that input and we could AT BEST reach a tiny
+fraction away from that target; such as <code class="prettyprint">641x512</code> (<code class="prettyprint">1.251953125</code>
+ratio), <code class="prettyprint">639x512</code> (<code class="prettyprint">1.248046875</code> ratio), <code class="prettyprint">640x513</code> (<code class="prettyprint">1.247563353</code>
+ratio) or <code class="prettyprint">640x511</code> (<code class="prettyprint">1.252446184</code> ratio). So whether you CAN hit your
+EXACT desired non-<code class="prettyprint">1.0</code> ratio or NOT depends 100% on your input file's
+resolution! That's why we passthrough files that are already super
+close to the desired ratio. Either way, such a tiny difference in
+aspect ratio won't be visible to the eye, so if you are using this
+&quot;target ratio&quot; feature for creating Instagram albums where all media
+has the same aspect ratio, the final result WILL still look perfect.</p>
+</li>
+<li>
+<p>&quot;useRecommendedRatio&quot; (bool): Whether to use the recommended aspect
+ratio for your specific media type and target feed (such as using an
+appropriate <code class="prettyprint">9:16</code> portrait widescreen for stories). Some targets use
+the recommended ratio by default, and others disable this by default.
+Therefore, you do NOT need to set this option manually unless you have
+a VERY special reason to do so! NOTE: This will ALWAYS be set to
+<code class="prettyprint">FALSE</code> if you're using the &quot;forceAspectRatio&quot; parameter!</p>
+</li>
+<li>
+<p>&quot;allowNewAspectDeviation&quot; (bool): Whether to allow the new, final
+aspect ratio (during processing) to deviate slightly from the MIN/MAX
+limits. By setting this option to <code class="prettyprint">TRUE</code>, you will tell our processing
+to allow &quot;slightly too high/slightly too low&quot; final aspect ratios
+(instead of throwing an exception) and to still permit the final
+&quot;closest-possible canvas&quot; we've calculated anyway. You should NEVER
+need to use this feature, but if you have manually configured extremely
+narrow min/max aspect ratio parameters (which your input media CANNOT
+be tweaked to fit perfectly within) then you MAY want to enable this.</p>
+</li>
+<li>
+<p>&quot;bgColor&quot; (array) - Array with 3 color components <code class="prettyprint">[R, G, B]</code>
+(0-255/0x00-0xFF) for the background. Uses white if not set.</p>
+</li>
+<li>
+<p>&quot;operation&quot; (int) - Operation to perform on the media (CROP or EXPAND).
+Uses <code class="prettyprint">self::CROP</code> if not set.</p>
+</li>
+<li>
+<p>&quot;tmpPath&quot; (string) - Path to temp directory. Uses system temp location
+or the class-default (<code class="prettyprint">self::$defaultTmpPath</code>) if not set.</p>
+</li>
+<li>
+<p>&quot;debug&quot; (bool) - Whether to output debugging info during calculation
+steps.</p>
+</li>
+</ul></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$inputFile</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Path to an input file.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$options</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>An associative array of optional parameters.
+See constructor description.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method___destruct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__destruct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">346</span>
+    </aside>
+        <p class="phpdocumentor-summary">Destructor.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__destruct</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_deleteFile"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">deleteFile()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">364</span>
+    </aside>
+        <p class="phpdocumentor-summary">Removes the output file if it exists and differs from input file.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">deleteFile</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This function is safe and won't delete the original input file.</p>
+<p>Is automatically called when the class instance is destroyed by PHP.
+But you can manually call it ahead of time if you want to force cleanup.</p>
+<p>Note that getFile() will still work afterwards, but will have to process
+the media again to a new temp file if the input file required processing.</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method_getFile"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getFile()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">396</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets the path to a media file matching the requirements.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getFile</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The automatic processing is performed the first time that this function
+is called. Which means that no CPU time is wasted if you never call this
+function at all.</p>
+<p>Due to the processing, the first call to this function may take a moment.</p>
+<p>If the input file already fits all of the specifications, we simply
+return the input path instead, without any need to re-process it.</p></section>
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\RuntimeException">RuntimeException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="\InstagramAPI\Media\InstagramMedia::_shouldProcess()"><abbr title="\InstagramAPI\Media\InstagramMedia::_shouldProcess()">InstagramMedia::_shouldProcess()</abbr></a></span>
+                                                            <section class="phpdocumentor-description"><p>The criteria that determines processing.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash; <span class="phpdocumentor-description"><p>The path to the media file.</p></span>
+            
+</article>
+                                    <a id="method__shouldProcess"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_shouldProcess()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">410</span>
+    </aside>
+        <p class="phpdocumentor-summary">Checks whether we should process the input file.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_shouldProcess</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method__isMod2CanvasRequired"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                        phpdocumentor-element--abstract                                "
+>
+    <h4 class="phpdocumentor-method__name">_isMod2CanvasRequired()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">475</span>
+    </aside>
+        <p class="phpdocumentor-summary">Whether this processor requires Mod2 width and height canvas dimensions.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__abstract">abstract</span>                        <span class="phpdocumentor-signature__name">_isMod2CanvasRequired</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If this returns FALSE, the calculated <code class="prettyprint">InstagramMedia</code> canvas passed to
+this processor <em>may</em> contain uneven width and/or height as the selected
+output dimensions.</p>
+<p>Therefore, this function must return TRUE if (and ONLY IF) perfectly even
+dimensions are necessary for this particular processor's output format.</p>
+<p>For example, JPEG images accept any dimensions and must therefore return
+FALSE. But H264 videos require EVEN dimensions and must return TRUE.</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method__process"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_process()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">484</span>
+    </aside>
+        <p class="phpdocumentor-summary">Process the input file and create the new file.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_process</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\RuntimeException">RuntimeException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash; <span class="phpdocumentor-description"><p>The path to the new file.</p></span>
+            
+</article>
+                                    <a id="method__createOutputFile"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                        phpdocumentor-element--abstract                                "
+>
+    <h4 class="phpdocumentor-method__name">_createOutputFile()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">855</span>
+    </aside>
+        <p class="phpdocumentor-summary">Create the new media file.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__abstract">abstract</span>                        <span class="phpdocumentor-signature__name">_createOutputFile</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$srcRect</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$dstRect</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$canvas</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Dimensions.html"><abbr title="\InstagramAPI\Media\Geometry\Dimensions">Dimensions</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$srcRect</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Rectangle to copy from the input.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$dstRect</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Rectangle.html"><abbr title="\InstagramAPI\Media\Geometry\Rectangle">Rectangle</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Destination place and scale of copied pixels.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$canvas</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Media-Geometry-Dimensions.html"><abbr title="\InstagramAPI\Media\Geometry\Dimensions">Dimensions</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The size of the destination canvas.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash; <span class="phpdocumentor-description"><p>The path to the output file.</p></span>
+            
+</article>
+                                    <a id="method__calculateNewCanvas"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_calculateNewCanvas()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">903</span>
+    </aside>
+        <p class="phpdocumentor-summary">Calculate a new canvas based on input size and requested modifications.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_calculateNewCanvas</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$operation</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$inputWidth</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$inputHeight</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$isMod2CanvasRequired</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$minWidth</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">1</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$maxWidth</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">99999</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$minAspectRatio</span> :
+                <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$maxAspectRatio</span> :
+                <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$forceTargetAspectRatio</span> :
+                <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$allowNewAspectDeviation</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">array</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The final canvas will be the same size as the input if everything was
+already okay and within the limits. Otherwise it will be a new canvas
+representing the <em>exact</em>, best-possible size to convert input media to.</p>
+<p>It is up to the caller to perfectly follow these orders, since deviating
+by even a SINGLE PIXEL can create illegal media aspect ratios.</p>
+<p>Also note that the resulting canvas can be LARGER than the input in
+several cases, such as in EXPAND-mode (obviously), or when the input
+isn't wide enough to be legal (and must be scaled up), and whenever Mod2
+is requested. In the latter case, the algorithm may have to add a few
+pixels to the height to make it valid in a few rare cases. The caller
+must be aware of such &quot;enlarged&quot; canvases and should handle them by
+stretching the input if necessary.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$operation</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$inputWidth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$inputHeight</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$isMod2CanvasRequired</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$minWidth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">1</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxWidth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">99999</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$minAspectRatio</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxAspectRatio</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$forceTargetAspectRatio</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Optional forced aspect ratio
+target (ALWAYS applied,
+except if input is already
+EXACTLY this ratio).</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$allowNewAspectDeviation</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>See constructor arg docs.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\RuntimeException">RuntimeException</abbr></span>
+                                                                                <section class="phpdocumentor-description"><p>If requested canvas couldn't be achieved, most
+commonly if you have chosen way too narrow
+aspect ratio ranges that cannot be perfectly
+reached by your input media, and you AREN'T
+running with <code class="prettyprint">$allowNewAspectDeviation</code>.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array</span>
+                    &mdash; <span class="phpdocumentor-description"><p>An array with <code class="prettyprint">canvas</code> (<code class="prettyprint">Dimensions</code>), <code class="prettyprint">mod2WidthDiff</code> and
+<code class="prettyprint">mod2HeightDiff</code>. The latter are integers representing how
+many pixels were cropped (-) or added (+) by the Mod2 step
+compared to the ideal canvas.</p></span>
+            
+</article>
+                                    <a id="method__accurateHeightRecalc"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_accurateHeightRecalc()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1172</span>
+    </aside>
+        <p class="phpdocumentor-summary">Calculates a new relative height using the target aspect ratio.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_accurateHeightRecalc</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$useFloorHeightRecalc</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$targetAspectRatio</span> :
+                <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$targetWidth</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">int</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Used internally by <code class="prettyprint">_calculateNewCanvas()</code>.</p>
+<p>This algorithm aims at the highest-possible or lowest-possible resulting
+aspect ratio based on what's needed. It uses either <code class="prettyprint">floor()</code> or <code class="prettyprint">ceil()</code>
+depending on whether we need the resulting aspect ratio to be &gt;= or &lt;=
+the target aspect ratio.</p>
+<p>The principle behind this is the fact that removing height (via floor)
+will give us a higher aspect ratio. And adding height (via ceil) will
+give us a lower aspect ratio.</p>
+<p>If the target aspect ratio is square (1), height becomes equal to width.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$useFloorHeightRecalc</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$targetAspectRatio</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$targetWidth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            
+</article>
+                                    <a id="method__calculateAdjustedMod2Canvas"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_calculateAdjustedMod2Canvas()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1218</span>
+    </aside>
+        <p class="phpdocumentor-summary">Adjusts dimensions to create a Mod2-compatible canvas.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_calculateAdjustedMod2Canvas</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$inputWidth</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$inputHeight</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$useFloorHeightRecalc</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$targetWidth</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$targetHeight</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$targetAspectRatio</span> :
+                <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$minWidth</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">1</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$maxWidth</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">99999</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$minAspectRatio</span> :
+                <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$maxAspectRatio</span> :
+                <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$allowNewAspectDeviation</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Media-Geometry-Dimensions.html"><abbr title="\InstagramAPI\Media\Geometry\Dimensions">Dimensions</abbr></a></span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Used internally by <code class="prettyprint">_calculateNewCanvas()</code>.</p>
+<p>The reason why this function also takes the original input width/height
+is because it tries to maximize its usage of the available original pixel
+surface area while correcting the dimensions. It uses the extra
+information to know when it's safely able to grow the canvas beyond the
+given target width/height parameter values.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$inputWidth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$inputHeight</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$useFloorHeightRecalc</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$targetWidth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$targetHeight</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$targetAspectRatio</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$minWidth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">1</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxWidth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">99999</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$minAspectRatio</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxAspectRatio</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$allowNewAspectDeviation</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>See constructor arg docs.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\RuntimeException">RuntimeException</abbr></span>
+                                                                                <section class="phpdocumentor-description"><p>If requested canvas couldn't be achieved, most
+commonly if you have chosen way too narrow
+aspect ratio ranges that cannot be perfectly
+reached by your input media, and you AREN'T
+running with <code class="prettyprint">$allowNewAspectDeviation</code>.</p></section>
+                </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="\InstagramAPI\Media\InstagramMedia::_calculateNewCanvas()"><abbr title="\InstagramAPI\Media\InstagramMedia::_calculateNewCanvas()">InstagramMedia::_calculateNewCanvas()</abbr></a></span>
+                                                            <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Media-Geometry-Dimensions.html"><abbr title="\InstagramAPI\Media\Geometry\Dimensions">Dimensions</abbr></a></span>
+            
+</article>
+                                    <a id="method__isNumberMod2"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_isNumberMod2()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1393</span>
+    </aside>
+        <p class="phpdocumentor-summary">Checks whether a number is Mod2.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_isNumberMod2</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$number</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int|float</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$number</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int|float</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method__debugText"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_debugText()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1407</span>
+    </aside>
+        <p class="phpdocumentor-summary">Output debug text.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_debugText</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$stepDescription</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$formatMessage</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$args</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$stepDescription</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$formatMessage</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$args</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__debugDimensions"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_debugDimensions()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Media/InstagramMedia.php"><a href="../files/src-media-instagrammedia.html"><abbr title="src/Media/InstagramMedia.php">InstagramMedia.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1430</span>
+    </aside>
+        <p class="phpdocumentor-summary">Debug current calculation dimensions and their ratio.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_debugDimensions</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$width</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int|float</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$height</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int|float</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$stepDescription</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$width</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int|float</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$height</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int|float</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$stepDescription</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                            </section>
+            </article>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                    <h2>Search results</h2>
+                    <ul class="phpdocumentor-search-results__entries">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

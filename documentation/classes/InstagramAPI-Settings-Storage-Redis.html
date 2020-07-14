@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="../css/template.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-top-header"></header>
+    <header class="phpdocumentor-header">
+        <section class="phpdocumentor-section">
+            <h1 class="phpdocumentor-title">Documentation</h1>
+        </section>
+    </header>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/instagramapi.html"><abbr title="\InstagramAPI">InstagramAPI</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/instagramapi-devices.html"><abbr title="\InstagramAPI\Devices">Devices</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-exception.html"><abbr title="\InstagramAPI\Exception">Exception</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-media.html"><abbr title="\InstagramAPI\Media">Media</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-middleware.html"><abbr title="\InstagramAPI\Middleware">Middleware</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-push.html"><abbr title="\InstagramAPI\Push">Push</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-react.html"><abbr title="\InstagramAPI\React">React</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-settings.html"><abbr title="\InstagramAPI\Settings">Settings</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="nine phpdocumentor-columns phpdocumentor-content">
+                <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/instagramapi.html">InstagramAPI</a></li>
+                    <li><a href="../namespaces/instagramapi-settings.html">Settings</a></li>
+                    <li><a href="../namespaces/instagramapi-settings-storage.html">Storage</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            Redis
+                                                    <span class="phpdocumentor-class__implements">
+                    implements
+                                            <a href="../classes/InstagramAPI-Settings-StorageInterface.html"><abbr title="\InstagramAPI\Settings\StorageInterface">StorageInterface</abbr></a>                                    </span>
+                                </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">18</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary">Redis in-memory key-value storage backend.</p>
+        <section class="phpdocumentor-class__description"><p>IMPORTANT!
+You need <a href="https://github.com/phpredis/phpredis">https://github.com/phpredis/phpredis</a> for this class:
+$ pecl install redis</p></section>
+                    <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"><p>Juan (<a href="https://github.com/Juan-de-Costa-Rica">https://github.com/Juan-de-Costa-Rica</a>)</p></section>
+                </dd>
+                        </dl>
+
+
+        <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#property__redis">$_redis</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\Redis">Redis</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#property__isSharedRedis">$_isSharedRedis</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#property__username">$_username</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#property__cache">$_cache</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                                                                <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_openLocation">openLocation()</a></th>
+                    <td class="phpdocumentor-cell">Connect to a storage location and perform necessary startup preparations.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_hasUser">hasUser()</a></th>
+                    <td class="phpdocumentor-cell">Whether the storage backend contains a specific user.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_moveUser">moveUser()</a></th>
+                    <td class="phpdocumentor-cell">Move the internal data for a username to a new username.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_deleteUser">deleteUser()</a></th>
+                    <td class="phpdocumentor-cell">Delete all internal data for a given username.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_openUser">openUser()</a></th>
+                    <td class="phpdocumentor-cell">Open the data storage for a specific user.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_loadUserSettings">loadUserSettings()</a></th>
+                    <td class="phpdocumentor-cell">Load all settings for the currently active user.</td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_saveUserSettings">saveUserSettings()</a></th>
+                    <td class="phpdocumentor-cell">Save the settings for the currently active user.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_hasUserCookies">hasUserCookies()</a></th>
+                    <td class="phpdocumentor-cell">Whether the storage backend has cookies for the currently active user.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_getUserCookiesFilePath">getUserCookiesFilePath()</a></th>
+                    <td class="phpdocumentor-cell">Get the cookiefile disk path (only if a file-based cookie jar is wanted).</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_loadUserCookies">loadUserCookies()</a></th>
+                    <td class="phpdocumentor-cell">(Non-cookiefile) Load all cookies for the currently active user.</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_saveUserCookies">saveUserCookies()</a></th>
+                    <td class="phpdocumentor-cell">(Non-cookiefile) Save all cookies for the currently active user.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_closeUser">closeUser()</a></th>
+                    <td class="phpdocumentor-cell">Close the settings storage for the currently active user.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method_closeLocation">closeLocation()</a></th>
+                    <td class="phpdocumentor-cell">Disconnect from a storage location and perform necessary shutdown steps.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-Storage-Redis.html#method__checkConnection">_checkConnection()</a></th>
+                    <td class="phpdocumentor-cell">Check the connection by pinging it.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                                            </table>
+
+        
+                    <section>
+                <h3 class="phpdocumentor-properties__header">Properties</h3>
+                                    <a id="property__redis"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_redis</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">21</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\Redis">Redis</abbr></span>
+        <span class="phpdocumentor-signature__name">$_redis</span>
+            </code>
+            
+</article>
+                                    <a id="property__isSharedRedis"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_isSharedRedis</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">23</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">bool</span>
+        <span class="phpdocumentor-signature__name">$_isSharedRedis</span>
+            </code>
+            
+</article>
+                                    <a id="property__username"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_username</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">25</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_username</span>
+            </code>
+            
+</article>
+                                    <a id="property__cache"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_cache</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">27</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$_cache</span>
+            </code>
+            
+</article>
+                                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method_openLocation"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">openLocation()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">34</span>
+    </aside>
+        <p class="phpdocumentor-summary">Connect to a storage location and perform necessary startup preparations.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">openLocation</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$locationConfig</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This function is guaranteed to be called before anything else here.</p>
+<p>Must do whatever needs to be done BEFORE any per-user data can be loaded
+from/saved to the storage backend. For example, setting variables,
+connecting to a database, creating tables, or loading from disk.</p>
+<p>You can treat this as your &quot;constructor&quot;, but you may ALSO want a
+separate constructor for any work that you DON'T want to repeat every
+time that you're told to open a different storage location.</p>
+<p>However, you MUST put ALL per-storage startup code in THIS function,
+since a normal constructor is only called a single time, as you're aware.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$locationConfig</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Configuration parameters for the location.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_hasUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">hasUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">78</span>
+    </aside>
+        <p class="phpdocumentor-summary">Whether the storage backend contains a specific user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">hasUser</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Having a user is defined as HAVING the USERSETTINGS-portion of the data.
+The usercookies may be stored separately (such as in a cookiefile) and
+are NOT essential since they can be re-generated. So the data storage
+implementation MUST ONLY check for the existence of the USERSETTINGS.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The Instagram username.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>TRUE if user exists, otherwise FALSE.</p></span>
+            
+</article>
+                                    <a id="method_moveUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">moveUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">89</span>
+    </aside>
+        <p class="phpdocumentor-summary">Move the internal data for a username to a new username.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">moveUser</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$oldUsername</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$newUsername</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Is NEVER called for the currently loaded user, so Storage backend writers
+can safely assume that you'll never be asked to rename the loaded user.</p>
+<p>Before performing the move, this function MUST validate that the OLD user
+EXISTS and that the NEW user DOESN'T EXIST, and MUST throw an exception
+if either of those checks fail. This is to ensure that users don't lose
+data by accidentally overwriting something.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$oldUsername</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The old name that settings are stored as.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$newUsername</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The new name to move the settings to.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_deleteUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">deleteUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">133</span>
+    </aside>
+        <p class="phpdocumentor-summary">Delete all internal data for a given username.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">deleteUser</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Is NEVER called for the currently loaded user, so Storage backend writers
+can safely assume that you'll never be asked to delete the loaded user.</p>
+<p>This function MUST treat a non-existent or already deleted user as
+&quot;success&quot;. ONLY throw an exception if ACTUAL deletion fails.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The Instagram username.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_openUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">openUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">147</span>
+    </aside>
+        <p class="phpdocumentor-summary">Open the data storage for a specific user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">openUser</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If the user does not exist, THIS call MUST create their user storage, or
+at least do any necessary preparations so that the other functions can
+read/write to the user's storage (and behave as specified).</p>
+<p>Is called every time we're switching to a user, and happens before we
+call any user-specific data retrieval functions.</p>
+<p>This function must cache the user reference and perform necessary backend
+operations, such as opening file/database handles and finding the row ID
+for the given user, so that all further queries know what user to use.</p>
+<p>All further calls relating to that user will assume that your storage
+class has cached the user reference we gave you in this call.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The Instagram username.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_loadUserSettings"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">loadUserSettings()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">164</span>
+    </aside>
+        <p class="phpdocumentor-summary">Load all settings for the currently active user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">loadUserSettings</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">array</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array</span>
+                    &mdash; <span class="phpdocumentor-description"><p>An array with all current key-value pairs for the user, or
+an empty array if no settings exist.</p></span>
+            
+</article>
+                                    <a id="method_saveUserSettings"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">saveUserSettings()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">185</span>
+    </aside>
+        <p class="phpdocumentor-summary">Save the settings for the currently active user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">saveUserSettings</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$userSettings</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$triggerKey</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Is called every time any setting changes. The trigger-key can be used for
+selectively saving only the modified setting. But most backends should
+simply JSON-encode the whole $userSettings array and store that string.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$userSettings</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>An array with all of the user's key-value pairs.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$triggerKey</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The differing key which triggered the write.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_hasUserCookies"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">hasUserCookies()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">203</span>
+    </aside>
+        <p class="phpdocumentor-summary">Whether the storage backend has cookies for the currently active user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">hasUserCookies</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Even cookiefile (file-based jars) MUST answer this question, for example
+by checking if their desired cookiefile exists and is non-empty. And all
+other storage backends (such as databases) MUST also verify that their
+existing cookie data is non-empty.</p>
+<p>Don't validate the actual cookie contents, just look for non-zero size!</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>TRUE if cookies exist, otherwise FALSE.</p></span>
+            
+</article>
+                                    <a id="method_getUserCookiesFilePath"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getUserCookiesFilePath()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">214</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get the cookiefile disk path (only if a file-based cookie jar is wanted).</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getUserCookiesFilePath</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string|null</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The file does not have to exist yet. It will be created by the caller
+on-demand when necessary.</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash; <span class="phpdocumentor-description"><p>Either a non-empty string file-path to use a
+file-based cookie jar which the CALLER will
+read/write, otherwise NULL (or any other
+non-string value) if the BACKEND wants to
+handle the cookies itself.</p></span>
+            
+</article>
+                                    <a id="method_loadUserCookies"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">loadUserCookies()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">225</span>
+    </aside>
+        <p class="phpdocumentor-summary">(Non-cookiefile) Load all cookies for the currently active user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">loadUserCookies</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string|null</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Note that this function is ONLY called if a non-string answer was
+returned by the getUserCookiesFilePath() call.</p>
+<p>If your Storage backend class uses a cookiefile, make this a no-op.</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash; <span class="phpdocumentor-description"><p>A previously-stored raw cookie data string, or an
+empty string/NULL if no data exists in the storage.</p></span>
+            
+</article>
+                                    <a id="method_saveUserCookies"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">saveUserCookies()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">235</span>
+    </aside>
+        <p class="phpdocumentor-summary">(Non-cookiefile) Save all cookies for the currently active user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">saveUserCookies</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$rawData</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Note that this function is called frequently! But it is ONLY called if a
+non-string answer was returned by the getUserCookiesFilePath() call.</p>
+<p>If your Storage backend class uses a cookiefile, make this a no-op.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$rawData</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>An encoded string with all cookie data.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_closeUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">closeUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">251</span>
+    </aside>
+        <p class="phpdocumentor-summary">Close the settings storage for the currently active user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">closeUser</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Is called every time we're switching away from a user, BEFORE the new
+user's loadUserSettings() call. Should be used for doing things like
+closing previous per-user file handles in the backend, and unsetting the
+cached user information that was set in the openUser() call.</p>
+<p>After this call, there will not be any other user-related calls until the
+next openUser() call.</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_closeLocation"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">closeLocation()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">262</span>
+    </aside>
+        <p class="phpdocumentor-summary">Disconnect from a storage location and perform necessary shutdown steps.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">closeLocation</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This function is called ONCE, when we no longer need to access the
+currently open storage. But we may still open another storage afterwards,
+so do NOT treat this as a &quot;class destructor&quot;!</p>
+<p>Implementing this is optional, but the function must exist.</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__checkConnection"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--private
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_checkConnection()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/Storage/Redis.php"><a href="../files/src-settings-storage-redis.html"><abbr title="src/Settings/Storage/Redis.php">Redis.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">278</span>
+    </aside>
+        <p class="phpdocumentor-summary">Check the connection by pinging it.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                                <span class="phpdocumentor-signature__name">_checkConnection</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                                            </section>
+            </article>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                    <h2>Search results</h2>
+                    <ul class="phpdocumentor-search-results__entries">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

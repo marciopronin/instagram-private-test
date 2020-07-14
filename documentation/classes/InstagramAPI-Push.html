@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="../css/template.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-top-header"></header>
+    <header class="phpdocumentor-header">
+        <section class="phpdocumentor-section">
+            <h1 class="phpdocumentor-title">Documentation</h1>
+        </section>
+    </header>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/instagramapi.html"><abbr title="\InstagramAPI">InstagramAPI</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/instagramapi-devices.html"><abbr title="\InstagramAPI\Devices">Devices</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-exception.html"><abbr title="\InstagramAPI\Exception">Exception</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-media.html"><abbr title="\InstagramAPI\Media">Media</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-middleware.html"><abbr title="\InstagramAPI\Middleware">Middleware</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-push.html"><abbr title="\InstagramAPI\Push">Push</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-react.html"><abbr title="\InstagramAPI\React">React</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-settings.html"><abbr title="\InstagramAPI\Settings">Settings</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="nine phpdocumentor-columns phpdocumentor-content">
+                <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/instagramapi.html">InstagramAPI</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            Push
+                                                    <span class="phpdocumentor-class__implements">
+                    implements
+                                            <abbr title="\Evenement\EventEmitterInterface">EventEmitterInterface</abbr>                                    </span>
+                                        <span class="phpdocumentor-class__extends">
+                    Uses
+                                            <abbr title="\Evenement\EventEmitterTrait">EventEmitterTrait</abbr>                                    </span>
+                    </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">141</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary">The following events are emitted.</p>
+        <section class="phpdocumentor-class__description"><p>Posts:</p>
+<ul>
+<li>post - &quot;USERNAME just shared a post.&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>first_post - &quot;See NAME's first Instagram post.&quot;
+user?username=USERNAME</li>
+<li>resurrected_user_post - &quot;USERNAME posted for the first time in a while. Be the first to add a comment.&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>recent_follow_post - &quot;USERNAME just shared a post.&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>fb_first_post - &quot;Your Facebook friend NAME just shared their first Instagram post&quot;
+user?username=USERNAME</li>
+<li>first_bestie_post - &quot;USERNAME just shared a post with their close friends list.&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>follower_activity_with_location - &quot;USERNAME tagged LOCATION in a post.&quot;
+media?id=1111111111111111111 &lt;- Yep, no author ID here.</li>
+</ul>
+<p>Stories:</p>
+<ul>
+<li>first_reel_post - &quot;See USERNAME's first story on Instagram.&quot;
+user?username=USERNAME&amp;launch_reel=1</li>
+<li>resurrected_reel_post - &quot;USERNAME added to their story for the first time in a while.&quot;
+user?username=USERNAME&amp;launch_reel=1</li>
+<li>first_bestie_post - &quot;USERNAME just shared a post with their close friends list.&quot;
+user?username=USERNAME&amp;launch_reel=1</li>
+<li>story_poll_vote - &quot;USERNAME voted YES to &quot;POLL&quot;. Currently: 2 YES, 1 NO&quot;
+user?username=USERNAME&amp;launch_reel=1&amp;media_id=1111111111111111111_1111111111&amp;include_viewers=1</li>
+<li>story_poll_close - &quot;Your poll, &quot;POLL&quot; ends in an hour. Results so far: 2 YES, 1 NO&quot;
+user?username=USERNAME&amp;launch_reel=1&amp;media_id=1111111111111111111_1111111111&amp;include_viewers=1</li>
+<li>story_producer_expire_media - &quot;Your story has NUMBER views. Find out who's seen it before it disappears.&quot;
+user?username=USERNAME&amp;launch_reel=1</li>
+<li>story_poll_result_share - &quot;Your poll is almost over, and YES is winning. See and share the results.&quot;
+user?username=USERNAME&amp;launch_reel=1&amp;media_id=1111111111111111111_1111111111&amp;include_viewers=1</li>
+<li>story_daily_digest - &quot;USERNAME1, USERNAME2 and USERNAME3 recently added to their stories.&quot;
+mainfeed?launch_reel_user_ids=1111111111,2222222222,3333333333,4444444444</li>
+</ul>
+<p>Followers and contacts:</p>
+<ul>
+<li>new_follower - &quot;NAME (USERNAME) started following you.&quot;
+user?username=USERNAME</li>
+<li>private_user_follow_request - &quot;NAME (@USERNAME) has requested to follow you.&quot;
+user?username=USERNAME</li>
+<li>follow_request_approved - &quot;USERNAME accepted your follow request. Now you can see their photos and videos.&quot;
+user?username=USERNAME</li>
+<li>contactjoined - &quot;Your Facebook friend NAME is on Instagram as USERNAME.&quot;
+user?username=USERNAME</li>
+<li>contact_joined_email - &quot;NAME, one of your contacts, is on Instagram as @USERNAME. Would you like to follow them?&quot;
+user?username=USERNAME</li>
+<li>fb_friend_connected - &quot;Your Facebook friend NAME is on Instagram as USERNAME.&quot;
+user?username=USERNAME</li>
+<li>follower_follow - &quot;USERNAME1 and USERNAME2 followed NAME on Instagram. See their posts.&quot;
+user?username=USERNAME</li>
+<li>follower_activity_reminders - &quot;USERNAME1, USERNAME2 and others shared NUMBER photos.&quot;
+mainfeed</li>
+</ul>
+<p>Comments:</p>
+<ul>
+<li>comment - &quot;USERNAME commented: &quot;TEXT&quot;&quot;
+media?id=1111111111111111111_1111111111&amp;forced_preview_comment_id=11111111111111111
+comments_v2?media_id=1111111111111111111_1111111111&amp;target_comment_id=11111111111111111</li>
+<li>mentioned_comment - &quot;USERNAME mentioned you in a comment: TEXT...&quot;
+media?id=1111111111111111111_1111111111
+comments_v2?media_id=1111111111111111111_1111111111</li>
+<li>comment_on_tag - &quot;USERNAME commented on a post you're tagged in.&quot;
+media?id=1111111111111111111 &lt;- Yep, no author ID here.</li>
+<li>comment_subscribed - &quot;USERNAME also commented on USERNAME's post: &quot;TEXT&quot;&quot;
+comments_v2?media_id=1111111111111111111_1111111111&amp;target_comment_id=11111111111111111</li>
+<li>comment_subscribed_on_like - &quot;USERNAME commented on a post you liked: TEXT&quot;
+comments_v2?media_id=1111111111111111111_1111111111&amp;target_comment_id=11111111111111111</li>
+<li>reply_to_comment_with_threading - &quot;USERNAME replied to your comment on your post: &quot;TEXT&quot;&quot;
+comments_v2?media_id=1111111111111111111_1111111111&amp;target_comment_id=11111111111111111</li>
+</ul>
+<p>Likes:</p>
+<ul>
+<li>like - &quot;USERNAME liked your post.&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>like_on_tag - &quot;USERNAME liked a post you're tagged in.&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>comment_like - &quot;USERNAME liked your comment: &quot;TEXT...&quot;&quot;
+media?id=1111111111111111111_1111111111&amp;forced_preview_comment_id=11111111111111111</li>
+</ul>
+<p>Direct:</p>
+<ul>
+<li>direct_v2_message - &quot;USERNAME sent you a message.&quot;
+direct_v2?id=11111111111111111111111111111111111111&amp;x=11111111111111111111111111111111111</li>
+<li>direct_v2_message - &quot;USERNAME wants to send you a message.&quot;
+direct_v2?id=11111111111111111111111111111111111111&amp;t=p</li>
+<li>direct_v2_message - &quot;USERNAME sent you a photo.&quot;
+direct_v2?id=11111111111111111111111111111111111111&amp;x=11111111111111111111111111111111111&amp;t=ds</li>
+</ul>
+<p>Live:</p>
+<ul>
+<li>live_broadcast - &quot;USERNAME started a live video. Watch it before it ends!&quot;
+broadcast?id=11111111111111111&amp;reel_id=1111111111&amp;published_time=1234567890</li>
+<li>live_with_broadcast - &quot;USERNAME1 is going live now with USERNAME2.&quot;
+broadcast?id=11111111111111111&amp;reel_id=1111111111&amp;published_time=1234567890</li>
+<li>live_broadcast_revoke
+broadcast?id=11111111111111111&amp;reel_id=1111111111&amp;published_time=1234567890</li>
+</ul>
+<p>Business:</p>
+<ul>
+<li>aymt - &quot;Your promotion was approved.&quot; or &quot;Your promotion has ended.&quot; or internationalized message.
+media?id=1111111111111111111 &lt;- Yep, no author ID here.</li>
+<li>ad_preview - &quot;Your ad is ready to preview&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>branded_content_tagged - &quot;USERNAME tagged you as a business partner on a post.&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>branded_content_untagged - &quot;USERNAME removed you as a business partner on a post.&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>business_profile - &quot;Add a website so customers can learn about your business.&quot;
+editprofile?user_id=1111111111</li>
+</ul>
+<p>Unsorted:</p>
+<ul>
+<li>usertag - &quot;USERNAME tagged you in a post&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>video_view_count - &quot;People viewed your video more than NUMBER times.&quot;
+media?id=1111111111111111111_1111111111</li>
+<li>copyright_video - &quot;Your video may have copyrighted content that belongs to someone else.&quot;
+news</li>
+<li>report_updated - &quot;Your support request from DATE was just updated.&quot;
+news</li>
+<li>promote_account - &quot;Check out today's photo from TEXT.&quot;
+user?username=USERNAME</li>
+<li>unseen_notification_reminders
+news</li>
+</ul>
+<p>System:</p>
+<ul>
+<li>silent_push - Some kind of service push that does nothing. Nothing important, I hope.</li>
+<li>incoming - The event that catches all pushes. Useful for debugging and logging.</li>
+<li>warning - An exception of severity &quot;warning&quot; occured.</li>
+<li>error - An exception of severity &quot;error&quot; occurred. It's not guaranteed that the Push client will continue to work.</li>
+</ul></section>
+                
+
+        <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#property__instagram">$_instagram</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#property__loop">$_loop</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#property__logger">$_logger</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#property__fbns">$_fbns</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Push-Fbns.html"><abbr title="\InstagramAPI\Push\Fbns">Fbns</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#property__fbnsAuth">$_fbnsAuth</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Push-Fbns-Auth.html"><abbr title="\InstagramAPI\Push\Fbns\Auth">Auth</abbr></a></td>
+                </tr>
+                                                                <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#method___construct">__construct()</a></th>
+                    <td class="phpdocumentor-cell">Push constructor.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#method__onPush">_onPush()</a></th>
+                    <td class="phpdocumentor-cell">Incoming notification callback.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#method__getFbns">_getFbns()</a></th>
+                    <td class="phpdocumentor-cell">Create a new FBNS receiver.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Push-Fbns.html"><abbr title="\InstagramAPI\Push\Fbns">Fbns</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#method_start">start()</a></th>
+                    <td class="phpdocumentor-cell">Start Push receiver.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Push.html#method_stop">stop()</a></th>
+                    <td class="phpdocumentor-cell">Stop Push receiver.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                                            </table>
+
+        
+                    <section>
+                <h3 class="phpdocumentor-properties__header">Properties</h3>
+                                    <a id="property__instagram"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_instagram</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">146</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_instagram</span>
+            </code>
+            
+</article>
+                                    <a id="property__loop"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_loop</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">149</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></span>
+        <span class="phpdocumentor-signature__name">$_loop</span>
+            </code>
+            
+</article>
+                                    <a id="property__logger"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_logger</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">152</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
+        <span class="phpdocumentor-signature__name">$_logger</span>
+            </code>
+            
+</article>
+                                    <a id="property__fbns"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_fbns</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">155</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Push-Fbns.html"><abbr title="\InstagramAPI\Push\Fbns">Fbns</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_fbns</span>
+            </code>
+            
+</article>
+                                    <a id="property__fbnsAuth"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_fbnsAuth</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">158</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Push-Fbns-Auth.html"><abbr title="\InstagramAPI\Push\Fbns\Auth">Auth</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_fbnsAuth</span>
+            </code>
+            
+</article>
+                                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method___construct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__construct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">169</span>
+    </aside>
+        <p class="phpdocumentor-summary">Push constructor.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__construct</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$loop</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$instagram</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$logger</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$loop</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$instagram</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$logger</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\RuntimeException">RuntimeException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__onPush"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_onPush()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">194</span>
+    </aside>
+        <p class="phpdocumentor-summary">Incoming notification callback.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_onPush</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$notification</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Push-Notification.html"><abbr title="\InstagramAPI\Push\Notification">Notification</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$notification</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Push-Notification.html"><abbr title="\InstagramAPI\Push\Notification">Notification</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__getFbns"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_getFbns()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">210</span>
+    </aside>
+        <p class="phpdocumentor-summary">Create a new FBNS receiver.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_getFbns</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Push-Fbns.html"><abbr title="\InstagramAPI\Push\Fbns">Fbns</abbr></a></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Push-Fbns.html"><abbr title="\InstagramAPI\Push\Fbns">Fbns</abbr></a></span>
+            
+</article>
+                                    <a id="method_start"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">start()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">274</span>
+    </aside>
+        <p class="phpdocumentor-summary">Start Push receiver.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">start</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_stop"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">stop()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Push.php"><a href="../files/src-push.html"><abbr title="src/Push.php">Push.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">282</span>
+    </aside>
+        <p class="phpdocumentor-summary">Stop Push receiver.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">stop</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                                            </section>
+            </article>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                    <h2>Search results</h2>
+                    <ul class="phpdocumentor-search-results__entries">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

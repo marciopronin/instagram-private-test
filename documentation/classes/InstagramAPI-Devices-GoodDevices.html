@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="../css/template.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-top-header"></header>
+    <header class="phpdocumentor-header">
+        <section class="phpdocumentor-section">
+            <h1 class="phpdocumentor-title">Documentation</h1>
+        </section>
+    </header>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/instagramapi.html"><abbr title="\InstagramAPI">InstagramAPI</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/instagramapi-devices.html"><abbr title="\InstagramAPI\Devices">Devices</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-exception.html"><abbr title="\InstagramAPI\Exception">Exception</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-media.html"><abbr title="\InstagramAPI\Media">Media</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-middleware.html"><abbr title="\InstagramAPI\Middleware">Middleware</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-push.html"><abbr title="\InstagramAPI\Push">Push</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-react.html"><abbr title="\InstagramAPI\React">React</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-settings.html"><abbr title="\InstagramAPI\Settings">Settings</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="nine phpdocumentor-columns phpdocumentor-content">
+                <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/instagramapi.html">InstagramAPI</a></li>
+                    <li><a href="../namespaces/instagramapi-devices.html">Devices</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            GoodDevices
+                                                        </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="src/Devices/GoodDevices.php"><a href="../files/src-devices-gooddevices.html"><abbr title="src/Devices/GoodDevices.php">GoodDevices.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">88</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary">Internal list of verified Android devices.</p>
+        <section class="phpdocumentor-class__description"></section>
+                    <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"><p>SteveJobzniak (<a href="https://github.com/SteveJobzniak">https://github.com/SteveJobzniak</a>)</p>
+<p>This is a list of popular, modern Android phones, all VERIFIED to support
+receiving the max-resolution videos from Instagram's API replies. This list
+has to be hand-crafted, because bad devices only receive low-resolution
+videos! Instagram's API looks at device MODEL when deciding to deliver HD.</p>
+<p>The goal with this list is to have a list of ~10 modern phones which we only
+have to refresh every few years, as they slip away into obscurity.</p>
+<p>Here are the rules for building the list:</p>
+<ul>
+<li>Find a top-list of the best Android phones for [current year].</li>
+<li>Only select devices with super high resolution screens (at least 1080p+).</li>
+<li>Find the model at <a href="https://www.handsetdetection.com/properties/devices">https://www.handsetdetection.com/properties/devices</a>.</li>
+<li>Some phones have tons of sub-models. Find the phone on Amazon and look at
+the details to find sub-model identifier for the most popular US variant!</li>
+<li>Research the model's popularity. For example, NEVER include a Samsung phone
+with an &quot;X&quot; suffix (such as SM-G935X). Those are STORE DEMO units.</li>
+<li>Check if they've recorded any Instagram user agent. If there are multiple
+agents for Instagram, compare them all carefully and pick the latest.</li>
+<li>Look closely to make sure the string wasn't truncated or modified on their
+site. I've seen phones lacking the locale and final parenthesis, for
+example. Or strings that are all-lowercase. DO NOT USE THOSE!</li>
+<li>Verify the device details by doing a Google search for the model identifier
+you found in the user-agent, to verify all specs match the real device.</li>
+<li>Enter good models below in the same format as the other devices. Triple and
+quadruple check that it is 100% CORRECT for that device.</li>
+<li>Always enter the EXACT Android version that the user agent was seen with on
+the website above, which is usually the OS version the phone released with.</li>
+<li>The Android version is the first part of the agent, such as &quot;23/6.0.1&quot;.</li>
+</ul>
+<p>Here's an example string:
+&quot;Instagram 10.9.0 Android (23/6.0.1; 480dpi; 1080x1776; LENOVO/Lenovo; Lenovo P2a42; P2a42; qcom; fr_FR)&quot;.</p>
+<p>The format is made via the android.os.Build library:
+&quot;Instagram %s Android (%s/%s; %s; %s; %s/%s; %s; %s; %s)</p>
+<ol>
+<li>Instagram VERSION.</li>
+<li>Android API VERSION (Build$VERSION.SDK_INT)</li>
+<li>Android VERSION (Build$VERSION.RELEASE)</li>
+<li>DPI.</li>
+<li>Display Resolution.</li>
+<li>MANUFACTURER.
+7 (optional). BRAND (this &quot;/&quot;-portion with a brand doesn't always exist).</li>
+<li>MODEL.</li>
+<li>DEVICE.</li>
+<li>CPU (Build.HARDWARE)</li>
+<li>Language (Build.LOCALE).</li>
+</ol>
+<p>We only want the part within parenthesis, and we ignore the locale.</p>
+<p>That gives us the following string:
+&quot;23/6.0.1; 480dpi; 1080x1776; LENOVO/Lenovo; Lenovo P2a42; P2a42; qcom&quot;.</p>
+<p>However, note that the device above isn't at least 1920x1080. Don't use it.</p>
+<p>When you have a &quot;possibly good&quot; agent, you must finally TEST IT: Use the
+&quot;devtools/checkDevices.php&quot; developer script to check your agent and verify
+that Instagram detects it as a high-resolution device and gives it HD videos!</p>
+<p>LASTLY, YOU MUST UNDERSTAND THE FOLLOWING: THE DEVICE LIST BELOW IS MEANT TO
+BE A &quot;SNAPSHOT&quot; OF DEVICES AND THEIR ANDROID VERSIONS AT THAT MOMENT IN TIME.
+WE ARE <em>ONLY</em> SUPPOSED TO <em>ADD</em> NEW DEVICES TO IT OR COMPLETELY <em>DELETE</em> OLD
+DEVICES. DO <em>NOT</em> &quot;EDIT&quot; THE LIST TO TRY TO &quot;IMPROVE&quot; OR &quot;UPDATE&quot; ANDROID
+VERSIONS OR <em>ANYTHING</em> ELSE ABOUT AN EXISTING DEVICE. EDITING EVEN A <em>SINGLE</em>
+BYTE WILL CAUSE <em>ALL</em> USERS OF THAT DEVICE TO BE LOGGED OUT AND <em>RE-ASSIGNED</em>
+TO A BRAND NEW PHONE HARDWARE FINGERPRINT AND A DIFFERENT RANDOM DEVICE. THAT
+BEHAVIOR IS INTENTIONAL AND <em>BY DESIGN</em>. IT ALLOWS US TO SAFELY BLACKLIST BAD
+DEVICES AND IT DISCOURAGES DUMB, FRIVOLOUS &quot;UPGRADES&quot;, THUS ENSURING THAT WE
+<em>ONLY</em> IDENTIFY OUR DEVICES WITH THE ACTUAL <em>ANDROID</em> VERSION THEY <em>SHIPPED</em>
+WITH, WHICH IS THE SAFEST WAY TO IDENTIFY OUR VIRTUAL DEVICES. MOST REAL
+USERS DON'T UPGRADE ANDROID OS BEYOND WHAT THE PHONE ORIGINALLY SHIPPED WITH.</p>
+<p>THIS DEVICE LIST IS CRITICAL TO THE OPERATION OF THE API. DO NOT CONTRIBUTE
+TO THIS LIST IF YOU DON'T UNDERSTAND <em>ALL</em> INSTRUCTIONS ABOVE. PERFECTLY. ALL
+CONTRIBUTIONS MUST INCLUDE THE RELEASE DATE, HANDSETDETECTION AND A LINK TO A
+PAGE (SUCH AS AMAZON) FOR THAT EXACT MODEL SPECIFIER, AS SEEN BELOW, SO THAT
+WE CAN VALIDATE ALL AGENTS TO SEE THAT YOU AREN'T ADDING AN INCORRECTLY
+WRITTEN OR UNPOPULAR DEVICE AGENT WHICH WILL GET US BANNED BY INSTAGRAM!</p></section>
+                </dd>
+                        </dl>
+
+
+        <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Devices-GoodDevices.html#constant_CPU_ABI">CPU_ABI</a></th>
+                    <td class="phpdocumentor-cell">List of supported binary architectures for the device CPUs.</td>
+                    <td class="phpdocumentor-cell">&#039;armeabi-v7a:armeabi&#039;</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Devices-GoodDevices.html#constant_FLAGGED_DEVICES">FLAGGED_DEVICES</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">[
+    /* OnePlus 3T. Released: November 2016.
+     * https://www.amazon.com/OnePlus-A3010-64GB-Gunmetal-International/dp/B01N4H00V8
+     * https://www.handsetdetection.com/properties/devices/OnePlus/A3010
+     */
+    &#039;24/7.0; 380dpi; 1080x1920; OnePlus; ONEPLUS A3010; OnePlus3T; qcom&#039;,
+    /* LG G5. Released: April 2016.
+     * https://www.amazon.com/LG-Unlocked-Phone-Titan-Warranty/dp/B01DJE22C2
+     * https://www.handsetdetection.com/properties/devices/LG/RS988
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2392; LGE/lge; RS988; h1; h1&#039;,
+    /* Huawei Mate 9 Pro. Released: January 2017.
+     * https://www.amazon.com/Huawei-Dual-Sim-Titanium-Unlocked-International/dp/B01N9O1L6N
+     * https://www.handsetdetection.com/properties/devices/Huawei/LON-L29
+     */
+    &#039;24/7.0; 640dpi; 1440x2560; HUAWEI; LON-L29; HWLON; hi3660&#039;,
+    /* ZTE Axon 7. Released: June 2016.
+     * https://www.frequencycheck.com/models/OMYDK/zte-axon-7-a2017u-dual-sim-lte-a-64gb
+     * https://www.handsetdetection.com/properties/devices/ZTE/A2017U
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; ZTE; ZTE A2017U; ailsa_ii; qcom&#039;,
+    /* Samsung Galaxy S7 Edge SM-G935F. Released: March 2016.
+     * https://www.amazon.com/Samsung-SM-G935F-Factory-Unlocked-Smartphone/dp/B01C5OIINO
+     * https://www.handsetdetection.com/properties/devices/Samsung/SM-G935F
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; samsung; SM-G935F; hero2lte; samsungexynos8890&#039;,
+    /* Samsung Galaxy S7 SM-G930F. Released: March 2016.
+     * https://www.amazon.com/Samsung-SM-G930F-Factory-Unlocked-Smartphone/dp/B01J6MS6BC
+     * https://www.handsetdetection.com/properties/devices/Samsung/SM-G930F
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Devices-GoodDevices.html#constant_DEVICES">DEVICES</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">[
+    /* OnePlus 3T. Released: November 2016.
+     * https://www.amazon.com/OnePlus-A3010-64GB-Gunmetal-International/dp/B01N4H00V8
+     * https://www.handsetdetection.com/properties/devices/OnePlus/A3010
+     */
+    &#039;24/7.0; 380dpi; 1080x1920; OnePlus; ONEPLUS A3010; OnePlus3T; qcom&#039;,
+    /* LG G5. Released: April 2016.
+     * https://www.amazon.com/LG-Unlocked-Phone-Titan-Warranty/dp/B01DJE22C2
+     * https://www.handsetdetection.com/properties/devices/LG/RS988
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2392; LGE/lge; RS988; h1; h1&#039;,
+    /* Huawei Mate 9 Pro. Released: January 2017.
+     * https://www.amazon.com/Huawei-Dual-Sim-Titanium-Unlocked-International/dp/B01N9O1L6N
+     * https://www.handsetdetection.com/properties/devices/Huawei/LON-L29
+     */
+    &#039;24/7.0; 640dpi; 1440x2560; HUAWEI; LON-L29; HWLON; hi3660&#039;,
+    /* ZTE Axon 7. Released: June 2016.
+     * https://www.frequencycheck.com/models/OMYDK/zte-axon-7-a2017u-dual-sim-lte-a-64gb
+     * https://www.handsetdetection.com/properties/devices/ZTE/A2017U
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; ZTE; ZTE A2017U; ailsa_ii; qcom&#039;,
+    /* Samsung Galaxy S7 Edge SM-G935F. Released: March 2016.
+     * https://www.amazon.com/Samsung-SM-G935F-Factory-Unlocked-Smartphone/dp/B01C5OIINO
+     * https://www.handsetdetection.com/properties/devices/Samsung/SM-G935F
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; samsung; SM-G935F; hero2lte; samsungexynos8890&#039;,
+    /* Samsung Galaxy S7 SM-G930F. Released: March 2016.
+     * https://www.amazon.com/Samsung-SM-G930F-Factory-Unlocked-Smartphone/dp/B01J6MS6BC
+     * https://www.handsetdetection.com/properties/devices/Samsung/SM-G930F
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;,
+    &#039;22/5.1; 480dpi; 1080x1920; Meizu; m3 note; m3note; mt6755&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G925F; zerolte; samsungexynos7420&#039;,
+    &#039;23/6.0.1; 480dpi; 1080x1920; Xiaomi; Redmi Note 3; kenzo; qcom&#039;,
+    &#039;24/7.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-A510F; a5xelte; samsungexynos7580&#039;,
+    &#039;24/7.0; 420dpi; 1080x2094; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; Xiaomi/xiaomi; Redmi Note 4; mido; qcom&#039;,
+    &#039;23/6.0.1; 480dpi; 1080x1920; Xiaomi; Redmi 4; markw; qcom&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; HUAWEI/HONOR; STF-L09; HWSTF; hi3660&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; Xiaomi/xiaomi; Mi A1; tissot_sprout; qcom&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; Xiaomi; MI 6; sagit; qcom&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G920F; zeroflte; samsungexynos7420&#039;,
+    &#039;25/7.1.1; 440dpi; 1080x1920; Xiaomi; MI MAX 2; oxygen; qcom&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; Xiaomi; MI 5s; capricorn; qcom&#039;,
+    &#039;25/7.1.2; 440dpi; 1080x2030; Xiaomi/xiaomi; Redmi 5 Plus; vince; qcom&#039;,
+    &#039;26/8.0.0; 640dpi; 1440x2768; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;,
+    &#039;24/7.0; 420dpi; 1080x1920; samsung; SM-J730FM; j7y17lte; samsungexynos7870&#039;,
+    &#039;23/6.0.1; 480dpi; 1080x1920; samsung; SM-G900F; klte; qcom&#039;,
+    &#039;23/6.0; 480dpi; 1080x1920; Xiaomi; Redmi Note 4; nikel; mt6797&#039;,
+    &#039;23/6.0.1; 420dpi; 1080x1920; LeMobile/LeEco; Le X527; le_s2_ww; qcom&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2032; HUAWEI/HONOR; LLD-L31; HWLLD-H; hi6250&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-G935F; hero2lte; samsungexynos8890&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-G935W8; hero2ltebmc; samsungexynos8890&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-G965F; star2lte; samsungexynos9810&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G935F; hero2lte; samsungexynos8890&#039;,
+    &#039;24/7.0; 420dpi; 1080x1920; samsung; SM-A720F; a7y17lte; samsungexynos7880&#039;,
+    &#039;23/6.0; 480dpi; 1080x1920; Xiaomi; Redmi Note 4X; nikel; mt6797&#039;,
+    &#039;26/8.0.0; 560dpi; 1440x2792; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;23/6.0.1; 480dpi; 1080x1920; Xiaomi; Redmi Note 3; kate; qcom&#039;,
+    &#039;23/6.0; 480dpi; 1080x1920; Meizu; MX6; MX6; mt6797&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G950U; dreamqltesq; qcom&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-N950F; greatlte; samsungexynos8895&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x1920; OnePlus; ONEPLUS A5000; OnePlus5; qcom&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G920I; zeroflte; samsungexynos7420&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2150; HUAWEI; ANE-LX1; HWANE; hi6250&#039;,
+    &#039;24/7.0; 480dpi; 1080x2040; HUAWEI; RNE-L21; HWRNE; hi6250&#039;,
+    &#039;24/7.0; 420dpi; 1080x1920; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;,
+    &#039;26/8.0.0; 408dpi; 1080x1920; Xiaomi/xiaomi; Mi A1; tissot_sprout; qcom&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G960F; starlte; samsungexynos9810&#039;,
+    &#039;23/6.0; 480dpi; 1080x1920; Meizu; PRO 6; PRO6; mt6797&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; HUAWEI; VTR-L09; HWVTR; hi3660&#039;,
+    &#039;27/8.1.0; 480dpi; 1080x2136; Xiaomi/xiaomi; Mi A2 Lite; daisy_sprout; qcom&#039;,
+    &#039;27/8.1.0; 480dpi; 1080x2218; HUAWEI; SNE-LX1; HWSNE; kirin710&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; HUAWEI/HONOR; STF-L09; HWSTF; hi3660&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2032; HUAWEI/HONOR; LLD-L31; HWLLD-H; hi6250&#039;,
+    &#039;27/8.1.0; 480dpi; 1080x1920; Xiaomi/xiaomi; Mi A1; tissot_sprout; qcom&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-A510F; a5xelte; samsungexynos7580&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;27/8.1.0; 440dpi; 1080x2030; Xiaomi/xiaomi; Redmi 5 Plus; vince; qcom&#039;,
+    &#039;28/9; 560dpi; 1440x2792; samsung; SM-G965N; star2lteks; samsungexynos9810&#039;,
+]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Devices-GoodDevices.html#constant_VP9_COMPATIBLE_DEVICES">VP9_COMPATIBLE_DEVICES</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">[&#039;24/7.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;, &#039;24/7.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;, &#039;24/7.0; 420dpi; 1080x2094; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;, &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;, &#039;26/8.0.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;, &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;, &#039;26/8.0.0; 640dpi; 1440x2768; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;, &#039;23/6.0; 480dpi; 1080x1920; Xiaomi; Redmi Note 4; nikel; mt6797&#039;, &#039;23/6.0.1; 420dpi; 1080x1920; LeMobile/LeEco; Le X527; le_s2_ww; qcom&#039;, &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-G965F; star2lte; samsungexynos9810&#039;, &#039;24/7.0; 420dpi; 1080x1920; samsung; SM-A720F; a7y17lte; samsungexynos7880&#039;, &#039;23/6.0; 480dpi; 1080x1920; Xiaomi; Redmi Note 4X; nikel; mt6797&#039;, &#039;26/8.0.0; 560dpi; 1440x2792; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;, &#039;23/6.0; 480dpi; 1080x1920; Meizu; MX6; MX6; mt6797&#039;, &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-N950F; greatlte; samsungexynos8895&#039;, &#039;26/8.0.0; 420dpi; 1080x1920; OnePlus; ONEPLUS A5000; OnePlus5; qcom&#039;, &#039;26/8.0.0; 420dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;, &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G960F; starlte; samsungexynos9810&#039;, &#039;23/6.0; 480dpi; 1080x1920; Meizu; PRO 6; PRO6; mt6797&#039;, &#039;24/7.0; 480dpi; 1080x1920; HUAWEI; VTR-L09; HWVTR; hi3660&#039;, &#039;27/8.1.0; 480dpi; 1080x2218; HUAWEI; SNE-LX1; HWSNE; kirin710&#039;, &#039;28/9; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;, &#039;28/9; 560dpi; 1440x2792; samsung; SM-G965N; star2lteks; samsungexynos9810&#039;]</td>
+                </tr>
+                                                                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Devices-GoodDevices.html#method_getRandomGoodDevice">getRandomGoodDevice()</a></th>
+                    <td class="phpdocumentor-cell">Retrieve the device string for a random good device.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Devices-GoodDevices.html#method_getAllGoodDevices">getAllGoodDevices()</a></th>
+                    <td class="phpdocumentor-cell">Retrieve all good devices.</td>
+                    <td class="phpdocumentor-cell">string[]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Devices-GoodDevices.html#method_isGoodDevice">isGoodDevice()</a></th>
+                    <td class="phpdocumentor-cell">Checks whether a device string is one of the good devices.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Devices-GoodDevices.html#method_isVP9Compatible">isVP9Compatible()</a></th>
+                    <td class="phpdocumentor-cell">Checks whether a device string is VP9 compatible.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                                            </table>
+
+                    <section>
+                <h3 class="phpdocumentor-constants__header">Constants</h3>
+                                    <a id="constant_CPU_ABI"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">CPU_ABI</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Devices/GoodDevices.php"><a href="../files/src-devices-gooddevices.html"><abbr title="src/Devices/GoodDevices.php">GoodDevices.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">110</span>
+    </aside>
+            <p class="phpdocumentor-summary">List of supported binary architectures for the device CPUs.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$CPU_ABI</span>
+        = <span class="phpdocumentor-signature__default-value">&#039;armeabi-v7a:armeabi&#039;</span>
+    </code>
+        <section class="phpdocumentor-description">NOTE TO COLLABORATORS: Currently all devices use the same 64-bit ARM list,
+but if future added devices have different CPU capabilities, this will need
+a rewrite to be able to specify different CPU_ABI values per-device. It&#039;s
+very unlikely to happen, though, since we only add 64-bit CPU devices to the
+list. And there&#039;s no real value to increasing ARM chip sizes beyond 64-bit
+since the physical address lines take up more space, and there are no real
+numerical benefits beyond 64-bit numbers. So we most likely won&#039;t need
+any per-device values here.
+
+Also note that the list below is actually the two 32-bit ARM identifiers.
+That&#039;s because Instagram is querying the 32-bit CPU_ABI1 and CPU_ABI2
+constants, so the below is the correct CPU_ABI value on our 64-bit devices.</section>
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://developer.android.com/ndk/guides/abis.html"><abbr title="https://developer.android.com/ndk/guides/abis.html">https://developer.android.com/ndk/guides/abis.html</abbr></a></span>
+                                                            <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+</article>
+                                    <a id="constant_FLAGGED_DEVICES"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">FLAGGED_DEVICES</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Devices/GoodDevices.php"><a href="../files/src-devices-gooddevices.html"><abbr title="src/Devices/GoodDevices.php">GoodDevices.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">112</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__name">$FLAGGED_DEVICES</span>
+        = <span class="phpdocumentor-signature__default-value">[
+    /* OnePlus 3T. Released: November 2016.
+     * https://www.amazon.com/OnePlus-A3010-64GB-Gunmetal-International/dp/B01N4H00V8
+     * https://www.handsetdetection.com/properties/devices/OnePlus/A3010
+     */
+    &#039;24/7.0; 380dpi; 1080x1920; OnePlus; ONEPLUS A3010; OnePlus3T; qcom&#039;,
+    /* LG G5. Released: April 2016.
+     * https://www.amazon.com/LG-Unlocked-Phone-Titan-Warranty/dp/B01DJE22C2
+     * https://www.handsetdetection.com/properties/devices/LG/RS988
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2392; LGE/lge; RS988; h1; h1&#039;,
+    /* Huawei Mate 9 Pro. Released: January 2017.
+     * https://www.amazon.com/Huawei-Dual-Sim-Titanium-Unlocked-International/dp/B01N9O1L6N
+     * https://www.handsetdetection.com/properties/devices/Huawei/LON-L29
+     */
+    &#039;24/7.0; 640dpi; 1440x2560; HUAWEI; LON-L29; HWLON; hi3660&#039;,
+    /* ZTE Axon 7. Released: June 2016.
+     * https://www.frequencycheck.com/models/OMYDK/zte-axon-7-a2017u-dual-sim-lte-a-64gb
+     * https://www.handsetdetection.com/properties/devices/ZTE/A2017U
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; ZTE; ZTE A2017U; ailsa_ii; qcom&#039;,
+    /* Samsung Galaxy S7 Edge SM-G935F. Released: March 2016.
+     * https://www.amazon.com/Samsung-SM-G935F-Factory-Unlocked-Smartphone/dp/B01C5OIINO
+     * https://www.handsetdetection.com/properties/devices/Samsung/SM-G935F
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; samsung; SM-G935F; hero2lte; samsungexynos8890&#039;,
+    /* Samsung Galaxy S7 SM-G930F. Released: March 2016.
+     * https://www.amazon.com/Samsung-SM-G930F-Factory-Unlocked-Smartphone/dp/B01J6MS6BC
+     * https://www.handsetdetection.com/properties/devices/Samsung/SM-G930F
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+]</span>
+    </code>
+            
+</article>
+                                    <a id="constant_DEVICES"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">DEVICES</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Devices/GoodDevices.php"><a href="../files/src-devices-gooddevices.html"><abbr title="src/Devices/GoodDevices.php">GoodDevices.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">153</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__name">$DEVICES</span>
+        = <span class="phpdocumentor-signature__default-value">[
+    /* OnePlus 3T. Released: November 2016.
+     * https://www.amazon.com/OnePlus-A3010-64GB-Gunmetal-International/dp/B01N4H00V8
+     * https://www.handsetdetection.com/properties/devices/OnePlus/A3010
+     */
+    &#039;24/7.0; 380dpi; 1080x1920; OnePlus; ONEPLUS A3010; OnePlus3T; qcom&#039;,
+    /* LG G5. Released: April 2016.
+     * https://www.amazon.com/LG-Unlocked-Phone-Titan-Warranty/dp/B01DJE22C2
+     * https://www.handsetdetection.com/properties/devices/LG/RS988
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2392; LGE/lge; RS988; h1; h1&#039;,
+    /* Huawei Mate 9 Pro. Released: January 2017.
+     * https://www.amazon.com/Huawei-Dual-Sim-Titanium-Unlocked-International/dp/B01N9O1L6N
+     * https://www.handsetdetection.com/properties/devices/Huawei/LON-L29
+     */
+    &#039;24/7.0; 640dpi; 1440x2560; HUAWEI; LON-L29; HWLON; hi3660&#039;,
+    /* ZTE Axon 7. Released: June 2016.
+     * https://www.frequencycheck.com/models/OMYDK/zte-axon-7-a2017u-dual-sim-lte-a-64gb
+     * https://www.handsetdetection.com/properties/devices/ZTE/A2017U
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; ZTE; ZTE A2017U; ailsa_ii; qcom&#039;,
+    /* Samsung Galaxy S7 Edge SM-G935F. Released: March 2016.
+     * https://www.amazon.com/Samsung-SM-G935F-Factory-Unlocked-Smartphone/dp/B01C5OIINO
+     * https://www.handsetdetection.com/properties/devices/Samsung/SM-G935F
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; samsung; SM-G935F; hero2lte; samsungexynos8890&#039;,
+    /* Samsung Galaxy S7 SM-G930F. Released: March 2016.
+     * https://www.amazon.com/Samsung-SM-G930F-Factory-Unlocked-Smartphone/dp/B01J6MS6BC
+     * https://www.handsetdetection.com/properties/devices/Samsung/SM-G930F
+     */
+    &#039;23/6.0.1; 640dpi; 1440x2560; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;,
+    &#039;22/5.1; 480dpi; 1080x1920; Meizu; m3 note; m3note; mt6755&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G925F; zerolte; samsungexynos7420&#039;,
+    &#039;23/6.0.1; 480dpi; 1080x1920; Xiaomi; Redmi Note 3; kenzo; qcom&#039;,
+    &#039;24/7.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-A510F; a5xelte; samsungexynos7580&#039;,
+    &#039;24/7.0; 420dpi; 1080x2094; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; Xiaomi/xiaomi; Redmi Note 4; mido; qcom&#039;,
+    &#039;23/6.0.1; 480dpi; 1080x1920; Xiaomi; Redmi 4; markw; qcom&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; HUAWEI/HONOR; STF-L09; HWSTF; hi3660&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; Xiaomi/xiaomi; Mi A1; tissot_sprout; qcom&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; Xiaomi; MI 6; sagit; qcom&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G920F; zeroflte; samsungexynos7420&#039;,
+    &#039;25/7.1.1; 440dpi; 1080x1920; Xiaomi; MI MAX 2; oxygen; qcom&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; Xiaomi; MI 5s; capricorn; qcom&#039;,
+    &#039;25/7.1.2; 440dpi; 1080x2030; Xiaomi/xiaomi; Redmi 5 Plus; vince; qcom&#039;,
+    &#039;26/8.0.0; 640dpi; 1440x2768; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;,
+    &#039;24/7.0; 420dpi; 1080x1920; samsung; SM-J730FM; j7y17lte; samsungexynos7870&#039;,
+    &#039;23/6.0.1; 480dpi; 1080x1920; samsung; SM-G900F; klte; qcom&#039;,
+    &#039;23/6.0; 480dpi; 1080x1920; Xiaomi; Redmi Note 4; nikel; mt6797&#039;,
+    &#039;23/6.0.1; 420dpi; 1080x1920; LeMobile/LeEco; Le X527; le_s2_ww; qcom&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2032; HUAWEI/HONOR; LLD-L31; HWLLD-H; hi6250&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-G935F; hero2lte; samsungexynos8890&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-G935W8; hero2ltebmc; samsungexynos8890&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-G965F; star2lte; samsungexynos9810&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G935F; hero2lte; samsungexynos8890&#039;,
+    &#039;24/7.0; 420dpi; 1080x1920; samsung; SM-A720F; a7y17lte; samsungexynos7880&#039;,
+    &#039;23/6.0; 480dpi; 1080x1920; Xiaomi; Redmi Note 4X; nikel; mt6797&#039;,
+    &#039;26/8.0.0; 560dpi; 1440x2792; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;23/6.0.1; 480dpi; 1080x1920; Xiaomi; Redmi Note 3; kate; qcom&#039;,
+    &#039;23/6.0; 480dpi; 1080x1920; Meizu; MX6; MX6; mt6797&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G950U; dreamqltesq; qcom&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-N950F; greatlte; samsungexynos8895&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x1920; OnePlus; ONEPLUS A5000; OnePlus5; qcom&#039;,
+    &#039;24/7.0; 640dpi; 1440x2560; samsung; SM-G920I; zeroflte; samsungexynos7420&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2150; HUAWEI; ANE-LX1; HWANE; hi6250&#039;,
+    &#039;24/7.0; 480dpi; 1080x2040; HUAWEI; RNE-L21; HWRNE; hi6250&#039;,
+    &#039;24/7.0; 420dpi; 1080x1920; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;26/8.0.0; 420dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;,
+    &#039;26/8.0.0; 408dpi; 1080x1920; Xiaomi/xiaomi; Mi A1; tissot_sprout; qcom&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G960F; starlte; samsungexynos9810&#039;,
+    &#039;23/6.0; 480dpi; 1080x1920; Meizu; PRO 6; PRO6; mt6797&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; HUAWEI; VTR-L09; HWVTR; hi3660&#039;,
+    &#039;27/8.1.0; 480dpi; 1080x2136; Xiaomi/xiaomi; Mi A2 Lite; daisy_sprout; qcom&#039;,
+    &#039;27/8.1.0; 480dpi; 1080x2218; HUAWEI; SNE-LX1; HWSNE; kirin710&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; HUAWEI/HONOR; STF-L09; HWSTF; hi3660&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x2032; HUAWEI/HONOR; LLD-L31; HWLLD-H; hi6250&#039;,
+    &#039;27/8.1.0; 480dpi; 1080x1920; Xiaomi/xiaomi; Mi A1; tissot_sprout; qcom&#039;,
+    &#039;24/7.0; 480dpi; 1080x1920; samsung; SM-A510F; a5xelte; samsungexynos7580&#039;,
+    &#039;26/8.0.0; 480dpi; 1080x1920; samsung; SM-G930F; herolte; samsungexynos8890&#039;,
+    &#039;27/8.1.0; 440dpi; 1080x2030; Xiaomi/xiaomi; Redmi 5 Plus; vince; qcom&#039;,
+    &#039;28/9; 560dpi; 1440x2792; samsung; SM-G965N; star2lteks; samsungexynos9810&#039;,
+]</span>
+    </code>
+            
+</article>
+                                    <a id="constant_VP9_COMPATIBLE_DEVICES"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">VP9_COMPATIBLE_DEVICES</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Devices/GoodDevices.php"><a href="../files/src-devices-gooddevices.html"><abbr title="src/Devices/GoodDevices.php">GoodDevices.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">248</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__name">$VP9_COMPATIBLE_DEVICES</span>
+        = <span class="phpdocumentor-signature__default-value">[&#039;24/7.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;, &#039;24/7.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;, &#039;24/7.0; 420dpi; 1080x2094; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;, &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;, &#039;26/8.0.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;, &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;, &#039;26/8.0.0; 640dpi; 1440x2768; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;, &#039;23/6.0; 480dpi; 1080x1920; Xiaomi; Redmi Note 4; nikel; mt6797&#039;, &#039;23/6.0.1; 420dpi; 1080x1920; LeMobile/LeEco; Le X527; le_s2_ww; qcom&#039;, &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-G965F; star2lte; samsungexynos9810&#039;, &#039;24/7.0; 420dpi; 1080x1920; samsung; SM-A720F; a7y17lte; samsungexynos7880&#039;, &#039;23/6.0; 480dpi; 1080x1920; Xiaomi; Redmi Note 4X; nikel; mt6797&#039;, &#039;26/8.0.0; 560dpi; 1440x2792; samsung; SM-G955F; dream2lte; samsungexynos8895&#039;, &#039;23/6.0; 480dpi; 1080x1920; Meizu; MX6; MX6; mt6797&#039;, &#039;26/8.0.0; 420dpi; 1080x2094; samsung; SM-N950F; greatlte; samsungexynos8895&#039;, &#039;26/8.0.0; 420dpi; 1080x1920; OnePlus; ONEPLUS A5000; OnePlus5; qcom&#039;, &#039;26/8.0.0; 420dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880&#039;, &#039;26/8.0.0; 480dpi; 1080x2076; samsung; SM-G960F; starlte; samsungexynos9810&#039;, &#039;23/6.0; 480dpi; 1080x1920; Meizu; PRO 6; PRO6; mt6797&#039;, &#039;24/7.0; 480dpi; 1080x1920; HUAWEI; VTR-L09; HWVTR; hi3660&#039;, &#039;27/8.1.0; 480dpi; 1080x2218; HUAWEI; SNE-LX1; HWSNE; kirin710&#039;, &#039;28/9; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895&#039;, &#039;28/9; 560dpi; 1440x2792; samsung; SM-G965N; star2lteks; samsungexynos9810&#039;]</span>
+    </code>
+            
+</article>
+                                            </section>
+        
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method_getRandomGoodDevice"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                    phpdocumentor-element--static                    "
+>
+    <h4 class="phpdocumentor-method__name">getRandomGoodDevice()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Devices/GoodDevices.php"><a href="../files/src-devices-gooddevices.html"><abbr title="src/Devices/GoodDevices.php">GoodDevices.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">279</span>
+    </aside>
+        <p class="phpdocumentor-summary">Retrieve the device string for a random good device.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                        <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getRandomGoodDevice</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_getAllGoodDevices"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                    phpdocumentor-element--static                    "
+>
+    <h4 class="phpdocumentor-method__name">getAllGoodDevices()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Devices/GoodDevices.php"><a href="../files/src-devices-gooddevices.html"><abbr title="src/Devices/GoodDevices.php">GoodDevices.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">292</span>
+    </aside>
+        <p class="phpdocumentor-summary">Retrieve all good devices.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                        <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAllGoodDevices</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string[]</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string[]</span>
+            
+</article>
+                                    <a id="method_isGoodDevice"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                    phpdocumentor-element--static                    "
+>
+    <h4 class="phpdocumentor-method__name">isGoodDevice()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Devices/GoodDevices.php"><a href="../files/src-devices-gooddevices.html"><abbr title="src/Devices/GoodDevices.php">GoodDevices.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">304</span>
+    </aside>
+        <p class="phpdocumentor-summary">Checks whether a device string is one of the good devices.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                        <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">isGoodDevice</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$deviceString</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$deviceString</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method_isVP9Compatible"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                    phpdocumentor-element--static                    "
+>
+    <h4 class="phpdocumentor-method__name">isVP9Compatible()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Devices/GoodDevices.php"><a href="../files/src-devices-gooddevices.html"><abbr title="src/Devices/GoodDevices.php">GoodDevices.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">317</span>
+    </aside>
+        <p class="phpdocumentor-summary">Checks whether a device string is VP9 compatible.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                        <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">isVP9Compatible</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$deviceString</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$deviceString</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                                            </section>
+            </article>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                    <h2>Search results</h2>
+                    <ul class="phpdocumentor-search-results__entries">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

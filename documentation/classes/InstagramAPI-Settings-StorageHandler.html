@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+        <link rel="stylesheet" href="../css/template.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-top-header"></header>
+    <header class="phpdocumentor-header">
+        <section class="phpdocumentor-section">
+            <h1 class="phpdocumentor-title">Documentation</h1>
+        </section>
+    </header>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/instagramapi.html"><abbr title="\InstagramAPI">InstagramAPI</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/instagramapi-devices.html"><abbr title="\InstagramAPI\Devices">Devices</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-exception.html"><abbr title="\InstagramAPI\Exception">Exception</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-media.html"><abbr title="\InstagramAPI\Media">Media</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-middleware.html"><abbr title="\InstagramAPI\Middleware">Middleware</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-push.html"><abbr title="\InstagramAPI\Push">Push</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-react.html"><abbr title="\InstagramAPI\React">React</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-response.html"><abbr title="\InstagramAPI\Response">Response</abbr></a></li>
+                                            <li><a href="../namespaces/instagramapi-settings.html"><abbr title="\InstagramAPI\Settings">Settings</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="nine phpdocumentor-columns phpdocumentor-content">
+                <ul class="phpdocumentor-breadcrumbs">
+    <li><a href="../index.html">Home</a></li>
+                        <li><a href="../namespaces/instagramapi.html">InstagramAPI</a></li>
+                    <li><a href="../namespaces/instagramapi-settings.html">Settings</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            StorageHandler
+                                                        </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">18</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary">Advanced, modular settings storage engine.</p>
+        <section class="phpdocumentor-class__description"><p>Connects to a StorageInterface and transfers data to/from the application,
+with intelligent caching and data translation.</p></section>
+                    <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"><p>SteveJobzniak (<a href="https://github.com/SteveJobzniak">https://github.com/SteveJobzniak</a>)</p></section>
+                </dd>
+                        </dl>
+
+
+        <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#constant_PERSISTENT_KEYS">PERSISTENT_KEYS</a></th>
+                    <td class="phpdocumentor-cell">Complete list of all settings that will be stored/retrieved persistently.</td>
+                    <td class="phpdocumentor-cell">[
+    &#039;account_id&#039;,
+    // The numerical UserPK ID of the account.
+    &#039;devicestring&#039;,
+    // Which Android device they&#039;re identifying as.
+    &#039;device_id&#039;,
+    // Hardware identifier.
+    &#039;phone_id&#039;,
+    // Hardware identifier.
+    &#039;uuid&#039;,
+    // Universally unique identifier.
+    &#039;advertising_id&#039;,
+    // Google Play advertising ID.
+    &#039;session_id&#039;,
+    // The user&#039;s current application session ID.
+    &#039;experiments&#039;,
+    // Interesting experiment variables for this account.
+    &#039;fb_access_token&#039;,
+    // Facebook access token for alternative login method.
+    &#039;fbns_auth&#039;,
+    // Serialized auth credentials for FBNS.
+    &#039;fbns_token&#039;,
+    // Serialized FBNS token.
+    &#039;last_fbns_token&#039;,
+    // Tracks time elapsed since our last FBNS token refresh.
+    &#039;last_login&#039;,
+    // Tracks time elapsed since our last login state refresh.
+    &#039;last_experiments&#039;,
+    // Tracks time elapsed since our last experiments refresh.
+    &#039;datacenter&#039;,
+    // Preferred data center (region-based).
+    &#039;presence_disabled&#039;,
+    // Whether the presence feature has been disabled by user.
+    &#039;zr_token&#039;,
+    // Zero rating token.
+    &#039;zr_expires&#039;,
+    // Zero rating token expiration timestamp.
+    &#039;zr_rules&#039;,
+    // Zero rating rewrite rules.
+    &#039;banner_token&#039;,
+    // Used for IGTV requests.
+    &#039;checksum&#039;,
+    // Graph API.
+    &#039;authorization_header&#039;,
+    // IG Authorization header.
+    &#039;pending_events&#039;,
+    // Graph API.
+    &#039;public_key&#039;,
+    &#039;public_key_id&#039;,
+    &#039;business_account&#039;,
+]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#constant_KEEP_KEYS_WHEN_ERASING_DEVICE">KEEP_KEYS_WHEN_ERASING_DEVICE</a></th>
+                    <td class="phpdocumentor-cell">List of important settings to keep when erasing device-specific settings.</td>
+                    <td class="phpdocumentor-cell">[&#039;account_id&#039;]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#constant_EXPERIMENT_KEYS">EXPERIMENT_KEYS</a></th>
+                    <td class="phpdocumentor-cell">Whitelist for experiments.</td>
+                    <td class="phpdocumentor-cell">[&#039;ig_android_realtime_iris&#039;, &#039;ig_android_skywalker_live_event_start_end&#039;, &#039;ig_android_gqls_typing_indicator&#039;, &#039;ig_android_upload_reliability_universe&#039;, &#039;ig_android_photo_fbupload_universe&#039;, &#039;ig_android_video_segmented_upload_universe&#039;, &#039;ig_android_direct_video_segmented_upload_universe&#039;, &#039;ig_android_reel_raven_video_segmented_upload_universe&#039;, &#039;ig_android_ad_async_ads_universe&#039;, &#039;ig_android_direct_inbox_presence&#039;, &#039;ig_android_direct_thread_presence&#039;, &#039;ig_android_rtc_reshare&#039;, &#039;ig_android_sidecar_photo_fbupload_universe&#039;, &#039;ig_android_fbupload_sidecar_video_universe&#039;, &#039;ig_android_loom_universe&#039;, &#039;ig_android_live_suggested_live_expansion&#039;, &#039;ig_android_live_qa_broadcaster_v1_universe&#039;]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#constant_SUPPORTED_CALLBACKS">SUPPORTED_CALLBACKS</a></th>
+                    <td class="phpdocumentor-cell">Complete list of all supported callbacks.</td>
+                    <td class="phpdocumentor-cell">[&#039;onCloseUser&#039;]</td>
+                </tr>
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#property__storage">$_storage</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Settings-StorageInterface.html"><abbr title="\InstagramAPI\Settings\StorageInterface">StorageInterface</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#property__callbacks">$_callbacks</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#property__username">$_username</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#property__userSettings">$_userSettings</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#property__cookiesFilePath">$_cookiesFilePath</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                                                                <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method___construct">__construct()</a></th>
+                    <td class="phpdocumentor-cell">Constructor.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method___destruct">__destruct()</a></th>
+                    <td class="phpdocumentor-cell">Destructor.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_getStorage">getStorage()</a></th>
+                    <td class="phpdocumentor-cell">Get storage instance.</td>
+                    <td class="phpdocumentor-cell"><abbr title="\InstagramAPI\Settings\Class">Class</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_getUserPath">getUserPath()</a></th>
+                    <td class="phpdocumentor-cell">Get path to user storage folder.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_hasUser">hasUser()</a></th>
+                    <td class="phpdocumentor-cell">Whether the storage backend contains a specific user.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_moveUser">moveUser()</a></th>
+                    <td class="phpdocumentor-cell">Move the internal data for a username to a new username.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_deleteUser">deleteUser()</a></th>
+                    <td class="phpdocumentor-cell">Delete all internal data for a given username.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_setActiveUser">setActiveUser()</a></th>
+                    <td class="phpdocumentor-cell">Load all settings for a user from the storage and mark as current user.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_isMaybeLoggedIn">isMaybeLoggedIn()</a></th>
+                    <td class="phpdocumentor-cell">Does a preliminary guess about whether the current user is logged in.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_eraseDeviceSettings">eraseDeviceSettings()</a></th>
+                    <td class="phpdocumentor-cell">Erase all device-specific settings and all cookies.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_get">get()</a></th>
+                    <td class="phpdocumentor-cell">Retrieve the value of a setting from the current user&#039;s memory cache.</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_set">set()</a></th>
+                    <td class="phpdocumentor-cell">Store a setting&#039;s value for the current user.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_hasCookies">hasCookies()</a></th>
+                    <td class="phpdocumentor-cell">Whether the storage backend has cookies for the currently active user.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_getCookies">getCookies()</a></th>
+                    <td class="phpdocumentor-cell">Get all cookies for the currently active user.</td>
+                    <td class="phpdocumentor-cell">string|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_setCookies">setCookies()</a></th>
+                    <td class="phpdocumentor-cell">Save all cookies for the currently active user.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method__createCookiesFileDirectory">_createCookiesFileDirectory()</a></th>
+                    <td class="phpdocumentor-cell">Ensures the whole directory path to the cookie file exists/is writable.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method__throwIfNotString">_throwIfNotString()</a></th>
+                    <td class="phpdocumentor-cell">Internal: Ensures that a parameter is a string.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method__throwIfEmptyValue">_throwIfEmptyValue()</a></th>
+                    <td class="phpdocumentor-cell">Internal: Ensures that a parameter is a non-empty string.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method__throwIfNoActiveUser">_throwIfNoActiveUser()</a></th>
+                    <td class="phpdocumentor-cell">Internal: Ensures that there is an active storage user.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method__triggerCallback">_triggerCallback()</a></th>
+                    <td class="phpdocumentor-cell">Internal: Triggers a callback.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_setExperiments">setExperiments()</a></th>
+                    <td class="phpdocumentor-cell">Process and save experiments.</td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_getExperiments">getExperiments()</a></th>
+                    <td class="phpdocumentor-cell">Return saved experiments.</td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_setRewriteRules">setRewriteRules()</a></th>
+                    <td class="phpdocumentor-cell">Save rewrite rules.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_getRewriteRules">getRewriteRules()</a></th>
+                    <td class="phpdocumentor-cell">Return saved rewrite rules.</td>
+                    <td class="phpdocumentor-cell">array</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_setFbnsAuth">setFbnsAuth()</a></th>
+                    <td class="phpdocumentor-cell">Save FBNS authorization.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method_getFbnsAuth">getFbnsAuth()</a></th>
+                    <td class="phpdocumentor-cell">Get FBNS authorization.</td>
+                    <td class="phpdocumentor-cell"><abbr title="\Fbns\Auth">Auth</abbr></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method__packJson">_packJson()</a></th>
+                    <td class="phpdocumentor-cell">Pack data as JSON, deflating it when it saves some space.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Settings-StorageHandler.html#method__unpackJson">_unpackJson()</a></th>
+                    <td class="phpdocumentor-cell">Unpacks data from JSON encoded string, inflating it when necessary.</td>
+                    <td class="phpdocumentor-cell">array|object</td>
+                </tr>
+                                            </table>
+
+                    <section>
+                <h3 class="phpdocumentor-constants__header">Constants</h3>
+                                    <a id="constant_PERSISTENT_KEYS"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">PERSISTENT_KEYS</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">28</span>
+    </aside>
+            <p class="phpdocumentor-summary">Complete list of all settings that will be stored/retrieved persistently.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$PERSISTENT_KEYS</span>
+        = <span class="phpdocumentor-signature__default-value">[
+    &#039;account_id&#039;,
+    // The numerical UserPK ID of the account.
+    &#039;devicestring&#039;,
+    // Which Android device they&#039;re identifying as.
+    &#039;device_id&#039;,
+    // Hardware identifier.
+    &#039;phone_id&#039;,
+    // Hardware identifier.
+    &#039;uuid&#039;,
+    // Universally unique identifier.
+    &#039;advertising_id&#039;,
+    // Google Play advertising ID.
+    &#039;session_id&#039;,
+    // The user&#039;s current application session ID.
+    &#039;experiments&#039;,
+    // Interesting experiment variables for this account.
+    &#039;fb_access_token&#039;,
+    // Facebook access token for alternative login method.
+    &#039;fbns_auth&#039;,
+    // Serialized auth credentials for FBNS.
+    &#039;fbns_token&#039;,
+    // Serialized FBNS token.
+    &#039;last_fbns_token&#039;,
+    // Tracks time elapsed since our last FBNS token refresh.
+    &#039;last_login&#039;,
+    // Tracks time elapsed since our last login state refresh.
+    &#039;last_experiments&#039;,
+    // Tracks time elapsed since our last experiments refresh.
+    &#039;datacenter&#039;,
+    // Preferred data center (region-based).
+    &#039;presence_disabled&#039;,
+    // Whether the presence feature has been disabled by user.
+    &#039;zr_token&#039;,
+    // Zero rating token.
+    &#039;zr_expires&#039;,
+    // Zero rating token expiration timestamp.
+    &#039;zr_rules&#039;,
+    // Zero rating rewrite rules.
+    &#039;banner_token&#039;,
+    // Used for IGTV requests.
+    &#039;checksum&#039;,
+    // Graph API.
+    &#039;authorization_header&#039;,
+    // IG Authorization header.
+    &#039;pending_events&#039;,
+    // Graph API.
+    &#039;public_key&#039;,
+    &#039;public_key_id&#039;,
+    &#039;business_account&#039;,
+]</span>
+    </code>
+        <section class="phpdocumentor-description">This key list WILL be changed whenever we need to support new features,
+so do NOT assume that it will stay the same forever.</section>
+            
+</article>
+                                    <a id="constant_KEEP_KEYS_WHEN_ERASING_DEVICE"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">KEEP_KEYS_WHEN_ERASING_DEVICE</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">68</span>
+    </aside>
+            <p class="phpdocumentor-summary">List of important settings to keep when erasing device-specific settings.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$KEEP_KEYS_WHEN_ERASING_DEVICE</span>
+        = <span class="phpdocumentor-signature__default-value">[&#039;account_id&#039;]</span>
+    </code>
+        <section class="phpdocumentor-description">Whenever we are told to erase all device-specific settings, we will clear
+the values of all settings EXCEPT the keys listed here. It is therefore
+VERY important to list ALL important NON-DEVICE specific settings here!</section>
+                <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="\InstagramAPI\Settings\StorageHandler::eraseDeviceSettings()"><abbr title="\InstagramAPI\Settings\StorageHandler::eraseDeviceSettings()">StorageHandler::eraseDeviceSettings()</abbr></a></span>
+                                                            <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+</article>
+                                    <a id="constant_EXPERIMENT_KEYS"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">EXPERIMENT_KEYS</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">79</span>
+    </aside>
+            <p class="phpdocumentor-summary">Whitelist for experiments.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$EXPERIMENT_KEYS</span>
+        = <span class="phpdocumentor-signature__default-value">[&#039;ig_android_realtime_iris&#039;, &#039;ig_android_skywalker_live_event_start_end&#039;, &#039;ig_android_gqls_typing_indicator&#039;, &#039;ig_android_upload_reliability_universe&#039;, &#039;ig_android_photo_fbupload_universe&#039;, &#039;ig_android_video_segmented_upload_universe&#039;, &#039;ig_android_direct_video_segmented_upload_universe&#039;, &#039;ig_android_reel_raven_video_segmented_upload_universe&#039;, &#039;ig_android_ad_async_ads_universe&#039;, &#039;ig_android_direct_inbox_presence&#039;, &#039;ig_android_direct_thread_presence&#039;, &#039;ig_android_rtc_reshare&#039;, &#039;ig_android_sidecar_photo_fbupload_universe&#039;, &#039;ig_android_fbupload_sidecar_video_universe&#039;, &#039;ig_android_loom_universe&#039;, &#039;ig_android_live_suggested_live_expansion&#039;, &#039;ig_android_live_qa_broadcaster_v1_universe&#039;]</span>
+    </code>
+        <section class="phpdocumentor-description">We will save ONLY the experiments mentioned in this list.</section>
+            
+</article>
+                                    <a id="constant_SUPPORTED_CALLBACKS"></a>
+<article
+        class="
+            phpdocumentor-element
+            phpdocumentor-constant
+            phpdocumentor-constant--public
+                    "
+>
+    <h4 class="phpdocumentor-constant__name">SUPPORTED_CALLBACKS</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">106</span>
+    </aside>
+            <p class="phpdocumentor-summary">Complete list of all supported callbacks.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__name">$SUPPORTED_CALLBACKS</span>
+        = <span class="phpdocumentor-signature__default-value">[&#039;onCloseUser&#039;]</span>
+    </code>
+        <section class="phpdocumentor-description">- &quot;onCloseUser&quot;: Triggered before closing a user&#039;s storage (at script
+end or when switching to a different user). Can be used for bulk-saving
+data at the end of a user&#039;s session, to avoid constant micro-updates.</section>
+            
+</article>
+                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-properties__header">Properties</h3>
+                                    <a id="property__storage"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_storage</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">111</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/InstagramAPI-Settings-StorageInterface.html"><abbr title="\InstagramAPI\Settings\StorageInterface">StorageInterface</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$_storage</span>
+            </code>
+            
+</article>
+                                    <a id="property__callbacks"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_callbacks</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">114</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$_callbacks</span>
+            </code>
+            
+</article>
+                                    <a id="property__username"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_username</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">117</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_username</span>
+            </code>
+            
+</article>
+                                    <a id="property__userSettings"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_userSettings</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">120</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">array</span>
+        <span class="phpdocumentor-signature__name">$_userSettings</span>
+            </code>
+            
+</article>
+                                    <a id="property__cookiesFilePath"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_cookiesFilePath</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">123</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__name">$_cookiesFilePath</span>
+            </code>
+            
+</article>
+                                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method___construct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__construct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">135</span>
+    </aside>
+        <p class="phpdocumentor-summary">Constructor.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__construct</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$storageInstance</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Settings-StorageInterface.html"><abbr title="\InstagramAPI\Settings\StorageInterface">StorageInterface</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$locationConfig</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$callbacks</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$storageInstance</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Settings-StorageInterface.html"><abbr title="\InstagramAPI\Settings\StorageInterface">StorageInterface</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>An instance of desired Storage.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$locationConfig</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Configuration parameters for
+the storage backend location.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$callbacks</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Optional callback functions.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method___destruct"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">__destruct()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">164</span>
+    </aside>
+        <p class="phpdocumentor-summary">Destructor.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">__destruct</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getStorage"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getStorage()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">180</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get storage instance.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getStorage</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Settings\Class">Class</abbr></span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Settings\Class">Class</abbr></span>
+            
+</article>
+                                    <a id="method_getUserPath"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getUserPath()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">192</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get path to user storage folder.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getUserPath</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_hasUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">hasUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">207</span>
+    </aside>
+        <p class="phpdocumentor-summary">Whether the storage backend contains a specific user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">hasUser</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The Instagram username.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>TRUE if user exists, otherwise FALSE.</p></span>
+            
+</article>
+                                    <a id="method_moveUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">moveUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">238</span>
+    </aside>
+        <p class="phpdocumentor-summary">Move the internal data for a username to a new username.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">moveUser</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$oldUsername</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$newUsername</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This function is important because of the fact that all per-user settings
+in all Storage implementations are retrieved and stored via its Instagram
+username, since their NAME is literally the ONLY thing we know about a
+user before we have loaded their settings or logged in! So if you later
+rename that Instagram account, it means that your old device settings
+WON'T follow along automatically, since the new login username is seen
+as a brand new user that isn't in the settings storage.</p>
+<p>This function conveniently tells your chosen Storage backend to move a
+user's settings to a new name, so that they WILL be found again when you
+later look for settings for your new name.</p>
+<p>Bonus guide for easily confused people: YOU must manually rename your
+user on Instagram.com before you call this function. We don't do that.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$oldUsername</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The old name that settings are stored as.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$newUsername</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The new name to move the settings to.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_deleteUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">deleteUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">262</span>
+    </aside>
+        <p class="phpdocumentor-summary">Delete all internal data for a given username.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">deleteUser</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The Instagram username.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_setActiveUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setActiveUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">283</span>
+    </aside>
+        <p class="phpdocumentor-summary">Load all settings for a user from the storage and mark as current user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setActiveUser</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The Instagram username.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_isMaybeLoggedIn"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">isMaybeLoggedIn()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">342</span>
+    </aside>
+        <p class="phpdocumentor-summary">Does a preliminary guess about whether the current user is logged in.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">isMaybeLoggedIn</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Can only be executed after setActiveUser(). And the session it looks
+for may be expired, so there's no guarantee that we are still logged in.</p></section>
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>TRUE if possibly logged in, otherwise FALSE.</p></span>
+            
+</article>
+                                    <a id="method_eraseDeviceSettings"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">eraseDeviceSettings()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">361</span>
+    </aside>
+        <p class="phpdocumentor-summary">Erase all device-specific settings and all cookies.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">eraseDeviceSettings</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This is useful when assigning a new Android device to the account, upon
+which it's very important that we erase all previous, device-specific
+settings so that our account still looks natural to Instagram.</p>
+<p>Note that ALL cookies will be erased too, to clear out the old session.</p></section>
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_get"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">get()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">384</span>
+    </aside>
+        <p class="phpdocumentor-summary">Retrieve the value of a setting from the current user&#039;s memory cache.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">get</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$key</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string|null</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Can only be executed after setActiveUser().</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$key</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Name of the setting.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash; <span class="phpdocumentor-description"><p>The value as a string IF the setting exists AND is
+a NON-EMPTY string. Otherwise NULL.</p></span>
+            
+</article>
+                                    <a id="method_set"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">set()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">416</span>
+    </aside>
+        <p class="phpdocumentor-summary">Store a setting&#039;s value for the current user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">set</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$key</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Can only be executed after setActiveUser(). To clear the value of a
+setting, simply pass in an empty string as value.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$key</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Name of the setting.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The data to store. MUST be castable to string.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_hasCookies"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">hasCookies()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">461</span>
+    </aside>
+        <p class="phpdocumentor-summary">Whether the storage backend has cookies for the currently active user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">hasCookies</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Can only be executed after setActiveUser().</p></section>
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash; <span class="phpdocumentor-description"><p>TRUE if cookies exist, otherwise FALSE.</p></span>
+            
+</article>
+                                    <a id="method_getCookies"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getCookies()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">479</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get all cookies for the currently active user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getCookies</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string|null</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Can only be executed after setActiveUser().</p></section>
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash; <span class="phpdocumentor-description"><p>A previously-stored, raw cookie data string
+(non-empty), or NULL if no cookies exist for
+the active user.</p></span>
+            
+</article>
+                                    <a id="method_setCookies"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setCookies()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">529</span>
+    </aside>
+        <p class="phpdocumentor-summary">Save all cookies for the currently active user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setCookies</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$rawData</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Can only be executed after setActiveUser(). Note that this function is
+called frequently!</p>
+<p>NOTE: It is very important that the owner of this SettingsHandler either
+continuously calls &quot;setCookies&quot;, or better yet listens to the &quot;closeUser&quot;
+callback to save all cookies in bulk to storage at the end of a session.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$rawData</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>An encoded string with all cookie data. Use an
+empty string to erase currently stored cookies.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__createCookiesFileDirectory"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_createCookiesFileDirectory()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">573</span>
+    </aside>
+        <p class="phpdocumentor-summary">Ensures the whole directory path to the cookie file exists/is writable.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_createCookiesFileDirectory</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__throwIfNotString"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_throwIfNotString()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">595</span>
+    </aside>
+        <p class="phpdocumentor-summary">Internal: Ensures that a parameter is a string.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_throwIfNotString</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The value to check.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__throwIfEmptyValue"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_throwIfEmptyValue()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">610</span>
+    </aside>
+        <p class="phpdocumentor-summary">Internal: Ensures that a parameter is a non-empty string.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_throwIfEmptyValue</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The value to check.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__throwIfNoActiveUser"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_throwIfNoActiveUser()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">623</span>
+    </aside>
+        <p class="phpdocumentor-summary">Internal: Ensures that there is an active storage user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_throwIfNoActiveUser</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method__triggerCallback"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_triggerCallback()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">642</span>
+    </aside>
+        <p class="phpdocumentor-summary">Internal: Triggers a callback.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_triggerCallback</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$cbName</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>All callback functions are given the storage handler instance as their
+one and only argument.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$cbName</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The name of the callback.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_setExperiments"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setExperiments()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">677</span>
+    </aside>
+        <p class="phpdocumentor-summary">Process and save experiments.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setExperiments</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$experiments</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">array</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$experiments</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array</span>
+                    &mdash; <span class="phpdocumentor-description"><p>A list of &quot;good&quot; experiments.</p></span>
+            
+</article>
+                                    <a id="method_getExperiments"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getExperiments()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">699</span>
+    </aside>
+        <p class="phpdocumentor-summary">Return saved experiments.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getExperiments</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">array</span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array</span>
+            
+</article>
+                                    <a id="method_setRewriteRules"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setRewriteRules()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">711</span>
+    </aside>
+        <p class="phpdocumentor-summary">Save rewrite rules.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setRewriteRules</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$rules</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$rules</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getRewriteRules"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getRewriteRules()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">724</span>
+    </aside>
+        <p class="phpdocumentor-summary">Return saved rewrite rules.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getRewriteRules</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">array</span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array</span>
+            
+</article>
+                                    <a id="method_setFbnsAuth"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setFbnsAuth()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">734</span>
+    </aside>
+        <p class="phpdocumentor-summary">Save FBNS authorization.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setFbnsAuth</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$auth</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$auth</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getFbnsAuth"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getFbnsAuth()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">748</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get FBNS authorization.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getFbnsAuth</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><abbr title="\Fbns\Auth">Auth</abbr></span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Will restore previously saved auth details if they exist. Otherwise it
+creates random new authorization details.</p></section>
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Fbns\Auth">Auth</abbr></span>
+            
+</article>
+                                    <a id="method__packJson"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_packJson()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">767</span>
+    </aside>
+        <p class="phpdocumentor-summary">Pack data as JSON, deflating it when it saves some space.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_packJson</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$data</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array|object</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$data</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array|object</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method__unpackJson"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_unpackJson()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">791</span>
+    </aside>
+        <p class="phpdocumentor-summary">Unpacks data from JSON encoded string, inflating it when necessary.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_unpackJson</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$packed</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$assoc</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">array|object</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$packed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$assoc</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">true</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array|object</span>
+            
+</article>
+                                                            </section>
+            </article>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                    <h2>Search results</h2>
+                    <ul class="phpdocumentor-search-results__entries">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

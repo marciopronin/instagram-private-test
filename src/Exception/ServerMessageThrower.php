@@ -105,7 +105,7 @@ class ServerMessageThrower
         'Checkpoint\SelectVerificationMethodFormException'   => ['SelectVerificationMethodForm'],
         'Checkpoint\UFACBlockingFormException'               => ['UFACBlockingForm'],
         'Checkpoint\SelectContactPointRecoveryFormException' => ['SelectContactPointRecoveryForm'],
-        'Checkpoint\IeForceSetNewPasswordFormException'      => ['IeForceSetNewPasswordForm']
+        'Checkpoint\IeForceSetNewPasswordFormException'      => ['IeForceSetNewPasswordForm'],
     ];
 
     /**

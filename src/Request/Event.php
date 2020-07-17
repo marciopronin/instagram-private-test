@@ -1861,7 +1861,12 @@ class Event extends RequestCollection
                                 }
                             }
                         }
-                        $this->sendExploreHomeImpression($section->getLayoutContent()->getOneByTwoItem()->getStories()->getSeedReel()->getItems()[0], [
+                        if ($section->getLayoutContent()->getOneByTwoItem()->getStories() !== null) {
+                            $oneByTwoItem = $section->getLayoutContent()->getOneByTwoItem()->getStories()->getSeedReel()->getItems()[0];
+                        } else {
+                            $oneByTwoItem = $section->getLayoutContent()->getOneByTwoItem()->getClips()->getItems()[0]->getMedia();
+                        }
+                        $this->sendExploreHomeImpression($oneByTwoItem, [
                             'position'              => json_encode([strval($row - 1), strval($cOffset)]),
                             'size'                  => json_encode(['2', '1']),
                             'topic_cluster_id'      => $clusterId,

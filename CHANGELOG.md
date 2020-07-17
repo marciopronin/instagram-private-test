@@ -1,3 +1,11 @@
+# Stable release v13.1.1
+## Date: 18/07/2020
+
+### Updates and fixes
+
+- **Account:** Update `prepareAndSendExploreImpression()`
+- **General:** Update codestyle
+
 # Stable release v13.1.0
 ## Date: 17/07/2020 
 

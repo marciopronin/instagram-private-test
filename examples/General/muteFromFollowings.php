@@ -85,7 +85,6 @@ try {
 
     $ig->event->sendNavigation('button', 'media_mute_sheet', 'self_unified_follow_lists');
 
-
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();

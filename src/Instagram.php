@@ -121,6 +121,20 @@ class Instagram implements ExperimentsInterface
     public static $skipLoginFlowAtMyOwnRisk = false;
 
     /**
+     * Global flag for users who want to run the library incorrectly.
+     *
+     * YOU ENABLE THIS AT YOUR OWN RISK! WE GIVE _ZERO_ SUPPORT FOR THIS MODE!
+     * THIS WILL SKIP ANY PRE AND POST LOGIN FLOW!
+     *
+     * THIS SHOULD BE ONLY USED FOR RESEARCHING AND EXPERIMENTAL PURPOSES.
+     *
+     * YOU HAVE BEEN WARNED. ANY DATA CORRUPTION YOU CAUSE IS YOUR OWN PROBLEM!
+     *
+     * @var bool
+     */
+    public static $skipAccountValidation = false;
+
+    /**
      * Global flag for users who want to manage login exceptions on their own.
      *
      * YOU ENABLE THIS AT YOUR OWN RISK! WE GIVE _ZERO_ SUPPORT FOR THIS MODE!
@@ -1748,17 +1762,19 @@ class Instagram implements ExperimentsInterface
     protected function _updateLoginState(
         Response\LoginResponse $response)
     {
-        // This check is just protection against accidental bugs. It makes sure
-        // that we always call this function with a *successful* login response!
-        if (!$response instanceof Response\LoginResponse
-            || !$response->isOk() || empty($response->getLoggedInUser()->getPk())) {
-            throw new \InvalidArgumentException('Invalid login response provided to _updateLoginState().');
-        }
+        if (self::$skipAccountValidation === false) {
+            // This check is just protection against accidental bugs. It makes sure
+            // that we always call this function with a *successful* login response!
+            if (!$response instanceof Response\LoginResponse
+                || !$response->isOk() || empty($response->getLoggedInUser()->getPk())) {
+                throw new \InvalidArgumentException('Invalid login response provided to _updateLoginState().');
+            }
 
-        $this->isMaybeLoggedIn = true;
-        $this->account_id = $response->getLoggedInUser()->getPk();
-        $this->settings->set('account_id', $this->account_id);
-        $this->settings->set('last_login', time());
+            $this->isMaybeLoggedIn = true;
+            $this->account_id = $response->getLoggedInUser()->getPk();
+            $this->settings->set('account_id', $this->account_id);
+            $this->settings->set('last_login', time());
+        }
     }
 
     /**

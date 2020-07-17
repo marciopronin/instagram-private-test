@@ -1,3 +1,24 @@
+# Stable release v13.1.0
+## Date: 17/07/2020 
+
+### New features
+
+- **Instagram:** Added `skipAccountValidation` flag
+
+### Updates and fixes
+
+- **Account:** Update `createValidated()`
+- **Account:** Update `checkPhoneNumber()`
+- **Instagram:** Update `_updateLoginState()`
+
+### Examples
+
+- **Example**: Add mute from following
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v13.0.1
 ## Date: 12/07/2020
 
@@ -22,6 +43,7 @@
 
 ### New features
 
+- **Constants** Update constants to 148.0.0.33.121
 - **Account:** Added function `sendEmailVerificationCode()`
 - **Account:** Added function `checkConfirmationCode()`
 

@@ -30,7 +30,9 @@ $ig->event->sendFlowSteps('one_page_v2', 'next_button_tapped', $waterfallId, $st
 $ig->event->sendFlowSteps('one_page_v2', 'contacts_import_opt_in', $waterfallId, $startTime, ['flow' => 'phone']);
 $ig->event->sendFlowSteps('one_page_v2', 'step_view_loaded', $waterfallId, $startTime, ['flow' => 'phone']);
 
-$ig->account->requestRegistrationSms($phone, $waterfallId, $username);
+$ig->account->checkPhoneNumber($phone);
+
+$tos = $ig->account->requestRegistrationSms($phone, $waterfallId, $username)->getTosVersion();
 $ig->account->validateSignupSmsCode($smsCode, $phone, $waterfallId);
 
 $ig->event->sendNavigation('button', 'one_page_registration', 'add_birthday');
@@ -71,7 +73,7 @@ $ig->internal->getOnBoardingSteps($waterfallId);
 $ig->event->forceSendBatch();
 
 try {
-    $response = $ig->account->createValidated($smsCode, $username, $password, $phone, sprintf('%d-%2d-%2d', $year, $month, $day), $firstName, $waterfallId);
+    $response = $ig->account->createValidated($smsCode, $username, $password, $phone, sprintf('%d-%2d-%2d', $year, $month, $day), $firstName, $waterfallId, $tos);
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit();

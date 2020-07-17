@@ -1581,6 +1581,11 @@ Search.appendIndex(
             "summary": "Global\u0020flag\u0020for\u0020users\u0020who\u0020want\u0020to\u0020run\u0020the\u0020library\u0020incorrectly.",
             "url": "../classes/InstagramAPI-Instagram.html#property_skipLoginFlowAtMyOwnRisk"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024skipAccountValidation",
+            "name": "skipAccountValidation",
+            "summary": "Global\u0020flag\u0020for\u0020users\u0020who\u0020want\u0020to\u0020run\u0020the\u0020library\u0020incorrectly.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_skipAccountValidation"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024manuallyManageLoginException",
             "name": "manuallyManageLoginException",
             "summary": "Global\u0020flag\u0020for\u0020users\u0020who\u0020want\u0020to\u0020manage\u0020login\u0020exceptions\u0020on\u0020their\u0020own.",
@@ -6448,7 +6453,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AvalidateSignupSmsCode\u0028\u0029",
             "name": "validateSignupSmsCode",
-            "summary": "Get\u0020details\u0020about\u0020child\u0020and\u0020main\u0020IG\u0020accounts.",
+            "summary": "Validate\u0020signup\u0020sms\u0020code.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_validateSignupSmsCode"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AsendEmailVerificationCode\u0028\u0029",

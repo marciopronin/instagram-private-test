@@ -75,6 +75,7 @@ class Account extends RequestCollection
      * @param string $date        The date of birth. Format: YYYY-MM-DD.
      * @param string $firstName   First name.
      * @param string $waterfallId UUIDv4.
+     * @param string $tosVersion  ToS version.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -87,16 +88,19 @@ class Account extends RequestCollection
         $phone,
         $date,
         $firstName,
-        $waterfallId)
+        $waterfallId,
+        $tosVersion = 'eu')
     {
         $date = explode('-', $date);
 
         return $this->ig->request('accounts/create_validated/')
             ->setNeedsAuth(false)
-            ->addPost('is_secondary_account_creation', false)
-            ->addPost('tos_version', 'eu')
+            ->addPost('is_secondary_account_creation', 'false')
+            ->addPost('tos_version', $tosVersion)
             ->addPost('suggestedUsername', '')
+            ->addPost('allow_contacts_sync', 'true')
             ->addPost('sn_result', 'GOOGLE_PLAY_UNAVAILABLE:SERVICE_INVALID')
+            ->addPost('do_not_auto_login_if_credentials_match', 'true')
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('username', $username)
@@ -114,7 +118,9 @@ class Account extends RequestCollection
             ->addPost('waterfall_id', $waterfallId)
             ->addPost('enc_password', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('verification_code', $smsCode)
-            ->addPost('has_sms_consent', true)
+            ->addPost('qs_stamp', '')
+            ->addPost('one_tap_opt_in', 'true')
+            ->addPost('has_sms_consent', 'true')
             ->getResponse(new Response\AccountCreateResponse());
     }
 
@@ -138,7 +144,6 @@ class Account extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('guid', $this->ig->uuid)
-            ->addPost('device_id', $this->ig->device_id)
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
@@ -163,19 +168,17 @@ class Account extends RequestCollection
 
         return $this->ig->request('accounts/send_signup_sms_code/')
             ->setNeedsAuth(false)
-            ->addPost('prefill_shown', 'False')
             ->addPost('phone_number', $phone)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
-            ->addPost('device_id', $this->ig->device_id)
             ->addPost('waterfall_id', $waterfallId)
             ->getResponse(new Response\SendSignupSmsCodeResponse());
     }
 
     /**
-     * Get details about child and main IG accounts.
+     * Validate signup sms code.
      *
      * @param string $smsCode     The received SMS code.
      * @param string $phone       Phone with country code. For example: '+34123456789'.

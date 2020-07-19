@@ -16176,6 +16176,16 @@ Search.appendIndex(
             "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
             "url": "../classes/InstagramAPI-Exception-Checkpoint-IeForceSetNewPasswordFormException.html"
         },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\Clip",
+            "name": "Clip",
+            "summary": "Clip.",
+            "url": "../classes/InstagramAPI-Response-Model-Clip.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\Clip\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-Clip.html#constant_JSON_PROPERTY_MAP"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

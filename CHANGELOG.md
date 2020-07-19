@@ -1,3 +1,15 @@
+# Stable release v13.1.2
+## Date: 19/07/2020
+
+### Updates and fixes
+
+- **Constants:** Update `SUPPORTED_CAPABILITIES`
+- **Internal:** Update `sendLauncherSync()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v13.1.1
 ## Date: 18/07/2020
 

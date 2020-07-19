@@ -1190,13 +1190,9 @@ class Internal extends RequestCollection
         $loginConfigs = false)
     {
         $request = $this->ig->request('launcher/sync/')
-            ->addPost('id', ($idIsUuid ? $this->ig->uuid : $this->ig->account_id));
+            ->addPost('id', ($idIsUuid ? $this->ig->uuid : $this->ig->account_id))
+            ->addPost('server_config_retrieval', 1);
 
-        if ($this->ig->getIsAndroid()) {
-            $request->addPost('configs', $loginConfigs ? Constants::LAUNCHER_LOGIN_CONFIGS : Constants::LAUNCHER_CONFIGS);
-        } else {
-            $request->addPost('server_config_retrieval', 1);
-        }
         if ($useCsrfToken) {
             $request->addPost('_csrftoken', $this->ig->client->getToken());
         }

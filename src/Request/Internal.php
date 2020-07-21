@@ -2756,9 +2756,7 @@ class Internal extends RequestCollection
             'upload_media_height'      => (string) $videoDetails->getHeight(),
             'upload_media_width'       => (string) $videoDetails->getWidth(),
             'upload_media_duration_ms' => (string) $videoDetails->getDurationInMsec(),
-            'media_type'               => (string) Response\Model\Item::VIDEO,
-            // TODO select with targetFeed (?)
-            'potential_share_types'    => json_encode(['not supported type']),
+            'media_type'               => ($targetFeed === Constants::FEED_DIRECT_AUDIO) ? (string) Constants::FEED_DIRECT_AUDIO : (string) Response\Model\Item::VIDEO,
         ];
         // Target feed's specific params.
         switch ($targetFeed) {
@@ -2848,18 +2846,20 @@ class Internal extends RequestCollection
         $prefix = sha1($videoDetails->getFilename().uniqid('', true));
 
         try {
-            // Split the video stream into a multiple segments by time.
-            $ffmpeg->run(sprintf(
-                '-i %s -c:v copy -an -dn -sn -f segment -segment_time %d -segment_format mp4 %s',
-                Args::escape($videoDetails->getFilename()),
-                $this->_getTargetSegmentDuration($targetFeed),
-                Args::escape(sprintf(
-                    '%s%s%s.video.%%03d.mp4',
-                    $outputDirectory,
-                    DIRECTORY_SEPARATOR,
-                    $prefix
-                ))
-            ));
+            if ($videoDetails->getVideoCodec() !== null) {
+                // Split the video stream into a multiple segments by time.
+                $ffmpeg->run(sprintf(
+                    '-i %s -c:v copy -an -dn -sn -f segment -segment_time %d -segment_format mp4 %s',
+                    Args::escape($videoDetails->getFilename()),
+                    $this->_getTargetSegmentDuration($targetFeed),
+                    Args::escape(sprintf(
+                        '%s%s%s.video.%%03d.mp4',
+                        $outputDirectory,
+                        DIRECTORY_SEPARATOR,
+                        $prefix
+                    ))
+                ));
+            }
 
             if ($videoDetails->getAudioCodec() !== null) {
                 // Save the audio stream in one segment.
@@ -2924,6 +2924,7 @@ class Internal extends RequestCollection
             case Constants::FEED_DIRECT:
             case Constants::FEED_TIMELINE:
             case Constants::FEED_TIMELINE_ALBUM:
+            case Constants::FEED_DIRECT_AUDIO:
                 $duration = 10;
                 break;
             case Constants::FEED_STORY:

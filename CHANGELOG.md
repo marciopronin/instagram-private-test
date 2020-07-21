@@ -1,3 +1,28 @@
+# Stable release v13.1.3
+## Date: 21/07/2020
+
+### EXPERIMENTAL
+
+- **Direct:** `sendAudio()`. Still at research. Won't work in its current status.
+
+### Updates and fixes
+
+- **Direct:** Update `_sendDirectItem()`
+- **Event:** Update `_validateNavigationPath()`
+- **Event:** Update `prepareAndSendThumbnailImpression()`
+
+### Examples
+
+- **Example**: Update mute from following
+
+### Wiki
+
+- **Wiki:** Added instructions (`Composer.md`) for using composer with private repository
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v13.1.2
 ## Date: 19/07/2020
 

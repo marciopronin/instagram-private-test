@@ -263,20 +263,22 @@ class VideoDetails extends MediaDetails
         // users. Do NOT use it to read from the hard disk!
         $mediaFilename = $this->getBasename();
 
-        // Make sure we have found at least one video stream.
-        if ($this->_videoCodec === null) {
-            throw new \InvalidArgumentException(sprintf(
-                'Instagram requires video with at least one video stream. Your file "%s" doesn\'t have any.',
-                $mediaFilename
-            ));
-        }
+        if ($this->_videoCodec !== null) {
+            // Make sure we have found at least one video stream.
+            if ($this->_videoCodec === null) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Instagram requires video with at least one video stream. Your file "%s" doesn\'t have any.',
+                    $mediaFilename
+                ));
+            }
 
-        // Check the video stream. We should have at least one.
-        if ($this->_videoCodec !== 'h264') {
-            throw new \InvalidArgumentException(sprintf(
-                'Instagram only accepts videos encoded with the H.264 video codec. Your file "%s" has "%s".',
-                $mediaFilename, $this->_videoCodec
-            ));
+            // Check the video stream. We should have at least one.
+            if ($this->_videoCodec !== 'h264') {
+                throw new \InvalidArgumentException(sprintf(
+                    'Instagram only accepts videos encoded with the H.264 video codec. Your file "%s" has "%s".',
+                    $mediaFilename, $this->_videoCodec
+                ));
+            }
         }
 
         // Check the audio stream (if available).
@@ -295,32 +297,36 @@ class VideoDetails extends MediaDetails
             ));
         }
 
-        // Validate video resolution. Instagram allows between 480px-720px width.
-        // NOTE: They'll resize 720px wide videos on the server, to 640px instead.
-        // NOTE: Their server CAN receive between 320px-1080px width without
-        // rejecting the video, but the official app would NEVER upload such
-        // resolutions. It's controlled by the "ig_android_universe_video_production"
-        // experiment variable, which currently enforces width of min:480, max:720.
-        // If users want to upload bigger videos, they MUST resize locally first!
-        $width = $this->getWidth();
-        if ($width < self::MIN_WIDTH || $width > self::MAX_WIDTH) {
-            throw new \InvalidArgumentException(sprintf(
-                'Instagram only accepts videos that are between %d and %d pixels wide. Your file "%s" is %d pixels wide.',
-                self::MIN_WIDTH, self::MAX_WIDTH, $mediaFilename, $width
-            ));
+        if ($this->_videoCodec !== null) {
+            // Validate video resolution. Instagram allows between 480px-720px width.
+            // NOTE: They'll resize 720px wide videos on the server, to 640px instead.
+            // NOTE: Their server CAN receive between 320px-1080px width without
+            // rejecting the video, but the official app would NEVER upload such
+            // resolutions. It's controlled by the "ig_android_universe_video_production"
+            // experiment variable, which currently enforces width of min:480, max:720.
+            // If users want to upload bigger videos, they MUST resize locally first!
+            $width = $this->getWidth();
+            if ($width < self::MIN_WIDTH || $width > self::MAX_WIDTH) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Instagram only accepts videos that are between %d and %d pixels wide. Your file "%s" is %d pixels wide.',
+                    self::MIN_WIDTH, self::MAX_WIDTH, $mediaFilename, $width
+                ));
+            }
         }
 
         // Validate video length.
         // NOTE: Instagram has no disk size limit, but this length validation
         // also ensures we can only upload small files exactly as intended.
-        $duration = $this->getDuration();
-        $minDuration = $constraints->getMinDuration();
-        $maxDuration = $constraints->getMaxDuration();
-        if ($duration < $minDuration || $duration > $maxDuration) {
-            throw new \InvalidArgumentException(sprintf(
-                'Instagram only accepts %s videos that are between %.3f and %.3f seconds long. Your video "%s" is %.3f seconds long.',
-                $constraints->getTitle(), $minDuration, $maxDuration, $mediaFilename, $duration
-            ));
+        if ($this->_videoCodec !== null) {
+            $duration = $this->getDuration();
+            $minDuration = $constraints->getMinDuration();
+            $maxDuration = $constraints->getMaxDuration();
+            if ($duration < $minDuration || $duration > $maxDuration) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Instagram only accepts %s videos that are between %.3f and %.3f seconds long. Your video "%s" is %.3f seconds long.',
+                    $constraints->getTitle(), $minDuration, $maxDuration, $mediaFilename, $duration
+                ));
+            }
         }
     }
 

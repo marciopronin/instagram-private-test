@@ -1705,9 +1705,14 @@ class Event extends RequestCollection
                     }
                     break;
                 case 'two_by_two_right':
+                case 'two_by_two_left':
                     if ($section->getLayoutType() === 'two_by_two_right') {
-                        $column = 2;
+                        $column = 1;
                         $cOffset = 1;
+                    }
+                    if ($section->getLayoutType() === 'two_by_two_left') {
+                        $column = 3;
+                        $cOffset = 0;
                     }
                     if ($section->getFeedType() === 'media' || $section->getFeedType() === 'channel') {
                         foreach ($section->getLayoutContent()->getFillItems() as $item) {
@@ -1722,8 +1727,50 @@ class Event extends RequestCollection
                         $column = 1;
                     }
                     break;
+                case 'one_by_two_right':
+                case 'one_by_two_left':
+                    if ($section->getLayoutType() === 'one_by_two_right') {
+                        $column = 1;
+                        $cOffset = 2;
+                    }
+                    if ($section->getLayoutType() === 'one_by_two_left') {
+                        $column = 2;
+                        $cOffset = 0;
+                    }
+                    if ($section->getFeedType() === 'media') {
+                        foreach ($section->getLayoutContent()->getFillItems() as $item) {
+                            $options['position'] = json_encode([strval($row - 1), strval($column - 2)]);
+                            $option['size'] = json_encode(['1', '1']);
+                            $this->sendThumbnailImpression('instagram_thumbnail_impression', $item->getMedia(), $module, $hashtagId, $hashtagName, $options);
+                            if ($section->getLayoutType() === 'one_by_two_right') {
+                                if ($column % 2 === 0) {
+                                    $row++;
+                                    $column = 1;
+                                } else {
+                                    $column++;
+                                }
+                            } else {
+                                if ($column % 3 === 0) {
+                                    $row++;
+                                    $column = 1;
+                                } else {
+                                    $column++;
+                                }
+                            }
+                        }
+                        if ($section->getLayoutContent()->getOneByTwoItem()->getStories() !== null) {
+                            $oneByTwoItem = $section->getLayoutContent()->getOneByTwoItem()->getStories()->getSeedReel()->getItems()[0];
+                        } else {
+                            $oneByTwoItem = $section->getLayoutContent()->getOneByTwoItem()->getClips()->getItems()[0]->getMedia();
+                        }
+                        $options['position'] = json_encode([strval($row - 1), strval($cOffset)]);
+                        $option['size'] = json_encode(['2', '1']);
+                        $this->sendThumbnailImpression('instagram_thumbnail_impression', $item->getMedia(), $module, $hashtagId, $hashtagName, $options);
+                        $column = 1;
+                    }
+                    break;
                 default:
-                    throw new InstagramException('Layout type not implemented');
+                    throw new \InstagramException('Layout type not implemented');
             }
         }
     }
@@ -2758,6 +2805,10 @@ class Event extends RequestCollection
                     'clickpoint'    => 'button',
                     'dest_module'   => 'reel_follow_list',
                 ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'media_mute_sheet',
+                ],
             ],
             'unified_follow_lists' => [
                 [
@@ -3373,6 +3424,12 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'back',
                     'dest_module'   => 'feed_timeline',
+                ],
+            ],
+            'media_mute_sheet' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'self_unified_follow_lists',
                 ],
             ],
         ];

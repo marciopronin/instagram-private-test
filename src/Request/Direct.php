@@ -1543,19 +1543,16 @@ class Direct extends RequestCollection
                     throw new \InvalidArgumentException('No upload_id provided.');
                 }
                 $request->addPost('upload_id', $options['upload_id']);
-                // Set video_result if provided.
-                if (isset($options['video_result'])) {
-                    $request->addPost('video_result', $options['video_result']);
-                }
+
                 $samplingFreq = (isset($options['waveform_sampling_frequency_hz']) ? $options['waveform_sampling_frequency_hz'] : 10);
                 $waveform = [];
                 for ($i = 0; $i < 20; $i++) {
-                    $waveform[] = sin($i * (M_PI / 10)) * 0.5 + 0.5;
+                    $waveform[] = round(sin($i * (M_PI / 10)) * 0.5 + 0.5, 2);
                 }
                 $request->addPost('waveform_sampling_frequency_hz', $samplingFreq)
-                        ->addPost('form', [
-                            'waveform'  => json_encode($waveform),
-                        ]);
+                        ->addPost('waveform', json_encode($waveform))
+                        ->addPost('is_shh_mode', 'false')
+                        ->addPost('send_attribution', 'inbox_search');
                 break;
             case 'links':
                 $request = $this->ig->request('direct_v2/threads/broadcast/link/');

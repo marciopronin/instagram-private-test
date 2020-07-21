@@ -22,46 +22,30 @@ try {
 }
 
 try {
-    // Send navigation from 'feed_timeline' to 'explore_popular'.
     $ig->event->sendNavigation('main_profile', 'feed_timeline', 'self_profile');
 
-    $ig->event->sendProfileView($this->account_id);
+    $ig->highlight->getSelfUserFeed();
+    $ig->people->getSelfInfo();
+    $ig->discover->profileSuBadge();
+    $ig->story->getArchiveBadgeCount();
 
-    $ig->people->getFriendship($this->account_id);
-    $ig->highlight->getUserFeed($this->account_id);
-    $ig->people->getInfoById($this->account_id, 'self_profile');
-    $ig->story->getUserStoryFeed($this->account_id);
-    $userFeed = $ig->timeline->getUserFeed($this->account_id);
-    $items = $userFeed->getItems();
-
-    $c = 0;
-    foreach ($items as $item) {
-        if ($c === 5) {
-            break;
-        }
-        $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'self_profile');
-        $c++;
-    }
-    $ig->event->sendProfileAction('tap_follow_details', $this->account_id,
+    $ig->event->sendProfileAction('tap_follow_details', $ig->account_id,
         [
             [
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_profile',
             ],
-    ], ['module' => 'self_profile', 'follow_status' => 'self']);
+    ], ['module' => 'self']);
 
     $ig->event->sendNavigation('button', 'self_profile', 'self_unified_follow_lists');
-    $ig->event->sendProfileAction('tap_followers', $this->account_id,
+
+    $ig->event->sendProfileAction('tap_followers', $ig->account_id,
         [
-            [
-                'module'        => 'self_profile',
-                'click_point'   => 'button',
-            ],
             [
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_profile',
             ],
-    ], ['module' => 'self_profile', 'follow_status' => 'self']);
+    ], ['module' => 'self']);
 
     $ig->event->sendNavigation('following', 'self_unified_follow_lists', 'self_unified_follow_lists', null, null,
         [
@@ -70,18 +54,34 @@ try {
         ]
     );
 
-    $ig->discover->surfaceWithSu($this->account_id);
-
     $rankToken = \InstagramAPI\Signatures::generateUUID();
-    $followers = $ig->people->getFollowings($this->account_id, $rankToken);
-    $userId = $followers->getUsers()[0]->getPk();
+    $followings = $ig->people->getSelfFollowing($rankToken)->getUsers();
+    $userId = $followings[0]->getPk();
+
+    $ig->event->sendFollowButtonTapped($userId, 'self_following',
+        [
+            [
+                'module'        => 'self_unified_follow_lists',
+                'click_point'   => 'following',
+            ],
+            [
+                'module'        => 'self_unified_follow_lists',
+                'click_point'   => 'following',
+            ],
+            [
+                'module'        => 'feed_timeline',
+                'click_point'   => 'main_profile',
+            ],
+        ], null, true);
+
+    $ig->discover->surfaceWithSu($ig->account_id);
 
     $ig->event->sendNavigation('button', 'self_unified_follow_lists', 'media_mute_sheet');
 
     $ig->people->muteUserMedia($userId, 'post');
-    $ig->event->sendMuteMedia('post', true, false, $userId, $followers->getUsers()->getIsPrivate());
+    $ig->event->sendMuteMedia('post', true, false, $userId, $followings[0]->getIsPrivate());
     $ig->people->muteUserMedia($userId, 'story');
-    $ig->event->sendMuteMedia('ig_mute_stories', true, false, $userId, $followers->getUsers()[0]->getIsPrivate());
+    $ig->event->sendMuteMedia('ig_mute_stories', true, false, $userId, $followings[0]->getIsPrivate());
 
     $ig->event->sendNavigation('button', 'media_mute_sheet', 'self_unified_follow_lists');
 

@@ -1,3 +1,15 @@
+# Stable release v13.1.4
+## Date: 25/07/2020
+
+### Updates and fixes
+
+- **Constants:** Update constants to 151.0.0.23.120
+
+### Examples
+
+- **Example:** Update SMS registration
+- **Example:** Update followFromLocationSearch
+
 # Stable release v13.1.3
 ## Date: 21/07/2020
 

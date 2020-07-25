@@ -24,6 +24,7 @@ $ig->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-passwo
 $ig->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
 
 $waterfallId = \InstagramAPI\Signatures::generateUUID();
+$startTime = time();
 
 $ig->event->sendFlowSteps('one_page_v2', 'reg_field_interacted', $waterfallId, $startTime, ['flow' => 'phone', 'field_name' => 'phone_field']);
 $ig->event->sendFlowSteps('one_page_v2', 'next_button_tapped', $waterfallId, $startTime, ['flow' => 'phone']);
@@ -33,6 +34,9 @@ $ig->event->sendFlowSteps('one_page_v2', 'step_view_loaded', $waterfallId, $star
 $ig->account->checkPhoneNumber($phone);
 
 $tos = $ig->account->requestRegistrationSms($phone, $waterfallId, $username)->getTosVersion();
+echo 'SMS Code: ';
+$smsCode = trim(fgets(STDIN));
+
 $ig->account->validateSignupSmsCode($smsCode, $phone, $waterfallId);
 
 $ig->event->sendNavigation('button', 'one_page_registration', 'add_birthday');

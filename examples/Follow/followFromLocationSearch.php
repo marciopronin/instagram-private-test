@@ -105,6 +105,11 @@ try {
         }
     }
 
+    if (empty($sections)) {
+        // No sections.
+        exit();
+    }
+
     // Send thumbnail click impression (clickling on the selected media).
     $ig->event->sendThumbnailImpression('instagram_thumbnail_click', $item, 'feed_location');
     // When we clicked the item, we are navigating from 'feed_location' to 'feed_contextual_location'.

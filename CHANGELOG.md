@@ -1,3 +1,11 @@
+# Stable release v13.1.5
+## Date: 26/07/2020
+
+### Updates and fixes
+
+- **Events:** Update headers **Critical**
+- **People:** Update `getFollowers()` function
+
 # Stable release v13.1.4
 ## Date: 25/07/2020
 

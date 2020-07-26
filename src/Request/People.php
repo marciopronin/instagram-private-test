@@ -536,6 +536,8 @@ class People extends RequestCollection
         $request = $this->ig->request("friendships/{$userId}/followers/")
             ->addParam('search_surface', 'follow_list_page')
             ->addParam('rank_token', $rankToken)
+            ->addParam('order', 'default')
+            ->addParam('enable_groups', 'true')
             ->addParam('query', $searchQuery);
 
         if ($maxId !== null) {

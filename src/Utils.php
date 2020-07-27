@@ -1701,13 +1701,27 @@ class Utils
      *
      * This function is Unicode-aware.
      *
-     * @param string $text The string to scan for URLs.
+     * @param string            $text        The string to scan for URLs.
+     * @param string|string[]   $excludeText The string to scan for URLs.
      *
      * @return array An array of URLs and their individual components.
      */
     public static function extractURLs(
-        $text)
+        $text,
+        array $excludeText = [])
     {
+        if (!is_array($excludeText)) {
+            $excludeText = [$excludeText];
+        }
+
+        if (!empty($excludeText)) {
+            $replace = [];
+            foreach($excludeText as $str) {
+                $replace[] = '';
+            }
+            $text = str_replace($excludeText, $replace, $text);
+        }
+
         $urls = [];
         if (preg_match_all(
             // NOTE: This disgusting regex comes from the Android SDK, slightly

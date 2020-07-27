@@ -1809,7 +1809,11 @@ class Instagram implements ExperimentsInterface
                 $this->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
                 $this->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
                 //$this->internal->bootstrapMsisdnHeader();
-                $this->internal->logAttribution();
+                try {
+                    $this->internal->logAttribution();
+                } catch (\InstagramAPI\Exception\InstagramException $e) {
+                    // pass
+                }
                 $this->account->getPrefillCandidates();
             } finally {
                 // Stops emulating batch requests.

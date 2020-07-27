@@ -1,3 +1,16 @@
+# Stable release v14.0.0
+## Date: 27/07/2020
+
+### BACKWARD BREAKS ⚠️
+
+- **Direct:** `getInbox()` signature has changed. Arguments have been updated.
+
+### Updates and fixes
+
+- **Account**: Update `create()` and `createValidated()`
+- **Instagram:** Update `_sendPreLoginFlow()`
+- **Utils**: Update `extractURLs()`
+
 # Stable release v13.1.5
 ## Date: 26/07/2020
 

@@ -25,11 +25,12 @@ class Direct extends RequestCollection
      * Get direct inbox messages for your account.
      *
      * @param string|null $cursorId           Next "cursor ID", used for pagination.
+     * @param string|null $seqId              Sequence ID.
      * @param int         $limit              Number of threads. From 0 to 20.
      * @param null        $threadMessageLimit (optional) Number of messages per thread
      * @param bool        $prefetch           (optional) Indicates if the request is called from prefetch.
-     * @param string      $filder             Filter: all, unread, relevant, flagged.
-     * @param mixed       $filter
+     * @param string      $filter             Filter: all, unread, relevant, flagged.
+     * @param string|null $fetchReason        Values: manual_refresh or page_scroll.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -38,10 +39,12 @@ class Direct extends RequestCollection
      */
     public function getInbox(
         $cursorId = null,
+        $seqId = null,
         $limit = 20,
         $threadMessageLimit = 10,
         $prefetch = false,
-        $filter = 'all')
+        $filter = 'all',
+        $fetchReason = null)
     {
         if ($limit < 0 || $limit > 20) {
             throw new \InvalidArgumentException('Invalid value provided to limit.');
@@ -54,12 +57,19 @@ class Direct extends RequestCollection
             ->addParam('limit', $limit);
         if ($cursorId !== null) {
             $request->addParam('cursor', $cursorId);
+            $request->addParam('direction', 'older');
         }
         if ($prefetch) {
             $request->addHeader('X-IG-Prefetch-Request', 'foreground');
         }
         if ($filter !== 'all') {
             $request->addParam('selected_filter', $filter);
+        }
+        if ($filter !== null) {
+            $request->addParam('fetch_reason', $fetchReason);
+        }
+        if ($seqId !== null) {
+            $request->addParam('seq_id', $seqId);
         }
 
         return $request->getResponse(new Response\DirectInboxResponse());
@@ -549,6 +559,7 @@ class Direct extends RequestCollection
      * @param string $text       Text message.
      * @param array  $options    An associative array of optional parameters, including:
      *                           "client_context" and "mutation_token" - predefined UUID used to prevent double-posting.
+     *                           "exclude_text" is used for excluding text in extractURLs function.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -564,7 +575,7 @@ class Direct extends RequestCollection
             throw new \InvalidArgumentException('Text can not be empty.');
         }
 
-        $urls = Utils::extractURLs($text);
+        $urls = Utils::extractURLs($text, $options['exclude_text']);
         if (count($urls)) {
             /** @var Response\DirectSendItemResponse $result */
             $result = $this->_sendDirectItem('links', $recipients, array_merge($options, [

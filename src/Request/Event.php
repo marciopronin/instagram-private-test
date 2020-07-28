@@ -195,6 +195,7 @@ class Event extends RequestCollection
           ->addHeader('X-IG-Connection-Type', Constants::X_IG_Connection_Type)
           ->addHeader('X-IG-Capabilities', Constants::IOS_X_IG_Capabilities)
           ->addHeader('X-IG-APP-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
+          ->addHeader('X-FB-HTTP-Engine', Constants::X_FB_HTTP_Engine)
           ->addPost('access_token', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID.'|'.Constants::GRAPH_API_ACCESS_TOKEN)
           ->addPost('format', 'json')
           ->addPost('sent_time', time())

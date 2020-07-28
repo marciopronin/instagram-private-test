@@ -1,3 +1,11 @@
+# Stable release v14.0.1
+## Date: 28/07/2020
+
+### Updates and fixes
+
+- **Client:** Update `_buildGuzzleOptions()`
+- **Event:** Update `_sendBatchEvents()`
+
 # Stable release v14.0.0
 ## Date: 27/07/2020
 

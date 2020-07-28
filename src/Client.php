@@ -781,15 +781,17 @@ class Client
      * Such as cookies and the user's proxy. But don't call this function
      * manually. It's automatically called by _guzzleRequest()!
      *
-     * @param array $guzzleOptions The options specific to the current request.
+     * @param array $guzzleOptions  The options specific to the current request.
+     * @param bool  $disableCookies Disable cookies.
      *
      * @return array A guzzle options array.
      */
     protected function _buildGuzzleOptions(
-        array $guzzleOptions = [])
+        array $guzzleOptions = [],
+        $disableCookies = false)
     {
         $criticalOptions = [
-            'cookies' => ($this->_cookieJar instanceof CookieJar ? $this->_cookieJar : false),
+            'cookies' => (($this->_cookieJar instanceof CookieJar && !$disableCookies) ? $this->_cookieJar : false),
             'verify'  => $this->_verifySSL,
             'proxy'   => ($this->_proxy !== null ? $this->_proxy : null),
             'curl'    => ($this->_resolveHost !== null ? [CURLOPT_RESOLVE => [$this->_resolveHost]] : null),
@@ -847,8 +849,10 @@ class Client
         HttpRequestInterface $request,
         array $guzzleOptions = [])
     {
+        $disableCookies = ($request->getUri()->getPath() === '/logging_client_events') ? true : false;
+
         // Add critically important options for authenticating the request.
-        $guzzleOptions = $this->_buildGuzzleOptions($guzzleOptions);
+        $guzzleOptions = $this->_buildGuzzleOptions($guzzleOptions, $disableCookies);
 
         // Attempt the request. Will throw in case of socket errors!
         try {

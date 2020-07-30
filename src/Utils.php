@@ -274,8 +274,8 @@ class Utils
      */
     public static function encryptPasswordForBrowser(
         $password,
-        $publicKey = '4fd28ee2f38b02707cf2478111e82ed6c3d9fb4e181768d4bc15b6aae1474a45',
-        $publicKeyId = 155)
+        $publicKey = '8dd9aad29d9a614c338cff479f850d3ec57c525c33b3f702ab65e9e057fc087e',
+        $publicKeyId = 87)
     {
         $key = openssl_random_pseudo_bytes(32);
         $iv = "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00";
@@ -285,7 +285,7 @@ class Utils
         $encrypted = openssl_encrypt($password, 'aes-256-gcm', $key, OPENSSL_RAW_DATA, $iv, $tag, strval($time));
         $payload = base64_encode("\x01" | pack('n', intval($publicKeyId)).pack('s', strlen($sealedBox)).$sealedBox.$tag.$encrypted);
 
-        return sprintf('#PWD_INSTAGRAM_BROWSER:6:%s:%s', $time, $payload);
+        return sprintf('#PWD_INSTAGRAM_BROWSER:9:%s:%s', $time, $payload);
     }
 
     /**
@@ -1701,8 +1701,8 @@ class Utils
      *
      * This function is Unicode-aware.
      *
-     * @param string            $text        The string to scan for URLs.
-     * @param string|string[]   $excludeText The string to scan for URLs.
+     * @param string          $text        The string to scan for URLs.
+     * @param string|string[] $excludeText The string to scan for URLs.
      *
      * @return array An array of URLs and their individual components.
      */
@@ -1716,7 +1716,7 @@ class Utils
 
         if (!empty($excludeText)) {
             $replace = [];
-            foreach($excludeText as $str) {
+            foreach ($excludeText as $str) {
                 $replace[] = '';
             }
             $text = str_replace($excludeText, $replace, $text);

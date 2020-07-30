@@ -47,6 +47,99 @@ class Web extends RequestCollection
     }
 
     /**
+     * Send signup SMS.
+     *
+     * @param string $phone The phone number.
+     * @param string $mid   Mid value (obtained from cookie).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return string
+     */
+    public function sendSignupSms(
+        $phone,
+        $mid)
+    {
+        return $this->ig->request('https://www.instagram.com/send_signup_sms_code_ajax/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->setAddDefaultHeaders(false)
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-Requested-With', 'XMLHttpRequest')
+            ->addPost('client_id', $mid)
+            ->addPost('phone_number', $phone)
+            ->addPost('phone_id', '')
+            ->addPost('big_blue_token', '')
+            ->getRawResponse();
+    }
+
+    /**
+     * Web registration.
+     *
+     * @param string $username The account username.
+     * @param string $password The account password.
+     * @param string $name     The name of the account.
+     * @param string $phone    The phone number.
+     * @param string $day      Day of birth.
+     * @param string $month    Month of birth.
+     * @param string $year     Year of bith.
+     * @param string $mid      Mid value (obtained from cookie).
+     * @param bool   $attempt  Wether it is an attempt or not.
+     * @param string $tos      Terms of Service.
+     * @param string $smsCode  The SMS code.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return string
+     */
+    public function createAccount(
+        $username,
+        $password,
+        $name,
+        $phone,
+        $day,
+        $month,
+        $year,
+        $mid,
+        $attempt,
+        $smsCode = null,
+        $tos = 'row')
+    {
+        if (extension_loaded('sodium') === false) {
+            throw new \InstagramAPI\Exception\InternalException('You must have the sodium PHP extension to use web login.');
+        }
+
+        if ($attempt) {
+            $endpoint = '/accounts/web_create_ajax/attempt/';
+        } else {
+            $endpoint = '/accounts/web_create_ajax/';
+        }
+
+        $request = $this->ig->request('https://www.instagram.com'.$endpoint)
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->setAddDefaultHeaders(false)
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-Requested-With', 'XMLHttpRequest')
+            ->addPost('enc_password', Utils::encryptPasswordForBrowser($password))
+            ->addPost('phone_number', $phone)
+            ->addPost('username', $username)
+            ->addPost('first_name', $name)
+            ->addPost('month', $month)
+            ->addPost('day', $day)
+            ->addPost('year', $year)
+            ->addPost('client_id', $mid)
+            ->addPost('seamless_login_enabled', 1)
+            ->addPost('tos_version', $tos);
+
+        if ($attempt === false) {
+            $request->addPost('sms_code', $smsCode);
+        }
+
+        return $request->getRawResponse();
+    }
+
+    /**
      * Gets account information.
      *
      * @throws \InstagramAPI\Exception\InstagramException

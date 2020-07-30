@@ -1,3 +1,19 @@
+# Stable release v14.1.0
+## Date: 30/07/2020
+
+### Updates and fixes
+
+- **Web:** Add `createAccount()`
+- **Web:** Add `sendSignupSms()`
+
+### Updates and fixes
+
+- **Utils:** Update `encryptPasswordForBrowser()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.0.1
 ## Date: 28/07/2020
 

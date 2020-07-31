@@ -24,7 +24,7 @@ try {
 try {
     // Get Direct Inbox with Limit = 20. That limit is set by Instagram and tells the server
     // how many threads to return.
-    $threads = $ig->direct->getInbox(null, 20)->getInbox()->getThreads();
+    $threads = $ig->direct->getInbox(null, null, 20)->getInbox()->getThreads();
 
     // In this example we will be iterating each thread to load all the items of each.
     foreach ($threads as $thread) {

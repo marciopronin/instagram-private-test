@@ -1,7 +1,15 @@
+# Stable release v14.1.1
+## Date: 31/07/2020
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **Example:** Update directInbox
+
 # Stable release v14.1.0
 ## Date: 30/07/2020
 
-### Updates and fixes
+### New features
 
 - **Web:** Add `createAccount()`
 - **Web:** Add `sendSignupSms()`

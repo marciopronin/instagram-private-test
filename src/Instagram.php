@@ -2035,8 +2035,8 @@ class Instagram implements ExperimentsInterface
                 $this->_registerPushChannels();
                 $this->people->getSharePrefill();
                 $this->direct->getPresences();
-                $this->direct->getInbox();
-                $this->direct->getInbox(null, null, 20, 10);
+                $this->direct->getInbox(null, null, 0, null);
+                $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
                 $this->_registerPushChannels();
             } finally {
                 // Stops emulating batch requests

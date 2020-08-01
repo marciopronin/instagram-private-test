@@ -27,7 +27,7 @@ class Direct extends RequestCollection
      * @param string|null $cursorId           Next "cursor ID", used for pagination.
      * @param string|null $seqId              Sequence ID.
      * @param int         $limit              Number of threads. From 0 to 20.
-     * @param null        $threadMessageLimit (optional) Number of messages per thread
+     * @param int|null    $threadMessageLimit (optional) Number of messages per thread
      * @param bool        $prefetch           (optional) Indicates if the request is called from prefetch.
      * @param string      $filter             Filter: all, unread, relevant, flagged.
      * @param string|null $fetchReason        Values: manual_refresh or page_scroll.
@@ -53,7 +53,6 @@ class Direct extends RequestCollection
         $request = $this->ig->request('direct_v2/inbox/')
             ->addParam('persistentBadging', 'true')
             ->addParam('visual_message_return_type', 'unseen')
-            ->addParam('thread_message_limit', $threadMessageLimit)
             ->addParam('limit', $limit);
         if ($cursorId !== null) {
             $request->addParam('cursor', $cursorId);
@@ -70,6 +69,9 @@ class Direct extends RequestCollection
         }
         if ($seqId !== null) {
             $request->addParam('seq_id', $seqId);
+        }
+        if ($threadMessageLimit !== null) {
+            $request->addParam('thread_message_limit', $threadMessageLimit);
         }
 
         return $request->getResponse(new Response\DirectInboxResponse());

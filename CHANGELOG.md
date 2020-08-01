@@ -1,3 +1,11 @@
+# Stable release v14.1.2
+## Date: 01/08/2020
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **Direct:** Update `getInbox()`
+
 # Stable release v14.1.1
 ## Date: 31/07/2020
 

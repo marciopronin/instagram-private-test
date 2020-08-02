@@ -214,6 +214,7 @@ class Timeline extends RequestCollection
      *                             or not. Valid values: 0 for not charging, 1 for
      *                             charging.
      *                             "request_id". Request ID (UUIDv4). Used when paginating.
+     *                             "is_dark_mode" if dark mode is enabled. 0 Disabled, 1 Enabled.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -310,6 +311,12 @@ class Timeline extends RequestCollection
 
         if (!empty($options['request_id'])) {
             $request->addPost('request_id', $options['request_id']);
+        }
+
+        if (isset($options['is_dark_mode'])) {
+            $request->addPost('is_dark_mode', $options['is_dark_mode']);
+        } else {
+            $request->addPost('is_dark_mode', 0);
         }
 
         return $request->getResponse(new Response\TimelineFeedResponse());

@@ -577,6 +577,9 @@ class Direct extends RequestCollection
             throw new \InvalidArgumentException('Text can not be empty.');
         }
 
+        if (!isset($options['exclude_text'])) {
+            $options['exclude_text'] = [];
+        }
         $urls = Utils::extractURLs($text, $options['exclude_text']);
         if (count($urls)) {
             /** @var Response\DirectSendItemResponse $result */

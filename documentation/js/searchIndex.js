@@ -891,11 +891,6 @@ Search.appendIndex(
             "summary": "Retrieve\u0020the\u0020device\u0020string\u0020for\u0020a\u0020random\u0020good\u0020device.",
             "url": "../classes/InstagramAPI-Devices-GoodDevices.html#method_getRandomGoodDevice"
         },                {
-            "fqsen": "\\InstagramAPI\\Devices\\GoodDevices\u003A\u003AgetAllGoodDevices\u0028\u0029",
-            "name": "getAllGoodDevices",
-            "summary": "Retrieve\u0020all\u0020good\u0020devices.",
-            "url": "../classes/InstagramAPI-Devices-GoodDevices.html#method_getAllGoodDevices"
-        },                {
             "fqsen": "\\InstagramAPI\\Devices\\GoodDevices\u003A\u003AisGoodDevice\u0028\u0029",
             "name": "isGoodDevice",
             "summary": "Checks\u0020whether\u0020a\u0020device\u0020string\u0020is\u0020one\u0020of\u0020the\u0020good\u0020devices.",
@@ -910,11 +905,6 @@ Search.appendIndex(
             "name": "CPU_ABI",
             "summary": "List\u0020of\u0020supported\u0020binary\u0020architectures\u0020for\u0020the\u0020device\u0020CPUs.",
             "url": "../classes/InstagramAPI-Devices-GoodDevices.html#constant_CPU_ABI"
-        },                {
-            "fqsen": "\\InstagramAPI\\Devices\\GoodDevices\u003A\u003AFLAGGED_DEVICES",
-            "name": "FLAGGED_DEVICES",
-            "summary": "",
-            "url": "../classes/InstagramAPI-Devices-GoodDevices.html#constant_FLAGGED_DEVICES"
         },                {
             "fqsen": "\\InstagramAPI\\Devices\\GoodDevices\u003A\u003ADEVICES",
             "name": "DEVICES",
@@ -6751,6 +6741,11 @@ Search.appendIndex(
             "summary": "Get\u0020should\u0020require\u0020professional\u0020account.",
             "url": "../classes/InstagramAPI-Request-Business.html#method_getShouldRequireProfessionalAccount"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Business\u003A\u003AgetMonetizationProductsEligibilityData\u0028\u0029",
+            "name": "getMonetizationProductsEligibilityData",
+            "summary": "Get\u0020monetization\u0020products\u0020eligibility\u0020data.",
+            "url": "../classes/InstagramAPI-Request-Business.html#method_getMonetizationProductsEligibilityData"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Checkpoint",
             "name": "Checkpoint",
             "summary": "Functions\u0020for\u0020managing\u0020Checkpoint.",
@@ -7948,7 +7943,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AstoreClientPushPermissions\u0028\u0029",
             "name": "storeClientPushPermissions",
-            "summary": "",
+            "summary": "Store\u0020client\u0020push\u0020permissions.",
             "url": "../classes/InstagramAPI-Request-Internal.html#method_storeClientPushPermissions"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AstartNewUserFlow\u0028\u0029",
@@ -16195,6 +16190,16 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-Model-Clip.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\MonetizationProductsEligibilityDataResponse",
+            "name": "MonetizationProductsEligibilityDataResponse",
+            "summary": "MonetizationProductsEligibilityDataResponse.",
+            "url": "../classes/InstagramAPI-Response-MonetizationProductsEligibilityDataResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\MonetizationProductsEligibilityDataResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-MonetizationProductsEligibilityDataResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

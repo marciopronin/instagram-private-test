@@ -212,4 +212,18 @@ class Business extends RequestCollection
         return $this->ig->request('business/branded_content/should_require_professional_account/')
             ->getResponse(new Response\ShouldRequireProfessionalAccountResponse());
     }
+
+    /**
+     * Get monetization products eligibility data.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\MonetizationProductsEligibilityDataResponse
+     */
+    public function getMonetizationProductsEligibilityData()
+    {
+        return $this->ig->request('business/eligibility/get_monetization_products_eligibility_data/')
+            ->addParam('product_types', 'branded_content')
+            ->getResponse(new Response\MonetizationProductsEligibilityDataResponse());
+    }
 }

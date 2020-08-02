@@ -1,3 +1,24 @@
+# Stable release v14.2.0
+## Date: 03/08/2020
+
+### New features
+
+- **Business:** Add `getMonetizationProductsEligibilityData()` and response model
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **Direct:** Update `sendText()`
+- **GoodDevices:** Delete `FLAGGED_DEVICES`
+- **People:** Update `getSharePrefill()`
+- **Timeline:** Update `getTimelineFeed()`
+
+
+### Documentation
+
+- **Documentation:** Update documentation
+
+
 # Stable release v14.1.2
 ## Date: 01/08/2020
 

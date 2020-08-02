@@ -1989,10 +1989,11 @@ class Instagram implements ExperimentsInterface
                 $this->people->getRecentActivityInbox();
                 $this->internal->logResurrectAttribution();
                 $this->internal->getLoomFetchConfig();
-                $this->internal->getDeviceCapabilitiesDecisions();
+                //$this->internal->getDeviceCapabilitiesDecisions();
                 //$this->people->getBootstrapUsers();
                 $this->people->getInfoById($this->account_id);
                 $this->account->getLinkageStatus();
+                $this->business->getMonetizationProductsEligibilityData();
                 $this->creative->sendSupportedCapabilities();
                 $this->media->getBlockedMedia();
                 $this->internal->storeClientPushPermissions();

@@ -1567,6 +1567,13 @@ class Internal extends RequestCollection
                         ->getResponse(new Response\GetViewableStatusesResponse());
     }
 
+    /**
+     * Store client push permissions.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
     public function storeClientPushPermissions()
     {
         return $this->ig->request('notifications/store_client_push_permissions/')

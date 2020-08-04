@@ -60,7 +60,7 @@ class Web extends RequestCollection
         $phone,
         $mid)
     {
-        return $this->ig->request('https://www.instagram.com/send_signup_sms_code_ajax/')
+        return $this->ig->request('https://www.instagram.com/accounts/send_signup_sms_code_ajax/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->setAddDefaultHeaders(false)
@@ -74,19 +74,70 @@ class Web extends RequestCollection
     }
 
     /**
+     * Send email verification code.
+     *
+     * @param string $email The email.
+     * @param string $mid   Mid value (obtained from cookie).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return string
+     */
+    public function sendEmailVerificationCode(
+        $email,
+        $mid)
+    {
+        return $this->ig->request('https://www.i.instagram.com/api/v1/accounts/send_verify_email/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->setAddDefaultHeaders(false)
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addPost('device_id', $mid)
+            ->addPost('email', $phone)
+            ->getRawResponse();
+    }
+
+    /**
+     * Check email verification code.
+     *
+     * @param string $email The email.
+     * @param string $code  The verification code.
+     * @param string $mid   Mid value (obtained from cookie).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return string
+     */
+    public function checkEmailVerificationCode(
+        $email,
+        $code,
+        $mid)
+    {
+        return $this->ig->request('https://www.i.instagram.com/api/v1/accounts/check_confirmation_code/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->setAddDefaultHeaders(false)
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addPost('code', $code)
+            ->addPost('device_id', $mid)
+            ->addPost('email', $phone)
+            ->getRawResponse();
+    }
+
+    /**
      * Web registration.
      *
-     * @param string $username The account username.
-     * @param string $password The account password.
-     * @param string $name     The name of the account.
-     * @param string $phone    The phone number.
-     * @param string $day      Day of birth.
-     * @param string $month    Month of birth.
-     * @param string $year     Year of bith.
-     * @param string $mid      Mid value (obtained from cookie).
-     * @param bool   $attempt  Wether it is an attempt or not.
-     * @param string $tos      Terms of Service.
-     * @param string $smsCode  The SMS code.
+     * @param string $username     The account username.
+     * @param string $password     The account password.
+     * @param string $name         The name of the account.
+     * @param string $phoneOrEmail The phone number or email.
+     * @param string $day          Day of birth.
+     * @param string $month        Month of birth.
+     * @param string $year         Year of bith.
+     * @param string $mid          Mid value (obtained from cookie).
+     * @param bool   $attempt      Wether it is an attempt or not.
+     * @param string $tos          Terms of Service.
+     * @param string $smsCode      The SMS code.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -96,7 +147,7 @@ class Web extends RequestCollection
         $username,
         $password,
         $name,
-        $phone,
+        $phoneOrEmail,
         $day,
         $month,
         $year,
@@ -122,7 +173,6 @@ class Web extends RequestCollection
             ->addHeader('X-CSRFToken', $this->ig->client->getToken())
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addPost('enc_password', Utils::encryptPasswordForBrowser($password))
-            ->addPost('phone_number', $phone)
             ->addPost('username', $username)
             ->addPost('first_name', $name)
             ->addPost('month', $month)
@@ -132,7 +182,15 @@ class Web extends RequestCollection
             ->addPost('seamless_login_enabled', 1)
             ->addPost('tos_version', $tos);
 
-        if ($attempt === false) {
+        if (strpos($phoneOrEmail, '@') !== false) {
+            $request->addPost('email', $phoneOrEmail);
+        } else {
+            $request->addPost('phone_number', $phoneOrEmail);
+        }
+
+        if ($attempt === false && (strpos($phoneOrEmail, '@') !== false)) {
+            $request->addPost('code', $smsCode);
+        } else {
             $request->addPost('sms_code', $smsCode);
         }
 

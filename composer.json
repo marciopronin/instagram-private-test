@@ -50,14 +50,11 @@
         "clue/socks-react": "^0.8.2",
         "clue/http-proxy-react": "^1.1.0",
         "psr/log": "^1.0",
-        "valga/fbns-react": "0.2.1",
+        "valga/fbns-react": "0.3.1",
         "symfony/process": "^3.4|^4.0",
         "winbox/args": "1.0.0",
-        "ramsey/uuid": "^3.9"
+        "ramsey/uuid": "^3.9|^4.0"
     },
-    "repositories": [
-        {"type": "composer", "url": "https://repo.packagist.com/instagram-private/"}
-    ],
     "suggest": {
         "ext-sodium": "The new sodium php extension",
         "ext-event": "Installing PHP's native Event extension enables faster Realtime class event handling.",

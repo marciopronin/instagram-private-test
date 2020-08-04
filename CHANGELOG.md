@@ -1,3 +1,17 @@
+# Stable release v14.3.0
+## Date: 04/08/2020
+
+### New features
+
+- **Web:** Add `sendEmailVerificationCode()`
+- **Web:** Add `checkEmailVerificationCode()`
+
+### Updates and fixes
+
+- **Web:** Update `createAccount()`
+- **Web:** Update `sendSignupSms()`
+- **Composer:** Update composer
+
 # Stable release v14.2.0
 ## Date: 03/08/2020
 

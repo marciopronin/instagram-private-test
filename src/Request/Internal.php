@@ -2867,7 +2867,6 @@ class Internal extends RequestCollection
                     ))
                 ));
             }
-
             if ($videoDetails->getAudioCodec() !== null) {
                 // Save the audio stream in one segment.
                 $ffmpeg->run(sprintf(

@@ -9386,6 +9386,16 @@ Search.appendIndex(
             "summary": "Send\u0020signup\u0020SMS.",
             "url": "../classes/InstagramAPI-Request-Web.html#method_sendSignupSms"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AsendEmailVerificationCode\u0028\u0029",
+            "name": "sendEmailVerificationCode",
+            "summary": "Send\u0020email\u0020verification\u0020code.",
+            "url": "../classes/InstagramAPI-Request-Web.html#method_sendEmailVerificationCode"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AcheckEmailVerificationCode\u0028\u0029",
+            "name": "checkEmailVerificationCode",
+            "summary": "Check\u0020email\u0020verification\u0020code.",
+            "url": "../classes/InstagramAPI-Request-Web.html#method_checkEmailVerificationCode"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AcreateAccount\u0028\u0029",
             "name": "createAccount",
             "summary": "Web\u0020registration.",

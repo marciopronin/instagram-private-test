@@ -229,6 +229,20 @@ class Client
     protected $_dsUserId = '';
 
     /**
+     * Request ID for logger.
+     *
+     * @var int
+     */
+    protected $_requestId = 0;
+
+    /**
+     * Request UUID.
+     *
+     * @var string
+     */
+    protected $_requestUuid = '';
+
+    /**
      * Constructor.
      *
      * @param \InstagramAPI\Instagram $parent
@@ -245,6 +259,7 @@ class Client
 
         // Set Pigeon Session ID.
         $this->_pigeonSession = Signatures::generateUUID();
+        $this->_requestUuid = uniqid();
 
         // Create a default handler stack with Guzzle's auto-selected "best
         // possible transfer handler for the user's system", and with all of
@@ -921,15 +936,26 @@ class Client
         array $guzzleOptions = [],
         array $libraryOptions = [])
     {
-        // Perform the API request and retrieve the raw HTTP response body.
-        $guzzleResponse = $this->_guzzleRequest($request, $guzzleOptions);
+        $requestId = $this->_getRequestId();
 
         if ($this->_parent->logger !== null) {
             $this->_parent->logger->info('request',
                 [
-                    $this->_zeroRating->rewrite((string) $request->getUri()),
-                    (string) $request->getBody(),
-                    (string) $guzzleResponse->getBody(),
+                    'uri'        => $this->_zeroRating->rewrite((string) $request->getUri()),
+                    'request'    => (string) $request->getBody(),
+                    'request_id' => $requestId,
+                ]);
+        }
+
+        // Perform the API request and retrieve the raw HTTP response body.
+        $guzzleResponse = $this->_guzzleRequest($request, $guzzleOptions);
+
+        if ($this->_parent->logger !== null) {
+            $this->_parent->logger->info('response',
+                [
+                    'uri'        => $this->_zeroRating->rewrite((string) $request->getUri()),
+                    'response'   => (string) $guzzleResponse->getBody(),
+                    'request_id' => $requestId,
                 ]);
         }
 
@@ -1153,6 +1179,19 @@ class Client
         }
 
         return sprintf('%.3F', $result);
+    }
+
+    /**
+     * Get request ID.
+     *
+     * @return string
+     */
+    private function _getRequestId()
+    {
+        $requestId = sprintf('%s-%d', $this->_requestUuid, $this->_requestId);
+        $this->_requestId++;
+
+        return $requestId;
     }
 
     /**

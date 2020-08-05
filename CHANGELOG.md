@@ -1,3 +1,24 @@
+# Stable release v14.4.0
+## Date: 05/08/2020
+
+### New features
+
+- **Client:** Add `_getRequestId()` and update logger
+
+### Updates and fixes
+
+- **Web:** Update `sendEmailVerificationCode()` and `checkEmailVerificationCode()`
+
+### Examples
+
+- **Example:** Update paginationExample
+- **Example:** Add sendReaction
+
+### Documentation
+
+- **Documentation:** Update documentation
+
+
 # Stable release v14.3.0
 ## Date: 04/08/2020
 

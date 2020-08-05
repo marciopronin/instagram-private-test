@@ -171,6 +171,11 @@ Search.appendIndex(
             "summary": "Get\u0020Pigeon\u0020Client\u0020time.",
             "url": "../classes/InstagramAPI-Client.html#method__getPigeonRawClientTime"
         },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A_getRequestId\u0028\u0029",
+            "name": "_getRequestId",
+            "summary": "Get\u0020request\u0020ID.",
+            "url": "../classes/InstagramAPI-Client.html#method__getRequestId"
+        },                {
             "fqsen": "\\InstagramAPI\\Client\u003A\u003AsetLastRequest\u0028\u0029",
             "name": "setLastRequest",
             "summary": "Sets\u0020the\u0020last\u0020processed\u0020request.",
@@ -315,6 +320,16 @@ Search.appendIndex(
             "name": "_dsUserId",
             "summary": "DS\u0020User\u0020ID.",
             "url": "../classes/InstagramAPI-Client.html#property__dsUserId"
+        },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_requestId",
+            "name": "_requestId",
+            "summary": "Request\u0020ID\u0020for\u0020logger.",
+            "url": "../classes/InstagramAPI-Client.html#property__requestId"
+        },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_requestUuid",
+            "name": "_requestUuid",
+            "summary": "Request\u0020UUID.",
+            "url": "../classes/InstagramAPI-Client.html#property__requestUuid"
         },                {
             "fqsen": "\\InstagramAPI\\Constants",
             "name": "Constants",

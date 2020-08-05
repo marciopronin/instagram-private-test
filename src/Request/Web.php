@@ -87,13 +87,13 @@ class Web extends RequestCollection
         $email,
         $mid)
     {
-        return $this->ig->request('https://www.i.instagram.com/api/v1/accounts/send_verify_email/')
+        return $this->ig->request('accounts/send_verify_email/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->setAddDefaultHeaders(false)
             ->addHeader('X-CSRFToken', $this->ig->client->getToken())
             ->addPost('device_id', $mid)
-            ->addPost('email', $phone)
+            ->addPost('email', $email)
             ->getRawResponse();
     }
 
@@ -113,14 +113,14 @@ class Web extends RequestCollection
         $code,
         $mid)
     {
-        return $this->ig->request('https://www.i.instagram.com/api/v1/accounts/check_confirmation_code/')
+        return $this->ig->request('accounts/check_confirmation_code/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->setAddDefaultHeaders(false)
             ->addHeader('X-CSRFToken', $this->ig->client->getToken())
             ->addPost('code', $code)
             ->addPost('device_id', $mid)
-            ->addPost('email', $phone)
+            ->addPost('email', $email)
             ->getRawResponse();
     }
 

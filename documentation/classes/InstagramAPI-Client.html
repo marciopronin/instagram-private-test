@@ -242,6 +242,16 @@ individual endpoint functions.</p></section>
                     <td class="phpdocumentor-cell">DS User ID.</td>
                     <td class="phpdocumentor-cell">string</td>
                 </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__requestId">$_requestId</a></th>
+                    <td class="phpdocumentor-cell">Request ID for logger.</td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#property__requestUuid">$_requestUuid</a></th>
+                    <td class="phpdocumentor-cell">Request UUID.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
                                                                 <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method___construct">__construct()</a></th>
                     <td class="phpdocumentor-cell">Constructor.</td>
@@ -385,6 +395,11 @@ individual endpoint functions.</p></section>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method__getPigeonRawClientTime">_getPigeonRawClientTime()</a></th>
                     <td class="phpdocumentor-cell">Get Pigeon Client time.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Client.html#method__getRequestId">_getRequestId()</a></th>
+                    <td class="phpdocumentor-cell">Get request ID.</td>
                     <td class="phpdocumentor-cell">string</td>
                 </tr>
                             <tr>
@@ -1016,6 +1031,48 @@ enable debug mode.</p></section>
          = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span>    </code>
             
 </article>
+                                    <a id="property__requestId"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_requestId</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">236</span>
+    </aside>
+            <p class="phpdocumentor-summary">Request ID for logger.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$_requestId</span>
+         = <span class="phpdocumentor-signature__default-value">""</span>    </code>
+            
+</article>
+                                    <a id="property__requestUuid"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_requestUuid</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">243</span>
+    </aside>
+            <p class="phpdocumentor-summary">Request UUID.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__name">$_requestUuid</span>
+         = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span>    </code>
+            
+</article>
                                                             </section>
         
                     <section>
@@ -1031,7 +1088,7 @@ enable debug mode.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">236</span>
+        <span class="phpdocumentor-element-found-in__line">250</span>
     </aside>
         <p class="phpdocumentor-summary">Constructor.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1072,7 +1129,7 @@ enable debug mode.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">288</span>
+        <span class="phpdocumentor-element-found-in__line">303</span>
     </aside>
         <p class="phpdocumentor-summary">Resets certain Client settings via the current Settings storage.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1124,7 +1181,7 @@ enable debug mode.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">315</span>
+        <span class="phpdocumentor-element-found-in__line">330</span>
     </aside>
         <p class="phpdocumentor-summary">Loads all cookies via the current Settings storage.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1175,7 +1232,7 @@ enable debug mode.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">348</span>
+        <span class="phpdocumentor-element-found-in__line">363</span>
     </aside>
         <p class="phpdocumentor-summary">Retrieve Pigeon Session ID.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1204,7 +1261,7 @@ enable debug mode.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">363</span>
+        <span class="phpdocumentor-element-found-in__line">378</span>
     </aside>
         <p class="phpdocumentor-summary">Retrieve the CSRF token from the current cookie jar.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1238,7 +1295,7 @@ have been logged out, or if they have expired naturally.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">378</span>
+        <span class="phpdocumentor-element-found-in__line">393</span>
     </aside>
         <p class="phpdocumentor-summary">Retrieve the MID token from the current cookie jar.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1268,7 +1325,7 @@ have been logged out, or if they have expired naturally.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">397</span>
+        <span class="phpdocumentor-element-found-in__line">412</span>
     </aside>
         <p class="phpdocumentor-summary">Searches for a specific cookie in the current jar.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1328,7 +1385,7 @@ have been logged out, or if they have expired naturally.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">434</span>
+        <span class="phpdocumentor-element-found-in__line">449</span>
     </aside>
         <p class="phpdocumentor-summary">Gives you all cookies in the Jar encoded as a JSON string.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1368,7 +1425,7 @@ have been logged out, or if they have expired naturally.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">462</span>
+        <span class="phpdocumentor-element-found-in__line">477</span>
     </aside>
         <p class="phpdocumentor-summary">Tells current settings storage to store cookies if necessary.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1420,7 +1477,7 @@ automatically calls it when enough time has elapsed since last save.</p></sectio
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">489</span>
+        <span class="phpdocumentor-element-found-in__line">504</span>
     </aside>
         <p class="phpdocumentor-summary">Controls the SSL verification behavior of the Client.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1474,7 +1531,7 @@ a custom CA bundle file.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">500</span>
+        <span class="phpdocumentor-element-found-in__line">515</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the current SSL verification behavior of the Client.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1503,7 +1560,7 @@ a custom CA bundle file.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">513</span>
+        <span class="phpdocumentor-element-found-in__line">528</span>
     </aside>
         <p class="phpdocumentor-summary">Set the proxy to use for requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1555,7 +1612,7 @@ Guzzle format, or NULL to disable proxying.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">525</span>
+        <span class="phpdocumentor-element-found-in__line">540</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the current proxy used for requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1584,7 +1641,7 @@ Guzzle format, or NULL to disable proxying.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">537</span>
+        <span class="phpdocumentor-element-found-in__line">552</span>
     </aside>
         <p class="phpdocumentor-summary">Set the resolving host.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1635,7 +1692,7 @@ Guzzle format, or NULL to disable proxying.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">548</span>
+        <span class="phpdocumentor-element-found-in__line">563</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the current resolving host.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1664,7 +1721,7 @@ Guzzle format, or NULL to disable proxying.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">564</span>
+        <span class="phpdocumentor-element-found-in__line">579</span>
     </aside>
         <p class="phpdocumentor-summary">Sets the network interface override to use.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1718,7 +1775,7 @@ disable override and let Guzzle use any interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">576</span>
+        <span class="phpdocumentor-element-found-in__line">591</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the current network interface override used for requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1747,7 +1804,7 @@ disable override and let Guzzle use any interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">594</span>
+        <span class="phpdocumentor-element-found-in__line">609</span>
     </aside>
         <p class="phpdocumentor-summary">Output debugging information.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1844,7 +1901,7 @@ avoid displaying it.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">649</span>
+        <span class="phpdocumentor-element-found-in__line">664</span>
     </aside>
         <p class="phpdocumentor-summary">Maps a server response onto a specific kind of result object.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1925,7 +1982,7 @@ from Instagram's server.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">789</span>
+        <span class="phpdocumentor-element-found-in__line">804</span>
     </aside>
         <p class="phpdocumentor-summary">Helper which builds in the most important Guzzle options.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1979,7 +2036,7 @@ manually. It's automatically called by _guzzleRequest()!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">848</span>
+        <span class="phpdocumentor-element-found-in__line">863</span>
     </aside>
         <p class="phpdocumentor-summary">Wraps Guzzle&#039;s request and adds special error handling and options.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2063,7 +2120,7 @@ debugging, server response checking and response decoding!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">919</span>
+        <span class="phpdocumentor-element-found-in__line">934</span>
     </aside>
         <p class="phpdocumentor-summary">Internal wrapper around _guzzleRequest().</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2156,7 +2213,7 @@ such as the debugging output.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">979</span>
+        <span class="phpdocumentor-element-found-in__line">1003</span>
     </aside>
         <p class="phpdocumentor-summary">Perform an Instagram API call.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2216,7 +2273,7 @@ such as the debugging output.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1096</span>
+        <span class="phpdocumentor-element-found-in__line">1120</span>
     </aside>
         <p class="phpdocumentor-summary">Decode a JSON reply from Instagram&#039;s API.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2271,7 +2328,7 @@ or NULL if unable to decode JSON.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1108</span>
+        <span class="phpdocumentor-element-found-in__line">1132</span>
     </aside>
         <p class="phpdocumentor-summary">Get the cookies middleware instance.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2300,7 +2357,7 @@ or NULL if unable to decode JSON.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1118</span>
+        <span class="phpdocumentor-element-found-in__line">1142</span>
     </aside>
         <p class="phpdocumentor-summary">Get the zero rating rewrite middleware instance.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2329,7 +2386,7 @@ or NULL if unable to decode JSON.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1126</span>
+        <span class="phpdocumentor-element-found-in__line">1150</span>
     </aside>
         <p class="phpdocumentor-summary">Start Pigeon batch requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2358,7 +2415,7 @@ or NULL if unable to decode JSON.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1135</span>
+        <span class="phpdocumentor-element-found-in__line">1159</span>
     </aside>
         <p class="phpdocumentor-summary">Stop Pigeon batch requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2387,12 +2444,41 @@ or NULL if unable to decode JSON.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1146</span>
+        <span class="phpdocumentor-element-found-in__line">1170</span>
     </aside>
         <p class="phpdocumentor-summary">Get Pigeon Client time.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">private</span>
                                 <span class="phpdocumentor-signature__name">_getPigeonRawClientTime</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method__getRequestId"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--private
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_getRequestId()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1187</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get request ID.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                                <span class="phpdocumentor-signature__name">_getRequestId</span>(
                 )
         : <span class="phpdocumentor-signature__response_type">string</span>
     </code>
@@ -2416,7 +2502,7 @@ or NULL if unable to decode JSON.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1163</span>
+        <span class="phpdocumentor-element-found-in__line">1200</span>
     </aside>
         <p class="phpdocumentor-summary">Sets the last processed request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2457,7 +2543,7 @@ or NULL if unable to decode JSON.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Client.php"><a href="../files/src-client.html"><abbr title="src/Client.php">Client.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1174</span>
+        <span class="phpdocumentor-element-found-in__line">1211</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the last processed point.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

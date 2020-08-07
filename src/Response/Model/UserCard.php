@@ -8,15 +8,15 @@ use InstagramAPI\AutoPropertyMapper;
  * UserCard.
  *
  * @method string getAlgorithm()
- * @method mixed getCaption()
+ * @method string getCaption()
  * @method bool getFollowedBy()
  * @method mixed getIcon()
  * @method bool getIsNewSuggestion()
- * @method mixed getLargeUrls()
- * @method mixed getMediaIds()
- * @method mixed getMediaInfos()
+ * @method string[] getLargeUrls()
+ * @method string[] getMediaIds()
+ * @method Media[] getMediaInfos()
  * @method string getSocialContext()
- * @method mixed getThumbnailUrls()
+ * @method string[] getThumbnailUrls()
  * @method User getUser()
  * @method string getUuid()
  * @method float getValue()
@@ -34,15 +34,15 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isUuid()
  * @method bool isValue()
  * @method $this setAlgorithm(string $value)
- * @method $this setCaption(mixed $value)
+ * @method $this setCaption(string $value)
  * @method $this setFollowedBy(bool $value)
  * @method $this setIcon(mixed $value)
  * @method $this setIsNewSuggestion(bool $value)
- * @method $this setLargeUrls(mixed $value)
- * @method $this setMediaIds(mixed $value)
- * @method $this setMediaInfos(mixed $value)
+ * @method $this setLargeUrls(string[] $value)
+ * @method $this setMediaIds(string[] $value)
+ * @method $this setMediaInfos(Media[] $value)
  * @method $this setSocialContext(string $value)
- * @method $this setThumbnailUrls(mixed $value)
+ * @method $this setThumbnailUrls(string[] $value)
  * @method $this setUser(User $value)
  * @method $this setUuid(string $value)
  * @method $this setValue(float $value)
@@ -66,12 +66,12 @@ class UserCard extends AutoPropertyMapper
         'user'              => 'User',
         'algorithm'         => 'string',
         'social_context'    => 'string',
-        'caption'           => '',
+        'caption'           => 'string',
         'icon'              => '',
-        'media_ids'         => '',
-        'thumbnail_urls'    => '',
-        'large_urls'        => '',
-        'media_infos'       => '',
+        'media_ids'         => 'string[]',
+        'thumbnail_urls'    => 'string[]',
+        'large_urls'        => 'string[]',
+        'media_infos'       => 'Media[]',
         'value'             => 'float',
         'is_new_suggestion' => 'bool',
         'uuid'              => 'string',

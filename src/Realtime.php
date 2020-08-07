@@ -486,6 +486,14 @@ class Realtime implements EventEmitterInterface
     }
 
     /**
+     * Check if client is connected.
+     */
+    public function isConnected()
+    {
+        return $this->_client->isConnected();
+    }
+
+    /**
      * Check whether sharing via the realtime client is enabled.
      *
      * @return bool

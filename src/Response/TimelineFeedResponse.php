@@ -23,6 +23,7 @@ use InstagramAPI\Response;
  * @method string getSessionId()
  * @method mixed getStartupPrefetchConfigs()
  * @method string getStatus()
+ * @method Model\SuggestedUsers getSuggestedUsers()
  * @method string getViewStateVersion()
  * @method Model\_Message[] get_Messages()
  * @method bool isAutoLoadMoreEnabled()
@@ -41,6 +42,7 @@ use InstagramAPI\Response;
  * @method bool isSessionId()
  * @method bool isStartupPrefetchConfigs()
  * @method bool isStatus()
+ * @method bool isSuggestedUsers()
  * @method bool isViewStateVersion()
  * @method bool is_Messages()
  * @method $this setAutoLoadMoreEnabled(bool $value)
@@ -59,6 +61,7 @@ use InstagramAPI\Response;
  * @method $this setSessionId(string $value)
  * @method $this setStartupPrefetchConfigs(mixed $value)
  * @method $this setStatus(string $value)
+ * @method $this setSuggestedUsers(Model\SuggestedUsers $value)
  * @method $this setViewStateVersion(string $value)
  * @method $this set_Messages(Model\_Message[] $value)
  * @method $this unsetAutoLoadMoreEnabled()
@@ -77,6 +80,7 @@ use InstagramAPI\Response;
  * @method $this unsetSessionId()
  * @method $this unsetStartupPrefetchConfigs()
  * @method $this unsetStatus()
+ * @method $this unsetSuggestedUsers()
  * @method $this unsetViewStateVersion()
  * @method $this unset_Messages()
  */
@@ -99,5 +103,6 @@ class TimelineFeedResponse extends Response
         'session_id'                     => 'string',
         'startup_prefetch_configs'       => '',
         'preload_distance'               => 'int',
+        'suggested_users'                => 'Model\SuggestedUsers',
     ];
 }

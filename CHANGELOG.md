@@ -1,3 +1,25 @@
+# Stable release v14.5.0
+## Date: 07/08/2020
+
+### New features
+
+- **Realtime:** Add `isConnected()`
+
+### Updates and fixes
+
+- **Event:** Update `sendNavigation()`
+- **Response:** Update `TimelineFeedResponse`
+- **Utils:** Update `extractURLs()`
+
+### Examples
+
+- **Example:** Add directInboxHide
+
+### Documentation
+
+- **Documentation:** Update documentation
+
+
 # Stable release v14.4.0
 ## Date: 05/08/2020
 

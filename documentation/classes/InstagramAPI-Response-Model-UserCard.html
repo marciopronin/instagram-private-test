@@ -411,7 +411,7 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#constant_JSON_PROPERTY_MAP">JSON_PROPERTY_MAP</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">[&#039;user&#039; =&gt; &#039;User&#039;, &#039;algorithm&#039; =&gt; &#039;string&#039;, &#039;social_context&#039; =&gt; &#039;string&#039;, &#039;caption&#039; =&gt; &#039;&#039;, &#039;icon&#039; =&gt; &#039;&#039;, &#039;media_ids&#039; =&gt; &#039;&#039;, &#039;thumbnail_urls&#039; =&gt; &#039;&#039;, &#039;large_urls&#039; =&gt; &#039;&#039;, &#039;media_infos&#039; =&gt; &#039;&#039;, &#039;value&#039; =&gt; &#039;float&#039;, &#039;is_new_suggestion&#039; =&gt; &#039;bool&#039;, &#039;uuid&#039; =&gt; &#039;string&#039;, &#039;followed_by&#039; =&gt; &#039;bool&#039;]</td>
+                    <td class="phpdocumentor-cell">[&#039;user&#039; =&gt; &#039;User&#039;, &#039;algorithm&#039; =&gt; &#039;string&#039;, &#039;social_context&#039; =&gt; &#039;string&#039;, &#039;caption&#039; =&gt; &#039;string&#039;, &#039;icon&#039; =&gt; &#039;&#039;, &#039;media_ids&#039; =&gt; &#039;string[]&#039;, &#039;thumbnail_urls&#039; =&gt; &#039;string[]&#039;, &#039;large_urls&#039; =&gt; &#039;string[]&#039;, &#039;media_infos&#039; =&gt; &#039;Media[]&#039;, &#039;value&#039; =&gt; &#039;float&#039;, &#039;is_new_suggestion&#039; =&gt; &#039;bool&#039;, &#039;uuid&#039; =&gt; &#039;string&#039;, &#039;followed_by&#039; =&gt; &#039;bool&#039;]</td>
                 </tr>
                                                                                         <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#method_getAlgorithm">getAlgorithm()</a></th>
@@ -421,7 +421,7 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#method_getCaption">getCaption()</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">mixed</td>
+                    <td class="phpdocumentor-cell">string</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#method_getFollowedBy">getFollowedBy()</a></th>
@@ -441,17 +441,17 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#method_getLargeUrls">getLargeUrls()</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">mixed</td>
+                    <td class="phpdocumentor-cell">string[]</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#method_getMediaIds">getMediaIds()</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">mixed</td>
+                    <td class="phpdocumentor-cell">string[]</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#method_getMediaInfos">getMediaInfos()</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">mixed</td>
+                    <td class="phpdocumentor-cell">\InstagramAPI\Response\Model\Media[]</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#method_getSocialContext">getSocialContext()</a></th>
@@ -461,7 +461,7 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#method_getThumbnailUrls">getThumbnailUrls()</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">mixed</td>
+                    <td class="phpdocumentor-cell">string[]</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-Model-UserCard.html#method_getUser">getUser()</a></th>
@@ -695,7 +695,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
         <span class="phpdocumentor-signature__name">$JSON_PROPERTY_MAP</span>
-        = <span class="phpdocumentor-signature__default-value">[&#039;user&#039; =&gt; &#039;User&#039;, &#039;algorithm&#039; =&gt; &#039;string&#039;, &#039;social_context&#039; =&gt; &#039;string&#039;, &#039;caption&#039; =&gt; &#039;&#039;, &#039;icon&#039; =&gt; &#039;&#039;, &#039;media_ids&#039; =&gt; &#039;&#039;, &#039;thumbnail_urls&#039; =&gt; &#039;&#039;, &#039;large_urls&#039; =&gt; &#039;&#039;, &#039;media_infos&#039; =&gt; &#039;&#039;, &#039;value&#039; =&gt; &#039;float&#039;, &#039;is_new_suggestion&#039; =&gt; &#039;bool&#039;, &#039;uuid&#039; =&gt; &#039;string&#039;, &#039;followed_by&#039; =&gt; &#039;bool&#039;]</span>
+        = <span class="phpdocumentor-signature__default-value">[&#039;user&#039; =&gt; &#039;User&#039;, &#039;algorithm&#039; =&gt; &#039;string&#039;, &#039;social_context&#039; =&gt; &#039;string&#039;, &#039;caption&#039; =&gt; &#039;string&#039;, &#039;icon&#039; =&gt; &#039;&#039;, &#039;media_ids&#039; =&gt; &#039;string[]&#039;, &#039;thumbnail_urls&#039; =&gt; &#039;string[]&#039;, &#039;large_urls&#039; =&gt; &#039;string[]&#039;, &#039;media_infos&#039; =&gt; &#039;Media[]&#039;, &#039;value&#039; =&gt; &#039;float&#039;, &#039;is_new_suggestion&#039; =&gt; &#039;bool&#039;, &#039;uuid&#039; =&gt; &#039;string&#039;, &#039;followed_by&#039; =&gt; &#039;bool&#039;]</span>
     </code>
             
 </article>
@@ -815,7 +815,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getCaption</span>(
                 )
-        : <span class="phpdocumentor-signature__response_type">mixed</span>
+        : <span class="phpdocumentor-signature__response_type">string</span>
     </code>
 
     
@@ -823,7 +823,7 @@
         
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
+        <span class="phpdocumentor-signature__response_type">string</span>
             
 </article>
                                     <a id="method_getFollowedBy"></a>
@@ -927,7 +927,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getLargeUrls</span>(
                 )
-        : <span class="phpdocumentor-signature__response_type">mixed</span>
+        : <span class="phpdocumentor-signature__response_type">string[]</span>
     </code>
 
     
@@ -935,7 +935,7 @@
         
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
+        <span class="phpdocumentor-signature__response_type">string[]</span>
             
 </article>
                                     <a id="method_getMediaIds"></a>
@@ -955,7 +955,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getMediaIds</span>(
                 )
-        : <span class="phpdocumentor-signature__response_type">mixed</span>
+        : <span class="phpdocumentor-signature__response_type">string[]</span>
     </code>
 
     
@@ -963,7 +963,7 @@
         
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
+        <span class="phpdocumentor-signature__response_type">string[]</span>
             
 </article>
                                     <a id="method_getMediaInfos"></a>
@@ -983,7 +983,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getMediaInfos</span>(
                 )
-        : <span class="phpdocumentor-signature__response_type">mixed</span>
+        : <span class="phpdocumentor-signature__response_type">\InstagramAPI\Response\Model\Media[]</span>
     </code>
 
     
@@ -991,7 +991,7 @@
         
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
+        <span class="phpdocumentor-signature__response_type">\InstagramAPI\Response\Model\Media[]</span>
             
 </article>
                                     <a id="method_getSocialContext"></a>
@@ -1039,7 +1039,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getThumbnailUrls</span>(
                 )
-        : <span class="phpdocumentor-signature__response_type">mixed</span>
+        : <span class="phpdocumentor-signature__response_type">string[]</span>
     </code>
 
     
@@ -1047,7 +1047,7 @@
         
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
+        <span class="phpdocumentor-signature__response_type">string[]</span>
             
 </article>
                                     <a id="method_getUser"></a>
@@ -1556,7 +1556,7 @@
                                 <span class="phpdocumentor-signature__name">setCaption</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$value</span> :
-                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
         : <span class="phpdocumentor-signature__response_type">$this</span>
@@ -1567,7 +1567,7 @@
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$value</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
@@ -1716,7 +1716,7 @@
                                 <span class="phpdocumentor-signature__name">setLargeUrls</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$value</span> :
-                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__return-type">string[]</span>
                             </span>
                 )
         : <span class="phpdocumentor-signature__response_type">$this</span>
@@ -1727,7 +1727,7 @@
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$value</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string[]</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
@@ -1756,7 +1756,7 @@
                                 <span class="phpdocumentor-signature__name">setMediaIds</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$value</span> :
-                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__return-type">string[]</span>
                             </span>
                 )
         : <span class="phpdocumentor-signature__response_type">$this</span>
@@ -1767,7 +1767,7 @@
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$value</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string[]</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
@@ -1796,7 +1796,7 @@
                                 <span class="phpdocumentor-signature__name">setMediaInfos</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$value</span> :
-                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__return-type">\InstagramAPI\Response\Model\Media[]</span>
                             </span>
                 )
         : <span class="phpdocumentor-signature__response_type">$this</span>
@@ -1807,7 +1807,7 @@
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$value</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">\InstagramAPI\Response\Model\Media[]</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
@@ -1876,7 +1876,7 @@
                                 <span class="phpdocumentor-signature__name">setThumbnailUrls</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$value</span> :
-                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__return-type">string[]</span>
                             </span>
                 )
         : <span class="phpdocumentor-signature__response_type">$this</span>
@@ -1887,7 +1887,7 @@
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$value</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string[]</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>

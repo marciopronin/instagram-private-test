@@ -28,7 +28,7 @@ try {
                 ->media_id;
     $item = $ig->media->getInfo($mediaId)->getItems()[0];
     $extraData = [];
-    if ($item->getMediaType() === Item::CAROUSEL) {
+    if ($item->getMediaType() === \InstagramAPI\Response\Model\Item::CAROUSEL) {
         $extraData['carousel_media'] = 1;
         $extraData['carousel_index'] = 0;
     }

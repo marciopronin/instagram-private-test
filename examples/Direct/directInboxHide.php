@@ -3,7 +3,7 @@
 set_time_limit(0);
 date_default_timezone_set('UTC');
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 /////// CONFIG ///////
 $username = '';
@@ -32,7 +32,7 @@ try {
         $inboxResponse = $ig->direct->getInbox($cursor, $seqId, 20);
         $seqId = $inboxResponse->getSeqId();
         $inbox = $inboxResponse->getInbox();
-        $cursor = $inbox->getNextCursor()->getCursorThreadV2Id();
+        $cursor = $inbox->getOldestCursor();
         $threads = $inbox->getThreads();
         // In this example we will be iterating each thread to load all the items of each.
         foreach ($threads as $thread) {
@@ -50,16 +50,18 @@ try {
                 $threadItems = $threadInbox->getItems();
 
                 foreach ($threadItems as $threadItem) {
-                    if ($threadItem->getType() === 'reaction') {
-                        $ig->direct->hideThread($threadInbox->getThreadId());
-                        break;
+                    if ($threadItem->getItemType() === 'reel_share') {
+                        if ($threadItem->getReelShare()->getType() === 'reaction') {
+                            $ig->direct->hideThread($threadInbox->getThreadId());
+                            break;
+                        }
                     }
                 }
                 $ig->event->sendNavigation('back', 'direct_thread', 'direct_inbox');
                 // We will stop the do-while loop when oldesct cursor is null or is the same as the previous one.
             } while ($oldestCursor !== null && $previous !== $oldestCursor);
         }
-    } while($cursor !== null);
+    } while ($cursor !== null);
 
     $ig->event->sendNavigation('back', 'direct_inbox', 'feed_timeline');
     $ig->event->forceSendBatch();

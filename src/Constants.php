@@ -11,9 +11,9 @@ class Constants
     ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
     const IG_VERSION = '151.0.0.23.120';
-    const IG_IOS_VERSION = '142.0.0.22.109';
+    const IG_IOS_VERSION = '153.0.0.26.73';
     const VERSION_CODE = '232867993';
-    const IG_IOS_VERSION_CODE = '214888322';
+    const IG_IOS_VERSION_CODE = '236545181';
     const IOS_MODEL = 'iPhone9,3';
     const IOS_VERSION = '13_2_3';
     const IOS_DPI = '750x1334';

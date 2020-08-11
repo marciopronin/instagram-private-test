@@ -1,3 +1,20 @@
+# Stable release v14.5.1
+## Date: 11/08/2020
+
+### Updates and fixes
+
+- **Constants:** iOS to 153.0.0.26.73
+- **GoodDevices:** Update User Agents
+
+### Examples
+
+- **Example:** Update directInboxHide
+
+### Documentation
+
+- **Documentation:** Update documentation
+
+
 # Stable release v14.5.0
 ## Date: 07/08/2020
 

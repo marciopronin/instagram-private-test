@@ -1197,7 +1197,7 @@ class Instagram implements ExperimentsInterface
                         ->addPost('guid', $this->uuid)
                         ->addPost('google_tokens', '[]');
                 } elseif ($this->getPlatform() === 'ios') {
-                    $request->addPost('req_login', '0');
+                    $request->addPost('reg_login', '0');
                 }
                 $response = $request->getResponse(new Response\LoginResponse());
                 $this->settings->set('business_account', $response->getLoggedInUser()->getIsBusiness());
@@ -1652,7 +1652,12 @@ class Instagram implements ExperimentsInterface
             } else {
                 $this->settings->set('device_id', Signatures::generateDeviceId($this->getPlatform()));
             }
-            $this->settings->set('phone_id', Signatures::generateUUID());
+
+            if ($this->getIsAndroid()) {
+                $this->settings->set('phone_id', Signatures::generateUUID());
+            } else {
+                $this->settings->set('phone_id', $this->settings->get('device_id'));
+            }
             $this->settings->set('uuid', Signatures::generateUUID());
 
             if ($loginType === 'facebook') {

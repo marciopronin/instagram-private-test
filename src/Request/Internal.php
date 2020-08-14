@@ -2853,20 +2853,18 @@ class Internal extends RequestCollection
         $prefix = sha1($videoDetails->getFilename().uniqid('', true));
 
         try {
-            if ($videoDetails->getVideoCodec() !== null) {
-                // Split the video stream into a multiple segments by time.
-                $ffmpeg->run(sprintf(
-                    '-i %s -c:v copy -an -dn -sn -f segment -segment_time %d -segment_format mp4 %s',
-                    Args::escape($videoDetails->getFilename()),
-                    $this->_getTargetSegmentDuration($targetFeed),
-                    Args::escape(sprintf(
-                        '%s%s%s.video.%%03d.mp4',
-                        $outputDirectory,
-                        DIRECTORY_SEPARATOR,
-                        $prefix
-                    ))
-                ));
-            }
+            // Split the video stream into a multiple segments by time.
+            $ffmpeg->run(sprintf(
+                '-i %s -c:v copy -an -dn -sn -f segment -segment_time %d -segment_format mp4 %s',
+                Args::escape($videoDetails->getFilename()),
+                $this->_getTargetSegmentDuration($targetFeed),
+                Args::escape(sprintf(
+                    '%s%s%s.video.%%03d.mp4',
+                    $outputDirectory,
+                    DIRECTORY_SEPARATOR,
+                    $prefix
+                ))
+            ));
             if ($videoDetails->getAudioCodec() !== null) {
                 // Save the audio stream in one segment.
                 $ffmpeg->run(sprintf(

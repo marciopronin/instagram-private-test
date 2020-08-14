@@ -1,3 +1,15 @@
+# Stable release v14.5.3
+## Date: 14/08/2020
+
+### Updates and fixes
+
+- **Constants:** Update iOS constants
+- **Instagram:** Update `_login()` for iOS
+- **Instagram:** Update `_setUser()` for iOS
+- **Internal:** Update `_splitVideoIntoSegments()`
+- **Media:** Update MediaDetails
+- **Media:** Update VideoDetails
+
 # Stable release v14.5.2
 ## Date: 14/08/2020
 

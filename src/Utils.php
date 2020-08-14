@@ -1708,7 +1708,7 @@ class Utils
      */
     public static function extractURLs(
         $text,
-        array $excludeText = [])
+        $excludeText = [])
     {
         if (!is_array($excludeText)) {
             $excludeText = [$excludeText];

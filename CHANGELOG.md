@@ -1,3 +1,11 @@
+# Stable release v14.5.2
+## Date: 14/08/2020
+
+### Updates and fixes
+
+- **Events:** Fix `sendNavigation()`
+- **Utils:** Fix `extractURLs()`
+
 # Stable release v14.5.1
 ## Date: 11/08/2020
 

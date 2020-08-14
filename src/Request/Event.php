@@ -3540,7 +3540,7 @@ class Event extends RequestCollection
                 if ($toModule === 'feed_timeline') {
                     $extra['nav_depth'] = $navDepth;
                 } elseif ($toModule === 'direct_thread') {
-                    if (!isset($options['user_id']) || !isset($options['thread_id'])) {
+                    if (!isset($options['user_id']) && !isset($options['thread_id'])) {
                         throw new \InvalidArgumentException('User ID or Thread ID not provided.');
                     }
 

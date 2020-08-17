@@ -968,12 +968,13 @@ class Instagram implements ExperimentsInterface
     /**
      * Set iOS Model.
      *
-     * @param string $value.
+     * @param string $device iOS device model.
      */
     public function setIosModel(
-        $value)
+        $device)
     {
-        $this->iosModel = $value;
+        Utils::checkIsValidiDevice($device);
+        $this->iosModel = $device;
     }
 
     /**

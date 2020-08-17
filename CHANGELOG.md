@@ -1,3 +1,25 @@
+# Stable release v14.6.0
+## Date: 17/08/2020
+
+### New features
+
+- **Utils:** Add `checkIsValidiDevice()`. More customization for iOS users. See /wiki/iDevices.md
+- **Web:** Add `getPasswordChanges()`
+
+### Updates and fixes
+
+- **Constants:** Update iOS version
+- **Instagram:** Update `setIosModel()`
+- **Model:** Update `AccountAccessToolSettingsPages`
+
+### Wiki
+
+- **Wiki:** Added instructions (`iDevices.md`) for using different iPhone models.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.5.3
 ## Date: 14/08/2020
 

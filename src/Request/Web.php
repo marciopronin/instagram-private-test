@@ -208,12 +208,10 @@ class Web extends RequestCollection
     {
         $response = $this->ig->request('https://instagram.com/accounts/access_tool/')
             ->setAddDefaultHeaders(false)
-            ->addHeader('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0')
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
             ->getRawResponse();
 
-        preg_match_all('/window._sharedData = (.*);<\/script>/m', $response, $matches, PREG_SET_ORDER, 0);
-
-        return new Response\AccountAccessToolResponse(json_decode($matches[0][1], true));
+        return new Response\AccountAccessToolResponse(json_decode($response, true));
     }
 
     /**
@@ -342,5 +340,22 @@ class Web extends RequestCollection
             ->addHeader('User-Agent', $this->ig->getWebUserAgent())
             ->addParam('__a', '1')
             ->getResponse(new Response\WebUserInfoResponse());
+    }
+
+    /**
+     * Gets information about password changes.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\AccountAccessToolResponse
+     */
+    public function getPasswordChanges()
+    {
+        $response = $this->ig->request('https://instagram.com/accounts/access_tool/password_changes')
+            ->setAddDefaultHeaders(false)
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->getRawResponse();
+
+        return new Response\AccountAccessToolResponse(json_decode($response, true));
     }
 }

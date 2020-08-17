@@ -2003,4 +2003,36 @@ class Utils
 
         return '1';
     }
+
+    /**
+     * Check if correct iDevice (for iOS usage only).
+     *
+     * @param string $device The Apple device model.
+     */
+    public static function checkIsValidiDevice(
+        $device)
+    {
+        $iDevices = [
+            'iPhone9,1', // iPhone 7 (Global)
+            'iPhone9,2', // iPhone 7 Plus (Global)
+            'iPhone9,3', // iPhone 7 (GSM)
+            'iphone9,4', // iPhone 7 Plus (GSM)
+            'iPhone10,1', // iPhone 8 (Global)
+            'iPhone10,2', // iPhone 8 Plus (Global)
+            'iPhone10,4', // iPhone 8 (GSM)
+            'iPhone10,5', // iPhone 8 Plus (GSM)
+            'iPhone10,3', // iPhone X (Global)
+            'iPhone11,6', // iPhone XS Max
+            'iPhone11,4', // iPhone XS Max (China)
+            'iPhone11,8', // iPhone XR
+            'iPhone12,1', // iPhone 11
+            'iPhone12,3', // iPhone 11 Pro
+            'iPhone12,5', // iPhone 11 Pro Max
+            'iPhone12,8', // iPhone SE (2020)
+        ];
+
+        if (!in_array($value, $iDevices, true)) {
+            throw new \InvalidArgumentException(sprintf('Invalid iPhone model %s.', $device));
+        }
+    }
 }

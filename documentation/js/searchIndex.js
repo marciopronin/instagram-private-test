@@ -9451,6 +9451,11 @@ Search.appendIndex(
             "summary": "Get\u0020username\u0020profile\u0020info.",
             "url": "../classes/InstagramAPI-Request-Web.html#method_getUserInfo"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AgetPasswordChanges\u0028\u0029",
+            "name": "getPasswordChanges",
+            "summary": "Gets\u0020information\u0020about\u0020password\u0020changes.",
+            "url": "../classes/InstagramAPI-Request-Web.html#method_getPasswordChanges"
+        },                {
             "fqsen": "\\InstagramAPI\\Request",
             "name": "Request",
             "summary": "Bridge\u0020between\u0020Instagram\u0020Client\u0020calls,\u0020the\u0020object\u0020mapper\u0020\u0026\u0020response\u0020objects.",
@@ -15940,6 +15945,11 @@ Search.appendIndex(
             "name": "getCountryCode",
             "summary": "Get\u0020country\u0020code\u0020from\u0020given\u0020locale.",
             "url": "../classes/InstagramAPI-Utils.html#method_getCountryCode"
+        },                {
+            "fqsen": "\\InstagramAPI\\Utils\u003A\u003AcheckIsValidiDevice\u0028\u0029",
+            "name": "checkIsValidiDevice",
+            "summary": "Check\u0020if\u0020correct\u0020iDevice\u0020\u0028for\u0020iOS\u0020usage\u0020only\u0029.",
+            "url": "../classes/InstagramAPI-Utils.html#method_checkIsValidiDevice"
         },                {
             "fqsen": "\\InstagramAPI\\Utils\u003A\u003ABOUNDARY_CHARS",
             "name": "BOUNDARY_CHARS",

@@ -1,3 +1,20 @@
+# Stable release v14.6.1
+## Date: 21/08/2020
+
+### Updates and fixes
+
+- **Direct:** Update `_sendDirectItem()`
+- **Event:** Update `_validateNavigationOptions()`
+- **Internal:** Update `configureSinglePhoto()`
+
+### Wiki
+
+- **Wiki:** Added docummentation for feedback (`feedback.md`).
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.6.0
 ## Date: 17/08/2020
 

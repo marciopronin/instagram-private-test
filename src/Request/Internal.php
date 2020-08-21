@@ -298,6 +298,11 @@ class Internal extends RequestCollection
                 if ($altText !== null) {
                     $request->addPost('custom_accessibility_caption', $altText);
                 }
+                if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['fb_access_token'])) {
+                    $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
+                            ->addPost('fb_access_token', $externalMetadata['fb_access_token'])
+                            ->addPost('share_to_fb_destination_type', 'USER');
+                }
                 break;
             case Constants::FEED_STORY:
                 if ($internalMetadata->isBestieMedia()) {

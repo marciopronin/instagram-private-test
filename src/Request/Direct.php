@@ -562,6 +562,9 @@ class Direct extends RequestCollection
      * @param array  $options    An associative array of optional parameters, including:
      *                           "client_context" and "mutation_token" - predefined UUID used to prevent double-posting.
      *                           "exclude_text" is used for excluding text in extractURLs function.
+     *                           "shh_mode" still being researched. Default value 0.
+     *                           "send_attribution" the dialog context from where you initiated sending the message. Default value 'inbox'.
+     *                           Other values: 'inbox_search', 'message_button', 'direct_thread' and 'more_menu'.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1538,7 +1541,8 @@ class Direct extends RequestCollection
                 if (!isset($options['upload_id'])) {
                     throw new \InvalidArgumentException('No upload_id provided.');
                 }
-                $request->addPost('upload_id', $options['upload_id']);
+                $request->addPost('upload_id', $options['upload_id'])
+                        ->addPost('allow_full_aspect_ratio', true);
                 break;
             case 'video':
                 $request = $this->ig->request('direct_v2/threads/broadcast/configure_video/');
@@ -1642,6 +1646,21 @@ class Direct extends RequestCollection
             $request->addPost('thread_ids', $recipients['thread']);
         } else {
             throw new \InvalidArgumentException('Please provide at least one recipient.');
+        }
+
+        if (isset($options['shh_mode'])) {
+            if (!is_bool($options['shh_mode'])) {
+                throw new \InvalidArgumentException('shh_mode must be a boolean value.');
+            }
+            $request->addPost('is_shh_mode', intval($options['shh_mode']));
+        } else {
+            $request->addPost('is_shh_mode', 0);
+        }
+
+        if (isset($options['send_attribution'])) {
+            $request->addPost('send_attribution', $options['send_attribution']);
+        } else {
+            $request->addPost('send_attribution', 'inbox');
         }
 
         // Handle client_context.

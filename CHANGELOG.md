@@ -1,3 +1,23 @@
+# Stable release v14.7.0
+## Date: 25/08/2020
+
+### New features
+
+- **Discover:** Add `getExploreReels()`
+- **Instagram:** Added new Reel class
+- **Reel:** Add `getHome()`
+- **Reel:** Add `getUserReels()`
+- **Reel:** Add `getMusic()`
+- **Response:** Added Reels response
+
+### Updates and fixes
+
+- **Constants:** Update to 155.0.0.37.107
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.6.1
 ## Date: 21/08/2020
 

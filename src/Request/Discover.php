@@ -53,6 +53,31 @@ class Discover extends RequestCollection
     }
 
     /**
+     * Explore reels.
+     *
+     * @param string|null $maxId Next "maximum ID", used for pagination.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UserReelResponse
+     */
+    public function getExploreReels(
+        $maxId = null)
+    {
+        $request = $this->ig->request('discover/explore_clips/')
+            ->setSignedPost(false)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('_uuid', $this->ig->uuid);
+
+        if ($maxId !== null) {
+            $request->addPost('max_id', $maxId);
+        }
+
+        return $request->getResponse(new Response\UserReelsResponse());
+    }
+
+    /**
      * Get discover chaining feed.
      *
      * @param \Response\Model\Item $mediaItem       The Media Item from `getExploreFeed()`.

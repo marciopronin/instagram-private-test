@@ -1841,6 +1841,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Instagram.html#property_push"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024reel",
+            "name": "reel",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Instagram.html#property_reel"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024shopping",
             "name": "shopping",
             "summary": "",
@@ -7140,6 +7145,11 @@ Search.appendIndex(
             "name": "getExploreFeed",
             "summary": "Get\u0020Explore\u0020tab\u0020feed.",
             "url": "../classes/InstagramAPI-Request-Discover.html#method_getExploreFeed"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Discover\u003A\u003AgetExploreReels\u0028\u0029",
+            "name": "getExploreReels",
+            "summary": "Explore\u0020reels.",
+            "url": "../classes/InstagramAPI-Request-Discover.html#method_getExploreReels"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Discover\u003A\u003AgetChainingFeed\u0028\u0029",
             "name": "getChainingFeed",
@@ -16240,6 +16250,36 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-MonetizationProductsEligibilityDataResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel",
+            "name": "Reel",
+            "summary": "Functions\u0020related\u0020to\u0020Reels\u0020also\u0020known\u0020internally\u0020as\u0020clips.",
+            "url": "../classes/InstagramAPI-Request-Reel.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetHome\u0028\u0029",
+            "name": "getHome",
+            "summary": "Home\u0020reels.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_getHome"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetUserReels\u0028\u0029",
+            "name": "getUserReels",
+            "summary": "Get\u0020user\u0020reels.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_getUserReels"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetMusic\u0028\u0029",
+            "name": "getMusic",
+            "summary": "Get\u0020music\u0020for\u0020reels.\u0020NOT\u0020FINISHED.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_getMusic"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\UserReelsResponse",
+            "name": "UserReelsResponse",
+            "summary": "UserReelsResponse.",
+            "url": "../classes/InstagramAPI-Response-UserReelsResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\UserReelsResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-UserReelsResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

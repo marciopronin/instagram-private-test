@@ -681,8 +681,9 @@ class Live extends RequestCollection
      *
      * Read the description of `start()` for proper usage.
      *
-     * @param int $previewWidth  (optional) Width.
-     * @param int $previewHeight (optional) Height.
+     * @param int    $previewWidth  (optional) Width.
+     * @param int    $previewHeight (optional) Height.
+     * @param string $title         (Optional) Title of the live broadcast.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -694,17 +695,24 @@ class Live extends RequestCollection
      */
     public function create(
         $previewWidth = 1080,
-        $previewHeight = 2076)
+        $previewHeight = 2076,
+        $title = null)
     {
-        return $this->ig->request('live/create/')
+        $request = $this->ig->request('live/create/')
             ->setSignedPost(false)
-            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('user_pay_enabled', 'false')
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('preview_height', $previewHeight)
-            ->addPost('preview_width', $previewWidth)
+            ->addPost('_uuid', $this->ig->uuid)
             ->addPost('broadcast_type', 'RTMP_SWAP_ENABLED')
-            ->addPost('internal_only', 0)
-            ->getResponse(new Response\CreateLiveResponse());
+            ->addPost('preview_width', $previewWidth)
+            ->addPost('internal_only', 0);
+
+        if ($title !== null) {
+            $request->addPost('broadcast_message', $title);
+        }
+
+        return $request->getResponse(new Response\CreateLiveResponse());
     }
 
     /**
@@ -834,6 +842,25 @@ class Live extends RequestCollection
     }
 
     /**
+     * Get post live thumbnails.
+     *
+     * This is used to obtain thumbnail for later use it for uploading to IGTV.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GetPostLiveThumbnailsResponse
+     */
+    public function getPostLiveThumbnails(
+        $broadcastId)
+    {
+        return $this->ig->request("live/{$broadcastId}/get_post_live_thumbnails/")
+            ->addParam('signed_body', Signatures::generateSignature(json_encode((object) []).'.{}'))
+            ->getResponse(new Response\GetPostLiveThumbnailsResponse());
+    }
+
+    /**
      * Add a finished broadcast to your post-live feed (saved replay).
      *
      * The broadcast must have ended before you can call this function.
@@ -895,6 +922,23 @@ class Live extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Get if fundraiser set.
+     *
+     *
+     * @param mixed|null $maxId
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\FundraiserInfoResponse
+     */
+    public function getFundraiserInfo(
+        $maxId = null)
+    {
+        return $this->ig->request("fundraiser/{$this->ig->account_id}/standalone_fundraiser_info/")
+            ->getResponse(new Response\FundraiserInfoResponse());
     }
 
     /**

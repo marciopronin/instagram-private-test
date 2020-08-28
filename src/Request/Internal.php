@@ -724,6 +724,10 @@ class Internal extends RequestCollection
         $attachedMedia = (isset($externalMetadata['attached_media']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['attached_media'] : null;
         /** @var array Title of the media uploaded to your channel. ONLY TV MEDIA! */
         $title = (isset($externalMetadata['title']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['title'] : null;
+        /** @var array In which series to add the video. ONLY TV MEDIA! */
+        $seriesId = (isset($externalMetadata['series_id']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['series_id'] : null;
+        /** @var array IGTV composer session ID. ONLY TV MEDIA! */
+        $sessionId = (isset($externalMetadata['igtv_session_id']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_session_id'] : null;
 
         // Fix very bad external user-metadata values.
         if (!is_string($captionText)) {
@@ -881,6 +885,12 @@ class Internal extends RequestCollection
             case Constants::FEED_TV:
                 if ($title === null) {
                     throw new \InvalidArgumentException('You must provide a title for the media.');
+                }
+                if ($seriesId !== null) {
+                    $request->addPost('igtv_series_id', $seriesId);
+                }
+                if ($sessionId !== null) {
+                    $request->addPost('igtv_composer_session_id', $sessionId);
                 }
                 $request
                     ->addPost('title', $title)

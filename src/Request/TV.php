@@ -243,4 +243,47 @@ class TV extends RequestCollection
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Get all IGTV user series.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\AllUserSeriesResponse
+     */
+    public function getAllUserSeries()
+    {
+        return $this->ig->request("igtv/series/all_user_series/{$this->ig->account_id}/")
+            ->addParam('signed_body', Signatures::generateSignature(json_encode((object) []).'.{}'))
+            ->getResponse(new Response\AllUserSeriesResponse());
+    }
+
+    /**
+     * Create IGTV series.
+     *
+     * @param string      $title       Title of the serie.
+     * @param string      $igtvSession UUIDv4.
+     * @param string|null $description Description of the serie.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\CreateSerieResponse
+     */
+    public function createSeries(
+        $title,
+        $description = null)
+    {
+        $request = $this->ig->request('igtv/series/create/')
+            ->addPost('title', $title)
+            ->addPost('igtv_composer_session_id', $igtvSession)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('_csrftoken', $this->ig->client->getToken());
+
+        if ($description !== null) {
+            $request->addPost('description', $description);
+        }
+
+        return $request->getResponse(new Response\CreateSerieResponse());
+    }
 }

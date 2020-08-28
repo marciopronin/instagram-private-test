@@ -268,6 +268,11 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Live.html#method_getPostLiveThumbnails">getPostLiveThumbnails()</a></th>
+                    <td class="phpdocumentor-cell">Get post live thumbnails.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GetPostLiveThumbnailsResponse.html"><abbr title="\InstagramAPI\Response\GetPostLiveThumbnailsResponse">GetPostLiveThumbnailsResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Live.html#method_addToPostLive">addToPostLive()</a></th>
                     <td class="phpdocumentor-cell">Add a finished broadcast to your post-live feed (saved replay).</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
@@ -281,6 +286,11 @@
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Live.html#method_setSubscriptionPreference">setSubscriptionPreference()</a></th>
                     <td class="phpdocumentor-cell">Set subscription (notification) preferences.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Live.html#method_getFundraiserInfo">getFundraiserInfo()</a></th>
+                    <td class="phpdocumentor-cell">Get if fundraiser set.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-FundraiserInfoResponse.html"><abbr title="\InstagramAPI\Response\FundraiserInfoResponse">FundraiserInfoResponse</abbr></a></td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Live.html#method_getDefaultCharities">getDefaultCharities()</a></th>
@@ -2132,7 +2142,7 @@ a WebRTC conference.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">695</span>
+        <span class="phpdocumentor-element-found-in__line">696</span>
     </aside>
         <p class="phpdocumentor-summary">Create a live broadcast.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2146,6 +2156,10 @@ a WebRTC conference.</p></section>
             [,                 <span class="phpdocumentor-signature__argument__name">$previewHeight</span> :
                 <span class="phpdocumentor-signature__argument__return-type">int</span>
                  = <span class="phpdocumentor-signature__argument__default-value">2076</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$title</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-CreateLiveResponse.html"><abbr title="\InstagramAPI\Response\CreateLiveResponse">CreateLiveResponse</abbr></a></span>
     </code>
@@ -2164,6 +2178,11 @@ a WebRTC conference.</p></section>
                     : <span class="phpdocumentor-signature__argument__return-type">int</span>
                      = <span class="phpdocumentor-signature__argument__default-value">2076</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(optional) Height.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$title</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(Optional) Title of the live broadcast.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -2214,7 +2233,7 @@ a WebRTC conference.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">737</span>
+        <span class="phpdocumentor-element-found-in__line">745</span>
     </aside>
         <p class="phpdocumentor-summary">Start a live broadcast.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2315,7 +2334,7 @@ it without special patching!), OR by calling the <code class="prettyprint">end()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">775</span>
+        <span class="phpdocumentor-element-found-in__line">783</span>
     </aside>
         <p class="phpdocumentor-summary">Get question status.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2366,7 +2385,7 @@ it without special patching!), OR by calling the <code class="prettyprint">end()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">798</span>
+        <span class="phpdocumentor-element-found-in__line">806</span>
     </aside>
         <p class="phpdocumentor-summary">Acknowledges a copyright warning from Instagram after detected via a heartbeat request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2419,7 +2438,7 @@ to see the proper usage of this function.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">824</span>
+        <span class="phpdocumentor-element-found-in__line">832</span>
     </aside>
         <p class="phpdocumentor-summary">End a live broadcast.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2484,6 +2503,58 @@ which was assigned to you in the <code class="prettyprint">create()</code> respo
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
             
 </article>
+                                    <a id="method_getPostLiveThumbnails"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getPostLiveThumbnails()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">855</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get post live thumbnails.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getPostLiveThumbnails</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$broadcastId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GetPostLiveThumbnailsResponse.html"><abbr title="\InstagramAPI\Response\GetPostLiveThumbnailsResponse">GetPostLiveThumbnailsResponse</abbr></a></span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This is used to obtain thumbnail for later use it for uploading to IGTV.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$broadcastId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The broadcast ID in Instagram's internal format (ie &quot;17854587811139572&quot;).</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GetPostLiveThumbnailsResponse.html"><abbr title="\InstagramAPI\Response\GetPostLiveThumbnailsResponse">GetPostLiveThumbnailsResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_addToPostLive"></a>
 <article
         class="
@@ -2495,7 +2566,7 @@ which was assigned to you in the <code class="prettyprint">create()</code> respo
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">847</span>
+        <span class="phpdocumentor-element-found-in__line">874</span>
     </aside>
         <p class="phpdocumentor-summary">Add a finished broadcast to your post-live feed (saved replay).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2547,7 +2618,7 @@ which was assigned to you in the <code class="prettyprint">create()</code> respo
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">866</span>
+        <span class="phpdocumentor-element-found-in__line">893</span>
     </aside>
         <p class="phpdocumentor-summary">Delete a saved post-live broadcast.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2598,7 +2669,7 @@ which was assigned to you in the <code class="prettyprint">create()</code> respo
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">889</span>
+        <span class="phpdocumentor-element-found-in__line">916</span>
     </aside>
         <p class="phpdocumentor-summary">Set subscription (notification) preferences.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2652,6 +2723,57 @@ which was assigned to you in the <code class="prettyprint">create()</code> respo
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
             
 </article>
+                                    <a id="method_getFundraiserInfo"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getFundraiserInfo()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">937</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get if fundraiser set.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getFundraiserInfo</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$maxId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-FundraiserInfoResponse.html"><abbr title="\InstagramAPI\Response\FundraiserInfoResponse">FundraiserInfoResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-FundraiserInfoResponse.html"><abbr title="\InstagramAPI\Response\FundraiserInfoResponse">FundraiserInfoResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_getDefaultCharities"></a>
 <article
         class="
@@ -2663,7 +2785,7 @@ which was assigned to you in the <code class="prettyprint">create()</code> respo
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">909</span>
+        <span class="phpdocumentor-element-found-in__line">953</span>
     </aside>
         <p class="phpdocumentor-summary">Get default charities.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2714,7 +2836,7 @@ which was assigned to you in the <code class="prettyprint">create()</code> respo
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">930</span>
+        <span class="phpdocumentor-element-found-in__line">974</span>
     </aside>
         <p class="phpdocumentor-summary">Get default charities.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2765,7 +2887,7 @@ which was assigned to you in the <code class="prettyprint">create()</code> respo
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">947</span>
+        <span class="phpdocumentor-element-found-in__line">991</span>
     </aside>
         <p class="phpdocumentor-summary">Get charity donations.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

@@ -8291,6 +8291,11 @@ Search.appendIndex(
             "summary": "End\u0020a\u0020live\u0020broadcast.",
             "url": "../classes/InstagramAPI-Request-Live.html#method_end"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AgetPostLiveThumbnails\u0028\u0029",
+            "name": "getPostLiveThumbnails",
+            "summary": "Get\u0020post\u0020live\u0020thumbnails.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_getPostLiveThumbnails"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AaddToPostLive\u0028\u0029",
             "name": "addToPostLive",
             "summary": "Add\u0020a\u0020finished\u0020broadcast\u0020to\u0020your\u0020post\u002Dlive\u0020feed\u0020\u0028saved\u0020replay\u0029.",
@@ -8305,6 +8310,11 @@ Search.appendIndex(
             "name": "setSubscriptionPreference",
             "summary": "Set\u0020subscription\u0020\u0028notification\u0029\u0020preferences.",
             "url": "../classes/InstagramAPI-Request-Live.html#method_setSubscriptionPreference"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AgetFundraiserInfo\u0028\u0029",
+            "name": "getFundraiserInfo",
+            "summary": "Get\u0020if\u0020fundraiser\u0020set.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_getFundraiserInfo"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AgetDefaultCharities\u0028\u0029",
             "name": "getDefaultCharities",
@@ -9365,6 +9375,16 @@ Search.appendIndex(
             "name": "writeSeenState",
             "summary": "Write\u0020seen\u0020state\u0020on\u0020a\u0020video.",
             "url": "../classes/InstagramAPI-Request-TV.html#method_writeSeenState"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\TV\u003A\u003AgetAllUserSeries\u0028\u0029",
+            "name": "getAllUserSeries",
+            "summary": "Get\u0020all\u0020IGTV\u0020user\u0020series.",
+            "url": "../classes/InstagramAPI-Request-TV.html#method_getAllUserSeries"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\TV\u003A\u003AcreateSeries\u0028\u0029",
+            "name": "createSeries",
+            "summary": "Create\u0020IGTV\u0020series.",
+            "url": "../classes/InstagramAPI-Request-TV.html#method_createSeries"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Usertag",
             "name": "Usertag",
@@ -16280,6 +16300,46 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-UserReelsResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\AllUserSeriesResponse",
+            "name": "AllUserSeriesResponse",
+            "summary": "AllUserSeriesResponse.",
+            "url": "../classes/InstagramAPI-Response-AllUserSeriesResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\AllUserSeriesResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-AllUserSeriesResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\FundraiserInfoResponse",
+            "name": "FundraiserInfoResponse",
+            "summary": "FundraiserInfoResponse.",
+            "url": "../classes/InstagramAPI-Response-FundraiserInfoResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\FundraiserInfoResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-FundraiserInfoResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\GetPostLiveThumbnailsResponse",
+            "name": "GetPostLiveThumbnailsResponse",
+            "summary": "GetPostLiveThumbnailsResponse.",
+            "url": "../classes/InstagramAPI-Response-GetPostLiveThumbnailsResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\GetPostLiveThumbnailsResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-GetPostLiveThumbnailsResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\CreateSerieResponse",
+            "name": "CreateSerieResponse",
+            "summary": "CreateSerieResponse.",
+            "url": "../classes/InstagramAPI-Response-CreateSerieResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\CreateSerieResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-CreateSerieResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

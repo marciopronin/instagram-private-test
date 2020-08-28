@@ -1,3 +1,28 @@
+# Stable release v14.8.0
+## Date: 28/08/2020
+
+### New features
+
+- **IGTV:** Add `getAllUserSeries()`
+- **IGTV:** Add `createSeries()`
+- **Live:** Add `getPostLiveThumbnails()`
+- **Live:** Add `getFundraiserInfo()`
+- Added models and responses
+
+### Updates and fixes
+
+- **Discover:** Update `getExploreFeed()`
+- **Internal:** Update `configureSingleVideo()`
+- **Live:** Update `create()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
+### Wiki
+
+- **Wiki:** Added docummentation for device fingerprinting and recommendations (`deviceFingerprint.md`).
+
 # Stable release v14.7.0
 ## Date: 25/08/2020
 

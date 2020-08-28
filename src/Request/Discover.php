@@ -35,6 +35,7 @@ class Discover extends RequestCollection
         $request = $this->ig->request('discover/topical_explore/')
             ->addParam('is_prefetch', $isPrefetch)
             ->addParam('omit_cover_media', true)
+            ->addParam('reels_configuration', 'default')
             ->addParam('use_sectional_payload', true)
             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
             ->addParam('session_id', $sessionId)

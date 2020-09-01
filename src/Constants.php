@@ -97,6 +97,7 @@ class Constants
     const FEED_DIRECT = 4;
     const FEED_DIRECT_STORY = 5;
     const FEED_TV = 6;
+    const FEED_REELS = 9; // Clips
     const FEED_DIRECT_AUDIO = 11;
 
     // Story view modes.
@@ -106,6 +107,30 @@ class Constants
 
     // Web.
     const WEB_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0';
+
+    // Share Type Constants.
+    const SHARE_TYPE = [
+        'FOLLOWERS_SHARE'                   => 0,
+        'DIRECT_SHARE'                      => 1,
+        'REEL_SHARE'                        => 2,
+        'DIRECT_STORY_SHARE'                => 3,
+        'DIRECT_STORY_SHARE_DRAFT'          => 4,
+        'REEL_SHARE_AND_DIRECT_STORY_SHARE' => 5,
+        'NAMETAG_SELFIE'                    => 6,
+        'UNKNOWN'                           => 7,
+        'IGTV'                              => 8,
+        'IGTV_REACTION'                     => 9,
+        'COWATCH_LOCAL'                     => 10,
+        'GROUP_REEL_SHARE'                  => 11,
+        'ARCHIVE'                           => 12,
+        'CLIPS'                             => 13,
+        'POST_LIVE_IGTV'                    => 14,
+        'POST_LIVE_IGTV_COVER_PHOTO'        => 15,
+        'IGWB_SELFIE_CAPTCHA'               => 16,
+        'IGWB_ID_CAPTCHA'                   => 17,
+        'EFFECT_DEMO_VIDEO'                 => 18,
+        'INVALID'                           => 19,
+    ];
 
     // General Constants.
     const SRC_DIR = __DIR__; // Absolute path to the "src" folder.

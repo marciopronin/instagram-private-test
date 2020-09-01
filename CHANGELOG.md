@@ -1,3 +1,18 @@
+# Stable release v14.8.1
+## Date: 01/09/2020
+
+### Updates and fixes
+
+- **Constants:** Added new `SHARE_TYPE` constants.
+- **Instagram:** Update `generateUUID()`
+- **Internal:** Update share type constants.
+- **Settings:** Update `StorageHandler`. New `seq_id` key added.
+- **Signatures:** Update `generateUUID()`.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.8.0
 ## Date: 28/08/2020
 

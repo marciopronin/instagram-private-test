@@ -49,9 +49,10 @@ class StorageHandler
         'checksum', // Graph API.
         'authorization_header', // IG Authorization header.
         'pending_events', // Graph API.
-        'public_key',
-        'public_key_id',
-        'business_account',
+        'public_key', // Instagram's Public Key for authentication.
+        'public_key_id', // Instagram's Public Key ID for authentication.
+        'business_account', // Is business account.
+        'seq_id', // Iris Sequence ID.
     ];
 
     /**

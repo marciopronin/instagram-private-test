@@ -286,6 +286,7 @@ class Internal extends RequestCollection
                     ->addPost('source_type', '4')
                     ->addPost('media_folder', 'Camera')
                     ->addPost('upload_id', $uploadId);
+                   // ->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
 
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
@@ -312,7 +313,7 @@ class Internal extends RequestCollection
                 $request
                     ->addPost('client_shared_at', (string) time())
                     ->addPost('source_type', '3')
-                    ->addPost('configure_mode', '1')
+                    ->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     ->addPost('client_timestamp', (string) (time() - mt_rand(3, 10)))
                     ->addPost('upload_id', $uploadId);
 
@@ -395,7 +396,7 @@ class Internal extends RequestCollection
                     ->addPost('thread_ids', $internalMetadata->getDirectThreads())
                     ->addPost('client_shared_at', (string) time())
                     ->addPost('source_type', '3')
-                    ->addPost('configure_mode', '2')
+                    ->addPost('configure_mode', Constants::SHARE_TYPE['DIRECT_STORY_SHARE']) // 3 - DIRECT_STORY_SHARE
                     ->addPost('client_timestamp', (string) (time() - mt_rand(3, 10)))
                     ->addPost('upload_id', $uploadId);
 
@@ -680,6 +681,9 @@ class Internal extends RequestCollection
         case Constants::FEED_TV:
             $endpoint = 'media/configure_to_igtv/';
             break;
+        case Constants::FEED_REEL:
+            $endpoint = 'media/configure_to_clips/';
+            break;
         default:
             throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
         }
@@ -773,6 +777,7 @@ class Internal extends RequestCollection
                         $in[] = ['user_id' => $userId];
                     }
                     $request->addPost('usertags', $in);
+                    //->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
                 }
                 break;
             case Constants::FEED_STORY:
@@ -781,7 +786,7 @@ class Internal extends RequestCollection
                 }
 
                 $request
-                    ->addPost('configure_mode', 1) // 1 - REEL_SHARE
+                    ->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     ->addPost('story_media_creation_date', time() - mt_rand(10, 20))
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time());
@@ -871,7 +876,7 @@ class Internal extends RequestCollection
                 break;
             case Constants::FEED_DIRECT_STORY:
                 $request
-                    ->addPost('configure_mode', 2) // 2 - DIRECT_STORY_SHARE
+                    ->addPost('configure_mode', Constants::SHARE_TYPE['DIRECT_STORY_SHARE']) // 3 - DIRECT_STORY_SHARE
                     ->addPost('recipient_users', $internalMetadata->getDirectUsers())
                     ->addPost('thread_ids', $internalMetadata->getDirectThreads())
                     ->addPost('story_media_creation_date', time() - mt_rand(10, 20))
@@ -894,7 +899,8 @@ class Internal extends RequestCollection
                 }
                 $request
                     ->addPost('title', $title)
-                    ->addPost('caption', $captionText);
+                    ->addPost('caption', $captionText)
+                    ->addPost('configure_mode', Constants::SHARE_TYPE['IGTV']); // 8 - IGTV
                 break;
         }
 

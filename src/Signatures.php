@@ -126,7 +126,8 @@ class Signatures
     }
 
     public static function generateUUID(
-        $keepDashes = true)
+        $keepDashes = true,
+        $customUuid = false)
     {
         // Instagram generates the device's UUID in a special way which differs
         // from the way all other in-app UUIDs are generated. They insert a
@@ -147,7 +148,9 @@ class Signatures
         // Therefore the result of the calculation is simply the hex encoding of
         // "1635" (base 10), which is "663" (base 16). So: "[1 random hex]663".
         $uuidParts = explode('-', Uuid::uuid4());
-        $uuidParts[1] = $uuidParts[1][0].'663'; // Keep 1st old random hex char.
+        if ($customUuid === true) {
+            $uuidParts[1] = $uuidParts[1][0].'663'; // Keep 1st old random hex char.
+        }
         if ($keepDashes === true) {
             $uuid = implode('-', $uuidParts);
         } else {

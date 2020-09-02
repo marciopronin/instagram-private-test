@@ -1,3 +1,18 @@
+# Stable release v14.9.0
+## Date: 02/09/2020
+
+### New features
+
+- **Media:** Added PDQ Hashing algorithm.
+
+### Updates and fixes
+
+- **Internal:** Update `configure_mode` types.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.8.1
 ## Date: 01/09/2020
 

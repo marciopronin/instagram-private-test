@@ -16351,280 +16351,270 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Response-CreateSerieResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
-            "fqsen": "\\PDQHash",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash",
             "name": "PDQHash",
             "summary": "A\u0020PDQ\u0020hash\u0020is\u0020simply\u0020256\u0020bits.\u0020The\u0020only\u0020string\u0020representation\u0020is\u002064\u0020hex\ndigits.\u0020Bit\u002Dordering\u0020is\u0020a\u0020concern,\u0020but\u0020is\u0020a\u0020non\u002Dissue\u0020as\u0020long\u0020as\u0020the\nto\u002Dstring\u0020and\u0020from\u002Dstring\u0020methods\u0020in\u0020this\u0020class\u0020are\u0020consistent.",
-            "url": "../classes/PDQHash.html"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "The\u0020constructor\u0020is\u0020private\u0020since\u0020the\u0020only\u0020valid\u0020representation\u0020is\nhex\u002Dstring.\u0020Yet\u0020we\u0020have\u0020a\u0020PDQHash\u0020class,\u0020not\u0020just\u0020strings,\u0020due\u0020to\u0020lessons\nlearned\u0020from\u0020other\u0020projects.\u0020Separating\u0020ser\/des\u0020format\u0020\u0028string\u0029\u0020from\ninternal\u0020representation\u0020helps\u0020avoid\u0020false\u0020negatives.",
-            "url": "../classes/PDQHash.html#method___construct"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method___construct"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003AmakeZeroesHash\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003AmakeZeroesHash\u0028\u0029",
             "name": "makeZeroesHash",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_makeZeroesHash"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_makeZeroesHash"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003AfromHexString\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003AfromHexString\u0028\u0029",
             "name": "fromHexString",
             "summary": "Creates\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020hash\u0020from\u0020a\u0020hexadecimal\u002Dformatted\u0020PDQ\nhash\u0020string.\u0020Throws\u0020MalformedPDQHashException\u0020for\u0020improperly\nformatted\u0020hashes.",
-            "url": "../classes/PDQHash.html#method_fromHexString"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_fromHexString"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003AtoHexString\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003AtoHexString\u0028\u0029",
             "name": "toHexString",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_toHexString"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_toHexString"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003Ato64BitStrings\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003Ato64BitStrings\u0028\u0029",
             "name": "to64BitStrings",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_to64BitStrings"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_to64BitStrings"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003Ato32BitStrings\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003Ato32BitStrings\u0028\u0029",
             "name": "to32BitStrings",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_to32BitStrings"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_to32BitStrings"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003Ato16BitStrings\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003Ato16BitStrings\u0028\u0029",
             "name": "to16BitStrings",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_to16BitStrings"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_to16BitStrings"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003AsetBit\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003AsetBit\u0028\u0029",
             "name": "setBit",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_setBit"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_setBit"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003AhammingDistanceTo\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003AhammingDistanceTo\u0028\u0029",
             "name": "hammingDistanceTo",
             "summary": "The\u0020Hamming\u0020distance\u0020between\u0020this\u0020hash\u0020and\u0020another.",
-            "url": "../classes/PDQHash.html#method_hammingDistanceTo"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_hammingDistanceTo"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003AisWithinHammingDistanceOf\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003AisWithinHammingDistanceOf\u0028\u0029",
             "name": "isWithinHammingDistanceOf",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_isWithinHammingDistanceOf"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_isWithinHammingDistanceOf"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003AhammingNorm\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003AhammingNorm\u0028\u0029",
             "name": "hammingNorm",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_hammingNorm"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method_hammingNorm"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003ApopCount16\u0028\u0029",
-            "name": "popCount16",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003A__popCount16\u0028\u0029",
+            "name": "__popCount16",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_popCount16"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method___popCount16"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003ApopCount16Slow\u0028\u0029",
-            "name": "popCount16Slow",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003A__popCount16Slow\u0028\u0029",
+            "name": "__popCount16Slow",
             "summary": "",
-            "url": "../classes/PDQHash.html#method_popCount16Slow"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#method___popCount16Slow"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003APDQHASH_NUM_SLOTS",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003APDQHASH_NUM_SLOTS",
             "name": "PDQHASH_NUM_SLOTS",
             "summary": "",
-            "url": "../classes/PDQHash.html#constant_PDQHASH_NUM_SLOTS"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#constant_PDQHASH_NUM_SLOTS"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003APDQHASH_HEX_LENGTH",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003APDQHASH_HEX_LENGTH",
             "name": "PDQHASH_HEX_LENGTH",
             "summary": "",
-            "url": "../classes/PDQHash.html#constant_PDQHASH_HEX_LENGTH"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#constant_PDQHASH_HEX_LENGTH"
         },                {
-            "fqsen": "\\PDQHash\u003A\u003A\u0024slots",
-            "name": "slots",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHash\u003A\u003A\u0024_slots",
+            "name": "_slots",
             "summary": "",
-            "url": "../classes/PDQHash.html#property_slots"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHash.html#property__slots"
         },                {
-            "fqsen": "\\PDQHasher",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher",
             "name": "PDQHasher",
             "summary": "",
-            "url": "../classes/PDQHasher.html"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AimageToLumaMatrix\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AimageToLumaMatrix\u0028\u0029",
             "name": "imageToLumaMatrix",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_imageToLumaMatrix"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_imageToLumaMatrix"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeJaroszFilterWindowSize\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AcomputeJaroszFilterWindowSize\u0028\u0029",
             "name": "computeJaroszFilterWindowSize",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeJaroszFilterWindowSize"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_computeJaroszFilterWindowSize"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AboxAlongRows\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AboxAlongRows\u0028\u0029",
             "name": "boxAlongRows",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_boxAlongRows"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_boxAlongRows"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AboxAlongCols\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AboxAlongCols\u0028\u0029",
             "name": "boxAlongCols",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_boxAlongCols"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_boxAlongCols"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AjaroszFilter\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AjaroszFilter\u0028\u0029",
             "name": "jaroszFilter",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_jaroszFilter"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_jaroszFilter"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeImageDomainQualityMetric\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AcomputeImageDomainQualityMetric\u0028\u0029",
             "name": "computeImageDomainQualityMetric",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeImageDomainQualityMetric"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_computeImageDomainQualityMetric"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeDCT64To16\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AcomputeDCT64To16\u0028\u0029",
             "name": "computeDCT64To16",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeDCT64To16"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_computeDCT64To16"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003Adct16OriginalToRotate90\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003Adct16OriginalToRotate90\u0028\u0029",
             "name": "dct16OriginalToRotate90",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_dct16OriginalToRotate90"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_dct16OriginalToRotate90"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003Adct16OriginalToRotate180\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003Adct16OriginalToRotate180\u0028\u0029",
             "name": "dct16OriginalToRotate180",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_dct16OriginalToRotate180"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_dct16OriginalToRotate180"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003Adct16OriginalToRotate270\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003Adct16OriginalToRotate270\u0028\u0029",
             "name": "dct16OriginalToRotate270",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_dct16OriginalToRotate270"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_dct16OriginalToRotate270"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003Adct16OriginalToFlipX\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003Adct16OriginalToFlipX\u0028\u0029",
             "name": "dct16OriginalToFlipX",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_dct16OriginalToFlipX"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_dct16OriginalToFlipX"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003Adct16OriginalToFlipY\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003Adct16OriginalToFlipY\u0028\u0029",
             "name": "dct16OriginalToFlipY",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_dct16OriginalToFlipY"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_dct16OriginalToFlipY"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003Adct16OriginalToFlipPlus1\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003Adct16OriginalToFlipPlus1\u0028\u0029",
             "name": "dct16OriginalToFlipPlus1",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_dct16OriginalToFlipPlus1"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_dct16OriginalToFlipPlus1"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003Adct16OriginalToFlipMinus1\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003Adct16OriginalToFlipMinus1\u0028\u0029",
             "name": "dct16OriginalToFlipMinus1",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_dct16OriginalToFlipMinus1"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_dct16OriginalToFlipMinus1"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeHashFromDCTOutput\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AcomputeHashFromDCTOutput\u0028\u0029",
             "name": "computeHashFromDCTOutput",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeHashFromDCTOutput"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_computeHashFromDCTOutput"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AreadImageFromFilename\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AreadImageFromFilename\u0028\u0029",
             "name": "readImageFromFilename",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_readImageFromFilename"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_readImageFromFilename"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeDCTAndQualityFromImage\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AcomputeDCTAndQualityFromImage\u0028\u0029",
             "name": "computeDCTAndQualityFromImage",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeDCTAndQualityFromImage"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_computeDCTAndQualityFromImage"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeHashAndQualityFromImage\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AcomputeHashAndQualityFromImage\u0028\u0029",
             "name": "computeHashAndQualityFromImage",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeHashAndQualityFromImage"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_computeHashAndQualityFromImage"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeHashesAndQualityFromImage\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AcomputeHashesAndQualityFromImage\u0028\u0029",
             "name": "computeHashesAndQualityFromImage",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeHashesAndQualityFromImage"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_computeHashesAndQualityFromImage"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeHashAndQualityFromFilename\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AcomputeHashAndQualityFromFilename\u0028\u0029",
             "name": "computeHashAndQualityFromFilename",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeHashAndQualityFromFilename"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_computeHashAndQualityFromFilename"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeHashesAndQualityFromFilename\u0028\u0029",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003AcomputeHashesAndQualityFromFilename\u0028\u0029",
             "name": "computeHashesAndQualityFromFilename",
             "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeHashesAndQualityFromFilename"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#method_computeHashesAndQualityFromFilename"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeStringHashAndQualityFromFilenameUsingExtension\u0028\u0029",
-            "name": "computeStringHashAndQualityFromFilenameUsingExtension",
-            "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeStringHashAndQualityFromFilenameUsingExtension"
-        },                {
-            "fqsen": "\\PDQHasher\u003A\u003AcomputeStringHashesAndQualityFromFilenameUsingExtension\u0028\u0029",
-            "name": "computeStringHashesAndQualityFromFilenameUsingExtension",
-            "summary": "",
-            "url": "../classes/PDQHasher.html#method_computeStringHashesAndQualityFromFilenameUsingExtension"
-        },                {
-            "fqsen": "\\PDQHasher\u003A\u003ALUMA_FROM_R_COEFF",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ALUMA_FROM_R_COEFF",
             "name": "LUMA_FROM_R_COEFF",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_LUMA_FROM_R_COEFF"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_LUMA_FROM_R_COEFF"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ALUMA_FROM_G_COEFF",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ALUMA_FROM_G_COEFF",
             "name": "LUMA_FROM_G_COEFF",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_LUMA_FROM_G_COEFF"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_LUMA_FROM_G_COEFF"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ALUMA_FROM_B_COEFF",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ALUMA_FROM_B_COEFF",
             "name": "LUMA_FROM_B_COEFF",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_LUMA_FROM_B_COEFF"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_LUMA_FROM_B_COEFF"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003APDQ_JAROSZ_WINDOW_SIZE_DIVISOR",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003APDQ_JAROSZ_WINDOW_SIZE_DIVISOR",
             "name": "PDQ_JAROSZ_WINDOW_SIZE_DIVISOR",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_PDQ_JAROSZ_WINDOW_SIZE_DIVISOR"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_PDQ_JAROSZ_WINDOW_SIZE_DIVISOR"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003APDQ_NUM_JAROSZ_XY_PASSES",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003APDQ_NUM_JAROSZ_XY_PASSES",
             "name": "PDQ_NUM_JAROSZ_XY_PASSES",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_PDQ_NUM_JAROSZ_XY_PASSES"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_PDQ_NUM_JAROSZ_XY_PASSES"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ADIH_ORIGINAL",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ADIH_ORIGINAL",
             "name": "DIH_ORIGINAL",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_DIH_ORIGINAL"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_ORIGINAL"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ADIH_ROTATE_90",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ADIH_ROTATE_90",
             "name": "DIH_ROTATE_90",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_DIH_ROTATE_90"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_ROTATE_90"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ADIH_ROTATE_180",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ADIH_ROTATE_180",
             "name": "DIH_ROTATE_180",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_DIH_ROTATE_180"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_ROTATE_180"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ADIH_ROTATE_270",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ADIH_ROTATE_270",
             "name": "DIH_ROTATE_270",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_DIH_ROTATE_270"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_ROTATE_270"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ADIH_FLIP_X",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ADIH_FLIP_X",
             "name": "DIH_FLIP_X",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_DIH_FLIP_X"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_FLIP_X"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ADIH_FLIP_Y",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ADIH_FLIP_Y",
             "name": "DIH_FLIP_Y",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_DIH_FLIP_Y"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_FLIP_Y"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ADIH_FLIP_PLUS_1",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ADIH_FLIP_PLUS_1",
             "name": "DIH_FLIP_PLUS_1",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_DIH_FLIP_PLUS_1"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_FLIP_PLUS_1"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ADIH_FLIP_MINUS_1",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ADIH_FLIP_MINUS_1",
             "name": "DIH_FLIP_MINUS_1",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_DIH_FLIP_MINUS_1"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_FLIP_MINUS_1"
         },                {
-            "fqsen": "\\PDQHasher\u003A\u003ADIH_ALL",
+            "fqsen": "\\InstagramAPI\\Media\\PDQ\\PDQHasher\u003A\u003ADIH_ALL",
             "name": "DIH_ALL",
             "summary": "",
-            "url": "../classes/PDQHasher.html#constant_DIH_ALL"
+            "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_ALL"
         },                {
             "fqsen": "\\",
             "name": "\\",
@@ -16665,6 +16655,11 @@ Search.appendIndex(
             "name": "Geometry",
             "summary": "",
             "url": "../namespaces/instagramapi-media-geometry.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\PDQ",
+            "name": "PDQ",
+            "summary": "",
+            "url": "../namespaces/instagramapi-media-pdq.html"
         },                {
             "fqsen": "\\InstagramAPI\\Media\\Photo",
             "name": "Photo",

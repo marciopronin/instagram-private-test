@@ -2444,11 +2444,12 @@ class Event extends RequestCollection
                 'topic_nav_order',
             ];
         } elseif ($fromModule === 'direct_inbox' && $toModule === 'direct_thread') {
-            /*
-            $requiredOptions = [
-                'user_id',
-            ];
-            */
+            $requiredOptions = [];
+        /*
+        $requiredOptions = [
+            'user_id',
+        ];
+        */
         } elseif ($fromModule === 'feed_hashtag' && $toModule === 'feed_contextual_hashtag') {
             $requiredOptions = [
                 'hashtag_id',

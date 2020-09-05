@@ -1,3 +1,15 @@
+# Stable release v14.9.1
+## Date: 05/09/2020
+
+### Updates and fixes
+
+- **Utils:** Update `extractURLs()`.
+- **Events:** Fix `_validateNavigationOptions()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.9.0
 ## Date: 02/09/2020
 

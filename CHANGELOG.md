@@ -1,3 +1,11 @@
+# Stable release v14.9.2
+## Date: 06/09/2020
+
+### Updates and fixes
+
+- **Examples:** Add `unfollowFromSearch`.
+- **Examples:** Add `checkIfUserFollowsOtherUser`
+
 # Stable release v14.9.1
 ## Date: 05/09/2020
 

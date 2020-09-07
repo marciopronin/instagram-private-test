@@ -132,6 +132,14 @@ class Constants
         'INVALID'                           => 19,
     ];
 
+    // PDQ TIME FRAMES FOR VIDEO UPLOADS.
+    const PDQ_VIDEO_TIME_FRAMES = [
+        0,
+        1.0,
+        2.0,
+        3.0,
+    ];
+
     // General Constants.
     const SRC_DIR = __DIR__; // Absolute path to the "src" folder.
 }

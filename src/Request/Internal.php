@@ -16,6 +16,7 @@ use InstagramAPI\Exception\SettingsException;
 use InstagramAPI\Exception\ThrottledException;
 use InstagramAPI\Exception\UploadFailedException;
 use InstagramAPI\Media\MediaDetails;
+use InstagramAPI\Media\PDQ\PDQHasher as PDQHasher;
 use InstagramAPI\Media\Video\FFmpeg;
 use InstagramAPI\Media\Video\InstagramThumbnail;
 use InstagramAPI\Media\Video\VideoDetails;
@@ -532,7 +533,7 @@ class Internal extends RequestCollection
         $internalMetadata = $this->uploadVideo($targetFeed, $videoFilename, $internalMetadata);
 
         // Attempt to upload the thumbnail, associated with our video's ID.
-        $this->uploadVideoThumbnail($targetFeed, $internalMetadata, $externalMetadata);
+        $pdqHashes = $this->uploadVideoThumbnail($targetFeed, $internalMetadata, $externalMetadata);
 
         // Configure the uploaded video and attach it to our timeline/story.
         try {
@@ -543,6 +544,7 @@ class Internal extends RequestCollection
                     return $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
                 }
             );
+            $this->updateMediaWithPdqHashes($internalMetadata->getUploadId(), $pdqHashes);
         } catch (InstagramException $e) {
             // Pass Instagram's error as is.
             throw $e;
@@ -568,6 +570,8 @@ class Internal extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\UploadFailedException
+     *
+     * @return string[]        PDQ Hashes.
      */
     public function uploadVideoThumbnail(
         $targetFeed,
@@ -592,9 +596,20 @@ class Internal extends RequestCollection
                     $options
                 );
             }
+
+            $pdqHashes = [];
+            foreach (Constants::PDQ_VIDEO_TIME_FRAMES as $timeFrame) {
+                $options['thumbnailTimestamp'] = $timeFrame;
+                $frame = new InstagramThumbnail($internalMetadata->getVideoDetails()->getFilename(), $options);
+                list($hash, $quality) = PDQHasher::computeHashAndQualityFromFilename($frame->getFile(), false, false);
+                $pdqHashes[] = $hash->toHexString();
+            }
+
             // Validate and upload the thumbnail.
             $internalMetadata->setPhotoDetails($targetFeed, $videoThumbnail->getFile());
             $this->uploadPhotoData($targetFeed, $internalMetadata);
+
+            return $pdqHashes;
         } catch (InstagramException $e) {
             // Pass Instagram's error as is.
             throw $e;
@@ -1958,6 +1973,38 @@ class Internal extends RequestCollection
 
         // We are never supposed to get here!
         throw new \LogicException('Something went wrong during configuration.');
+    }
+
+    /**
+     * Update media with PDQ hash info.
+     *
+     * @param string   $uploadId  Media Upload ID.
+     * @param string[] $pdqHashes Array of PDQ Hashes.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function updateMediaWithPdqHashes(
+        $uploadId,
+        $pdqHashes)
+    {
+        $request = $this->ig->request('media/update_media_with_pdq_hash_info/')
+             ->addPost('upload_id', $uploadId)
+             ->addPost('_csrftoken', $this->ig->client->getToken())
+             ->addPost('_uid', $this->ig->account_id)
+             ->addPost('_uuid', $this->ig->uuid);
+
+        $pdqHashInfo = [];
+        foreach ($pdqHashes as $idx => $pdqHash) {
+            $pdqHashInfo[] = [
+                'pdq_hash'      => sprintf('%s:1', $pdqHash),
+                'frame_time'    => round(Constants::PDQ_VIDEO_TIME_FRAMES[$idx] * 1000),
+            ];
+        }
+        $request->addPost('pdq_hash_info', json_encode($pdqHashInfo));
+
+        return $request->getResponse(new Response\GenericResponse());
     }
 
     /**

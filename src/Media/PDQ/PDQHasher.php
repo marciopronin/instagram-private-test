@@ -589,6 +589,7 @@ class PDQHasher
         $filename,
         $downsample_first)
     {
+        /*
         $is_jpeg = false;
         if (substr_compare($filename, '.jpg', -strlen('.jpg')) === 0) {
             $orig_image = imagecreatefromjpeg($filename);
@@ -601,6 +602,9 @@ class PDQHasher
         } else {
             throw new Exception('PDQHasher: could not handle filetype of '.$filename);
         }
+        */
+        $orig_image = imagecreatefromjpeg($filename);
+        $is_jpeg = true;
 
         // The pure-PHP hasher is *really* slow in pure PHP for megapixel images.
         // So, downsample first. Don't worry about aspect ratio since PDQ will

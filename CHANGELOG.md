@@ -1,7 +1,25 @@
+# Stable release v14.10.0
+## Date: 07/09/2020
+
+### New features
+
+- **Constants:** Add `PDQ_VIDEO_TIME_FRAMES`
+- **Internal:** Add `updateMediaWithPdqHashes()`
+
+### Updates and fixes
+
+- **Internal:** Update `uploadSingleVideo()`
+- **Internal:** Update `uploadVideoThumbnail()`
+- **Media:** Update `PDQHasher`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.9.2
 ## Date: 06/09/2020
 
-### Updates and fixes
+### Examples
 
 - **Examples:** Add `unfollowFromSearch`.
 - **Examples:** Add `checkIfUserFollowsOtherUser`

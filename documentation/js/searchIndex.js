@@ -616,6 +616,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Constants.html#constant_SHARE_TYPE"
         },                {
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003APDQ_VIDEO_TIME_FRAMES",
+            "name": "PDQ_VIDEO_TIME_FRAMES",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Constants.html#constant_PDQ_VIDEO_TIME_FRAMES"
+        },                {
             "fqsen": "\\InstagramAPI\\Constants\u003A\u003ASRC_DIR",
             "name": "SRC_DIR",
             "summary": "",
@@ -8020,6 +8025,11 @@ Search.appendIndex(
             "name": "configureWithRetries",
             "summary": "Configure\u0020media\u0020entity\u0020\u0028album,\u0020video,\u0020...\u0029\u0020with\u0020retries.",
             "url": "../classes/InstagramAPI-Request-Internal.html#method_configureWithRetries"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AupdateMediaWithPdqHashes\u0028\u0029",
+            "name": "updateMediaWithPdqHashes",
+            "summary": "Send\u0020consent\u0020policy\u0020to\u0020Instagram.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_updateMediaWithPdqHashes"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003A_uploadResumableMedia\u0028\u0029",
             "name": "_uploadResumableMedia",

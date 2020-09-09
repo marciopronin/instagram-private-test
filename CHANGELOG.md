@@ -1,3 +1,8 @@
+# Stable release v14.10.2
+## Date: 09/09/2020
+
+- **Event:** Update event body
+
 # Stable release v14.10.1
 ## Date: 09/09/2020
 

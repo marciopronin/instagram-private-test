@@ -30,12 +30,11 @@ class Event extends RequestCollection
             'device_id'         => $this->ig->uuid,
             'family_device_id'  => $this->ig->phone_id,
             'session_id'        => $this->ig->client->getPigeonSession(),
-            'uid'               => 0,
             'channel'           => 'regular',
             'log_type'          => 'client_event',
             'app_uid'           => $this->ig->account_id,
             'config_version'    => 'v2',
-            'config_checksum'   => empty($this->ig->settings->get('checksum')) ? '' : $this->ig->settings->get('checksum'),
+            'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
             'data'              => $batch,
         ];
 
@@ -211,7 +210,7 @@ class Event extends RequestCollection
                     );
         } else {
             $message = [
-                'request_info'  => '',
+                'request_info'  => '{}',
                 'batches'       => [
                     $eventBatch,
                 ],

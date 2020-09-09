@@ -8028,7 +8028,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AupdateMediaWithPdqHashes\u0028\u0029",
             "name": "updateMediaWithPdqHashes",
-            "summary": "Send\u0020consent\u0020policy\u0020to\u0020Instagram.",
+            "summary": "Update\u0020media\u0020with\u0020PDQ\u0020hash\u0020info.",
             "url": "../classes/InstagramAPI-Request-Internal.html#method_updateMediaWithPdqHashes"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003A_uploadResumableMedia\u0028\u0029",

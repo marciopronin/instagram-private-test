@@ -1,3 +1,11 @@
+# Stable release v14.10.1
+## Date: 09/09/2020
+
+### Examples:
+
+- **Examples:** Update UnfollowFromSearch
+- **Examples:** Add muteFromSearchUser
+
 # Stable release v14.10.0
 ## Date: 07/09/2020
 

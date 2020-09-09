@@ -13,7 +13,7 @@ $truncatedDebug = false;
 //////////////////////
 
 //////////////////////
-$usernameToFollow = 'selenagomez';
+$usernameToMute = 'selenagomez';
 //////////////////////
 
 $ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
@@ -78,7 +78,8 @@ try {
     $ig->discover->registerRecentSearchClick('user', $userId);
     $friendship = $ig->people->getFriendship($userId);
     $followStatus = $friendship->getFriendshipStatus()->getFollowing();
-    $suggestions = $ig->people->getInfoById($userId, 'search_users')->getUser()->getChainingSuggestions();
+    $userInfo = $ig->people->getInfoById($userId, 'search_users')->getUser();
+    $suggestions = $userInfo->getChainingSuggestions();
 
     if ($suggestions !== null) {
         for ($i = 0; $i < 4; $i++) {
@@ -110,59 +111,42 @@ try {
     $ig->internal->getQPFetch();
     sleep(mt_rand(1, 2));
     $ig->event->sendProfileView($userId);
-    $ig->event->sendFollowButtonTapped($userId, 'profile',
-        [
-            [
-                'module'        => 'blended_search',
-                'click_point'   => 'search_result',
-            ],
-            [
-                'module'        => 'blended_search',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'explore_popular',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'explore_popular',
-                'click_point'   => 'explore_topic_load',
-            ],
-            [
-                'module'        => 'feed_timeline',
-                'click_point'   => 'main_search',
-            ],
-        ],
-    null, true);
 
-    if ($followStatus !== false) {
-        $ig->people->unfollow($userId);
-        $ig->event->sendProfileAction('unfollow', $userId,
-            [
-                [
-                    'module'        => 'blended_search',
-                    'click_point'   => 'search_result',
-                ],
-                [
-                    'module'        => 'blended_search',
-                    'click_point'   => 'button',
-                ],
-                [
-                    'module'        => 'explore_popular',
-                    'click_point'   => 'button',
-                ],
-                [
-                    'module'        => 'explore_popular',
-                    'click_point'   => 'explore_topic_load',
-                ],
-                [
-                    'module'        => 'feed_timeline',
-                    'click_point'   => 'main_search',
-                ],
-            ]
-        );
-        $ig->event->forceSendBatch();
-    }
+    $ig->event->sendProfileAction('tap_follow_sheet', $userId,
+    [
+        [
+            'module'        => 'blended_search',
+            'click_point'   => 'search_result',
+        ],
+        [
+            'module'        => 'blended_search',
+            'click_point'   => 'button',
+        ],
+        [
+            'module'        => 'explore_popular',
+            'click_point'   => 'button',
+        ],
+        [
+            'module'        => 'explore_popular',
+            'click_point'   => 'explore_topic_load',
+        ],
+        [
+            'module'        => 'feed_timeline',
+            'click_point'   => 'main_search',
+        ],
+    ]);
+    $ig->event->sendNavigation('button', 'profile', 'media_mute_sheet');
+
+    $ig->people->muteUserMedia($userId, 'post');
+    $ig->event->sendMuteMedia('post', true, false, $userId, $userInfo->getIsPrivate());
+    $ig->people->muteUserMedia($userId, 'story');
+    $ig->event->sendMuteMedia('ig_mute_stories', true, false, $userId, $userInfo->getIsPrivate());
+
+    $ig->event->sendNavigation('button', 'media_mute_sheet', 'profile');
+
+    // forceSendBatch() should be only used if you are "closing" the app so all the events that
+    // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
+    $ig->event->forceSendBatch();
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

@@ -805,11 +805,19 @@ class Client
         array $guzzleOptions = [],
         $disableCookies = false)
     {
+        $curlOptions = [
+            CURLOPT_HTTP_VERSION    => CURL_HTTP_VERSION_2_0,
+        ];
+
+        if ($this->_resolveHost !== null) {
+            $curlOptions[CURLOPT_RESOLVE] = [$this->_resolveHost];
+        }
+
         $criticalOptions = [
             'cookies' => (($this->_cookieJar instanceof CookieJar && !$disableCookies) ? $this->_cookieJar : false),
             'verify'  => $this->_verifySSL,
             'proxy'   => ($this->_proxy !== null ? $this->_proxy : null),
-            'curl'    => ($this->_resolveHost !== null ? [CURLOPT_RESOLVE => [$this->_resolveHost]] : null),
+            'curl'    => $curlOptions,
         ];
 
         // Critical options always overwrite identical keys in regular opts.

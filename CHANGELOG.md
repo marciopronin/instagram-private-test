@@ -1,5 +1,18 @@
+# Stable release v14.10.3
+## Date: 10/09/2020
+
+### Updates and fixes
+
+- **Client:** Update `_buildGuzzleOptions()`. Now API uses HTTP2.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.10.2
 ## Date: 09/09/2020
+
+### Updates and fixes
 
 - **Event:** Update event body
 

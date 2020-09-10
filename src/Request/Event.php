@@ -1310,6 +1310,7 @@ class Event extends RequestCollection
             case 'tap_follow_sheet':
                 $clickpoint = 'button_tray';
                 $module = 'profile';
+                $followStatus = 'following';
                 if (isset($options['media_id_attribution']) && isset($options['media_tracking_token_attribution'])) {
                     $extra['media_id_attribution'] = $options['media_id_attribution'];
                     $extra['media_tracking_token_attribution'] = $options['media_tracking_token_attribution'];
@@ -3238,6 +3239,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'   => 'back',
                     'dest_module'  => 'comments_v2',
+                ],
+                [
+                    'clickpoint'   => 'button',
+                    'dest_module'  => 'media_mute_sheet',
                 ],
             ],
             'reel_profile' => [

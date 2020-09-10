@@ -1,3 +1,10 @@
+# Stable release v14.10.4
+## Date: 10/09/2020
+
+### Updates and fixes
+
+- **Event:** Update `sendProfileAction()` and `_validateNavigationPath()`
+
 # Stable release v14.10.3
 ## Date: 10/09/2020
 

@@ -1,3 +1,15 @@
+# Stable release v14.10.5
+## Date: 14/09/2020
+
+### Updates and fixes
+
+- **Client:** Update `_buildGuzzleOptions()`
+- **Internal:** Update `configureSingleVideo()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.10.4
 ## Date: 10/09/2020
 

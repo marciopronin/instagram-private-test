@@ -822,7 +822,7 @@ class Client
 
         // Critical options always overwrite identical keys in regular opts.
         // This ensures that we can't screw up the proxy/verify/cookies.
-        $finalOptions = array_merge($guzzleOptions, $criticalOptions);
+        $finalOptions = array_merge_recursive($guzzleOptions, $criticalOptions);
 
         // Now merge any specific Guzzle cURL-backend overrides. We must do this
         // separately since it's in an associative array and we can't just

@@ -748,6 +748,10 @@ class Internal extends RequestCollection
         $seriesId = (isset($externalMetadata['series_id']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['series_id'] : null;
         /** @var array IGTV composer session ID. ONLY TV MEDIA! */
         $sessionId = (isset($externalMetadata['igtv_session_id']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_session_id'] : null;
+        /** @var array IGTV Ads. ONLY TV MEDIA! */
+        $igtvAds = (isset($externalMetadata['igtv_ads_toggled_on']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_ads_toggled_on'] : null;
+        /** @var array IGTV share preview to feed. ONLY TV MEDIA! */
+        $igtvShareToFeed = (isset($externalMetadata['igtv_share_preview_to_feed']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_share_preview_to_feed'] : null;
 
         // Fix very bad external user-metadata values.
         if (!is_string($captionText)) {
@@ -908,15 +912,23 @@ class Internal extends RequestCollection
                 if ($title === null) {
                     throw new \InvalidArgumentException('You must provide a title for the media.');
                 }
+                if ($sessionId === null) {
+                    throw new \InvalidArgumentException('You must provide a session ID for the media.');
+                }
+
                 if ($seriesId !== null) {
                     $request->addPost('igtv_series_id', $seriesId);
                 }
-                if ($sessionId !== null) {
-                    $request->addPost('igtv_composer_session_id', $sessionId);
+
+                if ($igtvShareToFeed !== null) {
+                    $request->addPost('igtv_share_preview_to_feed', '1');
                 }
+
                 $request
                     ->addPost('title', $title)
-                    ->addPost('caption', $captionText);
+                    ->addPost('caption', $captionText)
+                    ->addPost('igtv_composer_session_id', $sessionId)
+                    ->addPost('igtv_ads_toggled_on', boolval($igtvAds));
                     //->addPost('configure_mode', Constants::SHARE_TYPE['IGTV']); // 8 - IGTV
                 break;
         }

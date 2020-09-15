@@ -52,6 +52,29 @@ $metadata = [
     ],
 ];
 
+$ig->event->sendNavigation('your_story_dialog_option', 'feed_timeline', 'quick_capture_fragment');
+
+$sessionId = \InstagramAPI\Signatures::generateUUID();
+$ig->event->sendIGStartCameraSession($sessionId);
+
+$loggerId = \InstagramAPI\Signatures::generateUUID();
+$productSessionId = \InstagramAPI\Signatures::generateUUID();
+$eventTime = mt_rand(200, 300) * 1000;
+$ig->event->sendCameraWaterfall('instagram_stories', 'add_outputs', $loggerId, $productSessionId, 'instagram_stories', $eventTime);
+
+$ig->event->sendCameraWaterfall('instagram_stories', 'set_input', $loggerId, $productSessionId, 'instagram_stories', $eventTime + 1);
+
+$waterfallId = \InstagramAPI\Signatures::generateUUID();
+$startTime = round(microtime(true) * 1000);
+$ig->event->sendNametagSessionStart('ig_nametag_session_start', $waterfallId, $startTime, $startTime, 'story_camera');
+
+$cameraShareId = \InstagramAPI\Signatures::generateUUID();
+$ig->event->sendIgCameraShareMedia($cameraShareId, 1);
+
+$ig->event->sendNavigation('button', 'reel_composer_preview', 'reel_composer_camera');
+
+$ig->event->sendNametagSessionStart('ig_nametag_session_end', $waterfallId, null, null, null);
+
 try {
     // This example will upload the image via our automatic photo processing
     // class. It will ensure that the story file matches the ~9:16 (portrait)
@@ -62,6 +85,11 @@ try {
     // Also note that it has lots of options, so read its class documentation!
     $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename, ['targetFeed' => \InstagramAPI\Constants::FEED_STORY]);
     $ig->story->uploadPhoto($photo->getFile(), $metadata);
+
+    $ig->event->sendIgCameraEndPostCaptureSession($sessionId);
+    $ig->event->sendIgCameraEndSession($sessionId);
+
+    $ig->event->sendNavigation('story_posted_from_camera', 'quick_capture_fragment', 'feed_timeline');
 
     // NOTE: Providing metadata for story uploads is OPTIONAL. If you just want
     // to upload it without any tags/location/caption, simply do the following:

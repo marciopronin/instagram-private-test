@@ -1,3 +1,28 @@
+# Stable release v14.11.0
+## Date: 15/09/2020
+
+### New features
+
+- **Event:** Add `sendIGStartCameraSession()`
+- **Event:** Add `sendCameraWaterfall()`
+- **Event:** Add `sendNametagSessionStart()`
+- **Event:** Add `sendIgCameraShareMedia()`
+- **Event:** Add `sendIgCameraEndPostCaptureSession()`
+- **Event:** Add `sendIgCameraEndSession()`
+
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+
+### Examples
+
+- **Examples:** Update `uploadStorySlider`.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.10.5
 ## Date: 14/09/2020
 

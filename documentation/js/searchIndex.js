@@ -7631,6 +7631,36 @@ Search.appendIndex(
             "summary": "Start\u0020upload\u0020attempt.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendConfigureMedia"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendIGStartCameraSession\u0028\u0029",
+            "name": "sendIGStartCameraSession",
+            "summary": "Start\u0020camera\u0020session.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendIGStartCameraSession"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendCameraWaterfall\u0028\u0029",
+            "name": "sendCameraWaterfall",
+            "summary": "Camera\u0020waterfall.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendCameraWaterfall"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendNametagSessionStart\u0028\u0029",
+            "name": "sendNametagSessionStart",
+            "summary": "Nametag\u0020session\u0020start.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendNametagSessionStart"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendIgCameraShareMedia\u0028\u0029",
+            "name": "sendIgCameraShareMedia",
+            "summary": "Send\u0020IG\u0020camera\u0020share\u0020media.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendIgCameraShareMedia"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendIgCameraEndPostCaptureSession\u0028\u0029",
+            "name": "sendIgCameraEndPostCaptureSession",
+            "summary": "Send\u0020IG\u0020camera\u0020end\u0020post\u0020capture\u0020session.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendIgCameraEndPostCaptureSession"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendIgCameraEndSession\u0028\u0029",
+            "name": "sendIgCameraEndSession",
+            "summary": "Send\u0020IG\u0020camera\u0020end\u0020session.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendIgCameraEndSession"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003ApushNotificationSettings\u0028\u0029",
             "name": "pushNotificationSettings",
             "summary": "Prepares\u0020Push\u0020Notification\u0020Settings.\u0020Managed\u0020automaticallyby\u0020the\u0020API.\u0020Set\u0020during\u0020cold\u0020start\u0020login\u0020\u0028before\u0029.",

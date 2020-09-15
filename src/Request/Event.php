@@ -2602,6 +2602,10 @@ class Event extends RequestCollection
                     'clickpoint'    => 'button',
                     'dest_module'   => 'BottomSheetConstants.FRAGMENT_TAG',
                 ],
+                [
+                    'clickpoint'    => 'your_story_dialog_option',
+                    'dest_module'   => 'quick_capture_fragment',
+                ],
             ],
             'reel_feed_timeline_item_header'    => [
                 [
@@ -3439,6 +3443,18 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'self_unified_follow_lists',
+                ],
+            ],
+            'reel_composer_preview' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'reel_composer_camera',
+                ],
+            ],
+            'quick_capture_fragment' => [
+                [
+                    'clickpoint'    => 'story_posted_from_camera',
+                    'dest_module'   => 'feed_timeline',
                 ],
             ],
         ];
@@ -4724,6 +4740,189 @@ class Event extends RequestCollection
         ];
 
         $event = $this->_addEventBody($name, null, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Start camera session.
+     *
+     * @param string $sessionId Session UUID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendIGStartCameraSession(
+        $sessionId)
+    {
+        $extra = [
+            'session_id'               => $sessionId,
+            'entry_point'              => 12,
+            'ig_userid'                => $this->ig->account_id,
+            'event_type'               => 1,
+            'capture_type'             => 1,
+            'capture_format_index'     => 0,
+            'ar_core_version'          => -1,
+        ];
+
+        $event = $this->_addEventBody('ig_camera_start_camera_session', 'ig_camera_client_events', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Camera waterfall.
+     *
+     * @param string $product          Product name.
+     * @param string $event            Event.
+     * @param string $loggerId         Logger ID.
+     * @param string $productSessionId Product session ID.
+     * @param string $module           Module.
+     * @param mixed  $time             Event time.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendCameraWaterfall(
+        $product,
+        $event,
+        $loggerId,
+        $productSessionId,
+        $module,
+        $time)
+    {
+        $extra = [
+            'event'                                => $event,
+            'product_name'                         => $product,
+            'logger_session_id'                    => $loggerId,
+            'product_session_id'                   => $productSessionId,
+            'camera_core_controller'               => 'NotUsed',
+            'extras'                               => json_encode([
+                'event_time'            => strval($time),
+                'maybe_bg_app_state'    => strval(0),
+            ]),
+            'current_outputs'     => [
+                'SurfaceOutput',
+            ],
+            'texture_memory_bytes'          => 0,
+        ];
+
+        if ($event === 'set_input') {
+            $event['current_input'] = 'IgCameraVideoInputV1';
+            $event['current_input_size'] = '0x0';
+        }
+
+        $event = $this->_addEventBody('camera_waterfall', $module, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Nametag session start.
+     *
+     * @param string $name        Name.
+     * @param string $waterfallId Waterfall ID.
+     * @param string $startTime   Start time.
+     * @param string $currentTime Current tine.
+     * @param string $origin      Origin.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendNametagSessionStart(
+        $name,
+        $waterfallId,
+        $startTime,
+        $currentTime,
+        $origin)
+    {
+        $extra = [
+            'waterfall_id'                                => $waterfallId,
+            'start_time'                                  => $startTime,
+            'current_time'                                => $currentTime,
+            'elapsed_time'                                => $currentTime - $startTime,
+        ];
+
+        if ($name === 'ig_nametag_session_start') {
+            $extra['origin'] = $origin;
+            $extra['has_camera_permission'] = true;
+            $extra['has_storage_permission'] = true;
+        }
+
+        $event = $this->_addEventBody($name, 'waterfall_instagram_nametag', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send IG camera share media.
+     *
+     * @param string $sessionId Session ID.
+     * @param int    $mediaType Media type. 1 for photo, 2 for video.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendIgCameraShareMedia(
+        $sessionId,
+        $mediaType)
+    {
+        $extra = [
+            'session_id'                                   => $sessionId,
+            'entry_point'                                  => 12,
+            'ig_userid'                                    => $this->ig->account_id,
+            'event_type'                                   => 2,
+            'capture_type'                                 => 1,
+            'capture_format_index'                         => 0,
+            'media_source'                                 => 1,
+            'media_type'                                   => $mediaType,
+            'camera_position'                              => 1,
+            'share_destination'                            => 1,
+            'thread_id'                                    => null,
+            'posting_surface'                              => 1,
+            'extra_data'                                   => [],
+        ];
+
+        $event = $this->_addEventBody('ig_camera_share_media', 'ig_camera_client_events', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send IG camera end post capture session.
+     *
+     * @param string $sessionId Session ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendIgCameraEndPostCaptureSession(
+        $sessionId)
+    {
+        $extra = [
+            'session_id'                                   => $sessionId,
+            'entry_point'                                  => 12,
+            'ig_userid'                                    => $this->ig->account_id,
+            'event_type'                                   => 2,
+            'capture_type'                                 => 1,
+            'capture_format_index'                         => 0,
+        ];
+
+        $event = $this->_addEventBody('ig_camera_end_post_capture_session', 'ig_camera_client_events', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send IG camera end session.
+     *
+     * @param string $sessionId Session ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendIgCameraEndSession(
+        $sessionId)
+    {
+        $extra = [
+            'session_id'                                   => $sessionId,
+            'entry_point'                                  => 12,
+            'ig_userid'                                    => $this->ig->account_id,
+            'event_type'                                   => 2,
+            'capture_type'                                 => 1,
+            'capture_format_index'                         => 0,
+            'exit_point'                                   => 2,
+        ];
+
+        $event = $this->_addEventBody('ig_camera_end_camera_session', 'ig_camera_client_events', $extra);
         $this->_addEventData($event);
     }
 

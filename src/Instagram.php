@@ -2053,7 +2053,10 @@ class Instagram implements ExperimentsInterface
                 $this->client->stopEmulatingBatch();
             }
 
-            $this->internal->getFacebookOTA();
+            try {
+                $this->internal->getFacebookOTA();
+            } catch (Exception $e) {
+            }
         } else {
             $lastLoginTime = $this->settings->get('last_login');
             $isSessionExpired = $lastLoginTime === null || (time() - $lastLoginTime) > $appRefreshInterval;

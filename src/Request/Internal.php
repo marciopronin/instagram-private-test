@@ -1477,7 +1477,6 @@ class Internal extends RequestCollection
             ->addParam('fields', Constants::FACEBOOK_OTA_FIELDS)
             ->addParam('custom_user_id', $this->ig->account_id)
             ->addParam('signed_body', Signatures::generateSignature('').'.')
-            ->addParam('ig_sig_key_version', Constants::SIG_KEY_VERSION)
             ->addParam('version_code', Constants::VERSION_CODE)
             ->addParam('version_name', Constants::IG_VERSION)
             ->addParam('custom_app_id', Constants::FACEBOOK_ORCA_APPLICATION_ID)

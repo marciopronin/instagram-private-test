@@ -1,3 +1,15 @@
+# Stable release v14.11.1
+## Date: 18/09/2020
+
+### Updates and fixes
+
+- **Constant:** Update android version to 159.0.0.40.122
+- **Internal:** Update `getFacebookOTA()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.11.0
 ## Date: 15/09/2020
 

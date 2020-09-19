@@ -1,3 +1,18 @@
+# Stable release v14.12.0
+## Date: 19/09/2020
+
+### New features
+
+- **Instagram:** Added getter and setter dark mode
+
+### Updates and fixes
+
+- **Highlight:** Update `getUserFeed()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.11.1
 ## Date: 18/09/2020
 

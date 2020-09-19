@@ -381,6 +381,13 @@ class Instagram implements ExperimentsInterface
     public $iosModel = null;
 
     /**
+     * Dark mode enabled.
+     *
+     * @var bool
+     */
+    public $darkModeEnabled = false;
+
+    /**
      * iOS DPI.
      *
      * @var string|null
@@ -1009,6 +1016,27 @@ class Instagram implements ExperimentsInterface
     public function getIosDpi()
     {
         return $this->iosDpi;
+    }
+
+    /**
+     * Get is dark mode enabled.
+     *
+     * @return bool
+     */
+    public function getIsDarkModeEnabled()
+    {
+        return $this->darkModeEnabled;
+    }
+
+    /**
+     * Set is dark mode enabled.
+     *
+     * @param bool $value.
+     */
+    public function setIsDarkModeEnabled(
+        $value)
+    {
+        $this->darkModeEnabled = $value;
     }
 
     /**
@@ -2043,7 +2071,11 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->_registerPushChannels();
-                $this->people->getSharePrefill();
+
+                try {
+                    $this->people->getSharePrefill();
+                } catch (Exception $e) {
+                }
                 $this->direct->getPresences();
                 $this->direct->getInbox(null, null, 0, null);
                 $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');

@@ -1446,6 +1446,16 @@ Search.appendIndex(
             "summary": "Get\u0020iOS\u0020DPI.",
             "url": "../classes/InstagramAPI-Instagram.html#method_getIosDpi"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetIsDarkModeEnabled\u0028\u0029",
+            "name": "getIsDarkModeEnabled",
+            "summary": "Get\u0020is\u0020dark\u0020mode\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getIsDarkModeEnabled"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetIsDarkModeEnabled\u0028\u0029",
+            "name": "setIsDarkModeEnabled",
+            "summary": "Set\u0020is\u0020dark\u0020mode\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setIsDarkModeEnabled"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003Alogin\u0028\u0029",
             "name": "login",
             "summary": "Login\u0020to\u0020Instagram\u0020or\u0020automatically\u0020resume\u0020and\u0020refresh\u0020previous\u0020session.",
@@ -1760,6 +1770,11 @@ Search.appendIndex(
             "name": "iosModel",
             "summary": "iOS\u0020Model.",
             "url": "../classes/InstagramAPI-Instagram.html#property_iosModel"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024darkModeEnabled",
+            "name": "darkModeEnabled",
+            "summary": "Dark\u0020mode\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_darkModeEnabled"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024iosDpi",
             "name": "iosDpi",

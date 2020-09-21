@@ -1,3 +1,16 @@
+# Stable release v14.12.1
+## Date: 21/09/2020
+
+### Updates and fixes
+
+- **Constants:** Update iOS to 159.0.0.28.123
+
+### Examples
+
+- **Example:** Update followFromSearch
+- **Example:** Update followFromActivity
+- **Example:** unfollowFromSearch
+
 # Stable release v14.12.0
 ## Date: 19/09/2020
 

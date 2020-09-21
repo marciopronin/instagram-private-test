@@ -50,6 +50,17 @@ try {
             'click_point'   => 'main_inbox',
         ],
     ];
+    $userFeed = $ig->timeline->getUserFeed($userId);
+    $items = $userFeed->getItems();
+
+    $c = 0;
+    foreach ($items as $item) {
+        if ($c === 5) {
+            break;
+        }
+        $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
+        $c++;
+    }
     $ig->event->sendFollowButtonTapped($userId, 'profile', $navstack);
     $ig->people->follow($userId);
     $ig->event->sendProfileAction('follow', $userId, $navstack);

@@ -11,9 +11,9 @@ class Constants
     ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
     const IG_VERSION = '159.0.0.40.122';
-    const IG_IOS_VERSION = '154.0.0.25.120';
+    const IG_IOS_VERSION = '159.0.0.28.123';
     const VERSION_CODE = '245196047';
-    const IG_IOS_VERSION_CODE = '237443006';
+    const IG_IOS_VERSION_CODE = '244425769';
     const IOS_MODEL = 'iPhone9,3';
     const IOS_VERSION = '13_6_1';
     const IOS_DPI = '750x1334';
@@ -31,7 +31,7 @@ class Constants
 
     // Endpoint Constants.
     const BLOCK_VERSIONING_ID = 'c76e70c382311c68b2201f168f946d800bbfcb7b6d9e43edbd9342d9a2048377'; // getTimelineFeed()
-    const IOS_BLOCKS_VERSIONING_ID = '5ab7ddea25e1f0e7ef7ee06b9514ccd57be81f4f921ffe9a965f54bed76e4f90';
+    const IOS_BLOCKS_VERSIONING_ID = 'e383e78962d3349e3a858fd56b958f2a6b9e274cca6b85bc079308f0d9e3154c';
     const BATCH_SURFACES = [
         ['4715', 'instagram_feed_header'],
         ['5734', 'instagram_feed_prompt'],
@@ -50,7 +50,7 @@ class Constants
     const CONTENT_TYPE = 'application/x-www-form-urlencoded; charset=UTF-8';
     const X_IG_Connection_Type = 'WIFI';
     const X_IG_Capabilities = '3brTvx8=';
-    const IOS_X_IG_Capabilities = '36r/Fwc=';
+    const IOS_X_IG_Capabilities = '36r/Fx8=';
     const X_FB_HTTP_Engine = 'Liger';
 
     // Supported Capabilities

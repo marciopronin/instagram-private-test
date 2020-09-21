@@ -100,6 +100,17 @@ try {
     $traySession = \InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
     $ig->story->getUserStoryFeed($userId);
+    $userFeed = $ig->timeline->getUserFeed($userId);
+    $items = $userFeed->getItems();
+
+    $c = 0;
+    foreach ($items as $item) {
+        if ($c === 5) {
+            break;
+        }
+        $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
+        $c++;
+    }
     $ig->event->reelTrayRefresh(
         [
             'tray_session_id'   => $traySession,

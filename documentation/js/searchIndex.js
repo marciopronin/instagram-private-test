@@ -6856,10 +6856,10 @@ Search.appendIndex(
             "summary": "Send\u0020phone\u0020via\u0020web\u0020form.",
             "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_sendWebFormPhoneNumber"
         },                {
-            "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AsendWebFormSmsCode\u0028\u0029",
-            "name": "sendWebFormSmsCode",
+            "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AsendWebFormSecurityCode\u0028\u0029",
+            "name": "sendWebFormSecurityCode",
             "summary": "Send\u0020sms\u0020code\u0020via\u0020web\u0020form.",
-            "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_sendWebFormSmsCode"
+            "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_sendWebFormSecurityCode"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AgetWebFormCheckpoint\u0028\u0029",
             "name": "getWebFormCheckpoint",
@@ -14891,6 +14891,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Response-WebCheckpointResponse.html#method_getSiteKey"
         },                {
+            "fqsen": "\\InstagramAPI\\Response\\WebCheckpointResponse\u003A\u003AgetVerificationChoice\u0028\u0029",
+            "name": "getVerificationChoice",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-WebCheckpointResponse.html#method_getVerificationChoice"
+        },                {
             "fqsen": "\\InstagramAPI\\Response\\WebCheckpointResponse\u003A\u003AJSON_PROPERTY_MAP",
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
@@ -16670,6 +16675,16 @@ Search.appendIndex(
             "name": "DIH_ALL",
             "summary": "",
             "url": "../classes/InstagramAPI-Media-PDQ-PDQHasher.html#constant_DIH_ALL"
+        },                {
+            "fqsen": "\\InstagramAPI\\Exception\\Checkpoint\\AcknowledgeFormException",
+            "name": "AcknowledgeFormException",
+            "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
+            "url": "../classes/InstagramAPI-Exception-Checkpoint-AcknowledgeFormException.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Exception\\Checkpoint\\VerifyEmailCodeFormException",
+            "name": "VerifyEmailCodeFormException",
+            "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
+            "url": "../classes/InstagramAPI-Exception-Checkpoint-VerifyEmailCodeFormException.html"
         },                {
             "fqsen": "\\",
             "name": "\\",

@@ -1,3 +1,26 @@
+# Stable release v15.0.0
+## Date: 22/09/2020
+
+### BACKWARD BREAKS ⚠️
+
+- **Checkpoint:** `sendWebFormSmsCode()` has been renamed to `sendWebFormSecurityCode()`
+
+### Updates and fixes
+
+- **Checkpoint:** Update `sendChallenge()`
+- **Exception:** Update ServerMessageThrower
+- **Exception:** Add AcknowledgeFormException
+- **Exception:** Add VerifyEmailCodeFormException
+- **Models and responses:** Update models and responses
+
+### Examples
+
+- **Example:** Update checkpoint
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v14.12.1
 ## Date: 21/09/2020
 

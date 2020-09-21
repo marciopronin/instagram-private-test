@@ -16,6 +16,7 @@ class Checkpoint extends RequestCollection
      *
      * @param string $checkpointUrl Checkpoint URL.
      * @param bool   $webform       Webform.
+     * @param mixed  $post
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -23,7 +24,8 @@ class Checkpoint extends RequestCollection
      */
     public function sendChallenge(
         $checkpointUrl,
-        $webform = false)
+        $webform = false,
+        $post = false)
     {
         $checkpointUrl = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
             return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
@@ -34,13 +36,18 @@ class Checkpoint extends RequestCollection
             ->setSignedPost(false);
 
         if ($webform === false) {
-            return $request
+            $request
                 ->addParam('guid', $this->ig->uuid)
-                ->addParam('device_id', $this->ig->device_id)
-                ->getResponse(new Response\CheckpointResponse());
+                ->addParam('device_id', $this->ig->device_id);
+
+            if ($post !== false) {
+                $request->addPost('', '');
+            }
+
+            return $request->getResponse(new Response\CheckpointResponse());
         } else {
             return $request
-                ->getRawResponse();
+                ->getResponse(new Response\WebCheckpointResponse());
         }
     }
 
@@ -264,20 +271,20 @@ class Checkpoint extends RequestCollection
      * Send sms code via web form.
      *
      * @param string $checkpointUrl Checkpoint URL.
-     * @param string $smsCode       SMS Code.
+     * @param string $securityCode  SMS Code.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\WebCheckpointResponse
      */
-    public function sendWebFormSmsCode(
+    public function sendWebFormSecurityCode(
         $checkpointUrl,
-        $smsCode)
+        $securityCode)
     {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
-            ->addPost('security_code', $smsCode)
+            ->addPost('security_code', $securityCode)
             ->getResponse(new Response\WebCheckpointResponse());
     }
 

@@ -44,4 +44,9 @@ class WebCheckpointResponse extends Response
     {
         return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('fields')->_getProperty('sitekey');
     }
+
+    public function getVerificationChoice()
+    {
+        return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('fields')->_getProperty('choice');
+    }
 }

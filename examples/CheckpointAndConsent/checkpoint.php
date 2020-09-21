@@ -49,8 +49,12 @@ try {
                             if ($iterations > 5) {
                                 $webForm = true;
                             }
-                            // Send a challenge request
-                            $ig->checkpoint->sendChallenge($checkApiPath);
+                            if ($e->getResponse()->getChallenge()->getChallengeContext() !== null) {
+                                $ig->checkpoint->sendChallenge($e->getResponse()->getChallenge()->getUrl(), true);
+                            } else {
+                                // Send a challenge request
+                                $ig->checkpoint->sendChallenge($checkApiPath);
+                            }
                         }
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\EscalationInformationalException:
@@ -117,20 +121,24 @@ try {
                         $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), $verifiationMethod);
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\VerifySMSCodeFormForSMSCaptchaException:
-                        $smsCode = trim(fgets(STDIN));
-                        $ig->checkpoint->sendWebFormSmsCode($e->getResponse()->getChallengeUrl(), $smsCode);
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\VerifyEmailCodeFormException:
+                        $securityCode = trim(fgets(STDIN));
+                        $ig->checkpoint->sendWebFormSecurityCode($e->getResponse()->getChallengeUrl(), $securityCode);
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\UFACBlockingFormException:
                         echo 'Account on moderation';
                         exit();
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SelectContactPointRecoveryFormException:
-                        $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), 0);
+                        $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), $e->getResponse()->getVerificationChoice());
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\IeForceSetNewPasswordFormException:
                         $newPassword = trim(fgets(STDIN));
                         $ig->account->changePassword($password, $newPassword);
                         break 2;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\AcknowledgeFormException:
+                        $ig->checkpoint->sendChallenge(substr($e->getResponse()->getChallengeUrl(), 1), false, true);
+                        break;
                     default:
                         throw new InstagramAPI\Exception\Checkpoint\UnknownChallengeStepException();
                 }

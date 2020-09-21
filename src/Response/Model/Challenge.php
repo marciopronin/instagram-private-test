@@ -8,24 +8,28 @@ use InstagramAPI\AutoPropertyMapper;
  * Challenge.
  *
  * @method string getApiPath()
+ * @method string getChallengeContext()
  * @method bool getHideWebviewHeader()
  * @method bool getLock()
  * @method bool getLogout()
  * @method bool getNativeFlow()
  * @method string getUrl()
  * @method bool isApiPath()
+ * @method bool isChallengeContext()
  * @method bool isHideWebviewHeader()
  * @method bool isLock()
  * @method bool isLogout()
  * @method bool isNativeFlow()
  * @method bool isUrl()
  * @method $this setApiPath(string $value)
+ * @method $this setChallengeContext(string $value)
  * @method $this setHideWebviewHeader(bool $value)
  * @method $this setLock(bool $value)
  * @method $this setLogout(bool $value)
  * @method $this setNativeFlow(bool $value)
  * @method $this setUrl(string $value)
  * @method $this unsetApiPath()
+ * @method $this unsetChallengeContext()
  * @method $this unsetHideWebviewHeader()
  * @method $this unsetLock()
  * @method $this unsetLogout()
@@ -41,5 +45,6 @@ class Challenge extends AutoPropertyMapper
         'lock'                => 'bool',
         'logout'              => 'bool',
         'native_flow'         => 'bool',
+        'challenge_context'   => 'string',
     ];
 }

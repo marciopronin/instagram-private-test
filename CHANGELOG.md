@@ -1,3 +1,24 @@
+# Stable release v15.1.0
+## Date: 22/09/2020
+
+### New features
+
+- **Event:** Add `sendSearchFollowButtonClicked()`
+
+### Updates and fixes
+
+- **Discover:** Update `getChainingUsers()`
+
+### Examples
+
+- **Example:** Update followFromSearch
+- **Example:** Update muteFromFollowings
+- **Example:** Update likeFromMediaLikers
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.0.0
 ## Date: 22/09/2020
 

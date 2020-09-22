@@ -170,6 +170,16 @@ try {
             ],
         ]
     );
+
+    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $ig->event->sendSearchFollowButtonClicked($userId, 'profile', $rankToken);
+
+    $chainingUsers = $ig->discover->getChainingUsers($userId, 'profile')->getUsers();
+
+    foreach ($chainingUsers as $user) {
+        $ig->event->sendSimilarUserImpression($userId, $user->getPk());
+    }
+
     $ig->event->forceSendBatch();
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";

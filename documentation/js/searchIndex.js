@@ -7243,7 +7243,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Discover\u003A\u003AgetChainingUsers\u0028\u0029",
             "name": "getChainingUsers",
-            "summary": "TODO.",
+            "summary": "Get\u0020recommended\u0020users\u0020based\u0020on\u0020another\u0020user.",
             "url": "../classes/InstagramAPI-Request-Discover.html#method_getChainingUsers"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event",
@@ -7605,6 +7605,11 @@ Search.appendIndex(
             "name": "sendFollowButtonTapped",
             "summary": "Sends\u0020follow\u0020button\u0020tapped.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendFollowButtonTapped"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendSearchFollowButtonClicked\u0028\u0029",
+            "name": "sendSearchFollowButtonClicked",
+            "summary": "Sends\u0020follow\u0020button\u0020tapped.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendSearchFollowButtonClicked"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendFeedButtonTapped\u0028\u0029",
             "name": "sendFeedButtonTapped",
@@ -16685,6 +16690,26 @@ Search.appendIndex(
             "name": "VerifyEmailCodeFormException",
             "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
             "url": "../classes/InstagramAPI-Exception-Checkpoint-VerifyEmailCodeFormException.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\ChainingUsersResponse",
+            "name": "ChainingUsersResponse",
+            "summary": "ChainingUsersResponse.",
+            "url": "../classes/InstagramAPI-Response-ChainingUsersResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\ChainingUsersResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-ChainingUsersResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\ChainingUser",
+            "name": "ChainingUser",
+            "summary": "ChainingUser.",
+            "url": "../classes/InstagramAPI-Response-Model-ChainingUser.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\ChainingUser\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-ChainingUser.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

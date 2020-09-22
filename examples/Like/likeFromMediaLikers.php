@@ -168,39 +168,6 @@ try {
     $likersResponse = $ig->media->getLikers($items[0]->getId());
     $userList = $likersResponse->getUsers();
 
-    $ig->event->sendFollowButtonTapped($userList[0]->getPk(), 'likers',
-        [
-            [
-                'module'        => 'feed_contextual_profile',
-                'click_point'   => 'media_likes',
-            ],
-            [
-                'module'        => 'profile',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'blended_search',
-                'click_point'   => 'search_result',
-            ],
-            [
-                'module'        => 'blended_search',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'explore_popular',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'explore_popular',
-                'click_point'   => 'explore_topic_load',
-            ],
-            [
-                'module'        => 'feed_timeline',
-                'click_point'   => 'main_search',
-            ],
-        ]
-    );
-
     $ig->event->sendNavigation('button', 'likers', 'profile');
     $ig->event->sendProfileView($userList[0]->getPk());
 

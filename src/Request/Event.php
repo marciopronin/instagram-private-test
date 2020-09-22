@@ -4437,6 +4437,35 @@ class Event extends RequestCollection
     }
 
     /**
+     * Sends follow button tapped.
+     *
+     * This event should be sent when tapped the follow button.
+     *
+     * @param string $userId    The user ID.
+     * @param string $module    Module.
+     * @param string $rankToken Rank token.
+     * @param bool   $unfollow  Unfollow flag.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendSearchFollowButtonClicked(
+        $userId,
+        $module,
+        $rankToken,
+        $unfollow = false)
+    {
+        $extra = [
+            'rank_token'                      => sprintf('%s|%s', $this->ig->account_id, $rankToken),
+            'user_id'                         => $userId,
+            'inline'                          => false,
+            'follow_status'                   => ($unfollow === false) ? 'follow' : 'not_following',
+        ];
+
+        $event = $this->_addEventBody('search_follow_button_clicked', $module, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Sends feed button tapped.
      *
      * @param string $module  Module.

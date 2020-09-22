@@ -406,20 +406,27 @@ class Discover extends RequestCollection
     }
 
     /**
-     * TODO.
+     * Get recommended users based on another user.
      *
-     * @param $targetId Numerical UserPK ID.
+     * @param string      $targetId Numerical UserPK ID.
+     * @param string|null $module   Module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return \InstagramAPI\Response\ChainingUsersResponse
      */
     public function getChainingUsers(
-        $targetId)
+        $targetId,
+        $module = null)
     {
-        return $this->ig->request('discover/chaining/')
+        $request = $this->ig->request('discover/chaining/')
             ->setSignedPost(false)
-            ->addParam('target_id', $targetId)
-            ->getResponse(new Response\GenericResponse());
+            ->addParam('target_id', $targetId);
+
+        if ($module !== null) {
+            $request->addParam('module', $module);
+        }
+
+        return $request->getResponse(new Response\ChainingUsersResponse());
     }
 }

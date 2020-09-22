@@ -58,22 +58,6 @@ try {
     $followings = $ig->people->getSelfFollowing($rankToken)->getUsers();
     $userId = $followings[0]->getPk();
 
-    $ig->event->sendFollowButtonTapped($userId, 'self_following',
-        [
-            [
-                'module'        => 'self_unified_follow_lists',
-                'click_point'   => 'following',
-            ],
-            [
-                'module'        => 'self_unified_follow_lists',
-                'click_point'   => 'following',
-            ],
-            [
-                'module'        => 'feed_timeline',
-                'click_point'   => 'main_profile',
-            ],
-        ], null, true);
-
     $ig->discover->surfaceWithSu($ig->account_id);
 
     $ig->event->sendNavigation('button', 'self_unified_follow_lists', 'media_mute_sheet');

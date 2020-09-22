@@ -1,3 +1,10 @@
+# Stable release v15.1.1
+## Date: 22/09/2020
+
+### Updates and fixes
+
+- **Discover:** Update `getChainingUsers()`
+
 # Stable release v15.1.0
 ## Date: 22/09/2020
 

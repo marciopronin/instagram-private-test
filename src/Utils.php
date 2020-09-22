@@ -2031,7 +2031,7 @@ class Utils
             'iPhone12,8', // iPhone SE (2020)
         ];
 
-        if (!in_array($value, $iDevices, true)) {
+        if (!in_array($device, $iDevices, true)) {
             throw new \InvalidArgumentException(sprintf('Invalid iPhone model %s.', $device));
         }
     }

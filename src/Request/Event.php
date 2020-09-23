@@ -717,6 +717,83 @@ class Event extends RequestCollection
     }
 
     /**
+     * Send reel tray impression.
+     *
+     * @param Response\Model\Item $item          The item object.
+     * @param string              $traySessionId UUIDv4.
+     * @param string              $rankingToken  UUIDv4.
+     * @param array               $options       Options.
+     * @param string              $source        Source of action. 'feed_timeline'.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendReelTrayImpression(
+        $item,
+        $traySessionId,
+        $rankingToken,
+        array $options = [],
+        $source = 'feed_timeline')
+    {
+        $extra = [
+            'has_my_reel'                      => isset($options['has_my_reel']) ? strval($options['has_my_reel']) : '0',
+            'has_my_replay_reel'               => isset($options['has_my_replay_reel']) ? strval($options['has_my_replay_reel']) : '0',
+            'viewed_reel_count'                => isset($options['viewed_reel_count']) ? $options['viewed_reel_count'] : 0,
+            'new_reel_count'                   => isset($options['new_reel_count']) ? $options['new_reel_count'] : 0,
+            'live_reel_count'                  => isset($options['live_reel_count']) ? $options['live_reel_count'] : 0,
+            'muted_replay_reel_count'          => isset($options['muted_replay_reel_count']) ? $options['muted_replay_reel_count'] : 0,
+            'unfetched_reel_count'             => isset($options['unfetched_reel_count']) ? $options['unfetched_reel_count'] : 0,
+            'tray_position'                    => isset($options['tray_position']) ? $options['tray_position'] : 0,
+            'tray_session_id'                  => $traySessionId,
+            'viewer_session_id'                => null,
+            'is_live_reel'                     => isset($options['is_live_reel']) ? strval($options['is_live_reel']) : '0',
+            'is_live_questions_reel'           => isset($options['is_live_questions_reel']) ? strval($options['is_live_questions_reel']) : '0',
+            'is_new_reel'                      => isset($options['is_new_reel']) ? strval($options['is_new_reel']) : '0',
+            'reel_type'                        => 'story',
+            'story_ranking_token'              => $rankingToken,
+            'reel_id'                          => $item->getUser()->getPk(),
+            'is_besties_reel'                  => isset($options['is_besties_reel']) ? strval($options['is_besties_reel']) : '0',
+            'a_pk'                             => $item->getUser()->getPk(),
+        ];
+
+        $event = $this->_addEventBody('reel_tray_impression', $source, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send feed item inserted.
+     *
+     * @param Response\Model\Item $item      The item object.
+     * @param string              $requestId UUIDv4.
+     * @param string              $sessionId UUIDv4.
+     * @param array               $options   Options.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendFeedItemInserted(
+        $item,
+        $requestId,
+        $sessionId,
+        array $options = [])
+    {
+        $extra = [
+            'request_id'                      => $requestId,
+            'session_id'                      => $sessionId,
+            'request_type'                    => $requestType,
+            'view_info_count'                 => isset($options['view_info_count']) ? $options['view_info_count'] : 0,
+            'feed_item_type'                  => 'media',
+            'media_id'                        => $item->getPk(),
+            'delivery_flags'                  => 'n',
+            'is_ad'                           => isset($options['is_ad']) ? $options['is_ad'] : false,
+            'expected_position',
+        ];
+
+        $event = $this->_addEventBody('instagram_feed_item_inserted', 'feed_timeline', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Send newsfeed story impression.
      *
      * @param Response\Model\Story $newsfeedItem The newsfeed object.
@@ -1561,6 +1638,47 @@ class Event extends RequestCollection
         }
 
         $event = $this->_addEventBody('instagram_organic_impression', $module, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send organic carousel impression.
+     *
+     * @param Response\Model\Item $item      The item object.
+     * @param string              $requestId UUID.
+     * @param array               $options   Options to configure the event.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendOrganicCarouselImpression(
+        $item,
+        $requestId,
+        array $options = [])
+    {
+        $extra = [
+            'm_pk'                              => $item->getId(),
+            'a_pk'                              => $item->getUser()->getPk(),
+            'm_ts'                              => (int) $item->getTakenAt(),
+            'm_t'                               => $item->getMediaType(),
+            'tracking_token'                    => $item->getOrganicTrackingToken(),
+            'source_of_action'                  => $module,
+            'follow_status'                     => isset($options['following']) ? 'following' : 'not_following',
+            'm_ix'                              => 0,
+            'carousel_index'                    => isset($options['carousel_index']) ? $options['carousel_index'] : 0,
+            'carousel_media_id'                 => isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getId() : $item->getCarouselMedia()[0]->getId(),
+            'carousel_m_t'                      => isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getMediaType() : $item->getCarouselMedia()[0]->getMediaType(),
+            'carousel_size'                     => $item->getCarouselMediaCount(),
+            'inventory_source'                  => 'media_or_ad',
+            'feed_request_id'                   => $requestId,
+            'delivery_flags'                    => 'n',
+            'elapsed_time_since_last_item'      => -1.0,
+            'is_eof'                            => false,
+            'imp_logger_ver'                    => 24,
+            'is_acp_delivered'                  => false,
+        ];
+
+        $event = $this->_addEventBody('instagram_organic_carousel_impression', 'feed_timeline', $extra);
         $this->_addEventData($event);
     }
 

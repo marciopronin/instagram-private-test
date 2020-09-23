@@ -7321,6 +7321,16 @@ Search.appendIndex(
             "summary": "Send\u0020organic\u0020reel\/story\u0020impression.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendOrganicReelImpression"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendReelTrayImpression\u0028\u0029",
+            "name": "sendReelTrayImpression",
+            "summary": "Send\u0020reel\u0020tray\u0020impression.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendReelTrayImpression"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendFeedItemInserted\u0028\u0029",
+            "name": "sendFeedItemInserted",
+            "summary": "Send\u0020feed\u0020item\u0020inserted.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendFeedItemInserted"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendNewsfeedStoryImpression\u0028\u0029",
             "name": "sendNewsfeedStoryImpression",
             "summary": "Send\u0020newsfeed\u0020story\u0020impression.",
@@ -7415,6 +7425,11 @@ Search.appendIndex(
             "name": "sendOrganicMediaImpression",
             "summary": "Send\u0020organic\u0020media\u0020impression.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendOrganicMediaImpression"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendOrganicCarouselImpression\u0028\u0029",
+            "name": "sendOrganicCarouselImpression",
+            "summary": "Send\u0020organic\u0020carousel\u0020impression.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendOrganicCarouselImpression"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendReelPlaybackNavigation\u0028\u0029",
             "name": "sendReelPlaybackNavigation",

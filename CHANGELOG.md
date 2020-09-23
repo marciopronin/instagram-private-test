@@ -1,9 +1,22 @@
+# Stable release v15.2.0
+## Date: 23/09/2020
+
+### New features
+
+- **Event:** Add `sendReelTrayImpression()`
+- **Event:** Add `sendFeedItemInserted()`
+- **Event:** Add `sendOrganicCarouselImpression()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.1.1
 ## Date: 22/09/2020
 
 ### Updates and fixes
 
-- **Discover:** Update `getChainingUsers()`
+- **Utils:** Update `checkIsValidiDevice()`
 
 # Stable release v15.1.0
 ## Date: 22/09/2020

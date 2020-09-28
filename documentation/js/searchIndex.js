@@ -621,6 +621,16 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Constants.html#constant_PDQ_VIDEO_TIME_FRAMES"
         },                {
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003ABLACKLISTED_PASSWORDS",
+            "name": "BLACKLISTED_PASSWORDS",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Constants.html#constant_BLACKLISTED_PASSWORDS"
+        },                {
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003APRIDE_HASHTAGS",
+            "name": "PRIDE_HASHTAGS",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Constants.html#constant_PRIDE_HASHTAGS"
+        },                {
             "fqsen": "\\InstagramAPI\\Constants\u003A\u003ASRC_DIR",
             "name": "SRC_DIR",
             "summary": "",
@@ -16365,6 +16375,11 @@ Search.appendIndex(
             "name": "Reel",
             "summary": "Functions\u0020related\u0020to\u0020Reels\u0020also\u0020known\u0020internally\u0020as\u0020clips.",
             "url": "../classes/InstagramAPI-Request-Reel.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AuploadVideo\u0028\u0029",
+            "name": "uploadVideo",
+            "summary": "Uploads\u0020a\u0020video\u0020to\u0020Reels\u0020\u0028clips\u0029.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_uploadVideo"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetHome\u0028\u0029",
             "name": "getHome",

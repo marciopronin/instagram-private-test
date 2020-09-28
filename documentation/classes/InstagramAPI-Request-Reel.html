@@ -98,6 +98,11 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></td>
                 </tr>
                                         <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_uploadVideo">uploadVideo()</a></th>
+                    <td class="phpdocumentor-cell">Uploads a video to Reels (clips).</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ConfigureResponse.html"><abbr title="\InstagramAPI\Response\ConfigureResponse">ConfigureResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getHome">getHome()</a></th>
                     <td class="phpdocumentor-cell">Home reels.</td>
                     <td class="phpdocumentor-cell"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></td>
@@ -156,6 +161,87 @@
         
                     <section>
                 <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method_uploadVideo"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">uploadVideo()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">26</span>
+    </aside>
+        <p class="phpdocumentor-summary">Uploads a video to Reels (clips).</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">uploadVideo</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$videoFilename</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$externalMetadata</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ConfigureResponse.html"><abbr title="\InstagramAPI\Response\ConfigureResponse">ConfigureResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$videoFilename</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The video filename.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$externalMetadata</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(optional) User-provided metadata key-value pairs.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-UploadFailedException.html"><abbr title="\InstagramAPI\Exception\UploadFailedException">UploadFailedException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"><p>If the video upload fails.</p></section>
+                </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="\InstagramAPI\Request\Internal::configureSingleVideo()"><abbr title="\InstagramAPI\Request\Internal::configureSingleVideo()">Internal::configureSingleVideo()</abbr></a></span>
+                                                            <section class="phpdocumentor-description"><p>for available metadata fields.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ConfigureResponse.html"><abbr title="\InstagramAPI\Response\ConfigureResponse">ConfigureResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_getHome"></a>
 <article
         class="
@@ -167,7 +253,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">23</span>
+        <span class="phpdocumentor-element-found-in__line">44</span>
     </aside>
         <p class="phpdocumentor-summary">Home reels.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -234,7 +320,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">51</span>
+        <span class="phpdocumentor-element-found-in__line">72</span>
     </aside>
         <p class="phpdocumentor-summary">Get user reels.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -301,7 +387,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">78</span>
+        <span class="phpdocumentor-element-found-in__line">99</span>
     </aside>
         <p class="phpdocumentor-summary">Get music for reels. NOT FINISHED.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

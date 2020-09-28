@@ -780,7 +780,7 @@ class Event extends RequestCollection
         $extra = [
             'request_id'                      => $requestId,
             'session_id'                      => $sessionId,
-            'request_type'                    => $requestType,
+            'request_type'                    => isset($options['request_type']) ? $options['request_type'] : 'cold_start_fetch',
             'view_info_count'                 => isset($options['view_info_count']) ? $options['view_info_count'] : 0,
             'feed_item_type'                  => 'media',
             'media_id'                        => $item->getPk(),
@@ -1662,7 +1662,7 @@ class Event extends RequestCollection
             'm_ts'                              => (int) $item->getTakenAt(),
             'm_t'                               => $item->getMediaType(),
             'tracking_token'                    => $item->getOrganicTrackingToken(),
-            'source_of_action'                  => $module,
+            'source_of_action'                  => isset($options['module']) ? $options['module'] : 'feed_timeline',
             'follow_status'                     => isset($options['following']) ? 'following' : 'not_following',
             'm_ix'                              => 0,
             'carousel_index'                    => isset($options['carousel_index']) ? $options['carousel_index'] : 0,
@@ -1738,7 +1738,13 @@ class Event extends RequestCollection
             'dest_module'                       => isset($options['dest_module']) ? $options['dest_module'] : 'reel_feed_timeline',
         ];
 
-        $event = $this->_addEventBody('reel_playback_navigation', $module, $extra);
+        if (isset($options['action']) && $options['action'] === 'tap_exit') {
+            $name = 'reel_playback_exit';
+        } else {
+            $name = 'reel_playback_navigation';
+        }
+
+        $event = $this->_addEventBody($name, $module, $extra);
         $this->_addEventData($event);
     }
 

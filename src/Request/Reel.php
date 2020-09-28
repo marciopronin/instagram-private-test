@@ -10,6 +10,27 @@ use InstagramAPI\Response;
 class Reel extends RequestCollection
 {
     /**
+     * Uploads a video to Reels (clips). EXPERIMENTAL.
+     *
+     * @param string $videoFilename    The video filename.
+     * @param array  $externalMetadata (optional) User-provided metadata key-value pairs.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
+     *
+     * @return \InstagramAPI\Response\ConfigureResponse
+     *
+     * @see Internal::configureSingleVideo() for available metadata fields.
+     */
+    public function uploadVideo(
+        $videoFilename,
+        array $externalMetadata = [])
+    {
+        return $this->ig->internal->uploadSingleVideo(Constants::FEED_REEL, $videoFilename, null, $externalMetadata);
+    }
+
+    /**
      * Home reels.
      *
      * @param string|null $maxId  Next "maximum ID", used for pagination.

@@ -1,3 +1,22 @@
+# Stable release v15.3.0
+## Date: 28/09/2020
+
+### New features
+
+- **Reel:** Add `uploadVideo()`
+- **Constants:** Add `BLACKLISTED_PASSWORDS`
+- **Constants:** Add `PRIDE_HASHTAGS`
+
+### Updates and fixes
+
+- **Account:** Update `create()`
+- **Account:** Update `createValidated()`
+- **Event:** Update `sendReelPlaybackNavigation()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.2.0
 ## Date: 23/09/2020
 

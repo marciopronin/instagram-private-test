@@ -36,6 +36,12 @@ class Account extends RequestCollection
         $firstName,
         $waterfallId)
     {
+        if (strlen($password) < 6) {
+            throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
+        } elseif (in_array($password, Constants::BLACKLISTED_PASSWORDS, true)) {
+            throw new \InstagramAPI\Exception\InstagramException('This is a common password. Try something that\'s harder to guess.');
+        }
+
         $date = explode('-', $date);
 
         return $this->ig->request('accounts/create/')
@@ -91,6 +97,12 @@ class Account extends RequestCollection
         $waterfallId,
         $tosVersion = 'eu')
     {
+        if (strlen($password) < 6) {
+            throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
+        } elseif (in_array($password, Constants::BLACKLISTED_PASSWORDS, true)) {
+            throw new \InstagramAPI\Exception\InstagramException('This is a common password. Try something that\'s harder to guess.');
+        }
+
         $date = explode('-', $date);
 
         return $this->ig->request('accounts/create_validated/')

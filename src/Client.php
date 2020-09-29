@@ -805,9 +805,13 @@ class Client
         array $guzzleOptions = [],
         $disableCookies = false)
     {
-        $curlOptions = [
-            CURLOPT_HTTP_VERSION    => CURL_HTTP_VERSION_2_0,
-        ];
+        $curlOptions = [];
+
+        if (\InstagramAPI::$disableHttp2 === false) {
+            $curlOptions = [
+                CURLOPT_HTTP_VERSION    => CURL_HTTP_VERSION_2_0,
+            ];
+        }
 
         if ($this->_resolveHost !== null) {
             $curlOptions[CURLOPT_RESOLVE] = [$this->_resolveHost];

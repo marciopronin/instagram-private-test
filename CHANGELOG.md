@@ -1,9 +1,16 @@
+# Stable release v15.4.2 (Hot fix)
+## Date: 29/09/2020
+
+### New features
+
+- **Instagram:** You can now disable HTTP2 and use HTTP1 instead. NOT RECOMMENDED! `\InstagramAPI\Instagram::$disableHttp2 = true;`
+
 # Stable release v15.4.1
 ## Date: 29/09/2020
 
 ### New features
 
-- **Instagram:** You can now disable HTTP2 and use HTTP1 instead. NOT RECOMMENDED! `\InstagramAPI::$disableHttp2 = true;`
+- **Instagram:** You can now disable HTTP2 and use HTTP1 instead. NOT RECOMMENDED! `\InstagramAPI\Instagram::$disableHttp2 = true;`
 
 # Stable release v15.4.0
 ## Date: 29/09/2020

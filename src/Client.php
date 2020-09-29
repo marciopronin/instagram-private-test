@@ -807,7 +807,7 @@ class Client
     {
         $curlOptions = [];
 
-        if (\InstagramAPI::$disableHttp2 === false) {
+        if (\InstagramAPI\Instagram::$disableHttp2 === false) {
             $curlOptions = [
                 CURLOPT_HTTP_VERSION    => CURL_HTTP_VERSION_2_0,
             ];

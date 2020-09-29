@@ -2077,8 +2077,11 @@ class Instagram implements ExperimentsInterface
                 } catch (Exception $e) {
                 }
                 $this->direct->getPresences();
-                $this->direct->getInbox(null, null, 0, null);
-                $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
+                try {
+                    $this->direct->getInbox(null, null, 0, null);
+                    $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
+                } catch (Exception $e) {
+                }
                 $this->_registerPushChannels();
             } finally {
                 // Stops emulating batch requests

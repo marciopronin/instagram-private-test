@@ -25,6 +25,23 @@ try {
     exit(0);
 }
 
+$ig->event->sendNavigation('main_profile', 'feed_timeline', 'self_profile');
+
+$ig->highlight->getUserFeed($ig->account_id);
+$ig->people->getInfoById($ig->account_id, 'self_profile');
+$ig->story->getUserStoryFeed($ig->account_id);
+$userFeed = $ig->timeline->getUserFeed($ig->account_id);
+$items = $userFeed->getItems();
+
+$c = 0;
+foreach ($items as $item) {
+    if ($c === 5) {
+        break;
+    }
+    $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
+    $c++;
+}
+
 // You don't have to provide hashtags or locations for your story. It is
 // optional! But we will show you how to do both...
 
@@ -84,6 +101,11 @@ $metadata = [
 ];
 
 try {
+    $ig->live->getFundraiserInfo();
+    $ig->creative->getFaceModels();
+    $ig->creative->getSegmentationModels();
+    $ig->creative->getCameraModels();
+    $ig->creative->getStickerAssets();
     // This example will upload the image via our automatic photo processing
     // class. It will ensure that the story file matches the ~9:16 (portrait)
     // aspect ratio needed by Instagram stories. You have nothing to worry
@@ -91,8 +113,6 @@ try {
     // processing, and it never overwrites your original file.
     //
     // Also note that it has lots of options, so read its class documentation!
-    $ig->event->sendNavigation('button', 'reel_composer_preview', 'story_stickers_tray');
-    $ig->event->sendNavigation('button', 'story_stickers_tray', 'reel_composer_preview');
     $ig->event->sendNavigation('button', 'reel_composer_preview', 'reel_composer_camera');
     $ig->event->sendNavigation('button', 'reel_composer_preview', 'self_profile');
     $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename, ['targetFeed' => \InstagramAPI\Constants::FEED_STORY]);

@@ -2817,6 +2817,10 @@ class Internal extends RequestCollection
             case Constants::FEED_TIMELINE_ALBUM:
                 $result['is_sidecar'] = '1';
                 break;
+            case Constants::FEED_STORY:
+                list($hash, $quality) = PDQHasher::computeHashAndQualityFromFilename($internalMetadata->getPhotoDetails()->getFilename(), false, false);
+                $result['original_photo_pdq_hash'] = sprintf('%s:%d', $hash->toHexString(), 9);
+                break;
             default:
         }
 

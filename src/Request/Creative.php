@@ -67,8 +67,48 @@ class Creative extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('aml_facetracker_model_version', 12)
+            ->addPost('supported_model_compression_type', 'TAR_BROTLI')
+            ->addPost('aml_facetracker_model_version', '14')
             ->getResponse(new Response\FaceModelsResponse());
+    }
+
+    /**
+     * Get segmentation models.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\SegmentationModelsResponse
+     */
+    public function getSegmentationModels()
+    {
+        return $this->ig->request('creatives/segmentation_models/')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('supported_model_compression_type', 'TAR_BROTLI')
+            ->addPost('aml_facetracker_model_version', '106')
+            ->getResponse(new Response\SegmentationModelsResponse());
+    }
+
+    /**
+     * Get camera models.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\CameraModelsResponse
+     */
+    public function getCameraModels()
+    {
+        return $this->ig->request('creatives/camera_models/')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('model_request_blobs', json_encode([
+                'type'                              => 'target_recognition',
+                'target_recognition_model_version'  => 9,
+                'supported_model_compression_type'  => 'TAR_BROTLI',
+            ]))
+            ->getResponse(new Response\CameraModelsResponse());
     }
 
     /**

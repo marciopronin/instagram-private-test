@@ -6931,6 +6931,16 @@ Search.appendIndex(
             "summary": "Get\u0020face\u0020models\u0020that\u0020can\u0020be\u0020used\u0020to\u0020customize\u0020photos\u0020or\u0020videos.",
             "url": "../classes/InstagramAPI-Request-Creative.html#method_getFaceModels"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Creative\u003A\u003AgetSegmentationModels\u0028\u0029",
+            "name": "getSegmentationModels",
+            "summary": "Get\u0020segmentation\u0020models.",
+            "url": "../classes/InstagramAPI-Request-Creative.html#method_getSegmentationModels"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Creative\u003A\u003AgetCameraModels\u0028\u0029",
+            "name": "getCameraModels",
+            "summary": "Get\u0020camera\u0020models.",
+            "url": "../classes/InstagramAPI-Request-Creative.html#method_getCameraModels"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Creative\u003A\u003AgetFaceEffects\u0028\u0029",
             "name": "getFaceEffects",
             "summary": "Get\u0020face\u0020overlay\u0020effects\u0020to\u0020customize\u0020photos\u0020or\u0020videos.",
@@ -16378,7 +16388,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AuploadVideo\u0028\u0029",
             "name": "uploadVideo",
-            "summary": "Uploads\u0020a\u0020video\u0020to\u0020Reels\u0020\u0028clips\u0029.",
+            "summary": "Uploads\u0020a\u0020video\u0020to\u0020Reels\u0020\u0028clips\u0029.\u0020EXPERIMENTAL.",
             "url": "../classes/InstagramAPI-Request-Reel.html#method_uploadVideo"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetHome\u0028\u0029",
@@ -16740,6 +16750,46 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-Model-ChainingUser.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\CameraModelsResponse",
+            "name": "CameraModelsResponse",
+            "summary": "CameraModelsResponse.",
+            "url": "../classes/InstagramAPI-Response-CameraModelsResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\CameraModelsResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-CameraModelsResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\CameraModels",
+            "name": "CameraModels",
+            "summary": "Automatically\u0020maps\u0020JSON\u0020data\u0020onto\u0020PHP\u0020objects\u0020with\u0020virtual\u0020functions.",
+            "url": "../classes/InstagramAPI-Response-Model-CameraModels.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\CameraModels\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-CameraModels.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\SegmentationModels",
+            "name": "SegmentationModels",
+            "summary": "SegmentationModels.",
+            "url": "../classes/InstagramAPI-Response-Model-SegmentationModels.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\SegmentationModels\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-SegmentationModels.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\SegmentationModelsResponse",
+            "name": "SegmentationModelsResponse",
+            "summary": "SegmentationModelsResponse.",
+            "url": "../classes/InstagramAPI-Response-SegmentationModelsResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\SegmentationModelsResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-SegmentationModelsResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

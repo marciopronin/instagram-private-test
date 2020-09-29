@@ -1,3 +1,27 @@
+# Stable release v15.4.0
+## Date: 29/09/2020
+
+### New features
+
+- **Creative:** Add `getSegmentationModels()`
+- **Creative:** Add `getCameraModels()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **Creative:** Update `getFaceModels()`
+- **Internal:** Update `_getPhotoUploadParams()`
+- **Models and responses:** Update models and responses
+
+### Examples
+
+- **Example:** Update checkpoint example
+- **Example:** Update checkpoint uploadStory
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.3.0
 ## Date: 28/09/2020
 

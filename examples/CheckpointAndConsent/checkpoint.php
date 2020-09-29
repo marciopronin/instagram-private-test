@@ -49,7 +49,7 @@ try {
                             if ($iterations > 5) {
                                 $webForm = true;
                             }
-                            if ($e->getResponse()->getChallenge()->getChallengeContext() !== null) {
+                            if ((is_array($e->getResponse()->getChallenge()) === false) && ($e->getResponse()->getChallenge()->getChallengeContext() !== null)) {
                                 $ig->checkpoint->sendChallenge($e->getResponse()->getChallenge()->getUrl(), true);
                             } else {
                                 // Send a challenge request

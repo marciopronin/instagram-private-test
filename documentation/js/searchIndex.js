@@ -1636,6 +1636,11 @@ Search.appendIndex(
             "summary": "Global\u0020flag\u0020for\u0020users\u0020who\u0020want\u0020to\u0020run\u0020deprecated\u0020functions.",
             "url": "../classes/InstagramAPI-Instagram.html#property_overrideDeprecatedThrower"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024disableHttp2",
+            "name": "disableHttp2",
+            "summary": "Global\u0020flag\u0020for\u0020users\u0020who\u0020want\u0020to\u0020run\u0020deprecated\u0020functions.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_disableHttp2"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024uuid",
             "name": "uuid",
             "summary": "UUID.",

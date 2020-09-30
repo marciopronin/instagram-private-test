@@ -1,3 +1,20 @@
+# Stable release v15.4.3
+## Date: 30/09/2020
+
+### Updates and fixes
+
+- **Direct:** Update `getPendingInbox()`
+- **Event:** Update `_validateNavigationPath()`
+- **Story:** Update `getReelsTrayFeed()`
+
+### Examples
+
+- **Example:** Add likeFromUserFollowings
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.4.2 (Hot fix)
 ## Date: 29/09/2020
 

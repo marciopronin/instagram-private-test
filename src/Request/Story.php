@@ -5,6 +5,7 @@ namespace InstagramAPI\Request;
 use InstagramAPI\Constants;
 use InstagramAPI\Request\Metadata\Internal as InternalMetadata;
 use InstagramAPI\Response;
+use InstagramAPI\Signatures;
 use InstagramAPI\Utils;
 
 /**
@@ -130,6 +131,8 @@ class Story extends RequestCollection
             ->setSignedPost(false)
             ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
             ->addPost('reason', $reason)
+            ->addPost('timezone_offset', date('Z'))
+            ->addPost('request_id', Signatures::generateUUID())
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\ReelsTrayFeedResponse());

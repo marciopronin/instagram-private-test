@@ -90,8 +90,8 @@ class Direct extends RequestCollection
         $cursorId = null)
     {
         $request = $this->ig->request('direct_v2/pending_inbox/')
-            ->addParam('persistentBadging', 'true')
-            ->addParam('use_unified_inbox', 'true');
+            ->addParam('visual_message_return_type', 'unseen')
+            ->addParam('persistentBadging', 'true');
         if ($cursorId !== null) {
             $request->addParam('cursor', $cursorId);
         }

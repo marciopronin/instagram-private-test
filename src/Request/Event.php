@@ -3569,12 +3569,6 @@ class Event extends RequestCollection
                     'dest_module'   => 'self_unified_follow_lists',
                 ],
             ],
-            'reel_composer_preview' => [
-                [
-                    'clickpoint'    => 'button',
-                    'dest_module'   => 'reel_composer_camera',
-                ],
-            ],
             'quick_capture_fragment' => [
                 [
                     'clickpoint'    => 'story_posted_from_camera',

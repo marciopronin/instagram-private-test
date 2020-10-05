@@ -148,6 +148,17 @@ try {
     $ig->event->sendThumbnailImpression('instagram_thumbnail_click', $item, 'feed_hashtag', $hashtagId, $queryHashtag);
     // When we clicked the item, we are navigating from 'feed_hashtag' to 'feed_contextual_hashtag'.
     $ig->event->sendNavigation('button', 'feed_hashtag', 'feed_contextual_hashtag', $hashtagId, $queryHashtag);
+
+    $ig->media->getCommentInfos($item->getId());
+
+    $ig->event->sendOrganicNumberOfLikes($item, 'feed_contextual_hashtag');
+    $previewComments = $item->getPreviewComments();
+    if ($previewComments !== null) {
+        foreach ($previewComments as $comment) {
+            $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+        }
+    }
+
     // Perform like.
     $ig->media->like($item->getId(), 0, 'feed_contextual_hashtag', false, ['hashtag_id' => $hashtagId, 'hashtag' => $queryHashtag]);
     // Send organic like.

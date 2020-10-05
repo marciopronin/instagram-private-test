@@ -184,37 +184,37 @@ try {
             ],
     ], ['module' => 'profile']);
 
-    $ig->event->sendNavigation('following', 'unified_follow_lists', 'unified_follow_lists', null, null,
+    $ig->event->sendNavigation('followers', 'unified_follow_lists', 'unified_follow_lists', null, null,
         [
-            'source_tab'    => 'following',
-            'dest_tab'      => 'following',
+            'source_tab'    => 'followers',
+            'dest_tab'      => 'followers',
         ]
     );
 
     $ig->discover->surfaceWithSu($userId);
 
     $rankToken = \InstagramAPI\Signatures::generateUUID();
-    $followings = $ig->people->getFollowing($userId, $rankToken);
+    $followers = $ig->people->getFollowers($userId, $rankToken);
 
-    $followingList = [];
-    foreach ($followings->getUsers() as $following) {
-        $followingList[] = $following->getPk();
+    $followerList = [];
+    foreach ($followers->getUsers() as $follower) {
+        $followerList[] = $follower->getPk();
     }
 
-    $ig->people->getFriendships($followingList);
+    $ig->people->getFriendships($followerList);
     $ig->discover->markSuSeen();
     $ig->discover->getAyml();
-    $ig->people->getFriendships($followingList);
+    $ig->people->getFriendships($followerList);
 
     $ig->event->sendNavigation('button', 'unified_follow_lists', 'profile');
 
-    $ig->event->sendProfileView($followingList[0]);
+    $ig->event->sendProfileView($followerList[0]);
 
-    $ig->people->getFriendship($followingList[0]);
-    $ig->highlight->getUserFeed($followingList[0]);
-    $ig->people->getInfoById($followingList[0]);
-    $ig->story->getUserStoryFeed($followingList[0]);
-    $userFeed = $ig->timeline->getUserFeed($followingList[0]);
+    $ig->people->getFriendship($followerList[0]);
+    $ig->highlight->getUserFeed($followerList[0]);
+    $ig->people->getInfoById($followerList[0]);
+    $ig->story->getUserStoryFeed($followerList[0]);
+    $userFeed = $ig->timeline->getUserFeed($followerList[0]);
     $items = $userFeed->getItems();
 
     $c = 0;

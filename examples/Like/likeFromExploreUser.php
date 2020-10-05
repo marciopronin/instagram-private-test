@@ -126,6 +126,16 @@ try {
     $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
 
     $ig->event->sendOrganicMediaImpression($item, 'feed_contextual_profile');
+    $ig->media->getCommentInfos($item->getId());
+
+    $ig->event->sendOrganicNumberOfLikes($item, 'feed_contextual_profile');
+    $previewComments = $item->getPreviewComments();
+    if ($previewComments !== null) {
+        foreach ($previewComments as $comment) {
+            $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+        }
+    }
+
     // Since we are going to like the first item of the media, the position in
     // the feed is 0. If you want to like the second item, it would position 1, and so on.
     $ig->media->like($item->getId(), 0);

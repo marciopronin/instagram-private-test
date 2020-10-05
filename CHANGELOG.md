@@ -1,3 +1,20 @@
+# Stable release v15.4.4
+
+### Wiki
+
+- **Wiki:** Update FAQ. Add instructions for disabling HTTP2.
+
+### Examples
+
+- **Example:** Add likeFromUserFollowers
+- **Example:** Add sendReactionFromUserSearch
+
+- **Example:** Update likeFromExploreTag
+- **Example:** Update likeFromExploreUser
+- **Example:** Update likeFromTimeline
+- **Example:** Update likeFromUserFollowings
+
+
 # Stable release v15.4.3
 ## Date: 30/09/2020
 

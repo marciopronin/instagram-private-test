@@ -46,7 +46,7 @@ In order to be able to login using the web class, you will need to install the `
 **Installation:**
 
 ```
-git clone https://github.com/jedisct1/libsodium-php  cd libsodium-php
+git clone https://github.com/jedisct1/libsodium-php cd libsodium-php
 phpize
 ./configure
 make
@@ -60,5 +60,22 @@ You will need to add the following line to your `php.ini` file:
 In order to check if all was done correctly, run the following command: `php -m`. 
 
 Module `sodium` should be listed there.
+
+## HTTP2
+
+If you are getting the following error:
+
+```
+CURLE_HTTP2 (16)
+
+A problem was detected in the HTTP2 framing layer. This is somewhat generic and can be one out of several problems, see the error buffer for details. 
+```
+
+Means you are having troubles with HTTP2, you can disable HTTP2 at any time by setting the following global flag:
+
+```php
+\InstagramAPI\Instagram::$disableHttp2 = true;
+```
+
 
  

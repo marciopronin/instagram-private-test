@@ -1,4 +1,12 @@
+# Stable release v15.4.5
+## Date: 06/09/2020
+
+### Updates and fixes
+
+- **People:** Update `linkAddressBook()`
+
 # Stable release v15.4.4
+## Date: 05/09/2020
 
 ### Wiki
 

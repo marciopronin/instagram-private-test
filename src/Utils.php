@@ -244,11 +244,13 @@ class Utils
         $iv = openssl_random_pseudo_bytes(12);
         $time = time();
 
+        /* Disabled
         // Fallback mode.
         if (empty($publicKey) || empty($publicKeyId)) {
             $publicKey = openssl_pkey_get_public(Constants::IG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY);
             $publicKeyId = Constants::IG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY_ID;
         }
+        */
 
         openssl_public_encrypt($key, $encryptedAesKey, base64_decode($publicKey));
         $encrypted = openssl_encrypt($password, 'aes-256-gcm', $key, OPENSSL_RAW_DATA, $iv, $tag, strval($time));

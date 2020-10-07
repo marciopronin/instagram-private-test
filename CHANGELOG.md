@@ -1,12 +1,19 @@
+# Stable release v15.4.6
+## Date: 07/10/2020
+
+### Updates and fixes
+
+- **Utils:** Update `encryptPassword()`
+
 # Stable release v15.4.5
-## Date: 06/09/2020
+## Date: 06/10/2020
 
 ### Updates and fixes
 
 - **People:** Update `linkAddressBook()`
 
 # Stable release v15.4.4
-## Date: 05/09/2020
+## Date: 05/10/2020
 
 ### Wiki
 

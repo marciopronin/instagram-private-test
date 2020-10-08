@@ -7626,6 +7626,11 @@ Search.appendIndex(
             "summary": "Send\u0020enter\u0020direct\u0020thread\u0020event.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendEnterDirectThread"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendSearchInitiated\u0028\u0029",
+            "name": "sendSearchInitiated",
+            "summary": "Send\u0020search\u0020session\u0020initiated.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendSearchInitiated"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendSearchResults\u0028\u0029",
             "name": "sendSearchResults",
             "summary": "Send\u0020search\u0020results.",
@@ -16795,6 +16800,11 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-SegmentationModelsResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Exception\\Checkpoint\\VerifySMSCodeFormException",
+            "name": "VerifySMSCodeFormException",
+            "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
+            "url": "../classes/InstagramAPI-Exception-Checkpoint-VerifySMSCodeFormException.html"
         },                {
             "fqsen": "\\",
             "name": "\\",

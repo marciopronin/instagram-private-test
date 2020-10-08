@@ -4379,6 +4379,27 @@ class Event extends RequestCollection
     }
 
     /**
+     * Send search session initiated.
+     *
+     * @param string $searchSession Search session. UUIDv4.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @see follow example.
+     */
+    public function sendSearchInitiated(
+        $searchSession)
+    {
+        $extra = [
+            'search_session_id'                 => $searchSession,
+            'shopping_session_id'               => null,
+        ];
+
+        $event = $this->_addEventBody('instagram_search_session_initiated', 'blended_search', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Send search results.
      *
      * This event should be sent once you have searched something,

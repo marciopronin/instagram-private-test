@@ -122,6 +122,7 @@ try {
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\VerifySMSCodeFormForSMSCaptchaException:
                     case $e instanceof InstagramAPI\Exception\Checkpoint\VerifyEmailCodeFormException:
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\VerifySMSCodeFormException:
                         $securityCode = trim(fgets(STDIN));
                         $ig->checkpoint->sendWebFormSecurityCode($e->getResponse()->getChallengeUrl(), $securityCode);
                         break 2;

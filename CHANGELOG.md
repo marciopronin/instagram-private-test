@@ -1,3 +1,19 @@
+# Stable release v15.5.0
+## Date: 09/10/2020
+
+### New features
+
+- **Event:** Add `sendSearchInitiated()`
+- **Exception:** Add `VerifySMSCodeFormException`
+
+### Examples
+
+- **Example:** Update checkpoint
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.4.6
 ## Date: 07/10/2020
 

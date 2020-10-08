@@ -108,6 +108,7 @@ class ServerMessageThrower
         'Checkpoint\IeForceSetNewPasswordFormException'      => ['IeForceSetNewPasswordForm'],
         'Checkpoint\AcknowledgeFormException'                => ['AcknowledgeForm'],
         'Checkpoint\VerifyEmailCodeFormException'            => ['VerifyEmailCodeForm'],
+        'Checkpoint\VerifySMSCodeFormException'              => ['VerifySMSCodeForm'],
     ];
 
     /**

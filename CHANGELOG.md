@@ -1,3 +1,10 @@
+# Stable release v15.6.1
+## Date: 10/10/2020
+
+### Updates and fixes
+
+- **Checkpoint:** Update `sendSetNewPassword()`
+
 # Stable release v15.6.0
 ## Date: 09/10/2020
 

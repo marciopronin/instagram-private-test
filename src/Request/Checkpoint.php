@@ -3,6 +3,7 @@
 namespace InstagramAPI\Request;
 
 use InstagramAPI\Response;
+use InstagramAPI\Utils;
 
 /**
  * Functions for managing Checkpoint.
@@ -305,6 +306,7 @@ class Checkpoint extends RequestCollection
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
+            ->setIsSilentFail(true)
             ->addPost('enc_new_password1', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('enc_new_password2', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->getResponse(new Response\WebCheckpointResponse());

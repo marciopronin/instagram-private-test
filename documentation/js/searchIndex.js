@@ -6876,6 +6876,11 @@ Search.appendIndex(
             "summary": "Send\u0020sms\u0020code\u0020via\u0020web\u0020form.",
             "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_sendWebFormSecurityCode"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AsendSetNewPassword\u0028\u0029",
+            "name": "sendSetNewPassword",
+            "summary": "Send\u0020force\u0020password\u0020change.",
+            "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_sendSetNewPassword"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AgetWebFormCheckpoint\u0028\u0029",
             "name": "getWebFormCheckpoint",
             "summary": "Get\u0020webform\u0020checkpoint.",
@@ -16805,6 +16810,11 @@ Search.appendIndex(
             "name": "VerifySMSCodeFormException",
             "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
             "url": "../classes/InstagramAPI-Exception-Checkpoint-VerifySMSCodeFormException.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Exception\\Checkpoint\\LegacyForceSetNewPasswordFormException",
+            "name": "LegacyForceSetNewPasswordFormException",
+            "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
+            "url": "../classes/InstagramAPI-Exception-Checkpoint-LegacyForceSetNewPasswordFormException.html"
         },                {
             "fqsen": "\\",
             "name": "\\",

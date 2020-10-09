@@ -1,3 +1,19 @@
+# Stable release v15.6.0
+## Date: 09/10/2020
+
+### New features
+
+- **Checkpoint:** Add `sendSetNewPassword()`
+- **Exception:** Add `LegacyForceSetNewPasswordFormException`
+
+### Examples
+
+- **Example:** Update checkpoint
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.5.0
 ## Date: 09/10/2020
 

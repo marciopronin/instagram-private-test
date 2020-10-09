@@ -158,6 +158,11 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-WebCheckpointResponse.html"><abbr title="\InstagramAPI\Response\WebCheckpointResponse">WebCheckpointResponse</abbr></a></td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Checkpoint.html#method_sendSetNewPassword">sendSetNewPassword()</a></th>
+                    <td class="phpdocumentor-cell">Send force password change.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-WebCheckpointResponse.html"><abbr title="\InstagramAPI\Response\WebCheckpointResponse">WebCheckpointResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Checkpoint.html#method_getWebFormCheckpoint">getWebFormCheckpoint()</a></th>
                     <td class="phpdocumentor-cell">Get webform checkpoint.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-WebCheckpointResponse.html"><abbr title="\InstagramAPI\Response\WebCheckpointResponse">WebCheckpointResponse</abbr></a></td>
@@ -902,6 +907,66 @@ Instagram's ToS or is using a copyrighted media.</p></section>
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-WebCheckpointResponse.html"><abbr title="\InstagramAPI\Response\WebCheckpointResponse">WebCheckpointResponse</abbr></a></span>
             
 </article>
+                                    <a id="method_sendSetNewPassword"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">sendSetNewPassword()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">301</span>
+    </aside>
+        <p class="phpdocumentor-summary">Send force password change.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">sendSetNewPassword</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$checkpointUrl</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$password</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-WebCheckpointResponse.html"><abbr title="\InstagramAPI\Response\WebCheckpointResponse">WebCheckpointResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$checkpointUrl</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Checkpoint URL.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$password</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Password to set.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-WebCheckpointResponse.html"><abbr title="\InstagramAPI\Response\WebCheckpointResponse">WebCheckpointResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_getWebFormCheckpoint"></a>
 <article
         class="
@@ -913,7 +978,7 @@ Instagram's ToS or is using a copyrighted media.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">300</span>
+        <span class="phpdocumentor-element-found-in__line">322</span>
     </aside>
         <p class="phpdocumentor-summary">Get webform checkpoint.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

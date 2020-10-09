@@ -140,6 +140,10 @@ try {
                     case $e instanceof InstagramAPI\Exception\Checkpoint\AcknowledgeFormException:
                         $ig->checkpoint->sendChallenge(substr($e->getResponse()->getChallengeUrl(), 1), false, true);
                         break;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\LegacyForceSetNewPasswordFormException:
+                        $newPassword = trim(fgets(STDIN));
+                        $ig->checkpoint->sendSetNewPassword($e->getResponse()->getChallengeUrl(), $newPassword);
+                        break 2;
                     default:
                         throw new InstagramAPI\Exception\Checkpoint\UnknownChallengeStepException();
                 }

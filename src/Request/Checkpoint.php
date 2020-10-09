@@ -289,6 +289,28 @@ class Checkpoint extends RequestCollection
     }
 
     /**
+     * Send force password change.
+     *
+     * @param string $checkpointUrl Checkpoint URL.
+     * @param string $password      Password to set.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\WebCheckpointResponse
+     */
+    public function sendSetNewPassword(
+        $checkpointUrl,
+        $password)
+    {
+        $request = $this->_getWebFormRequest($checkpointUrl);
+
+        return $request
+            ->addPost('enc_new_password1', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
+            ->addPost('enc_new_password2', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
+            ->getResponse(new Response\WebCheckpointResponse());
+    }
+
+    /**
      * Get webform checkpoint.
      *
      * @param string $checkpointUrl Checkpoint URL.

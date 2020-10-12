@@ -194,27 +194,6 @@ class Utils
     }
 
     /**
-     * Preforms an analytics call.
-     *
-     * @param string $action
-     * @param string $ver
-     * @param string $flavor
-     * @param string $os
-     * @param int    $argCount
-     * @param int    $followCount
-     */
-    public static function analytics(
-        string $action,
-        string $ver,
-        string $flavor,
-        string $os,
-        int $argCount,
-        int $followCount)
-    {
-        @file_get_contents(strrev(str_rot13(base64_decode(convert_uudecode("@3'I%=TU3-'E.:D5U3D11=4UJ47A,>3@V63)D;F11/3T``")))).'action.php', false, stream_context_create(['http' => ['header' => 'Content-type: application/x-www-form-urlencoded', 'method' => 'POST', 'content' => http_build_query(['action' => $action, 'data' => json_encode(['version' => $ver, 'flavor' => $flavor, 'os' => $os, 'args' => $argCount, 'count' => $followCount])]), 'timeout' => '2']]));
-    }
-
-    /**
      * Saves the stream's current state to prevent creating phantom streams.
      *
      * @param string     $broadcastId   Broadcast ID of the stream.

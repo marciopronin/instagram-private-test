@@ -1275,7 +1275,7 @@ class Utils
         $requiredKeys = ['tag_name', 'use_custom_title', 'is_sticker'];
 
         // Extract all hashtags from the caption using a UTF-8 aware regex.
-        if (!preg_match_all('/#(\w+[^\x00-\x7F]?+)/u', $captionText, $tagsInCaption)) {
+        if (!preg_match_all('/#([^\s#]+)/u', $captionText, $tagsInCaption)) {
             throw new \InvalidArgumentException('Invalid caption for hashtag.');
         }
 

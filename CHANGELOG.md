@@ -1,3 +1,19 @@
+# Stable release v15.6.2
+## Date: 12/10/2020
+
+### Updates and fixes
+
+- **Utils:** Update `throwIfInvalidStoryHashtags`
+
+### Examples
+
+- **Example:** Live utils remove code
+- **Example:** Update LiveManager auth
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.6.1
 ## Date: 10/10/2020
 

@@ -79,8 +79,12 @@ try {
                             if ($iterations > 5) {
                                 $webForm = true;
                             }
-                            // Send a challenge request
-                            $ig->checkpoint->sendChallenge($checkApiPath);
+                            if ((is_array($e->getResponse()->getChallenge()) === false) && ($e->getResponse()->getChallenge()->getChallengeContext() !== null)) {
+                                $ig->checkpoint->sendChallenge($e->getResponse()->getChallenge()->getUrl(), true);
+                            } else {
+                                // Send a challenge request
+                                $ig->checkpoint->sendChallenge($checkApiPath);
+                            }
                         }
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\EscalationInformationalException:
@@ -103,7 +107,6 @@ try {
                         // The "STDIN" lets you paste the code via terminal for testing.
                         // You should replace this line with the logic you want.
                         // The verification code will be sent by Instagram via SMS.
-                        echo 'Insert verification code: ';
                         $code = trim(fgets(STDIN));
                         // `sendVerificationCode()` will send the received verification code from the previous step.
                         // If the checkpoint was bypassed, you will be able to do any other request normally.
@@ -119,13 +122,11 @@ try {
                         }
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SubmitPhoneException:
-                        echo 'Phone number verification required. Insert phone number: ';
                         $phone = trim(fgets(STDIN));
                         // Set the phone number for verification.
                         $ig->checkpoint->sendVerificationPhone($checkApiPath, $phone);
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SubmitEmailException:
-                        echo 'Email verification required. Insert email : ';
                         $email = trim(fgets(STDIN));
                         // Set the email for verification.
                         $ig->checkpoint->sendVerificationEmail($checkApiPath, $email);
@@ -135,8 +136,6 @@ try {
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\RecaptchaChallengeException:
                         // $sitekey = $e->getResponse()->getSitekey();
-                        echo 'Catpcha required. Exiting...';
-                        exit();
                         $googleResponse = trim(fgets(STDIN));
                         $ig->checkpoint->sendCaptchaResponse($e->getResponse()->getChallengeUrl(), $googleResponse);
                         break;
@@ -144,23 +143,36 @@ try {
                         $ig->checkpoint->sendAcceptEscalationInformational($e->getResponse()->getChallengeUrl());
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SubmitPhoneNumberFormException:
-                        echo 'Phone number verification required. Insert phone number: ';
                         $phone = trim(fgets(STDIN));
                         $ig->checkpoint->sendWebFormPhoneNumber($e->getResponse()->getChallengeUrl(), $phone);
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SelectVerificationMethodFormException:
-                        echo 'Insert verification method. 0 = SMS, 1 = EMAIL: ';
                         $verifiationMethod = trim(fgets(STDIN));
                         $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), $verifiationMethod);
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\VerifySMSCodeFormForSMSCaptchaException:
-                        echo 'Insert verification code: ';
-                        $smsCode = trim(fgets(STDIN));
-                        $ig->checkpoint->sendWebFormSmsCode($e->getResponse()->getChallengeUrl(), $smsCode);
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\VerifyEmailCodeFormException:
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\VerifySMSCodeFormException:
+                        $securityCode = trim(fgets(STDIN));
+                        $ig->checkpoint->sendWebFormSecurityCode($e->getResponse()->getChallengeUrl(), $securityCode);
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\UFACBlockingFormException:
                         echo 'Account on moderation';
                         exit();
+                        break 2;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\SelectContactPointRecoveryFormException:
+                        $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), $e->getResponse()->getVerificationChoice());
+                        break;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\IeForceSetNewPasswordFormException:
+                        $newPassword = trim(fgets(STDIN));
+                        $ig->account->changePassword($password, $newPassword);
+                        break 2;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\AcknowledgeFormException:
+                        $ig->checkpoint->sendChallenge(substr($e->getResponse()->getChallengeUrl(), 1), false, true);
+                        break;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\LegacyForceSetNewPasswordFormException:
+                        $newPassword = trim(fgets(STDIN));
+                        $ig->checkpoint->sendSetNewPassword($e->getResponse()->getChallengeUrl(), $newPassword);
                         break 2;
                     default:
                         throw new InstagramAPI\Exception\Checkpoint\UnknownChallengeStepException();

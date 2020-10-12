@@ -927,7 +927,6 @@ class Live extends RequestCollection
     /**
      * Get if fundraiser set.
      *
-     *
      * @param mixed|null $maxId
      *
      * @throws \InstagramAPI\Exception\InstagramException

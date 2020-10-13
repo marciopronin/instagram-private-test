@@ -1,3 +1,15 @@
+# Stable release v15.6.5
+## Date: 13/10/2020
+
+### Updates and fixes
+
+- **Internal:** Update `configureSinglePhoto`
+- **Internal:** Update `configureSingleVideo`
+
+### Examples
+
+- **Example:** Update checkpoint
+
 # Stable release v15.6.4
 ## Date: 13/10/2020
 

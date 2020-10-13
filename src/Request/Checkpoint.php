@@ -248,6 +248,26 @@ class Checkpoint extends RequestCollection
     }
 
     /**
+     * Select accept/correct form.
+     *
+     * @param string $checkpointUrl      Checkpoint URL.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function selectAcceptCorrectForm(
+        $checkpointUrl)
+    {
+        $request = $this->_getWebFormRequest($checkpointUrl);
+
+        return $request
+            ->setIsSilentFail(true)
+            ->addPost('choice', 0)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Send phone via web form.
      *
      * @param string $checkpointUrl Checkpoint URL.

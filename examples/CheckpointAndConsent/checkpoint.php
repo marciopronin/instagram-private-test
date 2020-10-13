@@ -134,7 +134,7 @@ try {
                         $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), $e->getResponse()->getVerificationChoice());
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\ReviewContactPointChangeFormException:
-                        $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), 0);
+                        $ig->checkpoint->selectAcceptCorrectForm($e->getResponse()->getChallengeUrl());
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\IeForceSetNewPasswordFormException:
                         $newPassword = trim(fgets(STDIN));

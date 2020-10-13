@@ -1,3 +1,18 @@
+# Stable release v15.6.3
+## Date: 13/10/2020
+
+### Updates and fixes
+
+- **Exception:** Add `ReviewContactPointChangeFormException`
+
+### Examples
+
+- **Example:** Update checkpoint
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.6.2
 ## Date: 12/10/2020
 

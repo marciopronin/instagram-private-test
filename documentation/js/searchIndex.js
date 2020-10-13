@@ -16816,6 +16816,11 @@ Search.appendIndex(
             "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
             "url": "../classes/InstagramAPI-Exception-Checkpoint-LegacyForceSetNewPasswordFormException.html"
         },                {
+            "fqsen": "\\InstagramAPI\\Exception\\Checkpoint\\ReviewContactPointChangeFormException",
+            "name": "ReviewContactPointChangeFormException",
+            "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
+            "url": "../classes/InstagramAPI-Exception-Checkpoint-ReviewContactPointChangeFormException.html"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

@@ -110,6 +110,7 @@ class ServerMessageThrower
         'Checkpoint\VerifyEmailCodeFormException'            => ['VerifyEmailCodeForm'],
         'Checkpoint\VerifySMSCodeFormException'              => ['VerifySMSCodeForm'],
         'Checkpoint\LegacyForceSetNewPasswordFormException'  => ['LegacyForceSetNewPasswordForm'],
+        'Checkpoint\ReviewContactPointChangeFormException'   => ['ReviewContactPointChangeForm'],
     ];
 
     /**

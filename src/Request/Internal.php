@@ -391,6 +391,11 @@ class Internal extends RequestCollection
                         ->addPost('attached_media', json_encode($attachedMedia))
                         ->addPost('story_sticker_ids', 'media_simple_'.reset($attachedMedia)['media_id']);
                 }
+                if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['fb_access_token'])) {
+                    $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
+                            ->addPost('fb_access_token', $externalMetadata['fb_access_token'])
+                            ->addPost('share_to_fb_destination_type', 'USER');
+                }
                 break;
             case Constants::FEED_DIRECT_STORY:
                 $request
@@ -893,6 +898,11 @@ class Internal extends RequestCollection
                     $request
                         ->addPost('attached_media', json_encode($attachedMedia))
                         ->addPost('story_sticker_ids', 'media_simple_'.reset($attachedMedia)['media_id']);
+                }
+                if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['fb_access_token'])) {
+                    $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
+                            ->addPost('fb_access_token', $externalMetadata['fb_access_token'])
+                            ->addPost('share_to_fb_destination_type', 'USER');
                 }
                 break;
             case Constants::FEED_DIRECT_STORY:

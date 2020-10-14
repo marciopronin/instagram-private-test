@@ -1,3 +1,18 @@
+# Stable release v15.7.0
+## Date: 14/10/2020
+
+### Updates and fixes
+
+- **Account:** Add `setBirthday()`
+
+### Examples
+
+- **Example:** Update Gating
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.6.5
 ## Date: 13/10/2020
 

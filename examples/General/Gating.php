@@ -120,6 +120,10 @@ try {
     $ig->highlight->getUserFeed($userId);
     $userInfo = $ig->people->getInfoById($userId, 'blended_search')->getUser();
     if ($userInfo->getGating() !== null) {
+        if ($userInfo->getGating()->getGatingType() === 'unappealable') {
+            echo $userInfo->getGating()->getDescription();
+            exit();
+        }
         $ig->people->markUserOverage($userId);
     }
     $ig->story->getUserStoryFeed($userId);

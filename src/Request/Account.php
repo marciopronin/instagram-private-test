@@ -406,6 +406,33 @@ class Account extends RequestCollection
     }
 
     /**
+     * Edit your birthday.
+     *
+     * WARNING: Remember to also call `editProfile()` *after* using this
+     * function, so that you act like the real app!
+     *
+     * @param string $day   Day of birth.
+     * @param string $month Month of birth.
+     * @param string $year  Year of birth.
+     *
+     * @return \InstagramAPI\Response\UserInfoResponse
+     */
+    public function setBirthday(
+        $day,
+        $month,
+        $year)
+    {
+        return $this->ig->request('accounts/set_birthday/')
+            ->setSignedPost(false)
+            ->addPost('day', $day)
+            ->addPost('month', $month)
+            ->addPost('year', $year)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('_uuid', $this->ig->uuid)
+            ->getResponse(new Response\UserInfoResponse());
+    }
+
+    /**
      * Edit your biography.
      *
      * You are able to add `@mentions` and `#hashtags` to your biography, but

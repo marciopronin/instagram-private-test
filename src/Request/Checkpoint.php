@@ -250,7 +250,7 @@ class Checkpoint extends RequestCollection
     /**
      * Select accept/correct form.
      *
-     * @param string $checkpointUrl      Checkpoint URL.
+     * @param string $checkpointUrl Checkpoint URL.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *

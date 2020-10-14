@@ -6561,6 +6561,11 @@ Search.appendIndex(
             "summary": "Edit\u0020your\u0020gender.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_setGender"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AsetBirthday\u0028\u0029",
+            "name": "setBirthday",
+            "summary": "Edit\u0020your\u0020birthday.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_setBirthday"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AsetBiography\u0028\u0029",
             "name": "setBiography",
             "summary": "Edit\u0020your\u0020biography.",
@@ -6865,6 +6870,11 @@ Search.appendIndex(
             "name": "selectVerificationMethodForm",
             "summary": "Select\u0020verification\u0020method\u0020form.",
             "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_selectVerificationMethodForm"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AselectAcceptCorrectForm\u0028\u0029",
+            "name": "selectAcceptCorrectForm",
+            "summary": "Select\u0020accept\/correct\u0020form.",
+            "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_selectAcceptCorrectForm"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AsendWebFormPhoneNumber\u0028\u0029",
             "name": "sendWebFormPhoneNumber",

@@ -1,7 +1,18 @@
+# Stable release v15.7.1
+## Date: 15/10/2020
+
+### Updates and fixes
+
+- **Instagram:** Update `setLocale()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.7.0
 ## Date: 14/10/2020
 
-### Updates and fixes
+### New feature
 
 - **Account:** Add `setBirthday()`
 

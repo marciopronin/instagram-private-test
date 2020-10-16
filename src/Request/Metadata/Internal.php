@@ -50,6 +50,9 @@ final class Internal
     /** @var bool */
     private $_isCarousel = false;
 
+    /** @var string */
+    private $_broadcastId;
+
     /**
      * Constructor.
      *
@@ -301,7 +304,7 @@ final class Internal
     /**
      * Set waterfall ID.
      *
-     * @param mixed $waterfallId
+     * @param string $waterfallId
      */
     public function setWaterfallID(
         $waterfallId)
@@ -322,7 +325,7 @@ final class Internal
     /**
      * Set isCarousel.
      *
-     * @param mixed $bool
+     * @param bool $bool
      */
     public function setIsCarousel(
         $bool)
@@ -338,5 +341,26 @@ final class Internal
     public function getIsCarousel()
     {
         return $this->_isCarousel;
+    }
+
+    /**
+     * Set broadcast ID.
+     *
+     * @param string $broadcastId
+     */
+    public function setBroadcastId(
+        $broadcastId)
+    {
+        $this->_broadcastId = $broadcastId;
+    }
+
+    /**
+     * Get broadcastId ID.
+     *
+     * @return string
+     */
+    public function getBroadcastId()
+    {
+        return $this->_broadcastId;
     }
 }

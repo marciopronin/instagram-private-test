@@ -1,3 +1,25 @@
+# Stable release v15.8.0
+## Date: 16/10/2020
+
+### New features
+
+**Live:** Live: Add `shareToIgtv()`
+
+### Updates and fixes
+
+- **Instagram:** Update `setAcceptLanguage()`
+- **Internal:** Add share to IGTV
+- **Metadata:** Add broadcast ID property
+
+### Examples
+
+- **Example:** Update liveBroadcast
+- **Examples:** Update goLive
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.7.1
 ## Date: 15/10/2020
 

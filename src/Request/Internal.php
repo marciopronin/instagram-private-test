@@ -78,6 +78,7 @@ class Internal extends RequestCollection
             && $targetFeed !== Constants::FEED_STORY
             && $targetFeed !== Constants::FEED_DIRECT
             && $targetFeed !== Constants::FEED_DIRECT_STORY
+            && $targetFeed !== Constants::FEED_TV
         ) {
             throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
         }
@@ -194,6 +195,9 @@ class Internal extends RequestCollection
         case Constants::FEED_STORY:
             $endpoint = 'media/configure_to_story/';
             break;
+        case Constants::FEED_TV:
+            $endpoint = 'media/configure_to_igtv/';
+            break;
         default:
             throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
         }
@@ -240,6 +244,12 @@ class Internal extends RequestCollection
         $attachedMedia = (isset($externalMetadata['attached_media']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['attached_media'] : null;
         /** @var array Product Tags to use for the media. ONLY FOR TIMELINE PHOTOS! */
         $productTags = (isset($externalMetadata['product_tags']) && $targetFeed == Constants::FEED_TIMELINE) ? $externalMetadata['product_tags'] : null;
+        /** @var array Title for IGTV. */
+        $igtvTitle = (isset($externalMetadata['igtv_title']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_title'] : null;
+        /** @var array Series ID for IGTV. */
+        $igtvSeriesId = (isset($externalMetadata['igtv_series_id']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_series_id'] : null;
+        /** @var array IGTV composer session ID. ONLY TV MEDIA! */
+        $igtvSessionId = (isset($externalMetadata['igtv_session_id']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_session_id'] : null;
 
         // Fix very bad external user-metadata values.
         if (!is_string($captionText)) {
@@ -410,6 +420,37 @@ class Internal extends RequestCollection
 
                 if ($internalMetadata->getStoryViewMode() !== null) {
                     $request->addPost('view_mode', $internalMetadata->getStoryViewMode());
+                }
+                break;
+            case Constants::FEED_TV:
+
+                if ($igtvTitle === null) {
+                    throw new \InvalidArgumentException('You must provide a title for the media.');
+                }
+                if ($igtvSessionId === null) {
+                    throw new \InvalidArgumentException('You must provide a session ID for the media.');
+                }
+
+                $request
+                    ->addHeader('is_igtv_video', '1')
+                    ->addHeader('retry_context', json_encode(
+                        [
+                            'num_reupload'          => 0,
+                            'num_step_auto_retry'   => 0,
+                            'num_step_manual_retry' => 0,
+                        ])
+                    )
+                    ->addPost('igtv_ads_toggled_on', '0')
+                    ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
+                    ->addPost('source_type', '4')
+                    ->addPost('keep_shoppable_products', '0')
+                    ->addPost('igtv_share_preview_to_feed', '1')
+                    ->addPost('caption', $captionText)
+                    ->addPost('title', $igtvTitle)
+                    ->addPost('igtv_composer_session_id', $igtvSessionId);
+
+                if ($igtvSeriesId !== null) {
+                    $request->addPost('igtv_series_id', $igtvSeriesId);
                 }
                 break;
         }
@@ -2832,6 +2873,10 @@ class Internal extends RequestCollection
             case Constants::FEED_STORY:
                 list($hash, $quality) = PDQHasher::computeHashAndQualityFromFilename($internalMetadata->getPhotoDetails()->getFilename(), false, false);
                 $result['original_photo_pdq_hash'] = sprintf('%s:%d', $hash->toHexString(), 9);
+                break;
+            case Constants::FEED_TV:
+                $result['broadcast_id'] = (string) $internalMetadata->getBroadcastId();
+                $result['is_post_live_igtv'] = '1';
                 break;
             default:
         }

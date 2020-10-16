@@ -2,6 +2,8 @@
 
 namespace InstagramAPI\Request;
 
+use InstagramAPI\Constants;
+use InstagramAPI\Request\Metadata\Internal as InternalMetadata;
 use InstagramAPI\Response;
 use InstagramAPI\Signatures;
 use InstagramAPI\Utils;
@@ -863,6 +865,8 @@ class Live extends RequestCollection
     /**
      * Add a finished broadcast to your post-live feed (saved replay).
      *
+     * @deprecated This endpoint has been removed in favor of shareToIgtv().
+     *
      * The broadcast must have ended before you can call this function.
      *
      * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
@@ -884,6 +888,8 @@ class Live extends RequestCollection
     /**
      * Delete a saved post-live broadcast.
      *
+     * @deprecated This endpoint has been removed, see notes of addToPostLive().
+     *
      * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
      *
      * @throws \InstagramAPI\Exception\InstagramException
@@ -898,6 +904,33 @@ class Live extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Share to IGTV.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     * @param string $coverPhoto  The cover to be used in IGTV.
+     * @param array  $metadata    External metadata: 'igtv_title', 'igtv_series_id'.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function shareToIgtv(
+        $broadcastId,
+        $coverPhoto,
+        array $metadata = [])
+    {
+        if (!isset($metadata['igtv_title'])) {
+            throw new \InvalidArgumentException('You must provide a valid title for IGTV.');
+        }
+
+        $internalMetadata = new InternalMetadata();
+        $internalMetadata->setBroadcastId($broadcastId);
+        $cover = new \InstagramAPI\Media\Photo\InstagramPhoto($coverPhoto);
+
+        return $this->ig->internal->uploadSinglePhoto(Constants::FEED_TV, $cover->getFile(), $internalMetadata, $metadata);
     }
 
     /**

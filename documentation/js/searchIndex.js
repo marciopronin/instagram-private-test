@@ -8436,6 +8436,11 @@ Search.appendIndex(
             "summary": "Delete\u0020a\u0020saved\u0020post\u002Dlive\u0020broadcast.",
             "url": "../classes/InstagramAPI-Request-Live.html#method_deletePostLive"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AshareToIgtv\u0028\u0029",
+            "name": "shareToIgtv",
+            "summary": "Share\u0020to\u0020IGTV.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_shareToIgtv"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AsetSubscriptionPreference\u0028\u0029",
             "name": "setSubscriptionPreference",
             "summary": "Set\u0020subscription\u0020\u0028notification\u0029\u0020preferences.",
@@ -8791,6 +8796,16 @@ Search.appendIndex(
             "summary": "Get\u0020isCarousel.",
             "url": "../classes/InstagramAPI-Request-Metadata-Internal.html#method_getIsCarousel"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Metadata\\Internal\u003A\u003AsetBroadcastId\u0028\u0029",
+            "name": "setBroadcastId",
+            "summary": "Set\u0020broadcast\u0020ID.",
+            "url": "../classes/InstagramAPI-Request-Metadata-Internal.html#method_setBroadcastId"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Metadata\\Internal\u003A\u003AgetBroadcastId\u0028\u0029",
+            "name": "getBroadcastId",
+            "summary": "Get\u0020broadcastId\u0020ID.",
+            "url": "../classes/InstagramAPI-Request-Metadata-Internal.html#method_getBroadcastId"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Metadata\\Internal\u003A\u003A\u0024_photoDetails",
             "name": "_photoDetails",
             "summary": "",
@@ -8850,6 +8865,11 @@ Search.appendIndex(
             "name": "_isCarousel",
             "summary": "",
             "url": "../classes/InstagramAPI-Request-Metadata-Internal.html#property__isCarousel"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Metadata\\Internal\u003A\u003A\u0024_broadcastId",
+            "name": "_broadcastId",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Request-Metadata-Internal.html#property__broadcastId"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\People",
             "name": "People",

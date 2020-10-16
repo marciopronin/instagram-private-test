@@ -774,15 +774,15 @@ class Instagram implements ExperimentsInterface
     /**
      * Set accept Language.
      *
-     * @param string $value
+     * @param string|string[] $value
      */
     public function setAcceptLanguage(
         $value)
     {
-        preg_match('/^[a-z]{2}-[A-Z]{2}$/', $value, $matches, PREG_OFFSET_CAPTURE, 0);
+        $matches = preg_grep('/^[a-z]{2}-[A-Z]{2}$/', $value);
 
         if (!empty($matches)) {
-            $this->acceptLanguage = $value;
+            $this->acceptLanguage = implode(', ', $matches);
         } else {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid accept language value.', $value));
         }

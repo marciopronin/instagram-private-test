@@ -55,6 +55,8 @@ $streamTotalSec = 0;
 $autoPin = null;
 $setUser = null;
 $charity = null;
+$title = null;
+$coverPhoto = null;
 foreach ($argv as $curArg) {
     if (strpos($curArg, '--stream-sec=') !== false) {
         $streamTotalSec = (int) str_replace('--stream-sec=', '', $curArg);
@@ -67,6 +69,12 @@ foreach ($argv as $curArg) {
     }
     if (strpos($curArg, '--set-charity=') !== false) {
         $charity = str_replace('_', ' ', str_replace('--set-charity=', '', $curArg));
+    }
+    if (strpos($curArg, '--set-title=') !== false) {
+        $title = str_replace('_', ' ', str_replace('--set-title=', '', $curArg));
+    }
+    if (strpos($curArg, '--set-cover=') !== false) {
+        $coverPhoto = str_replace('_', ' ', str_replace('--set-cover=', '', $curArg));
     }
 }
 
@@ -391,7 +399,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             //Normal livestream creation flow
             $info = $ig->people->getSelfInfo();
             Utils::log('[>] Livestream: Creating livestream...');
-            $stream = $ig->live->create(OBS_X, OBS_Y);
+            $stream = $ig->live->create(OBS_X, OBS_Y, $title);
             @define('maxTime', $stream->isMaxTimeInSeconds() ? ($stream->getMaxTimeInSeconds() - 100) : 3480);
             @define('heartbeatInterval', $stream->isHeartbeatInterval() ? $stream->getHeartbeatInterval() : 2);
 
@@ -745,7 +753,8 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
                 $archived = Utils::promptInput();
             }
             if (autoArchive || $archived == 'yes' && !autoDiscard) {
-                $ig->live->addToPostLive($broadcastId);
+                $igtvSessionId = Signatures::generateUUID();
+                $ig->live->shareToIgtv($broadcastId, $coverPhoto, ['igtv_title' => $title, 'igtv_session_id' => $igtvSessionId]);
                 Utils::log('Livestream: Added livestream to archive!');
             }
             exit(0);
@@ -761,7 +770,8 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
                 $archived = Utils::promptInput();
             }
             if (autoArchive || $archived == 'yes' && !autoDiscard) {
-                $ig->live->addToPostLive($broadcastId);
+                $igtvSessionId = Signatures::generateUUID();
+                $ig->live->shareToIgtv($broadcastId, $coverPhoto, ['igtv_title' => $title, 'igtv_session_id' => $igtvSessionId]);
                 Utils::log('Livestream: Added livestream to archive!');
             }
             $restart = 'yes';
@@ -834,7 +844,8 @@ function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $o
                 $archived = Utils::promptInput();
             }
             if (autoArchive || $archived == 'yes' && !autoDiscard) {
-                $live->addToPostLive($broadcastId);
+                $igtvSessionId = Signatures::generateUUID();
+                $ig->live->shareToIgtv($broadcastId, $coverPhoto, ['igtv_title' => $title, 'igtv_session_id' => $igtvSessionId]);
                 Utils::log('Livestream: Added livestream to archive!');
             }
             exit(0);
@@ -977,7 +988,8 @@ function endLivestreamFlow($ig, $broadcastId, $archived, $obsAuto, $helper, $pid
     $ig->live->end($broadcastId);
     Utils::log('Livestream: Ended livestream!');
     if ($archived == 'yes') {
-        $ig->live->addToPostLive($broadcastId);
+        $igtvSessionId = Signatures::generateUUID();
+        $ig->live->shareToIgtv($broadcastId, $coverPhoto, ['igtv_title' => $title, 'igtv_session_id' => $igtvSessionId]);
         Utils::log('Livestream: Added livestream to archive!');
     }
     Utils::deleteRecovery();

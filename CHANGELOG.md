@@ -1,3 +1,10 @@
+# Stable release v15.8.1
+## Date: 19/10/2020
+
+### Updates and fixes
+
+- **Constants:** Bump version to `163.0.0.45.122` in order to be able to use all IG features. WIP.
+
 # Stable release v15.8.0
 ## Date: 16/10/2020
 

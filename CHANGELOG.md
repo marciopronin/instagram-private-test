@@ -1,3 +1,10 @@
+# Stable release v15.8.2
+## Date: 20/10/2020
+
+### Updates and fixes
+
+**Instagram:** Update `setLocale()` and `setAcceptLanguage()`
+
 # Stable release v15.8.1
 ## Date: 19/10/2020
 

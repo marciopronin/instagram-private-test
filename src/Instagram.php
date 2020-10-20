@@ -748,6 +748,10 @@ class Instagram implements ExperimentsInterface
     public function setLocale(
         $value)
     {
+        if (!is_array($value)) {
+            $value = [$value];
+        }
+        
         $matches = preg_grep('/^[a-z]{2}_[A-Z]{2}$/', $value);
 
         if (!empty($matches)) {
@@ -779,6 +783,10 @@ class Instagram implements ExperimentsInterface
     public function setAcceptLanguage(
         $value)
     {
+        if (!is_array($value)) {
+            $value = [$value];
+        }
+
         $matches = preg_grep('/^[a-z]{2}-[A-Z]{2}$/', $value);
 
         if (!empty($matches)) {

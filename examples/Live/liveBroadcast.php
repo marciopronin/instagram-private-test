@@ -137,7 +137,8 @@ try {
     // Once the broadcast has ended, you can optionally add the finished
     // broadcast to your post-live feed (saved replay).
     $igtvSessionId = \InstagramAPI\Signatures::generateUUID();
-    $ig->live->shareToIgtv($broadcastId, $coverPhoto, ['igtv_title' => 'test', 'igtv_session_id' => $igtvSessionId]);
+    $cover = new \InstagramAPI\Media\Photo\InstagramPhoto($coverPhoto, ['targetFeed' => \InstagramAPI\Constants::FEED_TV]);
+    $ig->live->shareToIgtv($broadcastId, $cover->getFile(), ['igtv_title' => 'test', 'igtv_session_id' => $igtvSessionId]);
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

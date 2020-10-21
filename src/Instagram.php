@@ -751,7 +751,7 @@ class Instagram implements ExperimentsInterface
         if (!is_array($value)) {
             $value = [$value];
         }
-        
+
         $matches = preg_grep('/^[a-z]{2}_[A-Z]{2}$/', $value);
 
         if (!empty($matches)) {

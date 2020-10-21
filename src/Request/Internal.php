@@ -107,8 +107,26 @@ class Internal extends RequestCollection
             return $internalMetadata;
         }
 
-        // Configure the uploaded image and attach it to our timeline/story.
-        $configure = $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
+        // Configure the uploaded photo/share to IGTV and attach it to our timeline/IGTV.
+        try {
+            /** @var \InstagramAPI\Response\ConfigureResponse $configure */
+            $configure = $this->ig->internal->configureWithRetries(
+                function () use ($targetFeed, $internalMetadata, $externalMetadata) {
+                    // Configure the uploaded image and attach it to our timeline/story/IGTV.
+                    $configure = $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
+                }
+            );
+        } catch (InstagramException $e) {
+            // Pass Instagram's error as is.
+            throw $e;
+        } catch (\Exception $e) {
+            // Wrap runtime errors.
+            throw new UploadFailedException(
+                sprintf('Upload of "%s" failed: %s', basename($photoFilename), $e->getMessage()),
+                $e->getCode(),
+                $e
+            );
+        }
 
         return $configure;
     }
@@ -445,8 +463,10 @@ class Internal extends RequestCollection
                     ->addPost('source_type', '4')
                     ->addPost('keep_shoppable_products', '0')
                     ->addPost('igtv_share_preview_to_feed', '1')
+                    ->addPost('device_id', $this->ig->device_id)
                     ->addPost('caption', $captionText)
                     ->addPost('title', $igtvTitle)
+                    ->addPost('upload_id', $uploadId)
                     ->addPost('igtv_composer_session_id', $igtvSessionId);
 
                 if ($igtvSeriesId !== null) {

@@ -928,9 +928,8 @@ class Live extends RequestCollection
 
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setBroadcastId($broadcastId);
-        $cover = new \InstagramAPI\Media\Photo\InstagramPhoto($coverPhoto);
 
-        return $this->ig->internal->uploadSinglePhoto(Constants::FEED_TV, $cover->getFile(), $internalMetadata, $metadata);
+        return $this->ig->internal->uploadSinglePhoto(Constants::FEED_TV, $coverPhoto, $internalMetadata, $metadata);
     }
 
     /**

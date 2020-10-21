@@ -27,11 +27,12 @@ try {
 }
 
 try {
+    $cover = new \InstagramAPI\Media\Photo\InstagramPhoto($coverPhoto, ['targetFeed' => \InstagramAPI\Constants::FEED_TV]);
     $metadata = [
-        'cover_photo' => $coverPhoto, // Video thumbnail
+        'cover_photo' => $cover->getFile(), // Video thumbnail
     ];
 
-    $video = new \InstagramAPI\Media\Photo\InstagramVideo($videoFilename, ['targetFeed' => \InstagramAPI\Constants::FEED_TV]);
+    $video = new \InstagramAPI\Media\Video\InstagramVideo($videoFilename, ['targetFeed' => \InstagramAPI\Constants::FEED_TV]);
     $ig->tv->uploadVideo($video->getFile(), $metadata);
 } catch (\Exception $e) {
     if ($e instanceof InstagramAPI\Exception\LoginRequiredException) {

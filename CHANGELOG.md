@@ -1,3 +1,19 @@
+# Stable release v15.8.3
+## Date: 21/10/2020
+
+### Updates and fixes
+
+- **Internal:** Update `shareToIgtv()`
+
+### Examples
+
+- **Example:** Update liveBroadcast
+- **Examples:** Update uploadVideoIGTVWithThumbnail
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.8.2
 ## Date: 20/10/2020
 

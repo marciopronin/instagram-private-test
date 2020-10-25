@@ -1,3 +1,15 @@
+# Stable release v15.8.4
+## Date: 26/10/2020
+
+### Updates and fixes
+
+- **Internal:** Update `uploadSinglePhoto()`
+- **Utils:** Update `extractURLs()`
+
+### Examples
+
+- **Example:** Update goLive
+
 # Stable release v15.8.3
 ## Date: 21/10/2020
 

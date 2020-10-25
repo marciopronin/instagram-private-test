@@ -754,7 +754,18 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
             }
             if (autoArchive || $archived == 'yes' && !autoDiscard) {
                 $igtvSessionId = Signatures::generateUUID();
+                if ($coverPhoto === null) {
+                    $thumbnailsResponse = $ig->live->getPostLiveThumbnails($broadcastId);
+                    $thumbnailUrl = $thumbnailsResponse->getThumbnails()[0];
+                    $thumb = tmpfile();
+                    fwrite($thumb, file_get_contents($thumbnailUrl));
+                    $coverPhoto = $thumb;
+                }
                 $ig->live->shareToIgtv($broadcastId, $coverPhoto, ['igtv_title' => $title, 'igtv_session_id' => $igtvSessionId]);
+                if ($thumb !== null) {
+                    fclose($thumb);
+                    $thumb = null;
+                }
                 Utils::log('Livestream: Added livestream to archive!');
             }
             exit(0);
@@ -771,7 +782,18 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
             }
             if (autoArchive || $archived == 'yes' && !autoDiscard) {
                 $igtvSessionId = Signatures::generateUUID();
+                if ($coverPhoto === null) {
+                    $thumbnailsResponse = $ig->live->getPostLiveThumbnails($broadcastId);
+                    $thumbnailUrl = $thumbnailsResponse->getThumbnails()[0];
+                    $thumb = tmpfile();
+                    fwrite($thumb, file_get_contents($thumbnailUrl));
+                    $coverPhoto = $thumb;
+                }
                 $ig->live->shareToIgtv($broadcastId, $coverPhoto, ['igtv_title' => $title, 'igtv_session_id' => $igtvSessionId]);
+                if ($thumb !== null) {
+                    fclose($thumb);
+                    $thumb = null;
+                }
                 Utils::log('Livestream: Added livestream to archive!');
             }
             $restart = 'yes';
@@ -845,7 +867,18 @@ function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $o
             }
             if (autoArchive || $archived == 'yes' && !autoDiscard) {
                 $igtvSessionId = Signatures::generateUUID();
+                if ($coverPhoto === null) {
+                    $thumbnailsResponse = $ig->live->getPostLiveThumbnails($broadcastId);
+                    $thumbnailUrl = $thumbnailsResponse->getThumbnails()[0];
+                    $thumb = tmpfile();
+                    fwrite($thumb, file_get_contents($thumbnailUrl));
+                    $coverPhoto = $thumb;
+                }
                 $ig->live->shareToIgtv($broadcastId, $coverPhoto, ['igtv_title' => $title, 'igtv_session_id' => $igtvSessionId]);
+                if ($thumb !== null) {
+                    fclose($thumb);
+                    $thumb = null;
+                }
                 Utils::log('Livestream: Added livestream to archive!');
             }
             exit(0);
@@ -989,7 +1022,18 @@ function endLivestreamFlow($ig, $broadcastId, $archived, $obsAuto, $helper, $pid
     Utils::log('Livestream: Ended livestream!');
     if ($archived == 'yes') {
         $igtvSessionId = Signatures::generateUUID();
+        if ($coverPhoto === null) {
+            $thumbnailsResponse = $ig->live->getPostLiveThumbnails($broadcastId);
+            $thumbnailUrl = $thumbnailsResponse->getThumbnails()[0];
+            $thumb = tmpfile();
+            fwrite($thumb, file_get_contents($thumbnailUrl));
+            $coverPhoto = $thumb;
+        }
         $ig->live->shareToIgtv($broadcastId, $coverPhoto, ['igtv_title' => $title, 'igtv_session_id' => $igtvSessionId]);
+        if ($thumb !== null) {
+            fclose($thumb);
+            $thumb = null;
+        }
         Utils::log('Livestream: Added livestream to archive!');
     }
     Utils::deleteRecovery();

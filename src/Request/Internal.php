@@ -113,7 +113,7 @@ class Internal extends RequestCollection
             $configure = $this->ig->internal->configureWithRetries(
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Configure the uploaded image and attach it to our timeline/story/IGTV.
-                    $configure = $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
+                    return $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
                 }
             );
         } catch (InstagramException $e) {

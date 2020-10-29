@@ -4248,10 +4248,8 @@ class Event extends RequestCollection
     /**
      * Send string impressions.
      *
-     * This is used to send Instagram how many times have you seen user IDs while searching in the direct module.
-     * TODO: Probably is used for other modules as well. It will be documented as it
-     *       discovered.
-     *
+     * Impressions of internal strings shown in the app.
+     * 
      * @param array $impressions Impressions. Format: ['2131821003': 4, '2131821257': 2, '2131821331': 10].
      *
      * @throws \InstagramAPI\Exception\InstagramException
@@ -4261,7 +4259,7 @@ class Event extends RequestCollection
     {
         $extra = [
             'impressions'   => $impressions,
-            'string_locale' => Constants::USER_AGENT_LOCALE,
+            'string_locale' => $this->ig->getLocale(),
         ];
         $event = $this->_addEventBody('android_string_impressions', 'IgResourcesAnalyticsModule', $extra);
         $this->_addEventData($event);

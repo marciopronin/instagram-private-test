@@ -1,3 +1,15 @@
+# Stable release v16.0.1
+## Date: 29/10/2020
+
+### Dataset
+
+- **Data:** `ads_countries_config.json`
+
+### Updates and fixes
+
+- **Constants:** Update to 165.1.0.29.119
+- **Event:** Update `sendStringImpressions()`
+
 # Stable release v16.0.0
 ## Date: 29/10/2020
 

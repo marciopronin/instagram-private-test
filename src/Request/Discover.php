@@ -33,6 +33,7 @@ class Discover extends RequestCollection
         $isPrefetch = false)
     {
         $request = $this->ig->request('discover/topical_explore/')
+            ->addHeader('X-IG-Prefetch-Request', 'foreground')
             ->addParam('is_prefetch', $isPrefetch)
             ->addParam('omit_cover_media', true)
             ->addParam('reels_configuration', 'default')

@@ -6751,6 +6751,11 @@ Search.appendIndex(
             "summary": "Get\u0020linked\u0020accounts\u0020status.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_getLinkageStatus"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AgetCrossPostingDestinationStatus\u0028\u0029",
+            "name": "getCrossPostingDestinationStatus",
+            "summary": "Get\u0020cross\u0020posting\u0020destination\u0020\u0028Cross\u0020posting\u0020to\u0020Facebook\u0029.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_getCrossPostingDestinationStatus"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AgetProcessContactPointSignals\u0028\u0029",
             "name": "getProcessContactPointSignals",
             "summary": "TODO.",
@@ -6985,6 +6990,11 @@ Search.appendIndex(
             "name": "getInbox",
             "summary": "Get\u0020direct\u0020inbox\u0020messages\u0020for\u0020your\u0020account.",
             "url": "../classes/InstagramAPI-Request-Direct.html#method_getInbox"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Direct\u003A\u003AgetHasInteropUpgraded\u0028\u0029",
+            "name": "getHasInteropUpgraded",
+            "summary": "Get\u0020if\u0020has\u0020interop\u0020upgraded.",
+            "url": "../classes/InstagramAPI-Request-Direct.html#method_getHasInteropUpgraded"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Direct\u003A\u003AgetPendingInbox\u0028\u0029",
             "name": "getPendingInbox",
@@ -16850,6 +16860,16 @@ Search.appendIndex(
             "name": "ReviewContactPointChangeFormException",
             "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
             "url": "../classes/InstagramAPI-Exception-Checkpoint-ReviewContactPointChangeFormException.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\HasInteropUpgradedResponse",
+            "name": "HasInteropUpgradedResponse",
+            "summary": "HasInteropUpgradedResponse.",
+            "url": "../classes/InstagramAPI-Response-HasInteropUpgradedResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\HasInteropUpgradedResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-HasInteropUpgradedResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

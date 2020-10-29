@@ -1,3 +1,31 @@
+# Stable release v16.0.0
+## Date: 29/10/2020
+
+### BACKWARD BREAKS ⚠️
+
+- **Direct:** Update `markItemSeen()`. A new argument has been added to `markItemSeen()`.
+
+### New features
+
+- **Account:** Add `getCrossPostingDestinationStatus()`
+- **Direct:** Add `getHasInteropUpgraded()`
+
+### Updates and fixes
+
+- **Direct:** Update `markItemSeen()`.
+- **Discover:** Update `getExploreFeed()`
+- **Instagram:** Update login flow
+- **Internal:** Share story to FB page. 'USER' or 'PAGE' can be selected with 'share_to_fb_destination_type' external metadata key.
+- **Request:** Update headers
+
+### Examples
+
+- **Example:** Add approvePendingInbox
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v15.8.4
 ## Date: 26/10/2020
 

@@ -1850,12 +1850,6 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
-                // We must fetch new token here, because it updates rewrite rules.
-                try {
-                    $this->internal->getFacebookDodResources();
-                } catch (\InstagramAPI\Exception\InstagramException $e) {
-                    // Some locales doesn't have DOD resources.
-                }
                 $this->internal->fetchZeroRatingToken();
                 $this->event->sendZeroCarrierSignal();
                 //$this->internal->bootstrapMsisdnHeader();

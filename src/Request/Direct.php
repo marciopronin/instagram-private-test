@@ -78,6 +78,19 @@ class Direct extends RequestCollection
     }
 
     /**
+     * Get if has interop upgraded.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\HasInteropUpgradedResponse
+     */
+    public function getHasInteropUpgraded()
+    {
+        return $this->ig->request('direct_v2/has_interop_upgraded/')
+            ->getResponse(new Response\HasInteropUpgradedResponse());
+    }
+
+    /**
      * Get pending inbox data.
      *
      * @param string|null $cursorId Next "cursor ID", used for pagination.
@@ -1301,8 +1314,9 @@ class Direct extends RequestCollection
     /**
      * Marks an item from given thread as seen.
      *
-     * @param string $threadId     Thread ID.
-     * @param string $threadItemId Thread item ID.
+     * @param string $threadId      Thread ID.
+     * @param string $threadItemId  Thread item ID.
+     * @param string $clientContext Client context.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1310,15 +1324,17 @@ class Direct extends RequestCollection
      */
     public function markItemSeen(
         $threadId,
-        $threadItemId)
+        $threadItemId,
+        $clientContext)
     {
         return $this->ig->request("direct_v2/threads/{$threadId}/items/{$threadItemId}/seen/")
-            ->addPost('use_unified_inbox', 'true')
             ->addPost('action', 'mark_seen')
             ->addPost('thread_id', $threadId)
             ->addPost('item_id', $threadItemId)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('client_context', $clientContext)
+            ->addPost('offline_threading_id', $clientContext)
             ->setSignedPost(false)
             ->getResponse(new Response\DirectSeenItemResponse());
     }

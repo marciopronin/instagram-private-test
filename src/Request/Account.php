@@ -1266,6 +1266,20 @@ class Account extends RequestCollection
     }
 
     /**
+     * Get cross posting destination (Cross posting to Facebook).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getCrossPostingDestinationStatus()
+    {
+        return $this->ig->request('ig_fb_xposting/account_linking/user_xposting_destination/')
+            ->addParam('signed_body', Signatures::generateSignature().'.{}')
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * TODO.
      *
      * @throws \InstagramAPI\Exception\InstagramException

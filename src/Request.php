@@ -417,6 +417,7 @@ class Request
                 $this->_headers['X-IG-Capabilities'] = Constants::X_IG_Capabilities;
                 $this->_headers['X-Bloks-Version-Id'] = Constants::BLOCK_VERSIONING_ID;
                 $this->_headers['X-Bloks-Is-Layout-RTL'] = 'false';
+                $this->_headers['X-Bloks-Is-Panorama-Enabled'] = 'false';
             } else {
                 $this->_headers['X-DEVICE-ID'] = $this->_parent->uuid;
                 $this->_headers['X-IG-App-ID'] = Constants::FACEBOOK_ORCA_APPLICATION_ID;

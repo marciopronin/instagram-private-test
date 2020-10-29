@@ -331,7 +331,7 @@ class Internal extends RequestCollection
                 if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['fb_access_token'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
                             ->addPost('fb_access_token', $externalMetadata['fb_access_token'])
-                            ->addPost('share_to_fb_destination_type', 'USER');
+                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
                 }
                 break;
             case Constants::FEED_STORY:
@@ -423,7 +423,7 @@ class Internal extends RequestCollection
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
                             ->addPost('xpost_surface', 'auto_xpost')
                             ->addPost('share_to_facebook', 1)
-                            ->addPost('share_to_fb_destination_type', 'USER');
+                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
                 }
                 break;
             case Constants::FEED_DIRECT_STORY:
@@ -965,7 +965,7 @@ class Internal extends RequestCollection
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
                             ->addPost('xpost_surface', 'auto_xpost')
                             ->addPost('share_to_facebook', 1)
-                            ->addPost('share_to_fb_destination_type', 'USER');
+                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
                 }
                 break;
             case Constants::FEED_DIRECT_STORY:

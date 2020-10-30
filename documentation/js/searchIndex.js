@@ -9646,6 +9646,11 @@ Search.appendIndex(
             "summary": "Gets\u0020information\u0020about\u0020password\u0020changes.",
             "url": "../classes/InstagramAPI-Request-Web.html#method_getPasswordChanges"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AsendGraphqlQuery\u0028\u0029",
+            "name": "sendGraphqlQuery",
+            "summary": "Make\u0020GraphQL\u0020request.",
+            "url": "../classes/InstagramAPI-Request-Web.html#method_sendGraphqlQuery"
+        },                {
             "fqsen": "\\InstagramAPI\\Request",
             "name": "Request",
             "summary": "Bridge\u0020between\u0020Instagram\u0020Client\u0020calls,\u0020the\u0020object\u0020mapper\u0020\u0026\u0020response\u0020objects.",

@@ -358,4 +358,33 @@ class Web extends RequestCollection
 
         return new Response\AccountAccessToolResponse(json_decode($response, true));
     }
+
+    /**
+     * Make GraphQL request.
+     *
+     * @param string $queryHash Query hash.
+     * @param array  $variables Variables.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\WebUserInfoResponse
+     */
+    public function sendGraphqlQuery(
+        $queryHash,
+        array $variables)
+    {
+        return $this->ig->request('https://www.instagram.com/graphql/query/')
+            ->setAddDefaultHeaders(false)
+            ->setSignedPost(false)
+            ->setIsSilentFail(true)
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('Referer', 'https://www.instagram.com/')
+            ->addHeader('X-Requested-With', 'XMLHttpRequest')
+            ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
+            ->addHeader('X-IG-App-ID', '936619743392459')
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->addParam('query_hash', $queryHash)
+            ->addParam('variables', json_encode($variables))
+            ->getRawResponse();
+    }
 }

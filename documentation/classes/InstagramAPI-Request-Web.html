@@ -157,6 +157,11 @@
                     <td class="phpdocumentor-cell">Gets information about password changes.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-AccountAccessToolResponse.html"><abbr title="\InstagramAPI\Response\AccountAccessToolResponse">AccountAccessToolResponse</abbr></a></td>
                 </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Web.html#method_sendGraphqlQuery">sendGraphqlQuery()</a></th>
+                    <td class="phpdocumentor-cell">Make GraphQL request.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-WebUserInfoResponse.html"><abbr title="\InstagramAPI\Response\WebUserInfoResponse">WebUserInfoResponse</abbr></a></td>
+                </tr>
                                                     <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-RequestCollection.html#method___construct">__construct()</a></th>
                     <td class="phpdocumentor-cell">Constructor.</td>
@@ -931,6 +936,66 @@
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-AccountAccessToolResponse.html"><abbr title="\InstagramAPI\Response\AccountAccessToolResponse">AccountAccessToolResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_sendGraphqlQuery"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">sendGraphqlQuery()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">372</span>
+    </aside>
+        <p class="phpdocumentor-summary">Make GraphQL request.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">sendGraphqlQuery</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$queryHash</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$variables</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-WebUserInfoResponse.html"><abbr title="\InstagramAPI\Response\WebUserInfoResponse">WebUserInfoResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$queryHash</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Query hash.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$variables</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Variables.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-WebUserInfoResponse.html"><abbr title="\InstagramAPI\Response\WebUserInfoResponse">WebUserInfoResponse</abbr></a></span>
             
 </article>
                                                                     <a id="method___construct"></a>

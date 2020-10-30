@@ -1,3 +1,19 @@
+# Stable release v16.1.0
+## Date: 30/10/2020
+
+### New features
+
+- **Web:** Add `sendGraphqlQuery()`
+
+### Updates and fixes
+
+- **Constants:** Update iOS constants
+- **Utils:** Update supported devices
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.0.1
 ## Date: 29/10/2020
 

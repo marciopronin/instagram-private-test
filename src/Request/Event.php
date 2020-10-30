@@ -4249,7 +4249,7 @@ class Event extends RequestCollection
      * Send string impressions.
      *
      * Impressions of internal strings shown in the app.
-     * 
+     *
      * @param array $impressions Impressions. Format: ['2131821003': 4, '2131821257': 2, '2131821331': 10].
      *
      * @throws \InstagramAPI\Exception\InstagramException

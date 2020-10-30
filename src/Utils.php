@@ -2018,7 +2018,7 @@ class Utils
             'iPhone9,1', // iPhone 7 (Global)
             'iPhone9,2', // iPhone 7 Plus (Global)
             'iPhone9,3', // iPhone 7 (GSM)
-            'iphone9,4', // iPhone 7 Plus (GSM)
+            'iPhone9,4', // iPhone 7 Plus (GSM)
             'iPhone10,1', // iPhone 8 (Global)
             'iPhone10,2', // iPhone 8 Plus (Global)
             'iPhone10,4', // iPhone 8 (GSM)
@@ -2031,6 +2031,10 @@ class Utils
             'iPhone12,3', // iPhone 11 Pro
             'iPhone12,5', // iPhone 11 Pro Max
             'iPhone12,8', // iPhone SE (2020)
+            'iPhone13,1', // iPhone 12 mini
+            'iPhone13,2', // iPhone 12
+            'iPhone13,3', // iPhone Pro
+            'iPhone13,4', // iPhone 12 Pro Max
         ];
 
         if (!in_array($device, $iDevices, true)) {

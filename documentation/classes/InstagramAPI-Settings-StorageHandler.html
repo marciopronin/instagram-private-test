@@ -156,6 +156,9 @@ with intelligent caching and data translation.</p></section>
     &#039;business_account&#039;,
     // Is business account.
     &#039;seq_id&#039;,
+    // Iris Sequence ID.
+    &#039;www_claim&#039;,
+    &#039;direct_region&#039;,
 ]</td>
                 </tr>
                             <tr>
@@ -415,6 +418,9 @@ with intelligent caching and data translation.</p></section>
     &#039;business_account&#039;,
     // Is business account.
     &#039;seq_id&#039;,
+    // Iris Sequence ID.
+    &#039;www_claim&#039;,
+    &#039;direct_region&#039;,
 ]</span>
     </code>
         <section class="phpdocumentor-description">This key list WILL be changed whenever we need to support new features,
@@ -433,7 +439,7 @@ so do NOT assume that it will stay the same forever.</section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">69</span>
+        <span class="phpdocumentor-element-found-in__line">71</span>
     </aside>
             <p class="phpdocumentor-summary">List of important settings to keep when erasing device-specific settings.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -469,7 +475,7 @@ VERY important to list ALL important NON-DEVICE specific settings here!</section
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">80</span>
+        <span class="phpdocumentor-element-found-in__line">82</span>
     </aside>
             <p class="phpdocumentor-summary">Whitelist for experiments.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -493,7 +499,7 @@ VERY important to list ALL important NON-DEVICE specific settings here!</section
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">107</span>
+        <span class="phpdocumentor-element-found-in__line">109</span>
     </aside>
             <p class="phpdocumentor-summary">Complete list of all supported callbacks.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -522,7 +528,7 @@ data at the end of a user&#039;s session, to avoid constant micro-updates.</sect
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">112</span>
+        <span class="phpdocumentor-element-found-in__line">114</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -542,7 +548,7 @@ data at the end of a user&#039;s session, to avoid constant micro-updates.</sect
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">115</span>
+        <span class="phpdocumentor-element-found-in__line">117</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -562,7 +568,7 @@ data at the end of a user&#039;s session, to avoid constant micro-updates.</sect
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">118</span>
+        <span class="phpdocumentor-element-found-in__line">120</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -582,7 +588,7 @@ data at the end of a user&#039;s session, to avoid constant micro-updates.</sect
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">121</span>
+        <span class="phpdocumentor-element-found-in__line">123</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -602,7 +608,7 @@ data at the end of a user&#039;s session, to avoid constant micro-updates.</sect
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">124</span>
+        <span class="phpdocumentor-element-found-in__line">126</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -626,7 +632,7 @@ data at the end of a user&#039;s session, to avoid constant micro-updates.</sect
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">136</span>
+        <span class="phpdocumentor-element-found-in__line">138</span>
     </aside>
         <p class="phpdocumentor-summary">Constructor.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -696,7 +702,7 @@ the storage backend location.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">165</span>
+        <span class="phpdocumentor-element-found-in__line">167</span>
     </aside>
         <p class="phpdocumentor-summary">Destructor.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -735,7 +741,7 @@ the storage backend location.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">181</span>
+        <span class="phpdocumentor-element-found-in__line">183</span>
     </aside>
         <p class="phpdocumentor-summary">Get storage instance.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -764,7 +770,7 @@ the storage backend location.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">193</span>
+        <span class="phpdocumentor-element-found-in__line">195</span>
     </aside>
         <p class="phpdocumentor-summary">Get path to user storage folder.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -805,7 +811,7 @@ the storage backend location.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">208</span>
+        <span class="phpdocumentor-element-found-in__line">210</span>
     </aside>
         <p class="phpdocumentor-summary">Whether the storage backend contains a specific user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -857,7 +863,7 @@ the storage backend location.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">239</span>
+        <span class="phpdocumentor-element-found-in__line">241</span>
     </aside>
         <p class="phpdocumentor-summary">Move the internal data for a username to a new username.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -929,7 +935,7 @@ user on Instagram.com before you call this function. We don't do that.</p></sect
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">263</span>
+        <span class="phpdocumentor-element-found-in__line">265</span>
     </aside>
         <p class="phpdocumentor-summary">Delete all internal data for a given username.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -980,7 +986,7 @@ user on Instagram.com before you call this function. We don't do that.</p></sect
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">284</span>
+        <span class="phpdocumentor-element-found-in__line">286</span>
     </aside>
         <p class="phpdocumentor-summary">Load all settings for a user from the storage and mark as current user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1031,7 +1037,7 @@ user on Instagram.com before you call this function. We don't do that.</p></sect
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">343</span>
+        <span class="phpdocumentor-element-found-in__line">345</span>
     </aside>
         <p class="phpdocumentor-summary">Does a preliminary guess about whether the current user is logged in.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1073,7 +1079,7 @@ for may be expired, so there's no guarantee that we are still logged in.</p></se
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">362</span>
+        <span class="phpdocumentor-element-found-in__line">364</span>
     </aside>
         <p class="phpdocumentor-summary">Erase all device-specific settings and all cookies.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1116,7 +1122,7 @@ settings so that our account still looks natural to Instagram.</p>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">385</span>
+        <span class="phpdocumentor-element-found-in__line">387</span>
     </aside>
         <p class="phpdocumentor-summary">Retrieve the value of a setting from the current user&#039;s memory cache.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1170,7 +1176,7 @@ a NON-EMPTY string. Otherwise NULL.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">417</span>
+        <span class="phpdocumentor-element-found-in__line">419</span>
     </aside>
         <p class="phpdocumentor-summary">Store a setting&#039;s value for the current user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1232,7 +1238,7 @@ setting, simply pass in an empty string as value.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">462</span>
+        <span class="phpdocumentor-element-found-in__line">464</span>
     </aside>
         <p class="phpdocumentor-summary">Whether the storage backend has cookies for the currently active user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1273,7 +1279,7 @@ setting, simply pass in an empty string as value.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">480</span>
+        <span class="phpdocumentor-element-found-in__line">482</span>
     </aside>
         <p class="phpdocumentor-summary">Get all cookies for the currently active user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1316,7 +1322,7 @@ the active user.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">530</span>
+        <span class="phpdocumentor-element-found-in__line">532</span>
     </aside>
         <p class="phpdocumentor-summary">Save all cookies for the currently active user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1373,7 +1379,7 @@ empty string to erase currently stored cookies.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">574</span>
+        <span class="phpdocumentor-element-found-in__line">576</span>
     </aside>
         <p class="phpdocumentor-summary">Ensures the whole directory path to the cookie file exists/is writable.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1412,7 +1418,7 @@ empty string to erase currently stored cookies.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">596</span>
+        <span class="phpdocumentor-element-found-in__line">598</span>
     </aside>
         <p class="phpdocumentor-summary">Internal: Ensures that a parameter is a string.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1463,7 +1469,7 @@ empty string to erase currently stored cookies.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">611</span>
+        <span class="phpdocumentor-element-found-in__line">613</span>
     </aside>
         <p class="phpdocumentor-summary">Internal: Ensures that a parameter is a non-empty string.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1514,7 +1520,7 @@ empty string to erase currently stored cookies.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">624</span>
+        <span class="phpdocumentor-element-found-in__line">626</span>
     </aside>
         <p class="phpdocumentor-summary">Internal: Ensures that there is an active storage user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1553,7 +1559,7 @@ empty string to erase currently stored cookies.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">643</span>
+        <span class="phpdocumentor-element-found-in__line">645</span>
     </aside>
         <p class="phpdocumentor-summary">Internal: Triggers a callback.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1606,7 +1612,7 @@ one and only argument.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">678</span>
+        <span class="phpdocumentor-element-found-in__line">680</span>
     </aside>
         <p class="phpdocumentor-summary">Process and save experiments.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1658,7 +1664,7 @@ one and only argument.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">700</span>
+        <span class="phpdocumentor-element-found-in__line">702</span>
     </aside>
         <p class="phpdocumentor-summary">Return saved experiments.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1697,7 +1703,7 @@ one and only argument.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">712</span>
+        <span class="phpdocumentor-element-found-in__line">714</span>
     </aside>
         <p class="phpdocumentor-summary">Save rewrite rules.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1748,7 +1754,7 @@ one and only argument.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">725</span>
+        <span class="phpdocumentor-element-found-in__line">727</span>
     </aside>
         <p class="phpdocumentor-summary">Return saved rewrite rules.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1787,7 +1793,7 @@ one and only argument.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">735</span>
+        <span class="phpdocumentor-element-found-in__line">737</span>
     </aside>
         <p class="phpdocumentor-summary">Save FBNS authorization.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1828,7 +1834,7 @@ one and only argument.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">749</span>
+        <span class="phpdocumentor-element-found-in__line">751</span>
     </aside>
         <p class="phpdocumentor-summary">Get FBNS authorization.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1859,7 +1865,7 @@ creates random new authorization details.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">768</span>
+        <span class="phpdocumentor-element-found-in__line">770</span>
     </aside>
         <p class="phpdocumentor-summary">Pack data as JSON, deflating it when it saves some space.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1900,7 +1906,7 @@ creates random new authorization details.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Settings/StorageHandler.php"><a href="../files/src-settings-storagehandler.html"><abbr title="src/Settings/StorageHandler.php">StorageHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">792</span>
+        <span class="phpdocumentor-element-found-in__line">794</span>
     </aside>
         <p class="phpdocumentor-summary">Unpacks data from JSON encoded string, inflating it when necessary.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

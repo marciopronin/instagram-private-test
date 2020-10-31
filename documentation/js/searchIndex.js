@@ -16876,6 +16876,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Response-HasInteropUpgradedResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
+            "fqsen": "\\InstagramAPI\\Exception\\InvalidArgumentException",
+            "name": "InvalidArgumentException",
+            "summary": "Used\u0020when\u0020we\u0020know\u0020the\u0020argument\u0020provided\u0020is\u0020wrong.",
+            "url": "../classes/InstagramAPI-Exception-InvalidArgumentException.html"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

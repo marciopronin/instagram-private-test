@@ -1235,8 +1235,8 @@ class Utils
     public static function throwIfInvalidStoryLocationSticker(
         array $locationSticker)
     {
-        $requiredKeys = ['location_id', 'is_sticker'];
-        $missingKeys = array_keys(array_diff_key(['location_id' => 1, 'is_sticker' => 1], $locationSticker));
+        $requiredKeys = ['location_id', 'is_sticker', 'tap_state', 'tap_state_str_id'];
+        $missingKeys = array_keys(array_diff_key(['location_id' => 1, 'is_sticker' => 1, 'tap_state' => 1, 'tap_state_str_id' => 1], $locationSticker));
 
         if (count($missingKeys)) {
             throw new \InvalidArgumentException(sprintf('Missing keys "%s" for location array.', implode(', ', $missingKeys)));
@@ -1251,7 +1251,17 @@ class Utils
                     break;
                 case 'is_sticker':
                     if (!is_bool($v)) {
-                        throw new \InvalidArgumentException(sprintf('Invalid value "%s" for hashtag array-key "%s".', $v, $k));
+                        throw new \InvalidArgumentException(sprintf('Invalid value "%s" for location array-key "%s".', $v, $k));
+                    }
+                    break;
+                case 'tap_state':
+                    if ($v !== 0) {
+                        throw new \InvalidArgumentException(sprintf('Invalid value "%s" for location array-key "%s".', $v, $k));
+                    }
+                    break;
+                case 'tap_state_str_id':
+                    if ($v !== 'location_sticker_vibrant') {
+                        throw new \InvalidArgumentException(sprintf('Invalid value "%s" for location array-key "%s".', $v, $k));
                     }
                     break;
             }

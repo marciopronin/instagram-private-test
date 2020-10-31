@@ -1,3 +1,24 @@
+# Stable release v16.1.1
+## Date: 31/10/2020
+
+### Updates and fixes
+
+- **Client:** Update header seters
+- **Constants:** Update capabilities
+- **Event:** Fix throw statement
+- **Exception:** Added missing exception `InvalidArgumentException`
+- **Internal:** Update location sticker
+- **Utils:** Update `throwIfInvalidStoryLocationSticker()`
+- **Settings:** Update StorageHandler
+
+### Examples
+
+- **Example:** Update uploadStory
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.1.0
 ## Date: 30/10/2020
 

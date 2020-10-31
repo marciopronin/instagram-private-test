@@ -260,6 +260,8 @@ class Client
         // Set Pigeon Session ID.
         $this->_pigeonSession = Signatures::generateUUID();
         $this->_requestUuid = uniqid();
+        $this->_directRegionHint = ($this->_parent->settings->get('direct_region') !== null) ? $this->_parent->settings->get('direct_region') : '';
+        $this->wwwClaim = ($this->_parent->settings->get('www_claim') !== null) ? $this->_parent->settings->get('www_claim') : '';
 
         // Create a default handler stack with Guzzle's auto-selected "best
         // possible transfer handler for the user's system", and with all of
@@ -1100,6 +1102,13 @@ class Client
         $this->_dsUserId = $response->getHeaderLine('ig-set-ig-u-ds-user-id');
         $this->_rur = $response->getHeaderLine('ig-set-ig-u-rur');
         $this->_directRegionHint = $response->getHeaderLine('ig-set-ig-u-ig-direct-region-hint');
+
+        if ($this->_directRegionHint !== '') {
+            $this->_parent->settings->set('direct_region', $this->_directRegionHint);
+        }
+        if ($this->wwwClaim !== '') {
+            $this->_parent->settings->set('www_claim', $this->wwwClaim);
+        }
 
         $authorizationHeader = $response->getHeaderLine('ig-set-authorization');
 

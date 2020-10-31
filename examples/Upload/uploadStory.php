@@ -86,13 +86,15 @@ $metadata = [
 
     // (optional) To add a location, do BOTH of these:
     'location_sticker' => [
-        'width'         => 0.89333333333333331,
-        'height'        => 0.071281859070464776,
-        'x'             => 0.5,
-        'y'             => 0.2,
-        'rotation'      => 0.0,
-        'is_sticker'    => true,
-        'location_id'   => $location->getExternalId(),
+        'width'             => 0.89333333333333331,
+        'height'            => 0.071281859070464776,
+        'x'                 => 0.5,
+        'y'                 => 0.2,
+        'rotation'          => 0.0,
+        'is_sticker'        => true,
+        'tap_state'         => 0,
+        'tap_state_str_id'  => 'location_sticker_vibrant',
+        'location_id'       => $location->getExternalId(),
     ],
     'location' => $location,
 

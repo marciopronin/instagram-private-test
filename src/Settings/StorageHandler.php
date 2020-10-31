@@ -53,6 +53,8 @@ class StorageHandler
         'public_key_id', // Instagram's Public Key ID for authentication.
         'business_account', // Is business account.
         'seq_id', // Iris Sequence ID.
+        'www_claim',
+        'direct_region',
     ];
 
     /**

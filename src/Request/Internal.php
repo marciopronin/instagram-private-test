@@ -361,8 +361,8 @@ class Internal extends RequestCollection
                 if ($locationSticker !== null && $location !== null) {
                     Utils::throwIfInvalidStoryLocationSticker($locationSticker);
                     $request
-                        ->addPost('story_locations', json_encode([$locationSticker]))
-                        ->addPost('mas_opt_in', 'NOT_PROMPTED');
+                        ->addPost('tap_models', json_encode([$locationSticker]))
+                        ->addPost('story_sticker_ids', 'location_sticker');
                 }
                 if ($storyMentions !== null && $captionText !== '') {
                     Utils::throwIfInvalidStoryMentions($storyMentions);
@@ -478,16 +478,14 @@ class Internal extends RequestCollection
         if ($location instanceof Response\Model\Location) {
             if ($targetFeed === Constants::FEED_TIMELINE) {
                 $request->addPost('location', Utils::buildMediaLocationJSON($location));
+
+                $request
+                    ->addPost('geotag_enabled', '1')
+                    ->addPost('posting_latitude', $location->getLat())
+                    ->addPost('posting_longitude', $location->getLng())
+                    ->addPost('media_latitude', $location->getLat())
+                    ->addPost('media_longitude', $location->getLng());
             }
-            if ($targetFeed === Constants::FEED_STORY && $locationSticker === null) {
-                throw new \InvalidArgumentException('You must provide a location_sticker together with your story location.');
-            }
-            $request
-                ->addPost('geotag_enabled', '1')
-                ->addPost('posting_latitude', $location->getLat())
-                ->addPost('posting_longitude', $location->getLng())
-                ->addPost('media_latitude', $location->getLat())
-                ->addPost('media_longitude', $location->getLng());
         }
 
         $configure = $request->getResponse(new Response\ConfigureResponse());
@@ -893,8 +891,8 @@ class Internal extends RequestCollection
                 if ($locationSticker !== null && $location !== null) {
                     Utils::throwIfInvalidStoryLocationSticker($locationSticker);
                     $request
-                        ->addPost('story_locations', json_encode([$locationSticker]))
-                        ->addPost('mas_opt_in', 'NOT_PROMPTED');
+                        ->addPost('tap_models', json_encode([$locationSticker]))
+                        ->addPost('story_sticker_ids', 'location_sticker');
                 }
                 if ($storyMentions !== null && $captionText !== '') {
                     Utils::throwIfInvalidStoryMentions($storyMentions);
@@ -1022,16 +1020,14 @@ class Internal extends RequestCollection
         if ($location instanceof Response\Model\Location) {
             if ($targetFeed === Constants::FEED_TIMELINE) {
                 $request->addPost('location', Utils::buildMediaLocationJSON($location));
+
+                $request
+                    ->addPost('geotag_enabled', '1')
+                    ->addPost('posting_latitude', $location->getLat())
+                    ->addPost('posting_longitude', $location->getLng())
+                    ->addPost('media_latitude', $location->getLat())
+                    ->addPost('media_longitude', $location->getLng());
             }
-            if ($targetFeed === Constants::FEED_STORY && $locationSticker === null) {
-                throw new \InvalidArgumentException('You must provide a location_sticker together with your story location.');
-            }
-            $request
-                ->addPost('geotag_enabled', '1')
-                ->addPost('posting_latitude', $location->getLat())
-                ->addPost('posting_longitude', $location->getLng())
-                ->addPost('media_latitude', $location->getLat())
-                ->addPost('media_longitude', $location->getLng());
         }
 
         $configure = $request->getResponse(new Response\ConfigureResponse());

@@ -1,3 +1,14 @@
+# Stable release v16.1.2
+## Date: 1/11/2020
+
+### Updates and fixes
+
+- **Client:** Update client. Fixes issue from v16.1.1.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.1.1
 ## Date: 31/10/2020
 

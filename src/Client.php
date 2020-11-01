@@ -260,8 +260,6 @@ class Client
         // Set Pigeon Session ID.
         $this->_pigeonSession = Signatures::generateUUID();
         $this->_requestUuid = uniqid();
-        $this->_directRegionHint = ($this->_parent->settings->get('direct_region') !== null) ? $this->_parent->settings->get('direct_region') : '';
-        $this->wwwClaim = ($this->_parent->settings->get('www_claim') !== null) ? $this->_parent->settings->get('www_claim') : '';
 
         // Create a default handler stack with Guzzle's auto-selected "best
         // possible transfer handler for the user's system", and with all of
@@ -1033,6 +1031,9 @@ class Client
         if ($request->getUri()->getHost() !== parse_url(Constants::GRAPH_API_URL, PHP_URL_HOST)) {
             $headers['set_headers']['X-Pigeon-Session-Id'] = $this->_pigeonSession;
             $headers['set_headers']['X-Pigeon-Rawclienttime'] = $this->_getPigeonRawClientTime();
+
+            $this->_directRegionHint = ($this->_parent->settings->get('direct_region') !== null) ? $this->_parent->settings->get('direct_region') : '';
+            $this->wwwClaim = ($this->_parent->settings->get('www_claim') !== null) ? $this->_parent->settings->get('www_claim') : '';
 
             if ($this->_totalTime !== 0 && !empty($this->_bandwidthB)) {
                 $headers['set_headers']['X-IG-Bandwidth-Speed-KBPS'] = ($this->_totalBytes / $this->_totalTime + $this->_bandwidthB / $this->_bandwidthM) / 2;

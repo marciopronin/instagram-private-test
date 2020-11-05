@@ -1,3 +1,20 @@
+# Stable release v16.2.0
+## Date: 4/11/2020
+
+### New features
+
+- **Event:** Add `_getModuleClass()`
+- **Event:** Add `_generateNavChain()`
+- **Event:** Add `sendUpdateSessionChain()`
+
+### Examples
+
+- **Example:** Update goLive example.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.1.2
 ## Date: 1/11/2020
 

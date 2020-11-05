@@ -282,7 +282,7 @@ use InstagramAPI\Response\Model\Comment;
 use InstagramAPI\Signatures;
 
 //Run preparation flow
-preparationFlow(new ObsHelper(!obsNoStream, disableObsAutomation, forceSlobs, (!obsNoIni && OBS_MODIFY_SETTINGS)), $argv, $commandData, $streamTotalSec, $autoPin, $setUser, $charity);
+preparationFlow(new ObsHelper(!obsNoStream, disableObsAutomation, forceSlobs, (!obsNoIni && OBS_MODIFY_SETTINGS)), $argv, $commandData, $streamTotalSec, $autoPin, $setUser, $charity, $title);
 
 /**
  * Runs the preparation code such as logging in and creating the stream.
@@ -294,8 +294,9 @@ preparationFlow(new ObsHelper(!obsNoStream, disableObsAutomation, forceSlobs, (!
  * @param string|null $autoPin        The comment to auto pin the stream
  * @param mixed|null  $setUser
  * @param mixed|null  $charity
+ * @param mixed|null  $title
  */
-function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $autoPin = null, $setUser = null, $charity = null)
+function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $autoPin = null, $setUser = null, $charity = null, $title = null)
 {
     //Ensure that static files are here in webMode
     if (webMode && !file_exists('static/')) {
@@ -580,6 +581,8 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
  */
 function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, $helper, $streamTotalSec, $autoPin, $args, $commandData, $startCommentTs = 0, $startLikeTs = 0, $startingQuestion = -1, $startingTime = -1)
 {
+    global $title;
+    global $coverPhoto;
     $pid = 0;
     if (bypassCheck && !Utils::isMac() && !Utils::isWindows()) {
         Utils::log('Command Line: You are forcing the new command line. This is unsupported and may result in issues.');
@@ -842,6 +845,8 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
  */
 function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $obsAuto, $helper)
 {
+    global $title;
+    global $coverPhoto;
     $line = Utils::promptInput();
     switch ($line) {
         case 'ecomments':
@@ -1007,6 +1012,9 @@ function addComment($comment, $system = false)
  */
 function endLivestreamFlow($ig, $broadcastId, $archived, $obsAuto, $helper, $pid, $commentCount, $likeCount, $likeBurstCount, $exit = true)
 {
+    global $title;
+    global $coverPhoto;
+
     if ($obsAuto) {
         Utils::log('OBS Integration: Killing OBS...');
         $helper->killOBS();

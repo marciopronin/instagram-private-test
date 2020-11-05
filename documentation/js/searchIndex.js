@@ -7316,6 +7316,16 @@ Search.appendIndex(
             "summary": "Adds\u0020event\u0020body.",
             "url": "../classes/InstagramAPI-Request-Event.html#method__addEventBody"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003A_getModuleClass\u0028\u0029",
+            "name": "_getModuleClass",
+            "summary": "Get\u0020module\u0020class.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method__getModuleClass"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003A_generateNavChain\u0028\u0029",
+            "name": "_generateNavChain",
+            "summary": "Generate\u0020nav\u0020chain.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method__generateNavChain"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003A_getTagsForNameAndModule\u0028\u0029",
             "name": "_getTagsForNameAndModule",
             "summary": "Return\u0020if\u0020tags\u0020property\u0020is\u0020used\u0020for\u0020the\u0020event.",
@@ -7550,6 +7560,11 @@ Search.appendIndex(
             "name": "sendNavigation",
             "summary": "Send\u0020navigation.\u0020It\u0020tells\u0020Instagram\u0020how\u0020you\u0020reached\u0020specific\u0020modules.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendNavigation"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendUpdateSessionChain\u0028\u0029",
+            "name": "sendUpdateSessionChain",
+            "summary": "Update\u0020session\u0020chain.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendUpdateSessionChain"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendOpenPhotoCameraTab\u0028\u0029",
             "name": "sendOpenPhotoCameraTab",

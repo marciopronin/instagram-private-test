@@ -100,6 +100,52 @@ class Event extends RequestCollection
     }
 
     /**
+     * Get module class.
+     *
+     * @param string $module Module.
+     *
+     * @return string
+     */
+    protected function _getModuleClass(
+        $module)
+    {
+        $classes = []; //TODO.
+
+        if (in_array($module, $classes, true)) {
+            throw new \InstagramAPI\Exception\InstagramException('Invalid module for chain.');
+        }
+
+        return $classes[$module];
+    }
+
+    /**
+     * Generate nav chain.
+     *
+     * @param string[] $modules Array of modules.
+     *
+     * @return string
+     */
+    protected function _generateNavChain(
+        array $modules)
+    {
+        $navChain = '';
+        $step = 1; // Not incremental in all cases!
+        $lastKey = array_key_last($modules);
+
+        foreach ($modules as $idx => $module) {
+            $chain = sprintf('%s:%s:%d', _getModuleClass($module), $module, $step);
+            $step++;
+
+            if ($idx !== $lastKey) {
+                $chain += ',';
+            }
+            $navChain += $chain;
+        }
+
+        return $navChain;
+    }
+
+    /**
      * Return if tags property is used for the event.
      *
      * @param array  $event  Batch data.
@@ -1896,7 +1942,7 @@ class Event extends RequestCollection
                     }
                     break;
                 default:
-                    throw new \InstagramException('Layout type not implemented');
+                    throw new \InstagramAPI\Exception\InstagramException('Layout type not implemented.');
             }
         }
     }
@@ -3771,6 +3817,33 @@ class Event extends RequestCollection
         $event = $this->_addEventBody('navigation', $fromModule, $extra);
 
         $this->ig->navigationSequence++;
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Update session chain.
+     *
+     * It used for updating navigation chain.
+     *
+     * @param string $module   Module.
+     * @param array  $navstack Navstack.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendUpdateSessionChain(
+        $module,
+        $navstack)
+    {
+        $moduleStack = [];
+        foreach ($navstack as $nav) {
+            $moduleStack[] = $nav['module'];
+        }
+
+        $extra = [
+            'sessions_chain'  => $this->_generateNavChain($moduleStack),
+        ];
+
+        $event = $this->_addEventBody('ig_sessions_chain_update', $module, $extra);
         $this->_addEventData($event);
     }
 

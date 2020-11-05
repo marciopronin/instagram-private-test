@@ -113,6 +113,16 @@
                     <td class="phpdocumentor-cell">array</td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Event.html#method__getModuleClass">_getModuleClass()</a></th>
+                    <td class="phpdocumentor-cell">Get module class.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Event.html#method__generateNavChain">_generateNavChain()</a></th>
+                    <td class="phpdocumentor-cell">Generate nav chain.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Event.html#method__getTagsForNameAndModule">_getTagsForNameAndModule()</a></th>
                     <td class="phpdocumentor-cell">Return if tags property is used for the event.</td>
                     <td class="phpdocumentor-cell">mixed</td>
@@ -345,6 +355,11 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Event.html#method_sendNavigation">sendNavigation()</a></th>
                     <td class="phpdocumentor-cell">Send navigation. It tells Instagram how you reached specific modules.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Event.html#method_sendUpdateSessionChain">sendUpdateSessionChain()</a></th>
+                    <td class="phpdocumentor-cell">Update session chain.</td>
                     <td class="phpdocumentor-cell">mixed</td>
                 </tr>
                             <tr>
@@ -827,6 +842,88 @@
         <span class="phpdocumentor-signature__response_type">array</span>
             
 </article>
+                                    <a id="method__getModuleClass"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_getModuleClass()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">109</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get module class.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_getModuleClass</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$module</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$module</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Module.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method__generateNavChain"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_generateNavChain()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">128</span>
+    </aside>
+        <p class="phpdocumentor-summary">Generate nav chain.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_generateNavChain</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$modules</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string[]</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$modules</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string[]</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Array of modules.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
                                     <a id="method__getTagsForNameAndModule"></a>
 <article
         class="
@@ -838,7 +935,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">109</span>
+        <span class="phpdocumentor-element-found-in__line">155</span>
     </aside>
         <p class="phpdocumentor-summary">Return if tags property is used for the event.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -888,7 +985,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">137</span>
+        <span class="phpdocumentor-element-found-in__line">183</span>
     </aside>
         <p class="phpdocumentor-summary">Adds event to the event batch and sends it if reached 50 events.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -929,7 +1026,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">152</span>
+        <span class="phpdocumentor-element-found-in__line">198</span>
     </aside>
         <p class="phpdocumentor-summary">Save pending events for future sessions.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -958,7 +1055,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">160</span>
+        <span class="phpdocumentor-element-found-in__line">206</span>
     </aside>
         <p class="phpdocumentor-summary">Force send batch event.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -987,7 +1084,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">173</span>
+        <span class="phpdocumentor-element-found-in__line">219</span>
     </aside>
         <p class="phpdocumentor-summary">Sets and updates checksum from Graph API.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1028,7 +1125,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">186</span>
+        <span class="phpdocumentor-element-found-in__line">232</span>
     </aside>
         <p class="phpdocumentor-summary">Send the generated event batch to Facebook&#039;s Graph API.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1067,7 +1164,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">264</span>
+        <span class="phpdocumentor-element-found-in__line">310</span>
     </aside>
         <p class="phpdocumentor-summary">Send login/register steps events.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1175,7 +1272,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">349</span>
+        <span class="phpdocumentor-element-found-in__line">395</span>
     </aside>
         <p class="phpdocumentor-summary">Send funnel registration.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1252,7 +1349,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">455</span>
+        <span class="phpdocumentor-element-found-in__line">501</span>
     </aside>
         <p class="phpdocumentor-summary">Send Thumbnail impression or thumbnail click.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1359,7 +1456,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">566</span>
+        <span class="phpdocumentor-element-found-in__line">612</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic time spent.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1471,7 +1568,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">690</span>
+        <span class="phpdocumentor-element-found-in__line">736</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic reel/story impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1574,7 +1671,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">731</span>
+        <span class="phpdocumentor-element-found-in__line">777</span>
     </aside>
         <p class="phpdocumentor-summary">Send reel tray impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1668,7 +1765,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">774</span>
+        <span class="phpdocumentor-element-found-in__line">820</span>
     </aside>
         <p class="phpdocumentor-summary">Send feed item inserted.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1753,7 +1850,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">807</span>
+        <span class="phpdocumentor-element-found-in__line">853</span>
     </aside>
         <p class="phpdocumentor-summary">Send newsfeed story impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1838,7 +1935,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">836</span>
+        <span class="phpdocumentor-element-found-in__line">882</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic number of likes.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1914,7 +2011,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">874</span>
+        <span class="phpdocumentor-element-found-in__line">920</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic action menu.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1999,7 +2096,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">912</span>
+        <span class="phpdocumentor-element-found-in__line">958</span>
     </aside>
         <p class="phpdocumentor-summary">Reel tray refresh.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2066,7 +2163,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">966</span>
+        <span class="phpdocumentor-element-found-in__line">1012</span>
     </aside>
         <p class="phpdocumentor-summary">Reel in feed tray hide.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2135,7 +2232,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">989</span>
+        <span class="phpdocumentor-element-found-in__line">1035</span>
     </aside>
         <p class="phpdocumentor-summary">Main feed request began.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2195,7 +2292,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1015</span>
+        <span class="phpdocumentor-element-found-in__line">1061</span>
     </aside>
         <p class="phpdocumentor-summary">Loading more (Pagination) on main feed.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2255,7 +2352,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1036</span>
+        <span class="phpdocumentor-element-found-in__line">1082</span>
     </aside>
         <p class="phpdocumentor-summary">Main feed request end.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2315,7 +2412,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1074</span>
+        <span class="phpdocumentor-element-found-in__line">1120</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic like.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2430,7 +2527,7 @@ At this point we call login()
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1180</span>
+        <span class="phpdocumentor-element-found-in__line">1226</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic comment.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2501,7 +2598,7 @@ Use sendCommentImpression().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1213</span>
+        <span class="phpdocumentor-element-found-in__line">1259</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic comment like.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2579,7 +2676,7 @@ Use sendCommentImpression().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1241</span>
+        <span class="phpdocumentor-element-found-in__line">1287</span>
     </aside>
         <p class="phpdocumentor-summary">Send comment create.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2618,7 +2715,7 @@ Use sendCommentImpression().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1266</span>
+        <span class="phpdocumentor-element-found-in__line">1312</span>
     </aside>
         <p class="phpdocumentor-summary">Send comment impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2706,7 +2803,7 @@ Use sendCommentImpression().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1306</span>
+        <span class="phpdocumentor-element-found-in__line">1352</span>
     </aside>
         <p class="phpdocumentor-summary">Send profile action.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2795,7 +2892,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1426</span>
+        <span class="phpdocumentor-element-found-in__line">1472</span>
     </aside>
         <p class="phpdocumentor-summary">Send Phone ID.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2871,7 +2968,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1460</span>
+        <span class="phpdocumentor-element-found-in__line">1506</span>
     </aside>
         <p class="phpdocumentor-summary">Send IGTV notification preference.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2922,7 +3019,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1482</span>
+        <span class="phpdocumentor-element-found-in__line">1528</span>
     </aside>
         <p class="phpdocumentor-summary">Send unfollow successful.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2991,7 +3088,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1506</span>
+        <span class="phpdocumentor-element-found-in__line">1552</span>
     </aside>
         <p class="phpdocumentor-summary">Send remove follower.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3042,7 +3139,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1531</span>
+        <span class="phpdocumentor-element-found-in__line">1577</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic media impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3122,7 +3219,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1654</span>
+        <span class="phpdocumentor-element-found-in__line">1700</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic carousel impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3198,7 +3295,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1698</span>
+        <span class="phpdocumentor-element-found-in__line">1744</span>
     </aside>
         <p class="phpdocumentor-summary">Send reel playback navigation.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3301,7 +3398,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1760</span>
+        <span class="phpdocumentor-element-found-in__line">1806</span>
     </aside>
         <p class="phpdocumentor-summary">Send explore home impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3368,7 +3465,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1803</span>
+        <span class="phpdocumentor-element-found-in__line">1849</span>
     </aside>
         <p class="phpdocumentor-summary">Prepare and send thumbnail impressions.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3465,7 +3562,7 @@ search for a user and click on the result.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1915</span>
+        <span class="phpdocumentor-element-found-in__line">1961</span>
     </aside>
         <p class="phpdocumentor-summary">Prepare and send explore impressions.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3542,7 +3639,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2068</span>
+        <span class="phpdocumentor-element-found-in__line">2114</span>
     </aside>
         <p class="phpdocumentor-summary">Send similar user impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3618,7 +3715,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2092</span>
+        <span class="phpdocumentor-element-found-in__line">2138</span>
     </aside>
         <p class="phpdocumentor-summary">Send recommended user impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3687,7 +3784,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2123</span>
+        <span class="phpdocumentor-element-found-in__line">2169</span>
     </aside>
         <p class="phpdocumentor-summary">Send similar entity impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3781,7 +3878,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2157</span>
+        <span class="phpdocumentor-element-found-in__line">2203</span>
     </aside>
         <p class="phpdocumentor-summary">Send organic viewed impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3885,7 +3982,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2293</span>
+        <span class="phpdocumentor-element-found-in__line">2339</span>
     </aside>
         <p class="phpdocumentor-summary">Send video action.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3973,7 +4070,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2431</span>
+        <span class="phpdocumentor-element-found-in__line">2477</span>
     </aside>
         <p class="phpdocumentor-summary">Send profile view.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4042,7 +4139,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2461</span>
+        <span class="phpdocumentor-element-found-in__line">2507</span>
     </aside>
         <p class="phpdocumentor-summary">Get nav depth.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4102,7 +4199,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2555</span>
+        <span class="phpdocumentor-element-found-in__line">2601</span>
     </aside>
         <p class="phpdocumentor-summary">Validate navigation options.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4171,7 +4268,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2636</span>
+        <span class="phpdocumentor-element-found-in__line">2682</span>
     </aside>
         <p class="phpdocumentor-summary">Validate navigation path.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4240,7 +4337,7 @@ Array of \InstagramAPI\Response\Model\Section.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3637</span>
+        <span class="phpdocumentor-element-found-in__line">3683</span>
     </aside>
         <p class="phpdocumentor-summary">Send navigation. It tells Instagram how you reached specific modules.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4355,6 +4452,67 @@ when going from the chained feed ('feed_contextual_chain') to the comments modul
         <span class="phpdocumentor-signature__response_type">mixed</span>
             
 </article>
+                                    <a id="method_sendUpdateSessionChain"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">sendUpdateSessionChain()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">3834</span>
+    </aside>
+        <p class="phpdocumentor-summary">Update session chain.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">sendUpdateSessionChain</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$module</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$navstack</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>It used for updating navigation chain.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$module</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$navstack</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Navstack.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
                                     <a id="method_sendOpenPhotoCameraTab"></a>
 <article
         class="
@@ -4366,7 +4524,7 @@ when going from the chained feed ('feed_contextual_chain') to the comments modul
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3786</span>
+        <span class="phpdocumentor-element-found-in__line">3860</span>
     </aside>
         <p class="phpdocumentor-summary">Open photo camera tab.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4435,7 +4593,7 @@ when going from the chained feed ('feed_contextual_chain') to the comments modul
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3811</span>
+        <span class="phpdocumentor-element-found-in__line">3885</span>
     </aside>
         <p class="phpdocumentor-summary">Shutter click in camera.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4504,7 +4662,7 @@ when going from the chained feed ('feed_contextual_chain') to the comments modul
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3837</span>
+        <span class="phpdocumentor-element-found-in__line">3911</span>
     </aside>
         <p class="phpdocumentor-summary">Start gallery edit.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4557,7 +4715,7 @@ This is when gallery start session starts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3861</span>
+        <span class="phpdocumentor-element-found-in__line">3935</span>
     </aside>
         <p class="phpdocumentor-summary">Send filter photo.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4626,7 +4784,7 @@ This is when gallery start session starts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3887</span>
+        <span class="phpdocumentor-element-found-in__line">3961</span>
     </aside>
         <p class="phpdocumentor-summary">Send filter finish.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4695,7 +4853,7 @@ This is when gallery start session starts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3915</span>
+        <span class="phpdocumentor-element-found-in__line">3989</span>
     </aside>
         <p class="phpdocumentor-summary">Send Instagram Media Creation.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4780,7 +4938,7 @@ This is when gallery start session starts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3947</span>
+        <span class="phpdocumentor-element-found-in__line">4021</span>
     </aside>
         <p class="phpdocumentor-summary">End gallery edit.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4831,7 +4989,7 @@ This is when gallery start session starts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3969</span>
+        <span class="phpdocumentor-element-found-in__line">4043</span>
     </aside>
         <p class="phpdocumentor-summary">Start share session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4882,7 +5040,7 @@ This is when gallery start session starts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3993</span>
+        <span class="phpdocumentor-element-found-in__line">4067</span>
     </aside>
         <p class="phpdocumentor-summary">Share media.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4951,7 +5109,7 @@ This is when gallery start session starts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4023</span>
+        <span class="phpdocumentor-element-found-in__line">4097</span>
     </aside>
         <p class="phpdocumentor-summary">Direct. Send intent/attempt of a message.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5038,7 +5196,7 @@ the 'direct_composer_send_text' and finally the attempt.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4063</span>
+        <span class="phpdocumentor-element-found-in__line">4137</span>
     </aside>
         <p class="phpdocumentor-summary">Direct external share option.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5107,7 +5265,7 @@ the 'direct_composer_send_text' and finally the attempt.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4086</span>
+        <span class="phpdocumentor-element-found-in__line">4160</span>
     </aside>
         <p class="phpdocumentor-summary">Direct direct share media.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5167,7 +5325,7 @@ the 'direct_composer_send_text' and finally the attempt.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4112</span>
+        <span class="phpdocumentor-element-found-in__line">4186</span>
     </aside>
         <p class="phpdocumentor-summary">Send badging event.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5255,7 +5413,7 @@ the 'direct_composer_send_text' and finally the attempt.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4151</span>
+        <span class="phpdocumentor-element-found-in__line">4225</span>
     </aside>
         <p class="phpdocumentor-summary">Send Organic Share button.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5357,7 +5515,7 @@ the 'direct_composer_send_text' and finally the attempt.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4241</span>
+        <span class="phpdocumentor-element-found-in__line">4315</span>
     </aside>
         <p class="phpdocumentor-summary">Direct. Send text direct message.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5396,7 +5554,7 @@ the 'direct_composer_send_text' and finally the attempt.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4257</span>
+        <span class="phpdocumentor-element-found-in__line">4331</span>
     </aside>
         <p class="phpdocumentor-summary">Send string impressions.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5448,7 +5606,7 @@ the 'direct_composer_send_text' and finally the attempt.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4280</span>
+        <span class="phpdocumentor-element-found-in__line">4354</span>
     </aside>
         <p class="phpdocumentor-summary">Send direct user search picker.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5502,7 +5660,7 @@ For example: 'I', 'In', 'Ins', 'Inst', 'Insta'. 5 events sent showing the query.
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4303</span>
+        <span class="phpdocumentor-element-found-in__line">4377</span>
     </aside>
         <p class="phpdocumentor-summary">Send direct user search selection.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5590,7 +5748,7 @@ For example: 'I', 'In', 'Ins', 'Inst', 'Insta'. 5 events sent showing the query.
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4344</span>
+        <span class="phpdocumentor-element-found-in__line">4418</span>
     </aside>
         <p class="phpdocumentor-summary">Send group creation.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5641,7 +5799,7 @@ For example: 'I', 'In', 'Ins', 'Inst', 'Insta'. 5 events sent showing the query.
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4366</span>
+        <span class="phpdocumentor-element-found-in__line">4440</span>
     </aside>
         <p class="phpdocumentor-summary">Send enter direct thread event.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5703,7 +5861,7 @@ TODO. More cases.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4388</span>
+        <span class="phpdocumentor-element-found-in__line">4462</span>
     </aside>
         <p class="phpdocumentor-summary">Send search session initiated.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5761,7 +5919,7 @@ TODO. More cases.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4417</span>
+        <span class="phpdocumentor-element-found-in__line">4491</span>
     </aside>
         <p class="phpdocumentor-summary">Send search results.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5866,7 +6024,7 @@ and it will send Instagram the results you got.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4456</span>
+        <span class="phpdocumentor-element-found-in__line">4530</span>
     </aside>
         <p class="phpdocumentor-summary">Sends the selected user from the search results.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5991,7 +6149,7 @@ and it will send Instagram the results you got.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4511</span>
+        <span class="phpdocumentor-element-found-in__line">4585</span>
     </aside>
         <p class="phpdocumentor-summary">Sends related hashtag items.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6079,7 +6237,7 @@ and it will send Instagram the results you got.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4546</span>
+        <span class="phpdocumentor-element-found-in__line">4620</span>
     </aside>
         <p class="phpdocumentor-summary">Sends follow button tapped.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6168,7 +6326,7 @@ It seems to be only set in blended_search.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4588</span>
+        <span class="phpdocumentor-element-found-in__line">4662</span>
     </aside>
         <p class="phpdocumentor-summary">Sends follow button tapped.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6247,7 +6405,7 @@ It seems to be only set in blended_search.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4614</span>
+        <span class="phpdocumentor-element-found-in__line">4688</span>
     </aside>
         <p class="phpdocumentor-summary">Sends feed button tapped.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6316,7 +6474,7 @@ It seems to be only set in blended_search.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4654</span>
+        <span class="phpdocumentor-element-found-in__line">4728</span>
     </aside>
         <p class="phpdocumentor-summary">Send muted media.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6403,7 +6561,7 @@ It seems to be only set in blended_search.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4698</span>
+        <span class="phpdocumentor-element-found-in__line">4772</span>
     </aside>
         <p class="phpdocumentor-summary">Report media action.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6472,7 +6630,7 @@ It seems to be only set in blended_search.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4728</span>
+        <span class="phpdocumentor-element-found-in__line">4802</span>
     </aside>
         <p class="phpdocumentor-summary">Send picked media option.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6552,7 +6710,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4755</span>
+        <span class="phpdocumentor-element-found-in__line">4829</span>
     </aside>
         <p class="phpdocumentor-summary">Start ingest media.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6630,7 +6788,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4789</span>
+        <span class="phpdocumentor-element-found-in__line">4863</span>
     </aside>
         <p class="phpdocumentor-summary">Start upload attempt.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6708,7 +6866,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4827</span>
+        <span class="phpdocumentor-element-found-in__line">4901</span>
     </aside>
         <p class="phpdocumentor-summary">Start upload attempt.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6786,7 +6944,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4868</span>
+        <span class="phpdocumentor-element-found-in__line">4942</span>
     </aside>
         <p class="phpdocumentor-summary">Start upload attempt.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6864,7 +7022,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4919</span>
+        <span class="phpdocumentor-element-found-in__line">4993</span>
     </aside>
         <p class="phpdocumentor-summary">Start camera session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -6915,7 +7073,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4948</span>
+        <span class="phpdocumentor-element-found-in__line">5022</span>
     </aside>
         <p class="phpdocumentor-summary">Camera waterfall.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7011,7 +7169,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">4992</span>
+        <span class="phpdocumentor-element-found-in__line">5066</span>
     </aside>
         <p class="phpdocumentor-summary">Nametag session start.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7098,7 +7256,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5024</span>
+        <span class="phpdocumentor-element-found-in__line">5098</span>
     </aside>
         <p class="phpdocumentor-summary">Send IG camera share media.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7158,7 +7316,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5055</span>
+        <span class="phpdocumentor-element-found-in__line">5129</span>
     </aside>
         <p class="phpdocumentor-summary">Send IG camera end post capture session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7209,7 +7367,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5078</span>
+        <span class="phpdocumentor-element-found-in__line">5152</span>
     </aside>
         <p class="phpdocumentor-summary">Send IG camera end session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7260,7 +7418,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5103</span>
+        <span class="phpdocumentor-element-found-in__line">5177</span>
     </aside>
         <p class="phpdocumentor-summary">Prepares Push Notification Settings. Managed automaticallyby the API. Set during cold start login (before).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7299,7 +7457,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5120</span>
+        <span class="phpdocumentor-element-found-in__line">5194</span>
     </aside>
         <p class="phpdocumentor-summary">Enables Push Notification Settings (event). Managed automaticallyby the API. Set during cold start login (before).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7350,7 +7508,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5147</span>
+        <span class="phpdocumentor-element-found-in__line">5221</span>
     </aside>
         <p class="phpdocumentor-summary">Send Instagram Netego Delivery.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7410,7 +7568,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5171</span>
+        <span class="phpdocumentor-element-found-in__line">5245</span>
     </aside>
         <p class="phpdocumentor-summary">Send Async ad controller success.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7470,7 +7628,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5190</span>
+        <span class="phpdocumentor-element-found-in__line">5264</span>
     </aside>
         <p class="phpdocumentor-summary">Send zero carrier signal.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7509,7 +7667,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5213</span>
+        <span class="phpdocumentor-element-found-in__line">5287</span>
     </aside>
         <p class="phpdocumentor-summary">Send active interval.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7560,7 +7718,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5233</span>
+        <span class="phpdocumentor-element-found-in__line">5307</span>
     </aside>
         <p class="phpdocumentor-summary">Send zero url rewrite.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7620,7 +7778,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5253</span>
+        <span class="phpdocumentor-element-found-in__line">5327</span>
     </aside>
         <p class="phpdocumentor-summary">Send cellular data opt.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7671,7 +7829,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5273</span>
+        <span class="phpdocumentor-element-found-in__line">5347</span>
     </aside>
         <p class="phpdocumentor-summary">Send dark mode opt.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7722,7 +7880,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5289</span>
+        <span class="phpdocumentor-element-found-in__line">5363</span>
     </aside>
         <p class="phpdocumentor-summary">Wellbeing time in app migration impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7761,7 +7919,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5310</span>
+        <span class="phpdocumentor-element-found-in__line">5384</span>
     </aside>
         <p class="phpdocumentor-summary">Perf percent render photos.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7830,7 +7988,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5358</span>
+        <span class="phpdocumentor-element-found-in__line">5432</span>
     </aside>
         <p class="phpdocumentor-summary">Network trace.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7896,7 +8054,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5375</span>
+        <span class="phpdocumentor-element-found-in__line">5449</span>
     </aside>
         <p class="phpdocumentor-summary">qe exposure.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -7965,7 +8123,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5395</span>
+        <span class="phpdocumentor-element-found-in__line">5469</span>
     </aside>
         <p class="phpdocumentor-summary">Non feed activation impression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -8004,7 +8162,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5412</span>
+        <span class="phpdocumentor-element-found-in__line">5486</span>
     </aside>
         <p class="phpdocumentor-summary">Send SSO Status.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -8043,7 +8201,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5432</span>
+        <span class="phpdocumentor-element-found-in__line">5506</span>
     </aside>
         <p class="phpdocumentor-summary">Launcher badge.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -8103,7 +8261,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5455</span>
+        <span class="phpdocumentor-element-found-in__line">5529</span>
     </aside>
         <p class="phpdocumentor-summary">Updates the app state.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -8170,7 +8328,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5478</span>
+        <span class="phpdocumentor-element-found-in__line">5552</span>
     </aside>
         <p class="phpdocumentor-summary">Send day of birth pick.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -8221,7 +8379,7 @@ different options: Share, Copy link, edit, delete...</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Event.php"><a href="../files/src-request-event.html"><abbr title="src/Request/Event.php">Event.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">5494</span>
+        <span class="phpdocumentor-element-found-in__line">5568</span>
     </aside>
         <p class="phpdocumentor-summary">Send IG Nux flow.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

@@ -1,3 +1,10 @@
+# Stable release v16.2.2
+## Date: 6/11/2020
+
+### Updates and Fixed
+
+- **Event:** Update `prepareAndSendExploreImpression()`
+
 # Stable release v16.2.1
 ## Date: 5/11/2020
 

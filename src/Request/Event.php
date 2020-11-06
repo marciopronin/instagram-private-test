@@ -2096,7 +2096,7 @@ class Event extends RequestCollection
                     }
                     break;
                 default:
-                    throw new \InstagramException('Layout type not implemented');
+                    throw new \InstagramAPI\Exception\InstagramException('Layout type not implemented.');
             }
         }
     }

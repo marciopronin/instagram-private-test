@@ -1,3 +1,18 @@
+# Stable release v16.2.1
+## Date: 5/11/2020
+
+### Updates and Fixed
+
+- **Direct:** Update `getThreadByParticipants()`
+
+### Examples
+
+- **Example:** Update direct sendText.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.2.0
 ## Date: 4/11/2020
 

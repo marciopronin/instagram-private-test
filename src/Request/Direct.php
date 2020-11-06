@@ -300,7 +300,9 @@ class Direct extends RequestCollection
             }
         }
         $request = $this->ig->request('direct_v2/threads/get_by_participants/')
-            ->addParam('recipient_users', '['.implode(',', $users).']');
+            ->addParam('recipient_users', '['.implode(',', $users).']')
+            ->addParam('seq_id', '1')
+            ->addParam('limit', '20');
 
         return $request->getResponse(new Response\DirectThreadResponse());
     }

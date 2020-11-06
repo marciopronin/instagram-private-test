@@ -29,12 +29,14 @@ try {
 try {
     $clientContext = \InstagramAPI\Utils::generateClientContext();
     $ig->event->sendNavigation('on_launch_direct_inbox', 'feed_timeline', 'direct_inbox');
-    $users = $ig->people->search($query, [], null, 'direct_recipient_list_page')->getUsers();
+
+    // This is as replacement of search, repeating this request with organic typing would be better.
+    $users = $ig->direct->getRankedRecipients('raven', true, $query);
 
     foreach ($users as $key => $value) {
-        if ($value->getUsername() === $query) {
+        if ($value->getUser()->getUsername() === $query) {
             $position = $key;
-            $userId = $value->getPk();
+            $userId = $value->getUser->getPk();
             break;
         }
     }
@@ -55,6 +57,7 @@ try {
         ],
     ];
 
+    $ig->direct->getThreadByParticipants([$userId]);
     $ig->direct->sendText($recipients, $text, ['client_context' => $clientContext]);
     $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'text');
     $ig->event->sendTextDirectMessage();

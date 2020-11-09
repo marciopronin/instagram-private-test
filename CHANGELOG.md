@@ -1,3 +1,10 @@
+# Stable release v16.3.1
+## Date: 9/11/2020
+
+### Updates and Fixed
+
+- **Event:** Update `sendNavigation()`
+
 # Stable release v16.3.0
 ## Date: 9/11/2020
 

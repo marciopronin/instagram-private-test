@@ -405,6 +405,27 @@ class Instagram implements ExperimentsInterface
      */
     public $iosDpi = null;
 
+    /**
+     * Navigation chain.
+     *
+     * @var string
+     */
+    public $navChain = '';
+
+    /**
+     * Navigation chain step.
+     *
+     * @var int
+     */
+    public $navChainStep = 0;
+
+    /**
+     * Previous navigation chain class.
+     *
+     * @var string
+     */
+    public $prevNavChainClass = '';
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -1050,12 +1071,87 @@ class Instagram implements ExperimentsInterface
     /**
      * Set is dark mode enabled.
      *
-     * @param bool $value.
+     * @param bool $value
      */
     public function setIsDarkModeEnabled(
         $value)
     {
         $this->darkModeEnabled = $value;
+    }
+
+    /**
+     * Get navigation chain.
+     *
+     * @return string
+     */
+    public function getNavChain()
+    {
+        return $this->navChain;
+    }
+
+    /**
+     * Set navigation chain.
+     *
+     * @param mixed $value
+     */
+    public function setNavChain(
+        $value)
+    {
+        if ($value === '') {
+            $this->navChain = '';
+        } else {
+            $this->navChain .= $value;
+        }
+    }
+
+    /**
+     * Get navigation chain step.
+     *
+     * @return int
+     */
+    public function getNavChainStep()
+    {
+        return $this->navChainStep;
+    }
+
+    /**
+     * Set navigation chain step.
+     *
+     * @param mixed $value
+     */
+    public function setNavChainStep(
+        $value)
+    {
+        $this->navChainStep = $value;
+    }
+
+    /**
+     * Increment navigation chain step.
+     */
+    public function incrementNavChainStep()
+    {
+        $this->navChainStep++;
+    }
+
+    /**
+     * Get previous navigation chain class.
+     *
+     * @return string
+     */
+    public function getPrevNavChainClass()
+    {
+        return $this->prevNavChainClass;
+    }
+
+    /**
+     * Set next previous navigation chain class.
+     *
+     * @param mixed $value
+     */
+    public function setPrevNavChainClass(
+        $value)
+    {
+        $this->prevNavChainClass = $value;
     }
 
     /**

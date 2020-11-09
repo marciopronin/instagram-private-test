@@ -1,3 +1,26 @@
+# Stable release v16.3.0
+## Date: 9/11/2020
+
+### New features
+
+- **Instagram:** Add navigation chain set and get functions
+
+### Updates and Fixed
+
+- **Client:** Update `X-IG-WWW-Claim` default value
+- **Event:** Update `_getModuleClass()`
+- **Event:** Update `_generateNavChain()`
+- **Event:** Update `sendUpdateSessionChain()`
+
+
+### Wiki
+
+- **Wiki:** Add notes about navigation chain. MUST READ.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.2.2
 ## Date: 6/11/2020
 

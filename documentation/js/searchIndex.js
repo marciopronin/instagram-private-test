@@ -1466,6 +1466,41 @@ Search.appendIndex(
             "summary": "Set\u0020is\u0020dark\u0020mode\u0020enabled.",
             "url": "../classes/InstagramAPI-Instagram.html#method_setIsDarkModeEnabled"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetNavChain\u0028\u0029",
+            "name": "getNavChain",
+            "summary": "Get\u0020navigation\u0020chain.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getNavChain"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetNavChain\u0028\u0029",
+            "name": "setNavChain",
+            "summary": "Set\u0020navigation\u0020chain.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setNavChain"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetNavChainStep\u0028\u0029",
+            "name": "getNavChainStep",
+            "summary": "Get\u0020navigation\u0020chain\u0020step.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getNavChainStep"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetNavChainStep\u0028\u0029",
+            "name": "setNavChainStep",
+            "summary": "Set\u0020navigation\u0020chain\u0020step.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setNavChainStep"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AincrementNavChainStep\u0028\u0029",
+            "name": "incrementNavChainStep",
+            "summary": "Increment\u0020navigation\u0020chain\u0020step.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_incrementNavChainStep"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetPrevNavChainClass\u0028\u0029",
+            "name": "getPrevNavChainClass",
+            "summary": "Get\u0020previous\u0020navigation\u0020chain\u0020class.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getPrevNavChainClass"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetPrevNavChainClass\u0028\u0029",
+            "name": "setPrevNavChainClass",
+            "summary": "Set\u0020next\u0020previous\u0020navigation\u0020chain\u0020class.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setPrevNavChainClass"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003Alogin\u0028\u0029",
             "name": "login",
             "summary": "Login\u0020to\u0020Instagram\u0020or\u0020automatically\u0020resume\u0020and\u0020refresh\u0020previous\u0020session.",
@@ -1795,6 +1830,21 @@ Search.appendIndex(
             "name": "iosDpi",
             "summary": "iOS\u0020DPI.",
             "url": "../classes/InstagramAPI-Instagram.html#property_iosDpi"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024navChain",
+            "name": "navChain",
+            "summary": "Navigation\u0020chain.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_navChain"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024navChainStep",
+            "name": "navChainStep",
+            "summary": "Navigation\u0020chain\u0020step.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_navChainStep"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024prevNavChainClass",
+            "name": "prevNavChainClass",
+            "summary": "Previous\u0020navigation\u0020chain\u0020class.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_prevNavChainClass"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024account",
             "name": "account",

@@ -109,40 +109,102 @@ class Event extends RequestCollection
     protected function _getModuleClass(
         $module)
     {
-        $classes = []; //TODO.
-
-        if (in_array($module, $classes, true)) {
-            throw new \InstagramAPI\Exception\InstagramException('Invalid module for chain.');
+        switch ($module) {
+            case 'feed_timeline':
+            case 'explore_popular':
+            case 'newsfeed_you':
+                $class = '1Qx';
+                break;
+            case 'search':
+            case 'blended_search':
+            case 'search_users':
+            case 'search_tags':
+            case 'search_places':
+            case 'search_result':
+                $class = 'AdB';
+                break;
+            case 'feed_hashtag':
+                $class = '2nd';
+                break;
+            case 'feed_location':
+                $class = '8Sn';
+                break;
+            case 'feed_contextual_chain':
+                $class = '2np';
+                break;
+            case 'feed_contextual_place':
+            case 'feed_contextual_location':
+            case 'feed_contextual_hashtag':
+            case 'feed_contextual_profile':
+            case 'feed_contextual_self_profile':
+                $class = '2l7';
+                break;
+            case 'profile':
+            case 'self_profile':
+                $class = 'UserDetailFragment';
+                break;
+            case 'following_sheet':
+                $class = 'ProfileFollowRelationshipFragment';
+                break;
+            case 'unified_follow_lists':
+            case 'self_unified_follow_lists':
+                $class = 'UnifiedFollowFragment';
+                break;
+            case 'likers':
+                $class = '1SH';
+                break;
+            default:
+                $class = false;
         }
 
-        return $classes[$module];
+        return $class;
     }
 
     /**
      * Generate nav chain.
      *
-     * @param string[] $modules Array of modules.
+     * @param string $module Module.
      *
-     * @return string
+     * @return string|null
      */
     protected function _generateNavChain(
-        array $modules)
+        $module)
     {
-        $navChain = '';
-        $step = 1; // Not incremental in all cases!
-        $lastKey = array_key_last($modules);
+        $class = $this->_getModuleClass($module);
 
-        foreach ($modules as $idx => $module) {
-            $chain = sprintf('%s:%s:%d', _getModuleClass($module), $module, $step);
-            $step++;
+        if ($this->ig->getPrevNavChainClass() === $class) {
+            $this->ig->incrementNavChainStep();
 
-            if ($idx !== $lastKey) {
-                $chain += ',';
-            }
-            $navChain += $chain;
+            return $this->ig->getNavChain();
         }
 
-        return $navChain;
+        if ($class === false) {
+            $this->ig->incrementNavChainStep();
+
+            return $this->ig->getNavChain();
+        }
+
+        if ($module === 'feed_timeline') {
+            $this->ig->setNavChainStep(1);
+            $this->ig->setNavChain('');
+        } elseif ($module === 'explore_popular') {
+            $this->ig->setNavChainStep(2);
+            $this->ig->setNavChain('');
+        } elseif ($module === 'newsfeed_you') {
+            $this->ig->setNavChainStep(3);
+            $this->ig->setNavChain('');
+        }
+
+        $chain = '';
+        if ($this->ig->getNavChain() !== '') {
+            $chain = ',';
+        }
+        $chain .= sprintf('%s:%s:%d', $class, $module, $this->ig->getNavChainStep());
+        $this->ig->setPrevNavChainClass($class);
+        $this->ig->setNavChain($chain);
+        $this->ig->incrementNavChainStep();
+
+        return $this->ig->getNavChain();
     }
 
     /**
@@ -3697,6 +3759,11 @@ class Event extends RequestCollection
 
         $this->_validateNavigationPath($fromModule, $toModule, $clickPoint);
         $this->_validateNavigationOptions($fromModule, $toModule, $options);
+
+        if($this->getIsAndroid()) {
+            $this->sendUpdateSessionChain($toModule);
+        }
+
         $navDepth = $this->_getNavDepthForModules($fromModule, $toModule);
 
         $extra = [
@@ -3823,24 +3890,17 @@ class Event extends RequestCollection
     /**
      * Update session chain.
      *
-     * It used for updating navigation chain.
+     * It is used for updating navigation chain.
      *
-     * @param string $module   Module.
-     * @param array  $navstack Navstack.
+     * @param string $module Module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendUpdateSessionChain(
-        $module,
-        $navstack)
+        $module)
     {
-        $moduleStack = [];
-        foreach ($navstack as $nav) {
-            $moduleStack[] = $nav['module'];
-        }
-
         $extra = [
-            'sessions_chain'  => $this->_generateNavChain($moduleStack),
+            'sessions_chain'  => $this->_generateNavChain($module),
         ];
 
         $event = $this->_addEventBody('ig_sessions_chain_update', $module, $extra);

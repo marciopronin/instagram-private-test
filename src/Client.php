@@ -1033,7 +1033,7 @@ class Client
             $headers['set_headers']['X-Pigeon-Rawclienttime'] = $this->_getPigeonRawClientTime();
 
             $this->_directRegionHint = ($this->_parent->settings->get('direct_region') !== null) ? $this->_parent->settings->get('direct_region') : '';
-            $this->wwwClaim = ($this->_parent->settings->get('www_claim') !== null) ? $this->_parent->settings->get('www_claim') : '';
+            $this->wwwClaim = ($this->_parent->settings->get('www_claim') !== null) ? $this->_parent->settings->get('www_claim') : '0';
 
             if ($this->_totalTime !== 0 && !empty($this->_bandwidthB)) {
                 $headers['set_headers']['X-IG-Bandwidth-Speed-KBPS'] = ($this->_totalBytes / $this->_totalTime + $this->_bandwidthB / $this->_bandwidthM) / 2;

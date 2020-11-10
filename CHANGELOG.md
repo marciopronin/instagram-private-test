@@ -1,3 +1,10 @@
+# Stable release v16.3.2
+## Date: 10/11/2020
+
+### Updates and fixes
+
+- **Instagram/Internal:** Add a function to disable auto retries media upload
+
 # Stable release v16.3.1
 ## Date: 9/11/2020
 

@@ -426,6 +426,15 @@ class Instagram implements ExperimentsInterface
      */
     public $prevNavChainClass = '';
 
+    /**
+     * Disable auto retries in media upload.
+     *
+     * USE IT UNDER YOUR OWN RISK.
+     *
+     * @var bool
+     */
+    public $disableAutoRetriesMediaUpload = false;
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -1146,12 +1155,33 @@ class Instagram implements ExperimentsInterface
     /**
      * Set next previous navigation chain class.
      *
-     * @param mixed $value
+     * @param string $value
      */
     public function setPrevNavChainClass(
         $value)
     {
         $this->prevNavChainClass = $value;
+    }
+
+    /**
+     * Disable auto retries media upload.
+     *
+     * @param bool $value
+     */
+    public function disableAutoRetriesMediaUpload(
+        $value)
+    {
+        $this->disableAutoRetriesMediaUpload = $value;
+    }
+
+    /**
+     * Get auto disable retries media upload.
+     *
+     * @return bool
+     */
+    public function getIsDisabledAutoRetriesMediaUpload()
+    {
+        return $this->disableAutoRetriesMediaUpload;
     }
 
     /**

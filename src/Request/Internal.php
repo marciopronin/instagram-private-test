@@ -1975,7 +1975,7 @@ class Internal extends RequestCollection
     {
         $attempt = 0;
         $lastError = null;
-        while (true) {
+        while (true && !$this->ig->getIsDisabledAutoRetriesMediaUpload()) {
             // Check for max retry-limit, and throw if we exceeded it.
             if (++$attempt > self::MAX_CONFIGURE_RETRIES) {
                 if ($lastError === null) {

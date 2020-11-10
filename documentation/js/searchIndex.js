@@ -1501,6 +1501,16 @@ Search.appendIndex(
             "summary": "Set\u0020next\u0020previous\u0020navigation\u0020chain\u0020class.",
             "url": "../classes/InstagramAPI-Instagram.html#method_setPrevNavChainClass"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024disableAutoRetriesMediaUpload",
+            "name": "disableAutoRetriesMediaUpload",
+            "summary": "Disable\u0020auto\u0020retries\u0020in\u0020media\u0020upload.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_disableAutoRetriesMediaUpload"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetIsDisabledAutoRetriesMediaUpload\u0028\u0029",
+            "name": "getIsDisabledAutoRetriesMediaUpload",
+            "summary": "Get\u0020auto\u0020disable\u0020retries\u0020media\u0020upload.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getIsDisabledAutoRetriesMediaUpload"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003Alogin\u0028\u0029",
             "name": "login",
             "summary": "Login\u0020to\u0020Instagram\u0020or\u0020automatically\u0020resume\u0020and\u0020refresh\u0020previous\u0020session.",

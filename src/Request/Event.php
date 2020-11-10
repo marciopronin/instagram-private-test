@@ -3760,7 +3760,7 @@ class Event extends RequestCollection
         $this->_validateNavigationPath($fromModule, $toModule, $clickPoint);
         $this->_validateNavigationOptions($fromModule, $toModule, $options);
 
-        if($this->ig->getIsAndroid()) {
+        if ($this->ig->getIsAndroid()) {
             $this->sendUpdateSessionChain($toModule);
         }
 

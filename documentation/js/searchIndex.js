@@ -416,20 +416,20 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Constants.html#constant_SIG_KEY_IOS_VERSION"
         },                {
-            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AIG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY",
-            "name": "IG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY",
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AIG_LOGIN_DEFAULT_PUBLIC_KEY",
+            "name": "IG_LOGIN_DEFAULT_PUBLIC_KEY",
             "summary": "",
-            "url": "../classes/InstagramAPI-Constants.html#constant_IG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY"
+            "url": "../classes/InstagramAPI-Constants.html#constant_IG_LOGIN_DEFAULT_PUBLIC_KEY"
         },                {
-            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AIG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY_ID",
-            "name": "IG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY_ID",
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AIG_LOGIN_DEFAULT_PUBLIC_KEY_ID",
+            "name": "IG_LOGIN_DEFAULT_PUBLIC_KEY_ID",
             "summary": "",
-            "url": "../classes/InstagramAPI-Constants.html#constant_IG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY_ID"
+            "url": "../classes/InstagramAPI-Constants.html#constant_IG_LOGIN_DEFAULT_PUBLIC_KEY_ID"
         },                {
-            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AIG_LOGIN_ANDROID_PUBLIC_KEY",
-            "name": "IG_LOGIN_ANDROID_PUBLIC_KEY",
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AIG_LOGIN_PUBLIC_KEY",
+            "name": "IG_LOGIN_PUBLIC_KEY",
             "summary": "",
-            "url": "../classes/InstagramAPI-Constants.html#constant_IG_LOGIN_ANDROID_PUBLIC_KEY"
+            "url": "../classes/InstagramAPI-Constants.html#constant_IG_LOGIN_PUBLIC_KEY"
         },                {
             "fqsen": "\\InstagramAPI\\Constants\u003A\u003ABLOCK_VERSIONING_ID",
             "name": "BLOCK_VERSIONING_ID",

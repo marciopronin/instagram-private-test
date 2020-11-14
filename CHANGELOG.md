@@ -1,3 +1,15 @@
+# Stable release v16.3.3
+## Date: 13/11/2020
+
+### Updates and fixes
+
+- **Constants:** Update Constants
+- **Account:** Update registration functions for iOS support
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.3.2
 ## Date: 10/11/2020
 

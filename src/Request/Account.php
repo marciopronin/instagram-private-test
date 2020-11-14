@@ -20,6 +20,7 @@ use InstagramAPI\Utils;
  * @param string $date        The date of birth. Format: YYYY-MM-DD.
  * @param string $firstName   First name.
  * @param string $waterfallId UUIDv4.
+ * @param string $tosVersion  ToS version.
  *
  * @throws \InstagramAPI\Exception\InstagramException
  *
@@ -34,7 +35,8 @@ class Account extends RequestCollection
         $email,
         $date,
         $firstName,
-        $waterfallId)
+        $waterfallId,
+        $tosVersion = 'eu')
     {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
@@ -44,14 +46,9 @@ class Account extends RequestCollection
 
         $date = explode('-', $date);
 
-        return $this->ig->request('accounts/create/')
+        $request = $this->ig->request('accounts/create/')
             ->setNeedsAuth(false)
-            ->addPost('is_secondary_account_creation', false)
-            ->addPost('tos_version', 'eu')
-            ->addPost('suggestedUsername', '')
-            ->addPost('jazoest', Utils::generateJazoest($this->ig->phone_id))
-            ->addPost('sn_result', 'GOOGLE_PLAY_UNAVAILABLE:+SERVICE_INVALID')
-            ->addPost('do_not_auto_login_if_credentials_match', 'true')
+            ->addPost('tos_version', $tosVersion)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('username', $username)
@@ -64,11 +61,26 @@ class Account extends RequestCollection
             ->addPost('day', $date[2])
             ->addPost('month', $date[1])
             ->addPost('year', $date[0])
-            ->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))
-            ->addPost('force_sign_up_code', $signupCode)
             ->addPost('waterfall_id', $waterfallId)
             ->addPost('enc_password', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
-            ->getResponse(new Response\AccountCreateResponse());
+            ->addPost('force_sign_up_code', $signupCode);
+
+        if ($this->ig->getIsAndroid()) {
+            $request->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))
+                ->addPost('suggestedUsername', '')
+                ->addPost('is_secondary_account_creation', false)
+                ->addPost('jazoest', Utils::generateJazoest($this->ig->phone_id))
+                ->addPost('sn_result', 'GOOGLE_PLAY_UNAVAILABLE:+SERVICE_INVALID')
+                ->addPost('do_not_auto_login_if_credentials_match', 'true');
+        } else {
+            $request->addPost('do_not_auto_login_if_credentials_match', '0')
+                ->addPost('force_create_account', '0')
+                ->addPost('ck_error', 'NSURLErrorDomain: -1202')
+                ->addPost('ck_environment', 'production')
+                ->addPost('ck_environment', 'iCloud.com.burbn.instagram');
+        }
+
+        return $request->getResponse(new Response\AccountCreateResponse());
     }
 
     /**
@@ -105,14 +117,10 @@ class Account extends RequestCollection
 
         $date = explode('-', $date);
 
-        return $this->ig->request('accounts/create_validated/')
+        $request = $this->ig->request('accounts/create_validated/')
             ->setNeedsAuth(false)
-            ->addPost('is_secondary_account_creation', 'false')
             ->addPost('tos_version', $tosVersion)
-            ->addPost('suggestedUsername', '')
             ->addPost('allow_contacts_sync', 'true')
-            ->addPost('sn_result', 'GOOGLE_PLAY_UNAVAILABLE:+SERVICE_INVALID')
-            ->addPost('do_not_auto_login_if_credentials_match', 'true')
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('username', $username)
@@ -122,19 +130,33 @@ class Account extends RequestCollection
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('phone_number', $phone)
-            ->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))
-            ->addPost('force_sign_up_code', '')
             ->addPost('day', $date[2])
             ->addPost('month', $date[1])
             ->addPost('year', $date[0])
             ->addPost('waterfall_id', $waterfallId)
             ->addPost('enc_password', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('verification_code', $smsCode)
-            ->addPost('jazoest', Utils::generateJazoest($this->ig->phone_id))
             ->addPost('qs_stamp', '')
             ->addPost('one_tap_opt_in', 'true')
-            ->addPost('has_sms_consent', 'true')
-            ->getResponse(new Response\AccountCreateResponse());
+            ->addPost('has_sms_consent', 'true');
+
+        if ($this->ig->getIsAndroid()) {
+            $request->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))
+                ->addPost('suggestedUsername', '')
+                ->addPost('is_secondary_account_creation', false)
+                ->addPost('jazoest', Utils::generateJazoest($this->ig->phone_id))
+                ->addPost('sn_result', 'GOOGLE_PLAY_UNAVAILABLE:+SERVICE_INVALID')
+                ->addPost('do_not_auto_login_if_credentials_match', 'true')
+                ->addPost('force_sign_up_code', '');
+        } else {
+            $request->addPost('do_not_auto_login_if_credentials_match', '0')
+                ->addPost('force_create_account', '0')
+                ->addPost('ck_error', 'NSURLErrorDomain: -1202')
+                ->addPost('ck_environment', 'production')
+                ->addPost('ck_environment', 'iCloud.com.burbn.instagram');
+        }
+
+        return $request->getResponse(new Response\AccountCreateResponse());
     }
 
     /**

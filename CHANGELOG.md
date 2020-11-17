@@ -1,3 +1,17 @@
+# Stable release v16.3.4
+## Date: 17/11/2020
+
+### Updates and fixes
+
+- **Media:** Update `getOembedInfo()`
+
+### Wiki and code
+
+- **Wiki:** AccountCompromised
+- **Wiki:** Bundle
+
+- Added Superpack compiled bundle and old decompiled JS bundle.
+
 # Stable release v16.3.3
 ## Date: 13/11/2020
 

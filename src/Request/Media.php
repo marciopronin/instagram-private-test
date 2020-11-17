@@ -42,7 +42,7 @@ class Media extends RequestCollection
     public function getOembedInfo(
         $mediaUrl)
     {
-        return $this->ig->request('oembed/')
+        return $this->ig->request('instagram_oembed/')
             ->setIsSilentFail(true)
             ->addParam('url', $mediaUrl)
             ->getResponse(new Response\MediaInfoResponse());

@@ -163,12 +163,14 @@ class Event extends RequestCollection
     /**
      * Generate nav chain.
      *
-     * @param string $module Module.
+     * @param string $module     Module.
+     * @param string $clickPoint Click point.
      *
      * @return string|null
      */
     protected function _generateNavChain(
-        $module)
+        $module,
+        $clickPoint)
     {
         $class = $this->_getModuleClass($module);
 
@@ -199,10 +201,21 @@ class Event extends RequestCollection
         if ($this->ig->getNavChain() !== '') {
             $chain = ',';
         }
-        $chain .= sprintf('%s:%s:%d', $class, $module, $this->ig->getNavChainStep());
-        $this->ig->setPrevNavChainClass($class);
-        $this->ig->setNavChain($chain);
-        $this->ig->incrementNavChainStep();
+
+        if ($clickPoint === 'back') {
+            $chain = $this->ig->getNavChain();
+            $chains = explode(',', $chain);
+            array_pop($chains);
+            $newChain = implode(',', $chains);
+            $this->ig->setNavChain('');
+            $this->ig->setNavChain($newChain);
+            $this->ig->decrementNavChainStep();
+        } else {
+            $chain .= sprintf('%s:%s:%d', $class, $module, $this->ig->getNavChainStep());
+            $this->ig->setPrevNavChainClass($class);
+            $this->ig->setNavChain($chain);
+            $this->ig->incrementNavChainStep();
+        }
 
         return $this->ig->getNavChain();
     }
@@ -3480,6 +3493,10 @@ class Event extends RequestCollection
                     'clickpoint'   => 'button',
                     'dest_module'  => 'media_mute_sheet',
                 ],
+                [
+                    'clickpoint'   => 'back',
+                    'dest_module'  => 'search',
+                ],
             ],
             'reel_profile' => [
                 [
@@ -3761,7 +3778,7 @@ class Event extends RequestCollection
         $this->_validateNavigationOptions($fromModule, $toModule, $options);
 
         if ($this->ig->getIsAndroid()) {
-            $this->sendUpdateSessionChain($toModule);
+            $navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
         }
 
         $navDepth = $this->_getNavDepthForModules($fromModule, $toModule);
@@ -3773,6 +3790,10 @@ class Event extends RequestCollection
             'seq'                       => $this->ig->navigationSequence,
             'nav_time_taken'            => mt_rand(200, 350),
         ];
+
+        if ($this->ig->getIsAndroid()) {
+            $extra['nav_chain'] = $navChain;
+        }
 
         switch ($fromModule) {
             case 'feed_timeline':
@@ -3892,19 +3913,26 @@ class Event extends RequestCollection
      *
      * It is used for updating navigation chain.
      *
-     * @param string $module Module.
+     * @param string $module     Module.
+     * @param string $clickPoint Click point.
      *
      * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return string
      */
     public function sendUpdateSessionChain(
-        $module)
+        $module,
+        $clickPoint)
     {
+        $navChain = $this->_generateNavChain($module, $clickPoint);
         $extra = [
-            'sessions_chain'  => $this->_generateNavChain($module),
+            'sessions_chain'  => $navChain,
         ];
 
         $event = $this->_addEventBody('ig_sessions_chain_update', $module, $extra);
         $this->_addEventData($event);
+
+        return $navChain;
     }
 
     /**

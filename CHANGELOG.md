@@ -1,3 +1,23 @@
+# Stable release v16.4.0
+## Date: 19/11/2020
+
+### New feature:
+
+- **Instagram:** Add `decrementNavChainStep()`
+
+### Updates and fixes
+
+- **Constants:** Update batch query
+- **Event:** Update nav chain algorithm
+
+### Examples
+
+- **Example:** Add checkUsers example
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.3.4
 ## Date: 17/11/2020
 

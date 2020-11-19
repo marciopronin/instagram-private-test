@@ -1143,6 +1143,14 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
+     * Decrement navigation chain step.
+     */
+    public function decrementNavChainStep()
+    {
+        $this->navChainStep--;
+    }
+
+    /**
      * Get previous navigation chain class.
      *
      * @return string

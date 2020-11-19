@@ -1491,6 +1491,11 @@ Search.appendIndex(
             "summary": "Increment\u0020navigation\u0020chain\u0020step.",
             "url": "../classes/InstagramAPI-Instagram.html#method_incrementNavChainStep"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AdecrementNavChainStep\u0028\u0029",
+            "name": "decrementNavChainStep",
+            "summary": "Decrement\u0020navigation\u0020chain\u0020step.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_decrementNavChainStep"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetPrevNavChainClass\u0028\u0029",
             "name": "getPrevNavChainClass",
             "summary": "Get\u0020previous\u0020navigation\u0020chain\u0020class.",

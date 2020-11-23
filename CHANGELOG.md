@@ -1,3 +1,18 @@
+# Stable release v16.4.1
+## Date: 23/11/2020
+
+### Updates and fixes
+
+- **Event:** Fixed IDE issues
+
+### Documentation
+
+- **Documentation:** Update documentation
+
+### Wiki
+
+- **Wiki:** WIP. NavChains v167.
+
 # Stable release v16.4.0
 ## Date: 19/11/2020
 

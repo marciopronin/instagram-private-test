@@ -559,16 +559,16 @@ class Event extends RequestCollection
     /**
      * Send Thumbnail impression or thumbnail click.
      *
-     * @param string              $type        'instagram_thumbnail_impression' to send a view impression on a thumbnail.
-     *                                         'instagram_thumbnail_click' to send a click event on a thumbnail.
-     * @param Response\Model\Item $item        The item object.
-     * @param string              $module      'profile', 'feed_timeline' or 'feed_hashtag'.
-     * @param string|null         $hashtagId   The hashtag ID. Only used when 'feed_hashtag' is used as module.
-     * @param string|null         $hashtagName The hashtag name. Only used when 'feed_hashtag' is used as module.
-     * @param array               $options     Options to configure the event.
-     *                                         'position', string, the media position.
-     *                                         'following', string, 'following' or 'not_following'.
-     *                                         'feed_type', string, 'top', 'recent'.
+     * @param string                            $type        'instagram_thumbnail_impression' to send a view impression on a thumbnail.
+     *                                                       'instagram_thumbnail_click' to send a click event on a thumbnail.
+     * @param \InstagramAPI\Response\Model\Item $item        The item object.
+     * @param string                            $module      'profile', 'feed_timeline' or 'feed_hashtag'.
+     * @param string|null                       $hashtagId   The hashtag ID. Only used when 'feed_hashtag' is used as module.
+     * @param string|null                       $hashtagName The hashtag name. Only used when 'feed_hashtag' is used as module.
+     * @param array                             $options     Options to configure the event.
+     *                                                       'position', string, the media position.
+     *                                                       'following', string, 'following' or 'not_following'.
+     *                                                       'feed_type', string, 'top', 'recent'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -666,20 +666,20 @@ class Event extends RequestCollection
      *
      * This event tells Instagram how much time do you spent on each module.
      *
-     * @param Response\Model\Item $item                The item object.
-     * @param string              $followingUserStatus Following status. 'following' or 'not_following'.
-     * @param string              $timespent           Time spent in milliseconds.
-     * @param string              $module              The current module you are. 'feed_contextual_profile',
-     *                                                 'feed_contextual_self_profile',
-     *                                                 'feed_contextual_chain',
-     * @param array               $clusterData         Cluster data used in 'feed_contextual_chain' module.
-     *                                                 'feed_position' zero based position of the media in the feed.
-     *                                                 'chaining_session_id' UUIDv4.
-     *                                                 'topic_cluster_id' 'explore_all:0' (More info on Discover class).
-     *                                                 'topic_cluster_title' 'For You' (More info on Discover class).
-     *                                                 'topic_cluster_type' 'explore_all' (More info on Discover class).
-     *                                                 'topic_cluster_session_id' UUIDv4.
-     * @param array|null          $options
+     * @param \InstagramAPI\Response\Model\Item $item                The item object.
+     * @param string                            $followingUserStatus Following status. 'following' or 'not_following'.
+     * @param string                            $timespent           Time spent in milliseconds.
+     * @param string                            $module              The current module you are. 'feed_contextual_profile',
+     *                                                               'feed_contextual_self_profile',
+     *                                                               'feed_contextual_chain',
+     * @param array                             $clusterData         Cluster data used in 'feed_contextual_chain' module.
+     *                                                               'feed_position' zero based position of the media in the feed.
+     *                                                               'chaining_session_id' UUIDv4.
+     *                                                               'topic_cluster_id' 'explore_all:0' (More info on Discover class).
+     *                                                               'topic_cluster_title' 'For You' (More info on Discover class).
+     *                                                               'topic_cluster_type' 'explore_all' (More info on Discover class).
+     *                                                               'topic_cluster_session_id' UUIDv4.
+     * @param array|null                        $options
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -798,12 +798,12 @@ class Event extends RequestCollection
     /**
      * Send organic reel/story impression.
      *
-     * @param Response\Model\Item $item                The item object.
-     * @param string              $viewerSessionId     UUIDv4.
-     * @param string              $traySessionId       UUIDv4.
-     * @param string              $rankingToken        UUIDv4.
-     * @param string              $followingUserStatus Following status. 'following' or 'not_following'.
-     * @param string              $source              Source of action. 'reel_feed_timeline'.
+     * @param \InstagramAPI\Response\Model\Item $item                The item object.
+     * @param string                            $viewerSessionId     UUIDv4.
+     * @param string                            $traySessionId       UUIDv4.
+     * @param string                            $rankingToken        UUIDv4.
+     * @param string                            $followingUserStatus Following status. 'following' or 'not_following'.
+     * @param string                            $source              Source of action. 'reel_feed_timeline'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -840,11 +840,11 @@ class Event extends RequestCollection
     /**
      * Send reel tray impression.
      *
-     * @param Response\Model\Item $item          The item object.
-     * @param string              $traySessionId UUIDv4.
-     * @param string              $rankingToken  UUIDv4.
-     * @param array               $options       Options.
-     * @param string              $source        Source of action. 'feed_timeline'.
+     * @param \InstagramAPI\Response\Model\Item $item          The item object.
+     * @param string                            $traySessionId UUIDv4.
+     * @param string                            $rankingToken  UUIDv4.
+     * @param array                             $options       Options.
+     * @param string                            $source        Source of action. 'feed_timeline'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -884,10 +884,10 @@ class Event extends RequestCollection
     /**
      * Send feed item inserted.
      *
-     * @param Response\Model\Item $item      The item object.
-     * @param string              $requestId UUIDv4.
-     * @param string              $sessionId UUIDv4.
-     * @param array               $options   Options.
+     * @param \InstagramAPI\Response\Model\Item $item      The item object.
+     * @param string                            $requestId UUIDv4.
+     * @param string                            $sessionId UUIDv4.
+     * @param array                             $options   Options.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -947,9 +947,9 @@ class Event extends RequestCollection
     /**
      * Send organic number of likes.
      *
-     * @param Response\Model\Item $item    The item object.
-     * @param string              $module  Module.
-     * @param array               $options Options.
+     * @param \InstagramAPI\Response\Model\Item $item    The item object.
+     * @param string                            $module  Module.
+     * @param array                             $options Options.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -984,10 +984,10 @@ class Event extends RequestCollection
     /**
      * Send organic action menu.
      *
-     * @param string              $module        Module.
-     * @param Response\Model\Item $item          The item object.
-     * @param string              $feedSessionId UUIDv4.
-     * @param array               $options       Options.
+     * @param string                            $module        Module.
+     * @param \InstagramAPI\Response\Model\Item $item          The item object.
+     * @param string                            $feedSessionId UUIDv4.
+     * @param array                             $options       Options.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1178,16 +1178,16 @@ class Event extends RequestCollection
     /**
      * Send organic like.
      *
-     * @param Response\Model\Item $item        The item object.
-     * @param string              $module      'profile', 'feed_contextual_hashtag', 'feed_short_url', 'feed_timeline'.
-     * @param string|null         $hashtagId   The hashtag ID. Only used when 'feed_contextual_hashtag' is used as module.
-     * @param string|null         $hashtagName The hashtag name. Only used when 'feed_contextual_hashtag' is used as module.
-     * @param string|null         $sessionId   Timeline session ID.
-     * @param array               $options     Options to configure the event.
-     *                                         'follow_status', string, 'following' or 'not_following'.
-     *                                         'hashtag_follow_status', string, 'following' or 'not_following'.
-     *                                         'hashtag_feed_type', string, 'top', 'recent'.
-     * @param bool                $unlike      Wether to send organic like or unlike.
+     * @param \InstagramAPI\Response\Model\Item $item        The item object.
+     * @param string                            $module      'profile', 'feed_contextual_hashtag', 'feed_short_url', 'feed_timeline'.
+     * @param string|null                       $hashtagId   The hashtag ID. Only used when 'feed_contextual_hashtag' is used as module.
+     * @param string|null                       $hashtagName The hashtag name. Only used when 'feed_contextual_hashtag' is used as module.
+     * @param string|null                       $sessionId   Timeline session ID.
+     * @param array                             $options     Options to configure the event.
+     *                                                       'follow_status', string, 'following' or 'not_following'.
+     *                                                       'hashtag_follow_status', string, 'following' or 'not_following'.
+     *                                                       'hashtag_feed_type', string, 'top', 'recent'.
+     * @param bool                              $unlike      Wether to send organic like or unlike.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1292,9 +1292,9 @@ class Event extends RequestCollection
      * NOTE: After using this event you need to send comment impression on your own comment.
      *       Use sendCommentImpression().
      *
-     * @param Response\Model\Item $item            The item object.
-     * @param bool                $isFollowingUser If you are following the user that owns the media.
-     * @param int                 $composeDuration The time in milliseconds it took to compose the comment.
+     * @param \InstagramAPI\Response\Model\Item $item            The item object.
+     * @param bool                              $isFollowingUser If you are following the user that owns the media.
+     * @param int                               $composeDuration The time in milliseconds it took to compose the comment.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
@@ -1324,10 +1324,10 @@ class Event extends RequestCollection
     /**
      * Send organic comment like.
      *
-     * @param Response\Model\Item $item      The item object.
-     * @param string              $userId    User ID of account who made the comment in Instagram's internal format.
-     * @param string              $commentId Comment ID in Instagram's internal format.
-     * @param string              $sessionId UUID.
+     * @param \InstagramAPI\Response\Model\Item $item      The item object.
+     * @param string                            $userId    User ID of account who made the comment in Instagram's internal format.
+     * @param string                            $commentId Comment ID in Instagram's internal format.
+     * @param string                            $sessionId UUID.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
@@ -1376,11 +1376,11 @@ class Event extends RequestCollection
      *
      * Whenever you see a comment, a comment impression is sent.
      *
-     * @param Response\Model\Item $item             The item object.
-     * @param string              $userId           User ID of account who made the comment in Instagram's internal format.
-     * @param string              $commentId        Comment ID in Instagram's internal format.
-     * @param int                 $commentLikeCount The number of likes the comment has.
-     * @param string              $module           Module.
+     * @param \InstagramAPI\Response\Model\Item $item             The item object.
+     * @param string                            $userId           User ID of account who made the comment in Instagram's internal format.
+     * @param string                            $commentId        Comment ID in Instagram's internal format.
+     * @param int                               $commentLikeCount The number of likes the comment has.
+     * @param string                            $module           Module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
@@ -1638,13 +1638,13 @@ class Event extends RequestCollection
     /**
      * Send organic media impression.
      *
-     * @param Response\Model\Item $item    The item object.
-     * @param string              $module  'profile', 'reel_feed_timeline', 'feed_short_url', 'feed_contextual_profile'.
-     * @param array               $options Options to configure the event.
-     *                                     'following', string, 'following' or 'not_following'.'.
-     *                                     'story_ranking_token' UUIDv4. Used on module 'reel_feed_timeline'.
-     *                                     'viewer_session_id' UUIDv4. Used on module 'reel_feed_timeline'.
-     *                                     'tray_session_id' UUIDv4. Used on module 'reel_feed_timeline'.
+     * @param \InstagramAPI\Response\Model\Item $item    The item object.
+     * @param string                            $module  'profile', 'reel_feed_timeline', 'feed_short_url', 'feed_contextual_profile'.
+     * @param array                             $options Options to configure the event.
+     *                                                   'following', string, 'following' or 'not_following'.'.
+     *                                                   'story_ranking_token' UUIDv4. Used on module 'reel_feed_timeline'.
+     *                                                   'viewer_session_id' UUIDv4. Used on module 'reel_feed_timeline'.
+     *                                                   'tray_session_id' UUIDv4. Used on module 'reel_feed_timeline'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1765,9 +1765,9 @@ class Event extends RequestCollection
     /**
      * Send organic carousel impression.
      *
-     * @param Response\Model\Item $item      The item object.
-     * @param string              $requestId UUID.
-     * @param array               $options   Options to configure the event.
+     * @param \InstagramAPI\Response\Model\Item $item      The item object.
+     * @param string                            $requestId UUID.
+     * @param array                             $options   Options to configure the event.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1806,12 +1806,12 @@ class Event extends RequestCollection
     /**
      * Send reel playback navigation.
      *
-     * @param Response\Model\Item $item            The item object.
-     * @param string              $viewerSessionId UUID.
-     * @param string              $traySessionId   UUID.
-     * @param string              $rankingToken    UUID.
-     * @param string              $module          Module.
-     * @param array               $options         Options to configure the event.
+     * @param \InstagramAPI\Response\Model\Item $item            The item object.
+     * @param string                            $viewerSessionId UUID.
+     * @param string                            $traySessionId   UUID.
+     * @param string                            $rankingToken    UUID.
+     * @param string                            $module          Module.
+     * @param array                             $options         Options to configure the event.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1872,8 +1872,8 @@ class Event extends RequestCollection
     /**
      * Send explore home impression.
      *
-     * @param Response\Model\Item $item    The item object.
-     * @param array               $options Options to configure the event.
+     * @param \InstagramAPI\Response\Model\Item $item    The item object.
+     * @param array                             $options Options to configure the event.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -2264,13 +2264,13 @@ class Event extends RequestCollection
     /**
      * Send organic viewed impression.
      *
-     * @param Response\Model\Item $item            The item object.
-     * @param string              $module          'feed_contextual_profile', 'reel_profile'.
-     * @param string              $viewerSessionId UUIDv4.
-     * @param string              $traySessionId   UUIDv4.
-     * @param string              $rankingToken    UUIDv4.
-     * @param array               $options         Options to configure the event.
-     *                                             'following', string, 'following' or 'not_following'.'.
+     * @param \InstagramAPI\Response\Model\Item $item            The item object.
+     * @param string                            $module          'feed_contextual_profile', 'reel_profile'.
+     * @param string                            $viewerSessionId UUIDv4.
+     * @param string                            $traySessionId   UUIDv4.
+     * @param string                            $rankingToken    UUIDv4.
+     * @param array                             $options         Options to configure the event.
+     *                                                           'following', string, 'following' or 'not_following'.'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -2400,13 +2400,13 @@ class Event extends RequestCollection
     /**
      * Send video action.
      *
-     * @param string              $action  Action to be made. 'video_displayed', 'video_should_start', 'video_buffering_started',
-     *                                     'video_started_playing', 'video_paused', 'video_exited'.
-     * @param Response\Model\Item $item    The item object.
-     * @param string              $module  'feed_contextual_profile'.
-     * @param array               $options Options to configure the event.
-     *                                     'following', string, 'following' or 'not_following'.'.
-     *                                     'viewer_session_id', string. UUIDv4.
+     * @param string                            $action  Action to be made. 'video_displayed', 'video_should_start', 'video_buffering_started',
+     *                                                   'video_started_playing', 'video_paused', 'video_exited'.
+     * @param \InstagramAPI\Response\Model\Item $item    The item object.
+     * @param string                            $module  'feed_contextual_profile'.
+     * @param array                             $options Options to configure the event.
+     *                                                   'following', string, 'following' or 'not_following'.'.
+     *                                                   'viewer_session_id', string. UUIDv4.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -4292,19 +4292,19 @@ class Event extends RequestCollection
     /**
      * Send Organic Share button.
      *
-     * @param Response\Model\Item $item                The item object.
-     * @param string              $followingUserStatus Following status. 'following' or 'not_following'.
-     * @param string              $module              The current module you are. 'feed_contextual_profile',
-     *                                                 'feed_contextual_self_profile',
-     *                                                 'feed_contextual_chain',
-     * @param array               $clusterData         Cluster data used in 'feed_contextual_chain' module.
-     *                                                 'feed_position' zero based position of the media in the feed.
-     *                                                 'chaining_session_id' UUIDv4.
-     *                                                 'topic_cluster_id' 'explore_all:0' (More info on Discover class).
-     *                                                 'topic_cluster_title' 'For You' (More info on Discover class).
-     *                                                 'topic_cluster_type' 'explore_all' (More info on Discover class).
-     *                                                 'topic_cluster_session_id' UUIDv4.
-     * @param array               $options
+     * @param \InstagramAPI\Response\Model\Item $item                The item object.
+     * @param string                            $followingUserStatus Following status. 'following' or 'not_following'.
+     * @param string                            $module              The current module you are. 'feed_contextual_profile',
+     *                                                               'feed_contextual_self_profile',
+     *                                                               'feed_contextual_chain',
+     * @param array                             $clusterData         Cluster data used in 'feed_contextual_chain' module.
+     *                                                               'feed_position' zero based position of the media in the feed.
+     *                                                               'chaining_session_id' UUIDv4.
+     *                                                               'topic_cluster_id' 'explore_all:0' (More info on Discover class).
+     *                                                               'topic_cluster_title' 'For You' (More info on Discover class).
+     *                                                               'topic_cluster_type' 'explore_all' (More info on Discover class).
+     *                                                               'topic_cluster_session_id' UUIDv4.
+     * @param array                             $options
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -5300,8 +5300,8 @@ class Event extends RequestCollection
     /**
      * Send Instagram Netego Delivery.
      *
-     * @param Response\Model\Item $item      The item object.
-     * @param string              $sessionId UUIDv4.
+     * @param \InstagramAPI\Response\Model\Item $item      The item object.
+     * @param string                            $sessionId UUIDv4.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */

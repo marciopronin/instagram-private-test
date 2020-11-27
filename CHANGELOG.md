@@ -1,3 +1,21 @@
+# Stable release v16.4.2
+## Date: 27/11/2020
+
+### Updates and fixes
+
+- **Client:** Update visibility bandwidth and network params
+- **Debug:** Add condition for RAW DATA
+
+### Examples
+
+- **Example:** Update followFromLocationSearch
+- **Example:** Update followFromSearch
+- **Example:** Update likeFromExploreTag
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.4.1
 ## Date: 23/11/2020
 

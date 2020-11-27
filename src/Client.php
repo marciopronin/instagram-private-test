@@ -163,28 +163,28 @@ class Client
      *
      * @var string
      */
-    private $_totalTime = 0;
+    public $totalTime = 0;
 
     /**
      * Total Bytes received.
      *
      * @var string
      */
-    private $_totalBytes = 0;
+    public $totalBytes = 0;
 
     /**
      * Bytes received in the latest response.
      *
      * @var string
      */
-    private $_bandwidthB = 0;
+    public $bandwidthB = 0;
 
     /**
      * Time elapsed in the latest response.
      *
      * @var string
      */
-    private $_bandwidthM = 0;
+    public $bandwidthM = 0;
 
     /**
      * IG WWW Claim.
@@ -1035,8 +1035,8 @@ class Client
             $this->_directRegionHint = ($this->_parent->settings->get('direct_region') !== null) ? $this->_parent->settings->get('direct_region') : '';
             $this->wwwClaim = ($this->_parent->settings->get('www_claim') !== null) ? $this->_parent->settings->get('www_claim') : '0';
 
-            if ($this->_totalTime !== 0 && !empty($this->_bandwidthB)) {
-                $headers['set_headers']['X-IG-Bandwidth-Speed-KBPS'] = ($this->_totalBytes / $this->_totalTime + $this->_bandwidthB / $this->_bandwidthM) / 2;
+            if ($this->totalTime !== 0 && !empty($this->bandwidthB)) {
+                $headers['set_headers']['X-IG-Bandwidth-Speed-KBPS'] = ($this->totalBytes / $this->totalTime + $this->bandwidthB / $this->bandwidthM) / 2;
             } else {
                 $headers['set_headers']['X-IG-Bandwidth-Speed-KBPS'] = '-1.000';
             }
@@ -1069,8 +1069,8 @@ class Client
                 $headers['set_headers']['IG-U-IG-DIRECT-REGION-HINT'] = $this->_directRegionHint;
             }
 
-            $headers['set_headers']['X-IG-Bandwidth-TotalBytes-B'] = $this->_totalBytes;
-            $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = $this->_totalTime;
+            $headers['set_headers']['X-IG-Bandwidth-TotalBytes-B'] = $this->totalBytes;
+            $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = $this->totalTime;
             $headers['set_headers']['X-MID'] = $this->getMid();
         }
 
@@ -1117,12 +1117,12 @@ class Client
             $this->_parent->settings->set('authorization_header', $authorizationHeader);
         }
 
-        $this->_bandwidthM = ceil(1000 * (microtime(true) - $start));
-        $this->_bandwidthB = $response->getHeaderLine('Content-Length');
+        $this->bandwidthM = ceil(1000 * (microtime(true) - $start));
+        $this->bandwidthB = $response->getHeaderLine('Content-Length');
 
-        if ($this->_bandwidthB >= 50000 && $this->_bandwidthM >= 50) {
-            $this->_totalTime += $this->_bandwidthM;
-            $this->_totalBytes += $this->_bandwidthB;
+        if ($this->bandwidthB >= 50000 && $this->bandwidthM >= 50) {
+            $this->totalTime += $this->bandwidthM;
+            $this->totalBytes += $this->bandwidthB;
         }
 
         return $response;

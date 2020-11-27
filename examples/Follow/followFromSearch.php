@@ -107,6 +107,20 @@ try {
         if ($c === 5) {
             break;
         }
+        if ($item->getMediaType() === 1) {
+            $candidates = $item->getImageVersions2()->getCandidates();
+            $smallCandidate = end($candidates);
+            $ig->request($smallCandidate->getUrl())->getRawResponse();
+            $ig->event->sendPerfPercentPhotosRendered('profile', $item->getId(), [
+                'is_grid_view'                      => true,
+                'image_heigth'                      => $smallCandidate->getHeight(),
+                'image_width'                       => $smallCandidate->getWidth(),
+                'load_time'                         => $ig->client->bandwidthM,
+                'estimated_bandwidth'               => $ig->client->bandwidthB,
+                'estimated_bandwidth_totalBytes_b'  => $ig->client->totalBytes,
+                'estimated_bandwidth_totalTime_ms'  => $ig->client->totalTime,
+            ]);
+        }
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
         $c++;
     }

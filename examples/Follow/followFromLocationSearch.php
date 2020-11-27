@@ -100,7 +100,21 @@ try {
                 $item = $section->getLayoutContent()->getMedias()[0]->getMedia();
             }
             foreach ($section->getLayoutContent()->getMedias() as $media) {
-                $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $media->getMedia(), 'feed_location');
+                if ($media->getMedia()->getMediaType() === 1) {
+                    $candidates = $media->getMedia()->getImageVersions2()->getCandidates();
+                    $smallCandidate = end($candidates);
+                    $ig->request($smallCandidate->getUrl())->getRawResponse();
+                    $ig->event->sendPerfPercentPhotosRendered('feed_location', $media->getMedia()->getId(), [
+                        'is_grid_view'                      => true,
+                        'image_heigth'                      => $smallCandidate->getHeight(),
+                        'image_width'                       => $smallCandidate->getWidth(),
+                        'load_time'                         => $ig->client->bandwidthM,
+                        'estimated_bandwidth'               => $ig->client->bandwidthB,
+                        'estimated_bandwidth_totalBytes_b'  => $ig->client->totalBytes,
+                        'estimated_bandwidth_totalTime_ms'  => $ig->client->totalTime,
+                    ]);
+                    $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $media->getMedia(), 'feed_location');
+                }
             }
         }
     }

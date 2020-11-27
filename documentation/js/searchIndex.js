@@ -271,25 +271,25 @@ Search.appendIndex(
             "summary": "The\u0020Pigeon\u0020Session\u0020ID.",
             "url": "../classes/InstagramAPI-Client.html#property__pigeonSession"
         },                {
-            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_totalTime",
-            "name": "_totalTime",
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024totalTime",
+            "name": "totalTime",
             "summary": "Total\u0020time\u0020elapsed.",
-            "url": "../classes/InstagramAPI-Client.html#property__totalTime"
+            "url": "../classes/InstagramAPI-Client.html#property_totalTime"
         },                {
-            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_totalBytes",
-            "name": "_totalBytes",
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024totalBytes",
+            "name": "totalBytes",
             "summary": "Total\u0020Bytes\u0020received.",
-            "url": "../classes/InstagramAPI-Client.html#property__totalBytes"
+            "url": "../classes/InstagramAPI-Client.html#property_totalBytes"
         },                {
-            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_bandwidthB",
-            "name": "_bandwidthB",
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024bandwidthB",
+            "name": "bandwidthB",
             "summary": "Bytes\u0020received\u0020in\u0020the\u0020latest\u0020response.",
-            "url": "../classes/InstagramAPI-Client.html#property__bandwidthB"
+            "url": "../classes/InstagramAPI-Client.html#property_bandwidthB"
         },                {
-            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_bandwidthM",
-            "name": "_bandwidthM",
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024bandwidthM",
+            "name": "bandwidthM",
             "summary": "Time\u0020elapsed\u0020in\u0020the\u0020latest\u0020response.",
-            "url": "../classes/InstagramAPI-Client.html#property__bandwidthM"
+            "url": "../classes/InstagramAPI-Client.html#property_bandwidthM"
         },                {
             "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024wwwClaim",
             "name": "wwwClaim",

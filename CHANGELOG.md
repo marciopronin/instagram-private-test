@@ -1,3 +1,16 @@
+# Stable release v16.4.3
+## Date: 30/11/2020
+
+### Updates and fixes
+
+**Instagram:** Update to 167.0.0.24.120
+**Request:** Add new header `X-FB-Client-IP`
+**Event:** Update NavChain classes
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.4.2
 ## Date: 27/11/2020
 

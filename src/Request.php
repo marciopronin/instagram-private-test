@@ -406,6 +406,7 @@ class Request
             $this->_headers['X-IG-Connection-Speed'] = $this->_parent->getConnectionSpeed();
             $this->_headers['X-IG-Device-ID'] = $this->_parent->uuid;
             $this->_headers['X-FB-HTTP-Engine'] = Constants::X_FB_HTTP_Engine;
+            $this->_headers['X-FB-Client-IP'] = 'True';
             $this->_headers['X-IG-App-Startup-Country'] = explode('_', $this->_parent->getLocale())[1];
             $this->_headers['X-IG-Mapped-Locale'] = $this->_parent->getLocale();
 

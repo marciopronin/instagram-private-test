@@ -134,7 +134,10 @@ try {
             $c++;
         }
 
-        $ig->internal->getQPFetch();
+        try {
+            $ig->internal->getQPFetch();
+        } catch (Exception $e) {
+        }
         sleep(2);
         $ig->event->sendProfileView($userId);
 

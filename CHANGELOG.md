@@ -1,3 +1,23 @@
+# Stable release v16.4.5
+## Date: 02/12/2020
+
+### Updates and fixes
+
+- **Instagram:** Update login flow
+
+### Examples
+
+- **Examples:** Update followFromLocationSearch
+- **Examples:** Update followFromSearch
+- **Examples:** Update unfollowFromSearch
+- **Examples:** Update checkUsers
+- **Examples:** Update muteFromSearchUser
+- **Examples:** Update SettingUserNotifications
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.4.4
 ## Date: 02/12/2020
 

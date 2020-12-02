@@ -108,7 +108,11 @@ try {
         ],
         'network'
     );
-    $ig->internal->getQPFetch();
+
+    try {
+        $ig->internal->getQPFetch();
+    } catch (Exception $e) {
+    }
     sleep(mt_rand(1, 2));
     $ig->event->sendProfileView($userId);
 

@@ -2203,7 +2203,11 @@ class Instagram implements ExperimentsInterface
             try {
                 $this->story->getReelsMediaFeed($this->account_id);
                 $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), true);
-                $this->internal->getQPFetch();
+
+                try {
+                    $this->internal->getQPFetch();
+                } catch (Exception $e) {
+                }
                 //$this->account->getProcessContactPointSignals();
                 if ($this->getPlatform() === 'android') {
                     $this->internal->getArlinkDownloadInfo();

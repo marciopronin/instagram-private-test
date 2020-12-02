@@ -1,3 +1,18 @@
+# Stable release v16.4.4
+## Date: 02/12/2020
+
+### Updates and fixes
+
+- **Constraints:** Update `TimelineConstraints`
+
+### Wiki
+
+- **Wiki:** Added warning regarding direct messaging usage.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.4.3
 ## Date: 30/11/2020
 

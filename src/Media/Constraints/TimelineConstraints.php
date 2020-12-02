@@ -63,7 +63,7 @@ class TimelineConstraints implements ConstraintsInterface
      *
      * @see https://help.instagram.com/270963803047681
      */
-    const MAX_DURATION = 60.0;
+    const MAX_DURATION = 60.9;
 
     /** {@inheritdoc} */
     public function getTitle()

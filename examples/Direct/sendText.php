@@ -31,12 +31,12 @@ try {
     $ig->event->sendNavigation('on_launch_direct_inbox', 'feed_timeline', 'direct_inbox');
 
     // This is as replacement of search, repeating this request with organic typing would be better.
-    $users = $ig->direct->getRankedRecipients('raven', true, $query);
+    $rankedRecipients = $ig->direct->getRankedRecipients('raven', true, $query)->getRankedRecipients();
 
-    foreach ($users as $key => $value) {
-        if ($value->getUser()->getUsername() === $query) {
+    foreach ($rankedRecipients as $key => $value) {
+        if ($value->getUser() !== null && $value->getUser()->getUsername() === $query) {
             $position = $key;
-            $userId = $value->getUser->getPk();
+            $userId = $value->getUser()->getPk();
             break;
         }
     }

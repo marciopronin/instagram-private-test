@@ -1,3 +1,10 @@
+# Stable release v16.4.6
+## Date: 03/12/2020
+
+### Examples
+
+- **Examples:** Update sendText
+
 # Stable release v16.4.5
 ## Date: 02/12/2020
 

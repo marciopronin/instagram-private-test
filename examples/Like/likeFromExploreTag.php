@@ -163,10 +163,10 @@ try {
     // When we clicked the item, we are navigating from 'feed_hashtag' to 'feed_contextual_hashtag'.
     $ig->event->sendNavigation('button', 'feed_hashtag', 'feed_contextual_hashtag', $hashtagId, $queryHashtag);
 
-    $ig->media->getCommentInfos($item->getId());
+    $previewComments = $ig->media->getCommentInfos($item->getId())->getCommentInfos()->getData()->getPreviewComments();
 
     $ig->event->sendOrganicNumberOfLikes($item, 'feed_contextual_hashtag');
-    $previewComments = $item->getPreviewComments();
+
     if ($previewComments !== null) {
         foreach ($previewComments as $comment) {
             $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());

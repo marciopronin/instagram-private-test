@@ -33,9 +33,9 @@ try {
     $item = $ig->media->getInfo($mediaId)->getItems()[0];
     $userId = $item->getUser()->getPk();
     $ig->event->sendOrganicMediaImpression($item, 'feed_short_url');
-    $ig->media->getCommentInfos($item->getId());
 
-    $previewComments = $item->getPreviewComments();
+    $previewComments = $ig->media->getCommentInfos($item->getId())->getCommentInfos()->getData()->getPreviewComments();
+
     if ($previewComments !== null) {
         foreach ($previewComments as $comment) {
             $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());

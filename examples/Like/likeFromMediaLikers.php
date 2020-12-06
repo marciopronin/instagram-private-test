@@ -153,10 +153,9 @@ try {
 
     $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
     $ig->event->sendOrganicMediaImpression($items[0], 'feed_contextual_profile');
-    $ig->media->getCommentInfos($items[0]->getId());
+    $previewComments = $ig->media->getCommentInfos($items[0]->getId())->getCommentInfos()->getData()->getPreviewComments();
 
     $ig->event->sendOrganicNumberOfLikes($items[0], 'feed_contextual_profile');
-    $previewComments = $items[0]->getPreviewComments();
     if ($previewComments !== null) {
         foreach ($previewComments as $comment) {
             $ig->event->sendCommentImpression($items[0], $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
@@ -227,10 +226,9 @@ try {
             break;
         }
         $ig->event->sendOrganicMediaImpression($item, 'feed_contextual_profile');
-        $ig->media->getCommentInfos($item->getId());
+        $previewComments = $ig->media->getCommentInfos($item->getId())->getCommentInfos()->getData()->getPreviewComments();
 
         $ig->event->sendOrganicNumberOfLikes($item, 'feed_contextual_profile');
-        $previewComments = $item->getPreviewComments();
         if ($previewComments !== null) {
             foreach ($previewComments as $comment) {
                 $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());

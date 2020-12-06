@@ -62,8 +62,11 @@ try {
                 }
             }
             $previewComments = ($item->getMediaOrAd() === null) ? [] : $item->getMediaOrAd()->getPreviewComments();
-            foreach ($previewComments as $comment) {
-                $ig->event->sendCommentImpression($item->getMediaOrAd(), $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount(), 'feed_timeline');
+
+            if ($previewComments !== null) {
+                foreach ($previewComments as $comment) {
+                    $ig->event->sendCommentImpression($item->getMediaOrAd(), $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount(), 'feed_timeline');
+                }
             }
         }
 

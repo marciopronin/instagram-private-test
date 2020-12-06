@@ -153,9 +153,9 @@ try {
 
     $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
     $ig->event->sendOrganicMediaImpression($items[0], 'feed_contextual_profile');
-    $ig->media->getCommentInfos($items[0]->getId());
 
-    $previewComments = $items[0]->getPreviewComments();
+    $previewComments = $ig->media->getCommentInfos($items[0]->getId())->getCommentInfos()->getData()->getPreviewComments();
+
     if ($previewComments !== null) {
         foreach ($previewComments as $comment) {
             $ig->event->sendCommentImpression($items[0], $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());

@@ -30,8 +30,11 @@ try {
     $item = $feedItems[0]->getMediaOrAd();
     $previewComments = $item->getPreviewComments();
     $ig->event->sendOrganicMediaImpression($item, 'feed_timeline');
-    foreach ($previewComments as $comment) {
-        $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+
+    if ($previewComments !== null) {
+        foreach ($previewComments as $comment) {
+            $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+        }
     }
     $ig->event->sendNavigation('button', 'feed_timeline', 'comments_v2');
     $comments = $ig->media->getComments($item->getId())->getComments();

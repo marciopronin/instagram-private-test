@@ -1,3 +1,24 @@
+# Stable release v16.4.7
+## Date: 06/12/2020
+
+### Examples
+
+- **Examples:** Update comment
+- **Examples:** Update commentLike
+- **Examples:** Update followFromExternalUrl
+- **Examples:** Update followFromMediaLikers
+- **Examples:** Update mediaLikers
+- **Examples:** Update timelinePagination
+- **Examples:** Update likeFromExploreTag
+- **Examples:** Update likeFromExploreUser
+- **Examples:** Update likeFromMediaLikers
+- **Examples:** Update likeFromUserFollowers
+- **Examples:** Update likeFromUserFollowings
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.4.6
 ## Date: 03/12/2020
 

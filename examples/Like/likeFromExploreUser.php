@@ -126,10 +126,11 @@ try {
     $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
 
     $ig->event->sendOrganicMediaImpression($item, 'feed_contextual_profile');
-    $ig->media->getCommentInfos($item->getId());
+
+    $previewComments = $ig->media->getCommentInfos($item->getId())->getCommentInfos()->getData()->getPreviewComments();
 
     $ig->event->sendOrganicNumberOfLikes($item, 'feed_contextual_profile');
-    $previewComments = $item->getPreviewComments();
+
     if ($previewComments !== null) {
         foreach ($previewComments as $comment) {
             $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());

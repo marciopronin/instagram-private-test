@@ -32,7 +32,7 @@ try {
             $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
         }
     }
-    
+
     $ig->event->sendNavigation('button', 'feed_timeline', 'comments_v2');
     $comments = $ig->media->getComments($item->getId())->getComments();
     $c = 0;

@@ -1,3 +1,18 @@
+# Stable release v16.4.9
+## Date: 07/12/2020
+
+### Updates and fixes
+
+- **Instagram:** Add stop deletion token
+
+### Wiki
+
+- **Wiki:** Clarifying MQTT messages and Deletion Token
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.4.8
 ## Date: 07/12/2020
 

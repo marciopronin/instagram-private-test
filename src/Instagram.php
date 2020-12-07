@@ -1207,24 +1207,25 @@ class Instagram implements ExperimentsInterface
      * account needs two-factor login before letting you log in! Read the
      * two-factor login example to see how to handle that.
      *
-     * @param string $username           Your Instagram username.
-     *                                   You can also use your email or phone,
-     *                                   but take in mind that they won't work
-     *                                   when you have two factor auth enabled.
-     * @param string $password           Your Instagram password.
-     * @param int    $appRefreshInterval How frequently `login()` should act
-     *                                   like an Instagram app that's been
-     *                                   closed and reopened and needs to
-     *                                   "refresh its state", by asking for
-     *                                   extended account state details.
-     *                                   Default: After `1800` seconds, meaning
-     *                                   `30` minutes after the last
-     *                                   state-refreshing `login()` call.
-     *                                   This CANNOT be longer than `6` hours.
-     *                                   Read `_sendLoginFlow()`! The shorter
-     *                                   your delay is the BETTER. You may even
-     *                                   want to set it to an even LOWER value
-     *                                   than the default 30 minutes!
+     * @param string      $username           Your Instagram username.
+     *                                        You can also use your email or phone,
+     *                                        but take in mind that they won't work
+     *                                        when you have two factor auth enabled.
+     * @param string      $password           Your Instagram password.
+     * @param int         $appRefreshInterval How frequently `login()` should act
+     *                                        like an Instagram app that's been
+     *                                        closed and reopened and needs to
+     *                                        "refresh its state", by asking for
+     *                                        extended account state details.
+     *                                        Default: After `1800` seconds, meaning
+     *                                        `30` minutes after the last
+     *                                        state-refreshing `login()` call.
+     *                                        This CANNOT be longer than `6` hours.
+     *                                        Read `_sendLoginFlow()`! The shorter
+     *                                        your delay is the BETTER. You may even
+     *                                        want to set it to an even LOWER value
+     *                                        than the default 30 minutes!
+     * @param string|null $deletionToken      Deletion token. Stop account deletion.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1238,13 +1239,14 @@ class Instagram implements ExperimentsInterface
     public function login(
         $username,
         $password,
-        $appRefreshInterval = 1800)
+        $appRefreshInterval = 1800,
+        $deletionToken = null)
     {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to login().');
         }
 
-        return $this->_login($username, $password, false, $appRefreshInterval);
+        return $this->_login($username, $password, false, $appRefreshInterval, $deletionToken);
     }
 
     /**
@@ -1302,14 +1304,15 @@ class Instagram implements ExperimentsInterface
     /**
      * Internal login handler.
      *
-     * @param string $username
-     * @param string $password
-     * @param bool   $forceLogin         Force login to Instagram instead of
-     *                                   resuming previous session. Used
-     *                                   internally to do a new, full relogin
-     *                                   when we detect an expired/invalid
-     *                                   previous session.
-     * @param int    $appRefreshInterval
+     * @param string      $username
+     * @param string      $password
+     * @param bool        $forceLogin         Force login to Instagram instead of
+     *                                        resuming previous session. Used
+     *                                        internally to do a new, full relogin
+     *                                        when we detect an expired/invalid
+     *                                        previous session.
+     * @param int         $appRefreshInterval
+     * @param string|null $deletionToken      Deletion token. Stop account deletion.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1322,7 +1325,8 @@ class Instagram implements ExperimentsInterface
         $username,
         $password,
         $forceLogin = false,
-        $appRefreshInterval = 1800)
+        $appRefreshInterval = 1800,
+        $deletionToken = null)
     {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to _login().');
@@ -1367,6 +1371,10 @@ class Instagram implements ExperimentsInterface
                     ->addPost('phone_id', $this->phone_id)
                     ->addPost('adid', $this->advertising_id)
                     ->addPost('login_attempt_count', $this->loginAttemptCount);
+
+                if ($deletionToken !== null) {
+                    $request->addPost('stop_deletion_token', $deletionToken);
+                }
 
                 if ($this->getPlatform() === 'android') {
                     $request->addPost('country_codes', json_encode(

@@ -156,7 +156,6 @@ try {
     $commentInfos = $ig->media->getCommentInfos($items[0]->getId())->getCommentInfos()->getData();
 
     $ig->event->sendOrganicNumberOfLikes($items[0], 'feed_contextual_profile');
-    
 
     foreach ($commentInfos as $key => $value) {
         $previewComments = $value->getPreviewComments();

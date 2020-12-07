@@ -154,11 +154,14 @@ try {
     $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
     $ig->event->sendOrganicMediaImpression($items[0], 'feed_contextual_profile');
 
-    $previewComments = $ig->media->getCommentInfos($items[0]->getId())->getCommentInfos()->getData()->getPreviewComments();
+    $commentInfos = $ig->media->getCommentInfos($items[0]->getId())->getCommentInfos()->getData();
 
-    if ($previewComments !== null) {
-        foreach ($previewComments as $comment) {
-            $ig->event->sendCommentImpression($items[0], $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+    foreach ($commentInfos as $key => $value) {
+        $previewComments = $value->getPreviewComments();
+        if ($previewComments !== null) {
+            foreach ($previewComments as $comment) {
+                $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+            }
         }
     }
     $ig->event->sendNavigation('media_likes', 'feed_contextual_profile', 'likers');

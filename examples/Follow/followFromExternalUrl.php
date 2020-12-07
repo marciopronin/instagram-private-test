@@ -34,11 +34,14 @@ try {
     $userId = $item->getUser()->getPk();
     $ig->event->sendOrganicMediaImpression($item, 'feed_short_url');
 
-    $previewComments = $ig->media->getCommentInfos($item->getId())->getCommentInfos()->getData()->getPreviewComments();
+    $commentInfos = $ig->media->getCommentInfos($item->getId())->getCommentInfos()->getData();
 
-    if ($previewComments !== null) {
-        foreach ($previewComments as $comment) {
-            $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+    foreach ($commentInfos as $key => $value) {
+        $previewComments = $value->getPreviewComments();
+        if ($previewComments !== null) {
+            foreach ($previewComments as $comment) {
+                $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+            }
         }
     }
 

@@ -230,13 +230,16 @@ try {
 
     $ig->event->sendOrganicMediaImpression($items[0], 'feed_contextual_profile');
 
-    $previewComments = $ig->media->getCommentInfos($items[0]->getId())->getCommentInfos()->getData()->getPreviewComments();
+    $commentInfos = $ig->media->getCommentInfos($items[0]->getId())->getCommentInfos()->getData();
 
     $ig->event->sendOrganicNumberOfLikes($items[0], 'feed_contextual_profile');
 
-    if ($previewComments !== null) {
-        foreach ($previewComments as $comment) {
-            $ig->event->sendCommentImpression($items[0], $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+    foreach ($commentInfos as $key => $value) {
+        $previewComments = $value->getPreviewComments();
+        if ($previewComments !== null) {
+            foreach ($previewComments as $comment) {
+                $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+            }
         }
     }
 

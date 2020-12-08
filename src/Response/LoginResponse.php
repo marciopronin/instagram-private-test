@@ -11,14 +11,14 @@ use InstagramAPI\Response;
  * @method string getAction()
  * @method bool getAllowContactsSync()
  * @method string getAllowedCommenterType()
- * @method mixed getButtons()
+ * @method Model\LoginButton[] getButtons()
  * @method bool getCanBoostPost()
  * @method bool getCanSeeOrganicInsights()
  * @method Model\Challenge getChallenge()
  * @method string getCheckpointUrl()
  * @method int getCountryCode()
- * @method mixed getErrorTitle()
- * @method mixed getErrorType()
+ * @method string getErrorTitle()
+ * @method string getErrorType()
  * @method string getFullName()
  * @method bool getHasAnonymousProfilePicture()
  * @method bool getHasIgtvSeries()
@@ -93,14 +93,14 @@ use InstagramAPI\Response;
  * @method $this setAction(string $value)
  * @method $this setAllowContactsSync(bool $value)
  * @method $this setAllowedCommenterType(string $value)
- * @method $this setButtons(mixed $value)
+ * @method $this setButtons(Model\LoginButton[] $value)
  * @method $this setCanBoostPost(bool $value)
  * @method $this setCanSeeOrganicInsights(bool $value)
  * @method $this setChallenge(Model\Challenge $value)
  * @method $this setCheckpointUrl(string $value)
  * @method $this setCountryCode(int $value)
- * @method $this setErrorTitle(mixed $value)
- * @method $this setErrorType(mixed $value)
+ * @method $this setErrorTitle(string $value)
+ * @method $this setErrorType(string $value)
  * @method $this setFullName(string $value)
  * @method $this setHasAnonymousProfilePicture(bool $value)
  * @method $this setHasIgtvSeries(bool $value)
@@ -199,10 +199,10 @@ class LoginResponse extends Response
         'phone_number'                  => 'string',
         'country_code'                  => 'int',
         'national_number'               => 'int',
-        'error_title'                   => '', // On wrong pass.
-        'error_type'                    => '', // On wrong pass.
-        'buttons'                       => '', // On wrong pass.
-        'invalid_credentials'           => '', // On wrong pass.
+        'error_title'                   => 'string', // On wrong pass or other account related error.
+        'error_type'                    => 'string', // On wrong pass or other account related error.
+        'buttons'                       => 'Model\LoginButton[]', // On wrong pass or other account related error.
+        'invalid_credentials'           => '', // On wrong pass or other account related error.
         'logged_in_user'                => 'Model\User',
         'two_factor_required'           => '',
         'phone_verification_settings'   => 'Model\PhoneVerificationSettings',

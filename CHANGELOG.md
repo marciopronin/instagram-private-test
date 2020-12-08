@@ -1,3 +1,14 @@
+# Stable release v16.4.11
+## Date: 08/12/2020
+
+### Updates and fixes
+
+- **Model and responses:** Update LoginResponse and models
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.4.10
 ## Date: 08/12/2020
 

@@ -16961,6 +16961,16 @@ Search.appendIndex(
             "summary": "Used\u0020when\u0020we\u0020know\u0020the\u0020argument\u0020provided\u0020is\u0020wrong.",
             "url": "../classes/InstagramAPI-Exception-InvalidArgumentException.html"
         },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\LoginButton",
+            "name": "LoginButton",
+            "summary": "LoginButton.",
+            "url": "../classes/InstagramAPI-Response-Model-LoginButton.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\LoginButton\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-LoginButton.html#constant_JSON_PROPERTY_MAP"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

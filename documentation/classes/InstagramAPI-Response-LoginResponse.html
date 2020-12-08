@@ -1107,14 +1107,14 @@
     &#039;phone_number&#039; =&gt; &#039;string&#039;,
     &#039;country_code&#039; =&gt; &#039;int&#039;,
     &#039;national_number&#039; =&gt; &#039;int&#039;,
-    &#039;error_title&#039; =&gt; &#039;&#039;,
-    // On wrong pass.
-    &#039;error_type&#039; =&gt; &#039;&#039;,
-    // On wrong pass.
-    &#039;buttons&#039; =&gt; &#039;&#039;,
-    // On wrong pass.
+    &#039;error_title&#039; =&gt; &#039;string&#039;,
+    // On wrong pass or other account related error.
+    &#039;error_type&#039; =&gt; &#039;string&#039;,
+    // On wrong pass or other account related error.
+    &#039;buttons&#039; =&gt; &#039;Model\\LoginButton[]&#039;,
+    // On wrong pass or other account related error.
     &#039;invalid_credentials&#039; =&gt; &#039;&#039;,
-    // On wrong pass.
+    // On wrong pass or other account related error.
     &#039;logged_in_user&#039; =&gt; &#039;Model\\User&#039;,
     &#039;two_factor_required&#039; =&gt; &#039;&#039;,
     &#039;phone_verification_settings&#039; =&gt; &#039;Model\\PhoneVerificationSettings&#039;,
@@ -1155,7 +1155,7 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-LoginResponse.html#method_getButtons">getButtons()</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">mixed</td>
+                    <td class="phpdocumentor-cell">\InstagramAPI\Response\Model\LoginButton[]</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-LoginResponse.html#method_getCanBoostPost">getCanBoostPost()</a></th>
@@ -1185,12 +1185,12 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-LoginResponse.html#method_getErrorTitle">getErrorTitle()</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">mixed</td>
+                    <td class="phpdocumentor-cell">string</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-LoginResponse.html#method_getErrorType">getErrorType()</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">mixed</td>
+                    <td class="phpdocumentor-cell">string</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-LoginResponse.html#method_getFullName">getFullName()</a></th>
@@ -2084,14 +2084,14 @@
     &#039;phone_number&#039; =&gt; &#039;string&#039;,
     &#039;country_code&#039; =&gt; &#039;int&#039;,
     &#039;national_number&#039; =&gt; &#039;int&#039;,
-    &#039;error_title&#039; =&gt; &#039;&#039;,
-    // On wrong pass.
-    &#039;error_type&#039; =&gt; &#039;&#039;,
-    // On wrong pass.
-    &#039;buttons&#039; =&gt; &#039;&#039;,
-    // On wrong pass.
+    &#039;error_title&#039; =&gt; &#039;string&#039;,
+    // On wrong pass or other account related error.
+    &#039;error_type&#039; =&gt; &#039;string&#039;,
+    // On wrong pass or other account related error.
+    &#039;buttons&#039; =&gt; &#039;Model\\LoginButton[]&#039;,
+    // On wrong pass or other account related error.
     &#039;invalid_credentials&#039; =&gt; &#039;&#039;,
-    // On wrong pass.
+    // On wrong pass or other account related error.
     &#039;logged_in_user&#039; =&gt; &#039;Model\\User&#039;,
     &#039;two_factor_required&#039; =&gt; &#039;&#039;,
     &#039;phone_verification_settings&#039; =&gt; &#039;Model\\PhoneVerificationSettings&#039;,
@@ -2418,7 +2418,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getButtons</span>(
                 )
-        : <span class="phpdocumentor-signature__response_type">mixed</span>
+        : <span class="phpdocumentor-signature__response_type">\InstagramAPI\Response\Model\LoginButton[]</span>
     </code>
 
     
@@ -2426,7 +2426,7 @@
         
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
+        <span class="phpdocumentor-signature__response_type">\InstagramAPI\Response\Model\LoginButton[]</span>
             
 </article>
                                     <a id="method_getCanBoostPost"></a>
@@ -2586,7 +2586,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getErrorTitle</span>(
                 )
-        : <span class="phpdocumentor-signature__response_type">mixed</span>
+        : <span class="phpdocumentor-signature__response_type">string</span>
     </code>
 
     
@@ -2594,7 +2594,7 @@
         
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
+        <span class="phpdocumentor-signature__response_type">string</span>
             
 </article>
                                     <a id="method_getErrorType"></a>
@@ -2614,7 +2614,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getErrorType</span>(
                 )
-        : <span class="phpdocumentor-signature__response_type">mixed</span>
+        : <span class="phpdocumentor-signature__response_type">string</span>
     </code>
 
     
@@ -2622,7 +2622,7 @@
         
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
+        <span class="phpdocumentor-signature__response_type">string</span>
             
 </article>
                                     <a id="method_getFullName"></a>
@@ -4766,7 +4766,7 @@ to handle unusual multi-error message values in certain responses.</p></section>
                                 <span class="phpdocumentor-signature__name">setButtons</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$value</span> :
-                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__return-type">\InstagramAPI\Response\Model\LoginButton[]</span>
                             </span>
                 )
         : <span class="phpdocumentor-signature__response_type">$this</span>
@@ -4777,7 +4777,7 @@ to handle unusual multi-error message values in certain responses.</p></section>
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$value</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">\InstagramAPI\Response\Model\LoginButton[]</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
@@ -5006,7 +5006,7 @@ to handle unusual multi-error message values in certain responses.</p></section>
                                 <span class="phpdocumentor-signature__name">setErrorTitle</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$value</span> :
-                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
         : <span class="phpdocumentor-signature__response_type">$this</span>
@@ -5017,7 +5017,7 @@ to handle unusual multi-error message values in certain responses.</p></section>
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$value</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
@@ -5046,7 +5046,7 @@ to handle unusual multi-error message values in certain responses.</p></section>
                                 <span class="phpdocumentor-signature__name">setErrorType</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$value</span> :
-                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
         : <span class="phpdocumentor-signature__response_type">$this</span>
@@ -5057,7 +5057,7 @@ to handle unusual multi-error message values in certain responses.</p></section>
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$value</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>

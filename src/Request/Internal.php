@@ -284,6 +284,7 @@ class Internal extends RequestCollection
 
         // Build the request...
         $request = $this->ig->request($endpoint)
+            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
@@ -345,7 +346,12 @@ class Internal extends RequestCollection
                     ->addPost('configure_mode', 1)
                     //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     ->addPost('client_timestamp', (string) (time() - mt_rand(3, 10)))
-                    ->addPost('upload_id', $uploadId);
+                    ->addPost('upload_id', $uploadId)
+                    ->addPost('original_media_type', 'photo')
+                    ->addPost('scene_capture_type', '')
+                    ->addPost('creation_surface', 'camera')
+                    ->addPost('capture_type', 'normal')
+                    ->addPost('has_original_sound', '1');
 
                 if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
                     $story_cta = '[{"links":[{"webUri":'.json_encode($link).'}]}]';

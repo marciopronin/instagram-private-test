@@ -1,3 +1,16 @@
+# Stable release v16.4.10
+## Date: 08/12/2020
+
+### Updates and fixes
+
+- **Constants:** Update capabilities
+- **Internal:** Update story parameters
+- **Utils:** Update throwIfInvalidStoryLocationSticker
+
+### Examples
+
+- **Example:** Added uploadStoryLocation
+
 # Stable release v16.4.9
 ## Date: 07/12/2020
 

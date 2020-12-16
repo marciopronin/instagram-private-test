@@ -10,6 +10,7 @@ use InstagramAPI\Response;
  * @method Model\Broadcast[] getBroadcasts()
  * @method int getFaceFilterNuxVersion()
  * @method bool getHasNewNuxStory()
+ * @method Model\Item[] getItems()
  * @method mixed getMessage()
  * @method Model\PostLive getPostLive()
  * @method string getStatus()
@@ -22,6 +23,7 @@ use InstagramAPI\Response;
  * @method bool isBroadcasts()
  * @method bool isFaceFilterNuxVersion()
  * @method bool isHasNewNuxStory()
+ * @method bool isItems()
  * @method bool isMessage()
  * @method bool isPostLive()
  * @method bool isStatus()
@@ -34,6 +36,7 @@ use InstagramAPI\Response;
  * @method $this setBroadcasts(Model\Broadcast[] $value)
  * @method $this setFaceFilterNuxVersion(int $value)
  * @method $this setHasNewNuxStory(bool $value)
+ * @method $this setItems(Model\Item[] $value)
  * @method $this setMessage(mixed $value)
  * @method $this setPostLive(Model\PostLive $value)
  * @method $this setStatus(string $value)
@@ -46,6 +49,7 @@ use InstagramAPI\Response;
  * @method $this unsetBroadcasts()
  * @method $this unsetFaceFilterNuxVersion()
  * @method $this unsetHasNewNuxStory()
+ * @method $this unsetItems()
  * @method $this unsetMessage()
  * @method $this unsetPostLive()
  * @method $this unsetStatus()
@@ -68,5 +72,6 @@ class ReelsTrayFeedResponse extends Response
         'stories_viewer_gestures_nux_eligible' => 'bool',
         'has_new_nux_story'                    => 'bool',
         'suggestions'                          => 'Model\TraySuggestions[]',
+        'items'                                => 'Model\Item[]',
     ];
 }

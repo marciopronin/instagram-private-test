@@ -318,7 +318,7 @@ class Event extends RequestCollection
           ->addHeader('X-FB-HTTP-Engine', Constants::X_FB_HTTP_Engine)
           ->addPost('access_token', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID.'|'.Constants::GRAPH_API_ACCESS_TOKEN)
           ->addPost('format', 'json')
-          ->addPost('sent_time', time())
+          ->addPost('sent_time', round(microtime(true), 3))
           ->setAddDefaultHeaders(false);
 
         if ($this->ig->getEventsCompressed()) {
@@ -331,7 +331,12 @@ class Event extends RequestCollection
                     );
         } else {
             $message = [
-                'request_info'  => '{}',
+                'request_info'  => (object) [],
+                'config'        => [
+                    'config_version'    => 'v2',
+                    'app_uid'           => $this->ig->account_id,
+                    'app_ver'           => Constants::IG_VERSION,
+                ],
                 'batches'       => [
                     $eventBatch,
                 ],
@@ -1844,7 +1849,7 @@ class Event extends RequestCollection
             'reel_position'                     => isset($options['reel_position']) ? $options['reel_position'] : 1,
             'reel_viewer_position'              => isset($options['reel_viewer_position']) ? $options['reel_viewer_position'] : 0,
             'reel_type'                         => 'story',
-            'reel_size'                         => $options['reel_size'],
+            'reel_size'                         => isset($options['reel_size']) ? $options['reel_size'] : 1,
             'tray_position'                     => isset($options['tray_position']) ? $options['tray_position'] : 1,
             'session_reel_counter'              => isset($options['session_reel_counter']) ? $options['session_reel_counter'] : 1,
             'time_elapsed'                      => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,

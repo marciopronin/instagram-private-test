@@ -1,3 +1,19 @@
+# Stable release v16.4.12
+## Date: 16/12/2020
+
+### Updates and fixes
+
+- **Event:** Update event body
+- Update model and responses
+
+### Documentation
+
+- **Documentation:** Update documentation
+
+### Examples
+
+- **Example:** Added viewStoryFromTimeline
+
 # Stable release v16.4.11
 ## Date: 08/12/2020
 

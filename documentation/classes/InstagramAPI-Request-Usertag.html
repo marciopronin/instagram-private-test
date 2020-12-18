@@ -108,6 +108,11 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-EditMediaResponse.html"><abbr title="\InstagramAPI\Response\EditMediaResponse">EditMediaResponse</abbr></a></td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Usertag.html#method_removeTag">removeTag()</a></th>
+                    <td class="phpdocumentor-cell">Remove usertag.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-MediaInfoResponse.html"><abbr title="\InstagramAPI\Response\MediaInfoResponse">MediaInfoResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Usertag.html#method_removeSelfTag">removeSelfTag()</a></th>
                     <td class="phpdocumentor-cell">Remove yourself from a tagged media item.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-MediaInfoResponse.html"><abbr title="\InstagramAPI\Response\MediaInfoResponse">MediaInfoResponse</abbr></a></td>
@@ -332,6 +337,57 @@
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-EditMediaResponse.html"><abbr title="\InstagramAPI\Response\EditMediaResponse">EditMediaResponse</abbr></a></span>
             
 </article>
+                                    <a id="method_removeTag"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">removeTag()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Usertag.php"><a href="../files/src-request-usertag.html"><abbr title="src/Request/Usertag.php">Usertag.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">77</span>
+    </aside>
+        <p class="phpdocumentor-summary">Remove usertag.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">removeTag</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$mediaId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-MediaInfoResponse.html"><abbr title="\InstagramAPI\Response\MediaInfoResponse">MediaInfoResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$mediaId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The media ID in Instagram's internal format (ie &quot;3482384834_43294&quot;).</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-MediaInfoResponse.html"><abbr title="\InstagramAPI\Response\MediaInfoResponse">MediaInfoResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_removeSelfTag"></a>
 <article
         class="
@@ -343,7 +399,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Usertag.php"><a href="../files/src-request-usertag.html"><abbr title="src/Request/Usertag.php">Usertag.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">77</span>
+        <span class="phpdocumentor-element-found-in__line">97</span>
     </aside>
         <p class="phpdocumentor-summary">Remove yourself from a tagged media item.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -394,7 +450,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Usertag.php"><a href="../files/src-request-usertag.html"><abbr title="src/Request/Usertag.php">Usertag.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">97</span>
+        <span class="phpdocumentor-element-found-in__line">117</span>
     </aside>
         <p class="phpdocumentor-summary">Get user taggings for a user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -454,7 +510,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Usertag.php"><a href="../files/src-request-usertag.html"><abbr title="src/Request/Usertag.php">Usertag.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">119</span>
+        <span class="phpdocumentor-element-found-in__line">139</span>
     </aside>
         <p class="phpdocumentor-summary">Get user taggings for your own account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -505,7 +561,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Usertag.php"><a href="../files/src-request-usertag.html"><abbr title="src/Request/Usertag.php">Usertag.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">134</span>
+        <span class="phpdocumentor-element-found-in__line">154</span>
     </aside>
         <p class="phpdocumentor-summary">Choose how photos you are tagged in will be added to your profile.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

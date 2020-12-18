@@ -66,6 +66,26 @@ class Usertag extends RequestCollection
     }
 
     /**
+     * Remove usertag.
+     *
+     * @param string $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\MediaInfoResponse
+     */
+    public function removeTag(
+        $mediaId)
+    {
+        return $this->ig->request('usertags/remove/')
+            ->addPost('media_to_untag', $media)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('container_module', 'self_comments_v2_newsfeed_you')
+            ->getResponse(new Response\MediaInfoResponse());
+    }
+
+    /**
      * Remove yourself from a tagged media item.
      *
      * @param string $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").

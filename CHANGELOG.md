@@ -1,3 +1,10 @@
+# Stable release v16.5.0
+## Date: 18/12/2020
+
+### New features
+
+- **Usertag:** Add `removeTag()`
+
 # Stable release v16.4.12
 ## Date: 16/12/2020
 

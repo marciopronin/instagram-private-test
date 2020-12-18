@@ -9641,6 +9641,11 @@ Search.appendIndex(
             "summary": "Untag\u0020a\u0020user\u0020from\u0020a\u0020media\u0020item.",
             "url": "../classes/InstagramAPI-Request-Usertag.html#method_untagMedia"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Usertag\u003A\u003AremoveTag\u0028\u0029",
+            "name": "removeTag",
+            "summary": "Remove\u0020usertag.",
+            "url": "../classes/InstagramAPI-Request-Usertag.html#method_removeTag"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Usertag\u003A\u003AremoveSelfTag\u0028\u0029",
             "name": "removeSelfTag",
             "summary": "Remove\u0020yourself\u0020from\u0020a\u0020tagged\u0020media\u0020item.",

@@ -1,3 +1,14 @@
+# Stable release v16.5.1
+## Date: 19/12/2020
+
+### Updates and fixes
+
+- **Usertag:** Update `removeTag()`
+
+### Examples
+
+- **Example:** Added viewStoriesFromLikerList
+
 # Stable release v16.5.0
 ## Date: 18/12/2020
 

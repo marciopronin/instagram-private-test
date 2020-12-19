@@ -78,7 +78,7 @@ class Usertag extends RequestCollection
         $mediaId)
     {
         return $this->ig->request('usertags/remove/')
-            ->addPost('media_to_untag', $media)
+            ->addPost('media_to_untag', $mediaId)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('container_module', 'self_comments_v2_newsfeed_you')

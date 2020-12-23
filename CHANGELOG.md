@@ -1,3 +1,19 @@
+# Stable release v16.6.0
+## Date: 23/12/2020
+
+### New features
+
+- **Account:** Add `updateTagSettingsAction()`
+- **Account:** Add `updateMentionSettingsAction()`
+
+### Wiki
+
+- **WIP/Work in progress**
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.5.1
 ## Date: 19/12/2020
 

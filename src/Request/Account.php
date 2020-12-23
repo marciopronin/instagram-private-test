@@ -1393,4 +1393,48 @@ class Account extends RequestCollection
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\MultiAccountsResponse());
     }
+
+    /**
+     * Set if user can tag you in media posts.
+     *
+     * @param bool $set true for enabling and false for disabling.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function updateTagSettingsAction(
+        $set)
+    {
+        return $this->ig->request('bloks/apps/com.instagram.bullying.privacy.tags_options.update_tag_setting_action/')
+            ->setSignedPost(false)
+            ->addPost('tag_setting', $set ? 'on' : 'off')
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('nest_data_manifest', 'true')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Set if user can mention you in media posts.
+     *
+     * @param bool $set true for enabling and false for disabling.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function updateMentionSettingsAction(
+        $set)
+    {
+        return $this->ig->request('bloks/apps/com.instagram.bullying.privacy.mentions_options.update_mention_settting_action/')
+            ->setSignedPost(false)
+            ->addPost('tag_setting', $set ? 'on' : 'off')
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('nest_data_manifest', 'true')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
 }

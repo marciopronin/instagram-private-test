@@ -6841,6 +6841,16 @@ Search.appendIndex(
             "summary": "Get\u0020accounts\u0020multi\u0020login.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_getAccountsMultiLogin"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AupdateTagSettingsAction\u0028\u0029",
+            "name": "updateTagSettingsAction",
+            "summary": "Set\u0020if\u0020user\u0020can\u0020tag\u0020you\u0020in\u0020media\u0020posts.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_updateTagSettingsAction"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AupdateMentionSettingsAction\u0028\u0029",
+            "name": "updateMentionSettingsAction",
+            "summary": "Set\u0020if\u0020user\u0020can\u0020mention\u0020you\u0020in\u0020media\u0020posts.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_updateMentionSettingsAction"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Business",
             "name": "Business",
             "summary": "Business\u002Daccount\u0020related\u0020functions.",

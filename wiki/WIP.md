@@ -9,7 +9,7 @@
 
 ## Realtime client
 
-`snapshot_app_version` new attribute for the IrisSubscription module
+`snapshot_app_version` new attribute for the IrisSubscription module. Done!
 
 ## NavChains
 

@@ -1,3 +1,12 @@
+# Stable release v16.6.1
+## Date: 25/12/2020
+
+### Updates and fixes
+
+- **Realtime:** Update IrisSubscribe. Realtime fixed and working again!
+
+Happy Xmas!
+
 # Stable release v16.6.0
 ## Date: 23/12/2020
 

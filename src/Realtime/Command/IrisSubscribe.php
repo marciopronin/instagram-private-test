@@ -2,6 +2,7 @@
 
 namespace InstagramAPI\Realtime\Command;
 
+use InstagramAPI\Constants;
 use InstagramAPI\Realtime\CommandInterface;
 use InstagramAPI\Realtime\Mqtt;
 
@@ -49,8 +50,9 @@ class IrisSubscribe implements CommandInterface
     public function jsonSerialize()
     {
         return [
-            'seq_id'            => $this->_sequenceId,
-            'snapshot_at_ms'    => $this->_snapshotMs,
+            'seq_id'                => $this->_sequenceId,
+            'snapshot_at_ms'        => $this->_snapshotMs,
+            'snapshot_app_version'  => Constants::IG_VERSION,
         ];
     }
 }

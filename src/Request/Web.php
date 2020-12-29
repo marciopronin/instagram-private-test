@@ -387,4 +387,36 @@ class Web extends RequestCollection
             ->addParam('variables', json_encode($variables))
             ->getRawResponse();
     }
+
+    /**
+     * Update date of birth.
+     *
+     * @param string $day   Day.
+     * @param string $month Month.
+     * @param string $year  Year.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function updateDateOfBirth(
+        $day,
+        $month,
+        $year)
+    {
+        return $this->ig->request('https://instagram.com/web/consent/update_dob/')
+            ->setAddDefaultHeaders(false)
+            ->setSignedPost(false)
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('Referer', 'https://www.instagram.com/')
+            ->addHeader('X-Requested-With', 'XMLHttpRequest')
+            ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
+            ->addHeader('X-IG-App-ID', '936619743392459')
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->addPost('day', $day)
+            ->addPost('month', $month)
+            ->addPost('year', $year)
+            ->addPost('current_screen_key', 'dob')
+            ->getResponse(new Response\GenericResponse());
+    }
 }

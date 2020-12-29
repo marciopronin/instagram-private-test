@@ -9746,6 +9746,11 @@ Search.appendIndex(
             "summary": "Make\u0020GraphQL\u0020request.",
             "url": "../classes/InstagramAPI-Request-Web.html#method_sendGraphqlQuery"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AupdateDateOfBirth\u0028\u0029",
+            "name": "updateDateOfBirth",
+            "summary": "Update\u0020date\u0020of\u0020birth.",
+            "url": "../classes/InstagramAPI-Request-Web.html#method_updateDateOfBirth"
+        },                {
             "fqsen": "\\InstagramAPI\\Request",
             "name": "Request",
             "summary": "Bridge\u0020between\u0020Instagram\u0020Client\u0020calls,\u0020the\u0020object\u0020mapper\u0020\u0026\u0020response\u0020objects.",

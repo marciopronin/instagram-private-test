@@ -29,7 +29,7 @@ try {
     $maxId = null;
     do {
         // Request the page corresponding to maxId.
-        $response = $ig->timeline->getUserFeed($userId, true, $maxId);
+        $response = $ig->timeline->getUserFeed($userId, $maxId);
 
         // In this example we're simply printing the IDs of this page's items.
         foreach ($response->getItems() as $item) {

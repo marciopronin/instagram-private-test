@@ -1,3 +1,24 @@
+# Stable release v16.7.0
+## Date: 29/12/2020
+
+### New features
+
+- **Events:** Web: Add `updateDateOfBirth()`
+
+### Updates and fixes
+
+- **Constants:** Constants: Update to 169.1.0.29.135
+- **Event:** Update `_getModuleClass()`. New nav chains for 169.1.0.29.135
+
+### Examples
+
+- **Example:** Update paginationExample
+- **Example:** Add getCommentsTimeline
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.6.1
 ## Date: 25/12/2020
 

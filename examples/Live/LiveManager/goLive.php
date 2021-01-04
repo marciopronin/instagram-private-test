@@ -19,8 +19,8 @@ $helpData = [];
 registerArgument($helpData, $argv, 'help', 'Help', 'Displays this message.', 'h', 'help');
 registerArgument($helpData, $argv, 'bypassCheck', 'Bypass OS Check', "Bypasses the operating system check. Please do not use this if don't know what you're doing!", 'b', 'bypass-check');
 registerArgument($helpData, $argv, 'forceLegacy', 'Force Legacy Mode', 'Forces legacy mode for Windows & Mac users.', 'l', 'force-legacy');
-registerArgument($helpData, $argv, 'bypassCutoff', 'Bypass Cutoff', 'Bypasses stream cutoff after one hour. Please do not use this if you are not verified!', '-bypass-cutoff');
-registerArgument($helpData, $argv, 'infiniteStream', 'Infinite Stream', 'Automatically starts a new stream after the hour cutoff.', 'i', 'infinite-stream');
+registerArgument($helpData, $argv, 'bypassCutoff', 'Bypass Cutoff', 'Bypasses stream cutoff after four hours. Please do not use this if you are not verified!', '-bypass-cutoff');
+registerArgument($helpData, $argv, 'infiniteStream', 'Infinite Stream', 'Automatically starts a new stream after the hours cutoff.', 'i', 'infinite-stream');
 registerArgument($helpData, $argv, 'autoArchive', 'Auto Archive', 'Automatically archives a live stream after it ends.', 'a', 'auto-archive');
 registerArgument($helpData, $argv, 'autoDiscard', 'Auto Discard', 'Automatically discards a live stream after it ends.', 'd', 'auto-discard');
 registerArgument($helpData, $argv, 'logCommentOutput', 'Log Comment Output', 'Logs comment and like output into a text file.', 'o', 'comment-output');
@@ -401,7 +401,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             $info = $ig->people->getSelfInfo();
             Utils::log('[>] Livestream: Creating livestream...');
             $stream = $ig->live->create(OBS_X, OBS_Y, $title);
-            @define('maxTime', $stream->isMaxTimeInSeconds() ? ($stream->getMaxTimeInSeconds() - 100) : 3480);
+            @define('maxTime', $stream->isMaxTimeInSeconds() ? ($stream->getMaxTimeInSeconds() - 100) : 14400);
             @define('heartbeatInterval', $stream->isHeartbeatInterval() ? $stream->getHeartbeatInterval() : 2);
 
             $broadcastId = $stream->getBroadcastId();
@@ -426,7 +426,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             $streamKey = $recoveryData['streamKey'];
             $obsAutomation = (bool) $recoveryData['obs'];
             $helper = unserialize($recoveryData['obsObject']);
-            define('maxTime', 3480);
+            define('maxTime', 14400);
             define('heartbeatInterval', 2);
         }
 

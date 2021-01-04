@@ -1,3 +1,12 @@
+# Stable release v16.7.1
+## Date: 04/01/2020
+
+### Examples
+
+- **Example:** Add checkUserInfoExample
+- **Example:** Update getCommentsTimeline
+- **Example:** Update LiveManager goLive
+
 # Stable release v16.7.0
 ## Date: 29/12/2020
 

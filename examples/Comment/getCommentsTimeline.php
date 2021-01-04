@@ -29,7 +29,7 @@ try {
     // Starting at "null" means starting at the first page.
     $maxId = null;
     do {
-        $userFeed = $ig->timeline->getUserFeed($userId, $maxId); // Pagination with maxId
+        $userFeed = $ig->timeline->getTimelineFeed($userId, $maxId); // Pagination with maxId
         $items = $userFeed->getItems();
 
         $c = 0;

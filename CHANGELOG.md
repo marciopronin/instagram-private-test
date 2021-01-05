@@ -1,3 +1,11 @@
+# Stable release v16.7.2
+## Date: 06/01/2020
+
+### Examples
+
+- **Example:** Add viewStoryFromSearch
+- **Example:** Update checkUserInfoExample
+
 # Stable release v16.7.1
 ## Date: 04/01/2020
 

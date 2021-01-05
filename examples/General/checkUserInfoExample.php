@@ -143,7 +143,7 @@ try {
         $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile'); // Navigating to feed contextual profile (user feed)
 
         foreach ($items as $item) {
-            $ig->event->sendOrganicMediaImpression($item, 'feed_contextual_profile'); 
+            $ig->event->sendOrganicMediaImpression($item, 'feed_contextual_profile');
             $commentInfos = $ig->media->getCommentInfos($item->getId())->getCommentInfos()->getData(); // comment previews (event)
             $ig->event->sendOrganicNumberOfLikes($item, 'feed_contextual_profile'); // number of likes of media (event)
 
@@ -168,7 +168,6 @@ try {
             }
         }
         $maxId = $userFeed->getNextMaxId();
-
     } while ($maxId !== null); // Must use "!==" for comparison instead of "!=".
 
     // forceSendBatch() should be only used if you are "closing" the app so all the events that

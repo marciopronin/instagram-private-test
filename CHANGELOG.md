@@ -1,3 +1,9 @@
+# Stable release v16.7.4
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v16.7.3
 ## Date: 12/01/2020
 

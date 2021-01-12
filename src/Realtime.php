@@ -251,10 +251,6 @@ class Realtime implements EventEmitterInterface
         $mediaId,
         array $options = [])
     {
-        if (!$this->_isRtcReshareEnabled()) {
-            return false;
-        }
-
         try {
             $command = new DirectCommand\SendPost($threadId, $mediaId, $options);
             $this->_client->sendCommand($command);
@@ -283,10 +279,6 @@ class Realtime implements EventEmitterInterface
         $storyId,
         array $options = [])
     {
-        if (!$this->_isRtcReshareEnabled()) {
-            return false;
-        }
-
         try {
             $command = new DirectCommand\SendStory($threadId, $storyId, $options);
             $this->_client->sendCommand($command);
@@ -315,10 +307,6 @@ class Realtime implements EventEmitterInterface
         $userId,
         array $options = [])
     {
-        if (!$this->_isRtcReshareEnabled()) {
-            return false;
-        }
-
         try {
             $command = new DirectCommand\SendProfile($threadId, $userId, $options);
             $this->_client->sendCommand($command);
@@ -350,10 +338,6 @@ class Realtime implements EventEmitterInterface
         $locationId,
         array $options = [])
     {
-        if (!$this->_isRtcReshareEnabled()) {
-            return false;
-        }
-
         try {
             $command = new DirectCommand\SendLocation($threadId, $locationId, $options);
             $this->_client->sendCommand($command);
@@ -382,10 +366,6 @@ class Realtime implements EventEmitterInterface
         $hashtag,
         array $options = [])
     {
-        if (!$this->_isRtcReshareEnabled()) {
-            return false;
-        }
-
         try {
             $command = new DirectCommand\SendHashtag($threadId, $hashtag, $options);
             $this->_client->sendCommand($command);
@@ -491,15 +471,5 @@ class Realtime implements EventEmitterInterface
     public function isConnected()
     {
         return $this->_client->isConnected();
-    }
-
-    /**
-     * Check whether sharing via the realtime client is enabled.
-     *
-     * @return bool
-     */
-    protected function _isRtcReshareEnabled()
-    {
-        return $this->_instagram->isExperimentEnabled('ig_android_rtc_reshare', 'is_rtc_reshare_enabled');
     }
 }

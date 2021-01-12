@@ -1,3 +1,15 @@
+# Stable release v16.7.3
+## Date: 12/01/2020
+
+### Updates and fixes
+
+- **Timeline**: Delete unused experiment check in `getTimelineFeed()`
+- **Realtime:** Delete `_isRtcReshareEnabled()`. Enabled by default for anyone. This should have fixed the issue for sending posts, hashtags, and profiles via Realtime client
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.7.2
 ## Date: 06/01/2020
 

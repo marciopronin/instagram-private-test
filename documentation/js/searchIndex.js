@@ -6526,11 +6526,6 @@ Search.appendIndex(
             "summary": "Check\u0020if\u0020client\u0020is\u0020connected.",
             "url": "../classes/InstagramAPI-Realtime.html#method_isConnected"
         },                {
-            "fqsen": "\\InstagramAPI\\Realtime\u003A\u003A_isRtcReshareEnabled\u0028\u0029",
-            "name": "_isRtcReshareEnabled",
-            "summary": "Check\u0020whether\u0020sharing\u0020via\u0020the\u0020realtime\u0020client\u0020is\u0020enabled.",
-            "url": "../classes/InstagramAPI-Realtime.html#method__isRtcReshareEnabled"
-        },                {
             "fqsen": "\\InstagramAPI\\Realtime\u003A\u003A\u0024_instagram",
             "name": "_instagram",
             "summary": "",

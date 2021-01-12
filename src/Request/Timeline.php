@@ -224,10 +224,12 @@ class Timeline extends RequestCollection
         $maxId = null,
         array $options = null)
     {
+        /* NOT USED.
         $asyncAds = $this->ig->isExperimentEnabled(
             'ig_android_ad_async_ads_universe',
             'is_enabled'
         );
+        */
 
         $request = $this->ig->request('feed/timeline/')
             ->setSignedPost(false)

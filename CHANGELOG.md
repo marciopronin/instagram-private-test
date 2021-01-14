@@ -1,4 +1,21 @@
+# Stable release v16.7.5
+## Date: 14/01/2020
+
+### Updates and fixes
+
+- **Event:** Update `_getModuleClass()`
+- **Event:** Update `_validateNavigationPath()`
+
+### Examples
+
+- **Examples:** Update uploadPhoto
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.7.4
+## Date: 13/01/2020
 
 ### Updates and fixes
 

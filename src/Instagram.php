@@ -2179,9 +2179,10 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->people->getRecentActivityInbox();
+
                 try {
                     $this->internal->logResurrectAttribution();
-                } catch(Exception $e) {
+                } catch (Exception $e) {
                     // pass
                 }
                 $this->internal->getLoomFetchConfig();

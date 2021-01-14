@@ -153,6 +153,15 @@ class Event extends RequestCollection
             case 'likers':
                 $class = '7u1';
                 break;
+            case 'tabbed_gallery_camera':
+                $class = 'MediaCaptureFragment';
+                break;
+            case 'photo_filter':
+                $class = 'Ds4';
+                break;
+            case 'metadata_followers_share':
+                $class = 'FollowersShareFragment';
+                break;
             default:
                 $class = false;
         }
@@ -2931,6 +2940,24 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'photo_filter',
+                ],
+            ],
+            'tabbed_gallery_camera' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'photo_filter',
+                ],
+            ],
+            'photo_filter' => [
+                [
+                    'clickpoint'    => 'next',
+                    'dest_module'   => 'metadata_followers_share',
+                ],
+            ],
+            'metadata_followers_share' => [
+                [
+                    'clickpoint'    => 'next',
+                    'dest_module'   => 'feed_timeline',
                 ],
             ],
             'follow_requests' => [

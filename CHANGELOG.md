@@ -1,3 +1,19 @@
+# Stable release v16.7.6
+## Date: 15/01/2020
+
+### Updates and fixes
+
+- **Event:** Update `_sendBatchEvents()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
+### Wiki
+
+- **Wiki:** Direct/Realtime. Now realtime can be used to send different actions (post, location, hashtah...)
+- **Report:** Added report from 14-01-2021.
+
 # Stable release v16.7.5
 ## Date: 14/01/2020
 

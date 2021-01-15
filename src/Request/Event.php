@@ -4,6 +4,7 @@ namespace InstagramAPI\Request;
 
 use InstagramAPI\Constants;
 use InstagramAPI\Debug;
+use InstagramAPI\Exception\NetworkException;
 use InstagramAPI\Signatures;
 
 /**
@@ -355,7 +356,14 @@ class Event extends RequestCollection
                     ->addPost('message', json_encode($message));
         }
 
-        $response = $request->getDecodedResponse();
+        try {
+            $response = $request->getDecodedResponse();
+        } catch (NetworkException $e) {
+            // Ignore network exceptions.
+        } finally {
+            // TODO: put batch.gz in queue or retry multiple times before discarding batch.
+            return;
+        }
 
         $path = Debug::$debugLogPath;
         if ($this->ig->settings->getStorage() instanceof \InstagramAPI\Settings\Storage\File) {

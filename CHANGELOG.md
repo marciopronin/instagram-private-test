@@ -1,3 +1,10 @@
+# Stable release v16.7.7
+## Date: 15/01/2020
+
+### Updates and fixes
+
+- **Event:** Fix bug `_sendBatchEvents()`
+
 # Stable release v16.7.6
 ## Date: 15/01/2020
 

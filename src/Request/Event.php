@@ -360,9 +360,9 @@ class Event extends RequestCollection
             $response = $request->getDecodedResponse();
         } catch (NetworkException $e) {
             // Ignore network exceptions.
+            return;
         } finally {
             // TODO: put batch.gz in queue or retry multiple times before discarding batch.
-            return;
         }
 
         $path = Debug::$debugLogPath;

@@ -1,3 +1,10 @@
+# Stable release v16.7.8
+## Date: 18/01/2020
+
+### WIP notice
+
+- **WIP:** Notes on WIP
+
 # Stable release v16.7.7
 ## Date: 15/01/2020
 

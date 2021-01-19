@@ -109,7 +109,7 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Handler-DirectHandler.html#constant_ITEM_REGEXP">ITEM_REGEXP</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">&#039;#^/direct_v2/threads/(?&lt;thread_id&gt;[^/]+)/items/(?&lt;item_id&gt;[^/]+)$#D&#039;</td>
+                    <td class="phpdocumentor-cell">&#039;#^/direct_v2/threads/(?&lt;thread_id&gt;[^/]+)/items/(?&lt;item_id&gt;[^/]+)#D&#039;</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Handler-DirectHandler.html#constant_ACTIVITY_REGEXP">ACTIVITY_REGEXP</a></th>
@@ -189,6 +189,11 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Handler-DirectHandler.html#method__upsertThreadItem">_upsertThreadItem()</a></th>
                     <td class="phpdocumentor-cell">Handler for thread item creation/modification.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Handler-DirectHandler.html#method__likeThreadItem">_likeThreadItem()</a></th>
+                    <td class="phpdocumentor-cell">Handler for thread item like/unlike.</td>
                     <td class="phpdocumentor-cell">mixed</td>
                 </tr>
                             <tr>
@@ -322,7 +327,7 @@
         <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
         <span class="phpdocumentor-signature__name">$ITEM_REGEXP</span>
-        = <span class="phpdocumentor-signature__default-value">&#039;#^/direct_v2/threads/(?&lt;thread_id&gt;[^/]+)/items/(?&lt;item_id&gt;[^/]+)$#D&#039;</span>
+        = <span class="phpdocumentor-signature__default-value">&#039;#^/direct_v2/threads/(?&lt;thread_id&gt;[^/]+)/items/(?&lt;item_id&gt;[^/]+)#D&#039;</span>
     </code>
             
 </article>
@@ -720,7 +725,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">148</span>
+        <span class="phpdocumentor-element-found-in__line">150</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for the REPLACE op.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -771,7 +776,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">186</span>
+        <span class="phpdocumentor-element-found-in__line">188</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for the REMOVE op.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -822,7 +827,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">204</span>
+        <span class="phpdocumentor-element-found-in__line">210</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for NOTIFY op.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -873,7 +878,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">223</span>
+        <span class="phpdocumentor-element-found-in__line">229</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for thread creation/modification.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -933,7 +938,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">252</span>
+        <span class="phpdocumentor-element-found-in__line">258</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for thread item creation/modification.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -982,6 +987,66 @@
         <span class="phpdocumentor-signature__response_type">mixed</span>
             
 </article>
+                                    <a id="method__likeThreadItem"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_likeThreadItem()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">287</span>
+    </aside>
+        <p class="phpdocumentor-summary">Handler for thread item like/unlike.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_likeThreadItem</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$op</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-Payload-Event-PatchEventOp.html"><abbr title="\InstagramAPI\Realtime\Payload\Event\PatchEventOp">PatchEventOp</abbr></a></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$like</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$op</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Realtime-Payload-Event-PatchEventOp.html"><abbr title="\InstagramAPI\Realtime\Payload\Event\PatchEventOp">PatchEventOp</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$like</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Realtime-Handler-HandlerException.html"><abbr title="\InstagramAPI\Realtime\Handler\HandlerException">HandlerException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
                                     <a id="method__updateThreadActivity"></a>
 <article
         class="
@@ -993,7 +1058,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">280</span>
+        <span class="phpdocumentor-element-found-in__line">315</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for thread activity indicator.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1044,7 +1109,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">306</span>
+        <span class="phpdocumentor-element-found-in__line">341</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for story update.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1095,7 +1160,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">334</span>
+        <span class="phpdocumentor-element-found-in__line">369</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for unseen count.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1145,7 +1210,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">356</span>
+        <span class="phpdocumentor-element-found-in__line">391</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for thread seen indicator.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1196,7 +1261,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">384</span>
+        <span class="phpdocumentor-element-found-in__line">419</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for screenshot notification.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1247,7 +1312,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">410</span>
+        <span class="phpdocumentor-element-found-in__line">445</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for direct story creation.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1298,7 +1363,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">441</span>
+        <span class="phpdocumentor-element-found-in__line">476</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for story action.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1349,7 +1414,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">470</span>
+        <span class="phpdocumentor-element-found-in__line">505</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for thread item removal.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1400,7 +1465,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">491</span>
+        <span class="phpdocumentor-element-found-in__line">526</span>
     </aside>
         <p class="phpdocumentor-summary">Handler for thread notify.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1451,7 +1516,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">520</span>
+        <span class="phpdocumentor-element-found-in__line">555</span>
     </aside>
         <p class="phpdocumentor-summary">Checks if the path starts with specified substring.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1501,7 +1566,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Handler/DirectHandler.php"><a href="../files/src-realtime-handler-directhandler.html"><abbr title="src/Realtime/Handler/DirectHandler.php">DirectHandler.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">535</span>
+        <span class="phpdocumentor-element-found-in__line">570</span>
     </aside>
         <p class="phpdocumentor-summary">Checks if the path ends with specified substring.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

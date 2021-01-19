@@ -25,7 +25,7 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
     const MODULE = 'direct';
 
     const THREAD_REGEXP = '#^/direct_v2/inbox/threads/(?<thread_id>[^/]+)$#D';
-    const ITEM_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)$#D';
+    const ITEM_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)#D';
     const ACTIVITY_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/activity_indicator_id/(?<context>[^/]+)$#D';
     const STORY_REGEXP = '#^/direct_v2/visual_threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)$#D';
     const SEEN_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/participants/(?<user_id>[^/]+)/has_seen$#D';
@@ -124,10 +124,12 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
     {
         $path = $op->getPath();
         if ($this->_pathStartsWith($path, '/direct_v2/threads')) {
-            if (strpos($path, 'activity_indicator_id') === false) {
-                $this->_upsertThreadItem($op, true);
-            } else {
+            if (strpos($path, 'activity_indicator_id') !== false) {
                 $this->_updateThreadActivity($op);
+            } elseif (strpos($path, 'reactions/likes/') !== false) {
+                $this->_likeThreadItem($op, true);
+            } else {
+                $this->_upsertThreadItem($op, true);
             }
         } elseif ($this->_pathStartsWith($path, '/direct_v2/inbox/threads')) {
             $this->_upsertThread($op, true);
@@ -188,7 +190,11 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
     {
         $path = $op->getPath();
         if ($this->_pathStartsWith($path, '/direct_v2')) {
-            $this->_removeThreadItem($op);
+            if (strpos($path, 'reactions/likes/') !== false) {
+                $this->_likeThreadItem($op, false);
+            } else {
+                $this->_removeThreadItem($op);
+            }
         } else {
             throw new HandlerException(sprintf('Unsupported REMOVE path "%s".', $path));
         }
@@ -254,6 +260,35 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
         $insert)
     {
         $event = $insert ? 'thread-item-created' : 'thread-item-updated';
+        if (!$this->_hasListeners($event)) {
+            return;
+        }
+
+        if (!preg_match(self::ITEM_REGEXP, $op->getPath(), $matches)) {
+            throw new HandlerException(sprintf('Path "%s" does not match thread item regexp.', $op->getPath()));
+        }
+
+        $json = HttpClient::api_body_decode($op->getValue());
+        if (!is_array($json)) {
+            throw new HandlerException(sprintf('Failed to decode thread item JSON: %s.', json_last_error_msg()));
+        }
+
+        $this->_target->emit($event, [$matches['thread_id'], $matches['item_id'], new DirectThreadItem($json)]);
+    }
+
+    /**
+     * Handler for thread item like/unlike.
+     *
+     * @param PatchEventOp $op
+     * @param bool         $like
+     *
+     * @throws HandlerException
+     */
+    protected function _likeThreadItem(
+        PatchEventOp $op,
+        $like)
+    {
+        $event = $like ? 'thread-item-liked' : 'thread-item-unliked';
         if (!$this->_hasListeners($event)) {
             return;
         }

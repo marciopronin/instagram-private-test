@@ -4356,6 +4356,11 @@ Search.appendIndex(
             "summary": "Handler\u0020for\u0020thread\u0020item\u0020creation\/modification.",
             "url": "../classes/InstagramAPI-Realtime-Handler-DirectHandler.html#method__upsertThreadItem"
         },                {
+            "fqsen": "\\InstagramAPI\\Realtime\\Handler\\DirectHandler\u003A\u003A_likeThreadItem\u0028\u0029",
+            "name": "_likeThreadItem",
+            "summary": "Handler\u0020for\u0020thread\u0020item\u0020like\/unlike.",
+            "url": "../classes/InstagramAPI-Realtime-Handler-DirectHandler.html#method__likeThreadItem"
+        },                {
             "fqsen": "\\InstagramAPI\\Realtime\\Handler\\DirectHandler\u003A\u003A_updateThreadActivity\u0028\u0029",
             "name": "_updateThreadActivity",
             "summary": "Handler\u0020for\u0020thread\u0020activity\u0020indicator.",

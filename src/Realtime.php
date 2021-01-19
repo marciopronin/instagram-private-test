@@ -26,6 +26,8 @@ use React\EventLoop\LoopInterface;
  *  - thread-notify - Someone has created ActionLog item in thread.
  *  - thread-seen - Someone has updated their last seen position.
  *  - thread-activity - Someone has created an activity (like start/stop typing) in thread.
+ *  - thread-item-liked - Someone has liked one message.
+ *  - thread-item-unliked - Someone has unliked one message.
  *  - thread-item-created - New item has been created in thread.
  *  - thread-item-updated - An existing item has been updated in thread.
  *  - thread-item-removed - An existing item has been removed from thread.

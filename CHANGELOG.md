@@ -1,3 +1,14 @@
+# Stable release v16.8.1
+## Date: 20/01/2020
+
+### Updates and fixes
+
+- **DirectHandler:** Update `_likeThreadItem()`
+
+### Examples
+
+- **Examples:** Update realtimeClient
+
 # Stable release v16.8.0
 ## Date: 19/01/2020
 

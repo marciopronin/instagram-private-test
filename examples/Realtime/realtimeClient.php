@@ -58,7 +58,7 @@ $rtc->on('direct-story-created', function (\InstagramAPI\Response\Model\DirectTh
 $rtc->on('thread-item-liked', function ($threadId, $threadItemId, \InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
     printf('[RTC] Item %s has been liked in %s%s', $threadItemId, $threadId, PHP_EOL);
 });
-$rtc->on('thread-item-unliked', function ($threadId, $threadItemId, \InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
+$rtc->on('thread-item-unliked', function ($threadId, $threadItemId) {
     printf('[RTC] Item %s has been unliked in %s%s', $threadItemId, $threadId, PHP_EOL);
 });
 $rtc->on('direct-story-updated', function ($threadId, $threadItemId, \InstagramAPI\Response\Model\DirectThreadItem $threadItem) {

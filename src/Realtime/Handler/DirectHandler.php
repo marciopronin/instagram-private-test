@@ -297,12 +297,16 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
             throw new HandlerException(sprintf('Path "%s" does not match thread item regexp.', $op->getPath()));
         }
 
-        $json = HttpClient::api_body_decode($op->getValue());
-        if (!is_array($json)) {
-            throw new HandlerException(sprintf('Failed to decode thread item JSON: %s.', json_last_error_msg()));
-        }
+        if ($like) {
+            $json = HttpClient::api_body_decode($op->getValue());
+            if (!is_array($json)) {
+                throw new HandlerException(sprintf('Failed to decode thread item JSON: %s.', json_last_error_msg()));
+            }
 
-        $this->_target->emit($event, [$matches['thread_id'], $matches['item_id'], new DirectThreadItem($json)]);
+            $this->_target->emit($event, [$matches['thread_id'], $matches['item_id'], new DirectThreadItem($json)]);
+        } else {
+            $this->_target->emit($event, [$matches['thread_id'], $matches['item_id']]);
+        }
     }
 
     /**

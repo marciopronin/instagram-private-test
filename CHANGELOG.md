@@ -1,3 +1,14 @@
+# Stable release v16.8.4
+## Date: 21/01/2020
+
+### Updates and fixes
+
+- **Direct:** Update `getThread()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.8.3
 ## Date: 21/01/2020
 

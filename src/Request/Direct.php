@@ -261,8 +261,7 @@ class Direct extends RequestCollection
         try {
             $request = $this->ig->request('direct_v2/ranked_recipients/')
                 ->addParam('mode', $mode)
-                ->addParam('show_threads', $showThreads ? 'true' : 'false')
-                ->addParam('use_unified_inbox', 'true');
+                ->addParam('show_threads', $showThreads ? 'true' : 'false');
             if ($query !== null) {
                 $request->addParam('query', $query);
             }
@@ -312,6 +311,7 @@ class Direct extends RequestCollection
      *
      * @param string      $threadId Thread ID.
      * @param string|null $cursorId Next "cursor ID", used for pagination.
+     * @param string|null $seqId    Sequence ID.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -322,9 +322,15 @@ class Direct extends RequestCollection
         $cursorId = null)
     {
         $request = $this->ig->request("direct_v2/threads/$threadId/")
-            ->addParam('use_unified_inbox', 'true');
+            ->addParam('limit', 20)
+            ->addParam('visual_message_return_type', 'unseen');
+
         if ($cursorId !== null) {
-            $request->addParam('cursor', $cursorId);
+            $request->addParam('cursor', $cursorId)
+                    ->addParam('direction', 'older');
+        }
+        if ($seqId !== null) {
+            $request->addParam('seq_id', $seqId);
         }
 
         return $request->getResponse(new Response\DirectThreadResponse());
@@ -559,7 +565,6 @@ class Direct extends RequestCollection
         $threadId)
     {
         return $this->ig->request("direct_v2/threads/{$threadId}/hide/")
-            ->addPost('use_unified_inbox', 'true')
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)

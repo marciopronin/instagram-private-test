@@ -4431,6 +4431,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Realtime-Handler-DirectHandler.html#constant_ITEM_REGEXP"
         },                {
+            "fqsen": "\\InstagramAPI\\Realtime\\Handler\\DirectHandler\u003A\u003AREACTIONS_REGEXP",
+            "name": "REACTIONS_REGEXP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Realtime-Handler-DirectHandler.html#constant_REACTIONS_REGEXP"
+        },                {
             "fqsen": "\\InstagramAPI\\Realtime\\Handler\\DirectHandler\u003A\u003AACTIVITY_REGEXP",
             "name": "ACTIVITY_REGEXP",
             "summary": "",

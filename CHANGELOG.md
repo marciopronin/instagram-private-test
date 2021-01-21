@@ -1,3 +1,24 @@
+# Stable release v16.8.2
+## Date: 21/01/2020
+
+### Updates and fixes
+
+- **DirectHandler:** Update `_likeThreadItem()`
+- **Request:** Update `_addDefaultHeaders()`
+- **Settings:** Update StorageHandler
+
+### Examples
+
+- **Examples:** Update realtimeClient
+
+### Documentation
+
+- **Documentation:** Update documentation
+
+### WIP notice
+
+- **WIP:** Notes on WIP
+
 # Stable release v16.8.1
 ## Date: 20/01/2020
 

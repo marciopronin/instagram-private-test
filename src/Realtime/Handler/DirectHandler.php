@@ -26,6 +26,7 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
 
     const THREAD_REGEXP = '#^/direct_v2/inbox/threads/(?<thread_id>[^/]+)$#D';
     const ITEM_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)#D';
+    const REACTIONS_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)/(?<user_id>[^/]+)$#D';
     const ACTIVITY_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/activity_indicator_id/(?<context>[^/]+)$#D';
     const STORY_REGEXP = '#^/direct_v2/visual_threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)$#D';
     const SEEN_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/participants/(?<user_id>[^/]+)/has_seen$#D';
@@ -293,7 +294,7 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
             return;
         }
 
-        if (!preg_match(self::ITEM_REGEXP, $op->getPath(), $matches)) {
+        if (!preg_match(self::REACTIONS_REGEXP, $op->getPath(), $matches)) {
             throw new HandlerException(sprintf('Path "%s" does not match thread item regexp.', $op->getPath()));
         }
 
@@ -303,9 +304,9 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
                 throw new HandlerException(sprintf('Failed to decode thread item JSON: %s.', json_last_error_msg()));
             }
 
-            $this->_target->emit($event, [$matches['thread_id'], $matches['item_id'], new DirectThreadItem($json)]);
+            $this->_target->emit($event, [$matches['thread_id'], $matches['item_id'], $matches['user_id'], new DirectThreadItem($json)]);
         } else {
-            $this->_target->emit($event, [$matches['thread_id'], $matches['item_id']]);
+            $this->_target->emit($event, [$matches['thread_id'], $matches['item_id'], $matches['user_id']]);
         }
     }
 

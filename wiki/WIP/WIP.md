@@ -5,18 +5,9 @@
 - Bloks ID: bfe7510720e920cb359b6fc8e96cfb8323a7127b448ecd0d54dc057e3720e766
 - Capabilities: 3brTvx8=
 
-## Manage experiments client
+# TOP priority
 
-X-IG-EU-DC-ENABLED and X-IG-CONCURRENT-ENABLED must be controlled by two set of experiments:
-
-if ($this->ig->isExperimentEnabled('ig_traffic_routing_universe','is_in_lla_routing_experiment', false)) {
-   add X-IG-EU-DC-ENABLED = $this->ig->isExperimentEnabled('ig_traffic_routing_universe','route_to_lla', false)
-}
-
-if ($this->ig->isExperimentEnabled('ig_traffic_routing_universe','is_in_cr_routing_experiment', false)) {
-   add X-IG-CONCURRENT-ENABLED = $this->ig->isExperimentEnabled('ig_traffic_routing_universe','route_to_cr_header', false)
-}
-
+Instagram has migrated to a new way to handle challenge/checkpoint based in bloks. It will be updated ASAP!
 
 # Working on..
 

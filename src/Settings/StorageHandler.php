@@ -97,6 +97,7 @@ class StorageHandler
         'ig_android_loom_universe',
         'ig_android_live_suggested_live_expansion',
         'ig_android_live_qa_broadcaster_v1_universe',
+        'ig_traffic_routing_universe',
     ];
 
     /**

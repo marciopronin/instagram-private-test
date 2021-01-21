@@ -410,6 +410,14 @@ class Request
             $this->_headers['X-IG-App-Startup-Country'] = explode('_', $this->_parent->getLocale())[1];
             $this->_headers['X-IG-Mapped-Locale'] = $this->_parent->getLocale();
 
+            if ($this->_parent->isExperimentEnabled('ig_traffic_routing_universe', 'is_in_lla_routing_experiment', false)) {
+                $this->_headers['X-IG-EU-DC-ENABLED'] = $this->_parent->isExperimentEnabled('ig_traffic_routing_universe', 'route_to_lla', false);
+            }
+
+            if ($this->_parent->isExperimentEnabled('ig_traffic_routing_universe', 'is_in_cr_routing_experiment', false)) {
+                $this->_headers['X-IG-CONCURRENT-ENABLED'] = $this->_parent->isExperimentEnabled('ig_traffic_routing_universe', 'route_to_cr_header', false);
+            }
+
             if ($this->_parent->getPlatform() === 'android') {
                 $this->_headers['X-IG-App-Locale'] = $this->_parent->getLocale();
                 $this->_headers['X-IG-Device-Locale'] = $this->_parent->getLocale();

@@ -263,12 +263,12 @@
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                     <span class="phpdocumentor-signature__argument">
-            [,                 <span class="phpdocumentor-signature__argument__name">$webform</span> :
-                <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+            [,                 <span class="phpdocumentor-signature__argument__name">$context</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                     <span class="phpdocumentor-signature__argument">
             [,                 <span class="phpdocumentor-signature__argument__name">$post</span> :
-                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
                  = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-CheckpointResponse.html"><abbr title="\InstagramAPI\Response\CheckpointResponse">CheckpointResponse</abbr></a></span>
@@ -283,13 +283,13 @@
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Checkpoint URL.</p></section></dd>
                             <dt class="phpdocumentor-argument-list__entry">
-                    <span class="phpdocumentor-signature__argument__name">$webform</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
-                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Webform.</p></section></dd>
+                    <span class="phpdocumentor-signature__argument__name">$context</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Challenge context.</p></section></dd>
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$post</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                      = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
@@ -321,7 +321,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">66</span>
+        <span class="phpdocumentor-element-found-in__line">63</span>
     </aside>
         <p class="phpdocumentor-summary">Request verficiation method.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -390,7 +390,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">94</span>
+        <span class="phpdocumentor-element-found-in__line">91</span>
     </aside>
         <p class="phpdocumentor-summary">Send verficiation method.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -450,7 +450,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">120</span>
+        <span class="phpdocumentor-element-found-in__line">117</span>
     </aside>
         <p class="phpdocumentor-summary">Set phone number for checkpoint verification.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -520,7 +520,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">153</span>
+        <span class="phpdocumentor-element-found-in__line">150</span>
     </aside>
         <p class="phpdocumentor-summary">Set email for checkpoint verification.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -590,7 +590,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">185</span>
+        <span class="phpdocumentor-element-found-in__line">182</span>
     </aside>
         <p class="phpdocumentor-summary">Accept an escalation informational.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -643,7 +643,7 @@ Instagram's ToS or is using a copyrighted media.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">195</span>
+        <span class="phpdocumentor-element-found-in__line">192</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">protected</span>
@@ -683,7 +683,7 @@ Instagram's ToS or is using a copyrighted media.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">218</span>
+        <span class="phpdocumentor-element-found-in__line">215</span>
     </aside>
         <p class="phpdocumentor-summary">Send captcha response.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -743,7 +743,7 @@ Instagram's ToS or is using a copyrighted media.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">239</span>
+        <span class="phpdocumentor-element-found-in__line">236</span>
     </aside>
         <p class="phpdocumentor-summary">Select verification method form.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -803,7 +803,7 @@ Instagram's ToS or is using a copyrighted media.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">259</span>
+        <span class="phpdocumentor-element-found-in__line">256</span>
     </aside>
         <p class="phpdocumentor-summary">Select accept/correct form.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -854,7 +854,7 @@ Instagram's ToS or is using a copyrighted media.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">280</span>
+        <span class="phpdocumentor-element-found-in__line">277</span>
     </aside>
         <p class="phpdocumentor-summary">Send phone via web form.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -914,7 +914,7 @@ Instagram's ToS or is using a copyrighted media.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">301</span>
+        <span class="phpdocumentor-element-found-in__line">298</span>
     </aside>
         <p class="phpdocumentor-summary">Send sms code via web form.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -974,7 +974,7 @@ Instagram's ToS or is using a copyrighted media.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">322</span>
+        <span class="phpdocumentor-element-found-in__line">319</span>
     </aside>
         <p class="phpdocumentor-summary">Send force password change.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1034,7 +1034,7 @@ Instagram's ToS or is using a copyrighted media.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Checkpoint.php"><a href="../files/src-request-checkpoint.html"><abbr title="src/Request/Checkpoint.php">Checkpoint.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">344</span>
+        <span class="phpdocumentor-element-found-in__line">341</span>
     </aside>
         <p class="phpdocumentor-summary">Get webform checkpoint.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

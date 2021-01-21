@@ -49,12 +49,8 @@ try {
                             if ($iterations > 5) {
                                 $webForm = true;
                             }
-                            if ((is_array($e->getResponse()->getChallenge()) === false) && ($e->getResponse()->getChallenge()->getChallengeContext() !== null)) {
-                                $ig->checkpoint->sendChallenge($e->getResponse()->getChallenge()->getUrl(), true);
-                            } else {
-                                // Send a challenge request
-                                $ig->checkpoint->sendChallenge($checkApiPath);
-                            }
+                            // Send a challenge request
+                            $ig->checkpoint->sendChallenge($checkApiPath, $e->getResponse()->getChallenge()->getChallengeContext());
                         }
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\EscalationInformationalException:
@@ -141,7 +137,7 @@ try {
                         $ig->account->changePassword($password, $newPassword);
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\AcknowledgeFormException:
-                        $ig->checkpoint->sendChallenge(substr($e->getResponse()->getChallengeUrl(), 1), false, true);
+                        $ig->checkpoint->sendChallenge(substr($e->getResponse()->getChallengeUrl(), 1), null, true);
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\LegacyForceSetNewPasswordFormException:
                         $newPassword = trim(fgets(STDIN));

@@ -1,3 +1,19 @@
+# Stable release v16.8.3
+## Date: 21/01/2020
+
+### Updates and fixes
+
+- **Checkpoint:** Update `sendChallenge()`
+- **Exception:** Update ServerMessageThrower
+
+### Examples
+
+- **Examples:** Update checkpoint
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.8.2
 ## Date: 21/01/2020
 

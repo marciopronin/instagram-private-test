@@ -15,9 +15,9 @@ class Checkpoint extends RequestCollection
     /**
      * Send checkpoint challenge.
      *
-     * @param string $checkpointUrl Checkpoint URL.
-     * @param bool   $webform       Webform.
-     * @param mixed  $post
+     * @param string      $checkpointUrl Checkpoint URL.
+     * @param string|null $context       Challenge context.
+     * @param bool        $post
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -25,7 +25,7 @@ class Checkpoint extends RequestCollection
      */
     public function sendChallenge(
         $checkpointUrl,
-        $webform = false,
+        $context = null,
         $post = false)
     {
         $checkpointUrl = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
@@ -34,22 +34,19 @@ class Checkpoint extends RequestCollection
 
         $request = $this->ig->request($checkpointUrl)
             ->setNeedsAuth(false)
-            ->setSignedPost(false);
+            ->setSignedPost(false)
+            ->addParam('guid', $this->ig->uuid)
+            ->addParam('device_id', $this->ig->device_id);
 
-        if ($webform === false) {
-            $request
-                ->addParam('guid', $this->ig->uuid)
-                ->addParam('device_id', $this->ig->device_id);
-
-            if ($post !== false) {
-                $request->addPost('', '');
-            }
-
-            return $request->getResponse(new Response\CheckpointResponse());
-        } else {
-            return $request
-                ->getResponse(new Response\WebCheckpointResponse());
+        if ($context !== null) {
+            $request->addParam('challenge_context', $context);
         }
+
+        if ($post !== false) {
+            $request->addPost('', '');
+        }
+
+        return $request->getResponse(new Response\CheckpointResponse());
     }
 
     /**

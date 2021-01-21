@@ -161,7 +161,8 @@ class ServerMessageThrower
                 $messages[] = $serverErrorType;
             }
             if ($serverResponse->hasEntryData()) {
-                $entryData = $serverResponse->asArray()['entry_data'];
+                $resp = $serverResponse->asArray();
+                $entryData = isset($resp['entry_data']) ? $resp['entry_data'] : [];
                 if (isset($entryData['Challenge']) && !empty($entryData['Challenge'])) {
                     $serverErrorType = $serverResponse->getChallengeType();
                     $messages[] = $serverErrorType;

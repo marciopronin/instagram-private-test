@@ -26,7 +26,7 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
 
     const THREAD_REGEXP = '#^/direct_v2/inbox/threads/(?<thread_id>[^/]+)$#D';
     const ITEM_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)#D';
-    const REACTIONS_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)/(?<user_id>[^/]+)$#D';
+    const REACTIONS_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)/reactions/likes/(?<user_id>[^/]+)$#D';
     const ACTIVITY_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/activity_indicator_id/(?<context>[^/]+)$#D';
     const STORY_REGEXP = '#^/direct_v2/visual_threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)$#D';
     const SEEN_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/participants/(?<user_id>[^/]+)/has_seen$#D';

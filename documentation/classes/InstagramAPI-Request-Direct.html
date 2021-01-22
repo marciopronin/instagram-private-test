@@ -937,6 +937,10 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
             [,                 <span class="phpdocumentor-signature__argument__name">$cursorId</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$seqId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-DirectThreadResponse.html"><abbr title="\InstagramAPI\Response\DirectThreadResponse">DirectThreadResponse</abbr></a></span>
     </code>
@@ -954,6 +958,11 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
                     : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                      = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Next &quot;cursor ID&quot;, used for pagination.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$seqId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Sequence ID.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -983,7 +992,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">354</span>
+        <span class="phpdocumentor-element-found-in__line">355</span>
     </aside>
         <p class="phpdocumentor-summary">Get direct visual thread.</p>
         <code class="phpdocumentor-signature phpdocumentor-code phpdocumentor-signature--deprecated">
@@ -1057,7 +1066,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">376</span>
+        <span class="phpdocumentor-element-found-in__line">377</span>
     </aside>
         <p class="phpdocumentor-summary">Update thread title.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1117,7 +1126,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">402</span>
+        <span class="phpdocumentor-element-found-in__line">403</span>
     </aside>
         <p class="phpdocumentor-summary">Move thread to folder.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1180,7 +1189,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">423</span>
+        <span class="phpdocumentor-element-found-in__line">424</span>
     </aside>
         <p class="phpdocumentor-summary">Mute direct thread.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1231,7 +1240,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">442</span>
+        <span class="phpdocumentor-element-found-in__line">443</span>
     </aside>
         <p class="phpdocumentor-summary">Unmute direct thread.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1282,7 +1291,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">469</span>
+        <span class="phpdocumentor-element-found-in__line">470</span>
     </aside>
         <p class="phpdocumentor-summary">Create a private story sharing group.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1354,7 +1363,7 @@ and then all communication is done through MQTT (Realtime Client).</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">512</span>
+        <span class="phpdocumentor-element-found-in__line">513</span>
     </aside>
         <p class="phpdocumentor-summary">Add users to thread.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1421,7 +1430,7 @@ and then all communication is done through MQTT (Realtime Client).</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">545</span>
+        <span class="phpdocumentor-element-found-in__line">546</span>
     </aside>
         <p class="phpdocumentor-summary">Leave direct thread.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1472,7 +1481,7 @@ and then all communication is done through MQTT (Realtime Client).</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">564</span>
+        <span class="phpdocumentor-element-found-in__line">565</span>
     </aside>
         <p class="phpdocumentor-summary">Hide direct thread.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1523,7 +1532,7 @@ and then all communication is done through MQTT (Realtime Client).</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">594</span>
+        <span class="phpdocumentor-element-found-in__line">595</span>
     </aside>
         <p class="phpdocumentor-summary">Send a direct text message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1607,7 +1616,7 @@ Other values: 'inbox_search', 'message_button', 'direct_thread' and 'more_menu'.
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">642</span>
+        <span class="phpdocumentor-element-found-in__line">643</span>
     </aside>
         <p class="phpdocumentor-summary">Send reaction from a story media.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1696,7 +1705,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">683</span>
+        <span class="phpdocumentor-element-found-in__line">684</span>
     </aside>
         <p class="phpdocumentor-summary">Share an existing media post via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1785,7 +1794,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">719</span>
+        <span class="phpdocumentor-element-found-in__line">720</span>
     </aside>
         <p class="phpdocumentor-summary">Send a photo (upload) via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1865,7 +1874,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">784</span>
+        <span class="phpdocumentor-element-found-in__line">785</span>
     </aside>
         <p class="phpdocumentor-summary">Send a permanent photo (upload) via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1958,7 +1967,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">814</span>
+        <span class="phpdocumentor-element-found-in__line">815</span>
     </aside>
         <p class="phpdocumentor-summary">Send a disappearing photo (upload) via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2051,7 +2060,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">844</span>
+        <span class="phpdocumentor-element-found-in__line">845</span>
     </aside>
         <p class="phpdocumentor-summary">Send a replayable photo (upload) via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2144,7 +2153,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">874</span>
+        <span class="phpdocumentor-element-found-in__line">875</span>
     </aside>
         <p class="phpdocumentor-summary">Send a video (upload) via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2238,7 +2247,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">941</span>
+        <span class="phpdocumentor-element-found-in__line">942</span>
     </aside>
         <p class="phpdocumentor-summary">Send a audio (upload) via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2332,7 +2341,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1009</span>
+        <span class="phpdocumentor-element-found-in__line">1010</span>
     </aside>
         <p class="phpdocumentor-summary">Send a disappearing video (upload) via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2432,7 +2441,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1040</span>
+        <span class="phpdocumentor-element-found-in__line">1041</span>
     </aside>
         <p class="phpdocumentor-summary">Send a replayable video (upload) via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2532,7 +2541,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1066</span>
+        <span class="phpdocumentor-element-found-in__line">1067</span>
     </aside>
         <p class="phpdocumentor-summary">Send a like to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2596,7 +2605,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1090</span>
+        <span class="phpdocumentor-element-found-in__line">1091</span>
     </aside>
         <p class="phpdocumentor-summary">Send a hashtag to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2677,7 +2686,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1126</span>
+        <span class="phpdocumentor-element-found-in__line">1127</span>
     </aside>
         <p class="phpdocumentor-summary">Send a location to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2767,7 +2776,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1157</span>
+        <span class="phpdocumentor-element-found-in__line">1158</span>
     </aside>
         <p class="phpdocumentor-summary">Send a profile to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2848,7 +2857,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1185</span>
+        <span class="phpdocumentor-element-found-in__line">1186</span>
     </aside>
         <p class="phpdocumentor-summary">Send a reaction to an existing thread item.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2934,7 +2943,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1218</span>
+        <span class="phpdocumentor-element-found-in__line">1219</span>
     </aside>
         <p class="phpdocumentor-summary">Share an existing story post via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3034,7 +3043,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1267</span>
+        <span class="phpdocumentor-element-found-in__line">1268</span>
     </aside>
         <p class="phpdocumentor-summary">Share an occurring or archived live stream via direct message to a user&#039;s inbox.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3116,7 +3125,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1291</span>
+        <span class="phpdocumentor-element-found-in__line">1292</span>
     </aside>
         <p class="phpdocumentor-summary">Delete a reaction to an existing thread item.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3202,7 +3211,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1310</span>
+        <span class="phpdocumentor-element-found-in__line">1311</span>
     </aside>
         <p class="phpdocumentor-summary">Delete an item from given thread.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3262,7 +3271,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1332</span>
+        <span class="phpdocumentor-element-found-in__line">1333</span>
     </aside>
         <p class="phpdocumentor-summary">Marks an item from given thread as seen.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3331,7 +3340,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1362</span>
+        <span class="phpdocumentor-element-found-in__line">1363</span>
     </aside>
         <p class="phpdocumentor-summary">Marks visual items from given thread as seen.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3399,7 +3408,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1393</span>
+        <span class="phpdocumentor-element-found-in__line">1394</span>
     </aside>
         <p class="phpdocumentor-summary">Marks visual items from given thread as replayed.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3467,7 +3476,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1424</span>
+        <span class="phpdocumentor-element-found-in__line">1425</span>
     </aside>
         <p class="phpdocumentor-summary">Validate and prepare recipients for direct messaging.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3530,7 +3539,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1497</span>
+        <span class="phpdocumentor-element-found-in__line">1498</span>
     </aside>
         <p class="phpdocumentor-summary">Send a direct message to specific users or thread.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3619,7 +3628,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1733</span>
+        <span class="phpdocumentor-element-found-in__line">1734</span>
     </aside>
         <p class="phpdocumentor-summary">Send a direct messages to specific users or thread.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3700,7 +3709,7 @@ instead, provide &quot;thread&quot; with the thread ID.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Direct.php"><a href="../files/src-request-direct.html"><abbr title="src/Request/Direct.php">Direct.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1840</span>
+        <span class="phpdocumentor-element-found-in__line">1841</span>
     </aside>
         <p class="phpdocumentor-summary">Handle a reaction to an existing thread item.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

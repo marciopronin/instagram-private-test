@@ -319,7 +319,8 @@ class Direct extends RequestCollection
      */
     public function getThread(
         $threadId,
-        $cursorId = null)
+        $cursorId = null,
+        $seqId = null)
     {
         $request = $this->ig->request("direct_v2/threads/$threadId/")
             ->addParam('limit', 20)

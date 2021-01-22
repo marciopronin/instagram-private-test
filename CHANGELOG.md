@@ -1,5 +1,17 @@
+# Stable release v16.8.5
+## Date: 22/01/2021
+
+### Updates and fixes
+
+- **DirectHandler:** Update REACTIONS_REGEXP regexp expression
+- **Direct:** Update `getThread()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.8.4
-## Date: 21/01/2020
+## Date: 21/01/2021
 
 ### Updates and fixes
 
@@ -10,7 +22,7 @@
 - **Documentation:** Update documentation
 
 # Stable release v16.8.3
-## Date: 21/01/2020
+## Date: 21/01/2021
 
 ### Updates and fixes
 
@@ -26,7 +38,7 @@
 - **Documentation:** Update documentation
 
 # Stable release v16.8.2
-## Date: 21/01/2020
+## Date: 21/01/2021
 
 ### Updates and fixes
 
@@ -47,7 +59,7 @@
 - **WIP:** Notes on WIP
 
 # Stable release v16.8.1
-## Date: 20/01/2020
+## Date: 20/01/2021
 
 ### Updates and fixes
 
@@ -58,7 +70,7 @@
 - **Examples:** Update realtimeClient
 
 # Stable release v16.8.0
-## Date: 19/01/2020
+## Date: 19/01/2021
 
 ### New features
 
@@ -77,21 +89,21 @@
 - **Documentation:** Update documentation
 
 # Stable release v16.7.8
-## Date: 18/01/2020
+## Date: 18/01/2021
 
 ### WIP notice
 
 - **WIP:** Notes on WIP
 
 # Stable release v16.7.7
-## Date: 15/01/2020
+## Date: 15/01/2021
 
 ### Updates and fixes
 
 - **Event:** Fix bug `_sendBatchEvents()`
 
 # Stable release v16.7.6
-## Date: 15/01/2020
+## Date: 15/01/2021
 
 ### Updates and fixes
 
@@ -107,7 +119,7 @@
 - **Report:** Added report from 14-01-2021.
 
 # Stable release v16.7.5
-## Date: 14/01/2020
+## Date: 14/01/2021
 
 ### Updates and fixes
 
@@ -123,14 +135,14 @@
 - **Documentation:** Update documentation
 
 # Stable release v16.7.4
-## Date: 13/01/2020
+## Date: 13/01/2021
 
 ### Updates and fixes
 
 - **Instagram:** Update `_sendLoginFlow()`
 
 # Stable release v16.7.3
-## Date: 12/01/2020
+## Date: 12/01/2021
 
 ### Updates and fixes
 
@@ -142,7 +154,7 @@
 - **Documentation:** Update documentation
 
 # Stable release v16.7.2
-## Date: 06/01/2020
+## Date: 06/01/2021
 
 ### Examples
 
@@ -150,7 +162,7 @@
 - **Example:** Update checkUserInfoExample
 
 # Stable release v16.7.1
-## Date: 04/01/2020
+## Date: 04/01/2021
 
 ### Examples
 

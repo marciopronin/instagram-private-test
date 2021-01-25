@@ -1,3 +1,20 @@
+# Stable release v16.8.6
+## Date: 25/01/2021
+
+### Updates and fixes
+
+- **Constants:** Update version to 170.2.0.30.474
+- **Events:** Update chain event classes
+
+### Examples
+
+- **Examples:** Update checkpoint
+- **Examples:** Update goLive
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.8.5
 ## Date: 22/01/2021
 

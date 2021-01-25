@@ -370,7 +370,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
 
     //Parse and validate recovery if present
     try {
-        if (Utils::isRecovery() && ($ig->live->getInfo(Utils::getRecovery()['broadcastId'])->getBroadcastStatus() !== 'interrupted')) {
+        if (Utils::isRecovery() && ($ig->live->getInfo(Utils::getRecovery()['broadcastId'])->getBroadcastStatus() !== 'interrupted') && !acceptRecovery) {
             Utils::log("\n\n\e[93mRecovery:\e[0m Detected recovery was outdated, deleting...");
             Utils::deleteRecovery();
             Utils::log("\e[91m[x] Recovery:\e[0m Deleted Outdated Recovery!");
@@ -715,15 +715,22 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
 
         //Process Likes
         $likesArray = [];
-        $likeCountResponse = $ig->live->getLikeCount($broadcastId, $lastLikeTs); //Get our current batch for likes
-        $lastLikeTs = $likeCountResponse->getLikeTs();
-        foreach ($likeCountResponse->getLikers() as $user) {
-            addLike((isset($userCache[$user->getUserId()]) ? ('@'.$userCache[$user->getUserId()]) : 'An Unknown User'));
-            $likesArray[] = (isset($userCache[$user->getUserId()]) ? ('@'.$userCache[$user->getUserId()]) : 'An Unknown User').' has liked the stream!';
-        }
+        $likeCount = 0;
+        $likeBurstCount = 0;
 
-        $likeCount = $likeCountResponse->getLikes();
-        $likeBurstCount = $likeCountResponse->getBurstLikes();
+        try {
+            $likeCountResponse = $ig->live->getLikeCount($broadcastId, $lastLikeTs); //Get our current batch for likes
+            $lastLikeTs = $likeCountResponse->getLikeTs();
+            foreach ($likeCountResponse->getLikers() as $user) {
+                addLike((isset($userCache[$user->getUserId()]) ? ('@'.$userCache[$user->getUserId()]) : 'An Unknown User'));
+                $likesArray[] = (isset($userCache[$user->getUserId()]) ? ('@'.$userCache[$user->getUserId()]) : 'An Unknown User').' has liked the stream!';
+            }
+
+            $likeCount = $likeCountResponse->getLikes();
+            $likeBurstCount = $likeCountResponse->getBurstLikes();
+        } catch (Exception $e) {
+            // pass
+        }
 
         //Send Heartbeat and Fetch Info
         $heartbeatResponse = $ig->live->getHeartbeatAndViewerCount($broadcastId); //Maintain :clap: comments :clap: and :clap: likes :clap: after :clap: stream

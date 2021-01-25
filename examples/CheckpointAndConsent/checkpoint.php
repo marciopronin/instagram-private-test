@@ -49,8 +49,13 @@ try {
                             if ($iterations > 5) {
                                 $webForm = true;
                             }
+                            if ((is_array($e->getResponse()->getChallenge()) === false) && ($e->getResponse()->getChallenge()->getChallengeContext() !== null)) {
+                                $challengeContext = $e->getResponse()->getChallenge()->getChallengeContext();
+                            } else {
+                                $challengeContext = null;
+                            }
                             // Send a challenge request
-                            $ig->checkpoint->sendChallenge($checkApiPath, $e->getResponse()->getChallenge()->getChallengeContext());
+                            $ig->checkpoint->sendChallenge($checkApiPath, $challengeContext);
                         }
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\EscalationInformationalException:

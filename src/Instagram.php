@@ -1559,7 +1559,7 @@ class Instagram implements ExperimentsInterface
         if (empty($verificationCode) || empty($twoFactorIdentifier)) {
             throw new \InvalidArgumentException('You must provide a verification code and two-factor identifier to finishTwoFactorLogin().');
         }
-        if (!in_array($verificationMethod, ['1', '2', '3'], true)) {
+        if (!in_array($verificationMethod, [1, 2, 3], true)) {
             throw new \InvalidArgumentException('You must provide a valid verification method value.');
         }
 
@@ -1996,17 +1996,21 @@ class Instagram implements ExperimentsInterface
                 $this->event->sendZeroCarrierSignal();
                 //$this->internal->bootstrapMsisdnHeader();
                 //$this->internal->readMsisdnHeader('default');
-                $this->internal->syncDeviceFeatures(true);
+                try {
+                    $this->internal->syncDeviceFeatures(true);
+                } catch (Exception $e) {
+                    // pass
+                }
                 $launcherResponse = $this->internal->sendLauncherSync(true)->getHttpResponse();
                 $this->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
                 $this->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
                 //$this->internal->bootstrapMsisdnHeader();
                 try {
                     $this->internal->logAttribution();
+                    $this->account->getPrefillCandidates();
                 } catch (\InstagramAPI\Exception\InstagramException $e) {
                     // pass
                 }
-                $this->account->getPrefillCandidates();
             } finally {
                 // Stops emulating batch requests.
                 $this->client->stopEmulatingBatch();
@@ -2027,7 +2031,12 @@ class Instagram implements ExperimentsInterface
                 $this->account->getNamePrefill();
             }
             $this->internal->sendLauncherSync(true, true, true);
-            $this->internal->syncDeviceFeatures(true, true);
+
+            try {
+                $this->internal->syncDeviceFeatures(true, true);
+            } catch (Exception $e) {
+                //pass
+            }
         } finally {
             // Stops emulating batch requests.
             $this->client->stopEmulatingBatch();
@@ -2146,7 +2155,12 @@ class Instagram implements ExperimentsInterface
                 $this->internal->sendLauncherSync(false, false, true);
                 $this->internal->fetchZeroRatingToken();
                 $this->event->sendZeroCarrierSignal();
-                $this->internal->syncUserFeatures();
+
+                try {
+                    $this->internal->syncUserFeatures();
+                } catch (Exception $e) {
+                    // pass
+                }
             } finally {
                 // Stops emulating batch requests.
                 $this->client->stopEmulatingBatch();

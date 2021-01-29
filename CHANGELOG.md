@@ -1,3 +1,17 @@
+# Stable release v16.8.7
+## Date: 29/01/2021
+
+### Updates and fixes
+
+- **Instagram:** Update login flow
+- **Instagram:** Update two factor login
+
+### WIP
+
+- Researching new checkpoint procedures/routines
+- New endpoints
+- Events are changing and being replaced for other events
+
 # Stable release v16.8.6
 ## Date: 25/01/2021
 

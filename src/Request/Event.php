@@ -1098,11 +1098,36 @@ class Event extends RequestCollection
     }
 
     /**
+     * Send stories request.
+     *
+     * @param string $traySessionId UUIDv4.
+     * @param string $requestId     UUIDv4.
+     * @param string $requestType   Request type.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendStoriesRequest(
+        $traySessionId,
+        $requestId,
+        $requestType = 'auto_refresh')
+    {
+        $extra = [
+            'tray_session_id'        => $traySessionId,
+            'request_id'             => $requestId,
+            'request_type'           => $requestType,
+            'app_session_id'         => $this->ig->client->getPigeonSession(),
+        ];
+
+        $event = $this->_addEventBody('instagram_stories_request_sent', 'reel_feed_timeline', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Reel in feed tray hide.
      *
      * @param string $traySessionId UUIDv4.
      * @param string $hideReason    Hide reason.
-     * @param string $trayId        Tray ID..
+     * @param string $trayId        Tray ID.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
@@ -1925,6 +1950,34 @@ class Event extends RequestCollection
         }
 
         $event = $this->_addEventBody('explore_home_impression', 'explore_popular', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send explore switch.
+     *
+     * @param string $sessionId UUIDv4.
+     * @param array  $options   Options to configure the event.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendExploreSwitch(
+        $sessionId,
+        array $options = [])
+    {
+        $extra = [
+            'topic_nav_order'                      => isset($options['topic_nav_order']) ? $options['topic_nav_order'] : 0,
+            'dest_topic_cluster_position'          => isset($options['dest_topic_cluster_position']) ? $options['dest_topic_cluster_position'] : 0,
+            'dest_topic_cluster_debug_info'        => null,
+            'dest_topic_cluster_type'              => isset($options['dest_topic_cluster_type']) ? $options['dest_topic_cluster_type'] : 'explore_all',
+            'dest_topic_cluster_title'             => isset($options['dest_topic_cluster_title']) ? $options['dest_topic_cluster_title'] : 'For+You',
+            'dest_topic_cluster_id'	               => isset($options['dest_topic_cluster_id']) ? $options['dest_topic_cluster_id'] : 'explore_all:0',
+            'action'                               => 'load',
+            'session_id'                           => $sessionId,
+        ];
+
+        $event = $this->_addEventBody('explore_topic_switch', 'explore_popular', $extra);
         $this->_addEventData($event);
     }
 
@@ -3945,6 +3998,32 @@ class Event extends RequestCollection
         $event = $this->_addEventBody('navigation', $fromModule, $extra);
 
         $this->ig->navigationSequence++;
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send navigation tab clicked.
+     *
+     * @param string $sourceSection      Section origin (main_X).
+     * @param string $destinationSection Section destination (main_Y).
+     * @param string $module             Current module
+     * @param string $flag               Type of navigation tab.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendNavigationTabClicked(
+        $sourceSection,
+        $destinationSection,
+        $module,
+        $flag = 'tab')
+    {
+        $extra = [
+            'current_section'        => $sourceSection,
+            'destination_section'    => $destinationSection,
+            'flag'                   => $flag,
+        ];
+
+        $event = $this->_addEventBody('ig_navigation_tab_clicked', 'feed_timeline', $extra);
         $this->_addEventData($event);
     }
 

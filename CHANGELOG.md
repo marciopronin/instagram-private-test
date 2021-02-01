@@ -1,3 +1,16 @@
+# Stable release v16.9.0
+## Date: 01/02/2021
+
+### New features
+
+- **Events:** Add `sendStoriesRequest()`
+- **Events:** Add `sendExploreSwitch()`
+- **Events:** Add `sendNavigationTabClicked()`
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.8.7
 ## Date: 29/01/2021
 

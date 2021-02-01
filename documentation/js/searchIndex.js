@@ -7491,6 +7491,11 @@ Search.appendIndex(
             "summary": "Reel\u0020tray\u0020refresh.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_reelTrayRefresh"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendStoriesRequest\u0028\u0029",
+            "name": "sendStoriesRequest",
+            "summary": "Send\u0020stories\u0020request.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendStoriesRequest"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AreelInFeedTrayHide\u0028\u0029",
             "name": "reelInFeedTrayHide",
             "summary": "Reel\u0020in\u0020feed\u0020tray\u0020hide.",
@@ -7581,6 +7586,11 @@ Search.appendIndex(
             "summary": "Send\u0020explore\u0020home\u0020impression.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendExploreHomeImpression"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendExploreSwitch\u0028\u0029",
+            "name": "sendExploreSwitch",
+            "summary": "Send\u0020explore\u0020switch.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendExploreSwitch"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AprepareAndSendThumbnailImpression\u0028\u0029",
             "name": "prepareAndSendThumbnailImpression",
             "summary": "Prepare\u0020and\u0020send\u0020thumbnail\u0020impressions.",
@@ -7640,6 +7650,11 @@ Search.appendIndex(
             "name": "sendNavigation",
             "summary": "Send\u0020navigation.\u0020It\u0020tells\u0020Instagram\u0020how\u0020you\u0020reached\u0020specific\u0020modules.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendNavigation"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendNavigationTabClicked\u0028\u0029",
+            "name": "sendNavigationTabClicked",
+            "summary": "Send\u0020navigation\u0020tab\u0020clicked.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendNavigationTabClicked"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendUpdateSessionChain\u0028\u0029",
             "name": "sendUpdateSessionChain",

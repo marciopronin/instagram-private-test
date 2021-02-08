@@ -114,7 +114,7 @@ class Event extends RequestCollection
             case 'feed_timeline':
             case 'explore_popular':
             case 'newsfeed_you':
-                $class = '1Wn';
+                $class = '1Lb';
                 break;
             case 'search':
             case 'blended_search':
@@ -122,23 +122,23 @@ class Event extends RequestCollection
             case 'search_tags':
             case 'search_places':
             case 'search_result':
-                $class = '9YJ';
+                $class = '9AJ';
                 break;
             case 'feed_hashtag':
-                $class = '8v8';
+                $class = 'Abe';
                 break;
             case 'feed_location':
-                $class = '8vO';
+                $class = 'Abi';
                 break;
             case 'feed_contextual_chain':
-                $class = '8gH';
+                $class = 'ACg';
                 break;
             case 'feed_contextual_place':
             case 'feed_contextual_location':
             case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = '8gx';
+                $class = 'ACI';
                 break;
             case 'profile':
             case 'self_profile':
@@ -152,13 +152,13 @@ class Event extends RequestCollection
                 $class = 'UnifiedFollowFragment';
                 break;
             case 'likers':
-                $class = '6jI';
+                $class = '9dP';
                 break;
             case 'tabbed_gallery_camera':
                 $class = 'MediaCaptureFragment';
                 break;
             case 'photo_filter':
-                $class = 'Ajm';
+                $class = 'E96';
                 break;
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';

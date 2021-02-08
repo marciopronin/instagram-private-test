@@ -1,3 +1,15 @@
+# Stable release v16.9.1
+## Date: 08/02/2021
+
+### Updates and fixes
+
+- **Constants:** Update version to `172.0.0.21.123`
+- **Events:** Update `_getModuleClass()`. Updated nav chain classes.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v16.9.0
 ## Date: 01/02/2021
 

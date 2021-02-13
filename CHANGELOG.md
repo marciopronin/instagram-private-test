@@ -1,3 +1,10 @@
+# Stable release v16.9.2
+## Date: 13/02/2021
+
+### Examples
+
+- **Example:** Update storyView. Now all story items are marked marked as seen at once
+
 # Stable release v16.9.1
 ## Date: 08/02/2021
 

@@ -128,10 +128,14 @@ try {
     $traySession = \InstagramAPI\Signatures::generateUUID();
     $rankToken = \InstagramAPI\Signatures::generateUUID();
 
-    $ig->event->sendOrganicReelImpression($storyItems[0], $viewerSession, $traySession, $rankToken, $following, 'reel_profile');
-    $ig->event->sendOrganicMediaImpression($storyItems[0], 'reel_profile', ['story_ranking_token' => $rankToken, 'tray_session_id' => $traySession, 'viewer_session_id' => $viewerSession]);
-    $ig->story->markMediaSeen([$storyItems[0]]);
-    $ig->event->sendOrganicViewedImpression($storyItems[0], 'reel_profile', $viewerSession, $traySession, $rankToken);
+    // Send impressions to all stories at once
+    foreach ($storyItems as $storyItem) {
+        $ig->event->sendOrganicReelImpression($storyItem, $viewerSession, $traySession, $rankToken, $following, 'reel_profile');
+        $ig->event->sendOrganicMediaImpression($storyItem, 'reel_profile', ['story_ranking_token' => $rankToken, 'tray_session_id' => $traySession, 'viewer_session_id' => $viewerSession]);
+        $ig->event->sendOrganicViewedImpression($storyItem, 'reel_profile', $viewerSession, $traySession, $rankToken);
+    }
+    $ig->story->markMediaSeen($storyItems);
+
 
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.

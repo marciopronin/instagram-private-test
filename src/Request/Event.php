@@ -2245,6 +2245,18 @@ class Event extends RequestCollection
                         $column = 1;
                     }
                     break;
+                case 'three_by_four':
+                    if ($section->getFeedType() === 'media' || $section->getFeedType() === 'channel') {
+                        $item = $section->getLayoutContent()->getThreeByFourItem()->getClips()->getItems()[0]->getMedia();
+                        $this->sendExploreHomeImpression($item, [
+                            'position'              => json_encode([strval(0), strval(0)]),
+                            'size'                  => json_encode(['4', '3']),
+                            'topic_cluster_id'      => $clusterId,
+                            'topic_cluster_title'   => array_search($clusterId, $clusters),
+                            'topic_cluster_type'    => explode($clusterId, ':')[0],
+                        ]);
+                    }
+                    break;
                 default:
                     throw new \InstagramAPI\Exception\InstagramException('Layout type not implemented.');
             }

@@ -1,3 +1,10 @@
+# Stable release v16.9.3
+## Date: 16/02/2021
+
+### Updates and fixes
+
+- **Event:** Update `prepareAndSendExploreImpression()`. New layout type has been added.
+
 # Stable release v16.9.2
 ## Date: 13/02/2021
 

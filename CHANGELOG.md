@@ -1,3 +1,10 @@
+# Stable release v16.9.4
+## Date: 17/02/2021
+
+### Wiki
+
+- **Wiki:** Added documentation for reel playback navigation.
+
 # Stable release v16.9.3
 ## Date: 16/02/2021
 

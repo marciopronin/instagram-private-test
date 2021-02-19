@@ -4,4 +4,5 @@ When visualising stories, it is possible to pass the story or go back to the pre
 
 - 'tap_forward'
 - 'swipe_back'
+- 'swipe_forward'
 - 'tap_exit'

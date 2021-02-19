@@ -1916,6 +1916,71 @@ class Event extends RequestCollection
         $this->_addEventData($event);
     }
 
+
+    /**
+     * Send reel session summary.
+     *
+     * This event must be sent after 'reel_playback_navigation' event.
+     *
+     * @param \InstagramAPI\Response\Model\Item $item            The item object.
+     * @param string                            $viewerSessionId UUID.
+     * @param string                            $traySessionId   UUID.
+     * @param string                            $rankingToken    UUID.
+     * @param string                            $module          Module.
+     * @param array                             $options         Options to configure the event.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendReelSessionSummary(
+        $item,
+        $viewerSessionId,
+        $traySessionId,
+        $rankingToken,
+        $module = 'reel_feed_timeline',
+        array $options = [])
+    {
+        $extra = [
+            'a_pk'                                  => $item->getUser()->getPk(),
+            'action'					            => isset($options['action']) ? $options['action'] : 'tap_forward',
+            'elapsed_time_since_last_item'          => isset($options['elapsed_time_since_last_item']) ? $options['elapsed_time_since_last_item'] : -1,
+            'source_of_action'                      => $module,
+            'follow_status'                         => isset($options['following']) ? 'following' : 'not_following',
+            'viewer_session_id'                     => $viewerSessionId,
+            'tray_session_id'                       => $traySessionId,
+            'story_ranking_token'                   => $rankingToken,
+            'reel_type'                             => 'story',
+            'reel_size'                             => isset($options['reel_size']) ? $options['reel_size'] : 1,
+            'tray_position'                         => isset($options['tray_position']) ? $options['tray_position'] : 1,
+            'session_reel_counter'                  => isset($options['session_reel_counter']) ? $options['session_reel_counter'] : 1,
+            'pause_duration'                        => isset($options['pause_duration']) ? $options['pause_duration'] : 0,
+            'time_elapsed'                          => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
+            'ad_pause_duration'                     => 0,
+            'ad_time_elapsed'                       => 0,
+            'viewer_session_media_consumed'         => isset($options['viewer_session_media_consumed']) ? $options['viewer_session_media_consumed'] : 0,
+            'viewer_session_reels_consumed'         => isset($options['viewer_session_reels_consumed']) ? $options['viewer_session_reels_consumed'] : 0,
+            'photos_consumed'                       => isset($options['photos_consumed']) ? $options['photos_consumed'] : 0,
+            'videos_consumed'                       => isset($options['videos_consumed']) ? $options['videos_consumed'] : 0,
+            'viewer_session_ad_media_consumed'      => 0,
+            'viewer_session_ad_reels_consumed'      => 0,
+            'viewer_session_netego_reels_consumed'  => 0,
+            'viewer_session_replay_videos_consumed' => isset($options['viewer_session_replay_videos_consumed']) ? $options['viewer_session_replay_videos_consumed'] : 0,
+            'viewer_session_live_reels_consumed'    => isset($options['viewer_session_live_reels_consumed']) ? $options['viewer_session_live_reels_consumed'] : 0,
+            'viewer_session_replay_reels_consumed'  => isset($options['viewer_session_replay_reels_consumed']) ? $options['viewer_session_replay_reels_consumed'] : 0,
+            'ad_photos_consumed'                    => 0,
+            'ad_videos_consumed'                    => 0,
+            'replay_videos_consumed'                => isset($options['replay_videos_consumed']) ? $options['replay_videos_consumed'] : 0,
+            'live_videos_consumed'                  => isset($options['live_videos_consumed']) ? $options['live_videos_consumed'] : 0,
+            'viewer_volume_on'                      => isset($options['viewer_volume_on']) ? $options['viewer_volume_on'] : false,
+            'viewer_volume_toggled'                 => isset($options['viewer_volume_toggled']) ? $options['viewer_volume_toggled'] : false,
+            'is_last_reel'                          => isset($options['is_last_reel']) ? $options['is_last_reel'] : false,
+            'is_acp_delivered'                      => isset($options['is_acp_delivered']) ? $options['is_acp_delivered'] : false,
+        ];
+
+        $event = $this->_addEventBody('reel_session_summary', $module, $extra);
+        $this->_addEventData($event);
+    }
+
     /**
      * Send explore home impression.
      *

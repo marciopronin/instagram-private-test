@@ -1,3 +1,18 @@
+# Stable release v16.10.0
+## Date: 19/02/2021
+
+### New features
+
+- **Event:** Added `sendReelSessionSummary()`
+
+### Examples
+
+- **LiveManager:** Live manager has been updated for better 2FA support.
+
+### Wiki
+
+- **Wiki:** Update documentation for reel playback navigation.
+
 # Stable release v16.9.4
 ## Date: 17/02/2021
 

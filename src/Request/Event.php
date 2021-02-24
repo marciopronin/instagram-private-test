@@ -1632,7 +1632,7 @@ class Event extends RequestCollection
             'elapsed_time_since_last_item'  => -1,
         ];
 
-        $name = $nable ? 'igtv_notification_add' : 'igtv_notification_remove';
+        $name = $enable ? 'igtv_notification_add' : 'igtv_notification_remove';
 
         $event = $this->_addEventBody($name, 'media_notifications_sheet', $extra);
         $this->_addEventData($event);

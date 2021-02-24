@@ -1,3 +1,14 @@
+# Stable release v16.10.2
+## Date: 24/02/2021
+
+### WIP
+
+Working on version 176.0.0.38.116.
+
+### Updates and fixes
+
+- **Event:** Fixed typo in `sendIGTvNotificationPreference()`
+
 # Stable release v16.10.1
 ## Date: 24/02/2021
 

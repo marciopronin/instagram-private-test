@@ -2157,7 +2157,7 @@ class Event extends RequestCollection
                     }
                     break;
                 default:
-                    throw new \InstagramAPI\Exception\InstagramException('Layout type not implemented.');
+                    throw new \InstagramAPI\Exception\InstagramException(sprintf('Layout type "%s" not implemented. Data: %s', $section->getLayoutType(), base64_encode($section->asJson())));
             }
         }
     }
@@ -2323,7 +2323,7 @@ class Event extends RequestCollection
                     }
                     break;
                 default:
-                    throw new \InstagramAPI\Exception\InstagramException('Layout type not implemented.');
+                    throw new \InstagramAPI\Exception\InstagramException(sprintf('Layout type "%s" not implemented. Data: %s', $section->getLayoutType(), base64_encode($section->asJson())));
             }
         }
     }

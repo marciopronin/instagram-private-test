@@ -619,6 +619,8 @@ class Internal extends RequestCollection
         } catch (InstagramException $e) {
             // Pass Instagram's error as is.
             throw $e;
+        } catch (NetworkException $e) {
+            throw $e;
         } catch (\Exception $e) {
             // Wrap runtime errors.
             throw new UploadFailedException(

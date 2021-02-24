@@ -99,10 +99,6 @@ class Debug
             $response = mb_substr($response, 0, 1000, 'utf8').'...';
         }
 
-        if (ctype_print($response) === false) {
-            $response = 'RAW DATA';
-        }
-
         if ($cliDebug) {
             echo $res.$response."\n\n";
         }

@@ -1,3 +1,17 @@
+# Stable release v16.10.1
+## Date: 24/02/2021
+
+### WIP
+
+Working on version 176.0.0.38.116.
+
+### Updates and fixes
+
+- **Debug:** Update response log to avoid omitting full response.
+- **Event:** Update `prepareAndSendThumbnailImpression()` to provide more info about new layout types.
+- **Event:** Update `prepareAndSendExploreImpression()` to provide more info about new layout types.
+- **Internal:** Update `uploadSingleVideo()`. Added a new catch for network exceptions.
+
 # Stable release v16.10.0
 ## Date: 19/02/2021
 

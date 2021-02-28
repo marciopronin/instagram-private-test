@@ -114,7 +114,7 @@ class Event extends RequestCollection
             case 'feed_timeline':
             case 'explore_popular':
             case 'newsfeed_you':
-                $class = '1Lb';
+                $class = '1TK';
                 break;
             case 'search':
             case 'blended_search':
@@ -122,13 +122,13 @@ class Event extends RequestCollection
             case 'search_tags':
             case 'search_places':
             case 'search_result':
-                $class = '9AJ';
+                $class = 'A0k';
                 break;
             case 'feed_hashtag':
-                $class = 'Abe';
+                $class = '7pf';
                 break;
             case 'feed_location':
-                $class = 'Abi';
+                $class = '7p1';
                 break;
             case 'feed_contextual_chain':
                 $class = 'ACg';
@@ -138,7 +138,7 @@ class Event extends RequestCollection
             case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = 'ACI';
+                $class = '7jh';
                 break;
             case 'profile':
             case 'self_profile':
@@ -152,13 +152,16 @@ class Event extends RequestCollection
                 $class = 'UnifiedFollowFragment';
                 break;
             case 'likers':
-                $class = '9dP';
+                $class = '8EJ';
                 break;
             case 'tabbed_gallery_camera':
                 $class = 'MediaCaptureFragment';
                 break;
             case 'photo_filter':
                 $class = 'E96';
+                break;
+            case 'gallery_picker':
+                $class = 'BVj';
                 break;
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';
@@ -3666,6 +3669,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'   => 'back',
                     'dest_module'  => 'search',
+                ],
+                [
+                    'clickpoint'   => 'back',
+                    'dest_module'  => 'newsfeed_you',
                 ],
             ],
             'reel_profile' => [

@@ -1548,7 +1548,7 @@ class Instagram implements ExperimentsInterface
         $password,
         $twoFactorIdentifier,
         $verificationCode,
-        $verificationMethod = '1',
+        $verificationMethod = 1,
         $appRefreshInterval = 1800,
         $usernameHandler = null,
         $trustDevice = true)

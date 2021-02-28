@@ -1,3 +1,13 @@
+# Stable release v16.10.3
+## Date: 01/03/2021
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+- **Event:** Update `_getModuleClass()`. Do NOT use yet!
+- **Instagram:** Fixed wrong default value in `finishTwoFactorLogin()`
+- **Instagram:** Update constants to 176.0.0.38.116
+
 # Stable release v16.10.2
 ## Date: 24/02/2021
 

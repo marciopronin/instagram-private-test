@@ -407,8 +407,10 @@ class Request
             $this->_headers['X-IG-Device-ID'] = $this->_parent->uuid;
             $this->_headers['X-FB-HTTP-Engine'] = Constants::X_FB_HTTP_Engine;
             $this->_headers['X-FB-Client-IP'] = 'True';
+            $this->_headers['X-FB-Server-Cluster'] = 'True';
             $this->_headers['X-IG-App-Startup-Country'] = explode('_', $this->_parent->getLocale())[1];
             $this->_headers['X-IG-Mapped-Locale'] = $this->_parent->getLocale();
+            $this->_headers['IG-INTENDED-USER-ID'] = empty($this->_parent->settings->get('account_id')) ? 0 : $this->_parent->settings->get('account_id');
 
             if ($this->_parent->isExperimentEnabled('ig_traffic_routing_universe', 'is_in_lla_routing_experiment', false)) {
                 $this->_headers['X-IG-EU-DC-ENABLED'] = $this->_parent->isExperimentEnabled('ig_traffic_routing_universe', 'route_to_lla', false);

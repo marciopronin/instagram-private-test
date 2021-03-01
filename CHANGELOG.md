@@ -1,3 +1,11 @@
+# Stable release v16.10.4
+## Date: 01/03/2021
+
+### Updates and fixes
+
+- **Request:** Update `_addDefaultHeaders()`
+- **Event:** Update `_getModuleClass()`.
+
 # Stable release v16.10.3
 ## Date: 01/03/2021
 

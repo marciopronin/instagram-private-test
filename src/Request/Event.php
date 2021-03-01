@@ -131,7 +131,7 @@ class Event extends RequestCollection
                 $class = '7p1';
                 break;
             case 'feed_contextual_chain':
-                $class = 'ACg';
+                $class = '7za';
                 break;
             case 'feed_contextual_place':
             case 'feed_contextual_location':
@@ -158,7 +158,7 @@ class Event extends RequestCollection
                 $class = 'MediaCaptureFragment';
                 break;
             case 'photo_filter':
-                $class = 'E96';
+                $class = 'BQd';
                 break;
             case 'gallery_picker':
                 $class = 'BVj';

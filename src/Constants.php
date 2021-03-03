@@ -11,9 +11,9 @@ class Constants
     ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
     const IG_VERSION = '176.0.0.38.116';
-    const IG_IOS_VERSION = '165.0.0.20.119';
+    const IG_IOS_VERSION = '177.0.0.20.117';
     const VERSION_CODE = '274774853';
-    const IG_IOS_VERSION_CODE = '252729634';
+    const IG_IOS_VERSION_CODE = '275424340';
     const IOS_MODEL = 'iPhone13,2';
     const IOS_VERSION = '14_1';
     const IOS_DPI = '750x1334';
@@ -31,7 +31,7 @@ class Constants
 
     // Endpoint Constants.
     const BLOCK_VERSIONING_ID = '04aea816923c82114bde27467c266784fdf17c4eabbc559a0bbb63490b260988';
-    const IOS_BLOCKS_VERSIONING_ID = '83f024906df173b412773dc5153c5abeeddc84306933cd172934a4117fccea3f';
+    const IOS_BLOCKS_VERSIONING_ID = '628974fad3b3fbc66e723f6581b60edd0585667970f19daa4874421231514c7d';
     const BATCH_SURFACES = [
         ['4715', ['instagram_other_profile_page_header']],
         ['5734', ['instagram_other_profile_page_prompt']],

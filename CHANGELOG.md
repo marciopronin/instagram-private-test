@@ -1,3 +1,10 @@
+# Stable release v16.10.5
+## Date: 03/03/2021
+
+### Updates and fixes
+
+- **Constants:** Update iOS version to 177.0.0.20.117
+
 # Stable release v16.10.4
 ## Date: 01/03/2021
 

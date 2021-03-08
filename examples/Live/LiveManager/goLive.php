@@ -739,7 +739,11 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
         $viewerCount = $heartbeatResponse->getViewerCount();
         $totalViewerCount = $heartbeatResponse->getTotalUniqueViewerCount();
 
-        $ig->live->getJoinRequestCounts($broadcastId);
+        try {
+            $ig->live->getJoinRequestCounts($broadcastId);
+        } catch (Exception $e) {
+            // pass
+        }
 
         //Handle Livestream Takedowns
         if ($heartbeatResponse->isIsPolicyViolation() && (int) $heartbeatResponse->getIsPolicyViolation() === 1) {

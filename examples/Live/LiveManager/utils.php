@@ -300,17 +300,17 @@ class Utils
             if ($loginResponse !== null && $loginResponse->isTwoFactorRequired()) {
                 self::log('Login Flow: Two-Factor Authentication Required! Please provide your verification code from your texts/other means.');
                 $twoFactorIdentifier = $loginResponse->getTwoFactorInfo()->getTwoFactorIdentifier();
-                $verificationMethod = '1';
+                $verificationMethod = 1;
 
                 if ($loginResponse->getTwoFactorInfo()->getTotpTwoFactorOn() === true) {
-                    $verificationMethod = '3';
+                    $verificationMethod = 3;
                 }
 
-                self::log("Login Flow: We've detected that you're using ".($verificationMethod === '3' ? 'authenticator app' : 'text message').' verification. If you are actually using '.($verificationMethod === '3' ? 'text message' : 'authenticator app')." verification, please type 'yes', otherwise press enter.");
+                self::log("Login Flow: We've detected that you're using ".($verificationMethod === 3 ? 'authenticator app' : 'text message').' verification. If you are actually using '.($verificationMethod === 3 ? 'text message' : 'authenticator app')." verification, please type 'yes', otherwise press enter.");
                 $choice = self::promptInput();
 
                 if ($choice === 'yes') {
-                    $verificationMethod = ($verificationMethod === '3' ? '1' : '3');
+                    $verificationMethod = ($verificationMethod === 3 ? 1 : 3);
                 }
                 
                 do {
@@ -416,8 +416,8 @@ class Utils
                                 break;
                             case $e instanceof InstagramAPI\Exception\Checkpoint\SelectVerificationMethodFormException:
                                 echo '[>] Insert verification method. 0 = SMS, 1 = EMAIL: ';
-                                $verifiationMethod = trim(fgets(STDIN));
-                                $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), $verifiationMethod);
+                                $verificationMethod = intval(trim(fgets(STDIN)));
+                                $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), $verificationMethod);
                                 break;
                             case $e instanceof InstagramAPI\Exception\Checkpoint\VerifySMSCodeFormForSMSCaptchaException:
                                 echo '[>] Insert verification code: ';

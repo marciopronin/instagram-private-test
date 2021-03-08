@@ -1,3 +1,11 @@
+# Stable release v16.10.6
+## Date: 08/03/2021
+
+### Examples
+
+- **LiveManager:** Update goLive
+- **LiveManager:** Update auth utils
+
 # Stable release v16.10.5
 ## Date: 03/03/2021
 

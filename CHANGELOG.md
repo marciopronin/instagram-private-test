@@ -1,3 +1,12 @@
+# Stable release v16.10.7
+## Date: 09/03/2021
+
+### Updates and fixes
+
+- **LiveManager:** Remove unused function
+- **Constants:** Update Android version to 177.0.0.30.119
+- **Events:** Update `_getModuleClass()`
+
 # Stable release v16.10.6
 ## Date: 08/03/2021
 

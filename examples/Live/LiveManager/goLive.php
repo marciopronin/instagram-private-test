@@ -413,10 +413,6 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             $streamKey = trim($broadcastId.$split[1]);
 
             Utils::log("\e[96m[✓] Livestream: Created livestream!\e[0m");
-
-            if (!ANALYTICS_OPT_OUT) {
-                Utils::analytics('live', scriptVersion, scriptFlavor, PHP_OS, count($args), $info->getUser()->getFollowerCount());
-            }
         } else {
             //Recovery livestream flow
             Utils::log("\e[95m[*] Recovery: Restarting previous stream...\e[0m");

@@ -112,36 +112,45 @@ class Event extends RequestCollection
     {
         switch ($module) {
             case 'feed_timeline':
-            case 'explore_popular':
+                $class = '1TN';
+                break;
             case 'newsfeed_you':
-                $class = '1TK';
+                $class = '8Bb';
+                break;
+            case 'explore_popular':
+                $class = '1jN';
                 break;
             case 'search':
             case 'blended_search':
-            case 'search_users':
-            case 'search_tags':
-            case 'search_places':
             case 'search_result':
-                $class = 'A0k';
+                $class = '9L2';
+                break;
+            case 'search_places':
+                $class = '9L3';
+            case 'search_users':
+                $class = '9Kw';
+                break;
+            case 'search_tags':
+                $class = '9Kx';
                 break;
             case 'feed_hashtag':
-                $class = '7pf';
+                $class = '9rP';
                 break;
             case 'feed_location':
-                $class = '7p1';
+                $class = '9qD';
                 break;
             case 'feed_contextual_chain':
-                $class = '7za';
+                $class = 'A00';
                 break;
             case 'feed_contextual_place':
             case 'feed_contextual_location':
             case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = '7jh';
+                $class = '8K2';
                 break;
             case 'profile':
-            case 'self_profile':
+            case 'self_profile': // 6wB, ProfileMediaTabFragment
                 $class = 'UserDetailFragment';
                 break;
             case 'following_sheet':
@@ -152,16 +161,19 @@ class Event extends RequestCollection
                 $class = 'UnifiedFollowFragment';
                 break;
             case 'likers':
-                $class = '8EJ';
+                $class = '84F';
                 break;
             case 'tabbed_gallery_camera':
                 $class = 'MediaCaptureFragment';
                 break;
             case 'photo_filter':
-                $class = 'BQd';
+                $class = 'DfJ';
                 break;
             case 'gallery_picker':
-                $class = 'BVj';
+                $class = 'DaB';
+                break;
+            case 'quick_capture_fragment':
+                $class = 'Cgd';
                 break;
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';

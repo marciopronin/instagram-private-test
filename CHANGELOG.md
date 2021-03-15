@@ -1,3 +1,11 @@
+# Stable release v16.10.9
+## Date: 15/03/2021
+
+### Updates and fixes
+
+- **Request:** Update `_buildHttpRequest()`
+- **Model:** Update User model
+
 # Stable release v16.10.8
 ## Date: 15/03/2021
 

@@ -759,7 +759,7 @@ class Request
     {
         $endpoint = $this->_url;
         // Determine the URI to use (it's either relative to API, or a full URI).
-        if (strncmp($endpoint, 'http:', 5) !== 0 && strncmp($endpoint, 'https:', 6) !== 0) {
+        if (strncmp($endpoint, 'http:', 5) !== 0 && strncmp($endpoint, 'https:', 6) !== 0 && strncmp($endpoint, 'www.', 4) !== 0) {
             $endpoint = Constants::API_URLS[$this->_apiVersion].$endpoint;
         }
         // Check signed request params flag.

@@ -767,5 +767,6 @@ class User extends AutoPropertyMapper
         'linked_fb_info'                                => '',
         'has_password'                                  => 'bool',
         'gating'                                        => 'Gating',
+        'fbid_v2'                                       => 'string',
     ];
 }

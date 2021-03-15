@@ -1,3 +1,15 @@
+# Stable release v16.10.8
+## Date: 15/03/2021
+
+### New features
+
+- **Music:** Add `getMoods()` and `getGenres()`
+- **Models and responses**
+
+### Report
+
+- **Important notes:** Addressing recent blocks from IG.
+
 # Stable release v16.10.7
 ## Date: 09/03/2021
 

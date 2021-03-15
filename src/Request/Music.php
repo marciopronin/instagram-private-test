@@ -105,4 +105,44 @@ class Music extends RequestCollection
         return $this->ig->request("music/track/{$trackId}/lyrics/")
             ->getResponse(new Response\GetLyricsResponse());
     }
+
+    /**
+     * Get music genres.
+     *
+     * @param string $browseSessionId  The browse session ID (UUIDv4).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GetMusicGenresResponse
+     */
+    public function getGenres(
+        $browseSessionId)
+    {
+        return $this->ig->request('music/genres/')
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('browse_session_id', $browseSessionId)
+            ->addPost('product', 'story_camera_music_overlay_post_capture')
+            ->getResponse(new Response\GetMusicGenresResponse());
+    }
+
+    /**
+     * Get music moods.
+     *
+     * @param string $browseSessionId  The browse session ID (UUIDv4).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getMoods(
+        $browseSessionId)
+    {
+        return $this->ig->request('music/moods/')
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('browse_session_id', $browseSessionId)
+            ->addPost('product', 'story_camera_music_overlay_post_capture')
+            ->getResponse(new Response\GenericResponse());
+    }
 }

@@ -28,6 +28,7 @@ try {
 
 try {
     $clientContext = \InstagramAPI\Utils::generateClientContext();
+    $sessionId = \InstagramAPI\Signatures::generateUUID();
     $ig->event->sendNavigation('on_launch_direct_inbox', 'feed_timeline', 'direct_inbox');
     $users = $ig->people->search($query, [], null, 'direct_recipient_list_page')->getUsers();
 
@@ -47,7 +48,7 @@ try {
     $ig->event->sendDirectUserSearchSelection($userId, $position, $groupSession);
     $ig->event->sendGroupCreation($groupSession);
     $ig->event->sendNavigation('button', 'direct_inbox', 'direct_thread', null, null, ['user_id' => $userId]);
-    $ig->event->sendEnterDirectThread(null);
+    $ig->event->sendEnterDirectThread(null, $sessionId);
 
     $recipients = [
         'users' => [

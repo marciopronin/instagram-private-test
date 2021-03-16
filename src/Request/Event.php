@@ -178,6 +178,15 @@ class Event extends RequestCollection
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';
                 break;
+            case 'direct_inbox':
+                $class = '5Ma';
+                break;
+            case 'direct_recipient_picker':
+                $class = '66z';
+                break;
+            case 'direct_thread':
+                $class = '4gU';
+                break;
             default:
                 $class = false;
         }
@@ -4004,10 +4013,12 @@ class Event extends RequestCollection
                 if ($toModule === 'feed_timeline') {
                     $extra['nav_depth'] = $navDepth;
                 } elseif ($toModule === 'direct_thread') {
+                    /*
                     if (!isset($options['user_id']) && !isset($options['thread_id'])) {
                         throw new \InvalidArgumentException('User ID or Thread ID not provided.');
                     }
-
+                    */
+                    
                     if (isset($options['user_id'])) {
                         $extra['user_id'] = $options['user_id'];
                     }
@@ -4688,9 +4699,12 @@ class Event extends RequestCollection
                 throw new \InvalidArgumentException('UUID must not be null.');
             }
             $extra = [
-                'position'          => $position,
-                'recipient_ids'     => [$userId],
-                'group_session_id'  => $uuid,
+                'position'              => $position,
+                'relative_position'     => $position,
+                'search_query_length'   => ($query === null) ? 0 : strlen($query),
+                'recipient'             => $userId,
+                'search_string'         => ($query === null) ? '' : $query,
+                'session_id'            => $uuid,
             ];
         } elseif ($module === 'direct_reshare_sheet') {
             if ($query === null) {
@@ -4698,7 +4712,7 @@ class Event extends RequestCollection
             }
             $extra = [
                 'position'              => $position,
-                'recipient_ids'         => [$userId],
+                'recipient'             => $userId,
                 'section_type'          => 'search',
                 'search_query_length'   => strlen($query),
             ];
@@ -4729,25 +4743,50 @@ class Event extends RequestCollection
     }
 
     /**
+     * Send group creation enter.
+     *
+     * @param string $groupSession UUIDv4.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendGroupCreationEnter(
+        $groupSession)
+    {
+        $extra = [
+            'group_session_id'   => $groupSession,
+        ];
+
+        $event = $this->_addEventBody('direct_group_creation_enter', 'direct_recipient_picker', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Send enter direct thread event.
      *
      * Used when entering a thread.
      * TODO. More cases.
      *
      * @param string|null $threadId   The thread ID.
+     * @param string      $sessionId  Session ID.
      * @param string      $entryPoint Entry point.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendEnterDirectThread(
         $threadId,
+        $sessionId,
         $entryPoint = 'inbox_new_message')
     {
         $extra = [
-            'thread_id'          => $threadId,
+            'session_id'         => $sessionId,
             'entry_point'        => $entryPoint,
             'inviter'            => $this->ig->account_id,
         ];
+
+        if ($threadId !== null) {
+            $extra['thread_id'] = $threadId;
+        }
+
         $event = $this->_addEventBody('direct_enter_thread', 'direct_thread', $extra);
         $this->_addEventData($event);
     }

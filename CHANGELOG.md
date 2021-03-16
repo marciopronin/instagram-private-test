@@ -1,3 +1,24 @@
+# Stable release v17.0.0
+## Date: 16/03/2021
+
+## Backward breaks
+
+- **Event:** `sendEnterDirectThread()` fingerprint has changed. All examples were updated.
+
+### New features
+
+- **Event:** Add `sendGroupCreationEnter()`
+
+### Updates and fixes
+
+- **Event:** Update `sendDirectUserSearchSelection()`
+- **Event:** Update `sendNavigation()`
+- **Event:** Update `_getModuleClass()`
+
+### Examples
+
+Updated direct examples.
+
 # Stable release v16.10.9
 ## Date: 15/03/2021
 

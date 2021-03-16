@@ -63,10 +63,11 @@ try {
     $ig->event->sendDirectUserSearchPicker($query);
 
     $groupSession = \InstagramAPI\Signatures::generateUUID();
+    $sessionId = \InstagramAPI\Signatures::generateUUID();
     $ig->event->sendDirectUserSearchSelection($userId, $position, $groupSession);
     $ig->event->sendGroupCreation($groupSession);
     $ig->event->sendNavigation('button', 'direct_inbox', 'direct_thread', null, null, ['user_id' => $userId]);
-    $ig->event->sendEnterDirectThread(null);
+    $ig->event->sendEnterDirectThread(null, $sessionId);
 
     $recipients = [
         'users' => [

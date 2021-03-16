@@ -1,3 +1,10 @@
+# Stable release v17.0.1
+## Date: 16/03/2021
+
+### Updates and fixes
+
+- **Model:** Update User model
+
 # Stable release v17.0.0
 ## Date: 16/03/2021
 

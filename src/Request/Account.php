@@ -1437,4 +1437,43 @@ class Account extends RequestCollection
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Get synced Facebook pages IDs.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return string[]
+     */
+    public function getSyncedFacebookPagesIds()
+    {
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'server_params' =>
+                [
+                    'account_id'    => $this->ig->account_id,
+                    'newly_linked'  => 'false',
+                    'entrypoint'    => '1'
+                ]
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('nest_data_manifest', 'true')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $re = '/\"(\d{15})\\\\/m';
+        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+        $ids = [];
+        foreach($matches as $id) {
+            $id = $id[1];
+
+            if ($id[0] === '1' && $id[1] === '0') {
+                $ids[] = $id;
+            }
+        }
+
+        return array_unique($ids);
+    }
 }

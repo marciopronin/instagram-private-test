@@ -1,3 +1,10 @@
+# Stable release v17.1.0
+## Date: 17/03/2021
+
+### New feature
+
+- **Account:** Add `getSyncedFacebookPagesIds()`
+
 # Stable release v17.0.1
 ## Date: 16/03/2021
 

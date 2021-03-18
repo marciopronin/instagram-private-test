@@ -288,7 +288,7 @@ class Client
             'http_errors'     => false,
         ];
 
-        if ($this->_parent->curlDebug === true) {
+        if (\InstagramAPI\Instagram::$curlDebug === true) {
             $defaultOptions['debug'] = true;
         }
 

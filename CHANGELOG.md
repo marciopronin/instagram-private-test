@@ -1,3 +1,10 @@
+# Stable release v17.1.1
+## Date: 18/03/2021
+
+### Updates and fixes
+
+- **Client:** Added `curlDebug` global flag for enabling cURL debug.
+
 # Stable release v17.1.0
 ## Date: 17/03/2021
 

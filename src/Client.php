@@ -274,7 +274,7 @@ class Client
         $stack->push($this->_zeroRating, 'zero_rewrite');
 
         // Default request options (immutable after client creation).
-        $this->_guzzleClient = new GuzzleClient([
+        $defaultOptions = [
             'handler'         => $stack, // Our middleware is now injected.
             'allow_redirects' => [
                 'max' => 8, // Allow up to eight redirects (that's plenty).
@@ -286,7 +286,13 @@ class Client
             // thus ensuring that it only triggers exceptions on socket errors!
             // We'll instead MANUALLY be throwing on certain other HTTP codes.
             'http_errors'     => false,
-        ]);
+        ];
+
+        if ($this->_parent->curlDebug === true) {
+            $defaultOptions['debug'] = true;
+        }
+
+        $this->_guzzleClient = new GuzzleClient($defaultOptions);
 
         $this->_resetConnection = false;
     }

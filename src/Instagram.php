@@ -168,6 +168,15 @@ class Instagram implements ExperimentsInterface
     public static $disableHttp2 = false;
 
     /**
+     * Global flag for users who want to enable cURL debug.
+     *
+     * @var bool
+     *
+     * @see Instagram::__construct()
+     */
+    public static $curlDebug = false;
+
+    /**
      * UUID.
      *
      * @var string

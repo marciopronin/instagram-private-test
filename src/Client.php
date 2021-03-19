@@ -246,9 +246,11 @@ class Client
      * Constructor.
      *
      * @param \InstagramAPI\Instagram $parent
+     * @param array Options to be passed to the Guzzle Client.
      */
     public function __construct(
-        $parent)
+        $parent,
+        $options = [])
     {
         $this->_parent = $parent;
 
@@ -288,11 +290,15 @@ class Client
             'http_errors'     => false,
         ];
 
+        $options = array_merge($defaultOptions, $options);
+        // In case user replaces handler by mistake.
+        $options['handler'] = $stack; // Our middleware is now injected.
+
         if (\InstagramAPI\Instagram::$curlDebug === true) {
-            $defaultOptions['debug'] = true;
+            $options['debug'] = true;
         }
 
-        $this->_guzzleClient = new GuzzleClient($defaultOptions);
+        $this->_guzzleClient = new GuzzleClient($options);
 
         $this->_resetConnection = false;
     }

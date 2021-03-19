@@ -1,3 +1,10 @@
+# Stable release v17.1.3
+## Date: 19/03/2021
+
+### Updates and fixes
+
+- **Client:** Update constructor.
+
 # Stable release v17.1.2
 ## Date: 18/03/2021
 

@@ -444,6 +444,15 @@ class Instagram implements ExperimentsInterface
      */
     public $disableAutoRetriesMediaUpload = false;
 
+    /**
+     * Optional user Guzzle Options.
+     *
+     * USE IT UNDER YOUR OWN RISK.
+     *
+     * @var array
+     */
+    public $userGuzzleOptions = [];
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -602,7 +611,7 @@ class Instagram implements ExperimentsInterface
                 },
             ]
         );
-        $this->client = new Client($this);
+        $this->client = new Client($this, $this->userGuzzleOptions);
         $this->experiments = [];
     }
 
@@ -1199,6 +1208,17 @@ class Instagram implements ExperimentsInterface
     public function getIsDisabledAutoRetriesMediaUpload()
     {
         return $this->disableAutoRetriesMediaUpload;
+    }
+
+    /**
+     * Set user Guzzle Options.
+     * 
+     * @param array
+     */
+    public function setUserGuzzleOptions(
+        $options)
+    {
+        $this->userGuzzleOptions = $options;
     }
 
     /**

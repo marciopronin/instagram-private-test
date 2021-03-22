@@ -1,3 +1,9 @@
+# Stable release v17.2.1
+
+### New feature
+
+- **Instagram:** Added `setUserGuzzleOptions()` to let users pass additional options to the Guzzle Client.
+
 # Stable release v17.2.0
 
 ### New feature

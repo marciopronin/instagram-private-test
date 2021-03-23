@@ -1,3 +1,9 @@
+# Stable release v17.2.2
+
+### Updates and fixes
+
+- **Account:** Update `getPresenceStatus()`
+
 # Stable release v17.2.1
 
 ### New feature

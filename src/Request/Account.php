@@ -1056,14 +1056,9 @@ class Account extends RequestCollection
      */
     public function getPresenceStatus()
     {
-        /** @var Response\PresenceStatusResponse $result */
-        $result = $this->ig->request('accounts/get_presence_disabled/')
+        return $this->ig->request('accounts/get_presence_disabled/')
             ->setSignedGet(true)
             ->getResponse(new Response\PresenceStatusResponse());
-
-        $this->_savePresenceStatus($result->getDisabled());
-
-        return $result;
     }
 
     /**

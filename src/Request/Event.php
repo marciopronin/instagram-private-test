@@ -3868,6 +3868,22 @@ class Event extends RequestCollection
                     'dest_module'   => 'feed_timeline',
                 ],
             ],
+            'direct_thread_toggle' => [
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'pending_inbox',
+                ],
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'direct_inbox',
+                ],
+            ],
+            'pending_inbox' => [
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'direct_inbox',
+                ],
+            ],
             'direct_thread' => [
                 [
                     'clickpoint'    => 'back',
@@ -4774,14 +4790,17 @@ class Event extends RequestCollection
      */
     public function sendEnterDirectThread(
         $threadId,
-        $sessionId,
+        $sessionId = null,
         $entryPoint = 'inbox_new_message')
     {
         $extra = [
-            'session_id'         => $sessionId,
             'entry_point'        => $entryPoint,
             'inviter'            => $this->ig->account_id,
         ];
+
+        if ($sessionId !== null) {
+            $extra['session_id'] = $sessionId;
+        }
 
         if ($threadId !== null) {
             $extra['thread_id'] = $threadId;

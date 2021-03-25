@@ -1516,6 +1516,11 @@ Search.appendIndex(
             "summary": "Get\u0020auto\u0020disable\u0020retries\u0020media\u0020upload.",
             "url": "../classes/InstagramAPI-Instagram.html#method_getIsDisabledAutoRetriesMediaUpload"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetUserGuzzleOptions\u0028\u0029",
+            "name": "setUserGuzzleOptions",
+            "summary": "Set\u0020user\u0020Guzzle\u0020Options.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setUserGuzzleOptions"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003Alogin\u0028\u0029",
             "name": "login",
             "summary": "Login\u0020to\u0020Instagram\u0020or\u0020automatically\u0020resume\u0020and\u0020refresh\u0020previous\u0020session.",
@@ -1690,6 +1695,11 @@ Search.appendIndex(
             "name": "disableHttp2",
             "summary": "Global\u0020flag\u0020for\u0020users\u0020who\u0020want\u0020to\u0020run\u0020deprecated\u0020functions.",
             "url": "../classes/InstagramAPI-Instagram.html#property_disableHttp2"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024curlDebug",
+            "name": "curlDebug",
+            "summary": "Global\u0020flag\u0020for\u0020users\u0020who\u0020want\u0020to\u0020enable\u0020cURL\u0020debug.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_curlDebug"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024uuid",
             "name": "uuid",
@@ -6856,6 +6866,11 @@ Search.appendIndex(
             "summary": "Set\u0020if\u0020user\u0020can\u0020mention\u0020you\u0020in\u0020media\u0020posts.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_updateMentionSettingsAction"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AgetSyncedFacebookPagesIds\u0028\u0029",
+            "name": "getSyncedFacebookPagesIds",
+            "summary": "Get\u0020synced\u0020Facebook\u0020pages\u0020IDs.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_getSyncedFacebookPagesIds"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Business",
             "name": "Business",
             "summary": "Business\u002Daccount\u0020related\u0020functions.",
@@ -7581,6 +7596,11 @@ Search.appendIndex(
             "summary": "Send\u0020reel\u0020playback\u0020navigation.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendReelPlaybackNavigation"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendReelSessionSummary\u0028\u0029",
+            "name": "sendReelSessionSummary",
+            "summary": "Send\u0020reel\u0020session\u0020summary.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendReelSessionSummary"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendExploreHomeImpression\u0028\u0029",
             "name": "sendExploreHomeImpression",
             "summary": "Send\u0020explore\u0020home\u0020impression.",
@@ -7755,6 +7775,11 @@ Search.appendIndex(
             "name": "sendGroupCreation",
             "summary": "Send\u0020group\u0020creation.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendGroupCreation"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendGroupCreationEnter\u0028\u0029",
+            "name": "sendGroupCreationEnter",
+            "summary": "Send\u0020group\u0020creation\u0020enter.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendGroupCreationEnter"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendEnterDirectThread\u0028\u0029",
             "name": "sendEnterDirectThread",
@@ -16326,6 +16351,16 @@ Search.appendIndex(
             "summary": "Gets\u0020the\u0020phrases\u0020from\u0020lyrics\u0020of\u0020a\u0020track.",
             "url": "../classes/InstagramAPI-Request-Music.html#method_getLyrics"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Music\u003A\u003AgetGenres\u0028\u0029",
+            "name": "getGenres",
+            "summary": "Get\u0020music\u0020genres.",
+            "url": "../classes/InstagramAPI-Request-Music.html#method_getGenres"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Music\u003A\u003AgetMoods\u0028\u0029",
+            "name": "getMoods",
+            "summary": "Get\u0020music\u0020moods.",
+            "url": "../classes/InstagramAPI-Request-Music.html#method_getMoods"
+        },                {
             "fqsen": "\\InstagramAPI\\Response\\GetLyricsResponse",
             "name": "GetLyricsResponse",
             "summary": "GetLyricsResponse.",
@@ -17010,6 +17045,46 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-Model-LoginButton.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\MusicGenre",
+            "name": "MusicGenre",
+            "summary": "Automatically\u0020maps\u0020JSON\u0020data\u0020onto\u0020PHP\u0020objects\u0020with\u0020virtual\u0020functions.",
+            "url": "../classes/InstagramAPI-Response-Model-MusicGenre.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\MusicGenre\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-MusicGenre.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\MusicGenreItem",
+            "name": "MusicGenreItem",
+            "summary": "Automatically\u0020maps\u0020JSON\u0020data\u0020onto\u0020PHP\u0020objects\u0020with\u0020virtual\u0020functions.",
+            "url": "../classes/InstagramAPI-Response-Model-MusicGenreItem.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\MusicGenreItem\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-MusicGenreItem.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\ThreeByFourItem",
+            "name": "ThreeByFourItem",
+            "summary": "Automatically\u0020maps\u0020JSON\u0020data\u0020onto\u0020PHP\u0020objects\u0020with\u0020virtual\u0020functions.",
+            "url": "../classes/InstagramAPI-Response-Model-ThreeByFourItem.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\ThreeByFourItem\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-ThreeByFourItem.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\GetMusicGenresResponse",
+            "name": "GetMusicGenresResponse",
+            "summary": "Core\u0020class\u0020for\u0020Instagram\u0020API\u0020responses.",
+            "url": "../classes/InstagramAPI-Response-GetMusicGenresResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\GetMusicGenresResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-GetMusicGenresResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

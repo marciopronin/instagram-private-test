@@ -1,3 +1,9 @@
+# Stable release v17.2.3
+
+### Updates and fixes
+
+- **Event:** Update navigations and direct events
+
 # Stable release v17.2.2
 
 ### Updates and fixes

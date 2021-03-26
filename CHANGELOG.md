@@ -1,3 +1,14 @@
+# Stable release v17.2.4
+## Date: 26/03/2021
+
+### Updates and fixes
+
+- **Event:** Update navigations
+
+### Examples
+
+- **Live:** Update goLive example
+
 # Stable release v17.2.3
 
 ### Updates and fixes

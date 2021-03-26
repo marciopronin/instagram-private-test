@@ -3883,6 +3883,10 @@ class Event extends RequestCollection
                     'clickpoint'    => 'back',
                     'dest_module'   => 'direct_inbox',
                 ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'direct_thread',
+                ],
             ],
             'direct_thread' => [
                 [

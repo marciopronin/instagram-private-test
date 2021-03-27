@@ -6,6 +6,7 @@ use Fbns\Mqtt\RtiConnection;
 use Fbns\Thrift\Compact\Types;
 use InstagramAPI\Constants;
 use InstagramAPI\Instagram;
+use InstagramAPI\Exception\InstagramException;
 
 class RealtimeConnection extends RtiConnection
 {
@@ -72,7 +73,11 @@ class RealtimeConnection extends RtiConnection
         $ig)
     {
         $this->_userId = $ig->account_id;
-        $this->_sessionId = $ig->client->getCookie('sessionid')->getValue();
+        if ($ig->client->getCookie('sessionid') === null) {
+            throw new InstagramException('User cookies does not contain session_id');
+        } else {
+            $this->_sessionId = $ig->client->getCookie('sessionid')->getValue();
+        }
         $this->_clientCapabilities = 183;
         $this->_endpointCapabilities = 0;
         $this->_publishFormat = 1;

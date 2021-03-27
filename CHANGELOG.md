@@ -1,3 +1,10 @@
+# Stable release v17.2.5
+## Date: 27/03/2021
+
+### Updates and fixes
+
+- **Realtime:** Update RealtimeConnection
+
 # Stable release v17.2.4
 ## Date: 26/03/2021
 

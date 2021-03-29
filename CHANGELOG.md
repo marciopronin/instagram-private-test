@@ -1,3 +1,10 @@
+# Stable release v17.2.6
+## Date: 29/03/2021
+
+### Updates and fixes
+
+- **Internal:** Update `configureSinglePhoto()`. Story feed now supports product tags.
+
 # Stable release v17.2.5
 ## Date: 27/03/2021
 

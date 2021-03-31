@@ -6,7 +6,7 @@
 set_time_limit(0);
 date_default_timezone_set('America/New_York');
 if (php_sapi_name() !== 'cli') {
-    die('This script may not be run on a website!');
+    exit('This script may not be run on a website!');
 }
 
 //Script version constants
@@ -859,20 +859,17 @@ function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $o
     $line = Utils::promptInput();
     switch ($line) {
         case 'ecomments':
-
             $live->enableComments($broadcastId);
             Utils::log('Enabled Comments!');
             break;
 
         case 'dcomments':
-
             $live->disableComments($broadcastId);
             Utils::log('Disabled Comments!');
             break;
 
         case 'stop':
         case 'end':
-
             endLivestreamFlow($live->ig, $broadcastId, '', $obsAuto, $helper, 0, 0, 0, 0, false);
             $archived = 'yes';
             if (!autoArchive && !autoDiscard) {
@@ -899,12 +896,10 @@ function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $o
             break;
 
         case 'url':
-
             Utils::log("================================ Stream URL ================================\n".$streamUrl."\n================================ Stream URL ================================");
             break;
 
         case 'key':
-
             Utils::log("======================== Current Stream Key ========================\n".$streamKey."\n======================== Current Stream Key ========================");
             if (Utils::isWindows()) {
                 shell_exec('echo '.Utils::sanitizeStreamKey($streamKey).' | clip');
@@ -913,7 +908,6 @@ function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $o
             break;
 
         case 'info':
-
             $info = $live->getInfo($broadcastId);
             $status = $info->getStatus();
             $muted = var_export($info->is_Messages(), true);
@@ -922,7 +916,6 @@ function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $o
             break;
 
         case 'viewers':
-
             Utils::log('Viewers:');
             $live->getInfo($broadcastId);
             $vCount = 0;
@@ -938,7 +931,6 @@ function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $o
             break;
 
         case 'wave':
-
             Utils::log('Please enter the user id you would like to wave at.');
             $viewerId = Utils::promptInput();
 
@@ -952,7 +944,6 @@ function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $o
             break;
 
         case 'comment':
-
             Utils::log('Please enter the text you wish to comment.');
             $text = Utils::promptInput();
             if ($text !== '') {
@@ -964,12 +955,10 @@ function legacyLivestreamingFlow($live, $broadcastId, $streamUrl, $streamKey, $o
             break;
 
         case 'help':
-
             Utils::log("Commands:\nhelp - Prints this message\nurl - Prints Stream URL\nkey - Prints Stream Key\ninfo - Grabs Stream Info\nviewers - Grabs Stream Viewers\necomments - Enables Comments\ndcomments - Disables Comments\ncomment - Leaves a comment on your stream\nwave - Waves at a User\nstop - Stops the Live Stream");
             break;
 
         default:
-
             Utils::log('Invalid Command. Type "help" for help!');
             break;
     }

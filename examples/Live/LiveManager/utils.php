@@ -312,10 +312,10 @@ class Utils
                 if ($choice === 'yes') {
                     $verificationMethod = ($verificationMethod === 3 ? 1 : 3);
                 }
-                
+
                 do {
                     $verificationCode = intval(self::promptInput('Type your verification code>'));
-                } while((strlen($verificationCode) != 6) || !is_int($verificationCode));
+                } while ((strlen($verificationCode) != 6) || !is_int($verificationCode));
 
                 self::log('Login Flow: Logging in with verification token...');
                 $ig->finishTwoFactorLogin($username, $password, $twoFactorIdentifier, $verificationCode, $verificationMethod);

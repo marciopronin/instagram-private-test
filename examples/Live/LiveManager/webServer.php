@@ -5,7 +5,7 @@ $requestUri = $_SERVER['REQUEST_URI'];
 if ($requestUri === '/tick') {
     header('Content-Type: application/json', true);
     http_response_code(200);
-    die(@file_get_contents(__DIR__.'/webLink.json'));
+    exit(@file_get_contents(__DIR__.'/webLink.json'));
 }
 
 if ($requestUri === '/request') {
@@ -19,21 +19,21 @@ if ($requestUri === '/request') {
     }
     header('Content-Type: application/json', true);
     http_response_code(200);
-    die('{"status": "ok"}');
+    exit('{"status": "ok"}');
 }
 
 if ($requestUri === '/static/style.css') {
     header('Content-Type: text/css', true);
-    die(@file_get_contents(__DIR__.'/static/style.css'));
+    exit(@file_get_contents(__DIR__.'/static/style.css'));
 }
 
 if ($requestUri === '/static/jquery.min.js') {
     header('Content-Type: text/javascript', true);
-    die(@file_get_contents(__DIR__.'/static/jquery.min.js'));
+    exit(@file_get_contents(__DIR__.'/static/jquery.min.js'));
 }
 if ($requestUri === '/static/script.js') {
     header('Content-Type: text/javascript', true);
-    die(@file_get_contents(__DIR__.'/static/script.js'));
+    exit(@file_get_contents(__DIR__.'/static/script.js'));
 }
 ?>
 <!DOCTYPE html>

@@ -1203,8 +1203,9 @@ class Instagram implements ExperimentsInterface
 
     /**
      * Set user Guzzle Options.
-     * 
+     *
      * @param array
+     * @param mixed $options
      */
     public function setUserGuzzleOptions(
         $options)

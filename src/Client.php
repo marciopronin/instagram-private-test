@@ -247,6 +247,7 @@ class Client
      *
      * @param \InstagramAPI\Instagram $parent
      * @param array Options to be passed to the Guzzle Client.
+     * @param mixed $options
      */
     public function __construct(
         $parent,

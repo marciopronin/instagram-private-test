@@ -31,7 +31,6 @@ function newCommand($commands)
     $line = Utils::promptInput("\n>");
     switch ($line) {
         case 'help':
-
             Utils::log('Commands:');
             Utils::log('help - Displays this message');
             foreach ($commands as $cmd) {
@@ -41,7 +40,6 @@ function newCommand($commands)
 
         case 'stop':
         case 'end':
-
             $archived = 'yes';
             if (!autoArchive && !autoDiscard) {
                 Utils::log('Would you like to keep the stream archived for 24 hours? Type "yes" to do so or anything else to not.');
@@ -54,7 +52,6 @@ function newCommand($commands)
             break;
 
         default:
-
             if (!isset($commands[$line])) {
                 Utils::log('Command Line: Invalid Command. Type "help" for help!');
                 break;

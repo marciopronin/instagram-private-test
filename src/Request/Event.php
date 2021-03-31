@@ -127,6 +127,7 @@ class Event extends RequestCollection
                 break;
             case 'search_places':
                 $class = '9L3';
+                // no break
             case 'search_users':
                 $class = '9Kw';
                 break;
@@ -1940,7 +1941,6 @@ class Event extends RequestCollection
         $this->_addEventData($event);
     }
 
-
     /**
      * Send reel session summary.
      *
@@ -1966,7 +1966,7 @@ class Event extends RequestCollection
     {
         $extra = [
             'a_pk'                                  => $item->getUser()->getPk(),
-            'action'					            => isset($options['action']) ? $options['action'] : 'tap_forward',
+            'action'					                           => isset($options['action']) ? $options['action'] : 'tap_forward',
             'elapsed_time_since_last_item'          => isset($options['elapsed_time_since_last_item']) ? $options['elapsed_time_since_last_item'] : -1,
             'source_of_action'                      => $module,
             'follow_status'                         => isset($options['following']) ? 'following' : 'not_following',
@@ -4038,7 +4038,7 @@ class Event extends RequestCollection
                         throw new \InvalidArgumentException('User ID or Thread ID not provided.');
                     }
                     */
-                    
+
                     if (isset($options['user_id'])) {
                         $extra['user_id'] = $options['user_id'];
                     }

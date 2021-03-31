@@ -127,7 +127,7 @@ foreach ($testDevices as $thisDevice) {
         // Verify all video candidates.
         $videoVersions = $mediaInfo->getVideoVersions();
         if (count($videoVersions) !== count($expectedResolutions)) {
-            die('Wrong number of video candidate URLs for media item: '.$videoId);
+            exit('Wrong number of video candidate URLs for media item: '.$videoId);
         }
         $isBadVersions = false;
         foreach ($videoVersions as $idx => $version) {

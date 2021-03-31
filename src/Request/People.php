@@ -126,7 +126,7 @@ class People extends RequestCollection
     public function getAboutThisAccountInfo(
         $userId)
     {
-        return  $this->ig->request('bloks/apps/com.instagram.interactions.about_this_account/')
+        return $this->ig->request('bloks/apps/com.instagram.interactions.about_this_account/')
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('target_user_id', $userId)

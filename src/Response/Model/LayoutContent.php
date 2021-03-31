@@ -16,6 +16,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method Tag[] getRelated()
  * @method string getRelatedStyle()
  * @method TabsInfo getTabsInfo()
+ * @method ThreeByFourItem getThreeByFourItem()
  * @method TwoByTwoItem getTwoByTwoItem()
  * @method bool isExploreItemInfo()
  * @method bool isFeedType()
@@ -26,6 +27,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isRelated()
  * @method bool isRelatedStyle()
  * @method bool isTabsInfo()
+ * @method bool isThreeByFourItem()
  * @method bool isTwoByTwoItem()
  * @method $this setExploreItemInfo(ExploreItemInfo $value)
  * @method $this setFeedType(string $value)
@@ -36,6 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setRelated(Tag[] $value)
  * @method $this setRelatedStyle(string $value)
  * @method $this setTabsInfo(TabsInfo $value)
+ * @method $this setThreeByFourItem(ThreeByFourItem $value)
  * @method $this setTwoByTwoItem(TwoByTwoItem $value)
  * @method $this unsetExploreItemInfo()
  * @method $this unsetFeedType()
@@ -46,6 +49,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this unsetRelated()
  * @method $this unsetRelatedStyle()
  * @method $this unsetTabsInfo()
+ * @method $this unsetThreeByFourItem()
  * @method $this unsetTwoByTwoItem()
  */
 class LayoutContent extends AutoPropertyMapper
@@ -61,6 +65,6 @@ class LayoutContent extends AutoPropertyMapper
         'full_item'          => 'FullItem',
         'one_by_two_item'    => 'OneByTwoItem',
         'two_by_two_item'    => 'TwoByTwoItem',
-        'three_by_four_item' => 'ThreeByFourItem'
+        'three_by_four_item' => 'ThreeByFourItem',
     ];
 }

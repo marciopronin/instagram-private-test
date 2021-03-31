@@ -6,7 +6,7 @@
 set_time_limit(0);
 date_default_timezone_set('America/New_York');
 if (php_sapi_name() !== 'cli') {
-    die('This script may not be run on a website!');
+    exit('This script may not be run on a website!');
 }
 
 if (!defined('PHP_MAJOR_VERSION') || PHP_MAJOR_VERSION < 7) {

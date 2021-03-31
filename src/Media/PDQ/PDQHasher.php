@@ -648,7 +648,7 @@ class PDQHasher
 
     // ================================================================
     public static function computeDCTAndQualityFromImage(
-    /*resource*/&$image,
+    /*resource*/ &$image,
     /*bool*/ $show_timings,
     /*bool*/ $dump
   ) {
@@ -783,7 +783,7 @@ class PDQHasher
 
     // ----------------------------------------------------------------
     public static function computeHashAndQualityFromImage(
-    /*resource*/&$image,
+    /*resource*/ &$image,
     /*bool*/ $show_timings,
     /*bool*/ $dump
   ) {
@@ -810,7 +810,7 @@ class PDQHasher
 
     // ----------------------------------------------------------------
     public static function computeHashesAndQualityFromImage(
-    /*resource*/&$image,
+    /*resource*/ &$image,
     /*int*/ $which_flags = self::DIH_ALL,
     /*bool*/ $show_timings,
     /*bool*/ $dump

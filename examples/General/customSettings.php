@@ -114,7 +114,7 @@ $newStorage = \InstagramAPI\Settings\Factory::createHandler([
 // from the old storage to the new storage, for all of the "migrateUsers".
 foreach ($migrateUsers as $user) {
     if (!$oldStorage->hasUser($user)) {
-        die("Unable to migrate '{$user}' from old storage (user doesn't exist).\n");
+        exit("Unable to migrate '{$user}' from old storage (user doesn't exist).\n");
     }
 
     echo "Migrating '{$user}'.\n";

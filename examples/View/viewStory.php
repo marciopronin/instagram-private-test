@@ -136,7 +136,6 @@ try {
     }
     $ig->story->markMediaSeen($storyItems);
 
-
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();

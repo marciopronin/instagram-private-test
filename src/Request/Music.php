@@ -109,7 +109,7 @@ class Music extends RequestCollection
     /**
      * Get music genres.
      *
-     * @param string $browseSessionId  The browse session ID (UUIDv4).
+     * @param string $browseSessionId The browse session ID (UUIDv4).
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -129,7 +129,7 @@ class Music extends RequestCollection
     /**
      * Get music moods.
      *
-     * @param string $browseSessionId  The browse session ID (UUIDv4).
+     * @param string $browseSessionId The browse session ID (UUIDv4).
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *

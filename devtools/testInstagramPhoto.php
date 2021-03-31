@@ -42,7 +42,7 @@ foreach (['Landscape', 'Portrait'] as $orientation) {
         $fileName = sprintf('%s_%d.jpg', $orientation, $imgNum);
         $inputFile = sprintf('%s/%s', $testImageFolder, $fileName);
         if (!is_file($inputFile)) {
-            die('Error: Missing "'.$inputFile.'".');
+            exit('Error: Missing "'.$inputFile.'".');
         }
 
         // Run the cropping test...

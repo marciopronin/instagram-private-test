@@ -18,3 +18,97 @@ Realtime client now admit to send multiple type of messages, including:
 See all functions in: `/src/Realtime.php`.
 
 **NOTE:** Sending links still to be sent using direct HTTP.
+
+# Direct events
+
+## From timeline to Direct
+
+`$ig->event->sendNavigation('on_launch_direct_inbox', 'feed_timeline', 'direct_inbox');`
+
+## Searching a user in Direct 
+
+```php
+$rankedRecipients = $ig->direct->getRankedRecipients('raven', true, $query)->getRankedRecipients();
+
+foreach ($rankedRecipients as $key => $value) {
+    if ($value->getUser() !== null && $value->getUser()->getUsername() === $query) {
+        $position = $key;
+        $userId = $value->getUser()->getPk();
+        break;
+    }
+}
+
+$ig->event->sendDirectUserSearchPicker($query);
+$ig->event->sendDirectUserSearchPicker($query);
+$ig->event->sendDirectUserSearchPicker($query);
+```
+
+## Navigate to recently created thread
+
+```php
+$groupSession = \InstagramAPI\Signatures::generateUUID();
+$ig->event->sendDirectUserSearchSelection($userId, $position, $groupSession); // search user selection
+$ig->event->sendGroupCreation($groupSession);
+$ig->event->sendNavigation('button', 'direct_inbox', 'direct_thread', null, null, ['user_id' => $userId]);
+$ig->event->sendEnterDirectThread(null, $sessionId);
+```
+
+## Navigate to thread
+
+```php
+$ig->event->sendNavigation('button', 'direct_inbox', 'direct_thread', null, null, ['user_id' => $userId]);
+$ig->event->sendEnterDirectThread(null, $sessionId);
+```
+
+## Sending a text message 
+
+```php
+$ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'text');
+$ig->event->sendTextDirectMessage();
+$ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'text');
+$ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'text');
+```
+
+## Sending a image
+
+```php
+$ig->direct->sendPhoto($recipients, $photoFilename, ['client_context' => $clientContext]);
+$ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'visual_photo');
+$ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'visual_photo');
+$ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'visual_photo');
+```
+
+## Sending a story reaction
+
+```php
+$ig->direct->sendStoryReaction($recipients, $reaction, $storyItems[0]->getId(), ['client_context' => $clientContext]);
+
+$ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'reel_share');
+$ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'reel_share');
+$ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'reel_share');
+```
+
+## Navigating back to timeline
+
+```php
+$ig->event->sendNavigation('back', 'direct_thread', 'direct_inbox');
+$ig->event->sendNavigation('back', 'direct_inbox', 'feed_timeline');
+```
+
+## Navigating to pending inbox
+
+```php
+$ig->event->sendNavigation('button', 'direct_inbox', 'pending_inbox');
+```
+
+## Emulating Instagram in background
+
+```php
+$ig->event->updateAppState('background', $module);
+````
+
+## Emulating coming back from background process 
+
+```php
+$ig->event->updateAppState('foreground', $module);
+````

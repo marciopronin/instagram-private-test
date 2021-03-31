@@ -451,7 +451,6 @@ class Internal extends RequestCollection
                 }
                 break;
             case Constants::FEED_TV:
-
                 if ($igtvTitle === null) {
                     throw new \InvalidArgumentException('You must provide a title for the media.');
                 }

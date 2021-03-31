@@ -1,3 +1,18 @@
+# Stable release v17.2.7
+## Date: 31/03/2021
+
+## WiP
+
+Hot fix for disappearing `sessionn_id` in cookies.
+
+### Updates and fixes
+
+- **Codestyle:** Refactorization and code styling.
+
+### Wiki
+
+- **Direct:** Update direct documentation
+
 # Stable release v17.2.6
 ## Date: 29/03/2021
 

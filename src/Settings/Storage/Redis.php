@@ -78,7 +78,7 @@ class Redis implements StorageInterface
     public function hasUser(
         $username
     ) {
-        return  $this->_redis->hExists($username, 'settings');
+        return $this->_redis->hExists($username, 'settings');
     }
 
     /**

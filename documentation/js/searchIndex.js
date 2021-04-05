@@ -17048,7 +17048,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Response\\Model\\MusicGenre",
             "name": "MusicGenre",
-            "summary": "Automatically\u0020maps\u0020JSON\u0020data\u0020onto\u0020PHP\u0020objects\u0020with\u0020virtual\u0020functions.",
+            "summary": "MusicGenre.",
             "url": "../classes/InstagramAPI-Response-Model-MusicGenre.html"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\Model\\MusicGenre\u003A\u003AJSON_PROPERTY_MAP",
@@ -17058,7 +17058,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Response\\Model\\MusicGenreItem",
             "name": "MusicGenreItem",
-            "summary": "Automatically\u0020maps\u0020JSON\u0020data\u0020onto\u0020PHP\u0020objects\u0020with\u0020virtual\u0020functions.",
+            "summary": "MusicGenreItem.",
             "url": "../classes/InstagramAPI-Response-Model-MusicGenreItem.html"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\Model\\MusicGenreItem\u003A\u003AJSON_PROPERTY_MAP",
@@ -17068,7 +17068,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Response\\Model\\ThreeByFourItem",
             "name": "ThreeByFourItem",
-            "summary": "Automatically\u0020maps\u0020JSON\u0020data\u0020onto\u0020PHP\u0020objects\u0020with\u0020virtual\u0020functions.",
+            "summary": "ThreeByFourItem.",
             "url": "../classes/InstagramAPI-Response-Model-ThreeByFourItem.html"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\Model\\ThreeByFourItem\u003A\u003AJSON_PROPERTY_MAP",

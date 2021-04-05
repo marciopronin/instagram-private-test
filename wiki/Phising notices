@@ -1,0 +1,14 @@
+## Phising notices
+
+When you use the API and the IP of the account you are managing and the user mismatch, it will appear a phising notice. This is a security measure offered by Instagram to avoid the accounts being hijacked by tracking usual IPs, if the user started using a new IP from a different location, it will trigger this scenario. 
+
+### Causes
+
+- IP mismatch or different location
+- IP used is from a server, not from a domestic or mobile connection IP
+- IP/Subnet banned
+
+### Solution
+
+- Changing password
+- Going through the checkpoint verification to validate the IP

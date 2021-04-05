@@ -1,3 +1,15 @@
+# Stable release v17.2.8
+## Date: 05/04/2021
+
+### WIP
+
+Working on `181.0.0.33.117` version and android strings classifier.
+
+### Wiki
+
+- Phising notices
+- WIP
+
 # Stable release v17.2.7
 ## Date: 31/03/2021
 

@@ -291,14 +291,18 @@ class Event extends RequestCollection
      * @param array $event Batch data.
      */
     protected function _addEventData(
-        $event)
+        $event,
+        $batch = 2)
     {
-        $this->ig->eventBatch[] = $event;
+        $this->ig->eventBatch[$batch][] = $event;
 
-        if (count($this->ig->eventBatch) === 50) {
-            $this->_sendBatchEvents();
-            $this->ig->eventBatch = [];
-            $this->ig->batchIndex++;
+        foreach($this->ig->eventBatch as $batch) {
+            if (count($batch) === 50) {
+                $this->_sendBatchEvents();
+                $this->ig->eventBatch = [];
+                $this->ig->batchIndex++;
+                break;
+            }
         }
     }
 
@@ -315,9 +319,16 @@ class Event extends RequestCollection
      */
     public function forceSendBatch()
     {
-        if (!empty($this->ig->eventBatch)) {
-            $this->_sendBatchEvents();
-            $this->ig->eventBatch = [];
+        foreach ($this->ig->eventBatch as $batch) {
+            if (!empty($batch)) {
+                $this->_sendBatchEvents();
+                $this->ig->eventBatch = [
+                    [],
+                    [],
+                    [],
+                ];
+                break;
+            }
         }
     }
 
@@ -342,7 +353,13 @@ class Event extends RequestCollection
     protected function _sendBatchEvents()
     {
         $batchFilename = sprintf('%s_%s_regular.batch.gz', Signatures::generateUUID(), $this->ig->batchIndex);
-        $eventBatch = $this->_addBatchBody($this->ig->eventBatch);
+
+        $batches = [];
+        foreach($this->ig->eventBatch as $batch) {
+            if (!empty($batch)) {
+                $batches[] = $this->_addBatchBody($batch);
+            }
+        }
 
         $request = $this->ig->request(Constants::GRAPH_API_URL)
           ->setSignedPost(false)
@@ -357,7 +374,7 @@ class Event extends RequestCollection
           ->setAddDefaultHeaders(false);
 
         if ($this->ig->getEventsCompressed()) {
-            $batch = json_encode($eventBatch);
+            $batch = json_encode($batches);
             $request->addPost('cmethod', 'deflate')
                     ->addFileData(
                         'cmsg',
@@ -373,7 +390,7 @@ class Event extends RequestCollection
                     'app_ver'           => Constants::IG_VERSION,
                 ],
                 'batches'       => [
-                    $eventBatch,
+                    $batches,
                 ],
             ];
             $request->addPost('compressed', 0)
@@ -394,7 +411,7 @@ class Event extends RequestCollection
         if ($this->ig->settings->getStorage() instanceof \InstagramAPI\Settings\Storage\File) {
             $path = $this->ig->settings->getUserPath($this->ig->username);
         }
-        Debug::printEvent($eventBatch, $path, $this->ig->debug);
+        Debug::printEvent($batches, $path, $this->ig->debug);
 
         $this->_updateChecksum($response);
     }
@@ -4669,7 +4686,7 @@ class Event extends RequestCollection
             'string_locale' => $this->ig->getLocale(),
         ];
         $event = $this->_addEventBody('android_string_impressions', 'IgResourcesAnalyticsModule', $extra);
-        $this->_addEventData($event);
+        $this->_addEventData($event, 1);
     }
 
     /**

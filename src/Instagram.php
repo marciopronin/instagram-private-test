@@ -363,7 +363,11 @@ class Instagram implements ExperimentsInterface
      *
      * @var array
      */
-    public $eventBatch = [];
+    public $eventBatch = [
+        [], // less common
+        [], // android strings and other events will fit here
+        [], // Most of the events will go here
+    ];
 
     /**
      * Batch index.

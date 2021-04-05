@@ -1,3 +1,10 @@
+# Stable release v17.2.9
+## Date: 05/04/2021
+
+### Updates and fixes
+
+- **Event:** Improved event system to support multi batch events
+
 # Stable release v17.2.8
 ## Date: 05/04/2021
 

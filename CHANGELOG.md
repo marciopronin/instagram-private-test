@@ -1,3 +1,12 @@
+# Stable release v17.2.10
+## Date: 06/04/2021
+
+### Updates and fixes
+
+- **Instagram:** Update login flow events
+- **People:** Update get followers function
+- **Event:** Update navigation chains
+
 # Stable release v17.2.9
 ## Date: 05/04/2021
 

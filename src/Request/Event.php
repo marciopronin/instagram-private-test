@@ -188,6 +188,9 @@ class Event extends RequestCollection
             case 'direct_thread':
                 $class = '4gU';
                 break;
+            case 'followers':
+                $class = '83s';
+                break;
             default:
                 $class = false;
         }

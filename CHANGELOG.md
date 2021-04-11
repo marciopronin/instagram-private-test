@@ -1,3 +1,14 @@
+# Stable release v17.2.11
+## Date: 12/04/2021
+
+**WIP:** New android version will be pushed soon.
+**WIP:** Proxification of MQTT and FBNS push.
+**WIP:** Update stories statistics functionalities within the next hours.
+
+### Events
+
+- **Android strings:** Added a new list with all android strings for impressions.
+
 # Stable release v17.2.10
 ## Date: 06/04/2021
 

@@ -1,3 +1,19 @@
+# Stable release v17.3.0
+## Date: 13/04/2021
+
+### Instagram
+
+- **Instagram:** Added `loginWithEmailLink()`
+- **Instagram:** Update `userLookup()`
+
+### Events
+
+- Added and update several events
+
+### Documentation
+
+- Update documentation
+
 # Stable release v17.2.11
 ## Date: 12/04/2021
 

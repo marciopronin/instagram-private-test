@@ -1531,6 +1531,11 @@ Search.appendIndex(
             "summary": "Login\u0020to\u0020Instagram\u0020with\u0020Facebook\u0020or\u0020automatically\u0020resume\u0020and\u0020refresh\u0020previous\u0020session.",
             "url": "../classes/InstagramAPI-Instagram.html#method_loginWithFacebook"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AloginWithEmailLink\u0028\u0029",
+            "name": "loginWithEmailLink",
+            "summary": "Login\u0020to\u0020Instagram\u0020with\u0020email\u0020link.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_loginWithEmailLink"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A_login\u0028\u0029",
             "name": "_login",
             "summary": "Internal\u0020login\u0020handler.",
@@ -1540,6 +1545,11 @@ Search.appendIndex(
             "name": "_loginWithFacebook",
             "summary": "Internal\u0020Facebook\u0020login\u0020handler.",
             "url": "../classes/InstagramAPI-Instagram.html#method__loginWithFacebook"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A_loginWithEmailLink\u0028\u0029",
+            "name": "_loginWithEmailLink",
+            "summary": "Internal\u0020Email\u0020link\u0020login\u0020handler.",
+            "url": "../classes/InstagramAPI-Instagram.html#method__loginWithEmailLink"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AfinishTwoFactorLogin\u0028\u0029",
             "name": "finishTwoFactorLogin",
@@ -7586,6 +7596,16 @@ Search.appendIndex(
             "summary": "Send\u0020organic\u0020media\u0020impression.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendOrganicMediaImpression"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendOrganicMediaSubImpression\u0028\u0029",
+            "name": "sendOrganicMediaSubImpression",
+            "summary": "Send\u0020organic\u0020media\u0020sub\u0020impression.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendOrganicMediaSubImpression"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendOrganicVpvdImpression\u0028\u0029",
+            "name": "sendOrganicVpvdImpression",
+            "summary": "Send\u0020organic\u0020media\u0020Vpvd\u0020impression.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendOrganicVpvdImpression"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendOrganicCarouselImpression\u0028\u0029",
             "name": "sendOrganicCarouselImpression",
             "summary": "Send\u0020organic\u0020carousel\u0020impression.",
@@ -7600,6 +7620,11 @@ Search.appendIndex(
             "name": "sendReelSessionSummary",
             "summary": "Send\u0020reel\u0020session\u0020summary.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendReelSessionSummary"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendReelPlaybackEntry\u0028\u0029",
+            "name": "sendReelPlaybackEntry",
+            "summary": "Send\u0020reel\u0020playback\u0020entry.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendReelPlaybackEntry"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendExploreHomeImpression\u0028\u0029",
             "name": "sendExploreHomeImpression",
@@ -7640,6 +7665,11 @@ Search.appendIndex(
             "name": "sendOrganicViewedImpression",
             "summary": "Send\u0020organic\u0020viewed\u0020impression.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendOrganicViewedImpression"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendOrganicViewedSubImpression\u0028\u0029",
+            "name": "sendOrganicViewedSubImpression",
+            "summary": "Send\u0020organic\u0020viewed\u0020sub\u0020impression.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendOrganicViewedSubImpression"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendVideoAction\u0028\u0029",
             "name": "sendVideoAction",

@@ -1327,6 +1327,49 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
+     * Login to Instagram with email link.
+     *
+     * Sets the active account for the class instance. You can call this
+     * multiple times to switch between multiple Instagram accounts.
+     *
+     * @param string $username           Your Instagram username.
+     * @param string $link               Login link.
+     * @param int    $appRefreshInterval How frequently `loginWithFacebook()` should act
+     *                                   like an Instagram app that's been
+     *                                   closed and reopened and needs to
+     *                                   "refresh its state", by asking for
+     *                                   extended account state details.
+     *                                   Default: After `1800` seconds, meaning
+     *                                   `30` minutes after the last
+     *                                   state-refreshing `login()` call.
+     *                                   This CANNOT be longer than `6` hours.
+     *                                   Read `_sendLoginFlow()`! The shorter
+     *                                   your delay is the BETTER. You may even
+     *                                   want to set it to an even LOWER value
+     *                                   than the default 30 minutes!
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\LoginResponse|null A login response if a
+     *                                                   full (re-)login
+     *                                                   happens, otherwise
+     *                                                   `NULL` if an existing
+     *                                                   session is resumed.
+     */
+    public function loginWithEmailLink(
+        $username,
+        $link,
+        $appRefreshInterval = 1800
+    ) {
+       if (empty($username) || empty($link)) {
+           throw new \InvalidArgumentException('You must provide a link to loginWithEmailLink().');
+       }
+
+       return $this->_loginWithEmailLink($username, $link, false, $appRefreshInterval);
+   }
+
+    /**
      * Internal login handler.
      *
      * @param string      $username
@@ -1543,6 +1586,93 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
+     * Internal Email link login handler.
+     *
+     * @param string $username           Your Instagram username.
+     * @param string $link               Email login link.
+     * @param bool   $forceLogin         Force login to Instagram instead of
+     *                                   resuming previous session. Used
+     *                                   internally to do a new, full relogin
+     *                                   when we detect an expired/invalid
+     *                                   previous session.
+     * @param int    $appRefreshInterval
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\LoginResponse|null
+     *
+     * @see Instagram::loginWithEmailLink() The public email with link login handler with a full description.
+     */
+    protected function _loginWithEmailLink(
+        $username,
+        $link,
+        $forceLogin = false,
+        $appRefreshInterval = 1800)
+    {
+        // Switch the currently active user/pass if the details are different.
+        if ($this->username !== $username) {
+            $this->_setUser('regular', $username, 'NOPASSWORD');
+
+            if ($this->settings->get('pending_events') !== null) {
+                $this->eventBatch = json_decode($this->settings->get('pending_events'));
+                $this->settings->set('pending_events', '');
+            }
+        }
+
+        if (!$this->isMaybeLoggedIn || $forceLogin) {
+            if ($this->loginAttemptCount === 0 && !self::$skipLoginFlowAtMyOwnRisk) {
+                $this->_sendPreLoginFlow();
+            }
+
+            try {
+                $str = explode('?', $link);
+                parse_str($str[1], $params);
+
+                $request = $this->request('accounts/one_click_login/')
+                    ->setNeedsAuth(false)
+                    ->addPost('source', 'email')
+                    ->addPost('_csrftoken', $this->client->getToken())
+                    ->addPost('uid', $params['uid'])
+                    ->addPost('adid', $this->advertising_id)
+                    ->addPost('guid', $this->uuid)
+                    ->addPost('device_id', $this->device_id)
+                    ->addPost('token', $params['token'])
+                    ->addPost('auto_send', '0');
+
+                $response = $request->getResponse(new Response\LoginResponse());
+                $this->settings->set('business_account', $response->getLoggedInUser()->getIsBusiness());
+
+            } catch (\InstagramAPI\Exception\InstagramException $e) {
+                if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
+                    // Login failed because two-factor login is required.
+                    // Return server response to tell user they need 2-factor.
+                    return $e->getResponse();
+                } elseif ($e->hasResponse() && ($e->getResponse()->getInvalidCredentials() === true)) {
+                    $this->loginAttemptCount++;
+                } else {
+                    if ($e->getResponse() === null) {
+                        throw new \InstagramAPI\Exception\NetworkException($e);
+                    }
+                    // Login failed for some other reason... Re-throw error.
+                    throw $e;
+                }
+            }
+
+            $this->loginAttemptCount = 0;
+            $this->_updateLoginState($response);
+
+            $this->_sendLoginFlow(true, $appRefreshInterval);
+
+            // Full (re-)login successfully completed. Return server response.
+            return $response;
+        }
+        // Attempt to resume an existing session, or full re-login if necessary.
+        // NOTE: The "return" here gives a LoginResponse in case of re-login.
+        return $this->_sendLoginFlow(false, $appRefreshInterval);
+    }
+
+    /**
      * Finish a two-factor authenticated login.
      *
      * This function finishes a two-factor challenge that was provided by the
@@ -1719,14 +1849,28 @@ class Instagram implements ExperimentsInterface
     {
         // Set active user (without pwd), and create database entry if new user.
         $this->setUserWithoutPassword($username);
+        $waterfallId = \InstagramAPI\Signatures::generateUUID();
 
         return $this->request('users/lookup/')
             ->setNeedsAuth(false)
+            ->addPost('country_codes', json_encode(
+                [
+                    [
+                        'country_code' => Utils::getCountryCode(explode('_', $this->getLocale())[1]),
+                        'source'       => [
+                            'default',
+                        ],
+                    ],
+                ]
+            ))
             ->addPost('q', $username)
-            ->addPost('directly_sign_in', true)
+            ->addPost('directly_sign_in', 'true')
             ->addPost('username', $username)
             ->addPost('device_id', $this->device_id)
+            ->addPost('android_build_type', 'release')
             ->addPost('guid', $this->uuid)
+            ->addPost('waterfall_id', $waterfallId)
+            ->addPost('directly_sign_in', 'true')
             ->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\UsersLookupResponse());
     }

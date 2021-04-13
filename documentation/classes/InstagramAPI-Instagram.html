@@ -766,6 +766,11 @@ botting, harassment, massive bulk messaging...).</li>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Instagram.html#method_loginWithEmailLink">loginWithEmailLink()</a></th>
+                    <td class="phpdocumentor-cell">Login to Instagram with email link.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Instagram.html#method__login">_login()</a></th>
                     <td class="phpdocumentor-cell">Internal login handler.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</td>
@@ -773,6 +778,11 @@ botting, harassment, massive bulk messaging...).</li>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Instagram.html#method__loginWithFacebook">_loginWithFacebook()</a></th>
                     <td class="phpdocumentor-cell">Internal Facebook login handler.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Instagram.html#method__loginWithEmailLink">_loginWithEmailLink()</a></th>
+                    <td class="phpdocumentor-cell">Internal Email link login handler.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</td>
                 </tr>
                             <tr>
@@ -1798,7 +1808,13 @@ user closes and re-opens the Instagram application or switches account.</p></sec
         <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__type">array</span>
         <span class="phpdocumentor-signature__name">$eventBatch</span>
-         = <span class="phpdocumentor-signature__default-value">[]</span>    </code>
+         = <span class="phpdocumentor-signature__default-value">[
+    [],
+    // less common
+    [],
+    // android strings and other events will fit here
+    [],
+]</span>    </code>
             
 </article>
                                     <a id="property_batchIndex"></a>
@@ -1812,7 +1828,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">373</span>
+        <span class="phpdocumentor-element-found-in__line">377</span>
     </aside>
             <p class="phpdocumentor-summary">Batch index.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1833,7 +1849,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">380</span>
+        <span class="phpdocumentor-element-found-in__line">384</span>
     </aside>
             <p class="phpdocumentor-summary">Navigation sequence.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1854,7 +1870,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">387</span>
+        <span class="phpdocumentor-element-found-in__line">391</span>
     </aside>
             <p class="phpdocumentor-summary">Web user agent.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1875,7 +1891,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">394</span>
+        <span class="phpdocumentor-element-found-in__line">398</span>
     </aside>
             <p class="phpdocumentor-summary">Logging events compression.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1896,7 +1912,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">401</span>
+        <span class="phpdocumentor-element-found-in__line">405</span>
     </aside>
             <p class="phpdocumentor-summary">iOS Model.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1917,7 +1933,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">408</span>
+        <span class="phpdocumentor-element-found-in__line">412</span>
     </aside>
             <p class="phpdocumentor-summary">Dark mode enabled.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1938,7 +1954,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">415</span>
+        <span class="phpdocumentor-element-found-in__line">419</span>
     </aside>
             <p class="phpdocumentor-summary">iOS DPI.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1959,7 +1975,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">422</span>
+        <span class="phpdocumentor-element-found-in__line">426</span>
     </aside>
             <p class="phpdocumentor-summary">Navigation chain.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1980,7 +1996,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">429</span>
+        <span class="phpdocumentor-element-found-in__line">433</span>
     </aside>
             <p class="phpdocumentor-summary">Navigation chain step.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2001,7 +2017,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">436</span>
+        <span class="phpdocumentor-element-found-in__line">440</span>
     </aside>
             <p class="phpdocumentor-summary">Previous navigation chain class.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2022,7 +2038,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">445</span>
+        <span class="phpdocumentor-element-found-in__line">449</span>
     </aside>
             <p class="phpdocumentor-summary">Disable auto retries in media upload.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2044,7 +2060,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">448</span>
+        <span class="phpdocumentor-element-found-in__line">452</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2064,7 +2080,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">450</span>
+        <span class="phpdocumentor-element-found-in__line">454</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2084,7 +2100,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">452</span>
+        <span class="phpdocumentor-element-found-in__line">456</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2104,7 +2120,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">454</span>
+        <span class="phpdocumentor-element-found-in__line">458</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2124,7 +2140,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">456</span>
+        <span class="phpdocumentor-element-found-in__line">460</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2144,7 +2160,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">458</span>
+        <span class="phpdocumentor-element-found-in__line">462</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2164,7 +2180,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">460</span>
+        <span class="phpdocumentor-element-found-in__line">464</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2184,7 +2200,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">462</span>
+        <span class="phpdocumentor-element-found-in__line">466</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2204,7 +2220,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">464</span>
+        <span class="phpdocumentor-element-found-in__line">468</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2224,7 +2240,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">466</span>
+        <span class="phpdocumentor-element-found-in__line">470</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2244,7 +2260,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">468</span>
+        <span class="phpdocumentor-element-found-in__line">472</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2264,7 +2280,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">470</span>
+        <span class="phpdocumentor-element-found-in__line">474</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2284,7 +2300,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">472</span>
+        <span class="phpdocumentor-element-found-in__line">476</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2304,7 +2320,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">474</span>
+        <span class="phpdocumentor-element-found-in__line">478</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2324,7 +2340,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">476</span>
+        <span class="phpdocumentor-element-found-in__line">480</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2344,7 +2360,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">478</span>
+        <span class="phpdocumentor-element-found-in__line">482</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2364,7 +2380,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">480</span>
+        <span class="phpdocumentor-element-found-in__line">484</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2384,7 +2400,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">482</span>
+        <span class="phpdocumentor-element-found-in__line">486</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2404,7 +2420,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">484</span>
+        <span class="phpdocumentor-element-found-in__line">488</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2424,7 +2440,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">486</span>
+        <span class="phpdocumentor-element-found-in__line">490</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2444,7 +2460,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">488</span>
+        <span class="phpdocumentor-element-found-in__line">492</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2464,7 +2480,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">490</span>
+        <span class="phpdocumentor-element-found-in__line">494</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2484,7 +2500,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">492</span>
+        <span class="phpdocumentor-element-found-in__line">496</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2504,7 +2520,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">494</span>
+        <span class="phpdocumentor-element-found-in__line">498</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2528,7 +2544,7 @@ user closes and re-opens the Instagram application or switches account.</p></sec
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">508</span>
+        <span class="phpdocumentor-element-found-in__line">512</span>
     </aside>
         <p class="phpdocumentor-summary">Constructor.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2616,7 +2632,7 @@ user settings storage backend.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">619</span>
+        <span class="phpdocumentor-element-found-in__line">623</span>
     </aside>
         <p class="phpdocumentor-summary">Controls the SSL verification behavior of the Client.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2670,7 +2686,7 @@ a custom CA bundle file.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">630</span>
+        <span class="phpdocumentor-element-found-in__line">634</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the current SSL verification behavior of the Client.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2699,7 +2715,7 @@ a custom CA bundle file.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">644</span>
+        <span class="phpdocumentor-element-found-in__line">648</span>
     </aside>
         <p class="phpdocumentor-summary">Set the proxy to use for requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2752,7 +2768,7 @@ proxying.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">655</span>
+        <span class="phpdocumentor-element-found-in__line">659</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the current proxy used for requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2781,7 +2797,7 @@ proxying.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">667</span>
+        <span class="phpdocumentor-element-found-in__line">671</span>
     </aside>
         <p class="phpdocumentor-summary">Set the host to resolve.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2832,7 +2848,7 @@ proxying.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">678</span>
+        <span class="phpdocumentor-element-found-in__line">682</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the current resolving host.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2861,7 +2877,7 @@ proxying.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">691</span>
+        <span class="phpdocumentor-element-found-in__line">695</span>
     </aside>
         <p class="phpdocumentor-summary">Set a custom device string.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2904,7 +2920,7 @@ the good devices list will be chosen randomly.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">702</span>
+        <span class="phpdocumentor-element-found-in__line">706</span>
     </aside>
         <p class="phpdocumentor-summary">Set a custom device ID.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2945,7 +2961,7 @@ the good devices list will be chosen randomly.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">720</span>
+        <span class="phpdocumentor-element-found-in__line">724</span>
     </aside>
         <p class="phpdocumentor-summary">Sets the network interface override to use.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3000,7 +3016,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">731</span>
+        <span class="phpdocumentor-element-found-in__line">735</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the current network interface override used for requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3029,7 +3045,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">741</span>
+        <span class="phpdocumentor-element-found-in__line">745</span>
     </aside>
         <p class="phpdocumentor-summary">Set the radio type used for requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3070,7 +3086,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">756</span>
+        <span class="phpdocumentor-element-found-in__line">760</span>
     </aside>
         <p class="phpdocumentor-summary">Get the radio type used for requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3099,7 +3115,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">766</span>
+        <span class="phpdocumentor-element-found-in__line">770</span>
     </aside>
         <p class="phpdocumentor-summary">Set the timezone offset.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3140,7 +3156,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">777</span>
+        <span class="phpdocumentor-element-found-in__line">781</span>
     </aside>
         <p class="phpdocumentor-summary">Get timezone offset.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3169,7 +3185,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">787</span>
+        <span class="phpdocumentor-element-found-in__line">791</span>
     </aside>
         <p class="phpdocumentor-summary">Set locale.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3210,7 +3226,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">808</span>
+        <span class="phpdocumentor-element-found-in__line">812</span>
     </aside>
         <p class="phpdocumentor-summary">Get locale.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3239,7 +3255,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">822</span>
+        <span class="phpdocumentor-element-found-in__line">826</span>
     </aside>
         <p class="phpdocumentor-summary">Set accept Language.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3280,7 +3296,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">843</span>
+        <span class="phpdocumentor-element-found-in__line">847</span>
     </aside>
         <p class="phpdocumentor-summary">Get Accept Language.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3309,7 +3325,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">857</span>
+        <span class="phpdocumentor-element-found-in__line">861</span>
     </aside>
         <p class="phpdocumentor-summary">Get the platform used for requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3338,7 +3354,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">867</span>
+        <span class="phpdocumentor-element-found-in__line">871</span>
     </aside>
         <p class="phpdocumentor-summary">Check if running on Android platform.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3367,7 +3383,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">877</span>
+        <span class="phpdocumentor-element-found-in__line">881</span>
     </aside>
         <p class="phpdocumentor-summary">Check if using an android session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3396,7 +3412,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">891</span>
+        <span class="phpdocumentor-element-found-in__line">895</span>
     </aside>
         <p class="phpdocumentor-summary">Get the connection speed.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3425,7 +3441,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">901</span>
+        <span class="phpdocumentor-element-found-in__line">905</span>
     </aside>
         <p class="phpdocumentor-summary">Set the connection speed.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3466,7 +3482,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">912</span>
+        <span class="phpdocumentor-element-found-in__line">916</span>
     </aside>
         <p class="phpdocumentor-summary">Get if user is in EU.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3495,7 +3511,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">922</span>
+        <span class="phpdocumentor-element-found-in__line">926</span>
     </aside>
         <p class="phpdocumentor-summary">Set if user is from EU.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3536,7 +3552,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">933</span>
+        <span class="phpdocumentor-element-found-in__line">937</span>
     </aside>
         <p class="phpdocumentor-summary">Get battery level.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3565,7 +3581,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">943</span>
+        <span class="phpdocumentor-element-found-in__line">947</span>
     </aside>
         <p class="phpdocumentor-summary">Set battery level.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3606,7 +3622,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">958</span>
+        <span class="phpdocumentor-element-found-in__line">962</span>
     </aside>
         <p class="phpdocumentor-summary">Get sound enabled.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3635,7 +3651,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">968</span>
+        <span class="phpdocumentor-element-found-in__line">972</span>
     </aside>
         <p class="phpdocumentor-summary">Set sound enabled.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3676,7 +3692,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">979</span>
+        <span class="phpdocumentor-element-found-in__line">983</span>
     </aside>
         <p class="phpdocumentor-summary">Get if device is charging.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3705,7 +3721,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">989</span>
+        <span class="phpdocumentor-element-found-in__line">993</span>
     </aside>
         <p class="phpdocumentor-summary">Set battery level.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3746,7 +3762,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1000</span>
+        <span class="phpdocumentor-element-found-in__line">1004</span>
     </aside>
         <p class="phpdocumentor-summary">Set Web User Agent.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3787,7 +3803,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1011</span>
+        <span class="phpdocumentor-element-found-in__line">1015</span>
     </aside>
         <p class="phpdocumentor-summary">Get Web User Agent.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3816,7 +3832,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1021</span>
+        <span class="phpdocumentor-element-found-in__line">1025</span>
     </aside>
         <p class="phpdocumentor-summary">Get if device is VP9 compatible.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3845,7 +3861,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1031</span>
+        <span class="phpdocumentor-element-found-in__line">1035</span>
     </aside>
         <p class="phpdocumentor-summary">Get logging events compressed.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3874,7 +3890,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1041</span>
+        <span class="phpdocumentor-element-found-in__line">1045</span>
     </aside>
         <p class="phpdocumentor-summary">Set iOS Model.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3915,7 +3931,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1053</span>
+        <span class="phpdocumentor-element-found-in__line">1057</span>
     </aside>
         <p class="phpdocumentor-summary">Get iOS Model.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3944,7 +3960,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1063</span>
+        <span class="phpdocumentor-element-found-in__line">1067</span>
     </aside>
         <p class="phpdocumentor-summary">Set iOS DPI.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3985,7 +4001,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1074</span>
+        <span class="phpdocumentor-element-found-in__line">1078</span>
     </aside>
         <p class="phpdocumentor-summary">Get iOS DPI.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4014,7 +4030,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1084</span>
+        <span class="phpdocumentor-element-found-in__line">1088</span>
     </aside>
         <p class="phpdocumentor-summary">Get is dark mode enabled.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4043,7 +4059,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1094</span>
+        <span class="phpdocumentor-element-found-in__line">1098</span>
     </aside>
         <p class="phpdocumentor-summary">Set is dark mode enabled.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4084,7 +4100,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1105</span>
+        <span class="phpdocumentor-element-found-in__line">1109</span>
     </aside>
         <p class="phpdocumentor-summary">Get navigation chain.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4113,7 +4129,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1115</span>
+        <span class="phpdocumentor-element-found-in__line">1119</span>
     </aside>
         <p class="phpdocumentor-summary">Set navigation chain.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4154,7 +4170,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1130</span>
+        <span class="phpdocumentor-element-found-in__line">1134</span>
     </aside>
         <p class="phpdocumentor-summary">Get navigation chain step.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4183,7 +4199,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1140</span>
+        <span class="phpdocumentor-element-found-in__line">1144</span>
     </aside>
         <p class="phpdocumentor-summary">Set navigation chain step.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4224,7 +4240,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1149</span>
+        <span class="phpdocumentor-element-found-in__line">1153</span>
     </aside>
         <p class="phpdocumentor-summary">Increment navigation chain step.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4253,7 +4269,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1157</span>
+        <span class="phpdocumentor-element-found-in__line">1161</span>
     </aside>
         <p class="phpdocumentor-summary">Decrement navigation chain step.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4282,7 +4298,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1167</span>
+        <span class="phpdocumentor-element-found-in__line">1171</span>
     </aside>
         <p class="phpdocumentor-summary">Get previous navigation chain class.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4311,7 +4327,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1177</span>
+        <span class="phpdocumentor-element-found-in__line">1181</span>
     </aside>
         <p class="phpdocumentor-summary">Set next previous navigation chain class.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4352,7 +4368,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1188</span>
+        <span class="phpdocumentor-element-found-in__line">1192</span>
     </aside>
         <p class="phpdocumentor-summary">Disable auto retries media upload.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4393,7 +4409,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1199</span>
+        <span class="phpdocumentor-element-found-in__line">1203</span>
     </aside>
         <p class="phpdocumentor-summary">Get auto disable retries media upload.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4422,7 +4438,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1210</span>
+        <span class="phpdocumentor-element-found-in__line">1214</span>
     </aside>
         <p class="phpdocumentor-summary">Set user Guzzle Options.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4463,7 +4479,7 @@ interface.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1260</span>
+        <span class="phpdocumentor-element-found-in__line">1264</span>
     </aside>
         <p class="phpdocumentor-summary">Login to Instagram or automatically resume and refresh previous session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4577,7 +4593,7 @@ session is resumed.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1313</span>
+        <span class="phpdocumentor-element-found-in__line">1317</span>
     </aside>
         <p class="phpdocumentor-summary">Login to Instagram with Facebook or automatically resume and refresh previous session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4668,6 +4684,101 @@ happens, otherwise
 session is resumed.</p></span>
             
 </article>
+                                    <a id="method_loginWithEmailLink"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">loginWithEmailLink()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1360</span>
+    </aside>
+        <p class="phpdocumentor-summary">Login to Instagram with email link.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">loginWithEmailLink</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$link</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$appRefreshInterval</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">1800</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Sets the active account for the class instance. You can call this
+multiple times to switch between multiple Instagram accounts.</p></section>
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Your Instagram username.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$link</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Login link.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$appRefreshInterval</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">1800</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>How frequently <code class="prettyprint">loginWithFacebook()</code> should act
+like an Instagram app that's been
+closed and reopened and needs to
+&quot;refresh its state&quot;, by asking for
+extended account state details.
+Default: After <code class="prettyprint">1800</code> seconds, meaning
+<code class="prettyprint">30</code> minutes after the last
+state-refreshing <code class="prettyprint">login()</code> call.
+This CANNOT be longer than <code class="prettyprint">6</code> hours.
+Read <code class="prettyprint">_sendLoginFlow()</code>! The shorter
+your delay is the BETTER. You may even
+want to set it to an even LOWER value
+than the default 30 minutes!</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</span>
+                    &mdash; <span class="phpdocumentor-description"><p>A login response if a
+full (re-)login
+happens, otherwise
+<code class="prettyprint">NULL</code> if an existing
+session is resumed.</p></span>
+            
+</article>
                                     <a id="method__login"></a>
 <article
         class="
@@ -4679,7 +4790,7 @@ session is resumed.</p></span>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1345</span>
+        <span class="phpdocumentor-element-found-in__line">1392</span>
     </aside>
         <p class="phpdocumentor-summary">Internal login handler.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4784,7 +4895,7 @@ previous session.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1484</span>
+        <span class="phpdocumentor-element-found-in__line">1532</span>
     </aside>
         <p class="phpdocumentor-summary">Internal Facebook login handler.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4869,6 +4980,102 @@ previous session.</p></section></dd>
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</span>
             
 </article>
+                                    <a id="method__loginWithEmailLink"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--protected
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">_loginWithEmailLink()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1607</span>
+    </aside>
+        <p class="phpdocumentor-summary">Internal Email link login handler.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                                <span class="phpdocumentor-signature__name">_loginWithEmailLink</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$link</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$forceLogin</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$appRefreshInterval</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">1800</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Your Instagram username.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$link</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Email login link.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$forceLogin</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Force login to Instagram instead of
+resuming previous session. Used
+internally to do a new, full relogin
+when we detect an expired/invalid
+previous session.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$appRefreshInterval</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">1800</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="\InstagramAPI\Instagram::loginWithEmailLink()"><abbr title="\InstagramAPI\Instagram::loginWithEmailLink()">Instagram::loginWithEmailLink()</abbr></a></span>
+                                                            <section class="phpdocumentor-description"><p>The public email with link login handler with a full description.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-LoginResponse.html"><abbr title="\InstagramAPI\Response\LoginResponse">LoginResponse</abbr></a>|null</span>
+            
+</article>
                                     <a id="method_finishTwoFactorLogin"></a>
 <article
         class="
@@ -4880,7 +5087,7 @@ previous session.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1567</span>
+        <span class="phpdocumentor-element-found-in__line">1702</span>
     </aside>
         <p class="phpdocumentor-summary">Finish a two-factor authenticated login.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5010,7 +5217,7 @@ Email and phone aren't allowed here.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1643</span>
+        <span class="phpdocumentor-element-found-in__line">1778</span>
     </aside>
         <p class="phpdocumentor-summary">Request a new security code SMS for a Two Factor login account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5094,7 +5301,7 @@ Email and phone aren't allowed here.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1688</span>
+        <span class="phpdocumentor-element-found-in__line">1823</span>
     </aside>
         <p class="phpdocumentor-summary">Finish checkpoint.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5147,7 +5354,7 @@ send login flow.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1712</span>
+        <span class="phpdocumentor-element-found-in__line">1847</span>
     </aside>
         <p class="phpdocumentor-summary">Request information about available password recovery methods for an account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5204,7 +5411,7 @@ accounts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1743</span>
+        <span class="phpdocumentor-element-found-in__line">1892</span>
     </aside>
         <p class="phpdocumentor-summary">Request a recovery EMAIL to get back into your account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5259,7 +5466,7 @@ accounts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1776</span>
+        <span class="phpdocumentor-element-found-in__line">1925</span>
     </aside>
         <p class="phpdocumentor-summary">Request a recovery SMS to get back into your account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5314,7 +5521,7 @@ accounts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1804</span>
+        <span class="phpdocumentor-element-found-in__line">1953</span>
     </aside>
         <p class="phpdocumentor-summary">Set the active account for the class instance.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5391,7 +5598,7 @@ accounts.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1953</span>
+        <span class="phpdocumentor-element-found-in__line">2102</span>
     </aside>
         <p class="phpdocumentor-summary">Set the active account for the class instance, without knowing password.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5461,7 +5668,7 @@ need device parameters when the user DOESN'T KNOW their password yet.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1981</span>
+        <span class="phpdocumentor-element-found-in__line">2130</span>
     </aside>
         <p class="phpdocumentor-summary">Updates the internal state after a successful login.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5519,7 +5726,7 @@ need device parameters when the user DOESN'T KNOW their password yet.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2004</span>
+        <span class="phpdocumentor-element-found-in__line">2153</span>
     </aside>
         <p class="phpdocumentor-summary">Sends pre-login flow. This is required to emulate real device behavior.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5558,7 +5765,7 @@ need device parameters when the user DOESN'T KNOW their password yet.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2070</span>
+        <span class="phpdocumentor-element-found-in__line">2219</span>
     </aside>
         <p class="phpdocumentor-summary">Registers available Push channels during the login flow.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5587,7 +5794,7 @@ need device parameters when the user DOESN'T KNOW their password yet.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2130</span>
+        <span class="phpdocumentor-element-found-in__line">2279</span>
     </aside>
         <p class="phpdocumentor-summary">Sends login flow. This is required to emulate real device behavior.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5661,7 +5868,7 @@ flow attempt, otherwise
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2428</span>
+        <span class="phpdocumentor-element-found-in__line">2577</span>
     </aside>
         <p class="phpdocumentor-summary">Log out of Instagram.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5712,7 +5919,7 @@ cases you want to <em>stay logged in</em> so that <code class="prettyprint">logi
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2456</span>
+        <span class="phpdocumentor-element-found-in__line">2605</span>
     </aside>
         <p class="phpdocumentor-summary">Checks if a parameter is enabled in the given experiment.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5771,7 +5978,7 @@ cases you want to <em>stay logged in</em> so that <code class="prettyprint">logi
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2475</span>
+        <span class="phpdocumentor-element-found-in__line">2624</span>
     </aside>
         <p class="phpdocumentor-summary">Get a parameter value for the given experiment.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -5830,7 +6037,7 @@ cases you want to <em>stay logged in</em> so that <code class="prettyprint">logi
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Instagram.php"><a href="../files/src-instagram.html"><abbr title="src/Instagram.php">Instagram.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2495</span>
+        <span class="phpdocumentor-element-found-in__line">2644</span>
     </aside>
         <p class="phpdocumentor-summary">Create a custom API request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

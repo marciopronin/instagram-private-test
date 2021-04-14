@@ -2196,11 +2196,13 @@ class Instagram implements ExperimentsInterface
 
         try {
             //$this->internal->readMsisdnHeader('default', true);
+            /*
             try {
                 $this->account->setContactPointPrefill('prefill');
             } catch (Exception $e) {
                 //pass
             }
+            */
 
             if ($this->getPlatform() === 'ios') {
                 $this->account->getNamePrefill();

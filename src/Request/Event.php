@@ -422,7 +422,9 @@ class Event extends RequestCollection
 
         $path = Debug::$debugLogPath;
         if ($this->ig->settings->getStorage() instanceof \InstagramAPI\Settings\Storage\File) {
-            $path = $this->ig->settings->getUserPath($this->ig->username);
+            if ($path === null) {
+                $path = $this->ig->settings->getUserPath($this->ig->username);
+            }
         }
         Debug::printEvent($batches, $path, $this->ig->debug);
 

@@ -1,3 +1,10 @@
+# Stable release v17.3.4
+## Date: 16/04/2021
+
+### Updates and fixes
+
+- **Event:** Update path log settings preference
+
 # Stable release v17.3.3
 ## Date: 16/04/2021
 

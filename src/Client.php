@@ -630,7 +630,9 @@ class Client
     {
         $path = Debug::$debugLogPath;
         if ($this->_parent->settings->getStorage() instanceof \InstagramAPI\Settings\Storage\File) {
-            $path = $this->_parent->settings->getUserPath($this->_parent->username);
+            if ($path === null) {
+                $path = $this->_parent->settings->getUserPath($this->_parent->username);
+            }
         }
         Debug::printRequest($method, $url, $path, $debug);
 

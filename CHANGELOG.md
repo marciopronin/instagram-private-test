@@ -1,21 +1,28 @@
+# Stable release v17.3.3
+## Date: 16/04/2021
+
+### Updates and fixes
+
+- **Client:** Update path log settings preference
+
 # Stable release v17.3.2
 ## Date: 14/04/2021
 
-### Instagram
+### Updates and fixes
 
 - **Instagram:** Update login flow
 
 # Stable release v17.3.1
 ## Date: 14/04/2021
 
-### Instagram
+### Updates and fixes
 
 - **Instagram:** Update login flow
 
 # Stable release v17.3.0
 ## Date: 13/04/2021
 
-### Instagram
+### Updates and fixes
 
 - **Instagram:** Added `loginWithEmailLink()`
 - **Instagram:** Update `userLookup()`

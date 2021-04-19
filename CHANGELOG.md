@@ -1,3 +1,14 @@
+# Stable release v17.3.5
+## Date: 19/04/2021
+
+### Updates and fixes
+
+- **Event:** Update several functions related with story events. Nnow full story emulation is achieved.
+
+### Examples
+
+- Story related examples has been updated with missing events.
+
 # Stable release v17.3.4
 ## Date: 16/04/2021
 

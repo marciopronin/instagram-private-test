@@ -1914,7 +1914,8 @@ class Event extends RequestCollection
      */
     public function sendOrganicMediaSubImpression(
         $item,
-        array $options = [])
+        array $options = [],
+        $module = 'reel_profile')
     {
         if (!isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
             throw new \InvalidArgumentException('Required options were not set.');
@@ -1926,7 +1927,7 @@ class Event extends RequestCollection
             'm_ts'                      => (int) $item->getTakenAt(),
             'm_t'                       => $item->getMediaType(),
             'tracking_token'            => $item->getOrganicTrackingToken(),
-            'source_of_action'          => 'reel_profile',
+            'source_of_action'          => $module,
             'follow_status'             => empty($options['following']) ? 'not_following' : 'following',
             'elapsed_time_since_last_item' => -1,
             'viewer_session_id'         => $options['viewer_session_id'],
@@ -1946,7 +1947,7 @@ class Event extends RequestCollection
             'is_acp_delivered'          => false,
         ];
 
-        $event = $this->_addEventBody('instagram_organic_sub_impression', 'reel_profile', $extra);
+        $event = $this->_addEventBody('instagram_organic_sub_impression', $module, $extra);
         $this->_addEventData($event);
     }
 
@@ -1965,9 +1966,9 @@ class Event extends RequestCollection
      */
     public function sendOrganicVpvdImpression(
         $item,
-        array $options = [])
+        array $options = [],
+        $module = 'reel_profile')
     {
-        $module = 'reel_profile';
 
         if (!isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
             throw new \InvalidArgumentException('Required options were not set.');
@@ -2185,8 +2186,6 @@ class Event extends RequestCollection
     /**
      * Send reel playback entry.
      *
-     * This event must be sent after 'reel_playback_entry' event.
-     *
      * @param string $userId            User ID.
      * @param string $viewerSessionId   UUID.
      * @param string traySessionId      UUID.
@@ -2197,11 +2196,12 @@ class Event extends RequestCollection
     public function sendReelPlaybackEntry(
         $userId,
         $viewerSessionId,
-        $traySessionId)
+        $traySessionId,
+        $module = 'reel_profile')
     {
         $extra = [
             'a_pk'                                  => $userId,
-            'source_of_action'                      => 'reel_profile',
+            'source_of_action'                      => $module,
             'elapsed_time_since_last_item'          => -1,
             'is_live_streaming'                     => 0,
             'is_live_questions'                     => 0,
@@ -2221,7 +2221,7 @@ class Event extends RequestCollection
             'is_acp_delivered'                      => false,
         ];
 
-        $event = $this->_addEventBody('reel_playback_entry', 'reel_profile', $extra);
+        $event = $this->_addEventBody('reel_playback_entry', $module, $extra);
         $this->_addEventData($event);
     }
 
@@ -2809,7 +2809,8 @@ class Event extends RequestCollection
         $item,
         $viewerSessionId = null,
         $traySessionId = null,
-        array $options = [])
+        array $options = [],
+        $module = 'reel_profile')
     {
         $extra = [
             'm_pk'                      => $item->getId(),
@@ -2817,7 +2818,7 @@ class Event extends RequestCollection
             'm_ts'                      => (int) $item->getTakenAt(),
             'm_t'                       => $item->getMediaType(),
             'tracking_token'            => $item->getOrganicTrackingToken(),
-            'source_of_action'          => 'reel_profile',
+            'source_of_action'          => $module,
             'follow_status'             => empty($options['following']) ? 'not_following' : 'following',
             'elapsed_time_since_last_item' => -1,
             'viewer_session_id'         => $viewerSessionId,
@@ -2840,7 +2841,7 @@ class Event extends RequestCollection
             'is_acp_delivered'          => false,
         ];
 
-        $event = $this->_addEventBody('instagram_organic_sub_viewed_impression', 'reel_profile', $extra);
+        $event = $this->_addEventBody('instagram_organic_sub_viewed_impression', $module, $extra);
         $this->_addEventData($event);
     }
 

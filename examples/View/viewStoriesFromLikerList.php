@@ -187,11 +187,96 @@ try {
         $traySession = \InstagramAPI\Signatures::generateUUID();
         $rankToken = \InstagramAPI\Signatures::generateUUID();
 
-        $ig->event->sendOrganicReelImpression($storyItems[0], $viewerSession, $traySession, $rankToken, $following, 'reel_liker_list');
-        $ig->event->sendOrganicMediaImpression($storyItems[0], 'reel_liker_list', ['story_ranking_token' => $rankToken, 'tray_session_id' => $traySession, 'viewer_session_id' => $viewerSession]);
-        $ig->story->markMediaSeen([$storyItems[0]]);
-        $ig->event->sendOrganicViewedImpression($storyItems[0], 'reel_liker_list', $viewerSession, $traySession, $rankToken);
+        $ig->event->sendReelPlaybackEntry($userId, $viewerSession, $traySession, 'reel_liker_list');
 
+        $reelsize = count($storyItems);
+        $cnt = 0;
+    
+        $photosConsumed = 0;
+        $videosConsumed = 0;
+    
+        foreach ($storyItems as $storyItem) {
+    
+            if($storyItem->getMediaType() == 2) {
+                $videosConsumed++;
+            } else {
+                $photosConsumed++;
+            }
+    
+            $ig->event->sendOrganicMediaSubImpression($storyItem,
+                [
+                    'tray_session_id'   => $traySession, 
+                    'viewer_session_id' => $viewerSession,
+                    'following'         => $following,
+                    'reel_size'         => $reelsize,
+                    'reel_position'     => $cnt,
+                ], 
+                'reel_liker_list'
+            );
+    
+            $ig->event->sendOrganicViewedSubImpression($storyItem, $viewerSession, $traySession,
+                [
+                    'tray_session_id'   => $traySession, 
+                    'viewer_session_id' => $viewerSession,
+                    'following'         => $following,
+                    'reel_size'         => $reelsize,
+                    'reel_position'     => $cnt,
+                ],
+                'reel_liker_list'
+            );
+    
+            $ig->event->sendOrganicTimespent($storyItem, $following, mt_rand(1000, 2000), 'reel_liker_list', [],
+                 [
+                    'tray_session_id'   => $traySession, 
+                    'viewer_session_id' => $viewerSession,
+                    'following'         => $following,
+                    'reel_size'         => $reelsize,
+                    'reel_position'     => $cnt,
+                 ]
+            );
+    
+            $ig->event->sendOrganicVpvdImpression($storyItem,
+                 [
+                    'tray_session_id'       => $traySession, 
+                    'viewer_session_id'     => $viewerSession,
+                    'following'             => $following,
+                    'reel_size'             => $reelsize,
+                    'reel_position'         => $cnt,
+                    'client_sub_impression' => 1,
+                 ],
+                 'reel_liker_list'
+            );
+    
+            $ig->event->sendOrganicReelImpression($storyItem, $viewerSession, $traySession, $rankToken, true, 'reel_liker_list');
+            $ig->event->sendOrganicMediaImpression($storyItem, 'reel_liker_list', 
+                [
+                    'story_ranking_token'   => $rankToken, 
+                    'tray_session_id'       => $traySession, 
+                    'viewer_session_id'     => $viewerSession
+                ]
+            );
+            $ig->event->sendOrganicViewedImpression($storyItem, 'reel_liker_list', $viewerSession, $traySession, $rankToken);
+    
+            $cnt++;
+        }
+
+        sleep(mt_rand(1, 3));
+
+        $ig->story->markMediaSeen($storyItems);
+        $ig->event->sendReelPlaybackNavigation(end($storyItems), $viewerSession, $traySession, $rankToken, 'reel_liker_list');
+        $ig->event->sendReelSessionSummary($item, $viewerSession, $traySession, 'reel_liker_list',
+            [
+                'tray_session_id'               => $traySession, 
+                'viewer_session_id'             => $viewerSession,
+                'following'                     => $following,
+                'reel_size'                     => $reelsize,
+                'reel_position'                 => count($storyItems) - 1,
+                'is_last_reel'                  => 1,
+                'photos_consumed'               => $photosConsumed,
+                'videos_consumed'               => $videosConsumed,
+                'viewer_session_media_consumed' => count($storyItems),
+            ]
+        );
         $ig->event->sendNavigation('back', 'reel_liker_list', 'likers');
 
         sleep(2);

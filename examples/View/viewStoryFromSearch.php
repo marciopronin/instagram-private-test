@@ -98,9 +98,11 @@ try {
     );
     $traySession = \InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
-    $storyItems = $ig->story->getUserStoryFeed($userId)->getReel()->getItems();
+    $storyFeed = $ig->story->getUserStoryFeed($userId);
+    $storyItems = $storyFeed->getReel()->getItems();
     $userFeed = $ig->timeline->getUserFeed($userId);
     $items = $userFeed->getItems();
+    $following =  $storyFeed->getReel()->getUser()->getFriendshipStatus()->getFollowing();
 
     $c = 0;
     foreach ($items as $item) {
@@ -150,17 +152,93 @@ try {
     $traySession = \InstagramAPI\Signatures::generateUUID();
     $rankToken = \InstagramAPI\Signatures::generateUUID();
 
+    $ig->event->sendReelPlaybackEntry($userId, $viewerSession, $traySession);
+
+    $reelsize = count($storyItems);
+    $cnt = 0;
+
+    $photosConsumed = 0;
+    $videosConsumed = 0;
+
     foreach ($storyItems as $storyItem) {
+
+        if($storyItem->getMediaType() == 2) {
+            $videosConsumed++;
+        } else {
+            $photosConsumed++;
+        }
+
+        $ig->event->sendOrganicMediaSubImpression($storyItem,
+            [
+                'tray_session_id'   => $traySession, 
+                'viewer_session_id' => $viewerSession,
+                'following'         => $following,
+                'reel_size'         => $reelsize,
+                'reel_position'     => $cnt,
+            ]
+        );
+
+        $ig->event->sendOrganicViewedSubImpression($storyItem, $viewerSession, $traySession,
+            [
+                'tray_session_id'   => $traySession, 
+                'viewer_session_id' => $viewerSession,
+                'following'         => $following,
+                'reel_size'         => $reelsize,
+                'reel_position'     => $cnt,
+            ]
+        );
+
+        $ig->event->sendOrganicTimespent($storyItem, $following, mt_rand(1000, 2000),'reel_profile', [],
+             [
+                'tray_session_id' => $traySession, 
+                'viewer_session_id' => $viewerSession,
+                'following' => $following,
+                'reel_size' => $reelsize,
+                'reel_position' => $cnt,
+             ]
+        );
+
+        $ig->event->sendOrganicVpvdImpression($storyItem,
+             [
+                'tray_session_id'       => $traySession, 
+                'viewer_session_id'     => $viewerSession,
+                'following'             => $following,
+                'reel_size'             => $reelsize,
+                'reel_position'         => $cnt,
+                'client_sub_impression' => 1,
+             ]
+        );
+
         $ig->event->sendOrganicReelImpression($storyItem, $viewerSession, $traySession, $rankToken, true, 'reel_profile');
-        $ig->event->sendOrganicMediaImpression($storyItem, 'reel_profile', ['story_ranking_token' => $rankToken, 'tray_session_id' => $traySession, 'viewer_session_id' => $viewerSession]);
-
-        sleep(mt_rand(1, 3));
-
-        $ig->story->markMediaSeen([$storyItem]);
+        $ig->event->sendOrganicMediaImpression($storyItem, 'reel_profile', 
+            [
+                'story_ranking_token'   => $rankToken, 
+                'tray_session_id'       => $traySession, 
+                'viewer_session_id'     => $viewerSession
+            ]
+        );
         $ig->event->sendOrganicViewedImpression($storyItem, 'reel_profile', $viewerSession, $traySession, $rankToken);
+
+        $cnt++;
     }
 
+    sleep(mt_rand(1, 3));
+
+    $ig->story->markMediaSeen($storyItems);
     $ig->event->sendReelPlaybackNavigation(end($storyItems), $viewerSession, $traySession, $rankToken);
+    $ig->event->sendReelSessionSummary($item, $viewerSession, $traySession, 'reel_profile',
+        [
+            'tray_session_id'               => $traySession, 
+            'viewer_session_id'             => $viewerSession,
+            'following'                     => $following,
+            'reel_size'                     => $reelsize,
+            'reel_position'                 => count($storyItems) - 1,
+            'is_last_reel'                  => 1,
+            'photos_consumed'               => $photosConsumed,
+            'videos_consumed'               => $videosConsumed,
+            'viewer_session_media_consumed' => count($storyItems),
+        ]
+    );
 
     $ig->event->sendNavigation('back', 'reel_profile', 'profile');
     // forceSendBatch() should be only used if you are "closing" the app so all the events that

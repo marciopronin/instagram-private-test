@@ -29,7 +29,10 @@ try {
 try {
     $cover = new \InstagramAPI\Media\Photo\InstagramPhoto($coverPhoto, ['targetFeed' => \InstagramAPI\Constants::FEED_TV]);
     $metadata = [
-        'cover_photo' => $cover->getFile(), // Video thumbnail
+        'cover_photo'   => $cover->getFile(), // Video thumbnail
+        'title'         => 'Test title',
+        'share_to_feed' => 0,
+        'caption'       => 'Caption text',
     ];
 
     $video = new \InstagramAPI\Media\Video\InstagramVideo($videoFilename, ['targetFeed' => \InstagramAPI\Constants::FEED_TV]);

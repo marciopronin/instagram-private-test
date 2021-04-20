@@ -2902,8 +2902,10 @@ class Internal extends RequestCollection
                 $result['original_photo_pdq_hash'] = sprintf('%s:%d', $hash->toHexString(), 9);
                 break;
             case Constants::FEED_TV:
-                $result['broadcast_id'] = (string) $internalMetadata->getBroadcastId();
-                $result['is_post_live_igtv'] = '1';
+                if ($internalMetadata->getBroadcastId() !== null) {
+                    $result['broadcast_id'] = (string) $internalMetadata->getBroadcastId();
+                    $result['is_post_live_igtv'] = '1';
+                }
                 break;
             default:
         }

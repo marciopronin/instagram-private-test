@@ -1,3 +1,14 @@
+# Stable release v17.3.6
+## Date: 20/04/2021
+
+### Updates and fixes
+
+- **Internal:** Fixed an issue in `_getPhotoUploadParams()` when uploading videos to IGTV feed.
+
+### Examples
+
+- Update uploadVideoIGTVWithThumbnail example.
+
 # Stable release v17.3.5
 ## Date: 19/04/2021
 

@@ -106,8 +106,24 @@ try {
     
             $cnt++;
         }
+
+        sleep(mt_rand(1, 3));
     
+        $ig->story->markMediaSeen($tray->getItems());
         $ig->event->sendReelPlaybackNavigation(end($tray->getItems()), $viewerSession, $traySession, $rankToken);
+        $ig->event->sendReelSessionSummary($storyItem, $viewerSession, $traySession, 'reel_feed_timeline',
+            [
+                'tray_session_id'               => $traySession, 
+                'viewer_session_id'             => $viewerSession,
+                'following'                     => true,
+                'reel_size'                     => $reelsize,
+                'reel_position'                 => count($tray->getItems()) - 1,
+                'is_last_reel'                  => 1,
+                'photos_consumed'               => $photosConsumed,
+                'videos_consumed'               => $videosConsumed,
+                'viewer_session_media_consumed' => count($tray->getItems()),
+            ]
+        );
     }
 
     $ig->event->sendNavigation('back', 'reel_feed_timeline', 'feed_timeline');

@@ -1,3 +1,10 @@
+# Stable release v17.3.8
+## Date: 21/04/2021
+
+### Examples
+
+- Update viewStoryFromTimeline example
+
 # Stable release v17.3.7
 ## Date: 21/04/2021
 

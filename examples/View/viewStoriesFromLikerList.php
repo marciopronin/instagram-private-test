@@ -187,7 +187,7 @@ try {
         $traySession = \InstagramAPI\Signatures::generateUUID();
         $rankToken = \InstagramAPI\Signatures::generateUUID();
 
-        $ig->event->sendReelPlaybackEntry($userId, $viewerSession, $traySession, 'reel_liker_list');
+        $ig->event->sendReelPlaybackEntry($userList[$i]->getPk(), $viewerSession, $traySession, 'reel_liker_list');
 
         $reelsize = count($storyItems);
         $cnt = 0;

@@ -1,3 +1,10 @@
+# Stable release v17.3.7
+## Date: 21/04/2021
+
+### Examples
+
+- Update story view examples.
+
 # Stable release v17.3.6
 ## Date: 20/04/2021
 

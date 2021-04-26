@@ -112,46 +112,46 @@ class Event extends RequestCollection
     {
         switch ($module) {
             case 'feed_timeline':
-                $class = '1TN';
+                $class = '1gM';
                 break;
             case 'newsfeed_you':
-                $class = '8Bb';
+                $class = '7uK';
                 break;
             case 'explore_popular':
-                $class = '1jN';
+                $class = '1wV';
                 break;
             case 'search':
             case 'blended_search':
             case 'search_result':
-                $class = '9L2';
+                $class = 'C3o';
                 break;
             case 'search_places':
-                $class = '9L3';
+                $class = 'C3u';
                 // no break
             case 'search_users':
-                $class = '9Kw';
+                $class = 'C3y';
                 break;
             case 'search_tags':
-                $class = '9Kx';
+                $class = 'C3w';
                 break;
             case 'feed_hashtag':
-                $class = '9rP';
+                $class = '99A';
                 break;
             case 'feed_location':
-                $class = '9qD';
+                $class = '99B';
                 break;
             case 'feed_contextual_chain':
-                $class = 'A00';
+                $class = '8Pb';
                 break;
             case 'feed_contextual_place':
             case 'feed_contextual_location':
             case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = '8K2';
+                $class = '8EB';
                 break;
             case 'profile':
-            case 'self_profile': // 6wB, ProfileMediaTabFragment
+            case 'self_profile': // 6Ur, ProfileMediaTabFragment
                 $class = 'UserDetailFragment';
                 break;
             case 'following_sheet':
@@ -162,34 +162,31 @@ class Event extends RequestCollection
                 $class = 'UnifiedFollowFragment';
                 break;
             case 'likers':
-                $class = '84F';
+                $class = '7ls';
                 break;
             case 'tabbed_gallery_camera':
                 $class = 'MediaCaptureFragment';
                 break;
             case 'photo_filter':
-                $class = 'DfJ';
+                $class = 'D0y';
                 break;
             case 'gallery_picker':
-                $class = 'DaB';
+                $class = 'D12';
                 break;
             case 'quick_capture_fragment':
-                $class = 'Cgd';
+                $class = 'CKi';
                 break;
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';
                 break;
             case 'direct_inbox':
-                $class = '5Ma';
-                break;
-            case 'direct_recipient_picker':
-                $class = '66z';
+                $class = '48R';
                 break;
             case 'direct_thread':
-                $class = '4gU';
+                $class = '54z';
                 break;
             case 'followers':
-                $class = '83s';
+                $class = '7jh';
                 break;
             case 'reel_profile':
                 $class = 'ReelViewerFragment';

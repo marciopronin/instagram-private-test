@@ -1,3 +1,12 @@
+# Stable release v17.3.10
+## Date: 26/04/2021
+
+### Updates and fixes
+
+- **Constants:** Update version to 184.0.0.30.117
+- **Events:** Update navigation chain classes
+- **Utils:** Update extract URL for sending direct texts
+
 # Stable release v17.3.9
 ## Date: 23/04/2021
 

@@ -190,6 +190,13 @@ class Event extends RequestCollection
                 break;
             case 'reel_profile':
                 $class = 'ReelViewerFragment';
+                break;
+            case 'edit_profile':
+                $class = '70a';
+                break;
+            case 'profile_edit_bio':
+                $class = 'AgP';
+                break;
             default:
                 $class = false;
         }
@@ -6028,9 +6035,9 @@ class Event extends RequestCollection
             'is_carousel'                       => isset($options['is_carousel']) ? $options['is_carousel'] : false,
             'did_fallback_render'               => isset($options['did_fallback_render']) ? $options['did_fallback_render'] : false,
             'is_ad'                             => false,
-            'image_attempted_height'            => $options['image_heigth'],
-            'image_attempted_width'             => $options['image_width'],
-            'load_time_ms'                      => $options['load_time'],
+            'load_source'                       => 'network',
+            'image_size_kb'                     => $options['image_size_kb'],
+            'load_time_ms'                      => isset($options['load_time']) ?  $options['load_time'] : 0,
             'estimated_bandwidth'               => $options['estimated_bandwidth'],
             'estimated_bandwidth_totalBytes_b'  => $options['estimated_bandwidth_totalBytes_b'],
             'estimated_bandwidth_totalTime_ms'  => $options['estimated_bandwidth_totalTime_ms'],

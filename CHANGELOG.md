@@ -1,3 +1,16 @@
+# Stable release v17.3.11
+## Date: 29/04/2021
+
+### Updates and fixes
+
+- **Events:** Update nav chain classes
+- **Events:** Update `sendPerfPercentPhotosRendered()`
+
+### Examples
+
+- **Example:** Update editProfileExample
+- **Example:** Add goToUserProfileExample
+
 # Stable release v17.3.10
 ## Date: 26/04/2021
 

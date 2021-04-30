@@ -130,6 +130,41 @@ try {
         if ($c === 5) {
             break;
         }
+
+        if ($item->getMediaType() === 1) {
+            $imageResponse = $ig->request($item->getImageVersions2()->getCandidates()[0]->getUrl());
+
+            if (isset($imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
+            }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
+            } else {
+                continue;
+            }
+
+            $options = [
+                'is_grid_view'                      => true,
+                'rendered'                          => true,
+                'did_fallback_render'               => false,
+                'is_carousel'                       => false,
+                'image_size_kb'                     => $imageSize,
+                'estimated_bandwidth'               => mt_rand(1000, 4000),
+                'estimated_bandwidth_totalBytes_b'  => $ig->client->totalBytes,
+                'estimated_bandwidth_totalTime_ms'  => $ig->client->totalTime,
+            ];
+
+            $ig->event->sendPerfPercentPhotosRendered('profile', $item->getId(), $options);
+            $c++;
+        }
+    }
+
+    $c = 0;
+    foreach ($items as $item) {
+        if ($c === 5) {
+            break;
+        }
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
         $c++;
     }
@@ -225,18 +260,33 @@ try {
             break;
         }
 
-        $options = [
-            'is_grid_view'                      => true,
-            'rendered'                          => true,
-            'did_fallback_render'               => false,
-            'is_carousel'                       => $item->getMediaType() === 8 ? true : false,
-            'estimated_bandwidth'               => mt_rand(1000, 4000),
-            'estimated_bandwidth_totalBytes_b'  => $ig->client->totalBytes,
-            'estimated_bandwidth_totalTime_ms'  => $ig->client->totalTime,
-        ];
+        if ($item->getMediaType() === 1) {
+            $imageResponse = $ig->request($item->getImageVersions2()->getCandidates()[0]->getUrl());
 
-        $ig->event->sendPerfPercentPhotosRendered('profile', $item->getId(), $options);
-        $c++;
+            if (isset($imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
+            }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
+            } else {
+                continue;
+            }
+
+            $options = [
+                'is_grid_view'                      => true,
+                'rendered'                          => true,
+                'did_fallback_render'               => false,
+                'is_carousel'                       => false,
+                'image_size_kb'                     => $imageSize,
+                'estimated_bandwidth'               => mt_rand(1000, 4000),
+                'estimated_bandwidth_totalBytes_b'  => $ig->client->totalBytes,
+                'estimated_bandwidth_totalTime_ms'  => $ig->client->totalTime,
+            ];
+
+            $ig->event->sendPerfPercentPhotosRendered('profile', $item->getId(), $options);
+            $c++;
+        }
     }
 
     $c = 0;

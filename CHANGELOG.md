@@ -1,3 +1,11 @@
+# Stable release v17.3.12
+## Date: 30/04/2021
+
+### Examples
+
+- **Example:** Update goToUserProfileExample
+- **Example:** Add sendAudio for Direct
+
 # Stable release v17.3.11
 ## Date: 29/04/2021
 

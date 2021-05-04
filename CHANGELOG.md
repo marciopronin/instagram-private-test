@@ -1,3 +1,14 @@
+# Stable release v17.3.13
+## Date: 04/05/2021
+
+### Updates and fixes
+
+- **Utils:** Update `throwIfInvalidStoryCountdown()`
+
+### Examples
+
+- **Example:** Update uploadStoryCountdown
+
 # Stable release v17.3.12
 ## Date: 30/04/2021
 

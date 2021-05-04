@@ -994,6 +994,10 @@ class Utils
                 case 'start_background_color':
                 case 'end_background_color':
                 case 'digit_color':
+                    if (!preg_match('/^[0-9a-fA-F]{6}$/', substr($v, 1))) {
+                        throw new \InvalidArgumentException(sprintf('Invalid value "%s" for story countdown array-key "%s".', $v, $k));
+                    }
+                    break;
                 case 'digit_card_color':
                     if (!preg_match('/^[0-9a-fA-F]{8}$/', substr($v, 1))) {
                         throw new \InvalidArgumentException(sprintf('Invalid value "%s" for story countdown array-key "%s".', $v, $k));

@@ -1,3 +1,14 @@
+# Stable release v17.4.0
+## Date: 06/05/2021
+
+### New features
+
+- **Live:** Get and set live settings. Now it is possible to archive/unarchive live streams.
+
+### Responses
+
+- Added LiveArchiveSettingsResponse 
+
 # Stable release v17.3.14
 ## Date: 04/05/2021
 

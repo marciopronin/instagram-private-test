@@ -1025,4 +1025,47 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/charity_donations/")
             ->getResponse(new Response\CharityDonationsResponse());
     }
+
+    /**
+     * Get live archive settings.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\LiveArchiveSettingsResponse
+     */
+    public function getLiveArchiveSettings()
+    {
+        return $this->ig->request('/archive/live/live_archive_settings/')
+            ->getResponse(new Response\LiveArchiveSettingsResponse());
+    }
+
+    /**
+     * Set live archive settings.
+     * 
+     * @param bool $archive Set wether to archive the live or not.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\LiveArchiveSettingsResponse
+     */
+    public function setLiveArchiveSettings(
+        $archive)
+    {
+
+        if (!is_bool($archive)) {
+            throw new \InvalidArgumentException('You must provide a valid value for archive.');
+        }
+
+        if ($archive === true) {
+            $setting = 'archive';
+        } else {
+            $setting = 'unarchive';
+        }
+
+        return $this->ig->request('/archive/live/live_archive_settings/')
+            ->addPost('live_archive_setting', $setting)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\LiveArchiveSettingsResponse());
+    }
 }

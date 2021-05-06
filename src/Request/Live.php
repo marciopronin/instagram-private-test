@@ -1035,7 +1035,7 @@ class Live extends RequestCollection
      */
     public function getLiveArchiveSettings()
     {
-        return $this->ig->request('/archive/live/live_archive_settings/')
+        return $this->ig->request('archive/live/live_archive_settings/')
             ->getResponse(new Response\LiveArchiveSettingsResponse());
     }
 
@@ -1062,10 +1062,42 @@ class Live extends RequestCollection
             $setting = 'unarchive';
         }
 
-        return $this->ig->request('/archive/live/live_archive_settings/')
+        return $this->ig->request('archive/live/live_archive_settings/')
             ->addPost('live_archive_setting', $setting)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\LiveArchiveSettingsResponse());
+    }
+
+    /**
+     * Get archived live streams.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\LiveArchiveResponse
+     */
+    public function getArchivedLives()
+    {
+        return $this->ig->request('archive/live/lives_archived/')
+            ->getResponse(new Response\LiveArchiveResponse());
+    }
+
+    /**
+     * Delete archived live.
+     * 
+     * @param string $archiveId The archived ID in Instagram's internal format (ie "17854587811139572").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function deleteArchivedLive(
+        $archiveId)
+    {
+        return $this->ig->request('archive/live/delete/')
+            ->addPost('archive_id', $archiveId)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
     }
 }

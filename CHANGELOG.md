@@ -1,3 +1,16 @@
+# Stable release v17.5.0
+## Date: 06/05/2021
+
+### New features
+
+- **Live:** Added `getArchivedLives()`
+- **Live:** Added `deleteArchivedLive()`
+
+### Updates and fixes
+
+- **Model:** Update Item model
+- **Model:** Update Broadcast model
+
 # Stable release v17.4.1
 ## Date: 06/05/2021
 

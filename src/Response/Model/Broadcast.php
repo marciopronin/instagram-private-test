@@ -139,6 +139,11 @@ class Broadcast extends AutoPropertyMapper
         'seen_ranked_position'              => '',
         'viewer_count'                      => 'int',
         'dash_manifest'                     => 'string',
+        'progressive_playback_url'          => 'string',
+        'last_seen_broadcast_ts'            => 'string',
+        'can_reply'                         => 'bool',
+        'can_reshare'                       => 'bool',
+        'can_share_to_igtv'                 => 'bool',
         /*
          * Unix timestamp of when the "post_live" will expire.
          */

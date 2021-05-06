@@ -960,6 +960,7 @@ class Item extends AutoPropertyMapper
         'feed_survey_integration_id'                  => 'string',
         'track'                                       => 'Track',
         'metadata'                                    => 'Metadata',
+        'broadcast'                                   => 'Broadcast',
     ];
 
     /**

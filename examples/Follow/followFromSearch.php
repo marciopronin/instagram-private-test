@@ -38,12 +38,17 @@ try {
         'topic_nav_order'           => 0,
     ];
 
+    $ig->event->sendNavigationTabClicked('main_home', 'main_search', 'feed_timeline');
     $ig->event->sendNavigation('main_search', 'feed_timeline', 'explore_popular', null, null, $topicData);
     $ig->discover->getNullStateDynamicSections();
     $ig->discover->getSuggestedSearches('blended');
-    $ig->discover->getExploreFeed('explore_all:0', $searchSession);
+    // Get explore feed sections and items.
+    $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', $searchSession)->getSectionalItems();
+    $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
+    
     $timeToSearch = mt_rand(2000, 3500);
     sleep($timeToSearch / 1000);
+
     $searchResponse = $ig->discover->search($usernameToFollow);
     $ig->event->sendNavigation('button', 'explore_popular', 'search');
     $ig->event->sendNavigation('button', 'search', 'blended_search');
@@ -107,22 +112,35 @@ try {
         if ($c === 5) {
             break;
         }
+
         if ($item->getMediaType() === 1) {
-            $candidates = $item->getImageVersions2()->getCandidates();
-            $smallCandidate = end($candidates);
-            $ig->request($smallCandidate->getUrl())->getRawResponse();
-            $ig->event->sendPerfPercentPhotosRendered('profile', $item->getId(), [
+            $imageResponse = $ig->request($item->getImageVersions2()->getCandidates()[0]->getUrl());
+
+            if (isset($imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
+            }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
+            } else {
+                continue;
+            }
+
+            $options = [
                 'is_grid_view'                      => true,
-                'image_heigth'                      => $smallCandidate->getHeight(),
-                'image_width'                       => $smallCandidate->getWidth(),
-                'load_time'                         => $ig->client->bandwidthM,
-                'estimated_bandwidth'               => $ig->client->bandwidthB,
+                'rendered'                          => true,
+                'did_fallback_render'               => false,
+                'is_carousel'                       => false,
+                'image_size_kb'                     => $imageSize,
+                'estimated_bandwidth'               => mt_rand(1000, 4000),
                 'estimated_bandwidth_totalBytes_b'  => $ig->client->totalBytes,
                 'estimated_bandwidth_totalTime_ms'  => $ig->client->totalTime,
-            ]);
+            ];
+
+            $ig->event->sendPerfPercentPhotosRendered('profile', $item->getId(), $options);
+            $c++;
         }
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
-        $c++;
     }
     $ig->event->reelTrayRefresh(
         [
@@ -132,11 +150,7 @@ try {
         'network'
     );
 
-    try {
-        $ig->internal->getQPFetch();
-    } catch (Exception $e) {
-    }
-    sleep(2);
+    usleep(1500000, 2500000);
     $ig->event->sendProfileView($userId);
     $ig->event->sendFollowButtonTapped($userId, 'profile',
         [
@@ -163,7 +177,6 @@ try {
         ]
     );
     $ig->people->follow($userId);
-
     $ig->event->sendProfileAction('follow', $userId,
         [
             [

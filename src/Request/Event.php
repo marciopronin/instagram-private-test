@@ -4428,7 +4428,7 @@ class Event extends RequestCollection
             'flag'                   => $flag,
         ];
 
-        $event = $this->_addEventBody('ig_navigation_tab_clicked', 'feed_timeline', $extra);
+        $event = $this->_addEventBody('ig_navigation_tab_clicked', $module, $extra);
         $this->_addEventData($event);
     }
 

@@ -8641,6 +8641,16 @@ Search.appendIndex(
             "summary": "Get\u0020charity\u0020donations.",
             "url": "../classes/InstagramAPI-Request-Live.html#method_getCharityDonations"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AgetLiveArchiveSettings\u0028\u0029",
+            "name": "getLiveArchiveSettings",
+            "summary": "Get\u0020live\u0020archive\u0020settings.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_getLiveArchiveSettings"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AsetLiveArchiveSettings\u0028\u0029",
+            "name": "setLiveArchiveSettings",
+            "summary": "Set\u0020live\u0020archive\u0020settings.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_setLiveArchiveSettings"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Location",
             "name": "Location",
             "summary": "Functions\u0020related\u0020to\u0020finding\u0020and\u0020exploring\u0020locations.",
@@ -17115,6 +17125,16 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-GetMusicGenresResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\LiveArchiveSettingsResponse",
+            "name": "LiveArchiveSettingsResponse",
+            "summary": "Core\u0020class\u0020for\u0020Instagram\u0020API\u0020responses.",
+            "url": "../classes/InstagramAPI-Response-LiveArchiveSettingsResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\LiveArchiveSettingsResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-LiveArchiveSettingsResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

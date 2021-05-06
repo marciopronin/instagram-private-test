@@ -1,3 +1,18 @@
+# Stable release v17.4.1
+## Date: 06/05/2021
+
+### Updates and fixes
+
+- **Event:** Upddate `sendNavigationTabClicked()`
+
+### Examples
+
+- **Example:** Update followFromSearch
+
+### Documentation
+
+- Update documentation
+
 # Stable release v17.4.0
 ## Date: 06/05/2021
 

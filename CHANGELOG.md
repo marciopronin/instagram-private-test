@@ -1,3 +1,19 @@
+# Stable release v17.5.1
+## Date: 10/05/2021
+
+### Updates and fixes
+
+- **Instagram:** Update `finishTwoFactorLogin()`. `waterfall_id` param has been included to provide consistent data along with events.
+- **Instagram:** Added public property loginWaterfallId
+
+### Examples
+
+- **Example:** Added followFromSearchMultipleUsers.
+
+### Documentation
+
+- **Documentation:** Update doc
+
 # Stable release v17.5.0
 ## Date: 06/05/2021
 

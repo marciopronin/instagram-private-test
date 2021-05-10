@@ -1881,6 +1881,11 @@ Search.appendIndex(
             "summary": "Previous\u0020navigation\u0020chain\u0020class.",
             "url": "../classes/InstagramAPI-Instagram.html#property_prevNavChainClass"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024loginWaterfallId",
+            "name": "loginWaterfallId",
+            "summary": "Login\u0020Waterfall\u0020ID",
+            "url": "../classes/InstagramAPI-Instagram.html#property_loginWaterfallId"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024account",
             "name": "account",
             "summary": "",
@@ -8650,6 +8655,16 @@ Search.appendIndex(
             "name": "setLiveArchiveSettings",
             "summary": "Set\u0020live\u0020archive\u0020settings.",
             "url": "../classes/InstagramAPI-Request-Live.html#method_setLiveArchiveSettings"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AgetArchivedLives\u0028\u0029",
+            "name": "getArchivedLives",
+            "summary": "Get\u0020archived\u0020live\u0020streams.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_getArchivedLives"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AdeleteArchivedLive\u0028\u0029",
+            "name": "deleteArchivedLive",
+            "summary": "Delete\u0020archived\u0020live.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_deleteArchivedLive"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Location",
             "name": "Location",
@@ -17135,6 +17150,16 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-LiveArchiveSettingsResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\LiveArchiveResponse",
+            "name": "LiveArchiveResponse",
+            "summary": "Core\u0020class\u0020for\u0020Instagram\u0020API\u0020responses.",
+            "url": "../classes/InstagramAPI-Response-LiveArchiveResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\LiveArchiveResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-LiveArchiveResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

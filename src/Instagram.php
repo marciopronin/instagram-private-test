@@ -448,6 +448,13 @@ class Instagram implements ExperimentsInterface
      */
     public $disableAutoRetriesMediaUpload = false;
 
+    /**
+     * Login Waterfall ID
+     *
+     * @var string
+     */
+    public $loginWaterfallId = '';
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -1422,6 +1429,7 @@ class Instagram implements ExperimentsInterface
 
             $startTime = round(microtime(true) * 1000);
             $waterfallId = \InstagramAPI\Signatures::generateUUID();
+            $this->loginWaterfallId = $waterfallId;
 
             $this->event->sendStringImpressions(['2131886669' => 2, '2131886920' => 1, '2131886921' => 1, '2131887780' => 2, '2131888077' => 1, '2131889757' => 1, '2131890710' => 1, '2131891487' => 1, '2131891804' => 1, '2131891827' => 1, '2131891831' => 1, '2131891833' => 2, '2131892682' => 1, '2131892683' => 1, '2131892684' => 1, '2131892685' => 1, '2131892686' => 1, '2131892687' => 1, '2131892688' => 1, '2131892690' => 1, '2131892691' => 1, '2131892692' => 1, '2131892693' => 1, '2131892694' => 1, '2131892695' => 1, '2131892696' => 1, '2131892697' => 1, '2131892698' => 1, '2131892699' => 1, '2131892700' => 1, '2131892701' => 1, '2131892702' => 1, '2131892703' => 1, '2131892706' => 1, '2131892707' => 1, '2131892708' => 1, '2131892709' => 2, '2131892710' => 1, '2131892711' => 1, '2131892724' => 1, '2131892811' => 1, '2131892903' => 1, '2131892911' => 1, '2131895359' => 1, '2131896430' => 1, '2131896493' => 1]);
             $this->event->sendFlowSteps('login', 'log_in_username_focus', $waterfallId, $startTime);
@@ -1736,16 +1744,17 @@ class Instagram implements ExperimentsInterface
 
         $response = $this->request('accounts/two_factor_login/')
             ->setNeedsAuth(false)
+            ->addPost('verification_code', $verificationCode)
+            ->addPost('phone_id', $this->phone_id)
+            ->addPost('_csrftoken', $this->client->getToken())
+            ->addPost('two_factor_identifier', $twoFactorIdentifier)
+            ->addPost('username', $username)
+            ->addPost('trust_this_device', ($trustDevice) ? '1' : '0')
+            ->addPost('guid', $this->uuid)
+            ->addPost('device_id', $this->device_id)
+            ->addPost('waterfall_id', $this->loginWaterfallId)
             // 1 - SMS, 2 - Backup codes, 3 - TOTP, 0 - ??
             ->addPost('verification_method', $verificationMethod)
-            ->addPost('phone_id', $this->phone_id)
-            ->addPost('verification_code', $verificationCode)
-            ->addPost('trust_this_device', ($trustDevice) ? '1' : '0')
-            ->addPost('two_factor_identifier', $twoFactorIdentifier)
-            ->addPost('_csrftoken', $this->client->getToken())
-            ->addPost('username', $username)
-            ->addPost('device_id', $this->device_id)
-            ->addPost('guid', $this->uuid)
             ->getResponse(new Response\LoginResponse());
 
         $this->_updateLoginState($response);

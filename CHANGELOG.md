@@ -1,3 +1,17 @@
+# Stable release v17.5.2
+## Date: 11/05/2021
+
+### Updates and fixes
+
+- **Event:** Update `sendProfileAction()`
+- **Event:** Update `_validateNavigationPath()`
+
+### Examples
+
+- **Example:** Add followFromExternalUrlProfile
+- **Example:** Update followFromSearch.
+- **Example:** Update followFromSearchMultipleUsers.
+
 # Stable release v17.5.1
 ## Date: 10/05/2021
 

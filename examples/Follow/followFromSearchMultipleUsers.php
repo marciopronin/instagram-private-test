@@ -59,7 +59,7 @@ try {
     {
      
         if ($firstSearch === false) {
-            usleep(1000000, 4000000);
+            usleep(mt_rand(1000000, 4000000));
         }
 
         $searchResponse = $ig->discover->search($usernameToFollow);
@@ -169,7 +169,7 @@ try {
             'network'
         );
 
-        usleep(1500000, 2500000);
+        usleep(mt_rand(1500000, 2500000));
         $ig->event->sendProfileView($userId);
         $ig->event->sendFollowButtonTapped($userId, 'profile',
             [
@@ -230,7 +230,7 @@ try {
             $ig->event->sendSimilarUserImpression($userId, $user->getPk());
         }
 
-        usleep(1000000, 2000000);
+        usleep(mt_rand(1000000, 2000000));
         $ig->event->updateAppState('profile', 'background');
         //
         // Other routines can be added here to increase entropy
@@ -238,7 +238,7 @@ try {
         // AI classifier.
         //
         $ig->event->forceSendBatch();
-        usleep(1000000, 4000000);
+        usleep(mt_rand(1000000, 4000000));
         $ig->event->updateAppState('profile', 'foreground');
         $ig->event->sendNavigation('back', 'profile', 'blended_search');
     }

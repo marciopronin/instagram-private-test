@@ -1567,6 +1567,7 @@ class Event extends RequestCollection
             'turn_on_story_notifications',
             'turn_off_story_notifications',
             'tap_profile_pic',
+            'notifications_entry_point_impression',
         ];
 
         if (!in_array($action, $actions)) {
@@ -1647,6 +1648,11 @@ class Event extends RequestCollection
                 $followStatus = 'following';
                 $clickpoint = 'following_sheet';
                 $module = 'media_notifications_sheet';
+                break;
+            case 'notifications_entry_point_impression':
+                $followStatus = 'following';
+                $clickpoint = 'user_profile_header';
+                $module = 'profile';
                 break;
         }
 
@@ -3304,6 +3310,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'your_story_dialog_option',
                     'dest_module'   => 'quick_capture_fragment',
+                ],
+                [
+                    'clickpoint'    => 'inferred_source',
+                    'dest_module'   => 'profile',
                 ],
             ],
             'reel_feed_timeline_item_header'    => [

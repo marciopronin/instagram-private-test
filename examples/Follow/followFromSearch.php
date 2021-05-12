@@ -150,7 +150,7 @@ try {
         'network'
     );
 
-    usleep(1500000, 2500000);
+    usleep(mt_rand(1500000, 2500000));
     $ig->event->sendProfileView($userId);
     $ig->event->sendFollowButtonTapped($userId, 'profile',
         [

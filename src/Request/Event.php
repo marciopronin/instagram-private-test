@@ -1568,6 +1568,8 @@ class Event extends RequestCollection
             'turn_off_story_notifications',
             'tap_profile_pic',
             'notifications_entry_point_impression',
+            'block_tap',
+            'block_confirm',
         ];
 
         if (!in_array($action, $actions)) {
@@ -1654,6 +1656,15 @@ class Event extends RequestCollection
                 $clickpoint = 'user_profile_header';
                 $module = 'profile';
                 break;
+            case 'block_tap':
+            case 'block_confirm':
+                $followStatus = 'following';
+                $clickpoint = 'profile';
+                $module = 'profile';
+                $extra['request_id'] = $options['request_id'];
+                $extra['direct_thread_id'] = null;
+                $extra['profile_user_type'] = 0;
+                break;
         }
 
         $extra['action'] = $action;
@@ -1663,6 +1674,42 @@ class Event extends RequestCollection
         $extra['click_point'] = $clickpoint;
 
         $event = $this->_addEventBody('ig_profile_action', $module, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send report user event (block).
+     *
+     * @param string $userId        User ID of account who made the comment in Instagram's internal format.
+     * @param string $action        'open_user_overflow', 'block_or_unblock_user'
+     * @param string $module        Module.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendUserReport(
+        $userId,
+        $action,
+        $module = 'profile')
+    {
+
+        $extra = [
+            'actor_id'         => $this->ig->account_id,
+            'action'           => $action,
+            'target_id'        => $userId,
+        ];
+
+        switch($action) {
+            case 'open_user_overflow':
+                break;
+            case 'block_or_unblock_user':
+                $extra['follow_status'] = 'followstatusnotfollowing';
+                $extra['nav_stack_depth'] = -1;
+                $extra['nav_stack'] = null;
+                break;
+        }
+
+        $event = $this->_addEventBody('report_user', $module, $extra);
         $this->_addEventData($event);
     }
 

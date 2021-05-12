@@ -1,3 +1,19 @@
+# Stable release v17.6.0
+## Date: 12/05/2021
+
+### New features
+
+- **Event:** Add `sendUserReport()`
+
+### Updates and fixes
+
+- **Event:** Update `sendProfileAction()`
+
+### Examples
+
+- **Example:** Update removeFollowings
+- **Example:** Add blockUser
+
 # Stable release v17.5.2
 ## Date: 11/05/2021
 

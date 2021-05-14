@@ -1,3 +1,18 @@
+# Stable release v17.6.1
+## Date: 14/05/2021
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+
+### Example
+
+- **Example:** Add likeFromSelfFollowers
+- **Example:** Add likeFromSelfFollowings
+- **Example:** Update removeFollowings
+- **Example:** Update removeFollowers
+- **Example:** Update blockUser
+
 # Stable release v17.6.0
 ## Date: 12/05/2021
 

@@ -29,7 +29,7 @@ try {
 
     $ig->highlight->getSelfUserFeed();
     $ig->people->getSelfInfo();
-    $userFeed = $ig->people->getSelfUserFeed();
+    $userFeed = $ig->timeline->getSelfUserFeed();
     $ig->discover->profileSuBadge();
     $ig->story->getArchiveBadgeCount();
     $items = $userFeed->getItems();

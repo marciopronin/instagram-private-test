@@ -3496,6 +3496,14 @@ class Event extends RequestCollection
                     'clickpoint'    => 'button',
                     'dest_module'   => 'edit_profile',
                 ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'self_following',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'self_followers',
+                ],
             ],
             'edit_profile'  => [
                 [

@@ -1,3 +1,10 @@
+# Stable release v17.6.2
+## Date: 15/05/2021
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+
 # Stable release v17.6.1
 ## Date: 14/05/2021
 

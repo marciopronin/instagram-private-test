@@ -1,3 +1,11 @@
+# Stable release v17.6.3
+## Date: 18/05/2021
+
+### Updates and fixes
+
+- **Constants:** Update Instagram version to 187.0.0.32.120
+- **Event:** Update nav chain classes.
+
 # Stable release v17.6.2
 ## Date: 15/05/2021
 

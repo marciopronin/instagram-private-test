@@ -171,6 +171,11 @@ class ServerMessageThrower
                     // pass
                 }
             }
+            if ($serverResponse->hasChallenge()
+                && $serverResponse->getMessage() === '') {
+                $serverErrorType = $serverResponse->getChallengeType();
+                $messages[] = $serverErrorType;
+            }
         }
 
         $exceptionClass = null;

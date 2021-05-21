@@ -2,6 +2,7 @@
 
 namespace InstagramAPI\Request;
 
+use InstagramAPI\Constants;
 use InstagramAPI\Response;
 use InstagramAPI\Utils;
 
@@ -195,11 +196,13 @@ class Checkpoint extends RequestCollection
         return $this->ig->request('https://i.instagram.com'.$checkpointUrl)
             ->setNeedsAuth(false)
             ->setSignedPost(false)
+            ->setAddDefaultHeaders(false)
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addHeader('X-IG-WWW-Claim', 0)
-            ->addHeader('User-Agent', $this->ig->device->getUserAgent())
+            ->addHeader('User-Agent', sprintf('%s %s', Constants::WEB_CHALLENGE_USER_AGENT, $this->ig->device->getUserAgent()))
             ->addHeader('X-CSRFToken', $this->ig->client->getToken())
-            ->addHeader('X-IG-App-ID', '936619743392459');
+            ->addHeader('X-IG-App-ID', '1217981644879628')
+            ->addHeader('X-Instagram-AJAX', 'c795b4273c42');
     }
 
     /**

@@ -31,5 +31,10 @@ class ChallengeFields extends AutoPropertyMapper
         'disable_num_days_remaining'    => 'int',
         'sitekey'                       => 'string',
         'code_whitelisted'              => 'bool',
+        'security_code'                 => 'string',
+        'sms_resend_delay'              => 'int',
+        'phone_number_preview'          => 'string',
+        'resend_delay'                  => 'int',
+        'form_type'                     => 'string',
     ];
 }

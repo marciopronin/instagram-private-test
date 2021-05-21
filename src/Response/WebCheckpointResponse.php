@@ -28,16 +28,25 @@ class WebCheckpointResponse extends Response
 {
     const JSON_PROPERTY_MAP = [
         'entry_data'           => 'Model\ChallengeEntryData',
+        'challenge'            => 'Model\WebChallenge'
     ];
 
     public function getChallengeType()
     {
-        return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('challengeType');
+        if ($this->_getProperty('entry_data') !== null) {
+            return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('challengeType');
+        } else {
+            return $this->_getProperty('challenge')->_getProperty('challengeType');
+        }
     }
 
     public function getChallengeUrl()
     {
-        return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('navigation')->_getProperty('forward');
+        if ($this->_getProperty('entry_data') !== null) {
+            return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('navigation')->_getProperty('forward');
+        } else {
+            return $this->_getProperty('challenge')->_getProperty('navigation')->_getProperty('forward');
+        }
     }
 
     public function getSiteKey()
@@ -47,6 +56,10 @@ class WebCheckpointResponse extends Response
 
     public function getVerificationChoice()
     {
-        return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('fields')->_getProperty('choice');
+        if ($this->_getProperty('entry_data') !== null) {
+            return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('fields')->_getProperty('choice');
+        } else {
+            return $this->_getProperty('challenge')->_getProperty('fields')->_getProperty('choice');
+        }
     }
 }

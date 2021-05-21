@@ -1,3 +1,12 @@
+# Stable release v17.6.4
+## Date: 21/05/2021
+
+### Updates and fixes
+
+- **Constants:** Update Constants
+- **ServerMessageThrower:** Update class thrower for new challenges
+- **Checkpoint:** Update checkpoint class and models
+
 # Stable release v17.6.3
 ## Date: 18/05/2021
 

@@ -111,6 +111,7 @@ class Constants
 
     // Web.
     const WEB_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0';
+    const WEB_CHALLENGE_USER_AGENT = 'Mozilla/5.0 (Linux; Android 10; MI 8 Build/QKQ1.190828.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/90.0.4430.91 Mobile Safari/537.36';
 
     // Share Type Constants.
     const SHARE_TYPE = [

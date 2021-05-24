@@ -611,6 +611,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Constants.html#constant_WEB_USER_AGENT"
         },                {
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AWEB_CHALLENGE_USER_AGENT",
+            "name": "WEB_CHALLENGE_USER_AGENT",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Constants.html#constant_WEB_CHALLENGE_USER_AGENT"
+        },                {
             "fqsen": "\\InstagramAPI\\Constants\u003A\u003ASHARE_TYPE",
             "name": "SHARE_TYPE",
             "summary": "",
@@ -7575,6 +7580,11 @@ Search.appendIndex(
             "name": "sendProfileAction",
             "summary": "Send\u0020profile\u0020action.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendProfileAction"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendUserReport\u0028\u0029",
+            "name": "sendUserReport",
+            "summary": "Send\u0020report\u0020user\u0020event\u0020\u0028block\u0029.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendUserReport"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendPhoneId\u0028\u0029",
             "name": "sendPhoneId",

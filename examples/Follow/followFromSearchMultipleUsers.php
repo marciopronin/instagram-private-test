@@ -128,7 +128,7 @@ try {
 
         $c = 0;
         foreach ($items as $item) {
-            if ($c === 5) {
+            if ($c === 6) {
                 break;
             }
 

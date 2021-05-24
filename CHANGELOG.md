@@ -1,3 +1,18 @@
+# Stable release v17.6.5
+## Date: 24/05/2021
+
+### Updates and fixes
+
+- Update Dockerfile
+
+### Examples
+
+- Update examples
+
+### Documentation
+
+- Update documentation
+
 # Stable release v17.6.4
 ## Date: 21/05/2021
 

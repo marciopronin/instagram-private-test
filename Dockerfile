@@ -1,25 +1,26 @@
-# The php:7.0-apache Docker image is based on debian:jessie.
-# See: https://github.com/docker-library/php/blob/20b89e64d16dc9310ba6493a38385e36304dded7/7.0/Dockerfile
+# The php:7.3-apache Docker image is based on debian:buster.
 
-FROM php:7.1-apache-jessie
-RUN echo "deb http://deb.debian.org/debian jessie main" > /etc/apt/sources.list \
-    && echo "deb http://security.debian.org jessie/updates main" >> /etc/apt/sources.list \
-    && apt-get update \
+FROM php:7.3-apache-buster
+
+RUN apt-get update && apt-get install -y libsodium-dev
+RUN pecl install -f libsodium
+
+RUN apt-get update \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
-        libpng12-dev \
+        libpng-dev \
         git \
-        libav-tools \
         unzip \
         wget \
         xz-utils \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt \
+    && docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install -j$(nproc) bcmath \
-    && docker-php-ext-install -j$(nproc) exif
+    && docker-php-ext-install -j$(nproc) exif \
+    && docker-php-ext-install -j$(nproc) sodium
 
 RUN wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz \
       && tar Jxvf ./ffmpeg-release-amd64-static.tar.xz \

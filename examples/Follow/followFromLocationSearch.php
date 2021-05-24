@@ -42,7 +42,10 @@ try {
     $ig->event->sendNavigation('main_search', 'feed_timeline', 'explore_popular', null, null, $topicData);
     $ig->discover->getNullStateDynamicSections();
     $ig->discover->getSuggestedSearches('blended');
-    $ig->discover->getExploreFeed('explore_all:0', $searchSession);
+    
+    $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', $searchSession)->getSectionalItems();
+    $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
+    
     $timeToSearch = mt_rand(2000, 3500);
     sleep($timeToSearch / 1000);
 

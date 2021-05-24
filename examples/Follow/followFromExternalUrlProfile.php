@@ -49,7 +49,7 @@ try {
 
     $c = 0;
     foreach ($items as $item) {
-        if ($c === 5) {
+        if ($c === 6) {
             break;
         }
 
@@ -82,6 +82,7 @@ try {
         }
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
     }
+
     $ig->event->reelTrayRefresh(
         [
             'tray_session_id'   => $traySession,

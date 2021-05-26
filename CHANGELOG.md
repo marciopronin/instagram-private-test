@@ -1,3 +1,10 @@
+# Stable release v17.6.6
+## Date: 26/05/2021
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `autoThrow()`. Fixes an issue managing exceptions when 2FA is required.
+
 # Stable release v17.6.5
 ## Date: 24/05/2021
 

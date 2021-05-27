@@ -1,3 +1,11 @@
+# Stable release v17.6.7
+## Date: 27/05/2021
+
+### Updates and fixes
+
+- **Direct:** Update `_sendDirectItems()`
+- **Direct:** Update `_sendDirectItem()`
+
 # Stable release v17.6.6
 ## Date: 26/05/2021
 

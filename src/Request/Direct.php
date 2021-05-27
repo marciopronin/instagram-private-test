@@ -1710,6 +1710,7 @@ class Direct extends RequestCollection
             ->addPost('offline_threading_id', $options['offline_threading_id'])
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('device_id', $this->ig->device_id)
             ->getResponse(new Response\DirectSendItemResponse());
     }
@@ -1819,6 +1820,7 @@ class Direct extends RequestCollection
             ->addPost('mutation_token', $options['mutation_token'])
             ->addPost('offline_threading_id', $options['offline_threading_id'])
             ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\DirectSendItemsResponse());
     }

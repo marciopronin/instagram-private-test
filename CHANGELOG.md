@@ -1,3 +1,22 @@
+# Stable release v17.7.0
+## Date: 31/05/2021
+
+### New features
+
+- **Event:** Added `preparePerfWithImpressions()`
+
+### Updates and fixes
+
+- Applied codestyle
+
+### Examples
+
+- **Example:** Added goToProfileFromExternalUrl
+
+### Documentation
+
+- Update documentation
+
 # Stable release v17.6.7
 ## Date: 27/05/2021
 

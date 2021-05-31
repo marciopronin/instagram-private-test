@@ -449,7 +449,7 @@ class Instagram implements ExperimentsInterface
     public $disableAutoRetriesMediaUpload = false;
 
     /**
-     * Login Waterfall ID
+     * Login Waterfall ID.
      *
      * @var string
      */
@@ -1369,12 +1369,12 @@ class Instagram implements ExperimentsInterface
         $link,
         $appRefreshInterval = 1800
     ) {
-       if (empty($username) || empty($link)) {
-           throw new \InvalidArgumentException('You must provide a link to loginWithEmailLink().');
-       }
+        if (empty($username) || empty($link)) {
+            throw new \InvalidArgumentException('You must provide a link to loginWithEmailLink().');
+        }
 
-       return $this->_loginWithEmailLink($username, $link, false, $appRefreshInterval);
-   }
+        return $this->_loginWithEmailLink($username, $link, false, $appRefreshInterval);
+    }
 
     /**
      * Internal login handler.
@@ -1650,7 +1650,6 @@ class Instagram implements ExperimentsInterface
 
                 $response = $request->getResponse(new Response\LoginResponse());
                 $this->settings->set('business_account', $response->getLoggedInUser()->getIsBusiness());
-
             } catch (\InstagramAPI\Exception\InstagramException $e) {
                 if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
                     // Login failed because two-factor login is required.

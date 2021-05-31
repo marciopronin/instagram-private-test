@@ -1041,7 +1041,7 @@ class Live extends RequestCollection
 
     /**
      * Set live archive settings.
-     * 
+     *
      * @param bool $archive Set wether to archive the live or not.
      *
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1051,7 +1051,6 @@ class Live extends RequestCollection
     public function setLiveArchiveSettings(
         $archive)
     {
-
         if (!is_bool($archive)) {
             throw new \InvalidArgumentException('You must provide a valid value for archive.');
         }
@@ -1084,7 +1083,7 @@ class Live extends RequestCollection
 
     /**
      * Delete archived live.
-     * 
+     *
      * @param string $archiveId The archived ID in Instagram's internal format (ie "17854587811139572").
      *
      * @throws \InstagramAPI\Exception\InstagramException

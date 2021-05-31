@@ -47,7 +47,7 @@ try {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
             } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
-            }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
             } else {
                 continue;
@@ -70,7 +70,7 @@ try {
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'self_profile');
     }
 
-    $navstack = 
+    $navstack =
         [
             [
                 'module'        => 'self_profile',
@@ -118,40 +118,40 @@ try {
     $ig->people->getFriendships($followerList);
 
     $cc = 0;
-    foreach($followerList as $follower) {
+    foreach ($followerList as $follower) {
         if ($cc === 5) {
             break;
         }
         $ig->event->sendNavigation('button', 'unified_follow_lists', 'profile');
 
         $ig->event->sendProfileView($follower);
-    
+
         $ig->people->getFriendship($follower);
         $ig->highlight->getUserFeed($follower);
         $ig->people->getInfoById($follower);
         $ig->story->getUserStoryFeed($follower);
         $userFeed = $ig->timeline->getUserFeed($follower);
         $items = $userFeed->getItems();
-    
+
         $c = 0;
         foreach ($items as $item) {
             if ($c === 6) {
                 break;
             }
-    
+
             if ($item->getMediaType() === 1) {
                 $imageResponse = $ig->request($item->getImageVersions2()->getCandidates()[0]->getUrl());
-    
+
                 if (isset($imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'])) {
                     $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
                 } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
                     $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
-                }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+                } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
                     $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
                 } else {
                     continue;
                 }
-    
+
                 $options = [
                     'is_grid_view'                      => true,
                     'rendered'                          => true,
@@ -162,19 +162,19 @@ try {
                     'estimated_bandwidth_totalBytes_b'  => $ig->client->totalBytes,
                     'estimated_bandwidth_totalTime_ms'  => $ig->client->totalTime,
                 ];
-    
+
                 $ig->event->sendPerfPercentPhotosRendered('profile', $item->getId(), $options);
                 $c++;
             }
             $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
         }
-    
+
         $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
         $ig->event->sendOrganicMediaImpression($items[0], 'feed_contextual_profile');
-    
+
         $commentInfos = $ig->media->getCommentInfos($items[0]->getId())->getCommentInfos()->getData();
         $ig->event->sendOrganicNumberOfLikes($items[0], 'feed_contextual_profile');
-    
+
         foreach ($commentInfos as $key => $value) {
             $previewComments = $value->getPreviewComments();
             if ($previewComments !== null) {
@@ -183,7 +183,7 @@ try {
                 }
             }
         }
-    
+
         // Since we are going to like the first item of the media, the position in
         // the feed is 0. If you want to like the second item, it would position 1, and so on.
         $ig->media->like($items[0]->getId(), 0);

@@ -45,7 +45,7 @@ try {
     // Get explore feed sections and items.
     $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', $searchSession)->getSectionalItems();
     $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
-    
+
     $timeToSearch = mt_rand(2000, 3500);
     sleep($timeToSearch / 1000);
 
@@ -120,7 +120,7 @@ try {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
             } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
-            }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
             } else {
                 continue;

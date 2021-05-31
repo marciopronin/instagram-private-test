@@ -47,7 +47,7 @@ try {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
             } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
-            }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
             } else {
                 continue;
@@ -70,7 +70,7 @@ try {
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'self_profile');
     }
 
-    $navstack = 
+    $navstack =
         [
             [
                 'module'        => 'self_profile',
@@ -129,7 +129,7 @@ try {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
             } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
-            }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
             } else {
                 continue;
@@ -164,7 +164,7 @@ try {
 
     $blockRequestId = \InstagramAPI\Signatures::generateUUID();
     $ig->event->sendUserReport($userId, 'open_user_overflow');
-    $navstack = 
+    $navstack =
     [
         [
             'module'        => 'profile',
@@ -191,7 +191,6 @@ try {
     $ig->people->block($userId);
     $ig->event->sendProfileAction('block_confirm', $userId, $navstack, ['request_id' => $blockRequestId]);
     $ig->event->sendUserReport($userId, 'block_or_unblock_user');
-
 
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.

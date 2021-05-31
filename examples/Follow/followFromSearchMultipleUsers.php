@@ -55,9 +55,7 @@ try {
 $firstSearch = false;
 
 try {
-    foreach($usersToFollow as $usernameToFollow) 
-    {
-     
+    foreach ($usersToFollow as $usernameToFollow) {
         if ($firstSearch === false) {
             usleep(mt_rand(1000000, 4000000));
         }
@@ -139,7 +137,7 @@ try {
                     $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
                 } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
                     $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
-                }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+                } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
                     $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
                 } else {
                     continue;

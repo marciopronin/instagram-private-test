@@ -3,7 +3,7 @@
 set_time_limit(0);
 date_default_timezone_set('UTC');
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 /////// CONFIG ///////
 $username = '';
@@ -11,6 +11,10 @@ $password = '';
 $debug = true;
 $truncatedDebug = false;
 //////////////////////
+
+/////// USER ////////
+$user = '';
+////////////////////
 
 $ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
 
@@ -21,35 +25,28 @@ try {
     exit(0);
 }
 
+$ig->event->updateAppState('background');
+$ig->event->forceSendBatch();
+usleep(mt_rand(4000000, 7000000)); // Can be increased for better emulation.
+
 try {
-    $ig->event->sendNavigation('main_inbox', 'feed_timeline', 'newsfeed_you');
+    $ig->event->updateAppState('foreground');
+    $ig->event->qeExposure($ig->account_id, 'ig_android_qr_code_nametag', 'deploy');
+    $ig->event->sendNavigation('inferred_source', 'feed_timeline', 'profile');
 
-    $suggedtedUsers = $ig->people->getRecentActivityInbox()->getSuggestedUsers()->getSuggestionCards();
-
-    $users = [];
-    foreach ($suggedtedUsers as $suggestedUser) {
-        $users[] = $suggestedUser->getUserCard()->getUser();
+    try {
+        $ig->internal->getQPFetch();
+    } catch (Exception $e) {
+        // pass
     }
 
-    $userId = $users[0]->getPk();
+    $userInfo = $ig->people->getInfoByName($user, 'deep_link_util');
+    $userId = $userInfo->getUser()->getPk();
+    $ig->event->sendBadgingEvent('impression', 'photos_of_you', 0, 'profile_menu', 'dot_badge');
 
-    $ig->event->sendNavigation('button', 'newsfeed_you', 'profile');
-
-    $ig->people->getFriendship($userId);
+    $traySession = \InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
-    $ig->people->getInfoById($userId);
     $ig->story->getUserStoryFeed($userId);
-    $ig->event->sendProfileView($userId);
-    $navstack = [
-        [
-            'module'        => 'newsfeed_you',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'feed_timeline',
-            'click_point'   => 'main_inbox',
-        ],
-    ];
     $userFeed = $ig->timeline->getUserFeed($userId);
     $items = $userFeed->getItems();
 
@@ -89,9 +86,38 @@ try {
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
     }
 
-    $ig->event->sendFollowButtonTapped($userId, 'profile', $navstack);
-    $ig->people->follow($userId);
-    $ig->event->sendProfileAction('follow', $userId, $navstack);
+    $ig->event->reelTrayRefresh(
+        [
+            'tray_session_id'   => $traySession,
+            'tray_refresh_time' => number_format(mt_rand(100, 500) / 1000, 3),
+        ],
+        'network'
+    );
+
+    usleep(mt_rand(1500000, 2500000));
+    $ig->event->sendProfileView($userId);
+
+    $navstack =
+        [
+            [
+                'module'        => 'profile',
+                'click_point'   => 'inferred_source',
+            ],
+            [
+                'module'        => 'feed_timeline',
+                'click_point'   => 'inferred_source',
+            ],
+            [
+                'module'        => 'feed_timeline',
+                'click_point'   => 'inferred_source',
+            ],
+            [
+                'module'        => 'login',
+                'click_point'   => 'cold start',
+            ],
+        ];
+
+    $ig->event->updateAppState('background');
     $ig->event->forceSendBatch();
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";

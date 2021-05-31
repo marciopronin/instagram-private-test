@@ -1735,7 +1735,7 @@ class Utils
             $excludeText = [$excludeText];
         }
 
-        foreach($excludeText as $key => $val) {
+        foreach ($excludeText as $key => $val) {
             $excludeText[$key] = '/\b'.$val.'\b/';
         }
 

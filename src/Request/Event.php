@@ -289,7 +289,7 @@ class Event extends RequestCollection
            || $name === 'android_string_impressions' && $module === 'IgResourcesAnalyticsModule') ?
         [
             'tags'  => (
-              $name === 'android_string_impressions' 
+              $name === 'android_string_impressions'
               || $name === 'instagram_wellbeing_warning_system_success_creation'
               || $name === 'direct_inbox_tab_impression'
               || $name === 'ig_direct_inbox_fetch_success_rate'
@@ -303,6 +303,7 @@ class Event extends RequestCollection
      * Adds event to the event batch and sends it if reached 50 events.
      *
      * @param array $event Batch data.
+     * @param mixed $batch
      */
     protected function _addEventData(
         $event,
@@ -310,7 +311,7 @@ class Event extends RequestCollection
     {
         $this->ig->eventBatch[$batch][] = $event;
 
-        foreach($this->ig->eventBatch as $batch) {
+        foreach ($this->ig->eventBatch as $batch) {
             if (count($batch) === 50) {
                 $this->_sendBatchEvents();
                 $this->ig->eventBatch = [];
@@ -369,7 +370,7 @@ class Event extends RequestCollection
         $batchFilename = sprintf('%s_%s_regular.batch.gz', Signatures::generateUUID(), $this->ig->batchIndex);
 
         $batches = [];
-        foreach($this->ig->eventBatch as $batch) {
+        foreach ($this->ig->eventBatch as $batch) {
             if (!empty($batch)) {
                 $batches[] = $this->_addBatchBody($batch);
             }
@@ -851,14 +852,13 @@ class Event extends RequestCollection
             || $module === 'reel_liker_list'
             || $module === 'reel_hashtag_feed'
             || $module === 'reel_comment') {
-                
             $extra = [
                 'm_pk'                          => $item->getId(),
                 'a_pk'                          => $item->getUser()->getPk(),
                 'm_ts'                          => (int) $item->getTakenAt(),
                 'm_t'                           => $item->getMediaType(),
                 'tracking_token'                => $item->getOrganicTrackingToken(),
-                'action'					    => 'webclick',
+                'action'					                   => 'webclick',
                 'source_of_action'              => $module,
                 'follow_status'                 => isset($options['following']) ? 'following' : 'not_following',
                 'viewer_session_id'             => $options['viewer_session_id'],
@@ -1677,9 +1677,9 @@ class Event extends RequestCollection
     /**
      * Send report user event (block).
      *
-     * @param string $userId        User ID of account who made the comment in Instagram's internal format.
-     * @param string $action        'open_user_overflow', 'block_or_unblock_user'
-     * @param string $module        Module.
+     * @param string $userId User ID of account who made the comment in Instagram's internal format.
+     * @param string $action 'open_user_overflow', 'block_or_unblock_user'
+     * @param string $module Module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1689,14 +1689,13 @@ class Event extends RequestCollection
         $action,
         $module = 'profile')
     {
-
         $extra = [
             'actor_id'         => $this->ig->account_id,
             'action'           => $action,
             'target_id'        => $userId,
         ];
 
-        switch($action) {
+        switch ($action) {
             case 'open_user_overflow':
                 break;
             case 'block_or_unblock_user':
@@ -1893,7 +1892,7 @@ class Event extends RequestCollection
                 'entity_page_name'          => $item->getUser()->getUsername(),
                 'entity_page_id'            => $item->getUser()->getPk(),
                 'entity_id'                 => $item->getUser()->getPk(),
-                'is_acp_delivered'          => false
+                'is_acp_delivered'          => false,
             ];
         } elseif (
             $module === 'reel_feed_timeline'
@@ -1902,7 +1901,6 @@ class Event extends RequestCollection
             || $module === 'reel_liker_list'
             || $module === 'reel_hashtag_feed'
             || $module === 'reel_comment') {
-
             if (!isset($options['story_ranking_token']) && !isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
                 throw new \InvalidArgumentException('Required options were not set.');
             }
@@ -1931,12 +1929,12 @@ class Event extends RequestCollection
                 'time_elapsed'                  => 0,
                 'reel_start_position'           => 0,
                 'is_dark_mode'                  => 0,
-	            'is_acp_delivered'              => false,
+                'is_acp_delivered'              => false,
             ];
 
-            if(!empty($options['story_ranking_token'])) {
-	            $extra['story_ranking_token'] = $options['story_ranking_token'];
-	        }
+            if (!empty($options['story_ranking_token'])) {
+                $extra['story_ranking_token'] = $options['story_ranking_token'];
+            }
         } else {
             throw new \InvalidArgumentException('Module not supported.');
         }
@@ -1962,6 +1960,7 @@ class Event extends RequestCollection
      *                                                   'story_ranking_token' UUIDv4. Used on module 'reel_feed_timeline'.
      *                                                   'viewer_session_id' UUIDv4. Used on module 'reel_feed_timeline'.
      *                                                   'tray_session_id' UUIDv4. Used on module 'reel_feed_timeline'.
+     * @param mixed                             $module
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1976,29 +1975,29 @@ class Event extends RequestCollection
         }
 
         $extra = [
-            'm_pk'                      => $item->getId(),
-            'a_pk'                      => $item->getUser()->getPk(),
-            'm_ts'                      => (int) $item->getTakenAt(),
-            'm_t'                       => $item->getMediaType(),
-            'tracking_token'            => $item->getOrganicTrackingToken(),
-            'source_of_action'          => $module,
-            'follow_status'             => empty($options['following']) ? 'not_following' : 'following',
+            'm_pk'                         => $item->getId(),
+            'a_pk'                         => $item->getUser()->getPk(),
+            'm_ts'                         => (int) $item->getTakenAt(),
+            'm_t'                          => $item->getMediaType(),
+            'tracking_token'               => $item->getOrganicTrackingToken(),
+            'source_of_action'             => $module,
+            'follow_status'                => empty($options['following']) ? 'not_following' : 'following',
             'elapsed_time_since_last_item' => -1,
-            'viewer_session_id'         => $options['viewer_session_id'],
-            'tray_session_id'           => $options['tray_session_id'],
-            'reel_id'                   => $item->getUser()->getPk(),
-            'reel_position'             => isset($options['reel_position']) ? $options['reel_position'] : 0,
-            'reel_viewer_position'      => 0,
-            'reel_type'                 => 'story',
-            'reel_size'                 => isset($options['reel_size']) ? $options['reel_size'] : 0,
-            "is_video_to_carousel"      => false,
-            'tray_position'             => 1,
-            'session_reel_counter'      => 1,
-            'time_elapsed'              => mt_rand(5, 6) + mt_rand(100, 900) * 0.001,
-            'reel_start_position'       => 0,
-            'is_dark_mode'              => 0,
-            'dark_mode_state'           => -1,
-            'is_acp_delivered'          => false,
+            'viewer_session_id'            => $options['viewer_session_id'],
+            'tray_session_id'              => $options['tray_session_id'],
+            'reel_id'                      => $item->getUser()->getPk(),
+            'reel_position'                => isset($options['reel_position']) ? $options['reel_position'] : 0,
+            'reel_viewer_position'         => 0,
+            'reel_type'                    => 'story',
+            'reel_size'                    => isset($options['reel_size']) ? $options['reel_size'] : 0,
+            'is_video_to_carousel'         => false,
+            'tray_position'                => 1,
+            'session_reel_counter'         => 1,
+            'time_elapsed'                 => mt_rand(5, 6) + mt_rand(100, 900) * 0.001,
+            'reel_start_position'          => 0,
+            'is_dark_mode'                 => 0,
+            'dark_mode_state'              => -1,
+            'is_acp_delivered'             => false,
         ];
 
         $event = $this->_addEventBody('instagram_organic_sub_impression', $module, $extra);
@@ -2014,6 +2013,7 @@ class Event extends RequestCollection
      *                                                   'story_ranking_token' UUIDv4. Used on module 'reel_feed_timeline'.
      *                                                   'viewer_session_id' UUIDv4. Used on module 'reel_feed_timeline'.
      *                                                   'tray_session_id' UUIDv4. Used on module 'reel_feed_timeline'.
+     * @param mixed                             $module
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -2023,7 +2023,6 @@ class Event extends RequestCollection
         array $options = [],
         $module = 'reel_profile')
     {
-
         if (!isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
             throw new \InvalidArgumentException('Required options were not set.');
         }
@@ -2042,7 +2041,7 @@ class Event extends RequestCollection
             'time_elapsed'              => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
             'time_remaining'            => mt_rand(1, 2),
             'time_paused'               => 0,
-            'client_sub_impression'     => isset($options['client_sub_impression']) ? true:false,
+            'client_sub_impression'     => isset($options['client_sub_impression']) ? true : false,
             'is_media_loaded'           => true,
             'is_highlights_sourced'     => false,
             'story_ranking_token'       => null,
@@ -2125,7 +2124,7 @@ class Event extends RequestCollection
             'm_ts'                              => (int) $item->getTakenAt(),
             'm_t'                               => $item->getMediaType(),
             'tracking_token'                    => $item->getOrganicTrackingToken(),
-            'action'					        => isset($options['action']) ? $options['action'] : 'tap_forward',
+            'action'					                       => isset($options['action']) ? $options['action'] : 'tap_forward',
             'elapsed_time_since_last_item'      => isset($options['elapsed_time_since_last_item']) ? $options['elapsed_time_since_last_item'] : -1,
             'source_of_action'                  => $module,
             'follow_status'                     => isset($options['following']) ? 'following' : 'not_following',
@@ -2158,7 +2157,7 @@ class Event extends RequestCollection
             'is_acp_delivered'                  => false,
         ];
 
-        if($item->getMediaType() == 2) {
+        if ($item->getMediaType() == 2) {
             $extra['has_playable_audio'] = $item->getHasAudio();
             $extra['viewer_volume_on'] = true;
         }
@@ -2240,9 +2239,11 @@ class Event extends RequestCollection
     /**
      * Send reel playback entry.
      *
-     * @param string $userId            User ID.
-     * @param string $viewerSessionId   UUID.
+     * @param string $userId          User ID.
+     * @param string $viewerSessionId UUID.
      * @param string traySessionId      UUID.
+     * @param mixed $traySessionId
+     * @param mixed $module
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -2342,6 +2343,50 @@ class Event extends RequestCollection
 
         $event = $this->_addEventBody('explore_topic_switch', 'explore_popular', $extra);
         $this->_addEventData($event);
+    }
+
+    /**
+     * Prepare and send perf and impressions events.
+     *
+     * @param \InstagramAPI\Response\Model\Item $item   The item object.
+     * @param string                            $module Module.
+     * @param mixed                             $items
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function preparePerfWithImpressions(
+        $items,
+        $module)
+    {
+        foreach ($items as $item) {
+            if ($item->getMediaType() === 1) {
+                $imageResponse = $this->ig->request($item->getImageVersions2()->getCandidates()[0]->getUrl());
+
+                if (isset($imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'])) {
+                    $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
+                } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
+                    $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
+                } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+                    $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
+                } else {
+                    continue;
+                }
+
+                $options = [
+                    'is_grid_view'                      => true,
+                    'rendered'                          => true,
+                    'did_fallback_render'               => false,
+                    'is_carousel'                       => false,
+                    'image_size_kb'                     => $imageSize,
+                    'estimated_bandwidth'               => mt_rand(1000, 4000),
+                    'estimated_bandwidth_totalBytes_b'  => $this->ig->client->totalBytes,
+                    'estimated_bandwidth_totalTime_ms'  => $this->ig->totalTime,
+                ];
+
+                $this->sendPerfPercentPhotosRendered($module, $item->getId(), $options);
+            }
+            $this->sendThumbnailImpression('instagram_thumbnail_impression', $item, $module);
+        }
     }
 
     /**
@@ -2855,6 +2900,7 @@ class Event extends RequestCollection
      * @param string                            $traySessionId   UUIDv4.
      * @param array                             $options         Options to configure the event.
      *                                                           'following', string, 'following' or 'not_following'.'.
+     * @param mixed                             $module
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -2867,32 +2913,32 @@ class Event extends RequestCollection
         $module = 'reel_profile')
     {
         $extra = [
-            'm_pk'                      => $item->getId(),
-            'a_pk'                      => $item->getUser()->getPk(),
-            'm_ts'                      => (int) $item->getTakenAt(),
-            'm_t'                       => $item->getMediaType(),
-            'tracking_token'            => $item->getOrganicTrackingToken(),
-            'source_of_action'          => $module,
-            'follow_status'             => empty($options['following']) ? 'not_following' : 'following',
+            'm_pk'                         => $item->getId(),
+            'a_pk'                         => $item->getUser()->getPk(),
+            'm_ts'                         => (int) $item->getTakenAt(),
+            'm_t'                          => $item->getMediaType(),
+            'tracking_token'               => $item->getOrganicTrackingToken(),
+            'source_of_action'             => $module,
+            'follow_status'                => empty($options['following']) ? 'not_following' : 'following',
             'elapsed_time_since_last_item' => -1,
-            'viewer_session_id'         => $viewerSessionId,
-            'tray_session_id'           => $traySessionId,
-            'reel_id'                   => $item->getId(),
-            'is_highlights_sourced'     => false,
-            'reel_position'             => isset($options['reel_position']) ? $options['reel_position'] : 0,
-            'reel_viewer_position'      => 0,
-            'reel_type'                 => 'story',
-            'reel_size'                 => isset($options['reel_size']) ? $options['reel_size'] : 1,
-            'tray_position'             => 1,
-            'session_reel_counter'      => 1,
-            'time_elapsed'              => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
-            'media_time_elapsed'        => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
-            'media_time_remaining'      => mt_rand(1, 2),
-            'media_dwell_time'          => mt_rand(5, 6) + mt_rand(100, 900) * 0.001,
-            'media_time_paused'         => 0,
-            'media_time_to_load'        => 0,
-            'reel_start_position'       => 0,
-            'is_acp_delivered'          => false,
+            'viewer_session_id'            => $viewerSessionId,
+            'tray_session_id'              => $traySessionId,
+            'reel_id'                      => $item->getId(),
+            'is_highlights_sourced'        => false,
+            'reel_position'                => isset($options['reel_position']) ? $options['reel_position'] : 0,
+            'reel_viewer_position'         => 0,
+            'reel_type'                    => 'story',
+            'reel_size'                    => isset($options['reel_size']) ? $options['reel_size'] : 1,
+            'tray_position'                => 1,
+            'session_reel_counter'         => 1,
+            'time_elapsed'                 => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
+            'media_time_elapsed'           => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
+            'media_time_remaining'         => mt_rand(1, 2),
+            'media_dwell_time'             => mt_rand(5, 6) + mt_rand(100, 900) * 0.001,
+            'media_time_paused'            => 0,
+            'media_time_to_load'           => 0,
+            'reel_start_position'          => 0,
+            'is_acp_delivered'             => false,
         ];
 
         $event = $this->_addEventBody('instagram_organic_sub_viewed_impression', $module, $extra);
@@ -6099,7 +6145,7 @@ class Event extends RequestCollection
             'is_ad'                             => false,
             'load_source'                       => 'network',
             'image_size_kb'                     => $options['image_size_kb'],
-            'load_time_ms'                      => isset($options['load_time']) ?  $options['load_time'] : 0,
+            'load_time_ms'                      => isset($options['load_time']) ? $options['load_time'] : 0,
             'estimated_bandwidth'               => $options['estimated_bandwidth'],
             'estimated_bandwidth_totalBytes_b'  => $options['estimated_bandwidth_totalBytes_b'],
             'estimated_bandwidth_totalTime_ms'  => $options['estimated_bandwidth_totalTime_ms'],

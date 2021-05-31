@@ -175,7 +175,7 @@ class Request
      * @param string    $url
      */
     public function __construct(
-        \InstagramAPI\Instagram $parent,
+        Instagram $parent,
         $url)
     {
         $this->_parent = $parent;

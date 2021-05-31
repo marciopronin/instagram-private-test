@@ -102,7 +102,7 @@ try {
     $storyItems = $storyFeed->getReel()->getItems();
     $userFeed = $ig->timeline->getUserFeed($userId);
     $items = $userFeed->getItems();
-    $following =  $storyFeed->getReel()->getUser()->getFriendshipStatus()->getFollowing();
+    $following = $storyFeed->getReel()->getUser()->getFriendshipStatus()->getFollowing();
 
     $c = 0;
     foreach ($items as $item) {
@@ -161,8 +161,7 @@ try {
     $videosConsumed = 0;
 
     foreach ($storyItems as $storyItem) {
-
-        if($storyItem->getMediaType() == 2) {
+        if ($storyItem->getMediaType() == 2) {
             $videosConsumed++;
         } else {
             $photosConsumed++;
@@ -170,7 +169,7 @@ try {
 
         $ig->event->sendOrganicMediaSubImpression($storyItem,
             [
-                'tray_session_id'   => $traySession, 
+                'tray_session_id'   => $traySession,
                 'viewer_session_id' => $viewerSession,
                 'following'         => $following,
                 'reel_size'         => $reelsize,
@@ -180,7 +179,7 @@ try {
 
         $ig->event->sendOrganicViewedSubImpression($storyItem, $viewerSession, $traySession,
             [
-                'tray_session_id'   => $traySession, 
+                'tray_session_id'   => $traySession,
                 'viewer_session_id' => $viewerSession,
                 'following'         => $following,
                 'reel_size'         => $reelsize,
@@ -188,19 +187,19 @@ try {
             ]
         );
 
-        $ig->event->sendOrganicTimespent($storyItem, $following, mt_rand(1000, 2000),'reel_profile', [],
+        $ig->event->sendOrganicTimespent($storyItem, $following, mt_rand(1000, 2000), 'reel_profile', [],
              [
-                'tray_session_id' => $traySession, 
+                'tray_session_id'   => $traySession,
                 'viewer_session_id' => $viewerSession,
-                'following' => $following,
-                'reel_size' => $reelsize,
-                'reel_position' => $cnt,
+                'following'         => $following,
+                'reel_size'         => $reelsize,
+                'reel_position'     => $cnt,
              ]
         );
 
         $ig->event->sendOrganicVpvdImpression($storyItem,
              [
-                'tray_session_id'       => $traySession, 
+                'tray_session_id'       => $traySession,
                 'viewer_session_id'     => $viewerSession,
                 'following'             => $following,
                 'reel_size'             => $reelsize,
@@ -210,11 +209,11 @@ try {
         );
 
         $ig->event->sendOrganicReelImpression($storyItem, $viewerSession, $traySession, $rankToken, true, 'reel_profile');
-        $ig->event->sendOrganicMediaImpression($storyItem, 'reel_profile', 
+        $ig->event->sendOrganicMediaImpression($storyItem, 'reel_profile',
             [
-                'story_ranking_token'   => $rankToken, 
-                'tray_session_id'       => $traySession, 
-                'viewer_session_id'     => $viewerSession
+                'story_ranking_token'   => $rankToken,
+                'tray_session_id'       => $traySession,
+                'viewer_session_id'     => $viewerSession,
             ]
         );
         $ig->event->sendOrganicViewedImpression($storyItem, 'reel_profile', $viewerSession, $traySession, $rankToken);
@@ -228,7 +227,7 @@ try {
     $ig->event->sendReelPlaybackNavigation(end($storyItems), $viewerSession, $traySession, $rankToken);
     $ig->event->sendReelSessionSummary($item, $viewerSession, $traySession, 'reel_profile',
         [
-            'tray_session_id'               => $traySession, 
+            'tray_session_id'               => $traySession,
             'viewer_session_id'             => $viewerSession,
             'following'                     => $following,
             'reel_size'                     => $reelsize,

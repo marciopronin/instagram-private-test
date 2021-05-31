@@ -7,18 +7,22 @@ use InstagramAPI\Response;
 /**
  * WebCheckpointResponse.
  *
+ * @method Model\WebChallenge getChallenge()
  * @method Model\ChallengeEntryData getEntryData()
  * @method mixed getMessage()
  * @method string getStatus()
  * @method Model\_Message[] get_Messages()
+ * @method bool isChallenge()
  * @method bool isEntryData()
  * @method bool isMessage()
  * @method bool isStatus()
  * @method bool is_Messages()
+ * @method $this setChallenge(Model\WebChallenge $value)
  * @method $this setEntryData(Model\ChallengeEntryData $value)
  * @method $this setMessage(mixed $value)
  * @method $this setStatus(string $value)
  * @method $this set_Messages(Model\_Message[] $value)
+ * @method $this unsetChallenge()
  * @method $this unsetEntryData()
  * @method $this unsetMessage()
  * @method $this unsetStatus()
@@ -28,7 +32,7 @@ class WebCheckpointResponse extends Response
 {
     const JSON_PROPERTY_MAP = [
         'entry_data'           => 'Model\ChallengeEntryData',
-        'challenge'            => 'Model\WebChallenge'
+        'challenge'            => 'Model\WebChallenge',
     ];
 
     public function getChallengeType()

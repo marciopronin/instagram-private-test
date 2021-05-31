@@ -38,32 +38,20 @@ try {
 
         $reelsize = count($tray->getItems());
         $cnt = 0;
-    
+
         $photosConsumed = 0;
         $videosConsumed = 0;
-    
+
         foreach ($tray->getItems() as $storyItem) {
-    
-            if($storyItem->getMediaType() == 2) {
+            if ($storyItem->getMediaType() == 2) {
                 $videosConsumed++;
             } else {
                 $photosConsumed++;
             }
-    
+
             $ig->event->sendOrganicMediaSubImpression($storyItem,
                 [
-                    'tray_session_id'   => $traySession, 
-                    'viewer_session_id' => $viewerSession,
-                    'following'         => true,
-                    'reel_size'         => $reelsize,
-                    'reel_position'     => $cnt,
-                ], 
-                'reel_feed_timeline'
-            );
-    
-            $ig->event->sendOrganicViewedSubImpression($storyItem, $viewerSession, $traySession,
-                [
-                    'tray_session_id'   => $traySession, 
+                    'tray_session_id'   => $traySession,
                     'viewer_session_id' => $viewerSession,
                     'following'         => true,
                     'reel_size'         => $reelsize,
@@ -71,20 +59,31 @@ try {
                 ],
                 'reel_feed_timeline'
             );
-    
+
+            $ig->event->sendOrganicViewedSubImpression($storyItem, $viewerSession, $traySession,
+                [
+                    'tray_session_id'   => $traySession,
+                    'viewer_session_id' => $viewerSession,
+                    'following'         => true,
+                    'reel_size'         => $reelsize,
+                    'reel_position'     => $cnt,
+                ],
+                'reel_feed_timeline'
+            );
+
             $ig->event->sendOrganicTimespent($storyItem, true, mt_rand(1000, 2000), 'reel_feed_timeline', [],
                  [
-                    'tray_session_id'   => $traySession, 
+                    'tray_session_id'   => $traySession,
                     'viewer_session_id' => $viewerSession,
                     'following'         => true,
                     'reel_size'         => $reelsize,
                     'reel_position'     => $cnt,
                  ]
             );
-    
+
             $ig->event->sendOrganicVpvdImpression($storyItem,
                  [
-                    'tray_session_id'       => $traySession, 
+                    'tray_session_id'       => $traySession,
                     'viewer_session_id'     => $viewerSession,
                     'following'             => true,
                     'reel_size'             => $reelsize,
@@ -93,27 +92,27 @@ try {
                  ],
                  'reel_feed_timeline'
             );
-    
+
             $ig->event->sendOrganicReelImpression($storyItem, $viewerSession, $traySession, $rankToken, true, 'reel_feed_timeline');
-            $ig->event->sendOrganicMediaImpression($storyItem, 'reel_feed_timeline', 
+            $ig->event->sendOrganicMediaImpression($storyItem, 'reel_feed_timeline',
                 [
-                    'story_ranking_token'   => $rankToken, 
-                    'tray_session_id'       => $traySession, 
-                    'viewer_session_id'     => $viewerSession
+                    'story_ranking_token'   => $rankToken,
+                    'tray_session_id'       => $traySession,
+                    'viewer_session_id'     => $viewerSession,
                 ]
             );
             $ig->event->sendOrganicViewedImpression($storyItem, 'reel_feed_timeline', $viewerSession, $traySession, $rankToken);
-    
+
             $cnt++;
         }
 
         sleep(mt_rand(1, 3));
-    
+
         $ig->story->markMediaSeen($tray->getItems());
         $ig->event->sendReelPlaybackNavigation(end($tray->getItems()), $viewerSession, $traySession, $rankToken);
         $ig->event->sendReelSessionSummary($storyItem, $viewerSession, $traySession, 'reel_feed_timeline',
             [
-                'tray_session_id'               => $traySession, 
+                'tray_session_id'               => $traySession,
                 'viewer_session_id'             => $viewerSession,
                 'following'                     => true,
                 'reel_size'                     => $reelsize,

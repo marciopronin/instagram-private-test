@@ -136,7 +136,7 @@ try {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
             } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
-            }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
             } else {
                 continue;
@@ -158,7 +158,7 @@ try {
         }
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
     }
-    
+
     $ig->event->sendProfileAction('tap_follow_details', $userId,
         [
             [

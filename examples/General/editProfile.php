@@ -13,11 +13,11 @@ $truncatedDebug = false;
 //////////////////////
 
 /////// DATA ///////
-$url        = null; // Leave it like this if you want to clear the value.
-$phone      = null; // Leave it like this if you want to clear the value.
-$name       = null; // Leave it like this if you want to clear the value.
-$biography  = null; // Leave it like this if you want to clear the value.
-$email      = ''; // REQUIRED.
+$url = null; // Leave it like this if you want to clear the value.
+$phone = null; // Leave it like this if you want to clear the value.
+$name = null; // Leave it like this if you want to clear the value.
+$biography = null; // Leave it like this if you want to clear the value.
+$email = ''; // REQUIRED.
 
 $profilePhoto = ''; // If you don't want to change it, leave it like this.
 ////////////////////
@@ -58,16 +58,16 @@ try {
     $ig->account->editProfile($url, $phone, $name, $biography, $email);
 
     $navstack = [
-        [ 
+        [
             'module'        => 'self_profile',
             'click_point'   => 'inferred_source',
         ],
         [
             'module'        => 'login',
-            'click_point'   => 'cold start'   
-        ]
+            'click_point'   => 'cold start',
+        ],
     ];
-        
+
     $ig->event->sendProfileAction('edit_profile', $ig->account_id, $navstack);
 
     $waterfallId = \InstagramAPI\Signatures::generateUUID();

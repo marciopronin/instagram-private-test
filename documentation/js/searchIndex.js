@@ -1888,7 +1888,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024loginWaterfallId",
             "name": "loginWaterfallId",
-            "summary": "Login\u0020Waterfall\u0020ID",
+            "summary": "Login\u0020Waterfall\u0020ID.",
             "url": "../classes/InstagramAPI-Instagram.html#property_loginWaterfallId"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024account",
@@ -7650,6 +7650,11 @@ Search.appendIndex(
             "name": "sendExploreSwitch",
             "summary": "Send\u0020explore\u0020switch.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendExploreSwitch"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003ApreparePerfWithImpressions\u0028\u0029",
+            "name": "preparePerfWithImpressions",
+            "summary": "Prepare\u0020and\u0020send\u0020perf\u0020and\u0020impressions\u0020events.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_preparePerfWithImpressions"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AprepareAndSendThumbnailImpression\u0028\u0029",
             "name": "prepareAndSendThumbnailImpression",
@@ -17153,7 +17158,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Response\\LiveArchiveSettingsResponse",
             "name": "LiveArchiveSettingsResponse",
-            "summary": "Core\u0020class\u0020for\u0020Instagram\u0020API\u0020responses.",
+            "summary": "LiveArchiveSettingsResponse.",
             "url": "../classes/InstagramAPI-Response-LiveArchiveSettingsResponse.html"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\LiveArchiveSettingsResponse\u003A\u003AJSON_PROPERTY_MAP",
@@ -17163,7 +17168,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Response\\LiveArchiveResponse",
             "name": "LiveArchiveResponse",
-            "summary": "Core\u0020class\u0020for\u0020Instagram\u0020API\u0020responses.",
+            "summary": "LiveArchiveResponse.",
             "url": "../classes/InstagramAPI-Response-LiveArchiveResponse.html"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\LiveArchiveResponse\u003A\u003AJSON_PROPERTY_MAP",

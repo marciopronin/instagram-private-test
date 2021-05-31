@@ -13,7 +13,7 @@ $truncatedDebug = false;
 //////////////////////
 
 /////// USER ////////
-$user = '';         
+$user = '';
 ////////////////////
 
 $ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
@@ -33,6 +33,7 @@ try {
     $ig->event->updateAppState('foreground');
     $ig->event->qeExposure($ig->account_id, 'ig_android_qr_code_nametag', 'deploy');
     $ig->event->sendNavigation('inferred_source', 'feed_timeline', 'profile');
+
     try {
         $ig->internal->getQPFetch();
     } catch (Exception $e) {
@@ -60,7 +61,7 @@ try {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
             } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
-            }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
                 $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
             } else {
                 continue;
@@ -133,7 +134,7 @@ try {
             $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
         } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
             $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
-        }  elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+        } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
             $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
         } else {
             continue;

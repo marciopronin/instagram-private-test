@@ -1719,10 +1719,10 @@ class Instagram implements ExperimentsInterface
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to finishTwoFactorLogin().');
         }
-        if (empty($verificationCode) || empty($twoFactorIdentifier)) {
+        if ((empty($verificationCode) && ($twoFactorIdentifier !== 4)) || empty($twoFactorIdentifier)) {
             throw new \InvalidArgumentException('You must provide a verification code and two-factor identifier to finishTwoFactorLogin().');
         }
-        if (!in_array($verificationMethod, [1, 2, 3], true)) {
+        if (!in_array($verificationMethod, [1, 2, 3, 4], true)) {
             throw new \InvalidArgumentException('You must provide a valid verification method value.');
         }
 
@@ -1752,7 +1752,7 @@ class Instagram implements ExperimentsInterface
             ->addPost('guid', $this->uuid)
             ->addPost('device_id', $this->device_id)
             ->addPost('waterfall_id', $this->loginWaterfallId)
-            // 1 - SMS, 2 - Backup codes, 3 - TOTP, 0 - ??
+            // 1 - SMS, 2 - Backup codes, 3 - TOTP, 0 - ??, 4 - Notification approval
             ->addPost('verification_method', $verificationMethod)
             ->getResponse(new Response\LoginResponse());
 
@@ -1817,6 +1817,41 @@ class Instagram implements ExperimentsInterface
             ->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\TwoFactorLoginSMSResponse());
     }
+
+    /**
+     * Check trusted notification status for 2FA login.
+     *
+     * This checks wether a device has approved the login via
+     * notification.
+     *
+     * @param string      $username            Your Instagram username.
+     * @param string      $twoFactorIdentifier Two factor identifier, obtained in
+     *                                         `login()` response.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * 
+     * @return \InstagramAPI\Response\TwoFactorNotificationStatusResponse
+     */
+    public function checkTrustedNotificationStatus(
+        $username,
+        $twoFactorIdentifier)
+    {
+        if (empty($username)) {
+            throw new \InvalidArgumentException('You must provide a username.');
+        }
+        if (empty($twoFactorIdentifier)) {
+            throw new \InvalidArgumentException('You must provide a two-factor identifier.');
+        }
+
+        return $this->request('two_factor/check_trusted_notification_status/')
+        ->setNeedsAuth(false)
+        ->addPost('two_factor_identifier', $twoFactorIdentifier)
+        ->addPost('username', $username)
+        ->addPost('device_id', $this->device_id)
+        ->addPost('_csrftoken', $this->client->getToken())
+        ->getResponse(new Response\TwoFactorNotificationStatusResponse());
+    }
+
 
     /**
      * Finish checkpoint.

@@ -1,3 +1,10 @@
+# Stable release v17.7.1
+## Date: 01/06/2021
+
+### New features
+
+- **Instagram:** Added `checkTrustedNotificationStatus()`. This function is used to check if 2FA was approved via notification in an already logged in device.
+
 # Stable release v17.7.0
 ## Date: 31/05/2021
 

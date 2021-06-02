@@ -1,3 +1,10 @@
+# Stable release v17.7.2
+## Date: 02/06/2021
+
+### Examples
+
+- **Example:** Added 2FA Login via approved notification
+
 # Stable release v17.7.1
 ## Date: 01/06/2021
 

@@ -4253,6 +4253,10 @@ class Event extends RequestCollection
                     'clickpoint'    => 'back',
                     'dest_module'   => 'feed_timeline',
                 ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'pending_inbox',
+                ]
             ],
             'direct_thread_toggle' => [
                 [

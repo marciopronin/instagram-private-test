@@ -2946,6 +2946,79 @@ class Event extends RequestCollection
     }
 
     /**
+     * Send IGTV preview end.
+     *
+     * @param \InstagramAPI\Response\Model\Item $item       The item object.
+     * @param string                            $module     Module.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendIgtvPreviewEnd(
+        $item,
+        $module = 'feed_contextual_profile')
+    {
+        $extra = [
+            'm_pk'                          => $item->getId(),
+            'elapsed_time_since_last_item'  => -1,
+            'is_acp_delivered'              => false,
+        ];
+    
+        $event = $this->_addEventBody('igtv_preview_end', $module, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send IGTV viewer actions.
+     *
+     * @param string                            $eventname  Event name
+     * @param \InstagramAPI\Response\Model\Item $item       The item object.
+     * @param string                            $action     Action to be made. 'igtv_viewer_entry', 'igtv_viewer_exit'.
+     * @param string                            $module     Module.
+     * @param array                             $options    Options to configure the event.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendIgtvViewerAction(
+        $eventname,
+        $item,
+        $action,
+        $entrypoint,
+        $module = 'igtv_preview_feed_contextual_profile',
+        array $options = [])
+    {
+        $extra = [
+            'm_pk'                      => $item->getId(),
+            'a_pk'                      => $item->getUser()->getPk(),
+            'm_ts'                      => (int) $item->getTakenAt(),
+            'm_t'                       => $item->getMediaType(),
+            'tracking_token'            => $item->getOrganicTrackingToken(),
+            'source_of_action'          => $module,
+            'follow_status'             => empty($options['following']) ? 'not_following' : 'following',
+            'action'                    => $action,
+            'elapsed_time_since_last_item' => -1,
+            'entry_point'               => $entrypoint,
+            'guide_open_status'         => false,
+            'igtv_viewer_session_id'    => isset($options['viewer_session_id']) ? $options['viewer_session_id'] : null,
+            'is_igtv'                   => 1,
+            'is_ad'                     => false,
+            'is_acp_delivered'          => false,
+        ];
+    
+        if ($eventname === 'igtv_viewer_entry') {
+            $extra['host_video_should_request_ads'] = false;
+        }
+
+        if (!empty($options['time_elapsed'])) {
+            $extra['time_elapsed'] = $options['time_elapsed'];
+        }
+    
+        $event = $this->_addEventBody($eventname, $module, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Send video action.
      *
      * @param string                            $action  Action to be made. 'video_displayed', 'video_should_start', 'video_buffering_started',
@@ -2967,6 +3040,7 @@ class Event extends RequestCollection
     {
         if ($module === 'feed_contextual_profile') {
             $extra = [
+                'video_type'                  => $item->getProductType(),
                 'm_pk'                        => $item->getId(),
                 'a_pk'                        => $item->getUser()->getPk(),
                 'm_ts'                        => (int) $item->getTakenAt(),
@@ -2979,7 +3053,6 @@ class Event extends RequestCollection
                 'video_codec'                 => $item->getVideoCodec(),
                 'playback_format'             => 'dash',
                 'a_i'                         => 'organic',
-                'imp_logger_ver'              => 21,
             ];
         } elseif ($module === 'feed_short_url') {
             $extra = [

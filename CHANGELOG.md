@@ -1,3 +1,15 @@
+# Stable release v17.8.0
+## Date: 04/06/2021
+
+### New features
+
+- **Event:** Add `sendIgtvPreviewEnd()`
+- **Event:** Add `sendIgtvViewerAction()`
+
+### Updates and fixes
+
+- **Event:** Update `sendVideoAction()`
+
 # Stable release v17.7.3
 ## Date: 03/06/2021
 

@@ -1,3 +1,14 @@
+# Stable release v17.8.1
+## Date: 08/06/2021
+
+### WIP
+
+- Improving and updating new graph system
+
+### Examples
+
+- Improvements and cleanup
+
 # Stable release v17.8.0
 ## Date: 04/06/2021
 

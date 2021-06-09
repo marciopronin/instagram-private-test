@@ -50,7 +50,7 @@ try {
     $userFeed = $ig->timeline->getUserFeed($userId);
     $items = $userFeed->getItems();
 
-    $items = array_slice($array, 0, 6);
+    $items = array_slice($items, 0, 6);
     $ig->event->preparePerfWithImpressions($items, 'profile');
 
     $ig->event->reelTrayRefresh(

@@ -1,3 +1,16 @@
+# Stable release v17.8.2
+## Date: 09/06/2021
+
+### Updates and fixes
+
+- **Event:** Update `preparePerfWithImpressions()`
+- **Event:** Update `_validateNavigationPath()`
+
+### Examples
+
+- Multiple fixes in examples.
+
+
 # Stable release v17.8.1
 ## Date: 08/06/2021
 

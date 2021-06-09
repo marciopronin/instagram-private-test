@@ -34,7 +34,7 @@ try {
     $ig->story->getArchiveBadgeCount();
     $items = $userFeed->getItems();
 
-    $items = array_slice($array, 0, 6);
+    $items = array_slice($items, 0, 6);
     $ig->event->preparePerfWithImpressions($items, 'self_profile');
 
     $navstack =
@@ -100,7 +100,7 @@ try {
         $userFeed = $ig->timeline->getUserFeed($follower);
         $items = $userFeed->getItems();
 
-        $items = array_slice($array, 0, 6);
+        $items = array_slice($items, 0, 6);
         $ig->event->preparePerfWithImpressions($items, 'profile');
 
         $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');

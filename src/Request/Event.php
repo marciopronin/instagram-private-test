@@ -2380,7 +2380,7 @@ class Event extends RequestCollection
                     'image_size_kb'                     => $imageSize,
                     'estimated_bandwidth'               => mt_rand(1000, 4000),
                     'estimated_bandwidth_totalBytes_b'  => $this->ig->client->totalBytes,
-                    'estimated_bandwidth_totalTime_ms'  => $this->ig->totalTime,
+                    'estimated_bandwidth_totalTime_ms'  => $this->ig->client->totalTime,
                 ];
 
                 $this->sendPerfPercentPhotosRendered($module, $item->getId(), $options);
@@ -4355,6 +4355,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'back',
                     'dest_module'   => 'direct_inbox',
+                ],
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'pending_inbox',
                 ],
             ],
             'login' => [

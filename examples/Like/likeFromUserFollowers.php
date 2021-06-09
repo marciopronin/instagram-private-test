@@ -123,14 +123,9 @@ try {
     $userFeed = $ig->timeline->getUserFeed($userId);
     $items = $userFeed->getItems();
 
-    $c = 0;
-    foreach ($items as $item) {
-        if ($c === 5) {
-            break;
-        }
-        $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
-        $c++;
-    }
+    $items = array_slice($items, 0, 6);
+    $ig->event->preparePerfWithImpressions($items, 'profile');
+
     $ig->event->sendProfileAction('tap_follow_details', $userId,
         [
             [
@@ -217,14 +212,9 @@ try {
     $userFeed = $ig->timeline->getUserFeed($followerList[0]);
     $items = $userFeed->getItems();
 
-    $c = 0;
-    foreach ($items as $item) {
-        if ($c === 5) {
-            break;
-        }
-        $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
-        $c++;
-    }
+    $items = array_slice($items, 0, 6);
+    $ig->event->preparePerfWithImpressions($items, 'profile');
+
 
     $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
 

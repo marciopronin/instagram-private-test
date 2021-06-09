@@ -1,3 +1,11 @@
+# Stable release v17.8.3
+## Date: 09/06/2021
+
+### Examples
+
+- Update likeFromMediaLikers
+- Update likeFromUserFollowers
+
 # Stable release v17.8.2
 ## Date: 09/06/2021
 

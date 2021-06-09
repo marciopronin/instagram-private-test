@@ -123,9 +123,9 @@ try {
     $userFeed = $ig->timeline->getUserFeed($userId);
     $items = $userFeed->getItems();
 
-    foreach ($items as $item) {
-        $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
-    }
+    $items = array_slice($items, 0, 6);
+    $ig->event->preparePerfWithImpressions($items, 'profile');
+
     $ig->event->sendThumbnailImpression('instagram_thumbnail_click', $items[0], 'profile');
     $ig->event->sendProfileAction('tap_grid_post', $userId,
         [
@@ -182,9 +182,8 @@ try {
     $userFeed = $ig->timeline->getUserFeed($userList[0]->getPk());
     $items = $userFeed->getItems();
 
-    foreach ($items as $item) {
-        $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
-    }
+    $items = array_slice($items, 0, 6);
+    $ig->event->preparePerfWithImpressions($items, 'profile');
 
     $ig->event->sendThumbnailImpression('instagram_thumbnail_click', $items[0], 'profile');
     $ig->event->sendProfileAction('tap_grid_post', $userList[0]->getPk(),

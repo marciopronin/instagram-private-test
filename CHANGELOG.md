@@ -1,3 +1,14 @@
+# Stable release v17.8.4
+## Date: 14/06/2021
+
+### Examples
+
+- Update followFromSearchMultipleUsers
+
+### Documentation
+
+- Update documentation
+
 # Stable release v17.8.3
 ## Date: 09/06/2021
 

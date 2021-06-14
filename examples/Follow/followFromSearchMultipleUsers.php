@@ -65,7 +65,6 @@ try {
         if ($firstSearch === false) {
             $ig->event->sendNavigation('button', 'explore_popular', 'search');
             $ig->event->sendNavigation('button', 'search', 'blended_search');
-        } else {
             $firstSearch = true;
         }
 

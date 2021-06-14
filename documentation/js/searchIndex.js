@@ -1566,6 +1566,11 @@ Search.appendIndex(
             "summary": "Request\u0020a\u0020new\u0020security\u0020code\u0020SMS\u0020for\u0020a\u0020Two\u0020Factor\u0020login\u0020account.",
             "url": "../classes/InstagramAPI-Instagram.html#method_sendTwoFactorLoginSMS"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AcheckTrustedNotificationStatus\u0028\u0029",
+            "name": "checkTrustedNotificationStatus",
+            "summary": "Check\u0020trusted\u0020notification\u0020status\u0020for\u00202FA\u0020login.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_checkTrustedNotificationStatus"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AfinishCheckpoint\u0028\u0029",
             "name": "finishCheckpoint",
             "summary": "Finish\u0020checkpoint.",
@@ -7690,6 +7695,16 @@ Search.appendIndex(
             "name": "sendOrganicViewedSubImpression",
             "summary": "Send\u0020organic\u0020viewed\u0020sub\u0020impression.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendOrganicViewedSubImpression"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendIgtvPreviewEnd\u0028\u0029",
+            "name": "sendIgtvPreviewEnd",
+            "summary": "Send\u0020IGTV\u0020preview\u0020end.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendIgtvPreviewEnd"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendIgtvViewerAction\u0028\u0029",
+            "name": "sendIgtvViewerAction",
+            "summary": "Send\u0020IGTV\u0020viewer\u0020actions.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendIgtvViewerAction"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendVideoAction\u0028\u0029",
             "name": "sendVideoAction",
@@ -17175,6 +17190,16 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-LiveArchiveResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\TwoFactorNotificationStatusResponse",
+            "name": "TwoFactorNotificationStatusResponse",
+            "summary": "Core\u0020class\u0020for\u0020Instagram\u0020API\u0020responses.",
+            "url": "../classes/InstagramAPI-Response-TwoFactorNotificationStatusResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\TwoFactorNotificationStatusResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-TwoFactorNotificationStatusResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

@@ -157,7 +157,9 @@ class Direct extends RequestCollection
             if ($folder !== 0 && $folder !== 1) {
                 throw new \InvalidArgumentException(sprintf('%d is not a valid folder value.', $folder));
             }
-            $request->addPost('folder', $folder);
+            $request->addPost('folder', $folder)
+                    ->addPost('origin_folder', 0)
+                    ->addPost('filter', 'DEFAULT');
         }
 
         return $request

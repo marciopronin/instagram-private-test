@@ -1,3 +1,14 @@
+# Stable release v17.8.5
+## Date: 14/06/2021
+
+### Updates and fixes
+
+- Update `approvePendingThreads()`
+
+### Libraries
+
+- **WIP:** Auto-patching tool: libliger.so
+
 # Stable release v17.8.4
 ## Date: 14/06/2021
 

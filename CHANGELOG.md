@@ -1,5 +1,12 @@
+# Stable release v17.8.6
+## Date: 18/06/2021
+
+### Updates and fixes
+
+- Update User model
+
 # Stable release v17.8.5
-## Date: 14/06/2021
+## Date: 17/06/2021
 
 ### Updates and fixes
 

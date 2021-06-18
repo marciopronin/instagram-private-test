@@ -773,5 +773,7 @@ class User extends AutoPropertyMapper
         'gating'                                        => 'Gating',
         'fbid_v2'                                       => 'string',
         'page_id_for_new_suma_biz_account'              => 'string',
+        'interop_user_type'                             => 'int',
+        'interop_messaging_user_fbid'                   => 'string',
     ];
 }

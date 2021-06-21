@@ -1,3 +1,10 @@
+# Stable release v17.8.7
+## Date: 21/06/2021
+
+### Updates and fixes
+
+- **Instagram:** Update login flow
+
 # Stable release v17.8.6
 ## Date: 18/06/2021
 

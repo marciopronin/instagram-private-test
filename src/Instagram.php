@@ -2390,7 +2390,47 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
-                $this->timeline->getTimelineFeed();
+                $feed = $this->timeline->getTimelineFeed();
+                $items = $feed->getFeedItems();
+                $items = array_slice($items, 0, 2);
+
+                foreach ($items as $item) {
+                    if ($item->getMediaOrAd() !== null) {
+                        switch ($item->getMediaOrAd()->getMediaType()) {
+                            case 1:
+                                $this->event->sendOrganicMediaImpression($item->getMediaOrAd(), 'feed_timeline');
+                                break;
+                            case 2:
+                                $this->event->sendOrganicViewedImpression($item->getMediaOrAd(), 'feed_timeline');
+                                // Not playing the video.
+                                break;
+                            case 8:
+                                $carouselItem = $item->getMediaOrAd()->getCarouselMedia()[0]; // First item of the carousel.
+                                if ($carouselItem->getMediaType() === 1) {
+                                    $this->event->sendOrganicMediaImpression($item->getMediaOrAd(), 'feed_timeline',
+                                        [
+                                            'feed_request_id'   => ($maxId === null) ? null : $requestId,
+                                        ]
+                                    );
+                                } else {
+                                    $this->event->sendOrganicViewedImpression($item->getMediaOrAd(), 'feed_timeline', null, null, null,
+                                        [
+                                            'feed_request_id'   => ($maxId === null) ? null : $requestId,
+                                        ]
+                                    );
+                                }
+                                break;
+                        }
+                    }
+                    $previewComments = ($item->getMediaOrAd() === null) ? [] : $item->getMediaOrAd()->getPreviewComments();
+        
+                    if ($previewComments !== null) {
+                        foreach ($previewComments as $comment) {
+                            $this->event->sendCommentImpression($item->getMediaOrAd(), $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount(), 'feed_timeline');
+                        }
+                    }
+                }
+
                 $this->story->getReelsTrayFeed('cold_start');
             } finally {
                 // Stops emulating batch requests
@@ -2515,9 +2555,50 @@ class Instagram implements ExperimentsInterface
                             throw $e;
                         }
                     }
-                    $this->timeline->getTimelineFeed(null, [
+                    $feed = $this->timeline->getTimelineFeed(null, [
                         'is_pull_to_refresh' => $isSessionExpired ? null : mt_rand(1, 3) < 3,
                     ]);
+
+                    $items = $feed->getFeedItems();
+                    $items = array_slice($items, 0, 2);
+
+                    foreach ($items as $item) {
+                        if ($item->getMediaOrAd() !== null) {
+                            switch ($item->getMediaOrAd()->getMediaType()) {
+                                case 1:
+                                    $this->event->sendOrganicMediaImpression($item->getMediaOrAd(), 'feed_timeline');
+                                    break;
+                                case 2:
+                                    $this->event->sendOrganicViewedImpression($item->getMediaOrAd(), 'feed_timeline');
+                                    // Not playing the video.
+                                    break;
+                                case 8:
+                                    $carouselItem = $item->getMediaOrAd()->getCarouselMedia()[0]; // First item of the carousel.
+                                    if ($carouselItem->getMediaType() === 1) {
+                                        $this->event->sendOrganicMediaImpression($item->getMediaOrAd(), 'feed_timeline',
+                                            [
+                                                'feed_request_id'   => ($maxId === null) ? null : $requestId,
+                                            ]
+                                        );
+                                    } else {
+                                        $this->event->sendOrganicViewedImpression($item->getMediaOrAd(), 'feed_timeline', null, null, null,
+                                            [
+                                                'feed_request_id'   => ($maxId === null) ? null : $requestId,
+                                            ]
+                                        );
+                                    }
+                                    break;
+                            }
+                        }
+                        $previewComments = ($item->getMediaOrAd() === null) ? [] : $item->getMediaOrAd()->getPreviewComments();
+            
+                        if ($previewComments !== null) {
+                            foreach ($previewComments as $comment) {
+                                $this->event->sendCommentImpression($item->getMediaOrAd(), $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount(), 'feed_timeline');
+                            }
+                        }
+                    }
+
                     $this->tv->getBrowseFeed();
                     $this->people->getSharePrefill();
                     $this->people->getRecentActivityInbox();

@@ -250,6 +250,7 @@ class Event extends RequestCollection
             $newChain = implode(',', $chains);
             $this->ig->setNavChain('');
             $this->ig->setNavChain($newChain);
+            $this->ig->setPrevNavChainClass(explode(':', end($chains))[0]);
             $this->ig->decrementNavChainStep();
         } else {
             $chain .= sprintf('%s:%s:%d', $class, $module, $this->ig->getNavChainStep());

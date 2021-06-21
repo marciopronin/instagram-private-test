@@ -1,3 +1,10 @@
+# Stable release v17.8.9
+## Date: 21/06/2021
+
+### Updates and fixes
+
+- **Event:** Critical update! Fixed a bug that affected sessions chain and nav chains
+
 # Stable release v17.8.8
 ## Date: 21/06/2021
 

@@ -2599,7 +2599,10 @@ class Instagram implements ExperimentsInterface
                         }
                     }
 
-                    $this->tv->getBrowseFeed();
+                    try {
+                        $this->tv->getBrowseFeed();
+                    } catch (Exception $e) {
+                    }
                     $this->people->getSharePrefill();
                     $this->people->getRecentActivityInbox();
                 } finally {

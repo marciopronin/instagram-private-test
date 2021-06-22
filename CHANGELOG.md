@@ -1,3 +1,10 @@
+# Stable release v17.8.11
+## Date: 22/06/2021
+
+### Updates and fixes
+
+- **Instagram:** Update login flow. Prevents failure on IGTV feed.
+
 # Stable release v17.8.10
 ## Date: 22/06/2021
 

@@ -2577,13 +2577,13 @@ class Instagram implements ExperimentsInterface
                                     if ($carouselItem->getMediaType() === 1) {
                                         $this->event->sendOrganicMediaImpression($item->getMediaOrAd(), 'feed_timeline',
                                             [
-                                                'feed_request_id'   => ($maxId === null) ? null : $requestId,
+                                                'feed_request_id'   => null,
                                             ]
                                         );
                                     } else {
                                         $this->event->sendOrganicViewedImpression($item->getMediaOrAd(), 'feed_timeline', null, null, null,
                                             [
-                                                'feed_request_id'   => ($maxId === null) ? null : $requestId,
+                                                'feed_request_id'   => null,
                                             ]
                                         );
                                     }

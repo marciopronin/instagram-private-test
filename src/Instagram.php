@@ -2211,7 +2211,7 @@ class Instagram implements ExperimentsInterface
                 //$this->internal->readMsisdnHeader('default');
                 try {
                     $this->internal->syncDeviceFeatures(true);
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     // pass
                 }
                 $launcherResponse = $this->internal->sendLauncherSync(true)->getHttpResponse();
@@ -2242,7 +2242,7 @@ class Instagram implements ExperimentsInterface
             /*
             try {
                 $this->account->setContactPointPrefill('prefill');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 //pass
             }
             */
@@ -2254,7 +2254,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->internal->syncDeviceFeatures(true, true);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 //pass
             }
         } finally {
@@ -2378,7 +2378,7 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->internal->syncUserFeatures();
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     // pass
                 }
             } finally {
@@ -2456,7 +2456,7 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->internal->logResurrectAttribution();
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     // pass
                 }
                 $this->internal->getLoomFetchConfig();
@@ -2493,7 +2493,7 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->internal->getQPFetch();
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                 }
                 //$this->account->getProcessContactPointSignals();
                 if ($this->getPlatform() === 'android') {
@@ -2512,14 +2512,14 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->people->getSharePrefill();
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                 }
                 $this->direct->getPresences();
 
                 try {
                     $this->direct->getInbox(null, null, 0, null);
                     $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                 }
                 $this->_registerPushChannels();
             } finally {
@@ -2529,7 +2529,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->internal->getFacebookOTA();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
             }
         } else {
             $lastLoginTime = $this->settings->get('last_login');
@@ -2601,7 +2601,7 @@ class Instagram implements ExperimentsInterface
 
                     try {
                         $this->tv->getBrowseFeed();
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                     }
                     $this->people->getSharePrefill();
                     $this->people->getRecentActivityInbox();

@@ -1,3 +1,10 @@
+# Stable release v17.8.12
+## Date: 24/06/2021
+
+### Updates and fixes
+
+- **Instagram:** Update Exceptions in namespace with correct format.
+
 # Stable release v17.8.11
 ## Date: 22/06/2021
 

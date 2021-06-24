@@ -1,3 +1,14 @@
+# Stable release v17.9.0
+## Date: 24/06/2021
+
+### New features
+
+The following functions will be used for X-IG-SALT-IDS header.
+
+- **Client:** Added `incrementAndGetUserFlowCounter()`
+- **Client:** Added `generateFlowId()`
+- **Client:** Added `generateNewFlowId()`
+
 # Stable release v17.8.12
 ## Date: 24/06/2021
 

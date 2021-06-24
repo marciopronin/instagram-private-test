@@ -243,6 +243,13 @@ class Client
     protected $_requestUuid = '';
 
     /**
+     * Flow User Counter.
+     *
+     * @var int
+     */
+    protected $_flowUserCounter = 1;
+
+    /**
      * Constructor.
      *
      * @param \InstagramAPI\Instagram $parent
@@ -1216,6 +1223,44 @@ class Client
         }
 
         return sprintf('%.3F', $result);
+    }
+
+    /**
+     * Increment user flow counter.
+     *
+     * @return int
+     */
+    public function incrementAndGetUserFlowCounter()
+    {
+        return $this->_flowUserCounter++;
+    }
+
+    /**
+     * Generate flow ID.
+     * 
+     * @param int   $val1   First value.
+     * @param int   $val2   Second value.
+     *
+     * @return int
+     */
+    public function generateFlowId(
+        $val1,
+        $val2) 
+    {
+        return $val1 | $val2 << 0x20;
+    }
+    
+    /**
+     * Generate new flow ID.
+     * 
+     * @param int   $val    Init value.
+     *
+     * @return int
+     */
+    public function generateNewFlowId(
+        $val)
+    {
+        return $val | $this->incrementAndGetUserFlowCounter() << 0x20;
     }
 
     /**

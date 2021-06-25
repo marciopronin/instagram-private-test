@@ -1,3 +1,10 @@
+# Stable release v17.9.1
+## Date: 26/06/2021
+
+### Updates and fixes
+
+- **Media:** Update `like()` and `likeComment()`.
+
 # Stable release v17.9.0
 ## Date: 24/06/2021
 

@@ -180,6 +180,7 @@ class Media extends RequestCollection
             ->addPost('inventory_source', 'media_or_ad')
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('media_id', $mediaId)
+            ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('container_module', $module);
 
         if ($this->ig->getIsAndroid()) {
@@ -569,6 +570,7 @@ class Media extends RequestCollection
             ->addPost('is_carousel_bumped_post', false)
             ->addPost('container_module', $module)
             ->addPost('feed_position', $feedPosition)
+            ->addPost('nav_chain', $this->ig->getNavChain())
             ->getResponse(new Response\CommentLikeUnlikeResponse());
     }
 

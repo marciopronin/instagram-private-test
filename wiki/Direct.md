@@ -105,10 +105,44 @@ $ig->event->sendNavigation('button', 'direct_inbox', 'pending_inbox');
 
 ```php
 $ig->event->updateAppState('background', $module);
-````
+```
 
 ## Emulating coming back from background process 
 
 ```php
 $ig->event->updateAppState('foreground', $module);
-````
+```
+
+## RealtimeClient
+
+### Quick answers
+
+Quick answers are predefined answers for certain business accounts. These answers will be received using the RTC event: `thread-item-created`.
+
+This is a sample of quick answers:
+
+```json
+[{"event":"patch","data":[{"op":"add","path":"/direct_v2/threads/THREAD_ID/items/ITEM_ID","value":"{"item_id": "ITEM_ID", "user_id": UID, "timestamp": TIMESTAMP, "item_type": "text", "text": "Text1.", "client_context": "CLIENT_CONTEXT", "show_forward_attribution": false, "is_shh_mode": false, "instant_reply_info": {"instant_replies": [{"title": "INSTANT_REPLY_1", "payload": "ACT::ACTID"}, {"title": "INSTANT_REPLY_2", "payload": "ACT::ACTID"}, {"title": "INSTANT_REPLY_3", "payload": "ACT::ACTID"}]}}"}],"message_type":1,"seq_id":2,"mutation_token":null,"realtime":true}]
+```
+
+### RTC notification events
+
+It is possible to trigger an event when something has been updated or some notification is received through RTC. It is not possible to know which type of notification. In order to provide this functionality, the following lines of code must be added in `/Realtime/MQTT.php` in `_handleMessage()` function:
+
+```php
+if ($module == 'direct'){
+    if (!empty($message->getData())) {
+        $this->_target->emit('patch-empty-event', [$message->getData()]);
+    }
+}
+```
+
+In the `realtimeClient.php` example, the next lines should be added to be able to listen to this event:
+
+```php
+$this->_rtc->on('patch-empty-event', function () {
+$this->_logger->info(sprintf('[RTC] RTC Event %s', PHP_EOL));
+
+// THIS CAN BE USED TO LISTEN FOR NEW PENDING THREADS
+});
+```

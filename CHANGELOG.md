@@ -1,3 +1,14 @@
+# Stable release v17.9.2
+## Date: 29/06/2021
+
+### Wiki
+
+- **Direc/Realtime:** Added documentation about how to handle quick answers and RTC notifications
+
+### Tools
+
+- **Frida:** Added frida script to debug MQTT communications from apk.
+
 # Stable release v17.9.1
 ## Date: 26/06/2021
 

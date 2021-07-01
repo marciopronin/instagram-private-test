@@ -1,3 +1,18 @@
+# Stable release v17.9.3
+## Date: 02/07/2021
+
+**NOTE:** If you are using any function to upload media. You should update to this release as soon as possible.
+
+### Updates and fixes
+
+- **Internal:** Update `configureSinglePhoto()`
+- **Internal:** Update `configureSingleVideo()`
+- **Responses:** Update `MusicGenresResponse` in order to match PSR-4
+
+### Documentation
+
+- Update documentation
+
 # Stable release v17.9.2
 ## Date: 29/06/2021
 

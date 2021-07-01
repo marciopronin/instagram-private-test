@@ -113,7 +113,7 @@ class Music extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GetMusicGenresResponse
+     * @return \InstagramAPI\Response\MusicGenresResponse
      */
     public function getGenres(
         $browseSessionId)
@@ -123,7 +123,7 @@ class Music extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('browse_session_id', $browseSessionId)
             ->addPost('product', 'story_camera_music_overlay_post_capture')
-            ->getResponse(new Response\GetMusicGenresResponse());
+            ->getResponse(new Response\MusicGenresResponse());
     }
 
     /**

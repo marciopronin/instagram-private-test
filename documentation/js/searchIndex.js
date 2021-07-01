@@ -171,6 +171,21 @@ Search.appendIndex(
             "summary": "Get\u0020Pigeon\u0020Client\u0020time.",
             "url": "../classes/InstagramAPI-Client.html#method__getPigeonRawClientTime"
         },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003AincrementAndGetUserFlowCounter\u0028\u0029",
+            "name": "incrementAndGetUserFlowCounter",
+            "summary": "Increment\u0020user\u0020flow\u0020counter.",
+            "url": "../classes/InstagramAPI-Client.html#method_incrementAndGetUserFlowCounter"
+        },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003AgenerateFlowId\u0028\u0029",
+            "name": "generateFlowId",
+            "summary": "Generate\u0020flow\u0020ID.",
+            "url": "../classes/InstagramAPI-Client.html#method_generateFlowId"
+        },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003AgenerateNewFlowId\u0028\u0029",
+            "name": "generateNewFlowId",
+            "summary": "Generate\u0020new\u0020flow\u0020ID.",
+            "url": "../classes/InstagramAPI-Client.html#method_generateNewFlowId"
+        },                {
             "fqsen": "\\InstagramAPI\\Client\u003A\u003A_getRequestId\u0028\u0029",
             "name": "_getRequestId",
             "summary": "Get\u0020request\u0020ID.",
@@ -330,6 +345,11 @@ Search.appendIndex(
             "name": "_requestUuid",
             "summary": "Request\u0020UUID.",
             "url": "../classes/InstagramAPI-Client.html#property__requestUuid"
+        },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_flowUserCounter",
+            "name": "_flowUserCounter",
+            "summary": "Flow\u0020User\u0020Counter.",
+            "url": "../classes/InstagramAPI-Client.html#property__flowUserCounter"
         },                {
             "fqsen": "\\InstagramAPI\\Constants",
             "name": "Constants",
@@ -17161,15 +17181,15 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Response-Model-ThreeByFourItem.html#constant_JSON_PROPERTY_MAP"
         },                {
-            "fqsen": "\\InstagramAPI\\Response\\GetMusicGenresResponse",
-            "name": "GetMusicGenresResponse",
+            "fqsen": "\\InstagramAPI\\Response\\MusicGenresResponse",
+            "name": "MusicGenresResponse",
             "summary": "Core\u0020class\u0020for\u0020Instagram\u0020API\u0020responses.",
-            "url": "../classes/InstagramAPI-Response-GetMusicGenresResponse.html"
+            "url": "../classes/InstagramAPI-Response-MusicGenresResponse.html"
         },                {
-            "fqsen": "\\InstagramAPI\\Response\\GetMusicGenresResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "fqsen": "\\InstagramAPI\\Response\\MusicGenresResponse\u003A\u003AJSON_PROPERTY_MAP",
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
-            "url": "../classes/InstagramAPI-Response-GetMusicGenresResponse.html#constant_JSON_PROPERTY_MAP"
+            "url": "../classes/InstagramAPI-Response-MusicGenresResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\LiveArchiveSettingsResponse",
             "name": "LiveArchiveSettingsResponse",

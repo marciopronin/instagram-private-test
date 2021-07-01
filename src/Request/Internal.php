@@ -288,6 +288,7 @@ class Internal extends RequestCollection
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('edits',
                 [
                     'crop_original_size'    => [(float) $photoWidth, (float) $photoHeight],
@@ -862,7 +863,8 @@ class Internal extends RequestCollection
                 ])
             ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_uid', $this->ig->account_id);
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('nav_chain', $this->ig->getNavChain());
 
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE:

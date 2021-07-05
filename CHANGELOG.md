@@ -1,3 +1,15 @@
+# Stable release v17.9.4
+## Date: 05/07/2021
+
+### Updates and fixes
+
+- **Internal:** WIP. Finishing reels feature.
+- **Media constraints:** Added reels (clips) constraints.
+
+### Documentation
+
+- Update documentation
+
 # Stable release v17.9.3
 ## Date: 02/07/2021
 

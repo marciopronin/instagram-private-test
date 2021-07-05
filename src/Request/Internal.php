@@ -600,6 +600,7 @@ class Internal extends RequestCollection
             && $targetFeed !== Constants::FEED_STORY
             && $targetFeed !== Constants::FEED_DIRECT_STORY
             && $targetFeed !== Constants::FEED_TV
+            && $targetFeed !== Constants::FEED_REEL
         ) {
             throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
         }
@@ -2960,6 +2961,9 @@ class Internal extends RequestCollection
             case Constants::FEED_DIRECT_AUDIO:
                 $result['is_direct_voice'] = '1';
                 break;
+            case Constants::FEED_REELS:
+                $result['is_clips_video'] = '1';
+                break;
             default:
         }
 
@@ -3106,6 +3110,7 @@ class Internal extends RequestCollection
                 break;
             case Constants::FEED_STORY:
             case Constants::FEED_DIRECT_STORY:
+            case COnstants::FEED_REELS:
                 $duration = 2;
                 break;
             case Constants::FEED_TV:

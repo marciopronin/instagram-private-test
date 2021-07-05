@@ -17221,6 +17221,51 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Response-TwoFactorNotificationStatusResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
+            "fqsen": "\\InstagramAPI\\Media\\Constraints\\ReelsConstraints",
+            "name": "ReelsConstraints",
+            "summary": "Instagram\u0027s\u0020Reels\u0020media\u0020constraints.",
+            "url": "../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\Constraints\\ReelsConstraints\u003A\u003AgetMinAspectRatio\u0028\u0029",
+            "name": "getMinAspectRatio",
+            "summary": "Get\u0020the\u0020minimum\u0020allowed\u0020media\u0020aspect\u0020ratio.",
+            "url": "../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html#method_getMinAspectRatio"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\Constraints\\ReelsConstraints\u003A\u003AgetMaxAspectRatio\u0028\u0029",
+            "name": "getMaxAspectRatio",
+            "summary": "Get\u0020the\u0020maximum\u0020allowed\u0020media\u0020aspect\u0020ratio.",
+            "url": "../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html#method_getMaxAspectRatio"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\Constraints\\ReelsConstraints\u003A\u003AgetMinDuration\u0028\u0029",
+            "name": "getMinDuration",
+            "summary": "Get\u0020the\u0020minimum\u0020allowed\u0020video\u0020duration.",
+            "url": "../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html#method_getMinDuration"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\Constraints\\ReelsConstraints\u003A\u003AgetMaxDuration\u0028\u0029",
+            "name": "getMaxDuration",
+            "summary": "Get\u0020the\u0020maximum\u0020allowed\u0020video\u0020duration.",
+            "url": "../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html#method_getMaxDuration"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\Constraints\\ReelsConstraints\u003A\u003AMIN_RATIO",
+            "name": "MIN_RATIO",
+            "summary": "Lowest\u0020allowed\u0020aspect\u0020ratio.",
+            "url": "../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html#constant_MIN_RATIO"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\Constraints\\ReelsConstraints\u003A\u003AMAX_RATIO",
+            "name": "MAX_RATIO",
+            "summary": "Highest\u0020allowed\u0020aspect\u0020ratio.",
+            "url": "../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html#constant_MAX_RATIO"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\Constraints\\ReelsConstraints\u003A\u003AMIN_DURATION",
+            "name": "MIN_DURATION",
+            "summary": "Minimum\u0020allowed\u0020video\u0020duration.",
+            "url": "../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html#constant_MIN_DURATION"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\Constraints\\ReelsConstraints\u003A\u003AMAX_DURATION",
+            "name": "MAX_DURATION",
+            "summary": "Maximum\u0020allowed\u0020video\u0020duration.",
+            "url": "../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html#constant_MAX_DURATION"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

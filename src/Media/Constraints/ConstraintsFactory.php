@@ -35,6 +35,9 @@ class ConstraintsFactory
             case Constants::FEED_TIMELINE_ALBUM:
                 $result = new AlbumConstraints();
                 break;
+            case Constants::FEED_REELS:
+                $result = new ReelsConstraints();
+                break;
             case Constants::FEED_TIMELINE:
             default:
                 $result = new TimelineConstraints();

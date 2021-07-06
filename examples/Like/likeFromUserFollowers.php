@@ -102,6 +102,7 @@ try {
     // Send selected result from results.
     $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
 
+    usleep(mt_rand(200000, 500000));
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
     $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
         [
@@ -188,6 +189,8 @@ try {
 
     $ig->discover->surfaceWithSu($userId);
 
+    usleep(mt_rand(200000, 500000));
+
     $rankToken = \InstagramAPI\Signatures::generateUUID();
     $followers = $ig->people->getFollowers($userId, $rankToken);
 
@@ -215,20 +218,19 @@ try {
     $items = array_slice($items, 0, 6);
     $ig->event->preparePerfWithImpressions($items, 'profile');
 
-
     $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
 
     $ig->event->sendOrganicMediaImpression($items[0], 'feed_contextual_profile');
 
     $commentInfos = $ig->media->getCommentInfos($items[0]->getId())->getCommentInfos()->getData();
-
+    usleep(mt_rand(100000, 300000));
     $ig->event->sendOrganicNumberOfLikes($items[0], 'feed_contextual_profile');
 
     foreach ($commentInfos as $key => $value) {
         $previewComments = $value->getPreviewComments();
         if ($previewComments !== null) {
             foreach ($previewComments as $comment) {
-                $ig->event->sendCommentImpression($item, $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
+                $ig->event->sendCommentImpression($items[0], $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount());
             }
         }
     }

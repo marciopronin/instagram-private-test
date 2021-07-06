@@ -1,3 +1,11 @@
+# Stable release v17.9.5
+## Date: 06/07/2021
+
+### Examples
+
+- **Example:** Update likeFromUserFollowers example
+- **Example:** Add likeFromExploreLocation example
+
 # Stable release v17.9.4
 ## Date: 05/07/2021
 

@@ -1,3 +1,19 @@
+# Stable release v17.9.6
+## Date: 08/07/2021
+
+### Critical update
+
+- **RealtimeConnection:** Update RTC credential.
+
+### Updates and fixes
+
+- **Internal:** Fixed typo in `_getTargetSegmentDuration()`
+- **Update model and responses**
+
+### Examples
+
+- **Example:** Update checkpoint example
+
 # Stable release v17.9.5
 ## Date: 06/07/2021
 

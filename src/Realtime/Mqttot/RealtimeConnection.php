@@ -73,10 +73,12 @@ class RealtimeConnection extends RtiConnection
         $ig)
     {
         $this->_userId = $ig->account_id;
-        if ($ig->client->getCookie('sessionid') === null) {
+        $authorizationData = json_decode(base64_decode(explode(':', $ig->settings->get('authorization_header'))[2]), true);
+        if (!isset($authorizationData['sessionid'])) {
             throw new InstagramException('User cookies does not contain session_id');
         } else {
-            $this->_sessionId = $ig->client->getCookie('sessionid')->getValue();
+            //$this->_sessionId = $ig->client->getCookie('sessionid')->getValue();
+            $this->_sessionId = $authorizationData['sessionid'];
         }
         $this->_clientCapabilities = 183;
         $this->_endpointCapabilities = 0;

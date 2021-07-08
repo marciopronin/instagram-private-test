@@ -54,8 +54,10 @@ try {
                             } else {
                                 $challengeContext = null;
                             }
-                            // Send a challenge request
-                            $ig->checkpoint->sendChallenge($checkApiPath, $challengeContext);
+                            $res = $ig->checkpoint->sendChallenge($checkApiPath, $challengeContext);
+                            if ($res->getAction() !== null) {
+                                break 2;
+                            }
                         }
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\EscalationInformationalException:

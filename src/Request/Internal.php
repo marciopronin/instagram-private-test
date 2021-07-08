@@ -3110,7 +3110,7 @@ class Internal extends RequestCollection
                 break;
             case Constants::FEED_STORY:
             case Constants::FEED_DIRECT_STORY:
-            case COnstants::FEED_REELS:
+            case Constants::FEED_REELS:
                 $duration = 2;
                 break;
             case Constants::FEED_TV:

@@ -48,5 +48,6 @@ class CheckpointResponse extends Response
         'step_data'      => 'Model\StepData',
         'user_id'        => 'string',
         'nonce_code'     => 'string',
+        'action'         => 'string',
     ];
 }

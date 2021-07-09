@@ -332,7 +332,9 @@ class Client
         // If it's missing, we're definitely NOT logged in! But even if all of
         // these checks succeed, the cookie may still not be valid. It's just a
         // preliminary check to detect definitely-invalid session cookies!
-        $authorizationData = json_decode(base64_decode(explode(':', $this->_parent->settings->get('authorization_header'))[2]), true);
+        if ($this->_parent->settings->get('authorization_header') !== null) {
+            $authorizationData = json_decode(base64_decode(explode(':', $this->_parent->settings->get('authorization_header'))[2]), true);
+        }
         if (!isset($authorizationData['sessionid'])) {
             if ($this->getToken() === null) {
                 $this->_parent->isMaybeLoggedIn = false;

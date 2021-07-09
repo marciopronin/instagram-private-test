@@ -1,3 +1,13 @@
+# Stable release v17.9.8
+## Date: 09/07/2021
+
+**WIP:** 195.0.0.31.123
+
+### Critical update
+
+- **Instagram:** Update `_setUser()` to use Authorization header if set.
+- **Client:** Update `updateFromCurrentSettings()`
+
 # Stable release v17.9.7
 ## Date: 09/07/2021
 

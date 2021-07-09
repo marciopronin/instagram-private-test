@@ -2104,12 +2104,18 @@ class Instagram implements ExperimentsInterface
         $this->experiments = $this->settings->getExperiments();
 
         // Load the previous session details if we're possibly logged in.
-        if (!$resetCookieJar && $this->settings->isMaybeLoggedIn()) {
+        $authorizationData = json_decode(base64_decode(explode(':', $this->settings->get('authorization_header'))[2]), true);
+        if (!isset($authorizationData['sessionid'])) {           
+            if (!$resetCookieJar && $this->settings->isMaybeLoggedIn()) {
+                $this->isMaybeLoggedIn = true;
+                $this->account_id = $this->settings->get('account_id');
+            } else {
+                $this->isMaybeLoggedIn = false;
+                $this->account_id = null;
+            }
+        } else {
             $this->isMaybeLoggedIn = true;
             $this->account_id = $this->settings->get('account_id');
-        } else {
-            $this->isMaybeLoggedIn = false;
-            $this->account_id = null;
         }
 
         // Configures Client for current user AND updates isMaybeLoggedIn state

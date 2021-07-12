@@ -391,11 +391,15 @@ class Instagram implements ExperimentsInterface
     public $webUserAgent = null;
 
     /**
-     * Logging events compression.
+     * Logging events compression mode.
+     * 
+     * 0 - Compressed. Event as file
+     * 1 - Uncompressed. Multi batch
+     * 2 - Compressed. Multi batch/single batch
      *
-     * @var bool
+     * @var int
      */
-    public $eventsCompressed = false;
+    public $eventsCompressedMode = 2;
 
     /**
      * iOS Model.
@@ -1035,13 +1039,13 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
-     * Get logging events compressed.
+     * Get logging events compressed mode.
      *
-     * @return bool
+     * @return int
      */
-    public function getEventsCompressed()
+    public function getEventsCompressedMode()
     {
-        return $this->eventsCompressed;
+        return $this->eventsCompressedMode;
     }
 
     /**

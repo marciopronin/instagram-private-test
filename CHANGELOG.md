@@ -1,3 +1,26 @@
+# Stable release v17.10.0
+## Date: 12/07/2021
+
+Instagram version: 195.0.0.31.123
+
+## Critical update!
+#### Update is highly recommended
+
+### Updates & fixes
+
+- **Checkpoint:** Update checkpoint with latest header authentication mechanism
+- **Client:** Update Pigeon Session ID format (UFS)
+- **Client:** Update `X-MID`
+- **Constants:** Update to Instagram version 195.0.0.31.123
+- **Debug:** Update `printResponse()`
+- **Events:** Update `_sendBatchEvents()` to match latest events format.
+- **Events:** Update `_getModuleClass()`
+- **Events:** Update `_addEventBody()`
+- **Events:** Update `_addBatchBody()`
+- **Instagram:** Update `getEventsCompressedMode()`
+- **Request:** Update `_addDefaultHeaders()`. Added new header `X-IG-Nav-Chain`
+- **Settings:** Update StorageHandler. Added new persistent key `mid`
+
 # Stable release v17.9.8
 ## Date: 09/07/2021
 

@@ -55,6 +55,7 @@ class StorageHandler
         'seq_id', // Iris Sequence ID.
         'www_claim',
         'direct_region',
+        'mid',
     ];
 
     /**

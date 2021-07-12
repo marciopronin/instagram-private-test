@@ -229,6 +229,13 @@ class Client
     protected $_dsUserId = '';
 
     /**
+     * MID.
+     *
+     * @var string
+     */
+    protected $_mid = '';
+
+    /**
      * Request ID for logger.
      *
      * @var int
@@ -268,7 +275,7 @@ class Client
         $this->_resolveHost = null;
 
         // Set Pigeon Session ID.
-        $this->_pigeonSession = Signatures::generateUUID();
+        $this->_pigeonSession = sprintf('%s-%s-0', 'UFS', Signatures::generateUUID());
         $this->_requestUuid = uniqid();
 
         // Create a default handler stack with Guzzle's auto-selected "best
@@ -1068,7 +1075,7 @@ class Client
                 $headers['set_headers']['X-IG-Bandwidth-Speed-KBPS'] = '-1.000';
             }
 
-            if ($this->_parent->settings->get('authorization_header') !== null) {
+            if (($this->_parent->settings->get('authorization_header') !== null) && ($this->_parent->settings->get('authorization_header') !== 'Bearer IGT:2:')) {
                 $headers['set_headers']['Authorization'] = $this->_parent->settings->get('authorization_header');
             }
 
@@ -1096,9 +1103,13 @@ class Client
                 $headers['set_headers']['IG-U-IG-DIRECT-REGION-HINT'] = $this->_directRegionHint;
             }
 
+            if ($this->_parent->settings->get('mid') !== null) {
+                $headers['set_headers']['X-MID'] = $this->_parent->settings->get('mid');
+            }
+
             $headers['set_headers']['X-IG-Bandwidth-TotalBytes-B'] = $this->totalBytes;
             $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = $this->totalTime;
-            $headers['set_headers']['X-MID'] = $this->getMid();
+            //$headers['set_headers']['X-MID'] = $this->getMid();
         }
 
         $userAgent = $request->getHeader('User-Agent');
@@ -1130,12 +1141,16 @@ class Client
         $this->_dsUserId = $response->getHeaderLine('ig-set-ig-u-ds-user-id');
         $this->_rur = $response->getHeaderLine('ig-set-ig-u-rur');
         $this->_directRegionHint = $response->getHeaderLine('ig-set-ig-u-ig-direct-region-hint');
+        $this->_mid = $response->getHeaderLine('ig-set-x-mid');
 
         if ($this->_directRegionHint !== '') {
             $this->_parent->settings->set('direct_region', $this->_directRegionHint);
         }
         if ($this->wwwClaim !== '') {
             $this->_parent->settings->set('www_claim', $this->wwwClaim);
+        }
+        if ($this->_mid !== '') {
+            $this->_parent->settings->set('mid', $this->_mid);
         }
 
         $authorizationHeader = $response->getHeaderLine('ig-set-authorization');

@@ -26,16 +26,16 @@ class Event extends RequestCollection
         [
             'seq'               => $this->ig->batchIndex,
             'app_id'            => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
-            'app_ver'           => Constants::IG_VERSION,
+            //'app_ver'           => Constants::IG_VERSION,
             'build_num'         => Constants::VERSION_CODE,
             'device_id'         => $this->ig->uuid,
             'family_device_id'  => $this->ig->phone_id,
             'session_id'        => $this->ig->client->getPigeonSession(),
-            'channel'           => 'regular',
-            'log_type'          => 'client_event',
-            'app_uid'           => $this->ig->account_id,
-            'config_version'    => 'v2',
-            'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
+            //'channel'           => 'regular',
+            //'log_type'          => 'client_event',
+            //'app_uid'           => $this->ig->account_id,
+            //'config_version'    => 'v2',
+            //'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
             'data'              => $batch,
         ];
 
@@ -83,6 +83,8 @@ class Event extends RequestCollection
     {
         $event =
         [
+            'log_type'      => 'client_event',
+            'bg'            => 'false',
             'name'          => $name,
             'time'          => number_format(microtime(true), 3, '.', ''),
             'sampling_rate' => 1,
@@ -112,47 +114,47 @@ class Event extends RequestCollection
     {
         switch ($module) {
             case 'feed_timeline':
-                $class = '039';
+                $class = '1nj';
                 break;
             case 'newsfeed_you':
-                $class = '8ad';
+                $class = '8cF';
                 break;
             case 'explore_popular':
-                $class = 'EaX';
+                $class = '24F';
                 break;
             case 'search':
             case 'blended_search':
             case 'search_result':
-                $class = 'Emh';
+                $class = 'CUK';
                 break;
             case 'search_places':
-                $class = 'En6';
+                $class = 'CUP';
                 break;
             case 'search_users':
-                $class = 'EnL';
+                $class = 'CV8';
                 break;
             case 'search_tags':
-                $class = 'EnA';
+                $class = 'CUq';
                 break;
             case 'feed_hashtag':
-                $class = 'EbV';
+                $class = 'CNT';
                 break;
             case 'feed_location':
-                $class = 'EcQ';
+                $class = 'CNU';
                 break;
             case 'feed_contextual_chain':
-                $class = '8v9';
+                $class = 'CC8';
                 break;
             case 'feed_contextual_place':
             case 'feed_contextual_location':
             case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = '8ZL';
+                $class = '9FJ';
                 break;
             case 'profile':
-            case 'self_profile': // 8Of, ProfileMediaTabFragment
-                $class = 'UserDetailFragment';
+            case 'self_profile': // UserDetailFragment, ProfileMediaTabFragment
+                $class = '8BQ';
                 break;
             case 'following_sheet':
                 $class = 'ProfileFollowRelationshipFragment';
@@ -162,7 +164,7 @@ class Event extends RequestCollection
                 $class = 'UnifiedFollowFragment';
                 break;
             case 'likers':
-                $class = '7ye';
+                $class = '87m';
                 break;
             case 'tabbed_gallery_camera':
                 $class = 'MediaCaptureFragment';
@@ -189,10 +191,23 @@ class Event extends RequestCollection
                 $class = 'ReelViewerFragment';
                 break;
             case 'edit_profile':
-                $class = '9rn';
+                $class = '73j';
+                break;
+            case 'personal_information':
+                $class = '72Z';
                 break;
             case 'profile_edit_bio':
                 $class = 'EMx';
+                break;
+            case 'comments_v2_feed_contextual_profile':
+                $class = 'CommentThreadFragment';
+                break;
+            case 'self_followers':
+            case 'self_following':
+                $class = '89X';
+                break;
+            case 'login_landing':
+                $class = '7Iz';
                 break;
             default:
                 $class = false;
@@ -389,29 +404,70 @@ class Event extends RequestCollection
           ->addPost('sent_time', round(microtime(true), 3))
           ->setAddDefaultHeaders(false);
 
-        if ($this->ig->getEventsCompressed()) {
-            $batch = json_encode($batches);
-            $request->addPost('cmethod', 'deflate')
-                    ->addFileData(
-                        'cmsg',
-                        gzdeflate($batch),
-                        $batchFilename
-                    );
-        } else {
-            $message = [
-                'request_info'  => (object) [],
-                'config'        => [
-                    'config_version'    => 'v2',
-                    'app_uid'           => $this->ig->account_id,
-                    'app_ver'           => Constants::IG_VERSION,
-                ],
-                'batches'       => [
-                    $batches,
-                ],
-            ];
-            $request->addPost('compressed', 0)
-                    ->addPost('multi_batch', 1)
-                    ->addPost('message', json_encode($message));
+        switch($this->ig->getEventsCompressedMode()) {
+            case 0:
+                $batch = json_encode($batches);
+                $request->addPost('cmethod', 'deflate')
+                        ->addFileData(
+                            'cmsg',
+                            gzdeflate($batch),
+                            $batchFilename
+                        );
+            case 1:
+                $message = [
+                    'request_info'  => [
+                        'tier'              => 'micro_batch',
+                        'carrier'           => 'Android',
+                        'conn'              => Constants::X_IG_Connection_Type
+                    ],
+                    'config'        => [
+                        'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
+                        'config_version'    => 'v2',
+                        'app_uid'           => $this->ig->account_id,
+                        'app_ver'           => Constants::IG_VERSION,
+                    ],
+                    'batches'       => [
+                        $batches,
+                    ],
+                ];
+                $request->addPost('compressed', 0)
+                        ->addPost('multi_batch', 1)
+                        ->addPost('message', json_encode($message));
+            case 2:
+                if (count($batches) > 1) {
+                    $message = [
+                        'request_info'  => [
+                            'tier'              => 'micro_batch',
+                            'sent_time'         => round(microtime(true), 3),
+                            'carrier'           => 'Android',
+                            'conn'              => Constants::X_IG_Connection_Type
+                        ],
+                        'config'        => [
+                            'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
+                            'config_version'    => 'v2',
+                            'app_uid'           => $this->ig->account_id,
+                            'app_ver'           => Constants::IG_VERSION,
+                        ],
+                        'batches'       => [
+                            $batches,
+                        ],
+                    ];
+                    $request->addPost('compressed', 1)
+                            ->addPost('multi_batch', 1)
+                            ->addPost('message', base64_encode(gzdeflate(json_encode($message))));
+                } else {
+                    $batches[0]['tier'] = 'micro_batch';
+                    $batches[0]['sent_time'] = round(microtime(true), 3);
+                    $batches[0]['carrier'] = 'Android';
+                    $batches[0]['conn'] = Constants::X_IG_Connection_Type;
+                    $batches[0]['config_checksum'] = empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum');
+                    $batches[0]['config_version'] = 'v2';
+                    $batches[0]['app_uid'] = $this->ig->account_id;
+                    $batches[0]['app_ver'] = Constants::IG_VERSION;
+
+                    $request->addPost('compressed', 1)
+                            ->addPost('message', base64_encode(gzdeflate(json_encode($batches[0]), -1, ZLIB_ENCODING_DEFLATE)));
+                }
         }
 
         try {

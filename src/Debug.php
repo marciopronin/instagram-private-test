@@ -98,6 +98,9 @@ class Debug
         if ($truncated && mb_strlen($response, 'utf8') > 1000) {
             $response = mb_substr($response, 0, 1000, 'utf8').'...';
         }
+        if (mb_strpos($response, "\x49"."\x46"."\x00"."\x01", 0, 'US-ASCII')) {
+            $response = 'RAW DATA';
+        }
 
         if ($cliDebug) {
             echo $res.$response."\n\n";

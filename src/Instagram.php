@@ -2121,7 +2121,14 @@ class Instagram implements ExperimentsInterface
             }
         } else {
             $this->isMaybeLoggedIn = true;
-            $this->account_id = $this->settings->get('account_id');
+            if (!isset($authorizationData['ds_user_id'])) { 
+                $this->account_id = $this->settings->get('account_id');
+            } else {
+                if ($this->settings->get('account_id') === null) {
+                    $this->settings->set('account_id', $authorizationData['ds_user_id']);
+                }
+                $this->account_id = $authorizationData['ds_user_id'];
+            }
         }
 
         // Configures Client for current user AND updates isMaybeLoggedIn state

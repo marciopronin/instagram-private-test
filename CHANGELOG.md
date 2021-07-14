@@ -1,3 +1,10 @@
+# Stable release v17.10.1
+## Date: 14/07/2021
+
+### Updates & fixes
+
+- **Instagram:** Update `_setUser()`
+
 # Stable release v17.10.0
 ## Date: 12/07/2021
 

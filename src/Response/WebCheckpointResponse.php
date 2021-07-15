@@ -33,14 +33,17 @@ class WebCheckpointResponse extends Response
     const JSON_PROPERTY_MAP = [
         'entry_data'           => 'Model\ChallengeEntryData',
         'challenge'            => 'Model\WebChallenge',
+        'challengeType'        => 'string',
     ];
 
     public function getChallengeType()
     {
         if ($this->_getProperty('entry_data') !== null) {
             return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('challengeType');
-        } else {
+        } elseif ($this->_getProperty('challenge') !== null) {
             return $this->_getProperty('challenge')->_getProperty('challengeType');
+        } else {
+            return $this->_getProperty('challengeType');
         }
     }
 

@@ -1,3 +1,11 @@
+# Stable release v17.10.2
+## Date: 15/07/2021
+
+### Updates & fixes
+
+- **ServerMessageThrower:** Update `autoThrow()`
+- **Response:** Update WebCheckpointResponse
+
 # Stable release v17.10.1
 ## Date: 14/07/2021
 

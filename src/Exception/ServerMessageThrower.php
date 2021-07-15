@@ -177,6 +177,13 @@ class ServerMessageThrower
                 $serverErrorType = $serverResponse->getChallengeType();
                 $messages[] = $serverErrorType;
             }
+            if ($serverResponse->hasChallengeType()) {
+                $resp = $serverResponse->asArray();
+                if (isset($resp['challengeType'])) {
+                    $serverErrorType = $serverResponse->getChallengeType();
+                    $messages[] = $serverErrorType;
+                }
+            }
         }
 
         $exceptionClass = null;

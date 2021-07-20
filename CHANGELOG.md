@@ -1,3 +1,17 @@
+# Stable release v17.10.3
+## Date: 20/07/2021
+
+### Updates & fixes
+
+- **Utils:** Update `throwIfInvalidStorySlider()`
+- **Event:** Update `_addCommonProperties()`
+- **Event:** Update `sendDirectMessageIntentOrAttempt()`
+- **Event:** Update `_getModuleClass()`
+
+### Examples
+
+Update direct examples
+
 # Stable release v17.10.2
 ## Date: 15/07/2021
 

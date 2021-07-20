@@ -57,9 +57,9 @@ try {
     ];
 
     $ig->direct->sendAudio($recipients, $videoFilename, ['client_context' => $clientContext]);
-    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'voice_media');
-    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'voice_media');
-    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'voice_media');
+    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'voice_media', [$userId]);
+    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'voice_media', [$userId]);
+    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'voice_media', [$userId]);
 
     //$ig->event->sendNavigation('back', 'direct_thread', 'direct_inbox');
     //$ig->event->sendNavigation('back', 'direct_inbox', 'feed_timeline');

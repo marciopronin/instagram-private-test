@@ -840,14 +840,14 @@ class Utils
     public static function throwIfInvalidStorySlider(
         array $storySlider)
     {
-        $requiredKeys = ['question', 'viewer_vote', 'viewer_can_vote', 'slider_vote_average', 'slider_vote_count', 'emoji', 'background_color', 'text_color', 'is_sticker'];
+        $requiredKeys = ['viewer_vote', 'viewer_can_vote', 'slider_vote_average', 'slider_vote_count', 'emoji', 'background_color', 'text_color', 'is_sticker'];
 
         if (count($storySlider) !== 1) {
             throw new \InvalidArgumentException(sprintf('Only one story slider is permitted. You added %d story sliders.', count($storySlider)));
         }
 
         // Ensure that all keys exist.
-        $missingKeys = array_keys(array_diff_key(['question' => 1, 'viewer_vote' => 1, 'viewer_can_vote' => 1, 'slider_vote_average' => 1, 'slider_vote_count' => 1, 'emoji' => 1, 'background_color' => 1, 'text_color' => 1, 'is_sticker' => 1], $storySlider[0]));
+        $missingKeys = array_keys(array_diff_key(['viewer_vote' => 1, 'viewer_can_vote' => 1, 'slider_vote_average' => 1, 'slider_vote_count' => 1, 'emoji' => 1, 'background_color' => 1, 'text_color' => 1, 'is_sticker' => 1], $storySlider[0]));
         if (count($missingKeys)) {
             throw new \InvalidArgumentException(sprintf('Missing keys "%s" for story slider array.', implode(', ', $missingKeys)));
         }
@@ -858,6 +858,7 @@ class Utils
                     if (!is_string($v)) {
                         throw new \InvalidArgumentException(sprintf('Invalid value "%s" for story slider array-key "%s".', $v, $k));
                     }
+                    $requiredKeys[] = 'question';
                     break;
                 case 'viewer_vote':
                 case 'slider_vote_count':

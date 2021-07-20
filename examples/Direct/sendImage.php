@@ -57,9 +57,9 @@ try {
     ];
 
     $ig->direct->sendPhoto($recipients, $photoFilename, ['client_context' => $clientContext]);
-    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'visual_photo');
-    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'visual_photo');
-    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'visual_photo');
+    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'visual_photo', [$userId]);
+    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'visual_photo', [$userId]);
+    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'visual_photo', [$userId]);
 
     //$ig->event->sendNavigation('back', 'direct_thread', 'direct_inbox');
     //$ig->event->sendNavigation('back', 'direct_inbox', 'feed_timeline');

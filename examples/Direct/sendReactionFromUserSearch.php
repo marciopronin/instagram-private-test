@@ -260,9 +260,9 @@ try {
 
     $ig->direct->sendStoryReaction($recipients, $reaction, $storyItems[0]->getId(), ['client_context' => $clientContext]);
 
-    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'reel_share');
-    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'reel_share');
-    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'reel_share');
+    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'reel_share', [$userId]);
+    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'reel_share', [$userId]);
+    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'reel_share', [$userId]);
 
     $ig->event->sendNavigation('back', 'reel_profile', 'profile');
 

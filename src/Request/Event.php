@@ -59,9 +59,10 @@ class Event extends RequestCollection
     {
         $commonProperties =
         [
-            'pk'                        => isset($event['pk']) ? $event['pk'] : $this->ig->account_id,
-            'release_channel'           => 'prod',
-            'radio_type'                => $this->ig->getRadioType(),
+            'pk'                                            => isset($event['pk']) ? $event['pk'] : $this->ig->account_id,
+            'release_channel'                               => 'prod',
+            'radio_type'                                    => $this->ig->getRadioType(),
+            'pigeon_reserved_keyword_requested_latency'     => -1, // TODO
         ];
 
         return array_merge($commonProperties, $event);
@@ -182,10 +183,13 @@ class Event extends RequestCollection
                 $class = 'FollowersShareFragment';
                 break;
             case 'direct_inbox':
-                $class = '5t7';
+                $class = '90D';
                 break;
             case 'direct_thread':
-                $class = '4tf';
+                $class = '5oi';
+                break;
+            case 'direct_recipient_picker':
+                $class = '8ti';
                 break;
             case 'reel_profile':
                 $class = 'ReelViewerFragment';
@@ -4943,10 +4947,11 @@ class Event extends RequestCollection
      * For sending any direct message, first is must be sent the invent,
      * the 'direct_composer_send_text' and finally the attempt.
      *
-     * @param string $action        'send_intent', 'send_attempt' or 'sent'.
-     * @param string $clientContext Client context used for sending intent/attempt DM.
-     * @param string $type          Message type. 'text', 'visual_photo', 'reel_share'.
-     * @param string $channel       Channel used for sending the intent/attempt DM. Others: 'rest'.
+     * @param string            $action             'send_intent', 'send_attempt' or 'sent'.
+     * @param string            $clientContext      Client context used for sending intent/attempt DM.
+     * @param string            $type               Message type. 'text', 'visual_photo', 'reel_share'.
+     * @param string|string[]   $recipients         String array of users PK.
+     * @param string            $channel            Channel used for sending the intent/attempt DM. Others: 'rest'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -4955,6 +4960,7 @@ class Event extends RequestCollection
         $action,
         $clientContext,
         $type,
+        $recipients,
         $channel = 'rest')
     {
         if ($action !== 'send_intent' && $action !== 'send_attempt' && $action !== 'sent') {
@@ -4965,17 +4971,26 @@ class Event extends RequestCollection
             throw new \InvalidArgumentException(sprintf('%s is not a valid type.', $type));
         }
 
+        if (!is_array($recipients)) {
+            $recipients = [$recipients];
+        }
+
         $extra = [
             'action'         => $action,
             'client_context' => $clientContext,
             'type'           => $type,
             'dedupe_token'   => Signatures::generateUUID(),
+            'sampled'        => true,
+            'recipient_ids'  => $recipients
         ];
 
-        if ($type === 'text' || $action === 'visual_photo') {
+        if ($action === 'send_intent') {
+            $extra['channel'] = 'unset';
+        }
+
+        if ($action === 'send_attempt' || $action === 'visual_photo') {
             $extra['channel'] = $channel;
-        } else {
-            $extra['total_duration'] = mt_rand(200, 500);
+            $extra['is_shh_mode'] = false;
         }
 
         $event = $this->_addEventBody('direct_message_waterfall', null, $extra);

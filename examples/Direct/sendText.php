@@ -60,10 +60,10 @@ try {
 
     $ig->direct->getThreadByParticipants([$userId]);
     $ig->direct->sendText($recipients, $text, ['client_context' => $clientContext]);
-    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'text');
+    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'text', [$userId]);
     $ig->event->sendTextDirectMessage();
-    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'text');
-    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'text');
+    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'text', [$userId]);
+    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'text', [$userId]);
 
     //$ig->event->sendNavigation('back', 'direct_thread', 'direct_inbox');
     //$ig->event->sendNavigation('back', 'direct_inbox', 'feed_timeline');

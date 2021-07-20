@@ -285,7 +285,7 @@ class Internal extends RequestCollection
         // Build the request...
         $request = $this->ig->request($endpoint)
             ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('nav_chain', $this->ig->getNavChain())
@@ -717,7 +717,7 @@ class Internal extends RequestCollection
     {
         $request = $this->ig->request('upload/video/')
             ->setSignedPost(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid);
 
         foreach ($this->_getVideoUploadParams($targetFeed, $internalMetadata) as $key => $value) {
@@ -862,7 +862,7 @@ class Internal extends RequestCollection
                     'source_width'  => $videoDetails->getWidth(),
                     'source_height' => $videoDetails->getHeight(),
                 ])
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('nav_chain', $this->ig->getNavChain());
@@ -1167,7 +1167,7 @@ class Internal extends RequestCollection
         // Build the request...
         $request = $this->ig->request($endpoint)
             ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('client_sidecar_id', $albumUploadId)
@@ -1260,9 +1260,11 @@ class Internal extends RequestCollection
             $request->addPost('server_config_retrieval', 1);
         }
 
+        /*
         if ($useCsrfToken) {
             $request->addPost('_csrftoken', $this->ig->client->getToken());
         }
+        */
         if ($prelogin) {
             $request->setNeedsAuth(false);
         } else {
@@ -1287,7 +1289,7 @@ class Internal extends RequestCollection
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('id', $this->ig->account_id);
 
         if ($this->ig->getIsAndroid()) {
@@ -1326,9 +1328,11 @@ class Internal extends RequestCollection
             ->addPost('id', ($idIsUuid ? $this->ig->uuid : $this->ig->account_id))
             ->addPost('server_config_retrieval', 1);
 
+        /*
         if ($useCsrfToken) {
             $request->addPost('_csrftoken', $this->ig->client->getToken());
         }
+        */
         if ($prelogin) {
             $request->setNeedsAuth(false);
         } else {
@@ -1383,7 +1387,7 @@ class Internal extends RequestCollection
             ->setIsSilentFail(true)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('adid', $this->ig->advertising_id)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1408,9 +1412,12 @@ class Internal extends RequestCollection
             // UUID is used as device_id intentionally.
             ->addPost('device_id', $this->ig->uuid)
             ->addPost('mobile_subno_usage', $usage);
+
+        /*
         if ($useCsrfToken) {
             $request->addPost('_csrftoken', $this->ig->client->getToken());
         }
+        */
 
         return $request->getResponse(new Response\MsisdnHeaderResponse());
     }
@@ -1526,7 +1533,7 @@ class Internal extends RequestCollection
             ->addPost('reason', '')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('uuid', md5(time()))
             ->getResponse(new Response\MegaphoneLogResponse());
     }
@@ -1614,7 +1621,7 @@ class Internal extends RequestCollection
     {
         return $this->ig->request('qp/batch_fetch/')
             ->addPost('vc_policy', 'default')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('surfaces_to_triggers', json_encode(
@@ -1680,7 +1687,7 @@ class Internal extends RequestCollection
         $feedbackUrl)
     {
         return $this->ig->request($feedbackUrl)
-             ->addPost('_csrftoken', $this->ig->client->getToken())
+             //->addPost('_csrftoken', $this->ig->client->getToken())
              ->addPost('_uid', $this->ig->account_id)
              ->addPost('_uuid', $this->ig->uuid)
              ->getResponse(new Response\GenericResponse());
@@ -1711,7 +1718,7 @@ class Internal extends RequestCollection
         return $this->ig->request('notifications/store_client_push_permissions/')
             ->setSignedPost(false)
             ->addPost('enabled', 'true')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -1729,7 +1736,7 @@ class Internal extends RequestCollection
         return $this->ig->request('consent/new_user_flow_begins/')
             ->setSignedPost(false)
             ->setNeedsAuth(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1753,7 +1760,7 @@ class Internal extends RequestCollection
         return $this->ig->request('consent/check_age_eligibility/')
             ->setSignedPost(false)
             ->setNeedsAuth(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('day', $day)
             ->addPost('month', $month)
             ->addPost('year', $year)
@@ -1793,7 +1800,7 @@ class Internal extends RequestCollection
             ->addPost('network_type', 'WIFI-UNKNOWN')
             ->addPost('guid', $this->ig->uuid)
             ->addPost('is_ci', 'false')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->uuid)
             ->addPost('waterfall_id', $waterfallId)
             ->addPost('reg_flow_taken', $regMethod)
@@ -1820,7 +1827,7 @@ class Internal extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('gdpr_s', '')
             ->addPost('guid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id);
 
         if ($acceptedTos) {
@@ -1855,7 +1862,7 @@ class Internal extends RequestCollection
         $request = $this->ig->request('consent/existing_user_flow/')
              ->setNeedsAuth(false)
              ->addPost('device_id', $this->ig->device_id)
-             ->addPost('_csrftoken', $this->ig->client->getToken())
+             //->addPost('_csrftoken', $this->ig->client->getToken())
              ->addPost('_uid', $this->ig->account_id)
              ->addPost('_uuid', $this->ig->uuid);
 
@@ -1959,7 +1966,7 @@ class Internal extends RequestCollection
             ->setIsBodyCompressed(true)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('container_module', $module)
             ->addPost('reels', $reels)
             ->addPost('reel_media_skipped', $skippedItems)
@@ -2085,7 +2092,7 @@ class Internal extends RequestCollection
     {
         $request = $this->ig->request('media/update_media_with_pdq_hash_info/')
              ->addPost('upload_id', $uploadId)
-             ->addPost('_csrftoken', $this->ig->client->getToken())
+             //->addPost('_csrftoken', $this->ig->client->getToken())
              ->addPost('_uid', $this->ig->account_id)
              ->addPost('_uuid', $this->ig->uuid);
 
@@ -2204,7 +2211,7 @@ class Internal extends RequestCollection
         $request = $this->ig->request('upload/photo/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addFile(
                 'photo',
                 $internalMetadata->getPhotoDetails()->getFilename(),

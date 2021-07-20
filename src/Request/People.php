@@ -127,7 +127,7 @@ class People extends RequestCollection
         $userId)
     {
         return $this->ig->request('bloks/apps/com.instagram.interactions.about_this_account/')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('target_user_id', $userId)
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
@@ -196,7 +196,7 @@ class People extends RequestCollection
             ->addPost('action', 'click')
             ->addPost('pk', $newsPk)
             ->addPost('tuuid', $tuuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -291,7 +291,7 @@ class People extends RequestCollection
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('user_ids', $userList)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\FriendshipsShowManyResponse());
     }
 
@@ -392,7 +392,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/approve/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('radio_type', $this->ig->radio_type)
             ->getResponse(new Response\FriendshipResponse());
@@ -416,7 +416,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/ignore/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('radio_type', $this->ig->radio_type)
             ->getResponse(new Response\FriendshipResponse());
@@ -437,7 +437,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/remove_follower/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('radio_type', $this->ig->radio_type)
             ->getResponse(new Response\FriendshipResponse());
@@ -458,7 +458,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/mark_user_overage/{$userId}/feed/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -750,7 +750,7 @@ class People extends RequestCollection
     {
         $request = $this->ig->request('ads/view_ads/')
             ->setSignedPost(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('target_user_id', $targetUserId)
             ->addPost('page_type', $pageType);
@@ -795,7 +795,7 @@ class People extends RequestCollection
             ->addParam('include', 'extra_display_name,thumbnails')
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('contacts', json_encode($contacts))
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('module', 'find_friends_contacts')
             ->addPost('source', 'ci')
@@ -818,7 +818,7 @@ class People extends RequestCollection
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UnlinkAddressBookResponse());
     }
 
@@ -842,7 +842,7 @@ class People extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('module', 'discover_people')
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('paginate', true);
 
         if ($maxId !== null) {
@@ -886,8 +886,8 @@ class People extends RequestCollection
         $module = 'discover_people')
     {
         $request = $this->ig->request('discover/profile_su_badge/')
-            ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken());
+            ->addPost('_uuid', $this->ig->uuid);
+            //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($module !== null) {
             $request->addPost('module', $module);
@@ -931,7 +931,7 @@ class People extends RequestCollection
     {
         return $this->ig->request('discover/aysf_dismiss/')
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addParam('target_id', $userId)
             ->addParam('algorithm', $algorithm)
             ->getResponse(new Response\SuggestedUsersResponse());
@@ -954,7 +954,7 @@ class People extends RequestCollection
         $request = $this->ig->request("friendships/create/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('device_id', $this->ig->device_id);
 
@@ -986,7 +986,7 @@ class People extends RequestCollection
         $request = $this->ig->request("friendships/destroy/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('radio_type', $this->ig->radio_type);
 
@@ -1018,7 +1018,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/favorite/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1038,7 +1038,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/unfavorite/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1058,7 +1058,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/favorite_for_igtv/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1078,7 +1078,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/unfavorite_for_igtv/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1098,7 +1098,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/favorite_for_stories/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1118,7 +1118,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/unfavorite_for_stories/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1141,7 +1141,7 @@ class People extends RequestCollection
             ->addPost('reason_id', 1)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('source_name', $sourceName)
             ->addPost('is_spam', true)
@@ -1163,7 +1163,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/block/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1183,7 +1183,7 @@ class People extends RequestCollection
         return $this->ig->request('restrict_action/restrict/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('target_user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1203,7 +1203,7 @@ class People extends RequestCollection
         return $this->ig->request('restrict_action/unrestrict/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('target_user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1271,8 +1271,8 @@ class People extends RequestCollection
     {
         $request = $this->ig->request($endpoint)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken());
+            ->addPost('_uid', $this->ig->account_id);
+            //->addPost('_csrftoken', $this->ig->client->getToken());
 
         switch ($option) {
             case 'story':
@@ -1307,7 +1307,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/unblock/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1351,7 +1351,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/block_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('source', $source)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1373,7 +1373,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/unblock_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('source', 'profile')
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1390,7 +1390,7 @@ class People extends RequestCollection
         return $this->ig->request('friendships/blocked_reels/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\BlockedReelsResponse());
     }
 
@@ -1415,7 +1415,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/mute_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\FriendshipResponse());
     }
 
@@ -1438,7 +1438,7 @@ class People extends RequestCollection
         return $this->ig->request("friendships/unmute_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\FriendshipResponse());
     }
 
@@ -1492,7 +1492,7 @@ class People extends RequestCollection
             ->setSignedPost(true)
             ->addPost('module', $module)
             ->addPost('source', $source)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('remove', $remove)
@@ -1524,7 +1524,7 @@ class People extends RequestCollection
     public function getMutedUsers()
     {
         return $this->ig->request('bloks/apps/com.instagram.growth.screens.muted_users/')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\MutedUsersResponse());

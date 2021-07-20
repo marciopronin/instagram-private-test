@@ -239,7 +239,7 @@ class Timeline extends RequestCollection
             ->addHeader('X-Ads-Opt-Out', '0')
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->uuid)
@@ -410,7 +410,7 @@ class Timeline extends RequestCollection
         return $this->ig->request("media/{$mediaId}/{$endpoint}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('media_id', $mediaId)
             ->getResponse(new Response\ArchiveMediaResponse());
     }
@@ -434,7 +434,7 @@ class Timeline extends RequestCollection
         return $this->ig->request('feed/hide_feed_post/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('a_pk', $userId)
             ->addPost('m_pk', $mediaId)
             ->getResponse(new Response\GenericResponse());

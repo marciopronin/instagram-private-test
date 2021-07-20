@@ -69,7 +69,7 @@ class Discover extends RequestCollection
     {
         $request = $this->ig->request('discover/explore_clips/')
             ->setSignedPost(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid);
 
         if ($maxId !== null) {
@@ -125,7 +125,7 @@ class Discover extends RequestCollection
         $request = $this->ig->request('discover/chaining_experience_feed/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('surface', $surface)
             ->addPost('explore_source_token', $mediaItem->getExploreSourceToken())
             ->addPost('trigger', 'tap')
@@ -256,7 +256,7 @@ class Discover extends RequestCollection
             ->setSignedPost(false)
             ->addPost('entity_type', $entityType)
             ->addPost('entity_id', $entityId)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -311,7 +311,7 @@ class Discover extends RequestCollection
         return $this->ig->request('fbsearch/clear_search_history/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -342,7 +342,7 @@ class Discover extends RequestCollection
         return $this->ig->request('discover/mark_su_seen/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -364,7 +364,7 @@ class Discover extends RequestCollection
             ->addPost('module', $module)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\DiscoverPeopleResponse());
     }
 
@@ -380,7 +380,7 @@ class Discover extends RequestCollection
         return $this->ig->request('discover/profile_su_badge/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -402,7 +402,7 @@ class Discover extends RequestCollection
             ->addPost('mutual_followers_limit', 12)
             ->addPost('module', 'profile_social_context')
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 

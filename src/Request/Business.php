@@ -111,7 +111,7 @@ class Business extends RequestCollection
             ->addParam('vc_policy', 'insights_policy')
             ->addPost('locale', $this->ig->getLocale())
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('variables', json_encode([
                 'surface'                       => 'post',
                 'query_params'                  => json_encode([
@@ -178,7 +178,7 @@ class Business extends RequestCollection
             ->addPost('added_user_ids', $addedUserIds)
             ->addPost('removed_user_ids', $removedUserIds)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\BusinessWhitelistSettingsResponse());
     }
@@ -195,7 +195,7 @@ class Business extends RequestCollection
         return $this->ig->request('business/branded_content/update_whitelist_settings/')
             ->addPost('to_account_type', 1)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\BusinessWhitelistSettingsResponse());
     }

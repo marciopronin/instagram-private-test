@@ -47,7 +47,7 @@ class Reel extends RequestCollection
     {
         $request = $this->ig->request('clips/home/')
             ->setSignedPost(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('container_module', $module);
 
@@ -75,7 +75,7 @@ class Reel extends RequestCollection
     {
         $request = $this->ig->request('clips/user/')
             ->setSignedPost(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('target_user_id', $userId);
 
@@ -101,7 +101,7 @@ class Reel extends RequestCollection
     {
         $request = $this->ig->request('clips/music/')
             ->setSignedPost(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid);
 
         if ($maxId !== null) {

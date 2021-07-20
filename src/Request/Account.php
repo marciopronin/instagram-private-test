@@ -50,7 +50,7 @@ class Account extends RequestCollection
             ->setNeedsAuth(false)
             ->addPost('tos_version', $tosVersion)
             ->addPost('phone_id', $this->ig->phone_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('username', $username)
             ->addPost('first_name', $firstName)
             ->addPost('adid', $this->ig->advertising_id)
@@ -122,7 +122,7 @@ class Account extends RequestCollection
             ->addPost('tos_version', $tosVersion)
             ->addPost('allow_contacts_sync', 'true')
             ->addPost('phone_id', $this->ig->phone_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('username', $username)
             ->addPost('first_name', $firstName)
             ->addPost('adid', $this->ig->advertising_id)
@@ -179,7 +179,7 @@ class Account extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('guid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -206,7 +206,7 @@ class Account extends RequestCollection
             ->addPost('phone_number', $phone)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
             ->addPost('waterfall_id', $waterfallId)
             ->getResponse(new Response\SendSignupSmsCodeResponse());
@@ -232,7 +232,7 @@ class Account extends RequestCollection
             ->setNeedsAuth(false)
             ->addPost('verification_code', $smsCode)
             ->addPost('phone_number', $phone)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('waterfall_id', $waterfallId)
@@ -256,7 +256,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/send_verify_email/')
             ->setNeedsAuth(false)
             ->addPost('email', $email)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('waterfall_id', $waterfallId)
@@ -284,7 +284,7 @@ class Account extends RequestCollection
             ->setNeedsAuth(false)
             ->addPost('code', $code)
             ->addPost('email', $email)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('waterfall_id', $waterfallId)
@@ -320,7 +320,7 @@ class Account extends RequestCollection
         return $this->ig->request('session/login_activity/logout_session/')
             ->setSignedPost(false)
             ->addPost('session_id', $sessionId)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -345,7 +345,7 @@ class Account extends RequestCollection
         ->setSignedPost(false)
         ->addPost('login_timestamp', $loginTimestamp)
         ->addPost('login_id', $loginId)
-        ->addPost('_csrftoken', $this->ig->client->getToken())
+        //->addPost('_csrftoken', $this->ig->client->getToken())
         ->addPost('_uuid', $this->ig->uuid)
         ->getResponse(new Response\GenericResponse());
     }
@@ -421,7 +421,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/set_gender/')
             ->setSignedPost(false)
             ->addPost('gender', $gender_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('custom_gender', $gender_id === 4 ? $gender : '')
             ->getResponse(new Response\UserInfoResponse());
@@ -449,7 +449,7 @@ class Account extends RequestCollection
             ->addPost('day', $day)
             ->addPost('month', $month)
             ->addPost('year', $year)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\UserInfoResponse());
     }
@@ -487,7 +487,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UserInfoResponse());
     }
 
@@ -510,7 +510,7 @@ class Account extends RequestCollection
         $uploadResponse = $this->ig->internal->uploadPhotoData(Constants::FEED_TIMELINE, $internalMetadata);
 
         return $this->ig->request('accounts/change_profile_picture/')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('use_fbuploader', 'true')
             ->addPost('upload_id', $internalMetadata->getUploadId())
@@ -529,7 +529,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/remove_profile_picture/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UserInfoResponse());
     }
 
@@ -583,7 +583,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/edit_profile/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('external_url', $url)
             ->addPost('phone_number', $phone)
             ->addPost('username', $username)
@@ -617,8 +617,8 @@ class Account extends RequestCollection
     public function setPublic()
     {
         $request = $this->ig->request('accounts/set_public/')
-            ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken());
+            ->addPost('_uuid', $this->ig->uuid);
+            //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('_uid', $this->ig->account_id);
@@ -637,8 +637,8 @@ class Account extends RequestCollection
     public function setPrivate()
     {
         $request = $this->ig->request('accounts/set_private/')
-            ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken());
+            ->addPost('_uuid', $this->ig->uuid);
+            //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('_uid', $this->ig->account_id);
@@ -677,7 +677,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/convert_to_personal/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\SwitchPersonalProfileResponse());
     }
 
@@ -708,7 +708,7 @@ class Account extends RequestCollection
             ->addPost('category_id', $categoryId)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\CreateBusinessInfoResponse());
     }
 
@@ -735,7 +735,7 @@ class Account extends RequestCollection
             ->setNeedsAuth(false)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('username', $username)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->getResponse(new Response\CheckUsernameResponse());
     }
@@ -794,7 +794,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/username_suggestions/')
             ->setNeedsAuth(false)
             ->addPost('phone_id', $this->ig->phone_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
             ->addPost('name', $usernameQuery)
             ->addPost('device_id', $this->ig->device_id)
@@ -831,7 +831,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/set_comment_filter/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('config_value', $config_value)
             ->getResponse(new Response\CommentFilterSetResponse());
     }
@@ -877,7 +877,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/set_comment_filter_keywords/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('keywords', $keywords)
             ->getResponse(new Response\CommentFilterSetResponse());
     }
@@ -899,7 +899,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/change_password/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('enc_old_password', Utils::encryptPassword($oldPassword, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('enc_new_password1', Utils::encryptPassword($newPassword, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('enc_new_password2', Utils::encryptPassword($newPassword, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
@@ -926,7 +926,7 @@ class Account extends RequestCollection
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\AccountSecurityInfoResponse());
     }
 
@@ -945,7 +945,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\AccountSecurityInfoResponse());
     }
 
@@ -971,7 +971,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/send_two_factor_enable_sms/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('phone_number', $cleanNumber)
             ->getResponse(new Response\SendTwoFactorEnableSMSResponse());
@@ -1007,7 +1007,7 @@ class Account extends RequestCollection
             ->addPost('trust_this_device', ($trustDevice) ? '1' : '0')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('phone_number', $cleanNumber)
             ->addPost('verification_code', $verificationCode)
@@ -1028,7 +1028,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/disable_sms_two_factor/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\DisableTwoFactorSMSResponse());
     }
 
@@ -1078,7 +1078,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('disabled', '0')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $this->_savePresenceStatus(false);
@@ -1102,7 +1102,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('disabled', '1')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $this->_savePresenceStatus(true);
@@ -1123,7 +1123,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('send_source', 'edit_profile')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\SendConfirmEmailResponse());
     }
 
@@ -1145,7 +1145,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('phone_number', $cleanNumber)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\SendSMSCodeResponse());
     }
 
@@ -1172,7 +1172,7 @@ class Account extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('phone_number', $cleanNumber)
             ->addPost('verification_code', $verificationCode)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\VerifySMSCodeResponse());
     }
 
@@ -1193,7 +1193,7 @@ class Account extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id);
 
         if ($this->ig->getIsAndroid()) {
-            $request->addPost('_csrftoken', $this->ig->client->getToken())
+            $request//->addPost('_csrftoken', $this->ig->client->getToken())
                     ->addPost('usage', $usage);
         }
 
@@ -1245,7 +1245,7 @@ class Account extends RequestCollection
         return $this->ig->request('notifications/badge/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('users_ids', $this->ig->account_id)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->uuid)
@@ -1265,7 +1265,7 @@ class Account extends RequestCollection
             ->setSignedPost(false)
             ->setIsSilentFail(true)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\FacebookIdResponse());
     }
 
@@ -1311,7 +1311,7 @@ class Account extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1333,7 +1333,7 @@ class Account extends RequestCollection
             ->addPost('adid', $this->ig->advertising_id)
             ->addPost('query', $query)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\SendRecoveryFlowResponse());
     }
 
@@ -1359,7 +1359,7 @@ class Account extends RequestCollection
             ->addPost('adid', $this->ig->advertising_id)
             ->addPost('query', $query)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\LookupPhoneResponse());
     }
 
@@ -1385,7 +1385,7 @@ class Account extends RequestCollection
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('guid', $this->ig->uuid)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\MultiAccountsResponse());
     }
 
@@ -1407,7 +1407,7 @@ class Account extends RequestCollection
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('nest_data_manifest', 'true')
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1429,7 +1429,7 @@ class Account extends RequestCollection
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('nest_data_manifest', 'true')
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1454,7 +1454,7 @@ class Account extends RequestCollection
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('nest_data_manifest', 'true')
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $re = '/\"(\d{15})\\\\/m';

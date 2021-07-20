@@ -119,8 +119,8 @@ class Live extends RequestCollection
     {
         $request = $this->ig->request("live/{$broadcastId}/heartbeat_and_get_viewer_count/")
             ->setSignedPost(false)
-            ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken());
+            ->addPost('_uuid', $this->ig->uuid);
+            //->addPost('_csrftoken', $this->ig->client->getToken());
         if ($isViewer) {
             $request->addPost('live_with_eligibility', 1);
         } else {
@@ -191,7 +191,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\BroadcastJoinResponse());
     }
 
@@ -220,7 +220,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -247,7 +247,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -274,7 +274,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -316,7 +316,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -337,7 +337,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/question/{$questionId}/activate/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -358,7 +358,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/question/{$questionId}/deactivate/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -380,7 +380,7 @@ class Live extends RequestCollection
     {
         return $this->ig->request("live/{$broadcastId}/questions/")
             ->setSignedPost(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('text', $questionText)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -449,7 +449,7 @@ class Live extends RequestCollection
     {
         return $this->ig->request("live/{$broadcastId}/wave/")
             ->addPost('viewer_id', $viewerId)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -497,7 +497,7 @@ class Live extends RequestCollection
             ->addPost('comment_id', $commentId)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\PinCommentBroadcastResponse());
     }
 
@@ -520,7 +520,7 @@ class Live extends RequestCollection
             ->addPost('comment_id', $commentId)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UnpinCommentBroadcastResponse());
     }
 
@@ -583,7 +583,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/unmute_comment/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\EnableDisableLiveCommentsResponse());
     }
 
@@ -602,7 +602,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/mute_comment/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\EnableDisableLiveCommentsResponse());
     }
 
@@ -630,7 +630,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/like/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_like_count', $likeCount)
             ->addPost('user_like_burst_count', $burstLikeCount)
             ->addPost('offset_to_video_start', 0)
@@ -703,7 +703,7 @@ class Live extends RequestCollection
         $request = $this->ig->request('live/create/')
             ->setSignedPost(false)
             ->addPost('user_pay_enabled', 'false')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('preview_height', $previewHeight)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('broadcast_type', 'RTMP_SWAP_ENABLED')
@@ -752,8 +752,8 @@ class Live extends RequestCollection
     {
         $request = $this->ig->request("live/{$broadcastId}/start/")
             ->setSignedPost(false)
-            ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken());
+            ->addPost('_uuid', $this->ig->uuid);
+            //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($latitude !== null && $longitude !== null) {
             $request->addPost('latitude', $latitude)
@@ -787,7 +787,7 @@ class Live extends RequestCollection
     {
         return $this->ig->request("live/{$broadcastId}/question_status/")
             ->setSignedPost(false)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('allow_question_submission', true)
             ->getResponse(new Response\GenericResponse());
@@ -809,7 +809,7 @@ class Live extends RequestCollection
         $broadcastId)
     {
         return $this->ig->request("live/{$broadcastId}/resume_broadcast_after_content_match/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -838,7 +838,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/end_broadcast/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('end_after_copyright_warning', $copyrightWarning)
             ->getResponse(new Response\GenericResponse());
     }
@@ -881,7 +881,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/add_to_post_live/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -902,7 +902,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/delete_post_live/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -952,7 +952,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$userId}/set_subscription_preference/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1064,7 +1064,7 @@ class Live extends RequestCollection
         return $this->ig->request('archive/live/live_archive_settings/')
             ->addPost('live_archive_setting', $setting)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\LiveArchiveSettingsResponse());
     }
 
@@ -1096,7 +1096,7 @@ class Live extends RequestCollection
         return $this->ig->request('archive/live/delete/')
             ->addPost('archive_id', $archiveId)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 }

@@ -116,7 +116,7 @@ class Shopping extends RequestCollection
             ->addPost('current_catalog_id', $catalogId)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\OnBoardCatalogResponse());
     }
 }

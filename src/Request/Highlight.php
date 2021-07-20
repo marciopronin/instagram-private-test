@@ -101,7 +101,7 @@ class Highlight extends RequestCollection
             ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
             ->addPost('source', $module)
             ->addPost('creation_id', round(microtime(true) * 1000))
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('cover', json_encode($cover))
@@ -151,7 +151,7 @@ class Highlight extends RequestCollection
             ->addPost('source', $module)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('title', $params['title'])
             ->addPost('cover', json_encode($cover))
             ->addPost('added_media_ids', json_encode(array_values($params['add_media'])))
@@ -174,7 +174,7 @@ class Highlight extends RequestCollection
         return $this->ig->request("highlights/{$highlightReelId}/delete_reel/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 }

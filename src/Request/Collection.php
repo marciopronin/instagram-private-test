@@ -75,7 +75,7 @@ class Collection extends RequestCollection
             ->addPost('module_name', $moduleName)
             ->addPost('added_media_ids', '[]')
             ->addPost('collection_visibility', '0') //Instagram is planning for public collections soon
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('name', $name)
             ->addPost('_uuid', $this->ig->uuid)
@@ -97,7 +97,7 @@ class Collection extends RequestCollection
         return $this->ig->request("collections/{$collectionId}/delete/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\DeleteCollectionResponse());
     }
 
@@ -140,8 +140,8 @@ class Collection extends RequestCollection
         }
         $request = $this->ig->request("collections/{$collectionId}/edit/")
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken());
+            ->addPost('_uid', $this->ig->account_id);
+            //->addPost('_csrftoken', $this->ig->client->getToken());
 
         foreach ($postData as $key => $value) {
             $request->addPost($key, $value);
@@ -175,7 +175,7 @@ class Collection extends RequestCollection
             ->addPost('radio_type', $this->ig->radio_type)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\EditCollectionResponse());
     }
 }

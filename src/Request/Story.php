@@ -133,7 +133,7 @@ class Story extends RequestCollection
             ->addPost('reason', $reason)
             ->addPost('timezone_offset', date('Z'))
             ->addPost('request_id', Signatures::generateUUID())
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\ReelsTrayFeedResponse());
     }
@@ -162,7 +162,7 @@ class Story extends RequestCollection
         return $this->ig->request('feed/get_latest_reel_media/')
             ->setSignedPost(false)
             ->addPost('user_ids', $feedList) // Must be string[] array.
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\ReelsTrayFeedResponse());
     }
@@ -252,7 +252,7 @@ class Story extends RequestCollection
             ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_ids', $feedList) // Must be string[] array.
             ->addPost('source', $source)
             ->getResponse(new Response\ReelsMediaResponse());
@@ -294,7 +294,7 @@ class Story extends RequestCollection
             ->setIsBodyCompressed(true)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('inserted_netego_indices', [])
             ->addPost('ad_and_netego_request_information', [])
             ->addPost('inserted_ad_indices', [])
@@ -406,7 +406,7 @@ class Story extends RequestCollection
         return $this->ig->request("media/{$storyId}/{$pollId}/story_poll_vote/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('radio_type', $this->ig->radio_type)
             ->addPost('vote', $votingOption)
             ->getResponse(new Response\ReelMediaViewerResponse());
@@ -438,7 +438,7 @@ class Story extends RequestCollection
         return $this->ig->request("media/{$storyId}/{$sliderId}/story_slider_vote/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('radio_type', $this->ig->radio_type)
             ->addPost('vote', $votingOption)
             ->getResponse(new Response\ReelMediaViewerResponse());
@@ -501,7 +501,7 @@ class Story extends RequestCollection
         $containerModule = 'reel_profile')
     {
         $request = $this->ig->request("media/{$storyId}/{$questionId}/story_question_response/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('response', $responseText)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('type', 'text')
@@ -560,7 +560,7 @@ class Story extends RequestCollection
         $answerId)
     {
         return $this->ig->request("media/{$storyId}/delete_story_question_response/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('question_id', $answerId)
@@ -593,7 +593,7 @@ class Story extends RequestCollection
         $countdownId)
     {
         return $this->ig->request("media/{$countdownId}/follow_story_countdown/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -612,7 +612,7 @@ class Story extends RequestCollection
         $countdownId)
     {
         return $this->ig->request("media/{$countdownId}/unfollow_story_countdown/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -639,7 +639,7 @@ class Story extends RequestCollection
         return $this->ig->request("media/{$storyId}/{$quizId}/story_quiz_answer/")
             ->setSignedPost(false)
             ->addPost('answer', $selectedOption)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -894,7 +894,7 @@ class Story extends RequestCollection
         $request = $this->ig->request('users/set_reel_settings/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('message_prefs', $messagePrefs);
 
         if ($allowStoryReshare !== null) {

@@ -1,3 +1,13 @@
+# Stable release v17.10.4
+## Date: 21/07/2021
+
+### Updates & fixes
+
+- **Media:** Update `like()`
+- **Request:** Update `_addDefaultHeaders()`
+
+- **General update:** Remove `_csrftoken`. Deprecated. No longer used.
+
 # Stable release v17.10.3
 ## Date: 20/07/2021
 

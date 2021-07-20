@@ -25,7 +25,7 @@ class Music extends RequestCollection
             ->setSignedPost(false)
             ->addPost('browse_session_id', $browseSessionId)
             ->addPost('product', 'story_camera_music_overlay_post_capture')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\MusicItemsResponse());
     }
@@ -53,7 +53,7 @@ class Music extends RequestCollection
             ->addPost('search_session_id', $searchSessionId)
             ->addPost('from_typeahead', 'false')
             ->addPost('product', 'story_camera_music_overlay_post_capture')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\MusicItemsResponse());
     }
@@ -119,7 +119,7 @@ class Music extends RequestCollection
         $browseSessionId)
     {
         return $this->ig->request('music/genres/')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('browse_session_id', $browseSessionId)
             ->addPost('product', 'story_camera_music_overlay_post_capture')
@@ -139,7 +139,7 @@ class Music extends RequestCollection
         $browseSessionId)
     {
         return $this->ig->request('music/moods/')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('browse_session_id', $browseSessionId)
             ->addPost('product', 'story_camera_music_overlay_post_capture')

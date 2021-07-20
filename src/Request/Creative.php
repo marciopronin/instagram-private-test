@@ -66,7 +66,7 @@ class Creative extends RequestCollection
         return $this->ig->request('creatives/face_models/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('supported_model_compression_type', 'TAR_BROTLI')
             ->addPost('aml_facetracker_model_version', '14')
             ->getResponse(new Response\FaceModelsResponse());
@@ -84,7 +84,7 @@ class Creative extends RequestCollection
         return $this->ig->request('creatives/segmentation_models/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('supported_model_compression_type', 'TAR_BROTLI')
             ->addPost('aml_facetracker_model_version', '106')
             ->getResponse(new Response\SegmentationModelsResponse());
@@ -102,7 +102,7 @@ class Creative extends RequestCollection
         return $this->ig->request('creatives/camera_models/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('model_request_blobs', json_encode([
                 'type'                              => 'target_recognition',
                 'target_recognition_model_version'  => 9,
@@ -131,7 +131,7 @@ class Creative extends RequestCollection
         $request = $this->ig->request('creatives/face_effects/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES));
 
         if ($location !== null) {
@@ -157,7 +157,7 @@ class Creative extends RequestCollection
             ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\WriteSuppotedCapabilitiesResponse());
     }
 

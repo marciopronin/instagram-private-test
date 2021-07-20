@@ -428,7 +428,7 @@ class Request
                 $this->_headers['X-IG-Capabilities'] = Constants::X_IG_Capabilities;
                 $this->_headers['X-Bloks-Version-Id'] = Constants::BLOCK_VERSIONING_ID;
                 $this->_headers['X-Bloks-Is-Layout-RTL'] = 'false';
-                $this->_headers['X-Bloks-Is-Panorama-Enabled'] = 'false';
+                $this->_headers['X-Bloks-Is-Panorama-Enabled'] = 'true';
                 if ($this->_parent->getNavChain() !== '') {
                     $this->_headers['X-IG-Nav-Chain'] = $this->_parent->getNavChain();
                 }

@@ -70,7 +70,7 @@ class Media extends RequestCollection
             ->addParam('media_type', $mediaType)
             ->addPost('igtv_feed_preview', false)
             ->addPost('media_id', $mediaId)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\MediaDeleteResponse());
@@ -108,7 +108,7 @@ class Media extends RequestCollection
         $request = $this->ig->request("media/{$mediaId}/edit_media/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('caption_text', $captionText);
 
         if (isset($metadata['usertags'])) {
@@ -175,13 +175,16 @@ class Media extends RequestCollection
         $request = $this->ig->request("media/{$mediaId}/like/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('delivery_class', 'organic')
-            ->addPost('inventory_source', 'media_or_ad')
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('media_id', $mediaId)
             ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('container_module', $module);
+
+        if ($module === 'feed_timeline') {
+            $request->addPost('inventory_source', 'media_or_ad');
+        }
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('radio_type', $this->ig->radio_type)
@@ -223,7 +226,7 @@ class Media extends RequestCollection
         $request = $this->ig->request("media/{$mediaId}/unlike/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('delivery_class', 'organic')
             ->addPost('inventory_source', 'media_or_ad')
             ->addPost('media_id', $mediaId)
@@ -312,7 +315,7 @@ class Media extends RequestCollection
     {
         return $this->ig->request("media/{$mediaId}/enable_comments/")
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
     }
@@ -331,7 +334,7 @@ class Media extends RequestCollection
     {
         return $this->ig->request("media/{$mediaId}/disable_comments/")
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
     }
@@ -378,7 +381,7 @@ class Media extends RequestCollection
             ->addPost('inventory_source', 'media_or_ad')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('comment_text', $commentText)
             ->addPost('container_module', $module)
             ->addPost('radio_type', $this->ig->radio_type)
@@ -517,7 +520,7 @@ class Media extends RequestCollection
         return $this->ig->request("media/{$mediaId}/comment/{$commentId}/delete/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\DeleteCommentResponse());
     }
 
@@ -542,7 +545,7 @@ class Media extends RequestCollection
         return $this->ig->request("media/{$mediaId}/comment/bulk_delete/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('comment_ids_to_delete', $commentIds)
             ->getResponse(new Response\DeleteCommentResponse());
     }
@@ -566,7 +569,7 @@ class Media extends RequestCollection
         return $this->ig->request("media/{$commentId}/comment_like/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('is_carousel_bumped_post', false)
             ->addPost('container_module', $module)
             ->addPost('feed_position', $feedPosition)
@@ -593,7 +596,7 @@ class Media extends RequestCollection
         return $this->ig->request("media/{$commentId}/comment_unlike/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('is_carousel_bumped_post', false)
             ->addPost('container_module', $module)
             ->addPost('feed_position', $feedPosition)
@@ -693,7 +696,7 @@ class Media extends RequestCollection
             ->addPost('comment_text', $comment)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\CheckOffensiveCommentResponse());
     }
 
@@ -715,7 +718,7 @@ class Media extends RequestCollection
         return $this->ig->request('media/validate_reel_url/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('url', $url)
             ->getResponse(new Response\ValidateURLResponse());
     }
@@ -735,7 +738,7 @@ class Media extends RequestCollection
         return $this->ig->request("media/{$mediaId}/save/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\SaveAndUnsaveMedia());
     }
 
@@ -754,7 +757,7 @@ class Media extends RequestCollection
         return $this->ig->request("media/{$mediaId}/unsave/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\SaveAndUnsaveMedia());
     }
 
@@ -811,7 +814,7 @@ class Media extends RequestCollection
             ->addPost('reason_id', '1')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -835,7 +838,7 @@ class Media extends RequestCollection
             ->addPost('reason', '1')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 

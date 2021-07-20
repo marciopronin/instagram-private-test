@@ -237,7 +237,7 @@ class Location extends RequestCollection
             ->setSignedPost(false)
             ->addPost('rank_token', $rankToken)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('session_id', $this->ig->session_id)
             ->addPost('tab', $tab);
 

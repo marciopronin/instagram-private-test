@@ -163,7 +163,7 @@ class Direct extends RequestCollection
         }
 
         return $request
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -206,7 +206,7 @@ class Direct extends RequestCollection
         }
 
         return $request
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -222,7 +222,7 @@ class Direct extends RequestCollection
     public function declineAllPendingThreads()
     {
         return $this->ig->request('direct_v2/threads/decline_all/')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -382,7 +382,7 @@ class Direct extends RequestCollection
     {
         return $this->ig->request("direct_v2/threads/{$threadId}/update_title/")
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('title', trim($title))
             ->setSignedPost(false)
             ->getResponse(new Response\DirectThreadResponse());
@@ -408,7 +408,7 @@ class Direct extends RequestCollection
     {
         return $this->ig->request("direct_v2/threads/{$threadId}/move/")
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('folder', $folder)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -427,7 +427,7 @@ class Direct extends RequestCollection
         $threadId)
     {
         return $this->ig->request("direct_v2/threads/{$threadId}/mute/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -446,7 +446,7 @@ class Direct extends RequestCollection
         $threadId)
     {
         return $this->ig->request("direct_v2/threads/{$threadId}/unmute/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -486,7 +486,7 @@ class Direct extends RequestCollection
         }
 
         $request = $this->ig->request('direct_v2/create_group_thread/')
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('recipient_users', json_encode($userIds))
             ->addPost('_uid', $this->ig->account_id);
@@ -529,7 +529,7 @@ class Direct extends RequestCollection
         }
 
         return $this->ig->request("direct_v2/threads/{$threadId}/add_user/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_ids', json_encode($users))
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
@@ -549,7 +549,7 @@ class Direct extends RequestCollection
         $threadId)
     {
         return $this->ig->request("direct_v2/threads/{$threadId}/leave/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -568,7 +568,7 @@ class Direct extends RequestCollection
         $threadId)
     {
         return $this->ig->request("direct_v2/threads/{$threadId}/hide/")
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -1316,7 +1316,7 @@ class Direct extends RequestCollection
     {
         return $this->ig->request("direct_v2/threads/{$threadId}/items/{$threadItemId}/delete/")
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1342,7 +1342,7 @@ class Direct extends RequestCollection
             ->addPost('thread_id', $threadId)
             ->addPost('item_id', $threadItemId)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('client_context', $clientContext)
             ->addPost('offline_threading_id', $clientContext)
             ->setSignedPost(false)
@@ -1376,7 +1376,7 @@ class Direct extends RequestCollection
             ->addPost('item_ids', '['.implode(',', $threadItemIds).']')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1407,7 +1407,7 @@ class Direct extends RequestCollection
             ->addPost('item_ids', '['.implode(',', $threadItemIds).']')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1710,7 +1710,7 @@ class Direct extends RequestCollection
             ->addPost('client_context', $options['client_context'])
             ->addPost('mutation_token', $options['mutation_token'])
             ->addPost('offline_threading_id', $options['offline_threading_id'])
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('device_id', $this->ig->device_id)
@@ -1821,7 +1821,7 @@ class Direct extends RequestCollection
             ->addPost('client_context', $options['client_context'])
             ->addPost('mutation_token', $options['mutation_token'])
             ->addPost('offline_threading_id', $options['offline_threading_id'])
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\DirectSendItemsResponse());

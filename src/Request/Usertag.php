@@ -80,7 +80,7 @@ class Usertag extends RequestCollection
         return $this->ig->request('usertags/remove/')
             ->addPost('media_to_untag', $mediaId)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('container_module', 'self_comments_v2_newsfeed_you')
             ->getResponse(new Response\MediaInfoResponse());
     }
@@ -100,7 +100,7 @@ class Usertag extends RequestCollection
         return $this->ig->request("usertags/{$mediaId}/remove/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\MediaInfoResponse());
     }
 
@@ -157,7 +157,7 @@ class Usertag extends RequestCollection
         return $this->ig->request('usertags/review_preference/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('enabled', (int) $enabled)
             ->getResponse(new Response\ReviewPreferenceResponse());
     }

@@ -80,7 +80,7 @@ class Hashtag extends RequestCollection
         $request = $this->ig->request("tags/{$urlHashtag}/sections/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('rank_token', $rankToken)
             ->addPost('include_persistent', true);
 
@@ -187,7 +187,7 @@ class Hashtag extends RequestCollection
         return $this->ig->request("tags/follow/{$urlHashtag}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -210,7 +210,7 @@ class Hashtag extends RequestCollection
         return $this->ig->request("tags/unfollow/{$urlHashtag}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('_csrftoken', $this->ig->client->getToken())
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 

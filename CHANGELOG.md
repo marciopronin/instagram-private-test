@@ -1,3 +1,14 @@
+# Stable release v17.10.5
+## Date: 21/07/2021
+
+### Updates & fixes
+
+- **Event:** Update `sendDirectMessageIntentOrAttempt()`
+
+### Examples
+
+- Update shareMedia example
+
 # Stable release v17.10.4
 ## Date: 21/07/2021
 

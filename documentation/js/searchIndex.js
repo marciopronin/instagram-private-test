@@ -336,6 +336,11 @@ Search.appendIndex(
             "summary": "DS\u0020User\u0020ID.",
             "url": "../classes/InstagramAPI-Client.html#property__dsUserId"
         },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_mid",
+            "name": "_mid",
+            "summary": "MID.",
+            "url": "../classes/InstagramAPI-Client.html#property__mid"
+        },                {
             "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_requestId",
             "name": "_requestId",
             "summary": "Request\u0020ID\u0020for\u0020logger.",
@@ -1456,10 +1461,10 @@ Search.appendIndex(
             "summary": "Get\u0020if\u0020device\u0020is\u0020VP9\u0020compatible.",
             "url": "../classes/InstagramAPI-Instagram.html#method_getIsVP9Compatible"
         },                {
-            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetEventsCompressed\u0028\u0029",
-            "name": "getEventsCompressed",
-            "summary": "Get\u0020logging\u0020events\u0020compressed.",
-            "url": "../classes/InstagramAPI-Instagram.html#method_getEventsCompressed"
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetEventsCompressedMode\u0028\u0029",
+            "name": "getEventsCompressedMode",
+            "summary": "Get\u0020logging\u0020events\u0020compressed\u0020mode.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getEventsCompressedMode"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetIosModel\u0028\u0029",
             "name": "setIosModel",
@@ -1876,10 +1881,10 @@ Search.appendIndex(
             "summary": "Web\u0020user\u0020agent.",
             "url": "../classes/InstagramAPI-Instagram.html#property_webUserAgent"
         },                {
-            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024eventsCompressed",
-            "name": "eventsCompressed",
-            "summary": "Logging\u0020events\u0020compression.",
-            "url": "../classes/InstagramAPI-Instagram.html#property_eventsCompressed"
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024eventsCompressedMode",
+            "name": "eventsCompressedMode",
+            "summary": "Logging\u0020events\u0020compression\u0020mode.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_eventsCompressedMode"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024iosModel",
             "name": "iosModel",

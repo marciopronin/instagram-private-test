@@ -4949,7 +4949,7 @@ class Event extends RequestCollection
      *
      * @param string            $action             'send_intent', 'send_attempt' or 'sent'.
      * @param string            $clientContext      Client context used for sending intent/attempt DM.
-     * @param string            $type               Message type. 'text', 'visual_photo', 'reel_share'.
+     * @param string            $type               Message type. 'text', 'visual_photo', 'reel_share', 'share_media' or 'profile'.
      * @param string|string[]   $recipients         String array of users PK.
      * @param string            $channel            Channel used for sending the intent/attempt DM. Others: 'rest'.
      *
@@ -4967,7 +4967,7 @@ class Event extends RequestCollection
             throw new \InvalidArgumentException(sprintf('%s is not a valid action.', $action));
         }
 
-        if ($type !== 'text' && $type !== 'visual_photo' && $type !== 'reel_share') {
+        if ($type !== 'text' && $type !== 'visual_photo' && $type !== 'reel_share' && $type !== 'share_media' && $type !== 'profile') {
             throw new \InvalidArgumentException(sprintf('%s is not a valid type.', $type));
         }
 

@@ -80,10 +80,10 @@ try {
     }
 
     $ig->direct->sendPost($recipients, $items[0]->getId(), ['client_context' => $clientContext, 'media_type' => $mediaType]);
+    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'share_media', [$userId]);
     $ig->event->sendDirectShareMedia($userId);
-    $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'share_media');
-    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'share_media');
-    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'share_media');
+    $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'share_media', [$userId]);
+    $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'share_media', [$userId]);
 
     //$ig->event->sendNavigation('back', 'direct_thread', 'direct_inbox');
     //$ig->event->sendNavigation('back', 'direct_inbox', 'feed_timeline');

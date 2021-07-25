@@ -1,3 +1,20 @@
+# Stable release v17.11.0
+## Date: 25/07/2021
+
+### New events
+
+- Added `sendNavigationTabImpression()`
+- Added `sendScreenshotDetector()`
+
+### Updates & fixes
+
+- **Events:** Updated some events to current version
+- **Instagram:** Update login flow
+
+### Examples
+
+- Added getCommentsFromExternalUrl
+
 # Stable release v17.10.5
 ## Date: 21/07/2021
 

@@ -5212,6 +5212,54 @@ class Event extends RequestCollection
     }
 
     /**
+     * Send navigation tab impression.
+     * 
+     * @param int $mode Mode. 0 - direct, 1 - main ig navigation tab.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendNavigationTabImpression(
+        $mode)
+    {
+        $extra = [
+            'app_device_id' => $this->ig->uuid,
+        ];
+
+        if ($mode === 0) {
+            $extra['tabs'] = [
+                'main_home',
+                'main_search',
+                'main_camera',
+                'main_inbox',
+                'main_profile',
+            ];
+        } elseif ($mode === 1) {
+            $extra['headers'] = [
+                'main_direct'
+            ];
+        }
+        
+        $event = $this->_addEventBody('ig_navigation_tab_impression', 'feed_timeline', $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send screenshot detector.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendScreenshotDetector()
+    {
+        $extra = [
+            'screenshot_directory_exists'           => false,
+            'phone_model'                           => $this->ig->device->getModel(),
+            'has_read_external_storage_permission'  => false,
+        ];
+        $event = $this->_addEventBody('ig_android_story_screenshot_directory', 'screenshot_detector', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Send direct user search picker.
      *
      * This event is sent while searching a user. Everytime you type a character, this event is sent.
@@ -6251,7 +6299,9 @@ class Event extends RequestCollection
         $darkMode = false)
     {
         $extra = [
-            'os_dark_mode_settings' => $darkMode,
+            'os_dark_mode_settings'     => $darkMode,
+            'dark_mode_in_app_toggle'   => intval($darkMode);
+            'in_app_dark_mode_setting'  => -1
         ];
 
         $event = $this->_addEventBody('ig_dark_mode_opt', null, $extra);

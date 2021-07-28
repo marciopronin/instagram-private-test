@@ -54,7 +54,15 @@ try {
         // The verification code will be sent by Instagram via SMS.
         echo 'Insert verification code: ';
         $verificationCode = trim(fgets(STDIN));
-        $ig->finishTwoFactorLogin($username, $password, $twoFactorIdentifier, $verificationCode);
+        echo "\nIf SMS verification type 1, if backup code type 2, if 2FA app type 3, if notification approval type 4";
+        $verificationMethod = intval(trim(fgets(STDIN)));
+        if ($verificationMethod === 4) {
+            do {
+                $status = $ig->checkTrustedNotificationStatus($username, $twoFactorIdentifier)->getReviewStatus();
+                sleep(5);
+            } while($status !== 1);
+        }
+        $ig->finishTwoFactorLogin($username, $password, $twoFactorIdentifier, $verificationCode, $verificationMethod);
     }
 } catch (Exception $e) {
     if ($e instanceof InstagramAPI\Exception\Checkpoint\ChallengeRequiredException) {

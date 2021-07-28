@@ -240,7 +240,7 @@ try {
 
     // Since we are going to like the first item of the media, the position in
     // the feed is 0. If you want to like the second item, it would position 1, and so on.
-    $ig->media->like($items[0]->getId(), 0);
+    $ig->media->like($items[0]->getId(), 0, 'feed_contextual_profile');
     $ig->event->sendOrganicLike($items[0], 'feed_contextual_profile', null, null, $ig->session_id);
 
     // forceSendBatch() should be only used if you are "closing" the app so all the events that

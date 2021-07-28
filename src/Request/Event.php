@@ -6300,7 +6300,7 @@ class Event extends RequestCollection
     {
         $extra = [
             'os_dark_mode_settings'     => $darkMode,
-            'dark_mode_in_app_toggle'   => intval($darkMode),
+            'dark_mode_in_app_toggle'   => intval($darkMode);
             'in_app_dark_mode_setting'  => -1
         ];
 

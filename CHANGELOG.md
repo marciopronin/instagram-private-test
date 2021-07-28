@@ -1,3 +1,17 @@
+# Stable release v17.11.2
+## Date: 29/07/2021
+
+**WIP:** Multi class selector during nav chains.
+
+### Updates & fixes
+
+- **Constants:** Update capabilities.
+
+### Examples
+
+- Update auth script for goLive
+- Update like examples to match correct modules
+
 # Stable release v17.11.1
 ## Date: 25/07/2021
 

@@ -241,7 +241,7 @@ try {
                 }
             }
         }
-        $ig->media->like($item->getId(), $c);
+        $ig->media->like($item->getId(), $c, 'feed_contextual_profile');
         $ig->event->sendOrganicLike($item, 'feed_contextual_profile', null, null, $ig->session_id);
         $c++;
     }

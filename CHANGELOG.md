@@ -1,3 +1,10 @@
+# Stable release v17.11.3
+## Date: 29/07/2021
+
+### Updates & fixes
+
+- **Events:** Fixed typo in `sendDarkModeOpt()`. Messed up files
+
 # Stable release v17.11.2
 ## Date: 29/07/2021
 

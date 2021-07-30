@@ -1,3 +1,12 @@
+# Stable release v17.11.4
+## Date: 30/07/2021
+
+### Updates & fixes
+
+- **Event:** Update `sendOrganicLike()`
+- **Event:** Update `sendOrganicMediaImpression()`
+- **Event:** Update `updateAppState()`
+
 # Stable release v17.11.3
 ## Date: 29/07/2021
 

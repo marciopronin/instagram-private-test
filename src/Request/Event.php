@@ -1392,6 +1392,7 @@ class Event extends RequestCollection
                 'entity_page_id'            => $item->getUser()->getPk(),
                 'entity_page_name'          => $item->getUser()->getUsername(),
                 'media_thumbnail_section'   => 'grid',
+                'is_acp_delivered'          => false,
             ];
         } elseif ($module === 'feed_contextual_hashtag') {
             $extra = [
@@ -2007,6 +2008,10 @@ class Event extends RequestCollection
             $extra['carousel_m_t'] = isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getMediaType() : $item->getCarouselMedia()[0]->getMediaType();
             $extra['carousel_size'] = $item->getCarouselMediaCount();
         }
+
+        $extra['nav_in_transit'] = 0;
+        $extra['last_navigation_module'] = $module;
+        $extra['nav_chain'] = $this->ig->getNavChain();
 
         $event = $this->_addEventBody('instagram_organic_impression', $module, $extra);
         $this->_addEventData($event);
@@ -6488,7 +6493,9 @@ class Event extends RequestCollection
         }
 
         $extra = [
-            'state' => $state,
+            'state'     => $state,
+            'nav_chain' => $this->ig->getNavChain(),
+
         ];
 
         $event = $this->_addEventBody('app_state', $module, $extra);

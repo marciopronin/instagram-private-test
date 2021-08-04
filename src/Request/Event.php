@@ -5003,6 +5003,133 @@ class Event extends RequestCollection
     }
 
     /**
+     * Direct. Send thread item seen (impression)
+     *
+     * @param string                                        $clientContext      Client context used for sending intent/attempt DM.
+     * @param string                                        $threadId           Thread ID.
+     * @param \InstagramAPI\Response\Model\DirectThreadItem $threadItem         Direct Thread Item.
+     * @param string                                        $action             'send_attempt' or 'sent'.
+     * @param string                                        $channel            Channel used for sending the intent/attempt DM. Others: 'rest'.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendDirectThreadItemSeen(
+        $clientContext,
+        $threadId,
+        $threadItem,
+        $action,
+        $channel = 'rest')
+    {
+        $extra = [
+            'type'           => 'thread_item_seen',
+            'client_context' => $clientContext,
+            'thread_id'      => $threadId,
+            'message_id'     => $threadItem->getItemId(),
+            'date_created'   => $threadItem->getTimestamp(),
+            'action'         => $action,
+            'channel'        => $channel,
+        ];
+
+        $event = $this->_addEventBody('direct_message_mark_waterfall', null, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Direct. Send thread unseen message impression.
+     *
+     * @param string                                        $threadId           Thread ID.
+     * @param \InstagramAPI\Response\Model\DirectThreadItem $threadItem         Direct Thread Item.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendThreadUnseenMessageImpression(
+        $threadId,
+        $threadItem)
+    {
+        $extra = [
+            'message_id'     => $threadItem->getItemId(),
+            'message_type'   => $threadItem->getItemType(),
+            'thread_id'      => $threadId,
+        ];
+
+        $event = $this->_addEventBody('direct_thread_unseen_message_impression', 'direct_thread', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Direct thread pagination.
+     *
+     * @param string        $action     'attempt' or 'success'.
+     * @param string|null   $cursor     Cursor used for pagination.
+     * 
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendDirectFetchPagination(
+        $action,
+        $cursor)
+    {
+        $extra = [
+            'action'     => $action,
+            'fetch_uuid' => Signatures::generateUUID(),
+            'fetch_type' => 'paging_new',
+        ];
+
+        if ($cursor !== null) {
+            $extra['oldest_cursor'] = $cursor;
+        }
+
+        $event = $this->_addEventBody('ig_direct_thread_fetch_success_rate', 'ig_direct', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Direct inbox tab impression.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendDirectInboxTabImpression()
+    {
+        $extra = [
+            'tab'   => 0,
+        ];
+
+        $event = $this->_addEventBody('direct_inbox_tab_impression', 'direct_inbox', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send direct enter thread.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\InvalidArgumentException
+     */
+    public function sendDirectEnterThread(
+        $theadId,
+        $userId,
+        $position,
+        $folder = 0,
+        array $options = [])
+    {
+        $extra = [
+            'thread_id'                 => $threadId,
+            'inviter'                   => $userId,
+            'entry_point'               => 'inbox',
+            'is_request_pending'        => isset($options['is_request_pending']) ? $options['is_request_pending'] : false,
+            'should_show_permission'    => isset($options['should_show_permission']) ? $options['should_show_permission'] : false,
+            'is_unread'                 => isset($options['is_unread']) ? $options['is_unread'] : false,
+            'folder'                    => $folder,
+            'position'                  => $position
+        ];
+
+        $event = $this->_addEventBody('direct_enter_thread', 'direct_thread', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Direct external share option.
      *
      * @param string $mediaId       Instagram's media ID.
@@ -5219,7 +5346,7 @@ class Event extends RequestCollection
     /**
      * Send navigation tab impression.
      * 
-     * @param int $mode Mode. 0 - direct, 1 - main ig navigation tab.
+     * @param int $mode Mode. 0 - main ig navigation tab, 1 - direct.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */

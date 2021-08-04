@@ -1,3 +1,22 @@
+# Stable release v17.12.0
+## Date: 05/08/2021
+
+### New features
+
+- **Event:** Added `sendDirectThreadItemSeen()`
+- **Event:** Added `sendThreadUnseenMessageImpression()`
+- **Event:** Added `sendDirectFetchPagination()`
+- **Event:** Added `sendDirectInboxTabImpression()`
+- **Event:** Added `sendDirectEnterThread()`
+
+### Updates & fixes
+
+- **Event:** Update doc `sendNavigationTabImpression()`
+
+### Examples
+
+- **Direct:** Update directInbox example
+
 # Stable release v17.11.4
 ## Date: 30/07/2021
 

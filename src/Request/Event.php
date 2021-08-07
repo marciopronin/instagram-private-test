@@ -137,6 +137,9 @@ class Event extends RequestCollection
             case 'search_tags':
                 $class = 'CUq';
                 break;
+            case 'blended_search_edit_recent':
+                $class = 'CUT';
+                break;
             case 'feed_hashtag':
                 $class = 'CNT';
                 break;
@@ -4956,7 +4959,7 @@ class Event extends RequestCollection
      * @param string            $clientContext      Client context used for sending intent/attempt DM.
      * @param string            $type               Message type. 'text', 'visual_photo', 'reel_share', 'share_media' or 'profile'.
      * @param string|string[]   $recipients         String array of users PK.
-     * @param string            $channel            Channel used for sending the intent/attempt DM. Others: 'rest'.
+     * @param string            $channel            Channel used for sending the intent/attempt DM. If using MQTT 'realtime', if using HTTP direct 'rest'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -5649,6 +5652,21 @@ class Event extends RequestCollection
             'results_type_list'      => $resultsTypeList,
         ];
         $event = $this->_addEventBody('search_results_page', $module, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send clear search history.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendClearSearchHistory()
+    {
+        $extra = [
+            'pigeon_reserved_keyword_module' => 'blended_search_edit_recent',
+        ];
+
+        $event = $this->_addEventBody('clear_search_history', 'blended_search_edit_recent', $extra);
         $this->_addEventData($event);
     }
 

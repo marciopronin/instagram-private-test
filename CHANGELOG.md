@@ -1,3 +1,19 @@
+# Stable release v17.13.0
+## Date: 07/08/2021
+
+### New features
+
+- **Event:** Added `sendClearSearchHistory()`
+
+### Updates & fixes
+
+- **Event:** Update `_getModuleClass()`
+- **Event:** Update doc `sendDirectMessageIntentOrAttempt()`
+
+### Examples
+
+- **Direct:** Update directInboxHide example
+
 # Stable release v17.12.0
 ## Date: 05/08/2021
 

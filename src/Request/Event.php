@@ -511,12 +511,14 @@ class Event extends RequestCollection
      *
      *  LOGIN:
      *
-     * 1) log_in_username_focus
-     * 2) log_in_password_focus
-     * 3) log_in_attempt
-     * 4) sim_card_state
+     * 1) step_view_loaded
+     * 2) landing_created
+     * 3) log_in_username_focus
+     * 4) log_in_password_focus
+     * 5) log_in_attempt
+     * 6) sim_card_state
      * At this point we call login()
-     * 5) log_in
+     * 7) log_in
      *
      * @param string $step        Step.
      * @param string $name        Name of the event.
@@ -545,8 +547,6 @@ class Event extends RequestCollection
             'step'              => $step,
             'current_time'      => $currentTime,
             'pk'                => '0',
-            'release_channel'   => null,
-            'radio_type'        => $this->ig->getRadioType(),
         ];
 
         if ($name === 'log_in_attempt') {
@@ -594,6 +594,22 @@ class Event extends RequestCollection
             $extra['chosen_signup_type'] = isset($options['flow']) ? $options['flow'] : 'email';
             $extra['retry_strategy'] = 'none';
             $extra['attempt_count'] = 1;
+        } elseif ($name === 'step_view_loaded') {
+            $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool)random_int(0, 1);
+            $extra['messenger_installed'] = isset($options['messenger_installed']) ? $options['messenger_installed'] : (bool)random_int(0, 1);
+            $extra['whatsapp_installed'] = isset($options['whatsapp_installed']) ? $options['whatsapp_installed'] : (bool)random_int(0, 1);
+            $extra['fb_lite_installed'] = isset($options['fb_lite_installed']) ? $options['fb_lite_installed'] : (bool)random_int(0, 1);
+            $extra['source'] = null;
+            $extra['flow'] = null;
+            $extra['cp_type_given'] = null;
+        } elseif ($name === 'landing_created') {
+            $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool)random_int(0, 1);
+            $extra['did_facebook_sso'] = false;
+            $extra['did_log_in'] = false;
+            $extra['network_type'] = Constants::X_IG_Connection_Type;
+            $extra['app_lang'] = $this->ig->getLocale();
+            $extra['device_lang'] = $this->ig->getLocale();
+            $extra['funnel_name'] = 'landing';
         }
 
         $event = $this->_addEventBody($name, 'waterfall_log_in', $extra);
@@ -1803,7 +1819,6 @@ class Event extends RequestCollection
              'os_version'           => $this->ig->device->getAndroidVersion(),
              'fb_family_device_id'  => $this->ig->phone_id,
              'guid'                 => $this->ig->uuid,
-             'source'               => 'mas',
              'prefill_type'         => 'both',
          ];
 
@@ -6680,6 +6695,110 @@ class Event extends RequestCollection
 
         $extra['pk'] = 0;
         $event = $this->_addEventBody('ig_nux_flow_updated', 'nux_controller_business_logic', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send Instagram Device IDs
+     * 
+     * @param string $waterfallId   Waterfall ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendInstagramDeviceIds(
+        $waterfallId)
+    {
+        $extra = [
+            'app_device_id'         => $this->ig->uuid,
+            'analytics_device_id'   => null,
+            'module'                => 'instagram_device_ids',
+            'waterfall_id'          => $waterfallId,
+        ];
+
+        $extra['pk'] = 0;
+        $event = $this->_addEventBody('instagram_device_ids', null, $extra);
+        $this->_addEventData($event, 0);
+    }
+
+    /**
+     * Send APK testing exposure.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendApkTestingExposure()
+    {
+        $extra = [
+            'build_num' => Constants::VERSION_CODE,
+            'installer' => null,
+        ];
+
+        $extra['pk'] = 0;
+        $event = $this->_addEventBody('android_apk_testing_exposure', null, $extra);
+        $this->_addEventData($event, 0);
+    }
+
+    /**
+     * Send APK signature V2.
+     * 
+     * @param string $module    Module.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendApkSignatureV2(
+        $module = 'IgFamilyApplicationInitializer')
+    {
+        $extra = [
+            'package_name'          => Constants::PACKAGE_NAME,
+            'previous_signature'    => null,
+            'signature'             => 'V2_UNTAGGED',
+        ];
+
+        $extra['pk'] = 0;
+        $event = $this->_addEventBody('apk_signature_v2', $module, $extra);
+        $this->_addEventData($event, 0);
+    }
+
+    /**
+     * Send emergency push initial version.
+     * 
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendEmergencyPushInitialVersion()
+    {
+        $extra = [
+            'current_version' => 46,
+        ];
+
+        $extra['pk'] = 0;
+        $event = $this->_addEventBody('ig_emergency_push_did_set_initial_version', null, $extra);
+        $this->_addEventData($event, 0);
+    }
+
+    /**
+     * Send emergency push initial version.
+     * 
+     * @param string    $waterfallId   Waterfall ID.
+     * @param int       $state         State.
+     * 
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendInstagramInstallWithReferrer(
+        $waterfallId,
+        $state)
+    {
+        $extra = [
+            'waterfall_id'  => $waterfallId,
+        ];
+
+        if ($state === 0) {
+            'referrer'  => 'first_open_waiting_for_referrer',
+        } else {
+            'referrer'  => null,
+            'error'     => 'FEATURE_NOT_SUPPORTED'
+        }
+
+        $extra['pk'] = 0;
+        $event = $this->_addEventBody('instagram_android_install_with_referrer', 'install_referrer', $extra);
         $this->_addEventData($event);
     }
 }

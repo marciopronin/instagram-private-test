@@ -301,12 +301,12 @@ class Story extends RequestCollection
             ->addPost('ad_request_index', '0')
             ->addPost('is_inventory_based_request_enabled', '0')
             ->addPost('is_ad_pod_enabled', '0')
-            ->addPost('battery_level', $this->ig->getBatteryLevel())
+            ->addHeader('battery_level', $this->ig->getBatteryLevel())
             ->addPost('tray_session_id', $traySessionId)
             ->addPost('viewer_session_id', md5($traySessionId))
             ->addPost('reel_position', '0')
-            ->addPost('is_charging', $this->ig->getIsDeviceCharging())
-            ->addPost('will_sound_on', (int) $this->ig->getSoundEnabled())
+            ->addHeader('is_charging', $this->ig->getIsDeviceCharging())
+            ->addHeader('will_sound_on', (int) $this->ig->getSoundEnabled())
             ->addPost('surface_q_id', '2247106998672735')
             ->addPost('tray_user_ids', $storyUserIds)
             ->addPost('is_media_based_insertion_enabled', '1')
@@ -314,7 +314,7 @@ class Story extends RequestCollection
             ->addPost('is_first_page', ($entryIndex !== 0) ? '0' : '1');
 
         if ($this->ig->getIsAndroid()) {
-            $request->addPost('phone_id', $this->ig->phone_id)
+            $request->addHeader('phone_id', $this->ig->phone_id)
                     ->addPost('device_id', $this->ig->uuid);
         }
 

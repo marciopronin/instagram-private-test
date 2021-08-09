@@ -34,11 +34,11 @@ class Highlight extends RequestCollection
             ->addHeader('X-Ads-Opt-Out', '0')
             ->addHeader('X-DEVICE-ID', $this->ig->device_id)
             ->addParam('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
-            ->addParam('phone_id', $this->ig->phone_id)
-            ->addParam('battery_level', $this->ig->getBatteryLevel())
-            ->addParam('is_charging', $this->ig->getIsDeviceCharging())
-            ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
-            ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
+            ->addHeader('phone_id', $this->ig->phone_id)
+            ->addHeader('battery_level', $this->ig->getBatteryLevel())
+            ->addHeader('is_charging', $this->ig->getIsDeviceCharging())
+            ->addHeader('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
+            ->addHeader('will_sound_on', (int) $this->ig->getSoundEnabled())
             ->getResponse(new Response\HighlightFeedResponse());
     }
 

@@ -1,3 +1,36 @@
+# Stable release v17.14.0
+## Date: 09/08/2021
+
+**WIP:** Adding full events to the login procedure until reaching timeline feed.
+
+### New features
+
+- **Event:** Added `sendInstagramDeviceIds()`
+- **Event:** Added `sendApkTestingExposure()`
+- **Event:** Added `sendApkSignatureV2()`
+- **Event:** Added `sendEmergencyPushInitialVersion()`
+- **Event:** Added `sendInstagramInstallWithReferrer()`
+
+### Updates & fixes
+
+- **Event:** Update `sendFlowSteps()`
+- **Highlight:** Update `getUserFeed()`
+- **Story:** Update `getInjectedStories()`
+- **Tv:** Update `getTvGuide()`
+- **Timeline:** Update `getTimelineFeed()`
+- **Discover:** Update `getChainingFeed()`
+
+### Notes
+
+MQTT users should add the following events when sending messages via realtime client (`$channel = 'realtime'`):
+
+```
+$this->_instagram->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'text', [$userId], 'realtime');
+$this->_instagram->event->sendTextDirectMessage();
+$this->_instagram->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'text', [$userId], 'realtime');
+$this->_instagram->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'text', [$userId], 'realtime');
+```
+
 # Stable release v17.13.0
 ## Date: 07/08/2021
 

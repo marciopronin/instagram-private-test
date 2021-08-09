@@ -241,11 +241,11 @@ class Timeline extends RequestCollection
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('phone_id', $this->ig->phone_id)
+            ->addHeader('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->uuid)
-            ->addPost('battery_level', $this->ig->getBatteryLevel())
-            ->addPost('is_charging', $this->ig->getIsDeviceCharging())
-            ->addPost('will_sound_on', (int) $this->ig->getSoundEnabled())
+            ->addHeader('battery_level', $this->ig->getBatteryLevel())
+            ->addHeader('is_charging', $this->ig->getIsDeviceCharging())
+            ->addHeader('will_sound_on', (int) $this->ig->getSoundEnabled())
             ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'));
 
         if ($this->ig->getIsAndroid()) {

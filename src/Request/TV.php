@@ -83,12 +83,12 @@ class TV extends RequestCollection
             ->addHeader('X-Google-AD-ID', $this->ig->advertising_id)
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             ->addParam('prefetch', 1)
-            ->addParam('phone_id', $this->ig->phone_id)
-            ->addPost('battery_level', $this->ig->getBatteryLevel())
-            ->addPost('is_charging', $this->ig->getIsDeviceCharging())
+            ->addHeader('phone_id', $this->ig->phone_id)
+            ->addHeader('battery_level', $this->ig->getBatteryLevel())
+            ->addHeader('is_charging', $this->ig->getIsDeviceCharging())
             ->addParam('banner_token', $this->ig->settings->get('banner_token'))
-            ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
-            ->addParam('is_charging', $this->ig->getIsDeviceCharging());
+            ->addHeader('will_sound_on', (int) $this->ig->getSoundEnabled())
+            ->addHeader('is_charging', $this->ig->getIsDeviceCharging());
 
         $response = $request->getResponse(new Response\TVGuideResponse());
 

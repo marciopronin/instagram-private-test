@@ -1246,7 +1246,7 @@ class Account extends RequestCollection
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
             //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('users_ids', $this->ig->account_id)
+            ->addPost('user_ids', $this->ig->account_id)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->uuid)
             ->getResponse(new Response\BadgeNotificationsResponse());

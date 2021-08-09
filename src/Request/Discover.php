@@ -133,12 +133,12 @@ class Discover extends RequestCollection
             ->addPost('entry_point', 'topical_explore')
             ->addPost('chaining_session_id', $chainingSession)
             ->addPost('cluster_id', $clusterId)
-            ->addPost('will_sound_on', (int) $this->ig->getSoundEnabled())
+            ->addHeader('will_sound_on', (int) $this->ig->getSoundEnabled())
             ->addPost('author_id', $mediaItem->getUser()->getPk())
             ->addPost('media_type', $mediaItem->getMediaType())
             ->addPost('paging_token', json_encode($pagingToken))
-            ->addPost('battery_level', $this->ig->getBatteryLevel())
-            ->addPost('is_charging', $this->ig->getIsDeviceCharging());
+            ->addHeader('battery_level', $this->ig->getBatteryLevel())
+            ->addHeader('is_charging', $this->ig->getIsDeviceCharging());
 
         if ($maxId !== null) {
             $request->addPost('max_id', $maxId);

@@ -6791,10 +6791,10 @@ class Event extends RequestCollection
         ];
 
         if ($state === 0) {
-            'referrer'  => 'first_open_waiting_for_referrer',
+            $extra['referrer'] = 'first_open_waiting_for_referrer';
         } else {
-            'referrer'  => null,
-            'error'     => 'FEATURE_NOT_SUPPORTED'
+            $extra['referrer'] = null;
+            $extra['error'] = 'FEATURE_NOT_SUPPORTED';
         }
 
         $extra['pk'] = 0;

@@ -1,3 +1,12 @@
+# Stable release v17.14.1
+## Date: 10/08/2021
+
+**WIP:** Adding full events to the login procedure until reaching timeline feed.
+
+### Updates & fixes
+
+- **Event:** Update `sendInstagramInstallWithReferrer()`. Wrong commit pushed in v17.14.0. This release fixes the typos.
+
 # Stable release v17.14.0
 ## Date: 09/08/2021
 

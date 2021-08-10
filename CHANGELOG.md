@@ -1,3 +1,21 @@
+# Stable release v17.15.0
+## Date: 10/08/2021
+
+**WIP:** Adding full events to the login procedure until reaching timeline feed.
+
+### New features
+
+- **Direct:** Add `shareReel()
+
+### Updates & fixes
+
+- **Event:** Update `sendDirectEnterThread()`
+- **Direct:** Update `_sendDirectItems()`
+
+### Examples
+
+- **Example:** Update goLive. 4 hour default streaming cutoff.
+
 # Stable release v17.14.1
 ## Date: 10/08/2021
 

@@ -1249,6 +1249,39 @@ class Direct extends RequestCollection
     }
 
     /**
+     * Share reel (aka clips internally).
+     *
+     * @param array  $recipients An array with "users" or "thread" keys.
+     *                           To start a new thread, provide "users" as an array
+     *                           of numerical UserPK IDs. To use an existing thread
+     *                           instead, provide "thread" with the thread ID.
+     * @param string $mediaId    The media ID in Instagram's internal format (ie "3482384834_43294").
+     * @param array  $options    An associative array of additional parameters, including:
+     *                           "client_context" and "mutation_token" (optional) - predefined UUID used to prevent double-posting;
+     *                           "text" (optional) - text message.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\DirectSendItemsResponse
+     *
+     * @see https://help.instagram.com/1209246439090858 For more information.
+     */
+    public function shareReel(
+        array $recipients,
+        $mediaId,
+        array $options = [])
+    {
+        if (!preg_match('#^\d+_\d+$#D', $mediaId)) {
+            throw new \InvalidArgumentException(sprintf('"%s" is not a valid media ID.', $mediaId));
+        }
+
+        return $this->_sendDirectItems('clip_share', $recipients, array_merge($options, [
+            'media_id' => $mediaId,
+        ]));
+    }
+
+    /**
      * Share an occurring or archived live stream via direct message to a user's inbox.
      *
      * You are able to share your own broadcasts, as well as broadcasts from
@@ -1783,6 +1816,19 @@ class Direct extends RequestCollection
                     $request->addParam('media_type', 'video');
                 } else {
                     $request->addParam('media_type', 'photo');
+                }
+                break;
+            case 'clip_share':
+                $request = $this->ig->request('direct_v2/threads/broadcast/clip_share/');
+                // Check and set media_id.
+                if (!isset($options['media_id'])) {
+                    throw new \InvalidArgumentException('No media_id provided.');
+                }
+                $request->addPost('media_id', $options['media_id']);
+
+                // Set text if provided.
+                if (isset($options['text']) && strlen($options['text'])) {
+                    $request->addPost('text', $options['text']);
                 }
                 break;
             default:

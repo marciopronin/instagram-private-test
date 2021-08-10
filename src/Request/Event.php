@@ -5126,7 +5126,7 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InvalidArgumentException
      */
     public function sendDirectEnterThread(
-        $theadId,
+        $threadId,
         $userId,
         $position,
         $folder = 0,

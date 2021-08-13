@@ -4413,6 +4413,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'pending_inbox',
+                ],
+                [
+                    'clickpoint'    => 'inbox',
+                    'dest_module'   => 'direct_thread',
                 ]
             ],
             'direct_thread_toggle' => [

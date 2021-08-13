@@ -1,3 +1,11 @@
+# Stable release v17.15.1
+## Date: 13/08/2021
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+- **People:** Update `getFollowing()` doc
+
 # Stable release v17.15.0
 ## Date: 10/08/2021
 

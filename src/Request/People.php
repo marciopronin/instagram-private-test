@@ -470,7 +470,7 @@ class People extends RequestCollection
      * @param string      $rankToken   The list UUID. You must use the same value for all pages of the list.
      * @param string|null $searchQuery Limit the userlist to ones matching the query.
      * @param string|null $maxId       Next "maximum ID", used for pagination.
-     * @param string|null $order       Search order. Latest followings: 'date_followed_earliest',
+     * @param string|null $order       Search order. Latest followings: 'date_followed_latest',
      *                                 earliest followings: 'date_followed_earliest'.
      *
      * @throws \InvalidArgumentException
@@ -552,7 +552,7 @@ class People extends RequestCollection
      * @param string      $rankToken   The list UUID. You must use the same value for all pages of the list.
      * @param string|null $searchQuery Limit the userlist to ones matching the query.
      * @param string|null $maxId       Next "maximum ID", used for pagination.
-     * @param string|null $order       Search order. Latest followings: 'date_followed_earliest',
+     * @param string|null $order       Search order. Latest followings: 'date_followed_latest',
      *                                 earliest followings: 'date_followed_earliest'.
      *
      * @throws \InstagramAPI\Exception\InstagramException

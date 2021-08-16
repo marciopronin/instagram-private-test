@@ -1737,7 +1737,7 @@ class Instagram implements ExperimentsInterface
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to finishTwoFactorLogin().');
         }
-        if ((empty($verificationCode) && ($twoFactorIdentifier !== 4)) || empty($twoFactorIdentifier)) {
+        if ((empty($verificationCode) && ($verificationMethod !== 4)) || empty($twoFactorIdentifier)) {
             throw new \InvalidArgumentException('You must provide a verification code and two-factor identifier to finishTwoFactorLogin().');
         }
         if (!in_array($verificationMethod, [1, 2, 3, 4], true)) {

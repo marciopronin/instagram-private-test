@@ -1,3 +1,15 @@
+# Stable release v17.15.2
+## Date: 16/08/2021
+
+### Updates and fixes
+
+- **Instagra,:** Fixes typo for two factor login condition while checking verification method.
+- **Constrains:** Updated reel constraints.
+
+### Examples
+
+- **Example:** Update realtimeHttp
+
 # Stable release v17.15.1
 ## Date: 13/08/2021
 

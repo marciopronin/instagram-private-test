@@ -136,9 +136,26 @@ class RealtimeHttpServer
     }
 
     /**
+     * Start RTC.
+     */
+    protected function _start()
+    {
+        // Initiate start.
+        $this->_rtc->start();
+    }
+
+    /**
      * Gracefully stop everything.
      */
     protected function _stop()
+    {
+        $this->_rtc->stop();
+    }
+
+     /**
+     * Gracefully stop everything.
+     */
+    protected function _kill()
     {
         // Initiate shutdown sequence.
         $this->_rtc->stop();
@@ -235,8 +252,16 @@ class RealtimeHttpServer
         switch ($command) {
             case '/ping':
                 return new \React\Http\Response(200, [], 'pong');
+            case '/kill':
+                $this->_kill();
+
+                return new \React\Http\Response(200);
             case '/stop':
                 $this->_stop();
+
+                return new \React\Http\Response(200);
+            case '/start':
+                $this->_start();
 
                 return new \React\Http\Response(200);
             case '/seen':

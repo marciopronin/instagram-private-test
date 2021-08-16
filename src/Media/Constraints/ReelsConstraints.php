@@ -49,7 +49,7 @@ class ReelsConstraints extends StoryConstraints
      *
      * @var float
      */
-    const MAX_DURATION = 30.0;
+    const MAX_DURATION = 60.0;
 
     /** {@inheritdoc} */
     public function getMinAspectRatio()

@@ -10,11 +10,37 @@ use InstagramAPI\Utils;
  */
 class Web extends RequestCollection
 {
+
+    /**
+     * Pre login.
+     * 
+     * Used to get csrftoken.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return string
+     */
+    public function sendPreLogin()
+    {
+        if (extension_loaded('sodium') === false) {
+            throw new \InstagramAPI\Exception\InternalException('You must have the sodium PHP extension to use web login.');
+        }
+
+        return $this->ig->request('https://www.instagram.com/accounts/login/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->setAddDefaultHeaders(false)
+            ->addHeader('X-Requested-With', 'XMLHttpRequest')
+            ->getRawResponse();
+    }
+
     /**
      * Web login.
      *
      * @param string $username
      * @param string $password
+     * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -22,7 +48,8 @@ class Web extends RequestCollection
      */
     public function login(
         $username,
-        $password)
+        $password,
+        $csrftoken)
     {
         if (extension_loaded('sodium') === false) {
             throw new \InstagramAPI\Exception\InternalException('You must have the sodium PHP extension to use web login.');
@@ -37,7 +64,8 @@ class Web extends RequestCollection
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->setAddDefaultHeaders(false)
-            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->addHeader('X-CSRFToken', $csrftoken)
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addHeader('Referer', 'https://www.instagram.com/accounts/login/')
             ->addPost('username', $username)
@@ -51,6 +79,7 @@ class Web extends RequestCollection
      *
      * @param string $phone The phone number.
      * @param string $mid   Mid value (obtained from cookie).
+     * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -58,13 +87,14 @@ class Web extends RequestCollection
      */
     public function sendSignupSms(
         $phone,
-        $mid)
+        $mid,
+        $csrftoken)
     {
         return $this->ig->request('https://www.instagram.com/accounts/send_signup_sms_code_ajax/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->setAddDefaultHeaders(false)
-            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-CSRFToken', $csrftoken)
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addPost('client_id', $mid)
             ->addPost('phone_number', $phone)
@@ -78,6 +108,7 @@ class Web extends RequestCollection
      *
      * @param string $email The email.
      * @param string $mid   Mid value (obtained from cookie).
+     * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -85,13 +116,14 @@ class Web extends RequestCollection
      */
     public function sendEmailVerificationCode(
         $email,
-        $mid)
+        $mid,
+        $csrftoken)
     {
         return $this->ig->request('accounts/send_verify_email/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->setAddDefaultHeaders(false)
-            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-CSRFToken', $csrftoken)
             ->addPost('device_id', $mid)
             ->addPost('email', $email)
             ->getRawResponse();
@@ -218,18 +250,20 @@ class Web extends RequestCollection
      * Like a media using Web Session.
      *
      * @param string $mediaId
+     * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\GenericResponse
      */
     public function like(
-        $mediaId)
+        $mediaId,
+        $csrftoken)
     {
         return $this->ig->request("https://instagram.com/web/likes/{$mediaId}/like/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
-            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-CSRFToken', $csrftoken)
             ->addHeader('Referer', 'https://www.instagram.com/')
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
@@ -243,18 +277,20 @@ class Web extends RequestCollection
      * Follow a user using Web Session.
      *
      * @param string $userId
+     * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\WebFollowResponse
      */
     public function follow(
-        $userId)
+        $userId,
+        $csrftoken)
     {
         return $this->ig->request("https://instagram.com/web/friendships/{$userId}/follow/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
-            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-CSRFToken', $csrftoken)
             ->addHeader('Referer', 'https://www.instagram.com/')
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
@@ -268,18 +304,20 @@ class Web extends RequestCollection
      * Unfollow a user using Web Session.
      *
      * @param string $userId
+     * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\WebFollowResponse
      */
     public function unfollow(
-        $userId)
+        $userId,
+        $csrftoken)
     {
         return $this->ig->request("https://instagram.com/web/friendships/{$userId}/unfollow/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
-            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-CSRFToken', $csrftoken)
             ->addHeader('Referer', 'https://www.instagram.com/')
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
@@ -294,6 +332,7 @@ class Web extends RequestCollection
      *
      * @param string $mediaId
      * @param string $reason  The reason of the report. '1' is Spam, '4' is pornography.
+     * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -301,12 +340,13 @@ class Web extends RequestCollection
      */
     public function reportMedia(
         $mediaId,
-        $reason)
+        $reason,
+        $csrftoken)
     {
         return $this->ig->request("https://instagram.com/media/{$mediaId}/flag/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
-            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-CSRFToken', $csrftoken)
             ->addHeader('Referer', 'https://www.instagram.com/')
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
@@ -320,19 +360,21 @@ class Web extends RequestCollection
      * Get username profile info.
      *
      * @param string $username
+     * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\WebUserInfoResponse
      */
     public function getUserInfo(
-        $username)
+        $username,
+        $csrftoken)
     {
         return $this->ig->request("https://www.instagram.com/{$username}/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
             ->setIsSilentFail(true)
-            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-CSRFToken', $csrftoken)
             ->addHeader('Referer', 'https://www.instagram.com/')
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addHeader('X-Instagram-AJAX', 'a878ae26c721')

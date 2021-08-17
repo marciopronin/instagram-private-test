@@ -1,3 +1,16 @@
+# Stable release v18.0.0
+## Date: 17/08/2021
+
+**WARNING** Backward breaks! If you use web class, now you should add csrftoken as argument to the functions.
+
+### Updates and fixes
+
+- **Web:** Update web class to work with csrftoken
+
+### Examples
+
+- **Example:** Update web login
+
 # Stable release v17.15.2
 ## Date: 16/08/2021
 

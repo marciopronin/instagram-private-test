@@ -3,7 +3,7 @@
 set_time_limit(0);
 date_default_timezone_set('UTC');
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 /////// CONFIG ///////
 $username = '';
@@ -20,6 +20,7 @@ try {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }
 
-$ig->web->login($username, $password);
+$csrftoken = json_decode($ig->web->sendPreLogin(), true)['config']['csrf_token'];
+$ig->web->login($username, $password, $csrftoken);
 $ig->client->saveCookieJar();
 // $ig->client->getCookieJarAsJSON()

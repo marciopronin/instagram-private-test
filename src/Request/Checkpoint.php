@@ -127,7 +127,7 @@ class Checkpoint extends RequestCollection
             ->addPost('phone_number', $phoneNumber)
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
         if ($afterLogin === false) {
             $request->setNeedsAuth(false);
         } else {
@@ -161,7 +161,7 @@ class Checkpoint extends RequestCollection
             ->addPost('email', $email)
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
         if ($afterLogin === false) {
             $request->setNeedsAuth(false);
         } else {

@@ -266,6 +266,8 @@ class RealtimeHttpServer
                 return new \React\Http\Response(200);
             case '/seen':
                 $context = $this->_rtc->markDirectItemSeen($params['threadId'], $params['threadItemId']);
+                $ig->event->sendDirectThreadItemSeen('', $params['threadId'], $params['threadItemId'], 'send_attempt');
+                $ig->event->sendDirectThreadItemSeen('', $params['threadId'], $params['threadItemId'], 'sent');
 
                 return new \React\Http\Response($context !== false ? 200 : 503);
             case '/activity':

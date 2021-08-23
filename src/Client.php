@@ -1257,23 +1257,23 @@ class Client
 
     /**
      * Generate flow ID.
-     * 
-     * @param int   $val1   First value.
-     * @param int   $val2   Second value.
+     *
+     * @param int $val1 First value.
+     * @param int $val2 Second value.
      *
      * @return int
      */
     public function generateFlowId(
         $val1,
-        $val2) 
+        $val2)
     {
         return $val1 | $val2 << 0x20;
     }
-    
+
     /**
      * Generate new flow ID.
-     * 
-     * @param int   $val    Init value.
+     *
+     * @param int $val Init value.
      *
      * @return int
      */

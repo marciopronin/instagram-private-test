@@ -7,6 +7,7 @@ use InstagramAPI\Response;
 /**
  * CheckpointResponse.
  *
+ * @method string getAction()
  * @method Model\Challenge getChallenge()
  * @method mixed getMessage()
  * @method string getNonceCode()
@@ -15,6 +16,7 @@ use InstagramAPI\Response;
  * @method string getStepName()
  * @method string getUserId()
  * @method Model\_Message[] get_Messages()
+ * @method bool isAction()
  * @method bool isChallenge()
  * @method bool isMessage()
  * @method bool isNonceCode()
@@ -23,6 +25,7 @@ use InstagramAPI\Response;
  * @method bool isStepName()
  * @method bool isUserId()
  * @method bool is_Messages()
+ * @method $this setAction(string $value)
  * @method $this setChallenge(Model\Challenge $value)
  * @method $this setMessage(mixed $value)
  * @method $this setNonceCode(string $value)
@@ -31,6 +34,7 @@ use InstagramAPI\Response;
  * @method $this setStepName(string $value)
  * @method $this setUserId(string $value)
  * @method $this set_Messages(Model\_Message[] $value)
+ * @method $this unsetAction()
  * @method $this unsetChallenge()
  * @method $this unsetMessage()
  * @method $this unsetNonceCode()

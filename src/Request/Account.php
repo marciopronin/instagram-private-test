@@ -618,7 +618,7 @@ class Account extends RequestCollection
     {
         $request = $this->ig->request('accounts/set_public/')
             ->addPost('_uuid', $this->ig->uuid);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('_uid', $this->ig->account_id);
@@ -638,7 +638,7 @@ class Account extends RequestCollection
     {
         $request = $this->ig->request('accounts/set_private/')
             ->addPost('_uuid', $this->ig->uuid);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('_uid', $this->ig->account_id);

@@ -87,6 +87,26 @@ $rtc->on('thread-activity', function ($threadId, \InstagramAPI\Realtime\Payload\
 });
 $rtc->on('thread-item-created', function ($threadId, $threadItemId, \InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
     printf('[RTC] Item %s has been created in thread %s%s', $threadItemId, $threadId, PHP_EOL);
+    if ($threadItem->getItemType() === 'text') {
+        $text = $threadItem->getText();
+        
+        if ($text === 'send link') {
+            $recipients = [
+                'thread' => [
+                    $threadItem->getItemId(),
+                ],
+            ];
+
+            $sendLinkText = 'Hi, this is your link, https://google.de';
+            $clientContext = \InstagramAPI\Utils::generateClientContext();
+        
+            $ig->direct->sendText($recipients, $sendLinkText, ['client_context' => $clientContext]);
+            $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'link', [$threadItem->getUserId()]);
+            $ig->event->sendTextDirectMessage();
+            $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'link', [$threadItem->getUserId()]);
+            $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'link', [$threadItem->getUserId()]);
+        }
+    }
 });
 $rtc->on('thread-item-updated', function ($threadId, $threadItemId, \InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
     printf('[RTC] Item %s has been updated in thread %s%s', $threadItemId, $threadId, PHP_EOL);

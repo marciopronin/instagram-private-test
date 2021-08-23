@@ -109,7 +109,7 @@ try {
 
     $items = array_slice($items, 0, 6);
     $ig->event->preparePerfWithImpressions($items, 'profile');
-    
+
     $ig->event->reelTrayRefresh(
         [
             'tray_session_id'   => $traySession,

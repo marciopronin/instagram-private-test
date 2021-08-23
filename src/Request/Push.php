@@ -35,7 +35,7 @@ class Push extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('users', $this->ig->account_id)
             ->addPost('family_device_id', $this->ig->phone_id);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('device_type', $pushChannel === 'mqtt' ? 'android_mqtt' : 'android_fcm')

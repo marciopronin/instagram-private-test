@@ -70,7 +70,7 @@ class Constants
         [
             'name'  => 'world_tracker',
             'value' => 'world_tracker_enabled',
-        ]
+        ],
     ];
 
     // Facebook Constants.

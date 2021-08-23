@@ -1,3 +1,12 @@
+# Stable release v18.0.1
+## Date: 23/08/2021
+
+WIP: Update to like routines will be updated later today.
+
+### Updates and fixes
+
+- **Instagram:** Disable `_csrftoken` for the remaining functions. `csrftoken` is now disabled globally and not used by Instagram anymore.
+
 # Stable release v18.0.0
 ## Date: 17/08/2021
 

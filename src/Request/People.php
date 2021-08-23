@@ -887,7 +887,7 @@ class People extends RequestCollection
     {
         $request = $this->ig->request('discover/profile_su_badge/')
             ->addPost('_uuid', $this->ig->uuid);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($module !== null) {
             $request->addPost('module', $module);
@@ -1272,7 +1272,7 @@ class People extends RequestCollection
         $request = $this->ig->request($endpoint)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
 
         switch ($option) {
             case 'story':

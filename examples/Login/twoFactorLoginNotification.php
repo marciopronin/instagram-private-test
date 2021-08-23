@@ -24,8 +24,8 @@ try {
         do {
             $status = $ig->checkTrustedNotificationStatus($username, $twoFactorIdentifier)->getReviewStatus();
             sleep(5);
-        } while($status !== 1);
-  
+        } while ($status !== 1);
+
         $ig->finishTwoFactorLogin($username, $password, $twoFactorIdentifier, '', 4);
     }
 } catch (\Exception $e) {

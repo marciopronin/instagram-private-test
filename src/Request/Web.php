@@ -10,10 +10,9 @@ use InstagramAPI\Utils;
  */
 class Web extends RequestCollection
 {
-
     /**
      * Pre login.
-     * 
+     *
      * Used to get csrftoken.
      *
      * @throws \InstagramAPI\Exception\InstagramException
@@ -77,8 +76,8 @@ class Web extends RequestCollection
     /**
      * Send signup SMS.
      *
-     * @param string $phone The phone number.
-     * @param string $mid   Mid value (obtained from cookie).
+     * @param string $phone     The phone number.
+     * @param string $mid       Mid value (obtained from cookie).
      * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
@@ -106,8 +105,8 @@ class Web extends RequestCollection
     /**
      * Send email verification code.
      *
-     * @param string $email The email.
-     * @param string $mid   Mid value (obtained from cookie).
+     * @param string $email     The email.
+     * @param string $mid       Mid value (obtained from cookie).
      * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException
@@ -331,7 +330,7 @@ class Web extends RequestCollection
      * Report media using web session.
      *
      * @param string $mediaId
-     * @param string $reason  The reason of the report. '1' is Spam, '4' is pornography.
+     * @param string $reason    The reason of the report. '1' is Spam, '4' is pornography.
      * @param string $csrftoken
      *
      * @throws \InstagramAPI\Exception\InstagramException

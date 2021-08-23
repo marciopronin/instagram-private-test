@@ -98,6 +98,11 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></td>
                 </tr>
                                         <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Web.html#method_sendPreLogin">sendPreLogin()</a></th>
+                    <td class="phpdocumentor-cell">Pre login.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Web.html#method_login">login()</a></th>
                     <td class="phpdocumentor-cell">Web login.</td>
                     <td class="phpdocumentor-cell">string</td>
@@ -211,6 +216,46 @@
         
                     <section>
                 <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method_sendPreLogin"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">sendPreLogin()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">22</span>
+    </aside>
+        <p class="phpdocumentor-summary">Pre login.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">sendPreLogin</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Used to get csrftoken.</p></section>
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
                                     <a id="method_login"></a>
 <article
         class="
@@ -222,7 +267,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">23</span>
+        <span class="phpdocumentor-element-found-in__line">48</span>
     </aside>
         <p class="phpdocumentor-summary">Web login.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -234,6 +279,10 @@
                             </span>
                     <span class="phpdocumentor-signature__argument">
             ,                 <span class="phpdocumentor-signature__argument__name">$password</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$csrftoken</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
@@ -250,6 +299,11 @@
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$password</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$csrftoken</span>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
@@ -282,7 +336,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">59</span>
+        <span class="phpdocumentor-element-found-in__line">87</span>
     </aside>
         <p class="phpdocumentor-summary">Send signup SMS.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -294,6 +348,10 @@
                             </span>
                     <span class="phpdocumentor-signature__argument">
             ,                 <span class="phpdocumentor-signature__argument__name">$mid</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$csrftoken</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
@@ -313,6 +371,11 @@
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Mid value (obtained from cookie).</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$csrftoken</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -342,7 +405,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">86</span>
+        <span class="phpdocumentor-element-found-in__line">116</span>
     </aside>
         <p class="phpdocumentor-summary">Send email verification code.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -354,6 +417,10 @@
                             </span>
                     <span class="phpdocumentor-signature__argument">
             ,                 <span class="phpdocumentor-signature__argument__name">$mid</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$csrftoken</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
@@ -373,6 +440,11 @@
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Mid value (obtained from cookie).</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$csrftoken</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -402,7 +474,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">111</span>
+        <span class="phpdocumentor-element-found-in__line">142</span>
     </aside>
         <p class="phpdocumentor-summary">Check email verification code.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -471,7 +543,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">146</span>
+        <span class="phpdocumentor-element-found-in__line">177</span>
     </aside>
         <p class="phpdocumentor-summary">Web registration.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -612,7 +684,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">207</span>
+        <span class="phpdocumentor-element-found-in__line">238</span>
     </aside>
         <p class="phpdocumentor-summary">Gets account information.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -651,7 +723,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">226</span>
+        <span class="phpdocumentor-element-found-in__line">258</span>
     </aside>
         <p class="phpdocumentor-summary">Like a media using Web Session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -659,6 +731,10 @@
                                 <span class="phpdocumentor-signature__name">like</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$mediaId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$csrftoken</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
@@ -670,6 +746,11 @@
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$mediaId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$csrftoken</span>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
@@ -702,7 +783,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">251</span>
+        <span class="phpdocumentor-element-found-in__line">285</span>
     </aside>
         <p class="phpdocumentor-summary">Follow a user using Web Session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -710,6 +791,10 @@
                                 <span class="phpdocumentor-signature__name">follow</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$userId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$csrftoken</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
@@ -721,6 +806,11 @@
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$userId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$csrftoken</span>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
@@ -753,7 +843,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">276</span>
+        <span class="phpdocumentor-element-found-in__line">312</span>
     </aside>
         <p class="phpdocumentor-summary">Unfollow a user using Web Session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -761,6 +851,10 @@
                                 <span class="phpdocumentor-signature__name">unfollow</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$userId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$csrftoken</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
@@ -772,6 +866,11 @@
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$userId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$csrftoken</span>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
@@ -804,7 +903,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">302</span>
+        <span class="phpdocumentor-element-found-in__line">340</span>
     </aside>
         <p class="phpdocumentor-summary">Report media using web session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -816,6 +915,10 @@
                             </span>
                     <span class="phpdocumentor-signature__argument">
             ,                 <span class="phpdocumentor-signature__argument__name">$reason</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$csrftoken</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
@@ -835,6 +938,11 @@
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The reason of the report. '1' is Spam, '4' is pornography.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$csrftoken</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -864,7 +972,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">328</span>
+        <span class="phpdocumentor-element-found-in__line">368</span>
     </aside>
         <p class="phpdocumentor-summary">Get username profile info.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -872,6 +980,10 @@
                                 <span class="phpdocumentor-signature__name">getUserInfo</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$csrftoken</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
                 )
@@ -883,6 +995,11 @@
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$csrftoken</span>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
@@ -915,7 +1032,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">352</span>
+        <span class="phpdocumentor-element-found-in__line">393</span>
     </aside>
         <p class="phpdocumentor-summary">Gets information about password changes.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -954,7 +1071,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">372</span>
+        <span class="phpdocumentor-element-found-in__line">413</span>
     </aside>
         <p class="phpdocumentor-summary">Make GraphQL request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1014,7 +1131,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Web.php"><a href="../files/src-request-web.html"><abbr title="src/Request/Web.php">Web.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">402</span>
+        <span class="phpdocumentor-element-found-in__line">443</span>
     </aside>
         <p class="phpdocumentor-summary">Update date of birth.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

@@ -7311,6 +7311,11 @@ Search.appendIndex(
             "summary": "Share\u0020an\u0020existing\u0020story\u0020post\u0020via\u0020direct\u0020message\u0020to\u0020a\u0020user\u0027s\u0020inbox.",
             "url": "../classes/InstagramAPI-Request-Direct.html#method_sendStory"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Direct\u003A\u003AshareReel\u0028\u0029",
+            "name": "shareReel",
+            "summary": "Share\u0020reel\u0020\u0028aka\u0020clips\u0020internally\u0029.",
+            "url": "../classes/InstagramAPI-Request-Direct.html#method_shareReel"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Direct\u003A\u003AsendLive\u0028\u0029",
             "name": "sendLive",
             "summary": "Share\u0020an\u0020occurring\u0020or\u0020archived\u0020live\u0020stream\u0020via\u0020direct\u0020message\u0020to\u0020a\u0020user\u0027s\u0020inbox.",
@@ -7821,6 +7826,31 @@ Search.appendIndex(
             "summary": "Direct.\u0020Send\u0020intent\/attempt\u0020of\u0020a\u0020message.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendDirectMessageIntentOrAttempt"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendDirectThreadItemSeen\u0028\u0029",
+            "name": "sendDirectThreadItemSeen",
+            "summary": "Direct.\u0020Send\u0020thread\u0020item\u0020seen\u0020\u0028impression\u0029.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendDirectThreadItemSeen"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendThreadUnseenMessageImpression\u0028\u0029",
+            "name": "sendThreadUnseenMessageImpression",
+            "summary": "Direct.\u0020Send\u0020thread\u0020unseen\u0020message\u0020impression.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendThreadUnseenMessageImpression"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendDirectFetchPagination\u0028\u0029",
+            "name": "sendDirectFetchPagination",
+            "summary": "Direct\u0020thread\u0020pagination.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendDirectFetchPagination"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendDirectInboxTabImpression\u0028\u0029",
+            "name": "sendDirectInboxTabImpression",
+            "summary": "Direct\u0020inbox\u0020tab\u0020impression.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendDirectInboxTabImpression"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendDirectEnterThread\u0028\u0029",
+            "name": "sendDirectEnterThread",
+            "summary": "Send\u0020direct\u0020enter\u0020thread.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendDirectEnterThread"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendExternalShareOption\u0028\u0029",
             "name": "sendExternalShareOption",
             "summary": "Direct\u0020external\u0020share\u0020option.",
@@ -7850,6 +7880,16 @@ Search.appendIndex(
             "name": "sendStringImpressions",
             "summary": "Send\u0020string\u0020impressions.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendStringImpressions"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendNavigationTabImpression\u0028\u0029",
+            "name": "sendNavigationTabImpression",
+            "summary": "Send\u0020navigation\u0020tab\u0020impression.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendNavigationTabImpression"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendScreenshotDetector\u0028\u0029",
+            "name": "sendScreenshotDetector",
+            "summary": "Send\u0020screenshot\u0020detector.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendScreenshotDetector"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendDirectUserSearchPicker\u0028\u0029",
             "name": "sendDirectUserSearchPicker",
@@ -7890,6 +7930,11 @@ Search.appendIndex(
             "name": "sendSearchResultsPage",
             "summary": "Sends\u0020the\u0020selected\u0020user\u0020from\u0020the\u0020search\u0020results.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendSearchResultsPage"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendClearSearchHistory\u0028\u0029",
+            "name": "sendClearSearchHistory",
+            "summary": "Send\u0020clear\u0020search\u0020history.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendClearSearchHistory"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendRelatedHashtagItem\u0028\u0029",
             "name": "sendRelatedHashtagItem",
@@ -8070,6 +8115,31 @@ Search.appendIndex(
             "name": "sendIgNuxFlow",
             "summary": "Send\u0020IG\u0020Nux\u0020flow.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendIgNuxFlow"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendInstagramDeviceIds\u0028\u0029",
+            "name": "sendInstagramDeviceIds",
+            "summary": "Send\u0020Instagram\u0020Device\u0020IDs.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendInstagramDeviceIds"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendApkTestingExposure\u0028\u0029",
+            "name": "sendApkTestingExposure",
+            "summary": "Send\u0020APK\u0020testing\u0020exposure.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendApkTestingExposure"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendApkSignatureV2\u0028\u0029",
+            "name": "sendApkSignatureV2",
+            "summary": "Send\u0020APK\u0020signature\u0020V2.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendApkSignatureV2"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendEmergencyPushInitialVersion\u0028\u0029",
+            "name": "sendEmergencyPushInitialVersion",
+            "summary": "Send\u0020emergency\u0020push\u0020initial\u0020version.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendEmergencyPushInitialVersion"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendInstagramInstallWithReferrer\u0028\u0029",
+            "name": "sendInstagramInstallWithReferrer",
+            "summary": "Send\u0020emergency\u0020push\u0020initial\u0020version.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendInstagramInstallWithReferrer"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Hashtag",
             "name": "Hashtag",
@@ -9835,6 +9905,11 @@ Search.appendIndex(
             "name": "Web",
             "summary": "Functions\u0020related\u0020to\u0020Instagram\u0020Web.",
             "url": "../classes/InstagramAPI-Request-Web.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AsendPreLogin\u0028\u0029",
+            "name": "sendPreLogin",
+            "summary": "Pre\u0020login.",
+            "url": "../classes/InstagramAPI-Request-Web.html#method_sendPreLogin"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003Alogin\u0028\u0029",
             "name": "login",
@@ -17188,7 +17263,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Response\\MusicGenresResponse",
             "name": "MusicGenresResponse",
-            "summary": "Core\u0020class\u0020for\u0020Instagram\u0020API\u0020responses.",
+            "summary": "MusicGenresResponse.",
             "url": "../classes/InstagramAPI-Response-MusicGenresResponse.html"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\MusicGenresResponse\u003A\u003AJSON_PROPERTY_MAP",
@@ -17218,7 +17293,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Response\\TwoFactorNotificationStatusResponse",
             "name": "TwoFactorNotificationStatusResponse",
-            "summary": "Core\u0020class\u0020for\u0020Instagram\u0020API\u0020responses.",
+            "summary": "TwoFactorNotificationStatusResponse.",
             "url": "../classes/InstagramAPI-Response-TwoFactorNotificationStatusResponse.html"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\TwoFactorNotificationStatusResponse\u003A\u003AJSON_PROPERTY_MAP",

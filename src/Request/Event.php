@@ -411,7 +411,7 @@ class Event extends RequestCollection
           ->addPost('sent_time', round(microtime(true), 3))
           ->setAddDefaultHeaders(false);
 
-        switch($this->ig->getEventsCompressedMode()) {
+        switch ($this->ig->getEventsCompressedMode()) {
             case 0:
                 $batch = json_encode($batches);
                 $request->addPost('cmethod', 'deflate')
@@ -420,12 +420,13 @@ class Event extends RequestCollection
                             gzdeflate($batch),
                             $batchFilename
                         );
+                        // no break
             case 1:
                 $message = [
                     'request_info'  => [
                         'tier'              => 'micro_batch',
                         'carrier'           => 'Android',
-                        'conn'              => Constants::X_IG_Connection_Type
+                        'conn'              => Constants::X_IG_Connection_Type,
                     ],
                     'config'        => [
                         'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
@@ -440,6 +441,7 @@ class Event extends RequestCollection
                 $request->addPost('compressed', 0)
                         ->addPost('multi_batch', 1)
                         ->addPost('message', json_encode($message));
+                        // no break
             case 2:
                 if (count($batches) > 1) {
                     $message = [
@@ -447,7 +449,7 @@ class Event extends RequestCollection
                             'tier'              => 'micro_batch',
                             'sent_time'         => round(microtime(true), 3),
                             'carrier'           => 'Android',
-                            'conn'              => Constants::X_IG_Connection_Type
+                            'conn'              => Constants::X_IG_Connection_Type,
                         ],
                         'config'        => [
                             'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
@@ -595,15 +597,15 @@ class Event extends RequestCollection
             $extra['retry_strategy'] = 'none';
             $extra['attempt_count'] = 1;
         } elseif ($name === 'step_view_loaded') {
-            $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool)random_int(0, 1);
-            $extra['messenger_installed'] = isset($options['messenger_installed']) ? $options['messenger_installed'] : (bool)random_int(0, 1);
-            $extra['whatsapp_installed'] = isset($options['whatsapp_installed']) ? $options['whatsapp_installed'] : (bool)random_int(0, 1);
-            $extra['fb_lite_installed'] = isset($options['fb_lite_installed']) ? $options['fb_lite_installed'] : (bool)random_int(0, 1);
+            $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool) random_int(0, 1);
+            $extra['messenger_installed'] = isset($options['messenger_installed']) ? $options['messenger_installed'] : (bool) random_int(0, 1);
+            $extra['whatsapp_installed'] = isset($options['whatsapp_installed']) ? $options['whatsapp_installed'] : (bool) random_int(0, 1);
+            $extra['fb_lite_installed'] = isset($options['fb_lite_installed']) ? $options['fb_lite_installed'] : (bool) random_int(0, 1);
             $extra['source'] = null;
             $extra['flow'] = null;
             $extra['cp_type_given'] = null;
         } elseif ($name === 'landing_created') {
-            $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool)random_int(0, 1);
+            $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool) random_int(0, 1);
             $extra['did_facebook_sso'] = false;
             $extra['did_log_in'] = false;
             $extra['network_type'] = Constants::X_IG_Connection_Type;
@@ -3032,8 +3034,8 @@ class Event extends RequestCollection
     /**
      * Send IGTV preview end.
      *
-     * @param \InstagramAPI\Response\Model\Item $item       The item object.
-     * @param string                            $module     Module.
+     * @param \InstagramAPI\Response\Model\Item $item   The item object.
+     * @param string                            $module Module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -3047,7 +3049,7 @@ class Event extends RequestCollection
             'elapsed_time_since_last_item'  => -1,
             'is_acp_delivered'              => false,
         ];
-    
+
         $event = $this->_addEventBody('igtv_preview_end', $module, $extra);
         $this->_addEventData($event);
     }
@@ -3060,6 +3062,7 @@ class Event extends RequestCollection
      * @param string                            $action     Action to be made. 'igtv_viewer_entry', 'igtv_viewer_exit'.
      * @param string                            $module     Module.
      * @param array                             $options    Options to configure the event.
+     * @param mixed                             $entrypoint
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -3073,23 +3076,23 @@ class Event extends RequestCollection
         array $options = [])
     {
         $extra = [
-            'm_pk'                      => $item->getId(),
-            'a_pk'                      => $item->getUser()->getPk(),
-            'm_ts'                      => (int) $item->getTakenAt(),
-            'm_t'                       => $item->getMediaType(),
-            'tracking_token'            => $item->getOrganicTrackingToken(),
-            'source_of_action'          => $module,
-            'follow_status'             => empty($options['following']) ? 'not_following' : 'following',
-            'action'                    => $action,
+            'm_pk'                         => $item->getId(),
+            'a_pk'                         => $item->getUser()->getPk(),
+            'm_ts'                         => (int) $item->getTakenAt(),
+            'm_t'                          => $item->getMediaType(),
+            'tracking_token'               => $item->getOrganicTrackingToken(),
+            'source_of_action'             => $module,
+            'follow_status'                => empty($options['following']) ? 'not_following' : 'following',
+            'action'                       => $action,
             'elapsed_time_since_last_item' => -1,
-            'entry_point'               => $entrypoint,
-            'guide_open_status'         => false,
-            'igtv_viewer_session_id'    => isset($options['viewer_session_id']) ? $options['viewer_session_id'] : null,
-            'is_igtv'                   => 1,
-            'is_ad'                     => false,
-            'is_acp_delivered'          => false,
+            'entry_point'                  => $entrypoint,
+            'guide_open_status'            => false,
+            'igtv_viewer_session_id'       => isset($options['viewer_session_id']) ? $options['viewer_session_id'] : null,
+            'is_igtv'                      => 1,
+            'is_ad'                        => false,
+            'is_acp_delivered'             => false,
         ];
-    
+
         if ($eventname === 'igtv_viewer_entry') {
             $extra['host_video_should_request_ads'] = false;
         }
@@ -3097,7 +3100,7 @@ class Event extends RequestCollection
         if (!empty($options['time_elapsed'])) {
             $extra['time_elapsed'] = $options['time_elapsed'];
         }
-    
+
         $event = $this->_addEventBody($eventname, $module, $extra);
         $this->_addEventData($event);
     }
@@ -4417,7 +4420,7 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'inbox',
                     'dest_module'   => 'direct_thread',
-                ]
+                ],
             ],
             'direct_thread_toggle' => [
                 [
@@ -4974,11 +4977,11 @@ class Event extends RequestCollection
      * For sending any direct message, first is must be sent the invent,
      * the 'direct_composer_send_text' and finally the attempt.
      *
-     * @param string            $action             'send_intent', 'send_attempt' or 'sent'.
-     * @param string            $clientContext      Client context used for sending intent/attempt DM.
-     * @param string            $type               Message type. 'text', 'visual_photo', 'reel_share', 'share_media' or 'profile'.
-     * @param string|string[]   $recipients         String array of users PK.
-     * @param string            $channel            Channel used for sending the intent/attempt DM. If using MQTT 'realtime', if using HTTP direct 'rest'.
+     * @param string          $action        'send_intent', 'send_attempt' or 'sent'.
+     * @param string          $clientContext Client context used for sending intent/attempt DM.
+     * @param string          $type          Message type. 'text', 'visual_photo', 'reel_share', 'share_media' or 'profile'.
+     * @param string|string[] $recipients    String array of users PK.
+     * @param string          $channel       Channel used for sending the intent/attempt DM. If using MQTT 'realtime', if using HTTP direct 'rest'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -5008,7 +5011,7 @@ class Event extends RequestCollection
             'type'           => $type,
             'dedupe_token'   => Signatures::generateUUID(),
             'sampled'        => true,
-            'recipient_ids'  => $recipients
+            'recipient_ids'  => $recipients,
         ];
 
         if ($action === 'send_intent') {
@@ -5025,13 +5028,13 @@ class Event extends RequestCollection
     }
 
     /**
-     * Direct. Send thread item seen (impression)
+     * Direct. Send thread item seen (impression).
      *
-     * @param string                                        $clientContext      Client context used for sending intent/attempt DM.
-     * @param string                                        $threadId           Thread ID.
-     * @param \InstagramAPI\Response\Model\DirectThreadItem $threadItem         Direct Thread Item.
-     * @param string                                        $action             'send_attempt' or 'sent'.
-     * @param string                                        $channel            Channel used for sending the intent/attempt DM. Others: 'rest'.
+     * @param string                                        $clientContext Client context used for sending intent/attempt DM.
+     * @param string                                        $threadId      Thread ID.
+     * @param \InstagramAPI\Response\Model\DirectThreadItem $threadItem    Direct Thread Item.
+     * @param string                                        $action        'send_attempt' or 'sent'.
+     * @param string                                        $channel       Channel used for sending the intent/attempt DM. Others: 'rest'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -5060,8 +5063,8 @@ class Event extends RequestCollection
     /**
      * Direct. Send thread unseen message impression.
      *
-     * @param string                                        $threadId           Thread ID.
-     * @param \InstagramAPI\Response\Model\DirectThreadItem $threadItem         Direct Thread Item.
+     * @param string                                        $threadId   Thread ID.
+     * @param \InstagramAPI\Response\Model\DirectThreadItem $threadItem Direct Thread Item.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -5083,9 +5086,9 @@ class Event extends RequestCollection
     /**
      * Direct thread pagination.
      *
-     * @param string        $action     'attempt' or 'success'.
-     * @param string|null   $cursor     Cursor used for pagination.
-     * 
+     * @param string      $action 'attempt' or 'success'.
+     * @param string|null $cursor Cursor used for pagination.
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
      */
@@ -5126,6 +5129,12 @@ class Event extends RequestCollection
     /**
      * Send direct enter thread.
      *
+     * @param mixed $threadId
+     * @param mixed $userId
+     * @param mixed $position
+     * @param mixed $folder
+     * @param array $options
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
      */
@@ -5144,7 +5153,7 @@ class Event extends RequestCollection
             'should_show_permission'    => isset($options['should_show_permission']) ? $options['should_show_permission'] : false,
             'is_unread'                 => isset($options['is_unread']) ? $options['is_unread'] : false,
             'folder'                    => $folder,
-            'position'                  => $position
+            'position'                  => $position,
         ];
 
         $event = $this->_addEventBody('direct_enter_thread', 'direct_thread', $extra);
@@ -5367,7 +5376,7 @@ class Event extends RequestCollection
 
     /**
      * Send navigation tab impression.
-     * 
+     *
      * @param int $mode Mode. 0 - main ig navigation tab, 1 - direct.
      *
      * @throws \InstagramAPI\Exception\InstagramException
@@ -5389,10 +5398,10 @@ class Event extends RequestCollection
             ];
         } elseif ($mode === 1) {
             $extra['headers'] = [
-                'main_direct'
+                'main_direct',
             ];
         }
-        
+
         $event = $this->_addEventBody('ig_navigation_tab_impression', 'feed_timeline', $extra);
         $this->_addEventData($event, 1);
     }
@@ -6470,7 +6479,7 @@ class Event extends RequestCollection
         $extra = [
             'os_dark_mode_settings'     => $darkMode,
             'dark_mode_in_app_toggle'   => intval($darkMode),
-            'in_app_dark_mode_setting'  => -1
+            'in_app_dark_mode_setting'  => -1,
         ];
 
         $event = $this->_addEventBody('ig_dark_mode_opt', null, $extra);
@@ -6659,7 +6668,6 @@ class Event extends RequestCollection
         $extra = [
             'state'     => $state,
             'nav_chain' => $this->ig->getNavChain(),
-
         ];
 
         $event = $this->_addEventBody('app_state', $module, $extra);
@@ -6703,9 +6711,9 @@ class Event extends RequestCollection
     }
 
     /**
-     * Send Instagram Device IDs
-     * 
-     * @param string $waterfallId   Waterfall ID.
+     * Send Instagram Device IDs.
+     *
+     * @param string $waterfallId Waterfall ID.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
@@ -6743,8 +6751,8 @@ class Event extends RequestCollection
 
     /**
      * Send APK signature V2.
-     * 
-     * @param string $module    Module.
+     *
+     * @param string $module Module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
@@ -6764,7 +6772,7 @@ class Event extends RequestCollection
 
     /**
      * Send emergency push initial version.
-     * 
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendEmergencyPushInitialVersion()
@@ -6780,10 +6788,10 @@ class Event extends RequestCollection
 
     /**
      * Send emergency push initial version.
-     * 
-     * @param string    $waterfallId   Waterfall ID.
-     * @param int       $state         State.
-     * 
+     *
+     * @param string $waterfallId Waterfall ID.
+     * @param int    $state       State.
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendInstagramInstallWithReferrer(

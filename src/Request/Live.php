@@ -120,7 +120,7 @@ class Live extends RequestCollection
         $request = $this->ig->request("live/{$broadcastId}/heartbeat_and_get_viewer_count/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
         if ($isViewer) {
             $request->addPost('live_with_eligibility', 1);
         } else {
@@ -753,7 +753,7 @@ class Live extends RequestCollection
         $request = $this->ig->request("live/{$broadcastId}/start/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($latitude !== null && $longitude !== null) {
             $request->addPost('latitude', $latitude)

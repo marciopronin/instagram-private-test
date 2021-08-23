@@ -141,7 +141,7 @@ class Collection extends RequestCollection
         $request = $this->ig->request("collections/{$collectionId}/edit/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
 
         foreach ($postData as $key => $value) {
             $request->addPost($key, $value);

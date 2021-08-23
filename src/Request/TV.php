@@ -152,7 +152,7 @@ class TV extends RequestCollection
             ->addPost('battery_level', $this->ig->getBatteryLevel())
             ->addPost('is_charging', $this->ig->getIsDeviceCharging())
             ->addPost('will_sound_on', (int) $this->ig->getSoundEnabled());
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($maxId !== null) {
             $request->addPost('max_id', $maxId);
@@ -278,7 +278,7 @@ class TV extends RequestCollection
             ->addPost('igtv_composer_session_id', $igtvSession)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id);
-            //->addPost('_csrftoken', $this->ig->client->getToken());
+        //->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($description !== null) {
             $request->addPost('description', $description);

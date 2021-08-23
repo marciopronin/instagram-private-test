@@ -392,7 +392,7 @@ class Instagram implements ExperimentsInterface
 
     /**
      * Logging events compression mode.
-     * 
+     *
      * 0 - Compressed. Event as file
      * 1 - Uncompressed. Multi batch
      * 2 - Compressed. Multi batch/single batch
@@ -1425,7 +1425,6 @@ class Instagram implements ExperimentsInterface
         $this->loginWaterfallId = $waterfallId;
         $startTime = round(microtime(true) * 1000);
 
-
         $this->event->sendInstagramInstallWithReferrer($this->loginWaterfallId, 0);
         $this->event->sendInstagramInstallWithReferrer($this->loginWaterfallId, 1);
 
@@ -1433,7 +1432,7 @@ class Instagram implements ExperimentsInterface
         $this->event->sendFlowSteps('landing', 'landing_created', $waterfallId, $startTime);
 
         $this->event->sendPhoneId($waterfallId, $startTime, 'request');
-        
+
         // Perform a full relogin if necessary.
         if (!$this->isMaybeLoggedIn || $forceLogin) {
             if ($this->loginAttemptCount === 0 && !self::$skipLoginFlowAtMyOwnRisk) {
@@ -1459,7 +1458,7 @@ class Instagram implements ExperimentsInterface
                     ->addPost('device_id', $this->device_id)
                     ->addPost('username', $this->username)
                     ->addPost('enc_password', Utils::encryptPassword($password, $this->settings->get('public_key_id'), $this->settings->get('public_key')))
-                    ->addPost('_csrftoken', $this->client->getToken())
+                    //->addPost('_csrftoken', $this->client->getToken())
                     ->addPost('phone_id', $this->phone_id)
                     ->addPost('adid', $this->advertising_id)
                     ->addPost('login_attempt_count', $this->loginAttemptCount);
@@ -1658,7 +1657,7 @@ class Instagram implements ExperimentsInterface
                 $request = $this->request('accounts/one_click_login/')
                     ->setNeedsAuth(false)
                     ->addPost('source', 'email')
-                    ->addPost('_csrftoken', $this->client->getToken())
+                    //->addPost('_csrftoken', $this->client->getToken())
                     ->addPost('uid', $params['uid'])
                     ->addPost('adid', $this->advertising_id)
                     ->addPost('guid', $this->uuid)
@@ -1763,7 +1762,7 @@ class Instagram implements ExperimentsInterface
             ->setNeedsAuth(false)
             ->addPost('verification_code', $verificationCode)
             ->addPost('phone_id', $this->phone_id)
-            ->addPost('_csrftoken', $this->client->getToken())
+            //->addPost('_csrftoken', $this->client->getToken())
             ->addPost('two_factor_identifier', $twoFactorIdentifier)
             ->addPost('username', $username)
             ->addPost('trust_this_device', ($trustDevice) ? '1' : '0')
@@ -1832,7 +1831,7 @@ class Instagram implements ExperimentsInterface
             ->addPost('username', $username)
             ->addPost('device_id', $this->device_id)
             ->addPost('guid', $this->uuid)
-            ->addPost('_csrftoken', $this->client->getToken())
+            //->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\TwoFactorLoginSMSResponse());
     }
 
@@ -1842,12 +1841,12 @@ class Instagram implements ExperimentsInterface
      * This checks wether a device has approved the login via
      * notification.
      *
-     * @param string      $username            Your Instagram username.
-     * @param string      $twoFactorIdentifier Two factor identifier, obtained in
-     *                                         `login()` response.
+     * @param string $username            Your Instagram username.
+     * @param string $twoFactorIdentifier Two factor identifier, obtained in
+     *                                    `login()` response.
      *
      * @throws \InstagramAPI\Exception\InstagramException
-     * 
+     *
      * @return \InstagramAPI\Response\TwoFactorNotificationStatusResponse
      */
     public function checkTrustedNotificationStatus(
@@ -1866,10 +1865,9 @@ class Instagram implements ExperimentsInterface
         ->addPost('two_factor_identifier', $twoFactorIdentifier)
         ->addPost('username', $username)
         ->addPost('device_id', $this->device_id)
-        ->addPost('_csrftoken', $this->client->getToken())
+        //->addPost('_csrftoken', $this->client->getToken())
         ->getResponse(new Response\TwoFactorNotificationStatusResponse());
     }
-
 
     /**
      * Finish checkpoint.
@@ -1932,7 +1930,7 @@ class Instagram implements ExperimentsInterface
             ->addPost('guid', $this->uuid)
             ->addPost('waterfall_id', $waterfallId)
             ->addPost('directly_sign_in', 'true')
-            ->addPost('_csrftoken', $this->client->getToken())
+            //->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\UsersLookupResponse());
     }
 
@@ -1965,7 +1963,7 @@ class Instagram implements ExperimentsInterface
             ->addPost('adid', $this->advertising_id)
             ->addPost('device_id', $this->device_id)
             ->addPost('guid', $this->uuid)
-            ->addPost('_csrftoken', $this->client->getToken())
+            //->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\RecoveryResponse());
     }
 
@@ -1995,7 +1993,7 @@ class Instagram implements ExperimentsInterface
         return $this->request('users/lookup_phone/')
             ->setNeedsAuth(false)
             ->addPost('query', $username)
-            ->addPost('_csrftoken', $this->client->getToken())
+            //->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\RecoveryResponse());
     }
 
@@ -2125,7 +2123,7 @@ class Instagram implements ExperimentsInterface
         if ($this->settings->get('authorization_header') !== null) {
             $authorizationData = json_decode(base64_decode(explode(':', $this->settings->get('authorization_header'))[2]), true);
         }
-        if (!isset($authorizationData['sessionid'])) {           
+        if (!isset($authorizationData['sessionid'])) {
             if (!$resetCookieJar && $this->settings->isMaybeLoggedIn()) {
                 $this->isMaybeLoggedIn = true;
                 $this->account_id = $this->settings->get('account_id');
@@ -2135,7 +2133,7 @@ class Instagram implements ExperimentsInterface
             }
         } else {
             $this->isMaybeLoggedIn = true;
-            if (!isset($authorizationData['ds_user_id'])) { 
+            if (!isset($authorizationData['ds_user_id'])) {
                 $this->account_id = $this->settings->get('account_id');
             } else {
                 if ($this->settings->get('account_id') === null) {
@@ -2461,7 +2459,7 @@ class Instagram implements ExperimentsInterface
                         }
                     }
                     $previewComments = ($item->getMediaOrAd() === null) ? [] : $item->getMediaOrAd()->getPreviewComments();
-        
+
                     if ($previewComments !== null) {
                         foreach ($previewComments as $comment) {
                             $this->event->sendCommentImpression($item->getMediaOrAd(), $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount(), 'feed_timeline');
@@ -2629,7 +2627,7 @@ class Instagram implements ExperimentsInterface
                             }
                         }
                         $previewComments = ($item->getMediaOrAd() === null) ? [] : $item->getMediaOrAd()->getPreviewComments();
-            
+
                         if ($previewComments !== null) {
                             foreach ($previewComments as $comment) {
                                 $this->event->sendCommentImpression($item->getMediaOrAd(), $comment->getUserId(), $comment->getPk(), $comment->getCommentLikeCount(), 'feed_timeline');
@@ -2751,7 +2749,7 @@ class Instagram implements ExperimentsInterface
         $response = $this->request('accounts/logout/')
             ->setSignedPost(false)
             ->addPost('phone_id', $this->phone_id)
-            ->addPost('_csrftoken', $this->client->getToken())
+            //->addPost('_csrftoken', $this->client->getToken())
             ->addPost('guid', $this->uuid)
             ->addPost('device_id', $this->device_id)
             ->addPost('_uuid', $this->uuid)

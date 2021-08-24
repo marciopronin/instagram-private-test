@@ -1,3 +1,13 @@
+# Stable release v18.0.2
+## Date: 24/08/2021
+
+WIP: like routines. like on stories, hide/unhide counter like and views.
+
+### Examples
+
+- Update followFromLocationSearch
+- Update likeFromExploreTag
+
 # Stable release v18.0.1
 ## Date: 23/08/2021
 

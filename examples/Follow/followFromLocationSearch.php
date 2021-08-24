@@ -104,9 +104,22 @@ try {
             }
             foreach ($section->getLayoutContent()->getMedias() as $media) {
                 if ($media->getMedia()->getMediaType() === 1) {
+
                     $candidates = $media->getMedia()->getImageVersions2()->getCandidates();
                     $smallCandidate = end($candidates);
-                    $ig->request($smallCandidate->getUrl())->getRawResponse();
+
+                    $imageResponse = $ig->request($smallCandidate->getUrl());
+
+                    if (isset($imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'])) {
+                        $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
+                    } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
+                        $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
+                    } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+                        $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
+                    } else {
+                        continue;
+                    }
+
                     $ig->event->sendPerfPercentPhotosRendered('feed_location', $media->getMedia()->getId(), [
                         'is_grid_view'                      => true,
                         'image_heigth'                      => $smallCandidate->getHeight(),

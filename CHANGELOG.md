@@ -1,3 +1,10 @@
+# Stable release v18.1.1
+## Date: 26/08/2021
+
+### Updates and fixes
+
+- Update `sendOrganicMediaImpression()`
+
 # Stable release v18.1.0
 ## Date: 26/08/2021
 

@@ -2011,6 +2011,7 @@ class Event extends RequestCollection
                 'time_elapsed'                  => 0,
                 'reel_start_position'           => 0,
                 'is_dark_mode'                  => 0,
+                'dark_mode_state'               => -1,
                 'is_acp_delivered'              => false,
             ];
 

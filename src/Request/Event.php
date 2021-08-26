@@ -4182,6 +4182,10 @@ class Event extends RequestCollection
                     'dest_module'   => 'unified_follow_lists',
                 ],
                 [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'self_unified_follow_lists',
+                ],
+                [
                     'clickpoint'    => 'main_inbox',
                     'dest_module'   => 'newsfeed_you',
                 ],

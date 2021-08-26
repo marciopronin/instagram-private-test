@@ -340,6 +340,29 @@ class Media extends RequestCollection
     }
 
     /**
+     * Hide and unhide like and view counter.
+     *
+     * @param string $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").
+     * @param bool   $disable Disable flag.  
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function updateLikeAndViewCountsVisibility(
+        $mediaId,
+        $disable)
+    {
+        return $this->ig->request('media/update_like_and_view_counts_visibility/')
+            ->addPost('like_and_view_counts_disabled', $disable)
+            ->addPost('media_id', $mediaId)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->setSignedPost(false)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Post a comment on a media item.
      *
      * @param string      $mediaId        The media ID in Instagram's internal format (ie "3482384834_43294").

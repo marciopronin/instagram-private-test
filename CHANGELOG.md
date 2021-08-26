@@ -1,3 +1,13 @@
+# Stable release v18.1.0
+## Date: 26/08/2021
+
+WIP: like routines. like on stories.
+
+### Updates and fixes
+
+- Update `updateLikeAndViewCountsVisibility()`
+- Update `_validateNavigationPath()`
+
 # Stable release v18.0.2
 ## Date: 24/08/2021
 

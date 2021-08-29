@@ -1,3 +1,14 @@
+# Stable release v18.2.0
+## Date: 29/08/2021
+
+### New features
+
+- **Event:** Update `sendDirectThreadImpression()`. This is event is sent when thread is seen (without entering). In order to check wether it has unseen messages or not, the `read_state` property should be used. Example:
+
+```
+$ig->event->sendDirectThreadImpression($thread->getThreadId(), boolval($thread->getReadState()), $position);
+```
+
 # Stable release v18.1.1
 ## Date: 26/08/2021
 

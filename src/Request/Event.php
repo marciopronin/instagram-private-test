@@ -5066,6 +5066,33 @@ class Event extends RequestCollection
     }
 
     /**
+     * Direct. Send thread inbox impression.
+     *
+     * @param string    $threadId       Thread ID.
+     * @param bool      $hasUnseen      Has unseen messages.
+     * @param int       $position       Position.
+     * @param int       $folder         Folder.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendDirectThreadImpression(
+        $threadId,
+        $hasUnseen,
+        $position,
+        $folder = -1)
+    {
+        $extra = [
+            'thread_id'      => $threadId,
+            'has_unseen'     => $hasUnseen,
+            'position'       => $position,
+            'folder'         => $folder
+        ];
+
+        $event = $this->_addEventBody('direct_inbox_thread_impression', 'direct_inbox', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Direct. Send thread unseen message impression.
      *
      * @param string                                        $threadId   Thread ID.

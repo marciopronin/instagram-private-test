@@ -1,3 +1,10 @@
+# Stable release v18.2.1
+## Date: 01/09/2021
+
+### Dev
+
+In the next releases tools for patching, monitoring and exploring in Instagram will be included. This will speed-up reverse engineering time while implementing new features, algorithms or encryptions.
+
 # Stable release v18.2.0
 ## Date: 29/08/2021
 

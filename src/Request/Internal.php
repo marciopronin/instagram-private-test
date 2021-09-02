@@ -236,7 +236,7 @@ class Internal extends RequestCollection
         $usertags = (isset($externalMetadata['usertags']) && $targetFeed == Constants::FEED_TIMELINE) ? $externalMetadata['usertags'] : null;
         /** @var string|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
          * AND YOU MUST HAVE A BUSINESS INSTAGRAM ACCOUNT TO POST A STORY LINK! */
-        $link = (isset($externalMetadata['link']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link'] : null;
+        $linkSticker = (isset($externalMetadata['link_sticker']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link_sticker'] : null;
         /** @var void Photo filter. THIS DOES NOTHING! All real filters are done in the mobile app. */
         // $filter = isset($externalMetadata['filter']) ? $externalMetadata['filter'] : null;
         $filter = null; // COMMENTED OUT SO USERS UNDERSTAND THEY CAN'T USE THIS!
@@ -354,9 +354,11 @@ class Internal extends RequestCollection
                     ->addPost('capture_type', 'normal')
                     ->addPost('has_original_sound', '1');
 
-                if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
-                    $story_cta = '[{"links":[{"webUri":'.json_encode($link).'}]}]';
-                    $request->addPost('story_cta', $story_cta);
+                if ($linkSticker !== null) {
+                    Utils::throwIfInvalidStoryLinkSticker($linkSticker);
+                    $request
+                        ->addPost('tap_models', json_encode([$linkSticker]))
+                        ->addPost('story_sticker_ids', 'link_sticker_default');
                 }
                 if ($productTags !== null) {
                     Utils::throwIfInvalidProductTags($productTags);
@@ -797,7 +799,7 @@ class Internal extends RequestCollection
         $locationSticker = (isset($externalMetadata['location_sticker']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['location_sticker'] : null;
         /** @var string|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
          * AND YOU MUST HAVE A BUSINESS INSTAGRAM ACCOUNT TO POST A STORY LINK! */
-        $link = (isset($externalMetadata['link']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link'] : null;
+        $linkSticker = (isset($externalMetadata['link_sticker']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link_sticker'] : null;
         /** @var array Hashtags to use for the media. ONLY STORY MEDIA! */
         $hashtags = (isset($externalMetadata['hashtags']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['hashtags'] : null;
         /** @var array Mentions to use for the media. ONLY STORY MEDIA! */
@@ -891,9 +893,11 @@ class Internal extends RequestCollection
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time());
 
-                if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
-                    $story_cta = '[{"links":[{"webUri":'.json_encode($link).'}]}]';
-                    $request->addPost('story_cta', $story_cta);
+                if ($linkSticker !== null) {
+                    Utils::throwIfInvalidStoryLinkSticker($linkSticker);
+                    $request
+                        ->addPost('tap_models', json_encode([$linkSticker]))
+                        ->addPost('story_sticker_ids', 'link_sticker_default');
                 }
                 if ($hashtags !== null && $captionText !== '') {
                     Utils::throwIfInvalidStoryHashtags($captionText, $hashtags);

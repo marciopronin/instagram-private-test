@@ -1,3 +1,16 @@
+# Stable release v18.2.2
+## Date: 02/09/2021
+
+### New features
+
+- **Internal:** New story link sticker
+- **Utils:** Update `throwIfInvalidStoryLinkSticker()`
+
+### Updates and fixes
+
+- **Internal:** Update `configureSinglePhoto()`
+- **Internal:** Update `configureSingleVideo()`
+
 # Stable release v18.2.1
 ## Date: 01/09/2021
 

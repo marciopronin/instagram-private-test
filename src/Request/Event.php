@@ -115,36 +115,39 @@ class Event extends RequestCollection
     {
         switch ($module) {
             case 'feed_timeline':
-                $class = '1nj';
+                $class = '1qy';
                 break;
             case 'newsfeed_you':
-                $class = '8cF';
+                $class = '3X4';
                 break;
             case 'explore_popular':
-                $class = '24F';
+                $class = '27d';
                 break;
             case 'search':
             case 'blended_search':
             case 'search_result':
-                $class = 'CUK';
+                $class = 'EQx';
                 break;
             case 'search_places':
-                $class = 'CUP';
+                $class = 'ERO';
                 break;
             case 'search_users':
-                $class = 'CV8';
+                $class = 'ERl';
                 break;
             case 'search_tags':
-                $class = 'CUq';
+                $class = 'ERh';
+                break;
+            case 'search_audio':
+                $class = 'EQv';
                 break;
             case 'blended_search_edit_recent':
                 $class = 'CUT';
                 break;
             case 'feed_hashtag':
-                $class = 'CNT';
+                $class = 'ERy';
                 break;
             case 'feed_location':
-                $class = 'CNU';
+                $class = 'ERz';
                 break;
             case 'feed_contextual_chain':
                 $class = 'CC8';
@@ -154,11 +157,11 @@ class Event extends RequestCollection
             case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = '9FJ';
+                $class = 'E8e';
                 break;
             case 'profile':
             case 'self_profile': // UserDetailFragment, ProfileMediaTabFragment
-                $class = '8BQ';
+                $class = '9aB';
                 break;
             case 'following_sheet':
                 $class = 'ProfileFollowRelationshipFragment';
@@ -168,7 +171,7 @@ class Event extends RequestCollection
                 $class = 'UnifiedFollowFragment';
                 break;
             case 'likers':
-                $class = '87m';
+                $class = '9V0';
                 break;
             case 'tabbed_gallery_camera':
                 $class = 'MediaCaptureFragment';
@@ -186,10 +189,10 @@ class Event extends RequestCollection
                 $class = 'FollowersShareFragment';
                 break;
             case 'direct_inbox':
-                $class = '90D';
+                $class = '7Wi';
                 break;
             case 'direct_thread':
-                $class = '5oi';
+                $class = '6Wu';
                 break;
             case 'direct_recipient_picker':
                 $class = '8ti';
@@ -211,7 +214,7 @@ class Event extends RequestCollection
                 break;
             case 'self_followers':
             case 'self_following':
-                $class = '89X';
+                $class = 'A0m';
                 break;
             case 'login_landing':
                 $class = '7Iz';
@@ -4559,7 +4562,8 @@ class Event extends RequestCollection
         $this->_validateNavigationOptions($fromModule, $toModule, $options);
 
         if ($this->ig->getIsAndroid()) {
-            $navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
+            //$navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
+            $navChain = $this->_generateNavChain($module, $clickPoint);
         }
 
         $navDepth = $this->_getNavDepthForModules($fromModule, $toModule);

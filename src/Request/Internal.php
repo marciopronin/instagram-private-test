@@ -1241,6 +1241,34 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Saves active experiments.
+     *
+     * @param Response\LauncherSyncResponse $syncResponse
+     *
+     * @throws \InstagramAPI\Exception\SettingsException
+     */
+    protected function _saveExperimentsLauncher(
+        Response\LauncherSyncResponse $syncResponse)
+    {
+        $experiments = [];
+        $configData = $syncResponse->getConfigs()->getData();
+
+        foreach($configData as $group => $param) {
+            if (substr($group, 0, 3) === 'qe_') {
+                foreach($param->getParams()->getData() as $paramName => $paramValue) {
+                    if ($paramValue->getValue() !== null) {
+                        $experiments[substr($group, 3)][$paramName] = $paramValue->getValue();
+                    }
+                }
+            }
+        }
+
+        // Save the experiments and the last time we refreshed them.
+        $this->ig->experiments = $this->ig->settings->setExperiments($experiments);
+        $this->ig->settings->set('last_experiments', time());
+    }
+
+    /**
      * Perform an Instagram "feature synchronization" call for device.
      *
      * @param bool $prelogin
@@ -1345,7 +1373,10 @@ class Internal extends RequestCollection
                 ->addPost('_uid', $this->ig->account_id);
         }
 
-        return $request->getResponse(new Response\LauncherSyncResponse());
+        $result = $request->getResponse(new Response\LauncherSyncResponse());
+        $this->_saveExperimentsLauncher($result);
+
+        return $result;
     }
 
     /**

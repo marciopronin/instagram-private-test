@@ -1,3 +1,18 @@
+# Stable release v18.3.0
+## Date: 08/09/2021
+
+### New features
+
+**Constants updated:** Using IG 203.0.0.29.118
+
+- **Internal:** Added `_saveExperimentsLauncher()` in replacement of qe sync experiments
+
+### Updates and fixes
+
+- **Internal:** `syncDeviceFeatures()` and `syncUserFeatures()` is not used anymore, at least for now
+- **Event:** Update event classes
+- **Event:** Update `sendNavigation()`. `ig_sessions_chain_update` is not used anymore, at least for now.
+
 # Stable release v18.2.2
 ## Date: 02/09/2021
 

@@ -2245,11 +2245,14 @@ class Instagram implements ExperimentsInterface
                 //$this->event->sendZeroCarrierSignal();
                 //$this->internal->bootstrapMsisdnHeader();
                 //$this->internal->readMsisdnHeader('default');
+
+                /* QE SYNC DISABLED
                 try {
                     $this->internal->syncDeviceFeatures(true);
                 } catch (\Exception $e) {
                     // pass
                 }
+                */
                 $launcherResponse = $this->internal->sendLauncherSync(true)->getHttpResponse();
                 $this->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
                 $this->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
@@ -2288,11 +2291,13 @@ class Instagram implements ExperimentsInterface
             }
             $this->internal->sendLauncherSync(true, true, true);
 
+            /* QE SYNC DISABLED
             try {
                 $this->internal->syncDeviceFeatures(true, true);
             } catch (\Exception $e) {
                 //pass
             }
+            */
         } finally {
             // Stops emulating batch requests.
             $this->client->stopEmulatingBatch();
@@ -2409,6 +2414,7 @@ class Instagram implements ExperimentsInterface
             try {
                 $this->account->getAccountFamily();
                 $this->internal->sendLauncherSync(false, false, true);
+                exit();
                 $this->internal->fetchZeroRatingToken();
                 $this->event->sendZeroCarrierSignal();
 
@@ -2703,6 +2709,7 @@ class Instagram implements ExperimentsInterface
                 // Start emulating batch requests with Pidgeon Raw Client Time.
                 $this->client->startEmulatingBatch();
 
+                /* QE SYNC DISABLED
                 try {
                     $this->internal->syncUserFeatures();
                     $this->internal->syncDeviceFeatures();
@@ -2710,6 +2717,7 @@ class Instagram implements ExperimentsInterface
                     // Stops emulating batch requests.
                     $this->client->stopEmulatingBatch();
                 }
+                */
             }
 
             // Update zero rating token when it has been expired.

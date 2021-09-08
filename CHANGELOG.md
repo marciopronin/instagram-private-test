@@ -1,3 +1,10 @@
+# Stable release v18.3.1
+## Date: 08/09/2021
+
+### Updates and fixes
+
+- **Event:** Update `sendNavigation()`. Fixes typo.
+
 # Stable release v18.3.0
 ## Date: 08/09/2021
 

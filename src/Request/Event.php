@@ -4563,7 +4563,7 @@ class Event extends RequestCollection
 
         if ($this->ig->getIsAndroid()) {
             //$navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
-            $navChain = $this->_generateNavChain($module, $clickPoint);
+            $navChain = $this->_generateNavChain($toModule, $clickPoint);
         }
 
         $navDepth = $this->_getNavDepthForModules($fromModule, $toModule);

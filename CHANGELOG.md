@@ -1,3 +1,10 @@
+# Stable release v18.4.0
+## Date: 09/09/2021
+
+### New features
+
+- **Creatives:** Added `getStickerTray()`. Will tell the available stickers a user can use.
+
 # Stable release v18.3.2
 ## Date: 09/09/2021
 

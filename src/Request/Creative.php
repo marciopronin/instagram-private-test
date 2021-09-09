@@ -52,6 +52,23 @@ class Creative extends RequestCollection
     }
 
     /**
+     * Get sticker tray.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\StickerTrayResponse
+     */
+    public function getStickerTray()
+    {
+        return $this->ig->request('creatives/sticker_tray/')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('type', 'static_stickers')
+            ->getResponse(new Response\StickerTrayResponse());
+    }
+
+    /**
      * Get face models that can be used to customize photos or videos.
      *
      * NOTE: The files are some strange binary format that only the Instagram

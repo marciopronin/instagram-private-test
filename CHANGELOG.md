@@ -1,3 +1,11 @@
+# Stable release v18.3.2
+## Date: 09/09/2021
+
+### Updates and fixes
+
+- **Instagram:** Remove debugging code.
+- **Instagram:** Added documentation for a new 2FA verification method. Method verification 6 means the verification code will be received in WhatsApp.
+
 # Stable release v18.3.1
 ## Date: 08/09/2021
 

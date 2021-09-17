@@ -234,6 +234,9 @@ class Internal extends RequestCollection
         /** @var array|null Array of usertagging instructions, in the format
          * [['position'=>[0.5,0.5], 'user_id'=>'123'], ...]. ONLY FOR TIMELINE PHOTOS! */
         $usertags = (isset($externalMetadata['usertags']) && $targetFeed == Constants::FEED_TIMELINE) ? $externalMetadata['usertags'] : null;
+        /** @var array|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
+         * AND YOU MUST HAVE A BUSINESS INSTAGRAM ACCOUNT TO POST A STORY LINK! */
+        $link = (isset($externalMetadata['link']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link'] : null;
         /** @var string|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
          * AND YOU MUST HAVE A BUSINESS INSTAGRAM ACCOUNT TO POST A STORY LINK! */
         $linkSticker = (isset($externalMetadata['link_sticker']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link_sticker'] : null;
@@ -308,6 +311,9 @@ class Internal extends RequestCollection
                     'source_height' => $photoHeight,
                 ]);
 
+        $stickerIds = [];
+        $tapModels = [];
+
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE:
                 $date = date('Y:m:d H:i:s');
@@ -354,11 +360,15 @@ class Internal extends RequestCollection
                     ->addPost('capture_type', 'normal')
                     ->addPost('has_original_sound', '1');
 
+                if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
+                    $story_cta = '[{"links":[{"webUri":'.json_encode($link).'}]}]';
+                    $request->addPost('story_cta', $story_cta);
+                }
                 if ($linkSticker !== null) {
                     Utils::throwIfInvalidStoryLinkSticker($linkSticker);
-                    $request
-                        ->addPost('tap_models', json_encode([$linkSticker]))
-                        ->addPost('story_sticker_ids', 'link_sticker_default');
+
+                    $tapModels[] = $linkSticker;
+                    $stickerIds[] = 'link_sticker_default';
                 }
                 if ($productTags !== null) {
                     Utils::throwIfInvalidProductTags($productTags);
@@ -373,9 +383,9 @@ class Internal extends RequestCollection
                 }
                 if ($locationSticker !== null && $location !== null) {
                     Utils::throwIfInvalidStoryLocationSticker($locationSticker);
-                    $request
-                        ->addPost('tap_models', json_encode([$locationSticker]))
-                        ->addPost('story_sticker_ids', 'location_sticker');
+
+                    $tapModels[] = $locationSticker;
+                    $stickerIds[] = 'location_sticker';
                 }
                 if ($storyMentions !== null && $captionText !== '') {
                     Utils::throwIfInvalidStoryMentions($storyMentions);
@@ -394,47 +404,54 @@ class Internal extends RequestCollection
                 if ($storySlider !== null) {
                     Utils::throwIfInvalidStorySlider($storySlider);
                     $request
-                        ->addPost('story_sliders', json_encode($storySlider))
-                        ->addPost('story_sticker_ids', 'emoji_slider_'.$storySlider[0]['emoji']);
+                        ->addPost('story_sliders', json_encode($storySlider));
+
+                    $stickerIds[] = 'emoji_slider_'.$storySlider[0]['emoji'];
                 }
                 if ($storyQuestion !== null) {
                     Utils::throwIfInvalidStoryQuestion($storyQuestion);
                     $request
-                        ->addPost('story_questions', json_encode($storyQuestion))
-                        ->addPost('story_sticker_ids', 'question_sticker_ama');
+                        ->addPost('story_questions', json_encode($storyQuestion));
+
+                    $stickerIds[] = 'question_sticker_ama';
                 }
                 if ($storyCountdown !== null) {
                     Utils::throwIfInvalidStoryCountdown($storyCountdown);
                     $request
-                        ->addPost('story_countdowns', json_encode($storyCountdown))
-                        ->addPost('story_sticker_ids', 'countdown_sticker_time');
+                        ->addPost('story_countdowns', json_encode($storyCountdown));
+
+                    $stickerIds[] = 'countdown_sticker_time';
                 }
                 if ($storyQuiz !== null) {
                     Utils::throwIfInvalidStoryQuiz($storyQuiz);
                     $request
-                        ->addPost('story_quizs', json_encode($storyQuiz))
-                        ->addPost('story_sticker_ids', 'quiz_story_sticker_default');
+                        ->addPost('story_quizs', json_encode($storyQuiz));
+
+                    $stickerIds[] = 'quiz_story_sticker_default';
                 }
                 if ($chatSticker !== null) {
                     Utils::throwIfInvalidChatSticker($chatSticker);
                     $request
-                        ->addPost('story_sticker_ids', 'chat_sticker_bundle_id')
                         ->addPost('story_chats', json_encode($chatSticker));
+
+                    $stickerIds[] = 'chat_sticker_bundle_id';
                 }
                 if ($storyFundraisers !== null) {
                     $request
-                        ->addPost('story_fundraisers', json_encode($storyFundraisers))
-                        ->addPost('story_sticker_ids', 'fundraiser_sticker_id');
+                        ->addPost('story_fundraisers', json_encode($storyFundraisers));
+
+                    $stickerIds[] = 'fundraiser_sticker_id';
                 }
                 if ($attachedMedia !== null) {
                     Utils::throwIfInvalidAttachedMedia($attachedMedia);
                     $request
-                        ->addPost('attached_media', json_encode($attachedMedia))
-                        ->addPost('story_sticker_ids', 'media_simple_'.reset($attachedMedia)['media_id']);
+                        ->addPost('attached_media', json_encode($attachedMedia));
+
+                    $stickerIds[] = 'media_simple_'.reset($attachedMedia)['media_id'];                   
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
-                            ->addPost('xpost_surface', 'auto_xpost')
+                            ->addPost('xpost_surface', 'ig_story_composer')
                             ->addPost('share_to_facebook', 1)
                             ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
                 }
@@ -485,6 +502,18 @@ class Internal extends RequestCollection
                     $request->addPost('igtv_series_id', $igtvSeriesId);
                 }
                 break;
+        }
+
+        $request->addPost('tap_models', json_encode($tapModels));
+
+        if (!empty($stickerIds)) {
+            $storyStickerIds = null;
+            if (count($stickerIds) === 1) {
+                $storyStickerIds = $stickerIds[0];
+            } else {
+                $storyStickerIds = implode(',', $stickerIds);
+            }
+            $request->addPost('story_sticker_ids', $storyStickerIds);
         }
 
         if ($location instanceof Response\Model\Location) {
@@ -602,7 +631,7 @@ class Internal extends RequestCollection
             && $targetFeed !== Constants::FEED_STORY
             && $targetFeed !== Constants::FEED_DIRECT_STORY
             && $targetFeed !== Constants::FEED_TV
-            && $targetFeed !== Constants::FEED_REEL
+            && $targetFeed !== Constants::FEED_REELS
         ) {
             throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
         }
@@ -777,7 +806,7 @@ class Internal extends RequestCollection
         case Constants::FEED_TV:
             $endpoint = 'media/configure_to_igtv/';
             break;
-        case Constants::FEED_REEL:
+        case Constants::FEED_REELS:
             $endpoint = 'media/configure_to_clips/';
             break;
         default:
@@ -797,6 +826,9 @@ class Internal extends RequestCollection
         /** @var array|null Array of story location sticker instructions. ONLY
          * USED FOR STORY MEDIA! */
         $locationSticker = (isset($externalMetadata['location_sticker']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['location_sticker'] : null;
+        /** @var array|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
+         * AND YOU MUST HAVE A BUSINESS INSTAGRAM ACCOUNT TO POST A STORY LINK! */
+        $link = (isset($externalMetadata['link']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link'] : null;
         /** @var string|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
          * AND YOU MUST HAVE A BUSINESS INSTAGRAM ACCOUNT TO POST A STORY LINK! */
         $linkSticker = (isset($externalMetadata['link_sticker']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link_sticker'] : null;
@@ -869,6 +901,9 @@ class Internal extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('nav_chain', $this->ig->getNavChain());
 
+        $stickerIds = [];
+        $tapModels = [];   
+
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE:
                 $request->addPost('caption', $captionText);
@@ -893,11 +928,15 @@ class Internal extends RequestCollection
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time());
 
+                if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
+                    $story_cta = '[{"links":[{"webUri":'.json_encode($link).'}]}]';
+                    $request->addPost('story_cta', $story_cta);
+                }
                 if ($linkSticker !== null) {
                     Utils::throwIfInvalidStoryLinkSticker($linkSticker);
-                    $request
-                        ->addPost('tap_models', json_encode([$linkSticker]))
-                        ->addPost('story_sticker_ids', 'link_sticker_default');
+
+                    $tapModels[] = $linkSticker;
+                    $stickerIds[] = 'link_sticker_default';
                 }
                 if ($hashtags !== null && $captionText !== '') {
                     Utils::throwIfInvalidStoryHashtags($captionText, $hashtags);
@@ -908,9 +947,9 @@ class Internal extends RequestCollection
                 }
                 if ($locationSticker !== null && $location !== null) {
                     Utils::throwIfInvalidStoryLocationSticker($locationSticker);
-                    $request
-                        ->addPost('tap_models', json_encode([$locationSticker]))
-                        ->addPost('story_sticker_ids', 'location_sticker');
+
+                    $tapModels[] = $locationSticker;
+                    $stickerIds[] = 'location_sticker';
                 }
                 if ($storyMentions !== null && $captionText !== '') {
                     Utils::throwIfInvalidStoryMentions($storyMentions);
@@ -922,12 +961,13 @@ class Internal extends RequestCollection
                 if ($storyMusic !== null) {
                     //Utils::throwIfInvalidStoryCountdown($storyCountdown);
                     $request
-                        ->addPost('tap_models', json_encode($storyMusic[0]['story_music_stickers']))
                         ->addPost('story_music_stickers', json_encode($storyMusic[0]['story_music_stickers']))
                         ->addPost('story_music_lyric_stickers', json_encode($storyMusic[0]['story_music_lyric_stickers']))
                         ->addPost('story_music_metadata', json_encode($storyMusic[0]['story_music_metadata']))
-                        ->addPost('story_sticker_ids', 'music_overlay_sticker_lyrics_dynamic_reveal')
                         ->addPost('internal_features', 'music_lyrics_sticker');
+
+                    $tapModels[] = $storyMusic[0]['story_music_stickers'];
+                    $stickerIds[] = 'music_overlay_sticker_lyrics_dynamic_reveal';
                 }
                 if ($storyPoll !== null) {
                     Utils::throwIfInvalidStoryPoll($storyPoll);
@@ -939,47 +979,54 @@ class Internal extends RequestCollection
                 if ($storySlider !== null) {
                     Utils::throwIfInvalidStorySlider($storySlider);
                     $request
-                        ->addPost('story_sliders', json_encode($storySlider))
-                        ->addPost('story_sticker_ids', 'emoji_slider_'.$storySlider[0]['emoji']);
+                        ->addPost('story_sliders', json_encode($storySlider));
+
+                    $stickerIds[] = 'emoji_slider_'.$storySlider[0]['emoji'];
                 }
                 if ($storyQuestion !== null) {
                     Utils::throwIfInvalidStoryQuestion($storyQuestion);
                     $request
-                        ->addPost('story_questions', json_encode($storyQuestion))
-                        ->addPost('story_sticker_ids', 'question_sticker_ama');
+                        ->addPost('story_questions', json_encode($storyQuestion));
+
+                    $stickerIds[] = 'question_sticker_ama';
                 }
                 if ($storyCountdown !== null) {
                     Utils::throwIfInvalidStoryCountdown($storyCountdown);
                     $request
-                        ->addPost('story_countdowns', json_encode($storyCountdown))
-                        ->addPost('story_sticker_ids', 'countdown_sticker_time');
+                        ->addPost('story_countdowns', json_encode($storyCountdown));
+
+                    $stickerIds[] = 'countdown_sticker_time';
                 }
                 if ($storyQuiz !== null) {
                     Utils::throwIfInvalidStoryQuiz($storyQuiz);
                     $request
-                        ->addPost('story_quizs', json_encode($storyQuiz))
-                        ->addPost('story_sticker_ids', 'quiz_story_sticker_default');
+                        ->addPost('story_quizs', json_encode($storyQuiz));
+
+                    $stickerIds[] = 'quiz_story_sticker_default';
                 }
                 if ($chatSticker !== null) {
                     Utils::throwIfInvalidChatSticker($chatSticker);
                     $request
-                        ->addPost('story_sticker_ids', 'chat_sticker_bundle_id')
                         ->addPost('story_chats', json_encode($chatSticker));
+
+                    $stickerIds[] = 'chat_sticker_bundle_id';
                 }
                 if ($storyFundraisers !== null) {
                     $request
-                        ->addPost('story_fundraisers', json_encode($storyFundraisers))
-                        ->addPost('story_sticker_ids', 'fundraiser_sticker_id');
+                        ->addPost('story_fundraisers', json_encode($storyFundraisers));
+
+                    $stickerIds[] = 'fundraiser_sticker_id';
                 }
                 if ($attachedMedia !== null) {
                     Utils::throwIfInvalidAttachedMedia($attachedMedia);
                     $request
-                        ->addPost('attached_media', json_encode($attachedMedia))
-                        ->addPost('story_sticker_ids', 'media_simple_'.reset($attachedMedia)['media_id']);
+                        ->addPost('attached_media', json_encode($attachedMedia));
+                    
+                    $stickerIds[] = 'media_simple_'.reset($attachedMedia)['media_id'];
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
-                            ->addPost('xpost_surface', 'auto_xpost')
+                            ->addPost('xpost_surface', 'ig_story_composer')
                             ->addPost('share_to_facebook', 1)
                             ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
                 }
@@ -1020,6 +1067,18 @@ class Internal extends RequestCollection
                     ->addPost('igtv_ads_toggled_on', boolval($igtvAds));
                     //->addPost('configure_mode', Constants::SHARE_TYPE['IGTV']); // 8 - IGTV
                 break;
+        }
+
+        $request->addPost('tap_models', json_encode($tapModels));
+
+        if (!empty($stickerIds)) {
+            $storyStickerIds = null;
+            if (count($stickerIds) === 1) {
+                $storyStickerIds = $stickerIds[0];
+            } else {
+                $storyStickerIds = implode(',', $stickerIds);
+            }
+            $request->addPost('story_sticker_ids', $storyStickerIds);
         }
 
         if ($targetFeed == Constants::FEED_STORY) {

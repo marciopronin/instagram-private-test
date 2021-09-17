@@ -27,7 +27,7 @@ class Reel extends RequestCollection
         $videoFilename,
         array $externalMetadata = [])
     {
-        return $this->ig->internal->uploadSingleVideo(Constants::FEED_REEL, $videoFilename, null, $externalMetadata);
+        return $this->ig->internal->uploadSingleVideo(Constants::FEED_REELS, $videoFilename, null, $externalMetadata);
     }
 
     /**

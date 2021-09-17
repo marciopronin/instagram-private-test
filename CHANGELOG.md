@@ -1,3 +1,14 @@
+# Stable release v18.4.1
+## Date: 18/09/2021
+
+### Updates and fixes
+
+- **Composer:** Bumped guzzle http to ^7.3
+
+- **Internal:** Update Internal class to better handle story stickers and cross posting between IG and FB.
+- **Internal:** Fixed broked references to FEED_REELS constants
+- **Reels:** Fixed broked references to FEED_REELS constants
+
 # Stable release v18.4.0
 ## Date: 09/09/2021
 

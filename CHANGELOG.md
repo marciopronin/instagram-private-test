@@ -1,3 +1,10 @@
+# Stable release v18.4.2
+## Date: 18/09/2021
+
+### Updates and fixes
+
+- **Composer:** Revert bumped guzzle http to ^7.3. **Note:** Will be bumped when full compatibility is achieved. ETA ~1-2week.
+
 # Stable release v18.4.1
 ## Date: 18/09/2021
 

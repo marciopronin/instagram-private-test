@@ -6,7 +6,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Cookie\SetCookie;
 use GuzzleHttp\HandlerStack;
-use function GuzzleHttp\Psr7\modify_request;
+use GuzzleHttp\Psr7\Utils as GuzzleUtils;
 use InstagramAPI\Exception\InstagramException;
 use InstagramAPI\Exception\LoginRequiredException;
 use InstagramAPI\Exception\ServerMessageThrower;
@@ -1121,7 +1121,7 @@ class Client
         }
 
         // Set up headers that are required for every request.
-        $request = modify_request($request, $headers);
+        $request = GuzzleUtils::modifyRequest($request, $headers);
 
         // Check the Content-Type header for debugging.
         $contentType = $request->getHeader('Content-Type');

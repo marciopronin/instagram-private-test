@@ -1,3 +1,14 @@
+# Stable release v19.0.0
+## Date: 18/09/2021
+
+## BACKWARD BREAKS
+- **Break:** Bumped guzzle http to ^7.3. Request and Client classes were updated to match latest Guzzle changes.
+
+### Updates and fixes
+
+- **Client:** Update Guzzle functions
+- **Request:** Update Guzzle functions
+
 # Stable release v18.4.2
 ## Date: 18/09/2021
 

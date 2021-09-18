@@ -5,7 +5,7 @@ namespace InstagramAPI;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request as HttpRequest;
 use GuzzleHttp\Psr7\Stream;
-use function GuzzleHttp\Psr7\stream_for;
+use GuzzleHttp\Psr7\Utils as GuzzleUtils;
 use InstagramAPI\Exception\InstagramException;
 use InstagramAPI\Exception\LoginRequiredException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
@@ -617,14 +617,14 @@ class Request
         array $file)
     {
         if (isset($file['contents'])) {
-            $result = stream_for($file['contents']); // Throws.
+            $result = GuzzleUtils::streamFor($file['contents']); // Throws.
         } elseif (isset($file['filepath'])) {
             $handle = fopen($file['filepath'], 'rb');
             if ($handle === false) {
                 throw new \RuntimeException(sprintf('Could not open file "%s" for reading.', $file['filepath']));
             }
             $this->_handles[] = $handle;
-            $result = stream_for($handle); // Throws.
+            $result = GuzzleUtils::streamFor($handle); // Throws.
         } else {
             throw new \InvalidArgumentException('No data for stream creation.');
         }
@@ -705,7 +705,7 @@ class Request
     {
         $this->_headers['Content-Type'] = Constants::CONTENT_TYPE;
 
-        return stream_for( // Throws.
+        return GuzzleUtils::streamFor( // Throws.
             http_build_query(Utils::reorderByHashCode($this->_posts))
         );
     }
@@ -723,7 +723,7 @@ class Request
         // Check and return raw body stream if set.
         if ($this->_body !== null) {
             if ($this->_isBodyCompressed) {
-                return stream_for(zlib_encode((string) $this->_body, ZLIB_ENCODING_GZIP));
+                return GuzzleUtils::streamFor(zlib_encode((string) $this->_body, ZLIB_ENCODING_GZIP));
             }
 
             return $this->_body;
@@ -744,7 +744,7 @@ class Request
         }
 
         if ($this->_isBodyCompressed) {
-            return stream_for(zlib_encode((string) $result, ZLIB_ENCODING_GZIP));
+            return GuzzleUtils::streamFor(zlib_encode((string) $result, ZLIB_ENCODING_GZIP));
         }
 
         return $result;

@@ -1,3 +1,10 @@
+# Stable release v19.0.1
+## Date: 21/09/2021
+
+### Updates and fixes
+
+- **Internal:** Update trick function from `stream_for()` to `streamFor()`. Using Guzzle Utils.
+
 # Stable release v19.0.0
 ## Date: 18/09/2021
 

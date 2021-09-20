@@ -4,7 +4,7 @@ namespace InstagramAPI\Request;
 
 use GuzzleHttp\Psr7\LimitStream;
 use GuzzleHttp\Psr7\Stream;
-use function GuzzleHttp\Psr7\stream_for;
+use GuzzleHttp\Psr7\Utils as GuzzleUtils;
 use InstagramAPI\Constants;
 use InstagramAPI\Exception\CheckpointRequiredException;
 use InstagramAPI\Exception\ConsentRequiredException;
@@ -2681,7 +2681,7 @@ class Internal extends RequestCollection
             ->setAddDefaultHeaders(false)
             ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams))
             // Dirty hack to make a POST request.
-            ->setBody(stream_for());
+            ->setBody(GuzzleUtils::streamFor());
         /** @var Response\SegmentedStartResponse $startResponse */
         $startResponse = $startRequest->getResponse(new Response\SegmentedStartResponse());
         $streamId = $startResponse->getStreamId();
@@ -2757,7 +2757,7 @@ class Internal extends RequestCollection
             ->addHeader('Stream-Id', $streamId)
             ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams))
             // Dirty hack to make a POST request.
-            ->setBody(stream_for());
+            ->setBody(GuzzleUtils::streamFor());
         /** @var Response\GenericResponse $result */
         $result = $endRequest->getResponse(new Response\GenericResponse());
 

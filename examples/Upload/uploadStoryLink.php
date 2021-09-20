@@ -33,7 +33,6 @@ try {
 // Now create the metadata array:
 $metadata = [
     'link_sticker' => [
-         [
              'link_type'        => 'web',
              'url'              => $link,
              'selected_index'   => 0,
@@ -46,7 +45,6 @@ $metadata = [
              'width'            => 1.0,
              'height'           => 1.0,
              'rotation'         => 0.0,
-         ],
      ],
 ];
 

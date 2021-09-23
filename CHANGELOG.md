@@ -1,3 +1,15 @@
+# Stable release v19.1.0
+## Date: 23/09/2021
+
+### New features
+
+**Reel:** Added `discover()`
+**Reel:** Added `sendSeenState()`
+
+### Examples
+
+- **Example:** Added `getReels`
+
 # Stable release v19.0.1
 ## Date: 21/09/2021
 

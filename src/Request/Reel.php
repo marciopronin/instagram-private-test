@@ -31,6 +31,69 @@ class Reel extends RequestCollection
     }
 
     /**
+     * Discover reels.
+     *
+     * @param string|null   $chainingMedia      Chaining media ID (Parent).
+     * @param array|null    $seenReels          Seen reels.
+     * @param array|null    $sessionInfo        Session info
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UserReelResponse
+     */
+    public function discover(
+        $chainingMedia = null,
+        $seenReels = null,
+        $sessionInfo = null)
+    {
+        $request = $this->ig->request('clips/discover/')
+            ->setSignedPost(false)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('_uuid', $this->ig->uuid);
+
+        if ($chainingMedia !== null) {
+            $request->addPost('chaining_media_id', $chainingMedia);
+        }
+        if ($seenReels !== null) {
+            $request->addPost('seen_reels', json_encode($seenReels, true));
+        }
+        if ($sessionInfo !== null) {
+            $request->addPost('session_info', json_encode($sessionInfo, true));
+        }
+
+        if (($chainingMedia !== null) || ($seenReels !== null) || ($sessionInfo !== null)) {
+            $request->addPost('container_module', 'clips_viewer_explore_popular_major_unit');
+        } else {
+            $request->addPost('container_module', 'clips_viewer_clips_tab');
+        }
+
+        return $request->getResponse(new Response\UserReelsResponse());
+    }
+
+    /**
+     * Send seen state.
+     *
+     * @param string[] $mediaIds    Media IDs in PK format.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function sendSeenState(
+        array $mediaIds = null)
+    {
+        $request = $this->ig->request('clips/write_seen_state/')
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('impressions', $mediaIds);
+
+        return $request->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Home reels.
      *
      * @param string|null $maxId  Next "maximum ID", used for pagination.

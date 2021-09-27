@@ -28,5 +28,6 @@ final class SendStory extends ShareItem
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid story ID.', $storyId));
         }
         $this->_data['item_id'] = (string) $storyId;
+        $this->_data['story_media_id'] = (string) $storyId;
     }
 }

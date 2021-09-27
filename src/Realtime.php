@@ -356,7 +356,7 @@ class Realtime implements EventEmitterInterface
      * Share a hashtag to a given direct thread.
      *
      * @param string $threadId Thread ID.
-     * @param string $hashtag  Hashtag to share.
+     * @param string $hashtag  Hashtag to share. Including #.
      * @param array  $options  An associative array of additional parameters, including:
      *                         "client_context" (optional) - predefined UUID used to prevent double-posting;
      *                         "text" (optional) - text message.
@@ -369,7 +369,8 @@ class Realtime implements EventEmitterInterface
         array $options = [])
     {
         try {
-            $command = new DirectCommand\SendHashtag($threadId, $hashtag, $options);
+            //$command = new DirectCommand\SendHashtag($threadId, $hashtag, $options);
+            $command = new DirectCommand\SendText($threadId, $hashtag, $options);
             $this->_client->sendCommand($command);
 
             return $command->getClientContext();

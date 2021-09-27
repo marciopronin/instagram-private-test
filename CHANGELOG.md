@@ -1,3 +1,11 @@
+# Stable release v19.1.1
+## Date: 27/09/2021
+
+### Updates and fixes
+
+**Realtime:** Updated `sendHashtagToDirect()`. Hashtags are now being sent through a normal SendText Direct command.
+**Realtime/Command/Direct:** Updated `SendStory` command. Now it is possible to send again story items via MQTT (Realtime).
+
 # Stable release v19.1.0
 ## Date: 23/09/2021
 

@@ -1,3 +1,10 @@
+# Stable release v19.1.2
+## Date: 29/09/2021
+
+### Updates and fixes
+
+**Internal:** Updated `configureSingleVideo()` to admit reel (clips) uploads.
+
 # Stable release v19.1.1
 ## Date: 27/09/2021
 

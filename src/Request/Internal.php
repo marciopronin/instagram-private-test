@@ -1033,7 +1033,7 @@ class Internal extends RequestCollection
                 break;
             case Constants::FEED_DIRECT_STORY:
                 $request
-                    ->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
+                    ->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE (STORIES)
                     ->addPost('recipient_users', $internalMetadata->getDirectUsers())
                     ->addPost('thread_ids', $internalMetadata->getDirectThreads())
                     ->addPost('story_media_creation_date', time() - mt_rand(10, 20))
@@ -1043,6 +1043,10 @@ class Internal extends RequestCollection
                 if ($internalMetadata->getStoryViewMode() !== null) {
                     $request->addPost('view_mode', $internalMetadata->getStoryViewMode());
                 }
+                break;
+            case Constants::FEED_REELS:
+                $request
+                    ->addPost('caption', $captionText);
                 break;
             case Constants::FEED_TV:
                 if ($title === null) {

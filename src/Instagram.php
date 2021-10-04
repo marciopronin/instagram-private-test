@@ -2644,8 +2644,13 @@ class Instagram implements ExperimentsInterface
                     try {
                         $this->tv->getBrowseFeed();
                     } catch (\Exception $e) {
+                        //pass
                     }
-                    $this->people->getSharePrefill();
+                    try {
+                        $this->people->getSharePrefill();
+                    } catch (\Exception $e) {
+                        //pass
+                    }
                     $this->people->getRecentActivityInbox();
                 } finally {
                     // Stops emulating batch requests.
@@ -2656,7 +2661,7 @@ class Instagram implements ExperimentsInterface
                 $this->client->startEmulatingBatch();
 
                 try {
-                    $this->people->getSharePrefill();
+                    //$this->people->getSharePrefill();
                     $this->people->getRecentActivityInbox();
                     $this->people->getInfoById($this->account_id);
                     $this->internal->getDeviceCapabilitiesDecisions();

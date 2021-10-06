@@ -811,7 +811,7 @@ class PDQHasher
     // ----------------------------------------------------------------
     public static function computeHashesAndQualityFromImage(
     /*resource*/ &$image,
-    /*int*/ $which_flags = self::DIH_ALL,
+    /*int*/ $which_flags,
     /*bool*/ $show_timings,
     /*bool*/ $dump
   ) {

@@ -71,7 +71,6 @@ use InstagramAPI\AutoPropertyMapper;
 class Suggestion extends AutoPropertyMapper
 {
     const JSON_PROPERTY_MAP = [
-        'media_infos'       => '',
         'social_context'    => 'string',
         'algorithm'         => 'string',
         'thumbnail_urls'    => 'string[]',

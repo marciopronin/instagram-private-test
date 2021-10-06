@@ -1,3 +1,13 @@
+# Stable release v19.1.4
+## Date: 06/10/2021
+
+### Updates and fixes
+
+**Discover:** Update function according to PHP8 standards
+**Instagram:** Update login flow.
+**Models:** Update model properties
+**PDQHasher:** Update function according to PHP8 standards
+
 # Stable release v19.1.3
 ## Date: 04/10/2021
 

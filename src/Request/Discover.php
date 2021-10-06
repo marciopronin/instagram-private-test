@@ -27,7 +27,7 @@ class Discover extends RequestCollection
      * @return \InstagramAPI\Response\ExploreResponse
      */
     public function getExploreFeed(
-        $clusterId = 'explore_all:0',
+        $clusterId,
         $sessionId,
         $maxId = null,
         $isPrefetch = false)

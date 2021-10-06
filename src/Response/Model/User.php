@@ -627,7 +627,6 @@ class User extends AutoPropertyMapper
         'has_anonymous_profile_picture'             => 'bool',
         'has_highlight_reels'                       => 'bool',
         'is_eligible_to_show_fb_cross_sharing_nux'  => 'bool',
-        'page_id_for_new_suma_biz_account'          => 'bool',
         'eligible_shopping_signup_entrypoints'      => 'string[]',
         'is_favorite'                               => 'bool',
         'is_favorite_for_stories'                   => 'bool',

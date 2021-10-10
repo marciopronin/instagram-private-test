@@ -38,13 +38,13 @@ if ($debug) {
     $logger = null;
 }
 $push = new \InstagramAPI\Push($loop, $ig, $logger);
-$push->on('incoming', function (\InstagramAPI\Push\Notification $push) {
+$push->on('incoming', function (InstagramAPI\Push\Notification $push) {
     printf('%s%s', $push->getMessage(), PHP_EOL);
 });
-$push->on('like', function (\InstagramAPI\Push\Notification $push) {
+$push->on('like', function (InstagramAPI\Push\Notification $push) {
     printf('Media ID: %s%s', $push->getActionParam('id'), PHP_EOL);
 });
-$push->on('comment', function (\InstagramAPI\Push\Notification $push) {
+$push->on('comment', function (InstagramAPI\Push\Notification $push) {
     switch ($push->getActionPath()) {
         case 'comments_v2':
             $mediaId = $push->getActionParam('media_id');
@@ -62,7 +62,7 @@ $push->on('comment', function (\InstagramAPI\Push\Notification $push) {
         PHP_EOL
     );
 });
-$push->on('direct_v2_message', function (\InstagramAPI\Push\Notification $push) {
+$push->on('direct_v2_message', function (InstagramAPI\Push\Notification $push) {
     printf(
         'Thread ID: %s. Thread item ID: %s.%s',
         $push->getActionParam('id'),
@@ -70,7 +70,7 @@ $push->on('direct_v2_message', function (\InstagramAPI\Push\Notification $push) 
         PHP_EOL
     );
 });
-$push->on('error', function (\Exception $e) use ($push, $loop) {
+$push->on('error', function (Exception $e) use ($push, $loop) {
     printf('[!!!] Got fatal error from FBNS: %s%s', $e->getMessage(), PHP_EOL);
     $push->stop();
     $loop->stop();

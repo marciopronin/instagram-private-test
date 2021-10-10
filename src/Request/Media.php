@@ -343,7 +343,7 @@ class Media extends RequestCollection
      * Hide and unhide like and view counter.
      *
      * @param string $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").
-     * @param bool   $disable Disable flag.  
+     * @param bool   $disable Disable flag.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *

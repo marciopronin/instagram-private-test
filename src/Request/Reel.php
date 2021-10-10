@@ -33,9 +33,9 @@ class Reel extends RequestCollection
     /**
      * Discover reels.
      *
-     * @param string|null   $chainingMedia      Chaining media ID (Parent).
-     * @param array|null    $seenReels          Seen reels.
-     * @param array|null    $sessionInfo        Session info
+     * @param string|null $chainingMedia Chaining media ID (Parent).
+     * @param array|null  $seenReels     Seen reels.
+     * @param array|null  $sessionInfo   Session info
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -74,7 +74,7 @@ class Reel extends RequestCollection
     /**
      * Send seen state.
      *
-     * @param string[] $mediaIds    Media IDs in PK format.
+     * @param string[] $mediaIds Media IDs in PK format.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException

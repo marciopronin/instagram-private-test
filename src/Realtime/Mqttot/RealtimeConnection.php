@@ -5,8 +5,8 @@ namespace InstagramAPI\Realtime\Mqttot;
 use Fbns\Mqtt\RtiConnection;
 use Fbns\Thrift\Compact\Types;
 use InstagramAPI\Constants;
-use InstagramAPI\Instagram;
 use InstagramAPI\Exception\InstagramException;
+use InstagramAPI\Instagram;
 
 class RealtimeConnection extends RtiConnection
 {

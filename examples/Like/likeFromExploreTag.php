@@ -142,7 +142,7 @@ try {
                 if ($media->getMedia()->getMediaType() === 1) {
                     $candidates = $media->getMedia()->getImageVersions2()->getCandidates();
                     $smallCandidate = end($candidates);
-                    
+
                     $imageResponse = $ig->request($smallCandidate->getUrl());
 
                     if (isset($imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'])) {

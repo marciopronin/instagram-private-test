@@ -1,3 +1,12 @@
+# Stable release v19.1.5
+## Date: 10/10/2021
+
+### Updates and fixes
+
+- **Instagram:** Update to 207.0.0.39.120
+- Update codestyle
+- Update documentation
+
 # Stable release v19.1.4
 ## Date: 06/10/2021
 

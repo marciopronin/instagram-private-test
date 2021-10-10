@@ -16,7 +16,6 @@ $truncatedDebug = false;
 $photoFilename = '';
 //////////////////////
 
-
 /////// MEDIA ////////
 $link = '';
 //////////////////////

@@ -6,8 +6,8 @@ date_default_timezone_set('UTC');
 require __DIR__.'/../../vendor/autoload.php';
 
 /////// CONFIG ///////
-$username = '';
-$password = '';
+$username = 'hellogloria_';
+$password = 'OldH4gs!';
 $debug = true;
 $truncatedDebug = false;
 //////////////////////

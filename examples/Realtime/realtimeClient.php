@@ -46,50 +46,50 @@ $rtc->on('connect', function () use ($rtc, $inboxResponse) {
     $rtc->receiveOfflineMessages($inboxResponse->getSeqId(),
     $inboxResponse->getSnapshotAtMs());
 });
-$rtc->on('live-started', function (\InstagramAPI\Realtime\Payload\LiveBroadcast $live) {
+$rtc->on('live-started', function (InstagramAPI\Realtime\Payload\LiveBroadcast $live) {
     printf('[RTC] Live broadcast %s has been started%s', $live->getBroadcastId(), PHP_EOL);
 });
-$rtc->on('live-stopped', function (\InstagramAPI\Realtime\Payload\LiveBroadcast $live) {
+$rtc->on('live-stopped', function (InstagramAPI\Realtime\Payload\LiveBroadcast $live) {
     printf('[RTC] Live broadcast %s has been stopped%s', $live->getBroadcastId(), PHP_EOL);
 });
-$rtc->on('direct-story-created', function (\InstagramAPI\Response\Model\DirectThread $thread) {
+$rtc->on('direct-story-created', function (InstagramAPI\Response\Model\DirectThread $thread) {
     printf('[RTC] Story %s has been created%s', $thread->getThreadId(), PHP_EOL);
 });
-$rtc->on('thread-item-liked', function ($threadId, $threadItemId, $userId, \InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
+$rtc->on('thread-item-liked', function ($threadId, $threadItemId, $userId, InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
     printf('[RTC] Item %s has been liked in %s by %s', $threadItemId, $threadId, $userId, PHP_EOL);
 });
 $rtc->on('thread-item-unliked', function ($threadId, $threadItemId, $userId) {
     printf('[RTC] Item %s has been unliked in %s by %s', $threadItemId, $threadId, $userId, PHP_EOL);
 });
-$rtc->on('direct-story-updated', function ($threadId, $threadItemId, \InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
+$rtc->on('direct-story-updated', function ($threadId, $threadItemId, InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
     printf('[RTC] Item %s has been created in story %s%s', $threadItemId, $threadId, PHP_EOL);
 });
-$rtc->on('direct-story-screenshot', function ($threadId, \InstagramAPI\Realtime\Payload\StoryScreenshot $screenshot) {
+$rtc->on('direct-story-screenshot', function ($threadId, InstagramAPI\Realtime\Payload\StoryScreenshot $screenshot) {
     printf('[RTC] %s has taken screenshot of story %s%s', $screenshot->getActionUserDict()->getUsername(), $threadId, PHP_EOL);
 });
-$rtc->on('direct-story-action', function ($threadId, \InstagramAPI\Response\Model\ActionBadge $storyAction) {
+$rtc->on('direct-story-action', function ($threadId, InstagramAPI\Response\Model\ActionBadge $storyAction) {
     printf('[RTC] Story in thread %s has badge %s now%s', $threadId, $storyAction->getActionType(), PHP_EOL);
 });
-$rtc->on('thread-created', function ($threadId, \InstagramAPI\Response\Model\DirectThread $thread) {
+$rtc->on('thread-created', function ($threadId, InstagramAPI\Response\Model\DirectThread $thread) {
     printf('[RTC] Thread %s has been created%s', $threadId, PHP_EOL);
 });
-$rtc->on('thread-updated', function ($threadId, \InstagramAPI\Response\Model\DirectThread $thread) {
+$rtc->on('thread-updated', function ($threadId, InstagramAPI\Response\Model\DirectThread $thread) {
     printf('[RTC] Thread %s has been updated%s', $threadId, PHP_EOL);
 });
-$rtc->on('thread-notify', function ($threadId, $threadItemId, \InstagramAPI\Realtime\Payload\ThreadAction $notify) {
+$rtc->on('thread-notify', function ($threadId, $threadItemId, InstagramAPI\Realtime\Payload\ThreadAction $notify) {
     printf('[RTC] Thread %s has notification from %s%s', $threadId, $notify->getUserId(), PHP_EOL);
 });
-$rtc->on('thread-seen', function ($threadId, $userId, \InstagramAPI\Response\Model\DirectThreadLastSeenAt $seenAt) {
+$rtc->on('thread-seen', function ($threadId, $userId, InstagramAPI\Response\Model\DirectThreadLastSeenAt $seenAt) {
     printf('[RTC] Thread %s has been checked by %s%s', $threadId, $userId, PHP_EOL);
 });
-$rtc->on('thread-activity', function ($threadId, \InstagramAPI\Realtime\Payload\ThreadActivity $activity) {
+$rtc->on('thread-activity', function ($threadId, InstagramAPI\Realtime\Payload\ThreadActivity $activity) {
     printf('[RTC] Thread %s has some activity made by %s%s', $threadId, $activity->getSenderId(), PHP_EOL);
 });
-$rtc->on('thread-item-created', function ($threadId, $threadItemId, \InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
+$rtc->on('thread-item-created', function ($threadId, $threadItemId, InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
     printf('[RTC] Item %s has been created in thread %s%s', $threadItemId, $threadId, PHP_EOL);
     if ($threadItem->getItemType() === 'text') {
         $text = $threadItem->getText();
-        
+
         if ($text === 'send link') {
             $recipients = [
                 'thread' => [
@@ -99,7 +99,7 @@ $rtc->on('thread-item-created', function ($threadId, $threadItemId, \InstagramAP
 
             $sendLinkText = 'Hi, this is your link, https://google.de';
             $clientContext = \InstagramAPI\Utils::generateClientContext();
-        
+
             $ig->direct->sendText($recipients, $sendLinkText, ['client_context' => $clientContext]);
             $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'link', [$threadItem->getUserId()]);
             $ig->event->sendTextDirectMessage();
@@ -108,23 +108,23 @@ $rtc->on('thread-item-created', function ($threadId, $threadItemId, \InstagramAP
         }
     }
 });
-$rtc->on('thread-item-updated', function ($threadId, $threadItemId, \InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
+$rtc->on('thread-item-updated', function ($threadId, $threadItemId, InstagramAPI\Response\Model\DirectThreadItem $threadItem) {
     printf('[RTC] Item %s has been updated in thread %s%s', $threadItemId, $threadId, PHP_EOL);
 });
 $rtc->on('thread-item-removed', function ($threadId, $threadItemId) {
     printf('[RTC] Item %s has been removed from thread %s%s', $threadItemId, $threadId, PHP_EOL);
 });
-$rtc->on('client-context-ack', function (\InstagramAPI\Realtime\Payload\Action\AckAction $ack) {
+$rtc->on('client-context-ack', function (InstagramAPI\Realtime\Payload\Action\AckAction $ack) {
     printf('[RTC] Received ACK for %s with status %s%s', $ack->getPayload()->getClientContext(), $ack->getStatus(), PHP_EOL);
 });
-$rtc->on('unseen-count-update', function ($inbox, \InstagramAPI\Response\Model\DirectSeenItemPayload $payload) {
+$rtc->on('unseen-count-update', function ($inbox, InstagramAPI\Response\Model\DirectSeenItemPayload $payload) {
     printf('[RTC] Updating unseen count in %s to %d%s', $inbox, $payload->getCount(), PHP_EOL);
 });
-$rtc->on('presence', function (\InstagramAPI\Response\Model\UserPresence $presence) {
+$rtc->on('presence', function (InstagramAPI\Response\Model\UserPresence $presence) {
     $action = $presence->getIsActive() ? 'is now using' : 'just closed';
     printf('[RTC] User %s %s one of Instagram apps%s', $presence->getUserId(), $action, PHP_EOL);
 });
-$rtc->on('error', function (\Exception $e) use ($rtc, $loop) {
+$rtc->on('error', function (Exception $e) use ($rtc, $loop) {
     printf('[!!!] Got fatal error from Realtime: %s%s', $e->getMessage(), PHP_EOL);
     $rtc->stop();
     $loop->stop();

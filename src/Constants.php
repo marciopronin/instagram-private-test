@@ -10,9 +10,9 @@ class Constants
         2   => 'https://i.instagram.com/api/v2/',
     ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
-    const IG_VERSION = '203.0.0.29.118';
+    const IG_VERSION = '207.0.0.39.120';
     const IG_IOS_VERSION = '177.0.0.20.117';
-    const VERSION_CODE = '314665232';
+    const VERSION_CODE = '321039115';
     const IG_IOS_VERSION_CODE = '275424340';
     const IOS_MODEL = 'iPhone13,2';
     const IOS_VERSION = '14_1';
@@ -30,7 +30,7 @@ class Constants
     const IG_LOGIN_PUBLIC_KEY = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF1enRZOEZvUlRGRU9mK1RkTGlUdAplN3FIQXY1cmdBMmk5RkQ0YjgzZk1GK3hheW14b0xSdU5KTitRanJ3dnBuSm1LQ0QxNGd3K2w3TGQ0RHkvRHVFCkRiZlpKcmRRWkJIT3drS3RqdDdkNWlhZFdOSjdLczlBM0NNbzB5UktyZFBGU1dsS21lQVJsTlFrVXF0YkNmTzcKT2phY3ZYV2dJcGlqTkdJRVk4UkdzRWJWZmdxSmsrZzhuQWZiT0xjNmEwbTMxckJWZUJ6Z0hkYWExeFNKOGJHcQplbG4zbWh4WDU2cmpTOG5LZGk4MzRZSlNaV3VxUHZmWWUrbEV6Nk5laU1FMEo3dE80eWxmeWlPQ05ycnF3SnJnCjBXWTFEeDd4MHlZajdrN1NkUWVLVUVaZ3FjNUFuVitjNUQ2SjJTSTlGMnNoZWxGNWVvZjJOYkl2TmFNakpSRDgKb1FJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==';
 
     // Endpoint Constants.
-    const BLOCK_VERSIONING_ID = '0989b5ad405eac04613ad203cffb894668e0013d60e25b3f66a2d120705c1aa3';
+    const BLOCK_VERSIONING_ID = '251c3023d7ef985a0e5d91b885c0c03bbb32b4b721d8de33bf9f667ba39b41ff';
     const IOS_BLOCKS_VERSIONING_ID = '628974fad3b3fbc66e723f6581b60edd0585667970f19daa4874421231514c7d';
     const BATCH_SURFACES = [
         ['4715', ['instagram_other_profile_page_header']],
@@ -57,7 +57,7 @@ class Constants
     const SUPPORTED_CAPABILITIES = [
         [
             'name'    => 'SUPPORTED_SDK_VERSIONS',
-            'value'   => '100.0,101.0,102.0,103.0,104.0,105.0,106.0,107.0,108.0,109.0,110.0,111.0,112.0,113.0,114.0,115.0,116.0,117.0',
+            'value'   => '105.0,106.0,107.0,108.0,109.0,110.0,111.0,112.0,113.0,114.0,115.0,116.0,117.0,118.0,119.0,120.0,121.0,122.0,123.0',
         ],
         [
             'name'  => 'FACE_TRACKER_VERSION',

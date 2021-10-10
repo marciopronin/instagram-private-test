@@ -104,7 +104,6 @@ try {
             }
             foreach ($section->getLayoutContent()->getMedias() as $media) {
                 if ($media->getMedia()->getMediaType() === 1) {
-
                     $candidates = $media->getMedia()->getImageVersions2()->getCandidates();
                     $smallCandidate = end($candidates);
 

@@ -57,18 +57,18 @@ try {
         $mediaInfo[$item->getMedia()->getId()] = [
             'total_watch_time_ms'   => [
                 'value'                 => mt_rand(2000, 4000),
-                'latest_play_end_ts'    => time()
+                'latest_play_end_ts'    => time(),
             ],
             'num_loops'             => [
                 'value'                 => 0,
-                'last_loop_end_ts'      => 0
-            ]
+                'last_loop_end_ts'      => 0,
+            ],
         ];
     }
 
     $sessionInfo = [
         'session_id'    => $reelSession,
-        'media_info'    => $mediaInfo
+        'media_info'    => $mediaInfo,
     ];
 
     // Send seen state.
@@ -76,7 +76,7 @@ try {
 
     // Fetch new reels.
     $ig->reel->discover($chainingMedia, $seenReels, $sessionInfo);
- 
+
     $ig->event->forceSendBatch();
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";

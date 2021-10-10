@@ -98,6 +98,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method mixed getLargeUrls()
  * @method float getLat()
  * @method string getLeadGenFormId()
+ * @method bool getLikeAndViewCountsDisabled()
  * @method int getLikeCount()
  * @method User[] getLikers()
  * @method string getLink()
@@ -282,6 +283,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isLargeUrls()
  * @method bool isLat()
  * @method bool isLeadGenFormId()
+ * @method bool isLikeAndViewCountsDisabled()
  * @method bool isLikeCount()
  * @method bool isLikers()
  * @method bool isLink()
@@ -466,6 +468,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setLargeUrls(mixed $value)
  * @method $this setLat(float $value)
  * @method $this setLeadGenFormId(string $value)
+ * @method $this setLikeAndViewCountsDisabled(bool $value)
  * @method $this setLikeCount(int $value)
  * @method $this setLikers(User[] $value)
  * @method $this setLink(string $value)
@@ -650,6 +653,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this unsetLargeUrls()
  * @method $this unsetLat()
  * @method $this unsetLeadGenFormId()
+ * @method $this unsetLikeAndViewCountsDisabled()
  * @method $this unsetLikeCount()
  * @method $this unsetLikers()
  * @method $this unsetLink()
@@ -786,6 +790,7 @@ class Item extends AutoPropertyMapper
         'headline'                                 => 'Headline',
         'title'                                    => 'string',
         'caption_is_edited'                        => 'bool',
+        'like_and_view_counts_disabled'            => 'bool',
         'photo_of_you'                             => 'bool',
         'fb_user_tags'                             => 'Usertag',
         'can_viewer_save'                          => 'bool',

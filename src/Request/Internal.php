@@ -447,7 +447,7 @@ class Internal extends RequestCollection
                     $request
                         ->addPost('attached_media', json_encode($attachedMedia));
 
-                    $stickerIds[] = 'media_simple_'.reset($attachedMedia)['media_id'];                   
+                    $stickerIds[] = 'media_simple_'.reset($attachedMedia)['media_id'];
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
@@ -902,7 +902,7 @@ class Internal extends RequestCollection
             ->addPost('nav_chain', $this->ig->getNavChain());
 
         $stickerIds = [];
-        $tapModels = [];   
+        $tapModels = [];
 
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE:
@@ -1021,7 +1021,7 @@ class Internal extends RequestCollection
                     Utils::throwIfInvalidAttachedMedia($attachedMedia);
                     $request
                         ->addPost('attached_media', json_encode($attachedMedia));
-                    
+
                     $stickerIds[] = 'media_simple_'.reset($attachedMedia)['media_id'];
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
@@ -1316,9 +1316,9 @@ class Internal extends RequestCollection
         $experiments = [];
         $configData = $syncResponse->getConfigs()->getData();
 
-        foreach($configData as $group => $param) {
+        foreach ($configData as $group => $param) {
             if (substr($group, 0, 3) === 'qe_') {
-                foreach($param->getParams()->getData() as $paramName => $paramValue) {
+                foreach ($param->getParams()->getData() as $paramName => $paramValue) {
                     if ($paramValue->getValue() !== null) {
                         $experiments[substr($group, 3)][$paramName] = $paramValue->getValue();
                     }

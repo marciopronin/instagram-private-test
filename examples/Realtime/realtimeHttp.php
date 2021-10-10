@@ -109,9 +109,9 @@ class RealtimeHttpServer
      * @param \Psr\Log\LoggerInterface|null  $logger
      */
     public function __construct(
-        \React\EventLoop\LoopInterface $loop,
-        \InstagramAPI\Instagram $instagram,
-        \Psr\Log\LoggerInterface $logger = null)
+        React\EventLoop\LoopInterface $loop,
+        InstagramAPI\Instagram $instagram,
+        Psr\Log\LoggerInterface $logger = null)
     {
         $this->_loop = $loop;
         $this->_instagram = $instagram;
@@ -125,7 +125,7 @@ class RealtimeHttpServer
 
         $rtc = new \InstagramAPI\Realtime($this->_instagram, $this->_loop, $this->_logger);
         $this->_rtc = $rtc;
-        $this->_rtc->on('connect', function () use ($rtc, $inboxResponse) {
+        $this->_rtc->on('connect', function () use ($inboxResponse) {
             $this->_rtc->receiveOfflineMessages($inboxResponse->getSeqId(),
             $inboxResponse->getSnapshotAtMs());
         });
@@ -152,7 +152,7 @@ class RealtimeHttpServer
         $this->_rtc->stop();
     }
 
-     /**
+    /**
      * Gracefully stop everything.
      */
     protected function _kill()
@@ -172,7 +172,7 @@ class RealtimeHttpServer
      * @param \Exception $e
      */
     public function onRealtimeFail(
-        \Exception $e)
+        Exception $e)
     {
         $this->_logger->error((string) $e);
         $this->_stop();
@@ -184,7 +184,7 @@ class RealtimeHttpServer
      * @param \InstagramAPI\Realtime\Payload\Action\AckAction $ack
      */
     public function onClientContextAck(
-        \InstagramAPI\Realtime\Payload\Action\AckAction $ack)
+        InstagramAPI\Realtime\Payload\Action\AckAction $ack)
     {
         $context = $ack->getPayload()->getClientContext();
         $this->_logger->info(sprintf('Received ACK for %s with status %s', $context, $ack->getStatus()));
@@ -221,7 +221,7 @@ class RealtimeHttpServer
         });
         // Set up promise.
         return $deferred->promise()
-            ->then(function (\InstagramAPI\Realtime\Payload\Action\AckAction $ack) use ($timeout) {
+            ->then(function (InstagramAPI\Realtime\Payload\Action\AckAction $ack) use ($timeout) {
                 // Cancel reject timer.
                 $timeout->cancel();
                 // Reply with info from $ack.
@@ -241,7 +241,7 @@ class RealtimeHttpServer
      * @return \React\Http\Response|\React\Promise\PromiseInterface
      */
     public function onHttpRequest(
-        \Psr\Http\Message\ServerRequestInterface $request)
+        Psr\Http\Message\ServerRequestInterface $request)
     {
         // Treat request path as command.
         $command = $request->getUri()->getPath();

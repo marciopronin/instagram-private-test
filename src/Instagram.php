@@ -2418,11 +2418,13 @@ class Instagram implements ExperimentsInterface
                 $this->internal->fetchZeroRatingToken();
                 $this->event->sendZeroCarrierSignal();
 
+                /* DISABLED. IG DOES NOT SEND THESE ANYMORE.
                 try {
                     $this->internal->syncUserFeatures();
                 } catch (\Exception $e) {
                     // pass
                 }
+                */
             } finally {
                 // Stops emulating batch requests.
                 $this->client->stopEmulatingBatch();
@@ -2646,6 +2648,7 @@ class Instagram implements ExperimentsInterface
                     } catch (\Exception $e) {
                         //pass
                     }
+
                     try {
                         $this->people->getSharePrefill();
                     } catch (\Exception $e) {

@@ -913,4 +913,147 @@ class Story extends RequestCollection
 
         return $request->getResponse(new Response\ReelSettingsResponse());
     }
+
+    /**
+     * Get private stories members.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\PrivateStoriesMembersResponse
+     */
+    public function getPrivateStoriesMembers()
+    {
+        return $this->ig->request('stories/private_stories/members/')
+            ->getResponse(new Response\PrivateStoriesMembersResponse());
+    }
+
+    /**
+     * Add private stories members.
+     *
+     * @param string $userId Numerical UserPK ID.
+     * @param string $module Module.
+     * @param string $source Source module.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function addPrivateStoriesMember(
+        $userId,
+        $module = 'audience_selection',
+        $source = 'story_share_sheet')
+    {
+        return $this->ig->request('stories/private_stories/add_member/')
+            ->setSignedPost(false)
+            ->addPost('module', $module)
+            ->addPost('source', $source)
+            ->addPost('user_id', $userId)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Remove private stories members.
+     *
+     * @param string $userId Numerical UserPK ID.
+     * @param string $module Module.
+     * @param string $source Source module.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function removePrivateStoriesMember(
+        $userId,
+        $module = 'audience_selection',
+        $source = 'story_share_sheet')
+    {
+        return $this->ig->request('stories/private_stories/remove_member/')
+            ->setSignedPost(false)
+            ->addPost('module', $module)
+            ->addPost('source', $source)
+            ->addPost('user_id', $userId)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Get story allow list viewers.
+     *
+     * @param string $storyId The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\PrivateStoriesMembersResponse
+     */
+    public function getStoryAllowlist(
+        $storyId)
+    {
+        return $this->ig->request("stories/private_stories/media/{$storyId}/allowlist/")
+            ->getResponse(new Response\PrivateStoriesMembersResponse());
+    }
+
+    /**
+     * Add story allow list viewer.
+     *
+     * @param string $storyId The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string $userId  Numerical UserPK ID.
+     * @param string $module  Module.
+     * @param string $source  Source module.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function addViewerToAllowList(
+        $storyId,
+        $userId,
+        $module = 'audience_selection',
+        $source = 'self_reel')
+    {
+        return $this->ig->request("stories/private_stories/media/{$storyId}/add_viewer/")
+            ->setSignedPost(false)
+            ->addPost('module', $module)
+            ->addPost('source', $source)
+            ->addPost('user_id', $userId)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Remove story allow list viewer.
+     *
+     * @param string $storyId The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string $userId  Numerical UserPK ID.
+     * @param string $module  Module.
+     * @param string $source  Source module.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function removeViewerToAllowList(
+        $storyId,
+        $userId,
+        $module = 'audience_selection',
+        $source = 'self_reel')
+    {
+        return $this->ig->request("stories/private_stories/media/{$storyId}/remove_viewer/")
+            ->setSignedPost(false)
+            ->addPost('module', $module)
+            ->addPost('source', $source)
+            ->addPost('user_id', $userId)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
 }

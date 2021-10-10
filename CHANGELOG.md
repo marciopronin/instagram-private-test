@@ -1,3 +1,10 @@
+# Stable release v19.1.6
+## Date: 10/10/2021
+
+### Updates and fixes
+
+- **Story:** New functions to manage private members and story viewers allow list
+
 # Stable release v19.1.5
 ## Date: 10/10/2021
 

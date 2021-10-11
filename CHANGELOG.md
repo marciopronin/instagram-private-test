@@ -1,3 +1,10 @@
+# Stable release v19.1.7
+## Date: 11/10/2021
+
+### Updates and fixes
+
+- **Instagram:** Update login flow
+
 # Stable release v19.1.6
 ## Date: 10/10/2021
 

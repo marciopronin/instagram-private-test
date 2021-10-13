@@ -983,6 +983,36 @@ class Story extends RequestCollection
     }
 
     /**
+     * Bulk Add/Remove viewers from your private stories allow list.
+     *
+     * @param string[] $add    UserIds to add to your private stories allow list.
+     * @param string[] $remove UserIds to remove from private stories allow list.
+     * @param string   $module (optional) Module.
+     * @param string   $source (optional) Source module.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function setPrivateStoriesMembers(
+        array $add,
+        array $remove,
+        $module = 'audience_selection',
+        $source = 'story_share_sheet')
+    {
+        return $this->ig->request('stories/private_stories/bulk_update_members/')
+            ->setSignedPost(false)
+            ->addPost('module', $module)
+            ->addPost('source', $source)
+           ->addPost('added_user_ids', json_encode($add))
+           ->addPost('removed_user_ids', json_encode($remove))
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get story allow list viewers.
      *
      * @param string $storyId The story media item's ID in Instagram's internal format (ie "1542304813904481224").
@@ -1052,6 +1082,40 @@ class Story extends RequestCollection
             ->addPost('module', $module)
             ->addPost('source', $source)
             ->addPost('user_id', $userId)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Bulk Add/Remove viewers from your story allow list.
+     *
+     * Note: You probably should not touch $module and $source as there is only one way to modify your story allow list.
+     *
+     * @param string   $storyId The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string[] $add     UserIds to add to your private story allow list.
+     * @param string[] $remove  UserIds to remove from your private story allow list.
+     * @param string   $module  (optional) From which app module (page) you have change your private story allow list.
+     * @param string   $source  (optional) Source page of app-module of where you changed your private story allow list.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function setStoryAllowList(
+        $storyId,
+        array $add,
+        array $remove,
+        $module = 'audience_selection',
+        $source = 'self_reel')
+    {
+        return $this->ig->request("stories/private_stories/media/{$storyId}/allowlist/edit/")
+            ->setSignedPost(false)
+            ->addPost('module', $module)
+            ->addPost('media_id', $storyId)
+            ->addPost('source', $source)
+           ->addPost('added_user_ids', json_encode($add))
+           ->addPost('removed_user_ids', json_encode($remove))
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->getResponse(new Response\GenericResponse());

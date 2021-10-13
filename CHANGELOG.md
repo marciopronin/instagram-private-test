@@ -1,3 +1,15 @@
+# Stable release v19.2.0
+## Date: 13/10/2021
+
+### New features
+
+- **Story:** Added `setPrivateStoriesMembers()` and `setStoryAllowList()`
+
+### Updates and fixes
+
+- **Model:** Update Media model
+- **Code style:** Update codestyle
+
 # Stable release v19.1.7
 ## Date: 11/10/2021
 

@@ -2680,11 +2680,9 @@ class Instagram implements ExperimentsInterface
                     $this->direct->getPresences();
                     $this->discover->getExploreFeed('explore_all:0', \InstagramAPI\Signatures::generateUUID());
                     $this->direct->getInbox();
-                }
-                catch(\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e){
+                } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
                     // This can have EmptyResponse, and that's ok.
-                }
-                finally {
+                } finally {
                     // Stops emulating batch requests.
                     $this->client->stopEmulatingBatch();
                 }
@@ -2706,11 +2704,9 @@ class Instagram implements ExperimentsInterface
                     $this->direct->getRankedRecipients('reshare', true);
                     $this->direct->getRankedRecipients('raven', true);
                     $this->_registerPushChannels();
-                }
-                catch(\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e){
+                } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
                     // This can have EmptyResponse, and that's ok.
-                }
-                finally {
+                } finally {
                     // Stops emulating batch requests.
                     $this->client->stopEmulatingBatch();
                 }

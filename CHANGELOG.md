@@ -1,3 +1,10 @@
+# Stable release v19.3.0
+## Date: 18/10/2021
+
+### New features
+
+- **Realtime:** Added `sendPing()`. Exposed in order to manually be able to send PINGREQ requests to Instagram MQTT Broker. API already handles PINGREQ and PINGRESP automatically before the keep-alive interval expires.
+
 # Stable release v19.2.0
 ## Date: 13/10/2021
 

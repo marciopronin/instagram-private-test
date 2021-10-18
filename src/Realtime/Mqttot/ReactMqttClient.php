@@ -328,6 +328,20 @@ class ReactMqttClient extends EventEmitter
     }
 
     /**
+     * Sends a ping.
+     *
+     * @return ExtendedPromiseInterface
+     */
+    public function sendPing()
+    {
+        if (!$this->_isConnected) {
+            return new RejectedPromise(new LogicException('The client is not connected.'));
+        }
+
+        return $this->_startFlow($this->_flowFactory->buildOutgoingPingFlow());
+    }
+
+    /**
      * Publishes a message.
      *
      * @param Message $message

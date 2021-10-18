@@ -475,4 +475,12 @@ class Realtime implements EventEmitterInterface
     {
         return $this->_client->isConnected();
     }
+
+    /**
+     * Sends a ping.
+     */
+    public function sendPing()
+    {
+        $this->_client->sendPing();
+    }
 }

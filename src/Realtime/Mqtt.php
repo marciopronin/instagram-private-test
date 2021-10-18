@@ -332,6 +332,15 @@ class Mqtt implements PersistentInterface
     }
 
     /**
+     * Sends a ping.
+     */
+    public function sendPing()
+    {
+        $this->_logger->info(sprintf('Sending ping to broker.'));
+        $this->_client->sendPing();
+    }
+
+    /**
      * Send the command.
      *
      * @param CommandInterface $command

@@ -1,3 +1,10 @@
+# Stable release v19.3.1
+## Date: 20/10/2021
+
+### New features
+
+- **Wiki:** Added SSL Pinning bypass script
+
 # Stable release v19.3.0
 ## Date: 18/10/2021
 

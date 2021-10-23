@@ -1,3 +1,10 @@
+# Stable release v19.3.2
+## Date: 23/10/2021
+
+### New features
+
+- **Instagram:** Update login flow
+
 # Stable release v19.3.1
 ## Date: 20/10/2021
 

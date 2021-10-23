@@ -2598,6 +2598,8 @@ class Instagram implements ExperimentsInterface
                         } else {
                             throw $e;
                         }
+                    } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
+                        // This can have EmptyResponse, and that's ok.
                     }
                     $feed = $this->timeline->getTimelineFeed(null, [
                         'is_pull_to_refresh' => $isSessionExpired ? null : mt_rand(1, 3) < 3,

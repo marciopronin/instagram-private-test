@@ -1,3 +1,18 @@
+# Stable release v19.3.3
+## Date: 24/10/2021
+
+### Updates and fixes
+
+- **Composer:** Update `composer.json`
+
+Code has been reviewed and its dependencies to be able to work with the new PHP8. If you are going to use PHP8 for this project, you will need to run the following command when running composer:
+
+```
+composer update --ignore-platform-req=php
+```
+
+The argument `--ignore-platform-req=php` is used to overide some specifications in other dependencies such as `valga/fbns-react`. The code on the dependencies were reviewed and runs perfectly on the new PHP8 versions, so it is safe to use this argument.
+
 # Stable release v19.3.2
 ## Date: 23/10/2021
 

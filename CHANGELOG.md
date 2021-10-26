@@ -1,3 +1,10 @@
+# Stable release v19.3.4
+## Date: 26/10/2021
+
+### Examples
+
+- **RealtimeHttp:** This example has been update to provide more control over the exceptions and errors caused within ReactPHP package.
+
 # Stable release v19.3.3
 ## Date: 24/10/2021
 

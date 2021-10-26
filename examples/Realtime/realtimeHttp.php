@@ -317,6 +317,12 @@ class RealtimeHttpServer
         $this->_logger->info(sprintf('Listening on http://%s', $socket->getAddress()));
         // Bind HTTP server on server socket.
         $this->_server = new \React\Http\Server([$this, 'onHttpRequest']);
+        $this->_server->on('error', function (Exception $e) {
+            if ($e->getPrevious() !== null) {
+                echo 'Error message: '.$e->getPrevious()->getMessage().PHP_EOL;
+                echo 'Stacktrace: '.$e->getPrevious()->getTraceAsString().PHP_EOL;
+            }
+        });
         $this->_server->listen($socket);
     }
 }

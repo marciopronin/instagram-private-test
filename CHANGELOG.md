@@ -1,3 +1,12 @@
+# Stable release v19.3.5
+## Date: 04/11/2021
+
+### Updates and fixes
+
+This new version provides the capability of setting story link stickers for everyone. It also let you upload IGTV videos with an empty title. Events will be updated soon after a full review on the complete app is completed.
+
+**Constants:** Update to `211.0.0.33.117`.
+
 # Stable release v19.3.4
 ## Date: 26/10/2021
 

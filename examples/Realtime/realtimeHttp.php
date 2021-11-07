@@ -121,7 +121,12 @@ class RealtimeHttpServer
         $this->_logger = $logger;
         $this->_contexts = [];
 
-        $inboxResponse = $instagram->direct->getInbox();
+        try {
+            $inboxResponse = $instagram->direct->getInbox();
+        } catch (InstagramAPI\Exception\NetworkException $e) {
+            echo 'Error: NetworkException';
+            exit();
+        }
 
         $rtc = new \InstagramAPI\Realtime($this->_instagram, $this->_loop, $this->_logger);
         $this->_rtc = $rtc;

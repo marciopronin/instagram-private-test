@@ -1,3 +1,14 @@
+# Stable release v19.3.6
+## Date: 07/11/2021
+
+### Updates and fixes
+
+**Realtime:** Errors occured in RTC will be emitted to the script for better exception management.
+
+### Examples
+
+- **RealtimeHttp:** This example has been update to provide more control over the exceptions and errors.
+
 # Stable release v19.3.5
 ## Date: 04/11/2021
 

@@ -406,7 +406,8 @@ class Mqtt implements PersistentInterface
         $client = new ReactMqttClient($this->_connector, $this->_loop, null, new Mqtt\StreamParser());
 
         $client->on('error', function (\Exception $e) {
-            $this->_logger->error($e->getMessage());
+            $this->_target->emit('error', [$e]);
+            //$this->_logger->error($e->getMessage());
         });
         $client->on('warning', function (\Exception $e) {
             $this->_logger->warning($e->getMessage());

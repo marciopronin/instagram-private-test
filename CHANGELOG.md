@@ -1,3 +1,14 @@
+# Stable release v19.3.7
+## Date: 08/11/2021
+
+### Updates and fixes
+
+**Constants:** Updated iOS version to 212.1.0.25.118
+
+### Examples
+
+- **General:** Added example `getRecentMediaFromLocationSearch`
+
 # Stable release v19.3.6
 ## Date: 07/11/2021
 

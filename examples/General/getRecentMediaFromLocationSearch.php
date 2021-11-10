@@ -77,7 +77,6 @@ try {
         }
     }
 
-
     // Send restults from search.
     $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
     $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_places');
@@ -186,7 +185,7 @@ try {
             }
         }
     }
-    
+
     $ig->event->forceSendBatch();
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";

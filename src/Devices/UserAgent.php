@@ -59,14 +59,16 @@ class UserAgent
     /**
      * Generates a User Agent string from a DeviceInterface.
      *
-     * @param string      $userLocale The user's locale, such as "en_US".
-     * @param string|null $iosModel   Custom iOS Model.
-     * @param string|null $iosDpi     Custom iOS DPI.
+     * @param string      $userLocale     The user's locale, such as "en_US".
+     * @param string      $acceptLanguage The user's accept language, such as "en-US".
+     * @param string|null $iosModel       Custom iOS Model.
+     * @param string|null $iosDpi         Custom iOS DPI.
      *
      * @return string
      */
     public static function buildiOSUserAgent(
         $userLocale,
+        $acceptLanguage,
         $iosModel = null,
         $iosDpi = null)
     {
@@ -77,7 +79,7 @@ class UserAgent
             Constants::IOS_VERSION,
             ($iosModel === null) ? Constants::IOS_MODEL : $iosModel,
             $userLocale,
-            $userLocale,
+            $acceptLanguage,
             ($iosDpi === null) ? Constants::IOS_DPI : $iosDpi,
             Constants::IG_IOS_VERSION_CODE
         );

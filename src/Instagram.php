@@ -2037,6 +2037,7 @@ class Instagram implements ExperimentsInterface
             Constants::IG_VERSION,
             Constants::VERSION_CODE,
             $this->getLocale(),
+            $this->getAcceptLanguage(),
             $savedDeviceString,
             $autoFallback,
             $this->getPlatform(),

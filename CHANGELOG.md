@@ -1,3 +1,11 @@
+# Stable release v19.3.8
+## Date: 10/11/2021
+
+### Updates and fixes
+
+**Instagram:** Update iOS user agent.
+**Devices & User Agent:** Update iOS user agent.
+
 # Stable release v19.3.7
 ## Date: 08/11/2021
 

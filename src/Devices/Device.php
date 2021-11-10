@@ -100,16 +100,17 @@ class Device implements DeviceInterface
     /**
      * Constructor.
      *
-     * @param string      $appVersion   Instagram client app version.
-     * @param string      $versionCode  Instagram client app version code.
-     * @param string      $userLocale   The user's locale, such as "en_US".
-     * @param string|null $deviceString (optional) The device string to attempt
-     *                                  to construct from. If NULL or not a good
-     *                                  device, we'll use a random good device.
-     * @param bool        $autoFallback (optional) Toggle automatic fallback.
-     * @param string      $platform     Platform used for requests.
-     * @param string|null $iosModel     Custom iOS Model.
-     * @param string|null $iosDpi       Custom iOS DPI.
+     * @param string      $appVersion     Instagram client app version.
+     * @param string      $versionCode    Instagram client app version code.
+     * @param string      $userLocale     The user's locale, such as "en_US".
+     * @param string      $acceptLanguage The user's accept language, such as "en-US".
+     * @param string|null $deviceString   (optional) The device string to attempt
+     *                                    to construct from. If NULL or not a good
+     *                                    device, we'll use a random good device.
+     * @param bool        $autoFallback   (optional) Toggle automatic fallback.
+     * @param string      $platform       Platform used for requests.
+     * @param string|null $iosModel       Custom iOS Model.
+     * @param string|null $iosDpi         Custom iOS DPI.
      *
      * @throws \RuntimeException If fallback is disabled and device is invalid.
      */
@@ -117,6 +118,7 @@ class Device implements DeviceInterface
         $appVersion,
         $versionCode,
         $userLocale,
+        $acceptLanguage,
         $deviceString = null,
         $autoFallback = true,
         $platform = 'android',
@@ -126,6 +128,7 @@ class Device implements DeviceInterface
         $this->_appVersion = $appVersion;
         $this->_versionCode = $versionCode;
         $this->_userLocale = $userLocale;
+        $this->_acceptLanguage = $acceptLanguage;
         $this->_iosModel = $iosModel;
         $this->_iosDpi = $iosDpi;
 
@@ -154,7 +157,7 @@ class Device implements DeviceInterface
     {
         if ($platform === 'ios') {
             // Build our user agent.
-            $this->_userAgent = UserAgent::buildiOSUserAgent($this->_userLocale, $this->_iosModel, $this->_iosDpi);
+            $this->_userAgent = UserAgent::buildiOSUserAgent($this->_userLocale, $this->_acceptLanguage, $this->_iosModel, $this->_iosDpi);
             $this->_fbUserAgents = [];
             $this->_deviceString = $platform;
 

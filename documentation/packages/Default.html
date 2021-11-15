@@ -97,6 +97,8 @@
             
                             <dt><a href="../classes/InstagramAPI-AutoPropertyMapper.html"><abbr title="\InstagramAPI\AutoPropertyMapper">AutoPropertyMapper</abbr></a></dt>
                 <dd>Automatically maps JSON data onto PHP objects with virtual functions.</dd>
+                            <dt><a href="../classes/InstagramAPI-Client.html"><abbr title="\InstagramAPI\Client">Client</abbr></a></dt>
+                <dd>This class handles core API network communication.</dd>
                             <dt><a href="../classes/InstagramAPI-Constants.html"><abbr title="\InstagramAPI\Constants">Constants</abbr></a></dt>
                 <dd></dd>
                             <dt><a href="../classes/InstagramAPI-Debug.html"><abbr title="\InstagramAPI\Debug">Debug</abbr></a></dt>
@@ -190,6 +192,8 @@ to be processed by Instagram&#039;s server.</dd>
 because of too many requests. You must slow yourself down!</dd>
                             <dt><a href="../classes/InstagramAPI-Exception-UploadFailedException.html"><abbr title="\InstagramAPI\Exception\UploadFailedException">UploadFailedException</abbr></a></dt>
                 <dd>Used when we know for a fact that our uploads failed.</dd>
+                            <dt><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></dt>
+                <dd>Instagram&#039;s Private API.</dd>
                             <dt><a href="../classes/InstagramAPI-InstagramID.html"><abbr title="\InstagramAPI\InstagramID">InstagramID</abbr></a></dt>
                 <dd>Class for converting media IDs to/from Instagram&#039;s shortcode system.</dd>
                             <dt><a href="../classes/InstagramAPI-Media-Constraints-AlbumConstraints.html"><abbr title="\InstagramAPI\Media\Constraints\AlbumConstraints">AlbumConstraints</abbr></a></dt>
@@ -261,6 +265,8 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd></dd>
                             <dt><a href="../classes/InstagramAPI-Realtime-Command-Direct-SendReaction.html"><abbr title="\InstagramAPI\Realtime\Command\Direct\SendReaction">SendReaction</abbr></a></dt>
                 <dd></dd>
+                            <dt><a href="../classes/InstagramAPI-Realtime-Command-Direct-SendStory.html"><abbr title="\InstagramAPI\Realtime\Command\Direct\SendStory">SendStory</abbr></a></dt>
+                <dd></dd>
                             <dt><a href="../classes/InstagramAPI-Realtime-Command-Direct-SendText.html"><abbr title="\InstagramAPI\Realtime\Command\Direct\SendText">SendText</abbr></a></dt>
                 <dd></dd>
                             <dt><a href="../classes/InstagramAPI-Realtime-Command-Direct-ShareItem.html"><abbr title="\InstagramAPI\Realtime\Command\Direct\ShareItem">ShareItem</abbr></a></dt>
@@ -310,6 +316,8 @@ because of too many requests. You must slow yourself down!</dd>
                             <dt><a href="../classes/InstagramAPI-Realtime-Mqttot-ReactMqttClient.html"><abbr title="\InstagramAPI\Realtime\Mqttot\ReactMqttClient">ReactMqttClient</abbr></a></dt>
                 <dd>Connects to a MQTT broker and subscribes to topics or publishes messages.</dd>
                             <dt><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeConnectFlow.html"><abbr title="\InstagramAPI\Realtime\Mqttot\RealtimeConnectFlow">RealtimeConnectFlow</abbr></a></dt>
+                <dd></dd>
+                            <dt><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeConnection.html"><abbr title="\InstagramAPI\Realtime\Mqttot\RealtimeConnection">RealtimeConnection</abbr></a></dt>
                 <dd></dd>
                             <dt><a href="../classes/InstagramAPI-Realtime-Mqttot-RealtimeConnectPacket.html"><abbr title="\InstagramAPI\Realtime\Mqttot\RealtimeConnectPacket">RealtimeConnectPacket</abbr></a></dt>
                 <dd></dd>
@@ -361,6 +369,9 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd></dd>
                             <dt><a href="../classes/InstagramAPI-Realtime-Subscription-SkywalkerSubscription.html"><abbr title="\InstagramAPI\Realtime\Subscription\SkywalkerSubscription">SkywalkerSubscription</abbr></a></dt>
                 <dd></dd>
+                            <dt><a href="../classes/InstagramAPI-Realtime.html"><abbr title="\InstagramAPI\Realtime">Realtime</abbr></a></dt>
+                <dd>The following events are emitted:
+ - live-started - New live broadcast has been started.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Account.html"><abbr title="\InstagramAPI\Request\Account">Account</abbr></a></dt>
                 <dd>Account-related functions, such as profile editing and security.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Business.html"><abbr title="\InstagramAPI\Request\Business">Business</abbr></a></dt>
@@ -369,16 +380,26 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>Functions for managing Checkpoint.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Collection.html"><abbr title="\InstagramAPI\Request\Collection">Collection</abbr></a></dt>
                 <dd>Functions related to creating and managing collections of your saved media.</dd>
+                            <dt><a href="../classes/InstagramAPI-Request-Creative.html"><abbr title="\InstagramAPI\Request\Creative">Creative</abbr></a></dt>
+                <dd>Functions related to Instagram&#039;s &quot;creative assets&quot;, such as stickers.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Direct.html"><abbr title="\InstagramAPI\Request\Direct">Direct</abbr></a></dt>
                 <dd>Instagram Direct messaging functions.</dd>
+                            <dt><a href="../classes/InstagramAPI-Request-Discover.html"><abbr title="\InstagramAPI\Request\Discover">Discover</abbr></a></dt>
+                <dd>General content discovery functions which don&#039;t fit into any better groups.</dd>
+                            <dt><a href="../classes/InstagramAPI-Request-Event.html"><abbr title="\InstagramAPI\Request\Event">Event</abbr></a></dt>
+                <dd>Functions related to Instagram&#039;s logging events.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Hashtag.html"><abbr title="\InstagramAPI\Request\Hashtag">Hashtag</abbr></a></dt>
                 <dd>Functions related to finding and exploring hashtags.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Highlight.html"><abbr title="\InstagramAPI\Request\Highlight">Highlight</abbr></a></dt>
                 <dd>Functions related to creating and managing highlights of your media.</dd>
+                            <dt><a href="../classes/InstagramAPI-Request-Internal.html"><abbr title="\InstagramAPI\Request\Internal">Internal</abbr></a></dt>
+                <dd>Collection of various INTERNAL library functions.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Live.html"><abbr title="\InstagramAPI\Request\Live">Live</abbr></a></dt>
                 <dd>Functions for exploring and interacting with live broadcasts.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Location.html"><abbr title="\InstagramAPI\Request\Location">Location</abbr></a></dt>
                 <dd>Functions related to finding and exploring locations.</dd>
+                            <dt><a href="../classes/InstagramAPI-Request-Media.html"><abbr title="\InstagramAPI\Request\Media">Media</abbr></a></dt>
+                <dd>Functions for interacting with media items from yourself and others.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Metadata-Internal.html"><abbr title="\InstagramAPI\Request\Metadata\Internal">Internal</abbr></a></dt>
                 <dd></dd>
                             <dt><a href="../classes/InstagramAPI-Request-People.html"><abbr title="\InstagramAPI\Request\People">People</abbr></a></dt>
@@ -389,6 +410,8 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>Base class for grouping multiple related request functions.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Shopping.html"><abbr title="\InstagramAPI\Request\Shopping">Shopping</abbr></a></dt>
                 <dd>Functions related to Shopping and catalogs.</dd>
+                            <dt><a href="../classes/InstagramAPI-Request-Story.html"><abbr title="\InstagramAPI\Request\Story">Story</abbr></a></dt>
+                <dd>Functions for managing your story and interacting with other stories.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Timeline.html"><abbr title="\InstagramAPI\Request\Timeline">Timeline</abbr></a></dt>
                 <dd>Functions for managing your timeline and interacting with other timelines.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-TV.html"><abbr title="\InstagramAPI\Request\TV">TV</abbr></a></dt>
@@ -397,6 +420,8 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>Functions related to managing and exploring user tags in media.</dd>
                             <dt><a href="../classes/InstagramAPI-Request-Web.html"><abbr title="\InstagramAPI\Request\Web">Web</abbr></a></dt>
                 <dd>Functions related to Instagram Web.</dd>
+                            <dt><a href="../classes/InstagramAPI-Request.html"><abbr title="\InstagramAPI\Request">Request</abbr></a></dt>
+                <dd>Bridge between Instagram Client calls, the object mapper &amp; response objects.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-AboutThisAccountResponse.html"><abbr title="\InstagramAPI\Response\AboutThisAccountResponse">AboutThisAccountResponse</abbr></a></dt>
                 <dd>AboutThisAccountResponse.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-AccountAccessToolResponse.html"><abbr title="\InstagramAPI\Response\AccountAccessToolResponse">AccountAccessToolResponse</abbr></a></dt>
@@ -595,6 +620,8 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>HighlightFeedResponse.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-InsightsResponse.html"><abbr title="\InstagramAPI\Response\InsightsResponse">InsightsResponse</abbr></a></dt>
                 <dd>InsightsResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-LauncherSyncResponse.html"><abbr title="\InstagramAPI\Response\LauncherSyncResponse">LauncherSyncResponse</abbr></a></dt>
+                <dd>LauncherSyncResponse.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-LeastInteractedWithResponse.html"><abbr title="\InstagramAPI\Response\LeastInteractedWithResponse">LeastInteractedWithResponse</abbr></a></dt>
                 <dd>LeastInteractedWithResponse.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-LikeFeedResponse.html"><abbr title="\InstagramAPI\Response\LikeFeedResponse">LikeFeedResponse</abbr></a></dt>
@@ -679,12 +706,16 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>ArchivedStoriesFeedItem.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-Args.html"><abbr title="\InstagramAPI\Response\Model\Args">Args</abbr></a></dt>
                 <dd>Args.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-AssetModel.html"><abbr title="\InstagramAPI\Response\Model\AssetModel">AssetModel</abbr></a></dt>
+                <dd>AssetModel.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-Attribution.html"><abbr title="\InstagramAPI\Response\Model\Attribution">Attribution</abbr></a></dt>
                 <dd>Attribution.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-AudioContext.html"><abbr title="\InstagramAPI\Response\Model\AudioContext">AudioContext</abbr></a></dt>
                 <dd>AudioContext.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-Aymf.html"><abbr title="\InstagramAPI\Response\Model\Aymf">Aymf</abbr></a></dt>
                 <dd>Aymf.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-AymfItem.html"><abbr title="\InstagramAPI\Response\Model\AymfItem">AymfItem</abbr></a></dt>
+                <dd>AymfItem.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-Badging.html"><abbr title="\InstagramAPI\Response\Model\Badging">Badging</abbr></a></dt>
                 <dd>Badging.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-BiographyEntities.html"><abbr title="\InstagramAPI\Response\Model\BiographyEntities">BiographyEntities</abbr></a></dt>
@@ -749,6 +780,8 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>ChainingInfo.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-ChainingSuggestion.html"><abbr title="\InstagramAPI\Response\Model\ChainingSuggestion">ChainingSuggestion</abbr></a></dt>
                 <dd>ChainingSuggestion.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-Challenge.html"><abbr title="\InstagramAPI\Response\Model\Challenge">Challenge</abbr></a></dt>
+                <dd>Challenge.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-ChallengeEntryData.html"><abbr title="\InstagramAPI\Response\Model\ChallengeEntryData">ChallengeEntryData</abbr></a></dt>
                 <dd>ChallengeEntryData.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-ChallengeFields.html"><abbr title="\InstagramAPI\Response\Model\ChallengeFields">ChallengeFields</abbr></a></dt>
@@ -893,6 +926,8 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>Insights.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-IOSLinks.html"><abbr title="\InstagramAPI\Response\Model\IOSLinks">IOSLinks</abbr></a></dt>
                 <dd>IOSLinks.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-Item.html"><abbr title="\InstagramAPI\Response\Model\Item">Item</abbr></a></dt>
+                <dd>Item.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-LayoutContent.html"><abbr title="\InstagramAPI\Response\Model\LayoutContent">LayoutContent</abbr></a></dt>
                 <dd>LayoutContent.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-Link.html"><abbr title="\InstagramAPI\Response\Model\Link">Link</abbr></a></dt>
@@ -1075,6 +1110,8 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>Suggested.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-SuggestedUsers.html"><abbr title="\InstagramAPI\Response\Model\SuggestedUsers">SuggestedUsers</abbr></a></dt>
                 <dd>SuggestedUsers.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-Suggestion.html"><abbr title="\InstagramAPI\Response\Model\Suggestion">Suggestion</abbr></a></dt>
+                <dd>Suggestion.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-SuggestionCard.html"><abbr title="\InstagramAPI\Response\Model\SuggestionCard">SuggestionCard</abbr></a></dt>
                 <dd>SuggestionCard.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-SummaryPromotions.html"><abbr title="\InstagramAPI\Response\Model\SummaryPromotions">SummaryPromotions</abbr></a></dt>
@@ -1135,6 +1172,8 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>Container for unpredictable data-keys with Reel object values.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-UnpredictableKeys-UserUnpredictableContainer.html"><abbr title="\InstagramAPI\Response\Model\UnpredictableKeys\UserUnpredictableContainer">UserUnpredictableContainer</abbr></a></dt>
                 <dd>Container for unpredictable data-keys with User object values.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-User.html"><abbr title="\InstagramAPI\Response\Model\User">User</abbr></a></dt>
+                <dd>User.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-UserCard.html"><abbr title="\InstagramAPI\Response\Model\UserCard">UserCard</abbr></a></dt>
                 <dd>UserCard.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-Model-UserPresence.html"><abbr title="\InstagramAPI\Response\Model\UserPresence">UserPresence</abbr></a></dt>
@@ -1363,6 +1402,10 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>Persistent storage backend which uses a SQLite database file.</dd>
                             <dt><a href="../classes/InstagramAPI-Settings-StorageHandler.html"><abbr title="\InstagramAPI\Settings\StorageHandler">StorageHandler</abbr></a></dt>
                 <dd>Advanced, modular settings storage engine.</dd>
+                            <dt><a href="../classes/InstagramAPI-Signatures.html"><abbr title="\InstagramAPI\Signatures">Signatures</abbr></a></dt>
+                <dd></dd>
+                            <dt><a href="../classes/InstagramAPI-Utils.html"><abbr title="\InstagramAPI\Utils">Utils</abbr></a></dt>
+                <dd></dd>
                             <dt><a href="../classes/InstagramAPI-Request-Music.html"><abbr title="\InstagramAPI\Request\Music">Music</abbr></a></dt>
                 <dd>Functions related to music and lyrics.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-GetLyricsResponse.html"><abbr title="\InstagramAPI\Response\GetLyricsResponse">GetLyricsResponse</abbr></a></dt>
@@ -1415,6 +1458,44 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>Clip.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-MonetizationProductsEligibilityDataResponse.html"><abbr title="\InstagramAPI\Response\MonetizationProductsEligibilityDataResponse">MonetizationProductsEligibilityDataResponse</abbr></a></dt>
                 <dd>MonetizationProductsEligibilityDataResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Request-Reel.html"><abbr title="\InstagramAPI\Request\Reel">Reel</abbr></a></dt>
+                <dd>Functions related to Reels also known internally as clips.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-UserReelsResponse.html"><abbr title="\InstagramAPI\Response\UserReelsResponse">UserReelsResponse</abbr></a></dt>
+                <dd>UserReelsResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-AllUserSeriesResponse.html"><abbr title="\InstagramAPI\Response\AllUserSeriesResponse">AllUserSeriesResponse</abbr></a></dt>
+                <dd>AllUserSeriesResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-FundraiserInfoResponse.html"><abbr title="\InstagramAPI\Response\FundraiserInfoResponse">FundraiserInfoResponse</abbr></a></dt>
+                <dd>FundraiserInfoResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-GetPostLiveThumbnailsResponse.html"><abbr title="\InstagramAPI\Response\GetPostLiveThumbnailsResponse">GetPostLiveThumbnailsResponse</abbr></a></dt>
+                <dd>GetPostLiveThumbnailsResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-CreateSerieResponse.html"><abbr title="\InstagramAPI\Response\CreateSerieResponse">CreateSerieResponse</abbr></a></dt>
+                <dd>CreateSerieResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Media-PDQ-PDQHash.html"><abbr title="\InstagramAPI\Media\PDQ\PDQHash">PDQHash</abbr></a></dt>
+                <dd>A PDQ hash is simply 256 bits. The only string representation is 64 hex
+digits. Bit-ordering is a concern, but is a non-issue as long as the
+to-string and from-string methods in this class are consistent.</dd>
+                            <dt><a href="../classes/InstagramAPI-Media-PDQ-PDQHasher.html"><abbr title="\InstagramAPI\Media\PDQ\PDQHasher">PDQHasher</abbr></a></dt>
+                <dd></dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-Checkpoint-AcknowledgeFormException.html"><abbr title="\InstagramAPI\Exception\Checkpoint\AcknowledgeFormException">AcknowledgeFormException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-Checkpoint-VerifyEmailCodeFormException.html"><abbr title="\InstagramAPI\Exception\Checkpoint\VerifyEmailCodeFormException">VerifyEmailCodeFormException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-ChainingUsersResponse.html"><abbr title="\InstagramAPI\Response\ChainingUsersResponse">ChainingUsersResponse</abbr></a></dt>
+                <dd>ChainingUsersResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-ChainingUser.html"><abbr title="\InstagramAPI\Response\Model\ChainingUser">ChainingUser</abbr></a></dt>
+                <dd>ChainingUser.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-CameraModelsResponse.html"><abbr title="\InstagramAPI\Response\CameraModelsResponse">CameraModelsResponse</abbr></a></dt>
+                <dd>CameraModelsResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-CameraModels.html"><abbr title="\InstagramAPI\Response\Model\CameraModels">CameraModels</abbr></a></dt>
+                <dd>Automatically maps JSON data onto PHP objects with virtual functions.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-SegmentationModels.html"><abbr title="\InstagramAPI\Response\Model\SegmentationModels">SegmentationModels</abbr></a></dt>
+                <dd>SegmentationModels.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-SegmentationModelsResponse.html"><abbr title="\InstagramAPI\Response\SegmentationModelsResponse">SegmentationModelsResponse</abbr></a></dt>
+                <dd>SegmentationModelsResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-Checkpoint-VerifySMSCodeFormException.html"><abbr title="\InstagramAPI\Exception\Checkpoint\VerifySMSCodeFormException">VerifySMSCodeFormException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
+                            <dt><a href="../classes/InstagramAPI-Exception-Checkpoint-LegacyForceSetNewPasswordFormException.html"><abbr title="\InstagramAPI\Exception\Checkpoint\LegacyForceSetNewPasswordFormException">LegacyForceSetNewPasswordFormException</abbr></a></dt>
+                <dd>All server-response API related exceptions must derive from this class.</dd>
                             <dt><a href="../classes/InstagramAPI-Exception-Checkpoint-ReviewContactPointChangeFormException.html"><abbr title="\InstagramAPI\Exception\Checkpoint\ReviewContactPointChangeFormException">ReviewContactPointChangeFormException</abbr></a></dt>
                 <dd>All server-response API related exceptions must derive from this class.</dd>
                             <dt><a href="../classes/InstagramAPI-Response-HasInteropUpgradedResponse.html"><abbr title="\InstagramAPI\Response\HasInteropUpgradedResponse">HasInteropUpgradedResponse</abbr></a></dt>
@@ -1439,6 +1520,20 @@ because of too many requests. You must slow yourself down!</dd>
                 <dd>TwoFactorNotificationStatusResponse.</dd>
                             <dt><a href="../classes/InstagramAPI-Media-Constraints-ReelsConstraints.html"><abbr title="\InstagramAPI\Media\Constraints\ReelsConstraints">ReelsConstraints</abbr></a></dt>
                 <dd>Instagram&#039;s Reels media constraints.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-ConfigLauncher.html"><abbr title="\InstagramAPI\Response\Model\ConfigLauncher">ConfigLauncher</abbr></a></dt>
+                <dd>ConfigLauncher.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-LauncherSyncParam.html"><abbr title="\InstagramAPI\Response\Model\LauncherSyncParam">LauncherSyncParam</abbr></a></dt>
+                <dd>LauncherSyncParam.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-StickerTray.html"><abbr title="\InstagramAPI\Response\Model\StickerTray">StickerTray</abbr></a></dt>
+                <dd>StickerTray.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-UnpredictableKeys-LauncherSyncParamsUnpredictableContainer.html"><abbr title="\InstagramAPI\Response\Model\UnpredictableKeys\LauncherSyncParamsUnpredictableContainer">LauncherSyncParamsUnpredictableContainer</abbr></a></dt>
+                <dd>Container for unpredictable data-keys with FriendshipStatus object values.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-Model-UnpredictableKeys-LauncherSyncUnpredictableContainer.html"><abbr title="\InstagramAPI\Response\Model\UnpredictableKeys\LauncherSyncUnpredictableContainer">LauncherSyncUnpredictableContainer</abbr></a></dt>
+                <dd>Container for unpredictable data-keys with FriendshipStatus object values.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-PrivateStoriesMembersResponse.html"><abbr title="\InstagramAPI\Response\PrivateStoriesMembersResponse">PrivateStoriesMembersResponse</abbr></a></dt>
+                <dd>PrivateStoriesMembersResponse.</dd>
+                            <dt><a href="../classes/InstagramAPI-Response-StickerTrayResponse.html"><abbr title="\InstagramAPI\Response\StickerTrayResponse">StickerTrayResponse</abbr></a></dt>
+                <dd>StickerTrayResponse.</dd>
             
                             <dt><a href="../classes/InstagramAPI-React-PersistentTrait.html"><abbr title="\InstagramAPI\React\PersistentTrait">PersistentTrait</abbr></a></dt>
                 <dd></dd>

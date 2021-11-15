@@ -222,6 +222,11 @@
                     <td class="phpdocumentor-cell">Check if client is connected.</td>
                     <td class="phpdocumentor-cell">mixed</td>
                 </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime.html#method_sendPing">sendPing()</a></th>
+                    <td class="phpdocumentor-cell">Sends a ping.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
                                             </table>
 
         
@@ -976,7 +981,7 @@ functions such as Location::search().</p></section>
                     <span class="phpdocumentor-signature__argument__name">$hashtag</span>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
-                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Hashtag to share.</p></section></dd>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Hashtag to share. Including #.</p></section></dd>
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$options</span>
                     : <span class="phpdocumentor-signature__argument__return-type">array</span>
@@ -1004,7 +1009,7 @@ functions such as Location::search().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime.php"><a href="../files/src-realtime.html"><abbr title="src/Realtime.php">Realtime.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">394</span>
+        <span class="phpdocumentor-element-found-in__line">395</span>
     </aside>
         <p class="phpdocumentor-summary">Sends reaction to a given direct thread item.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1074,7 +1079,7 @@ functions such as Location::search().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime.php"><a href="../files/src-realtime.html"><abbr title="src/Realtime.php">Realtime.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">429</span>
+        <span class="phpdocumentor-element-found-in__line">430</span>
     </aside>
         <p class="phpdocumentor-summary">Removes reaction to a given direct thread item.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1144,7 +1149,7 @@ functions such as Location::search().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime.php"><a href="../files/src-realtime.html"><abbr title="src/Realtime.php">Realtime.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">459</span>
+        <span class="phpdocumentor-element-found-in__line">460</span>
     </aside>
         <p class="phpdocumentor-summary">Receive offline messages starting from the sequence ID.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1194,12 +1199,41 @@ functions such as Location::search().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime.php"><a href="../files/src-realtime.html"><abbr title="src/Realtime.php">Realtime.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">473</span>
+        <span class="phpdocumentor-element-found-in__line">474</span>
     </aside>
         <p class="phpdocumentor-summary">Check if client is connected.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">isConnected</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_sendPing"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">sendPing()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime.php"><a href="../files/src-realtime.html"><abbr title="src/Realtime.php">Realtime.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">482</span>
+    </aside>
+        <p class="phpdocumentor-summary">Sends a ping.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">sendPing</span>(
                 )
         : <span class="phpdocumentor-signature__response_type">mixed</span>
     </code>

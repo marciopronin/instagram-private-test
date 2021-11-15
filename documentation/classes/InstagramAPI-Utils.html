@@ -264,6 +264,11 @@
                     <td class="phpdocumentor-cell">mixed</td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Utils.html#method_throwIfInvalidStoryLinkSticker">throwIfInvalidStoryLinkSticker()</a></th>
+                    <td class="phpdocumentor-cell">Verifies if a story link sticker is valid.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Utils.html#method_throwIfInvalidStoryHashtags">throwIfInvalidStoryHashtags()</a></th>
                     <td class="phpdocumentor-cell">Verifies if a caption is valid for a hashtag and verifies an array of hashtags.</td>
                     <td class="phpdocumentor-cell">mixed</td>
@@ -1934,6 +1939,57 @@ accept anything for checking purposes).</p></section></dd>
         <span class="phpdocumentor-signature__response_type">mixed</span>
             
 </article>
+                                    <a id="method_throwIfInvalidStoryLinkSticker"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                    phpdocumentor-element--static                    "
+>
+    <h4 class="phpdocumentor-method__name">throwIfInvalidStoryLinkSticker()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1289</span>
+    </aside>
+        <p class="phpdocumentor-summary">Verifies if a story link sticker is valid.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                        <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">throwIfInvalidStoryLinkSticker</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$linkSticker</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array[]</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$linkSticker</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array[]</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Array with link sticker key-value pairs.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"><p>If it's missing keys or has invalid values.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
                                     <a id="method_throwIfInvalidStoryHashtags"></a>
 <article
         class="
@@ -1945,7 +2001,7 @@ accept anything for checking purposes).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1291</span>
+        <span class="phpdocumentor-element-found-in__line">1346</span>
     </aside>
         <p class="phpdocumentor-summary">Verifies if a caption is valid for a hashtag and verifies an array of hashtags.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2006,7 +2062,7 @@ or if any tags are invalid.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1342</span>
+        <span class="phpdocumentor-element-found-in__line">1397</span>
     </aside>
         <p class="phpdocumentor-summary">Verifies an attached media.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2057,7 +2113,7 @@ or if any tags are invalid.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1378</span>
+        <span class="phpdocumentor-element-found-in__line">1433</span>
     </aside>
         <p class="phpdocumentor-summary">Verifies a story sticker&#039;s placement parameters.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2121,7 +2177,7 @@ of those parameters and ensures that the sticker placement is valid.</p></sectio
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1420</span>
+        <span class="phpdocumentor-element-found-in__line">1475</span>
     </aside>
         <p class="phpdocumentor-summary">Checks and validates a media item&#039;s type.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2174,7 +2230,7 @@ of those parameters and ensures that the sticker placement is valid.</p></sectio
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1439</span>
+        <span class="phpdocumentor-element-found-in__line">1494</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2223,7 +2279,7 @@ of those parameters and ensures that the sticker placement is valid.</p></sectio
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1454</span>
+        <span class="phpdocumentor-element-found-in__line">1509</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2272,7 +2328,7 @@ of those parameters and ensures that the sticker placement is valid.</p></sectio
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1486</span>
+        <span class="phpdocumentor-element-found-in__line">1541</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -2312,7 +2368,7 @@ of those parameters and ensures that the sticker placement is valid.</p></sectio
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1547</span>
+        <span class="phpdocumentor-element-found-in__line">1602</span>
     </aside>
         <p class="phpdocumentor-summary">Creates a folder if missing, or ensures that it is writable.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2354,7 +2410,7 @@ of those parameters and ensures that the sticker placement is valid.</p></sectio
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1568</span>
+        <span class="phpdocumentor-element-found-in__line">1623</span>
     </aside>
         <p class="phpdocumentor-summary">Recursively deletes a file/directory tree.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2405,7 +2461,7 @@ of those parameters and ensures that the sticker placement is valid.</p></sectio
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1612</span>
+        <span class="phpdocumentor-element-found-in__line">1667</span>
     </aside>
         <p class="phpdocumentor-summary">Atomic filewriter.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2470,7 +2526,7 @@ suffix for the temporary file.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1649</span>
+        <span class="phpdocumentor-element-found-in__line">1704</span>
     </aside>
         <p class="phpdocumentor-summary">Creates an empty temp file with a unique filename.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2530,7 +2586,7 @@ suffix for the temporary file.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1681</span>
+        <span class="phpdocumentor-element-found-in__line">1736</span>
     </aside>
         <p class="phpdocumentor-summary">Closes a file pointer if it&#039;s open.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2576,7 +2632,7 @@ The normal fclose() would give an annoying warning in that scenario.</p></sectio
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1715</span>
+        <span class="phpdocumentor-element-found-in__line">1770</span>
     </aside>
         <p class="phpdocumentor-summary">Checks if a URL has valid &quot;web&quot; syntax.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2631,7 +2687,7 @@ too many now to catch them all and new ones appear constantly).</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1731</span>
+        <span class="phpdocumentor-element-found-in__line">1786</span>
     </aside>
         <p class="phpdocumentor-summary">Extract all URLs from a text string.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2683,7 +2739,7 @@ too many now to catch them all and new ones appear constantly).</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1787</span>
+        <span class="phpdocumentor-element-found-in__line">1842</span>
     </aside>
         <p class="phpdocumentor-summary">Get country code from given locale.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2726,7 +2782,7 @@ too many now to catch them all and new ones appear constantly).</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Utils.php"><a href="../files/src-utils.html"><abbr title="src/Utils.php">Utils.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2038</span>
+        <span class="phpdocumentor-element-found-in__line">2093</span>
     </aside>
         <p class="phpdocumentor-summary">Check if correct iDevice (for iOS usage only).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

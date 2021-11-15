@@ -1,3 +1,15 @@
+# Stable release v19.3.9
+## Date: 15/11/2021
+
+### Updates and fixes
+
+**Event:** Update navigation paths and modules for locations.
+
+### Examples
+
+**Example:** Add likeRecentMediaFromLocationSearch
+**Example:** Add viewAndReactStoriesOfRecentMediaOwnerFromLocationSearch
+
 # Stable release v19.3.8
 ## Date: 10/11/2021
 

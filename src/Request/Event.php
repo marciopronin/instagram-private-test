@@ -945,6 +945,7 @@ class Event extends RequestCollection
             || $module === 'reel_follow_list'
             || $module === 'reel_liker_list'
             || $module === 'reel_hashtag_feed'
+            || $module === 'reel_location_feed'
             || $module === 'reel_comment') {
             $extra = [
                 'm_pk'                          => $item->getId(),
@@ -1410,7 +1411,7 @@ class Event extends RequestCollection
         array $options = [],
         $unlike = false)
     {
-        if ($module === 'feed_contextual_profile' || $module === 'profile' || $module === 'feed_short_url') {
+        if ($module === 'feed_contextual_profile' || $module === 'profile' || $module === 'feed_short_url' || $module === 'feed_contextual_location') {
             $extra = [
                 'm_pk'                      => $item->getId(),
                 'a_pk'                      => $item->getUser()->getPk(),
@@ -1994,6 +1995,7 @@ class Event extends RequestCollection
             || $module === 'reel_follow_list'
             || $module === 'reel_liker_list'
             || $module === 'reel_hashtag_feed'
+            || $module === 'reel_location_feed'
             || $module === 'reel_comment') {
             if (!isset($options['story_ranking_token']) && !isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
                 throw new \InvalidArgumentException('Required options were not set.');
@@ -2894,7 +2896,7 @@ class Event extends RequestCollection
                 'entity_page_id'            => $item->getUser()->getPk(),
             ];
         } elseif ($module === 'reel_feed_timeline' || $module === 'reel_profile' || $module === 'reel_follow_list' ||
-                  $module === 'reel_liker_list' || $module === 'reel_hashtag_feed' || $module === 'reel_comment') {
+                  $module === 'reel_liker_list' || $module === 'reel_hashtag_feed' || $module === 'reel_location_feed' || $module === 'reel_comment') {
             $event = 'instagram_organic_reel_viewed_impression';
             $extra = [
                 'm_pk'                      => $item->getId(),
@@ -4163,6 +4165,20 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'BottomSheetConstants.FRAGMENT_TAG',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'reel_location_feed',
+                ],
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_location',
+                ],
+            ],
+            'reel_location_feed' => [
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_location',
                 ],
             ],
             'profile' => [

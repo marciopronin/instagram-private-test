@@ -1,3 +1,10 @@
+# Stable release v19.3.10
+## Date: 17/11/2021
+
+### Updates and fixes
+
+**Account:** Update `getSyncedFacebookPagesIds()` in order to get all available page IDs to share with other apps (FB).
+
 # Stable release v19.3.9
 ## Date: 15/11/2021
 

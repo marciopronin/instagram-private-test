@@ -1446,13 +1446,18 @@ class Account extends RequestCollection
             ->setSignedPost(false)
             ->addPost('params', json_encode((object) [
                 'server_params' => [
-                    'account_id'    => $this->ig->account_id,
-                    'newly_linked'  => 'false',
-                    'entrypoint'    => '1',
+                    'should_show_done_button'   => 0,
+                    'account_id'                => $this->ig->account_id,
+                    'newly_linked'              => 0,
+                    'entrypoint'                => 1,
                 ],
             ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+                'ttrc_join_id'  => Signatures::generateUUID(),
+            ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
-            ->addPost('nest_data_manifest', 'true')
             ->addPost('_uuid', $this->ig->uuid)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
@@ -1463,7 +1468,7 @@ class Account extends RequestCollection
         foreach ($matches as $id) {
             $id = $id[1];
 
-            if ($id[0] === '1' && $id[1] === '0') {
+            if ($id[0] === '1' && ($id[1] === '0' || $id[1] === '1')) {
                 $ids[] = $id;
             }
         }

@@ -77,5 +77,18 @@ Means you are having troubles with HTTP2, you can disable HTTP2 at any time by s
 \InstagramAPI\Instagram::$disableHttp2 = true;
 ```
 
+# Known issues
 
- 
+## Privacy checkpoint
+
+If you are receiving the following error:
+
+```
+"message": "checkpoint_required",
+    "checkpoint_url": "https://i.instagram.com/privacy/checks/?cookie_consent=1&next=instagram://checkpoint/dismiss",
+    "lock": false,
+    "flow_render_type": 0,
+    "status": "fail"
+```
+
+It means you are using an outdated version of the API. The new version of the API does NOT use cookies, instead authorization headers are being used. If you encounter this issue you will need to update the API with composer: `composer update`

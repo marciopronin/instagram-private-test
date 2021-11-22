@@ -1,3 +1,14 @@
+# Stable release v19.3.11
+## Date: 22/11/2021
+
+### F.A.Q.:
+
+Updates the F.A.Q. to include a new issue that only affects the users that are running an API version older than June 2021. Instagram is now refusing to make connections with cookies, and the new version is already prepared to work without them. More info about this info in the F.A.Q. If you are using an updated version of the API you don't need to worry about this :)
+
+### Example
+
+- **Example:** Update viewAndReactStoriesOfRecentMediaOwnerFromLocationSearch
+
 # Stable release v19.3.10
 ## Date: 17/11/2021
 

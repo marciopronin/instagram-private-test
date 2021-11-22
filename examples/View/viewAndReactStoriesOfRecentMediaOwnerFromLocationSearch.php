@@ -14,6 +14,7 @@ $truncatedDebug = false;
 
 //////////////////////
 $queryLocation = 'Paris'; // :)
+$reaction = '🎉';
 //////////////////////
 
 $ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
@@ -277,6 +278,28 @@ try {
 
                 $cnt++;
             }
+
+            sleep(mt_rand(1, 3));
+
+            $userId = end($storyItems)->getUser()->getPk();
+            $recipients = [
+                'users' => [
+                    $userId,
+                ],
+            ];
+            if (end($storyItems)->getMediaType() === 1) {
+                $mediaType = 'photo';
+            } else {
+                $mediaType = 'video';
+            }
+
+            $clientContext = \InstagramAPI\Utils::generateClientContext();
+
+            $ig->direct->sendStoryReaction($recipients, $reaction, end($storyItems)->getId(), ['client_context' => $clientContext]);
+
+            $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'reel_share', [$userId]);
+            $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'reel_share', [$userId]);
+            $ig->event->sendDirectMessageIntentOrAttempt('sent', $clientContext, 'reel_share', [$userId]);
 
             sleep(mt_rand(1, 3));
 

@@ -3722,6 +3722,10 @@ class Event extends RequestCollection
                     'clickpoint'    => 'button',
                     'dest_module'   => 'self_followers',
                 ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'bottom_sheet_profile',
+                ],
             ],
             'edit_profile'  => [
                 [
@@ -3731,6 +3735,18 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'back',
                     'dest_module'   => 'self_profile',
+                ],
+            ],
+            'bottom_sheet_profile' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'settings_category_options',
+                ],
+            ],
+            'settings_category_options' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'security_options',
                 ],
             ],
             'profile_edit_bio'  => [

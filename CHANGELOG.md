@@ -1,3 +1,20 @@
+# Stable release v19.4.0
+## Date: 24/11/2021
+
+### New features
+
+- **Account:** Added `getTOTPCode()`
+- **Account:** Added `enableTOTPAuthentication()`
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+
+### Example
+
+- **Example:** Add set2FA
+- **Example:** Add changePassword
+
 # Stable release v19.3.11
 ## Date: 22/11/2021
 

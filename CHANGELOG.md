@@ -1,3 +1,10 @@
+# Stable release v19.4.1
+## Date: 26/11/2021
+
+### Example
+
+- **Example:** Update TwoFactorLogin example. Receiving 2FA code is possible via WhatsApp as well.
+
 # Stable release v19.4.0
 ## Date: 24/11/2021
 

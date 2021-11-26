@@ -13,6 +13,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool getShowNewLoginScreen()
  * @method bool getShowTrustedDeviceOption()
  * @method bool getSmsTwoFactorOn()
+ * @method bool getWhatsappTwoFactorOn()
  * @method bool getTotpTwoFactorOn()
  * @method string getTwoFactorIdentifier()
  * @method string getUsername()
@@ -22,6 +23,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isShowNewLoginScreen()
  * @method bool isShowTrustedDeviceOption()
  * @method bool isSmsTwoFactorOn()
+ * @method bool isWhatsappTwoFactorOn()
  * @method bool isTotpTwoFactorOn()
  * @method bool isTwoFactorIdentifier()
  * @method bool isUsername()
@@ -31,6 +33,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setShowNewLoginScreen(bool $value)
  * @method $this setShowTrustedDeviceOption(bool $value)
  * @method $this setSmsTwoFactorOn(bool $value)
+ * @method $this setWhatsappTwoFactorOn(bool $value)
  * @method $this setTotpTwoFactorOn(bool $value)
  * @method $this setTwoFactorIdentifier(string $value)
  * @method $this setUsername(string $value)
@@ -40,6 +43,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this unsetShowNewLoginScreen()
  * @method $this unsetShowTrustedDeviceOption()
  * @method $this unsetSmsTwoFactorOn()
+ * @method $this unsetWhatsappTwoFactorOn()
  * @method $this unsetTotpTwoFactorOn()
  * @method $this unsetTwoFactorIdentifier()
  * @method $this unsetUsername()
@@ -52,6 +56,7 @@ class TwoFactorInfo extends AutoPropertyMapper
         'phone_verification_settings' => 'PhoneVerificationSettings',
         'obfuscated_phone_number'     => 'string',
         'sms_two_factor_on'           => 'bool',
+        'whatsapp_two_factor_on'      => 'bool',
         'totp_two_factor_on'          => 'bool',
         'show_messenger_code_option'  => 'bool',
         'show_new_login_screen'       => 'bool',

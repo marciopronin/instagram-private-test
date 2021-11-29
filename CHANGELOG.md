@@ -1,3 +1,11 @@
+# Stable release v19.4.2
+## Date: 29/11/2021
+
+### Updates and fixes
+
+- **Story:** Add `addViewerToAllowList()`.
+- **Story:** Add `removeViewerToAllowList()`
+
 # Stable release v19.4.1
 ## Date: 26/11/2021
 

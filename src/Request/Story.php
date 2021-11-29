@@ -1048,7 +1048,7 @@ class Story extends RequestCollection
         $module = 'audience_selection',
         $source = 'self_reel')
     {
-        return $this->ig->request("stories/private_stories/media/{$storyId}/add_viewer/")
+        return $this->ig->request("stories/private_stories/{$storyId}/add_viewer/")
             ->setSignedPost(false)
             ->addPost('module', $module)
             ->addPost('source', $source)
@@ -1077,7 +1077,7 @@ class Story extends RequestCollection
         $module = 'audience_selection',
         $source = 'self_reel')
     {
-        return $this->ig->request("stories/private_stories/media/{$storyId}/remove_viewer/")
+        return $this->ig->request("stories/private_stories/{$storyId}/remove_viewer/")
             ->setSignedPost(false)
             ->addPost('module', $module)
             ->addPost('source', $source)
@@ -1114,8 +1114,8 @@ class Story extends RequestCollection
             ->addPost('module', $module)
             ->addPost('media_id', $storyId)
             ->addPost('source', $source)
-           ->addPost('added_user_ids', json_encode($add))
-           ->addPost('removed_user_ids', json_encode($remove))
+            ->addPost('added_user_ids', json_encode($add))
+            ->addPost('removed_user_ids', json_encode($remove))
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->getResponse(new Response\GenericResponse());

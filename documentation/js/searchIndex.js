@@ -17506,6 +17506,16 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Response-StickerTrayResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
+            "fqsen": "\\InstagramAPI\\Response\\TotpCodeResponse",
+            "name": "TotpCodeResponse",
+            "summary": "TotpCodeResponse.",
+            "url": "../classes/InstagramAPI-Response-TotpCodeResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\TotpCodeResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-TotpCodeResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

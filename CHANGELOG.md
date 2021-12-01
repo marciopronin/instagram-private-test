@@ -1,3 +1,11 @@
+# Stable release v19.4.3
+## Date: 01/12/2021
+
+### Updates and fixes
+
+- **Constants:** Update to Instagram 214.1.0.29.120
+- **Events:** Update `_getModuleClass()`
+
 # Stable release v19.4.2
 ## Date: 29/11/2021
 

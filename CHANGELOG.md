@@ -1,3 +1,10 @@
+# Stable release v19.4.4
+## Date: 04/12/2021
+
+### Examples
+
+- **Example:** Add sendStory. Shares a story via Direct.
+
 # Stable release v19.4.3
 ## Date: 01/12/2021
 

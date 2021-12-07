@@ -10,6 +10,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method ActionLog getActionLog()
  * @method AnimatedMedia getAnimatedMedia()
  * @method string getClientContext()
+ * @method Clip getClip()
  * @method MediaShare getDirectMediaShare()
  * @method DirectExpiringSummary getExpiringMediaActionSummary()
  * @method FelixShare getFelixShare()
@@ -40,6 +41,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isActionLog()
  * @method bool isAnimatedMedia()
  * @method bool isClientContext()
+ * @method bool isClip()
  * @method bool isDirectMediaShare()
  * @method bool isExpiringMediaActionSummary()
  * @method bool isFelixShare()
@@ -70,6 +72,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setActionLog(ActionLog $value)
  * @method $this setAnimatedMedia(AnimatedMedia $value)
  * @method $this setClientContext(string $value)
+ * @method $this setClip(Clip $value)
  * @method $this setDirectMediaShare(MediaShare $value)
  * @method $this setExpiringMediaActionSummary(DirectExpiringSummary $value)
  * @method $this setFelixShare(FelixShare $value)
@@ -100,6 +103,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this unsetActionLog()
  * @method $this unsetAnimatedMedia()
  * @method $this unsetClientContext()
+ * @method $this unsetClip()
  * @method $this unsetDirectMediaShare()
  * @method $this unsetExpiringMediaActionSummary()
  * @method $this unsetFelixShare()
@@ -181,5 +185,6 @@ class DirectThreadItem extends AutoPropertyMapper
         'animated_media'                => 'AnimatedMedia',
         'felix_share'                   => 'FelixShare',
         'voice_media'                   => 'VoiceMedia',
+        'clip'                          => 'Clip',
     ];
 }

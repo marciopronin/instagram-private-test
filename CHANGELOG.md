@@ -1,3 +1,18 @@
+# Stable release v19.4.5
+## Date: 07/12/2021
+
+### Updates and fixes
+
+- **Model:** Android and iOS returns different responses when retrieving a Direct Thread response for clip medias. Response was updated to include the iOS response as well.
+
+### Examples
+
+- **Example:** Add reportProfile. Reports a searched user for spam.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v19.4.4
 ## Date: 04/12/2021
 

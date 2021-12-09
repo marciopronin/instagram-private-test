@@ -1,3 +1,10 @@
+# Stable release v19.4.6
+## Date: 09/12/2021
+
+### Updates and fixes
+
+- **Model:** Updated Clip model to include Item properties.
+
 # Stable release v19.4.5
 ## Date: 07/12/2021
 

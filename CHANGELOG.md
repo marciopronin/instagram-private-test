@@ -1,3 +1,15 @@
+# Stable release v19.4.7
+## Date: 09/12/2021
+
+### Updates and fixes
+
+- **Model:** Updated Clip model to include Item properties.
+
+### Examples
+
+- **Example:** Add autoResponder example
+- **Example:** Add autoResponderRTC example
+
 # Stable release v19.4.6
 ## Date: 09/12/2021
 

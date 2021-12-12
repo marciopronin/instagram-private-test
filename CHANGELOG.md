@@ -1,3 +1,15 @@
+# Stable release v19.4.8
+## Date: 13/12/2021
+
+### Updates and fixes
+
+- **Event:** Update `sendOrganicVpvdImpression()`
+- **Event:** Update `sendOrganicViewedImpression()`
+
+### Examples
+
+- **viewVideo:** Update video examples with latest event changes to make impression and view to count.
+
 # Stable release v19.4.7
 ## Date: 09/12/2021
 

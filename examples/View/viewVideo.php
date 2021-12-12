@@ -56,7 +56,10 @@ try {
     $seq++;
     // We are sending the organic viewed impression. You need to specify wether you are following the
     // owner of the media in this case 'selenagomez'.
+    $ig->event->sendOrganicViewedSubImpression($item, null, null, ['following' => false], 'feed_contextual_profile');
+    $ig->event->sendOrganicMediaImpression($item, 'feed_contextual_profile');
     $ig->event->sendOrganicViewedImpression($item, 'feed_contextual_profile', null, null, null, ['following' => false]);
+    $ig->event->sendOrganicVpvdImpression($item, ['following' => false], 'feed_contextual_profile');
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();

@@ -1939,6 +1939,8 @@ class Event extends RequestCollection
                 'is_app_backgrounded'       => 'false',
                 'nav_in_transit'            => 0,
                 'is_acp_delivered'          => false,
+                'is_dark_mode'              => 0,
+                'dark_mode_state'           => -1,
             ];
             if ($module === 'feed_short_url' || $module === 'feed_contextual_profile') {
                 $extra['media_thumbnail_section'] = 'grid';
@@ -2130,28 +2132,53 @@ class Event extends RequestCollection
 
         $max = mt_rand(1000, 2500);
 
-        $extra = [
-            'm_pk'                      => $item->getId(),
-            'reel_id'                   => $item->getUser()->getPk(),
-            'tray_position'             => 1,
-            'reel_size'                 => isset($options['reel_size']) ? $options['reel_size'] : 0,
-            'reel_position'             => isset($options['reel_position']) ? $options['reel_position'] : 0,
-            'reel_type'                 => 'story',
-            'tracking_token'            => $item->getOrganicTrackingToken(),
-            'm_t'                       => $item->getMediaType(),
-            'time_elapsed'              => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
-            'time_remaining'            => mt_rand(1, 2),
-            'time_paused'               => 0,
-            'client_sub_impression'     => isset($options['client_sub_impression']) ? true : false,
-            'is_media_loaded'           => true,
-            'is_highlights_sourced'     => false,
-            'story_ranking_token'       => null,
-            'max_duration_ms'           => $max,
-            'sum_duration_ms'           => $max,
-            'legacy_duration_ms'        => $max,
-            'imp_logger_ver'            => 16,
-            'time_to_load'              => 0,
-        ];
+        if ($module === 'reel_profile') {
+            $extra = [
+                'm_pk'                      => $item->getId(),
+                'reel_id'                   => $item->getUser()->getPk(),
+                'tray_position'             => 1,
+                'reel_size'                 => isset($options['reel_size']) ? $options['reel_size'] : 0,
+                'reel_position'             => isset($options['reel_position']) ? $options['reel_position'] : 0,
+                'reel_type'                 => 'story',
+                'tracking_token'            => $item->getOrganicTrackingToken(),
+                'm_t'                       => $item->getMediaType(),
+                'time_elapsed'              => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
+                'time_remaining'            => mt_rand(1, 2),
+                'time_paused'               => 0,
+                'client_sub_impression'     => isset($options['client_sub_impression']) ? true : false,
+                'is_media_loaded'           => true,
+                'is_highlights_sourced'     => false,
+                'story_ranking_token'       => null,
+                'max_duration_ms'           => $max,
+                'sum_duration_ms'           => $max,
+                'legacy_duration_ms'        => $max,
+                'imp_logger_ver'            => 16,
+                'time_to_load'              => 0,
+            ];
+        } else {
+            $extra = [
+                'm_pk'                      => $item->getId(),
+                'a_pk'                      => $item->getUser()->getPk(),
+                'm_ts'                      => (int) $item->getTakenAt(),
+                'm_t'                       => $item->getMediaType(),
+                'tracking_token'            => $item->getOrganicTrackingToken(),
+                'source_of_action'          => $module,
+                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
+                'm_ix'                      => 3, // ?
+                'imp_logger_ver'            => 16,
+                'is_app_backgrounded'       => 'false',
+                'nav_in_transit'            => 0,
+                'is_acp_delivered'          => false,
+                'is_dark_mode'              => 0,
+                'dark_mode_state'           => -1,
+                'media_loading_progress'    => 75,
+                'entity_type'               => 'user',
+                'entity_name'               => $item->getUser()->getUsername(),
+                'entity_page_name'          => $item->getUser()->getUsername(),
+                'entity_page_id'            => $item->getUser()->getPk(),
+                'media_thumbnail_section'   => 'grid',
+            ];
+        }
 
         $event = $this->_addEventBody('instagram_organic_vpvd_imp', $module, $extra);
         $this->_addEventData($event);
@@ -2989,6 +3016,13 @@ class Event extends RequestCollection
             $extra['carousel_size'] = $item->getCarouselMediaCount();
         }
 
+        $extra['is_acp_delivered'] = false;
+        $extra['is_dark_mode'] = 0;
+        $extra['dark_mode_state'] = -1;
+        $extra['nav_in_transit'] = 0;
+        $extra['last_navigation_module'] = $module;
+        $extra['nav_chain'] = $this->ig->getNavChain();
+
         $event = $this->_addEventBody($event, $module, $extra);
         $this->_addEventData($event);
     }
@@ -3013,34 +3047,58 @@ class Event extends RequestCollection
         array $options = [],
         $module = 'reel_profile')
     {
-        $extra = [
-            'm_pk'                         => $item->getId(),
-            'a_pk'                         => $item->getUser()->getPk(),
-            'm_ts'                         => (int) $item->getTakenAt(),
-            'm_t'                          => $item->getMediaType(),
-            'tracking_token'               => $item->getOrganicTrackingToken(),
-            'source_of_action'             => $module,
-            'follow_status'                => empty($options['following']) ? 'not_following' : 'following',
-            'elapsed_time_since_last_item' => -1,
-            'viewer_session_id'            => $viewerSessionId,
-            'tray_session_id'              => $traySessionId,
-            'reel_id'                      => $item->getId(),
-            'is_highlights_sourced'        => false,
-            'reel_position'                => isset($options['reel_position']) ? $options['reel_position'] : 0,
-            'reel_viewer_position'         => 0,
-            'reel_type'                    => 'story',
-            'reel_size'                    => isset($options['reel_size']) ? $options['reel_size'] : 1,
-            'tray_position'                => 1,
-            'session_reel_counter'         => 1,
-            'time_elapsed'                 => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
-            'media_time_elapsed'           => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
-            'media_time_remaining'         => mt_rand(1, 2),
-            'media_dwell_time'             => mt_rand(5, 6) + mt_rand(100, 900) * 0.001,
-            'media_time_paused'            => 0,
-            'media_time_to_load'           => 0,
-            'reel_start_position'          => 0,
-            'is_acp_delivered'             => false,
-        ];
+        if ($module === 'reel_profile') {
+            $extra = [
+                'm_pk'                         => $item->getId(),
+                'a_pk'                         => $item->getUser()->getPk(),
+                'm_ts'                         => (int) $item->getTakenAt(),
+                'm_t'                          => $item->getMediaType(),
+                'tracking_token'               => $item->getOrganicTrackingToken(),
+                'source_of_action'             => $module,
+                'follow_status'                => empty($options['following']) ? 'not_following' : 'following',
+                'elapsed_time_since_last_item' => -1,
+                'viewer_session_id'            => $viewerSessionId,
+                'tray_session_id'              => $traySessionId,
+                'reel_id'                      => $item->getId(),
+                'is_highlights_sourced'        => false,
+                'reel_position'                => isset($options['reel_position']) ? $options['reel_position'] : 0,
+                'reel_viewer_position'         => 0,
+                'reel_type'                    => 'story',
+                'reel_size'                    => isset($options['reel_size']) ? $options['reel_size'] : 1,
+                'tray_position'                => 1,
+                'session_reel_counter'         => 1,
+                'time_elapsed'                 => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
+                'media_time_elapsed'           => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
+                'media_time_remaining'         => mt_rand(1, 2),
+                'media_dwell_time'             => mt_rand(5, 6) + mt_rand(100, 900) * 0.001,
+                'media_time_paused'            => 0,
+                'media_time_to_load'           => 0,
+                'reel_start_position'          => 0,
+                'is_acp_delivered'             => false,
+            ];
+        } else {
+            $extra = [
+                'm_pk'                      => $item->getId(),
+                'a_pk'                      => $item->getUser()->getPk(),
+                'm_ts'                      => (int) $item->getTakenAt(),
+                'm_t'                       => $item->getMediaType(),
+                'tracking_token'            => $item->getOrganicTrackingToken(),
+                'source_of_action'          => $module,
+                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
+                'm_ix'                      => 3, // ?
+                'imp_logger_ver'            => 16,
+                'is_app_backgrounded'       => 'false',
+                'nav_in_transit'            => 0,
+                'is_acp_delivered'          => false,
+                'is_dark_mode'              => 0,
+                'dark_mode_state'           => -1,
+                'entity_type'               => 'user',
+                'entity_name'               => $item->getUser()->getUsername(),
+                'entity_page_name'          => $item->getUser()->getUsername(),
+                'entity_page_id'            => $item->getUser()->getPk(),
+                'media_thumbnail_section'   => 'grid',
+            ];
+        }
 
         $event = $this->_addEventBody('instagram_organic_sub_viewed_impression', $module, $extra);
         $this->_addEventData($event);

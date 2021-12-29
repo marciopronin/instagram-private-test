@@ -1,3 +1,17 @@
+# Stable release v19.4.10
+## Date: 29/12/2021
+
+### Working on
+
+- Collection of frida scripts to easily debug and patch Instagram and Facebook apps.
+- Text to speech feature in Reels
+- Schedule content in stories and lives
+
+### Updates and fixes
+
+- **Certificates:** Certificates used by the app are included now.
+- **Liger:** It is included the latest version of libliger to bypass SSL pinning
+
 # Stable release v19.4.9
 ## Date: 16/12/2021
 

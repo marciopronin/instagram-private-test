@@ -3,7 +3,7 @@
 set_time_limit(0);
 date_default_timezone_set('UTC');
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 /////// CONFIG ///////
 $username = '';
@@ -173,14 +173,18 @@ try {
     $userList = $likersResponse->getUsers();
 
     for ($i = 0; $i < 15; $i++) {
-        $storyFeed = $ig->story->getUserStoryFeed($userList[$i]->getPk());
-        if ($storyFeed->getReel() === null) {
+        $storyFeed = $ig->story->getReelsMediaFeed($userList[$i]->getPk(), 'likers');
+        if (empty($storyFeed->getReels())) {
             // User has no active stories
             continue;
         }
 
-        $storyItems = $storyFeed->getReel()->getItems();
-        $following = $storyFeed->getReel()->getUser()->getFriendshipStatus()->getFollowing();
+        $storyContainer = $storyFeed->getReels()->getData();
+        foreach ($storyContainer as $key => $value) {
+            $storyItems = $value->getItems();
+            $following = $value->getUser()->getFriendshipStatus()->getFollowing();
+        }
+
         $ig->event->sendNavigation('button', 'likers', 'reel_liker_list');
 
         $viewerSession = \InstagramAPI\Signatures::generateUUID();

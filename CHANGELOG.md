@@ -1,3 +1,10 @@
+# Stable release v19.4.11
+## Date: 30/11/2021
+
+### Examples
+
+- **Example:** Update `viewStoriesFromLikerList` example according with the latest request used by the app and using unpridictable container.
+
 # Stable release v19.4.10
 ## Date: 29/12/2021
 

@@ -50,7 +50,7 @@ try {
             ],
     ], ['module' => 'self_profile']);
 
-    $ig->event->sendNavigation('button', 'self_profile', 'unified_follow_lists');
+    $ig->event->sendNavigation('button', 'self_profile', 'self_unified_follow_lists');
     $ig->event->sendProfileAction('tap_followers', $ig->account_id,
         [
             [
@@ -63,7 +63,7 @@ try {
             ],
     ], ['module' => 'self_profile']);
 
-    $ig->event->sendNavigation('followers', 'unified_follow_lists', 'unified_follow_lists', null, null,
+    $ig->event->sendNavigation('followers', 'self_unified_follow_lists', 'self_unified_follow_lists', null, null,
         [
             'source_tab'    => 'followers',
             'dest_tab'      => 'followers',
@@ -72,6 +72,10 @@ try {
 
     $rankToken = \InstagramAPI\Signatures::generateUUID();
     $followers = $ig->people->getFollowers($ig->account_id, $rankToken);
+    if (empty($followers->getUsers())) {
+        echo 'User has no followers';
+        exit();
+    }
     $userId = $followers->getUsers()[0]->getPk();
 
     $followersList = [];

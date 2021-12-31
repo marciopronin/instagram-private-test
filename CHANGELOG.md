@@ -1,5 +1,14 @@
+# Stable release v19.4.12
+## Date: 31/12/2021
+
+### Examples
+
+- **Example:** Update `viewStoryFromSearch`
+- **Example:** Update `viewStoryFromSelfFollowers`
+- **Example:** Update `viewStoryFromTimeline`
+
 # Stable release v19.4.11
-## Date: 30/11/2021
+## Date: 30/12/2021
 
 ### Examples
 

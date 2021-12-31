@@ -99,6 +99,10 @@ try {
     $traySession = \InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
     $storyFeed = $ig->story->getUserStoryFeed($userId);
+    if ($storyFeed->getReel() === null) {
+        echo 'User has no active stories';
+        exit();
+    }
     $storyItems = $storyFeed->getReel()->getItems();
     $userFeed = $ig->timeline->getUserFeed($userId);
     $items = $userFeed->getItems();
@@ -112,12 +116,25 @@ try {
         if ($item->getMediaType() === 1) {
             $candidates = $item->getImageVersions2()->getCandidates();
             $smallCandidate = end($candidates);
-            $ig->request($smallCandidate->getUrl())->getRawResponse();
+
+            $imageResponse = $ig->request($smallCandidate->getUrl());
+
+            if (isset($imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['x-encoded-content-length'][0];
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['Content-Length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['Content-Length'][0];
+            } elseif (isset($imageResponse->getHttpResponse()->getHeaders()['content-length'])) {
+                $imageSize = $imageResponse->getHttpResponse()->getHeaders()['content-length'][0];
+            } else {
+                continue;
+            }
+            
             $ig->event->sendPerfPercentPhotosRendered('profile', $item->getId(), [
                 'is_grid_view'                      => true,
                 'image_heigth'                      => $smallCandidate->getHeight(),
                 'image_width'                       => $smallCandidate->getWidth(),
                 'load_time'                         => $ig->client->bandwidthM,
+                'image_size_kb'                     => $imageSize,
                 'estimated_bandwidth'               => $ig->client->bandwidthB,
                 'estimated_bandwidth_totalBytes_b'  => $ig->client->totalBytes,
                 'estimated_bandwidth_totalTime_ms'  => $ig->client->totalTime,

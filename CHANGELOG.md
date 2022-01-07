@@ -1,3 +1,12 @@
+# Stable release v19.4.13
+## Date: 07/01/2022
+
+### Examples
+
+- **Example:** Update `followFromExternalUrlProfile`
+- **Example:** Add `followFromSearchResult`
+- **Example:** Add `followFromDiscover`
+
 # Stable release v19.4.12
 ## Date: 31/12/2021
 

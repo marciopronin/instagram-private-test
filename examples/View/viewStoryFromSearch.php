@@ -128,7 +128,7 @@ try {
             } else {
                 continue;
             }
-            
+
             $ig->event->sendPerfPercentPhotosRendered('profile', $item->getId(), [
                 'is_grid_view'                      => true,
                 'image_heigth'                      => $smallCandidate->getHeight(),

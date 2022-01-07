@@ -31,15 +31,15 @@ usleep(mt_rand(4000000, 7000000)); // Can be increased for better emulation.
 
 try {
     $ig->event->updateAppState('foreground');
+    $userId = $ig->people->getInfoByName($user, 'deep_link_util')->getUser()->getPk();
     $ig->event->qeExposure($ig->account_id, 'ig_android_qr_code_nametag', 'deploy');
-    $ig->event->sendNavigation('inferred_source', 'feed_timeline', 'profile');
+    $ig->event->sendNavigation('inferred_source', 'feed_timeline', 'profile', null, null, ['username' => $user, 'user_id' => $userId]);
 
     try {
         $ig->internal->getQPFetch();
     } catch (Exception $e) {
         // pass
     }
-    $userId = $ig->people->getInfoByName($user, 'deep_link_util')->getUser()->getPk();
     $ig->event->sendBadgingEvent('impression', 'photos_of_you', 0, 'profile_menu', 'dot_badge');
 
     $traySession = \InstagramAPI\Signatures::generateUUID();

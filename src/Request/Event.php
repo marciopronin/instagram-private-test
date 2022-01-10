@@ -28,6 +28,8 @@ class Event extends RequestCollection
             'app_id'            => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
             //'app_ver'           => Constants::IG_VERSION,
             'build_num'         => Constants::VERSION_CODE,
+            'device'            => $this->ig->device->getDevice(),
+            'os_ver'            => $this->ig->device->getAndroidRelease(),
             'device_id'         => $this->ig->uuid,
             'family_device_id'  => $this->ig->phone_id,
             'session_id'        => $this->ig->client->getPigeonSession(),
@@ -1106,6 +1108,7 @@ class Event extends RequestCollection
      * @param string               $section      Section.
      * @param int                  $position     Position.
      * @param string               $tab          Tab.
+     * @param string               $extraType    Extra data type. 'USER_SIMPLE' or 'CAMPAIGN_MESSAGE'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1114,7 +1117,8 @@ class Event extends RequestCollection
         $newsfeedItem,
         $section,
         $position,
-        $tab = 'You')
+        $tab = 'You',
+        $extraType = 'USER_SIMPLE')
     {
         $extra = [
             'story_id'                  => $newsfeedItem->getPk(),
@@ -1123,6 +1127,11 @@ class Event extends RequestCollection
             'section'                   => $section,
             'position'                  => $position,
             'tab'                       => $tab,
+            'physical_device_id'        => $this->ig->device_id,
+            'extra_data'                => [
+                'module_name'   => 'newsfeed_you',
+                'type'          => $extraType,
+            ],
         ];
 
         $event = $this->_addEventBody('newsfeed_story_impression', 'newsfeed_you', $extra);
@@ -6946,6 +6955,48 @@ class Event extends RequestCollection
 
         $extra['pk'] = 0;
         $event = $this->_addEventBody('instagram_android_install_with_referrer', 'install_referrer', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send legacy FB token on IG access control.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function legacyFbTokenOnIgAccessControl()
+    {
+        $extra = [
+            'event_type'    => 'token_access',
+            'caller_name'   => 'ig_invite_fb_friends',
+            'caller_class'  => 'UserDetailFragment',
+        ];
+
+        $event = $this->_addEventBody('fx_legacy_fb_token_on_ig_access_control', null, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send Quick Promotions events.
+     *
+     * @param string $qpLocation Quick Promotions location. 'PERSONAL_PROFILE' or 'ACTIVITY_FEED'.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendQuickPromotion(
+        $qpLocation)
+    {
+        $extra = [
+            'qp_location'   => 'PERSONAL_PROFILE',
+            'extra_data'    => [
+                'cache_state'       => 'unset',
+                'skipping_cache'    => 'false',
+                'triggers_fired'    => ($qpLocation === 'PERSONAL_PROFILE') ? '{MEGAPHONE=[PROFILE_HEADER], TOOLTIP=[PROFILE_TOOLTIP], INTERSTITIAL=[PROFILE_PROMPT], FLOATING_BANNER=[PROFILE_FLOATING_BANNER_PROMPT]}' : '{MEGAPHONE=[ACTIVITY_FEED_HEADER], INTERSTITIAL=[ACTIVITY_FEED_PROMPT]}',
+                'source'            => 'remote',
+                'skipping_cooldown' => 'false',
+            ],
+        ];
+
+        $event = $this->_addEventBody('ig_quick_promotion_events', 'quick_promotion', $extra);
         $this->_addEventData($event);
     }
 }

@@ -8166,6 +8166,16 @@ Search.appendIndex(
             "summary": "Send\u0020emergency\u0020push\u0020initial\u0020version.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendInstagramInstallWithReferrer"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AlegacyFbTokenOnIgAccessControl\u0028\u0029",
+            "name": "legacyFbTokenOnIgAccessControl",
+            "summary": "Send\u0020legacy\u0020FB\u0020token\u0020on\u0020IG\u0020access\u0020control.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_legacyFbTokenOnIgAccessControl"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendQuickPromotion\u0028\u0029",
+            "name": "sendQuickPromotion",
+            "summary": "Send\u0020Quick\u0020Promotions\u0020events.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendQuickPromotion"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Hashtag",
             "name": "Hashtag",
             "summary": "Functions\u0020related\u0020to\u0020finding\u0020and\u0020exploring\u0020hashtags.",

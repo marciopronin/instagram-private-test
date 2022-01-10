@@ -1,3 +1,26 @@
+# Stable release v19.5.0
+## Date: 11/01/2022
+
+Release note: Instagram is changing some events as part of minor app upgrades and it could affect script performance. This release and next releases will review all events used in the API and any changes will be applied.
+
+### New features
+
+- **Event:** Added `legacyFbTokenOnIgAccessControl()`
+- **Event:** Added `sendQuickPromotion()`
+
+### Updates and fixes
+
+- **Event:** Update `_addBatchBody()`
+- **Event:** Update `sendNewsfeedStoryImpression()`
+
+### Documentation
+
+- Update documentation
+
+### Codestyle
+
+- Applied codestyle
+
 # Stable release v19.4.13
 ## Date: 07/01/2022
 

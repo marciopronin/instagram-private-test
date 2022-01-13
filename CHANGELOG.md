@@ -1,3 +1,12 @@
+# Stable release v19.6.0
+## Date: 13/01/2022
+
+### Updates and fixes
+
+- **Client:** Update `api()` to use `X-Ig-Salt-Ids` header
+- **Instagram:** Update `_sendLoginFlow()`
+- **StorageHandler:** Added new persistent key `salt_ids`
+
 # Stable release v19.5.0
 ## Date: 11/01/2022
 

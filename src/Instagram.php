@@ -2477,6 +2477,12 @@ class Instagram implements ExperimentsInterface
                 }
 
                 $this->story->getReelsTrayFeed('cold_start');
+
+                try {
+                    $this->account->getBadgeNotifications();
+                } catch (\Exception $e) {
+                    // pass
+                }
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();

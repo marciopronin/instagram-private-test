@@ -254,7 +254,14 @@ class Client
      *
      * @var int
      */
-    protected $_flowUserCounter = 1;
+    protected $_flowUserCounter = 0;
+
+    /**
+     * IG User Salt ID.
+     *
+     * @var int
+     */
+    protected $_ig_user_salt_ids = '';
 
     /**
      * Constructor.
@@ -1110,6 +1117,14 @@ class Client
             $headers['set_headers']['X-IG-Bandwidth-TotalBytes-B'] = $this->totalBytes;
             $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = $this->totalTime;
             //$headers['set_headers']['X-MID'] = $this->getMid();
+
+            if (strpos($request->getUri(), 'notifications/badge') !== false) {
+                $this->_parent->settings->set('salt_ids', $this->generateNewFlowId(1061163349));
+            }
+
+            if ($this->_parent->settings->get('salt_ids') !== null) {
+                $headers['set_headers']['X-Ig-Salt-Ids'] = $this->_parent->settings->get('salt_ids');
+            }
         }
 
         $userAgent = $request->getHeader('User-Agent');

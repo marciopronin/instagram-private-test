@@ -356,6 +356,11 @@ Search.appendIndex(
             "summary": "Flow\u0020User\u0020Counter.",
             "url": "../classes/InstagramAPI-Client.html#property__flowUserCounter"
         },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A\u0024_ig_user_salt_ids",
+            "name": "_ig_user_salt_ids",
+            "summary": "IG\u0020User\u0020Salt\u0020ID.",
+            "url": "../classes/InstagramAPI-Client.html#property__ig_user_salt_ids"
+        },                {
             "fqsen": "\\InstagramAPI\\Constants",
             "name": "Constants",
             "summary": "",

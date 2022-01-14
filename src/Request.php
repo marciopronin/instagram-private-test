@@ -169,6 +169,13 @@ class Request
     protected $_httpResponse;
 
     /**
+     * Request priority.
+     *
+     * @var int
+     */
+    protected $_requestPriority = 3;
+
+    /**
      * Constructor.
      *
      * @param Instagram $parent
@@ -405,6 +412,7 @@ class Request
             $this->_headers['X-IG-Connection-Type'] = ($this->_parent->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)';
             $this->_headers['X-IG-Connection-Speed'] = $this->_parent->getConnectionSpeed();
             $this->_headers['X-IG-Device-ID'] = $this->_parent->uuid;
+            $this->_headers['X-Ig-Family-Device-Id'] = $this->_parent->phone_id;
             $this->_headers['X-FB-HTTP-Engine'] = Constants::X_FB_HTTP_Engine;
             $this->_headers['X-FB-Client-IP'] = 'True';
             $this->_headers['X-FB-Server-Cluster'] = 'True';
@@ -425,6 +433,7 @@ class Request
                 $this->_headers['X-IG-Device-Locale'] = $this->_parent->getLocale();
                 $this->_headers['X-IG-Android-ID'] = $this->_parent->device_id;
                 $this->_headers['X-IG-App-ID'] = Constants::FACEBOOK_ANALYTICS_APPLICATION_ID;
+                $this->_headers['Priority'] = $this->getRequestPriority();
                 $this->_headers['X-IG-Capabilities'] = Constants::X_IG_Capabilities;
                 $this->_headers['X-Bloks-Version-Id'] = Constants::BLOCK_VERSIONING_ID;
                 $this->_headers['X-Bloks-Is-Layout-RTL'] = 'false';
@@ -435,6 +444,7 @@ class Request
             } else {
                 $this->_headers['X-DEVICE-ID'] = $this->_parent->uuid;
                 $this->_headers['X-IG-App-ID'] = Constants::FACEBOOK_ORCA_APPLICATION_ID;
+                $this->_headers['Priority'] = $this->getRequestPriority();
                 $this->_headers['X-IG-Capabilities'] = Constants::IOS_X_IG_Capabilities;
                 $this->_headers['X-Bloks-Version-Id'] = Constants::IOS_BLOCKS_VERSIONING_ID;
             }
@@ -941,5 +951,30 @@ class Request
     public function getUrl()
     {
         return $this->_url;
+    }
+
+    /**
+     * Set the request priority.
+     * 
+     * @param int $priority Request priority.
+     */
+    public function setRequestPriority(
+        $priority)
+    {
+        if ($priority < 0 || $priority > 7) {
+            throw new InstagramException(sprintf('priority can be [0-7], 3 is default. Selected: %d', $priority));
+        }
+
+        $this->_requestPriority = $priority;
+    }
+
+    /**
+     * Returns the request priority.
+     *
+     * @return string
+     */
+    public function getRequestPriority()
+    {
+        return sprintf('u=%d', $this->_requestPriority);
     }
 }

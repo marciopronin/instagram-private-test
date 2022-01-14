@@ -1,3 +1,15 @@
+# Stable release v19.7.0
+## Date: 14/01/2022
+
+### New features
+
+- **Request:** Add `setRequestPriority()`
+- **Request:** Add `getRequestPriority()`
+
+### Updates and fixes
+
+- **Request:** Update `_addDefaultHeaders` to use `X-Ig-Family-Device-Id` and `Priority` headers
+
 # Stable release v19.6.0
 ## Date: 13/01/2022
 

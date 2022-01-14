@@ -1,3 +1,15 @@
+# Stable release v19.7.1
+## Date: 14/01/2022
+
+### Updates and fixes
+
+- **Direct:** Update `_sendDirectItem()`
+- **Event:** Update `sendGroupCreationEnter()`
+
+### Examples
+
+- **Example:** Update sendText
+
 # Stable release v19.7.0
 ## Date: 14/01/2022
 

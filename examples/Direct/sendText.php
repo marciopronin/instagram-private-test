@@ -59,7 +59,7 @@ try {
     ];
 
     $ig->direct->getThreadByParticipants([$userId]);
-    $ig->direct->sendText($recipients, $text, ['client_context' => $clientContext]);
+    $ig->direct->sendText($recipients, $text, ['client_context' => $clientContext, 'send_attribution' => 'inbox_new_message']);
     $ig->event->sendDirectMessageIntentOrAttempt('send_intent', $clientContext, 'text', [$userId]);
     $ig->event->sendTextDirectMessage();
     $ig->event->sendDirectMessageIntentOrAttempt('send_attempt', $clientContext, 'text', [$userId]);

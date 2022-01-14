@@ -5668,6 +5668,7 @@ class Event extends RequestCollection
     {
         $extra = [
             'group_session_id'   => $groupSession,
+            'direct_module'      => 'inbox',
         ];
 
         $event = $this->_addEventBody('direct_group_creation_enter', 'direct_recipient_picker', $extra);

@@ -64,11 +64,12 @@ class ServerMessageThrower
         'Checkpoint\ChallengeFinishedException'    => ['challenge_finished'],
         'Checkpoint\SubmitPhoneException'          => ['submit_phone'],
         'Checkpoint\SubmitEmailException'          => ['submit_email'],
-        'Checkpoint\SelectVerifyMethodException'   => ['select_verify_method'],
+        'Checkpoint\SelectVerifyMethodException'   => ['select_verify_method', 'select_contact_point_recovery'],
         'Checkpoint\VerifyCodeException'           => [
             'Please check the code we sent you and try again.', // message
             'verify_code', // step_name
             'verify_email', // step_name
+            'verify_sms_code' // step_name
         ],
         'Checkpoint\DeltaLoginReviewException'          => ['delta_login_review'], // step name
         'Checkpoint\EscalationInformationalException'   => ['escalation_challenge_informational'], // step name

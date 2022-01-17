@@ -1,3 +1,11 @@
+# Stable release v19.7.2
+## Date: 18/01/2022
+
+### Updates and fixes
+
+- **Request:** Update default headers
+- **ServerMessageThrower:** Update trigger strings for exceptions. This will fix updates during challenge/checkpoint procedure
+
 # Stable release v19.7.1
 ## Date: 14/01/2022
 

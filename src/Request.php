@@ -955,7 +955,7 @@ class Request
 
     /**
      * Set the request priority.
-     * 
+     *
      * @param int $priority Request priority.
      */
     public function setRequestPriority(

@@ -1,3 +1,11 @@
+# Stable release v19.7.3
+## Date: 24/01/2022
+
+### Updates and fixes
+
+- **Constants:** Update IG version to 218.0.0.19.108
+- **Events:** Update `_getModuleClass()` for navigation chain
+
 # Stable release v19.7.2
 ## Date: 18/01/2022
 

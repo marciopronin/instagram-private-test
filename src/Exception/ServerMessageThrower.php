@@ -69,7 +69,7 @@ class ServerMessageThrower
             'Please check the code we sent you and try again.', // message
             'verify_code', // step_name
             'verify_email', // step_name
-            'verify_sms_code' // step_name
+            'verify_sms_code', // step_name
         ],
         'Checkpoint\DeltaLoginReviewException'          => ['delta_login_review'], // step name
         'Checkpoint\EscalationInformationalException'   => ['escalation_challenge_informational'], // step name

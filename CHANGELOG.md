@@ -1,3 +1,21 @@
+# Stable release v19.7.4
+## Date: 28/01/2022
+
+### Examples
+
+- **Example:** A new example of checkpoint is included. This is an example of how the checkpoint/challenge can be handled one step at a time without the need of running it in CLI.
+
+### Tools
+
+- **Tool:** A new script has been added to quickly profile an Instagram apk. Example output:
+```
+versionName: 219.0.0.12.117
+versionCode: '322903320'
+BLOKS CLASS: 31J.smali
+BLOKS_ID: 7d5d5c3edda9c3c433f0b903ced68830addf7027827d1194d3fbec0c41de4e7d
+CAPABILITIES: 3brTv10=
+```
+
 # Stable release v19.7.3
 ## Date: 24/01/2022
 

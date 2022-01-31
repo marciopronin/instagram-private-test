@@ -130,13 +130,15 @@
     &#039;Checkpoint\\ChallengeFinishedException&#039; =&gt; [&#039;challenge_finished&#039;],
     &#039;Checkpoint\\SubmitPhoneException&#039; =&gt; [&#039;submit_phone&#039;],
     &#039;Checkpoint\\SubmitEmailException&#039; =&gt; [&#039;submit_email&#039;],
-    &#039;Checkpoint\\SelectVerifyMethodException&#039; =&gt; [&#039;select_verify_method&#039;],
+    &#039;Checkpoint\\SelectVerifyMethodException&#039; =&gt; [&#039;select_verify_method&#039;, &#039;select_contact_point_recovery&#039;],
     &#039;Checkpoint\\VerifyCodeException&#039; =&gt; [
         &#039;Please check the code we sent you and try again.&#039;,
         // message
         &#039;verify_code&#039;,
         // step_name
         &#039;verify_email&#039;,
+        // step_name
+        &#039;verify_sms_code&#039;,
     ],
     &#039;Checkpoint\\DeltaLoginReviewException&#039; =&gt; [&#039;delta_login_review&#039;],
     // step name
@@ -245,13 +247,15 @@
     &#039;Checkpoint\\ChallengeFinishedException&#039; =&gt; [&#039;challenge_finished&#039;],
     &#039;Checkpoint\\SubmitPhoneException&#039; =&gt; [&#039;submit_phone&#039;],
     &#039;Checkpoint\\SubmitEmailException&#039; =&gt; [&#039;submit_email&#039;],
-    &#039;Checkpoint\\SelectVerifyMethodException&#039; =&gt; [&#039;select_verify_method&#039;],
+    &#039;Checkpoint\\SelectVerifyMethodException&#039; =&gt; [&#039;select_verify_method&#039;, &#039;select_contact_point_recovery&#039;],
     &#039;Checkpoint\\VerifyCodeException&#039; =&gt; [
         &#039;Please check the code we sent you and try again.&#039;,
         // message
         &#039;verify_code&#039;,
         // step_name
         &#039;verify_email&#039;,
+        // step_name
+        &#039;verify_sms_code&#039;,
     ],
     &#039;Checkpoint\\DeltaLoginReviewException&#039; =&gt; [&#039;delta_login_review&#039;],
     // step name
@@ -334,7 +338,7 @@ of the API! Nothing else.</section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/ServerMessageThrower.php"><a href="../files/src-exception-servermessagethrower.html"><abbr title="src/Exception/ServerMessageThrower.php">ServerMessageThrower.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">141</span>
+        <span class="phpdocumentor-element-found-in__line">142</span>
     </aside>
         <p class="phpdocumentor-summary">Parses a server message and throws the appropriate exception.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -426,7 +430,7 @@ object (if available).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/ServerMessageThrower.php"><a href="../files/src-exception-servermessagethrower.html"><abbr title="src/Exception/ServerMessageThrower.php">ServerMessageThrower.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">272</span>
+        <span class="phpdocumentor-element-found-in__line">273</span>
     </aside>
         <p class="phpdocumentor-summary">Nicely reformats externally generated exception messages.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

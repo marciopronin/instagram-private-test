@@ -1,3 +1,11 @@
+# Stable release v19.7.5
+## Date: 31/01/2022
+
+### Updates and fixes
+
+- **Instagram:** Update version to 219.0.0.12.117. New changes for cookie policies are included in this version.
+- **Events:** Update classes names to match version 219.0.0.12.117
+
 # Stable release v19.7.4
 ## Date: 28/01/2022
 

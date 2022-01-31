@@ -52,12 +52,12 @@ try {
         }
     } else {
         $ig->setUser($username, $password);
-        switch($step) {
+        switch ($step) {
             case 'select_method':
-                throw new InstagramAPI\Exception\Checkpoint\SelectVerifyMethodException;
+                throw new InstagramAPI\Exception\Checkpoint\SelectVerifyMethodException();
                 break;
             case 'verify_method':
-                throw new InstagramAPI\Exception\Checkpoint\VerifyCodeException;
+                throw new InstagramAPI\Exception\Checkpoint\VerifyCodeException();
                 break;
         }
     }
@@ -73,6 +73,7 @@ try {
             echo sprintf('Checkpoint path: %s', $checkApiPath);
         }
     }
+
     try {
         switch (true) {
             case $e instanceof InstagramAPI\Exception\Checkpoint\ChallengeRequiredException:
@@ -96,9 +97,9 @@ try {
 
                 if ($challenge->getLoggedInUser() !== null) {
                     $ig->finishCheckpoint($challenge);
-                    break ;
+                    break;
                 } elseif ($challenge->getAction() === 'close') {
-                    break ;
+                    break;
                 }
                 break;
         }

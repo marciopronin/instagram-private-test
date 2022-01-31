@@ -188,6 +188,11 @@
                     <td class="phpdocumentor-cell">Cached HTTP response object.</td>
                     <td class="phpdocumentor-cell"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
                 </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request.html#property__requestPriority">$_requestPriority</a></th>
+                    <td class="phpdocumentor-cell">Request priority.</td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
                                                                 <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request.html#method___construct">__construct()</a></th>
                     <td class="phpdocumentor-cell">Constructor.</td>
@@ -351,6 +356,16 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request.html#method_getUrl">getUrl()</a></th>
                     <td class="phpdocumentor-cell">Returns the endpoint URL (absolute or relative) of this request.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request.html#method_setRequestPriority">setRequestPriority()</a></th>
+                    <td class="phpdocumentor-cell">Set the request priority.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request.html#method_getRequestPriority">getRequestPriority()</a></th>
+                    <td class="phpdocumentor-cell">Returns the request priority.</td>
                     <td class="phpdocumentor-cell">string</td>
                 </tr>
                                             </table>
@@ -784,6 +799,27 @@
             </code>
             
 </article>
+                                    <a id="property__requestPriority"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_requestPriority</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">176</span>
+    </aside>
+            <p class="phpdocumentor-summary">Request priority.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$_requestPriority</span>
+         = <span class="phpdocumentor-signature__default-value">3</span>    </code>
+            
+</article>
                                                             </section>
         
                     <section>
@@ -799,7 +835,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">177</span>
+        <span class="phpdocumentor-element-found-in__line">184</span>
     </aside>
         <p class="phpdocumentor-summary">Constructor.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -849,7 +885,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">205</span>
+        <span class="phpdocumentor-element-found-in__line">212</span>
     </aside>
         <p class="phpdocumentor-summary">Destructor.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -878,7 +914,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">220</span>
+        <span class="phpdocumentor-element-found-in__line">227</span>
     </aside>
         <p class="phpdocumentor-summary">Set API version to use.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -929,7 +965,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">239</span>
+        <span class="phpdocumentor-element-found-in__line">246</span>
     </aside>
         <p class="phpdocumentor-summary">Add query param to request, overwriting any previous value.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -979,7 +1015,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">261</span>
+        <span class="phpdocumentor-element-found-in__line">268</span>
     </aside>
         <p class="phpdocumentor-summary">Add POST param to request, overwriting any previous value.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1029,7 +1065,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">286</span>
+        <span class="phpdocumentor-element-found-in__line">293</span>
     </aside>
         <p class="phpdocumentor-summary">Add unsigned POST param to request, overwriting any previous value.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1081,7 +1117,7 @@ is a signed request. Instagram sometimes needs a few unsigned values.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">308</span>
+        <span class="phpdocumentor-element-found-in__line">315</span>
     </aside>
         <p class="phpdocumentor-summary">Add an on-disk file to a POST request, which causes this to become a multipart form request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1159,7 +1195,7 @@ is a signed request. Instagram sometimes needs a few unsigned values.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">350</span>
+        <span class="phpdocumentor-element-found-in__line">357</span>
     </aside>
         <p class="phpdocumentor-summary">Add raw file data to a POST request, which causes this to become a multipart form request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1227,7 +1263,7 @@ is a signed request. Instagram sometimes needs a few unsigned values.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">388</span>
+        <span class="phpdocumentor-element-found-in__line">395</span>
     </aside>
         <p class="phpdocumentor-summary">Add custom header to request, overwriting any previous or default value.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1284,7 +1320,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">402</span>
+        <span class="phpdocumentor-element-found-in__line">409</span>
     </aside>
         <p class="phpdocumentor-summary">Add headers used by most API requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1313,7 +1349,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">453</span>
+        <span class="phpdocumentor-element-found-in__line">463</span>
     </aside>
         <p class="phpdocumentor-summary">Set the &quot;add default headers&quot; flag.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1354,7 +1390,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">468</span>
+        <span class="phpdocumentor-element-found-in__line">478</span>
     </aside>
         <p class="phpdocumentor-summary">Set the extra Guzzle options for this request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1395,7 +1431,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">483</span>
+        <span class="phpdocumentor-element-found-in__line">493</span>
     </aside>
         <p class="phpdocumentor-summary">Set raw request body.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1436,7 +1472,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">498</span>
+        <span class="phpdocumentor-element-found-in__line">508</span>
     </aside>
         <p class="phpdocumentor-summary">Set authorized request flag.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1477,7 +1513,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">513</span>
+        <span class="phpdocumentor-element-found-in__line">523</span>
     </aside>
         <p class="phpdocumentor-summary">Set signed request data flag.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1518,7 +1554,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">528</span>
+        <span class="phpdocumentor-element-found-in__line">538</span>
     </aside>
         <p class="phpdocumentor-summary">Set signed request params flag.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1559,7 +1595,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">543</span>
+        <span class="phpdocumentor-element-found-in__line">553</span>
     </aside>
         <p class="phpdocumentor-summary">Set silentFail flag.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1600,7 +1636,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">558</span>
+        <span class="phpdocumentor-element-found-in__line">568</span>
     </aside>
         <p class="phpdocumentor-summary">Check deprecated version.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1641,7 +1677,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">577</span>
+        <span class="phpdocumentor-element-found-in__line">587</span>
     </aside>
         <p class="phpdocumentor-summary">Set the &quot;this API endpoint responds with multiple JSON objects&quot; flag.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1682,7 +1718,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">592</span>
+        <span class="phpdocumentor-element-found-in__line">602</span>
     </aside>
         <p class="phpdocumentor-summary">Set gz-compressed request params flag.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1723,7 +1759,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">616</span>
+        <span class="phpdocumentor-element-found-in__line">626</span>
     </aside>
         <p class="phpdocumentor-summary">Get a Stream for the given file.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1781,7 +1817,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">643</span>
+        <span class="phpdocumentor-element-found-in__line">653</span>
     </aside>
         <p class="phpdocumentor-summary">Convert the request&#039;s data into its HTTP POST multipart body contents.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1827,7 +1863,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">677</span>
+        <span class="phpdocumentor-element-found-in__line">687</span>
     </aside>
         <p class="phpdocumentor-summary">Close opened file handles.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1856,7 +1892,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">692</span>
+        <span class="phpdocumentor-element-found-in__line">702</span>
     </aside>
         <p class="phpdocumentor-summary">Reset opened handles array.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1885,7 +1921,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">704</span>
+        <span class="phpdocumentor-element-found-in__line">714</span>
     </aside>
         <p class="phpdocumentor-summary">Convert the request&#039;s data into its HTTP POST urlencoded body contents.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1924,7 +1960,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">721</span>
+        <span class="phpdocumentor-element-found-in__line">731</span>
     </aside>
         <p class="phpdocumentor-summary">Convert the request&#039;s data into its HTTP POST body contents.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1971,7 +2007,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">761</span>
+        <span class="phpdocumentor-element-found-in__line">771</span>
     </aside>
         <p class="phpdocumentor-summary">Build HTTP request object.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2017,7 +2053,7 @@ usually by separating the value string entries with a semicolon.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">801</span>
+        <span class="phpdocumentor-element-found-in__line">811</span>
     </aside>
         <p class="phpdocumentor-summary">Helper which throws an error if not logged in.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2058,7 +2094,7 @@ requires the user to be logged in!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">819</span>
+        <span class="phpdocumentor-element-found-in__line">829</span>
     </aside>
         <p class="phpdocumentor-summary">Perform the request and get its raw HTTP response.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2111,7 +2147,7 @@ requires the user to be logged in!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">852</span>
+        <span class="phpdocumentor-element-found-in__line">862</span>
     </aside>
         <p class="phpdocumentor-summary">Return the raw HTTP response body.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2164,7 +2200,7 @@ requires the user to be logged in!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">899</span>
+        <span class="phpdocumentor-element-found-in__line">909</span>
     </aside>
         <p class="phpdocumentor-summary">Return safely JSON-decoded HTTP response.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2230,7 +2266,7 @@ requires the user to be logged in!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">920</span>
+        <span class="phpdocumentor-element-found-in__line">930</span>
     </aside>
         <p class="phpdocumentor-summary">Perform the request and map its response data to the provided object.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2296,12 +2332,82 @@ requires the user to be logged in!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">941</span>
+        <span class="phpdocumentor-element-found-in__line">951</span>
     </aside>
         <p class="phpdocumentor-summary">Returns the endpoint URL (absolute or relative) of this request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getUrl</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_setRequestPriority"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setRequestPriority()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">961</span>
+    </aside>
+        <p class="phpdocumentor-summary">Set the request priority.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setRequestPriority</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$priority</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$priority</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Request priority.</p></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getRequestPriority"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getRequestPriority()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request.php"><a href="../files/src-request.html"><abbr title="src/Request.php">Request.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">976</span>
+    </aside>
+        <p class="phpdocumentor-summary">Returns the request priority.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getRequestPriority</span>(
                 )
         : <span class="phpdocumentor-signature__response_type">string</span>
     </code>

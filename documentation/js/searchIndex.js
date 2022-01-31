@@ -10241,6 +10241,16 @@ Search.appendIndex(
             "summary": "Returns\u0020the\u0020endpoint\u0020URL\u0020\u0028absolute\u0020or\u0020relative\u0029\u0020of\u0020this\u0020request.",
             "url": "../classes/InstagramAPI-Request.html#method_getUrl"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\u003A\u003AsetRequestPriority\u0028\u0029",
+            "name": "setRequestPriority",
+            "summary": "Set\u0020the\u0020request\u0020priority.",
+            "url": "../classes/InstagramAPI-Request.html#method_setRequestPriority"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\u003A\u003AgetRequestPriority\u0028\u0029",
+            "name": "getRequestPriority",
+            "summary": "Returns\u0020the\u0020request\u0020priority.",
+            "url": "../classes/InstagramAPI-Request.html#method_getRequestPriority"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\u003A\u003A\u0024_parent",
             "name": "_parent",
             "summary": "The\u0020Instagram\u0020class\u0020instance\u0020we\u0020belong\u0020to.",
@@ -10340,6 +10350,11 @@ Search.appendIndex(
             "name": "_httpResponse",
             "summary": "Cached\u0020HTTP\u0020response\u0020object.",
             "url": "../classes/InstagramAPI-Request.html#property__httpResponse"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\u003A\u003A\u0024_requestPriority",
+            "name": "_requestPriority",
+            "summary": "Request\u0020priority.",
+            "url": "../classes/InstagramAPI-Request.html#property__requestPriority"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\AboutThisAccountResponse",
             "name": "AboutThisAccountResponse",

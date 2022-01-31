@@ -10,9 +10,9 @@ class Constants
         2   => 'https://i.instagram.com/api/v2/',
     ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
-    const IG_VERSION = '218.0.0.19.108';
+    const IG_VERSION = '219.0.0.12.117';
     const IG_IOS_VERSION = '212.1.0.25.118';
-    const VERSION_CODE = '322803421';
+    const VERSION_CODE = '322903320';
     const IG_IOS_VERSION_CODE = '329643252';
     const IOS_MODEL = 'iPhone13,2';
     const IOS_VERSION = '14_1';
@@ -30,7 +30,7 @@ class Constants
     const IG_LOGIN_PUBLIC_KEY = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF1enRZOEZvUlRGRU9mK1RkTGlUdAplN3FIQXY1cmdBMmk5RkQ0YjgzZk1GK3hheW14b0xSdU5KTitRanJ3dnBuSm1LQ0QxNGd3K2w3TGQ0RHkvRHVFCkRiZlpKcmRRWkJIT3drS3RqdDdkNWlhZFdOSjdLczlBM0NNbzB5UktyZFBGU1dsS21lQVJsTlFrVXF0YkNmTzcKT2phY3ZYV2dJcGlqTkdJRVk4UkdzRWJWZmdxSmsrZzhuQWZiT0xjNmEwbTMxckJWZUJ6Z0hkYWExeFNKOGJHcQplbG4zbWh4WDU2cmpTOG5LZGk4MzRZSlNaV3VxUHZmWWUrbEV6Nk5laU1FMEo3dE80eWxmeWlPQ05ycnF3SnJnCjBXWTFEeDd4MHlZajdrN1NkUWVLVUVaZ3FjNUFuVitjNUQ2SjJTSTlGMnNoZWxGNWVvZjJOYkl2TmFNakpSRDgKb1FJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==';
 
     // Endpoint Constants.
-    const BLOCK_VERSIONING_ID = 'b13a12a264f3bc2543249f2567639a3b5e7fdf31bd4ca13fb3c827d68149b285';
+    const BLOCK_VERSIONING_ID = '7d5d5c3edda9c3c433f0b903ced68830addf7027827d1194d3fbec0c41de4e7d';
     const IOS_BLOCKS_VERSIONING_ID = '0d38efe9f67cf51962782e8aae19001881099884d8d86c683d374fc1b89ffad1';
     const BATCH_SURFACES = [
         ['4715', ['instagram_other_profile_page_header']],

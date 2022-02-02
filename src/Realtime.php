@@ -477,6 +477,20 @@ class Realtime implements EventEmitterInterface
     }
 
     /**
+     * Sets connect timeout.
+     *
+     * @param int $timeout
+     */
+    public function setTimeout(
+        $timeout)
+    {
+        if ($timeout < 1) {
+            throw new \Exception('Timeout value can not be 0 or negative.');
+        }
+        $this->_client->setTimeout($timeout);
+    }
+
+    /**
      * Sends a ping.
      */
     public function sendPing()

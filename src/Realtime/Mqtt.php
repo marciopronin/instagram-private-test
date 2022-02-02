@@ -76,6 +76,9 @@ class Mqtt implements PersistentInterface
     /** @var Instagram */
     protected $_instagram;
 
+    /** @var int */
+    protected $_timeout = 0;
+
     /**
      * Constructor.
      *
@@ -287,7 +290,9 @@ class Mqtt implements PersistentInterface
         $this->_setReconnectTimer(function () {
             $this->_logger->info(sprintf('Connecting to %s:%d...', Mqtt\Config::DEFAULT_HOST, Mqtt\Config::DEFAULT_PORT));
 
-            return $this->_client->connect(Mqtt\Config::DEFAULT_HOST, Mqtt\Config::DEFAULT_PORT, new RealtimeConnection($this->_instagram), Mqtt\Config::CONNECTION_TIMEOUT);
+            $timeout = ($this->_timeout === 0) ? Mqtt\Config::CONNECTION_TIMEOUT : $this->_timeout;
+
+            return $this->_client->connect(Mqtt\Config::DEFAULT_HOST, Mqtt\Config::DEFAULT_PORT, new RealtimeConnection($this->_instagram), $timeout);
         });
     }
 
@@ -359,6 +364,17 @@ class Mqtt implements PersistentInterface
             json_encode($command, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             $command->getQosLevel()
         );
+    }
+
+    /**
+     * Set timeout.
+     *
+     * @param int $timeout
+     */
+    public function setTimeout(
+        $timeout)
+    {
+        $this->$_timeout = $timeout;
     }
 
     /**

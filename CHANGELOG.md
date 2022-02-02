@@ -1,3 +1,14 @@
+# Stable release v19.8.0
+## Date: 03/02/2022
+
+### New features
+
+- **Realtime:** Added a function to set connection timeout.
+
+### Examples
+
+- **Example:** Added customUploadStory to manually manage story uploads.
+
 # Stable release v19.7.5
 ## Date: 31/01/2022
 

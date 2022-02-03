@@ -1,3 +1,19 @@
+# Stable release v19.9.0
+## Date: 03/02/2022
+
+### New features
+
+- **Account:** Added `getTOTPCode()`
+- **Account:** Added `enableTOTPAuthentication()`
+
+### Updates and fixes
+
+- **Account:** Update `getSyncedFacebookPagesIds()`
+
+### Wiki
+
+- **Realtime:** Added timeout default values
+
 # Stable release v19.8.0
 ## Date: 03/02/2022
 

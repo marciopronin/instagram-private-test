@@ -1177,6 +1177,42 @@ class Account extends RequestCollection
     }
 
     /**
+     * Generate TOTP Code.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\TotpCodeResponse
+     */
+    public function getTOTPCode()
+    {
+        return $this->ig->request('accounts/generate_two_factor_totp_key/')
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('device_id', $this->ig->device_id)
+            ->getResponse(new Response\TotpCodeResponse());
+    }
+
+    /**
+     * Enable TOTP Two factor authentication.
+     *
+     * @param string $code OTP code (6-digit code).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function enableTOTPAuthentication(
+        $code)
+    {
+        return $this->ig->request('accounts/enable_totp_two_factor/')
+            ->addPost('verification_code', $code)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('device_id', $this->ig->device_id)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Set contact point prefill.
      *
      * @param string $usage Either "prefill" or "auto_confirmation".
@@ -1442,14 +1478,13 @@ class Account extends RequestCollection
      */
     public function getSyncedFacebookPagesIds()
     {
-        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account/')
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account.async/')
             ->setSignedPost(false)
             ->addPost('params', json_encode((object) [
                 'server_params' => [
-                    'should_show_done_button'   => 0,
-                    'account_id'                => $this->ig->account_id,
-                    'newly_linked'              => 0,
-                    'entrypoint'                => 1,
+                    'account_id'    => $this->ig->account_id,
+                    'newly_linked'  => 0,
+                    'entrypoint'    => 1,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [

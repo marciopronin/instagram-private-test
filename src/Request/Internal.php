@@ -1047,6 +1047,13 @@ class Internal extends RequestCollection
             case Constants::FEED_REELS:
                 $request
                     ->addPost('caption', $captionText);
+                if ($usertags !== null) {
+                    $in = [];
+                    foreach ($usertags as $userId) {
+                        $in[] = ['user_id' => $userId];
+                    }
+                    $request->addPost('usertags', $in);
+                }
                 break;
             case Constants::FEED_TV:
                 if ($title === null) {

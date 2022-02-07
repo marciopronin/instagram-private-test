@@ -175,6 +175,11 @@
                     <td class="phpdocumentor-cell"></td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Instagram.html"><abbr title="\InstagramAPI\Instagram">Instagram</abbr></a></td>
                 </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#property__timeout">$_timeout</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
                                                     <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-React-PersistentTrait.html#property__reconnectInterval">$_reconnectInterval</a></th>
                     <td class="phpdocumentor-cell"></td>
@@ -268,6 +273,11 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_sendCommand">sendCommand()</a></th>
                     <td class="phpdocumentor-cell">Send the command.</td>
+                    <td class="phpdocumentor-cell">mixed</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Realtime-Mqtt.html#method_setTimeout">setTimeout()</a></th>
+                    <td class="phpdocumentor-cell">Set timeout.</td>
                     <td class="phpdocumentor-cell">mixed</td>
                 </tr>
                             <tr>
@@ -680,6 +690,26 @@
             </code>
             
 </article>
+                                    <a id="property__timeout"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--protected
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$_timeout</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">80</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__name">$_timeout</span>
+         = <span class="phpdocumentor-signature__default-value">""</span>    </code>
+            
+</article>
                                                                     <a id="property__reconnectInterval"></a>
 <article
         class="
@@ -735,7 +765,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">93</span>
+        <span class="phpdocumentor-element-found-in__line">96</span>
     </aside>
         <p class="phpdocumentor-summary">Constructor.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -843,7 +873,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">140</span>
+        <span class="phpdocumentor-element-found-in__line">143</span>
     </aside>
         <p class="phpdocumentor-summary">Returns the loop instance.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -872,7 +902,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">146</span>
+        <span class="phpdocumentor-element-found-in__line">149</span>
     </aside>
         <p class="phpdocumentor-summary">Returns whether persistence should be maintained.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -901,7 +931,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">156</span>
+        <span class="phpdocumentor-element-found-in__line">159</span>
     </aside>
         <p class="phpdocumentor-summary">Add a subscription to the list.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -942,7 +972,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">167</span>
+        <span class="phpdocumentor-element-found-in__line">170</span>
     </aside>
         <p class="phpdocumentor-summary">Remove a subscription from the list.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -983,7 +1013,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">179</span>
+        <span class="phpdocumentor-element-found-in__line">182</span>
     </aside>
         <p class="phpdocumentor-summary">Set an additional option.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1033,7 +1063,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">192</span>
+        <span class="phpdocumentor-element-found-in__line">195</span>
     </aside>
         <p class="phpdocumentor-summary">Add a subscription to the list and send a command (optional).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1083,7 +1113,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">224</span>
+        <span class="phpdocumentor-element-found-in__line">227</span>
     </aside>
         <p class="phpdocumentor-summary">Remove a subscription from the list and send a command (optional).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1133,7 +1163,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">253</span>
+        <span class="phpdocumentor-element-found-in__line">256</span>
     </aside>
         <p class="phpdocumentor-summary">Cancel a keepalive timer (if any).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1162,7 +1192,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">271</span>
+        <span class="phpdocumentor-element-found-in__line">274</span>
     </aside>
         <p class="phpdocumentor-summary">Set up a new keepalive timer.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1191,7 +1221,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">285</span>
+        <span class="phpdocumentor-element-found-in__line">288</span>
     </aside>
         <p class="phpdocumentor-summary">Try to establish a connection.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1220,7 +1250,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">297</span>
+        <span class="phpdocumentor-element-found-in__line">302</span>
     </aside>
         <p class="phpdocumentor-summary">Perform first connection in a row.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1249,7 +1279,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">309</span>
+        <span class="phpdocumentor-element-found-in__line">314</span>
     </aside>
         <p class="phpdocumentor-summary">Whether connection is established.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1278,7 +1308,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">317</span>
+        <span class="phpdocumentor-element-found-in__line">322</span>
     </aside>
         <p class="phpdocumentor-summary">Disconnect from server.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1307,7 +1337,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">326</span>
+        <span class="phpdocumentor-element-found-in__line">331</span>
     </aside>
         <p class="phpdocumentor-summary">Proxy for _disconnect().</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1336,7 +1366,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">337</span>
+        <span class="phpdocumentor-element-found-in__line">342</span>
     </aside>
         <p class="phpdocumentor-summary">Sends a ping.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1365,7 +1395,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">350</span>
+        <span class="phpdocumentor-element-found-in__line">355</span>
     </aside>
         <p class="phpdocumentor-summary">Send the command.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1405,6 +1435,47 @@
         <span class="phpdocumentor-signature__response_type">mixed</span>
             
 </article>
+                                    <a id="method_setTimeout"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setTimeout()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">374</span>
+    </aside>
+        <p class="phpdocumentor-summary">Set timeout.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setTimeout</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$timeout</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$timeout</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
                                     <a id="method__loadExperiments"></a>
 <article
         class="
@@ -1416,7 +1487,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">369</span>
+        <span class="phpdocumentor-element-found-in__line">385</span>
     </aside>
         <p class="phpdocumentor-summary">Load the experiments.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1457,7 +1528,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">375</span>
+        <span class="phpdocumentor-element-found-in__line">391</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">protected</span>
@@ -1485,7 +1556,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">404</span>
+        <span class="phpdocumentor-element-found-in__line">420</span>
     </aside>
         <p class="phpdocumentor-summary">Create a new MQTT client.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1514,7 +1585,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">457</span>
+        <span class="phpdocumentor-element-found-in__line">473</span>
     </aside>
         <p class="phpdocumentor-summary">Mass update subscriptions statuses.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1573,7 +1644,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">479</span>
+        <span class="phpdocumentor-element-found-in__line">495</span>
     </aside>
         <p class="phpdocumentor-summary">Subscribe to all topics.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1602,7 +1673,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">489</span>
+        <span class="phpdocumentor-element-found-in__line">505</span>
     </aside>
         <p class="phpdocumentor-summary">Unsubscribe from all topics.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1631,7 +1702,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">503</span>
+        <span class="phpdocumentor-element-found-in__line">519</span>
     </aside>
         <p class="phpdocumentor-summary">Maps human readable topic to its identifier.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1672,7 +1743,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">524</span>
+        <span class="phpdocumentor-element-found-in__line">540</span>
     </aside>
         <p class="phpdocumentor-summary">Maps topic ID to human readable name.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1713,7 +1784,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">543</span>
+        <span class="phpdocumentor-element-found-in__line">559</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">protected</span>
@@ -1771,7 +1842,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">560</span>
+        <span class="phpdocumentor-element-found-in__line">576</span>
     </aside>
         <p class="phpdocumentor-summary">Incoming message handler.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1812,7 +1883,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">576</span>
+        <span class="phpdocumentor-element-found-in__line">592</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">protected</span>
@@ -1861,7 +1932,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Realtime/Mqtt.php"><a href="../files/src-realtime-mqtt.html"><abbr title="src/Realtime/Mqtt.php">Mqtt.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">628</span>
+        <span class="phpdocumentor-element-found-in__line">644</span>
     </aside>
         <p class="phpdocumentor-summary">Returns the logger instance.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

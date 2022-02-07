@@ -5101,6 +5101,11 @@ Search.appendIndex(
             "summary": "Send\u0020the\u0020command.",
             "url": "../classes/InstagramAPI-Realtime-Mqtt.html#method_sendCommand"
         },                {
+            "fqsen": "\\InstagramAPI\\Realtime\\Mqtt\u003A\u003AsetTimeout\u0028\u0029",
+            "name": "setTimeout",
+            "summary": "Set\u0020timeout.",
+            "url": "../classes/InstagramAPI-Realtime-Mqtt.html#method_setTimeout"
+        },                {
             "fqsen": "\\InstagramAPI\\Realtime\\Mqtt\u003A\u003A_loadExperiments\u0028\u0029",
             "name": "_loadExperiments",
             "summary": "Load\u0020the\u0020experiments.",
@@ -5240,6 +5245,11 @@ Search.appendIndex(
             "name": "_instagram",
             "summary": "",
             "url": "../classes/InstagramAPI-Realtime-Mqtt.html#property__instagram"
+        },                {
+            "fqsen": "\\InstagramAPI\\Realtime\\Mqtt\u003A\u003A\u0024_timeout",
+            "name": "_timeout",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Realtime-Mqtt.html#property__timeout"
         },                {
             "fqsen": "\\InstagramAPI\\Realtime\\Mqttot\\ExtendedThiftWriter",
             "name": "ExtendedThiftWriter",
@@ -6611,6 +6621,11 @@ Search.appendIndex(
             "summary": "Check\u0020if\u0020client\u0020is\u0020connected.",
             "url": "../classes/InstagramAPI-Realtime.html#method_isConnected"
         },                {
+            "fqsen": "\\InstagramAPI\\Realtime\u003A\u003AsetTimeout\u0028\u0029",
+            "name": "setTimeout",
+            "summary": "Sets\u0020connect\u0020timeout.",
+            "url": "../classes/InstagramAPI-Realtime.html#method_setTimeout"
+        },                {
             "fqsen": "\\InstagramAPI\\Realtime\u003A\u003AsendPing\u0028\u0029",
             "name": "sendPing",
             "summary": "Sends\u0020a\u0020ping.",
@@ -6870,6 +6885,16 @@ Search.appendIndex(
             "name": "verifySMSCode",
             "summary": "Submit\u0020the\u0020SMS\u0020code\u0020you\u0020received\u0020to\u0020verify\u0020your\u0020phone\u0020number.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_verifySMSCode"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AgetTOTPCode\u0028\u0029",
+            "name": "getTOTPCode",
+            "summary": "Generate\u0020TOTP\u0020Code.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_getTOTPCode"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AenableTOTPAuthentication\u0028\u0029",
+            "name": "enableTOTPAuthentication",
+            "summary": "Enable\u0020TOTP\u0020Two\u0020factor\u0020authentication.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_enableTOTPAuthentication"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AsetContactPointPrefill\u0028\u0029",
             "name": "setContactPointPrefill",

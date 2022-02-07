@@ -1,3 +1,10 @@
+# Stable release v19.9.1
+## Date: 07/02/2022
+
+### Updates and fixes
+
+- **Internal:** Now it is possible to tag people in Reels media.
+
 # Stable release v19.9.0
 ## Date: 03/02/2022
 

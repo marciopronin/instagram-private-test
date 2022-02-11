@@ -1,3 +1,10 @@
+# Stable release v19.9.2
+## Date: 11/02/2022
+
+### Examples
+
+- **Example:** New alternative to follow from search
+
 # Stable release v19.9.1
 ## Date: 07/02/2022
 

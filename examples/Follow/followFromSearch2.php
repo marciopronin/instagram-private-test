@@ -25,7 +25,6 @@ try {
     exit(0);
 }
 
-
 // Explore and search session, will be used for the Graph API events.
 $searchSession = \InstagramAPI\Signatures::generateUUID();
 
@@ -47,6 +46,7 @@ $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', $searchSession)
 $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
 
 $back = false;
+
 try {
     foreach ($usernamesToFollow as $idx => $usernameToFollow) {
         if ($back === true) {
@@ -202,6 +202,7 @@ try {
         }
         sleep(mt_rand(10, 15));
     }
+    $ig->event->updateAppState('foreground', 'explore_popular');
     $ig->discover->clearSearchHistory();
     $ig->event->sendClearSearchHistory();
     $ig->event->forceSendBatch();

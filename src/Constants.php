@@ -129,6 +129,18 @@ class Constants
         'INVALID'                           => 19,
     ];
 
+    const REASONS = [
+        'cold_start_fetch',
+        'warm_start_fetch',
+        'pull_to_refresh',
+        'new_follow',
+        'find_new_friends',
+        'pagination',
+        'checkpoint_shown',
+        'pill_refresh',
+        'none',
+    ];
+
     // PDQ TIME FRAMES FOR VIDEO UPLOADS.
     const PDQ_VIDEO_TIME_FRAMES = [
         0,

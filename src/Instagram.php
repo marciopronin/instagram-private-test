@@ -2435,7 +2435,9 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
-                $feed = $this->timeline->getTimelineFeed();
+                $feed = $this->timeline->getTimelineFeed(null, [
+                    'reason' => Constants::REASONS[0],
+                ]);
                 $items = $feed->getFeedItems();
                 $items = array_slice($items, 0, 2);
 

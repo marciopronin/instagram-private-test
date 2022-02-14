@@ -231,6 +231,13 @@ class Timeline extends RequestCollection
         );
         */
 
+        if (isset($options['reason'])) {
+            echo $options['reason'];
+            if (!in_array($options['reason'], Constants::REASONS)) {
+                throw new \InvalidArgumentException('Invalid reason provided.');
+            }
+        }
+
         $request = $this->ig->request('feed/timeline/')
             ->setSignedPost(false)
             ->setIsBodyCompressed(true)
@@ -254,10 +261,6 @@ class Timeline extends RequestCollection
             $request->addPost('session_id', $this->ig->session_id);
         }
 
-        if (isset($options['latest_story_pk'])) {
-            $request->addPost('latest_story_pk', $options['latest_story_pk']);
-        }
-
         if ($maxId !== null) {
             $request->addPost('reason', 'pagination');
             $request->addPost('max_id', $maxId);
@@ -269,7 +272,7 @@ class Timeline extends RequestCollection
             $request->addPost('reason', 'warm_start_fetch');
             $request->addPost('is_pull_to_refresh', '0');
         } else {
-            $request->addPost('reason', 'cold_start_fetch');
+            $request->addPost('reason', isset($options['reason']) ? $options['reason'] : Constants::REASONS[0]); // cold_start_fetch
             $request->addPost('is_pull_to_refresh', '0');
         }
 
@@ -305,10 +308,6 @@ class Timeline extends RequestCollection
 
         if (!empty($options['push_disabled'])) {
             $request->addPost('push_disabled', 'true');
-        }
-
-        if (!empty($options['recovered_from_crash'])) {
-            $request->addPost('recovered_from_crash', '1');
         }
 
         if (!empty($options['request_id'])) {

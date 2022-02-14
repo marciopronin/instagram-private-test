@@ -1,3 +1,17 @@
+# Stable release v19.9.3
+## Date: 14/02/2022
+
+### Updates and fixes
+
+- **Account:** Update `editProfile()`
+- **Constants:** Added new Constants.
+- **Instagram:** Update `_sendLoginFlow()`
+- **Timeline:** Update `getTimelineFeed()`
+
+### Examples
+
+- **Example:** Update follow from search 2
+
 # Stable release v19.9.2
 ## Date: 11/02/2022
 

@@ -563,6 +563,9 @@ class Account extends RequestCollection
         $email,
         $newUsername = null)
     {
+        if ($email === null || $email === '') {
+            throw new \InvalidArgumentException('No email provided.');
+        }
         // We must mark the profile for editing before doing the main request.
         $userResponse = $this->ig->request('accounts/current_user/')
             ->addParam('edit', true)

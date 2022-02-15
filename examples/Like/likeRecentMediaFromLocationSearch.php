@@ -50,7 +50,6 @@ try {
     $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
 
     // Get suggested searches and recommendations from Instagram.
-    $ig->discover->getSuggestedSearches('blended');
     $ig->event->sendNavigation('button', 'explore_popular', 'search');
     $ig->event->sendNavigation('button', 'search', 'blended_search');
     $ig->event->sendNavigation('button', 'blended_search', 'search_places');

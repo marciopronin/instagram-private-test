@@ -50,7 +50,6 @@ try {
     // TODO: Add explore_home_impression per thumbnail shown in sectional items.
 
     // Get suggested searches and recommendations from Instagram.
-    $ig->discover->getSuggestedSearches('blended');
     $ig->event->sendNavigation('button', 'explore_popular', 'search');
     $ig->event->sendNavigation('button', 'search', 'blended_search');
     $ig->discover->getNullStateDynamicSections();

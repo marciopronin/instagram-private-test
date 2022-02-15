@@ -43,7 +43,6 @@ try {
     $ig->event->sendNavigationTabClicked('main_home', 'main_search', 'feed_timeline');
     $ig->event->sendNavigation('main_search', 'feed_timeline', 'explore_popular', null, null, $topicData);
     $ig->discover->getNullStateDynamicSections();
-    $ig->discover->getSuggestedSearches('blended');
 
     // Get explore feed sections and items.
     $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', $searchSession)->getSectionalItems();

@@ -1,3 +1,14 @@
+# Stable release v19.9.4
+## Date: 15/02/2022
+
+### Updates and fixes
+
+- **Discover:** Update `getSuggestedSearches()`. This function is not used anymore by Instagram app. A warning has been added in the function doc.
+
+### Examples
+
+- **Example:** All examples have been updated. `getSuggestedSearches()` is NOT used anymore.
+
 # Stable release v19.9.3
 ## Date: 14/02/2022
 

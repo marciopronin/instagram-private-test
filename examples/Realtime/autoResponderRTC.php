@@ -54,6 +54,7 @@ $rtc->on('connect', function () use ($rtc, $inboxResponse) {
     $ig->event->sendDirectInboxTabImpression();
 
     // In this example we will be iterating each thread to load all the items of each.
+    $clientContext = \InstagramAPI\Utils::generateClientContext();
     foreach ($threads as $pos=>$thread) {
         $ig->event->sendDirectEnterThread($thread->getThreadId(), $thread->getUsers()[0]->getPk(), $pos);
         $ig->event->sendNavigation('inbox', 'direct_inbox', 'direct_thread');

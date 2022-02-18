@@ -421,8 +421,8 @@ class Request
             $this->_headers['IG-INTENDED-USER-ID'] = empty($this->_parent->settings->get('account_id')) ? 0 : $this->_parent->settings->get('account_id');
 
             if ($this->_parent->getIsLowDataModeEnabled() === true) {
-                $this->_headers['X-IG-Low-Data-Mode-Image'] = 'true'
-                $this->_headers['X-IG-Low-Data-Mode-Video'] = 'true'
+                $this->_headers['X-IG-Low-Data-Mode-Image'] = 'true';
+                $this->_headers['X-IG-Low-Data-Mode-Video'] = 'true';
             }
 
             if ($this->_parent->isExperimentEnabled('qe_ig_traffic_routing_universe', 'is_in_cr_routing_experiment', false)) {

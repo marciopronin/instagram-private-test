@@ -908,11 +908,8 @@ class Internal extends RequestCollection
             case Constants::FEED_TIMELINE:
                 $request->addPost('caption', $captionText);
                 if ($usertags !== null) {
-                    $in = [];
-                    foreach ($usertags as $userId) {
-                        $in[] = ['user_id' => $userId];
-                    }
-                    $request->addPost('usertags', $in);
+                    Utils::throwIfInvalidUsertags($usertags);
+                    $request->addPost('usertags', json_encode($usertags));
                     //->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
                 }
                 break;
@@ -1048,11 +1045,8 @@ class Internal extends RequestCollection
                 $request
                     ->addPost('caption', $captionText);
                 if ($usertags !== null) {
-                    $in = [];
-                    foreach ($usertags as $userId) {
-                        $in[] = ['user_id' => $userId];
-                    }
-                    $request->addPost('usertags', $in);
+                    Utils::throwIfInvalidUsertags($usertags);
+                    $request->addPost('usertags', json_encode($usertags));
                 }
                 break;
             case Constants::FEED_TV:

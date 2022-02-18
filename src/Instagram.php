@@ -416,6 +416,13 @@ class Instagram implements ExperimentsInterface
     public $darkModeEnabled = false;
 
     /**
+     * Low data enabled.
+     *
+     * @var bool
+     */
+    public $lowDataModeEnabled = false;
+
+    /**
      * iOS DPI.
      *
      * @var string|null
@@ -1110,6 +1117,27 @@ class Instagram implements ExperimentsInterface
         $value)
     {
         $this->darkModeEnabled = $value;
+    }
+
+    /**
+     * Get low data mode enabled.
+     *
+     * @return bool
+     */
+    public function getIsLowDataModeEnabled()
+    {
+        return $this->lowDataModeEnabled;
+    }
+
+    /**
+     * Set low data mode enabled.
+     *
+     * @param bool $value
+     */
+    public function setIsLowDataModeEnabled(
+        $value)
+    {
+        $this->lowDataModeEnabled = $value;
     }
 
     /**

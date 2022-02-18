@@ -1,3 +1,19 @@
+# Stable release v19.10.0
+## Date: 18/02/2022
+
+### New features
+
+- **Instagram:** Add low data mode. This tells Instagram to send only the essential data (only to be used to emulate app).
+
+### Updates and fixes
+
+- **Request:** Update `_addDefaultHeaders()`. Deprecated headers were removed. Low data mode headers were added and changed experiment for setting `X-IG-CONCURRENT-ENABLED`
+- **Internal:** Fixed tag serializer when configuring media
+
+### Wiki
+
+- **Wiki:** Added information about `UFACWWWBloksScreen`
+
 # Stable release v19.9.4
 ## Date: 15/02/2022
 

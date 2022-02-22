@@ -1,3 +1,12 @@
+# Stable release v19.10.1
+## Date: 22/02/2022
+
+### Updates and fixes
+
+- **Constants:** Update Instagram constants to version 222.0.0.15.114
+- **Timeline:** Update `getTimelineFeed()`. Delete debug traces.
+- **Event:** Update `_getModuleClass()`. Update classes to 222.0.0.15.114
+
 # Stable release v19.10.0
 ## Date: 18/02/2022
 

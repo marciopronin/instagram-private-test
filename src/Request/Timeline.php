@@ -232,7 +232,6 @@ class Timeline extends RequestCollection
         */
 
         if (isset($options['reason'])) {
-            echo $options['reason'];
             if (!in_array($options['reason'], Constants::REASONS)) {
                 throw new \InvalidArgumentException('Invalid reason provided.');
             }

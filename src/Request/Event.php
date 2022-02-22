@@ -117,13 +117,13 @@ class Event extends RequestCollection
     {
         switch ($module) {
             case 'feed_timeline':
-                $class = '0N4';
+                $class = '1na';
                 break;
             case 'newsfeed_you':
-                $class = 'BSK';
+                $class = 'CVP';
                 break;
             case 'explore_popular':
-                $class = 'ETZ';
+                $class = '20v';
                 break;
             /*
             case 'search':
@@ -145,58 +145,58 @@ class Event extends RequestCollection
                 break;
             */
             case 'music_search':
-                $class = '5nq';
+                $class = '7jj';
                 break;
-            case 'blended_search_edit_recent':
-                $class = 'BzC';
+            case 'search_edit_recent':
+                $class = 'Dht';
                 break;
             case 'feed_hashtag':
                 $class = 'HashtagPageFragment';
                 break;
             case 'feed_location':
-                $class = 'EVG';
+                $class = 'DWw';
                 break;
             case 'feed_contextual_chain':
-                $class = 'Dki';
+                $class = 'DZG';
                 break;
-            case 'feed_contextual_place':
-            case 'feed_contextual_location':
-            case 'feed_contextual_hashtag':
+            //case 'feed_contextual_place':
+            //case 'feed_contextual_location':
+            //case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = 'Dkh';
+                $class = 'DZE';
                 break;
             case 'profile':
             case 'self_profile': // UserDetailFragment, ProfileMediaTabFragment
-                $class = 'BLG';
+                $class = '3Gi';
                 break;
             case 'following_sheet':
                 $class = 'ProfileFollowRelationshipFragment';
                 break;
             case 'bottom_sheet_profile':
-                $class = '4uu';
+                $class = '3LT';
                 break;
             case 'settings_category_options':
-                $class = '4zo';
+                $class = 'AqA';
                 break;
             case 'privacy_options':
-                $class = '50H';
+                $class = 'AXf';
                 break;
             case 'unified_follow_lists':
             case 'self_unified_follow_lists':
                 $class = 'UnifiedFollowFragment';
                 break;
             case 'likers':
-                $class = 'BL7';
+                $class = 'BXD';
                 break;
             case 'tabbed_gallery_camera':
                 $class = 'MediaCaptureFragment';
                 break;
             case 'photo_filter':
-                $class = '7Im';
+                $class = '8Ek';
                 break;
             case 'gallery_picker':
-                $class = '7IP';
+                $class = '8Iv';
                 break;
             /*
             case 'quick_capture_fragment':
@@ -207,39 +207,36 @@ class Event extends RequestCollection
                 $class = 'FollowersShareFragment';
                 break;
             case 'direct_inbox':
-                $class = '9SY';
+                $class = '35k';
                 break;
             case 'direct_thread':
-                $class = '8Tz';
+                $class = '4gG';
                 break;
             case 'direct_recipient_picker':
-                $class = '9Jc';
+                $class = '97w';
                 break;
             case 'reel_profile':
                 $class = 'ReelViewerFragment';
                 break;
             case 'edit_profile':
-                $class = '4yw';
+                $class = 'Aj6';
                 break;
             case 'personal_information':
-                $class = '4ys';
+                $class = 'AE2';
                 break;
             case 'profile_edit_bio':
-                $class = 'ALD';
+                $class = '9HV';
                 break;
             case 'comments_v2_feed_contextual_profile':
                 $class = 'CommentThreadFragment';
                 break;
             case 'self_followers':
             case 'self_following':
-                $class = 'BEq';
+                $class = 'BdP';
                 break;
             // login_landing
-            case 'clips_profile':
-                $class = 'Brs';
-                break;
-            case 'audio_page':
-                $class = '84J';
+            case 'video_profile':
+                $class = '4rt';
                 break;
             default:
                 $class = false;

@@ -263,7 +263,7 @@ class Discover extends RequestCollection
 
     /**
      * Get search suggestions via Facebook's algorithm.
-     * 
+     *
      * WARNING: THIS FUNCTION IS NOT USED ANYMORE!
      *
      * NOTE: In the app, they're listed as the "Suggested" in the "Top" tab at the "Search" screen.

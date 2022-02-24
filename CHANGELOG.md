@@ -1,3 +1,10 @@
+# Stable release v19.10.2
+## Date: 24/02/2022
+
+### Updates and fixes
+
+- **Realtime/Mqtt:** Fixed typo in `setTimeout()`
+
 # Stable release v19.10.1
 ## Date: 22/02/2022
 

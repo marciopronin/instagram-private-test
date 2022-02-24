@@ -374,7 +374,7 @@ class Mqtt implements PersistentInterface
     public function setTimeout(
         $timeout)
     {
-        $this->$_timeout = $timeout;
+        $this->_timeout = $timeout;
     }
 
     /**

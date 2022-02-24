@@ -1,3 +1,12 @@
+# Stable release v19.11.0
+## Date: 24/02/2022
+
+### New features
+
+- **Story:** Add `sendLike()`
+- **Story:** Add `unsendLike()`
+- **Story:** Add `_sendStoryInteraction()`
+
 # Stable release v19.10.2
 ## Date: 24/02/2022
 

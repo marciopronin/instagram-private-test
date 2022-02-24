@@ -1120,4 +1120,76 @@ class Story extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->getResponse(new Response\GenericResponse());
     }
+
+     /**
+     * Send story like.
+     *
+     * @param string $storyId           The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string $traySessionId     UUID v4.
+     * @param string $viewerSessionId   UUID v4.
+     * @param string $containerModule   The module.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function sendLike(
+        $storyId,
+        $traySessionId,
+        $viewerSessionId,
+        $containerModule = 'reel_profile')
+    {
+        return $this->_sendStoryInteraction('send_story_like', $storyId, $traySessionId, $viewerSessionId, $containerModule);
+    }
+    
+     /**
+     * Unsend story like.
+     *
+     * @param string $storyId           The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string $traySessionId     UUID v4.
+     * @param string $viewerSessionId   UUID v4.
+     * @param string $containerModule   The module.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function unsendLike(
+        $storyId,
+        $traySessionId,
+        $viewerSessionId,
+        $containerModule = 'reel_profile')
+    {
+        return $this->_sendStoryInteraction('unsend_story_like', $storyId, $traySessionId, $viewerSessionId, $containerModule);
+    }   
+
+     /**
+     * Perform story interactions.
+     *
+     * @param string $endpoint          Story interactions endpoint.
+     * @param string $storyId           The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string $traySessionId     UUID v4.
+     * @param string $viewerSessionId   UUID v4.
+     * @param string $containerModule   The module.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    protected function _sendStoryInteraction(
+        $endpoint,
+        $storyId,
+        $traySessionId,
+        $viewerSessionId,
+        $containerModule = 'reel_profile')
+    {
+        return $this->ig->request("story_interactions/{$endpoint}/")
+            ->addPost('media_id', $storyId)
+            ->addPost('container_module', $containerModule)
+            ->addPost('tray_session_id', $traySessionId)
+            ->addPost('viewer_session_id', $viewerSessionId)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
 }

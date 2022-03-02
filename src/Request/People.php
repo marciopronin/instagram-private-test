@@ -956,6 +956,7 @@ class People extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
+            ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('device_id', $this->ig->device_id);
 
         if ($this->ig->getIsAndroid()) {
@@ -988,6 +989,7 @@ class People extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
+            ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('radio_type', $this->ig->radio_type);
 
         if ($mediaId !== null) {

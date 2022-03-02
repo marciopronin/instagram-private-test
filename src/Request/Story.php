@@ -1121,13 +1121,13 @@ class Story extends RequestCollection
             ->getResponse(new Response\GenericResponse());
     }
 
-     /**
+    /**
      * Send story like.
      *
-     * @param string $storyId           The story media item's ID in Instagram's internal format (ie "1542304813904481224").
-     * @param string $traySessionId     UUID v4.
-     * @param string $viewerSessionId   UUID v4.
-     * @param string $containerModule   The module.
+     * @param string $storyId         The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string $traySessionId   UUID v4.
+     * @param string $viewerSessionId UUID v4.
+     * @param string $containerModule The module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1141,14 +1141,14 @@ class Story extends RequestCollection
     {
         return $this->_sendStoryInteraction('send_story_like', $storyId, $traySessionId, $viewerSessionId, $containerModule);
     }
-    
-     /**
+
+    /**
      * Unsend story like.
      *
-     * @param string $storyId           The story media item's ID in Instagram's internal format (ie "1542304813904481224").
-     * @param string $traySessionId     UUID v4.
-     * @param string $viewerSessionId   UUID v4.
-     * @param string $containerModule   The module.
+     * @param string $storyId         The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string $traySessionId   UUID v4.
+     * @param string $viewerSessionId UUID v4.
+     * @param string $containerModule The module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1161,16 +1161,16 @@ class Story extends RequestCollection
         $containerModule = 'reel_profile')
     {
         return $this->_sendStoryInteraction('unsend_story_like', $storyId, $traySessionId, $viewerSessionId, $containerModule);
-    }   
+    }
 
-     /**
+    /**
      * Perform story interactions.
      *
-     * @param string $endpoint          Story interactions endpoint.
-     * @param string $storyId           The story media item's ID in Instagram's internal format (ie "1542304813904481224").
-     * @param string $traySessionId     UUID v4.
-     * @param string $viewerSessionId   UUID v4.
-     * @param string $containerModule   The module.
+     * @param string $endpoint        Story interactions endpoint.
+     * @param string $storyId         The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string $traySessionId   UUID v4.
+     * @param string $viewerSessionId UUID v4.
+     * @param string $containerModule The module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *

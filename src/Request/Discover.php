@@ -13,14 +13,15 @@ class Discover extends RequestCollection
     /**
      * Get Explore tab feed.
      *
-     * @param string|null $clusterId  The cluster ID. Default page: 'explore_all:0', Animals: 'hashtag_inspired:1',
-     *                                Style: 'hashtag_inspired:26', Comics: 'hashtag_inspired:20', Travel: 'hashtag_inspired:28',
-     *                                Architecture: 'hashtag_inspired:18', Beauty: 'hashtag_inspired:3', DIY: 'hashtag_inspired:21',
-     *                                Auto: 'hashtag_inspired:19', Music: 'hashtag_inspired:11', Nature: 'hashtag_inspired:24',
-     *                                Decor: 'hashtag_inspired:5', Dance: 'hashtag_inspired:22'.
-     * @param string      $sessionId  Session ID. UUIDv4.
-     * @param string|null $maxId      Next "maximum ID", used for pagination.
-     * @param bool        $isPrefetch Whether this is the first fetch; we'll ignore maxId if TRUE.
+     * @param string|null $clusterId       The cluster ID. Default page: 'explore_all:0', Animals: 'hashtag_inspired:1',
+     *                                     Style: 'hashtag_inspired:26', Comics: 'hashtag_inspired:20', Travel: 'hashtag_inspired:28',
+     *                                     Architecture: 'hashtag_inspired:18', Beauty: 'hashtag_inspired:3', DIY: 'hashtag_inspired:21',
+     *                                     Auto: 'hashtag_inspired:19', Music: 'hashtag_inspired:11', Nature: 'hashtag_inspired:24',
+     *                                     Decor: 'hashtag_inspired:5', Dance: 'hashtag_inspired:22'.
+     * @param string      $sessionId       Session ID. UUIDv4.
+     * @param string|null $maxId           Next "maximum ID", used for pagination.
+     * @param bool        $isPrefetch      Whether this is the first fetch; we'll ignore maxId if TRUE.
+     * @param bool        $clusterDisabled Whether this is the first fetch; we'll ignore maxId if TRUE.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -30,18 +31,22 @@ class Discover extends RequestCollection
         $clusterId,
         $sessionId,
         $maxId = null,
-        $isPrefetch = false)
+        $isPrefetch = false,
+        $clusterDisabled = true)
     {
         $request = $this->ig->request('discover/topical_explore/')
             ->addHeader('X-IG-Prefetch-Request', 'foreground')
             ->addParam('is_prefetch', $isPrefetch)
             ->addParam('omit_cover_media', true)
+            ->addParam('is_ptr', false)
             ->addParam('reels_configuration', 'default')
             ->addParam('use_sectional_payload', true)
             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-            ->addParam('session_id', $sessionId)
-            ->addParam('include_fixed_destinations', true)
-            ->addParam('cluster_id', $clusterId);
+            ->addParam('session_id', $sessionId);
+
+        if ($clusterDisabled === false) {
+            $request->addParam('cluster_id', $clusterId);
+        }
 
         if (!$isPrefetch) {
             if ($maxId === null) {
@@ -202,12 +207,12 @@ class Discover extends RequestCollection
             throw new \InvalidArgumentException('Query must be a non-empty string.');
         }
         $request = $this->_paginateWithMultiExclusion(
-            $this->ig->request('fbsearch/topsearch_flat/')
-                ->addParam('context', 'blended')
-                ->addParam('query', $query)
+            $this->ig->request('fbsearch/ig_typeahead/')
+                ->addParam('search_surface', 'typeahead_search_page')
                 ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-                ->addParam('search_surface', 'top_search_page')
-                ->addParam('count', 30),
+                ->addParam('count', 30)
+                ->addParam('query', $query)
+                ->addParam('context', 'blended'),
             $excludeList,
             $rankToken
         );

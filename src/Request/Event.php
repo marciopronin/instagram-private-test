@@ -125,6 +125,9 @@ class Event extends RequestCollection
             case 'explore_popular':
                 $class = '20v';
                 break;
+            case 'search_typeahead':
+                $class = 'Di7';
+                break;
             /*
             case 'search':
             case 'blended_search':
@@ -4001,6 +4004,20 @@ class Event extends RequestCollection
                     'clickpoint'    => 'explore_topic_load',
                     'dest_module'   => 'explore_popular',
                 ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'search_typeahead',
+                ],
+            ],
+            'search_typeahead' => [
+                [
+                    'clickpoint'    => 'main_search',
+                    'dest_module'   => 'explore_popular',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'profile',
+                ],
             ],
             'search' => [
                 [
@@ -4284,6 +4301,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'back',
                     'dest_module'   => 'blended_search',
+                ],
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'search_typeahead',
                 ],
                 [
                     'clickpoint'    => 'button',
@@ -5771,6 +5792,9 @@ class Event extends RequestCollection
             'rank_token'                        => $rankToken,
             'query_text'                        => $queryText,
             'results_source_list'               => empty($results) ? [] : array_fill(0, count($results) - 1, 'server'),
+            'prior_module'                      => null,
+            'prior_query_text'                  => null,
+            'prior_serp_session_id'             => null,
         ];
         $event = $this->_addEventBody('instagram_search_results', $module, $extra);
         $this->_addEventData($event);
@@ -5816,21 +5840,31 @@ class Event extends RequestCollection
             $searchType = 'PLACE';
         } elseif ($module === 'blended_search') {
             $searchType = 'BLENDED';
+        } elseif ($module === 'search_typeahead') {
+            $searchType = 'TYPEAHEAD';
         }
 
         $extra = [
-            'rank_token'             => $rankToken,
-            'query_text'             => $queryText,
-            'search_session_id'      => $searchSession,
-            'search_type'            => $searchType,
-            'selected_type'          => $selectedType,
-            'selected_id'            => $selectedId,
-            'click_type'             => 'server_results',
-            'selected_position'      => $position,
-            'results_list'           => $results,
-            'selected_follow_status' => 'not_following',
-            'results_position_list'  => $positionList,
-            'results_type_list'      => $resultsTypeList,
+            'rank_token'                                    => $rankToken,
+            'query_text'                                    => $queryText,
+            'search_session_id'                             => $searchSession,
+            'search_type'                                   => $searchType,
+            'selected_type'                                 => $selectedType,
+            'selected_id'                                   => $selectedId,
+            'click_type'                                    => 'server_results',
+            'selected_position'                             => $position,
+            'results_list'                                  => $results,
+            'selected_follow_status'                        => 'not_following',
+            'results_position_list'                         => $positionList,
+            'results_type_list'                             => $resultsTypeList,
+            'encoded_latlon_privacy_sensitive_do_not_use'   => null,
+            'shopping_session_id'                           => null,
+            'prior_module'                                  => null,
+            'prior_query_text'                              => null,
+            'prior_serp_session_id'                         => null,
+            'recommendations_shown_entity_ids'              => [],
+            'recommendations_shown_entity_names'            => [],
+            'recommendations_shown_entity_types'            => [],
         ];
         $event = $this->_addEventBody('search_results_page', $module, $extra);
         $this->_addEventData($event);

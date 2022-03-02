@@ -1,3 +1,19 @@
+# Stable release v19.11.1
+## Date: 02/03/2022
+
+### Updates and fixes
+
+- **Discover:** Update `getExploreFeed()`
+- **Discover:** Update `search()`
+- **Events:** Update `_validateNavigationPath()`
+- **Events:** Update `sendSearchResultsPage()`
+- **Events:** Update `sendSearchResults()`
+- **People:** Update `follow()`
+
+### Examples
+
+- **Example:** Update followFromSearch2
+
 # Stable release v19.11.0
 ## Date: 24/02/2022
 

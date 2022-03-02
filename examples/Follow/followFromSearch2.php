@@ -40,7 +40,6 @@ $topicData =
 $ig->event->sendNavigationTabClicked('main_home', 'main_search', 'feed_timeline');
 $ig->event->sendNavigation('main_search', 'feed_timeline', 'explore_popular', null, null, $topicData);
 $ig->discover->getNullStateDynamicSections();
-$ig->discover->getSuggestedSearches('blended');
 // Get explore feed sections and items.
 $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', $searchSession)->getSectionalItems();
 $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
@@ -55,8 +54,7 @@ try {
         $timeToSearch = mt_rand(4000, 8500);
         sleep($timeToSearch / 1000);
         $searchResponse = $ig->discover->search($usernameToFollow);
-        $ig->event->sendNavigation('button', 'explore_popular', 'search');
-        $ig->event->sendNavigation('button', 'search', 'blended_search');
+        $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
         $searchResults = $searchResponse->getList();
         $rankToken = $searchResponse->getRankToken();
         $resultList = [];
@@ -83,11 +81,11 @@ try {
                 $position++;
             }
         }
-        $ig->event->sendSearchResults($usernameToFollow, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
-        $ig->event->sendSearchResultsPage($usernameToFollow, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
+        $ig->event->sendSearchResults($usernameToFollow, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_typeahead');
+        $ig->event->sendSearchResultsPage($usernameToFollow, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'search_typeahead');
         $ig->discover->registerRecentSearchClick('user', $userId);
         $ig->people->getFriendship($userId);
-        $suggestions = $ig->people->getInfoById($userId, 'search_users')->getUser()->getChainingSuggestions();
+        $suggestions = $ig->people->getInfoById($userId, 'search_typeahead')->getUser()->getChainingSuggestions();
 
         if ($suggestions !== null) {
             for ($i = 0; $i < 4; $i++) {
@@ -95,7 +93,7 @@ try {
                 $ig->event->sendSimilarEntityImpression($userId, $suggestions[$i]->getPk());
             }
         }
-        $ig->event->sendNavigation('button', 'search_users', 'profile', null, null,
+        $ig->event->sendNavigation('button', 'search_typeahead', 'profile', null, null,
             [
                 'rank_token'        => $rankToken,
                 'query_text'        => $usernameToFollow,
@@ -139,11 +137,11 @@ try {
         $ig->event->sendFollowButtonTapped($userId, 'profile',
             [
                 [
-                    'module'        => 'blended_search',
+                    'module'        => 'search_typeahead',
                     'click_point'   => 'search_result',
                 ],
                 [
-                    'module'        => 'blended_search',
+                    'module'        => 'search_typeahead',
                     'click_point'   => 'button',
                 ],
                 [
@@ -164,11 +162,11 @@ try {
         $ig->event->sendProfileAction('follow', $userId,
             [
                 [
-                    'module'        => 'blended_search',
+                    'module'        => 'search_typeahead',
                     'click_point'   => 'search_result',
                 ],
                 [
-                    'module'        => 'blended_search',
+                    'module'        => 'search_typeahead',
                     'click_point'   => 'button',
                 ],
                 [
@@ -194,8 +192,8 @@ try {
         foreach ($chainingUsers as $user) {
             $ig->event->sendSimilarUserImpression($userId, $user->getPk());
         }
-        $ig->event->sendNavigation('back', 'profile', 'search');
-        $ig->event->sendNavigation('main_search', 'search_users', 'explore_popular');
+        $ig->event->sendNavigation('back', 'profile', 'search_typeahead');
+        $ig->event->sendNavigation('main_search', 'search_typeahead', 'explore_popular');
         $ig->event->updateAppState('background', 'explore_popular');
         if ($back === false) {
             $back = true;

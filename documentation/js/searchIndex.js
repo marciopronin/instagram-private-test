@@ -651,6 +651,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Constants.html#constant_SHARE_TYPE"
         },                {
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AREASONS",
+            "name": "REASONS",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Constants.html#constant_REASONS"
+        },                {
             "fqsen": "\\InstagramAPI\\Constants\u003A\u003APDQ_VIDEO_TIME_FRAMES",
             "name": "PDQ_VIDEO_TIME_FRAMES",
             "summary": "",
@@ -1501,6 +1506,16 @@ Search.appendIndex(
             "summary": "Set\u0020is\u0020dark\u0020mode\u0020enabled.",
             "url": "../classes/InstagramAPI-Instagram.html#method_setIsDarkModeEnabled"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetIsLowDataModeEnabled\u0028\u0029",
+            "name": "getIsLowDataModeEnabled",
+            "summary": "Get\u0020low\u0020data\u0020mode\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getIsLowDataModeEnabled"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetIsLowDataModeEnabled\u0028\u0029",
+            "name": "setIsLowDataModeEnabled",
+            "summary": "Set\u0020low\u0020data\u0020mode\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setIsLowDataModeEnabled"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetNavChain\u0028\u0029",
             "name": "getNavChain",
             "summary": "Get\u0020navigation\u0020chain.",
@@ -1900,6 +1915,11 @@ Search.appendIndex(
             "name": "darkModeEnabled",
             "summary": "Dark\u0020mode\u0020enabled.",
             "url": "../classes/InstagramAPI-Instagram.html#property_darkModeEnabled"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024lowDataModeEnabled",
+            "name": "lowDataModeEnabled",
+            "summary": "Low\u0020data\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_lowDataModeEnabled"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024iosDpi",
             "name": "iosDpi",
@@ -9865,6 +9885,21 @@ Search.appendIndex(
             "name": "setStoryAllowList",
             "summary": "Bulk\u0020Add\/Remove\u0020viewers\u0020from\u0020your\u0020story\u0020allow\u0020list.",
             "url": "../classes/InstagramAPI-Request-Story.html#method_setStoryAllowList"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Story\u003A\u003AsendLike\u0028\u0029",
+            "name": "sendLike",
+            "summary": "Send\u0020story\u0020like.",
+            "url": "../classes/InstagramAPI-Request-Story.html#method_sendLike"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Story\u003A\u003AunsendLike\u0028\u0029",
+            "name": "unsendLike",
+            "summary": "Unsend\u0020story\u0020like.",
+            "url": "../classes/InstagramAPI-Request-Story.html#method_unsendLike"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Story\u003A\u003A_sendStoryInteraction\u0028\u0029",
+            "name": "_sendStoryInteraction",
+            "summary": "Perform\u0020story\u0020interactions.",
+            "url": "../classes/InstagramAPI-Request-Story.html#method__sendStoryInteraction"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Timeline",
             "name": "Timeline",

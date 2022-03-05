@@ -1,3 +1,14 @@
+# Stable release v19.11.2
+## Date: 05/03/2022
+
+### Examples
+
+- **Example:** basic example containing organic organic behaviour.
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v19.11.1
 ## Date: 02/03/2022
 

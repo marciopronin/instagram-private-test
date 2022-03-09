@@ -1,3 +1,11 @@
+# Stable release v19.11.3
+## Date: 09/03/2022
+
+### Updates and fixes
+
+- **Instagram:** Update to version 225.0.0.19.115. New releases will address minor adjustments to navigation modules during search
+- **Events:** Update navigation chain modules and classes.
+
 # Stable release v19.11.2
 ## Date: 05/03/2022
 

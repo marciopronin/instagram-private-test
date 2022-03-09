@@ -117,89 +117,90 @@ class Event extends RequestCollection
     {
         switch ($module) {
             case 'feed_timeline':
-                $class = '1na';
+                $class = '1WE';
                 break;
             case 'newsfeed_you':
-                $class = 'CVP';
+                $class = 'Cgp';
                 break;
             case 'explore_popular':
-                $class = '20v';
+                $class = '1ng';
                 break;
             case 'search_typeahead':
-                $class = 'Di7';
+                $class = 'EV2';
                 break;
-            /*
-            case 'search':
+            //case 'search':
             case 'blended_search':
-            case 'search_result':
-                $class = 'Cr5';
+            //case 'search_result':
+                $class = 'EV4';
                 break;
             case 'search_places':
-                $class = 'Cse';
+                $class = 'EVM';
                 break;
             case 'search_users':
-                $class = 'CxZ';
+                $class = 'EWJ';
                 break;
             case 'search_tags':
-                $class = 'CuP';
+                $class = 'EWC';
                 break;
             case 'search_audio':
-                $class = 'GgQ';
+                $class = 'EV9';
                 break;
-            */
             case 'music_search':
-                $class = '7jj';
+                $class = '7w2';
                 break;
-            case 'search_edit_recent':
-                $class = 'Dht';
+            case 'search_typeahead_edit_recent':
+                $class = 'EVB';
                 break;
             case 'feed_hashtag':
                 $class = 'HashtagPageFragment';
                 break;
-            case 'feed_location':
-                $class = 'DWw';
+            case 'discovery_map':
+                $class = 'MediaMapFragment';
+                break;
+            case 'discovery_map_location_detail':
+                $class = 'LocationDetailFragment';
                 break;
             case 'feed_contextual_chain':
-                $class = 'DZG';
+                $class = 'DuM';
                 break;
             //case 'feed_contextual_place':
             //case 'feed_contextual_location':
             //case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = 'DZE';
+                $class = 'Dti';
                 break;
             case 'profile':
             case 'self_profile': // UserDetailFragment, ProfileMediaTabFragment
-                $class = '3Gi';
+                $class = '5nH';
                 break;
             case 'following_sheet':
                 $class = 'ProfileFollowRelationshipFragment';
                 break;
             case 'bottom_sheet_profile':
-                $class = '3LT';
+                $class = '5n3';
                 break;
             case 'settings_category_options':
-                $class = 'AqA';
+                $class = 'C80';
                 break;
             case 'privacy_options':
-                $class = 'AXf';
+                $class = 'C69';
                 break;
             case 'unified_follow_lists':
             case 'self_unified_follow_lists':
                 $class = 'UnifiedFollowFragment';
                 break;
             case 'likers':
-                $class = 'BXD';
+                $class = 'CiS';
                 break;
             case 'tabbed_gallery_camera':
                 $class = 'MediaCaptureFragment';
                 break;
             case 'photo_filter':
-                $class = '8Ek';
+                $class = '8U0';
                 break;
             case 'gallery_picker':
-                $class = '8Iv';
+                $class = '5eD';
                 break;
             /*
             case 'quick_capture_fragment':
@@ -210,10 +211,10 @@ class Event extends RequestCollection
                 $class = 'FollowersShareFragment';
                 break;
             case 'direct_inbox':
-                $class = '35k';
+                $class = 'B4H';
                 break;
             case 'direct_thread':
-                $class = '4gG';
+                $class = '4L5';
                 break;
             case 'direct_recipient_picker':
                 $class = '97w';
@@ -222,24 +223,24 @@ class Event extends RequestCollection
                 $class = 'ReelViewerFragment';
                 break;
             case 'edit_profile':
-                $class = 'Aj6';
+                $class = 'C8u';
                 break;
             case 'personal_information':
-                $class = 'AE2';
+                $class = 'Blg';
                 break;
             case 'profile_edit_bio':
-                $class = '9HV';
+                $class = '93g';
                 break;
             case 'comments_v2_feed_contextual_profile':
                 $class = 'CommentThreadFragment';
                 break;
             case 'self_followers':
             case 'self_following':
-                $class = 'BdP';
+                $class = 'CiQ';
                 break;
             // login_landing
             case 'video_profile':
-                $class = '4rt';
+                $class = '4dy';
                 break;
             default:
                 $class = false;

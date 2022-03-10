@@ -617,7 +617,7 @@ class People extends RequestCollection
         $query,
         array $excludeList = [],
         $rankToken = null,
-        $searchSurface = 'user_search_page')
+        $searchSurface = 'user_serp')
     {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
@@ -625,11 +625,11 @@ class People extends RequestCollection
         }
 
         $request = $this->_paginateWithExclusion(
-            $this->ig->request('users/search/')
+            $this->ig->request('fbsearch/account_serp/')
                 ->addParam('q', $query)
                 ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                 ->addParam('search_surface', $searchSurface)
-                ->addParam('count', 50),
+                ->addParam('count', 30),
             $excludeList,
             $rankToken
         );

@@ -31,6 +31,59 @@ class Music extends RequestCollection
     }
 
     /**
+     * Search for music clips from Discover/Search module.
+     *
+     * @param string         $query           Finds locations containing this string.
+     * @param string[]|int[] $excludeList     Array of numerical location IDs (ie "17841562498105353")
+     *                                        to exclude from the response, allowing you to skip locations
+     *                                        from a previous call to get more results.
+     * @param string         $browseSessionId The browse session ID (UUIDv4).
+     * @param string|null    $rankToken       (When paginating) The rank token from the previous page's response.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\FBLocationResponse
+     *
+     * @see FBLocationResponse::getRankToken() To get a rank token from the response.
+     * @see examples/paginateWithExclusion.php For an example.
+     */
+    public function searchAudio(
+        $query,
+        array $excludeList = [],
+        $browseSessionId,
+        $rankToken = null)
+    {
+        // Do basic query validation. Do NOT use throwIfInvalidHashtag here.
+        if (!is_string($query) || $query === null) {
+            throw new \InvalidArgumentException('Query must be a non-empty string.');
+        }
+        $location = $this->_paginateWithExclusion(
+            $this->ig->request('music/audio_global_search/')
+                ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
+                ->addParam('query', $query)
+                ->addParam('search_surface', 'audio_serp_page')
+                ->addParam('count', 30)
+                ->addParam('browse_session_id', $browseSessionId),
+            $excludeList,
+            $rankToken
+        );
+
+        try {
+            /** @var Response\FBLocationResponse $result */
+            $result = $location->getResponse(new Response\FBLocationResponse());
+        } catch (RequestHeadersTooLargeException $e) {
+            $result = new Response\FBLocationResponse([
+                'has_more'   => false,
+                'items'      => [],
+                'rank_token' => $rankToken,
+            ]);
+        }
+
+        return $result;
+    }
+
+    /**
      * Search music.
      *
      * @param string $query           The song to search for.

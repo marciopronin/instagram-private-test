@@ -148,7 +148,7 @@ class Hashtag extends RequestCollection
             $this->ig->request('tags/search/')
                 ->addParam('q', $query)
                 ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-                ->addParam('search_surface', 'hashtag_search_page')
+                ->addParam('search_surface', 'hashtag_serp')
                 ->addParam('count', 30),
             $excludeList,
             $rankToken

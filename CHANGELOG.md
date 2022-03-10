@@ -1,3 +1,22 @@
+# Stable release v19.12.0
+## Date: 10/03/2022
+
+### New features
+
+- **Music:** It is possible to find clips/reels by the music (audio) used in it. Use `searchAudio()`
+
+### Updates and fixes
+
+Discover and search module is migrating to a new system and that is translated into slight changes that will require all examples to be adjusted according new IG changes.
+
+- **Hashtag:** Update `search()`
+- **People:** Update `search()`
+- **Location:** Update `findPlaces()`
+
+IGTV is deprecated from current version. While IGTV seems to be still present (in the code) IG no longer uses this. Timeline videos can be now up to 10 minutes.
+
+- **Constraints:** Update TimelineConstraints
+
 # Stable release v19.11.3
 ## Date: 09/03/2022
 

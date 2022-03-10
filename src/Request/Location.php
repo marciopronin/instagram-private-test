@@ -97,7 +97,7 @@ class Location extends RequestCollection
             $this->ig->request('fbsearch/places/')
                 ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                 ->addParam('query', $query)
-                ->addParam('search_surface', 'places_search_page')
+                ->addParam('search_surface', 'places_serp')
                 ->addParam('count', 30),
             $excludeList,
             $rankToken

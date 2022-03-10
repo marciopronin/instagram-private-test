@@ -34,24 +34,24 @@ class Music extends RequestCollection
      * Search for music clips from Discover/Search module.
      *
      * @param string         $query           Finds locations containing this string.
+     * @param string         $browseSessionId The browse session ID (UUIDv4).
      * @param string[]|int[] $excludeList     Array of numerical location IDs (ie "17841562498105353")
      *                                        to exclude from the response, allowing you to skip locations
      *                                        from a previous call to get more results.
-     * @param string         $browseSessionId The browse session ID (UUIDv4).
      * @param string|null    $rankToken       (When paginating) The rank token from the previous page's response.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FBLocationResponse
+     * @return \InstagramAPI\Response\MusicItemsResponse
      *
-     * @see FBLocationResponse::getRankToken() To get a rank token from the response.
+     * @see MusicItemsResponse::getRankToken() To get a rank token from the response.
      * @see examples/paginateWithExclusion.php For an example.
      */
     public function searchAudio(
         $query,
-        array $excludeList = [],
         $browseSessionId,
+        array $excludeList = [],
         $rankToken = null)
     {
         // Do basic query validation. Do NOT use throwIfInvalidHashtag here.
@@ -70,10 +70,10 @@ class Music extends RequestCollection
         );
 
         try {
-            /** @var Response\FBLocationResponse $result */
-            $result = $location->getResponse(new Response\FBLocationResponse());
+            /** @var Response\MusicItemsResponse $result */
+            $result = $location->getResponse(new Response\MusicItemsResponse());
         } catch (RequestHeadersTooLargeException $e) {
-            $result = new Response\FBLocationResponse([
+            $result = new Response\MusicItemsResponse([
                 'has_more'   => false,
                 'items'      => [],
                 'rank_token' => $rankToken,

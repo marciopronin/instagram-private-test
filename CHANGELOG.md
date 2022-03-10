@@ -1,3 +1,16 @@
+# Stable release v19.12.1
+## Date: 11/03/2022
+
+### New features
+
+- **Discover:** Added `topSearch()`
+
+### Updates and fixes
+
+- **Music:** Update `searchAudio()`
+- **Models/Responses:** Update responses and models
+
+
 # Stable release v19.12.0
 ## Date: 10/03/2022
 

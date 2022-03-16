@@ -1,3 +1,13 @@
+# Stable release v19.13.0
+## Date: 16/03/2022
+
+### New features
+
+Instagram has introduced a new feature to add moderators in Live streamings.
+
+- **Live:** Added `addModerator()`
+- **Live:** Added `revokeModerator()`
+
 # Stable release v19.12.1
 ## Date: 11/03/2022
 

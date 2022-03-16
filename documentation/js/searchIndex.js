@@ -7466,6 +7466,11 @@ Search.appendIndex(
             "summary": "Search\u0020for\u0020Instagram\u0020users,\u0020hashtags\u0020and\u0020places\u0020via\u0020Facebook\u0027s\u0020algorithm.",
             "url": "../classes/InstagramAPI-Request-Discover.html#method_search"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Discover\u003A\u003AtopSearch\u0028\u0029",
+            "name": "topSearch",
+            "summary": "Search\u0020for\u0020TOP\u0020media.",
+            "url": "../classes/InstagramAPI-Request-Discover.html#method_topSearch"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Discover\u003A\u003AregisterRecentSearchClick\u0028\u0029",
             "name": "registerRecentSearchClick",
             "summary": "Register\u0020recent\u0020search\u0020click.",
@@ -8880,6 +8885,16 @@ Search.appendIndex(
             "name": "deleteArchivedLive",
             "summary": "Delete\u0020archived\u0020live.",
             "url": "../classes/InstagramAPI-Request-Live.html#method_deleteArchivedLive"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AaddModerator\u0028\u0029",
+            "name": "addModerator",
+            "summary": "Add\u0020moderator.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_addModerator"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003ArevokeModerator\u0028\u0029",
+            "name": "revokeModerator",
+            "summary": "Revoke\u0020moderator.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_revokeModerator"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Location",
             "name": "Location",
@@ -16691,6 +16706,11 @@ Search.appendIndex(
             "summary": "Get\u0020trending\u0020music.",
             "url": "../classes/InstagramAPI-Request-Music.html#method_getTrending"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Music\u003A\u003AsearchAudio\u0028\u0029",
+            "name": "searchAudio",
+            "summary": "Search\u0020for\u0020music\u0020clips\u0020from\u0020Discover\/Search\u0020module.",
+            "url": "../classes/InstagramAPI-Request-Music.html#method_searchAudio"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Music\u003A\u003Asearch\u0028\u0029",
             "name": "search",
             "summary": "Search\u0020music.",
@@ -17605,6 +17625,26 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-TotpCodeResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\MediaGrid",
+            "name": "MediaGrid",
+            "summary": "MediaGrid.",
+            "url": "../classes/InstagramAPI-Response-Model-MediaGrid.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\MediaGrid\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-MediaGrid.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\TopSearchResponse",
+            "name": "TopSearchResponse",
+            "summary": "TopSearchResponse.",
+            "url": "../classes/InstagramAPI-Response-TopSearchResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\TopSearchResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-TopSearchResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

@@ -123,6 +123,11 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-FBSearchResponse.html"><abbr title="\InstagramAPI\Response\FBSearchResponse">FBSearchResponse</abbr></a></td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Discover.html#method_topSearch">topSearch()</a></th>
+                    <td class="phpdocumentor-cell">Search for TOP media.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-TopSearchResponse.html"><abbr title="\InstagramAPI\Response\TopSearchResponse">TopSearchResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Discover.html#method_registerRecentSearchClick">registerRecentSearchClick()</a></th>
                     <td class="phpdocumentor-cell">Register recent search click.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
@@ -658,6 +663,116 @@ from a previous call to get more results. The following entities are supported:
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-FBSearchResponse.html"><abbr title="\InstagramAPI\Response\FBSearchResponse">FBSearchResponse</abbr></a></span>
             
 </article>
+                                    <a id="method_topSearch"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">topSearch()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">262</span>
+    </aside>
+        <p class="phpdocumentor-summary">Search for TOP media.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">topSearch</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$query</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$latitude</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$longitude</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$excludeList</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$rankToken</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-TopSearchResponse.html"><abbr title="\InstagramAPI\Response\TopSearchResponse">TopSearchResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$query</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The username/full name, hashtag or location to search for.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$latitude</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(optional) Latitude.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$longitude</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(optional) Longitude.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$excludeList</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Array of grouped numerical entity IDs (ie &quot;users&quot; =&gt; [&quot;4021088339&quot;])
+to exclude from the response, allowing you to skip entities
+from a previous call to get more results. The following entities are supported:
+&quot;users&quot;, &quot;places&quot;, &quot;tags&quot;.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$rankToken</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(When paginating) The rank token from the previous page's response.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="\InstagramAPI\Request\TopSearchResponse::getRankToken()"><abbr title="\InstagramAPI\Request\TopSearchResponse::getRankToken()">TopSearchResponse::getRankToken()</abbr></a></span>
+                                                            <section class="phpdocumentor-description"><p>To get a rank token from the response.</p></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"><p>examples/paginateWithExclusion.php For a rank token example (but with a different type of exclude list).</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-TopSearchResponse.html"><abbr title="\InstagramAPI\Response\TopSearchResponse">TopSearchResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_registerRecentSearchClick"></a>
 <article
         class="
@@ -669,7 +784,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">252</span>
+        <span class="phpdocumentor-element-found-in__line">315</span>
     </aside>
         <p class="phpdocumentor-summary">Register recent search click.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -729,7 +844,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">282</span>
+        <span class="phpdocumentor-element-found-in__line">345</span>
     </aside>
         <p class="phpdocumentor-summary">Get search suggestions via Facebook&#039;s algorithm.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -782,7 +897,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">303</span>
+        <span class="phpdocumentor-element-found-in__line">366</span>
     </aside>
         <p class="phpdocumentor-summary">Get recent searches via Facebook&#039;s algorithm.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -822,7 +937,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">316</span>
+        <span class="phpdocumentor-element-found-in__line">379</span>
     </aside>
         <p class="phpdocumentor-summary">Clear the search history.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -861,7 +976,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">332</span>
+        <span class="phpdocumentor-element-found-in__line">395</span>
     </aside>
         <p class="phpdocumentor-summary">Get nullstate dynamic sections.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -900,7 +1015,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">347</span>
+        <span class="phpdocumentor-element-found-in__line">410</span>
     </aside>
         <p class="phpdocumentor-summary">TODO.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -939,7 +1054,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">365</span>
+        <span class="phpdocumentor-element-found-in__line">428</span>
     </aside>
         <p class="phpdocumentor-summary">Get user suggestions based on different algorithms.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -990,7 +1105,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">385</span>
+        <span class="phpdocumentor-element-found-in__line">448</span>
     </aside>
         <p class="phpdocumentor-summary">TODO.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1029,7 +1144,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">403</span>
+        <span class="phpdocumentor-element-found-in__line">466</span>
     </aside>
         <p class="phpdocumentor-summary">TODO.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1080,7 +1195,7 @@ from a previous call to get more results. The following entities are supported:
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Discover.php"><a href="../files/src-request-discover.html"><abbr title="src/Request/Discover.php">Discover.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">426</span>
+        <span class="phpdocumentor-element-found-in__line">489</span>
     </aside>
         <p class="phpdocumentor-summary">Get recommended users based on another user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

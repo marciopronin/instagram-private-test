@@ -332,6 +332,16 @@
                     <td class="phpdocumentor-cell">Delete archived live.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
                 </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Live.html#method_addModerator">addModerator()</a></th>
+                    <td class="phpdocumentor-cell">Add moderator.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Live.html#method_revokeModerator">revokeModerator()</a></th>
+                    <td class="phpdocumentor-cell">Revoke moderator.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
                                                     <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-RequestCollection.html#method___construct">__construct()</a></th>
                     <td class="phpdocumentor-cell">Constructor.</td>
@@ -3195,6 +3205,126 @@ which was assigned to you in the <code class="prettyprint">create()</code> respo
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The archived ID in Instagram's internal format (ie &quot;17854587811139572&quot;).</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_addModerator"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">addModerator()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1113</span>
+    </aside>
+        <p class="phpdocumentor-summary">Add moderator.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">addModerator</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$broadcastId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$userId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$broadcastId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The broadcast ID in Instagram's internal format (ie &quot;17854587811139572&quot;).</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$userId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Numerical UserPK ID.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_revokeModerator"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">revokeModerator()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Live.php"><a href="../files/src-request-live.html"><abbr title="src/Request/Live.php">Live.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1137</span>
+    </aside>
+        <p class="phpdocumentor-summary">Revoke moderator.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">revokeModerator</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$broadcastId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$userId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$broadcastId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The broadcast ID in Instagram's internal format (ie &quot;17854587811139572&quot;).</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$userId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Numerical UserPK ID.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>

@@ -1099,4 +1099,51 @@ class Live extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Add moderator.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     * @param string $userId      Numerical UserPK ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function addModerator(
+        $broadcastId,
+        $userId)
+    {
+        return $this->ig->request("live/{$broadcastId}/moderator/assign/")
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('step', 'add_as_moderator')
+            ->addPost('view_mode', 'host')
+            ->addPost('method', 'comment_action_sheet')
+            ->addPost('target_user_id', $userId)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Revoke moderator.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     * @param string $userId      Numerical UserPK ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function revokeModerator(
+        $broadcastId,
+        $userId)
+    {
+        return $this->ig->request("live/{$broadcastId}/moderator/revoke/")
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('view_mode', 'host')
+            ->addPost('method', 'comment_action_sheet')
+            ->addPost('target_user_id', $userId)
+            ->getResponse(new Response\GenericResponse());
+    }
 }

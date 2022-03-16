@@ -103,6 +103,11 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-MusicItemsResponse.html"><abbr title="\InstagramAPI\Response\MusicItemsResponse">MusicItemsResponse</abbr></a></td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Music.html#method_searchAudio">searchAudio()</a></th>
+                    <td class="phpdocumentor-cell">Search for music clips from Discover/Search module.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-MusicItemsResponse.html"><abbr title="\InstagramAPI\Response\MusicItemsResponse">MusicItemsResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Music.html#method_search">search()</a></th>
                     <td class="phpdocumentor-cell">Search music.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-MusicItemsResponse.html"><abbr title="\InstagramAPI\Response\MusicItemsResponse">MusicItemsResponse</abbr></a></td>
@@ -222,6 +227,106 @@
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-MusicItemsResponse.html"><abbr title="\InstagramAPI\Response\MusicItemsResponse">MusicItemsResponse</abbr></a></span>
             
 </article>
+                                    <a id="method_searchAudio"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">searchAudio()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Music.php"><a href="../files/src-request-music.html"><abbr title="src/Request/Music.php">Music.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">51</span>
+    </aside>
+        <p class="phpdocumentor-summary">Search for music clips from Discover/Search module.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">searchAudio</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$query</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$browseSessionId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$excludeList</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string[]|int[]</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$rankToken</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-MusicItemsResponse.html"><abbr title="\InstagramAPI\Response\MusicItemsResponse">MusicItemsResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$query</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Finds locations containing this string.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$browseSessionId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The browse session ID (UUIDv4).</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$excludeList</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string[]|int[]</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Array of numerical location IDs (ie &quot;17841562498105353&quot;)
+to exclude from the response, allowing you to skip locations
+from a previous call to get more results.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$rankToken</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(When paginating) The rank token from the previous page's response.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="\InstagramAPI\Request\MusicItemsResponse::getRankToken()"><abbr title="\InstagramAPI\Request\MusicItemsResponse::getRankToken()">MusicItemsResponse::getRankToken()</abbr></a></span>
+                                                            <section class="phpdocumentor-description"><p>To get a rank token from the response.</p></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"><p>examples/paginateWithExclusion.php For an example.</p></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-MusicItemsResponse.html"><abbr title="\InstagramAPI\Response\MusicItemsResponse">MusicItemsResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_search"></a>
 <article
         class="
@@ -233,7 +338,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Music.php"><a href="../files/src-request-music.html"><abbr title="src/Request/Music.php">Music.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">44</span>
+        <span class="phpdocumentor-element-found-in__line">97</span>
     </aside>
         <p class="phpdocumentor-summary">Search music.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -302,7 +407,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Music.php"><a href="../files/src-request-music.html"><abbr title="src/Request/Music.php">Music.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">75</span>
+        <span class="phpdocumentor-element-found-in__line">128</span>
     </aside>
         <p class="phpdocumentor-summary">Keyword search.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -381,7 +486,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Music.php"><a href="../files/src-request-music.html"><abbr title="src/Request/Music.php">Music.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">102</span>
+        <span class="phpdocumentor-element-found-in__line">155</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the phrases from lyrics of a track.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -434,7 +539,7 @@ lyrics.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Music.php"><a href="../files/src-request-music.html"><abbr title="src/Request/Music.php">Music.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">118</span>
+        <span class="phpdocumentor-element-found-in__line">171</span>
     </aside>
         <p class="phpdocumentor-summary">Get music genres.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -485,7 +590,7 @@ lyrics.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Music.php"><a href="../files/src-request-music.html"><abbr title="src/Request/Music.php">Music.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">138</span>
+        <span class="phpdocumentor-element-found-in__line">191</span>
     </aside>
         <p class="phpdocumentor-summary">Get music moods.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

@@ -50,15 +50,15 @@ try {
     $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
 
     // Get suggested searches and recommendations from Instagram.
-    $ig->event->sendNavigation('button', 'explore_popular', 'search');
-    $ig->event->sendNavigation('button', 'search', 'blended_search');
+    $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
+    
     $ig->discover->getNullStateDynamicSections();
 
     $hashtagId = null;
 
     // Search query and parse results.
     $searchResponse = $ig->discover->search($queryLocation);
-    $ig->event->sendNavigation('button', 'blended_search', 'search_places');
+    $ig->event->sendNavigation('button', 'search_typeahead', 'serp_places');
 
     $searchResults = $searchResponse->getList();
 
@@ -108,14 +108,14 @@ try {
     }
 
     // Send restults from search.
-    $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
-    $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_places');
+    $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_typeahead');
+    $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'serp_places');
     // Send selected result from results.
-    $ig->event->sendSearchResultsPage($queryLocation, $locationId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'PLACE', 'search_places');
+    $ig->event->sendSearchResultsPage($queryLocation, $locationId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'PLACE', 'serp_places');
 
     $ig->discover->registerRecentSearchClick('place', $locationId);
 
-    $ig->event->sendNavigation('search_result', 'search_places', 'feed_location', $locationId, $queryLocation,
+    $ig->event->sendNavigation('search_result', 'serp_places', 'feed_location', $locationId, $queryLocation,
         [
             'query_text'        => $queryLocation,
             'search_session_id' => $searchSession,

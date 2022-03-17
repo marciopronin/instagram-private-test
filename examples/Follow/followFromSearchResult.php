@@ -49,8 +49,8 @@ try {
     sleep($timeToSearch / 1000);
 
     $searchResponse = $ig->discover->search($usernameToFollow);
-    $ig->event->sendNavigation('button', 'explore_popular', 'search');
-    $ig->event->sendNavigation('button', 'search', 'blended_search');
+    $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
+    
     $searchResults = $searchResponse->getList();
     $rankToken = $searchResponse->getRankToken();
     $resultList = [];
@@ -77,18 +77,18 @@ try {
             $position++;
         }
     }
-    $ig->event->sendSearchResults($usernameToFollow, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
-    $ig->event->sendSearchResultsPage($usernameToFollow, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
+    $ig->event->sendSearchResults($usernameToFollow, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_typeahead');
+    $ig->event->sendSearchResultsPage($usernameToFollow, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'search_typeahead');
 
     $ig->people->follow($userId);
     $ig->event->sendProfileAction('follow', $userId,
         [
             [
-                'module'        => 'blended_search',
+                'module'        => 'search_typeahead',
                 'click_point'   => 'search_result',
             ],
             [
-                'module'        => 'blended_search',
+                'module'        => 'search_typeahead',
                 'click_point'   => 'button',
             ],
             [

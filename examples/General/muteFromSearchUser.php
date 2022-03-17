@@ -44,8 +44,8 @@ try {
     $timeToSearch = mt_rand(2000, 3500);
     sleep($timeToSearch / 1000);
     $searchResponse = $ig->discover->search($usernameToFollow);
-    $ig->event->sendNavigation('button', 'explore_popular', 'search');
-    $ig->event->sendNavigation('button', 'search', 'blended_search');
+    $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
+    
     $searchResults = $searchResponse->getList();
     $rankToken = $searchResponse->getRankToken();
     $resultList = [];
@@ -72,12 +72,12 @@ try {
             $position++;
         }
     }
-    $ig->event->sendSearchResults($usernameToFollow, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
-    $ig->event->sendSearchResultsPage($usernameToFollow, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
+    $ig->event->sendSearchResults($usernameToFollow, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_typeahead');
+    $ig->event->sendSearchResultsPage($usernameToFollow, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'search_typeahead');
     $ig->discover->registerRecentSearchClick('user', $userId);
     $friendship = $ig->people->getFriendship($userId);
     $followStatus = $friendship->getFriendshipStatus()->getFollowing();
-    $userInfo = $ig->people->getInfoById($userId, 'search_users')->getUser();
+    $userInfo = $ig->people->getInfoById($userId, 'serp_users')->getUser();
     $suggestions = $userInfo->getChainingSuggestions();
 
     if ($suggestions !== null) {
@@ -86,7 +86,7 @@ try {
             $ig->event->sendSimilarEntityImpression($userId, $suggestions[$i]->getPk());
         }
     }
-    $ig->event->sendNavigation('button', 'search_users', 'profile', null, null,
+    $ig->event->sendNavigation('button', 'serp_users', 'profile', null, null,
         [
             'rank_token'        => $rankToken,
             'query_text'        => $usernameToFollow,
@@ -118,11 +118,11 @@ try {
     $ig->event->sendProfileAction('tap_follow_sheet', $userId,
     [
         [
-            'module'        => 'blended_search',
+            'module'        => 'search_typeahead',
             'click_point'   => 'search_result',
         ],
         [
-            'module'        => 'blended_search',
+            'module'        => 'search_typeahead',
             'click_point'   => 'button',
         ],
         [

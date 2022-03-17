@@ -1,3 +1,17 @@
+# Stable release v19.13.1
+## Date: 17/03/2022
+
+### Updates and fixes
+
+**Note:** Instagram has changed search modules!
+
+- **Instagram:** Update version to 226.1.0.16.117
+- **Events:** Update event classes to 226.1.0.16.117
+
+### Examples
+
+- **Examples:** Update examples to match latest module names
+
 # Stable release v19.13.0
 ## Date: 16/03/2022
 

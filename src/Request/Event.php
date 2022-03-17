@@ -117,39 +117,39 @@ class Event extends RequestCollection
     {
         switch ($module) {
             case 'feed_timeline':
-                $class = '1WE';
+                $class = 'MainFeedFragment';
                 break;
             case 'newsfeed_you':
-                $class = 'Cgp';
+                $class = 'NewsfeedYouFragment';
                 break;
             case 'explore_popular':
-                $class = '1ng';
+                $class = 'ExploreFragment';
                 break;
             case 'search_typeahead':
-                $class = 'EV2';
+                $class = 'SingleSearchTypeaheadTabFragment';
                 break;
             //case 'search':
-            case 'blended_search':
+            case 'serp_top':
             //case 'search_result':
-                $class = 'EV4';
+                $class = 'TopSerpGridFragment';
                 break;
-            case 'search_places':
-                $class = 'EVM';
+            case 'serp_places':
+                $class = 'PlacesSerpGridFragment';
                 break;
-            case 'search_users':
-                $class = 'EWJ';
+            case 'serp_users':
+                $class = 'UserSerpGridFragment';
                 break;
-            case 'search_tags':
-                $class = 'EWC';
+            case 'serp_tags':
+                $class = 'HashtagSerpGridFragment';
                 break;
-            case 'search_audio':
-                $class = 'EV9';
+            case 'serp_audio':
+                $class = 'AudioSerpGridFragment';
                 break;
             case 'music_search':
-                $class = '7w2';
+                $class = 'MusicPostcaptureSearchController';
                 break;
             case 'search_typeahead_edit_recent':
-                $class = 'EVB';
+                $class = 'EditSearchHistoryFragment';
                 break;
             case 'feed_hashtag':
                 $class = 'HashtagPageFragment';
@@ -161,46 +161,46 @@ class Event extends RequestCollection
                 $class = 'LocationDetailFragment';
                 break;
             case 'feed_contextual_chain':
-                $class = 'DuM';
+                $class = 'DiscoveryChainingFeedFragment';
                 break;
             //case 'feed_contextual_place':
             //case 'feed_contextual_location':
             //case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = 'Dti';
+                $class = 'ContextualFeedFragment';
                 break;
             case 'profile':
             case 'self_profile': // UserDetailFragment, ProfileMediaTabFragment
-                $class = '5nH';
+                $class = 'UserDetailFragment';
                 break;
             case 'following_sheet':
                 $class = 'ProfileFollowRelationshipFragment';
                 break;
             case 'bottom_sheet_profile':
-                $class = '5n3';
+                $class = 'ProfileMenuFragment';
                 break;
             case 'settings_category_options':
-                $class = 'C80';
+                $class = 'UserOptionsFragment';
                 break;
             case 'privacy_options':
-                $class = 'C69';
+                $class = 'PrivacyOptionsFragment';
                 break;
             case 'unified_follow_lists':
             case 'self_unified_follow_lists':
                 $class = 'UnifiedFollowFragment';
                 break;
             case 'likers':
-                $class = 'CiS';
+                $class = 'LikesListFragment';
                 break;
             case 'tabbed_gallery_camera':
                 $class = 'MediaCaptureFragment';
                 break;
             case 'photo_filter':
-                $class = '8U0';
+                $class = 'PhotoFilterFragment';
                 break;
             case 'gallery_picker':
-                $class = '5eD';
+                $class = 'GalleryPickerFragment';
                 break;
             /*
             case 'quick_capture_fragment':
@@ -211,36 +211,36 @@ class Event extends RequestCollection
                 $class = 'FollowersShareFragment';
                 break;
             case 'direct_inbox':
-                $class = 'B4H';
+                $class = 'DirectInboxFragment';
                 break;
             case 'direct_thread':
-                $class = '4L5';
+                $class = 'DirectThreadFragment';
                 break;
             case 'direct_recipient_picker':
-                $class = '97w';
+                $class = 'DirectRecipientPickerFragment';
                 break;
             case 'reel_profile':
                 $class = 'ReelViewerFragment';
                 break;
             case 'edit_profile':
-                $class = 'C8u';
+                $class = 'EditProfileFragment';
                 break;
             case 'personal_information':
-                $class = 'Blg';
+                $class = 'PersonalInformationFragment';
                 break;
             case 'profile_edit_bio':
-                $class = '93g';
+                $class = 'EditBioFragment';
                 break;
             case 'comments_v2_feed_contextual_profile':
                 $class = 'CommentThreadFragment';
                 break;
             case 'self_followers':
             case 'self_following':
-                $class = 'CiQ';
+                $class = 'FollowListFragment';
                 break;
             // login_landing
             case 'video_profile':
-                $class = '4dy';
+                $class = 'VideoProfileTabFragment';
                 break;
             default:
                 $class = false;
@@ -5865,7 +5865,7 @@ class Event extends RequestCollection
             'prior_serp_session_id'                         => null,
             'recommendations_shown_entity_ids'              => [],
             'recommendations_shown_entity_names'            => [],
-            'recommendations_shown_entity_types'            => [],
+            'recommendations_shown_entity_types'            => []
         ];
         $event = $this->_addEventBody('search_results_page', $module, $extra);
         $this->_addEventData($event);

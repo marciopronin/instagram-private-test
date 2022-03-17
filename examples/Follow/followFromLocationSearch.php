@@ -48,9 +48,9 @@ try {
     $timeToSearch = mt_rand(2000, 3500);
     sleep($timeToSearch / 1000);
 
-    $ig->event->sendNavigation('button', 'explore_popular', 'search');
-    $ig->event->sendNavigation('button', 'search', 'blended_search');
-    $ig->event->sendNavigation('button', 'blended_search', 'search_places');
+    $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
+    
+    $ig->event->sendNavigation('button', 'search_typeahead', 'serp_places');
 
     $locationItems = $ig->location->findPlaces($query)->getItems();
 
@@ -73,15 +73,15 @@ try {
         }
     }
 
-    $ig->event->sendSearchResults($query, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_places');
-    $ig->event->sendSearchResultsPage($query, $placeId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'PLACE', 'search_places');
+    $ig->event->sendSearchResults($query, $resultList, $resultTypeList, $rankToken, $searchSession, 'serp_places');
+    $ig->event->sendSearchResultsPage($query, $placeId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'PLACE', 'serp_places');
 
-    $ig->event->sendNavigation('search_result', 'search_places', 'feed_location', null, null,
+    $ig->event->sendNavigation('search_result', 'serp_places', 'feed_location', null, null,
         [
             'rank_token'        => $rankToken,
             'query_text'        => $query,
             'search_session_id' => $searchSession,
-            'search_tab'        => 'search_places',
+            'search_tab'        => 'serp_places',
             'selected_type'     => 'place',
             'position'          => $position,
             'entity_page_name'  => $query,
@@ -157,7 +157,7 @@ try {
             'rank_token'        => $rankToken,
             'query_text'        => $query,
             'search_session_id' => $searchSession,
-            'search_tab'        => 'search_places',
+            'search_tab'        => 'serp_places',
             'selected_type'     => 'place',
             'position'          => $position,
             'username'          => $item->getUser()->getUsername(),
@@ -194,15 +194,15 @@ try {
                 'click_point'   => 'button',
             ],
             [
-                'module'        => 'search_places',
+                'module'        => 'serp_places',
                 'click_point'   => 'search_result',
             ],
             [
-                'module'        => 'blended_search',
+                'module'        => 'search_typeahead',
                 'click_point'   => 'button',
             ],
             [
-                'module'        => 'blended_search',
+                'module'        => 'search_typeahead',
                 'click_point'   => 'button',
             ],
             [
@@ -232,15 +232,15 @@ try {
                 'click_point'   => 'button',
             ],
             [
-                'module'        => 'search_places',
+                'module'        => 'serp_places',
                 'click_point'   => 'search_result',
             ],
             [
-                'module'        => 'blended_search',
+                'module'        => 'search_typeahead',
                 'click_point'   => 'button',
             ],
             [
-                'module'        => 'blended_search',
+                'module'        => 'search_typeahead',
                 'click_point'   => 'button',
             ],
             [

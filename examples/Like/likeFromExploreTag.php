@@ -50,15 +50,15 @@ try {
     $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
 
     // Get suggested searches and recommendations from Instagram.
-    $ig->event->sendNavigation('button', 'explore_popular', 'search');
-    $ig->event->sendNavigation('button', 'search', 'blended_search');
+    $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
+    
     $ig->discover->getNullStateDynamicSections();
 
     $hashtagId = null;
 
     // Search query and parse results.
     $searchResponse = $ig->discover->search($queryHashtag);
-    $ig->event->sendNavigation('button', 'blended_search', 'search_tags');
+    $ig->event->sendNavigation('button', 'search_typeahead', 'serp_tags');
 
     $searchResults = $searchResponse->getList();
 
@@ -94,14 +94,14 @@ try {
     }
 
     // Send restults from search.
-    $ig->event->sendSearchResults($queryHashtag, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
-    $ig->event->sendSearchResults($queryHashtag, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_tags');
+    $ig->event->sendSearchResults($queryHashtag, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_typeahead');
+    $ig->event->sendSearchResults($queryHashtag, $resultList, $resultTypeList, $rankToken, $searchSession, 'serp_tags');
     // Send selected result from results.
-    $ig->event->sendSearchResultsPage($queryHashtag, $hashtagId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'HASHTAG', 'search_tags');
+    $ig->event->sendSearchResultsPage($queryHashtag, $hashtagId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'HASHTAG', 'serp_tags');
 
     $ig->discover->registerRecentSearchClick('hashtag', $hashtagId);
 
-    $ig->event->sendNavigation('search_result', 'search_tags', 'feed_hashtag', $hashtagId, $queryHashtag,
+    $ig->event->sendNavigation('search_result', 'serp_tags', 'feed_hashtag', $hashtagId, $queryHashtag,
         [
             'query_text'        => $queryHashtag,
             'search_session_id' => $searchSession,

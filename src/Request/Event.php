@@ -4034,19 +4034,19 @@ class Event extends RequestCollection
             ],
             'serp_places' => [
                 [
-                    'clickpoint'    => 'button',
+                    'clickpoint'    => 'search_result',
                     'dest_module'   => 'feed_location',
                 ],
             ],
             'serp_tags' => [
                 [
-                    'clickpoint'    => 'button',
+                    'clickpoint'    => 'search_result',
                     'dest_module'   => 'feed_hashtag',
                 ],
             ],
             'serp_users' => [
                 [
-                    'clickpoint'    => 'button',
+                    'clickpoint'    => 'search_result',
                     'dest_module'   => 'profile',
                 ],
             ],
@@ -5865,14 +5865,16 @@ class Event extends RequestCollection
             $positionList[] = $c;
         }
 
-        if ($module === 'search_tags') {
+        if ($module === 'search_tags' || $module === 'serp_tags') {
             $searchType = 'HASHTAG';
-        } elseif ($module === 'search_places') {
+        } elseif ($module === 'search_places' || $module === 'serp_places') {
             $searchType = 'PLACE';
         } elseif ($module === 'blended_search') {
             $searchType = 'BLENDED';
         } elseif ($module === 'search_typeahead') {
             $searchType = 'TYPEAHEAD';
+        }  elseif ($module === 'serp_users') {
+            $searchType = 'USER';
         }
 
         $extra = [

@@ -1,9 +1,9 @@
-# Stable release v19.13.2
+# Stable release v19.13.3
 ## Date: 23/03/2022
 
 ### Updates and fixes
 
-- **Events:** Update navigation path modules
+- **Events:** Update `sendSearchResultsPage()`
 
 # Stable release v19.13.1
 ## Date: 17/03/2022

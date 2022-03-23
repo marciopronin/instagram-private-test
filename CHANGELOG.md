@@ -1,3 +1,10 @@
+# Stable release v19.13.2
+## Date: 23/03/2022
+
+### Updates and fixes
+
+- **Events:** Update navigation path modules
+
 # Stable release v19.13.1
 ## Date: 17/03/2022
 

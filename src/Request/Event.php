@@ -4017,6 +4017,36 @@ class Event extends RequestCollection
                 ],
                 [
                     'clickpoint'    => 'button',
+                    'dest_module'   => 'serp_places',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'serp_users',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'serp_tags',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'profile',
+                ],
+            ],
+            'serp_places' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'feed_location',
+                ],
+            ],
+            'serp_tags' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'feed_hashtag',
+                ],
+            ],
+            'serp_users' => [
+                [
+                    'clickpoint'    => 'button',
                     'dest_module'   => 'profile',
                 ],
             ],

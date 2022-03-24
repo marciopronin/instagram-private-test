@@ -105,7 +105,7 @@ class FFmpeg
             throw new \RuntimeException($errorMsg, $exitCode);
         }
 
-        return preg_split('#[\r\n]+#', $process->getOutput(), null, PREG_SPLIT_NO_EMPTY);
+        return preg_split('#[\r\n]+#', $process->getOutput(), 0, PREG_SPLIT_NO_EMPTY);
     }
 
     /**

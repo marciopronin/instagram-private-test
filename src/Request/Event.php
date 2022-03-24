@@ -5873,7 +5873,7 @@ class Event extends RequestCollection
             $searchType = 'BLENDED';
         } elseif ($module === 'search_typeahead') {
             $searchType = 'TYPEAHEAD';
-        }  elseif ($module === 'serp_users') {
+        } elseif ($module === 'serp_users') {
             $searchType = 'USER';
         }
 
@@ -5897,7 +5897,7 @@ class Event extends RequestCollection
             'prior_serp_session_id'                         => null,
             'recommendations_shown_entity_ids'              => [],
             'recommendations_shown_entity_names'            => [],
-            'recommendations_shown_entity_types'            => []
+            'recommendations_shown_entity_types'            => [],
         ];
         $event = $this->_addEventBody('search_results_page', $module, $extra);
         $this->_addEventData($event);

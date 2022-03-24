@@ -876,14 +876,15 @@ class Internal extends RequestCollection
         // Build the request...
         $request = $this->ig->request($endpoint)
             ->addParam('video', 1)
-            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            //->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
             ->addPost('video_result', $internalMetadata->getVideoUploadResponse() !== null ? (string) $internalMetadata->getVideoUploadResponse()->getResult() : '')
             ->addPost('upload_id', $uploadId)
             ->addPost('poster_frame_index', 0)
-            ->addPost('length', round($videoDetails->getDuration(), 1))
+            ->addPost('length', number_format($videoDetails->getDuration(), 3))
             ->addPost('audio_muted', false) // $videoDetails->getAudioCodec() === null
             ->addPost('filter_type', 0)
             ->addPost('source_type', 4)
+            ->addPost('camera_position', 'back')
             ->addPost('device',
                 [
                     'manufacturer'      => $this->ig->device->getManufacturer(),
@@ -898,8 +899,8 @@ class Internal extends RequestCollection
                 ])
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_uid', $this->ig->account_id)
-            ->addPost('nav_chain', $this->ig->getNavChain());
+            ->addPost('_uid', $this->ig->account_id);
+        //->addPost('nav_chain', $this->ig->getNavChain());
 
         $stickerIds = [];
         $tapModels = [];
@@ -1043,7 +1044,56 @@ class Internal extends RequestCollection
                 break;
             case Constants::FEED_REELS:
                 $request
-                    ->addPost('caption', $captionText);
+                    ->addHeader('Is_clips_video', '1')
+                    ->addHeader('retry_context', json_encode(
+                        [
+                            'num_reupload'          => 0,
+                            'num_step_auto_retry'   => 0,
+                            'num_step_manual_retry' => 0,
+                        ])
+                    )
+                    ->addPost('caption', $captionText)
+                    ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
+                    ->addPost('device_id', $this->ig->device_id)
+                    ->addPost('camera_session_id', Signatures::generateUUID())
+                    ->addPost('is_clips_edited', 0)
+                    ->addPost('camera_entry_point', 168)
+                    ->addPost('is_created_with_sound_sync', 0)
+                    ->addPost('clips_creation_entry_point', 'clips')
+                    ->addPost('clips', [
+                        [
+                            'length'          => number_format($videoDetails->getDuration(), 3),
+                            'source_type'     => '3',
+                            'camera_position' => 'back',
+                        ],
+                    ])
+                    ->addPost('clips_segments_metadata', [
+                        'num_segments'      => 1,
+                        'clips_segments'    => [
+                            [
+                                'index'                 => 0,
+                                'face_effect_id'        => null,
+                                'speed'                 => 100,
+                                'source'                => 'camera',
+                                'duration_ms'           => round($videoDetails->getDuration(), 3) * 1000,
+                                'audio_type'            => 'original',
+                                'from_draft'            => '0',
+                                'camera_position'       => '2',
+                                'media_folder'          => null,
+                                'media_type'            => 'video',
+                                'original_media_type'   => 'video',
+                            ],
+                        ],
+                    ])
+                    ->addPost('clips_audio_metadata', [
+                        'original'  => [
+                            'volume_level'  => 1,
+                        ],
+                    ])
+                    ->addPost('additional_audio_info', [
+                        'has_voiceover_attribution' => 0,
+                    ])
+                    ->addPost('capture_type', 'clips_v2');
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
                     $request->addPost('usertags', json_encode($usertags));
@@ -1074,7 +1124,9 @@ class Internal extends RequestCollection
                 break;
         }
 
-        $request->addPost('tap_models', json_encode($tapModels));
+        if (!empty($tapModels)) {
+            $request->addPost('tap_models', json_encode($tapModels));
+        }
 
         if (!empty($stickerIds)) {
             $storyStickerIds = null;

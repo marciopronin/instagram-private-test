@@ -52,7 +52,7 @@ try {
 
     // Get suggested searches and recommendations from Instagram.
     $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
-    
+
     $ig->discover->getNullStateDynamicSections();
 
     // Time spent to search.

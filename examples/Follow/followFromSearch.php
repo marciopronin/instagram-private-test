@@ -50,7 +50,7 @@ try {
 
     $searchResponse = $ig->discover->search($usernameToFollow);
     $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
-    
+
     $searchResults = $searchResponse->getList();
     $rankToken = $searchResponse->getRankToken();
     $resultList = [];

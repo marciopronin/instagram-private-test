@@ -38,7 +38,7 @@ class ReelsConstraints extends StoryConstraints
      *
      * @var float
      */
-    const MIN_DURATION = 15.0;
+    const MIN_DURATION = 3.0;
 
     /**
      * Maximum allowed video duration.
@@ -49,7 +49,7 @@ class ReelsConstraints extends StoryConstraints
      *
      * @var float
      */
-    const MAX_DURATION = 60.0;
+    const MAX_DURATION = 600.0;
 
     /** {@inheritdoc} */
     public function getMinAspectRatio()

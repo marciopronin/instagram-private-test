@@ -49,7 +49,7 @@ try {
     sleep($timeToSearch / 1000);
 
     $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
-    
+
     $ig->event->sendNavigation('button', 'search_typeahead', 'serp_places');
 
     $locationItems = $ig->location->findPlaces($query)->getItems();

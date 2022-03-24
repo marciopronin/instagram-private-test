@@ -72,7 +72,11 @@ try {
     ];
 
     // Send seen state.
-    $ig->reel->sendSeenState($itemIds);
+    try {
+        $ig->reel->sendSeenState($itemIds);
+    } catch (\Exception $e) {
+        // pass
+    }
 
     // Fetch new reels.
     $ig->reel->discover($chainingMedia, $seenReels, $sessionInfo);

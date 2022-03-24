@@ -1,3 +1,17 @@
+# Stable release v19.13.4
+## Date: 24/03/2022
+
+### Updates and fixes
+
+- **Internall:** Update `configureSingleVideo()` to support Reels (Clips)
+- **FFmpeg:** Update `run()`
+- **ReelsConstraints**: Updare Reels (clips) upload constraints.
+
+### Examples
+
+- **Example:** Update getReels.php
+- **Example:** Add uploadReel.php
+
 # Stable release v19.13.3
 ## Date: 23/03/2022
 

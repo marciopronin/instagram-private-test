@@ -63,7 +63,7 @@ try {
 
         if ($firstSearch === false) {
             $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
-            
+
             $firstSearch = true;
         }
 

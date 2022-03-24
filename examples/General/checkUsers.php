@@ -54,8 +54,6 @@ try {
     $ig->discover->getNullStateDynamicSections();
 
     foreach ($queryUsers as $queryUser) {
-        
-
         // Time spent to search.
         $timeToSearch = mt_rand(2000, 3500);
         sleep($timeToSearch / 1000);

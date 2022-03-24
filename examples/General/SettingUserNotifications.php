@@ -48,7 +48,7 @@ try {
     sleep($timeToSearch / 1000);
     $searchResponse = $ig->discover->search($queryUser);
     $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
-    
+
     $searchResults = $searchResponse->getList();
     $rankToken = $searchResponse->getRankToken();
     $resultList = [];

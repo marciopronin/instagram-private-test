@@ -1,3 +1,10 @@
+# Stable release v19.13.5
+## Date: 27/03/2022
+
+### Updates and fixes
+
+- **Reel:** Added missing Constants import
+
 # Stable release v19.13.4
 ## Date: 24/03/2022
 

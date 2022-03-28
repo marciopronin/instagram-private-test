@@ -1746,6 +1746,7 @@ class Instagram implements ExperimentsInterface
      * @param string|null $usernameHandler     Instagram username sent in the login response.
      *                                         Email and phone aren't allowed here.
      * @param bool        $trustDevice         If you want to trust the used Device ID.
+     * @param string      $pollingNonce        Trusted polling nonce.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1760,7 +1761,8 @@ class Instagram implements ExperimentsInterface
         $verificationMethod = 1,
         $appRefreshInterval = 1800,
         $usernameHandler = null,
-        $trustDevice = true)
+        $trustDevice = true,
+        $pollingNonce = null)
     {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to finishTwoFactorLogin().');
@@ -1787,7 +1789,7 @@ class Instagram implements ExperimentsInterface
         // Remove all whitespace from the verification code.
         $verificationCode = preg_replace('/\s+/', '', $verificationCode);
 
-        $response = $this->request('accounts/two_factor_login/')
+        $request = $this->request('accounts/two_factor_login/')
             ->setNeedsAuth(false)
             ->addPost('verification_code', $verificationCode)
             ->addPost('phone_id', $this->phone_id)
@@ -1799,8 +1801,13 @@ class Instagram implements ExperimentsInterface
             ->addPost('device_id', $this->device_id)
             ->addPost('waterfall_id', $this->loginWaterfallId)
             // 1 - SMS, 2 - Backup codes, 3 - TOTP, 4 - Notification approval, 6 - whatsapp
-            ->addPost('verification_method', $verificationMethod)
-            ->getResponse(new Response\LoginResponse());
+            ->addPost('verification_method', $verificationMethod);
+
+        if ($pollingNonce !== null) {
+            $request->addPost('trusted_notification_polling_nonces', json_encode([$pollingNonce]));
+        }
+
+        $response = $request->getResponse(new Response\LoginResponse());
 
         $this->_updateLoginState($response);
 
@@ -1873,6 +1880,7 @@ class Instagram implements ExperimentsInterface
      * @param string $username            Your Instagram username.
      * @param string $twoFactorIdentifier Two factor identifier, obtained in
      *                                    `login()` response.
+     * @param string $pollingNonce        Trusted polling nonce.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1880,7 +1888,8 @@ class Instagram implements ExperimentsInterface
      */
     public function checkTrustedNotificationStatus(
         $username,
-        $twoFactorIdentifier)
+        $twoFactorIdentifier,
+        $pollingNonce)
     {
         if (empty($username)) {
             throw new \InvalidArgumentException('You must provide a username.');
@@ -1894,6 +1903,7 @@ class Instagram implements ExperimentsInterface
         ->addPost('two_factor_identifier', $twoFactorIdentifier)
         ->addPost('username', $username)
         ->addPost('device_id', $this->device_id)
+        ->addPost('trusted_notification_polling_nonces', json_encode([$pollingNonce]))
         //->addPost('_csrftoken', $this->client->getToken())
         ->getResponse(new Response\TwoFactorNotificationStatusResponse());
     }

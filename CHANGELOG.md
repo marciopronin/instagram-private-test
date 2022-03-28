@@ -1,3 +1,18 @@
+# Stable release v19.13.6
+## Date: 28/03/2022
+
+### Updates and fixes
+
+- **Instagram:** Update `finishTwoFactorLogin()` and `checkTrustedNotificationStatus()`. A new nonce is used for checking trusted notifications.
+
+### Model and responses
+
+- **Model:** TwoFactorInfo model was updated
+
+### Examples
+
+- **Example:** Update twoFactorLoginNotification example
+
 # Stable release v19.13.5
 ## Date: 27/03/2022
 

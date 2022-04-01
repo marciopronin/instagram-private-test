@@ -697,7 +697,7 @@ class Internal extends RequestCollection
             if (isset($externalMetadata['thumbnail_timestamp'])) {
                 $options['thumbnailTimestamp'] = $externalMetadata['thumbnail_timestamp'];
             }
-            if (($targetFeed === Constants::FEED_TV || $targetFeed === Constants::FEED_TIMELINE) && isset($externalMetadata['cover_photo'])) {
+            if (($targetFeed === Constants::FEED_TV || $targetFeed === Constants::FEED_TIMELINE || $targetFeed === Constants::FEED_REELS) && isset($externalMetadata['cover_photo'])) {
                 $videoThumbnail = new \InstagramAPI\Media\Photo\InstagramPhoto($externalMetadata['cover_photo'], $options);
             } else {
                 $videoThumbnail = new InstagramThumbnail(
@@ -708,10 +708,14 @@ class Internal extends RequestCollection
 
             $pdqHashes = [];
             foreach (Constants::PDQ_VIDEO_TIME_FRAMES as $timeFrame) {
-                $options['thumbnailTimestamp'] = $timeFrame;
-                $frame = new InstagramThumbnail($internalMetadata->getVideoDetails()->getFilename(), $options);
-                list($hash, $quality) = PDQHasher::computeHashAndQualityFromFilename($frame->getFile(), false, false);
-                $pdqHashes[] = $hash->toHexString();
+                try {
+                    $options['thumbnailTimestamp'] = $timeFrame;
+                    $frame = new InstagramThumbnail($internalMetadata->getVideoDetails()->getFilename(), $options);
+                    list($hash, $quality) = PDQHasher::computeHashAndQualityFromFilename($frame->getFile(), false, false);
+                    $pdqHashes[] = $hash->toHexString();
+                } catch (\Exception $e) {
+                    // pass
+                }
             }
 
             // Validate and upload the thumbnail.

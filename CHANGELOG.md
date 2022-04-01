@@ -1,3 +1,17 @@
+# Stable release v19.13.7
+## Date: 01/04/2022
+
+### Updates and fixes
+
+- **Instagram:** Update Instagram version to 228.0.0.15.111
+- **Account:** Update `createValidated()` and `create()`
+- **Internal:** Update `uploadVideoThumbnail()`
+- **InstagramThumbnail:** Update InstagramThumbnail for Reels (Clips)
+
+### Examples
+
+- **Example:** Update smsRegistration example
+
 # Stable release v19.13.6
 ## Date: 28/03/2022
 

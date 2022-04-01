@@ -36,7 +36,7 @@ class Account extends RequestCollection
         $date,
         $firstName,
         $waterfallId,
-        $tosVersion = 'eu')
+        $tosVersion = 'row')
     {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
@@ -70,7 +70,7 @@ class Account extends RequestCollection
                 ->addPost('suggestedUsername', '')
                 ->addPost('is_secondary_account_creation', false)
                 ->addPost('jazoest', Utils::generateJazoest($this->ig->phone_id))
-                ->addPost('sn_result', 'GOOGLE_PLAY_UNAVAILABLE:+SERVICE_INVALID')
+                ->addPost('sn_result', sprintf('GOOGLE_PLAY_UNAVAILABLE: %s', array_rand(['SERVICE_INVALID', 'UNKNOWN', 'SERVICE_DISABLED', 'NETWORK_ERROR', 'INTERNAL_ERROR', 'CANCELED', 'INTERRUPTED', 'API_UNAVAILABLE'])))
                 ->addPost('do_not_auto_login_if_credentials_match', 'true');
         } else {
             $request->addPost('do_not_auto_login_if_credentials_match', '0')
@@ -107,7 +107,7 @@ class Account extends RequestCollection
         $date,
         $firstName,
         $waterfallId,
-        $tosVersion = 'eu')
+        $tosVersion = 'row')
     {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
@@ -137,7 +137,6 @@ class Account extends RequestCollection
             ->addPost('enc_password', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('verification_code', $smsCode)
             ->addPost('qs_stamp', '')
-            ->addPost('one_tap_opt_in', 'true')
             ->addPost('has_sms_consent', 'true');
 
         if ($this->ig->getIsAndroid()) {
@@ -145,7 +144,7 @@ class Account extends RequestCollection
                 ->addPost('suggestedUsername', '')
                 ->addPost('is_secondary_account_creation', false)
                 ->addPost('jazoest', Utils::generateJazoest($this->ig->phone_id))
-                ->addPost('sn_result', 'GOOGLE_PLAY_UNAVAILABLE:+SERVICE_INVALID')
+                ->addPost('sn_result', sprintf('GOOGLE_PLAY_UNAVAILABLE: %s', array_rand(['SERVICE_INVALID', 'UNKNOWN', 'SERVICE_DISABLED', 'NETWORK_ERROR', 'INTERNAL_ERROR', 'CANCELED', 'INTERRUPTED', 'API_UNAVAILABLE'])))
                 ->addPost('do_not_auto_login_if_credentials_match', 'true')
                 ->addPost('force_sign_up_code', '');
         } else {
@@ -207,6 +206,7 @@ class Account extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->device_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('android_build_type', 'RELEASE')
             ->addPost('guid', $this->ig->uuid)
             ->addPost('waterfall_id', $waterfallId)
             ->getResponse(new Response\SendSignupSmsCodeResponse());

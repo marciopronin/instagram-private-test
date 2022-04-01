@@ -43,7 +43,10 @@ class InstagramThumbnail extends InstagramVideo
                 // Stories always have the thumbnail at "00:00:00.000" instead.
                 $this->_thumbnailTimestamp = 0.0;
                 break;
-            case Constants::FEED_TIMELINE || Constants::FEED_TIMELINE_ALBUM:
+            case Constants::FEED_TIMELINE || Constants::FEED_TIMELINE_ALBUM || Consants::FEED_REELS:
+                if ($options['targetFeed'] === Consants::FEED_REELS) {
+                    $this->_thumbnailTimestamp = 0.0;
+                }
                 // Handle custom timestamp (only supported by timeline media).
                 // NOTE: Matches real app which only customizes timeline covers.
                 if (isset($options['thumbnailTimestamp'])) {

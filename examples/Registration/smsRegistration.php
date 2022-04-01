@@ -74,7 +74,8 @@ $ig->event->sendFlowSteps('username', 'register_with_ci_option', $waterfallId, $
 
 $ig->internal->startNewUserFlow();
 $ig->internal->getOnBoardingSteps($waterfallId);
-$ig->event->forceSendBatch();
+
+sleep(mt_rand(5, 10));
 
 try {
     $response = $ig->account->createValidated($smsCode, $username, $password, $phone, sprintf('%d-%2d-%2d', $year, $month, $day), $firstName, $waterfallId, $tos);

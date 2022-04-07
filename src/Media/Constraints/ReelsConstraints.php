@@ -38,7 +38,7 @@ class ReelsConstraints extends StoryConstraints
      *
      * @var float
      */
-    const MIN_DURATION = 3.0;
+    const MIN_DURATION = 0.5;
 
     /**
      * Maximum allowed video duration.

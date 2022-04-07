@@ -1,3 +1,11 @@
+# Stable release v19.13.8
+## Date: 07/04/2022
+
+### Updates and fixes
+
+- **Constraints:** Update ReelsConstraints
+- **InstagramThumbnail:** Update InstagramThumbnail for Reels (Clips)
+
 # Stable release v19.13.7
 ## Date: 01/04/2022
 

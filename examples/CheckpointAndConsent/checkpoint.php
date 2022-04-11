@@ -94,6 +94,19 @@ try {
                             break 2;
                         }
                         break;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\ChangePasswordException:
+                        $password = trim(fgets(STDIN));
+                        $challenge = $ig->checkpoint->sendSetNewPasswordCheck($checkApiPath, $password);
+
+                        if ($challenge->getLoggedInUser() !== null) {
+                            // If code was successfully verified, update login state and send login flow.
+                            $ig->finishCheckpoint($challenge);
+                            // Break switch and while loop.
+                            break 2;
+                        } elseif ($challenge->getAction() === 'close') {
+                            break 2;
+                        }
+                        break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SubmitPhoneException:
                         $phone = trim(fgets(STDIN));
                         // Set the phone number for verification.

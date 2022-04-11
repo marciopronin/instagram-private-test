@@ -71,7 +71,7 @@ class ServerMessageThrower
             'verify_email', // step_name
             'verify_sms_code', // step_name
         ],
-        'Checkpoint\DeltaLoginReviewException'          => ['delta_login_review'], // step name
+        'Checkpoint\DeltaLoginReviewException'          => ['delta_login_review', 'delta_acknowledge_approved'], // step name
         'Checkpoint\EscalationInformationalException'   => ['escalation_challenge_informational'], // step name
         'FeedbackRequiredException'                     => ['feedback_required'],
         'ConsentRequiredException'                      => ['consent_required'],
@@ -95,7 +95,7 @@ class ServerMessageThrower
             '/username(.*?)doesn\'t(.*?)belong/', // message
             'invalid_user', // error_type
         ],
-        'Checkpoint\ChangePasswordException'                 => ['/reset(.*?)password/'],
+        'Checkpoint\ChangePasswordException'                 => ['/reset(.*?)password/', 'set_new_password'],
         'Checkpoint\RecaptchaChallengeException'             => ['RecaptchaChallengeForm'],
         'Checkpoint\EscalationChallengeInformationException' => [
             'EscalationChallengeInformationalForm',
@@ -186,7 +186,8 @@ class ServerMessageThrower
                 }
             }
         }
-
+        
+        $messages = array_filter($messages);
         $exceptionClass = null;
 
         // Check if the server message is in our CRITICAL exception table.
@@ -205,7 +206,7 @@ class ServerMessageThrower
                             $exceptionClass = $className;
                             break 3;
                         }
-                    }
+                    }                 
                 }
             }
         }
@@ -229,7 +230,6 @@ class ServerMessageThrower
                     $exceptionClass = 'EndpointException';
             }
         }
-
         // We need to specify the full namespace path to the exception class.
         $fullClassPath = '\\'.__NAMESPACE__.'\\'.$exceptionClass;
 
@@ -256,7 +256,6 @@ class ServerMessageThrower
             && $e instanceof \InstagramAPI\Exception\InstagramException) {
             $e->setResponse($serverResponse);
         }
-
         throw $e;
     }
 

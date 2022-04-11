@@ -1,3 +1,18 @@
+# Stable release v19.14.0
+## Date: 12/04/2022
+
+### New features
+
+- **Checkpoint:** Added `sendSetNewPasswordCheck()`
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update exception messages for new checkpoint steps.
+
+### Examples
+
+- **Example:** Update checkpoint example
+
 # Stable release v19.13.8
 ## Date: 07/04/2022
 

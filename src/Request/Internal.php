@@ -711,8 +711,10 @@ class Internal extends RequestCollection
                 try {
                     $options['thumbnailTimestamp'] = $timeFrame;
                     $frame = new InstagramThumbnail($internalMetadata->getVideoDetails()->getFilename(), $options);
-                    list($hash, $quality) = PDQHasher::computeHashAndQualityFromFilename($frame->getFile(), false, false);
-                    $pdqHashes[] = $hash->toHexString();
+                    list($hash, $quality) = @PDQHasher::computeHashAndQualityFromFilename($frame->getFile(), false, false);
+                    if ($hash !== null) {
+                        $pdqHashes[] = $hash->toHexString();
+                    }
                 } catch (\Exception $e) {
                     // pass
                 }

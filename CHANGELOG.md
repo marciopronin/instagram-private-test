@@ -1,3 +1,11 @@
+# Stable release v19.14.1
+## Date: 12/04/2022
+
+### Updates and fixes
+
+- **PDQHasher:** Update `computeHashAndQualityFromFilename()`
+- **Internal:** Update `uploadVideoThumbnail()`
+
 # Stable release v19.14.0
 ## Date: 12/04/2022
 

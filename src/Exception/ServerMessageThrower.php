@@ -186,7 +186,7 @@ class ServerMessageThrower
                 }
             }
         }
-        
+
         $messages = array_filter($messages);
         $exceptionClass = null;
 
@@ -206,7 +206,7 @@ class ServerMessageThrower
                             $exceptionClass = $className;
                             break 3;
                         }
-                    }                 
+                    }
                 }
             }
         }
@@ -256,6 +256,7 @@ class ServerMessageThrower
             && $e instanceof \InstagramAPI\Exception\InstagramException) {
             $e->setResponse($serverResponse);
         }
+
         throw $e;
     }
 

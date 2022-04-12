@@ -892,6 +892,9 @@ class PDQHasher
 
         //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         $info = getimagesize($filename);
+        if ($info === false) {
+            return [null, null];
+        }
         if ($dump) {
             echo "IMAGE INFO:\n";
             print_r($info);

@@ -174,4 +174,40 @@ class Reel extends RequestCollection
 
         return $request->getResponse(new Response\UserReelsResponse());
     }
+
+    /**
+     * Get share to FB config.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\ReelShareToFbConfigResponse
+     */
+    public function getShareToFbConfig()
+    {
+        return $this->ig->request('clips/user/share_to_fb_config/')
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\ReelShareToFbConfigResponse());
+    }
+
+    /**
+     * Set default share to FB config.
+     *
+     * @param bool $enabled Enable default share to FB.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function setDefaultShareToFbConfig(
+        $enabled)
+    {
+        return $this->ig->request('clips/user/set_default_share_to_fb_enabled/')
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('default_share_to_fb_enabled', ($enabled === true) ? 'true' : 'false')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('enable_oa_reuse_on_fb', 'true')
+            ->addPost('container_module', 'ShareOnFacebookSettingsFragment')
+            ->getResponse(new Response\GenericResponse());
+    }
 }

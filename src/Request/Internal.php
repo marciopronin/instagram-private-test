@@ -1049,6 +1049,9 @@ class Internal extends RequestCollection
                 }
                 break;
             case Constants::FEED_REELS:
+                if (isset($externalMetadata['share_to_fb'])) {
+                    $request->addPost('is_shared_to_fb', '1');
+                }
                 $request
                     ->addHeader('Is_clips_video', '1')
                     ->addHeader('retry_context', json_encode(

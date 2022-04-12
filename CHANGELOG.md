@@ -1,3 +1,19 @@
+# Stable release v19.15.0
+## Date: 13/04/2022
+
+### New features
+
+- **Reel:** Add `getShareToFbConfig()`
+- **Reel:** Add `setDefaultShareToFbConfig()`
+
+### Models and responses
+
+- **Response:** Added ReelShareToFbConfigResponse
+
+### Updates and fixes
+
+- **Internal:** Update `configureSingleVideo()`
+
 # Stable release v19.14.1
 ## Date: 12/04/2022
 

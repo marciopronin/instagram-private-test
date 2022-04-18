@@ -1,3 +1,24 @@
+# Stable release v19.16.0
+## Date: 18/04/2022
+
+### New features
+
+- **Internal:** Add `getMobileConfig()`
+- **Internal:** Add `_saveExperimentsMobileConfig()`
+
+### Updates and fixes
+
+- **Constants:** Added MobileConfig experiments constant.
+- **Instagram:** Launcher sync and experiments replaced in favor of MobileConfig system.
+
+### Models and responses
+
+- **Response:** Added MobileConfigResponse
+
+### Extra
+
+- **data:** Added params_map.txt used for MobileConfig.
+
 # Stable release v19.15.0
 ## Date: 13/04/2022
 

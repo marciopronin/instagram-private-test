@@ -1,3 +1,20 @@
+# Stable release v19.17.0
+## Date: 19/04/2022
+
+### New features
+
+- **Live:** Add `enableRequestToJoin()`
+- **Live:** Add `disableRequestToJoin()`
+- **Live:** Add `removeUser()`
+- **Live:** Add `resignModeratorRequest()`
+
+### Updates and fixes
+
+- **Live:** Update `create()`
+- **Live:** Update `addModerator()`
+- **Live:** Update `revokeModerator()`
+
+
 # Stable release v19.16.0
 ## Date: 18/04/2022
 

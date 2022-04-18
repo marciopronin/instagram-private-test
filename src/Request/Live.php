@@ -44,6 +44,7 @@ class Live extends RequestCollection
         $broadcastId)
     {
         return $this->ig->request("live/{$broadcastId}/info/")
+            ->addParam('view_expired_broadcast', false)
             ->getResponse(new Response\BroadcastInfoResponse());
     }
 
@@ -213,7 +214,7 @@ class Live extends RequestCollection
         $encodedServerDataInfo,
         $videoOffset)
     {
-        return $this->ig->request("live/{$broadcastId}/join/")
+        return $this->ig->request("live/{$broadcastId}/invite/")
             ->addPost('invitees', $userId)
             ->addPost('offset_to_video_start', $videoOffset)
             ->addPost('encoded_server_data_info', $encodedServerDataInfo)
@@ -438,6 +439,7 @@ class Live extends RequestCollection
      *
      * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
      * @param string $viewerId    Numerical UserPK ID of the user to wave to.
+     * @param int    $waveType    Wave type.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -445,10 +447,12 @@ class Live extends RequestCollection
      */
     public function wave(
         $broadcastId,
-        $viewerId)
+        $viewerId,
+        $waveType = 0)
     {
         return $this->ig->request("live/{$broadcastId}/wave/")
             ->addPost('viewer_id', $viewerId)
+            ->addPost('wave_type', ($waveType === 0) ? 'wave' : 'wave_back')
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
@@ -475,6 +479,9 @@ class Live extends RequestCollection
             ->addPost('comment_text', $commentText)
             ->addPost('live_or_vod', 1)
             ->addPost('offset_to_video_start', 0)
+            ->addPost('force_create', false)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\CommentBroadcastResponse());
     }
 
@@ -527,9 +534,10 @@ class Live extends RequestCollection
     /**
      * Get broadcast comments.
      *
-     * @param string $broadcastId       The broadcast ID in Instagram's internal format (ie "17854587811139572").
-     * @param int    $lastCommentTs     Last comments timestamp (optional).
-     * @param int    $commentsRequested Number of comments requested (optional).
+     * @param string $broadcastId          The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     * @param int    $lastCommentTs        Last comments timestamp (optional).
+     * @param int    $joinRequestLastTs    Last join request last seen timestamp (optional).
+     * @param int    $joinRequestLastCount Join request last total count (optional).
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -538,11 +546,14 @@ class Live extends RequestCollection
     public function getComments(
         $broadcastId,
         $lastCommentTs = 0,
-        $commentsRequested = 3)
+        $joinRequestLastTs = 0,
+        $joinRequestLastCount = 0)
     {
         return $this->ig->request("live/{$broadcastId}/get_comment/")
             ->addParam('last_comment_ts', $lastCommentTs)
-//            ->addParam('num_comments_requested', $commentsRequested)
+            ->addParam('join_request_last_seen_ts', $joinRequestLastTs)
+            ->addParam('join_request_last_fetch_ts', $joinRequestLastTs)
+            ->addParam('join_request_last_total_count', $joinRequestLastCount)
             ->getResponse(new Response\BroadcastCommentsResponse());
     }
 
@@ -604,6 +615,44 @@ class Live extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\EnableDisableLiveCommentsResponse());
+    }
+
+    /**
+     * Enable Request To Join on your live broadcast.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\EnableDisableLiveCommentsResponse
+     */
+    public function enableRequestToJoin(
+        $broadcastId)
+    {
+        return $this->ig->request("live/{$broadcastId}/enable_request_to_join/")
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('_uuid', $this->ig->uuid)
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Disable Request To Join on your live broadcast.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\EnableDisableLiveCommentsResponse
+     */
+    public function disableRequestToJoin(
+        $broadcastId)
+    {
+        return $this->ig->request("live/{$broadcastId}/disable_request_to_join/")
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('_uuid', $this->ig->uuid)
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
     }
 
     /**
@@ -706,9 +755,11 @@ class Live extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('preview_height', $previewHeight)
             ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('should_use_rsys_rtc_infra', false)
             ->addPost('broadcast_type', 'RTMP_SWAP_ENABLED')
             ->addPost('preview_width', $previewWidth)
-            ->addPost('internal_only', 0);
+            ->addPost('internal_only', 0)
+            ->addPost('visibility', 0);
 
         if ($title !== null) {
             $request->addPost('broadcast_message', $title);
@@ -1117,10 +1168,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/moderator/assign/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('step', 'add_as_moderator')
-            ->addPost('view_mode', 'host')
-            ->addPost('method', 'comment_action_sheet')
-            ->addPost('target_user_id', $userId)
+            ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1141,9 +1189,46 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/moderator/revoke/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('view_mode', 'host')
-            ->addPost('method', 'comment_action_sheet')
-            ->addPost('target_user_id', $userId)
+            ->addPost('user_id', $userId)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Resign moderator request.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function resignModeratorRequest(
+        $broadcastId)
+    {
+        return $this->ig->request("live/{$broadcastId}/moderator/resign/")
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Remove user from live.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     * @param string $userId      Numerical UserPK ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function removeUser(
+        $broadcastId,
+        $userId)
+    {
+        return $this->ig->request("live/{$broadcastId}/remove_user/")
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
 }

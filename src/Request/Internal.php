@@ -1330,62 +1330,64 @@ class Internal extends RequestCollection
     /**
      * Saves active experiments.
      *
-     * @param Response\SyncResponse $syncResponse
+     * @param array $mobileConfigResponse
      *
      * @throws \InstagramAPI\Exception\SettingsException
      */
-    protected function _saveExperiments(
-        Response\SyncResponse $syncResponse)
+    protected function _saveExperimentsMobileConfig(
+        $mobileConfigResponse)
     {
-        $experiments = [];
-        foreach ($syncResponse->getExperiments() as $experiment) {
-            $group = $experiment->getName();
-            $params = $experiment->getParams();
+        $paramsMap = fopen(__DIR__.'/../data/params_map.txt', 'r');
+        $mappedExperiments = [];
+        $found = false;
 
-            if ($group === null || $params === null) {
-                continue;
-            }
-
-            if (!isset($experiments[$group])) {
-                $experiments[$group] = [];
-            }
-
-            foreach ($params as $param) {
-                $paramName = $param->getName();
-                if ($paramName === null) {
-                    continue;
-                }
-
-                $experiments[$group][$paramName] = $param->getValue();
-            }
-        }
-
-        // Save the experiments and the last time we refreshed them.
-        $this->ig->experiments = $this->ig->settings->setExperiments($experiments);
-        $this->ig->settings->set('last_experiments', time());
-    }
-
-    /**
-     * Saves active experiments.
-     *
-     * @param Response\LauncherSyncResponse $syncResponse
-     *
-     * @throws \InstagramAPI\Exception\SettingsException
-     */
-    protected function _saveExperimentsLauncher(
-        Response\LauncherSyncResponse $syncResponse)
-    {
-        $experiments = [];
-        $configData = $syncResponse->getConfigs()->getData();
-
-        foreach ($configData as $group => $param) {
-            if (substr($group, 0, 3) === 'qe_') {
-                foreach ($param->getParams()->getData() as $paramName => $paramValue) {
-                    if ($paramValue->getValue() !== null) {
-                        $experiments[substr($group, 3)][$paramName] = $paramValue->getValue();
+        if ($paramsMap) {
+            while (($line = fgets($paramsMap)) !== false) {
+                if ($found === true && $line[0] !== '*') {
+                    $exps = explode(',', $line);
+                    $mappedExperiments[hexdec(end($paramData))]['exps'][] = $exps[0];
+                } else {
+                    $found = false;
+                    $line = str_replace('*', '', $line);
+                    $paramData = explode(',', $line);
+                    if (in_array($paramData[0], Constants::MOBILE_CONFIG_EXPERIMTENTS)) {
+                        $mappedExperiments[strval(hexdec(end($paramData)))] = [
+                            'name'  => $paramData[0],
+                            'exps'  => [],
+                        ];
+                        $found = true;
                     }
                 }
             }
+
+            fclose($paramsMap);
+        }
+
+        $experiments = [];
+
+        foreach ($mobileConfigResponse['configs'] as $k => $v) {
+            $exps = [];
+            if (isset($mappedExperiments[$k])) {
+                $fields = $v['fields'];
+                asort($fields);
+                $c = 0;
+                foreach ($fields as $k2 => $v2) {
+                    if (isset($mappedExperiments[$k])) {
+                        if (isset($v2['bln'])) {
+                            $val = boolval($v2['bln']);
+                        } elseif (isset($v2['str'])) {
+                            $val = $v2['str'];
+                        } elseif (isset($v2['i64'])) {
+                            $val = intval($v2['i64']);
+                        } else {
+                            $val = null;
+                        }
+                        $exps[$mappedExperiments[$k]['exps'][$c]] = $val;
+                    }
+                    $c++;
+                }
+                $experiments[$mappedExperiments[$k]['name']] = $exps;
+            }
         }
 
         // Save the experiments and the last time we refreshed them.
@@ -1394,112 +1396,36 @@ class Internal extends RequestCollection
     }
 
     /**
-     * Perform an Instagram "feature synchronization" call for device.
+     * Get MobileConfig.
      *
-     * @param bool $prelogin
-     * @param bool $useCsrfToken
+     * @param bool $prelogin Indicates if the request is done before login request.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SyncResponse
+     * @return \InstagramAPI\Response\MobileConfigResponse
      */
-    public function syncDeviceFeatures(
-        $prelogin = false,
-        $useCsrfToken = false)
+    public function getMobileConfig(
+        $prelogin)
     {
-        $request = $this->ig->request('qe/sync/')
-            ->addHeader('X-DEVICE-ID', $this->ig->uuid)
-            ->addPost('id', $this->ig->uuid);
+        $request = $this->ig->request('launcher/mobileconfig/')
+            ->addPost('bool_opt_policy', 0)
+            ->addPost('api_version', 3)
+            ->addPost('device_id', $this->ig->uuid)
+            ->addPost('fetch_type', 'ASYNC_FULL');
 
-        if ($this->ig->getIsAndroid()) {
-            $request->addPost('experiments', Constants::LOGIN_EXPERIMENTS);
-        } else {
-            $request->addPost('server_config_retrieval', 1);
-        }
-
-        /*
-        if ($useCsrfToken) {
-            $request->addPost('_csrftoken', $this->ig->client->getToken());
-        }
-        */
         if ($prelogin) {
-            $request->setNeedsAuth(false);
+            $request
+                ->setNeedsAuth(false)
+                ->addPost('unit_type', 1)
+                ->addPost('query_hash', '290c995f19a1c2aa501b3cd60f1f5b7e89ea1836f094da6502b261254f04f795');
         } else {
             $request
-                ->addPost('_uuid', $this->ig->uuid)
-                ->addPost('_uid', $this->ig->account_id);
+                ->addPost('unit_type', 2)
+                ->addPost('query_hash', 'f457404050aa533cb8d2bb1826808a92ae78a32fe7f92a1037b35ebb33782c64');
         }
 
-        return $request->getResponse(new Response\SyncResponse());
-    }
-
-    /**
-     * Perform an Instagram "feature synchronization" call for account.
-     *
-     * @throws \InstagramAPI\Exception\InstagramException
-     *
-     * @return \InstagramAPI\Response\SyncResponse
-     */
-    public function syncUserFeatures()
-    {
-        $request = $this->ig->request('qe/sync/')
-            ->addHeader('X-DEVICE-ID', $this->ig->uuid)
-            ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('id', $this->ig->account_id);
-
-        if ($this->ig->getIsAndroid()) {
-            $request->addPost('experiments', Constants::EXPERIMENTS);
-        } else {
-            $request->addPost('server_config_retrieval', 1);
-        }
-
-        $result = $request->getResponse(new Response\SyncResponse());
-
-        // Save the updated experiments for this user.
-        $this->_saveExperiments($result);
-
-        return $result;
-    }
-
-    /**
-     * Send launcher sync.
-     *
-     * @param bool $prelogin     Indicates if the request is done before login request.
-     * @param bool $idIsUuid     Indicates if the id parameter is the UUID.
-     * @param bool $useCsrfToken Indicates if a csrf token should be included.
-     * @param bool $loginConfigs Indicates if login configs should be used.
-     *
-     * @throws \InstagramAPI\Exception\InstagramException
-     *
-     * @return \InstagramAPI\Response\LauncherSyncResponse
-     */
-    public function sendLauncherSync(
-        $prelogin,
-        $idIsUuid = true,
-        $useCsrfToken = false,
-        $loginConfigs = false)
-    {
-        $request = $this->ig->request('launcher/sync/')
-            ->addPost('id', ($idIsUuid ? $this->ig->uuid : $this->ig->account_id))
-            ->addPost('server_config_retrieval', 1);
-
-        /*
-        if ($useCsrfToken) {
-            $request->addPost('_csrftoken', $this->ig->client->getToken());
-        }
-        */
-        if ($prelogin) {
-            $request->setNeedsAuth(false);
-        } else {
-            $request
-                ->addPost('_uuid', $this->ig->uuid)
-                ->addPost('_uid', $this->ig->account_id);
-        }
-
-        $result = $request->getResponse(new Response\LauncherSyncResponse());
-        $this->_saveExperimentsLauncher($result);
+        $result = $request->getResponse(new Response\MobileConfigResponse());
+        $this->_saveExperimentsMobileConfig($result->asArray());
 
         return $result;
     }

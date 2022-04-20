@@ -397,9 +397,10 @@ class Internal extends RequestCollection
                 if ($storyPoll !== null) {
                     Utils::throwIfInvalidStoryPoll($storyPoll);
                     $request
-                        ->addPost('story_polls', json_encode($storyPoll))
-                        ->addPost('internal_features', 'polling_sticker')
-                        ->addPost('mas_opt_in', 'NOT_PROMPTED');
+                        ->addPost('internal_features', 'poll_sticker_v2');
+
+                    $tapModels[] = $storyPoll[0];
+                    $stickerIds[] = 'polling_sticker_v2';
                 }
                 if ($storySlider !== null) {
                     Utils::throwIfInvalidStorySlider($storySlider);
@@ -882,7 +883,7 @@ class Internal extends RequestCollection
         // Build the request...
         $request = $this->ig->request($endpoint)
             ->addParam('video', 1)
-            //->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
             ->addPost('video_result', $internalMetadata->getVideoUploadResponse() !== null ? (string) $internalMetadata->getVideoUploadResponse()->getResult() : '')
             ->addPost('upload_id', $uploadId)
             ->addPost('poster_frame_index', 0)
@@ -976,9 +977,10 @@ class Internal extends RequestCollection
                 if ($storyPoll !== null) {
                     Utils::throwIfInvalidStoryPoll($storyPoll);
                     $request
-                        ->addPost('story_polls', json_encode($storyPoll))
-                        ->addPost('internal_features', 'polling_sticker')
-                        ->addPost('mas_opt_in', 'NOT_PROMPTED');
+                        ->addPost('internal_features', 'poll_sticker_v2');
+
+                    $tapModels[] = $storyPoll[0];
+                    $stickerIds[] = 'polling_sticker_v2';
                 }
                 if ($storySlider !== null) {
                     Utils::throwIfInvalidStorySlider($storySlider);
@@ -2132,7 +2134,7 @@ class Internal extends RequestCollection
                 case 200:
                     // Instagram uses "ok" status for this error, so we need to check it first:
                     // {"message": "media_needs_reupload", "error_title": "staged_position_not_found", "status": "ok"}
-                    if (strtolower($result->getMessage()) === 'media_needs_reupload') {
+                    if ($result->getMessage() !== null && strtolower($result->getMessage()) === 'media_needs_reupload') {
                         throw new \RuntimeException(sprintf(
                             'You need to reupload the media (%s).',
                             // We are reading a property that isn't defined in the class

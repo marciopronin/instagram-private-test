@@ -1,3 +1,18 @@
+# Stable release v19.17.1
+## Date: 20/04/2022
+
+### Updates and fixes
+
+- **Internal:** Update `configureSinglePhoto()`
+- **Internal:** Update `configureSingleVideo()`
+- **Internal:** Update `configureWithRetries()`
+- **Utils:** Update `_throwIfInvalidStoryPollTallies()`
+- **Utils:** Update `throwIfInvalidStoryPoll()`
+
+### Examples
+
+- **Example:** Update uploadStoryPoll
+
 # Stable release v19.17.0
 ## Date: 19/04/2022
 

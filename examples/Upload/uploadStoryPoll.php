@@ -35,6 +35,9 @@ $metadata = [
         // Note that you can only do one story poll in this array.
         [
             'question'         => 'Is this API great?', // Story poll question. You need to manually to draw it on top of your image.
+            'color'            => 'black', // green, blue...
+            'type'             => 'poll',
+            'poll_id'          => '', // this is empty string
             'viewer_vote'      => 0, // Don't change this value.
             'viewer_can_vote'  => true, // Don't change this value.
             'tallies'          => [
@@ -48,13 +51,20 @@ $metadata = [
                     'count'     => 0, // Don't change this value.
                     'font_size' => 27.5, // Range: 17.5 - 35.0.
                 ],
+                [
+                    'text'      => '3rd option!?', // Answer 23
+                    'count'     => 0, // Don't change this value.
+                    'font_size' => 27.5, // Range: 17.5 - 35.0.
+                ],
             ],
-            'x'                => 0.5, // Range: 0.0 - 1.0. Note that x = 0.5 and y = 0.5 is center of screen.
-            'y'                => 0.5, // Also note that X/Y is setting the position of the CENTER of the clickable area.
-            'width'            => 0.5661107, // Clickable area size, as percentage of image size: 0.0 - 1.0
-            'height'           => 0.10647108, // ...
-            'rotation'         => 0.0,
-            'is_sticker'       => true, // Don't change this value.
+            'x'                     => 0.5, // Range: 0.0 - 1.0. Note that x = 0.5 and y = 0.5 is center of screen.
+            'y'                     => 0.5, // Also note that X/Y is setting the position of the CENTER of the clickable area.
+            'width'                 => 0.62843114, // Clickable area size, as percentage of image size: 0.0 - 1.0
+            'height'                => 0.39901808, // ...
+            'rotation'              => 0.0,
+            'is_sticker'            => true, // Don't change this value.
+            'tap_state_str_id'      => 'polling_sticker_v2',
+            'is_multi_option_poll'  => true,
         ],
     ],
 ];

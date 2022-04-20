@@ -789,14 +789,14 @@ class Utils
     public static function throwIfInvalidStoryPoll(
         array $storyPoll)
     {
-        $requiredKeys = ['question', 'viewer_vote', 'viewer_can_vote', 'tallies', 'is_sticker'];
+        $requiredKeys = ['question', 'viewer_vote', 'viewer_can_vote', 'tallies', 'is_sticker', 'color', 'type', 'poll_id', 'tap_state_str_id', 'is_multi_option_poll'];
 
         if (count($storyPoll) !== 1) {
             throw new \InvalidArgumentException(sprintf('Only one story poll is permitted. You added %d story polls.', count($storyPoll)));
         }
 
         // Ensure that all keys exist.
-        $missingKeys = array_keys(array_diff_key(['question' => 1, 'viewer_vote' => 1, 'viewer_can_vote' => 1, 'tallies' => 1, 'is_sticker' => 1], $storyPoll[0]));
+        $missingKeys = array_keys(array_diff_key(['question' => 1, 'viewer_vote' => 1, 'viewer_can_vote' => 1, 'tallies' => 1, 'is_sticker' => 1, 'color' => 1, 'type' => 1, 'poll_id' => 1, 'tap_state_str_id' => 1, 'is_multi_option_poll' => 1], $storyPoll[0]));
         if (count($missingKeys)) {
             throw new \InvalidArgumentException(sprintf('Missing keys "%s" for story poll array.', implode(', ', $missingKeys)));
         }
@@ -1162,8 +1162,8 @@ class Utils
         array $tallies)
     {
         $requiredKeys = ['text', 'count', 'font_size'];
-        if (count($tallies) !== 2) {
-            throw new \InvalidArgumentException(sprintf('Missing data for tallies.'));
+        if (count($tallies) < 2 && count($tallies) > 4) {
+            throw new \InvalidArgumentException(sprintf('Invalid number of tallies.'));
         }
 
         foreach ($tallies as $tallie) {

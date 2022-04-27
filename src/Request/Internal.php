@@ -505,7 +505,7 @@ class Internal extends RequestCollection
                 break;
         }
 
-        $request->addPost('tap_models', json_encode($tapModels));
+        $request->addPost('tap_models', json_encode($tapModels, JSON_UNESCAPED_SLASHES));
 
         if (!empty($stickerIds)) {
             $storyStickerIds = null;
@@ -1136,7 +1136,7 @@ class Internal extends RequestCollection
         }
 
         if (!empty($tapModels)) {
-            $request->addPost('tap_models', json_encode($tapModels));
+            $request->addPost('tap_models', json_encode($tapModels, JSON_UNESCAPED_SLASHES));
         }
 
         if (!empty($stickerIds)) {

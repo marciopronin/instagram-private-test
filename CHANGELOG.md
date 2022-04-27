@@ -1,3 +1,10 @@
+# Stable release v19.17.2
+## Date: 27/04/2022
+
+### Updates and fixes
+
+- **Internal:** Unescape slashes in tap models when json encoding it
+
 # Stable release v19.17.1
 ## Date: 20/04/2022
 

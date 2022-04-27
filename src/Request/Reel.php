@@ -41,7 +41,7 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserReelResponse
+     * @return \InstagramAPI\Response\ReelsResponse
      */
     public function discover(
         $chainingMedia = null,
@@ -69,7 +69,7 @@ class Reel extends RequestCollection
             $request->addPost('container_module', 'clips_viewer_clips_tab');
         }
 
-        return $request->getResponse(new Response\UserReelsResponse());
+        return $request->getResponse(new Response\ReelsResponse());
     }
 
     /**
@@ -103,7 +103,7 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserReelResponse
+     * @return \InstagramAPI\Response\ReelsResponse
      */
     public function getHome(
         $maxId = null,
@@ -119,7 +119,7 @@ class Reel extends RequestCollection
             $request->addPost('max_id', $maxId);
         }
 
-        return $request->getResponse(new Response\UserReelsResponse());
+        return $request->getResponse(new Response\ReelsResponse());
     }
 
     /**
@@ -131,7 +131,7 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserReelResponse
+     * @return \InstagramAPI\Response\ReelsResponse
      */
     public function getUserReels(
         $userId,
@@ -147,18 +147,18 @@ class Reel extends RequestCollection
             $request->addPost('max_id', $maxId);
         }
 
-        return $request->getResponse(new Response\UserReelsResponse());
+        return $request->getResponse(new Response\ReelsResponse());
     }
 
     /**
-     * Get music for reels. NOT FINISHED.
+     * Get music for reels.
      *
      * @param string|null $maxId Next "maximum ID", used for pagination.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserReelResponse
+     * @return \InstagramAPI\Response\ReelsResponse
      */
     public function getMusic(
         $maxId = null)
@@ -172,7 +172,60 @@ class Reel extends RequestCollection
             $request->addPost('max_id', $maxId);
         }
 
-        return $request->getResponse(new Response\UserReelsResponse());
+        return $request->getResponse(new Response\ReelsResponse());
+    }
+
+    /**
+     * Get reels from a location ID.
+     *
+     * @param string      $locationId Numerical UserPK ID.
+     * @param string|null $maxId      Next   "maximum ID", used for pagination.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\ReelsResponse
+     */
+    public function getLocationReels(
+        $locationId,
+        $maxId = null)
+    {
+        $request = $this->ig->request("clips/location/{$locationId}/")
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid);
+
+        if ($maxId !== null) {
+            $request->addPost('max_id', $maxId);
+        }
+
+        return $request->getResponse(new Response\ReelsResponse());
+    }
+
+    /**
+     * Get liked reels of a user.
+     *
+     * @param string      $userId Numerical UserPK ID.
+     * @param string|null $maxId  Next   "maximum ID", used for pagination.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\ReelsResponse
+     */
+    public function getUserLikedReels(
+        $userId,
+        $maxId = null)
+    {
+        $request = $this->ig->request('clips/liked/')
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('target_user_id', $userId);
+
+        if ($maxId !== null) {
+            $request->addPost('max_id', $maxId);
+        }
+
+        return $request->getResponse(new Response\ReelsResponse());
     }
 
     /**

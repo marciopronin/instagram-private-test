@@ -67,7 +67,7 @@ class Discover extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserReelResponse
+     * @return \InstagramAPI\Response\ReelsResponse
      */
     public function getExploreReels(
         $maxId = null)
@@ -81,7 +81,7 @@ class Discover extends RequestCollection
             $request->addPost('max_id', $maxId);
         }
 
-        return $request->getResponse(new Response\UserReelsResponse());
+        return $request->getResponse(new Response\ReelsResponse());
     }
 
     /**

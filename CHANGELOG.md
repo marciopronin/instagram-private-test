@@ -1,3 +1,11 @@
+# Stable release v19.18.0
+## Date: 27/04/2022
+
+### New features
+
+- **Reel (Clips):** Added `getLocationReels()`
+- **Reel (Clips):** Added `getUserLikedReels()`
+
 # Stable release v19.17.2
 ## Date: 27/04/2022
 

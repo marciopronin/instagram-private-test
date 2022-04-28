@@ -61,9 +61,10 @@ class Account extends RequestCollection
             ->addPost('day', $date[2])
             ->addPost('month', $date[1])
             ->addPost('year', $date[0])
-            ->addPost('waterfall_id', $waterfallId)
             ->addPost('enc_password', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
-            ->addPost('force_sign_up_code', $signupCode);
+            ->addPost('force_sign_up_code', $signupCode)
+            ->addPost('waterfall_id', $waterfallId)
+            ->addPost('qs_stamp', '');
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))
@@ -769,13 +770,34 @@ class Account extends RequestCollection
             $request->addPost('android_device_id', $this->ig->device_id)
                 ->addPost('login_nonce_map', '{}')
                 ->addPost('login_nonces', '[]')
-                ->addPost('qe_id', Signatures::generateUUID())
+                ->addPost('qe_id', $this->ig->uuid)
                 ->addPost('waterfall_id', $waterfallId);
         } else {
             $request->addPost('qe_id', $this->ig->device_id);
         }
 
         return $request->getResponse(new Response\CheckEmailResponse());
+    }
+
+    /**
+     * Get signup config.
+     *
+     * @param string $username Username.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getSignupConfig(
+        $username)
+    {
+        $this->ig->setUserWithoutPassword($username);
+
+        return $this->ig->request('consent/get_signup_config/')
+            ->setNeedsAuth(false)
+            ->addParam('guid', $this->ig->uuid)
+            ->addParam('main_account_selected', 'false')
+            ->getResponse(new Response\CheckEmailResponse());
     }
 
     /**
@@ -1268,6 +1290,7 @@ class Account extends RequestCollection
             ->setNeedsAuth(false)
             ->addPost('android_device_id', $this->ig->device_id)
             ->addPost('device_id', $this->ig->uuid)
+            ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('usages', '["account_recovery_omnibox"]')
             ->getResponse(new Response\PrefillCandidatesResponse());
     }

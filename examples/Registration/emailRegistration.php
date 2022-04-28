@@ -19,22 +19,28 @@ $email = 'InstaAPI@Test.com';
 $ig = new \InstagramAPI\Instagram($debug);
 $ig->setUserWithoutPassword($username);
 
-$launcherResponse = $ig->internal->sendLauncherSync(true)->getHttpResponse();
-$ig->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
-$ig->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
+$mobileconfigResponse = $ig->internal->getMobileConfig(true)->getHttpResponse();
+$ig->settings->set('public_key', $mobileconfigResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
+$ig->settings->set('public_key_id', $mobileconfigResponse->getHeaderLine('ig-set-password-encryption-key-id'));
 
 $startTime = round(microtime(true) * 1000);
 $waterfallId = \InstagramAPI\Signatures::generateUUID();
 
 $ig->event->sendFlowSteps('one_page_v2', 'register_full_name_focused', $waterfallId, $startTime, ['flow' => 'email']);
 $response = $ig->account->checkEmail($email, $waterfallId, $username);
+$ig->account->getSignupConfig($username);
 
 if ($response->getValid() && $response->getAvailable()) {
     $ig->account->sendEmailVerificationCode($email, $waterfallId);
     $code = trim(fgets(STDIN));
     $signupCode = $ig->account->checkConfirmationCode($code, $email, $waterfallId)->getSignupCode();
 
-    $ig->account->getUsernameSuggestions($email, $waterfallId);
+    $parts = str_split($username, 4);
+    foreach ($parts as $part) {
+        $ig->account->getUsernameSuggestions($email, $waterfallId, $part);
+        usleep(300000);
+    }
+
     $ig->event->sendFlowSteps('one_page_v2', 'reg_field_interacted', $waterfallId, $startTime, ['flow' => 'email', 'field_name' => 'password_field']);
     $ig->event->sendFlowSteps('one_page_v2', 'register_password_focused', $waterfallId, $startTime, ['flow' => 'email']);
     $ig->event->sendFlowSteps('one_page_v2', 'next_button_tapped', $waterfallId, $startTime, ['flow' => 'email']);
@@ -48,15 +54,18 @@ if ($response->getValid() && $response->getAvailable()) {
     $currentMonth = date('m');
     $currentDay = date('d');
 
+    usleep(mt_rand(1000000, 3000000));
     for ($i = 1; $i <= ($currentYear - $year); $i++) {
         $ig->event->sendDobPick(sprintf('%d-%02d-%02d', $currentYear - $i, $currentMonth, $currentDay));
     }
 
+    usleep(mt_rand(1000000, 3000000));
     $operand = ($month > $currentMonth) ? 1 : -1;
     for ($i = 1; $i <= abs(($currentMonth - $month)); $i++) {
         $ig->event->sendDobPick(sprintf('%d-%02d-%02d', $year, $currentMonth + ($operand * $i), $currentDay));
     }
 
+    usleep(mt_rand(1000000, 3000000));
     $operand = ($day > $currentDay) ? 1 : -1;
     for ($i = 1; $i <= abs(($currentDay - $day)); $i++) {
         $ig->event->sendDobPick(sprintf('%d-%02d-%02d', $year, $month, $currentDay + ($operand * $i)));
@@ -78,6 +87,8 @@ if ($response->getValid() && $response->getAvailable()) {
     $ig->internal->startNewUserFlow();
     $ig->internal->getOnBoardingSteps($waterfallId);
     $ig->event->forceSendBatch();
+
+    usleep(mt_rand(5000000, 8000000));
 
     try {
         $response = $ig->account->create($username, $password, $signupCode, $email, sprintf('%d-%2d-%2d', $year, $month, $day), $firstName, $waterfallId);

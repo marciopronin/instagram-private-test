@@ -1,3 +1,18 @@
+# Stable release v19.19.0
+## Date: 27/04/2022
+
+### New features
+
+- **:** Added `getSignupConfig()`
+
+### Updates and fixes
+
+- **Account:** Update `create()`
+
+### Examples
+
+- **Example:** Update emailRegistration
+
 # Stable release v19.18.0
 ## Date: 27/04/2022
 

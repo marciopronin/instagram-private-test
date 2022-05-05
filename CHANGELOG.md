@@ -1,3 +1,12 @@
+# Stable release v19.19.1
+## Date: 05/05/2022
+
+### Updates and fixes
+
+- **Constants:** Delete BATCH_SCALE
+- **Internal:** Update `getQPFetch()`
+- **Internal:** Update `uploadSingleVideo()`. Now its possible to share Reel (clip) to feed with the metadata key `reel_share_preview_to_feed`
+
 # Stable release v19.19.0
 ## Date: 27/04/2022
 

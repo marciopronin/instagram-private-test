@@ -354,14 +354,11 @@ class Account extends RequestCollection
     /**
      * Get details about child and main IG accounts.
      *
-     * @param bool $useAuth Indicates if auth is required for this request
-     *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\UserInfoResponse
      */
-    public function getAccountFamily(
-        $useAuth = true)
+    public function getAccountFamily()
     {
         return $this->ig->request('multiple_accounts/get_account_family/')
             ->getResponse(new Response\MultipleAccountFamilyResponse());

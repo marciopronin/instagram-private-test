@@ -1,3 +1,15 @@
+# Stable release v19.20.0
+## Date: 07/05/2022
+
+### Updates and fixes
+
+- **Constants:** Update Instagram to 233.0.0.13.112
+- **Account:** Update `getAccountFamily()`
+- **People:** Update `getSharePrefill()`
+- **Timeline:** Update `getTimelineFeed()`
+- **Event:** Update `_getModuleClass()`
+- **Instagram:** Update login flow
+
 # Stable release v19.19.1
 ## Date: 05/05/2022
 

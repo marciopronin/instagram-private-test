@@ -2446,6 +2446,7 @@ class Instagram implements ExperimentsInterface
             $this->client->zeroRating()->reset();
             $this->event->sendCellularDataOpt();
             $this->event->sendDarkModeOpt();
+            $this->internal->fetchZeroRatingToken();
             // Perform the "user has just done a full login" API flow.
 
             // Batch request 1
@@ -2454,7 +2455,6 @@ class Instagram implements ExperimentsInterface
             try {
                 $this->account->getAccountFamily();
                 $this->internal->getMobileConfig(false);
-                $this->internal->fetchZeroRatingToken();
                 $this->event->sendZeroCarrierSignal();
             } finally {
                 // Stops emulating batch requests.
@@ -2610,10 +2610,12 @@ class Instagram implements ExperimentsInterface
                 $this->client->stopEmulatingBatch();
             }
 
+            /*
             try {
                 $this->internal->getFacebookOTA();
             } catch (\Exception $e) {
             }
+            */
         } else {
             $lastLoginTime = $this->settings->get('last_login');
             $isSessionExpired = $lastLoginTime === null || (time() - $lastLoginTime) > $appRefreshInterval;

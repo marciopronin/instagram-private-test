@@ -1512,7 +1512,7 @@ class People extends RequestCollection
     public function getSharePrefill()
     {
         return $this->ig->request('banyan/banyan/')
-            ->addParam('views', '["story_share_sheet","direct_user_search_nullstate","forwarding_recipient_sheet","threads_people_picker","direct_inbox_active_now","group_stories_share_sheet","reshare_share_sheet","direct_user_search_keypressed"]')
+            ->addParam('views', '["reshare_share_sheet","direct_user_search_keypressed","story_share_sheet","direct_user_search_nullstate","direct_inbox_active_now","forwarding_recipient_sheet","call_recipients"]')
             ->getResponse(new Response\SharePrefillResponse());
     }
 

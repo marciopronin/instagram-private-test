@@ -117,39 +117,39 @@ class Event extends RequestCollection
     {
         switch ($module) {
             case 'feed_timeline':
-                $class = 'MainFeedFragment';
+                $class = '1ne'; //'MainFeedFragment';
                 break;
             case 'newsfeed_you':
-                $class = 'NewsfeedYouFragment';
+                $class = '8yv'; //'NewsfeedYouFragment';
                 break;
             case 'explore_popular':
-                $class = 'ExploreFragment';
+                $class = '25Q'; //'ExploreFragment';
                 break;
             case 'search_typeahead':
-                $class = 'SingleSearchTypeaheadTabFragment';
+                $class = 'BVu'; //'SingleSearchTypeaheadTabFragment';
                 break;
             //case 'search':
             case 'serp_top':
             //case 'search_result':
-                $class = 'TopSerpGridFragment';
+                $class = 'ACK'; //'TopSerpGridFragment';
                 break;
             case 'serp_places':
-                $class = 'PlacesSerpGridFragment';
+                $class = 'ACL'; //'PlacesSerpGridFragment';
                 break;
             case 'serp_users':
-                $class = 'UserSerpGridFragment';
+                $class = 'ACH'; //'UserSerpGridFragment';
                 break;
             case 'serp_tags':
-                $class = 'HashtagSerpGridFragment';
+                $class = 'ACI'; //'HashtagSerpGridFragment';
                 break;
             case 'serp_audio':
-                $class = 'AudioSerpGridFragment';
+                $class = 'ACJ'; //'AudioSerpGridFragment';
                 break;
             case 'music_search':
                 $class = 'MusicPostcaptureSearchController';
                 break;
             case 'search_typeahead_edit_recent':
-                $class = 'EditSearchHistoryFragment';
+                $class = 'BWe'; //'EditSearchHistoryFragment';
                 break;
             case 'feed_hashtag':
                 $class = 'HashtagPageFragment';
@@ -168,7 +168,7 @@ class Event extends RequestCollection
             //case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = 'ContextualFeedFragment';
+                $class = 'CWz'; // 'ContextualFeedFragment';
                 break;
             case 'profile':
             case 'self_profile': // UserDetailFragment, ProfileMediaTabFragment

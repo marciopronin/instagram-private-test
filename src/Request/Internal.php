@@ -1732,7 +1732,7 @@ class Internal extends RequestCollection
                 ]
             ))
             ->addPost('version', Constants::BATCH_VERSION)
-            ->addPost('scale', ceil($this->ig->device->getDPI() / 160))
+            ->addPost('scale', ceil(intval(substr($this->ig->device->getDPI(), 0, -3)) / 160))
             ->getResponse(new Response\FetchQPDataResponse());
     }
 

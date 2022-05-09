@@ -1,3 +1,10 @@
+# Stable release v19.20.1
+## Date: 09/05/2022
+
+### Updates and fixes
+
+- **Internal:** Update `getQPFetch()`
+
 # Stable release v19.20.0
 ## Date: 07/05/2022
 

@@ -1,3 +1,11 @@
+# Stable release v19.20.2
+## Date: 09/05/2022
+
+### Updates and fixes
+
+- **MobileConfig:** Update MobileConfig params
+- **Constants:** Update MobileConfig experiments
+
 # Stable release v19.20.1
 ## Date: 09/05/2022
 

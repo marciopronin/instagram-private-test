@@ -242,6 +242,18 @@ class Event extends RequestCollection
             case 'video_profile':
                 $class = 'VideoProfileTabFragment';
                 break;
+            case 'email_verify':
+                $class = 'D2k';
+                break;
+            case 'one_page_registration':
+                $class = 'E2Z';
+                break;
+            case 'add_birthday':
+                $class = 'DzK';
+                break;
+            case 'username_sign_up':
+                $class = 'E2i';
+                break;
             default:
                 $class = false;
         }
@@ -301,7 +313,7 @@ class Event extends RequestCollection
             $this->ig->setPrevNavChainClass(explode(':', end($chains))[0]);
             $this->ig->decrementNavChainStep();
         } else {
-            $chain .= sprintf('%s:%s:%d', $class, $module, $this->ig->getNavChainStep());
+            $chain .= sprintf('%s:%s:%d:%d', $class, $module, $this->ig->getNavChainStep(), $clickPoint);
             $this->ig->setPrevNavChainClass($class);
             $this->ig->setNavChain($chain);
             $this->ig->incrementNavChainStep();
@@ -569,8 +581,8 @@ class Event extends RequestCollection
         $extra = [
             'start_time'        => $startTime,
             'waterfall_id'      => $waterfallId,
-            'os_version'        => $this->ig->device->getAndroidVersion(),
             'elapsed_time'      => $currentTime - $startTime,
+            'containermodule'   => 'waterfall_log_in',
             'guid'              => $this->ig->uuid,
             'step'              => $step,
             'current_time'      => $currentTime,
@@ -582,7 +594,9 @@ class Event extends RequestCollection
             $extra['log_in_token'] = $this->ig->username;
         } elseif ($name === 'sim_card_state') {
             $extra['has_permission'] = false;
-            $extra['sim_state'] = 'absent';
+            $extra['sim_state'] = 'ready';
+            $extra['os_version'] = $this->ig->device->getAndroidVersion();
+            $extra['flow'] = isset($options['flow']) ? $options['flow'] : 'email';
         } elseif ($name === 'log_in') {
             $extra['instagram_id'] = $this->ig->account_id;
         } elseif ($name === 'register_full_name_focused' || $name === 'register_password_focused') {
@@ -590,8 +604,15 @@ class Event extends RequestCollection
         } elseif ($name === 'reg_field_interacted') {
             $extra['field_name'] = $options['field_name'];
             $extra['interaction_type'] = 'tapped';
+            $extra['flow'] = isset($options['flow']) ? $options['flow'] : 'email';
         } elseif ($name === 'next_button_tapped') {
             $extra['keyboard'] = false;
+            $extra['flow'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['cp_type_given'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['is_private'] = null;
+            $extra['instagram_id'] = null;
+            $extra['logged_in_accounts'] = [];
+            $extra['source'] = null;
         } elseif ($name === 'contacts_import_opt_in') {
             $extra['fb_family_device_id'] = $this->ig->phone_id;
             $extra['is_ci_opt_in'] = false;
@@ -628,7 +649,7 @@ class Event extends RequestCollection
             $extra['whatsapp_installed'] = isset($options['whatsapp_installed']) ? $options['whatsapp_installed'] : (bool) random_int(0, 1);
             $extra['fb_lite_installed'] = isset($options['fb_lite_installed']) ? $options['fb_lite_installed'] : (bool) random_int(0, 1);
             $extra['source'] = null;
-            $extra['flow'] = null;
+            $extra['flow'] = isset($options['flow']) ? $options['flow'] : 'email';
             $extra['cp_type_given'] = null;
         } elseif ($name === 'landing_created') {
             $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool) random_int(0, 1);
@@ -638,9 +659,19 @@ class Event extends RequestCollection
             $extra['app_lang'] = $this->ig->getLocale();
             $extra['device_lang'] = $this->ig->getLocale();
             $extra['funnel_name'] = 'landing';
+        } elseif ($name === 'switch_to_email') {
+            $extra['flow'] = 'email';
+        } elseif ($name === 'attempt_read_email_for_prefill') {
+            $extra['source'] = isset($options['flow']) ? $options['flow'] : 'email';
+        } elseif ($name === 'email_field_prefilled') {
+            $extra['is_valid'] = false;
+            $extra['source'] = null;
+            $extra['avail_emails'] = 0;
+            $extra['available_prefills'] = '{"p":[],"e":[]}';
+            $extra['error'] = 'no_email';
         }
 
-        $event = $this->_addEventBody($name, 'waterfall_log_in', $extra);
+        $event = $this->_addEventBody($name, null, $extra);
         $this->_addEventData($event);
     }
 
@@ -4650,6 +4681,24 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'story_posted_from_camera',
                     'dest_module'   => 'feed_timeline',
+                ],
+            ],
+            'app_background_detector' => [
+                [
+                    'clickpoint'    => 'warm_start',
+                    'dest_module'   => 'email_or_phone',
+                ],
+            ],
+            'email_or_phone' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'email_verify',
+                ],
+            ],
+            'email_verify' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'one_page_registration',
                 ],
             ],
         ];

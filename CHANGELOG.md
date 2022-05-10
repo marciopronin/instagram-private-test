@@ -1,3 +1,17 @@
+# Stable release v19.20.3
+## Date: 10/05/2022
+
+### Updates and fixes
+
+- **Event:** Update `sendFlowSteps()`
+- **Event:** Update `_getModuleClass()`
+- **Event:** Update `_generateNavChain()`
+- **Event:** Update `_validateNavigationPath()`
+
+### Examples
+
+- **Example:** Update emailRegistration
+
 # Stable release v19.20.2
 ## Date: 09/05/2022
 

@@ -1885,7 +1885,7 @@ class Internal extends RequestCollection
             ->addPost('is_secondary_account_creation', 'false')
             ->addPost('fb_connected', 'false')
             ->addPost('seen_steps', '[]')
-            ->addPost('progress_state', 'prefetch')
+            ->addPost('progress_state', 'start')
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('fb_installed', 'false')
             ->addPost('locale', $this->ig->getLocale())
@@ -1897,7 +1897,7 @@ class Internal extends RequestCollection
             ->addPost('device_id', $this->ig->uuid)
             ->addPost('waterfall_id', $waterfallId)
             ->addPost('reg_flow_taken', $regMethod)
-            ->addPost('tos_accepted', 'false')
+            ->addPost('tos_accepted', 'true')
             ->getResponse(new Response\GenericResponse());
     }
 

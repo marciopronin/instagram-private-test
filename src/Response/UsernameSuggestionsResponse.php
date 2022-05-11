@@ -9,7 +9,7 @@ use InstagramAPI\Response;
  *
  * @method mixed getMessage()
  * @method string getStatus()
- * @method mixed getSuggestionsWithMetadata()
+ * @method Model\SuggestionsWithMetadata getSuggestionsWithMetadata()
  * @method Model\_Message[] get_Messages()
  * @method bool isMessage()
  * @method bool isStatus()
@@ -17,7 +17,7 @@ use InstagramAPI\Response;
  * @method bool is_Messages()
  * @method $this setMessage(mixed $value)
  * @method $this setStatus(string $value)
- * @method $this setSuggestionsWithMetadata(mixed $value)
+ * @method $this setSuggestionsWithMetadata(Model\SuggestionsWithMetadata $value)
  * @method $this set_Messages(Model\_Message[] $value)
  * @method $this unsetMessage()
  * @method $this unsetStatus()
@@ -27,6 +27,6 @@ use InstagramAPI\Response;
 class UsernameSuggestionsResponse extends Response
 {
     const JSON_PROPERTY_MAP = [
-        'suggestions_with_metadata'             => '',
+        'suggestions_with_metadata'             => 'Model\SuggestionsWithMetadata',
     ];
 }

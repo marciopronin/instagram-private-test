@@ -7,7 +7,7 @@ $debug = true;
 /////////////////
 
 /////////////////
-$username = 'InstaAPITest';
+$username = 'username_handler'; // DO NOT CHANGE THIS! USERNAME WILL BE TAKEN AUTOMATICALLY FROM SUGGESTIONS.
 $password = 'InstaAPITest';
 $day = 01;
 $month = 01;
@@ -81,10 +81,19 @@ if ($response->getValid() && $response->getAvailable()) {
 
     $ig->event->sendNavigation('button', 'email_verify', 'one_page_registration');
 
-    $parts = str_split($username, 4);
+    $parts = str_split($firstName, 4);
+    $queryName = '';
     foreach($parts as $part) {
-        $ig->account->getUsernameSuggestions($email, $waterfallId, $part);
+        $queryName .= $part;
+        $suggestionResponse = $ig->account->getUsernameSuggestions($email, $waterfallId, $queryName);
         usleep(300000);
+    }
+    $suggestions = $suggestionResponse->getSuggestionsWithMetadata()->getSuggestions();
+    foreach($suggestions as $suggestion) {
+        if ($suggestion->getPrototype() === 'email') {
+            $username = $suggestion->getUsername();
+            break;
+        }
     }
 
     $ig->event->sendFlowSteps('one_page_v2', 'reg_field_interacted', $waterfallId, $startTime, 
@@ -172,7 +181,6 @@ if ($response->getValid() && $response->getAvailable()) {
     $ig->event->forceSendBatch();
 
     usleep(mt_rand(2000000, 5000000));
-
     try {
         $response = $ig->account->create($username, $password, $signupCode, $email, sprintf('%d-%2d-%2d', $year, $month, $day), $firstName, $waterfallId);
     } catch (\Exception $e) {

@@ -1,3 +1,20 @@
+# Stable release v19.20.4
+## Date: 11/05/2022
+
+### Updates and fixes
+
+- **Account:** Update `create()`
+- **Event:** Update `_generateNavChain()`
+- **Internal:** Update `getOnBoardingSteps()`
+
+### Models and responses
+
+- Added new models and responses
+
+### Examples
+
+- **Example:** Update emailRegistration
+
 # Stable release v19.20.3
 ## Date: 10/05/2022
 

@@ -49,6 +49,7 @@ class Account extends RequestCollection
         $request = $this->ig->request('accounts/create/')
             ->setNeedsAuth(false)
             ->addPost('tos_version', $tosVersion)
+            ->addPost('allow_contacts_sync', 'true')
             ->addPost('phone_id', $this->ig->phone_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('username', $username)
@@ -64,7 +65,8 @@ class Account extends RequestCollection
             ->addPost('enc_password', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('force_sign_up_code', $signupCode)
             ->addPost('waterfall_id', $waterfallId)
-            ->addPost('qs_stamp', '');
+            ->addPost('qs_stamp', '')
+            ->addPost('one_tap_opt_in', 'true');
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))

@@ -1,3 +1,10 @@
+# Stable release v19.20.5
+## Date: 17/05/2022
+
+### Updates and fixes
+
+- **Event:** Update `prepareAndSendThumbnailImpression()`
+
 # Stable release v19.20.4
 ## Date: 11/05/2022
 

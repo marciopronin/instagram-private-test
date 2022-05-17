@@ -64,7 +64,7 @@ class ServerMessageThrower
         'Checkpoint\ChallengeFinishedException'    => ['challenge_finished'],
         'Checkpoint\SubmitPhoneException'          => ['submit_phone'],
         'Checkpoint\SubmitEmailException'          => ['submit_email'],
-        'Checkpoint\SelectVerifyMethodException'   => ['select_verify_method', 'select_contact_point_recovery'],
+        'Checkpoint\SelectVerifyMethodException'   => ['select_verify_method', 'select_contact_point_recovery', 'review_contact_point_change'],
         'Checkpoint\VerifyCodeException'           => [
             'Please check the code we sent you and try again.', // message
             'verify_code', // step_name

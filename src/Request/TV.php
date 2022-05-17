@@ -271,6 +271,7 @@ class TV extends RequestCollection
      */
     public function createSeries(
         $title,
+        $igtvSession,
         $description = null)
     {
         $request = $this->ig->request('igtv/series/create/')

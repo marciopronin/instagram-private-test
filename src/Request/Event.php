@@ -2849,6 +2849,10 @@ class Event extends RequestCollection
                         ]);
                     }
                     break;
+                case 'one_by_two_center':
+                case 'one_by_two_left_right':
+                    // TODO: More information is required.
+                    break;
                 default:
                     throw new \InstagramAPI\Exception\InstagramException(sprintf('Layout type "%s" not implemented. Data: %s', $section->getLayoutType(), base64_encode($section->asJson())));
             }

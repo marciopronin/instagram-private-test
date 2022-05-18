@@ -1,3 +1,10 @@
+# Stable release v19.20.7
+## Date: 18/05/2022
+
+### Updates and fixes
+
+- **Event:** Update `prepareAndSendExploreImpression()`
+
 # Stable release v19.20.6
 ## Date: 18/05/2022
 

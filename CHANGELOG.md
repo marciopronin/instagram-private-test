@@ -1,3 +1,10 @@
+# Stable release v19.20.9
+## Date: 19/05/2022
+
+### Updates and fixes
+
+- **Event:** Update `_getModuleClass()`
+
 # Stable release v19.20.8
 ## Date: 19/05/2022
 

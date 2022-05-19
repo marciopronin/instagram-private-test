@@ -243,7 +243,7 @@ class Event extends RequestCollection
                 $class = 'VideoProfileTabFragment';
                 break;
             case 'email_verify':
-                $class = 'D2k';
+                $class = 'Dj6';
                 break;
             case 'one_page_registration':
                 $class = 'E2Z';
@@ -253,6 +253,9 @@ class Event extends RequestCollection
                 break;
             case 'username_sign_up':
                 $class = 'E2i';
+                break;
+            case 'email_or_phone':
+                $class = 'DzV';
                 break;
             default:
                 $class = false;

@@ -1,3 +1,11 @@
+# Stable release v19.20.8
+## Date: 19/05/2022
+
+### Updates and fixes
+
+- **Client:** Update headers
+- **Request:** Update headers
+
 # Stable release v19.20.7
 ## Date: 18/05/2022
 

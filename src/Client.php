@@ -1088,6 +1088,8 @@ class Client
 
             if ($this->wwwClaim !== '') {
                 $headers['set_headers']['X-IG-WWW-Claim'] = $this->wwwClaim;
+            } else {
+                $headers['set_headers']['X-IG-WWW-Claim'] = 0;
             }
 
             if ($this->_shbid !== '') {

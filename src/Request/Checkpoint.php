@@ -198,6 +198,36 @@ class Checkpoint extends RequestCollection
     }
 
     /**
+     * Set birth date.
+     *
+     * @param string $checkpointUrl Checkpoint URL.
+     * @param string $day
+     * @param string $month
+     * @param string $year
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\CheckpointResponse
+     */
+    public function sendSetBirthDate(
+        $checkpointUrl,
+        $day,
+        $month,
+        $year)
+    {
+        return $this->ig->request($checkpointUrl)
+            ->setSignedPost(false)
+            ->addPost('day', $day)
+            ->addPost('month', $month)
+            ->addPost('year', $year)
+            ->addPost('guid', $this->ig->uuid)
+            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->getResponse(new Response\CheckpointResponse());
+    }
+
+    /**
      * Accept an escalation informational.
      *
      * This happens when one of the account's media has violated

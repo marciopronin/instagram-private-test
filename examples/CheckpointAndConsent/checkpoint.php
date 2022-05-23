@@ -94,6 +94,13 @@ try {
                             break 2;
                         }
                         break;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\BirthdayRequiredException:
+                        $birthday = explode('-', trim(fgets(STDIN))); // 10-12-1970 (dd-mm-yyyy)
+                        $day = $birthday[0];
+                        $month = $birthday[1];
+                        $year = $birthday[2];
+                        $challenge = $ig->checkpoint->sendSetBirthDate($checkApiPath, $day, $month, $year);
+                        break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\ChangePasswordException:
                         $password = trim(fgets(STDIN));
                         $challenge = $ig->checkpoint->sendSetNewPasswordCheck($checkApiPath, $password);

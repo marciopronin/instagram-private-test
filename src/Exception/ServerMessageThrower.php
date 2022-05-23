@@ -74,6 +74,7 @@ class ServerMessageThrower
         'Checkpoint\DeltaLoginReviewException'          => ['delta_login_review', 'delta_acknowledge_approved'], // step name
         'Checkpoint\EscalationInformationalException'   => ['escalation_challenge_informational'], // step name
         'FeedbackRequiredException'                     => ['feedback_required'],
+        'Checkpoint\BirthdayRequiredException'          => ['add_birthday'],
         'ConsentRequiredException'                      => ['consent_required'],
         'IncorrectPasswordException'                    => [
             // "The password you entered is incorrect".

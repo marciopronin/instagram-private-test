@@ -1,3 +1,19 @@
+# Stable release v19.21.0
+## Date: 23/05/2022
+
+### New features
+
+- **Checkpoint:** Add `sendSetBirthDate()`
+- **Exception:** Add BirthdayRequiredException
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+
+### Examples
+
+- **Example:** Update checkpoint example
+
 # Stable release v19.20.9
 ## Date: 19/05/2022
 

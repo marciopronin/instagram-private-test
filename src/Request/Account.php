@@ -1503,13 +1503,14 @@ class Account extends RequestCollection
      */
     public function getSyncedFacebookPagesIds()
     {
-        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account.async/')
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account/')
             ->setSignedPost(false)
             ->addPost('params', json_encode((object) [
                 'server_params' => [
-                    'account_id'    => $this->ig->account_id,
-                    'newly_linked'  => 0,
-                    'entrypoint'    => 1,
+                    'should_show_done_button'   => 0,
+                    'account_id'                => $this->ig->account_id,
+                    'newly_linked'              => 0,
+                    'entrypoint'                => 1,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [

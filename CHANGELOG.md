@@ -1,3 +1,19 @@
+# Stable release v19.22.0
+## Date: 26/05/2022
+
+### New features
+
+- **Instagram:** Add `getCarrier()` and `setCarrier()`
+
+### Updates and fixes
+
+- **Account:** Update `getSyncedFacebookPagesIds()`
+- **Event:** Update event body and values. Use correct value of pk in pre-login events.
+
+### Examples
+
+- **Example:** Update emailRegistration
+
 # Stable release v19.21.1
 ## Date: 23/05/2022
 

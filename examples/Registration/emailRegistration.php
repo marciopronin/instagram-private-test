@@ -19,6 +19,9 @@ $email = 'InstaAPI@Test.com';
 $ig = new \InstagramAPI\Instagram($debug);
 $ig->setUserWithoutPassword($username);
 
+$ig->event->updateAppState('foreground', 'not_initialized');
+$ig->event->sendFlowSteps('landing', 'sim_card_state', $waterfallId, $startTime, ['flow' => 'email']);
+
 $mobileconfigResponse = $ig->internal->getMobileConfig(true)->getHttpResponse();
 $ig->settings->set('public_key', $mobileconfigResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
 $ig->settings->set('public_key_id', $mobileconfigResponse->getHeaderLine('ig-set-password-encryption-key-id'));
@@ -88,6 +91,7 @@ if ($response->getValid() && $response->getAvailable()) {
         $suggestionResponse = $ig->account->getUsernameSuggestions($email, $waterfallId, $queryName);
         usleep(300000);
     }
+    $ig->event->forceSendBatch();
     $suggestions = $suggestionResponse->getSuggestionsWithMetadata()->getSuggestions();
     foreach($suggestions as $suggestion) {
         if ($suggestion->getPrototype() === 'email') {
@@ -178,9 +182,32 @@ if ($response->getValid() && $response->getAvailable()) {
 
     $ig->internal->startNewUserFlow();
     $ig->internal->getOnBoardingSteps($waterfallId);
+
+    /*
+    $ig->event->sendInstagramDeviceIds($waterfallId);
+    $ig->event->sendStringImpressions(['2131232113' => 1]);
+    $ig->event->sendStringImpressions(['2131892522' => 1]);
+    $ig->event->sendStringImpressions(['2131232110' => 1, '2131232113' => 1]);
+    $ig->event->sendStringImpressions(['2131892522' => 1]);
+    $ig->event->sendStringImpressions(['2131232110' => 1, '2131888466' => 1]);
+    $ig->event->sendStringImpressions(
+        [
+            '2131887362' => 1,
+            '2131887363' => 1,
+            '2131888466' => 1,
+            '2131888757' => 1,
+            '2131892471' => 1,
+            '2131893374' => 1,
+            '2131894085' => 1,
+            '2131894089' => 1,
+            '2131899429' => 1,
+        ]
+    );
+    */
+
     $ig->event->forceSendBatch();
 
-    usleep(mt_rand(2000000, 5000000));
+    usleep(mt_rand(15000000, 3000000));
     try {
         $response = $ig->account->create($username, $password, $signupCode, $email, sprintf('%d-%2d-%2d', $year, $month, $day), $firstName, $waterfallId);
     } catch (\Exception $e) {

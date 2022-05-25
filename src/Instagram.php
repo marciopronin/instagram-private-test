@@ -466,6 +466,13 @@ class Instagram implements ExperimentsInterface
      */
     public $loginWaterfallId = '';
 
+    /**
+     * Carrier.
+     *
+     * @var string
+     */
+    public $carrier = 'Android';
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -1242,6 +1249,27 @@ class Instagram implements ExperimentsInterface
     public function getIsDisabledAutoRetriesMediaUpload()
     {
         return $this->disableAutoRetriesMediaUpload;
+    }
+
+    /**
+     * Getcarrier.
+     *
+     * @return string
+     */
+    public function getCarrier()
+    {
+        return $this->carrier;
+    }
+
+    /**
+     * Set carrier.
+     *
+     * @param string $value
+     */
+    public function setCarrier(
+        $value)
+    {
+        $this->carrier = $value;
     }
 
     /**

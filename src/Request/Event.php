@@ -61,7 +61,7 @@ class Event extends RequestCollection
     {
         $commonProperties =
         [
-            'pk'                                            => isset($event['pk']) ? $event['pk'] : $this->ig->account_id,
+            'pk'                                            => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
             'release_channel'                               => 'prod',
             'radio_type'                                    => $this->ig->getRadioType(),
             'pigeon_reserved_keyword_requested_latency'     => -1, // TODO
@@ -466,14 +466,15 @@ class Event extends RequestCollection
                 $message = [
                     'request_info'  => [
                         'tier'              => 'micro_batch',
-                        'carrier'           => 'Android',
+                        'carrier'           => $this->ig->getCarrier(),
                         'conn'              => Constants::X_IG_Connection_Type,
                     ],
                     'config'        => [
-                        'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
-                        'config_version'    => 'v2',
-                        'app_uid'           => $this->ig->account_id,
-                        'app_ver'           => Constants::IG_VERSION,
+                        'config_checksum'       => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
+                        'config_version'        => 'v2',
+                        'qpl_config_version'    => 'v6',
+                        'app_uid'               => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
+                        'app_ver'               => Constants::IG_VERSION,
                     ],
                     'batches'       => [
                         $batches,
@@ -489,14 +490,15 @@ class Event extends RequestCollection
                         'request_info'  => [
                             'tier'              => 'micro_batch',
                             'sent_time'         => round(microtime(true), 3),
-                            'carrier'           => 'Android',
+                            'carrier'           => $this->ig->getCarrier(),
                             'conn'              => Constants::X_IG_Connection_Type,
                         ],
                         'config'        => [
-                            'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
-                            'config_version'    => 'v2',
-                            'app_uid'           => $this->ig->account_id,
-                            'app_ver'           => Constants::IG_VERSION,
+                            'config_checksum'       => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
+                            'config_version'        => 'v2',
+                            'qpl_config_version'    => 'v6',
+                            'app_uid'               => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
+                            'app_ver'               => Constants::IG_VERSION,
                         ],
                         'batches'       => [
                             $batches,
@@ -508,11 +510,12 @@ class Event extends RequestCollection
                 } else {
                     $batches[0]['tier'] = 'micro_batch';
                     $batches[0]['sent_time'] = round(microtime(true), 3);
-                    $batches[0]['carrier'] = 'Android';
+                    $batches[0]['carrier'] = $this->ig->getCarrier();
                     $batches[0]['conn'] = Constants::X_IG_Connection_Type;
                     $batches[0]['config_checksum'] = empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum');
                     $batches[0]['config_version'] = 'v2';
-                    $batches[0]['app_uid'] = $this->ig->account_id;
+                    $batches[0]['qpl_config_version'] = 'v6';
+                    $batches[0]['app_uid'] = empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id');
                     $batches[0]['app_ver'] = Constants::IG_VERSION;
 
                     $request->addPost('compressed', 1)
@@ -589,7 +592,6 @@ class Event extends RequestCollection
             'guid'              => $this->ig->uuid,
             'step'              => $step,
             'current_time'      => $currentTime,
-            'pk'                => '0',
         ];
 
         if ($name === 'log_in_attempt') {
@@ -770,7 +772,6 @@ class Event extends RequestCollection
             'tags'              => json_encode(['waterfallId:'.$waterfallId, 'is_not_add_account']),
             'pseudo_end'        => true,
             'name'              => 'IG_REGISTRATION_FUNNEL',
-            'pk'                => '0',
             'release_channel'   => null,
             'radio_type'        => $this->ig->getRadioType(),
         ];
@@ -6681,7 +6682,6 @@ class Event extends RequestCollection
             'state_changed' => null,
         ];
 
-        $extra['pk'] = 0;
         $event = $this->_addEventBody('zero_carrier_signal', null, $extra);
         $this->_addEventData($event);
     }
@@ -6985,7 +6985,6 @@ class Event extends RequestCollection
             'old_flow'   => '{\"1DT\":[\"CHECK_FOR_PHONE\",\"FB_CONNECT\",\"FB_FOLLOW\",\"UNKNOWN\",\"CONTACT_INVITE\",\"ACCOUNT_PRIVACY\",\"TAKE_PROFILE_PHOTO\",\"ADD_PHONE\",\"TURN_ON_ONETAP\",\"DISCOVER_PEOPLE\",\"INTEREST_ACCOUNT_SUGGESTIONS\"]}',
         ];
 
-        $extra['pk'] = 0;
         $event = $this->_addEventBody('ig_nux_flow_updated', 'nux_controller_business_logic', $extra);
         $this->_addEventData($event);
     }
@@ -7007,7 +7006,6 @@ class Event extends RequestCollection
             'waterfall_id'          => $waterfallId,
         ];
 
-        $extra['pk'] = 0;
         $event = $this->_addEventBody('instagram_device_ids', null, $extra);
         $this->_addEventData($event, 0);
     }
@@ -7024,7 +7022,6 @@ class Event extends RequestCollection
             'installer' => null,
         ];
 
-        $extra['pk'] = 0;
         $event = $this->_addEventBody('android_apk_testing_exposure', null, $extra);
         $this->_addEventData($event, 0);
     }
@@ -7045,7 +7042,6 @@ class Event extends RequestCollection
             'signature'             => 'V2_UNTAGGED',
         ];
 
-        $extra['pk'] = 0;
         $event = $this->_addEventBody('apk_signature_v2', $module, $extra);
         $this->_addEventData($event, 0);
     }
@@ -7061,7 +7057,6 @@ class Event extends RequestCollection
             'current_version' => 46,
         ];
 
-        $extra['pk'] = 0;
         $event = $this->_addEventBody('ig_emergency_push_did_set_initial_version', null, $extra);
         $this->_addEventData($event, 0);
     }
@@ -7089,7 +7084,6 @@ class Event extends RequestCollection
             $extra['error'] = 'FEATURE_NOT_SUPPORTED';
         }
 
-        $extra['pk'] = 0;
         $event = $this->_addEventBody('instagram_android_install_with_referrer', 'install_referrer', $extra);
         $this->_addEventData($event);
     }

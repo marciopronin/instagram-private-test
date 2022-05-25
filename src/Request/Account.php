@@ -1534,6 +1534,19 @@ class Account extends RequestCollection
             }
         }
 
-        return array_unique($ids);
+        if (count($ids) === 0) {
+            return [];
+        }
+
+        $re = '/"\$":"([\w\s?]+)Facebook・/m';
+        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+        $pages = [];
+        $c = 0;
+        foreach ($matches as $page) {
+            $pages[$page[1]] = $ids[$c];
+            $c++;
+        }
+
+        return array_unique($pages);
     }
 }

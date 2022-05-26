@@ -1538,15 +1538,15 @@ class Account extends RequestCollection
             return [];
         }
 
-        $re = '/"\$":"([\w\s?]+)Facebook・/m';
+        $re = '/"\$":"([\w\s?]+)Facebook\\\\u30fb/m';
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
         $pages = [];
         $c = 0;
         foreach ($matches as $page) {
-            $pages[$page[1]] = $ids[$c];
+            $pages[$ids[$c]] = trim($page[1]);
             $c++;
         }
 
-        return array_unique($pages);
+        return $pages;
     }
 }

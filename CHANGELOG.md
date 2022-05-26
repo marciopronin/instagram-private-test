@@ -1,3 +1,10 @@
+# Stable release v19.22.1
+## Date: 26/05/2022
+
+### Updates and fixes
+
+- **Account:** Update `getSyncedFacebookPagesIds()`
+
 # Stable release v19.22.0
 ## Date: 26/05/2022
 

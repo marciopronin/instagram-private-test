@@ -1523,7 +1523,7 @@ class Account extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
-        $re = '/\"(\d{15})\\\\/m';
+        $re = '/Pattern,\s.\"(\d{15})\\\\/m';
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
         $ids = [];
         foreach ($matches as $id) {
@@ -1537,12 +1537,20 @@ class Account extends RequestCollection
         if (count($ids) === 0) {
             return [];
         }
+        $idsu = array_unique($ids);
+        $ids = [];
+        foreach ($idsu as $id) {
+            $ids[] = $id;
+        }
 
         $re = '/"\$":"([\w\s?]+)Facebook\\\\u30fb/m';
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
         $pages = [];
         $c = 0;
         foreach ($matches as $page) {
+            if (!isset($ids[$c])) {
+                break;
+            }
             $pages[$ids[$c]] = trim($page[1]);
             $c++;
         }

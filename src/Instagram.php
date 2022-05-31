@@ -2715,12 +2715,6 @@ class Instagram implements ExperimentsInterface
                     }
 
                     try {
-                        $this->tv->getBrowseFeed();
-                    } catch (\Exception $e) {
-                        //pass
-                    }
-
-                    try {
                         $this->people->getSharePrefill();
                     } catch (\Exception $e) {
                         //pass

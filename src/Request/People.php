@@ -172,7 +172,7 @@ class People extends RequestCollection
     {
         return $this->ig->request('news/inbox_seen/')
                         ->setSignedPost(false)
-                        ->addUnsignedPost('_csrftoken', $this->ig->client->getToken())
+                        //->addUnsignedPost('_csrftoken', $this->ig->client->getToken())
                         ->addUnsignedPost('_uuid', $this->ig->uuid)
                         ->getResponse(new Response\ActivityNewsResponse());
     }

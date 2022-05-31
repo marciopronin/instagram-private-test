@@ -1,3 +1,12 @@
+# Stable release v19.22.2
+## Date: 31/05/2022
+
+### Updates and fixes
+
+- **Account:** Update `getSyncedFacebookPagesIds()`
+- **People:** Update `getNewsInboxSeen()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v19.22.1
 ## Date: 26/05/2022
 

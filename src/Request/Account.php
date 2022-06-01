@@ -13,14 +13,15 @@ use InstagramAPI\Utils;
 /**
  * Account-related functions, such as profile editing and security.
  *
- * @param string $username    Username.
- * @param string $password    The password that is going to be set for the account.
- * @param string $signupCode  The signup code.
- * @param string $email       The email user for registration.
- * @param string $date        The date of birth. Format: YYYY-MM-DD.
- * @param string $firstName   First name.
- * @param string $waterfallId UUIDv4.
- * @param string $tosVersion  ToS version.
+ * @param string     $username    Username.
+ * @param string     $password    The password that is going to be set for the account.
+ * @param string     $signupCode  The signup code.
+ * @param string     $email       The email user for registration.
+ * @param string     $date        The date of birth. Format: YYYY-MM-DD.
+ * @param string     $firstName   First name.
+ * @param string     $waterfallId UUIDv4.
+ * @param string     $tosVersion  ToS version.
+ * @param array|null $sndata      SN Data.
  *
  * @throws \InstagramAPI\Exception\InstagramException
  *
@@ -36,7 +37,8 @@ class Account extends RequestCollection
         $date,
         $firstName,
         $waterfallId,
-        $tosVersion = 'row')
+        $tosVersion = 'row',
+        $sndata = null)
     {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
@@ -69,12 +71,17 @@ class Account extends RequestCollection
             ->addPost('one_tap_opt_in', 'true');
 
         if ($this->ig->getIsAndroid()) {
-            $request->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))
-                ->addPost('suggestedUsername', '')
+            $request->addPost('suggestedUsername', '')
                 ->addPost('is_secondary_account_creation', false)
                 ->addPost('jazoest', Utils::generateJazoest($this->ig->phone_id))
-                ->addPost('sn_result', sprintf('GOOGLE_PLAY_UNAVAILABLE: %s', array_rand(['SERVICE_INVALID', 'UNKNOWN', 'SERVICE_DISABLED', 'NETWORK_ERROR', 'INTERNAL_ERROR', 'CANCELED', 'INTERRUPTED', 'API_UNAVAILABLE'])))
                 ->addPost('do_not_auto_login_if_credentials_match', 'true');
+            if ($sndata !== null) {
+                $request->addPost('sn_nonce', $sndata['sn_nonce'])
+                        ->addPost('sn_result', $sndata['sn_result']);
+            } else {
+                $request->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))
+                        ->addPost('sn_result', sprintf('GOOGLE_PLAY_UNAVAILABLE: %s', array_rand(['SERVICE_INVALID', 'UNKNOWN', 'SERVICE_DISABLED', 'NETWORK_ERROR', 'INTERNAL_ERROR', 'CANCELED', 'INTERRUPTED', 'API_UNAVAILABLE'])));
+            }
         } else {
             $request->addPost('do_not_auto_login_if_credentials_match', '0')
                 ->addPost('force_create_account', '0')
@@ -89,14 +96,15 @@ class Account extends RequestCollection
     /**
      * Create an account with validated phone number.
      *
-     * @param string $smsCode     The received SMS code.
-     * @param string $username    Username.
-     * @param string $password    The password that is going to be set for the account.
-     * @param string $phone       Phone with country code. For example: '+34123456789'.
-     * @param string $date        The date of birth. Format: YYYY-MM-DD.
-     * @param string $firstName   First name.
-     * @param string $waterfallId UUIDv4.
-     * @param string $tosVersion  ToS version.
+     * @param string     $smsCode     The received SMS code.
+     * @param string     $username    Username.
+     * @param string     $password    The password that is going to be set for the account.
+     * @param string     $phone       Phone with country code. For example: '+34123456789'.
+     * @param string     $date        The date of birth. Format: YYYY-MM-DD.
+     * @param string     $firstName   First name.
+     * @param string     $waterfallId UUIDv4.
+     * @param string     $tosVersion  ToS version.
+     * @param array|null $sndata      SN Data.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -110,7 +118,8 @@ class Account extends RequestCollection
         $date,
         $firstName,
         $waterfallId,
-        $tosVersion = 'row')
+        $tosVersion = 'row',
+        $sndata = null)
     {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
@@ -143,13 +152,18 @@ class Account extends RequestCollection
             ->addPost('has_sms_consent', 'true');
 
         if ($this->ig->getIsAndroid()) {
-            $request->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))
-                ->addPost('suggestedUsername', '')
+            $request->addPost('suggestedUsername', '')
                 ->addPost('is_secondary_account_creation', false)
                 ->addPost('jazoest', Utils::generateJazoest($this->ig->phone_id))
-                ->addPost('sn_result', sprintf('GOOGLE_PLAY_UNAVAILABLE: %s', array_rand(['SERVICE_INVALID', 'UNKNOWN', 'SERVICE_DISABLED', 'NETWORK_ERROR', 'INTERNAL_ERROR', 'CANCELED', 'INTERRUPTED', 'API_UNAVAILABLE'])))
                 ->addPost('do_not_auto_login_if_credentials_match', 'true')
                 ->addPost('force_sign_up_code', '');
+            if ($sndata !== null) {
+                $request->addPost('sn_nonce', $sndata['sn_nonce'])
+                        ->addPost('sn_result', $sndata['sn_result']);
+            } else {
+                $request->addPost('sn_nonce', base64_encode($username.'|'.time().'|'.random_bytes(24)))
+                        ->addPost('sn_result', sprintf('GOOGLE_PLAY_UNAVAILABLE: %s', array_rand(['SERVICE_INVALID', 'UNKNOWN', 'SERVICE_DISABLED', 'NETWORK_ERROR', 'INTERNAL_ERROR', 'CANCELED', 'INTERRUPTED', 'API_UNAVAILABLE'])));
+            }
         } else {
             $request->addPost('do_not_auto_login_if_credentials_match', '0')
                 ->addPost('force_create_account', '0')
@@ -1353,7 +1367,7 @@ class Account extends RequestCollection
     public function getCrossPostingDestinationStatus()
     {
         return $this->ig->request('ig_fb_xposting/account_linking/user_xposting_destination/')
-            ->addParam('signed_body', Signatures::generateSignature().'.{}')
+            ->addParam('signed_body', Signatures::generateSignature('').'.{}')
             ->getResponse(new Response\GenericResponse());
     }
 

@@ -456,6 +456,9 @@ class Internal extends RequestCollection
                             ->addPost('share_to_facebook', 1)
                             ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
                 }
+                if (isset($externalMetadata['xpost'])) {
+                    $request->addPost('xpost_surface', 'auto_xpost');
+                }
                 break;
             case Constants::FEED_DIRECT_STORY:
                 $request
@@ -1037,6 +1040,9 @@ class Internal extends RequestCollection
                             ->addPost('xpost_surface', 'ig_story_composer')
                             ->addPost('share_to_facebook', 1)
                             ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+                }
+                if (isset($externalMetadata['xpost'])) {
+                    $request->addPost('xpost_surface', 'auto_xpost');
                 }
                 break;
             case Constants::FEED_DIRECT_STORY:

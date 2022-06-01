@@ -1,3 +1,16 @@
+# Stable release v19.22.3
+## Date: 02/06/2022
+
+### Updates and fixes
+
+- **Account:** Update `create()`
+- **Account:** Update `createValidated()`
+- **Internal:** Update cross posting options.
+
+### Examples
+
+- **Example:** Update smsRegistration
+
 # Stable release v19.22.2
 ## Date: 31/05/2022
 

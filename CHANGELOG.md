@@ -1,3 +1,10 @@
+# Stable release v19.22.4
+## Date: 02/06/2022
+
+### Updates and fixes
+
+Update `composer.json`
+
 # Stable release v19.22.3
 ## Date: 02/06/2022
 

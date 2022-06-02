@@ -1,3 +1,11 @@
+# Stable release v19.22.5
+## Date: 02/06/2022
+
+### Updates and fixes
+
+- **Account:** Update `getCrossPostingDestinationStatus()`
+- **Models and responses:** Response and models for `getCrossPostingDestinationStatus()` added
+
 # Stable release v19.22.4
 ## Date: 02/06/2022
 

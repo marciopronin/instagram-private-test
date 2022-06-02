@@ -1362,13 +1362,13 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return \InstagramAPI\Response\CrossPostingDestinationStatusResponse
      */
     public function getCrossPostingDestinationStatus()
     {
         return $this->ig->request('ig_fb_xposting/account_linking/user_xposting_destination/')
             ->addParam('signed_body', Signatures::generateSignature('').'.{}')
-            ->getResponse(new Response\GenericResponse());
+            ->getResponse(new Response\CrossPostingDestinationStatusResponse());
     }
 
     /**

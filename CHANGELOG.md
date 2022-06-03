@@ -1,3 +1,10 @@
+# Stable release v19.22.6
+## Date: 03/06/2022
+
+### Updates and fixes
+
+- **Live:** Update `create()`. New visibility modes added.
+
 # Stable release v19.22.5
 ## Date: 02/06/2022
 

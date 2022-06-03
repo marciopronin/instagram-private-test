@@ -735,6 +735,7 @@ class Live extends RequestCollection
      * @param int    $previewWidth  (optional) Width.
      * @param int    $previewHeight (optional) Height.
      * @param string $title         (Optional) Title of the live broadcast.
+     * @param int    $visibility    (Optional) Visibility. 0 - Public. 1 - Practice. 2 - Subscribers.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -747,7 +748,8 @@ class Live extends RequestCollection
     public function create(
         $previewWidth = 1080,
         $previewHeight = 2076,
-        $title = null)
+        $title = null,
+        $visibility = 0)
     {
         $request = $this->ig->request('live/create/')
             ->setSignedPost(false)
@@ -759,7 +761,7 @@ class Live extends RequestCollection
             ->addPost('broadcast_type', 'RTMP_SWAP_ENABLED')
             ->addPost('preview_width', $previewWidth)
             ->addPost('internal_only', 0)
-            ->addPost('visibility', 0);
+            ->addPost('visibility', $visibility);
 
         if ($title !== null) {
             $request->addPost('broadcast_message', $title);

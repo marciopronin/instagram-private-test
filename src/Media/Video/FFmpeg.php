@@ -120,7 +120,7 @@ class FFmpeg
     {
         $fullCommand = sprintf('%s -v error %s', Args::escape($this->_ffmpegBinary), $command);
 
-        $process = new Process($fullCommand);
+        $process = Process::fromShellCommandline($fullCommand);
         if (is_int(self::$defaultTimeout) && self::$defaultTimeout > 60) {
             $process->setTimeout(self::$defaultTimeout);
         }

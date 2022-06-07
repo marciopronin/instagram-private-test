@@ -1,3 +1,14 @@
+# Stable release v19.23.0
+## Date: 07/06/2022
+
+### New features
+
+- **Account:** Added `createSecondary()`
+
+### Updates and fixes
+
+- **FFmpeg:** Update `runAsync()`.
+
 # Stable release v19.22.6
 ## Date: 03/06/2022
 

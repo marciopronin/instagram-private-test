@@ -176,6 +176,48 @@ class Account extends RequestCollection
     }
 
     /**
+     * Create secundary account.
+     *
+     * @param string $username  Username.
+     * @param string $password  The password that is going to be set for the account.
+     * @param string $firstName First name.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\AccountCreateResponse
+     */
+    public function createSecondary(
+        $username,
+        $password,
+        $firstName = '')
+    {
+        if (strlen($password) < 6) {
+            throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
+        } elseif (in_array($password, Constants::BLACKLISTED_PASSWORDS, true)) {
+            throw new \InstagramAPI\Exception\InstagramException('This is a common password. Try something that\'s harder to guess.');
+        }
+
+        return $this->ig->request('multiple_accounts/create_secondary_account/')
+            ->addPost('suggestedUsername', '')
+            ->addPost('should_copy_consent_and_birthday_from_main', 'true')
+            ->addPost('main_user_authorization_token', $this->ig->settings->get('authorization_header'))
+            ->addPost('phone_id', $this->ig->phone_id)
+            ->addPost('enc_password', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
+            ->addPost('username', $username)
+            ->addPost('first_name', $firstName)
+            ->addPost('adid', $this->ig->advertising_id)
+            ->addPost('guid', $this->ig->uuid)
+            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('main_user_id', $this->ig->account_id)
+            ->addPost('force_sign_up_code', '')
+            ->addPost('waterfall_id', Signatures::generateUUID())
+            ->addPost('should_cal_link_to_main', 'false')
+            ->addPost('one_tap_opt_in', 'true')
+            ->addPost('should_link_to_main', 'false')
+            ->getResponse(new Response\AccountCreateResponse());
+    }
+
+    /**
      * Check if phone number is valid.
      *
      * @param string $phone Phone with country code. For example: '+34123456789'.

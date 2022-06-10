@@ -1,3 +1,10 @@
+# Stable release v19.23.1
+## Date: 10/06/2022
+
+### Updates and fixes
+
+- **Model:** Update User model
+
 # Stable release v19.23.0
 ## Date: 07/06/2022
 

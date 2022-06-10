@@ -105,7 +105,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool getIsVideoCreator()
  * @method string getLatestReelMedia()
  * @method float getLatitude()
- * @method mixed getLinkedFbInfo()
+ * @method LinkedFbUser getLinkedFbInfo()
  * @method FacebookUser getLinkedFbUser()
  * @method string getLiveSubscriptionStatus()
  * @method float getLongitude()
@@ -411,7 +411,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setIsVideoCreator(bool $value)
  * @method $this setLatestReelMedia(string $value)
  * @method $this setLatitude(float $value)
- * @method $this setLinkedFbInfo(mixed $value)
+ * @method $this setLinkedFbInfo(LinkedFbUser $value)
  * @method $this setLinkedFbUser(FacebookUser $value)
  * @method $this setLiveSubscriptionStatus(string $value)
  * @method $this setLongitude(float $value)
@@ -775,7 +775,7 @@ class User extends AutoPropertyMapper
         'should_show_tabbed_inbox'                      => 'bool',
         'show_post_insights_entry_point'                => 'bool',
         'existing_user_age_collection_enabled'          => 'bool',
-        'linked_fb_info'                                => '',
+        'linked_fb_info'                                => 'LinkedFbUser',
         'has_password'                                  => 'bool',
         'gating'                                        => 'Gating',
         'fbid_v2'                                       => 'string',

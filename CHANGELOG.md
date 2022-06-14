@@ -1,3 +1,10 @@
+# Stable release v20.1.0
+## Date: 14/06/2022
+
+### New features
+
+- **Live:** Added `scheduleEvent()`
+
 # Stable release v20.0.0
 ## Date: 14/06/2022
 

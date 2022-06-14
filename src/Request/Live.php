@@ -1233,4 +1233,31 @@ class Live extends RequestCollection
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Schedule live event.
+     *
+     * @param string $startTime Timestamp when livestream will start.
+     * @param string $title     Title of the live stream event.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UpcomingEventsResponse
+     */
+    public function scheduleEvent(
+        $startTime,
+        $title = '')
+    {
+        return $this->ig->request('upcoming_events/create/')
+            ->addPost('start_time', $startTime)
+            ->addPost('live_metadata', json_encode([
+                'is_scheduled_live' => true,
+                'visibility'        => 0,
+            ]))
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('title', $title)
+            ->addPost('show_on_profile', true)
+            ->getResponse(new Response\UpcomingEventsResponse());
+    }
 }

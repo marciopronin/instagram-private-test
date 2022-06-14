@@ -50,7 +50,7 @@ try {
     $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
 
     // Get suggested searches and recommendations from Instagram.
-    $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
+    $ig->event->sendNavigation('button', 'explore_popular', 'blended_search');
     $ig->discover->getNullStateDynamicSections();
 
     foreach ($queryUsers as $queryUser) {
@@ -99,12 +99,12 @@ try {
         }
 
         // Send restults from search.
-        $ig->event->sendSearchResults($queryUser, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_typeahead');
+        $ig->event->sendSearchResults($queryUser, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
         // Send selected result from results.
-        $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'search_typeahead');
+        $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
 
-        // When we clicked the user, we are navigating from 'search_typeahead' to 'profile'.
-        $ig->event->sendNavigation('button', 'search_typeahead', 'profile', null, null,
+        // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
+        $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
             [
                 'rank_token'            => null,
                 'query_text'            => $queryUser,
@@ -117,7 +117,7 @@ try {
         );
         $ig->people->getFriendship($userId);
         $ig->highlight->getUserFeed($userId);
-        $ig->people->getInfoById($userId, 'search_typeahead');
+        $ig->people->getInfoById($userId, 'blended_search');
         $ig->story->getUserStoryFeed($userId);
         $userFeed = $ig->timeline->getUserFeed($userId);
         $items = $userFeed->getItems();
@@ -138,7 +138,7 @@ try {
         sleep(2);
         $ig->event->sendProfileView($userId);
 
-        $ig->event->sendNavigation('back', 'profile', 'search_typeahead');
+        $ig->event->sendNavigation('back', 'profile', 'blended_search');
     }
     $ig->event->forceSendBatch();
 } catch (\Exception $e) {

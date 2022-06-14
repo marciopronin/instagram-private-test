@@ -50,9 +50,9 @@ try {
     $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
 
     // Get suggested searches and recommendations from Instagram.
-    $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
+    $ig->event->sendNavigation('button', 'explore_popular', 'blended_search');
 
-    $ig->event->sendNavigation('button', 'search_typeahead', 'serp_places');
+    $ig->event->sendNavigation('button', 'blended_search', 'search_places');
 
     $locationItems = $ig->location->findPlaces($queryLocation)->getItems();
     $rankToken = \InstagramAPI\Signatures::generateUUID();
@@ -77,19 +77,19 @@ try {
     }
 
     // Send restults from search.
-    $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_typeahead');
-    $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'serp_places');
+    $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
+    $ig->event->sendSearchResults($queryLocation, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_places');
     // Send selected result from results.
-    $ig->event->sendSearchResultsPage($queryLocation, $locationId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'PLACE', 'serp_places');
+    $ig->event->sendSearchResultsPage($queryLocation, $locationId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'PLACE', 'search_places');
 
     $ig->discover->registerRecentSearchClick('place', $locationId);
 
-    $ig->event->sendNavigation('search_result', 'serp_places', 'feed_location', null, null,
+    $ig->event->sendNavigation('search_result', 'search_places', 'feed_location', null, null,
         [
             'rank_token'        => $rankToken,
             'query_text'        => $queryLocation,
             'search_session_id' => $searchSession,
-            'search_tab'        => 'serp_places',
+            'search_tab'        => 'search_places',
             'selected_type'     => 'place',
             'position'          => $position,
             'entity_page_name'  => $queryLocation,

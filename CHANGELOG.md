@@ -1,3 +1,17 @@
+# Stable release v20.0.0
+## Date: 14/06/2022
+
+### Backward breaks
+
+Some events have been renamed, for example `serp_user` to `search_users`, the same thing for the other `serp_*` modules. Updating navigation modules with the new ones will be required to prevent any navigation issue.
+
+### Updates and fixes
+
+- **Constants:** Update Instagram to 237.0.0.14.102
+- **Data:** Update params_map.txt
+- **Discover:** Update `search()`
+- **Event:** Update event classes and modules
+
 # Stable release v19.23.2
 ## Date: 10/06/2022
 

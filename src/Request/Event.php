@@ -117,39 +117,39 @@ class Event extends RequestCollection
     {
         switch ($module) {
             case 'feed_timeline':
-                $class = '1ne'; //'MainFeedFragment';
+                $class = '1oz'; //'MainFeedFragment';
                 break;
             case 'newsfeed_you':
-                $class = '8yv'; //'NewsfeedYouFragment';
+                $class = 'BxA'; //'NewsfeedYouFragment';
                 break;
             case 'explore_popular':
-                $class = '25Q'; //'ExploreFragment';
+                $class = '24a'; //'ExploreFragment';
                 break;
-            case 'search_typeahead':
-                $class = 'BVu'; //'SingleSearchTypeaheadTabFragment';
+            case 'blended_search':
+                $class = 'F8t'; //'SingleSearchTypeaheadTabFragment';
                 break;
             //case 'search':
-            case 'serp_top':
             //case 'search_result':
-                $class = 'ACK'; //'TopSerpGridFragment';
+            //case 'search_result':
+            //    $class = 'ACK'; //'TopSerpGridFragment';
+            //    break;
+            case 'search_places':
+                $class = 'F95'; //'PlacesSerpGridFragment';
                 break;
-            case 'serp_places':
-                $class = 'ACL'; //'PlacesSerpGridFragment';
+            case 'search_users':
+                $class = 'FBT'; //'UserSerpGridFragment';
                 break;
-            case 'serp_users':
-                $class = 'ACH'; //'UserSerpGridFragment';
+            case 'search_tags':
+                $class = 'F96'; //'HashtagSerpGridFragment';
                 break;
-            case 'serp_tags':
-                $class = 'ACI'; //'HashtagSerpGridFragment';
-                break;
-            case 'serp_audio':
-                $class = 'ACJ'; //'AudioSerpGridFragment';
+            case 'search_audio':
+                $class = 'F8x'; //'AudioSerpGridFragment';
                 break;
             case 'music_search':
                 $class = 'MusicPostcaptureSearchController';
                 break;
-            case 'search_typeahead_edit_recent':
-                $class = 'BWe'; //'EditSearchHistoryFragment';
+            case 'search_edit_recent':
+                $class = 'F8p'; //'EditSearchHistoryFragment';
                 break;
             case 'feed_hashtag':
                 $class = 'HashtagPageFragment';
@@ -161,14 +161,14 @@ class Event extends RequestCollection
                 $class = 'LocationDetailFragment';
                 break;
             case 'feed_contextual_chain':
-                $class = 'DiscoveryChainingFeedFragment';
+                $class = 'F6L';
                 break;
             //case 'feed_contextual_place':
             //case 'feed_contextual_location':
             //case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = 'CWz'; // 'ContextualFeedFragment';
+                $class = 'F6J'; // 'ContextualFeedFragment';
                 break;
             case 'profile':
             case 'self_profile': // UserDetailFragment, ProfileMediaTabFragment
@@ -211,25 +211,25 @@ class Event extends RequestCollection
                 $class = 'FollowersShareFragment';
                 break;
             case 'direct_inbox':
-                $class = 'DirectInboxFragment';
+                $class = 'EbJ';
                 break;
             case 'direct_thread':
-                $class = 'DirectThreadFragment';
+                $class = '4OO';
                 break;
             case 'direct_recipient_picker':
-                $class = 'DirectRecipientPickerFragment';
+                $class = 'Cbg';
                 break;
             case 'reel_profile':
                 $class = 'ReelViewerFragment';
                 break;
             case 'edit_profile':
-                $class = 'EditProfileFragment';
+                $class = 'AYg';
                 break;
             case 'personal_information':
-                $class = 'PersonalInformationFragment';
+                $class = 'AJI';
                 break;
             case 'profile_edit_bio':
-                $class = 'EditBioFragment';
+                $class = 'EE9';
                 break;
             case 'comments_v2_feed_contextual_profile':
                 $class = 'CommentThreadFragment';
@@ -316,7 +316,7 @@ class Event extends RequestCollection
             $this->ig->setPrevNavChainClass(explode(':', end($chains))[0]);
             $this->ig->decrementNavChainStep();
         } else {
-            $chain .= sprintf('%s:%s:%d:%s', $class, $module, $this->ig->getNavChainStep(), $clickPoint);
+            $chain .= sprintf('%s:%s:%d:%s::', $class, $module, $this->ig->getNavChainStep(), $clickPoint);
             $this->ig->setPrevNavChainClass($class);
             $this->ig->setNavChain($chain);
             $this->ig->incrementNavChainStep();
@@ -4050,44 +4050,44 @@ class Event extends RequestCollection
                 ],
                 [
                     'clickpoint'    => 'button',
-                    'dest_module'   => 'search_typeahead',
+                    'dest_module'   => 'blended_search',
                 ],
             ],
-            'search_typeahead' => [
+            'blended_search' => [
                 [
                     'clickpoint'    => 'main_search',
                     'dest_module'   => 'explore_popular',
                 ],
                 [
                     'clickpoint'    => 'button',
-                    'dest_module'   => 'serp_places',
+                    'dest_module'   => 'search_places',
                 ],
                 [
                     'clickpoint'    => 'button',
-                    'dest_module'   => 'serp_users',
+                    'dest_module'   => 'search_users',
                 ],
                 [
                     'clickpoint'    => 'button',
-                    'dest_module'   => 'serp_tags',
+                    'dest_module'   => 'search_tags',
                 ],
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'profile',
                 ],
             ],
-            'serp_places' => [
+            'search_places' => [
                 [
                     'clickpoint'    => 'search_result',
                     'dest_module'   => 'feed_location',
                 ],
             ],
-            'serp_tags' => [
+            'search_tags' => [
                 [
                     'clickpoint'    => 'search_result',
                     'dest_module'   => 'feed_hashtag',
                 ],
             ],
-            'serp_users' => [
+            'search_users' => [
                 [
                     'clickpoint'    => 'search_result',
                     'dest_module'   => 'profile',
@@ -4378,7 +4378,7 @@ class Event extends RequestCollection
                 ],
                 [
                     'clickpoint'    => 'back',
-                    'dest_module'   => 'search_typeahead',
+                    'dest_module'   => 'blended_search',
                 ],
                 [
                     'clickpoint'    => 'button',
@@ -5934,7 +5934,7 @@ class Event extends RequestCollection
             $searchType = 'BLENDED';
         } elseif ($module === 'search_typeahead') {
             $searchType = 'TYPEAHEAD';
-        } elseif ($module === 'serp_users') {
+        } elseif ($module === 'search_users' || $module === 'serp_users') {
             $searchType = 'USER';
         }
 

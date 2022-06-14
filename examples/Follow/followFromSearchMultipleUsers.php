@@ -62,7 +62,7 @@ try {
         $searchResponse = $ig->discover->search($usernameToFollow);
 
         if ($firstSearch === false) {
-            $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
+            $ig->event->sendNavigation('button', 'explore_popular', 'blended_search');
 
             $firstSearch = true;
         }
@@ -93,11 +93,11 @@ try {
                 $position++;
             }
         }
-        $ig->event->sendSearchResults($usernameToFollow, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_typeahead');
-        $ig->event->sendSearchResultsPage($usernameToFollow, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'search_typeahead');
+        $ig->event->sendSearchResults($usernameToFollow, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
+        $ig->event->sendSearchResultsPage($usernameToFollow, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
         $ig->discover->registerRecentSearchClick('user', $userId);
         $ig->people->getFriendship($userId);
-        $suggestions = $ig->people->getInfoById($userId, 'serp_users')->getUser()->getChainingSuggestions();
+        $suggestions = $ig->people->getInfoById($userId, 'search_users')->getUser()->getChainingSuggestions();
 
         if ($suggestions !== null) {
             for ($i = 0; $i < 4; $i++) {
@@ -105,7 +105,7 @@ try {
                 $ig->event->sendSimilarEntityImpression($userId, $suggestions[$i]->getPk());
             }
         }
-        $ig->event->sendNavigation('button', 'serp_users', 'profile', null, null,
+        $ig->event->sendNavigation('button', 'search_users', 'profile', null, null,
             [
                 'rank_token'        => $rankToken,
                 'query_text'        => $usernameToFollow,
@@ -138,11 +138,11 @@ try {
         $ig->event->sendFollowButtonTapped($userId, 'profile',
             [
                 [
-                    'module'        => 'search_typeahead',
+                    'module'        => 'blended_search',
                     'click_point'   => 'search_result',
                 ],
                 [
-                    'module'        => 'search_typeahead',
+                    'module'        => 'blended_search',
                     'click_point'   => 'button',
                 ],
                 [
@@ -163,11 +163,11 @@ try {
         $ig->event->sendProfileAction('follow', $userId,
             [
                 [
-                    'module'        => 'search_typeahead',
+                    'module'        => 'blended_search',
                     'click_point'   => 'search_result',
                 ],
                 [
-                    'module'        => 'search_typeahead',
+                    'module'        => 'blended_search',
                     'click_point'   => 'button',
                 ],
                 [
@@ -204,7 +204,7 @@ try {
         $ig->event->forceSendBatch();
         usleep(mt_rand(1000000, 4000000));
         $ig->event->updateAppState('profile', 'foreground');
-        $ig->event->sendNavigation('back', 'profile', 'search_typeahead');
+        $ig->event->sendNavigation('back', 'profile', 'blended_search');
     }
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";

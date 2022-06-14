@@ -47,7 +47,7 @@ try {
     $timeToSearch = mt_rand(2000, 3500);
     sleep($timeToSearch / 1000);
     $searchResponse = $ig->discover->search($queryUser);
-    $ig->event->sendNavigation('button', 'explore_popular', 'search_typeahead');
+    $ig->event->sendNavigation('button', 'explore_popular', 'blended_search');
 
     $searchResults = $searchResponse->getList();
     $rankToken = $searchResponse->getRankToken();
@@ -75,11 +75,11 @@ try {
             $position++;
         }
     }
-    $ig->event->sendSearchResults($queryUser, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_typeahead');
-    $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'search_typeahead');
+    $ig->event->sendSearchResults($queryUser, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
+    $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
     $ig->discover->registerRecentSearchClick('user', $userId);
     $ig->people->getFriendship($userId);
-    $suggestions = $ig->people->getInfoById($userId, 'serp_users')->getUser()->getChainingSuggestions();
+    $suggestions = $ig->people->getInfoById($userId, 'search_users')->getUser()->getChainingSuggestions();
 
     if ($suggestions !== null) {
         for ($i = 0; $i < 4; $i++) {
@@ -87,7 +87,7 @@ try {
             $ig->event->sendSimilarEntityImpression($userId, $suggestions[$i]->getPk());
         }
     }
-    $ig->event->sendNavigation('button', 'serp_users', 'profile', null, null,
+    $ig->event->sendNavigation('button', 'search_users', 'profile', null, null,
         [
             'rank_token'        => $rankToken,
             'query_text'        => $queryUser,
@@ -118,11 +118,11 @@ try {
     $ig->event->sendFollowButtonTapped($userId, 'profile',
         [
             [
-                'module'        => 'search_typeahead',
+                'module'        => 'blended_search',
                 'click_point'   => 'search_result',
             ],
             [
-                'module'        => 'search_typeahead',
+                'module'        => 'blended_search',
                 'click_point'   => 'button',
             ],
             [

@@ -151,6 +151,32 @@ class Reel extends RequestCollection
     }
 
     /**
+     * Get hashtag reels.
+     *
+     * @param string      $hashtag Hashtag.
+     * @param string|null $maxId   Next "maximum ID", used for pagination.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\ReelsResponse
+     */
+    public function getHashtagReels(
+        $hashtag,
+        $maxId = null)
+    {
+        $request = $this->ig->request("clips/tags/{$hashtag}")
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid);
+
+        if ($maxId !== null) {
+            $request->addPost('max_id', $maxId);
+        }
+
+        return $request->getResponse(new Response\ReelsResponse());
+    }
+
+    /**
      * Get music for reels.
      *
      * @param string|null $maxId Next "maximum ID", used for pagination.

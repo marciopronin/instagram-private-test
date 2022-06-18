@@ -1,3 +1,14 @@
+# Stable release v20.2.1
+## Date: 18/06/2022
+
+### Updates and fixes
+
+- **Internal:** Now reels (clips) can be configured with poll, quiz and slider stickers.
+
+### Examples
+
+- **Example:** Added getHashtagReels
+
 # Stable release v20.2.0
 ## Date: 15/06/2022
 

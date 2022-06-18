@@ -849,15 +849,15 @@ class Internal extends RequestCollection
         /** @var array Story music to use for the media. ONLY STORY MEDIA */
         $storyMusic = (isset($externalMetadata['story_music']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_music'] : null;
         /** @var array Story poll to use for the media. ONLY STORY MEDIA! */
-        $storyPoll = (isset($externalMetadata['story_polls']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_polls'] : null;
+        $storyPoll = (isset($externalMetadata['story_polls']) && ($targetFeed == Constants::FEED_STORY || $targetFeed == Constants::FEED_REELS)) ? $externalMetadata['story_polls'] : null;
         /** @var array Attached media used to share media to story feed. ONLY STORY MEDIA! */
-        $storySlider = (isset($externalMetadata['story_sliders']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_sliders'] : null;
+        $storySlider = (isset($externalMetadata['story_sliders']) && ($targetFeed == Constants::FEED_STORY || $targetFeed == Constants::FEED_REELS)) ? $externalMetadata['story_sliders'] : null;
         /** @var array Story question to use for the media. ONLY STORY MEDIA */
         $storyQuestion = (isset($externalMetadata['story_questions']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_questions'] : null;
         /** @var array Story countdown to use for the media. ONLY STORY MEDIA */
         $storyCountdown = (isset($externalMetadata['story_countdowns']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_countdowns'] : null;
         /** @var array Story quiz to use for the media. ONLY STORY MEDIA */
-        $storyQuiz = (isset($externalMetadata['story_quizs']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_quizs'] : null;
+        $storyQuiz = (isset($externalMetadata['story_quizs']) && ($targetFeed == Constants::FEED_STORY || $targetFeed == Constants::FEED_REELS)) ? $externalMetadata['story_quizs'] : null;
         /** @var array Chat sticker to use for the media. ONLY STORY MEDIA */
         $chatSticker = (isset($externalMetadata['chat_sticker']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['chat_sticker'] : null;
         /** @var array Story fundraiser to use for the media. ONLY STORY MEDIA */
@@ -1113,12 +1113,35 @@ class Internal extends RequestCollection
                         'has_voiceover_attribution' => 0,
                     ])
                     ->addPost('capture_type', 'clips_v2');
+
+                    if ($storyPoll !== null) {
+                        Utils::throwIfInvalidStoryPoll($storyPoll);
+                        $request
+                            ->addPost('internal_features', 'poll_sticker_v2');
+
+                        $tapModels[] = $storyPoll[0];
+                        $stickerIds[] = 'polling_sticker_v2';
+                    }
+                    if ($storySlider !== null) {
+                        Utils::throwIfInvalidStorySlider($storySlider);
+                        $request
+                            ->addPost('story_sliders', json_encode($storySlider));
+
+                        $stickerIds[] = 'emoji_slider_'.$storySlider[0]['emoji'];
+                    }
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
                     $request->addPost('usertags', json_encode($usertags));
                 }
                 if ($reelShareToFeed !== null) {
                     $request->addPost('clips_share_preview_to_feed', '1');
+                }
+                if ($storyQuiz !== null) {
+                    Utils::throwIfInvalidStoryQuiz($storyQuiz);
+                    $request
+                        ->addPost('story_quizs', json_encode($storyQuiz));
+
+                    $stickerIds[] = 'quiz_story_sticker_default';
                 }
                 break;
             case Constants::FEED_TV:

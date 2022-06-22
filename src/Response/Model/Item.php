@@ -169,6 +169,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method string getTakenAt()
  * @method mixed getThumbnailUrls()
  * @method Thumbnail getThumbnails()
+ * @method string[] getTimelinePinnedUserIds()
  * @method int getTimezoneOffset()
  * @method string getTitle()
  * @method string[] getTopFollowers()
@@ -354,6 +355,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isTakenAt()
  * @method bool isThumbnailUrls()
  * @method bool isThumbnails()
+ * @method bool isTimelinePinnedUserIds()
  * @method bool isTimezoneOffset()
  * @method bool isTitle()
  * @method bool isTopFollowers()
@@ -539,6 +541,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setTakenAt(string $value)
  * @method $this setThumbnailUrls(mixed $value)
  * @method $this setThumbnails(Thumbnail $value)
+ * @method $this setTimelinePinnedUserIds(string[] $value)
  * @method $this setTimezoneOffset(int $value)
  * @method $this setTitle(string $value)
  * @method $this setTopFollowers(string[] $value)
@@ -724,6 +727,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this unsetTakenAt()
  * @method $this unsetThumbnailUrls()
  * @method $this unsetThumbnails()
+ * @method $this unsetTimelinePinnedUserIds()
  * @method $this unsetTimezoneOffset()
  * @method $this unsetTitle()
  * @method $this unsetTopFollowers()
@@ -861,6 +865,7 @@ class Item extends AutoPropertyMapper
         'suggested_users'                             => 'SuggestedUsers',
         'is_new_suggestion'                           => 'bool',
         'comment_likes_enabled'                       => 'bool',
+        'timeline_pinned_user_ids'                    => 'string[]',
         'location'                                    => 'Location',
         'lat'                                         => 'float',
         'lng'                                         => 'float',

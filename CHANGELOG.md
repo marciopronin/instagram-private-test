@@ -1,3 +1,15 @@
+# Stable release v20.2.2
+## Date: 23/06/2022
+
+### Work in progress
+
+- **Internal:** Instagram is refactoring their sticker system so it can be applied to stories and reels (clips) more easily. API will be adapted to this new style soon. Some metadata would need to be updated in the scripts in the near future to avoid any possible issues.
+
+### Updates and fixes
+
+- **Internal:** Now reels (clips) can be configured with poll, quiz and slider stickers.
+- **Models and resposes:** Update models
+
 # Stable release v20.2.1
 ## Date: 18/06/2022
 

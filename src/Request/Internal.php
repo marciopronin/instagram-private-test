@@ -1114,21 +1114,14 @@ class Internal extends RequestCollection
                     ])
                     ->addPost('capture_type', 'clips_v2');
 
-                    if ($storyPoll !== null) {
-                        Utils::throwIfInvalidStoryPoll($storyPoll);
-                        $request
-                            ->addPost('internal_features', 'poll_sticker_v2');
-
-                        $tapModels[] = $storyPoll[0];
-                        $stickerIds[] = 'polling_sticker_v2';
-                    }
-                    if ($storySlider !== null) {
-                        Utils::throwIfInvalidStorySlider($storySlider);
-                        $request
-                            ->addPost('story_sliders', json_encode($storySlider));
-
-                        $stickerIds[] = 'emoji_slider_'.$storySlider[0]['emoji'];
-                    }
+                if ($storyPoll !== null) {
+                    Utils::throwIfInvalidStoryPoll($storyPoll);
+                    $tapModels[] = $storyPoll[0];
+                }
+                if ($storySlider !== null) {
+                    Utils::throwIfInvalidStorySlider($storySlider);
+                    $tapModels[] = $storySlider[0];
+                }
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
                     $request->addPost('usertags', json_encode($usertags));
@@ -1138,10 +1131,7 @@ class Internal extends RequestCollection
                 }
                 if ($storyQuiz !== null) {
                     Utils::throwIfInvalidStoryQuiz($storyQuiz);
-                    $request
-                        ->addPost('story_quizs', json_encode($storyQuiz));
-
-                    $stickerIds[] = 'quiz_story_sticker_default';
+                    $tapModels[] = $storyQuiz[0];
                 }
                 break;
             case Constants::FEED_TV:
@@ -1199,13 +1189,6 @@ class Internal extends RequestCollection
         if ($location instanceof Response\Model\Location) {
             if ($targetFeed === Constants::FEED_TIMELINE) {
                 $request->addPost('location', Utils::buildMediaLocationJSON($location));
-
-                $request
-                    ->addPost('geotag_enabled', '1')
-                    ->addPost('posting_latitude', $location->getLat())
-                    ->addPost('posting_longitude', $location->getLng())
-                    ->addPost('media_latitude', $location->getLat())
-                    ->addPost('media_longitude', $location->getLng());
             }
         }
 

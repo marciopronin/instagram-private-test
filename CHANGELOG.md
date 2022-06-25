@@ -1,3 +1,10 @@
+# Stable release v20.2.3
+## Date: 25/06/2022
+
+### Updates and fixes
+
+- **Hashtag:** It is possible to fetch hashtag related reels (clips) using the tab 'clips' in `getSection()`
+
 # Stable release v20.2.2
 ## Date: 23/06/2022
 

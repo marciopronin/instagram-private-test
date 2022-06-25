@@ -85,12 +85,12 @@ class Hashtag extends RequestCollection
             ->addPost('include_persistent', true);
 
         if ($tab !== null) {
-            if ($tab !== 'top' && $tab !== 'recent' && $tab !== 'discover') {
-                throw new \InvalidArgumentException('Tab section must be \'top\', \'recent\', \'places\' or \'discover\'.');
+            if ($tab !== 'top' && $tab !== 'recent' && $tab !== 'clips') {
+                throw new \InvalidArgumentException('Tab section must be \'top\', \'recent\', \'places\' or \'clips\'.');
             }
             $request->addPost('tab', $tab);
         } else {
-            $request->addPost('supported_tabs', '["top","recent","discover"]');
+            $request->addPost('supported_tabs', '["top","recent","clips"]');
         }
 
         if ($maxId !== null) {

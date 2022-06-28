@@ -186,7 +186,7 @@ class Account extends RequestCollection
      *
      * @return \InstagramAPI\Response\AccountCreateResponse
      */
-    public function createSecondary(
+    public function createSecundary(
         $username,
         $password,
         $firstName = '')
@@ -1335,19 +1335,44 @@ class Account extends RequestCollection
     /**
      *  Get prefill candidates.
      *
+     * @param array $clientContactPoints phone (read from SIM) or/and email (read from google account manager).
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\PrefillCandidatesResponse
      */
-    public function getPrefillCandidates()
+    public function getPrefillCandidates(
+        $clientContactPoints = null)
     {
-        return $this->ig->request('accounts/get_prefill_candidates/')
+        $request = $this->ig->request('accounts/get_prefill_candidates/')
             ->setNeedsAuth(false)
             ->addPost('android_device_id', $this->ig->device_id)
             ->addPost('device_id', $this->ig->uuid)
             ->addPost('phone_id', $this->ig->phone_id)
-            ->addPost('usages', '["account_recovery_omnibox"]')
-            ->getResponse(new Response\PrefillCandidatesResponse());
+            ->addPost('usages', '["account_recovery_omnibox"]');
+
+        if ($clientContactPoints !== null) {
+            $contactPoints = [];
+            if (isset($clientContactPoints['email'])) {
+                $contactPoints[] = [
+                    'type'      => 'email',
+                    'value'     => $clientContactPoints['email'],
+                    'source'    => 'android_account_manager',
+                ];
+            }
+            if (isset($clientContactPoints['phone'])) {
+                $contactPoints[] = [
+                    'type'      => 'phone',
+                    'value'     => $clientContactPoints['phone'],
+                    'source'    => 'sim',
+                ];
+            }
+            if (!empty($contactPoints)) {
+                $request->addPost('client_contact_points', json_encode($contactPoints));
+            }
+        }
+
+        return $request->getResponse(new Response\PrefillCandidatesResponse());
     }
 
     /**

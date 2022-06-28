@@ -10,6 +10,7 @@ class ExtendedInstagram extends \InstagramAPI\Instagram
     }
 }
 
+
 /////////////////
 $debug = true;
 /////////////////
@@ -30,9 +31,18 @@ $ig->setUserWithoutPassword($username);
 $ig->event->updateAppState('foreground', 'not_initialized');
 $ig->event->sendFlowSteps('landing', 'sim_card_state', $waterfallId, $startTime, ['flow' => 'phone']);
 
-$launcherResponse = $ig->internal->sendLauncherSync(true)->getHttpResponse();
+try {
+    $ig->account->setContactPointPrefill('prefill');
+catch(\Exception) {
+    //pass
+}
+
+$ig->internal->fetchZeroRatingToken('token_expired', false);
+$launcherResponse = $ig->internal->getMobileConfig(false)->getHttpResponse();
 $ig->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
 $ig->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
+
+$ig->account->getPrefillCandidates(['phone' => $phone]);
 
 $waterfallId = \InstagramAPI\Signatures::generateUUID();
 $startTime = time();
@@ -51,6 +61,24 @@ echo 'SMS Code: ';
 $smsCode = trim(fgets(STDIN));
 
 $ig->account->validateSignupSmsCode($smsCode, $phone, $waterfallId);
+
+$ig->internal->fetchHeaders();
+
+$parts = str_split($firstName, 4);
+$queryName = '';
+foreach($parts as $part) {
+    $queryName .= $part;
+    $suggestionResponse = $ig->account->getUsernameSuggestions('', $waterfallId, $queryName);
+    usleep(300000);
+}
+$ig->event->forceSendBatch();
+$suggestions = $suggestionResponse->getSuggestionsWithMetadata()->getSuggestions();
+foreach($suggestions as $suggestion) {
+    if ($suggestion->getPrototype() === 'email') {
+        $username = $suggestion->getUsername();
+        break;
+    }
+}
 
 $ig->event->sendNavigation('button', 'one_page_registration', 'add_birthday');
 
@@ -83,13 +111,13 @@ if ($response->getEligibleToRegister() !== true) {
     exit();
 }
 
-$ig->event->sendFlowSteps('username', 'step_view_loaded', $waterfallId, $startTime,
+$ig->event->sendFlowSteps('username', 'step_view_loaded', $waterfallId, $startTime, 
     [
         'is_facebook_app_installed' => false,
         'messenger_installed'       => false,
         'whatsapp_installed'        => false,
         'fb_lite_installed'         => false,
-        'flow'                      => 'phone',
+        'flow'                      => 'phone'
     ]
 );
 
@@ -119,6 +147,7 @@ $ig->isMaybeLoggedIn = true;
 $ig->account_id = $response->getCreatedUser()->getPk();
 $ig->settings->set('account_id', $ig->account_id);
 $ig->settings->set('last_login', time());
+//
 
 $ig->event->sendFlowSteps('done', 'register_account_request_submitted', $waterfallId, $startTime, ['flow' => 'phone']);
 $ig->event->sendFlowSteps('done', 'register_account_created', $waterfallId, $startTime, ['flow' => 'phone', 'instagram_id' => $response->getUser()->getPk()]);
@@ -206,5 +235,61 @@ $ig->event->sendProfileAction('follow', $userToFollow,
 
 $rankToken = \InstagramAPI\Signatures::generateUUID();
 $ig->event->sendSearchFollowButtonClicked($userToFollow, 'discover_people_nux', $rankToken);
+
+$seenSteps = [ 
+    [
+        'step_name' => 'CHECK_FOR_PHONE',
+        'value'     => 1
+    ],
+    [
+        'step_name' => 'CREATE_PASSWORD',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'IDENTITY_SYNCING',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'FB_CONNECT',
+        'value'     => 0
+    ],
+    [
+        'step_name' => 'FB_FOLLOW',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'UNKNOWN',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'IDENTITY_SYNCING_AFTER_NUX_LINKING',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'CONTACT_INVITE',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'ACCOUNT_PRIVACY',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'TAKE_PROFILE_PHOTO',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'ADD_PHONE',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'TURN_ON_ONETAP',
+        'value'     => -1
+    ],
+    [
+        'step_name' => 'DISCOVER_PEOPLE',
+        'value'     => 1
+    ]
+];
+$ig->internal->getOnBoardingSteps($waterfallId, 'phone', json_encode($seenSteps), true);
 
 $ig->sendLoginFlow();

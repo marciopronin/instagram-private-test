@@ -1436,7 +1436,7 @@ class Internal extends RequestCollection
             $request
                 ->setNeedsAuth(false)
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '290c995f19a1c2aa501b3cd60f1f5b7e89ea1836f094da6502b261254f04f795');
+                ->addPost('query_hash', '979562cf627614c196da1d1b3efec153663d046a491a6bdb97f1ce75935312e9');
         } else {
             $request
                 ->addPost('unit_type', 2)
@@ -1447,6 +1447,22 @@ class Internal extends RequestCollection
         $this->_saveExperimentsMobileConfig($result->asArray());
 
         return $result;
+    }
+
+    /**
+     * Fetch headers.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function fetchHeaders()
+    {
+        return $this->ig->request('si/fetch_headers')
+            ->setNeedsAuth(false)
+            ->addParam('guid', str_replace('-', '', $this->ig->uuid))
+            ->addParam('challenge_type', 'signup')
+            ->getResponse(new Response\GenericResponse());
     }
 
     /**
@@ -1600,15 +1616,22 @@ class Internal extends RequestCollection
      * Get zero rating token hash result.
      *
      * @param string $reason One of: "token_expired", "mqtt_token_push", "token_stale", "provisioning_time_mismatch".
+     * @param mixed  $result
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\TokenResultResponse
      */
     public function fetchZeroRatingToken(
-        $reason = 'token_expired')
+        $reason = 'token_expired',
+        $result = true)
     {
-        $request = $this->ig->request('zr/token/result/')
+        if ($result === true) {
+            $endpoint = 'zr/token/result/';
+        } else {
+            $endpoint = 'zr/tokens/';
+        }
+        $request = $this->ig->request($endpoint)
             ->setNeedsAuth(false)
             ->addParam('custom_device_id', $this->ig->uuid)
             ->addParam('device_id', $this->ig->device_id)
@@ -1877,6 +1900,8 @@ class Internal extends RequestCollection
      *
      * @param string $waterfallId UUIDv4.
      * @param string $regMethod   Registration method. 'email' or 'phone'.
+     * @param array  $seenSteps   Seen steps.
+     * @param bool   $finish      Progress state has finished
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1885,7 +1910,9 @@ class Internal extends RequestCollection
      */
     public function getOnBoardingSteps(
         $waterfallId,
-        $regMethod = 'email')
+        $regMethod = 'email',
+        $seenSteps = [],
+        $finish = false)
     {
         if ($regMethod !== 'email' && $regMethod !== 'phone') {
             throw new \InvalidArgumentException(
@@ -1896,8 +1923,8 @@ class Internal extends RequestCollection
             ->setNeedsAuth(false)
             ->addPost('is_secondary_account_creation', 'false')
             ->addPost('fb_connected', 'false')
-            ->addPost('seen_steps', '[]')
-            ->addPost('progress_state', 'start')
+            ->addPost('seen_steps', (empty($seenSteps)) ? '[]' : json_encode($seenSteps))
+            ->addPost('progress_state', ($finish === false) ? 'start' : 'finish')
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('fb_installed', 'false')
             ->addPost('locale', $this->ig->getLocale())

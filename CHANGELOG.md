@@ -1,3 +1,17 @@
+# Stable release v20.3.0
+## Date: 28/06/2022
+
+### New features
+
+- **Internal:** Added `fetchHeaders()`
+
+### Updates and fixes
+
+- **Account:** Update `getPrefillCandidates()`
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `fetchZeroRatingToken()`
+- **Internal:** Update `getOnBoardingSteps()`
+
 # Stable release v20.2.3
 ## Date: 25/06/2022
 

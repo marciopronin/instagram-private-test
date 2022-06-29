@@ -1,3 +1,11 @@
+# Stable release v20.3.1
+## Date: 29/06/2022
+
+### Updates and fixes
+
+- **Request:** Update `_addDefaultHeaders()`
+- **Discover:** Update `getAyml()`
+
 # Stable release v20.3.0
 ## Date: 28/06/2022
 

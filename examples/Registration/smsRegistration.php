@@ -28,6 +28,9 @@ $firstName = 'First Name';
 $ig = new ExtendedInstagram($debug);
 $ig->setUserWithoutPassword($username);
 
+$waterfallId = \InstagramAPI\Signatures::generateUUID();
+$startTime = time();
+
 $ig->event->updateAppState('foreground', 'not_initialized');
 $ig->event->sendFlowSteps('landing', 'sim_card_state', $waterfallId, $startTime, ['flow' => 'phone']);
 
@@ -38,14 +41,11 @@ catch(\Exception) {
 }
 
 $ig->internal->fetchZeroRatingToken('token_expired', false);
-$launcherResponse = $ig->internal->getMobileConfig(false)->getHttpResponse();
+$launcherResponse = $ig->internal->getMobileConfig(true)->getHttpResponse();
 $ig->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
 $ig->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
 
 $ig->account->getPrefillCandidates(['phone' => $phone]);
-
-$waterfallId = \InstagramAPI\Signatures::generateUUID();
-$startTime = time();
 
 $ig->event->sendFlowSteps('one_page_v2', 'reg_field_interacted', $waterfallId, $startTime, ['flow' => 'phone', 'field_name' => 'phone_field']);
 $ig->event->sendFlowSteps('one_page_v2', 'next_button_tapped', $waterfallId, $startTime, ['flow' => 'phone']);
@@ -163,10 +163,11 @@ $feed = $this->timeline->getTimelineFeed(null, [
     'reason' => Constants::REASONS[0],
 ]);
 
-$followingList = json_decode($ig->discover->getAyml('explore_people')->getMaxId(), true);
-$ig->people->getFriendships($followingList);
+$suggestedList = json_decode($ig->discover->getAyml('explore_people', null, true)->getMaxId());
 
-$userToFollow = array_rand($followingList);
+$ig->people->getFriendships($suggestedList);
+
+$userToFollow = array_rand($suggestedList);
 $ig->event->sendFollowButtonTapped($userToFollow, 'discover_people_nux',
     [
         [
@@ -290,6 +291,6 @@ $seenSteps = [
         'value'     => 1
     ]
 ];
-$ig->internal->getOnBoardingSteps($waterfallId, 'phone', json_encode($seenSteps), true);
+$ig->internal->getOnBoardingSteps($waterfallId, 'phone', $seenSteps, true);
 
 $ig->sendLoginFlow();

@@ -432,7 +432,7 @@ class Request
             if ($this->_parent->getPlatform() === 'android') {
                 $this->_headers['X-IG-App-Locale'] = $this->_parent->getLocale();
                 $this->_headers['X-IG-Device-Locale'] = $this->_parent->getLocale();
-                $this->_headers['X-IG-Android-ID'] = ($this->_parent->isMaybeLoggedIn === true) ? $this->_parent->device_id : 'android- 0';
+                $this->_headers['X-IG-Android-ID'] = $this->_parent->device_id;
                 $this->_headers['X-IG-Timezone-Offset'] = ($this->_parent->getTimezoneOffset() !== null) ? $this->_parent->getTimezoneOffset() : date('Z');
                 $this->_headers['X-IG-App-ID'] = Constants::FACEBOOK_ANALYTICS_APPLICATION_ID;
                 $this->_headers['Priority'] = $this->getRequestPriority();

@@ -419,23 +419,35 @@ class Discover extends RequestCollection
     /**
      * Get user suggestions based on different algorithms.
      *
-     * @param string $module The module where the request is being called.
+     * @param string   $module             The module where the request is being called.
+     * @param int|null $maxNumberToDisplay Max number of results to display.
+     * @param bool     $paginate           Paginate.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\DiscoverPeopleResponse
      */
     public function getAyml(
-        $module = 'following')
+        $module = 'following',
+        $maxNumberToDisplay = 10,
+        $paginate = false)
     {
-        return $this->ig->request('discover/ayml/')
+        $request = $this->ig->request('discover/ayml/')
             ->setSignedPost(false)
-            ->addPost('max_number_to_display', 10)
             ->addPost('module', $module)
             ->addPost('phone_id', $this->ig->phone_id)
-            ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->getResponse(new Response\DiscoverPeopleResponse());
+            ->addPost('_uuid', $this->ig->uuid);
+        //->addPost('_csrftoken', $this->ig->client->getToken())
+
+        if ($maxNumberToDisplay !== null) {
+            $request->addPost('max_number_to_display', $maxNumberToDisplay);
+        }
+
+        if ($paginate !== false) {
+            $request->addPost('paginate', 'true');
+        }
+
+        return $request->getResponse(new Response\DiscoverPeopleResponse());
     }
 
     /**

@@ -1,3 +1,10 @@
+# Stable release v20.3.2
+## Date: 30/06/2022
+
+### Updates and fixes
+
+- **Instagram:** Update login flow
+
 # Stable release v20.3.1
 ## Date: 29/06/2022
 

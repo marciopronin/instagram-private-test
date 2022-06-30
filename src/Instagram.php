@@ -2474,7 +2474,6 @@ class Instagram implements ExperimentsInterface
             $this->client->zeroRating()->reset();
             $this->event->sendCellularDataOpt();
             $this->event->sendDarkModeOpt();
-            $this->internal->fetchZeroRatingToken();
             // Perform the "user has just done a full login" API flow.
 
             // Batch request 1
@@ -2482,6 +2481,12 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->account->getAccountFamily();
+            } catch (\Exception $e) {
+                // pass
+            }
+
+            try {
+                $this->internal->fetchZeroRatingToken();
                 $this->internal->getMobileConfig(false);
                 $this->event->sendZeroCarrierSignal();
             } finally {

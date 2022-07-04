@@ -1853,6 +1853,44 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Send Graph query.
+     *
+     * @param mixed $clientDoc
+     * @param mixed $vars
+     * @param mixed $friendlyName
+     * @param mixed $pretty
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function sendGraph(
+        $clientDoc,
+        $vars,
+        $friendlyName,
+        $pretty)
+    {
+        return $this->ig->request('https://i.instagram.com/graphql_www')
+            ->setSignedPost(false)
+            ->setNeedsAuth(false)
+            ->setIsSilentFail(true)
+            ->setAddDefaultHeaders(false)
+            ->addHeader('X-Graphql-Client-Library', 'graphservice')
+            ->addHeader('X-Fb-Friendly-Name', $friendlyName)
+            ->addPost('client_doc_id', $clientDoc)
+            ->addPost('method', 'post')
+            ->addPost('locale', $this->ig->getLocale())
+            ->addPost('pretty', $pretty)
+            ->addPost('format', 'json')
+            ->addPost('variables', json_encode($vars))
+            ->addPost('fb_api_req_friendly_name', $friendlyName)
+            ->addPost('fb_api_caller_class', 'graphservice')
+            ->addPost('fb_api_analytics_tags', json_encode(['GraphServices']))
+            ->addPost('server_timestamps', 'true')
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Starts new user flow when registering with phone number.
      *
      * @throws \InstagramAPI\Exception\InstagramException

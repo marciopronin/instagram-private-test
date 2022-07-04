@@ -2487,7 +2487,6 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->internal->fetchZeroRatingToken();
-                $this->internal->getMobileConfig(false);
                 $this->event->sendZeroCarrierSignal();
             } finally {
                 // Stops emulating batch requests.
@@ -2496,6 +2495,16 @@ class Instagram implements ExperimentsInterface
 
             // Batch request 2
             $this->client->startEmulatingBatch();
+            $this->internal->sendGraph('18293997048434484603993202463', [
+                'input' => [
+                    'log_only'  => true,
+                    'events'    => [
+                        'no_advertisement_id'   => false,
+                        'event_name'            => 'LOGIN',
+                        'adid'                  => $this->advertising_id,
+                    ],
+                ],
+            ], 'ReportAttributionEventsMutation', false);
 
             try {
                 $feed = $this->timeline->getTimelineFeed(null, [
@@ -2540,14 +2549,6 @@ class Instagram implements ExperimentsInterface
                         }
                     }
                 }
-
-                $this->story->getReelsTrayFeed('cold_start');
-
-                try {
-                    $this->account->getBadgeNotifications();
-                } catch (\Exception $e) {
-                    // pass
-                }
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
@@ -2557,8 +2558,11 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
+                $this->internal->getLoomFetchConfig();
                 $this->internal->getMobileConfig(false);
-                $this->story->getReelsMediaFeed($this->account_id);
+                $this->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', true);
+                $this->story->getReelsTrayFeed('cold_start');
+                $this->people->getSharePrefill();
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
@@ -2568,14 +2572,17 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
-                $this->people->getRecentActivityInbox();
+                $this->account->getBadgeNotifications();
+            } catch (\Exception $e) {
+                // pass
+            }
 
+            try {
                 try {
                     $this->internal->logResurrectAttribution();
                 } catch (\Exception $e) {
                     // pass
                 }
-                $this->internal->getLoomFetchConfig();
                 //$this->internal->getDeviceCapabilitiesDecisions();
                 //$this->people->getBootstrapUsers();
                 $this->people->getInfoById($this->account_id);
@@ -2637,6 +2644,7 @@ class Instagram implements ExperimentsInterface
                     $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
                 } catch (\Exception $e) {
                 }
+                $this->reel->discover();
                 $this->_registerPushChannels();
             } finally {
                 // Stops emulating batch requests

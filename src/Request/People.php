@@ -1512,7 +1512,9 @@ class People extends RequestCollection
     public function getSharePrefill()
     {
         return $this->ig->request('banyan/banyan/')
+            ->addParam('is_private_share', false)
             ->addParam('views', '["reshare_share_sheet","direct_user_search_keypressed","story_share_sheet","direct_user_search_nullstate","direct_inbox_active_now","forwarding_recipient_sheet","call_recipients"]')
+            ->addParam('is_real_time', false)
             ->getResponse(new Response\SharePrefillResponse());
     }
 
@@ -1530,5 +1532,18 @@ class People extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\MutedUsersResponse());
+    }
+
+    /**
+     * Get non expired friend requests.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\NonExpiredRequestsInfoResponse
+     */
+    public function getNonExpiredFriendRequests()
+    {
+        return $this->ig->request('trusted_friend/get_non_expired_requests_info/')
+            ->getResponse(new Response\NonExpiredRequestsInfoResponse());
     }
 }

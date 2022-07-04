@@ -1,3 +1,16 @@
+# Stable release v20.4.0
+## Date: 05/07/2022
+
+### New features
+
+- **Internal:** Add `sendGraph()`
+- **People:** Add `getNonExpiredFriendRequests()`
+
+### Updates and fixes
+
+- **Instagram:** Update login flow `_sendLoginFlow()`
+- **People:** Update `getSharePrefill()`
+
 # Stable release v20.3.2
 ## Date: 30/06/2022
 

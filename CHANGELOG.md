@@ -1,3 +1,13 @@
+# Stable release v20.4.1
+## Date: 06/07/2022
+
+### Updates and fixes
+
+- Update models and responses
+- **Instagram:** Update login flow `_sendLoginFlow()`
+- **Internal:** Update `fetchZeroRatingToken()`
+- **Account:** Update `getSyncedFacebookPagesIds()`
+
 # Stable release v20.4.0
 ## Date: 05/07/2022
 

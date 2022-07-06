@@ -10,6 +10,8 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool getAboutYourAccountBloksEntrypointEnabled()
  * @method int getAccountType()
  * @method string getAddressStreet()
+ * @method string getAdsPageId()
+ * @method string getAdsPageName()
  * @method mixed getAggregatePromoteEngagement()
  * @method mixed getAllowContactsSync()
  * @method string getAllowedCommenterType()
@@ -163,6 +165,8 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isAboutYourAccountBloksEntrypointEnabled()
  * @method bool isAccountType()
  * @method bool isAddressStreet()
+ * @method bool isAdsPageId()
+ * @method bool isAdsPageName()
  * @method bool isAggregatePromoteEngagement()
  * @method bool isAllowContactsSync()
  * @method bool isAllowedCommenterType()
@@ -316,6 +320,8 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setAboutYourAccountBloksEntrypointEnabled(bool $value)
  * @method $this setAccountType(int $value)
  * @method $this setAddressStreet(string $value)
+ * @method $this setAdsPageId(string $value)
+ * @method $this setAdsPageName(string $value)
  * @method $this setAggregatePromoteEngagement(mixed $value)
  * @method $this setAllowContactsSync(mixed $value)
  * @method $this setAllowedCommenterType(string $value)
@@ -469,6 +475,8 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this unsetAboutYourAccountBloksEntrypointEnabled()
  * @method $this unsetAccountType()
  * @method $this unsetAddressStreet()
+ * @method $this unsetAdsPageId()
+ * @method $this unsetAdsPageName()
  * @method $this unsetAggregatePromoteEngagement()
  * @method $this unsetAllowContactsSync()
  * @method $this unsetAllowedCommenterType()
@@ -776,6 +784,8 @@ class User extends AutoPropertyMapper
         'show_post_insights_entry_point'                => 'bool',
         'existing_user_age_collection_enabled'          => 'bool',
         'linked_fb_info'                                => 'LinkedFbInfo',
+        'ads_page_id'                                   => 'string',
+        'ads_page_name'                                 => 'string',
         'has_password'                                  => 'bool',
         'gating'                                        => 'Gating',
         'fbid_v2'                                       => 'string',

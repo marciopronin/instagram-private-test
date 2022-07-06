@@ -2309,7 +2309,7 @@ class Instagram implements ExperimentsInterface
             $this->event->sendEmergencyPushInitialVersion();
 
             try {
-                $this->internal->fetchZeroRatingToken();
+                $this->internal->fetchZeroRatingToken('token_expired', false);
                 //$this->event->sendZeroCarrierSignal();
                 //$this->internal->bootstrapMsisdnHeader();
                 //$this->internal->readMsisdnHeader('default');
@@ -2486,7 +2486,7 @@ class Instagram implements ExperimentsInterface
             }
 
             try {
-                $this->internal->fetchZeroRatingToken();
+                $this->internal->fetchZeroRatingToken('token_expired', false, false);
                 $this->event->sendZeroCarrierSignal();
             } finally {
                 // Stops emulating batch requests.
@@ -2804,7 +2804,7 @@ class Instagram implements ExperimentsInterface
             $expired = time() - (int) $this->settings->get('zr_expires');
             if ($expired > 0) {
                 $this->client->zeroRating()->reset();
-                $this->internal->fetchZeroRatingToken($expired > 7200 ? 'token_stale' : 'token_expired');
+                $this->internal->fetchZeroRatingToken($expired > 7200 ? 'token_stale' : 'token_expired', false, false);
                 $this->event->sendZeroCarrierSignal();
             }
         }

@@ -1615,8 +1615,9 @@ class Internal extends RequestCollection
     /**
      * Get zero rating token hash result.
      *
-     * @param string $reason One of: "token_expired", "mqtt_token_push", "token_stale", "provisioning_time_mismatch".
-     * @param mixed  $result
+     * @param string $reason   One of: "token_expired", "mqtt_token_push", "token_stale", "provisioning_time_mismatch".
+     * @param bool   $result   result
+     * @param bool   $prelogin Prelogin
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1624,7 +1625,8 @@ class Internal extends RequestCollection
      */
     public function fetchZeroRatingToken(
         $reason = 'token_expired',
-        $result = true)
+        $result = true,
+        $prelogin = true)
     {
         if ($result === true) {
             $endpoint = 'zr/token/result/';
@@ -1633,10 +1635,15 @@ class Internal extends RequestCollection
         }
         $request = $this->ig->request($endpoint)
             ->setNeedsAuth(false)
-            ->addParam('custom_device_id', $this->ig->uuid)
-            ->addParam('device_id', $this->ig->device_id)
-            ->addParam('fetch_reason', $reason)
-            ->addParam('token_hash', (string) $this->ig->settings->get('zr_token'));
+            ->setSignedPost(false)
+            ->addPost('custom_device_id', $this->ig->uuid)
+            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('fetch_reason', $reason)
+            ->addPost('token_hash', (string) $this->ig->settings->get('zr_token'));
+
+        if ($prelogin === false) {
+            $request->addPost('_uuid', $this->ig->uuid);
+        }
 
         /** @var Response\TokenResultResponse $result */
         $result = $request->getResponse(new Response\TokenResultResponse());

@@ -1604,36 +1604,12 @@ class Account extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
-        $re = '/Pattern,\s.\"(\d{15})\\\\/m';
+        $re = '/\[{"\\\\u3401":{"#":true,"\$":"(\w+?\s?\w+?\s?\w+?\s?\w+?\S?\w+?\s?\w+?\s?\w+?)","&":"(Button|Selected\sButton)","\\\\u0087":".\(bk\.action\.array\.Make,.\\\\"&\\\\",.\(bk\.action\.core\.Match,.\(bk\.action\.core\.Match,.\(bk\.action\.bloks\.GetVariable2,.\\\\"\d+\\\\"\),.\(bk\.action\.array\.Make,.\(bk\.action.core\.Pattern,.\\\\"(\d+)/m';
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
-        $ids = [];
-        foreach ($matches as $id) {
-            $id = $id[1];
 
-            if ($id[0] === '1' && ($id[1] === '0' || $id[1] === '1')) {
-                $ids[] = $id;
-            }
-        }
-
-        if (count($ids) === 0) {
-            return [];
-        }
-        $idsu = array_unique($ids);
-        $ids = [];
-        foreach ($idsu as $id) {
-            $ids[] = $id;
-        }
-
-        $re = '/"\$":"([\w\s?]+)Facebook\\\\u30fb/m';
-        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
         $pages = [];
-        $c = 0;
-        foreach ($matches as $page) {
-            if (!isset($ids[$c])) {
-                break;
-            }
-            $pages[$ids[$c]] = trim($page[1]);
-            $c++;
+        foreach ($matches as $match) {
+            $pages[$match[3]] = explode(' Facebook', $match[1])[0];
         }
 
         return $pages;

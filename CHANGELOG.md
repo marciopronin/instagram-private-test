@@ -1,3 +1,15 @@
+# Stable release v20.5.0
+## Date: 07/07/2022
+
+### New features
+
+- **Instagram:** Add `setAppStartupCountry()`
+- **Instagram:** Add `getAppStartupCountry()`
+
+### Updates and fixes
+
+- **Request:** Update `_addDefaultHeaders()`
+
 # Stable release v20.4.1
 ## Date: 06/07/2022
 

@@ -416,7 +416,7 @@ class Request
             $this->_headers['X-FB-HTTP-Engine'] = Constants::X_FB_HTTP_Engine;
             $this->_headers['X-FB-Client-IP'] = 'True';
             $this->_headers['X-FB-Server-Cluster'] = 'True';
-            $this->_headers['X-IG-App-Startup-Country'] = explode('_', $this->_parent->getLocale())[1];
+            $this->_headers['X-IG-App-Startup-Country'] = ($this->_parent->getAppStartupCountry() !== null) ? $this->_parent->getAppStartupCountry() : explode('_', $this->_parent->getLocale())[1];
             $this->_headers['X-IG-Mapped-Locale'] = $this->_parent->getLocale();
             $this->_headers['IG-INTENDED-USER-ID'] = empty($this->_parent->settings->get('account_id')) ? 0 : $this->_parent->settings->get('account_id');
 

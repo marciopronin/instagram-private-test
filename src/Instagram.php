@@ -359,6 +359,13 @@ class Instagram implements ExperimentsInterface
     public $acceptLanguage = '';
 
     /**
+     * Accept language.
+     *
+     * @var string|null
+     */
+    public $appStartupCountry = null;
+
+    /**
      * Event batch collection.
      *
      * @var array
@@ -876,6 +883,32 @@ class Instagram implements ExperimentsInterface
         } else {
             return $this->acceptLanguage;
         }
+    }
+
+    /**
+     * Set app startup country.
+     *
+     * @param string|null
+     * @param mixed $value
+     */
+    public function setAppStartupCountry(
+        $value)
+    {
+        if (preg_match_all('/^[A-Z]{2}$/m', $value, $matches)) {
+            $this->appStartupCountry = $matches[0][0];
+        } else {
+            throw new \InvalidArgumentException('Not a valid app startup country value.');
+        }
+    }
+
+    /**
+     * Get app startup country.
+     *
+     * @return string
+     */
+    public function getAppStartupCountry()
+    {
+        return $this->appStartupCountry;
     }
 
     /**

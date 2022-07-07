@@ -1,3 +1,17 @@
+# Stable release v20.6.0
+## Date: 08/07/2022
+
+### New features
+
+- **Account:** Add `confirmEmail()`
+- **Instagram:** Add `enableResolutionCheck()`
+
+### Updates and fixes
+
+- **Request:** Update `_addDefaultHeaders()`
+- **Devices:** Update Good Devices list.
+- **Devices:** Update `_initFromDeviceString()`
+
 # Stable release v20.5.0
 ## Date: 07/07/2022
 

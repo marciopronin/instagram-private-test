@@ -1208,6 +1208,31 @@ class Account extends RequestCollection
     }
 
     /**
+     * Confirm verification email.
+     *
+     * @param string $confirmationLink Confirmation link.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function confirmEmail(
+        $confirmationLink)
+    {
+        $re = '/^https:\/\/(www\.)?instagram.com\/accounts\/confirm_email\/(\w+)\/(\w+)/m';
+        preg_match_all($re, $confirmationLink, $matches, PREG_SET_ORDER, 0);
+
+        if (empty($matches)) {
+            throw new \InstagramAPI\Exception\InstagramException('Not valid link provided.');
+        }
+
+        return $this->ig->request("accounts/confirm_email/{$matches[0][1]}/{$matches[0][2]}/")
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Tell Instagram to send you an SMS code to verify your phone number.
      *
      * @param string $phoneNumber Phone number with country code. Format: +34123456789.

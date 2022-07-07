@@ -97,20 +97,24 @@ class Device implements DeviceInterface
     /** @var string Custom iOS DPI. */
     protected $_iosDpi;
 
+    /** @var bool Enable resolution check. */
+    protected $_enableResolutionCheck;
+
     /**
      * Constructor.
      *
-     * @param string      $appVersion     Instagram client app version.
-     * @param string      $versionCode    Instagram client app version code.
-     * @param string      $userLocale     The user's locale, such as "en_US".
-     * @param string      $acceptLanguage The user's accept language, such as "en-US".
-     * @param string|null $deviceString   (optional) The device string to attempt
-     *                                    to construct from. If NULL or not a good
-     *                                    device, we'll use a random good device.
-     * @param bool        $autoFallback   (optional) Toggle automatic fallback.
-     * @param string      $platform       Platform used for requests.
-     * @param string|null $iosModel       Custom iOS Model.
-     * @param string|null $iosDpi         Custom iOS DPI.
+     * @param string      $appVersion            Instagram client app version.
+     * @param string      $versionCode           Instagram client app version code.
+     * @param string      $userLocale            The user's locale, such as "en_US".
+     * @param string      $acceptLanguage        The user's accept language, such as "en-US".
+     * @param string|null $deviceString          (optional) The device string to attempt
+     *                                           to construct from. If NULL or not a good
+     *                                           device, we'll use a random good device.
+     * @param bool        $autoFallback          (optional) Toggle automatic fallback.
+     * @param string      $platform              Platform used for requests.
+     * @param string|null $iosModel              Custom iOS Model.
+     * @param string|null $iosDpi                Custom iOS DPI.
+     * @param bool        $enableResolutionCheck Enable resolution check.
      *
      * @throws \RuntimeException If fallback is disabled and device is invalid.
      */
@@ -123,7 +127,8 @@ class Device implements DeviceInterface
         $autoFallback = true,
         $platform = 'android',
         $iosModel = null,
-        $iosDpi = null)
+        $iosDpi = null,
+        $enableResolutionCheck = false)
     {
         $this->_appVersion = $appVersion;
         $this->_versionCode = $versionCode;
@@ -131,6 +136,7 @@ class Device implements DeviceInterface
         $this->_acceptLanguage = $acceptLanguage;
         $this->_iosModel = $iosModel;
         $this->_iosDpi = $iosDpi;
+        $this->_enableResolutionCheck = $enableResolutionCheck;
 
         // Use the provided device if a valid good device. Otherwise use random.
         if ($autoFallback && (!is_string($deviceString) || !GoodDevices::isGoodDevice($deviceString)) && $platform !== 'ios') {
@@ -182,7 +188,7 @@ class Device implements DeviceInterface
         // Check the screen resolution.
         $resolution = explode('x', $parts[2], 2);
         $pixelCount = (int) $resolution[0] * (int) $resolution[1];
-        if ($pixelCount < 2073600) { // 1920x1080.
+        if ($this->_enableResolutionCheck && ($pixelCount < 2073600)) { // 1920x1080.
             throw new \RuntimeException(sprintf('Device string "%s" does not meet the minimum resolution requirement of 1920x1080.', $deviceString));
         }
 

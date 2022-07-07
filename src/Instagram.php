@@ -480,6 +480,13 @@ class Instagram implements ExperimentsInterface
      */
     public $carrier = 'Android';
 
+    /**
+     * Enable resolution check.
+     *
+     * @var bool
+     */
+    public $enableResolutionCheck = false;
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -1303,6 +1310,17 @@ class Instagram implements ExperimentsInterface
         $value)
     {
         $this->carrier = $value;
+    }
+
+    /**
+     * Enable resolution check.
+     *
+     * @param string $value
+     */
+    public function enableResolutionCheck(
+        $value)
+    {
+        $this->enableResolutionCheck = $value;
     }
 
     /**
@@ -2141,7 +2159,8 @@ class Instagram implements ExperimentsInterface
             $autoFallback,
             $this->getPlatform(),
             $this->getIosModel(),
-            $this->getIosDpi()
+            $this->getIosDpi(),
+            $this->enableResolutionCheck
         );
 
         // Get active device string so that we can compare it to any saved one.

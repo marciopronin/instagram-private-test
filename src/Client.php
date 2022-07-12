@@ -1063,7 +1063,7 @@ class Client
                         'set_headers' => [
                             // Keep the API's HTTPS connection alive in Guzzle for future
                             // re-use, to greatly speed up all further queries after this.
-                            'Connection'       => 'Keep-Alive',
+                            'Connection'       => 'close',
                             'Accept-Encoding'  => Constants::ACCEPT_ENCODING,
                             'Accept-Language'  => $this->_parent->getAcceptLanguage(),
                         ],
@@ -1116,8 +1116,8 @@ class Client
                 $headers['set_headers']['X-MID'] = $this->_parent->settings->get('mid');
             }
 
-            $headers['set_headers']['X-IG-Bandwidth-TotalBytes-B'] = $this->totalBytes;
-            $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = $this->totalTime;
+            $headers['set_headers']['X-IG-Bandwidth-TotalBytes-B'] = strval($this->totalBytes);
+            $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = strval($this->totalTime);
             //$headers['set_headers']['X-MID'] = $this->getMid();
 
             if (strpos($request->getUri(), 'notifications/badge') !== false) {
@@ -1136,6 +1136,8 @@ class Client
         } else {
             $headers['set_headers']['User-Agent'] = $this->_userAgent;
         }
+
+        $headers['set_headers'] = $this->_orderHeaders($headers['set_headers'] + $request->getHeaders());
 
         // Set up headers that are required for every request.
         $request = GuzzleUtils::modifyRequest($request, $headers);
@@ -1311,6 +1313,72 @@ class Client
         $this->_requestId++;
 
         return $requestId;
+    }
+
+    /**
+     * Order headers.
+     *
+     * @param array $headers Request headers.
+     *
+     * @return array
+     */
+    private function _orderHeaders(
+        $headers)
+    {
+        $headersOrder = [
+            'Host',
+            'X-IG-App-Locale',
+            'X-IG-Device-Locale',
+            'X-IG-Mapped-Locale',
+            'X-Pigeon-Session-Id',
+            'X-Pigeon-Rawclienttime',
+            'X-IG-Bandwidth-Speed-KBPS',
+            'X-IG-Bandwidth-TotalBytes-B',
+            'X-IG-Bandwidth-TotalTime-MS',
+            'X-IG-App-Startup-Country',
+            'X-Bloks-Version-Id',
+            'X-IG-WWW-Claim',
+            'X-Bloks-Is-Layout-RTL',
+            'X-IG-Device-ID',
+            'X-IG-Family-Device-ID',
+            'X-IG-Android-ID',
+            'X-IG-Timezone-Offset',
+            'X-IG-Nav-Chain',
+            'X-FB-Connection-Type',
+            'X-IG-Connection-Type',
+            'X-IG-Capabilities',
+            'X-IG-App-ID',
+            'Priority',
+            'User-Agent',
+            'Accept-Language',
+            'Authorization',
+            'X-MID',
+            'IG-U-SHBID',
+            'Ig-U-SHBTS',
+            'IG-U-DS-USER-ID',
+            'IG-U-RUR',
+            'IG-INTENDED-USER-ID',
+            'Content-Type',
+            'Content-Length',
+            'Accept-Encoding',
+            'X-FB-HTTP-Engine',
+            'X-FB-Client-IP',
+            'X-FB-Server-Cluster',
+            'Connection',
+        ];
+
+        $orderedHeaders = [];
+        foreach ($headersOrder as $key) {
+            if (isset($headers[$key])) {
+                if (is_array($headers[$key])) {
+                    $orderedHeaders[$key] = is_int($headers[$key][0]) ? strval($headers[$key][0]) : $headers[$key][0];
+                } else {
+                    $orderedHeaders[$key] = $headers[$key];
+                }
+            }
+        }
+
+        return $orderedHeaders;
     }
 
     /**

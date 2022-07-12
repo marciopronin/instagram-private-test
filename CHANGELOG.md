@@ -1,3 +1,15 @@
+# Stable release v20.7.0
+## Date: 12/07/2022
+
+### New features
+
+- **Client:** Add `_orderHeaders()`
+
+### Updates and fixes
+
+- **Client:** Update `api()`
+- **Request:** Update `_addDefaultHeaders()`
+
 # Stable release v20.6.0
 ## Date: 08/07/2022
 

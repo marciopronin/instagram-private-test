@@ -411,7 +411,7 @@ class Request
         if ($this->_defaultHeaders) {
             $this->_headers['X-FB-Connection-Type'] = ($this->_parent->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)';
             $this->_headers['X-IG-Connection-Type'] = ($this->_parent->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)';
-            $this->_headers['X-IG-Connection-Speed'] = $this->_parent->getConnectionSpeed();
+            //$this->_headers['X-IG-Connection-Speed'] = $this->_parent->getConnectionSpeed();
             $this->_headers['X-IG-Device-ID'] = $this->_parent->uuid;
             $this->_headers['X-IG-Family-Device-ID'] = $this->_parent->phone_id;
             $this->_headers['X-FB-HTTP-Engine'] = Constants::X_FB_HTTP_Engine;
@@ -440,7 +440,7 @@ class Request
                 $this->_headers['X-IG-Capabilities'] = Constants::X_IG_Capabilities;
                 $this->_headers['X-Bloks-Version-Id'] = Constants::BLOCK_VERSIONING_ID;
                 $this->_headers['X-Bloks-Is-Layout-RTL'] = 'false';
-                $this->_headers['X-Bloks-Is-Panorama-Enabled'] = 'true';
+                //$this->_headers['X-Bloks-Is-Panorama-Enabled'] = 'true';
                 if ($this->_parent->getNavChain() !== '') {
                     $this->_headers['X-IG-Nav-Chain'] = $this->_parent->getNavChain();
                 }

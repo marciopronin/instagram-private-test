@@ -40,11 +40,13 @@ catch(\Exception) {
     //pass
 }
 
+
 $ig->internal->fetchZeroRatingToken('token_expired', false);
 $launcherResponse = $ig->internal->getMobileConfig(true)->getHttpResponse();
 $ig->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
 $ig->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
 
+$ig->account->sendGoogleTokenUsers();
 $ig->account->getPrefillCandidates(['phone' => $phone]);
 
 $ig->event->sendFlowSteps('one_page_v2', 'reg_field_interacted', $waterfallId, $startTime, ['flow' => 'phone', 'field_name' => 'phone_field']);
@@ -130,7 +132,11 @@ $ig->event->sendFlowSteps('username', 'next_button_tapped', $waterfallId, $start
 $ig->event->sendFlowSteps('username', 'register_with_ci_option', $waterfallId, $startTime, ['flow' => 'phone']);
 
 $ig->internal->startNewUserFlow();
+$ig->account->checkUsername($username);
+
 $ig->internal->getOnBoardingSteps($waterfallId, 'phone');
+
+$ig->internal->startNewUserFlow();
 
 $ig->event->forceSendBatch();
 usleep(mt_rand(15000000, 3000000));
@@ -157,7 +163,7 @@ $ig->account->getAccountFamily();
 $ig->internal->getMobileConfig(false);
 $ig->event->sendZeroCarrierSignal();
 
-$ig->internal->getOnBoardingSteps($waterfallId, 'phone');
+$ig->internal->getOnBoardingSteps($waterfallId, 'phone', [], false, false);
 
 $feed = $this->timeline->getTimelineFeed(null, [
     'reason' => Constants::REASONS[0],

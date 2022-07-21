@@ -1,3 +1,17 @@
+# Stable release v20.8.0
+## Date: 22/07/2022
+
+### New features
+
+- **Account:** Added `sendGoogleTokenUsers()`
+
+### Updates and fixes
+
+- **Account:** Update `requestRegistrationSms()`
+- **Account:** Update `createValidated()`
+- **Internal:** Update `getOnBoardingSteps()`
+- **Internal:** Update `startNewUserFlow`
+
 # Stable release v20.7.1
 ## Date: 21/07/2022
 

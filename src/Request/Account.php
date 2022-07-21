@@ -149,7 +149,8 @@ class Account extends RequestCollection
             ->addPost('enc_password', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('verification_code', $smsCode)
             ->addPost('qs_stamp', '')
-            ->addPost('has_sms_consent', 'true');
+            ->addPost('has_sms_consent', 'true')
+            ->addPost('one_tap_opt_in', 'true');
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('suggestedUsername', '')
@@ -265,7 +266,7 @@ class Account extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->device_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('android_build_type', 'RELEASE')
+            ->addPost('android_build_type', 'release')
             ->addPost('guid', $this->ig->uuid)
             ->addPost('waterfall_id', $waterfallId)
             ->getResponse(new Response\SendSignupSmsCodeResponse());
@@ -1478,6 +1479,21 @@ class Account extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Send Google token users.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function sendGoogleTokenUsers()
+    {
+        return $this->ig->request('accounts/google_token_users/')
+            ->addPost('google_tokens', '[]')
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }

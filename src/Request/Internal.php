@@ -1907,7 +1907,6 @@ class Internal extends RequestCollection
     public function startNewUserFlow()
     {
         return $this->ig->request('consent/new_user_flow_begins/')
-            ->setSignedPost(false)
             ->setNeedsAuth(false)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->uuid)
@@ -1946,7 +1945,8 @@ class Internal extends RequestCollection
      * @param string $waterfallId UUIDv4.
      * @param string $regMethod   Registration method. 'email' or 'phone'.
      * @param array  $seenSteps   Seen steps.
-     * @param bool   $finish      Progress state has finished
+     * @param bool   $finish      Progress state has finished.
+     * @param bool   $tosAccepted ToS Accepted.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
@@ -1957,7 +1957,8 @@ class Internal extends RequestCollection
         $waterfallId,
         $regMethod = 'email',
         $seenSteps = [],
-        $finish = false)
+        $finish = false,
+        $tosAccepted = true)
     {
         if ($regMethod !== 'email' && $regMethod !== 'phone') {
             throw new \InvalidArgumentException(
@@ -1981,7 +1982,7 @@ class Internal extends RequestCollection
             ->addPost('device_id', $this->ig->uuid)
             ->addPost('waterfall_id', $waterfallId)
             ->addPost('reg_flow_taken', $regMethod)
-            ->addPost('tos_accepted', 'true')
+            ->addPost('tos_accepted', $tosAccepted)
             ->getResponse(new Response\GenericResponse());
     }
 

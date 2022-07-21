@@ -444,7 +444,7 @@ class Event extends RequestCollection
           ->setSignedPost(false)
           ->setNeedsAuth(false)
           ->addHeader('X-IG-Connection-Type', Constants::X_IG_Connection_Type)
-          ->addHeader('X-IG-Capabilities', Constants::IOS_X_IG_Capabilities)
+          ->addHeader('X-IG-Capabilities', Constants::X_IG_Capabilities)
           ->addHeader('X-IG-APP-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
           ->addHeader('X-FB-HTTP-Engine', Constants::X_FB_HTTP_Engine)
           ->addPost('access_token', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID.'|'.Constants::GRAPH_API_ACCESS_TOKEN)
@@ -506,7 +506,7 @@ class Event extends RequestCollection
                     ];
                     $request->addPost('compressed', 1)
                             ->addPost('multi_batch', 1)
-                            ->addPost('message', base64_encode(gzdeflate(json_encode($message))));
+                            ->addPost('message', base64_encode(gzdeflate(json_encode($message), -1, ZLIB_ENCODING_DEFLATE)));
                 } else {
                     $batches[0]['tier'] = 'micro_batch';
                     $batches[0]['sent_time'] = round(microtime(true), 3);
@@ -1467,78 +1467,81 @@ class Event extends RequestCollection
         array $options = [],
         $unlike = false)
     {
+        $extra = [
+            'c_pk_list'                                     => [],
+            'time'                                          => -1,
+            'elapsed_time_since_last_item'                  => -1,
+            'scans'                                         => -1,
+            'igtv_video_width'                              => -1,
+            'contact_button_option'                         => -1,
+            'timeAsPercent'                                 => -1,
+            'tap_y_position'                                => -1,
+            'a_pk_long'                                     => $item->getUser()->getPk(),
+            'ad_pause_duration'                             => -1,
+            'push_down_offset'                              => -1,
+            'context_sheet_duration'                        => -1,
+            'tap_x_position'                                => -1,
+            'current_play_time'                             => -1,
+            'ad_videos_consumed'                            => -1,
+            'aspect_ratio'                                  => -1,
+            'source_of_like'                                => isset($options['source_of_like']) ? $options['source_of_like'] : 'button',
+            'tagged_user_ids'                               => [$item->getUser()->getPk()],
+            'source_of_action'                              => $module,
+            'actual_insert_position'                        => -1,
+            'comment_compose_duration'                      => -1,
+            'is_demo'                                       => false,
+            'follow_status'                                 => isset($options['follow_status']) ? $options['follow_status'] : 'not_following',
+            'duration'                                      => -1,
+            'reel_viewer_gestures_nux_impression_duration'  => -1,
+            'is_acp_delivered'                              => false,
+            'rating_and_review_cta_info'                    => [
+                'review_count'                      => -1,
+                'is_iaw_banner_enabled'             => false,
+                'rating_and_review_display_format'  => -1,
+                'rating_score'                      => -1,
+                'display_text'                      => 'unavailable',
+                'rating_and_review_stars'           => [],
+            ],
+            'm_pk'                                          => $item->getId(),
+            'a_pk'                                          => $item->getUser()->getPk(),
+            'm_ts'                                          => (int) $item->getTakenAt(),
+            'm_t'                                           => $item->getMediaType(),
+            'tracking_token'                                => $item->getOrganicTrackingToken(),
+        ];
+
         if ($module === 'feed_contextual_profile' || $module === 'profile' || $module === 'feed_short_url' || $module === 'feed_contextual_location') {
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'tracking_token'            => $item->getOrganicTrackingToken(),
-                'session_id'                => $sessionId,
-                'source_of_action'          => $module,
-                'follow_status'             => isset($options['follow_status']) ? $options['follow_status'] : 'not_following',
-                'm_ix'                      => isset($options['m_ix']) ? $options['m_ix'] : 7,
-                'source_of_like'            => isset($options['source_of_like']) ? $options['source_of_like'] : 'button',
-                'entity_page_id'            => $item->getUser()->getPk(),
-                'entity_page_name'          => $item->getUser()->getUsername(),
-                'media_thumbnail_section'   => 'grid',
-                'is_acp_delivered'          => false,
-            ];
+            $extra['session_id'] = $sessionId;
+            $extra['m_ix'] = isset($options['m_ix']) ? $options['m_ix'] : 7;
+            $extra['entity_page_id'] = $item->getUser()->getPk();
+            $extra['entity_page_name'] = $item->getUser()->getUsername();
+            $extra['media_thumbnail_section'] = 'grid';
         } elseif ($module === 'feed_contextual_hashtag') {
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'tracking_token'            => $item->getOrganicTrackingToken(),
-                'source_of_action'          => $module,
-                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
-                'm_ix'                      => 30, // ?
-                'source_of_like'            => isset($options['source_of_like']) ? $options['source_of_like'] : 'button',
-                'hashtag_follow_status'     => isset($options['hashtag_follow']) ? 'following' : 'not_following',
-                'hashtag_feed_type'         => isset($options['feed_type']) ? $options['feed_type'] : 'top',
-                'tab_index'                 => isset($options['tab_index']) ? $options['tab_index'] : 0,
-                'hashtag_id'                => $hashtagId,
-                'hashtag_name'              => $hashtagName,
-            ];
+            $extra['m_ix'] = 30; // ?
+            $extra['hashtag_follow_status'] = isset($options['hashtag_follow']) ? 'following' : 'not_following';
+            $extra['hashtag_feed_type'] = isset($options['feed_type']) ? $options['feed_type'] : 'top';
+            $extra['tab_index'] = isset($options['tab_index']) ? $options['tab_index'] : 0;
+            $extra['hashtag_id'] = $hashtagId;
+            $extra['hashtag_name'] = $hashtagName;
         } elseif ($module === 'feed_timeline') {
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'tracking_token'            => $item->getOrganicTrackingToken(),
-                'session_id'                => $sessionId,
-                'source_of_action'          => $module,
-                'follow_status'             => 'following',
-                'm_ix'                      => isset($options['m_ix']) ? $options['m_ix'] : 2, // ?
-                'inventory_source'          => 'media_or_ad',
-                'source_of_like'            => isset($options['source_of_like']) ? $options['source_of_like'] : 'button',
-                'is_eof'                    => false,
-            ];
+            $extra['session_id'] = $sessionId;
+            $extra['follow_status'] = 'following';
+            $extra['m_ix'] = isset($options['m_ix']) ? $options['m_ix'] : 2; // ?
+            $extra['inventory_source'] = 'media_or_ad';
+            $extra['is_eof'] = false;
         } elseif ($module === 'feed_contextual_chain') {
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'tracking_token'            => $item->getOrganicTrackingToken(),
-                'source_of_action'          => $module,
-                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
-                'connection_id'             => '180',
-                'imp_logger_ver'            => 16,
-                'timespent'                 => $options['timespent'],
-                'avgViewPercent'            => 1,
-                'maxViewPercent'            => 1,
-                'chaining_position'         => $options['feed_position'],
-                'chaining_session_id'       => $options['chaining_session_id'],
-                'm_ix'                      => 0,
-                'topic_cluster_id'          => $options['topic_cluster_id'], // example: 'explore_all:0'
-                'topic_cluster_title'       => $options['topic_cluster_title'], // example: 'For You'
-                'topic_cluster_type'        => $options['topic_cluster_type'], // example: 'explore_all'
-                'topic_cluster_debug_info'	 => null,
-                'topic_cluster_session_id'	 => $options['topic_cluster_session_id'],
-            ];
+            $extra['connection_id'] = '180';
+            $extra['imp_logger_ver'] = 16;
+            $extra['timespent'] = $options['timespent'];
+            $extra['avgViewPercent'] = 1;
+            $extra['maxViewPercent'] = 1;
+            $extra['chaining_position'] = $options['feed_position'];
+            $extra['chaining_session_id'] = $options['chaining_session_id'];
+            $extra['m_ix'] = 0;
+            $extra['topic_cluster_id'] = $options['topic_cluster_id']; // example: 'explore_all:0'
+            $extra['topic_cluster_title'] = $options['topic_cluster_title']; // example: 'For You'
+            $extra['topic_cluster_type'] = $options['topic_cluster_type']; // example: 'explore_all'
+            $extra['topic_cluster_debug_info'] = null;
+            $extra['topic_cluster_session_id'] = $options['topic_cluster_session_id'];
         } else {
             throw new \InvalidArgumentException('Module not supported.');
         }
@@ -1980,24 +1983,57 @@ class Event extends RequestCollection
         $module,
         array $options = [])
     {
+        $extra = [
+            'c_pk_list'                         => [],
+            'm_pk'                              => $item->getId(),
+            'is_dark_mode'                      => 0,
+            'a_pk_long'                         => $item->getUser()->getPk(),
+            'm_t'                               => $item->getMediaType(),
+            'ad_pause_duration'                 => -1,
+            'time'                              => -1,
+            'elapsed_time_since_last_item'      => -1,
+            'push_down_offset'                  => -1,
+            'context_sheet_duration'            => -1,
+            'tap_x_position'                    => -1,
+            'current_play_time'                 => -1,
+            'delivery_flags'                    => 'n',
+            'ad_videos_consumed'                => -1,
+            'igtv_video_width'                  => -1,
+            'inventory_source'                  => 'media_or_ad',
+            'is_eof'                            => false,
+            'is_merlin_double_logging_enabled'  => false,
+            'tracking_token'                    => $item->getOrganicTrackingToken(),
+            'aspect_ratio'                      => -1,
+            'source_of_action'                  => $module,
+            'contact_button_option'             => -1,
+            'two_measurement_debugging_fields'  => [
+                'scroll_velocity'   => number_format(random_int(1e16, 9e16) / 1e19, 18, '.', ''),
+                'last_action'       => '',
+                'last_actions'      => '',
+            ],
+            'dark_mode_state'                   => -1,
+            'duration'                          => -1,
+            'is_acp_delivered'                  => false,
+            'tap_y_position'                    => -1,
+            'a_pk'                              => $item->getUser()->getPk(),
+            'rating_and_review_cta_info'        => [
+                'review_count'                      => -1,
+                'is_iaw_banner_enabled'             => false,
+                'rating_and_review_display_format'  => -1,
+                'rating_score'                      => -1,
+                'display_text'                      => 'unavailable',
+                'rating_and_review_stars'           => [],
+            ],
+            'm_ts'                              => (int) $item->getTakenAt(),
+        ];
+
         if ($module === 'profile' || $module === 'feed_short_url'
             || $module === 'feed_contextual_profile' || $module === 'feed_contextual_self_profile' || $module === 'feed_timeline' || $module === 'reel_follow_list') {
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'tracking_token'            => $item->getOrganicTrackingToken(),
-                'source_of_action'          => $module,
-                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
-                'm_ix'                      => 3, // ?
-                'imp_logger_ver'            => 16,
-                'is_app_backgrounded'       => 'false',
-                'nav_in_transit'            => 0,
-                'is_acp_delivered'          => false,
-                'is_dark_mode'              => 0,
-                'dark_mode_state'           => -1,
-            ];
+            $extra['follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['m_ix'] = 3; // ?
+            $extra['imp_logger_ver'] = 16;
+            $extra['is_app_backgrounded'] = 'false';
+            $extra['nav_in_transit'] = 0;
             if ($module === 'feed_short_url' || $module === 'feed_contextual_profile') {
                 $extra['media_thumbnail_section'] = 'grid';
                 $extra['entity_page_name'] = $item->getUser()->getUsername();
@@ -2010,43 +2046,27 @@ class Event extends RequestCollection
                 }
             }
         } elseif ($module === 'feed_contextual_hashtag') {
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'hashtag_id'                => $options['hashtag_id'],
-                'hashtag_name'              => $options['hashtag_name'],
-                'hashtag_follow_status'     => isset($options['following']) ? 'following' : 'not_following',
-                'hashtag_feed_type'         => isset($options['feed_type']) ? $options['feed_type'] : 'top',
-                'tab_index'                 => isset($options['tab_index']) ? $options['tab_index'] : 0,
-                'source_of_action'          => $module,
-                'session_id'                => $this->ig->client->getPigeonSession(),
-                'media_type'                => $item->getMediaType(),
-                'type'                      => 0,
-                'section'                   => 0,
-                'position'                  => isset($options['position']) ? $options['position'] : '["0","0"]',
-            ];
+            $extra['hashtag_id'] = $options['hashtag_id'];
+            $extra['hashtag_name'] = $options['hashtag_name'];
+            $extra['hashtag_follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['hashtag_feed_type'] = isset($options['feed_type']) ? $options['feed_type'] : 'top';
+            $extra['tab_index'] = isset($options['tab_index']) ? $options['tab_index'] : 0;
+            $extra['session_id'] = $this->ig->client->getPigeonSession();
+            $extra['media_type'] = $item->getMediaType();
+            $extra['type'] = 0;
+            $extra['section'] = 0;
+            $extra['position'] = isset($options['position']) ? $options['position'] : '["0","0"]';
         } elseif ($module === 'feed_contextual_location') {
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'tracking_token'            => $item->getOrganicTrackingToken(),
-                'source_of_action'          => $module,
-                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
-                'm_ix'                      => 3, // ?
-                'imp_logger_ver'            => 16,
-                'is_app_backgrounded'       => 'false',
-                'nav_in_transit'            => 0,
-                'entity_type'               => 'place',
-                'entity_name'               => $item->getUser()->getUsername(),
-                'entity_page_name'          => $item->getUser()->getUsername(),
-                'entity_page_id'            => $item->getUser()->getPk(),
-                'entity_id'                 => $item->getUser()->getPk(),
-                'is_acp_delivered'          => false,
-            ];
+            $extra['follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['m_ix'] = 3; // ?
+            $extra['imp_logger_ver'] = 16;
+            $extra['is_app_backgrounded'] = 'false';
+            $extra['nav_in_transit'] = 0;
+            $extra['entity_type'] = 'place';
+            $extra['entity_name'] = $item->getUser()->getUsername();
+            $extra['entity_page_name'] = $item->getUser()->getUsername();
+            $extra['entity_page_id'] = $item->getUser()->getPk();
+            $extra['entity_id'] = $item->getUser()->getPk();
         } elseif (
             $module === 'reel_feed_timeline'
             || $module === 'reel_profile'
@@ -2058,34 +2078,23 @@ class Event extends RequestCollection
             if (!isset($options['story_ranking_token']) && !isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
                 throw new \InvalidArgumentException('Required options were not set.');
             }
-            $extra = [
-                'm_pk'                          => $item->getId(),
-                'a_pk'                          => $item->getUser()->getPk(),
-                'm_ts'                          => (int) $item->getTakenAt(),
-                'm_t'                           => $item->getMediaType(),
-                'tracking_token'                => $item->getOrganicTrackingToken(),
-                'action'                        => 'webclick',
-                'source_of_action'              => 'reel_feed_timeline',
-                'follow_status'                 => isset($options['following']) ? $options['following'] : 'not_following',
-                'elapsed_time_since_last_item'  => -1,
-                'viewer_session_id'             => $options['viewer_session_id'],
-                'tray_session_id'               => $options['tray_session_id'],
-                'reel_id'                       => $item->getUser()->getPk(),
-                'is_pride_reel'                 => false,
-                'is_besties_reel'               => false,
-                'reel_position'                 => 0,
-                'reel_viewer_position'          => 0,
-                'reel_type'                     => 'story',
-                'reel_size'                     => isset($options['reel_size']) ? $options['reel_size'] : 0,
-                'tray_position'                 => 0,
-                'is_video_to_carousel'          => false,
-                'session_reel_counter'          => 1,
-                'time_elapsed'                  => 0,
-                'reel_start_position'           => 0,
-                'is_dark_mode'                  => 0,
-                'dark_mode_state'               => -1,
-                'is_acp_delivered'              => false,
-            ];
+            $extra['action'] = 'webclick';
+            $extra['follow_status'] = isset($options['following']) ? $options['following'] : 'not_following';
+            $extra['elapsed_time_since_last_item'] = -1;
+            $extra['viewer_session_id'] = $options['viewer_session_id'];
+            $extra['tray_session_id'] = $options['tray_session_id'];
+            $extra['reel_id'] = $item->getUser()->getPk();
+            $extra['is_pride_reel'] = false;
+            $extra['is_besties_reel'] = false;
+            $extra['reel_position'] = 0;
+            $extra['reel_viewer_position'] = 0;
+            $extra['reel_type'] = 'story';
+            $extra['reel_size'] = isset($options['reel_size']) ? $options['reel_size'] : 0;
+            $extra['tray_position'] = 0;
+            $extra['is_video_to_carousel'] = false;
+            $extra['session_reel_counter'] = 1;
+            $extra['time_elapsed'] = 0;
+            $extra['reel_start_position'] = 0;
 
             if (!empty($options['story_ranking_token'])) {
                 $extra['story_ranking_token'] = $options['story_ranking_token'];
@@ -2103,7 +2112,6 @@ class Event extends RequestCollection
         }
 
         $extra['nav_in_transit'] = 0;
-        $extra['last_navigation_module'] = $module;
         $extra['nav_chain'] = $this->ig->getNavChain();
 
         $event = $this->_addEventBody('instagram_organic_impression', $module, $extra);
@@ -2970,104 +2978,129 @@ class Event extends RequestCollection
         $rankingToken = null,
         array $options = [])
     {
+        $extra = [
+            'm_pk'                                      => $item->getId(),
+            'a_pk'                                      => $item->getUser()->getPk(),
+            'm_ts'                                      => (int) $item->getTakenAt(),
+            'm_t'                                       => $item->getMediaType(),
+            'tracking_token'                            => $item->getOrganicTrackingToken(),
+            'is_replay'                                 => null,
+            'thread_id'                                 => null,
+            'topic_cluster_debug_info'                  => null,
+            'topic_cluster_id'                          => null,
+            'topic_cluster_title'                       => null,
+            'topic_cluster_type'                        => null,
+            'is_acp_delivered'                          => false,
+            'elapsed_time_since_last_item'              => -1,
+            'is_highlights_sourced'                     => false,
+            'session_id'                                => null,
+            'feed_request_id'                           => null,
+            'entity_id'                                 => null,
+            'entity_name'                               => null,
+            'is_igtv'                                   => false,
+            'is_dark_mode'                              => 0,
+            'audience'                                  => null,
+            'tab_index'                                 => null,
+            'collection_id'                             => null,
+            'collection_name'                           => null,
+            'nav_chain'                                 => $this->ig->getNavChain(),
+            'is_live_streaming'                         => null,
+            'is_live_questions'                         => null,
+            'is_influencer'                             => null,
+            'effect_id'                                 => null,
+            'media_face_effect_id'                      => null,
+            'ranking_info_token'                        => null,
+            'reply_type'                                => null,
+            'guest_id'                                  => null,
+            'top_liker_count'                           => null,
+            'top_followers_count'                       => null,
+            'top_likers_count'                          => null,
+            'dr_ad_type'                                => null,
+            'is_besties_reel'                           => null,
+            'search_session_id'                         => null,
+            'is_programmatic_scroll'                    => null,
+            'is_besties_media'                          => null,
+            'impression_token'                          => null,
+            'media_author_id'                           => null,
+            'media_type'                                => $item->getMediaType(),
+            'is_reshare'                                => null,
+            'ad_position_from_server'                   => null,
+            'entity_page_type'                          => null,
+            'min_consumed_media_gap_to_previous_ad'     => null,
+            'min_consumed_media_gap_to_previous_netego' => null,
+            'min_consumed_reel_gap_to_previous_ad'      => null,
+            'min_consumed_reel_gap_to_previous_netego'  => null,
+            'explore_topic_session_id'                  => null,
+            'is_pride_media'                            => null,
+            'is_pride_reel'                             => null,
+            'algorithm'                                 => null,
+        ];
+
         if ($module === 'feed_contextual_profile') {
             $event = 'instagram_organic_viewed_impression';
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'tracking_token'            => $item->getOrganicTrackingToken(),
-                'source_of_action'          => $module,
-                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
-                'm_ix'                      => 17, // ?
-                'imp_logger_ver'            => 21,
-                'media_thumbnail_section'   => 'grid',
-                'entity_page_name'          => $item->getUser()->getUsername(),
-                'entity_page_id'            => $item->getUser()->getPk(),
-            ];
+            $extra['source_of_action'] = $module;
+            $extra['follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['m_ix'] = 17; // ?
+            $extra['imp_logger_ver'] = 21;
+            $extra['media_thumbnail_section'] = 'grid';
+            $extra['entity_page_name'] = $item->getUser()->getUsername();
+            $extra['entity_page_id'] = $item->getUser()->getPk();
         } elseif ($module === 'reel_feed_timeline' || $module === 'reel_profile' || $module === 'reel_follow_list' ||
                   $module === 'reel_liker_list' || $module === 'reel_hashtag_feed' || $module === 'reel_location_feed' || $module === 'reel_comment') {
             $event = 'instagram_organic_reel_viewed_impression';
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'tracking_token'            => $item->getOrganicTrackingToken(),
-                'action'					               => 'webclick',
-                'source_of_action'          => $module,
-                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
-                'viewer_session_id'         => $viewerSessionId,
-                'tray_session_id'           => $traySessionId,
-                'reel_id'                   => $item->getId(),
-                'is_pride_reel'             => false,
-                'is_besties_reel'           => false,
-                'reel_position'             => 0,
-                'reel_viewer_position'      => 0,
-                'reel_type'                 => 'story',
-                'reel_size'                 => 1,
-                'tray_position'             => 1,
-                'session_reel_counter'      => 1,
-                'time_elapsed'              => 0,
-                'media_time_elapsed'        => 0,
-                'media_time_remaining'      => mt_rand(1, 2),
-                'media_dwell_time'          => mt_rand(5, 6) + mt_rand(100, 900) * 0.001,
-                'media_time_paused'         => 0,
-                'media_time_to_load'        => mt_rand(35, 67) * 0.01,
-                'reel_start_position'       => 0,
-                'story_ranking_token'       => $rankingToken,
-            ];
+            $extra['action'] = null;
+            $extra['source_of_action'] = $module;
+            $extra['follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['viewer_session_id'] = $viewerSessionId;
+            $extra['tray_session_id'] = $traySessionId;
+            $extra['reel_id'] = $item->getId();
+            $extra['is_pride_reel'] = false;
+            $extra['is_besties_reel'] = false;
+            $extra['reel_position'] = 0;
+            $extra['reel_viewer_position'] = 0;
+            $extra['reel_type'] = 'story';
+            $extra['reel_size'] = 1;
+            $extra['tray_position'] = 1;
+            $extra['session_reel_counter'] = 1;
+            $extra['time_elapsed'] = mt_rand(5, 6) + mt_rand(100, 900) * 0.001;
+            $extra['media_time_elapsed'] = -1;
+            $extra['reel_start_position'] = 0;
+            $extra['story_ranking_token'] = $rankingToken;
         } elseif ($module === 'feed_contextual_hashtag') {
             $event = 'instagram_organic_viewed_impression';
-            $extra = [
-                'id'                        => $item->getId(),
-                'm_pk'                      => $item->getId(),
-                'hashtag_id'                => $options['hashtag_id'],
-                'hashtag_name'              => $options['hashtag_name'],
-                'hashtag_follow_status'     => isset($options['following']) ? 'following' : 'not_following',
-                'hashtag_feed_type'         => isset($options['feed_type']) ? $options['feed_type'] : 'top',
-                'tab_index'                 => isset($options['tab_index']) ? $options['tab_index'] : 0,
-                'source_of_action'          => $module,
-                'session_id'                => $this->ig->client->getPigeonSession(),
-                'media_type'                => $item->getMediaType(),
-                'type'                      => 0,
-                'section'                   => 0,
-                'position'                  => isset($options['position']) ? $options['position'] : '["0","0"]',
-            ];
+            $extra['id'] = $item->getId();
+            $extra['hashtag_id'] = $options['hashtag_id'];
+            $extra['hashtag_name'] = $options['hashtag_name'];
+            $extra['hashtag_follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['hashtag_feed_type'] = isset($options['feed_type']) ? $options['feed_type'] : 'top';
+            $extra['tab_index'] = isset($options['tab_index']) ? $options['tab_index'] : 0;
+            $extra['source_of_action'] = $module;
+            $extra['session_id'] = $this->ig->client->getPigeonSession();
+            $extra['type'] = 0;
+            $extra['section'] = 0;
+            $extra['position'] = isset($options['position']) ? $options['position'] : '["0","0"]';
         } elseif ($module === 'feed_timeline') {
             $event = 'instagram_organic_viewed_impression';
-            $extra = [
-                'm_pk'                      => $item->getId(),
-                'a_pk'                      => $item->getUser()->getPk(),
-                'm_ts'                      => (int) $item->getTakenAt(),
-                'm_t'                       => $item->getMediaType(),
-                'tracking_token'            => $item->getOrganicTrackingToken(),
-                'source_of_action'          => $module,
-                'follow_status'             => 'following',
-                'inventory_source'          => 'media_or_ad',
-                'm_ix'                      => 0,
-                'imp_logger_ver'            => 16,
-                'is_eof'                    => false,
-                'delivery_flags'            => 'n,c',
-                'session_id'                => $this->ig->client->getPigeonSession(),
-            ];
+            $extra['source_of_action'] = $module;
+            $extra['follow_status'] = 'following';
+            $extra['inventory_source'] = 'media_or_ad';
+            $extra['m_ix'] = 0;
+            $extra['imp_logger_ver'] = 16;
+            $extra['is_eof'] = false;
+            $extra['delivery_flags'] = 'n,c';
+            $extra['session_id'] = $this->ig->client->getPigeonSession();
             if (isset($options['feed_request_id'])) {
                 $extra['feed_request_id'] = $options['feed_request_id'];
             }
         } elseif ($module === 'feed_short_url') {
             $event = 'instagram_organic_viewed_impression';
-            $extra = [
-                'id'                        => $item->getId(),
-                'm_pk'                      => $item->getId(),
-                'position'                  => isset($options['position']) ? $options['position'] : '["0", "0"]',
-                'media_type'                => $item->getMediaType(),
-                'entity_type'               => 'user',
-                'entity_name'               => $item->getUser()->getUsername(),
-                'entity_page_name'          => $item->getUser()->getUsername(),
-                'entity_page_id'            => $item->getUser()->getPk(),
-                'media_thumbnail_section'   => 'grid',
-            ];
+            $extra['id'] = $item->getId();
+            $extra['position'] = isset($options['position']) ? $options['position'] : '["0", "0"]';
+            $extra['entity_type'] = 'user';
+            $extra['entity_name'] = $item->getUser()->getUsername();
+            $extra['entity_page_name'] = $item->getUser()->getUsername();
+            $extra['entity_page_id'] = $item->getUser()->getPk();
+            $extra['media_thumbnail_section'] = 'grid';
         } else {
             throw new \InvalidArgumentException('Module not supported.');
         }
@@ -3079,13 +3112,6 @@ class Event extends RequestCollection
             $extra['carousel_m_t'] = isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getMediaType() : $item->getCarouselMedia()[0]->getMediaType();
             $extra['carousel_size'] = $item->getCarouselMediaCount();
         }
-
-        $extra['is_acp_delivered'] = false;
-        $extra['is_dark_mode'] = 0;
-        $extra['dark_mode_state'] = -1;
-        $extra['nav_in_transit'] = 0;
-        $extra['last_navigation_module'] = $module;
-        $extra['nav_chain'] = $this->ig->getNavChain();
 
         $event = $this->_addEventBody($event, $module, $extra);
         $this->_addEventData($event);
@@ -6804,6 +6830,8 @@ class Event extends RequestCollection
             'is_carousel'                       => isset($options['is_carousel']) ? $options['is_carousel'] : false,
             'did_fallback_render'               => isset($options['did_fallback_render']) ? $options['did_fallback_render'] : false,
             'is_ad'                             => false,
+            'target_scan'                       => 8,
+            'scan_number'                       => -1,
             'load_source'                       => 'network',
             'image_size_kb'                     => $options['image_size_kb'],
             'load_time_ms'                      => isset($options['load_time']) ? $options['load_time'] : 0,

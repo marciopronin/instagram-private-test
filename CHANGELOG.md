@@ -1,3 +1,11 @@
+# Stable release v20.7.1
+## Date: 21/07/2022
+
+### Updates and fixes
+
+- **Event:** Update `_sendBatchEvents()`. Update ASAP if you are using event system.
+- **Event:** Refactored and updated events with missing data. WIP.
+
 # Stable release v20.7.0
 ## Date: 12/07/2022
 

@@ -159,6 +159,8 @@ $ig->event->sendFlowSteps('done', 'register_account_request_submitted', $waterfa
 $ig->event->sendFlowSteps('done', 'register_account_created', $waterfallId, $startTime, ['flow' => 'phone', 'instagram_id' => $response->getUser()->getPk()]);
 $ig->event->forceSendBatch();
 
+$ig->people->linkAddressBook([]);
+
 $ig->account->getAccountFamily();
 $ig->internal->getMobileConfig(false);
 $ig->event->sendZeroCarrierSignal();

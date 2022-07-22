@@ -792,13 +792,11 @@ class People extends RequestCollection
         return $this->ig->request('address_book/link/')
             ->setIsBodyCompressed(true)
             ->setSignedPost(false)
-            ->addParam('include', 'extra_display_name,thumbnails')
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('contacts', json_encode($contacts))
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('module', 'find_friends_contacts')
-            ->addPost('source', 'ci')
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\LinkAddressBookResponse());
     }

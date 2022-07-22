@@ -1,3 +1,10 @@
+# Stable release v20.8.1
+## Date: 22/07/2022
+
+### Updates and fixes
+
+- **People:** Update `linkAddressBook()`
+
 # Stable release v20.8.0
 ## Date: 22/07/2022
 

@@ -3637,6 +3637,18 @@ class Event extends RequestCollection
         }
 
         $navigation = [
+            '<init>'    => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'landing_facebook',
+                ],
+            ],
+            'landing_facebook'    => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'email_or_phone',
+                ],
+            ],
             'one_page_registration' => [
                 [
                     'clickpoint'    => 'button',
@@ -3647,6 +3659,22 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'username_sign_up',
+                ],
+            ],
+            'username_sign_up'  => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'username_sign_up',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'register_flow_add_profile_photo',
+                ],
+            ],
+            'register_flow_add_profile_photo'  => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'discover_people_nux',
                 ],
             ],
             'feed_short_url'  => [
@@ -4732,8 +4760,18 @@ class Event extends RequestCollection
                     'clickpoint'    => 'button',
                     'dest_module'   => 'email_verify',
                 ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'phone_confirmation',
+                ],
             ],
             'email_verify' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'one_page_registration',
+                ],
+            ],
+            'phone_confirmation' => [
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'one_page_registration',

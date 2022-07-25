@@ -46,7 +46,11 @@ $launcherResponse = $ig->internal->getMobileConfig(true)->getHttpResponse();
 $ig->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
 $ig->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
 
+$ig->event->sendNavigation('button', '<init>', 'landing_facebook');
+
 $ig->account->sendGoogleTokenUsers();
+$ig->event->sendNavigation('button', 'landing_facebook', 'email_or_phone');
+
 $ig->account->getPrefillCandidates(['phone' => $phone]);
 
 $ig->event->sendFlowSteps('one_page_v2', 'reg_field_interacted', $waterfallId, $startTime, ['flow' => 'phone', 'field_name' => 'phone_field']);
@@ -62,9 +66,11 @@ $tos = $ig->account->requestRegistrationSms($phone, $waterfallId, $username)->ge
 echo 'SMS Code: ';
 $smsCode = trim(fgets(STDIN));
 
+$ig->event->sendNavigation('button', 'email_or_phone', 'phone_confirmation');
 $ig->account->validateSignupSmsCode($smsCode, $phone, $waterfallId);
 
 $ig->internal->fetchHeaders();
+$ig->event->sendNavigation('button', 'phone_confirmation', 'one_page_registration');
 
 $parts = str_split($firstName, 4);
 $queryName = '';
@@ -113,6 +119,8 @@ if ($response->getEligibleToRegister() !== true) {
     exit();
 }
 
+$ig->event->sendNavigation('button', 'add_birthday', 'username_sign_up');
+
 $ig->event->sendFlowSteps('username', 'step_view_loaded', $waterfallId, $startTime, 
     [
         'is_facebook_app_installed' => false,
@@ -122,6 +130,7 @@ $ig->event->sendFlowSteps('username', 'step_view_loaded', $waterfallId, $startTi
         'flow'                      => 'phone'
     ]
 );
+
 
 $ig->event->sendFlowSteps('username', 'step_view_loaded', $waterfallId, $startTime, ['flow' => 'phone']);
 $ig->event->sendNavigation('button', 'add_birthday', 'username_sign_up');
@@ -137,6 +146,7 @@ $ig->account->checkUsername($username);
 $ig->internal->getOnBoardingSteps($waterfallId, 'phone');
 
 $ig->internal->startNewUserFlow();
+$ig->event->sendNavigation('button', 'username_sign_up', 'username_sign_up');
 
 $ig->event->forceSendBatch();
 usleep(mt_rand(15000000, 3000000));
@@ -160,90 +170,55 @@ $ig->event->sendFlowSteps('done', 'register_account_created', $waterfallId, $sta
 $ig->event->forceSendBatch();
 
 $ig->people->linkAddressBook([]);
-
 $ig->account->getAccountFamily();
+
+$ig->internal->sendGraph('18293997048434484603993202463', [
+    'input' => [
+        'log_only'  => true,
+        'events'    => [
+            'no_advertisement_id'   => false,
+            'event_name'            => 'LOGIN',
+            'adid'                  => $ig->advertising_id
+        ]
+    ]], 'ReportAttributionEventsMutation', false);
+
+$ig->internal->newAccountNuxSeen($waterfallId);
+
+$ig->internal->getOnBoardingSteps($waterfallId, 'phone', []);
+$ig->account->setContactPointPrefill('auto_confirmation', false);
+$ig->internal->sendPrivacyConsentPromptAction();
+
+$ig->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', false);
+$ig->internal->sendGraph('18293997048434484603993202463', [
+    'input' => [
+        'log_only'  => true,
+        'events'    => [
+            'no_advertisement_id'   => false,
+            'event_name'            => 'REGISTRATION',
+            'adid'                  => $ig->advertising_id
+        ]
+    ]], 'ReportAttributionEventsMutation', false);
+
 $ig->internal->getMobileConfig(false);
+$ig->internal->getLoomFetchConfig();
+$ig->internal->sendPrivacyConsentPromptAction(true);
+
 $ig->event->sendZeroCarrierSignal();
 
 $ig->internal->getOnBoardingSteps($waterfallId, 'phone', [], false, false);
 
+/*
 $feed = $this->timeline->getTimelineFeed(null, [
     'reason' => Constants::REASONS[0],
 ]);
+*/
+
+$ig->event->sendNavigation('button', 'username_sign_up', 'register_flow_add_profile_photo');
+$ig->event->sendNavigation('button', 'register_flow_add_profile_photo', 'discover_people_nux');
 
 $suggestedList = json_decode($ig->discover->getAyml('explore_people', null, true)->getMaxId());
 
 $ig->people->getFriendships($suggestedList);
-
-$userToFollow = array_rand($suggestedList);
-$ig->event->sendFollowButtonTapped($userToFollow, 'discover_people_nux',
-    [
-        [
-            'module'        => 'username_sign_up',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'username_sign_up',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'register_flow_add_profile_photo',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'username_sign_up',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'add_birthday',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'one_page_registration',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'phone_confirmation',
-            'click_point'   => 'button',
-        ],
-    ]
-);
-$ig->people->follow($userToFollow);
-$ig->event->sendProfileAction('follow', $userToFollow,
-    [
-        [
-            'module'        => 'username_sign_up',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'username_sign_up',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'register_flow_add_profile_photo',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'username_sign_up',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'add_birthday',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'one_page_registration',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'phone_confirmation',
-            'click_point'   => 'button',
-        ],
-    ]
-);
-
-$rankToken = \InstagramAPI\Signatures::generateUUID();
-$ig->event->sendSearchFollowButtonClicked($userToFollow, 'discover_people_nux', $rankToken);
 
 $seenSteps = [ 
     [
@@ -299,6 +274,12 @@ $seenSteps = [
         'value'     => 1
     ]
 ];
-$ig->internal->getOnBoardingSteps($waterfallId, 'phone', $seenSteps, true);
 
-$ig->sendLoginFlow();
+$ig->internal->sendGraph('45541135218358940417711832437', [
+    'input' => [
+        'app_scoped_id'     => $this->ig->uuid,
+        'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID
+        'family_device_id'  => $this->ig->phone_id,
+    ]], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
+
+$ig->internal->getOnBoardingSteps($waterfallId, 'phone', $seenSteps, true);

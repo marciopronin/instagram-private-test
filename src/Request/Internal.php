@@ -1987,6 +1987,67 @@ class Internal extends RequestCollection
     }
 
     /**
+     * New account nux seen.
+     *
+     * @param string $waterfallId Waterfall ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function newAccountNuxSeen(
+        $waterfallId)
+    {
+        return $this->ig->request('nux/new_account_nux_seen/')
+            ->addPost('is_fb4a_installed', 'false')
+            ->addPost('phone_id', $this->ig->phone_id)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('guid', $this->ig->uuid)
+            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('waterfall_id', $waterfallId)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Send privacy consent prompt action.
+     *
+     * @param bool $form Form.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function sendPrivacyConsentPromptAction(
+        $form = false)
+    {
+        $request = $this->ig->request('bloks/apps/com.bloks.www.privacy.consent.prompt.action/')
+            ->setSignedPost(false)
+
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID);
+
+        if ($form === false) {
+            $request->addPost('surface', 'instagram_android')
+                    ->addPost('flow_name', 'new_users_meta_flow')
+                    ->addPost('source', 'source');
+        } else {
+            $request->addPost('params', json_encode([
+                'server_params' => [
+                    '_w_s228763'    => '',
+                    'flow_name'     => 'new_users_meta_flow',
+                    'source'        => 'source',
+                ], ]));
+        }
+
+        return $request->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Starts new user flow when registering with phone number.
      *
      * @param string $email       Email for registration.

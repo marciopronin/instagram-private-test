@@ -1,3 +1,17 @@
+# Stable release v20.9.0
+## Date: 26/07/2022
+
+### New features
+
+- **Internal:** Add `sendPrivacyConsentPromptAction()`
+- **Internal:** Add `newAccountNuxSeen()`
+
+### Updates and fixes
+
+- **Account:** Update `setContactPointPrefill()`
+- **Event:** Update `_validateNavigationPath()`
+- **Internal:** Update `getOnBoardingSteps()`
+
 # Stable release v20.8.1
 ## Date: 22/07/2022
 

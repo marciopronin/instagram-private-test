@@ -1321,22 +1321,27 @@ class Account extends RequestCollection
     /**
      * Set contact point prefill.
      *
-     * @param string $usage Either "prefill" or "auto_confirmation".
+     * @param string $usage    Either "prefill" or "auto_confirmation".
+     * @param bool   $prelogin Pre-login state.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\GenericResponse
      */
     public function setContactPointPrefill(
-        $usage)
+        $usage,
+        $prelogin = true)
     {
         $request = $this->ig->request('accounts/contact_point_prefill/')
-            ->setNeedsAuth(false)
-            ->addPost('phone_id', $this->ig->phone_id);
+            ->addPost('usage', $usage);
 
-        if ($this->ig->getIsAndroid()) {
-            $request//->addPost('_csrftoken', $this->ig->client->getToken())
-                    ->addPost('usage', $usage);
+        if ($prelogin === true) {
+            $request->setNeedsAuth(false)
+                    ->addPost('phone_id', $this->ig->phone_id);
+        } else {
+            $request->addPost('_uid', $this->ig->account_id)
+                    ->addPost('device_id', $this->ig->device_id)
+                    ->addPost('_uuid', $this->ig->uuid);
         }
 
         return $request->getResponse(new Response\GenericResponse());

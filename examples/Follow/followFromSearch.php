@@ -119,30 +119,7 @@ try {
 
     usleep(mt_rand(1500000, 2500000));
     $ig->event->sendProfileView($userId);
-    $ig->event->sendFollowButtonTapped($userId, 'profile',
-        [
-            [
-                'module'        => 'blended_search',
-                'click_point'   => 'search_result',
-            ],
-            [
-                'module'        => 'blended_search',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'explore_popular',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'explore_popular',
-                'click_point'   => 'explore_topic_load',
-            ],
-            [
-                'module'        => 'feed_timeline',
-                'click_point'   => 'main_search',
-            ],
-        ]
-    );
+    $ig->event->sendFollowButtonTapped($userId, 'profile', 'blended_search');
     $ig->people->follow($userId);
     $ig->event->sendProfileAction('follow', $userId,
         [

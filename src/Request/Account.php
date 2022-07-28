@@ -641,16 +641,18 @@ class Account extends RequestCollection
                   : $oldUsername; // Keep current name.
 
         return $this->ig->request('accounts/edit_profile/')
-            ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('primary_profile_link_type', '0')
             ->addPost('external_url', $url)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('phone_number', $phone)
             ->addPost('username', $username)
+            ->addPost('show_fb_link_on_profile', 'false')
             ->addPost('first_name', $name)
-            ->addPost('biography', $biography)
-            ->addPost('email', $email)
+            ->addPost('_uid', $this->ig->account_id)
             ->addPost('device_id', $this->ig->device_id)
+            ->addPost('biography', $biography)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('email', $email)
             ->getResponse(new Response\UserInfoResponse());
     }
 
@@ -1194,18 +1196,29 @@ class Account extends RequestCollection
     /**
      * Tell Instagram to send you a message to verify your email address.
      *
+     * @param string $email If the email is already set, it is not required.
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\SendConfirmEmailResponse
      */
-    public function sendConfirmEmail()
+    public function sendConfirmEmail(
+        $email = null)
     {
-        return $this->ig->request('accounts/send_confirm_email/')
-            ->addPost('_uuid', $this->ig->uuid)
+        $request = $this->ig->request('accounts/send_confirm_email/')
+            ->addPost('phone_id', $this->ig->phone_id)
+            ->addPost('send_source', 'personal_information')
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('send_source', 'edit_profile')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->getResponse(new Response\SendConfirmEmailResponse());
+            ->addPost('guid', $this->ig->uuid)
+            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('_uuid', $this->ig->uuid);
+        //->addPost('_csrftoken', $this->ig->client->getToken())
+
+        if ($email !== null) {
+            $request->addPost('email', $email);
+        }
+
+        return $request->getResponse(new Response\SendConfirmEmailResponse());
     }
 
     /**

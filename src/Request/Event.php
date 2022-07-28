@@ -1741,12 +1741,20 @@ class Event extends RequestCollection
             case 'follow':
                 $followStatus = 'not_following';
                 $clickpoint = isset($options['click_point']) ? $options['click_point'] : 'button_tray';
+                $extra['media_id_attribution'] = isset($options['media_id_attribution']) ? $options['media_id_attribution'] : null;
+                $extra['media_tracking_token_attribution'] = isset($options['media_tracking_token_attribution']) ? $options['media_tracking_token_attribution'] : null;
+                $extra['hashtag_id'] = null;
+                $extra['hashtag_name'] = null;
                 $module = 'profile';
                 break;
             case 'unfollow':
                 $followStatus = 'following';
                 $clickpoint = isset($options['click_point']) ? $options['click_point'] : 'button_tray';
                 $module = 'profile';
+                $extra['media_id_attribution'] = isset($options['media_id_attribution']) ? $options['media_id_attribution'] : null;
+                $extra['media_tracking_token_attribution'] = isset($options['media_tracking_token_attribution']) ? $options['media_tracking_token_attribution'] : null;
+                $extra['hashtag_id'] = null;
+                $extra['hashtag_name'] = null;
                 break;
             case 'edit_profile':
                 $followStatus = 'self';
@@ -1790,10 +1798,10 @@ class Event extends RequestCollection
                 $clickpoint = 'button_tray';
                 $module = 'profile';
                 $followStatus = 'following';
-                if (isset($options['media_id_attribution']) && isset($options['media_tracking_token_attribution'])) {
-                    $extra['media_id_attribution'] = $options['media_id_attribution'];
-                    $extra['media_tracking_token_attribution'] = $options['media_tracking_token_attribution'];
-                }
+                $extra['media_id_attribution'] = isset($options['media_id_attribution']) ? $options['media_id_attribution'] : null;
+                $extra['media_tracking_token_attribution'] = isset($options['media_tracking_token_attribution']) ? $options['media_tracking_token_attribution'] : null;
+                $extra['hashtag_id'] = null;
+                $extra['hashtag_name'] = null;
                 break;
             case 'turn_on_post_notifications':
             case 'turn_off_post_notifications':
@@ -6094,27 +6102,22 @@ class Event extends RequestCollection
     public function sendFollowButtonTapped(
         $userId,
         $module,
-        $navstack,
         $entryModule = null,
         $unfollow = false)
     {
         $extra = [
             'request_type'                    => ($unfollow === false) ? 'create' : 'destroy',
-            'nav_events'                      => json_encode($navstack),
-            'user_id'                         => $userId,
-            'follow_status'                   => ($unfollow === false) ? 'following' : 'not_following',
+            'm_pk'                            => $userId,
             'entity_id'                       => $userId,
             'entity_type'                     => 'user',
             'entity_follow_status'            => ($unfollow === false) ? 'following' : 'not_following',
-            'nav_stack_depth'                 => count($navstack),
-            'nav_stack'                       => $navstack,
+            'nav_chain'                       => $$this->ig->getNavChain(),
         ];
 
         if ($entryModule === 'blended_search') {
             $extra['click_point'] = 'user_profile_header';
             $extra['entry_trigger'] = 'search_navigate_to_user';
-            $extra['entry_module'] = 'blended_search';
-            $extra['view_type'] = 'vertical';
+            $extra['entry_module'] = 'search';
         }
 
         $event = $this->_addEventBody('follow_button_tapped', $module, $extra);

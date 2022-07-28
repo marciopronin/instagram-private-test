@@ -1,3 +1,13 @@
+# Stable release v20.9.1
+## Date: 29/07/2022
+
+### Updates and fixes
+
+- **Account:** Update `sendConfirmEmail()`
+- **Account:** Update `editProfile()`
+- **Event:** Update `sendFollowButtonTapped()`
+- **Event:** Update `sendProfileAction()`
+
 # Stable release v20.9.0
 ## Date: 26/07/2022
 

@@ -4731,6 +4731,20 @@ class Event extends RequestCollection
                     'clickpoint'    => 'inbox',
                     'dest_module'   => 'direct_thread',
                 ],
+                [
+                    'clickpoint'    => 'inbox_new_message',
+                    'dest_module'   => 'direct_thread',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'direct_recipient_picker',
+                ],
+            ],
+            'direct_recipient_picker' => [
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'direct_inbox',
+                ],
             ],
             'direct_thread_toggle' => [
                 [

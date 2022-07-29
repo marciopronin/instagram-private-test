@@ -1553,7 +1553,8 @@ class Direct extends RequestCollection
                 } else {
                     $request->addPost('mentioned_users_id', $options['mentioned_users_id']);
                 }
-                $request->addPost('text', $options['text']);
+                $request->addPost('text', $options['text'])
+                        ->addPost('is_x_transport_forward', 'false');
                 break;
             case 'like':
                 $request = $this->ig->request('direct_v2/threads/broadcast/like/');

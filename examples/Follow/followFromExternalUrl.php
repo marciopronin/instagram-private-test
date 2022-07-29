@@ -46,7 +46,6 @@ try {
     }
 
     $ig->event->sendNavigation('button', 'feed_short_url', 'profile');
-    $ig->event->sendProfileView($userId);
     $ig->people->getFriendship($userId);
     $ig->highlight->getUserFeed($userId);
     $ig->people->getInfoById($userId);
@@ -54,18 +53,20 @@ try {
     $userFeed = $ig->timeline->getUserFeed($userId);
     $items = $userFeed->getItems();
 
-    foreach ($items as $item) {
-        $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
-    }
+    $items = array_slice($items, 0, 6);
+    $ig->event->preparePerfWithImpressions($items, 'profile');
 
-    $ig->event->sendFollowButtonTapped($userId, 'profile',
+    $traySession = \InstagramAPI\Signatures::generateUUID();
+    $ig->event->reelTrayRefresh(
         [
-            [
-                'module'        => 'feed_short_url',
-                'click_point'   => 'button',
-            ],
-        ]
+            'tray_session_id'   => $traySession,
+            'tray_refresh_time' => number_format(mt_rand(100, 500) / 1000, 3),
+        ],
+        'network'
     );
+
+    $ig->event->sendProfileView($userId);
+    $ig->event->sendFollowButtonTapped($userId, 'profile');
     $ig->people->follow($userId);
 
     $ig->event->sendProfileAction('follow', $userId,
@@ -76,6 +77,20 @@ try {
             ],
         ]
     );
+
+    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $ig->event->sendSearchFollowButtonClicked($userId, 'profile', $rankToken);
+
+    try {
+        $chainingUsers = $ig->discover->getChainingUsers($userId, 'profile')->getUsers();
+
+        foreach ($chainingUsers as $user) {
+            $ig->event->sendSimilarUserImpression($userId, $user->getPk());
+        }
+    } catch (\Exception $e) {
+        // pass. No chaining.
+    }
+
     $ig->event->updateAppState('background');
     $ig->event->forceSendBatch();
 } catch (\Exception $e) {

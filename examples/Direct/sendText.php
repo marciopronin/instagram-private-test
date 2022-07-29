@@ -42,14 +42,18 @@ try {
         }
     }
 
+    $ig->event->sendNavigation('button', 'direct_inbox', 'direct_recipient_picker');
+
     $ig->event->sendDirectUserSearchPicker($query);
     $ig->event->sendDirectUserSearchPicker($query);
     $ig->event->sendDirectUserSearchPicker($query);
 
+    $ig->event->sendNavigation('back', 'direct_recipient_picker', 'direct_inbox');
+
     $groupSession = \InstagramAPI\Signatures::generateUUID();
     $ig->event->sendDirectUserSearchSelection($userId, $position, $groupSession);
     $ig->event->sendGroupCreation($groupSession);
-    $ig->event->sendNavigation('button', 'direct_inbox', 'direct_thread', null, null, ['user_id' => $userId]);
+    $ig->event->sendNavigation('inbox_new_message', 'direct_inbox', 'direct_thread', null, null, ['user_id' => $userId]);
     $ig->event->sendEnterDirectThread(null, $sessionId);
 
     $recipients = [

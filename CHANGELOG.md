@@ -1,3 +1,16 @@
+# Stable release v20.9.5
+## Date: 30/07/2022
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+- **Direct:** Update `_sendDirectItem()`
+
+### Examples
+
+- **Example:** Update sendText
+- **Example:** update followFromExternalUrl
+
 # Stable release v20.9.4
 ## Date: 29/07/2022
 

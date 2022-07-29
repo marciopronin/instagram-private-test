@@ -290,6 +290,7 @@ class Event extends RequestCollection
             return $this->ig->getNavChain();
         }
 
+        $aux = $this->ig->getNavChainStep();
         if ($module === 'feed_timeline') {
             $this->ig->setNavChainStep(1);
             $this->ig->setNavChain('');
@@ -306,6 +307,33 @@ class Event extends RequestCollection
             $chain = ',';
         }
 
+        $chain .= sprintf('%s:%s:%d:%s::', $class, $module, $this->ig->getNavChainStep(), $clickPoint);
+        $this->ig->setPrevNavChainClass($class);
+        $this->ig->setNavChain($chain);
+        $this->ig->setNavChainStep($aux);
+        $this->ig->incrementNavChainStep();
+
+        $chains = explode(',', $this->ig->getNavChain());
+
+        $moduleCounter = 0;
+        $navModule = null;
+        foreach ($chains as $idx => $chain) {
+            $navModule = explode(':', $chain)[1];
+
+            if (explode(':', $chain)[1] === @explode(':', $chains[$idx - 1])[1]) {
+                $moduleCounter++;
+            } else {
+                if ($moduleCounter >= 3) {
+                    array_splice($chains, $idx - $moduleCounter, $moduleCounter + 1, sprintf('%s%d,%s', 'TRUNCATEDx', $moduleCounter, $chain));
+                }
+                $moduleCounter = 0;
+            }
+        }
+        $newChain = implode(',', $chains);
+
+        $this->ig->setNavChain($newChain);
+
+        /* Seems like they are not including back chains anymore, will keep it here just in case.
         if ($clickPoint === 'back') {
             $chain = $this->ig->getNavChain();
             $chains = explode(',', $chain);
@@ -321,6 +349,7 @@ class Event extends RequestCollection
             $this->ig->setNavChain($chain);
             $this->ig->incrementNavChainStep();
         }
+        */
 
         return $this->ig->getNavChain();
     }

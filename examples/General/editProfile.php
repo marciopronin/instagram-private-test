@@ -18,6 +18,7 @@ $phone = null; // Leave it like this if you want to clear the value.
 $name = null; // Leave it like this if you want to clear the value.
 $biography = null; // Leave it like this if you want to clear the value.
 $email = ''; // REQUIRED.
+$newUsername = null;
 
 $profilePhoto = ''; // If you don't want to change it, leave it like this.
 ////////////////////
@@ -44,6 +45,10 @@ try {
             'module'        => 'feed_timeline',
             'click_point'   => 'main_profile',
         ],
+        [
+            'module'        => 'login',
+            'click_point'   => 'cold start',
+        ],
     ];
     $ig->event->sendProfileAction('edit_profile', $ig->account_id, $navstack);
 
@@ -54,13 +59,39 @@ try {
     if ($profilePhoto !== '') {
         $ig->account->changeProfilePicture($profilePhoto);
     }
+
+    $ig->event->sendNavigation('button', 'self_profile', 'profile_edit_bio');
     $ig->account->setBiography($biography);
-    $ig->account->editProfile($url, $phone, $name, $biography, $email);
+    $ig->event->sendNavigation('back', 'profile_edit_bio', 'self_profile');
+
+    $ig->account->editProfile($url, $phone, $name, $biography, $email, $newUsername);
 
     $navstack = [
+        /* If updating username add the commented navs
+        [
+            'module'        => 'edit_profile',
+            'click_point'   => 'button',
+        ],
+        [
+            'module'        => 'profile_edit_username',
+            'click_point'   => 'back',
+        ],
+        [
+            'module'        => 'profile_edit_username',
+            'click_point'   => 'button',
+        ],
+        */
+        [
+            'module'        => 'edit_profile',
+            'click_point'   => 'button',
+        ],
         [
             'module'        => 'self_profile',
-            'click_point'   => 'inferred_source',
+            'click_point'   => 'button',
+        ],
+        [
+            'module'        => 'feed_timeline',
+            'click_point'   => 'main_profile',
         ],
         [
             'module'        => 'login',

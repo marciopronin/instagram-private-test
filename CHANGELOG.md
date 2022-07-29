@@ -1,3 +1,10 @@
+# Stable release v20.9.3
+## Date: 29/07/2022
+
+### Examples
+
+- **Example:** Update editProfile
+
 # Stable release v20.9.2
 ## Date: 29/07/2022
 

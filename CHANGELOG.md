@@ -1,3 +1,10 @@
+# Stable release v20.9.2
+## Date: 29/07/2022
+
+### Updates and fixes
+
+- **Event:** Update `sendOrganicMediaImpression()`
+
 # Stable release v20.9.1
 ## Date: 29/07/2022
 

@@ -2015,7 +2015,7 @@ class Event extends RequestCollection
             'source_of_action'                  => $module,
             'contact_button_option'             => -1,
             'two_measurement_debugging_fields'  => [
-                'scroll_velocity'   => number_format(random_int(1e16, 9e16) / 1e19, 18, '.', ''),
+                'scroll_velocity'   => number_format(random_int(intval(1e16), intval(9e16)) / intval(-1e19), 18, '.', ''),
                 'last_action'       => '',
                 'last_actions'      => '',
             ],

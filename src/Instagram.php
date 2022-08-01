@@ -2613,8 +2613,13 @@ class Instagram implements ExperimentsInterface
                 $this->internal->getLoomFetchConfig();
                 $this->internal->getMobileConfig(false);
                 $this->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', true);
-                $this->story->getReelsTrayFeed('cold_start');
-                $this->people->getSharePrefill();
+
+                try {
+                    $this->story->getReelsTrayFeed('cold_start');
+                    $this->people->getSharePrefill();
+                } catch (\Exception $e) {
+                    // Pass (avoid throttling).
+                }
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();

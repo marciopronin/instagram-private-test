@@ -6154,7 +6154,7 @@ class Event extends RequestCollection
             'entity_id'                       => $userId,
             'entity_type'                     => 'user',
             'entity_follow_status'            => ($unfollow === false) ? 'following' : 'not_following',
-            'nav_chain'                       => $$this->ig->getNavChain(),
+            'nav_chain'                       => $this->ig->getNavChain(),
         ];
 
         if ($entryModule === 'blended_search') {

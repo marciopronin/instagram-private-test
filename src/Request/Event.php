@@ -2044,7 +2044,7 @@ class Event extends RequestCollection
             'source_of_action'                  => $module,
             'contact_button_option'             => -1,
             'two_measurement_debugging_fields'  => [
-                'scroll_velocity'   => number_format(random_int(intval(1e16), intval(9e16)) / intval(-1e19), 18, '.', ''),
+                'scroll_velocity'   => sprintf('0.00%s', gmp_strval(gmp_random_range('1000000000000000', '9000000000000000'))),
                 'last_action'       => '',
                 'last_actions'      => '',
             ],

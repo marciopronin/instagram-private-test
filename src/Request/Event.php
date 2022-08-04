@@ -4782,6 +4782,12 @@ class Event extends RequestCollection
                     'dest_module'   => 'feed_timeline',
                 ],
             ],
+            'feed_timeline' => [
+                [
+                    'clickpoint'    => 'warm_start',
+                    'dest_module'   => 'profile',
+                ],
+            ],
             'replay_feed_timeline' => [
                 [
                     'clickpoint'    => 'back',

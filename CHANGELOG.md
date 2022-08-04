@@ -1,3 +1,14 @@
+# Stable release v20.9.9
+## Date: 05/08/2022
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+
+### Examples
+
+- **Example:** Update followFromExternalUrlProfile
+
 # Stable release v20.9.8
 ## Date: 03/08/2022
 

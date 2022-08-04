@@ -13,27 +13,41 @@ $truncatedDebug = false;
 //////////////////////
 
 /////// USER ////////
-$user = '';
+$urlProfile = '';
 ////////////////////
 
 $ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+\InstagramAPI\Instagram::$skipLoginFlowAtMyOwnRisk = true;
 
 try {
+    // Account should be already logged in!
     $ig->login($username, $password);
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
-$ig->event->updateAppState('background');
-$ig->event->forceSendBatch();
-usleep(mt_rand(4000000, 7000000)); // Can be increased for better emulation.
-
 try {
+    $ig->request($urlProfile)->getDecodedResponse(false);
+
+    $re = '/https:\/\/(www)?instagram\.com\/(.*)\?/m';
+    preg_match_all($re, $urlProfile, $matches, PREG_SET_ORDER, 0);
+
+    if (empty($matches)) {
+        exit();
+    }
+    $user = $matches[0][1];
+
+    $ig->event->sendNavigation('cold start', 'login', 'feed_timeline');
     $ig->event->updateAppState('foreground');
+    $ig->event->sendNavigation('warm_start', 'feed_timeline', 'profile');
+
+    // If already known the user ID, it is better to set $userID directly and avoid the followin request!
     $userId = $ig->people->getInfoByName($user, 'deep_link_util')->getUser()->getPk();
+
+    $ig->people->getFriendship($userId);
     $ig->event->qeExposure($ig->account_id, 'ig_android_qr_code_nametag', 'deploy');
-    $ig->event->sendNavigation('inferred_source', 'feed_timeline', 'profile', null, null, ['username' => $user, 'user_id' => $userId]);
+    //$ig->event->sendNavigation('inferred_source', 'feed_timeline', 'profile', null, null, ['username' => $user, 'user_id' => $userId]);
 
     try {
         $ig->internal->getQPFetch();
@@ -66,23 +80,49 @@ try {
         [
             [
                 'module'        => 'profile',
-                'click_point'   => 'inferred_source',
+                'click_point'   => 'back',
+            ],
+            [
+                'module'        => 'feed_contextual_chain',
+                'click_point'   => 'back',
+            ],
+            [
+                'module'        => 'explore_popular', // I think this clickpoints needs to be added in events navigation path check
+                'click_point'   => 'explore_topic_load',
+            ],
+            [
+                'module'        => 'explore_popular',
+                'click_point'   => 'button',
+            ],
+            [
+                'module'        => 'blended_search',
+                'click_point'   => 'button',
+            ],
+            [
+                'module'        => 'blended_search',
+                'click_point'   => 'back',
+            ],
+            [
+                'module'        => 'explore_popular',
+                'click_point'   => 'explore_topic_load',
+            ],
+            [
+                'module'        => 'explore_popular',
+                'click_point'   => 'main_home',
             ],
             [
                 'module'        => 'feed_timeline',
-                'click_point'   => 'inferred_source',
+                'click_point'   => 'warm_start',
             ],
             [
-                'module'        => 'feed_timeline',
-                'click_point'   => 'inferred_source',
-            ],
-            [
-                'module'        => 'login',
-                'click_point'   => 'cold start',
+                'module'        => 'profile',
+                'click_point'   => 'button',
             ],
         ];
 
-    $ig->event->sendFollowButtonTapped($userId, 'profile', $navstack);
+    $navstack = array_reverse($navstack);
+
+    $ig->event->sendFollowButtonTapped($userId, 'profile');
     $ig->people->follow($userId);
     $ig->event->sendProfileAction('follow', $userId, $navstack);
 

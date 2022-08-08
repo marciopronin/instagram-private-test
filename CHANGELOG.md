@@ -1,3 +1,19 @@
+# Stable release v20.10.0
+## Date: 09/08/2022
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+- **Event:** Update `_generateNavChain()`
+- **Event:** Update `_getModuleClass()`
+- **Reel:** Update `discover()`
+- **Reel:** Add `discoverStream()`
+
+### Examples
+
+- **Example:** Update followFromExternalUrlProfile
+- **Example:** Add followFromReelsTab
+
 # Stable release v20.9.9
 ## Date: 05/08/2022
 

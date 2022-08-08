@@ -38,12 +38,15 @@ try {
     }
     $user = $matches[0][1];
 
-    $ig->event->sendNavigation('cold start', 'login', 'feed_timeline');
-    $ig->event->updateAppState('foreground');
-    $ig->event->sendNavigation('warm_start', 'feed_timeline', 'profile');
-
     // If already known the user ID, it is better to set $userID directly and avoid the followin request!
     $userId = $ig->people->getInfoByName($user, 'deep_link_util')->getUser()->getPk();
+
+    $ig->event->sendNavigation('cold start', 'login', 'feed_timeline');
+    $ig->event->updateAppState('foreground');
+    $ig->event->sendNavigation('warm_start', 'feed_timeline', 'profile', [
+        'username'  => $user,
+        'user_id'   => $userId,
+    ]);
 
     $ig->people->getFriendship($userId);
     $ig->event->qeExposure($ig->account_id, 'ig_android_qr_code_nametag', 'deploy');

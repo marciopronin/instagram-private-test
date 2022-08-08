@@ -37,6 +37,7 @@ class Reel extends RequestCollection
      * @param string|null $chainingMedia Chaining media ID (Parent).
      * @param array|null  $seenReels     Seen reels.
      * @param array|null  $sessionInfo   Session info
+     * @param array|null  $maxId         Max ID.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -46,7 +47,8 @@ class Reel extends RequestCollection
     public function discover(
         $chainingMedia = null,
         $seenReels = null,
-        $sessionInfo = null)
+        $sessionInfo = null,
+        $maxId = null)
     {
         $request = $this->ig->request('clips/discover/')
             ->setSignedPost(false)
@@ -62,11 +64,50 @@ class Reel extends RequestCollection
         if ($sessionInfo !== null) {
             $request->addPost('session_info', json_encode($sessionInfo, true));
         }
+        if ($maxId !== null) {
+            $request->addPost('max_id', $maxId);
+        }
 
         if (($chainingMedia !== null) || ($seenReels !== null) || ($sessionInfo !== null)) {
             $request->addPost('container_module', 'clips_viewer_explore_popular_major_unit');
         } else {
             $request->addPost('container_module', 'clips_viewer_clips_tab');
+        }
+
+        return $request->getResponse(new Response\ReelsResponse());
+    }
+
+    /**
+     * Discover stream reels.
+     *
+     * @param array|null $seenReels   Seen reels.
+     * @param array|null $sessionInfo Session info
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\ReelsResponse
+     */
+    public function discoverStream(
+        $seenReels = null,
+        $sessionInfo = null)
+    {
+        $request = $this->ig->request('clips/discover/stream/')
+            ->setSignedPost(false)
+            ->addPost('server_driven_cache_config', json_encode([
+                'serve_from_server_cache'       => true,
+                'cohort_to_ttl_map'             => '',
+                'serve_on_foreground_prefetch'  => 'true',
+                'serve_on_background_prefetch'  => 'true',
+                'meta'                          => '',
+            ]))
+            ->addPost('container_module', 'clips_viewer_clips_tab');
+
+        if ($seenReels !== null) {
+            $request->addPost('seen_reels', json_encode($seenReels, true));
+        }
+        if ($sessionInfo !== null) {
+            $request->addPost('session_info', json_encode($sessionInfo, true));
         }
 
         return $request->getResponse(new Response\ReelsResponse());

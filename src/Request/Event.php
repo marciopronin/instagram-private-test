@@ -202,11 +202,14 @@ class Event extends RequestCollection
             case 'gallery_picker':
                 $class = 'GalleryPickerFragment';
                 break;
+            case 'clips_viewer_clips_tab':
+                $class = 'ClipsViewerFragment';
             /*
             case 'quick_capture_fragment':
                 $class = '155';
                 break;
             */
+            // no break
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';
                 break;
@@ -294,7 +297,7 @@ class Event extends RequestCollection
         if ($module === 'feed_timeline') {
             $this->ig->setNavChainStep(1);
             $this->ig->setNavChain('');
-        } elseif ($module === 'explore_popular') {
+        } elseif ($module === 'explore_popular' || $module === 'clips_viewer_clips_tab') {
             $this->ig->setNavChainStep(2);
             $this->ig->setNavChain('');
         } elseif ($module === 'newsfeed_you') {
@@ -3669,7 +3672,7 @@ class Event extends RequestCollection
         $toModule,
         $clickPoint)
     {
-        if (in_array($clickPoint, ['main_home', 'main_search', 'main_inbox', 'main_camera', 'main_profile'])) {
+        if (in_array($clickPoint, ['main_home', 'main_search', 'main_inbox', 'main_camera', 'main_profile', 'main_clips'])) {
             return;
         }
 
@@ -3732,6 +3735,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'main_profile',
                     'dest_module'   => 'self_profile',
+                ],
+                [
+                    'clickpoint'    => 'main_clips',
+                    'dest_module'   => 'clips_viewer_clips_tab',
                 ],
                 [
                     'clickpoint'    => 'on_launch_direct_inbox',

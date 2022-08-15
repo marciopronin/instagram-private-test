@@ -1,3 +1,16 @@
+# Stable release v20.11.0
+## Date: 16/08/2022
+
+### New features
+
+**Accpunt:** Add `verifyEmailCode()`
+**Reel:** Add `allowRemixes()`
+**Reel:** Add `removeFromProfile()`
+
+### Updates and fixes
+
+**Internal:** Update `configureSingleVideo()`
+
 # Stable release v20.10.0
 ## Date: 09/08/2022
 

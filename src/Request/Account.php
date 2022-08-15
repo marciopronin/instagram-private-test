@@ -1222,6 +1222,33 @@ class Account extends RequestCollection
     }
 
     /**
+     * Verify email code.
+     *
+     * @param string $email The email.
+     * @param string $code  The received code.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function verifyEmailCode(
+        $email,
+        $code)
+    {
+        $request = $this->ig->request('accounts/verify_email_code/')
+            ->addPost('phone_id', $this->ig->phone_id)
+            ->addPost('send_source', 'personal_information')
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('guid', $this->ig->uuid)
+            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('code', $code)
+            ->addPost('email', $email);
+
+        return $request->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Confirm verification email.
      *
      * @param string $confirmationLink Confirmation link.

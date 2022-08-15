@@ -330,4 +330,47 @@ class Reel extends RequestCollection
             ->addPost('container_module', 'ShareOnFacebookSettingsFragment')
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Allow/Disallow remixes of uploaded reel. It is enabled by default on uploaded medias.
+     *
+     * @param string $mediaId Media ID.
+     * @param bool   $enabled Enable default share to FB.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function allowRemixes(
+        $mediaId,
+        $enabled)
+    {
+        return $this->ig->request('clips/item/set_mashups_allowed/')
+            ->setSignedPost(false)
+            ->addPost('media_id', $mediaId)
+            ->addPost('clips_media_id', $mediaId)
+            ->addPost('mashups_allowed', ($enabled === true) ? 'true' : 'false')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('container_module', 'clips_viewer_clips_tab')
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * It removes the reel only from the profile grid, reel is still visible at the reels section.
+     *
+     * @param string $mediaId Media ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function removeFromProfile(
+        $mediaId)
+    {
+        return $this->ig->request('feed/profile_grid/remove/')
+            ->setSignedPost(false)
+            ->addPost('media_id', $mediaId)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->getResponse(new Response\GenericResponse());
+    }
 }

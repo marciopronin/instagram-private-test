@@ -453,6 +453,26 @@ class Direct extends RequestCollection
     }
 
     /**
+     * Fetch and subscribe user presence.
+     *
+     * @param string $userId Numerical UserPK ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\DirectPresenceResponse
+     */
+    public function fetchAndSubscribePresence(
+        $userId)
+    {
+        return $this->ig->request('direct_v2/fetch_and_subscribe_presence/')
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('subscriptions_off', 'false')
+            ->addPost('request_data', [$userId])
+            ->getResponse(new Response\DirectPresenceResponse());
+    }
+
+    /**
      * Create a private story sharing group.
      *
      * NOTE: In the official app, when you create a story, you can choose to
@@ -1746,6 +1766,7 @@ class Direct extends RequestCollection
             ->addPost('offline_threading_id', $options['offline_threading_id'])
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('device_id', $this->ig->device_id)
             ->getResponse(new Response\DirectSendItemResponse());
     }

@@ -1,3 +1,19 @@
+# Stable release v20.12.0
+## Date: 16/08/2022
+
+### New features
+
+- **Direct:** Add `fetchAndSubscribePresence()`
+
+### Updates and fixes
+
+- **Internal:** Update `configureSingleVideo()`
+- **Direct:** Update `_sendDirectItem()`
+
+### Examples
+
+- **Example:** Update sendText
+
 # Stable release v20.11.0
 ## Date: 16/08/2022
 

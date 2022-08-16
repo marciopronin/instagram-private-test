@@ -909,8 +909,8 @@ class Internal extends RequestCollection
                 ])
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('_uid', $this->ig->account_id);
-        //->addPost('nav_chain', $this->ig->getNavChain());
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('nav_chain', $this->ig->getNavChain());
 
         $stickerIds = [];
         $tapModels = [];
@@ -1057,9 +1057,6 @@ class Internal extends RequestCollection
                 }
                 break;
             case Constants::FEED_REELS:
-                if (isset($externalMetadata['share_to_fb'])) {
-                    $request->addPost('is_shared_to_fb', '1');
-                }
                 $request
                     ->addHeader('Is_clips_video', '1')
                     ->addHeader('retry_context', json_encode(
@@ -1069,6 +1066,7 @@ class Internal extends RequestCollection
                             'num_step_manual_retry' => 0,
                         ])
                     )
+                    ->addPost('is_shared_to_fb', isset($externalMetadata['share_to_fb']) ? $externalMetadata['share_to_fb'] : '0')
                     ->addPost('caption', $captionText)
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('device_id', $this->ig->device_id)

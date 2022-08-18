@@ -3800,6 +3800,10 @@ class Event extends RequestCollection
                     'clickpoint'    => 'inferred_source',
                     'dest_module'   => 'profile',
                 ],
+                [
+                    'clickpoint'    => 'warm_start',
+                    'dest_module'   => 'profile',
+                ],
             ],
             'reel_feed_timeline_item_header'    => [
                 [
@@ -4787,12 +4791,6 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'cold start',
                     'dest_module'   => 'feed_timeline',
-                ],
-            ],
-            'feed_timeline' => [
-                [
-                    'clickpoint'    => 'warm_start',
-                    'dest_module'   => 'profile',
                 ],
             ],
             'replay_feed_timeline' => [

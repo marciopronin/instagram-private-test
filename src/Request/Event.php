@@ -333,7 +333,7 @@ class Event extends RequestCollection
             }
         }
         $newChain = implode(',', $chains);
-
+        $this->ig->setNavChain('');
         $this->ig->setNavChain($newChain);
 
         /* Seems like they are not including back chains anymore, will keep it here just in case.

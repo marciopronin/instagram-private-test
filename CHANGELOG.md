@@ -1,3 +1,10 @@
+# Stable release v20.12.3
+## Date: 24/08/2022
+
+### Updates and fixes
+
+- **People:** Update `sendNewsLog()`.
+
 # Stable release v20.12.2
 ## Date: 23/08/2022
 

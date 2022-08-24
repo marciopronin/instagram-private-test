@@ -182,18 +182,25 @@ class People extends RequestCollection
      *
      * @param $newsPk   The news PK. Example: "t+g+XAtK5RaGUdeQeL/V5roIgEM="
      * @param $tuuid    The news UUID.
+     * @param $action   Action to perform: "hide" or "click".
      *
+     * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\GenericResponse
      */
     public function sendNewsLog(
         $newsPk,
-        $tuuid)
+        $tuuid,
+        $action = 'click')
     {
+        if (!in_array($action, ['click', 'hide'], true)) {
+            throw new \InvalidArgumentException('Invalid action value.');
+        }
+
         return $this->ig->request('news/log/')
             ->setSignedPost(false)
-            ->addPost('action', 'click')
+            ->addPost('action', $action)
             ->addPost('pk', $newsPk)
             ->addPost('tuuid', $tuuid)
             //->addPost('_csrftoken', $this->ig->client->getToken())

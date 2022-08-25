@@ -1,3 +1,14 @@
+# Stable release v20.12.4
+## Date: 26/08/2022
+
+### Updates and fixes
+
+- **Constants:** Update Instagram to 249.0.0.20.105
+- **Highlight:** Update `getUserFeed()`
+- **Event:** Update `_getModuleClass()`
+- **Event:** Update `_generateNavChain()`
+- **Event:** Update `sendNavigation()`
+
 # Stable release v20.12.3
 ## Date: 24/08/2022
 

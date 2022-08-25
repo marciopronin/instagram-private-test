@@ -108,48 +108,73 @@ class Event extends RequestCollection
     /**
      * Get module class.
      *
-     * @param string $module Module.
+     * @param string $module        Module.
+     * @param string $classSelector Select class if there are multiple classes available.
+     *                              First class will be returned if none was selected.
      *
      * @return string
      */
     protected function _getModuleClass(
-        $module)
+        $module,
+        $classSelector = null)
     {
         switch ($module) {
             case 'feed_timeline':
-                $class = '1oz'; //'MainFeedFragment';
+                $class = 'MainFeedFragment'; //'MainFeedFragment';
                 break;
             case 'newsfeed_you':
-                $class = 'BxA'; //'NewsfeedYouFragment';
+                $class = 'NewsfeedYouFragment'; //'NewsfeedYouFragment';
                 break;
             case 'explore_popular':
-                $class = '24a'; //'ExploreFragment';
+                $class = 'ExploreFragment'; //'ExploreFragment';
                 break;
             case 'blended_search':
-                $class = 'F8t'; //'SingleSearchTypeaheadTabFragment';
+                $class = 'TopSearchChildFragment';
+                break;
+            case 'search_typeahead':
+                $class = 'SingleSearchTypeaheadTabFragment'; //'SingleSearchTypeaheadTabFragment';
+                break;
+            case 'serp_top':
+                $class = 'TopSerpGridFragment';
                 break;
             //case 'search':
             //case 'search_result':
             //case 'search_result':
             //    $class = 'ACK'; //'TopSerpGridFragment';
             //    break;
+            case 'serp_places':
+                $class = 'PlacesSerpGridFragment'; //'PlacesSerpGridFragment';
+                break;
             case 'search_places':
-                $class = 'F95'; //'PlacesSerpGridFragment';
+                $class = 'PlacesSearchChildFragment';
                 break;
             case 'search_users':
-                $class = 'FBT'; //'UserSerpGridFragment';
+                $class = 'UsersSearchChildFragment';
+                break;
+            case 'serp_users':
+                $class = 'UserSerpGridFragment'; //'UserSerpGridFragment';
                 break;
             case 'search_tags':
-                $class = 'F96'; //'HashtagSerpGridFragment';
+                $class = 'HashtagSearchChildFragment';
+                break;
+            case 'serp_tags':
+                $class = 'HashtagSerpGridFragment';
                 break;
             case 'search_audio':
-                $class = 'F8x'; //'AudioSerpGridFragment';
+                $class = 'AudioSearchChildFragment';
+                break;
+            case 'serp_audio':
+                $class = 'AudioSerpGridFragment';
                 break;
             case 'music_search':
                 $class = 'MusicPostcaptureSearchController';
                 break;
+            case 'music_overlay_search_results':
+                $class = 'MusicOverlaySearchResultsFragment';
+                break;
             case 'search_edit_recent':
-                $class = 'F8p'; //'EditSearchHistoryFragment';
+            case 'search_typeahead_edit_recent':
+                $class = 'EditSearchHistoryFragment'; //'EditSearchHistoryFragment';
                 break;
             case 'feed_hashtag':
                 $class = 'HashtagPageFragment';
@@ -161,18 +186,18 @@ class Event extends RequestCollection
                 $class = 'LocationDetailFragment';
                 break;
             case 'feed_contextual_chain':
-                $class = 'F6L';
+                $class = 'DiscoveryChainingFeedFragment';
                 break;
             //case 'feed_contextual_place':
             //case 'feed_contextual_location':
             //case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
-                $class = 'F6J'; // 'ContextualFeedFragment';
+                $class = 'ContextualFeedFragment'; // 'ContextualFeedFragment';
                 break;
             case 'profile':
             case 'self_profile': // UserDetailFragment, ProfileMediaTabFragment
-                $class = 'UserDetailFragment';
+                $class = ['UserDetailFragment', 'ProfileMediaTabFragment'];
                 break;
             case 'following_sheet':
                 $class = 'ProfileFollowRelationshipFragment';
@@ -202,6 +227,9 @@ class Event extends RequestCollection
             case 'gallery_picker':
                 $class = 'GalleryPickerFragment';
                 break;
+            case 'stories_precapture_camera':
+                $class = 'QuickCaptureFragment';
+                break;
             case 'clips_viewer_clips_tab':
                 $class = 'ClipsViewerFragment';
             /*
@@ -214,25 +242,28 @@ class Event extends RequestCollection
                 $class = 'FollowersShareFragment';
                 break;
             case 'direct_inbox':
-                $class = 'EbJ';
+                $class = 'DirectInboxFragment';
                 break;
             case 'direct_thread':
-                $class = '4OO';
+                $class = 'DirectThreadFragment';
                 break;
             case 'direct_recipient_picker':
-                $class = 'Cbg';
+                $class = 'DirectRecipientPickerFragment';
+                break;
+            case 'DIRECT_SEARCH_INBOX_FRAGMENT':
+                $class = 'DirectSearchInboxFragment';
                 break;
             case 'reel_profile':
                 $class = 'ReelViewerFragment';
                 break;
             case 'edit_profile':
-                $class = 'AYg';
+                $class = 'EditProfileFragment';
                 break;
             case 'personal_information':
-                $class = 'AJI';
+                $class = 'PersonalInformationFragment';
                 break;
             case 'profile_edit_bio':
-                $class = 'EE9';
+                $class = 'EditBioFragment';
                 break;
             case 'comments_v2_feed_contextual_profile':
                 $class = 'CommentThreadFragment';
@@ -246,22 +277,45 @@ class Event extends RequestCollection
                 $class = 'VideoProfileTabFragment';
                 break;
             case 'email_verify':
-                $class = 'Dj6';
+                $class = 'BaseEmailVerifyFragment';
                 break;
             case 'one_page_registration':
-                $class = 'E2Z';
+                $class = 'OnePageRegistrationFragment';
                 break;
             case 'add_birthday':
-                $class = 'DzK';
+                $class = 'AddBirthdayFragment';
                 break;
             case 'username_sign_up':
-                $class = 'E2i';
+                $class = 'UsernameSuggestionSignUpFragment';
                 break;
             case 'email_or_phone':
-                $class = 'DzV';
+                $class = 'ContactPointTriageFragment';
+                break;
+            case 'clips_music_overlay_detail':
+                $class = 'MusicOverlayBrowseResultsFragment';
+                break;
+            case 'clips_postcapture_camera':
+                $class = 'VideoViewController';
+                break;
+            case 'story_stickers_tray':
+                $class = 'AssetPickerController';
+                break;
+            case 'music_overlay_search_landing_page':
+                $class = 'MusicOverlaySearchLandingPageFragment';
+                break;
+            case 'private_story_share_sheet':
+                $class = 'PrivateStoryShareSheetFragment';
                 break;
             default:
                 $class = false;
+        }
+
+        if (is_array($class)) {
+            if ($classSelector !== null && in_array($classSelector, $class)) {
+                $class = $classSelector;
+            } else {
+                $class = $class[0];
+            }
         }
 
         return $class;
@@ -270,16 +324,18 @@ class Event extends RequestCollection
     /**
      * Generate nav chain.
      *
-     * @param string $module     Module.
-     * @param string $clickPoint Click point.
+     * @param string      $module        Module.
+     * @param string      $clickPoint    Click point.
+     * @param string|null $classSelector Class selector.
      *
      * @return string|null
      */
     protected function _generateNavChain(
         $module,
-        $clickPoint)
+        $clickPoint,
+        $classSelector = null)
     {
-        $class = $this->_getModuleClass($module);
+        $class = $this->_getModuleClass($module, $classSelector);
 
         if ($this->ig->getPrevNavChainClass() === $class) {
             $this->ig->incrementNavChainStep();
@@ -4176,8 +4232,44 @@ class Event extends RequestCollection
                     'clickpoint'    => 'button',
                     'dest_module'   => 'profile',
                 ],
+                [
+                    'clickpoint'    => 'search_result',
+                    'dest_module'   => 'profile',
+                ],
+            ],
+            'search_typeahead' => [
+                [
+                    'clickpoint'    => 'main_search',
+                    'dest_module'   => 'explore_popular',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'serp_places',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'serp_users',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'serp_tags',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'profile',
+                ],
+                [
+                    'clickpoint'    => 'search_result',
+                    'dest_module'   => 'profile',
+                ],
             ],
             'search_places' => [
+                [
+                    'clickpoint'    => 'search_result',
+                    'dest_module'   => 'feed_location',
+                ],
+            ],
+            'serp_places' => [
                 [
                     'clickpoint'    => 'search_result',
                     'dest_module'   => 'feed_location',
@@ -4189,7 +4281,19 @@ class Event extends RequestCollection
                     'dest_module'   => 'feed_hashtag',
                 ],
             ],
+            'serp_tags' => [
+                [
+                    'clickpoint'    => 'search_result',
+                    'dest_module'   => 'feed_hashtag',
+                ],
+            ],
             'search_users' => [
+                [
+                    'clickpoint'    => 'search_result',
+                    'dest_module'   => 'profile',
+                ],
+            ],
+            'serp_users' => [
                 [
                     'clickpoint'    => 'search_result',
                     'dest_module'   => 'profile',
@@ -4515,6 +4619,10 @@ class Event extends RequestCollection
                     'dest_module'   => 'direct_inbox',
                 ],
                 [
+                    'clickpoint'    => 'inbox_new_message',
+                    'dest_module'   => 'direct_thread',
+                ],
+                [
                     'clickpoint'    => 'media_location',
                     'dest_module'   => 'feed_location',
                 ],
@@ -4561,6 +4669,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'   => 'back',
                     'dest_module'  => 'newsfeed_you',
+                ],
+                [
+                    'clickpoint'   => 'button',
+                    'dest_module'  => 'profile',
                 ],
             ],
             'reel_profile' => [
@@ -4918,7 +5030,8 @@ class Event extends RequestCollection
 
         if ($this->ig->getIsAndroid()) {
             //$navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
-            $navChain = $this->_generateNavChain($toModule, $clickPoint);
+            $classSelector = isset($options['class_selector']) ? $options['class_selector'] : null;
+            $navChain = $this->_generateNavChain($toModule, $clickPoint, $classSelector);
         }
 
         $navDepth = $this->_getNavDepthForModules($fromModule, $toModule);

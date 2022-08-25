@@ -10,7 +10,7 @@ class Constants
         2   => 'https://i.instagram.com/api/v2/',
     ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
-    const IG_VERSION = '237.0.0.14.102';
+    const IG_VERSION = '249.0.0.20.105';
     const IG_IOS_VERSION = '212.1.0.25.118';
     const VERSION_CODE = '373310554';
     const IG_IOS_VERSION_CODE = '329643252';
@@ -27,7 +27,7 @@ class Constants
     const IG_LOGIN_PUBLIC_KEY = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF1enRZOEZvUlRGRU9mK1RkTGlUdAplN3FIQXY1cmdBMmk5RkQ0YjgzZk1GK3hheW14b0xSdU5KTitRanJ3dnBuSm1LQ0QxNGd3K2w3TGQ0RHkvRHVFCkRiZlpKcmRRWkJIT3drS3RqdDdkNWlhZFdOSjdLczlBM0NNbzB5UktyZFBGU1dsS21lQVJsTlFrVXF0YkNmTzcKT2phY3ZYV2dJcGlqTkdJRVk4UkdzRWJWZmdxSmsrZzhuQWZiT0xjNmEwbTMxckJWZUJ6Z0hkYWExeFNKOGJHcQplbG4zbWh4WDU2cmpTOG5LZGk4MzRZSlNaV3VxUHZmWWUrbEV6Nk5laU1FMEo3dE80eWxmeWlPQ05ycnF3SnJnCjBXWTFEeDd4MHlZajdrN1NkUWVLVUVaZ3FjNUFuVitjNUQ2SjJTSTlGMnNoZWxGNWVvZjJOYkl2TmFNakpSRDgKb1FJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==';
 
     // Endpoint Constants.
-    const BLOCK_VERSIONING_ID = '8dab28e76d3286a104a7f1c9e0c632386603a488cf584c9b49161c2f5182fe07';
+    const BLOCK_VERSIONING_ID = '33bf851d4ffa1459309fc7b28463c5d91ffc7aaad80d1c5f9a8a4ed728e319f7';
     const IOS_BLOCKS_VERSIONING_ID = '0d38efe9f67cf51962782e8aae19001881099884d8d86c683d374fc1b89ffad1';
     const BATCH_SURFACES = [
         ['4715', ['instagram_other_profile_page_header']],
@@ -53,7 +53,7 @@ class Constants
     const SUPPORTED_CAPABILITIES = [
         [
             'name'    => 'SUPPORTED_SDK_VERSIONS',
-            'value'   => '119.0,120.0,121.0,122.0,123.0,124.0,125.0,126.0,127.0,128.0,129.0,130.0,131.0,132.0,133.0,134.0,135.0,136.0,137.0,138.0,139.0,140.0',
+            'value'   => '119.0,120.0,121.0,122.0,123.0,124.0,125.0,126.0,127.0,128.0,129.0,130.0,131.0,132.0,133.0,134.0,135.0,136.0,137.0,138.0,139.0,140.0,141.0,142.0,143.0,144.0,145.0',
         ],
         [
             'name'  => 'FACE_TRACKER_VERSION',

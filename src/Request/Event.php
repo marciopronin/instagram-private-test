@@ -337,11 +337,13 @@ class Event extends RequestCollection
     {
         $class = $this->_getModuleClass($module, $classSelector);
 
+        /*
         if ($this->ig->getPrevNavChainClass() === $class) {
             $this->ig->incrementNavChainStep();
 
             return $this->ig->getNavChain();
         }
+        */
 
         if ($class === false) {
             $this->ig->incrementNavChainStep();

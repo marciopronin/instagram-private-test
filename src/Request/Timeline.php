@@ -7,6 +7,7 @@ use InstagramAPI\Exception\InstagramException;
 use InstagramAPI\Exception\UploadFailedException;
 use InstagramAPI\Request\Metadata\Internal as InternalMetadata;
 use InstagramAPI\Response;
+use InstagramAPI\Signatures;
 use InstagramAPI\Utils;
 
 /**
@@ -248,18 +249,14 @@ class Timeline extends RequestCollection
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
-            ->addHeader('phone_id', $this->ig->phone_id)
+            ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->uuid)
-            ->addHeader('battery_level', $this->ig->getBatteryLevel())
-            ->addHeader('is_charging', $this->ig->getIsDeviceCharging())
-            ->addHeader('will_sound_on', (int) $this->ig->getSoundEnabled())
-            ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'));
-
-        if ($this->ig->getIsAndroid()) {
-            $request->addPost('client_session_id', $this->ig->session_id);
-        } else {
-            $request->addPost('session_id', $this->ig->session_id);
-        }
+            ->addPost('battery_level', $this->ig->getBatteryLevel())
+            ->addPost('is_charging', $this->ig->getIsDeviceCharging())
+            ->addPost('will_sound_on', (int) $this->ig->getSoundEnabled())
+            //->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'));
+            ->addPost('timezone_offset', '7200')
+            ->addPost('session_id', $this->ig->session_id);
 
         if ($maxId !== null) {
             $request->addPost('reason', 'pagination');
@@ -312,6 +309,8 @@ class Timeline extends RequestCollection
 
         if (!empty($options['request_id'])) {
             $request->addPost('request_id', $options['request_id']);
+        } else {
+            $request->addPost('request_id', Signatures::generateUUID());
         }
 
         if (isset($options['is_dark_mode'])) {

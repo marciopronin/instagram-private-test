@@ -1,3 +1,12 @@
+# Stable release v20.12.6
+## Date: 28/08/2022
+
+### Updates and fixes
+
+- **Data:** Update `params_map`
+- **Event:** Update `_generateNavChain()`
+- **Timeline:** Update `getTimelineFeed()`
+
 # Stable release v20.12.5
 ## Date: 26/08/2022
 

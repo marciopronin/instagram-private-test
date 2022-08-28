@@ -352,7 +352,7 @@ class Event extends RequestCollection
         }
 
         $aux = $this->ig->getNavChainStep();
-        if ($module === 'feed_timeline') {
+        if ($module === 'feed_timeline' && $clickPoint !== 'cold start') {
             $this->ig->setNavChainStep(1);
             $this->ig->setNavChain('');
         } elseif ($module === 'explore_popular' || $module === 'clips_viewer_clips_tab') {

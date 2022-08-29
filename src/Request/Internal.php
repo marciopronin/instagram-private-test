@@ -1431,11 +1431,11 @@ class Internal extends RequestCollection
             $request
                 ->setNeedsAuth(false)
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '979562cf627614c196da1d1b3efec153663d046a491a6bdb97f1ce75935312e9');
+                ->addPost('query_hash', '492167aef9488a3e594dab61adb21b6762615b12d96bb252426cde4b0948edbf');
         } else {
             $request
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', 'f457404050aa533cb8d2bb1826808a92ae78a32fe7f92a1037b35ebb33782c64');
+                ->addPost('query_hash', '54646e6ddf107442f7dab4eb97071d638dbd488b0ff1baa3fb4b7c4110032d90');
         }
 
         $result = $request->getResponse(new Response\MobileConfigResponse());

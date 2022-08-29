@@ -1,3 +1,19 @@
+# Stable release v20.12.7
+## Date: 29/08/2022
+
+### Updates and fixes
+
+- **Instagram:** Update login flow
+- **Internal:** Update `getMobileConfig()`
+- **Event:** Update `_validateNavigationPath()`
+- **Event:** Update `_sendBatchEvents()`
+- **Media:**Update `_parseLikeParameters()`
+
+### Examples
+
+- **Example:** Update likeFromExploreUser
+- **Example:** Update followFromExploreUser
+
 # Stable release v20.12.6
 ## Date: 28/08/2022
 

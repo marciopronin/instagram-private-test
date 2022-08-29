@@ -901,9 +901,11 @@ class Media extends RequestCollection
         // Is this a "double-tap to like"? Note that Instagram doesn't have
         // "double-tap to unlike". So this can only be "1" if it's a "like".
         if ($type === 'like' && isset($extraData['double_tap']) && $extraData['double_tap']) {
-            $request->addUnsignedPost('d', 1);
+            $request->addPost('tap_source', 'double_tap_media')
+                    ->addUnsignedPost('d', 1);
         } else {
-            $request->addUnsignedPost('d', 0); // Must always be 0 for "unlike".
+            $request->addPost('tap_source', 'button')
+                    ->addUnsignedPost('d', 0); // Must always be 0 for "unlike".
         }
 
         // Now parse the necessary parameters for the selected module.
@@ -987,7 +989,7 @@ class Media extends RequestCollection
         case 'feed_contextual_profile': // LIST VIEW (when posts are shown vertically by the app
                                         // one at a time (as in the Timeline tab)).
         case 'igtv_feed_timeline': // IGTV timeline feed.
-            $request->addPost('inventory_source', 'media_or_ad');
+            //$request->addPost('inventory_source', 'media_or_ad');
             break;
         case 'instagram_shopping_home_creators_contextual_feed':
         case 'instagram_shopping_home_checkout_contextual_feed':

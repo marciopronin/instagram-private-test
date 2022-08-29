@@ -2361,7 +2361,22 @@ class Instagram implements ExperimentsInterface
             $this->event->sendEmergencyPushInitialVersion();
 
             try {
+                try {
+                    $this->account->getPrefillCandidates();
+                } catch (\InstagramAPI\Exception\InstagramException $e) {
+                    // pass
+                }
                 $this->internal->fetchZeroRatingToken('token_expired', false);
+                $this->account->setContactPointPrefill('prefill');
+
+                $this->internal->sendGraph('455411352809009551099714876', [
+                    'input' => [
+                        'app_scoped_id'     => $this->uuid,
+                        'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
+                        'family_device_id'  => $this->phone_id,
+                    ],
+                ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
+
                 //$this->event->sendZeroCarrierSignal();
                 //$this->internal->bootstrapMsisdnHeader();
                 //$this->internal->readMsisdnHeader('default');
@@ -2379,10 +2394,17 @@ class Instagram implements ExperimentsInterface
                 //$this->internal->bootstrapMsisdnHeader();
                 try {
                     $this->internal->logAttribution();
-                    $this->account->getPrefillCandidates();
                 } catch (\InstagramAPI\Exception\InstagramException $e) {
                     // pass
                 }
+
+                $this->internal->sendGraph('455411352809009551099714876', [
+                    'input' => [
+                        'app_scoped_id'     => $this->uuid,
+                        'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
+                        'family_device_id'  => $this->phone_id,
+                    ],
+                ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
             } finally {
                 // Stops emulating batch requests.
                 $this->client->stopEmulatingBatch();

@@ -562,7 +562,7 @@ class Event extends RequestCollection
                     'config'        => [
                         'config_checksum'       => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
                         'config_version'        => 'v2',
-                        'qpl_config_version'    => 'v6',
+                        'qpl_config_version'    => 'v7',
                         'app_uid'               => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
                         'app_ver'               => Constants::IG_VERSION,
                     ],
@@ -586,7 +586,7 @@ class Event extends RequestCollection
                         'config'        => [
                             'config_checksum'       => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
                             'config_version'        => 'v2',
-                            'qpl_config_version'    => 'v6',
+                            'qpl_config_version'    => 'v7',
                             'app_uid'               => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
                             'app_ver'               => Constants::IG_VERSION,
                         ],
@@ -604,7 +604,7 @@ class Event extends RequestCollection
                     $batches[0]['conn'] = Constants::X_IG_Connection_Type;
                     $batches[0]['config_checksum'] = empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum');
                     $batches[0]['config_version'] = 'v2';
-                    $batches[0]['qpl_config_version'] = 'v6';
+                    $batches[0]['qpl_config_version'] = 'v7';
                     $batches[0]['app_uid'] = empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id');
                     $batches[0]['app_ver'] = Constants::IG_VERSION;
 
@@ -4237,6 +4237,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'search_result',
                     'dest_module'   => 'profile',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'blended_search',
                 ],
             ],
             'search_typeahead' => [

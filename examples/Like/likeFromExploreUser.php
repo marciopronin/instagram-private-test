@@ -42,7 +42,7 @@ try {
     $ig->event->sendNavigation('main_search', 'feed_timeline', 'explore_popular', null, null, $topicData);
 
     // Send navigation from 'explore_popular' to 'explore_popular'.
-    $ig->event->sendNavigation('explore_topic_load', 'explore_popular', 'explore_popular', null, null, $topicData);
+    //$ig->event->sendNavigation('explore_topic_load', 'explore_popular', 'explore_popular', null, null, $topicData);
 
     // Get explore feed sections and items.
     $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', $searchSession)->getSectionalItems();
@@ -98,13 +98,15 @@ try {
         }
     }
 
+    $ig->event->sendNavigation('button', 'blended_search', 'blended_search');
+
     // Send restults from search.
     $ig->event->sendSearchResults($queryUser, $resultList, $resultTypeList, $rankToken, $searchSession, 'blended_search');
     // Send selected result from results.
     $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
 
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
-    $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
+    $ig->event->sendNavigation('search_result', 'blended_search', 'profile', null, null,
         [
             'rank_token'            => null,
             'query_text'            => $queryUser,
@@ -115,6 +117,19 @@ try {
             'user_id'               => $userId,
         ]
     );
+    $ig->event->sendNavigation('button', 'profile', 'profile', null, null,
+        [
+            'rank_token'            => null,
+            'query_text'            => $queryUser,
+            'search_session_id'     => $searchSession,
+            'selected_type'         => 'user',
+            'position'              => 0,
+            'username'              => $queryUser,
+            'user_id'               => $userId,
+            'class_selector'        => 'ProfileMediaTabFragment',
+        ]
+    );
+
     $ig->people->getFriendship($userId);
     $ig->highlight->getUserFeed($userId);
     $ig->people->getInfoById($userId, 'blended_search');

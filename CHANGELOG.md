@@ -1,3 +1,21 @@
+# Stable release v20.13.0
+## Date: 30/08/2022
+
+### New feature
+
+- **Instagram:** Add `setCustomResolver()`
+
+### Updates and fixes
+
+- **Instagram:** Update `request()`
+- **Event:** Update `_getModuleClass()`
+- **Interal:** Update `configureSingleVideo()`
+- **Client:** Update `_buildGuzzleOptions()`
+
+### Examples
+
+- **Example:** Update followFromReelsTab
+
 # Stable release v20.12.7
 ## Date: 29/08/2022
 

@@ -855,7 +855,7 @@ class Client
         }
 
         if ($this->_resolveHost !== null) {
-            $curlOptions[CURLOPT_RESOLVE] = [$this->_resolveHost];
+            $curlOptions[CURLOPT_RESOLVE] = is_array($this->_resolveHost) ? $this->_resolveHost : [$this->_resolveHost];
         }
 
         $criticalOptions = [

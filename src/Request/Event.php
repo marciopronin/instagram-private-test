@@ -232,12 +232,12 @@ class Event extends RequestCollection
                 break;
             case 'clips_viewer_clips_tab':
                 $class = 'ClipsViewerFragment';
+                break;
             /*
             case 'quick_capture_fragment':
                 $class = '155';
                 break;
             */
-            // no break
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';
                 break;

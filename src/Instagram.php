@@ -487,6 +487,13 @@ class Instagram implements ExperimentsInterface
      */
     public $enableResolutionCheck = false;
 
+    /**
+     * Custom resolver.
+     *
+     * @var callable
+     */
+    public $customResolver = null;
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -698,6 +705,17 @@ class Instagram implements ExperimentsInterface
     public function getProxy()
     {
         return $this->client->getProxy();
+    }
+
+    /**
+     * Set custom resolver.
+     *
+     * @param callable $value.
+     */
+    public function setCustomResolver(
+        $value)
+    {
+        $this->customResolver = $value;
     }
 
     /**
@@ -2981,6 +2999,10 @@ class Instagram implements ExperimentsInterface
     public function request(
         $url)
     {
+        if ($this->customResolver !== null) {
+            $this->client->setResolveHost(call_user_func_array($this->customResolver, [$url]));
+        }
+
         return new Request($this, $url);
     }
 }

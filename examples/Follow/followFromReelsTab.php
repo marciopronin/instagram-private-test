@@ -26,7 +26,7 @@ try {
 
     $sessionId = \InstagramAPI\Signatures::generateUUID();
 
-    $discoverStream = $ig->reel->discoverStream();
+    $discoverStream = $ig->reel->discover();
     $streamClips = $discoverStream->getItems();
 
     $seenReels = [];

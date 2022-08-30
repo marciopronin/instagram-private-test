@@ -874,6 +874,8 @@ class Internal extends RequestCollection
         $igtvAds = (isset($externalMetadata['igtv_ads_toggled_on']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_ads_toggled_on'] : null;
         /** @var array IGTV share preview to feed. ONLY TV MEDIA! */
         $igtvShareToFeed = (isset($externalMetadata['igtv_share_preview_to_feed']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_share_preview_to_feed'] : null;
+        /** @var array REELS (CLIPS) share preview to feed. ONLY REEL MEDIA! */
+        $reelShareToFeed = (isset($externalMetadata['reel_share_preview_to_feed']) && $targetFeed == Constants::FEED_REELS) ? $externalMetadata['reel_share_preview_to_feed'] : null;
 
         // Fix very bad external user-metadata values.
         if (!is_string($captionText)) {
@@ -1109,9 +1111,13 @@ class Internal extends RequestCollection
                         'has_voiceover_attribution' => 0,
                     ])
                     ->addPost('is_created_with_contextual_music_recs', '0')
-                    ->addPost('clips_share_preview_to_feed', '1')
                     ->addPost('capture_type', 'clips_v2');
 
+                if ($reelShareToFeed !== null) {
+                    $request->addPost('clips_share_preview_to_feed', $reelShareToFeed === true ? '1' : '0');
+                } else {
+                    $request->addPost('clips_share_preview_to_feed', '1');
+                }
                 if ($storyPoll !== null) {
                     Utils::throwIfInvalidStoryPoll($storyPoll);
                     $tapModels[] = $storyPoll[0];

@@ -1068,7 +1068,7 @@ class Internal extends RequestCollection
                             'num_step_manual_retry' => 0,
                         ])
                     )
-                    ->addPost('is_shared_to_fb', isset($externalMetadata['share_to_fb']) ? $externalMetadata['share_to_fb'] : '0')
+                    ->addPost('is_shared_to_fb', isset($externalMetadata['share_to_fb']) ? strval(intval($externalMetadata['share_to_fb'])) : '0')
                     ->addPost('caption', $captionText)
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('device_id', $this->ig->device_id)

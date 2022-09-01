@@ -186,7 +186,7 @@ $ig->internal->newAccountNuxSeen($waterfallId);
 
 $ig->internal->getOnBoardingSteps($waterfallId, 'phone', []);
 $ig->account->setContactPointPrefill('auto_confirmation', false);
-$ig->internal->sendPrivacyConsentPromptAction();
+$ig->internal->sendPrivacyConsentPromptAction('new_users_meta_flow');
 
 $ig->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', false);
 $ig->internal->sendGraph('18293997048434484603993202463', [
@@ -201,7 +201,7 @@ $ig->internal->sendGraph('18293997048434484603993202463', [
 
 $ig->internal->getMobileConfig(false);
 $ig->internal->getLoomFetchConfig();
-$ig->internal->sendPrivacyConsentPromptAction(true);
+$ig->internal->sendPrivacyConsentPromptAction('new_users_meta_flow', true);
 
 $ig->event->sendZeroCarrierSignal();
 

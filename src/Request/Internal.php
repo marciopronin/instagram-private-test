@@ -2013,18 +2013,19 @@ class Internal extends RequestCollection
     /**
      * Send privacy consent prompt action.
      *
-     * @param bool $form Form.
+     * @param bool  $form     Form.
+     * @param mixed $flowName
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\GenericResponse
      */
     public function sendPrivacyConsentPromptAction(
+        $flowName,
         $form = false)
     {
         $request = $this->ig->request('bloks/apps/com.bloks.www.privacy.consent.prompt.action/')
             ->setSignedPost(false)
-
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('bk_client_context', json_encode([
                 'bloks_version' => Constants::BLOCK_VERSIONING_ID,
@@ -2032,20 +2033,100 @@ class Internal extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID);
 
-        if ($form === false) {
-            $request->addPost('surface', 'instagram_android')
-                    ->addPost('flow_name', 'new_users_meta_flow')
-                    ->addPost('source', 'source');
-        } else {
-            $request->addPost('params', json_encode([
-                'server_params' => [
-                    '_w_s228763'    => '',
-                    'flow_name'     => 'new_users_meta_flow',
-                    'source'        => 'source',
-                ], ]));
+        switch ($flowName) {
+            case 'new_users_meta_flow':
+                if ($form === false) {
+                    $request->addPost('surface', 'instagram_android')
+                            ->addPost('flow_name', 'new_users_meta_flow')
+                            ->addPost('source', 'source');
+                } else {
+                    $request->addPost('params', json_encode([
+                        'server_params' => [
+                            '_w_s228763'    => '',
+                            'flow_name'     => 'new_users_meta_flow',
+                            'source'        => 'source',
+                        ], ]));
+                }
+                break;
+            case 'user_cookie_choice':
+                if ($form === false) {
+                    $request->addPost('surface', 'instagram_android')
+                            ->addPost('flow_name', 'user_cookie_choice')
+                            ->addPost('source', 'pft_user_cookie_choice');
+                } else {
+                    $request->addPost('params', json_encode([
+                        'server_params' => [
+                            '_w_s228763'    => '',
+                            'flow_name'     => 'user_cookie_choice',
+                            'source'        => 'pft_user_cookie_choice',
+                        ], ]));
+                }
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf('Invalid flow name provided: %s', $flowName));
+                break;
         }
 
         return $request->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Send privacy consent prompt callback.
+     *
+     * @param GenericResponse $response
+     * @param bool            $init     Init.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function sendPrivacyConsentPromptCallback(
+        $response,
+        $init = false)
+    {
+        $re = '/[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}/m';
+        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+        if (empty($matches)) {
+            throw new \InstagramException('Invalid response provided');
+        }
+
+        $experienceId = $matches[0][0];
+
+        $request = $this->ig->request('bloks/apps/com.bloks.www.privacy.consent.prompt.impression.callback/')
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID);
+
+        $params = [
+            'server_params' => [
+                'prompt_context'    => [
+                    'flow_step'         => 0,
+                    'current_screen_id' => 'nsati0:2',
+                    'previous_prompts'  => [],
+                    'experience_id'     => $experienceId,
+                    'first_screen_id'   => null,
+            ],
+            'source'        => 'pft_user_cookie_choice',
+            'extra_params'  => [
+                'attribution_events_flush'  => 'true',
+            ],
+            'config_enum'   => 'user_cookie_choice_french_cnil',
+            ],
+        ];
+
+        if ($init === false) {
+            $params['event'] = 'consent_interactions_prompt_impression';
+        } else {
+            $params['event_type'] = 'accept';
+        }
+
+        return $request->addPost('params', json_encode($params))
+                       ->getResponse(new Response\GenericResponse());
     }
 
     /**

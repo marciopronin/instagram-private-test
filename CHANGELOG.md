@@ -1,9 +1,21 @@
+# Stable release v20.14.0
+## Date: 01/09/2022
+
+### New features
+
+- **Internal:** Add `sendPrivacyConsentPromptAction()`
+- **Internal:** Add `sendPrivacyConsentPromptCallback()`
+
+### Examples
+
+- **Example:** Update smsRegistration
+
 # Stable release v20.13.1
 ## Date: 31/08/2022
 
 ### Updates and fixes
 
-- **Interal:** Update `configureSingleVideo()`
+- **Internal:** Update `configureSingleVideo()`
 
 # Stable release v20.13.0
 ## Date: 30/08/2022
@@ -16,7 +28,7 @@
 
 - **Instagram:** Update `request()`
 - **Event:** Update `_getModuleClass()`
-- **Interal:** Update `configureSingleVideo()`
+- **Internal:** Update `configureSingleVideo()`
 - **Client:** Update `_buildGuzzleOptions()`
 
 ### Examples

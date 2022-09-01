@@ -2384,8 +2384,13 @@ class Instagram implements ExperimentsInterface
                 } catch (\InstagramAPI\Exception\InstagramException $e) {
                     // pass
                 }
-                $this->internal->fetchZeroRatingToken('token_expired', false);
-                $this->account->setContactPointPrefill('prefill');
+
+                try {
+                    $this->internal->fetchZeroRatingToken('token_expired', false);
+                    $this->account->setContactPointPrefill('prefill');
+                } catch (\InstagramAPI\Exception\InstagramException $e) {
+                    // pass
+                }
 
                 $this->internal->sendGraph('455411352809009551099714876', [
                     'input' => [

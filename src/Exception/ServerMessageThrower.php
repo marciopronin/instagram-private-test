@@ -56,6 +56,7 @@ class ServerMessageThrower
          * ChallengeRequired!
          */
         'LoginRequiredException'                  => ['login_required'],
+        'LoginAndSignupPageException'             => ['LoginAndSignupPage'],
         'Checkpoint\CheckpointRequiredException'  => [
             'checkpoint_required', // message
             'checkpoint_challenge_required', // error_type

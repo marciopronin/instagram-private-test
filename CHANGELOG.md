@@ -1,3 +1,11 @@
+# Stable release v20.14.1
+## Date: 02/09/2022
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+- **Instagram:** Update `_sendPreLoginFlow()`
+
 # Stable release v20.14.0
 ## Date: 01/09/2022
 

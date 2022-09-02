@@ -4213,36 +4213,6 @@ class Event extends RequestCollection
                     'dest_module'   => 'blended_search',
                 ],
             ],
-            'blended_search' => [
-                [
-                    'clickpoint'    => 'main_search',
-                    'dest_module'   => 'explore_popular',
-                ],
-                [
-                    'clickpoint'    => 'button',
-                    'dest_module'   => 'search_places',
-                ],
-                [
-                    'clickpoint'    => 'button',
-                    'dest_module'   => 'search_users',
-                ],
-                [
-                    'clickpoint'    => 'button',
-                    'dest_module'   => 'search_tags',
-                ],
-                [
-                    'clickpoint'    => 'button',
-                    'dest_module'   => 'profile',
-                ],
-                [
-                    'clickpoint'    => 'search_result',
-                    'dest_module'   => 'profile',
-                ],
-                [
-                    'clickpoint'    => 'button',
-                    'dest_module'   => 'blended_search',
-                ],
-            ],
             'search_typeahead' => [
                 [
                     'clickpoint'    => 'main_search',
@@ -4351,6 +4321,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'search_users',
+                ],
+                [
+                    'clickpoint'    => 'search_result',
+                    'dest_module'   => 'profile',
                 ],
             ],
             'search_tags'  => [

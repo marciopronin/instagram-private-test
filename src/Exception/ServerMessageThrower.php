@@ -57,6 +57,7 @@ class ServerMessageThrower
          */
         'LoginRequiredException'                  => ['login_required'],
         'LoginAndSignupPageException'             => ['LoginAndSignupPage'],
+        'IPLoginBlockException'                   => ['RleLoginBlocked'],
         'Checkpoint\CheckpointRequiredException'  => [
             'checkpoint_required', // message
             'checkpoint_challenge_required', // error_type
@@ -93,8 +94,6 @@ class ServerMessageThrower
         ],
         'SentryBlockException'         => ['sentry_block'],
         'InvalidUserException'         => [
-            // "The username you entered doesn't appear to belong to an account"
-            '/username(.*?)doesn\'t(.*?)belong/', // message
             'invalid_user', // error_type
         ],
         'Checkpoint\ChangePasswordException'                 => ['/reset(.*?)password/', 'set_new_password'],
@@ -158,6 +157,11 @@ class ServerMessageThrower
                 $serverErrorType = $serverResponse->getErrorType();
                 $messages[] = $serverErrorType;
             }
+            if ($serverResponse->hasExceptionName()
+                && is_string($serverResponse->getExceptionName())) {
+                $serverErrorType = $serverResponse->getExceptionName();
+                $messages[] = $serverErrorType;
+            }
             if ($serverResponse->hasStepName()
                 && is_string($serverResponse->getStepName())) {
                 $serverErrorType = $serverResponse->getStepName();
@@ -172,6 +176,10 @@ class ServerMessageThrower
                 }
                 if (isset($entryData['HttpErrorPage'])) {
                     // pass
+                }
+                if (isset($entryData['LoginAndSignupPage'])) {
+                    $serverErrorType = 'LoginAndSignupPage';
+                    $messages[] = $serverErrorType;
                 }
             }
             if ($serverResponse->hasChallenge()

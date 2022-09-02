@@ -19,6 +19,7 @@ use InstagramAPI\Response;
  * @method int getCountryCode()
  * @method string getErrorTitle()
  * @method string getErrorType()
+ * @method string getExceptionName()
  * @method string getFullName()
  * @method bool getHasAnonymousProfilePicture()
  * @method bool getHasIgtvSeries()
@@ -60,6 +61,7 @@ use InstagramAPI\Response;
  * @method bool isCountryCode()
  * @method bool isErrorTitle()
  * @method bool isErrorType()
+ * @method bool isExceptionName()
  * @method bool isFullName()
  * @method bool isHasAnonymousProfilePicture()
  * @method bool isHasIgtvSeries()
@@ -101,6 +103,7 @@ use InstagramAPI\Response;
  * @method $this setCountryCode(int $value)
  * @method $this setErrorTitle(string $value)
  * @method $this setErrorType(string $value)
+ * @method $this setExceptionName(string $value)
  * @method $this setFullName(string $value)
  * @method $this setHasAnonymousProfilePicture(bool $value)
  * @method $this setHasIgtvSeries(bool $value)
@@ -142,6 +145,7 @@ use InstagramAPI\Response;
  * @method $this unsetCountryCode()
  * @method $this unsetErrorTitle()
  * @method $this unsetErrorType()
+ * @method $this unsetExceptionName()
  * @method $this unsetFullName()
  * @method $this unsetHasAnonymousProfilePicture()
  * @method $this unsetHasIgtvSeries()
@@ -201,6 +205,7 @@ class LoginResponse extends Response
         'national_number'               => 'int',
         'error_title'                   => 'string', // On wrong pass or other account related error.
         'error_type'                    => 'string', // On wrong pass or other account related error.
+        'exception_name'                => 'string',
         'buttons'                       => 'Model\LoginButton[]', // On wrong pass or other account related error.
         'invalid_credentials'           => '', // On wrong pass or other account related error.
         'logged_in_user'                => 'Model\User',

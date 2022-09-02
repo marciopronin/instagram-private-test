@@ -1,3 +1,15 @@
+# Stable release v20.14.2
+## Date: 02/09/2022
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+- **ServerMessageThrower:** Update `autoThrow()`
+- **Event:** Update `_validateNavigationPath()`
+
+### Models and responses
+- **Response:** Update LoginResponse
+
 # Stable release v20.14.1
 ## Date: 02/09/2022
 

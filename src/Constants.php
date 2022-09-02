@@ -12,7 +12,7 @@ class Constants
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
     const IG_VERSION = '249.0.0.20.105';
     const IG_IOS_VERSION = '212.1.0.25.118';
-    const VERSION_CODE = '373310554';
+    const VERSION_CODE = '392286023';
     const IG_IOS_VERSION_CODE = '329643252';
     const IOS_MODEL = 'iPhone13,2';
     const IOS_VERSION = '14_1';

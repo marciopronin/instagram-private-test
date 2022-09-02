@@ -2904,10 +2904,15 @@ class Instagram implements ExperimentsInterface
 
             // Update zero rating token when it has been expired.
             $expired = time() - (int) $this->settings->get('zr_expires');
-            if ($expired > 0) {
-                $this->client->zeroRating()->reset();
-                $this->internal->fetchZeroRatingToken($expired > 7200 ? 'token_stale' : 'token_expired', false, false);
-                $this->event->sendZeroCarrierSignal();
+
+            try {
+                if ($expired > 0) {
+                    $this->client->zeroRating()->reset();
+                    $this->internal->fetchZeroRatingToken($expired > 7200 ? 'token_stale' : 'token_expired', false, false);
+                    $this->event->sendZeroCarrierSignal();
+                }
+            } catch (\InstagramAPI\Exception\InstagramException $e) {
+                // pass
             }
         }
 

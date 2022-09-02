@@ -57,7 +57,10 @@ class ServerMessageThrower
          */
         'LoginRequiredException'                  => ['login_required'],
         'LoginAndSignupPageException'             => ['LoginAndSignupPage'],
-        'IPLoginBlockException'                   => ['RleLoginBlocked'],
+        'IPLoginBlockException'                   => [
+            'RleLoginBlocked', // exception_name
+            'ip_block', // error_type
+        ],
         'Checkpoint\CheckpointRequiredException'  => [
             'checkpoint_required', // message
             'checkpoint_challenge_required', // error_type

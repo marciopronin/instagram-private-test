@@ -1,3 +1,12 @@
+# Stable release v20.14.3
+## Date: 02/09/2022
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+- **Constants:** Update Constants. Fixed version code.
+- **Instagram:** Update login flow
+
 # Stable release v20.14.2
 ## Date: 02/09/2022
 

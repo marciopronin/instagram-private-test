@@ -1,3 +1,11 @@
+# Stable release v20.16.1
+## Date: 06/09/2022
+
+### Updates and fixes
+
+- **Instagram:** Updated login flow
+- **Internal:** Updated `getSupportedCapabilities()`
+
 # Stable release v20.16.0
 ## Date: 05/09/2022
 

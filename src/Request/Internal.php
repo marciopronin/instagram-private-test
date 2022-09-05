@@ -3442,8 +3442,13 @@ class Internal extends RequestCollection
     public function getSupportedCapabilities()
     {
         $supportedCapabilities = Constants::SUPPORTED_CAPABILITIES;
-        $segmentation = $this->ig->isExperimentEnabled('ig_android_stories_video_segmentation', 'is_long_video_segments_enabled');
-        if ($segmentation) {
+        $segmentation = $this->ig->isExperimentEnabled(
+            'qe_ig_android_reel_raven_video_segmented_upload_universe',
+            'segment_enabled_story_raven');
+        $segmentationUnknown = $this->ig->isExperimentEnabled(
+            'qe_ig_android_reel_raven_video_segmented_upload_universe',
+            'segment_enabled_unknown', true);
+        if ($segmentation || $segmentationUnknown) {
             $supportedCapabilities[] = [
                 'name'  => 'segmentation',
                 'value' => 'segmentation_enabled',

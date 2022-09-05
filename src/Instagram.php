@@ -2414,17 +2414,16 @@ class Instagram implements ExperimentsInterface
                 try {
                     $this->internal->fetchZeroRatingToken('token_expired', false);
                     $this->account->setContactPointPrefill('prefill');
+                    $this->internal->sendGraph('455411352809009551099714876', [
+                        'input' => [
+                            'app_scoped_id'     => $this->uuid,
+                            'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
+                            'family_device_id'  => $this->phone_id,
+                        ],
+                    ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
                 } catch (\InstagramAPI\Exception\InstagramException $e) {
                     // pass
                 }
-
-                $this->internal->sendGraph('455411352809009551099714876', [
-                    'input' => [
-                        'app_scoped_id'     => $this->uuid,
-                        'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
-                        'family_device_id'  => $this->phone_id,
-                    ],
-                ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
 
                 //$this->event->sendZeroCarrierSignal();
                 //$this->internal->bootstrapMsisdnHeader();
@@ -2443,17 +2442,16 @@ class Instagram implements ExperimentsInterface
                 //$this->internal->bootstrapMsisdnHeader();
                 try {
                     $this->internal->logAttribution();
+                    $this->internal->sendGraph('455411352809009551099714876', [
+                        'input' => [
+                            'app_scoped_id'     => $this->uuid,
+                            'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
+                            'family_device_id'  => $this->phone_id,
+                        ],
+                    ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
                 } catch (\InstagramAPI\Exception\InstagramException $e) {
                     // pass
                 }
-
-                $this->internal->sendGraph('455411352809009551099714876', [
-                    'input' => [
-                        'app_scoped_id'     => $this->uuid,
-                        'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
-                        'family_device_id'  => $this->phone_id,
-                    ],
-                ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
             } finally {
                 // Stops emulating batch requests.
                 $this->client->stopEmulatingBatch();
@@ -2611,6 +2609,8 @@ class Instagram implements ExperimentsInterface
             try {
                 $this->internal->fetchZeroRatingToken('token_expired', false, false);
                 $this->event->sendZeroCarrierSignal();
+            } catch (\Exception $e) {
+                // pass
             } finally {
                 // Stops emulating batch requests.
                 $this->client->stopEmulatingBatch();
@@ -2618,16 +2618,21 @@ class Instagram implements ExperimentsInterface
 
             // Batch request 2
             $this->client->startEmulatingBatch();
-            $this->internal->sendGraph('18293997048434484603993202463', [
-                'input' => [
-                    'log_only'  => true,
-                    'events'    => [
-                        'no_advertisement_id'   => false,
-                        'event_name'            => 'LOGIN',
-                        'adid'                  => $this->advertising_id,
+
+            try {
+                $this->internal->sendGraph('18293997048434484603993202463', [
+                    'input' => [
+                        'log_only'  => true,
+                        'events'    => [
+                            'no_advertisement_id'   => false,
+                            'event_name'            => 'LOGIN',
+                            'adid'                  => $this->advertising_id,
+                        ],
                     ],
-                ],
-            ], 'ReportAttributionEventsMutation', false);
+                ], 'ReportAttributionEventsMutation', false);
+            } catch (\Exception $e) {
+                // pass
+            }
 
             try {
                 $feed = $this->timeline->getTimelineFeed(null, [
@@ -2691,6 +2696,8 @@ class Instagram implements ExperimentsInterface
                 } catch (\Exception $e) {
                     // Pass (avoid throttling).
                 }
+            } catch (\Exception $e) {
+                // Pass (avoid throttling).
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();

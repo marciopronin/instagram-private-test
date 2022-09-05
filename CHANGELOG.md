@@ -1,3 +1,14 @@
+# Stable release v20.16.0
+## Date: 05/09/2022
+
+### New features
+
+- **Internal:** Added `writeSupportedCapabilities()`
+
+### Updates and fixes
+
+- **Instagram:** Updated login flow
+
 # Stable release v20.15.0
 ## Date: 05/09/2022
 

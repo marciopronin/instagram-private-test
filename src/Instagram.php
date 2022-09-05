@@ -2773,6 +2773,7 @@ class Instagram implements ExperimentsInterface
                 } catch (\Exception $e) {
                 }
                 $this->reel->discover();
+                $this->internal->writeSupportedCapabilities();
                 $this->_registerPushChannels();
             } finally {
                 // Stops emulating batch requests
@@ -2884,7 +2885,7 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->direct->getPresences();
-                    $this->discover->getExploreFeed('explore_all:0', \InstagramAPI\Signatures::generateUUID());
+                    $this->discover->getExploreFeed('', \InstagramAPI\Signatures::generateUUID(), null, true, true);
                     $this->direct->getInbox();
                 } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
                     // This can have EmptyResponse, and that's ok.
@@ -2906,7 +2907,7 @@ class Instagram implements ExperimentsInterface
                 $this->client->startEmulatingBatch();
 
                 try {
-                    $this->internal->getLoomFetchConfig();
+                    $this->internal->getQPFetch();
                     $this->direct->getRankedRecipients('reshare', true);
                     $this->direct->getRankedRecipients('raven', true);
                     $this->_registerPushChannels();
@@ -2923,9 +2924,11 @@ class Instagram implements ExperimentsInterface
             // Users normally resume their sessions, meaning that their
             // experiments never get synced and updated. So sync periodically.
             $lastExperimentsTime = $this->settings->get('last_experiments');
-            if ($lastExperimentsTime === null || (time() - $lastExperimentsTime) > self::EXPERIMENTS_REFRESH) {
+            if ($lastExperimentsTime === null || (time() - intval($lastExperimentsTime)) > self::EXPERIMENTS_REFRESH) {
                 // Start emulating batch requests with Pidgeon Raw Client Time.
-                $this->client->startEmulatingBatch();
+                //$this->client->startEmulatingBatch();
+                $this->internal->getMobileConfig(true);
+                $this->internal->getMobileConfig(false);
             }
 
             // Update zero rating token when it has been expired.

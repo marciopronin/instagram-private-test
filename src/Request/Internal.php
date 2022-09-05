@@ -3474,6 +3474,22 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Write capabilities.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function writeSupportedCapabilities()
+    {
+        return $this->ig->request('creatives/write_supported_capabilities/')
+            ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get target segment duration in seconds.
      *
      * @param int $targetFeed One of the FEED_X constants.

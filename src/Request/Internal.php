@@ -287,7 +287,7 @@ class Internal extends RequestCollection
 
         // Build the request...
         $request = $this->ig->request($endpoint)
-            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
@@ -888,7 +888,7 @@ class Internal extends RequestCollection
         // Build the request...
         $request = $this->ig->request($endpoint)
             ->addParam('video', 1)
-            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
             ->addPost('video_result', $internalMetadata->getVideoUploadResponse() !== null ? (string) $internalMetadata->getVideoUploadResponse()->getResult() : '')
             ->addPost('upload_id', $uploadId)
             ->addPost('poster_frame_index', 0)
@@ -1383,6 +1383,21 @@ class Internal extends RequestCollection
             fclose($paramsMap);
         }
 
+        $paramsMap = json_decode(file_get_contents(__DIR__.'/../data/mobileconfig.json'));
+
+        foreach ($paramsMap as $exp) {
+            $values = explode(':', $exp);
+            $mappedExperiments[$values[0]] = [
+                'name'  => $values[1],
+                'exps'  => [],
+            ];
+            foreach (array_slice($values, 2) as $k => $v) {
+                if ($k % 2 === 1) {
+                    $mappedExperiments[$values[0]]['exps'][] = $v;
+                }
+            }
+        }
+
         $experiments = [];
 
         foreach ($mobileConfigResponse['configs'] as $k => $v) {
@@ -1402,7 +1417,9 @@ class Internal extends RequestCollection
                         } else {
                             $val = null;
                         }
-                        $exps[$mappedExperiments[$k]['exps'][$c]] = $val;
+                        if (isset($mappedExperiments[$k]['exps'][$c])) {
+                            $exps[$mappedExperiments[$k]['exps'][$c]] = $val;
+                        }
                     }
                     $c++;
                 }
@@ -3415,6 +3432,45 @@ class Internal extends RequestCollection
         }
 
         return $result;
+    }
+
+    /**
+     * Get supported capabilities.
+     *
+     * @return string
+     */
+    public function getSupportedCapabilities()
+    {
+        $supportedCapabilities = Constants::SUPPORTED_CAPABILITIES;
+        $segmentation = $this->ig->isExperimentEnabled('ig_android_stories_video_segmentation', 'is_long_video_segments_enabled');
+        if ($segmentation) {
+            $supportedCapabilities[] = [
+                'name'  => 'segmentation',
+                'value' => 'segmentation_enabled',
+            ];
+        }
+
+        $supportedCapabilities[] = [
+            'name'  => 'COMPRESSION',
+            'value' => 'ETC2_COMPRESSION',
+        ];
+
+        $wordTracker = $this->ig->isExperimentEnabled('ig_android_cameracore_world_tracker_v2', 'enabled');
+        if ($wordTracker) {
+            $supportedCapabilities[] = [
+                'name'  => 'world_tracker',
+                'value' => 'world_tracker_enabled',
+            ];
+        }
+
+        if ($this->ig->getGyroscopeEnabled()) {
+            $supportedCapabilities[] = [
+                'name'  => 'gyroscope',
+                'value' => 'gyroscope_enabled',
+            ];
+        }
+
+        return json_encode($supportedCapabilities);
     }
 
     /**

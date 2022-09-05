@@ -1,3 +1,21 @@
+# Stable release v20.15.0
+## Date: 05/09/2022
+
+### New features
+
+- **Data:** Added `mobileconfig.json`
+- **Internal:** Added `getSupportedCapabilities()`
+
+### Updates and fixes
+
+- **Constants:** Update Constants
+- **Internal:** Update `_saveExperimentsMobileConfig()`
+- **Internal:** Update capability and experiment calls.
+- **Story:** Update functions to get capabilities
+- **Highlight:** Update functions to get capabilities
+- **Creative:** Update functions to get capabilities
+- **StorageHandler:** Update `setExperiments()`
+
 # Stable release v20.14.3
 ## Date: 02/09/2022
 

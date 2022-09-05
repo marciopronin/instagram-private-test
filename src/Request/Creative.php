@@ -2,7 +2,6 @@
 
 namespace InstagramAPI\Request;
 
-use InstagramAPI\Constants;
 use InstagramAPI\Response;
 
 /**
@@ -149,7 +148,7 @@ class Creative extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES));
+            ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities());
 
         if ($location !== null) {
             $request
@@ -171,7 +170,7 @@ class Creative extends RequestCollection
     public function sendSupportedCapabilities()
     {
         return $this->ig->request('creatives/write_supported_capabilities/')
-            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())

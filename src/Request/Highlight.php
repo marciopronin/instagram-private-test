@@ -2,7 +2,6 @@
 
 namespace InstagramAPI\Request;
 
-use InstagramAPI\Constants;
 use InstagramAPI\Response;
 
 /**
@@ -33,7 +32,7 @@ class Highlight extends RequestCollection
             ->addHeader('X-CM-Latency', '-1.000')
             ->addHeader('X-Ads-Opt-Out', '0')
             ->addHeader('X-DEVICE-ID', $this->ig->device_id)
-            ->addParam('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addParam('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addParam('phone_id', $this->ig->phone_id)
             ->addParam('battery_level', $this->ig->getBatteryLevel())
             ->addParam('is_charging', $this->ig->getIsDeviceCharging())
@@ -98,7 +97,7 @@ class Highlight extends RequestCollection
         ];
 
         return $this->ig->request('highlights/create_reel/')
-            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('source', $module)
             ->addPost('creation_id', round(microtime(true) * 1000))
             //->addPost('_csrftoken', $this->ig->client->getToken())
@@ -147,7 +146,7 @@ class Highlight extends RequestCollection
         ];
 
         return $this->ig->request("highlights/{$highlightReelId}/edit_reel/")
-            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('source', $module)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)

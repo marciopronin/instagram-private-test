@@ -129,7 +129,7 @@ class Story extends RequestCollection
     {
         return $this->ig->request('feed/reels_tray/')
             ->setSignedPost(false)
-            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('reason', $reason)
             ->addPost('timezone_offset', date('Z'))
             ->addPost('request_id', Signatures::generateUUID())
@@ -212,7 +212,7 @@ class Story extends RequestCollection
         $userId)
     {
         return $this->ig->request("feed/user/{$userId}/story/")
-            ->addParam('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addParam('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->getResponse(new Response\UserStoryFeedResponse());
     }
 
@@ -249,7 +249,7 @@ class Story extends RequestCollection
         unset($value); // Clear reference.
 
         return $this->ig->request('feed/reels_media/')
-            ->addPost('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES))
+            ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())
@@ -372,7 +372,7 @@ class Story extends RequestCollection
         $maxId = null)
     {
         $request = $this->ig->request("media/{$storyPk}/list_reel_media_viewer/")
-            ->addParam('supported_capabilities_new', json_encode(Constants::SUPPORTED_CAPABILITIES));
+            ->addParam('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities());
         if ($maxId !== null) {
             $request->addParam('max_id', $maxId);
         }

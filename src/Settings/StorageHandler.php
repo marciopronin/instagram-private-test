@@ -683,16 +683,9 @@ class StorageHandler
     public function setExperiments(
         array $experiments)
     {
-        $filtered = [];
-        foreach (self::EXPERIMENT_KEYS as $key) {
-            if (!isset($experiments[$key])) {
-                continue;
-            }
-            $filtered[$key] = $experiments[$key];
-        }
-        $this->set('experiments', $this->_packJson($filtered));
+        $this->set('experiments', $this->_packJson($experiments));
 
-        return $filtered;
+        return $experiments;
     }
 
     /**

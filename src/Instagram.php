@@ -494,6 +494,13 @@ class Instagram implements ExperimentsInterface
      */
     public $customResolver = null;
 
+    /**
+     * Gyroscope enabled.
+     *
+     * @var callable
+     */
+    public $gyroscopeEnabled = true;
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -1328,6 +1335,25 @@ class Instagram implements ExperimentsInterface
         $value)
     {
         $this->carrier = $value;
+    }
+
+    /**
+     * Set gyroscope enabled.
+     *
+     * @param bool $value
+     */
+    public function setGyroscopeEnabled(
+        $value)
+    {
+        $this->$gyroscopeEnabled = boolval($value);
+    }
+
+    /**
+     * Get gyroscope enabled.
+     */
+    public function getGyroscopeEnabled()
+    {
+        return $this->gyroscopeEnabled;
     }
 
     /**

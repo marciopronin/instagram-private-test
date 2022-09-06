@@ -1,3 +1,18 @@
+# Stable release v20.16.2
+## Date: 07/09/2022
+
+### Updates and fixes
+
+- **Constants:** Update Constants
+- **Discover:** Update `getExploreFeed()`
+- **Internal:** Update `getQPFetch()`
+- **Story:** Update `getReelsTrayFeed()`
+
+### Examples
+
+- **Example:** Update followFromMediaLikers
+- **Example:** Update unfollowFromSearch
+
 # Stable release v20.16.1
 ## Date: 06/09/2022
 

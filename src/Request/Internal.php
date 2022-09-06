@@ -1777,20 +1777,8 @@ class Internal extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('surfaces_to_triggers', json_encode(
-                [
-                    Constants::BATCH_SURFACES[0][0] => Constants::BATCH_SURFACES[0][1],
-                    Constants::BATCH_SURFACES[1][0] => Constants::BATCH_SURFACES[1][1],
-                    Constants::BATCH_SURFACES[2][0] => Constants::BATCH_SURFACES[2][1],
-                ]
-            ))
-            ->addPost('surfaces_to_queries', json_encode(
-                [
-                    Constants::BATCH_SURFACES[0][0] => Constants::BATCH_QUERY,
-                    Constants::BATCH_SURFACES[1][0] => Constants::BATCH_QUERY,
-                    Constants::BATCH_SURFACES[2][0] => Constants::BATCH_QUERY,
-                ]
-            ))
+            ->addPost('surfaces_to_triggers', Constants::BATCH_SURFACES)
+            ->addPost('surfaces_to_queries', Constants::BATCH_QUERY)
             ->addPost('version', Constants::BATCH_VERSION)
             ->addPost('scale', ceil(intval(substr($this->ig->device->getDPI(), 0, -3)) / 160))
             ->getResponse(new Response\FetchQPDataResponse());

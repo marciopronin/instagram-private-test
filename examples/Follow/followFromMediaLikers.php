@@ -102,7 +102,7 @@ try {
     $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
 
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
-    $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
+    $ig->event->sendNavigation('search_result', 'blended_search', 'profile', null, null,
         [
             'rank_token'            => null,
             'query_text'            => $queryUser,
@@ -111,6 +111,18 @@ try {
             'position'              => 0,
             'username'              => $queryUser,
             'user_id'               => $userId,
+        ]
+    );
+    $ig->event->sendNavigation('button', 'profile', 'profile', null, null,
+        [
+            'rank_token'            => null,
+            'query_text'            => $queryUser,
+            'search_session_id'     => $searchSession,
+            'selected_type'         => 'user',
+            'position'              => 0,
+            'username'              => $queryUser,
+            'user_id'               => $userId,
+            'class_selector'        => 'ProfileMediaTabFragment',
         ]
     );
     $ig->event->sendProfileView($userId);
@@ -141,10 +153,6 @@ try {
                 'click_point'   => 'button',
             ],
             [
-                'module'        => 'explore_popular',
-                'click_point'   => 'explore_topic_load',
-            ],
-            [
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_search',
             ],
@@ -171,38 +179,7 @@ try {
     $likersResponse = $ig->media->getLikers($items[0]->getId());
     $userList = $likersResponse->getUsers();
 
-    $ig->event->sendFollowButtonTapped($userList[0]->getPk(), 'likers',
-        [
-            [
-                'module'        => 'feed_contextual_profile',
-                'click_point'   => 'media_likes',
-            ],
-            [
-                'module'        => 'profile',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'blended_search',
-                'click_point'   => 'search_result',
-            ],
-            [
-                'module'        => 'blended_search',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'explore_popular',
-                'click_point'   => 'button',
-            ],
-            [
-                'module'        => 'explore_popular',
-                'click_point'   => 'explore_topic_load',
-            ],
-            [
-                'module'        => 'feed_timeline',
-                'click_point'   => 'main_search',
-            ],
-        ]
-    );
+    $ig->event->sendFollowButtonTapped($userList[0]->getPk(), 'likers', 'blended_search');
 
     $ig->people->follow($userId);
     // YES, NO PROFILE ACTION REQUIRED.

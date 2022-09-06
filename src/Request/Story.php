@@ -127,15 +127,20 @@ class Story extends RequestCollection
     public function getReelsTrayFeed(
         $reason = 'pull_to_refresh')
     {
-        return $this->ig->request('feed/reels_tray/')
+        $request = $this->ig->request('feed/reels_tray/')
             ->setSignedPost(false)
             ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('reason', $reason)
             ->addPost('timezone_offset', date('Z'))
             ->addPost('request_id', Signatures::generateUUID())
             //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('_uuid', $this->ig->uuid)
-            ->getResponse(new Response\ReelsTrayFeedResponse());
+            ->addPost('_uuid', $this->ig->uuid);
+
+        if ($this->ig->isExperimentEnabled('ig_android_stories_tray_pagination_killswitch', 'is_enabled', true)) {
+            $request->addPost('page_size', $this->ig->getExperimentParam('ig_android_stories_tray_pagination_killswitch', 'default_page_size', 50));
+        }
+
+        return $request->getResponse(new Response\ReelsTrayFeedResponse());
     }
 
     /**

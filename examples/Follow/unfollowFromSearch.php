@@ -85,15 +85,28 @@ try {
             $ig->event->sendSimilarEntityImpression($userId, $suggestions[$i]->getPk());
         }
     }
-    $ig->event->sendNavigation('button', 'search_users', 'profile', null, null,
+    // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
+    $ig->event->sendNavigation('search_result', 'blended_search', 'profile', null, null,
         [
-            'rank_token'        => $rankToken,
-            'query_text'        => $usernameToFollow,
-            'search_session_id' => $searchSession,
-            'selected_type'     => 'user',
-            'position'          => 0,
-            'username'          => $usernameToFollow,
-            'user_id'           => $userId,
+            'rank_token'            => null,
+            'query_text'            => $queryUser,
+            'search_session_id'     => $searchSession,
+            'selected_type'         => 'user',
+            'position'              => 0,
+            'username'              => $queryUser,
+            'user_id'               => $userId,
+        ]
+    );
+    $ig->event->sendNavigation('button', 'profile', 'profile', null, null,
+        [
+            'rank_token'            => null,
+            'query_text'            => $queryUser,
+            'search_session_id'     => $searchSession,
+            'selected_type'         => 'user',
+            'position'              => 0,
+            'username'              => $queryUser,
+            'user_id'               => $userId,
+            'class_selector'        => 'ProfileMediaTabFragment',
         ]
     );
     $traySession = \InstagramAPI\Signatures::generateUUID();
@@ -139,10 +152,6 @@ try {
                 'click_point'   => 'button',
             ],
             [
-                'module'        => 'explore_popular',
-                'click_point'   => 'explore_topic_load',
-            ],
-            [
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_search',
             ],
@@ -164,10 +173,6 @@ try {
                 [
                     'module'        => 'explore_popular',
                     'click_point'   => 'button',
-                ],
-                [
-                    'module'        => 'explore_popular',
-                    'click_point'   => 'explore_topic_load',
                 ],
                 [
                     'module'        => 'feed_timeline',

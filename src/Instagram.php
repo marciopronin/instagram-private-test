@@ -2880,6 +2880,7 @@ class Instagram implements ExperimentsInterface
                 try {
                     //$this->people->getSharePrefill();
                     $this->people->getRecentActivityInbox();
+                    $this->internal->writeSupportedCapabilities();
                     $this->people->getInfoById($this->account_id);
                     $this->internal->getDeviceCapabilitiesDecisions();
                 } finally {

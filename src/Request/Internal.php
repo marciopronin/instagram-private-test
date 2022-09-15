@@ -655,7 +655,7 @@ class Internal extends RequestCollection
                     return $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
                 }
             );
-            $this->updateMediaWithPdqHashes($internalMetadata->getUploadId(), $pdqHashes);
+            // $this->updateMediaWithPdqHashes($internalMetadata->getUploadId(), $pdqHashes);
         } catch (InstagramException $e) {
             // Pass Instagram's error as is.
             throw $e;
@@ -1509,7 +1509,8 @@ class Internal extends RequestCollection
     {
         return $this->ig->request('attribution/log_attribution/')
             ->setNeedsAuth(false)
-            ->addPost('adid', $this->ig->advertising_id)
+            ->setSignedPost(false)
+            ->addPost('signed_body', Signatures::generateSignature(json_encode((object) [])).'.{}')
             ->getResponse(new Response\GenericResponse());
     }
 

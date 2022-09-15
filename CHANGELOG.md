@@ -1,3 +1,11 @@
+# Stable release v20.16.4
+## Date: 15/09/2022
+
+### Updates and fixes
+
+**Internal:** Update `logAttribution()`
+**Internal:** Update `uploadSingleVideo()`
+
 # Stable release v20.16.3
 ## Date: 09/09/2022
 

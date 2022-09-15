@@ -1538,6 +1538,7 @@ class Account extends RequestCollection
     public function sendGoogleTokenUsers()
     {
         return $this->ig->request('accounts/google_token_users/')
+            ->setNeedsAuth(false)
             ->addPost('google_tokens', '[]')
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());

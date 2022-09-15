@@ -1,3 +1,23 @@
+# Stable release v20.17.0
+## Date: 15/09/2022
+
+### Updates and fixes
+
+**Internal:** Update `logAttribution()`
+**Internal:** Update `uploadSingleVideo()`
+
+### Updates and fixes
+
+**Account:** Update `sendGoogleTokenUsers()`
+**Event:** Update `_addEventBody()`
+**Event:** Update `sendStringImpressions()`
+**Event:** Update `sendEmergencyPushInitialVersion()`
+**Event:** Update `sendZeroUrlRewrite()`
+**Event:** Update `sendFlowSteps()`
+**Event:** Update `sendPhoneId()`
+**Event:** Update `_addCommonProperties()`
+**Event:** Update `sendInstagramInstallWithReferrer()`
+
 # Stable release v20.16.4
 ## Date: 15/09/2022
 

@@ -497,9 +497,30 @@ class Instagram implements ExperimentsInterface
     /**
      * Gyroscope enabled.
      *
-     * @var callable
+     * @var bool
      */
     public $gyroscopeEnabled = true;
+
+    /**
+     * Background enabled.
+     *
+     * @var bool
+     */
+    public $background = false;
+
+    /**
+     * Given consent.
+     *
+     * @var bool
+     */
+    public $givenConsent = true;
+
+    /**
+     * Device init state enabled.
+     *
+     * @var bool
+     */
+    public $devicecInitState = false;
 
     /** @var Request\Account Collection of Account related functions. */
     public $account;
@@ -1345,7 +1366,7 @@ class Instagram implements ExperimentsInterface
     public function setGyroscopeEnabled(
         $value)
     {
-        $this->$gyroscopeEnabled = boolval($value);
+        $this->gyroscopeEnabled = boolval($value);
     }
 
     /**
@@ -1354,6 +1375,63 @@ class Instagram implements ExperimentsInterface
     public function getGyroscopeEnabled()
     {
         return $this->gyroscopeEnabled;
+    }
+
+    /**
+     * Set background state.
+     *
+     * @param bool $value
+     */
+    public function setBackgroundState(
+        $value)
+    {
+        $this->background = boolval($value);
+    }
+
+    /**
+     * Get background state.
+     */
+    public function getBackgroundState()
+    {
+        return $this->background ? 'true' : 'false';
+    }
+
+    /**
+     * Set device init state.
+     *
+     * @param bool $value
+     */
+    public function setDeviceInitState(
+        $value)
+    {
+        $this->devicecInitState = boolval($value);
+    }
+
+    /**
+     * Get device init state.
+     */
+    public function getDeviceInitState()
+    {
+        return $this->devicecInitState;
+    }
+
+    /**
+     * Set given consent.
+     *
+     * @param bool $value
+     */
+    public function setGivenConsent(
+        $value)
+    {
+        $this->givenConsent = boolval($value);
+    }
+
+    /**
+     * Get given consent.
+     */
+    public function getGivenConsent()
+    {
+        return $this->givenConsent;
     }
 
     /**
@@ -2442,6 +2520,7 @@ class Instagram implements ExperimentsInterface
                 //$this->internal->bootstrapMsisdnHeader();
                 try {
                     $this->internal->logAttribution();
+                    exit();
                     $this->internal->sendGraph('455411352809009551099714876', [
                         'input' => [
                             'app_scoped_id'     => $this->uuid,

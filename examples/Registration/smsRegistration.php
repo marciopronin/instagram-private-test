@@ -16,9 +16,9 @@ $debug = true;
 /////////////////
 
 /////////////////
-$phone = '+34123456789';
-$username = 'InstaAPITest';
-$password = 'InstaAPITest';
+$phone = ''; //+ccphone
+$username = '';
+$password = '';
 $day = 01;
 $month = 01;
 $year = 1970;
@@ -28,15 +28,48 @@ $firstName = 'First Name';
 $ig = new ExtendedInstagram($debug);
 $ig->setUserWithoutPassword($username);
 
+$ig->setCarrier(''); // SET CARRIER
+
 $waterfallId = \InstagramAPI\Signatures::generateUUID();
 $startTime = time();
 
-$ig->event->updateAppState('foreground', 'not_initialized');
-$ig->event->sendFlowSteps('landing', 'sim_card_state', $waterfallId, $startTime, ['flow' => 'phone']);
+$ig->setBackgroundState(true);
+$ig->setDeviceInitState(true);
+$ig->setGivenConsent(false);
 
+// First event multi batch
+
+$ig->event->sendInstagramDeviceIds($waterfallId); // 0
+$ig->event->sendApkTestingExposure(); // 0
+$ig->event->sendStringImpressions(['2131232194' => 1]); // 0
+$ig->event->sendStringImpressions(['2131959156' => 1]); // 0
+$ig->event->sendPhoneIdUpdate('initial_create'); // 0
+$ig->event->sendStringImpressions(['2131232191' => 1, '2131232194' => 1]); // 0
+$ig->event->sendStringImpressions(['2131959156' => 1]); // 0
+
+$ig->setBackgroundState(false); // 
+
+$ig->event->sendAppInstallations(); // 1
+$ig->event->sendInstagramInstallWithReferrer($waterfallId, 0); // 1
+$ig->event->sendInstagramInstallWithReferrer($waterfallId, 1); // 1
+$ig->event->sendApkSignatureV2(); // 0
+$ig->event->sendFlowSteps('landing', 'step_view_loaded', $waterfallId, $startTime); // 1
+$ig->event->sendFlowSteps('landing', 'landing_created', $waterfallId, $startTime); // 1
+$ig->event->sendPhoneId($waterfallId, $startTime, 'request'); // 1
+$ig->event->sendStringImpressions(['2131232191' => 1, '2131959156' => 1]); // 1
+$ig->event->sendStringImpressions(['2131953090' => 1, '2131953091' => 1, '2131954456' => 1, '2131954725' => 1, '2131959052' => 1, '2131959965' => 1, '2131960702' => 1, '2131960706' => 1, '2131966368' => 1]); // 1
+
+$ig->event->sendFlowSteps('landing', 'sim_card_state', $waterfallId, $startTime, ['flow' => 'phone']); // 1
+$ig->event->sendEmergencyPushInitialVersion(); // 0
+
+// End of first event multi batch
+$ig->event->forceSendBatch();
+$ig->setGivenConsent(false); // temp
+
+$ig->event->updateAppState('foreground', 'not_initialized');
 try {
     $ig->account->setContactPointPrefill('prefill');
-catch(\Exception) {
+} catch(\Exception) {
     //pass
 }
 
@@ -45,6 +78,8 @@ $ig->internal->fetchZeroRatingToken('token_expired', false);
 $launcherResponse = $ig->internal->getMobileConfig(true)->getHttpResponse();
 $ig->settings->set('public_key', $launcherResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
 $ig->settings->set('public_key_id', $launcherResponse->getHeaderLine('ig-set-password-encryption-key-id'));
+
+$ig->internal->logAttribution();
 
 $ig->event->sendNavigation('button', '<init>', 'landing_facebook');
 
@@ -278,7 +313,7 @@ $seenSteps = [
 $ig->internal->sendGraph('45541135218358940417711832437', [
     'input' => [
         'app_scoped_id'     => $this->ig->uuid,
-        'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID
+        'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
         'family_device_id'  => $this->ig->phone_id,
     ]], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
 

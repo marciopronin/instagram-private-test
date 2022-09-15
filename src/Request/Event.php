@@ -24,25 +24,36 @@ class Event extends RequestCollection
     {
         $body =
         [
-            'seq'               => $this->ig->batchIndex,
+            'time'              => ($batch[0]['time'] * 1000) - mt_rand(0, 50),
             'app_id'            => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
-            //'app_ver'           => Constants::IG_VERSION,
+            'app_ver'           => Constants::IG_VERSION,
             'build_num'         => Constants::VERSION_CODE,
             'device'            => $this->ig->device->getDevice(),
             'os_ver'            => $this->ig->device->getAndroidRelease(),
             'device_id'         => $this->ig->uuid,
-            'family_device_id'  => $this->ig->phone_id,
             'session_id'        => $this->ig->client->getPigeonSession(),
             //'channel'           => 'regular',
             //'log_type'          => 'client_event',
             //'app_uid'           => $this->ig->account_id,
             //'config_version'    => 'v2',
             //'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
+            'seq'               => $this->ig->batchIndex,
+            'app_uid'           => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
             'data'              => $batch,
         ];
 
+        if ($this->ig->getGivenConsent() === false) {
+            $body = array_merge(array_slice($body, 0, array_search('build_num', array_keys($body)) + 1, true) + ['consent_state'  => 0] + array_slice($body, array_search('build_num', array_keys($body)) + 1, null, true));
+        }
+
+        if ($this->ig->getDeviceInitState() === false) {
+            $body = array_merge(array_slice($body, 0, array_search('device_id', array_keys($body)) + 1, true) + ['family_device_id'  => $this->ig->phone_id] + array_slice($body, array_search('device_id', array_keys($body)) + 1, null, true));
+        } else {
+            $this->ig->setDeviceInitState(false);
+        }
+
         if ($this->ig->client->wwwClaim !== '') {
-            $body = array_slice($body, 0, 11, true) + ['claims' => [$this->ig->client->wwwClaim]] + array_slice($body, 11, count($body) - 1, true);
+            $body = array_merge(array_slice($body, 0, array_search('app_uid', array_keys($body)) + 1, true) + ['claims'  => [$this->ig->client->wwwClaim]] + array_slice($body, array_search('app_uid', array_keys($body)) + 1, null, true));
         }
 
         return $body;
@@ -67,7 +78,7 @@ class Event extends RequestCollection
             'pigeon_reserved_keyword_requested_latency'     => -1, // TODO
         ];
 
-        return array_merge($commonProperties, $event);
+        return $commonProperties + $event; // + instead of array_merge to keep numeric string keys.
     }
 
     /**
@@ -87,7 +98,7 @@ class Event extends RequestCollection
         $event =
         [
             'log_type'      => 'client_event',
-            'bg'            => 'false',
+            'bg'            => $this->ig->getBackgroundState(),
             'name'          => $name,
             'time'          => number_format(microtime(true), 3, '.', ''),
             'sampling_rate' => 1,
@@ -744,7 +755,7 @@ class Event extends RequestCollection
             $extra['whatsapp_installed'] = isset($options['whatsapp_installed']) ? $options['whatsapp_installed'] : (bool) random_int(0, 1);
             $extra['fb_lite_installed'] = isset($options['fb_lite_installed']) ? $options['fb_lite_installed'] : (bool) random_int(0, 1);
             $extra['source'] = null;
-            $extra['flow'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['flow'] = isset($options['flow']) ? $options['flow'] : null;
             $extra['cp_type_given'] = null;
         } elseif ($name === 'landing_created') {
             $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool) random_int(0, 1);
@@ -767,7 +778,7 @@ class Event extends RequestCollection
         }
 
         $event = $this->_addEventBody($name, null, $extra);
-        $this->_addEventData($event);
+        $this->_addEventData($event, 1);
     }
 
     /**
@@ -1989,13 +2000,16 @@ class Event extends RequestCollection
              'current_time'         => $currentTime,
              'elapsed_time'         => $currentTime - $startTime,
              'os_version'           => $this->ig->device->getAndroidVersion(),
+             'step'                 => 'landing',
+             'containermodule'      => 'landing_facebook',
              'fb_family_device_id'  => $this->ig->phone_id,
              'guid'                 => $this->ig->uuid,
              'prefill_type'         => 'both',
+             'source'               => null,
          ];
 
         $event = $this->_addEventBody($name, 'waterfall_log_in', $extra);
-        $this->_addEventData($event);
+        $this->_addEventData($event, 1);
     }
 
     /**
@@ -5855,7 +5869,7 @@ class Event extends RequestCollection
             'string_locale' => $this->ig->getLocale(),
         ];
         $event = $this->_addEventBody('android_string_impressions', 'IgResourcesAnalyticsModule', $extra);
-        $this->_addEventData($event, 1);
+        $this->_addEventData($event, 0);
     }
 
     /**
@@ -6937,7 +6951,7 @@ class Event extends RequestCollection
         ];
 
         $event = $this->_addEventBody('ig_zero_url_rewrite', null, $extra);
-        $this->_addEventData($event);
+        $this->_addEventData($event, 1);
     }
 
     /**
@@ -7229,13 +7243,16 @@ class Event extends RequestCollection
     /**
      * Send APK testing exposure.
      *
+     * @param string|null $installer Installer
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      */
-    public function sendApkTestingExposure()
+    public function sendApkTestingExposure(
+        $installer = null)
     {
         $extra = [
             'build_num' => Constants::VERSION_CODE,
-            'installer' => null,
+            'installer' => $installer,
         ];
 
         $event = $this->_addEventBody('android_apk_testing_exposure', null, $extra);
@@ -7270,7 +7287,7 @@ class Event extends RequestCollection
     public function sendEmergencyPushInitialVersion()
     {
         $extra = [
-            'current_version' => 46,
+            'current_version' => 69,
         ];
 
         $event = $this->_addEventBody('ig_emergency_push_did_set_initial_version', null, $extra);
@@ -7278,7 +7295,7 @@ class Event extends RequestCollection
     }
 
     /**
-     * Send emergency push initial version.
+     * Send Instagram install with referrer.
      *
      * @param string $waterfallId Waterfall ID.
      * @param int    $state       State.
@@ -7293,15 +7310,22 @@ class Event extends RequestCollection
             'waterfall_id'  => $waterfallId,
         ];
 
-        if ($state === 0) {
-            $extra['referrer'] = 'first_open_waiting_for_referrer';
-        } else {
-            $extra['referrer'] = null;
-            $extra['error'] = 'FEATURE_NOT_SUPPORTED';
+        switch ($state) {
+            case 0:
+                $extra['referrer'] = 'first_open_waiting_for_referrer';
+                break;
+            case 1:
+                $extra['referrer'] = 'utm_source=google-play&utm_medium=organic';
+                $extra['utm_source'] = 'google-play';
+                $extra['utm_medium'] = 'organic';
+                break;
+            default:
+                $extra['referrer'] = null;
+                $extra['error'] = 'FEATURE_NOT_SUPPORTED';
         }
 
         $event = $this->_addEventBody('instagram_android_install_with_referrer', 'install_referrer', $extra);
-        $this->_addEventData($event);
+        $this->_addEventData($event, 1);
     }
 
     /**
@@ -7319,6 +7343,51 @@ class Event extends RequestCollection
 
         $event = $this->_addEventBody('fx_legacy_fb_token_on_ig_access_control', null, $extra);
         $this->_addEventData($event);
+    }
+
+    /**
+     * Send phone ID update.
+     *
+     * @param mixed $type
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendPhoneIdUpdate(
+        $type)
+    {
+        $extra = [
+            'custom_uuid'   => $this->ig->uuid,
+            'new_id'        => $this->ig->phone_id,
+            'new_ts'        => time(),
+            'type'          => $type,
+        ];
+
+        $event = $this->_addEventBody('phoneid_update', null, $extra);
+        $this->_addEventData($event, 0);
+    }
+
+    /**
+     * Send app installations.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendAppInstallations()
+    {
+        $extra = new \stdClass();
+        $extra->{'1548792348668883'} = false; // com.oculus.home
+        $extra->{'567067343352427'} = true;  // com.instagram.android
+        $extra->{'959659700848986'} = false; // com.instagram.igtv
+        $extra->{'306069495113'} = false; // com.whatsapp
+        $extra->{'256002347743983'} = false; // com.facebook.orca
+        $extra->{'1437758943160428'} = false; // com.oculus.horizon
+        $extra->{'881555691867714'} = false; // com.instagram.layout
+        $extra->{'121876164619130'} = false; // com.facebook.pages.app
+        $extra->{'526556311187863'} = false; // com.instagram.threadsapp
+
+        $extra = (array) $extra;
+
+        $event = $this->_addEventBody('app_installations', null, $extra);
+        $this->_addEventData($event, 1);
     }
 
     /**

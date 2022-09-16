@@ -2520,7 +2520,6 @@ class Instagram implements ExperimentsInterface
                 //$this->internal->bootstrapMsisdnHeader();
                 try {
                     $this->internal->logAttribution();
-                    exit();
                     $this->internal->sendGraph('455411352809009551099714876', [
                         'input' => [
                             'app_scoped_id'     => $this->uuid,

@@ -1,3 +1,10 @@
+# Stable release v20.17.1
+## Date: 16/09/2022
+
+### Updates and fixes
+
+**Instagram:** Update login flow. Removed debugging function that was preventing login routine to continue
+
 # Stable release v20.17.0
 ## Date: 15/09/2022
 

@@ -87,7 +87,6 @@ class StorageHandler
         'ig_android_gqls_typing_indicator',
         'ig_android_upload_reliability_universe',
         'ig_android_photo_fbupload_universe',
-        'ig_android_video_segmented_upload_universe',
         'ig_android_direct_video_segmented_upload_universe',
         'ig_android_reel_raven_video_segmented_upload_universe',
         'ig_android_ad_async_ads_universe',
@@ -100,6 +99,8 @@ class StorageHandler
         'ig_android_live_suggested_live_expansion',
         'ig_android_live_qa_broadcaster_v1_universe',
         'ig_traffic_routing_universe',
+        'ig_android_stories_tray_pagination_killswitch',
+        'ig_android_video_segmented_upload_universe',
     ];
 
     /**
@@ -683,9 +684,16 @@ class StorageHandler
     public function setExperiments(
         array $experiments)
     {
-        $this->set('experiments', $this->_packJson($experiments));
+        $filtered = [];
+        foreach (self::EXPERIMENT_KEYS as $key) {
+            if (!isset($experiments[$key])) {
+                continue;
+            }
+            $filtered[$key] = $experiments[$key];
+        }
+        $this->set('experiments', $this->_packJson($filtered));
 
-        return $experiments;
+        return $filtered;
     }
 
     /**

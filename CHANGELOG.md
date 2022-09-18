@@ -1,3 +1,11 @@
+# Stable release v20.17.2
+## Date: 19/09/2022
+
+### Updates and fixes
+
+**Event:** Update `prepareAndSendThumbnailImpression()`
+**StorageHandler:** Update `setExperiments()`
+
 # Stable release v20.17.1
 ## Date: 16/09/2022
 

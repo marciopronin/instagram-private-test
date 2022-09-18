@@ -317,6 +317,12 @@ class Event extends RequestCollection
             case 'private_story_share_sheet':
                 $class = 'PrivateStoryShareSheetFragment';
                 break;
+            case 'change_email':
+                $class = 'ChangeEmailFragment';
+                break;
+            case 'bloks-idfa-dialog':
+                $class = 'IgBloksIdfaDialog';
+                break;
             default:
                 $class = false;
         }
@@ -2805,6 +2811,7 @@ class Event extends RequestCollection
                     break;
                 case 'one_by_two_center':
                 case 'one_by_two_left_right':
+                case 'two_by_two_ad_left_with_fallback':
                     // TODO: More information is required.
                     break;
                 default:
@@ -7412,6 +7419,35 @@ class Event extends RequestCollection
         ];
 
         $event = $this->_addEventBody('ig_quick_promotion_events', 'quick_promotion', $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
+     * Send client event sync.
+     *
+     * @param string     $name        Name event sync.
+     * @param string     $eventType   Event type.
+     * @param int        $instanceId  Instance ID.
+     * @param array|null $annotations Event annotations.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendClientEventSync(
+        $name,
+        $eventType,
+        $instanceId,
+        $annotations = null)
+    {
+        $extra = [
+            'event_type'            => $eventType,
+            'category'              => 'Sync',
+            'feature'               => 'event_log',
+            'realtime'              => false,
+            'event_instance_id'     => $instanceId,
+            'event_annotations'     => $annotations,
+        ];
+
+        $event = $this->_addEventBody($name, 'client_event', $extra);
         $this->_addEventData($event);
     }
 }

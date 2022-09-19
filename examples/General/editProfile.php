@@ -36,7 +36,7 @@ try {
 
 try {
     $ig->event->sendNavigation('main_profile', 'feed_timeline', 'self_profile');
-    $ig->event->sendNavigation('button', 'feed_timeline', 'self_profile', null, null, ['class_selector' => 'ProfileMediaTabFragment']);
+    $ig->event->sendNavigation('button', 'self_profile', 'self_profile', null, null, ['class_selector' => 'ProfileMediaTabFragment']);
     $ig->timeline->getSelfUserFeed();
     $ig->highlight->getSelfUserFeed();
     $ig->people->getInfoById($ig->account_id, 'self_profile', 'self_profile');
@@ -101,15 +101,15 @@ try {
 
     if ($profilePhoto !== '') {
         $ig->event->sendNavigation('button', 'edit_profile', 'edit_profile', null, null, ['class_selector' => 'ProfileMediaTabFragment']);
-        $ig->event->sendNavigation('new_profile_photo', 'edit_profile', 'edit_profile']);
-        $ig->event->sendNavigation('button', 'edit_profile', 'tabbed_gallery_camera']);
-        $ig->event->sendNavigation('button', 'tabbed_gallery_camera', 'tabbed_gallery_camera']);
+        $ig->event->sendNavigation('new_profile_photo', 'edit_profile', 'edit_profile');
+        $ig->event->sendNavigation('button', 'edit_profile', 'tabbed_gallery_camera');
+        $ig->event->sendNavigation('button', 'tabbed_gallery_camera', 'tabbed_gallery_camera');
 
-        $ig->event->sendNavigation('button', 'tabbed_gallery_camera', 'photo_filter']);
+        $ig->event->sendNavigation('button', 'tabbed_gallery_camera', 'photo_filter');
 
         $ig->account->changeProfilePicture($profilePhoto);
 
-        $ig->event->sendNavigation('button', 'photo_filter', 'edit_profile']);
+        $ig->event->sendNavigation('button', 'photo_filter', 'edit_profile');
     }
 
     $ig->event->sendBadgingEvent('impression', 'photos_of_you', 0, 'profile_menu');

@@ -4975,6 +4975,16 @@ class Event extends RequestCollection
                     'clickpoint'    => 'button',
                     'dest_module'   => 'change_email',
                 ],
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'edit_profile',
+                ],
+            ],
+            'change_email' => [
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'personal_information',
+                ],
             ],
         ];
 

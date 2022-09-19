@@ -1,3 +1,10 @@
+# Stable release v20.18.1
+## Date: 19/09/2022
+
+### Updates and fixes
+
+**Event:** Update `_validateNavigationPath()`
+
 # Stable release v20.18.0
 ## Date: 19/09/2022
 

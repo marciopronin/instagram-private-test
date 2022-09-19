@@ -1,3 +1,14 @@
+# Stable release v20.18.0
+## Date: 19/09/2022
+
+### New features
+
+**Web:** Added `getMediaInfo()`
+
+### Updates and fixes
+
+**Web:** Update `getUserInfo()`
+
 # Stable release v20.17.3
 ## Date: 19/09/2022
 

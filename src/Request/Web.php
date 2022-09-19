@@ -369,7 +369,7 @@ class Web extends RequestCollection
         $username,
         $csrftoken)
     {
-        return $this->ig->request("https://www.instagram.com/{$username}/")
+        return $this->ig->request('https://i.instagram.com/api/v1/users/web_profile_info/')
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
             ->setIsSilentFail(true)
@@ -379,8 +379,35 @@ class Web extends RequestCollection
             ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
             ->addHeader('X-IG-App-ID', '936619743392459')
             ->addHeader('User-Agent', $this->ig->getWebUserAgent())
-            ->addParam('__a', '1')
+            ->addParam('username', $username)
             ->getResponse(new Response\WebUserInfoResponse());
+    }
+
+    /**
+     * Get media info.
+     *
+     * @param string $csrftoken
+     * @param string $mediaId   The media ID in Instagram's internal format (ie "3482384834_43294").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\MediaInfoResponse
+     */
+    public function getMediaInfo(
+        $csrftoken,
+        $mediaId)
+    {
+        return $this->ig->request("https://i.instagram.com/api/v1/media/$mediaId/info/")
+            ->setAddDefaultHeaders(false)
+            ->setSignedPost(false)
+            ->setIsSilentFail(true)
+            ->addHeader('X-CSRFToken', $csrftoken)
+            ->addHeader('Referer', 'https://www.instagram.com/')
+            ->addHeader('X-Requested-With', 'XMLHttpRequest')
+            ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
+            ->addHeader('X-IG-App-ID', '936619743392459')
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->getResponse(new Response\MediaInfoResponse());
     }
 
     /**

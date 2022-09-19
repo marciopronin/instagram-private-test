@@ -369,7 +369,7 @@ class Event extends RequestCollection
         }
 
         $aux = $this->ig->getNavChainStep();
-        if ($module === 'feed_timeline' && $clickPoint !== 'cold start') {
+        if ($module === 'feed_timeline' && ($clickPoint !== 'cold start' || $clickPoint !== 'cold_start')) {
             $this->ig->setNavChainStep(1);
             $this->ig->setNavChain('');
         } elseif ($module === 'explore_popular' || $module === 'clips_viewer_clips_tab') {
@@ -3959,17 +3959,19 @@ class Event extends RequestCollection
                     'clickpoint'    => 'button',
                     'dest_module'   => 'photo_filter',
                 ],
-            ],
-            'tabbed_gallery_camera' => [
                 [
                     'clickpoint'    => 'button',
-                    'dest_module'   => 'photo_filter',
+                    'dest_module'   => 'tabbed_gallery_camera',
                 ],
             ],
             'photo_filter' => [
                 [
                     'clickpoint'    => 'next',
                     'dest_module'   => 'metadata_followers_share',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'edit_profile',
                 ],
             ],
             'metadata_followers_share' => [
@@ -4038,6 +4040,18 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'back',
                     'dest_module'   => 'self_profile',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'personal_information',
+                ],
+                [
+                    'clickpoint'    => 'new_profile_photo',
+                    'dest_module'   => 'edit_profile',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'tabbed_gallery_camera',
                 ],
             ],
             'bottom_sheet_profile' => [
@@ -4905,6 +4919,10 @@ class Event extends RequestCollection
                     'clickpoint'    => 'cold start',
                     'dest_module'   => 'feed_timeline',
                 ],
+                [
+                    'clickpoint'    => 'cold_start',
+                    'dest_module'   => 'feed_timeline',
+                ],
             ],
             'replay_feed_timeline' => [
                 [
@@ -4950,6 +4968,12 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'one_page_registration',
+                ],
+            ],
+            'personal_information' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'change_email',
                 ],
             ],
         ];
@@ -5029,11 +5053,9 @@ class Event extends RequestCollection
         $this->_validateNavigationPath($fromModule, $toModule, $clickPoint);
         $this->_validateNavigationOptions($fromModule, $toModule, $options);
 
-        if ($this->ig->getIsAndroid()) {
-            //$navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
-            $classSelector = isset($options['class_selector']) ? $options['class_selector'] : null;
-            $navChain = $this->_generateNavChain($toModule, $clickPoint, $classSelector);
-        }
+        //$navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
+        $classSelector = isset($options['class_selector']) ? $options['class_selector'] : null;
+        $navChain = $this->_generateNavChain($toModule, $clickPoint, $classSelector);
 
         $navDepth = $this->_getNavDepthForModules($fromModule, $toModule);
 
@@ -5043,6 +5065,7 @@ class Event extends RequestCollection
             'dest_module'               => $toModule,
             'seq'                       => $this->ig->navigationSequence,
             'nav_time_taken'            => mt_rand(200, 350),
+            'dest_module_class'         => $this->_getModuleClass($toModule, $classSelector),
         ];
 
         if ($this->ig->getIsAndroid()) {

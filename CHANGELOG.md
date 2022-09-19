@@ -1,3 +1,20 @@
+# Stable release v20.17.3
+## Date: 19/09/2022
+
+### Updates and fixes
+
+**Event:** Update `prepareAndSendThumbnailImpression()`
+**StorageHandler:** Update `setExperiments()`
+**Highlight:** Update `getUserFeed()`
+**People:** Update `getSelfInfo()`
+**Event:** Update `sendNavigation()`
+**Event:** Update `_validateNavigationPath()`
+**Story:** Update `getArchiveBadgeCount()`
+
+### Examples
+
+**Example:** Update editProfile
+
 # Stable release v20.17.2
 ## Date: 19/09/2022
 

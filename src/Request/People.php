@@ -20,21 +20,22 @@ class People extends RequestCollection
      * NOTE: The real app uses this particular endpoint for _all_ user lookups
      * except "@mentions" (where it uses `getInfoByName()` instead).
      *
-     * @param string      $userId Numerical UserPK ID.
-     * @param string|null $module From which app module (page) you have opened the profile. One of (incomplete):
-     *                            "comment_likers",
-     *                            "comment_owner",
-     *                            "followers",
-     *                            "following",
-     *                            "likers_likers_media_view_profile",
-     *                            "likers_likers_photo_view_profile",
-     *                            "likers_likers_video_view_profile",
-     *                            "newsfeed",
-     *                            "self_followers",
-     *                            "self_following",
-     *                            "self_likers_self_likers_media_view_profile",
-     *                            "self_likers_self_likers_photo_view_profile",
-     *                            "self_likers_self_likers_video_view_profile".
+     * @param string      $userId     Numerical UserPK ID.
+     * @param string|null $module     From which app module (page) you have opened the profile. One of (incomplete):
+     *                                "comment_likers",
+     *                                "comment_owner",
+     *                                "followers",
+     *                                "following",
+     *                                "likers_likers_media_view_profile",
+     *                                "likers_likers_photo_view_profile",
+     *                                "likers_likers_video_view_profile",
+     *                                "newsfeed",
+     *                                "self_followers",
+     *                                "self_following",
+     *                                "self_likers_self_likers_media_view_profile",
+     *                                "self_likers_self_likers_photo_view_profile",
+     *                                "self_likers_self_likers_video_view_profile".
+     * @param string|null $entrypoint Entrypoint.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -42,9 +43,14 @@ class People extends RequestCollection
      */
     public function getInfoById(
         $userId,
-        $module = null)
+        $module = null,
+        $entrypoint = null)
     {
         $request = $this->ig->request("users/{$userId}/info/");
+
+        if ($entrypoint !== null) {
+            $request->addParam('entry_point', $entrypoint);
+        }
 
         if ($module !== null) {
             $request->addParam('from_module', $module);
@@ -101,15 +107,20 @@ class People extends RequestCollection
      *
      * Also try Account::getCurrentUser() instead, for account details.
      *
+     * @param string|null $module     From which app module (page) you have opened the profile.
+     * @param string|null $entrypoint Entrypoint.
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\UserInfoResponse
      *
      * @see Account::getCurrentUser()
      */
-    public function getSelfInfo()
+    public function getSelfInfo(
+        $module = 'self_profile',
+        $entrypoint = null)
     {
-        return $this->getInfoById($this->ig->account_id, 'self_profile');
+        return $this->getInfoById($this->ig->account_id, $module, $entrypoint);
     }
 
     /**

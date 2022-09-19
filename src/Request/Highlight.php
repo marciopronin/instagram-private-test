@@ -35,6 +35,7 @@ class Highlight extends RequestCollection
             ->addParam('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addParam('phone_id', $this->ig->phone_id)
             ->addParam('battery_level', $this->ig->getBatteryLevel())
+            ->addParam('panavision_mode', '')
             ->addParam('is_charging', $this->ig->getIsDeviceCharging())
             ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
             ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())

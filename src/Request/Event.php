@@ -252,6 +252,9 @@ class Event extends RequestCollection
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';
                 break;
+            case 'pending_inbox':
+                $class = 'DirectPendingInboxFragment';
+                break;
             case 'direct_inbox':
                 $class = 'DirectInboxFragment';
                 break;
@@ -365,6 +368,8 @@ class Event extends RequestCollection
         if ($class === false) {
             $this->ig->incrementNavChainStep();
 
+            return $this->ig->getNavChain();
+        } elseif ($clickPoint === 'back') {
             return $this->ig->getNavChain();
         }
 

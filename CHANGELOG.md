@@ -1,3 +1,11 @@
+# Stable release v20.18.2
+## Date: 22/09/2022
+
+### Updates and fixes
+
+**Event:** Update `_generateNavChain()`
+**Instagram:** Update `_login()`
+
 # Stable release v20.18.1
 ## Date: 19/09/2022
 

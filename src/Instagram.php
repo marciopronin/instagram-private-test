@@ -1747,7 +1747,7 @@ class Instagram implements ExperimentsInterface
                 'ig_other', 'ig_direct', 'uploads', 'ig_direct_requests', 'ig_direct_video_chat',
             ]);
             $this->event->sendNavigationTabImpression(1);
-            $this->event->sendNavigation('cold start', 'login', 'feed_timeline');
+            $this->event->sendNavigation('cold_start', 'login', 'feed_timeline');
             $this->event->sendScreenshotDetector();
             $this->event->sendNavigationTabImpression(0);
             $this->loginAttemptCount = 0;

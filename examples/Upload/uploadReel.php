@@ -27,6 +27,26 @@ try {
 }
 
 try {
+    $ig->event->sendNavigation('main_clips', 'feed_timeline', 'clips_viewer_clips_tab');
+    $ig->event->sendNavigation('button', 'clips_viewer_clips_tab', 'reel_composer_camera');
+
+    $ig->event->sendNavigation('button', 'clips_viewer_clips_tab', 'reel_composer_camera');
+    $ig->event->sendNavigation('button', 'reel_composer_camera', 'reel_composer_camera');
+
+    $ig->event->sendNavigation('button', 'reel_composer_camera', 'clips_precapture_camera');
+    $ig->event->sendNavigation('button', 'clips_precapture_camera', 'reel_composer_preview');
+
+    $ig->creative->getClipsAssets();
+    $ig->reel->getClipsInfoForCreation();
+
+    $ig->event->sendNavigation('button', 'reel_composer_preview', 'clips_share_sheet');
+
+    $ig->event->sendNavigation('button', 'clips_share_sheet', 'clips_share_sheet');
+
+    $ig->event->sendNavigation('button', 'clips_share_sheet', 'reels_share_to_fb_upsell_fragment');
+    $ig->event->sendNavigation('button', 'reels_share_to_fb_upsell_fragment', 'clips_share_sheet');
+    $ig->event->sendNavigation('button', 'clips_share_sheet', 'clips_share_sheet');
+
     // Note that all video upload functions perform some automatic chunk upload
     // retries, in case of failing to upload all video chunks to Instagram's
     // server! Uploads therefore take longer when their server is overloaded.

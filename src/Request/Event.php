@@ -311,6 +311,21 @@ class Event extends RequestCollection
             case 'clips_postcapture_camera':
                 $class = 'VideoViewController';
                 break;
+            case 'reel_composer_preview':
+                $class = 'VideoViewController';
+                break;
+            case 'clips_precapture_camera':
+                $class = 'ClipsCameraFragment';
+                break;
+            case 'clips_share_sheet':
+                $class = 'ClipsShareSheetFragment';
+                break;
+            case 'reels_share_to_fb_upsell_fragment':
+                $class = 'ReelsShareToFbUpsellFragment';
+                break;
+            case 'reel_composer_camera':
+                $class = 'IgCameraViewController';
+                break;
             case 'story_stickers_tray':
                 $class = 'AssetPickerController';
                 break;
@@ -3889,6 +3904,48 @@ class Event extends RequestCollection
                     'dest_module'   => 'profile',
                 ],
             ],
+            'clips_viewer_clips_tab'    => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'reel_composer_camera',
+                ],
+            ],
+            'reel_composer_camera'    => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'reel_composer_camera',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'clips_precapture_camera',
+                ],
+            ],
+            'clips_precapture_camera'    => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'clips_share_sheet',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'reel_composer_preview',
+                ],
+            ],
+            'clips_share_sheet'    => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'clips_share_sheet',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'reels_share_to_fb_upsell_fragment',
+                ],
+            ],
+            'reels_share_to_fb_upsell_fragment'    => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'clips_share_sheet',
+                ],
+            ],
             'reel_feed_timeline_item_header'    => [
                 [
                     'clickpoint'    => 'back',
@@ -4207,6 +4264,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'self_profile',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'clips_share_sheet',
                 ],
             ],
             'story_stickers_tray' => [

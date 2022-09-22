@@ -373,4 +373,17 @@ class Reel extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Get clips info for creation.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getClipsInfoForCreation()
+    {
+        return $this->ig->request('clips/clips_info_for_creation/')
+            ->getResponse(new Response\GenericResponse());
+    }
 }

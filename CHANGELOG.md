@@ -1,3 +1,17 @@
+# Stable release v20.19.0
+## Date: 22/09/2022
+
+### New features
+
+- **Creative:** Add `getClipsAssets()`
+- **Reel:** Add `getClipsInfoForCreation()`
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationOptions()`
+- **Event:** Update `_getModuleClass()`
+- **Internal:** Update `configureSingleVideo()`
+
 # Stable release v20.18.2
 ## Date: 22/09/2022
 

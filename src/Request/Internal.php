@@ -1073,9 +1073,10 @@ class Internal extends RequestCollection
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('device_id', $this->ig->device_id)
                     ->addPost('camera_session_id', Signatures::generateUUID())
-                    ->addPost('is_clips_edited', 0)
-                    ->addPost('camera_entry_point', 168)
-                    ->addPost('is_created_with_sound_sync', 0)
+                    ->addPost('is_clips_edited', '0')
+                    ->addPost('camera_entry_point', '168')
+                    ->addPost('disable_comments', '0')
+                    ->addPost('is_created_with_sound_sync', '0')
                     ->addPost('clips_creation_entry_point', 'clips')
                     ->addPost('clips', [
                         [
@@ -1111,6 +1112,11 @@ class Internal extends RequestCollection
                         'has_voiceover_attribution' => 0,
                     ])
                     ->addPost('is_created_with_contextual_music_recs', '0')
+                    ->addPost('video_subtitles_enabled', '1')
+                    ->addPost('template_clips_media_id', 'null')
+                    ->addPost('is_creator_requesting_mashup', '0')
+                    ->addPost('cross_app_share_type', '2') // 2 or 1
+                    ->addPost('cross_app_share_fb_validation_check_bypass', ['AUTO_CROSSPOST_SETTING'])
                     ->addPost('capture_type', 'clips_v2');
 
                 if ($reelShareToFeed !== null) {

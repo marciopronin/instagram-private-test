@@ -68,6 +68,23 @@ class Creative extends RequestCollection
     }
 
     /**
+     * Get clips assets.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getClipsAssets()
+    {
+        return $this->ig->request('creatives/clips_assets/')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('type', 'static_stickers')
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get face models that can be used to customize photos or videos.
      *
      * NOTE: The files are some strange binary format that only the Instagram

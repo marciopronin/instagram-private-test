@@ -3002,6 +3002,7 @@ class Event extends RequestCollection
                     break;
                 case 'one_by_two_center':
                 case 'one_by_two_left_right':
+                case 'two_by_two_ad_left_with_fallback':
                     // TODO: More information is required.
                     break;
                 default:

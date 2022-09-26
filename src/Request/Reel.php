@@ -312,14 +312,16 @@ class Reel extends RequestCollection
     /**
      * Set default share to FB config.
      *
-     * @param bool $enabled Enable default share to FB.
+     * @param bool $enabled     Enable default share to FB.
+     * @param int  $sharingMode Sharing mode.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\GenericResponse
      */
     public function setDefaultShareToFbConfig(
-        $enabled)
+        $enabled,
+        $sharingMode = 2)
     {
         return $this->ig->request('clips/user/set_default_share_to_fb_enabled/')
             //->addPost('_csrftoken', $this->ig->client->getToken())
@@ -327,6 +329,7 @@ class Reel extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('enable_oa_reuse_on_fb', 'true')
+            ->addPost('sharing_mode', $sharingMode)
             ->addPost('container_module', 'ShareOnFacebookSettingsFragment')
             ->getResponse(new Response\GenericResponse());
     }

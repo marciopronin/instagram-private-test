@@ -1,3 +1,12 @@
+# Stable release v20.19.1
+## Date: 26/09/2022
+
+### Updates and fixes
+
+- **Event:** Update `prepareAndSendExploreImpression()`
+- **Internal:** Update `configureSingleVideo()`
+- **Reel:** Update `setDefaultShareToFbConfig()`
+
 # Stable release v20.19.0
 ## Date: 22/09/2022
 

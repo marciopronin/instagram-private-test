@@ -1115,9 +1115,16 @@ class Internal extends RequestCollection
                     ->addPost('video_subtitles_enabled', '1')
                     ->addPost('template_clips_media_id', 'null')
                     ->addPost('is_creator_requesting_mashup', '0')
-                    ->addPost('cross_app_share_type', '2') // 2 or 1
-                    ->addPost('cross_app_share_fb_validation_check_bypass', ['AUTO_CROSSPOST_SETTING'])
                     ->addPost('capture_type', 'clips_v2');
+
+                if (isset($externalMetadata['share_to_fb'])) {
+                    $request->addPost('cross_app_share_type', '1'); // 1- Shared on fb recommended 2- shared as fb profile
+                }
+
+                if (isset($externalMetadata['share_to_fb_destination_id'])) {
+                    $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
+                            ->addPost('share_to_facebook', '1');
+                }
 
                 if ($reelShareToFeed !== null) {
                     $request->addPost('clips_share_preview_to_feed', $reelShareToFeed === true ? '1' : '0');

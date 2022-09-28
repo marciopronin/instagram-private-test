@@ -1,3 +1,12 @@
+# Stable release v20.19.3
+## Date: 28/09/2022
+
+### Updates and fixes
+
+**Account:** Update `checkUsername()`
+**Event:** Update `_sendBatchEvents()`
+**People:** Update `linkAddressBook()`
+
 # Stable release v20.19.2
 ## Date: 28/09/2022
 

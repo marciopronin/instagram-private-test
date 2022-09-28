@@ -796,7 +796,8 @@ class People extends RequestCollection
      * another one to search again, otherwise you will just keep getting the
      * same response about your currently linked address book every time!
      *
-     * @param array $contacts
+     * @param array  $contacts
+     * @param string $source
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -805,7 +806,8 @@ class People extends RequestCollection
      * @see People::unlinkAddressBook()
      */
     public function linkAddressBook(
-        array $contacts)
+        array $contacts,
+        $source = 'account_creation')
     {
         return $this->ig->request('address_book/link/')
             ->setIsBodyCompressed(true)
@@ -813,8 +815,9 @@ class People extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('contacts', json_encode($contacts))
             //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('device_id', $this->ig->uuid)
             ->addPost('module', 'find_friends_contacts')
+            ->addPost('source', $source)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\LinkAddressBookResponse());
     }

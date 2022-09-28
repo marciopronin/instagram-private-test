@@ -798,7 +798,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('username', $username)
             //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('is_group_creation', false)
             ->getResponse(new Response\CheckUsernameResponse());
     }
 

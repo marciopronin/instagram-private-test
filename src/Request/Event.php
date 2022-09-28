@@ -505,7 +505,11 @@ class Event extends RequestCollection
         foreach ($this->ig->eventBatch as $batch) {
             if (count($batch) === 50) {
                 $this->_sendBatchEvents();
-                $this->ig->eventBatch = [];
+                $this->ig->eventBatch = [
+                    [],
+                    [],
+                    [],
+                ];
                 $this->ig->batchIndex++;
                 break;
             }

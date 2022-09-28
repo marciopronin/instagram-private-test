@@ -1,3 +1,10 @@
+# Stable release v20.19.2
+## Date: 28/09/2022
+
+### Updates and fixes
+
+- **Event:** Update `_addEventData()`
+
 # Stable release v20.19.1
 ## Date: 26/09/2022
 

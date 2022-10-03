@@ -1,3 +1,14 @@
+# Stable release v20.19.4
+## Date: 03/10/2022
+
+### Updates and fixes
+
+**Internal:** Update `configureWithRetries()`
+
+### Examples
+
+**Example:** Update smsRegistration
+
 # Stable release v20.19.3
 ## Date: 28/09/2022
 

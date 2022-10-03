@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\LimitStream;
 use GuzzleHttp\Psr7\Stream;
 use GuzzleHttp\Psr7\Utils as GuzzleUtils;
 use InstagramAPI\Constants;
+use InstagramAPI\Exception\ChallengeRequiredException;
 use InstagramAPI\Exception\CheckpointRequiredException;
 use InstagramAPI\Exception\ConsentRequiredException;
 use InstagramAPI\Exception\FeedbackRequiredException;
@@ -2363,6 +2364,8 @@ class Internal extends RequestCollection
             } catch (ConsentRequiredException $e) {
                 throw $e;
             } catch (CheckpointRequiredException $e) {
+                throw $e;
+            } catch (ChallengeRequiredException $e) {
                 throw $e;
             } catch (InstagramException $e) {
                 if ($e->hasResponse()) {

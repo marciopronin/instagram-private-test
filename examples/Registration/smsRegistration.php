@@ -10,7 +10,6 @@ class ExtendedInstagram extends \InstagramAPI\Instagram
     }
 }
 
-
 /////////////////
 $debug = true;
 /////////////////
@@ -187,7 +186,16 @@ $ig->event->forceSendBatch();
 usleep(mt_rand(15000000, 3000000));
 
 try {
-    $response = $ig->account->createValidated($smsCode, $username, $password, $phone, sprintf('%d-%2d-%2d', $year, $month, $day), $firstName, $waterfallId, $tos);
+    $ts = strval(time() - mt_rand(3, 5));
+    $nonce = base64_encode($username.'|'.$ts.'|'.random_bytes(24));
+    $result = sprintf('VERIFICATION_PENDING: request time is %s', $ts);
+
+    $sndata = [
+        'sn_nonce'  => $nonce,
+        'sn_result' => $result,
+    ];
+    
+    $response = $ig->account->createValidated($smsCode, $username, $password, $phone, sprintf('%d-%2d-%2d', $year, $month, $day), $firstName, $waterfallId, $tos, $sndata);
 } catch (\Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit();
@@ -312,9 +320,10 @@ $seenSteps = [
 
 $ig->internal->sendGraph('45541135218358940417711832437', [
     'input' => [
-        'app_scoped_id'     => $this->ig->uuid,
-        'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
-        'family_device_id'  => $this->ig->phone_id,
+        'app_scoped_id'     => $ig->uuid,
+        'appid'             => \InstagramAPI\Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
+        'family_device_id'  => $ig->phone_id,
     ]], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
 
 $ig->internal->getOnBoardingSteps($waterfallId, 'phone', $seenSteps, true);
+$ig->event->forceSendBatch();

@@ -1,3 +1,11 @@
+# Stable release v20.19.5
+## Date: 06/10/2022
+
+### Updates and fixes
+
+**Constants:** Update version to 255.1.0.17.102
+**Experiments data:** Update experiments map to 255.1.0.17.102
+
 # Stable release v20.19.4
 ## Date: 03/10/2022
 

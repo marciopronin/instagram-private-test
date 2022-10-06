@@ -1,3 +1,10 @@
+# Stable release v20.19.6
+## Date: 06/10/2022
+
+### Updates and fixes
+
+**Event:** Update `_generateNavChain()
+
 # Stable release v20.19.5
 ## Date: 06/10/2022
 

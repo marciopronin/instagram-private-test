@@ -416,6 +416,9 @@ class Event extends RequestCollection
         $moduleCounter = 0;
         $navModule = null;
         foreach ($chains as $idx => $chain) {
+            if (strpos($chain, 'TRUNCATEDx') !== false) {
+                continue;
+            }
             $navModule = explode(':', $chain)[1];
 
             if (explode(':', $chain)[1] === @explode(':', $chains[$idx - 1])[1]) {

@@ -3013,8 +3013,12 @@ class Instagram implements ExperimentsInterface
             if ($lastExperimentsTime === null || (time() - intval($lastExperimentsTime)) > self::EXPERIMENTS_REFRESH) {
                 // Start emulating batch requests with Pidgeon Raw Client Time.
                 //$this->client->startEmulatingBatch();
-                $this->internal->getMobileConfig(true);
-                $this->internal->getMobileConfig(false);
+                try {
+                    $this->internal->getMobileConfig(true);
+                    $this->internal->getMobileConfig(false);
+                } catch (\Exception $e) {
+                    // Ignore exception if 500 is received.
+                }
             }
 
             // Update zero rating token when it has been expired.

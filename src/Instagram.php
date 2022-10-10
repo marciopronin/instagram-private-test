@@ -177,6 +177,13 @@ class Instagram implements ExperimentsInterface
     public static $curlDebug = false;
 
     /**
+     * Retry on NetworkExpcetion.
+     *
+     * @var bool
+     */
+    public static $retryOnNetworkException = false;
+
+    /**
      * UUID.
      *
      * @var string

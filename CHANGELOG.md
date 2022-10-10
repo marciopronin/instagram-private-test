@@ -1,3 +1,17 @@
+# Stable release v20.20.0
+## Date: 11/10/2022
+
+### New features
+
+- **Instagram:** Add static property `retryOnNetworkException`
+
+### Updates and fixes
+
+**Client:** Update `_guzzleRequest()`
+**Client:** Update `configureWithRetries()`
+**Client:** Update `_uploadResumableMedia()`
+**Internal:** Update `_uploadVideoChunks()`
+
 # Stable release v20.19.7
 ## Date: 07/10/2022
 

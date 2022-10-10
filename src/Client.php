@@ -923,12 +923,25 @@ class Client
         $guzzleOptions = $this->_buildGuzzleOptions($guzzleOptions, $disableCookies);
 
         // Attempt the request. Will throw in case of socket errors!
-        try {
-            $response = $this->_guzzleClient->send($request, $guzzleOptions);
-        } catch (\Exception $e) {
-            // Re-wrap Guzzle's exception using our own NetworkException.
-            throw new \InstagramAPI\Exception\NetworkException($e);
-        }
+        $retry = 0;
+        do {
+            $exp = false;
+
+            try {
+                $response = $this->_guzzleClient->send($request, $guzzleOptions);
+            } catch (\Exception $e) {
+                $exp = true;
+                // Re-wrap Guzzle's exception using our own NetworkException.
+                if ($retry === 2 || !\InstagramAPI\Instagram::$retryOnNetworkException) {
+                    throw new \InstagramAPI\Exception\NetworkException($e);
+                }
+            }
+            if ($exp === false) {
+                break;
+            }
+            $retry++;
+            sleep(1);
+        } while (\InstagramAPI\Instagram::$retryOnNetworkException && $retry < 3);
 
         // Detect very serious HTTP status codes in the response.
         $httpCode = $response->getStatusCode();

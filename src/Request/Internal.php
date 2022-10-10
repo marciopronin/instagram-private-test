@@ -6,8 +6,8 @@ use GuzzleHttp\Psr7\LimitStream;
 use GuzzleHttp\Psr7\Stream;
 use GuzzleHttp\Psr7\Utils as GuzzleUtils;
 use InstagramAPI\Constants;
-use InstagramAPI\Exception\ChallengeRequiredException;
-use InstagramAPI\Exception\CheckpointRequiredException;
+use InstagramAPI\Exception\Checkpoint\ChallengeRequiredException;
+use InstagramAPI\Exception\Checkpoint\CheckpointRequiredException;
 use InstagramAPI\Exception\ConsentRequiredException;
 use InstagramAPI\Exception\FeedbackRequiredException;
 use InstagramAPI\Exception\InstagramException;
@@ -2522,6 +2522,8 @@ class Internal extends RequestCollection
                     throw $e;
                 } catch (CheckpointRequiredException $e) {
                     throw $e;
+                } catch (ChallengeRequiredException $e) {
+                    throw $e;
                 } catch (\Exception $e) {
                     // Ignore everything else.
                 }
@@ -2828,6 +2830,8 @@ class Internal extends RequestCollection
                     /** @var Response\UploadVideoResponse $result */
                     $result = $request->getResponse(new Response\UploadVideoResponse());
                 } catch (CheckpointRequiredException $e) {
+                    throw $e;
+                } catch (ChallengeRequiredException $e) {
                     throw $e;
                 } catch (LoginRequiredException $e) {
                     throw $e;

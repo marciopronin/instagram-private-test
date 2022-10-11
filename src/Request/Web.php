@@ -384,6 +384,38 @@ class Web extends RequestCollection
     }
 
     /**
+     * Top search.
+     *
+     * @param string $query
+     * @param string $csrftoken
+     * @param mixed  $context
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\WebUserInfoResponse
+     */
+    public function getTopSearch(
+        $query,
+        $csrftoken,
+        $context = 'blended')
+    {
+        return $this->ig->request('https://i.instagram.com/api/v1/users/web_profile_info/')
+            ->setAddDefaultHeaders(false)
+            ->setSignedPost(false)
+            ->setIsSilentFail(true)
+            ->addHeader('X-CSRFToken', $csrftoken)
+            ->addHeader('Referer', 'https://www.instagram.com/')
+            ->addHeader('X-Requested-With', 'XMLHttpRequest')
+            ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
+            ->addHeader('X-IG-App-ID', '936619743392459')
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->addParam('context', $context)
+            ->addParam('query', $query)
+            ->addParam('include_reel', 'true')
+            ->getRawResponse();
+    }
+
+    /**
      * Get media info.
      *
      * @param string $csrftoken

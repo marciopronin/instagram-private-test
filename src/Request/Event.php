@@ -2897,7 +2897,13 @@ class Event extends RequestCollection
                 case 'media_grid':
                     if ($section->getFeedType() === 'media') {
                         foreach ($section->getLayoutContent()->getMedias() as $media) {
-                            $this->sendExploreHomeImpression($media->getMedia(), [
+                            if ($media->getMedia() !== null) {
+                                $mediaItem = $media->getMedia();
+                            }
+                            if ($media->getClips() !== null) {
+                                $mediaItem = $media->getClips()->getItems()[0]->getMedia();
+                            }
+                            $this->sendExploreHomeImpression($mediaItem, [
                                 'position'              => json_encode([strval($row - 1), strval($column - 1)]),
                                 'size'                  => json_encode(['1', '1']),
                                 'topic_cluster_id'      => $clusterId,

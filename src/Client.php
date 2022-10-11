@@ -940,7 +940,7 @@ class Client
                 break;
             }
             $retry++;
-            sleep(1);
+            sleep(5);
         } while (\InstagramAPI\Instagram::$retryOnNetworkException && $retry < 3);
 
         // Detect very serious HTTP status codes in the response.

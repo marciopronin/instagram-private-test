@@ -1,3 +1,15 @@
+# Stable release v20.1.0
+## Date: 11/10/2022
+
+### New features
+
+- **Web:** Add `getTopSearch()`
+
+### Updates and fixes
+
+**Client:** Update `_guzzleRequest()`
+**Event:** Update `prepareAndSendExploreImpression()`
+
 # Stable release v20.20.0
 ## Date: 11/10/2022
 

@@ -1261,13 +1261,13 @@ class Account extends RequestCollection
         $confirmationLink)
     {
         $re = '/^https:\/\/(www\.)?instagram.com\/accounts\/confirm_email\/(\w+)\/(\w+)/m';
-        preg_match_all($re, $confirmationLink, $matches, PREG_SET_ORDER, 0);
+        preg_match_all($re, $confirmationLink, $matches, PREG_OFFSET_CAPTURE, 0);
 
         if (empty($matches)) {
             throw new \InstagramAPI\Exception\InstagramException('Not valid link provided.');
         }
 
-        return $this->ig->request("accounts/confirm_email/{$matches[0][1]}/{$matches[0][2]}/")
+        return $this->ig->request("accounts/confirm_email/{$matches[2][0][0]}/{$matches[3][0][0]}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->getResponse(new Response\GenericResponse());

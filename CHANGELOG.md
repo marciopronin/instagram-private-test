@@ -1,4 +1,11 @@
-# Stable release v20.1.0
+# Stable release v20.21.1
+## Date: 12/10/2022
+
+### Updates and fixes
+
+**Account:** Update `confirmEmail()`
+
+# Stable release v20.21.0
 ## Date: 11/10/2022
 
 ### New features

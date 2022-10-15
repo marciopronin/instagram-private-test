@@ -1,3 +1,10 @@
+# Stable release v20.22.0
+## Date: 12/10/2022
+
+### Updates and fixes
+
+**Reel:** Update `getVideosChaining()`
+
 # Stable release v20.21.1
 ## Date: 12/10/2022
 

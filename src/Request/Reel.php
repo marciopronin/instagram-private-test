@@ -389,4 +389,44 @@ class Reel extends RequestCollection
         return $this->ig->request('clips/clips_info_for_creation/')
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Get videos chaining.
+     *
+     * @param string|null $chainingMedia Chaining media ID (Parent).
+     * @param array|null  $seenReels     Seen reels.
+     * @param array|null  $sessionInfo   Session info
+     * @param array|null  $maxId         Max ID.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\ReelsResponse
+     */
+    public function getVideosChaining(
+        $chainingMedia = null,
+        $seenReels = null,
+        $sessionInfo = null,
+        $maxId = null)
+    {
+        $request = $this->ig->request('clips/panavideochaining/')
+            ->setSignedPost(false)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('_uuid', $this->ig->uuid);
+
+        if ($chainingMedia !== null) {
+            $request->addPost('chaining_media_id', $chainingMedia);
+        }
+        if ($seenReels !== null) {
+            $request->addPost('seen_reels', json_encode($seenReels, true));
+        }
+        if ($sessionInfo !== null) {
+            $request->addPost('session_info', json_encode($sessionInfo, true));
+        }
+        if ($maxId !== null) {
+            $request->addPost('max_id', $maxId);
+        }
+
+        return $request->getResponse(new Response\ReelsResponse());
+    }
 }

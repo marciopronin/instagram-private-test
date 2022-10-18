@@ -2337,7 +2337,7 @@ class Internal extends RequestCollection
     {
         $attempt = 0;
         $lastError = null;
-        while (true && !$this->ig->getIsDisabledAutoRetriesMediaUpload()) {
+        while (true) {
             // Check for max retry-limit, and throw if we exceeded it.
             if (++$attempt > self::MAX_CONFIGURE_RETRIES) {
                 if ($lastError === null) {
@@ -2372,9 +2372,15 @@ class Internal extends RequestCollection
                     $result = $e->getResponse();
                 }
                 $lastError = $e;
+                if ($this->ig->getIsDisabledAutoRetriesMediaUpload()) {
+                    throw $e;
+                }
             } catch (\Exception $e) {
                 $lastError = $e;
                 // Ignore everything else.
+                if ($this->ig->getIsDisabledAutoRetriesMediaUpload()) {
+                    throw $e;
+                }
             }
 
             // We had a network error or something like that, let's continue to the next attempt.

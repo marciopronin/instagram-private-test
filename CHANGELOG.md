@@ -1,3 +1,10 @@
+# Stable release v20.22.1
+## Date: 18/10/2022
+
+### Updates and fixes
+
+**Internal:** Update `configureWithRetries()`
+
 # Stable release v20.22.0
 ## Date: 12/10/2022
 

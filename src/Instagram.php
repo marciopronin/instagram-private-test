@@ -2677,9 +2677,13 @@ class Instagram implements ExperimentsInterface
         // You have been warned.
         if ($justLoggedIn) {
             // Reset zero rating rewrite rules.
-            $this->client->zeroRating()->reset();
-            $this->event->sendCellularDataOpt();
-            $this->event->sendDarkModeOpt();
+            try {
+                $this->client->zeroRating()->reset();
+                $this->event->sendCellularDataOpt();
+                $this->event->sendDarkModeOpt();
+            } catch (\Exception $e) {
+                // pass
+            }
             // Perform the "user has just done a full login" API flow.
 
             // Batch request 1
@@ -2762,6 +2766,8 @@ class Instagram implements ExperimentsInterface
                         }
                     }
                 }
+            } catch (\Exception $e) {
+                // pass
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
@@ -2798,11 +2804,7 @@ class Instagram implements ExperimentsInterface
             }
 
             try {
-                try {
-                    $this->internal->logResurrectAttribution();
-                } catch (\Exception $e) {
-                    // pass
-                }
+                $this->internal->logResurrectAttribution();
                 //$this->internal->getDeviceCapabilitiesDecisions();
                 //$this->people->getBootstrapUsers();
                 $this->people->getInfoById($this->account_id);
@@ -2811,6 +2813,8 @@ class Instagram implements ExperimentsInterface
                 $this->creative->sendSupportedCapabilities();
                 $this->media->getBlockedMedia();
                 $this->internal->storeClientPushPermissions();
+            } catch (\Exception $e) {
+                // pass
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
@@ -2822,6 +2826,8 @@ class Instagram implements ExperimentsInterface
             try {
                 $this->internal->getQPCooldowns();
                 $this->_registerPushChannels();
+            } catch (\Exception $e) {
+                // pass
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
@@ -2833,15 +2839,14 @@ class Instagram implements ExperimentsInterface
             try {
                 $this->story->getReelsMediaFeed($this->account_id);
                 $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), true);
+                $this->internal->getQPFetch();
 
-                try {
-                    $this->internal->getQPFetch();
-                } catch (\Exception $e) {
-                }
                 //$this->account->getProcessContactPointSignals();
                 if ($this->getPlatform() === 'android') {
                     $this->internal->getArlinkDownloadInfo();
                 }
+            } catch (\Exception $e) {
+                // pass
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
@@ -2855,17 +2860,20 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->people->getSharePrefill();
+                    $this->direct->getPresences();
                 } catch (\Exception $e) {
+                    // pass
                 }
-                $this->direct->getPresences();
 
                 try {
                     $this->direct->getInbox(null, null, 0, null);
                     $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
+
+                    $this->reel->discover();
+                    $this->internal->writeSupportedCapabilities();
                 } catch (\Exception $e) {
+                    // pass
                 }
-                $this->reel->discover();
-                $this->internal->writeSupportedCapabilities();
                 $this->_registerPushChannels();
             } finally {
                 // Stops emulating batch requests
@@ -2950,10 +2958,12 @@ class Instagram implements ExperimentsInterface
 
                     try {
                         $this->people->getSharePrefill();
+                        $this->people->getRecentActivityInbox();
                     } catch (\Exception $e) {
                         //pass
                     }
-                    $this->people->getRecentActivityInbox();
+                } catch (\Exception $e) {
+                    //pass
                 } finally {
                     // Stops emulating batch requests.
                     $this->client->stopEmulatingBatch();
@@ -2967,7 +2977,9 @@ class Instagram implements ExperimentsInterface
                     $this->people->getRecentActivityInbox();
                     $this->internal->writeSupportedCapabilities();
                     $this->people->getInfoById($this->account_id);
-                    $this->internal->getDeviceCapabilitiesDecisions();
+                    //$this->internal->getDeviceCapabilitiesDecisions();
+                } catch (\Exception $e) {
+                    //pass
                 } finally {
                     // Stops emulating batch requests.
                     $this->client->stopEmulatingBatch();
@@ -3003,10 +3015,10 @@ class Instagram implements ExperimentsInterface
                     $this->internal->getQPFetch();
                     $this->direct->getRankedRecipients('reshare', true);
                     $this->direct->getRankedRecipients('raven', true);
-                    $this->_registerPushChannels();
-                } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
+                } catch (\Exception $e) {
                     // This can have EmptyResponse, and that's ok.
                 } finally {
+                    $this->_registerPushChannels();
                     // Stops emulating batch requests.
                     $this->client->stopEmulatingBatch();
                 }

@@ -1,3 +1,10 @@
+# Stable release v20.22.2
+## Date: 21/10/2022
+
+### Updates and fixes
+
+**Instagram:** Update pre login and login flow to prevent issues during login
+
 # Stable release v20.22.1
 ## Date: 18/10/2022
 

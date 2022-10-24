@@ -384,7 +384,8 @@ class Event extends RequestCollection
             $this->ig->incrementNavChainStep();
 
             return $this->ig->getNavChain();
-        } elseif ($clickPoint === 'back') {
+        }
+        if ($clickPoint === 'back') {
             return $this->ig->getNavChain();
         }
 
@@ -4113,6 +4114,10 @@ class Event extends RequestCollection
                 ],
             ],
             'edit_profile'  => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'edit_profile',
+                ],
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'profile_edit_bio',

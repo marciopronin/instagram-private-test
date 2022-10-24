@@ -393,7 +393,7 @@ class Event extends RequestCollection
         if ($module === 'feed_timeline' && ($clickPoint !== 'cold start' || $clickPoint !== 'cold_start')) {
             $this->ig->setNavChainStep(1);
             $this->ig->setNavChain('');
-        } elseif ($module === 'explore_popular' || $module === 'clips_viewer_clips_tab') {
+        } elseif ($module === 'explore_popular' || $module === 'clips_viewer_clips_tab' || $module === 'self_profile' || $module === 'profile') {
             $this->ig->setNavChainStep(2);
             $this->ig->setNavChain('');
         } elseif ($module === 'newsfeed_you') {
@@ -4124,6 +4124,10 @@ class Event extends RequestCollection
                 ],
                 [
                     'clickpoint'    => 'back',
+                    'dest_module'   => 'self_profile',
+                ],
+                [
+                    'clickpoint'    => 'button',
                     'dest_module'   => 'self_profile',
                 ],
                 [

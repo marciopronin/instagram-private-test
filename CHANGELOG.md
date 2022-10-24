@@ -1,3 +1,15 @@
+# Stable release v20.22.4
+## Date: 24/10/2022
+
+### Updates and fixes
+
+**Client:** Update `_orderHeaders()`
+**Account:** Update `changeProfilePicture()`
+
+### Examples
+
+- **Examples:** Update editProfile
+
 # Stable release v20.22.3
 ## Date: 24/10/2022
 

@@ -567,6 +567,7 @@ class Account extends RequestCollection
         $uploadResponse = $this->ig->internal->uploadPhotoData(Constants::FEED_TIMELINE, $internalMetadata);
 
         return $this->ig->request('accounts/change_profile_picture/')
+            ->setSignedPost(false)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('use_fbuploader', 'true')

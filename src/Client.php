@@ -1340,6 +1340,11 @@ class Client
     {
         $headersOrder = [
             'Host',
+            'X_FB_PHOTO_WATERFALL_ID',
+            'X-Instagram-Rupload-Params',
+            'X-Entity-Type',
+            'X-Entity-Name',
+            'X-Entity-Length',
             'X-IG-App-Locale',
             'X-IG-Device-Locale',
             'X-IG-Mapped-Locale',

@@ -4094,6 +4094,10 @@ class Event extends RequestCollection
                 ],
                 [
                     'clickpoint'    => 'button',
+                    'dest_module'   => 'self_profile',
+                ],
+                [
+                    'clickpoint'    => 'button',
                     'dest_module'   => 'self_unified_follow_lists',
                 ],
                 [

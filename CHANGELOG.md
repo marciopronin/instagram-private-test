@@ -1,3 +1,10 @@
+# Stable release v20.22.6
+## Date: 24/10/2022
+
+### Updates and fixes
+
+**Event:** Update `_validateNavigationPath()`
+
 # Stable release v20.22.5
 ## Date: 24/10/2022
 

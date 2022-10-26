@@ -2922,15 +2922,17 @@ class Event extends RequestCollection
                     break;
                 case 'two_by_two_right':
                 case 'two_by_two_left':
-                    if ($section->getLayoutType() === 'two_by_two_right') {
+                case 'two_by_two_ad_right_with_fallback':
+                case 'two_by_two_ad_left_with_fallback':
+                    if ($section->getLayoutType() === 'two_by_two_right' || $section->getLayoutType() === 'two_by_two_ad_right_with_fallback') {
                         $column = 1;
                         $cOffset = 1;
                     }
-                    if ($section->getLayoutType() === 'two_by_two_left') {
+                    if ($section->getLayoutType() === 'two_by_two_left' || $section->getLayoutType() === 'two_by_two_ad_left_with_fallback') {
                         $column = 3;
                         $cOffset = 0;
                     }
-                    if ($section->getFeedType() === 'media' || $section->getFeedType() === 'channel') {
+                    if ($section->getFeedType() === 'media' || $section->getFeedType() === 'channel' || $section->getFeedType() === 'media_or_ad') {
                         foreach ($section->getLayoutContent()->getFillItems() as $item) {
                             $this->sendExploreHomeImpression($item->getMedia(), [
                                 'position'              => json_encode([strval($row - 1), strval($column - 1)]),
@@ -2943,6 +2945,8 @@ class Event extends RequestCollection
                         }
                         if ($section->getFeedType() === 'media') {
                             $item = $section->getLayoutContent()->getTwoByTwoItem()->getMedia();
+                        } elseif ($section->getFeedType() === 'media_or_ad') {
+                            $item = $section->getLayoutContent()->getTwoByTwoAdItem()->getMediaOrAd();
                         } else {
                             $item = $section->getLayoutContent()->getTwoByTwoItem()->getChannel()->getMedia();
                         }

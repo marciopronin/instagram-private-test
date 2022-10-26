@@ -42,7 +42,7 @@ try {
     $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename);
 
     // Click on the camera icon and move to the gallery pick or camera.
-    $ig->event->sendNavigation('main_camera', 'feed_timeline', 'tabbed_gallery_camera');
+    $ig->event->sendNavigation('camera_action_bar_button_main_feed', 'feed_timeline', 'gallery_picker');
     $startTime = round(microtime(true) * 1000);
     $waterfallId = \InstagramAPI\Signatures::generateUUID();
     // Open Photo camera tab
@@ -53,7 +53,7 @@ try {
     $editSessionId = \InstagramAPI\Signatures::generateUUID();
     $ig->event->sendStartGalleryEditSession($editSessionId);
     // Navigate to the filter module.
-    $ig->event->sendNavigation('button', 'tabbed_gallery_camera', 'photo_filter');
+    $ig->event->sendNavigation('button', 'gallery_picker', 'photo_filter');
     // Send filter photo event.
     $ig->event->sendFilterPhoto($waterfallId, $startTime, round(microtime(true) * 1000));
     // Send IG Media creation. Media is being generated.

@@ -238,6 +238,9 @@ class Event extends RequestCollection
             case 'gallery_picker':
                 $class = 'GalleryPickerFragment';
                 break;
+            case 'universal_creation_menu':
+                $class = 'UniversalCreationMenuFragment';
+                break;
             case 'stories_precapture_camera':
                 $class = 'QuickCaptureFragment';
                 break;
@@ -3899,6 +3902,10 @@ class Event extends RequestCollection
                     'dest_module'   => 'tabbed_gallery_camera',
                 ],
                 [
+                    'clickpoint'    => 'camera_action_bar_button_main_feed',
+                    'dest_module'   => 'gallery_picker',
+                ],
+                [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'reel_feed_timeline',
                 ],
@@ -4047,6 +4054,12 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'tabbed_gallery_camera',
+                ],
+            ],
+            'gallery_picker' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'photo_filter',
                 ],
             ],
             'photo_filter' => [

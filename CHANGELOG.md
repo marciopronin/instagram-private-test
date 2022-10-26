@@ -1,3 +1,15 @@
+# Stable release v20.22.8
+## Date: 27/10/2022
+
+### Updates and fixes
+
+**Event:** Update `_getModuleClass()`
+**Event:** Update `_validateNavigationPath()`
+
+### Examples
+
+**Example:** Update uploadPhoto
+
 # Stable release v20.22.7
 ## Date: 26/10/2022
 

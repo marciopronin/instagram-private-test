@@ -1,3 +1,14 @@
+# Stable release v20.22.9
+## Date: 27/10/2022
+
+### Updates and fixes
+
+**Internal:** Update `uploadSinglePhoto()`
+
+### Examples
+
+**Example:** Update uploadPhoto
+
 # Stable release v20.22.8
 ## Date: 27/10/2022
 

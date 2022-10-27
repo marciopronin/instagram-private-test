@@ -70,9 +70,11 @@ try {
     //TODO; uploadPhoto should internally call some events related to the media ingest,
     //TODO; upload success, media publish and related.
     $ig->timeline->uploadPhoto($photo->getFile(), ['caption' => $captionText, 'waterfall_id' => $waterfallId]);
-    $this->ig->event->sendNavigation('next', 'photo_filter', 'metadata_followers_share');
+    $ig->event->sendNavigation('next', 'photo_filter', 'metadata_followers_share');
     sleep(mt_rand(1, 3));
-    $this->ig->event->sendNavigation('next', 'metadata_followers_share', 'feed_timeline');
+    $ig->event->sendNavigation('next', 'metadata_followers_share', 'feed_timeline');
+
+    $ig->event->forceSendBatch();
 } catch (\Exception $e) {
     if ($e instanceof InstagramAPI\Exception\LoginRequiredException) {
         echo 'Password was changed or cookie expired. Please login again.';

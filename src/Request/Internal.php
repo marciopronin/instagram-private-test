@@ -117,6 +117,16 @@ class Internal extends RequestCollection
                     return $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
                 }
             );
+
+            try {
+                list($hash, $quality) = @PDQHasher::computeHashAndQualityFromFilename($photoFilename, false, false);
+                if ($hash !== null) {
+                    $pdqHashes[] = $hash->toHexString();
+                    $this->updateMediaWithPdqHashes($internalMetadata->getUploadId(), $pdqHashes);
+                }
+            } catch (\Exception $e) {
+                // pass
+            }
         } catch (InstagramException $e) {
             // Pass Instagram's error as is.
             throw $e;

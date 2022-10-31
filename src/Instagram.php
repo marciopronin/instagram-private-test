@@ -2750,11 +2750,12 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $requestId = \InstagramAPI\Signatures::generateUUID();
+                $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch');
                 $feed = $this->timeline->getTimelineFeed(null, [
                     'reason'        => Constants::REASONS[0],
                     'request_id'    => $requestId,
                 ]);
-                $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch');
+                $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch', true);
                 $items = $feed->getFeedItems();
                 $items = array_slice($items, 0, 2);
 
@@ -2812,8 +2813,8 @@ class Instagram implements ExperimentsInterface
                 try {
                     $requestId = \InstagramAPI\Signatures::generateUUID();
                     $traySessionId = \InstagramAPI\Signatures::generateUUID();
-                    $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
                     $this->event->sendStoriesRequest($traySessionId, $requestId, 'cold_start');
+                    $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
                     $this->people->getSharePrefill();
                 } catch (\Exception $e) {
                     // Pass (avoid throttling).

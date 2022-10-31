@@ -1,3 +1,15 @@
+# Stable release v20.24.0
+## Date: 01/11/2022
+
+### New features
+
+**Event:** Add `sendRecommendedFollowButtonTapped()`
+
+### Updates and fixes
+
+**Instagram:** Update `_sendLoginFlow()`
+**Event:** Update `sendInstagramFeedRequestSent()`
+
 # Stable release v20.23.0
 ## Date: 31/10/2022
 

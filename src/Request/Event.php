@@ -3060,26 +3060,47 @@ class Event extends RequestCollection
     /**
      * Send recommended user impression.
      *
-     * @param Item   $item     Item.
-     * @param int    $position Position.
-     * @param string $module   Module.
+     * @param Item|User $item     Item.
+     * @param int       $position Position.
+     * @param string    $module   Module.
+     * @param mixed     $object
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendRecommendedUserImpression(
-        $item,
+        $object,
         $position,
         $module = 'newsfeed_you')
     {
-        $extra = [
-            'position'           => $position,
-            'view'               => 'fullscreen',
-            'uid'                => explode('|', $item->getUuid())[1],
-            'impression_uuid'    => $item->getUuid(),
-            'algorithm'          => $item->getAlgorithm(),
-            'social_context'     => $item->getSocialContext(),
-            'inlined'            => false,
-        ];
+        if ($module === 'newsfeed_you') {
+            $extra = [
+                'position'           => $position,
+                'view'               => 'fullscreen',
+                'uid'                => explode('|', $object->getUuid())[1],
+                'impression_uuid'    => $object->getUuid(),
+                'algorithm'          => $object->getAlgorithm(),
+                'social_context'     => $object->getSocialContext(),
+                'inlined'            => false,
+            ];
+        } elseif ($module === 'feed_timeline') {
+            $extra = [
+                'target_id'                 => $object->getUserCard()->getUser()->getPk(),
+                'position'                  => $position,
+                'view_module'               => 'hscroll_aymf_feed_unit',
+                'algorithm'                 => 'unknown',
+                'view_state_item_type'      => 0,
+                'feed_timeline'             => $module,
+                'follow_impression_id'      => 0,
+                'follow_impression_length'  => 182,
+                'ranking_algorithm'         => 'su_default',
+                'social_context'            => $object->getUserCard()->getSocialContext(),
+                'insertion_context'         => null,
+                'display_format'            => null,
+                'netego_unit_id'            => null,
+                'context_type'              => null,
+                'num_facepiles'             => null,
+            ];
+        }
 
         $event = $this->_addEventBody('recommended_user_impression', $module, $extra);
         $this->_addEventData($event);
@@ -6437,6 +6458,46 @@ class Event extends RequestCollection
     }
 
     /**
+     * Sends recommended follow button tapped.
+     *
+     * This event should be sent when tapped the suggested follow button.
+     *
+     * @param string $userId   The user ID.
+     * @param string $module   Module.
+     * @param int    $position Position.
+     * @param bool   $follow   Follow flag.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendRecommendedFollowButtonTapped(
+        $userId,
+        $module,
+        $position,
+        $follow = true)
+    {
+        $extra = [
+            'target_id'             => $userId,
+            'position'              => $position,
+            'view_module'           => 'hscroll_aymf_feed_unit',
+            'algorithm'             => 'unknown',
+            'view_state_item_type'  => 0,
+            'container_module'      => $module,
+            'request_type'          => ($follow === true) ? 'create' : 'destroy',
+            'follow_status'         => ($follow === true) ? 'following' : 'not_following',
+            'follow_impression_id'  => null,
+            'ranking_algorithm'     => 'su_default',
+            'social_context'        => 'Instagram recommended',
+            'insertion_context'     => null,
+            'display_format'        => 'fish-eye',
+            'netego_unit_id'        => null,
+            'context_type'          => null,
+        ];
+
+        $event = $this->_addEventBody('recommended_follow_button_tapped', $module, $extra);
+        $this->_addEventData($event);
+    }
+
+    /**
      * Sends follow button tapped.
      *
      * This event should be sent when tapped the follow button.
@@ -7660,18 +7721,26 @@ class Event extends RequestCollection
      *
      * @param mixed $requestId
      * @param mixed $type
+     * @param mixed $completed
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendInstagramFeedRequestSent(
         $requestId,
-        $type)
+        $type,
+        $completed = false)
     {
         $extra = [
             'request_id'        => $requestId,
             'session_id'        => $this->ig->client->getPigeonSession(),
             'request_type'      => $type,
         ];
+
+        if ($completed === false) {
+            $name = 'instagram_feed_request_sent';
+        } else {
+            $name = 'instagram_feed_request_completed';
+        }
 
         $event = $this->_addEventBody('instagram_feed_request_sent', 'feed_timeline', $extra);
         $this->_addEventData($event, 1);

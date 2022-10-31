@@ -116,7 +116,9 @@ class Story extends RequestCollection
      * still have stories. So it's always safer to call getUserStoryFeed() if
      * a specific user's story feed matters to you.
      *
-     * @param string $reason (optional) Reason for the request.
+     * @param string     $reason        (optional) Reason for the request.
+     * @param mixed|null $requestId
+     * @param mixed|null $traySessionId
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -125,16 +127,30 @@ class Story extends RequestCollection
      * @see Story::getUserStoryFeed()
      */
     public function getReelsTrayFeed(
-        $reason = 'pull_to_refresh')
+        $reason = 'pull_to_refresh',
+        $requestId = null,
+        $traySessionId = null)
     {
         $request = $this->ig->request('feed/reels_tray/')
             ->setSignedPost(false)
             ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('reason', $reason)
             ->addPost('timezone_offset', date('Z'))
-            ->addPost('request_id', Signatures::generateUUID())
             //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('reel_tray_impressions', json_encode([], JSON_FORCE_OBJECT))
             ->addPost('_uuid', $this->ig->uuid);
+
+        if ($requestId !== null) {
+            $request->addPost('request_id', $requestId);
+        } else {
+            $request->addPost('request_id', Signatures::generateUUID());
+        }
+
+        if ($traySessionId !== null) {
+            $request->addPost('tray_session_id', $traySessionId);
+        } else {
+            $request->addPost('tray_session_id', Signatures::generateUUID());
+        }
 
         if ($this->ig->isExperimentEnabled('ig_android_stories_tray_pagination_killswitch', 'is_enabled', true)) {
             $request->addPost('page_size', $this->ig->getExperimentParam('ig_android_stories_tray_pagination_killswitch', 'default_page_size', 50));

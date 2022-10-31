@@ -1687,6 +1687,20 @@ class Instagram implements ExperimentsInterface
             $this->event->sendStringImpressions(['17039371' => 2, '17039886' => 2, '17040255' => 1, '17040256' => 1, '17040257' => 1, '17040645' => 1, '2131232017' => 1, '2131232109' => 1, '2131232164' => 1, '2131232213' => 1, '2131232214' => 1, '2131232227' => 1, '2131232228' => 1, '2131232373' => 1, '2131232374' => 1, '2131232482' => 1, '2131232484' => 1, '2131232609' => 1, '2131232621' => 1, '2131886419' => 1, '2131886885' => 4, '2131887050' => 1, '2131887411' => 1, '2131888159' => 1, '2131890407' => 1, '2131890652' => 1, '2131891238' => 1, '2131891283' => 1, '2131892179' => 1, '2131892675' => 3, '2131892749' => 1, '2131892925' => 3, '2131893604' => 1, '2131894671' => 1, '2131894713' => 2, '2131895369' => 1, '2131895744' => 1, '2131896364' => 1, '2131898082' => 1, '2131898155' => 1]);
             $this->event->sendStringImpressions(['2131231967' => 1, '2131232008' => 1, '2131232152' => 1, '2131232466' => 1, '2131232682' => 1, '2131886420' => 1, '2131886709' => 1, '2131887421' => 1, '2131888159' => 1, '2131889830' => 1, '2131890107' => 5, '2131890302' => 1, '2131890652' => 1, '2131890810' => 4, '2131890813' => 4, '2131892646' => 1, '2131892913' => 1, '2131893117' => 3, '2131893560' => 1, '2131893562' => 1, '2131893668' => 1, '2131893810' => 1, '2131893811' => 1, '2131894468' => 1, '2131896103' => 1, '2131896230' => 1, '2131896432' => 2, '2131896577' => 1, '2131897080' => 3, '2131897172' => 3, '2131897229' => 1, '2131897678' => 2]);
 
+            $this->event->sendAttributionSdkDebug([
+                'event_name'    => 'report_events',
+                'event_types'   => '[LOGIN]',
+            ]);
+            $this->event->sendAttributionSdkDebug([
+                'event_name'    => 'report_events_compliant',
+                'event_types'   => '[LOGIN]',
+            ]);
+
+            $this->event->sendFxSsoLibrary('auth_token_write_start', null, 'log_in');
+            $this->event->sendFxSsoLibrary('auth_token_write_failure', 'provider_not_found', 'log_in');
+            $this->event->sendFxSsoLibrary('auth_token_write_start', null, 'log_in');
+            $this->event->sendFxSsoLibrary('auth_token_write_failure', 'provider_not_found', 'log_in');
+
             try {
                 $request = $this->request('accounts/login/')
                     ->setNeedsAuth(false)
@@ -1748,13 +1762,21 @@ class Instagram implements ExperimentsInterface
             } catch (\InstagramAPI\Exception\InstagramException $e) {
                 //pass
             }
+
             $this->event->sendFlowSteps('login', 'log_in', $waterfallId, $startTime);
             $this->event->pushNotificationSettings();
             $this->event->enableNotificationSettings([
-                'ig_other', 'ig_direct', 'uploads', 'ig_direct_requests', 'ig_direct_video_chat',
+                'ig_product_announcements', 'ig_friends_on_instagram', 'ig_likes', 'ig_other', 'ig_photos_of_you', 'ig_private_user_follow_request', 'ig_igtv_video_updates', 'ig_mentions_in_bio', 'ig_direct', 'uploads', 'ig_reminders', 'ig_direct_requests', 'ig_igtv_recommended_videos', 'ig_new_followers', 'ig_likes_and_comments_on_photos_of_you', 'ig_first_posts_and_stories', 'ig_comment_likes', 'ig_live_videos', 'ig_comments', 'ig_shopping_drops', 'ig_view_counts', 'ig_direct_video_chat', 'ig_posting_status',
             ]);
-            $this->event->sendNavigationTabImpression(1);
+            $this->event->sendAttributionSdkDebug([
+                'event_name'    => 'get_compliance_action_success',
+                'message'       => 'REPORT',
+                'event_types'   => '[LOGIN]',
+            ]);
+
             $this->event->sendNavigation('cold_start', 'login', 'feed_timeline');
+
+            $this->event->sendNavigationTabImpression(1);
             $this->event->sendScreenshotDetector();
             $this->event->sendNavigationTabImpression(0);
             $this->loginAttemptCount = 0;
@@ -2680,6 +2702,9 @@ class Instagram implements ExperimentsInterface
             try {
                 $this->client->zeroRating()->reset();
                 $this->event->sendCellularDataOpt();
+                $this->event->legacyFbTokenOnIgAccessControl('token_access', 'ig_login_util', 'LoginUtil');
+                $this->event->legacyFbTokenOnIgAccessControl('token_access', 'ig_login_util', 'LoginUtil');
+                $this->event->legacyFbTokenOnIgAccessControl('token_access', 'ig_login_util', 'LoginUtil');
                 $this->event->sendDarkModeOpt();
             } catch (\Exception $e) {
                 // pass
@@ -2724,9 +2749,12 @@ class Instagram implements ExperimentsInterface
             }
 
             try {
+                $requestId = \InstagramAPI\Signatures::generateUUID();
                 $feed = $this->timeline->getTimelineFeed(null, [
-                    'reason' => Constants::REASONS[0],
+                    'reason'        => Constants::REASONS[0],
+                    'request_id'    => $requestId,
                 ]);
+                $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch');
                 $items = $feed->getFeedItems();
                 $items = array_slice($items, 0, 2);
 
@@ -2782,7 +2810,10 @@ class Instagram implements ExperimentsInterface
                 $this->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', true);
 
                 try {
-                    $this->story->getReelsTrayFeed('cold_start');
+                    $requestId = \InstagramAPI\Signatures::generateUUID();
+                    $traySessionId = \InstagramAPI\Signatures::generateUUID();
+                    $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
+                    $this->event->sendStoriesRequest($traySessionId, $requestId, 'cold_start');
                     $this->people->getSharePrefill();
                 } catch (\Exception $e) {
                     // Pass (avoid throttling).
@@ -3054,6 +3085,7 @@ class Instagram implements ExperimentsInterface
             }
         }
 
+        $this->event->forceSendBatch();
         // We've now performed a login or resumed a session. Forcibly write our
         // cookies to the storage, to ensure that the storage doesn't miss them
         // in case something bad happens to PHP after this moment.
@@ -3147,10 +3179,6 @@ class Instagram implements ExperimentsInterface
     public function request(
         $url)
     {
-        if ($this->customResolver !== null) {
-            $this->client->setResolveHost(call_user_func_array($this->customResolver, [$url]));
-        }
-
-        return new Request($this, $url);
+        return new Request($this, $url, $this->customResolver);
     }
 }

@@ -1,3 +1,20 @@
+# Stable release v20.23.0
+## Date: 31/10/2022
+
+### New features
+
+**Event:** Add `legacyFbTokenOnIgAccessControl()`
+**Event:** Add `sendAttributionSdkDebug()`
+**Event:** Add `sendInstagramFeedRequestSent()`
+
+### Updates and fixes
+
+**Event:** Update `sendNavigationTabImpression`
+**Story:** Update `getReelsTrayFeed()`
+**Event:** Update `_addEventBody()`
+**Event:** Update `_sendBatchEvents()`
+**Request:** Update `_buildHttpRequest()`
+
 # Stable release v20.22.9
 ## Date: 27/10/2022
 

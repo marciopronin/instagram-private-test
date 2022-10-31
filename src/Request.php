@@ -176,14 +176,23 @@ class Request
     protected $_requestPriority = 3;
 
     /**
+     * Custom resolver.
+     *
+     * @var callable
+     */
+    protected $_customResolver = null;
+
+    /**
      * Constructor.
      *
      * @param Instagram $parent
      * @param string    $url
+     * @param mixed     $customResolver
      */
     public function __construct(
         Instagram $parent,
-        $url)
+        $url,
+        $customResolver)
     {
         $this->_parent = $parent;
         $this->_url = $url;
@@ -204,6 +213,7 @@ class Request
         $this->_isBodyCompressed = false;
         $this->_excludeSigned = [];
         $this->_defaultHeaders = true;
+        $this->_customResolver = $customResolver;
     }
 
     /**
@@ -787,6 +797,9 @@ class Request
             $endpoint = $endpoint
                 .(strpos($endpoint, '?') === false ? '?' : '&')
                 .http_build_query(Utils::reorderByHashCode($this->_params));
+        }
+        if ($this->_customResolver !== null) {
+            $this->_parent->client->setResolveHost(call_user_func_array($this->_customResolver, [$endpoint]));
         }
         // Add default headers (if enabled).
         $this->_addDefaultHeaders();

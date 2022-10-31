@@ -100,7 +100,7 @@ class Event extends RequestCollection
             'log_type'      => 'client_event',
             'bg'            => $this->ig->getBackgroundState(),
             'name'          => $name,
-            'time'          => number_format(microtime(true), 3, '.', ''),
+            'time'          => sprintf('%.12E', round(microtime(true), 2)),
             'sampling_rate' => 1,
             'extra'         => $this->_addCommonProperties($extra),
         ];
@@ -517,7 +517,6 @@ class Event extends RequestCollection
                     [],
                     [],
                 ];
-                $this->ig->batchIndex++;
                 break;
             }
         }
@@ -575,6 +574,7 @@ class Event extends RequestCollection
         foreach ($this->ig->eventBatch as $batch) {
             if (!empty($batch)) {
                 $batches[] = $this->_addBatchBody($batch);
+                $this->ig->batchIndex++;
             }
         }
 
@@ -618,9 +618,7 @@ class Event extends RequestCollection
                         'app_uid'               => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
                         'app_ver'               => Constants::IG_VERSION,
                     ],
-                    'batches'       => [
-                        $batches,
-                    ],
+                    'batches'   => $batches,
                 ];
                 $request->addPost('compressed', 0)
                         ->addPost('multi_batch', 1)
@@ -631,7 +629,7 @@ class Event extends RequestCollection
                     $message = [
                         'request_info'  => [
                             'tier'              => 'micro_batch',
-                            'sent_time'         => round(microtime(true), 3),
+                            'sent_time'         => sprintf('%.12E', round(microtime(true), 2)),
                             'carrier'           => $this->ig->getCarrier(),
                             'conn'              => Constants::X_IG_Connection_Type,
                         ],
@@ -642,16 +640,14 @@ class Event extends RequestCollection
                             'app_uid'               => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
                             'app_ver'               => Constants::IG_VERSION,
                         ],
-                        'batches'       => [
-                            $batches,
-                        ],
+                        'batches'   => $batches,
                     ];
                     $request->addPost('compressed', 1)
                             ->addPost('multi_batch', 1)
                             ->addPost('message', base64_encode(gzdeflate(json_encode($message), -1, ZLIB_ENCODING_DEFLATE)));
                 } else {
                     $batches[0]['tier'] = 'micro_batch';
-                    $batches[0]['sent_time'] = round(microtime(true), 3);
+                    $batches[0]['sent_time'] = sprintf('%.12E', round(microtime(true), 2));
                     $batches[0]['carrier'] = $this->ig->getCarrier();
                     $batches[0]['conn'] = Constants::X_IG_Connection_Type;
                     $batches[0]['config_checksum'] = empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum');
@@ -6044,13 +6040,14 @@ class Event extends RequestCollection
             $extra['tabs'] = [
                 'main_home',
                 'main_search',
-                'main_camera',
+                'main_clips',
                 'main_inbox',
                 'main_profile',
             ];
         } elseif ($mode === 1) {
             $extra['headers'] = [
                 'main_direct',
+                'main_story_creation',
             ];
         }
 
@@ -6961,19 +6958,17 @@ class Event extends RequestCollection
     /**
      * Prepares Push Notification Settings. Managed automaticallyby the API. Set during cold start login (before).
      *
-     * @param bool        $enabled
-     * @param string|null $module
-     *
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function pushNotificationSettings()
     {
         $extra = [
-            'all_notifications_status' => 1,
+            'status'                => 'enabled',
+            'extra_setting_data'    => null,
         ];
 
         $event = $this->_addEventBody('push_notification_setting', 'NotificationChannelsHelper', $extra);
-        $this->_addEventData($event);
+        $this->_addEventData($event, 1);
     }
 
     /**
@@ -7485,18 +7480,25 @@ class Event extends RequestCollection
     /**
      * Send legacy FB token on IG access control.
      *
+     * @param mixed $event
+     * @param mixed $name
+     * @param mixed $class
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      */
-    public function legacyFbTokenOnIgAccessControl()
+    public function legacyFbTokenOnIgAccessControl(
+        $event,
+        $name,
+        $class)
     {
         $extra = [
-            'event_type'    => 'token_access',
-            'caller_name'   => 'ig_invite_fb_friends',
-            'caller_class'  => 'UserDetailFragment',
+            'event_type'    => $event,
+            'caller_name'   => $name,
+            'caller_class'  => $class,
         ];
 
         $event = $this->_addEventBody('fx_legacy_fb_token_on_ig_access_control', null, $extra);
-        $this->_addEventData($event);
+        $this->_addEventData($event, 1);
     }
 
     /**
@@ -7596,5 +7598,82 @@ class Event extends RequestCollection
 
         $event = $this->_addEventBody($name, 'client_event', $extra);
         $this->_addEventData($event);
+    }
+
+    /**
+     * Send attribution SDK debug.
+     *
+     * @param array  $message  Message
+     * @param string $logLevel Log level.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendAttributionSdkDebug(
+        $message,
+        $logLevel = 'info')
+    {
+        $extra = [
+            'log_level'             => $logLevel,
+            'message'               => $message,
+        ];
+
+        $event = $this->_addEventBody('attribution_sdk_debug', null, $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send fxSSO Library.
+     *
+     * @param mixed $event
+     * @param mixed $reason
+     * @param mixed $token
+     * @param mixed $targetApp
+     * @param mixed $logLocation
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendFxSsoLibrary(
+        $event,
+        $reason,
+        $token,
+        $targetApp = 'FACEBOOK_DEBUG',
+        $logLocation = 'AccessLibrarySharedStorageManager')
+    {
+        $extra = [
+            'fx_sso_library_event'                  => $event,
+            'fx_sso_library_failure_reason'         => $reason,
+            'fx_sso_library_flow_using_auth_token'  => $token,
+            'debug_test_data'                       => [
+                'target_app'    => $targetApp,
+            ],
+            'version_id'                            => '3.0',
+            'initiator_account_id'                  => $this->ig->account_id,
+            'initiator_account_type'                => $logLocation,
+        ];
+
+        $event = $this->_addEventBody('fx_sso_library', null, $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send Instagram feed request sent.
+     *
+     * @param mixed $requestId
+     * @param mixed $type
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendInstagramFeedRequestSent(
+        $requestId,
+        $type)
+    {
+        $extra = [
+            'request_id'        => $requestId,
+            'session_id'        => $this->ig->client->getPigeonSession(),
+            'request_type'      => $type,
+        ];
+
+        $event = $this->_addEventBody('instagram_feed_request_sent', 'feed_timeline', $extra);
+        $this->_addEventData($event, 1);
     }
 }

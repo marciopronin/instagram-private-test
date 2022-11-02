@@ -185,14 +185,14 @@ class Request
     /**
      * Constructor.
      *
-     * @param Instagram $parent
-     * @param string    $url
-     * @param mixed     $customResolver
+     * @param Instagram  $parent
+     * @param string     $url
+     * @param mixed|null $customResolver
      */
     public function __construct(
         Instagram $parent,
         $url,
-        $customResolver)
+        $customResolver = null)
     {
         $this->_parent = $parent;
         $this->_url = $url;

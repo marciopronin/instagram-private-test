@@ -1,3 +1,11 @@
+# Stable release v20.24.1
+## Date: 02/11/2022
+
+### Updates and fixes
+
+**Request:** Update `Request` constructor
+**Internal:** Update `Request` inits
+
 # Stable release v20.24.0
 ## Date: 01/11/2022
 

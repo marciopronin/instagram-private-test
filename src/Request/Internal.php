@@ -2636,7 +2636,7 @@ class Internal extends RequestCollection
         $uploadParams = $this->_getPhotoUploadParams($targetFeed, $internalMetadata);
         $uploadParams = Utils::reorderByHashCode($uploadParams);
 
-        $offsetTemplate = new Request($this->ig, $endpoint);
+        $offsetTemplate = new Request($this->ig, $endpoint, $this->ig->customResolver);
         $offsetTemplate
             ->setAddDefaultHeaders(false)
             ->addHeader('X_FB_PHOTO_WATERFALL_ID', Signatures::generateUUID())
@@ -2827,7 +2827,7 @@ class Internal extends RequestCollection
                 }
 
                 // Prepare request.
-                $request = new Request($this->ig, $uploadUrl->getUrl());
+                $request = new Request($this->ig, $uploadUrl->getUrl(), $this->ig->customResolver);
                 $request
                     ->setAddDefaultHeaders(false)
                     ->addHeader('Content-Type', 'application/octet-stream')
@@ -2965,7 +2965,7 @@ class Internal extends RequestCollection
         $startRequest = new Request($this->ig, sprintf(
             'https://i.instagram.com/rupload_igvideo/%s?segmented=true&phase=start',
             Signatures::generateUUID()
-        ));
+        ), $this->ig->customResolver);
         $startRequest
             ->setAddDefaultHeaders(false)
             ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams))
@@ -2988,7 +2988,7 @@ class Internal extends RequestCollection
                     $segment->getFilesize()
                 );
 
-                $offsetTemplate = new Request($this->ig, $endpoint);
+                $offsetTemplate = new Request($this->ig, $endpoint, $this->ig->customResolver);
                 $offsetTemplate
                     ->setAddDefaultHeaders(false)
                     ->addHeader('Segment-Start-Offset', $offset)
@@ -3040,7 +3040,7 @@ class Internal extends RequestCollection
         $endRequest = new Request($this->ig, sprintf(
             'https://i.instagram.com/rupload_igvideo/%s?segmented=true&phase=end',
             Signatures::generateUUID()
-        ));
+        ), $this->ig->customResolver);
         $endRequest
             ->setAddDefaultHeaders(false)
             ->addHeader('Stream-Id', $streamId)
@@ -3096,7 +3096,7 @@ class Internal extends RequestCollection
         $uploadParams = $this->_getVideoUploadParams($targetFeed, $internalMetadata);
         $uploadParams = Utils::reorderByHashCode($uploadParams);
 
-        $offsetTemplate = new Request($this->ig, $endpoint);
+        $offsetTemplate = new Request($this->ig, $endpoint, $this->ig->customResolver);
         $offsetTemplate
             ->setAddDefaultHeaders(false)
             ->addHeader('X_FB_VIDEO_WATERFALL_ID', Signatures::generateUUID())

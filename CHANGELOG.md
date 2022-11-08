@@ -1,3 +1,10 @@
+# Stable release v20.24.2
+## Date: 08/11/2022
+
+### Updates and fixes
+
+**Constants:** Update to `260.0.0.23.115`
+
 # Stable release v20.24.1
 ## Date: 02/11/2022
 

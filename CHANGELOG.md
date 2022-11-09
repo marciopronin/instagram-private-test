@@ -1,3 +1,10 @@
+# Stable release v20.24.3
+## Date: 09/11/2022
+
+### Updates and fixes
+
+**Direct:** Update `approvePendingThreads()`
+
 # Stable release v20.24.2
 ## Date: 08/11/2022
 

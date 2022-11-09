@@ -119,6 +119,7 @@ class Direct extends RequestCollection
      * @param int   $folder  Folder used for Business accounts. ONLY for Business accounts.
      *                       Primary folder: 0.
      *                       General folder: 1.
+     * @param array $options Options.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -127,7 +128,8 @@ class Direct extends RequestCollection
      */
     public function approvePendingThreads(
         array $threads,
-        $folder = null)
+        $folder = null,
+        array $options = [])
     {
         if (!count($threads)) {
             throw new \InvalidArgumentException('Please provide at least one thread to approve.');
@@ -160,6 +162,10 @@ class Direct extends RequestCollection
             $request->addPost('folder', $folder)
                     ->addPost('origin_folder', 0)
                     ->addPost('filter', 'DEFAULT');
+        }
+
+        if (isset($options['client_context'])) {
+            $request->addPost('client_contex', $options['client_context']);
         }
 
         return $request

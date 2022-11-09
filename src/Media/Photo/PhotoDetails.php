@@ -118,7 +118,7 @@ class PhotoDetails extends MediaDetails
         }
         list($width, $height, $this->_type) = $result;
 
-        // Detect JPEG EXIF orientation if it exists.
+        // Detect WEBP EXIF orientation if it exists.
         $this->_orientation = $this->_getExifOrientation($filename, $this->_type);
 
         parent::__construct($filename, $filesize, $width, $height);
@@ -135,10 +135,10 @@ class PhotoDetails extends MediaDetails
         $mediaFilename = $this->getBasename();
 
         // Validate image type.
-        // NOTE: It is confirmed that Instagram only accepts JPEG files.
+        // NOTE: It is confirmed that Instagram only accepts WEBP files.
         $type = $this->getType();
-        if ($type !== IMAGETYPE_JPEG) {
-            throw new \InvalidArgumentException(sprintf('The photo file "%s" is not a JPEG file.', $mediaFilename));
+        if ($type !== IMAGETYPE_WEBP) {
+            throw new \InvalidArgumentException(sprintf('The photo file "%s" is not a WEBP file.', $mediaFilename));
         }
 
         $width = $this->getWidth();
@@ -163,7 +163,7 @@ class PhotoDetails extends MediaDetails
         $filename,
         $type)
     {
-        if ($type !== IMAGETYPE_JPEG || !function_exists('exif_read_data')) {
+        if ($type !== IMAGETYPE_WEBP || !function_exists('exif_read_data')) {
             return self::DEFAULT_ORIENTATION;
         }
 

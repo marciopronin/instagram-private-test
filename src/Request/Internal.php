@@ -2640,13 +2640,23 @@ class Internal extends RequestCollection
         $offsetTemplate
             ->setAddDefaultHeaders(false)
             ->addHeader('X_FB_PHOTO_WATERFALL_ID', Signatures::generateUUID())
-            ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams));
+            ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams))
+            ->setRequestPriority(6);
 
         $uploadTemplate = clone $offsetTemplate;
         $uploadTemplate
-            ->addHeader('X-Entity-Type', 'image/jpeg')
+            ->addHeader('Priority', $uploadTemplate->getRequestPriority())
+            ->addHeader('Offset', '0')
+            ->addHeader('X-Entity-Type', 'image/webp')
             ->addHeader('X-Entity-Name', basename(parse_url($endpoint, PHP_URL_PATH)))
-            ->addHeader('X-Entity-Length', $photoDetails->getFilesize());
+            ->addHeader('X-Entity-Length', $photoDetails->getFilesize())
+            ->addHeader('X-FB-Connection-Type', ($this->ig->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)')
+            ->addHeader('X-IG-Connection-Type', ($this->ig->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)')
+            ->addHeader('X-IG-App-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
+            ->addHeader('X-IG-Capabilities', Constants::X_IG_Capabilities)
+            ->addHeader('X-FB-HTTP-Engine', Constants::X_FB_HTTP_Engine)
+            ->addHeader('X-FB-Client-IP', 'True')
+            ->addHeader('X-FB-Server-Cluster', 'True');
 
         $this->ig->event->startIngestMedia(
             $internalMetadata->getUploadId(),
@@ -3279,7 +3289,7 @@ class Internal extends RequestCollection
         $result = [
             'upload_id'         => (string) $internalMetadata->getUploadId(),
             'retry_context'     => json_encode($this->_getRetryContext()),
-            'image_compression' => '{"lib_name":"moz","lib_version":"3.1.m","quality":"87"}',
+            'image_compression' => '{"lib_name":"moz","lib_version":"3.1.m","quality":"93"}',
             'xsharing_user_ids' => json_encode([]),
             'media_type'        => $internalMetadata->getVideoDetails() !== null
                 ? (string) Response\Model\Item::VIDEO

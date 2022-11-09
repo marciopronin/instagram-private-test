@@ -15,19 +15,19 @@ use InstagramAPI\Utils;
 class InstagramPhoto extends InstagramMedia
 {
     /**
-     * Output JPEG quality.
+     * Output WEBP quality.
      *
      * This value was chosen because 100 is very wasteful. And don't tweak this
-     * number, because the JPEG quality number is actually totally meaningless
+     * number, because the WEBP quality number is actually totally meaningless
      * (it is non-standardized) and Instagram can't even read it from the file.
      * They have no idea what quality we've used, and it can be harmful to go
-     * lower since different JPEG compressors (such as PHP's implementation) use
+     * lower since different WEBP compressors (such as PHP's implementation) use
      * different quality scales and are often awful at lower qualities! We know
-     * that PHP's JPEG quality at 95 is great, so there's no reason to lower it.
+     * that PHP's WEBP quality at 93 is great, so there's no reason to lower it.
      *
      * @var int
      */
-    const JPEG_QUALITY = 95;
+    const WEBP_QUALITY = 93;
 
     /**
      * Constructor.
@@ -76,8 +76,8 @@ class InstagramPhoto extends InstagramMedia
                 // Prepare output file.
                 $outputFile = Utils::createTempFile($this->_tmpPath, 'IMG');
 
-                if (!imagejpeg($output, $outputFile, self::JPEG_QUALITY)) {
-                    throw new \RuntimeException('Failed to create JPEG image file.');
+                if (!imagewebp($output, $outputFile, self::WEBP_QUALITY)) {
+                    throw new \RuntimeException('Failed to create WEBP image file.');
                 }
             } finally {
                 @imagedestroy($output);
@@ -112,6 +112,9 @@ class InstagramPhoto extends InstagramMedia
                 break;
             case IMAGETYPE_GIF:
                 $resource = imagecreatefromgif($this->_inputFile);
+                break;
+            case IMAGETYPE_WEBP:
+                $resource = imagecreatefromwebp($this->_inputFile);
                 break;
             default:
                 throw new \RuntimeException('Unsupported image type.');

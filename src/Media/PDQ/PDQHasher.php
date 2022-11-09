@@ -603,7 +603,7 @@ class PDQHasher
             throw new Exception('PDQHasher: could not handle filetype of '.$filename);
         }
         */
-        $orig_image = imagecreatefromjpeg($filename);
+        $orig_image = imagecreatefromwebp($filename);
         $is_jpeg = true;
 
         // The pure-PHP hasher is *really* slow in pure PHP for megapixel images.

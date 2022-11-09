@@ -1340,11 +1340,17 @@ class Client
     {
         $headersOrder = [
             'Host',
+            'X-Ads-Opt-Out',
+            'X-Google-Ad-Id',
+            'X-Device-Id',
+            'X-Cm-Bandwidth-Kbps',
+            'X-Cm-Latency',
             'X_FB_PHOTO_WATERFALL_ID',
             'X-Instagram-Rupload-Params',
             'X-Entity-Type',
             'X-Entity-Name',
             'X-Entity-Length',
+            'Offset',
             'X-IG-App-Locale',
             'X-IG-Device-Locale',
             'X-IG-Mapped-Locale',

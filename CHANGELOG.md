@@ -1,3 +1,19 @@
+# Stable release v21.0.0
+## Date: 09/11/2022
+
+### Backward breaks!
+
+Warning! Image JPEG/JPG format has been replaced for WEBP. If not using InstagramPhoto class for preparing image files, the input media must be of type webp.
+
+### Updates and fixes
+
+**Internal:** Update `_uploadResumablePhoto()`
+**Internal:** Update `_getPhotoUploadParams()`
+**InstagramPhoto:** Update to WEBP format
+**PhotoDetails:** Update to WEBP format
+**PDQHasher:** Update `readImageFromFilename()`
+**Client:** Update `_orderHeaders()`
+
 # Stable release v20.24.3
 ## Date: 09/11/2022
 

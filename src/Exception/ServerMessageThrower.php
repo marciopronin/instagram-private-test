@@ -65,6 +65,9 @@ class ServerMessageThrower
             'checkpoint_required', // message
             'checkpoint_challenge_required', // error_type
         ],
+        'AccountDeletionException'                 => [
+            '/You requested to delete(.*?)/',
+        ],
         'Checkpoint\ChallengeRequiredException'    => ['challenge_required'],
         'Checkpoint\ChallengeFinishedException'    => ['challenge_finished'],
         'Checkpoint\SubmitPhoneException'          => ['submit_phone'],

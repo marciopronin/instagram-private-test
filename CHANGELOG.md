@@ -1,3 +1,11 @@
+# Stable release v21.0.2
+## Date: 11/11/2022
+
+### Updates and fixes
+
+**ServerMessageThrowser:** Update `EXCEPTION_MAP`
+**Exception:** Added `AccountDeletionException`
+
 # Stable release v21.0.1
 ## Date: 11/11/2022
 

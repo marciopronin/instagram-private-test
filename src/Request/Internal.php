@@ -722,7 +722,7 @@ class Internal extends RequestCollection
             if (isset($externalMetadata['thumbnail_timestamp'])) {
                 $options['thumbnailTimestamp'] = $externalMetadata['thumbnail_timestamp'];
             }
-            if (($targetFeed === Constants::FEED_TV || $targetFeed === Constants::FEED_TIMELINE || $targetFeed === Constants::FEED_REELS) && isset($externalMetadata['cover_photo'])) {
+            if (($targetFeed === Constants::FEED_TV || $targetFeed === Constants::FEED_TIMELINE || $targetFeed === Constants::FEED_REELS || $targetFeed === Constants::FEED_STORY) && isset($externalMetadata['cover_photo'])) {
                 $videoThumbnail = new \InstagramAPI\Media\Photo\InstagramPhoto($externalMetadata['cover_photo'], $options);
             } else {
                 $videoThumbnail = new InstagramThumbnail(

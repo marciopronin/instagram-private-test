@@ -1,3 +1,11 @@
+# Stable release v21.0.3
+## Date: 14/11/2022
+
+### Updates and fixes
+
+**InstagramThumbnail:** Update `_getOutputFlags()`
+**Internal:** Update `uploadVideoThumbnail()`
+
 # Stable release v21.0.2
 ## Date: 11/11/2022
 

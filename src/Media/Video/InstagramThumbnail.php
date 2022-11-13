@@ -151,7 +151,7 @@ class InstagramThumbnail extends InstagramVideo
         $attempt)
     {
         return [
-            '-f mjpeg',
+            '-vcodec libwebp',
             '-vframes 1',
         ];
     }

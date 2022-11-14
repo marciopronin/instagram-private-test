@@ -153,6 +153,7 @@ class InstagramThumbnail extends InstagramVideo
         return [
             '-vcodec libwebp',
             '-vframes 1',
+            '-f webp',
         ];
     }
 }

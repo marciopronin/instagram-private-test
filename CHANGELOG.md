@@ -1,3 +1,10 @@
+# Stable release v21.0.4
+## Date: 14/11/2022
+
+### Updates and fixes
+
+**InstagramThumbnail:** Update `_getOutputFlags()`
+
 # Stable release v21.0.3
 ## Date: 14/11/2022
 

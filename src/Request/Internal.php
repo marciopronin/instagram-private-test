@@ -2646,7 +2646,6 @@ class Internal extends RequestCollection
         $uploadTemplate = clone $offsetTemplate;
         $uploadTemplate
             ->addHeader('Priority', $uploadTemplate->getRequestPriority())
-            ->addHeader('Offset', '0')
             ->addHeader('X-Entity-Type', 'image/webp')
             ->addHeader('X-Entity-Name', basename(parse_url($endpoint, PHP_URL_PATH)))
             ->addHeader('X-Entity-Length', $photoDetails->getFilesize())

@@ -1,3 +1,10 @@
+# Stable release v21.0.5
+## Date: 15/11/2022
+
+### Updates and fixes
+
+**Internal:** Update `_uploadResumablePhoto()`
+
 # Stable release v21.0.4
 ## Date: 14/11/2022
 

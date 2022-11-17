@@ -1622,12 +1622,13 @@ class Direct extends RequestCollection
                 }
                 break;
             case 'photo':
-                $request = $this->ig->request('direct_v2/threads/broadcast/configure_photo/');
+                $request = $this->ig->request('direct_v2/threads/broadcast/photo_attachment/');
                 // Check and set upload_id.
                 if (!isset($options['upload_id'])) {
                     throw new \InvalidArgumentException('No upload_id provided.');
                 }
-                $request->addPost('upload_id', $options['upload_id'])
+                $request->addPost('attachment_fbid', $options['upload_id'])
+                        ->addPost('is_x_transport_forward', 'false')
                         ->addPost('allow_full_aspect_ratio', true);
                 break;
             case 'video':

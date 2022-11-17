@@ -1,3 +1,14 @@
+# Stable release v21.0.6
+## Date: 17/11/2022
+
+### Updates and fixes
+
+**Internal:** Update `_uploadResumablePhoto()`
+**Metadata/Internal:** Update `setUploadId()`
+**PhotoDetails:** Update `validate()`
+**Response:** Update `ResumableUploadResponse`
+**Direct:** Update `_sendDirectItem()`
+
 # Stable release v21.0.5
 ## Date: 15/11/2022
 

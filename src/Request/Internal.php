@@ -2627,7 +2627,13 @@ class Internal extends RequestCollection
     {
         $photoDetails = $internalMetadata->getPhotoDetails();
 
-        $endpoint = sprintf('https://i.instagram.com/rupload_igphoto/%s_%d_%d',
+        if ($targetFeed === Constants::FEED_DIRECT) {
+            $url = 'https://rupload.facebook.com/messenger_image';
+        } else {
+            $url = 'https://i.instagram.com/rupload_igphoto';
+        }
+        $endpoint = sprintf('%s/%s_%d_%d',
+            $url,
             $internalMetadata->getUploadId(),
             0,
             Utils::hashCode($photoDetails->getFilename())
@@ -2646,7 +2652,7 @@ class Internal extends RequestCollection
         $uploadTemplate = clone $offsetTemplate;
         $uploadTemplate
             ->addHeader('Priority', $uploadTemplate->getRequestPriority())
-            ->addHeader('X-Entity-Type', 'image/webp')
+            ->addHeader('X-Entity-Type', ($targetFeed !== Constants::FEED_DIRECT) ? 'image/webp' : 'image/jpeg')
             ->addHeader('X-Entity-Name', basename(parse_url($endpoint, PHP_URL_PATH)))
             ->addHeader('X-Entity-Length', $photoDetails->getFilesize())
             ->addHeader('X-FB-Connection-Type', ($this->ig->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)')
@@ -2656,6 +2662,10 @@ class Internal extends RequestCollection
             ->addHeader('X-FB-HTTP-Engine', Constants::X_FB_HTTP_Engine)
             ->addHeader('X-FB-Client-IP', 'True')
             ->addHeader('X-FB-Server-Cluster', 'True');
+
+        if ($targetFeed === Constants::FEED_DIRECT) {
+            $uploadTemplate->addHeader('Image_type', 'FILE_ATTACHMENT');
+        }
 
         $this->ig->event->startIngestMedia(
             $internalMetadata->getUploadId(),
@@ -2677,6 +2687,10 @@ class Internal extends RequestCollection
             $uploadTemplate,
             true
         );
+
+        if ($targetFeed === Constants::FEED_DIRECT) {
+            $internalMetadata->setUploadId($uploadResumableMedia->getMediaId());
+        }
 
         $this->ig->event->uploadMediaSuccess(
             $internalMetadata->getUploadId(),

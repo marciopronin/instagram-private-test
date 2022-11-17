@@ -2,6 +2,7 @@
 
 namespace InstagramAPI\Media\Photo;
 
+use InstagramAPI\Constants;
 use InstagramAPI\Media\ConstraintsInterface;
 use InstagramAPI\Media\MediaDetails;
 
@@ -126,7 +127,8 @@ class PhotoDetails extends MediaDetails
 
     /** {@inheritdoc} */
     public function validate(
-        ConstraintsInterface $constraints)
+        ConstraintsInterface $constraints,
+        $validate = null)
     {
         parent::validate($constraints);
 
@@ -136,9 +138,11 @@ class PhotoDetails extends MediaDetails
 
         // Validate image type.
         // NOTE: It is confirmed that Instagram only accepts WEBP files.
-        $type = $this->getType();
-        if ($type !== IMAGETYPE_WEBP) {
-            throw new \InvalidArgumentException(sprintf('The photo file "%s" is not a WEBP file.', $mediaFilename));
+        if ($validate !== Constants::FEED_DIRECT) {
+            $type = $this->getType();
+            if ($type !== IMAGETYPE_WEBP) {
+                throw new \InvalidArgumentException(sprintf('The photo file "%s" is not a WEBP file.', $mediaFilename));
+            }
         }
 
         $width = $this->getWidth();

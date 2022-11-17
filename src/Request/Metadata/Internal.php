@@ -132,7 +132,7 @@ final class Internal
         $this->_photoDetails = new PhotoDetails($photoFilename);
 
         // Validate the photo details and throw if Instagram won't allow it.
-        $this->_photoDetails->validate(ConstraintsFactory::createFor($targetFeed));
+        $this->_photoDetails->validate(ConstraintsFactory::createFor($targetFeed), $targetFeed);
 
         return $this->_photoDetails;
     }
@@ -143,6 +143,17 @@ final class Internal
     public function getUploadId()
     {
         return $this->_uploadId;
+    }
+
+    /**
+     * Sets upload id.
+     *
+     * @param string $uploadId
+     */
+    public function setUploadId(
+        $uploadId)
+    {
+        $this->_uploadId = $uploadId;
     }
 
     /**

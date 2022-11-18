@@ -71,6 +71,7 @@ class Constants
     const PACKAGE_NAME = 'com.instagram.android';
 
     // Internal Feedtype Constants. CRITICAL: EVERY value here MUST be unique!
+    const PROFILE_PIC = -1;
     const FEED_TIMELINE = 1;
     const FEED_TIMELINE_ALBUM = 2;
     const FEED_STORY = 3;

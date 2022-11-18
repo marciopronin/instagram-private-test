@@ -138,7 +138,7 @@ class PhotoDetails extends MediaDetails
 
         // Validate image type.
         // NOTE: It is confirmed that Instagram only accepts WEBP files.
-        if ($validate !== Constants::FEED_DIRECT) {
+        if ($validate !== Constants::FEED_DIRECT && $validate !== Constants::PROFILE_PIC) {
             $type = $this->getType();
             if ($type !== IMAGETYPE_WEBP) {
                 throw new \InvalidArgumentException(sprintf('The photo file "%s" is not a WEBP file.', $mediaFilename));

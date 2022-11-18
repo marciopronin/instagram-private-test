@@ -208,6 +208,7 @@ abstract class InstagramMedia
         $operation = isset($options['operation']) ? $options['operation'] : self::CROP;
         $tmpPath = isset($options['tmpPath']) ? (string) $options['tmpPath'] : null;
         $debug = isset($options['debug']) ? $options['debug'] : false;
+        $this->_jpgOutput = isset($options['jpgOutput']) ? $options['jpgOutput'] : false;
 
         // Debugging.
         $this->_debug = $debug === true;

@@ -2652,7 +2652,7 @@ class Internal extends RequestCollection
         $uploadTemplate = clone $offsetTemplate;
         $uploadTemplate
             ->addHeader('Priority', $uploadTemplate->getRequestPriority())
-            ->addHeader('X-Entity-Type', ($targetFeed !== Constants::FEED_DIRECT) ? 'image/webp' : 'image/jpeg')
+            ->addHeader('X-Entity-Type', ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) ? 'image/webp' : 'image/jpeg')
             ->addHeader('X-Entity-Name', basename(parse_url($endpoint, PHP_URL_PATH)))
             ->addHeader('X-Entity-Length', $photoDetails->getFilesize())
             ->addHeader('X-FB-Connection-Type', ($this->ig->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)')
@@ -2665,6 +2665,9 @@ class Internal extends RequestCollection
 
         if ($targetFeed === Constants::FEED_DIRECT) {
             $uploadTemplate->addHeader('Image_type', 'FILE_ATTACHMENT');
+        }
+        if ($targetFeed === Constants::PROFILE_PIC) {
+            $uploadTemplate->addHeader('X_fb_photo_waterfall_id', Signatures::generateUUID());
         }
 
         $this->ig->event->startIngestMedia(

@@ -27,7 +27,8 @@ class InstagramPhoto extends InstagramMedia
      *
      * @var int
      */
-    const WEBP_QUALITY = 93;
+    const WEBP_QUALITY = 300;
+    const JPEG_QUALITY = 95;
 
     /**
      * Constructor.
@@ -75,9 +76,14 @@ class InstagramPhoto extends InstagramMedia
             try {
                 // Prepare output file.
                 $outputFile = Utils::createTempFile($this->_tmpPath, 'IMG');
-
-                if (!imagewebp($output, $outputFile, self::WEBP_QUALITY)) {
-                    throw new \RuntimeException('Failed to create WEBP image file.');
+                if (!$this->_jpgOutput) {
+                    if (!imagewebp($output, $outputFile, self::WEBP_QUALITY)) {
+                        throw new \RuntimeException('Failed to create WEBP image file.');
+                    }
+                } else {
+                    if (!imagejpeg($output, $outputFile, self::JPEG_QUALITY)) {
+                        throw new \RuntimeException('Failed to create JPEG image file.');
+                    }
                 }
             } finally {
                 @imagedestroy($output);

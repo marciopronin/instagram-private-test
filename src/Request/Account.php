@@ -561,10 +561,10 @@ class Account extends RequestCollection
     public function changeProfilePicture(
         $photoFilename)
     {
-        $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename);
+        $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename, ['jpgOutput' => true, 'targetFeed' => Constants::PROFILE_PIC]);
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
-        $internalMetadata->setPhotoDetails(Constants::FEED_TIMELINE, $photo->getFile());
-        $uploadResponse = $this->ig->internal->uploadPhotoData(Constants::FEED_TIMELINE, $internalMetadata);
+        $internalMetadata->setPhotoDetails(Constants::PROFILE_PIC, $photo->getFile());
+        $uploadResponse = $this->ig->internal->uploadPhotoData(Constants::PROFILE_PIC, $internalMetadata);
 
         return $this->ig->request('accounts/change_profile_picture/')
             ->setSignedPost(false)

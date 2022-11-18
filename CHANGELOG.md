@@ -1,3 +1,15 @@
+# Stable release v21.0.7
+## Date: 18/11/2022
+
+### Updates and fixes
+
+**Account:** Update `changeProfilePicture()`
+**Internal:** Update `_uploadResumablePhoto()`
+**PhotoDetails:** Update `validate()`
+**InstagramPhoto:** Update `_createOutputFile()`
+**Constants:** Update feed constants
+**InstagramMedia:** Update constructor
+
 # Stable release v21.0.6
 ## Date: 17/11/2022
 

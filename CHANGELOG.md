@@ -1,3 +1,10 @@
+# Stable release v21.0.8
+## Date: 21/11/2022
+
+### Updates and fixes
+
+**Direct:** Update `approvePendingThreads()`
+
 # Stable release v21.0.7
 ## Date: 18/11/2022
 

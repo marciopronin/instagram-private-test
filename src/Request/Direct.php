@@ -165,7 +165,7 @@ class Direct extends RequestCollection
         }
 
         if (isset($options['client_context'])) {
-            $request->addPost('client_contex', $options['client_context']);
+            $request->addPost('client_context', $options['client_context']);
         }
 
         return $request

@@ -15,20 +15,25 @@ use InstagramAPI\Utils;
 class InstagramPhoto extends InstagramMedia
 {
     /**
-     * Output WEBP quality.
+     * Output JPEG quality.
      *
      * This value was chosen because 100 is very wasteful. And don't tweak this
-     * number, because the WEBP quality number is actually totally meaningless
+     * number, because the JPEG quality number is actually totally meaningless
      * (it is non-standardized) and Instagram can't even read it from the file.
      * They have no idea what quality we've used, and it can be harmful to go
-     * lower since different WEBP compressors (such as PHP's implementation) use
+     * lower since different JPEG compressors (such as PHP's implementation) use
      * different quality scales and are often awful at lower qualities! We know
-     * that PHP's WEBP quality at 93 is great, so there's no reason to lower it.
+     * that PHP's JPEG quality at 93 is great, so there's no reason to lower it.
      *
      * @var int
      */
-    const WEBP_QUALITY = 300;
     const JPEG_QUALITY = 95;
+    /**
+     * Output WEBP quality.
+     *
+     * @var int
+     */
+    const WEBP_QUALITY = 100;
 
     /**
      * Constructor.

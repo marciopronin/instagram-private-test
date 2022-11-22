@@ -1,3 +1,14 @@
+# Stable release v21.0.9
+## Date: 22/11/2022
+
+### Updates and fixes
+
+**InstagramPhoto:** Update WEBP quality
+
+### Examples
+
+**Example:** Add getUserReels
+
 # Stable release v21.0.8
 ## Date: 21/11/2022
 

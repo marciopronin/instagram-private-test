@@ -1,3 +1,10 @@
+# Stable release v21.0.10
+## Date: 24/11/2022
+
+### Updates and fixes
+
+**Constants:** Update to version 261.0.0.21.111 (latest stable)
+
 # Stable release v21.0.9
 ## Date: 22/11/2022
 

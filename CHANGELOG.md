@@ -1,3 +1,10 @@
+# Stable release v21.0.11
+## Date: 30/11/2022
+
+### Updates and fixes
+
+**Internal:** Update `sendPrivacyConsentPromptCallback()`
+
 # Stable release v21.0.10
 ## Date: 24/11/2022
 

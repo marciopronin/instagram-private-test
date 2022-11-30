@@ -2138,7 +2138,7 @@ class Internal extends RequestCollection
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
 
         if (empty($matches)) {
-            throw new \InstagramException('Invalid response provided');
+            throw new InstagramException('Invalid response provided');
         }
 
         $experienceId = $matches[0][0];

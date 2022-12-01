@@ -1,3 +1,10 @@
+# Stable release v21.0.12
+## Date: 01/12/2022
+
+### Updates and fixes
+
+**Middleware/ZeroRatking:** Update `__invoke()`
+
 # Stable release v21.0.11
 ## Date: 30/11/2022
 

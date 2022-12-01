@@ -99,8 +99,8 @@ class ZeroRating
             $uri = $this->rewrite($oldUri);
             if ($uri !== $oldUri) {
                 $request = $request->withUri(new Uri($uri));
+                $this->_parent->event->sendZeroUrlRewrite($oldUri, $uri);
             }
-            $this->_parent->event->sendZeroUrlRewrite($oldUri, $uri);
 
             return $handler($request, $options);
         };

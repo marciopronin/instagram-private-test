@@ -324,6 +324,10 @@ class Internal extends RequestCollection
                     'source_height' => $photoHeight,
                 ]);
 
+        if ($this->ig->isExperimentEnabled('ig_android_eu_configure_disabled', 'route_to_us', false)) {
+            $request->addHeader('X-IG-EU-CONFIGURE-DISABLED', 'true');
+        }
+
         $stickerIds = [];
         $tapModels = [];
 
@@ -937,6 +941,10 @@ class Internal extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('nav_chain', $this->ig->getNavChain());
 
+        if ($this->ig->isExperimentEnabled('ig_android_eu_configure_disabled', 'route_to_us', false)) {
+            $request->addHeader('X-IG-EU-CONFIGURE-DISABLED', 'true');
+        }
+
         $stickerIds = [];
         $tapModels = [];
 
@@ -1492,17 +1500,20 @@ class Internal extends RequestCollection
             ->addPost('bool_opt_policy', 0)
             ->addPost('api_version', 3)
             ->addPost('device_id', $this->ig->uuid)
-            ->addPost('fetch_type', 'ASYNC_FULL');
+            ->addPost('fetch_type', 'ASYNC_FULL')
+            ->addPost('ts', time());
 
         if ($prelogin) {
             $request
                 ->setNeedsAuth(false)
+                ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '492167aef9488a3e594dab61adb21b6762615b12d96bb252426cde4b0948edbf');
+                ->addPost('query_hash', '4640c4f14a49cd3392b6dccd8321ddb2740e4640e1e31790ee577cb1ba8440bb');
         } else {
             $request
+                ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '54646e6ddf107442f7dab4eb97071d638dbd488b0ff1baa3fb4b7c4110032d90');
+                ->addPost('query_hash', '68104856be10382723c68f4c2f326ecf7513e034d12788bb0974e5f75dedd3e6');
         }
 
         $result = $request->getResponse(new Response\MobileConfigResponse());
@@ -1559,7 +1570,7 @@ class Internal extends RequestCollection
     }
 
     /**
-     * TODO.
+     * DEPRECATION CHECK.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1831,6 +1842,8 @@ class Internal extends RequestCollection
 
     /**
      * Get Arlink download info.
+     *
+     * DEPRECATION CHECK.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *

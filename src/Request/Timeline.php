@@ -319,6 +319,9 @@ class Timeline extends RequestCollection
             $request->addPost('is_dark_mode', 0);
         }
 
+        $request->addPost('has_camera_permission', isset($options['has_camera_permission']) ? $options['has_camera_permission'] : 1)
+                ->addPost('panavision_mode', $this->ig->isExperimentEnabled('ig_android_panavision_consumption_launcher', 'is_immersive_enabled', '1'));
+
         return $request->getResponse(new Response\TimelineFeedResponse());
     }
 

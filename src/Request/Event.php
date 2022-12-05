@@ -425,13 +425,17 @@ class Event extends RequestCollection
             }
             $navModule = explode(':', $chain)[1];
 
-            if (explode(':', $chain)[1] === @explode(':', $chains[$idx - 1])[1]) {
-                $moduleCounter++;
-            } else {
-                if ($moduleCounter >= 3) {
-                    array_splice($chains, $idx - $moduleCounter, $moduleCounter + 1, sprintf('%s%d,%s', 'TRUNCATEDx', $moduleCounter, $chain));
+            try {
+                if (explode(':', $chain)[1] === @explode(':', $chains[$idx])[1]) {
+                    $moduleCounter++;
+                } else {
+                    if ($moduleCounter >= 3) {
+                        array_splice($chains, $idx - $moduleCounter, $moduleCounter + 1, sprintf('%s%d,%s', 'TRUNCATEDx', $moduleCounter, $chain));
+                    }
+                    $moduleCounter = 0;
                 }
-                $moduleCounter = 0;
+            } catch (\Exception $e) {
+                continue;
             }
         }
         $newChain = implode(',', $chains);

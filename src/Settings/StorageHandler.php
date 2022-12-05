@@ -101,6 +101,8 @@ class StorageHandler
         'ig_traffic_routing_universe',
         'ig_android_stories_tray_pagination_killswitch',
         'ig_android_video_segmented_upload_universe',
+        'ig_android_eu_configure_disabled',
+        'ig_android_panavision_consumption_launcher',
     ];
 
     /**

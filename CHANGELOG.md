@@ -1,3 +1,18 @@
+# Stable release v21.0.13
+## Date: 06/12/2022
+
+### Updates and fixes
+
+**Client:** Update `_orderHeaders()`
+**Constants:** Update Constants
+**Data:** Update MobileConfig data
+**Event:** Update `_generateNavChain()`
+**Internal:** `getArlinkDownloadInfo()` has been deprecated.
+**Internal:** `logResurrectAttribution()` has been deprecated.
+**Internal:** Update `getMobileConfig()`
+**Instagram:** Update `_sendLoginFlow()`
+**Settings:** Update `EXPERIMENT_KEYS`
+
 # Stable release v21.0.12
 ## Date: 01/12/2022
 

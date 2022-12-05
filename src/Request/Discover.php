@@ -39,7 +39,7 @@ class Discover extends RequestCollection
             ->addParam('is_prefetch', $isPrefetch)
             ->addParam('omit_cover_media', true)
             ->addParam('is_ptr', false)
-            ->addParam('reels_configuration', $this->ig->getExperimentParam('ig_video_tab', 'explore_reels_configuration') === null ? 'hide_hero' : 'default')
+            ->addParam('reels_configuration', $this->ig->getExperimentParam('ig_android_stories_tray_pagination_killswitch', 'explore_reels_configuration') === null ? 'hide_hero' : 'default')
             ->addParam('use_sectional_payload', true)
             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
             ->addParam('session_id', $sessionId);

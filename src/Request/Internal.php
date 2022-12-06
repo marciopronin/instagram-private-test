@@ -1500,15 +1500,16 @@ class Internal extends RequestCollection
             ->addPost('bool_opt_policy', 0)
             ->addPost('api_version', 3)
             ->addPost('device_id', $this->ig->uuid)
-            ->addPost('fetch_type', 'ASYNC_FULL')
-            ->addPost('ts', time());
+            ->addPost('fetch_type', 'ASYNC_FULL');
 
         if ($prelogin) {
             $request
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '4640c4f14a49cd3392b6dccd8321ddb2740e4640e1e31790ee577cb1ba8440bb');
+                ->addPost('query_hash', '4640c4f14a49cd3392b6dccd8321ddb2740e4640e1e31790ee577cb1ba8440bb')
+                ->addPost('ts', time())
+                ->addPost('family_device_id', strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
@@ -2678,9 +2679,6 @@ class Internal extends RequestCollection
 
         if ($targetFeed === Constants::FEED_DIRECT) {
             $uploadTemplate->addHeader('Image_type', 'FILE_ATTACHMENT');
-        }
-        if ($targetFeed === Constants::PROFILE_PIC) {
-            $uploadTemplate->addHeader('X_fb_photo_waterfall_id', Signatures::generateUUID());
         }
 
         $this->ig->event->startIngestMedia(

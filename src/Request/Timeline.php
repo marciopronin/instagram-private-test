@@ -320,7 +320,7 @@ class Timeline extends RequestCollection
         }
 
         $request->addPost('has_camera_permission', isset($options['has_camera_permission']) ? $options['has_camera_permission'] : 1)
-                ->addPost('panavision_mode', $this->ig->isExperimentEnabled('ig_android_panavision_consumption_launcher', 'is_immersive_enabled', '1'));
+                ->addPost('panavision_mode', ''); //$this->ig->isExperimentEnabled('ig_android_panavision_consumption_launcher', 'is_immersive_enabled', ''));
 
         return $request->getResponse(new Response\TimelineFeedResponse());
     }

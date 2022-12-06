@@ -2881,7 +2881,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 //$this->story->getReelsMediaFeed($this->account_id);
-                $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), true);
+                $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), null, true);
                 $this->internal->getQPFetch();
 
                 //$this->account->getProcessContactPointSignals();

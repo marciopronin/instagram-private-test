@@ -1,3 +1,16 @@
+# Stable release v21.0.14
+## Date: 06/12/2022
+
+### Updates and fixes
+
+**Client:** Update `api()`
+**Client:** Update `_orderHeaders()`
+**Discover:** Update `getExploreFeed()`
+**Internal:** Update `_uploadResumablePhoto()`
+**Internal:** Update `getMobileConfig()`
+**Instagram:** Update login flow.
+**Timeline:** Update `getTimelineFeed()`
+
 # Stable release v21.0.13
 ## Date: 06/12/2022
 

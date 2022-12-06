@@ -1138,7 +1138,7 @@ class Client
             }
 
             if ($this->_parent->settings->get('salt_ids') !== null) {
-                $headers['set_headers']['X-Ig-Salt-Ids'] = $this->_parent->settings->get('salt_ids');
+                $headers['set_headers']['X-IG-Salt-Ids'] = $this->_parent->settings->get('salt_ids');
             }
         }
 
@@ -1359,6 +1359,7 @@ class Client
             'X-IG-Bandwidth-Speed-KBPS',
             'X-IG-Bandwidth-TotalBytes-B',
             'X-IG-Bandwidth-TotalTime-MS',
+            'X-IG-Prefetch-Request',
             'X-IG-App-Startup-Country',
             'X-Bloks-Version-Id',
             'X-IG-WWW-Claim',
@@ -1368,6 +1369,8 @@ class Client
             'X-IG-Android-ID',
             'X-IG-Timezone-Offset',
             'X-IG-Nav-Chain',
+            'X-IG-Client-Endpoint',
+            'X-IG-Salt-Ids',
             'X-FB-Connection-Type',
             'X-IG-Connection-Type',
             'X-IG-Capabilities',
@@ -1378,7 +1381,7 @@ class Client
             'Authorization',
             'X-MID',
             'IG-U-SHBID',
-            'Ig-U-SHBTS',
+            'IG-U-SHBTS',
             'IG-U-DS-USER-ID',
             'IG-U-RUR',
             'IG-INTENDED-USER-ID',

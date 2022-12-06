@@ -52,8 +52,12 @@ class Discover extends RequestCollection
             if ($maxId === null) {
                 $maxId = 0;
             }
-            $request->addParam('max_id', $maxId);
-            $request->addParam('module', 'explore_popular');
+            $request->addParam('max_id', $maxId)
+                    ->addParam('module', 'explore_popular')
+                    ->addParam('is_charging', $this->ig->getIsDeviceCharging())
+                    ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
+                    ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
+                    ->addParam('panavision_mode', ''); // $this->ig->isExperimentEnabled('ig_android_panavision_consumption_launcher', 'is_immersive_enabled', ''));
         }
 
         return $request->getResponse(new Response\ExploreResponse());

@@ -1,3 +1,10 @@
+# Stable release v21.0.15
+## Date: 07/12/2022
+
+### Examples
+
+**Example:** Update checkpoint example
+
 # Stable release v21.0.14
 ## Date: 06/12/2022
 

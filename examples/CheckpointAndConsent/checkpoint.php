@@ -66,10 +66,14 @@ try {
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SelectVerifyMethodException:
                         // If condition can be replaced by other logic. This will take always the phone number
                         // if it set, otherwise the email.
-                        if ($e->getResponse()->getStepData()->getPhoneNumber() !== null) {
-                            $method = 0;
+                        if (!is_array($e->getResponse()->getStepData())) {
+                            if ($e->getResponse()->getStepData()->getPhoneNumber() !== null) {
+                                $method = 0;
+                            } else {
+                                $method = 1;
+                            }
                         } else {
-                            $method = 1;
+                            $method = $e->getResponse()->getStepData()['choice'];
                         }
                         // requestVerificationCode() will request a verification code to your EMAIL or
                         // PHONE NUMBER. If you choose method 0, the code will be sent to your PHONE NUMBER.

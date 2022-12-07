@@ -1,3 +1,10 @@
+# Stable release v21.0.16
+## Date: 07/12/2022
+
+### Updates and fixes
+
+**Composer:** Update composer.json
+
 # Stable release v21.0.15
 ## Date: 07/12/2022
 

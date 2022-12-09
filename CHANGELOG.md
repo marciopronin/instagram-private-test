@@ -1,3 +1,10 @@
+# Stable release v21.0.17
+## Date: 09/12/2022
+
+### Updates and fixes
+
+**Discover:** `profileSuBadge()` is now deprecated. Examples has been updated to not include this request.
+
 # Stable release v21.0.16
 ## Date: 07/12/2022
 

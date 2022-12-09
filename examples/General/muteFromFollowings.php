@@ -26,7 +26,6 @@ try {
 
     $ig->highlight->getSelfUserFeed();
     $ig->people->getSelfInfo();
-    $ig->discover->profileSuBadge();
     $ig->story->getArchiveBadgeCount();
 
     $ig->event->sendProfileAction('tap_follow_details', $ig->account_id,

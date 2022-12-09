@@ -455,7 +455,7 @@ class Discover extends RequestCollection
     }
 
     /**
-     * TODO.
+     * DEPRECATED.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *

@@ -102,7 +102,7 @@ class ServerMessageThrower
         'InvalidUserException'         => [
             'invalid_user', // error_type
         ],
-        'Checkpoint\ChangePasswordException'                 => ['/reset(.*?)password/', 'set_new_password'],
+        'Checkpoint\ChangePasswordException'                 => ['/reset(.*?)password/', 'set_new_password', 'change_password'],
         'Checkpoint\RecaptchaChallengeException'             => ['RecaptchaChallengeForm'],
         'Checkpoint\EscalationChallengeInformationException' => [
             'EscalationChallengeInformationalForm',

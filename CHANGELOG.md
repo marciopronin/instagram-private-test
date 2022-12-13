@@ -1,3 +1,10 @@
+# Stable release v21.1.1
+## Date: 13/12/2022
+
+### Updates and fixes
+
+**ServerMessageThrower:** `Update login flow`
+
 # Stable release v21.1.0
 ## Date: 13/12/2022
 

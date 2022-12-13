@@ -1734,7 +1734,9 @@ class Instagram implements ExperimentsInterface
                     $request->addPost('reg_login', '0');
                 }
                 $response = $request->getResponse(new Response\LoginResponse());
-                $this->settings->set('business_account', $response->getLoggedInUser()->getIsBusiness());
+                if ($response->getLoggedInUser()->getIsBusiness() !== null) {
+                    $this->settings->set('business_account', $response->getLoggedInUser()->getIsBusiness());
+                }
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 // Login failed because checkpoint is required.
                 // Return server response to tell user they to bypass checkpoint.
@@ -2523,13 +2525,14 @@ class Instagram implements ExperimentsInterface
                 try {
                     $this->internal->fetchZeroRatingToken('token_expired', false);
                     $this->account->setContactPointPrefill('prefill');
+                    /*
                     $this->internal->sendGraph('455411352809009551099714876', [
                         'input' => [
                             'app_scoped_id'     => $this->uuid,
                             'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
                             'family_device_id'  => $this->phone_id,
-                        ],
-                    ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
+                        ]
+                    ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false); */
                 } catch (\InstagramAPI\Exception\InstagramException $e) {
                     // pass
                 }
@@ -2551,13 +2554,13 @@ class Instagram implements ExperimentsInterface
                 //$this->internal->bootstrapMsisdnHeader();
                 try {
                     //$this->internal->logAttribution();
-                    $this->internal->sendGraph('455411352809009551099714876', [
+                    /*$this->internal->sendGraph('455411352809009551099714876', [
                         'input' => [
                             'app_scoped_id'     => $this->uuid,
                             'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
                             'family_device_id'  => $this->phone_id,
-                        ],
-                    ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
+                        ]
+                    ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);*/
                     $this->people->getNonExpiredFriendRequests();
                 } catch (\InstagramAPI\Exception\InstagramException $e) {
                     // pass
@@ -2718,7 +2721,7 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
-                $this->account->getAccountFamily();
+                $this->internal->fetchZeroRatingToken('token_expired', false, false);
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
@@ -2726,9 +2729,16 @@ class Instagram implements ExperimentsInterface
             }
 
             try {
-                $this->internal->fetchZeroRatingToken('token_expired', false, false);
+                $this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => 'true'], 'AREffectConsentStateQuery', false, 'pando');
+            } catch (\Exception $e) {
+                // pass
+            }
+
+            try {
+                $this->account->getAccountFamily();
                 $this->event->sendZeroCarrierSignal();
                 $this->internal->getMobileConfig(false);
+                $this->internal->getAsyncNdxIgSteps();
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
@@ -2740,22 +2750,6 @@ class Instagram implements ExperimentsInterface
 
             // Batch request 2
             $this->client->startEmulatingBatch();
-            /*
-            try {
-                $this->internal->sendGraph('18293997048434484603993202463', [
-                    'input' => [
-                        'log_only'  => true,
-                        'events'    => [
-                            'no_advertisement_id'   => false,
-                            'event_name'            => 'LOGIN',
-                            'adid'                  => $this->advertising_id
-                        ]
-                    ]
-                ], 'ReportAttributionEventsMutation', false);
-            }  catch (\Exception $e) {
-                // pass
-            }
-            */
 
             try {
                 $requestId = \InstagramAPI\Signatures::generateUUID();
@@ -2818,7 +2812,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->internal->getLoomFetchConfig();
-                $this->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', true);
+                //$this->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', true);
 
                 $requestId = \InstagramAPI\Signatures::generateUUID();
                 $traySessionId = \InstagramAPI\Signatures::generateUUID();
@@ -2826,6 +2820,10 @@ class Instagram implements ExperimentsInterface
 
                 $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
                 $this->people->getSharePrefill();
+                $this->internal->sendGraph('20527889288964126383169629012', [
+                    'languages'     => ['nolang'],
+                    'service_ids'   => ['MUTED_WORDS'],
+                ], 'IGContentFilterDictionaryLookupQuery', true, 'minimal');
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
@@ -2853,6 +2851,7 @@ class Instagram implements ExperimentsInterface
                 $this->business->getMonetizationProductsEligibilityData();
                 $this->creative->sendSupportedCapabilities();
                 $this->media->getBlockedMedia();
+                $this->internal->sendGraph('27901845295083252414505722198', ['is_pando' => 'true'], 'FetchAttributionEventComplianceAction', true, 'pando');
                 $this->internal->storeClientPushPermissions();
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
@@ -2884,7 +2883,6 @@ class Instagram implements ExperimentsInterface
                 $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), null, true);
                 $this->internal->getQPFetch();
 
-                //$this->account->getProcessContactPointSignals();
                 /*
                 if ($this->getPlatform() === 'android') {
                     $this->internal->getArlinkDownloadInfo();
@@ -2908,6 +2906,7 @@ class Instagram implements ExperimentsInterface
                 try {
                     $this->people->getSharePrefill();
                     $this->direct->getPresences();
+                    $this->account->getProcessContactPointSignals();
                 } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {
@@ -2920,6 +2919,21 @@ class Instagram implements ExperimentsInterface
 
                     //$this->reel->discover();
                     $this->internal->writeSupportedCapabilities();
+                    $this->internal->sendGraph('182939970411432709618382061942', [
+                        'is_pando' => 'true',
+                        'input'    => [
+                            'actor_id'              => $this->account_id,
+                            'client_mutation_id'    => \InstagramAPI\Signatures::generateUUID(),
+                            'events'                => [
+                                'adid'                  => null,
+                                'event_name'            => 'RESURRECTION',
+                                'no_advertisement_id'   => false,
+                            ],
+                            'log_only'              => true,
+                        ],
+                    ], 'ReportAttributionEventsMutation', true, 'pando');
+                    //$this->internal->sendGraph('243882031010379133527862780970', [], 'FBToIGDefaultAudienceBottomSheetQuery', false, 'graphservice');
+                    //$this->internal->sendGraph('338246149711919572858330660779', ['is_pando' => 'true'], 'FBToIGDefaultAudienceSettingQuery', true, 'pando');
                 } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {

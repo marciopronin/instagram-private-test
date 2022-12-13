@@ -1,3 +1,15 @@
+# Stable release v21.1.0
+## Date: 13/12/2022
+
+### New features
+
+**Internal:** Add `getAsyncNdxIgSteps()`
+
+### Updates and fixes
+
+**Instagram:** Update login flow
+**Internal:** Update `sendGraph()`
+
 # Stable release v21.0.17
 ## Date: 09/12/2022
 

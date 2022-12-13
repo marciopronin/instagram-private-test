@@ -1931,6 +1931,7 @@ class Internal extends RequestCollection
      * @param mixed $vars
      * @param mixed $friendlyName
      * @param mixed $pretty
+     * @param mixed $clientLibrary
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1940,26 +1941,45 @@ class Internal extends RequestCollection
         $clientDoc,
         $vars,
         $friendlyName,
-        $pretty)
+        $pretty,
+        $clientLibrary = 'graphservice')
     {
-        return $this->ig->request('https://i.instagram.com/graphql_www')
+        $request = $this->ig->request('https://i.instagram.com/graphql_www')
             ->setSignedPost(false)
             ->setNeedsAuth(false)
             ->setIsSilentFail(true)
             ->setAddDefaultHeaders(false)
-            ->addHeader('X-Graphql-Client-Library', 'graphservice')
+            ->addHeader('X-Graphql-Client-Library', $clientLibrary)
             ->addHeader('X-Fb-Friendly-Name', $friendlyName)
             ->addPost('client_doc_id', $clientDoc)
-            ->addPost('method', 'post')
             ->addPost('locale', $this->ig->getLocale())
-            ->addPost('pretty', $pretty)
-            ->addPost('format', 'json')
-            ->addPost('variables', json_encode($vars))
-            ->addPost('fb_api_req_friendly_name', $friendlyName)
-            ->addPost('fb_api_caller_class', 'graphservice')
-            ->addPost('fb_api_analytics_tags', json_encode(['GraphServices']))
-            ->addPost('server_timestamps', 'true')
-            ->getResponse(new Response\GenericResponse());
+            ->addPost('variables', json_encode($vars));
+
+        if ($clientLibrary === 'graphservice') {
+            $request->addPost('fb_api_req_friendly_name', $friendlyName)
+                    ->addPost('fb_api_caller_class', 'graphservice')
+                    ->addPost('fb_api_analytics_tags', json_encode(['GraphServices']));
+        }
+        if ($clientLibrary === 'pando') {
+            $request->addPost('enable_canonical_naming', 'true')
+                    ->addPost('enable_canonical_variable_overrides', 'true')
+                    ->addPost('enable_canonical_naming_ambiguous_type_prefixing', 'true');
+        }
+        if ($clientLibrary === 'minimal') {
+            $request->addPost('strip_nulls', 'true')
+                    ->addPost('signed_body', 'SIGNATURE.')
+                    ->addPost('vc_policy', 'default')
+                    ->addPost('strip_defaults', 'true');
+        }
+
+        if ($clientLibrary === 'graphservice' || $clientLibrary === 'pando') {
+            $request->addPost('pretty', $pretty)
+                    ->addPost('format', 'json')
+                    ->addPost('method', 'post')
+                    ->addPost('server_timestamps', 'true');
+        }
+
+        return $request->getResponse(new Response\GenericResponse());
     }
 
     /**
@@ -3573,6 +3593,19 @@ class Internal extends RequestCollection
             ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Get async ndx IG steps.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getAsyncNdxIgSteps()
+    {
+        return $this->ig->request('devices/ndx/api/async_get_ndx_ig_steps/')
             ->getResponse(new Response\GenericResponse());
     }
 

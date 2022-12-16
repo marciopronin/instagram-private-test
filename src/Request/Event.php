@@ -389,6 +389,13 @@ class Event extends RequestCollection
             return $this->ig->getNavChain();
         }
         if ($clickPoint === 'back') {
+            $b = explode('::', $this->ig->getNavChain());
+            $c = implode('::', array_slice($b, 0, -2)).'::';
+            $this->ig->setNavChain('');
+            $this->ig->setNavChain($c);
+            $this->ig->setPrevNavChainClass($class);
+            $this->ig->decrementNavChainStep();
+
             return $this->ig->getNavChain();
         }
 

@@ -1256,7 +1256,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return \InstagramAPI\Response\ConfirmEmailResponse
      */
     public function confirmEmail(
         $confirmationLink)
@@ -1271,7 +1271,7 @@ class Account extends RequestCollection
         return $this->ig->request("accounts/confirm_email/{$matches[2][0][0]}/{$matches[3][0][0]}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->getResponse(new Response\GenericResponse());
+            ->getResponse(new Response\ConfirmEmailResponse());
     }
 
     /**

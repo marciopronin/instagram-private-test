@@ -1,3 +1,15 @@
+# Stable release v21.1.2
+## Date: 13/12/2022
+
+### Updates and fixes
+
+**Account:** Update `confirmEmail()`
+**Event:** Update `_generateNavChain()`
+
+### Examples
+
+**Example:** Update editProfile
+
 # Stable release v21.1.1
 ## Date: 13/12/2022
 

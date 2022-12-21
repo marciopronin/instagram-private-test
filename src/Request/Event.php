@@ -139,6 +139,9 @@ class Event extends RequestCollection
             case 'explore_popular':
                 $class = 'ExploreFragment'; //'ExploreFragment';
                 break;
+            case 'discover_people':
+                $class = 'ExplorePeopleFragment';
+                break;
             case 'blended_search':
                 $class = 'TopSearchChildFragment';
                 break;
@@ -4388,6 +4391,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'blended_search',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'discover_people',
                 ],
             ],
             'search_typeahead' => [

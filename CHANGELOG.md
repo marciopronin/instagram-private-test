@@ -1,3 +1,11 @@
+# Stable release v21.1.3
+## Date: 22/12/2022
+
+### Updates and fixes
+
+**Event:** Update `_validateNavigationOptions()`
+**Event:** Update `_getModuleClass()`
+
 # Stable release v21.1.2
 ## Date: 13/12/2022
 

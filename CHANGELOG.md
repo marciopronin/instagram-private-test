@@ -1,3 +1,19 @@
+# Stable release v21.1.4
+## Date: 29/12/2022
+
+### WIP
+
+- New upload system
+- Renewing good devices and randomizing version codes from the same version (armv7-armv8)
+- Add missing components in events
+- Hashing and syncing mechanisms
+
+**Recommendation:** Most of the componente are being updated to PHP8 so upgrading is recommended.
+
+### Updates and fixes
+
+- **Constants:** Update constants to Instagram version 264.0.0.22.106
+
 # Stable release v21.1.3
 ## Date: 22/12/2022
 

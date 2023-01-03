@@ -27,7 +27,7 @@ class Event extends RequestCollection
             'time'              => ($batch[0]['time'] * 1000) - mt_rand(0, 50),
             'app_id'            => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
             'app_ver'           => Constants::IG_VERSION,
-            'build_num'         => Constants::VERSION_CODE,
+            'build_num'         => $this->ig->getVersionCode(),
             'device'            => $this->ig->device->getDevice(),
             'os_ver'            => $this->ig->device->getAndroidRelease(),
             'device_id'         => $this->ig->uuid,
@@ -7479,7 +7479,7 @@ class Event extends RequestCollection
         $installer = null)
     {
         $extra = [
-            'build_num' => Constants::VERSION_CODE,
+            'build_num' => $this->ig->getVersionCode(),
             'installer' => $installer,
         ];
 

@@ -42,6 +42,13 @@ class Device implements DeviceInterface
     protected $_userLocale;
 
     /**
+     * Device Accept Language.
+     *
+     * @var string
+     */
+    protected $_acceptLanguage;
+
+    /**
      * Which device string we were built with internally.
      *
      * @var string
@@ -209,7 +216,7 @@ class Device implements DeviceInterface
         $this->_cpu = $parts[6];
 
         // Build our user agent.
-        $this->_userAgent = UserAgent::buildUserAgent($this->_appVersion, $this->_userLocale, $this);
+        $this->_userAgent = UserAgent::buildUserAgent($this->_appVersion, $this->_versionCode, $this->_userLocale, $this);
 
         $this->_fbUserAgents = [];
     }

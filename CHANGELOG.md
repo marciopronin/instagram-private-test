@@ -1,3 +1,18 @@
+# Stable release v21.2.0
+## Date: 03/01/2023
+
+### New features
+
+- **Instagram:** New version code system. Added `setVersionCode()` and `getVersionCode()`. If not version code is set, default one will be used automatically. Available version codes are listed in Constants.
+
+### Updates and fixes
+
+- **Constants:** Update `VERSION_CODE`
+- **Device:** Update `__construct()` and `_initFromDeviceString()`
+- **Event:** Update `sendApkTestingExposure()` and `_addBatchBody()`
+- **Internal:** Update `getFacebookDodResources()` and `getFacebookOTA()`
+- **UserAgent:** Update `buildUserAgent()`
+
 # Stable release v21.1.4
 ## Date: 29/12/2022
 

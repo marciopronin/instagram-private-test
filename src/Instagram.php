@@ -289,6 +289,13 @@ class Instagram implements ExperimentsInterface
     public $customDeviceId = null;
 
     /**
+     * Version Code.
+     *
+     * @var string
+     */
+    public $versionCode = Constants::VERSION_CODE[0];
+
+    /**
      * Login attempt counter.
      *
      * @var int
@@ -799,6 +806,37 @@ class Instagram implements ExperimentsInterface
         $value)
     {
         $this->customDeviceId = $value;
+    }
+
+    /**
+     * Set version code.
+     *
+     * If the provided version code is not valid, the default version code
+     * will be chosen.
+     *
+     * @param string $value
+     * @param bool   $random A random version code will be chosen if set to true.
+     */
+    public function setVersionCode(
+        $value,
+        $random = false)
+    {
+        if ($random === true) {
+            $versionCode = array_rand(Constants::VERSION_CODE);
+        } else {
+            $versionCode = (!in_array($value, Constants::VERSION_CODE)) ? Constants::VERSION_CODE[0] : $value;
+        }
+        $this->versionCode = $value;
+    }
+
+    /**
+     * Get version code.
+     *
+     * @return string Version Code.
+     */
+    public function getVersionCode()
+    {
+        $this->versionCode;
     }
 
     /**
@@ -2307,7 +2345,7 @@ class Instagram implements ExperimentsInterface
 
         $this->device = new Devices\Device(
             Constants::IG_VERSION,
-            Constants::VERSION_CODE,
+            $this->getVersionCode(),
             $this->getLocale(),
             $this->getAcceptLanguage(),
             $savedDeviceString,

@@ -22,14 +22,16 @@ class UserAgent
     /**
      * Generates a User Agent string from a DeviceInterface.
      *
-     * @param string          $appVersion Instagram client app version.
-     * @param string          $userLocale The user's locale, such as "en_US".
+     * @param string          $appVersion  Instagram client app version.
+     * @param string          $versionCode Instagram app version code.
+     * @param string          $userLocale  The user's locale, such as "en_US".
      * @param DeviceInterface $device
      *
      * @return string
      */
     public static function buildUserAgent(
         $appVersion,
+        $versionCode,
         $userLocale,
         DeviceInterface $device)
     {
@@ -52,7 +54,7 @@ class UserAgent
             $device->getDevice(),
             $device->getCPU(),
             $userLocale, // Locale ("en_US").
-            Constants::VERSION_CODE
+            $versionCode
         );
     }
 

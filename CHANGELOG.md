@@ -1,3 +1,10 @@
+# Stable release v21.2.1
+## Date: 04/01/2023
+
+### Updates and fixes
+
+- **StoryConstraints:** Updated max duration from 15 to 60.1 seconds.
+
 # Stable release v21.2.0
 ## Date: 03/01/2023
 

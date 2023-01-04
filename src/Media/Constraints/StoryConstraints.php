@@ -85,7 +85,7 @@ class StoryConstraints implements ConstraintsInterface
      *
      * @var float
      */
-    const MAX_DURATION = 15.0;
+    const MAX_DURATION = 60.1;
 
     /** {@inheritdoc} */
     public function getTitle()

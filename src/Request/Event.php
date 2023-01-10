@@ -419,7 +419,7 @@ class Event extends RequestCollection
             $chain = ',';
         }
 
-        $chain .= sprintf('%s:%s:%d:%s::', $class, $module, $this->ig->getNavChainStep(), $clickPoint);
+        $chain .= sprintf('%s:%s:%d:%s:%s::', $class, $module, $this->ig->getNavChainStep(), $clickPoint, number_format(microtime(true), 3, '.', ''));
         $this->ig->setPrevNavChainClass($class);
         $this->ig->setNavChain($chain);
         $this->ig->setNavChainStep($aux);

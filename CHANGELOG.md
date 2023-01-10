@@ -1,3 +1,16 @@
+# Stable release v21.2.2
+## Date: 11/01/2023
+
+### TODO
+
+Working in bloks and mobileconfig algorithms to natively implement them in the code.
+
+### Updates and fixes
+
+- **Constants:** Update to latest stable 265.0.0.19.301
+- **Event:** Update `_generateNavChain()` with new nav chain format
+- **Instagram:** Update login flow
+
 # Stable release v21.2.1
 ## Date: 04/01/2023
 

@@ -2952,8 +2952,8 @@ class Instagram implements ExperimentsInterface
                 }
 
                 try {
-                    $this->direct->getInbox(null, null, 0, null);
                     $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
+                    $this->direct->getInbox(null, null, 0, null);
 
                     //$this->reel->discover();
                     $this->internal->writeSupportedCapabilities();

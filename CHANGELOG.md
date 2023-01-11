@@ -1,3 +1,14 @@
+# Stable release v21.2.3
+## Date: 12/01/2023
+
+### Updates and fixes
+
+- **People:** Update `follow()`
+
+### Examples
+
+- **Example:** Update webLogin example
+
 # Stable release v21.2.2
 ## Date: 11/01/2023
 

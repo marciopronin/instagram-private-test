@@ -959,8 +959,9 @@ class People extends RequestCollection
     /**
      * Follow a user.
      *
-     * @param string      $userId  Numerical UserPK ID.
-     * @param string|null $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").
+     * @param string      $userId           Numerical UserPK ID.
+     * @param string|null $mediaId          The media ID in Instagram's internal format (ie "3482384834_43294").
+     * @param string|null $loggingInfoToken The logging info token associated to the media.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -968,7 +969,8 @@ class People extends RequestCollection
      */
     public function follow(
         $userId,
-        $mediaId = null)
+        $mediaId = null,
+        $loggingInfoToken = null)
     {
         $request = $this->ig->request("friendships/create/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -983,7 +985,12 @@ class People extends RequestCollection
         }
 
         if ($mediaId !== null) {
-            $request->addPost('media_id_attribution', $mediaId);
+            $request->addPost('media_id', $mediaId)
+                    ->addPost('media_id_attribution', $mediaId);
+        }
+
+        if ($loggingInfoToken !== null) {
+            $request->addPost('ranking_info_token', $loggingInfoToken);
         }
 
         return $request->getResponse(new Response\FriendshipResponse());

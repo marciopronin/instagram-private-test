@@ -1,3 +1,20 @@
+# Stable release v21.3.0
+## Date: 15/01/2023
+
+### New features
+
+- **Discover:** Added `getDiscoveryAccounts()`
+- **Model and responses** Added model and responses of `getDiscoveryAccounts()`
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+- **Event:** Update `_getModuleClass()`
+
+### Examples
+
+- **Example:** Added followFromAccountDiscovery
+
 # Stable release v21.2.3
 ## Date: 12/01/2023
 

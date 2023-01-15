@@ -516,4 +516,22 @@ class Discover extends RequestCollection
 
         return $request->getResponse(new Response\ChainingUsersResponse());
     }
+
+    /**
+     * Get recommended users for you.
+     *
+     * @param string $entryPoint Module entry point.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\DiscoveryAccountsResponse
+     */
+    public function getDiscoveryAccounts(
+        $entryPoint = 'self_profile')
+    {
+        return $this->ig->request('discover/account_discovery/')
+            ->setSignedPost(false)
+            ->addParam('entry_point', $entryPoint)
+            ->getResponse(new Response\DiscoveryAccountsResponse());
+    }
 }

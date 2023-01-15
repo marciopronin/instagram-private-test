@@ -142,6 +142,9 @@ class Event extends RequestCollection
             case 'discover_people':
                 $class = 'ExplorePeopleFragment';
                 break;
+            case 'account_discovery':
+                $class = 'AccountDiscoveryFragment';
+                break;
             case 'blended_search':
                 $class = 'TopSearchChildFragment';
                 break;
@@ -4163,6 +4166,16 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'bottom_sheet_profile',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'account_discovery',
+                ],
+            ],
+            'edit_profile'  => [
+                [
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'self_profile',
                 ],
             ],
             'edit_profile'  => [

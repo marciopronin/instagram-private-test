@@ -164,7 +164,8 @@ class People extends RequestCollection
         $markAsSeen = false)
     {
         $request = $this->ig->request('news/inbox/')
-                            ->addParam('mark_as_seen', $markAsSeen);
+                            ->addParam('mark_as_seen', $markAsSeen)
+                            ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'));
         if ($prefetch) {
             $request->addHeader('X-IG-Prefetch-Request', 'foreground');
         }

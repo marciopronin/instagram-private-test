@@ -1,3 +1,10 @@
+# Stable release v21.3.1
+## Date: 18/01/2023
+
+### Updates and fixes
+
+- **People:** Update `getRecentActivityInbox()`
+
 # Stable release v21.3.0
 ## Date: 15/01/2023
 

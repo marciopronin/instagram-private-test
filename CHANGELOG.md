@@ -1,3 +1,10 @@
+# Stable release v21.3.3
+## Date: 25/01/2023
+
+### Updates and fixes
+
+- **Data:** Update mobile config experiments
+
 # Stable release v21.3.2
 ## Date: 23/01/2023
 

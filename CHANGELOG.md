@@ -1,3 +1,11 @@
+# Stable release v21.3.4
+## Date: 25/01/2023
+
+### Updates and fixes
+
+- **Account:** `getPrefillCandidates()` is now deprecated
+- **Instagram:** Update pre login flow
+
 # Stable release v21.3.3
 ## Date: 25/01/2023
 

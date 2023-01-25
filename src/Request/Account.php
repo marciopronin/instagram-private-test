@@ -1407,6 +1407,8 @@ class Account extends RequestCollection
     /**
      *  Get prefill candidates.
      *
+     * DEPRECATED
+     *
      * @param array $clientContactPoints phone (read from SIM) or/and email (read from google account manager).
      *
      * @throws \InstagramAPI\Exception\InstagramException

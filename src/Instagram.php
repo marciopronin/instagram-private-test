@@ -2555,12 +2555,6 @@ class Instagram implements ExperimentsInterface
 
             try {
                 try {
-                    $this->account->getPrefillCandidates();
-                } catch (\InstagramAPI\Exception\InstagramException $e) {
-                    // pass
-                }
-
-                try {
                     $this->internal->fetchZeroRatingToken('token_expired', false);
                     $this->account->setContactPointPrefill('prefill');
                     /*

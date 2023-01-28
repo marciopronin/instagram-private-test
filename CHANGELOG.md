@@ -1,3 +1,11 @@
+# Stable release v21.3.5
+## Date: 29/01/2023
+
+### Updates and fixes
+
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `_saveExperimentsMobileConfig()`
+
 # Stable release v21.3.4
 ## Date: 25/01/2023
 

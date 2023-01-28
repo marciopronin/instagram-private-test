@@ -1409,10 +1409,11 @@ class Internal extends RequestCollection
     protected function _saveExperimentsMobileConfig(
         $mobileConfigResponse)
     {
-        $paramsMap = fopen(__DIR__.'/../data/params_map.txt', 'r');
+        //$paramsMap = fopen(__DIR__.'/../data/params_map.txt', 'r');
         $mappedExperiments = [];
-        $found = false;
+        //$found = false;
 
+        /*
         if ($paramsMap) {
             while (($line = fgets($paramsMap)) !== false) {
                 if ($found === true && $line[0] !== '*') {
@@ -1434,6 +1435,7 @@ class Internal extends RequestCollection
 
             fclose($paramsMap);
         }
+        */
 
         $paramsMap = json_decode(file_get_contents(__DIR__.'/../data/mobileconfig.json'));
 
@@ -1507,14 +1509,14 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '4640c4f14a49cd3392b6dccd8321ddb2740e4640e1e31790ee577cb1ba8440bb')
+                ->addPost('query_hash', 'e3c027b7896936999d38b5cd62bb9391bddc8fc3c6809c3dd365a739bbe7aa8f')
                 ->addPost('ts', time())
                 ->addPost('family_device_id', strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '68104856be10382723c68f4c2f326ecf7513e034d12788bb0974e5f75dedd3e6');
+                ->addPost('query_hash', '6d00f38945e83fae8c18eac88cc7e983241cf0ec8dc668fe6df10d1ec1d96a1f');
         }
 
         $result = $request->getResponse(new Response\MobileConfigResponse());

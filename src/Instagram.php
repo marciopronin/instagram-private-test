@@ -184,6 +184,13 @@ class Instagram implements ExperimentsInterface
     public static $retryOnNetworkException = false;
 
     /**
+     * Disable login bloks.
+     *
+     * @var bool
+     */
+    public static $disableLoginBloks = false;
+
+    /**
      * UUID.
      *
      * @var string
@@ -2389,7 +2396,8 @@ class Instagram implements ExperimentsInterface
             }
 
             if ($this->getIsAndroid()) {
-                $this->settings->set('phone_id', Signatures::generateUUID());
+                $phoneId = (self::$disableLoginBloks === false) ? Signatures::generateUUID() : Signatures::generateSpecialUUID();
+                $this->settings->set('phone_id', $phoneId);
             } else {
                 $this->settings->set('phone_id', $this->settings->get('device_id'));
             }

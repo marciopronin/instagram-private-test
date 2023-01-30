@@ -1,3 +1,15 @@
+# Stable release v21.4.0
+## Date: 30/01/2023
+
+### New features
+
+- **Instagram:** Add `disableLoginBloks` as static property. Will generate a valid UUID for phone_id which disables login bloks.
+- **Signatures:** Add `generateSpecialUUID()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_setUser()`
+
 # Stable release v21.3.5
 ## Date: 29/01/2023
 

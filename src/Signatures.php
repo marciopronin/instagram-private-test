@@ -168,7 +168,7 @@ class Signatures
             $val = gmp_mod(gmp_init(sprintf('0x%s', substr($hash, strlen($hash) - 15, 16))), 10000);
 
             if ($val >= 0) {
-                $res = gmp_div_q($val, 400);
+                $res = gmp_intval(gmp_div_q($val, 400));
                 if ($res >= 17) {
                     $res = -1;
                 }

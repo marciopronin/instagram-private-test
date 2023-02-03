@@ -1,3 +1,10 @@
+# Stable release v21.5.0
+## Date: 03/02/2023
+
+### New feature
+
+- **Web:** Added `editProfile()`.
+
 # Stable release v21.4.1
 ## Date: 30/01/2023
 

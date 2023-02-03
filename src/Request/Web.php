@@ -519,4 +519,52 @@ class Web extends RequestCollection
             ->addPost('current_screen_key', 'dob')
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Edit profile.
+     *
+     * @param string $firstName   First name.
+     * @param string $email       Email.
+     * @param string $phoneNumber Phone number.
+     * @param string $biography   Biography.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function editProfile(
+        $firstName = null,
+        $email = null,
+        $phoneNumber = null,
+        $biography = null)
+    {
+        $response = $this->ig->request('https://instagram.com/api/v1/accounts/edit/web_form_data/')
+            ->setAddDefaultHeaders(false)
+            ->setSignedPost(false)
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('Referer', 'https://www.instagram.com/accounts/edit/')
+            ->addHeader('X-Requested-With', 'XMLHttpRequest')
+            ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
+            ->addHeader('X-IG-App-ID', '936619743392459')
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->getResponse(new Response\WebFormDataResponse());
+
+        return $this->ig->request('https://instagram.com/api/v1/web/accounts/edit/')
+            ->setAddDefaultHeaders(false)
+            ->setSignedPost(false)
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('Referer', 'https://www.instagram.com/accounts/edit/')
+            ->addHeader('X-Requested-With', 'XMLHttpRequest')
+            ->addHeader('X-Instagram-AJAX', 'a878ae26c721')
+            ->addHeader('X-IG-App-ID', '936619743392459')
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->addPost('first_name', ($firstName !== null) ? $firstName : $response->getFormData()->getFirstName())
+            ->addPost('email', ($email !== null) ? $email : $response->getFormData()->getEmail())
+            ->addPost('username', $response->getFormData()->getUsername())
+            ->addPost('phone_number', ($phoneNumber !== null) ? $phoneNumber : $response->getFormData()->getPhoneNumber())
+            ->addPost('biography', ($biography !== null) ? $biography : $response->getFormData()->getBiography())
+            ->addPost('external_url', '')
+            ->addPost('chaining_enabled', 'on')
+            ->getResponse(new Response\GenericResponse());
+    }
 }

@@ -190,7 +190,8 @@ class ServerMessageThrower
             }
             if ($serverResponse->hasChallenge()
                 && $serverResponse->getMessage() === ''
-                && $serverResponse->getErrorType() !== 'two_factor_required') {
+                && $serverResponse->getErrorType() !== 'two_factor_required'
+                && $serverResponse->getErrorType() !== null) {
                 $serverErrorType = $serverResponse->getChallengeType();
                 $messages[] = $serverErrorType;
             }

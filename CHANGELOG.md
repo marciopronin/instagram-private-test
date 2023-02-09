@@ -1,3 +1,10 @@
+# Stable release v21.5.1
+## Date: 10/02/2023
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `autoThrow()`. Fixes a wrong mapping due to an unexpected login response failure.
+
 # Stable release v21.5.0
 ## Date: 03/02/2023
 

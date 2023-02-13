@@ -1,3 +1,10 @@
+# Stable release v21.5.3
+## Date: 14/02/2023
+
+### New features
+
+- **devtools:** Add ig_id_tools.js
+
 # Stable release v21.5.2
 ## Date: 13/02/2023
 

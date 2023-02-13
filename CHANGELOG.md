@@ -1,3 +1,10 @@
+# Stable release v21.5.2
+## Date: 13/02/2023
+
+### Updates and fixes
+
+- **Constants:** Update to 269.0.0.18.75
+
 # Stable release v21.5.1
 ## Date: 10/02/2023
 

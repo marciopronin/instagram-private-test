@@ -982,6 +982,8 @@ class Request
         }
 
         $this->_requestPriority = $priority;
+
+        return $this;
     }
 
     /**

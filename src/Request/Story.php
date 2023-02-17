@@ -133,6 +133,7 @@ class Story extends RequestCollection
     {
         $request = $this->ig->request('feed/reels_tray/')
             ->setSignedPost(false)
+            ->setRequestPriority(0)
             ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('reason', $reason)
             ->addPost('timezone_offset', date('Z'))

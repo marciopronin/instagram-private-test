@@ -1,3 +1,13 @@
+# Stable release v21.5.4
+## Date: 17/02/2023
+
+### Updates and fixes
+
+- **Internall:** Update `getMobileConfig()`. Update `query_hash`
+- **Request:** Fixed `setRequestPriority()`
+- **Story:** Update `getReelsTrayFeed()` set priority
+- **Timeline:** Update `getTimelineFeed()` set priority
+
 # Stable release v21.5.3
 ## Date: 14/02/2023
 

@@ -1,3 +1,10 @@
+# Stable release v21.5.5
+## Date: 19/02/2023
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update EXCEPTION_MAP to include a new form of captcha exception.
+
 # Stable release v21.5.4
 ## Date: 17/02/2023
 

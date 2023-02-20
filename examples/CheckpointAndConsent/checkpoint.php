@@ -4,6 +4,7 @@ set_time_limit(0);
 date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
+require __DIR__.'/NoCaptchaProxyless.php';
 
 /////// CONFIG ///////
 $username = '';
@@ -132,8 +133,23 @@ try {
                         $ig->checkpoint->requestVerificationCode($checkApiPath, 0);
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\RecaptchaChallengeException:
+                        /*
+                            This implementation is using proxyless, there is other class to do the same with proxy.
+                        */
+                        $recaptcha = new NoCaptchaProxyless();
+                        $recaptcha->setKey('ANTI-CAPTCHA-KEY'); // This is the API KEY
+                        $recaptcha->setWebsiteURL('https://instagram.com'); // It could be https://i.instagram.com as well
+                        $recaptcha->setWebsiteKey('6LebnxwUAAAAAGm3yH06pfqQtcMH0AYDwlsXnh-u'); // This sitekey is always the same.
+
+                        $recaptcha->createTask(); // returns ID of task but it is set internally.
+                        if ($recaptcha->waitForResult()) { // timeout 300 seconds (5 minutes)
+                            $googleResponse = $recaptcha->getTaskSolution();
+                        } else {
+                            // timeout
+                            // Some logic for failure cases
+                        }
                         // $sitekey = $e->getResponse()->getSitekey();
-                        $googleResponse = trim(fgets(STDIN));
+                        //$googleResponse = trim(fgets(STDIN));
                         $ig->checkpoint->sendCaptchaResponse($e->getResponse()->getChallengeUrl(), $googleResponse);
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\EscalationChallengeInformationException:

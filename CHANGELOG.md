@@ -1,3 +1,10 @@
+# Stable release v21.5.6
+## Date: 20/02/2023
+
+### Updates and fixes
+
+- **checkpoint:** Added implementation example to solve captcha challenges.
+
 # Stable release v21.5.5
 ## Date: 19/02/2023
 

@@ -1,3 +1,10 @@
+# Stable release v21.6.0
+## Date: 23/02/2023
+
+### New features
+
+- **Business:** Add `getAdsActivity()`
+
 # Stable release v21.5.6
 ## Date: 20/02/2023
 

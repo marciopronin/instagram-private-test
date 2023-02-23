@@ -124,6 +124,24 @@ class Business extends RequestCollection
     }
 
     /**
+     * Get ads activity.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getAdsActivity()
+    {
+        return $this->ig->request('ads/ads_history/')
+            ->setSignedPost(false)
+            ->setIsSilentFail(true)
+            ->addParam('_uuid', $this->ig->uuid)
+            ->addPost('page_type', 94)
+            ->addPost('ig_user_id', $this->ig->account_id)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get whitelist settings.
      *
      * Get's the list of users allowed to tag you in branded content.

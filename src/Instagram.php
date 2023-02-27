@@ -2151,6 +2151,55 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
+     * Request a new security code via WhatsApp for a Two Factor login account.
+     *
+     * @param string      $username            Your Instagram username.
+     * @param string      $password            Your Instagram password.
+     * @param string      $twoFactorIdentifier Two factor identifier, obtained in
+     *                                         `login()` response.
+     * @param string|null $usernameHandler     Instagram username sent in the login response.
+     *                                         Email and phone aren't allowed here.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\TwoFactorLoginSMSResponse
+     */
+    public function sendTwoFactorLoginWhatsapp(
+        $username,
+        $password,
+        $twoFactorIdentifier,
+        $usernameHandler = null)
+    {
+        if (empty($username) || empty($password)) {
+            throw new \InvalidArgumentException('You must provide a username and password to sendTwoFactorLoginSMS().');
+        }
+        if (empty($twoFactorIdentifier)) {
+            throw new \InvalidArgumentException('You must provide a two-factor identifier to sendTwoFactorLoginSMS().');
+        }
+
+        // Switch the currently active user/pass if the details are different.
+        // NOTE: The password IS NOT actually necessary for THIS
+        // endpoint, but this extra step helps people who statelessly embed the
+        // library directly into a webpage, so they can `sendTwoFactorLoginSMS()`
+        // on their second page load without having to begin any new `login()`
+        // call (since they did that in their previous webpage's library calls).
+        if ($this->username !== $username || $this->password !== $password) {
+            $this->_setUser('regular', $username, $password);
+        }
+
+        $username = ($usernameHandler !== null) ? $usernameHandler : $username;
+
+        return $this->request('two_factor/send_two_factor_login_whatsapp/')
+            ->setNeedsAuth(false)
+            ->addPost('two_factor_identifier', $twoFactorIdentifier)
+            ->addPost('username', $username)
+            ->addPost('device_id', $this->device_id)
+            ->addPost('guid', $this->uuid)
+            //->addPost('_csrftoken', $this->client->getToken())
+            ->getResponse(new Response\TwoFactorLoginSMSResponse());
+    }
+
+    /**
      * Check trusted notification status for 2FA login.
      *
      * This checks wether a device has approved the login via

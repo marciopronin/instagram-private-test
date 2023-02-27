@@ -1,3 +1,10 @@
+# Stable release v21.7.0
+## Date: 27/02/2023
+
+### New features
+
+- **Instagram:** Add `sendTwoFactorLoginWhatsapp()`
+
 # Stable release v21.6.0
 ## Date: 23/02/2023
 

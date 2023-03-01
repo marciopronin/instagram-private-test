@@ -106,6 +106,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method string getLinkText()
  * @method float getLng()
  * @method Location getLocation()
+ * @method string getLoggingInfoToken()
  * @method bool getMainFeedCarouselHasUnseenCoverMedia()
  * @method string getMainFeedCarouselStartingMediaId()
  * @method int getMaxNumVisiblePreviewComments()
@@ -292,6 +293,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isLinkText()
  * @method bool isLng()
  * @method bool isLocation()
+ * @method bool isLoggingInfoToken()
  * @method bool isMainFeedCarouselHasUnseenCoverMedia()
  * @method bool isMainFeedCarouselStartingMediaId()
  * @method bool isMaxNumVisiblePreviewComments()
@@ -478,6 +480,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setLinkText(string $value)
  * @method $this setLng(float $value)
  * @method $this setLocation(Location $value)
+ * @method $this setLoggingInfoToken(string $value)
  * @method $this setMainFeedCarouselHasUnseenCoverMedia(bool $value)
  * @method $this setMainFeedCarouselStartingMediaId(string $value)
  * @method $this setMaxNumVisiblePreviewComments(int $value)
@@ -664,6 +667,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this unsetLinkText()
  * @method $this unsetLng()
  * @method $this unsetLocation()
+ * @method $this unsetLoggingInfoToken()
  * @method $this unsetMainFeedCarouselHasUnseenCoverMedia()
  * @method $this unsetMainFeedCarouselStartingMediaId()
  * @method $this unsetMaxNumVisiblePreviewComments()
@@ -800,6 +804,7 @@ class Item extends AutoPropertyMapper
         'can_viewer_save'                          => 'bool',
         'has_viewer_saved'                         => 'bool',
         'organic_tracking_token'                   => 'string',
+        'logging_info_token'                       => 'string',
         'follow_hashtag_info'                      => 'Hashtag',
         'expiring_at'                              => 'string',
         'audience'                                 => 'string',

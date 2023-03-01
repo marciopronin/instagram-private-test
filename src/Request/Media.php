@@ -198,6 +198,10 @@ class Media extends RequestCollection
             $request->addPost('carousel_index', $extraData['carousel_index']);
         }
 
+        if (isset($extraData['logging_info_token'])) {
+            $request->addPost('logging_info_token', $extraData['logging_info_token']);
+        }
+
         $extraData['media_id'] = $mediaId;
         $this->_parseLikeParameters('like', $request, $module, $extraData);
 

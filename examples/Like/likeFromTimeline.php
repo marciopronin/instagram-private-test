@@ -5,12 +5,12 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
 $ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
 
@@ -44,7 +44,7 @@ try {
 
     // Since we are going to like the first item of the media, the position in
     // the feed is 0. If you want to like the second item, it would position 1, and so on.
-    $ig->media->like($item->getId(), 0);
+    $ig->media->like($item->getId(), 0, 'feed_timeline', false, ['logging_info_token' => $item->getLoggingInfoToken()]);
     // Send organic like from the 'feed_timeline' module.
     $ig->event->sendOrganicLike($item, 'feed_timeline', null, null, $ig->session_id);
     // forceSendBatch() should be only used if you are "closing" the app so all the events that

@@ -1,3 +1,16 @@
+# Stable release v21.7.1
+## Date: 01/03/2023
+
+### Updates and fixes
+
+- **Media:** Update `like()`
+- **Models:** Update Item and FeedItem models
+
+### Examples
+
+- **Example:** Update likeFromTimeline example
+- **Example:** Add getAdsActivity
+
 # Stable release v21.7.0
 ## Date: 27/02/2023
 

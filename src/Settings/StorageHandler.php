@@ -56,6 +56,7 @@ class StorageHandler
         'www_claim',
         'direct_region',
         'mid',
+        'rur',
         'salt_ids',
     ];
 

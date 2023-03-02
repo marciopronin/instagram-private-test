@@ -1,3 +1,11 @@
+# Stable release v21.7.2
+## Date: 02/03/2023
+
+### Updates and fixes
+
+- **StorageHandler:** Update PERSISTENT_KEYS to store rur value.
+- **Client:** Update client to store and use stored rur value.
+
 # Stable release v21.7.1
 ## Date: 01/03/2023
 

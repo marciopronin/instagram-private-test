@@ -1118,7 +1118,7 @@ class Client
             }
 
             if ($this->_rur !== '') {
-                $headers['set_headers']['IG-U-RUR'] = $this->_rur;
+                $headers['set_headers']['IG-U-RUR'] = $this->_parent->settings->get('rur');
             }
 
             if ($this->_directRegionHint !== '') {
@@ -1183,6 +1183,9 @@ class Client
         }
         if ($this->_mid !== '') {
             $this->_parent->settings->set('mid', $this->_mid);
+        }
+        if ($this->_rur !== '') {
+            $this->_parent->settings->set('rur', $this->_rur);
         }
 
         $authorizationHeader = $response->getHeaderLine('ig-set-authorization');

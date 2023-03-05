@@ -83,7 +83,7 @@
         <aside class="phpdocumentor-element-found-in">
             <abbr class="phpdocumentor-element-found-in__file" title="src/Response/ResumableUploadResponse.php"><a href="../files/src-response-resumableuploadresponse.html"><abbr title="src/Response/ResumableUploadResponse.php">ResumableUploadResponse.php</abbr></a></abbr>
             :
-            <span class="phpdocumentor-element-found-in__line">31</span>
+            <span class="phpdocumentor-element-found-in__line">35</span>
         </aside>
 
         <p class="phpdocumentor-class__summary">ResumableUploadResponse.</p>
@@ -91,6 +91,30 @@
                     <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">method</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">method</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">method</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">method</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                    <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">method</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
@@ -218,14 +242,24 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#constant_JSON_PROPERTY_MAP">JSON_PROPERTY_MAP</a></th>
                     <td class="phpdocumentor-cell"></td>
-                    <td class="phpdocumentor-cell">[&#039;xsharing_nonces&#039; =&gt; &#039;&#039;, &#039;upload_id&#039; =&gt; &#039;int&#039;]</td>
+                    <td class="phpdocumentor-cell">[&#039;xsharing_nonces&#039; =&gt; &#039;&#039;, &#039;upload_id&#039; =&gt; &#039;int&#039;, &#039;media_id&#039; =&gt; &#039;int&#039;]</td>
                 </tr>
                                                                 <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response.html#property_httpResponse">$httpResponse</a></th>
                     <td class="phpdocumentor-cell"></td>
                     <td class="phpdocumentor-cell"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></td>
                 </tr>
-                                                    <tr>
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_isOk">isOk()</a></th>
+                    <td class="phpdocumentor-cell">Checks if the response was successful.</td>
+                    <td class="phpdocumentor-cell">bool</td>
+                </tr>
+                                        <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_getMediaId">getMediaId()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">int</td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_getMessage">getMessage()</a></th>
                     <td class="phpdocumentor-cell">Gets the message.</td>
                     <td class="phpdocumentor-cell">mixed</td>
@@ -249,6 +283,11 @@
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_get_Messages">get_Messages()</a></th>
                     <td class="phpdocumentor-cell"></td>
                     <td class="phpdocumentor-cell">\InstagramAPI\Response\Model\_Message[]</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_isMediaId">isMediaId()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">bool</td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_isMessage">isMessage()</a></th>
@@ -276,6 +315,11 @@
                     <td class="phpdocumentor-cell">bool</td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_setMediaId">setMediaId()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">$this</td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_setMessage">setMessage()</a></th>
                     <td class="phpdocumentor-cell"></td>
                     <td class="phpdocumentor-cell">$this</td>
@@ -297,6 +341,11 @@
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_set_Messages">set_Messages()</a></th>
+                    <td class="phpdocumentor-cell"></td>
+                    <td class="phpdocumentor-cell">$this</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_unsetMediaId">unsetMediaId()</a></th>
                     <td class="phpdocumentor-cell"></td>
                     <td class="phpdocumentor-cell">$this</td>
                 </tr>
@@ -426,13 +475,13 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Response/ResumableUploadResponse.php"><a href="../files/src-response-resumableuploadresponse.html"><abbr title="src/Response/ResumableUploadResponse.php">ResumableUploadResponse.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">33</span>
+        <span class="phpdocumentor-element-found-in__line">37</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
         <span class="phpdocumentor-signature__name">$JSON_PROPERTY_MAP</span>
-        = <span class="phpdocumentor-signature__default-value">[&#039;xsharing_nonces&#039; =&gt; &#039;&#039;, &#039;upload_id&#039; =&gt; &#039;int&#039;]</span>
+        = <span class="phpdocumentor-signature__default-value">[&#039;xsharing_nonces&#039; =&gt; &#039;&#039;, &#039;upload_id&#039; =&gt; &#039;int&#039;, &#039;media_id&#039; =&gt; &#039;int&#039;]</span>
     </code>
             
 </article>
@@ -619,7 +668,64 @@
         
                     <section>
                 <h3 class="phpdocumentor-methods__header">Methods</h3>
-                                                    <a id="method_getMessage"></a>
+                                    <a id="method_isOk"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">isOk()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Response/ResumableUploadResponse.php"><a href="../files/src-response-resumableuploadresponse.html"><abbr title="src/Response/ResumableUploadResponse.php">ResumableUploadResponse.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">48</span>
+    </aside>
+        <p class="phpdocumentor-summary">Checks if the response was successful.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">isOk</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                                    <a id="method_getMediaId"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getMediaId()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Response/ResumableUploadResponse.php"><a href="../files/src-response-resumableuploadresponse.html"><abbr title="src/Response/ResumableUploadResponse.php">ResumableUploadResponse.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">0</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getMediaId</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">int</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            
+</article>
+                                    <a id="method_getMessage"></a>
 <article
         class="
             phpdocumentor-method
@@ -762,6 +868,34 @@ to handle unusual multi-error message values in certain responses.</p></section>
         <span class="phpdocumentor-signature__response_type">\InstagramAPI\Response\Model\_Message[]</span>
             
 </article>
+                                    <a id="method_isMediaId"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">isMediaId()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Response/ResumableUploadResponse.php"><a href="../files/src-response-resumableuploadresponse.html"><abbr title="src/Response/ResumableUploadResponse.php">ResumableUploadResponse.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">0</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">isMediaId</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
                                     <a id="method_isMessage"></a>
 <article
         class="
@@ -900,6 +1034,46 @@ to handle unusual multi-error message values in certain responses.</p></section>
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method_setMediaId"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setMediaId()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Response/ResumableUploadResponse.php"><a href="../files/src-response-resumableuploadresponse.html"><abbr title="src/Response/ResumableUploadResponse.php">ResumableUploadResponse.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">0</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setMediaId</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$value</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">$this</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$value</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">$this</span>
             
 </article>
                                     <a id="method_setMessage"></a>
@@ -1095,6 +1269,34 @@ to handle unusual multi-error message values in certain responses.</p></section>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">$this</span>
+            
+</article>
+                                    <a id="method_unsetMediaId"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">unsetMediaId()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Response/ResumableUploadResponse.php"><a href="../files/src-response-resumableuploadresponse.html"><abbr title="src/Response/ResumableUploadResponse.php">ResumableUploadResponse.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">0</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">unsetMediaId</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">$this</span>
+    </code>
+
+    
     
         
 

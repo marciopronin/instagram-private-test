@@ -83,7 +83,7 @@
         <aside class="phpdocumentor-element-found-in">
             <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
             :
-            <span class="phpdocumentor-element-found-in__line">10</span>
+            <span class="phpdocumentor-element-found-in__line">11</span>
         </aside>
 
         <p class="phpdocumentor-class__summary">Functions related to Reels also known internally as clips.</p>
@@ -105,7 +105,12 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_discover">discover()</a></th>
                     <td class="phpdocumentor-cell">Discover reels.</td>
-                    <td class="phpdocumentor-cell"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_discoverStream">discoverStream()</a></th>
+                    <td class="phpdocumentor-cell">Discover stream reels.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_sendSeenState">sendSeenState()</a></th>
@@ -115,17 +120,62 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getHome">getHome()</a></th>
                     <td class="phpdocumentor-cell">Home reels.</td>
-                    <td class="phpdocumentor-cell"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getUserReels">getUserReels()</a></th>
                     <td class="phpdocumentor-cell">Get user reels.</td>
-                    <td class="phpdocumentor-cell"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getHashtagReels">getHashtagReels()</a></th>
+                    <td class="phpdocumentor-cell">Get hashtag reels.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getMusic">getMusic()</a></th>
-                    <td class="phpdocumentor-cell">Get music for reels. NOT FINISHED.</td>
-                    <td class="phpdocumentor-cell"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></td>
+                    <td class="phpdocumentor-cell">Get music for reels.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getLocationReels">getLocationReels()</a></th>
+                    <td class="phpdocumentor-cell">Get reels from a location ID.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getUserLikedReels">getUserLikedReels()</a></th>
+                    <td class="phpdocumentor-cell">Get liked reels of a user.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getShareToFbConfig">getShareToFbConfig()</a></th>
+                    <td class="phpdocumentor-cell">Get share to FB config.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelShareToFbConfigResponse.html"><abbr title="\InstagramAPI\Response\ReelShareToFbConfigResponse">ReelShareToFbConfigResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_setDefaultShareToFbConfig">setDefaultShareToFbConfig()</a></th>
+                    <td class="phpdocumentor-cell">Set default share to FB config.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_allowRemixes">allowRemixes()</a></th>
+                    <td class="phpdocumentor-cell">Allow/Disallow remixes of uploaded reel. It is enabled by default on uploaded medias.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_removeFromProfile">removeFromProfile()</a></th>
+                    <td class="phpdocumentor-cell">It removes the reel only from the profile grid, reel is still visible at the reels section.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getClipsInfoForCreation">getClipsInfoForCreation()</a></th>
+                    <td class="phpdocumentor-cell">Get clips info for creation.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Reel.html#method_getVideosChaining">getVideosChaining()</a></th>
+                    <td class="phpdocumentor-cell">Get videos chaining.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></td>
                 </tr>
                                                     <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-RequestCollection.html#method___construct">__construct()</a></th>
@@ -182,7 +232,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">26</span>
+        <span class="phpdocumentor-element-found-in__line">27</span>
     </aside>
         <p class="phpdocumentor-summary">Uploads a video to Reels (clips). EXPERIMENTAL.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -263,7 +313,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">45</span>
+        <span class="phpdocumentor-element-found-in__line">47</span>
     </aside>
         <p class="phpdocumentor-summary">Discover reels.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -281,8 +331,12 @@
             [,                 <span class="phpdocumentor-signature__argument__name">$sessionInfo</span> :
                 <span class="phpdocumentor-signature__argument__return-type">array|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$maxId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
-        : <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></span>
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
     </code>
 
     
@@ -293,6 +347,78 @@
                     : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                      = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Chaining media ID (Parent).</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$seenReels</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Seen reels.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$sessionInfo</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Session info</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Max ID.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_discoverStream"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">discoverStream()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">91</span>
+    </aside>
+        <p class="phpdocumentor-summary">Discover stream reels.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">discoverStream</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$seenReels</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$sessionInfo</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$seenReels</span>
                     : <span class="phpdocumentor-signature__argument__return-type">array|null</span>
@@ -325,7 +451,7 @@
 
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
             
 </article>
                                     <a id="method_sendSeenState"></a>
@@ -339,7 +465,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">84</span>
+        <span class="phpdocumentor-element-found-in__line">126</span>
     </aside>
         <p class="phpdocumentor-summary">Send seen state.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -397,7 +523,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">107</span>
+        <span class="phpdocumentor-element-found-in__line">149</span>
     </aside>
         <p class="phpdocumentor-summary">Home reels.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -412,7 +538,7 @@
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                  = <span class="phpdocumentor-signature__argument__default-value">&#039;clips_tab&#039;</span> ]            </span>
                 )
-        : <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></span>
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
     </code>
 
     
@@ -450,7 +576,7 @@
 
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
             
 </article>
                                     <a id="method_getUserReels"></a>
@@ -464,7 +590,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">135</span>
+        <span class="phpdocumentor-element-found-in__line">177</span>
     </aside>
         <p class="phpdocumentor-summary">Get user reels.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -479,7 +605,7 @@
                 <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
-        : <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></span>
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
     </code>
 
     
@@ -517,7 +643,74 @@
 
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_getHashtagReels"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getHashtagReels()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">205</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get hashtag reels.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getHashtagReels</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$hashtag</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$maxId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$hashtag</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Hashtag.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Next &quot;maximum ID&quot;, used for pagination.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
             
 </article>
                                     <a id="method_getMusic"></a>
@@ -531,9 +724,9 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">162</span>
+        <span class="phpdocumentor-element-found-in__line">230</span>
     </aside>
-        <p class="phpdocumentor-summary">Get music for reels. NOT FINISHED.</p>
+        <p class="phpdocumentor-summary">Get music for reels.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getMusic</span>(
@@ -542,7 +735,7 @@
                 <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
-        : <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></span>
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
     </code>
 
     
@@ -575,7 +768,475 @@
 
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\InstagramAPI\Response\UserReelResponse">UserReelResponse</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_getLocationReels"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getLocationReels()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">256</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get reels from a location ID.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getLocationReels</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$locationId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$maxId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$locationId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Numerical UserPK ID.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Next   &quot;maximum ID&quot;, used for pagination.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_getUserLikedReels"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getUserLikedReels()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">282</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get liked reels of a user.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getUserLikedReels</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$userId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$maxId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$userId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Numerical UserPK ID.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Next   &quot;maximum ID&quot;, used for pagination.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_getShareToFbConfig"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getShareToFbConfig()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">305</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get share to FB config.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getShareToFbConfig</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelShareToFbConfigResponse.html"><abbr title="\InstagramAPI\Response\ReelShareToFbConfigResponse">ReelShareToFbConfigResponse</abbr></a></span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelShareToFbConfigResponse.html"><abbr title="\InstagramAPI\Response\ReelShareToFbConfigResponse">ReelShareToFbConfigResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_setDefaultShareToFbConfig"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">setDefaultShareToFbConfig()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">322</span>
+    </aside>
+        <p class="phpdocumentor-summary">Set default share to FB config.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">setDefaultShareToFbConfig</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$enabled</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$sharingMode</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">2</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$enabled</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Enable default share to FB.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$sharingMode</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">2</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Sharing mode.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_allowRemixes"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">allowRemixes()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">347</span>
+    </aside>
+        <p class="phpdocumentor-summary">Allow/Disallow remixes of uploaded reel. It is enabled by default on uploaded medias.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">allowRemixes</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$mediaId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$enabled</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$mediaId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Media ID.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$enabled</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Enable default share to FB.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_removeFromProfile"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">removeFromProfile()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">370</span>
+    </aside>
+        <p class="phpdocumentor-summary">It removes the reel only from the profile grid, reel is still visible at the reels section.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">removeFromProfile</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$mediaId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$mediaId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Media ID.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_getClipsInfoForCreation"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getClipsInfoForCreation()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">387</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get clips info for creation.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getClipsInfoForCreation</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_getVideosChaining"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getVideosChaining()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Reel.php"><a href="../files/src-request-reel.html"><abbr title="src/Request/Reel.php">Reel.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">406</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get videos chaining.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getVideosChaining</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$chainingMedia</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$seenReels</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$sessionInfo</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$maxId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$chainingMedia</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Chaining media ID (Parent).</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$seenReels</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Seen reels.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$sessionInfo</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Session info</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$maxId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Max ID.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsResponse.html"><abbr title="\InstagramAPI\Response\ReelsResponse">ReelsResponse</abbr></a></span>
             
 </article>
                                                                     <a id="method___construct"></a>

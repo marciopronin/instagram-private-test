@@ -240,7 +240,7 @@ try {
                 }
             }
         }
-        $ig->media->like($item->getId(), $c, 'feed_contextual_profile');
+        $ig->media->like($item->getId(), $c, 'feed_contextual_profile', false, ['logging_info_token' => $item->getLoggingInfoToken()]);
         $ig->event->sendOrganicLike($item, 'feed_contextual_profile', null, null, $ig->session_id);
         $c++;
     }

@@ -417,6 +417,11 @@
                     <td class="phpdocumentor-cell">Gets a list of users who&#039;s stories or posts you mute.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-MutedUsersResponse.html"><abbr title="\InstagramAPI\Response\MutedUsersResponse">MutedUsersResponse</abbr></a></td>
                 </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-People.html#method_getNonExpiredFriendRequests">getNonExpiredFriendRequests()</a></th>
+                    <td class="phpdocumentor-cell">Get non expired friend requests.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-NonExpiredRequestsInfoResponse.html"><abbr title="\InstagramAPI\Response\NonExpiredRequestsInfoResponse">NonExpiredRequestsInfoResponse</abbr></a></td>
+                </tr>
                                                     <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-RequestCollection.html#method___construct">__construct()</a></th>
                     <td class="phpdocumentor-cell">Constructor.</td>
@@ -472,7 +477,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">43</span>
+        <span class="phpdocumentor-element-found-in__line">44</span>
     </aside>
         <p class="phpdocumentor-summary">Get details about a specific user via their numerical UserPK ID.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -484,6 +489,10 @@
                             </span>
                     <span class="phpdocumentor-signature__argument">
             [,                 <span class="phpdocumentor-signature__argument__name">$module</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$entrypoint</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
@@ -518,6 +527,11 @@ except &quot;@mentions&quot; (where it uses <code class="prettyprint">getInfoByN
 &quot;self_likers_self_likers_media_view_profile&quot;,
 &quot;self_likers_self_likers_photo_view_profile&quot;,
 &quot;self_likers_self_likers_video_view_profile&quot;.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$entrypoint</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Entrypoint.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -547,7 +561,7 @@ except &quot;@mentions&quot; (where it uses <code class="prettyprint">getInfoByN
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">70</span>
+        <span class="phpdocumentor-element-found-in__line">76</span>
     </aside>
         <p class="phpdocumentor-summary">Get details about a specific user via their username.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -615,7 +629,7 @@ except &quot;@mentions&quot; (where it uses <code class="prettyprint">getInfoByN
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">93</span>
+        <span class="phpdocumentor-element-found-in__line">99</span>
     </aside>
         <p class="phpdocumentor-summary">Get the numerical UserPK ID for a specific user via their username.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -676,18 +690,39 @@ People::getInfoByName() instead, which lets you see more details.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">110</span>
+        <span class="phpdocumentor-element-found-in__line">119</span>
     </aside>
         <p class="phpdocumentor-summary">Get user details about your own account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getSelfInfo</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$module</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;self_profile&#039;</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$entrypoint</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-UserInfoResponse.html"><abbr title="\InstagramAPI\Response\UserInfoResponse">UserInfoResponse</abbr></a></span>
     </code>
 
         <section class="phpdocumentor-description"><p>Also try Account::getCurrentUser() instead, for account details.</p></section>
     
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$module</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;self_profile&#039;</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>From which app module (page) you have opened the profile.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$entrypoint</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Entrypoint.</p></section></dd>
+                    </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
     <dl class="phpdocumentor-tag-list">
@@ -723,7 +758,7 @@ People::getInfoByName() instead, which lets you see more details.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">126</span>
+        <span class="phpdocumentor-element-found-in__line">137</span>
     </aside>
         <p class="phpdocumentor-summary">Get about this account info.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -775,7 +810,7 @@ People::getInfoByName() instead, which lets you see more details.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">151</span>
+        <span class="phpdocumentor-element-found-in__line">162</span>
     </aside>
         <p class="phpdocumentor-summary">Get other people&#039;s recent activities related to you and your posts.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -838,7 +873,7 @@ comments, people who started following you, etc.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">171</span>
+        <span class="phpdocumentor-element-found-in__line">183</span>
     </aside>
         <p class="phpdocumentor-summary">Get news inbox seen.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -877,7 +912,7 @@ comments, people who started following you, etc.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">190</span>
+        <span class="phpdocumentor-element-found-in__line">204</span>
     </aside>
         <p class="phpdocumentor-summary">Send action news log.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -891,6 +926,10 @@ comments, people who started following you, etc.</p></section>
             ,                 <span class="phpdocumentor-signature__argument__name">$tuuid</span> :
                 <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
                             </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$action</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;click&#039;</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
     </code>
@@ -908,11 +947,23 @@ comments, people who started following you, etc.</p></section>
                     : <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>news UUID.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$action</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;click&#039;</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>to perform: &quot;hide&quot; or &quot;click&quot;.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
@@ -937,7 +988,7 @@ comments, people who started following you, etc.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">216</span>
+        <span class="phpdocumentor-element-found-in__line">235</span>
     </aside>
         <p class="phpdocumentor-summary">Get news feed with recent activities by accounts you follow.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -990,7 +1041,7 @@ they've liked or that they've started following other people.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">238</span>
+        <span class="phpdocumentor-element-found-in__line">257</span>
     </aside>
         <p class="phpdocumentor-summary">Retrieve bootstrap user data (autocompletion user list).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1032,7 +1083,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">268</span>
+        <span class="phpdocumentor-element-found-in__line">287</span>
     </aside>
         <p class="phpdocumentor-summary">Show a user&#039;s friendship status with you.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1083,7 +1134,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">283</span>
+        <span class="phpdocumentor-element-found-in__line">302</span>
     </aside>
         <p class="phpdocumentor-summary">Show multiple users&#039; friendship status with you.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1134,7 +1185,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">308</span>
+        <span class="phpdocumentor-element-found-in__line">327</span>
     </aside>
         <p class="phpdocumentor-summary">Show the least interacted with from the following tab from users profile.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1194,7 +1245,7 @@ Instagram REQUIRES that you wait several minutes between calls to it.</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">332</span>
+        <span class="phpdocumentor-element-found-in__line">351</span>
     </aside>
         <p class="phpdocumentor-summary">Unfollow chaining count.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1247,7 +1298,7 @@ It will return the number of similar accounts you follow.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">353</span>
+        <span class="phpdocumentor-element-found-in__line">372</span>
     </aside>
         <p class="phpdocumentor-summary">Unfollow chaining.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1318,7 +1369,7 @@ It will return similar accounts of the user it was just unfollowed.</p></section
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">373</span>
+        <span class="phpdocumentor-element-found-in__line">392</span>
     </aside>
         <p class="phpdocumentor-summary">Get list of pending friendship requests.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1357,7 +1408,7 @@ It will return similar accounts of the user it was just unfollowed.</p></section
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">389</span>
+        <span class="phpdocumentor-element-found-in__line">408</span>
     </aside>
         <p class="phpdocumentor-summary">Approve a friendship request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1408,7 +1459,7 @@ It will return similar accounts of the user it was just unfollowed.</p></section
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">413</span>
+        <span class="phpdocumentor-element-found-in__line">432</span>
     </aside>
         <p class="phpdocumentor-summary">Reject a friendship request.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1461,7 +1512,7 @@ rejection. If they're harassing you, use People::block() instead.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">434</span>
+        <span class="phpdocumentor-element-found-in__line">453</span>
     </aside>
         <p class="phpdocumentor-summary">Remove one of your followers.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1512,7 +1563,7 @@ rejection. If they're harassing you, use People::block() instead.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">455</span>
+        <span class="phpdocumentor-element-found-in__line">474</span>
     </aside>
         <p class="phpdocumentor-summary">Mark user over age in order to see sensitive content.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1563,7 +1614,7 @@ rejection. If they're harassing you, use People::block() instead.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">484</span>
+        <span class="phpdocumentor-element-found-in__line">503</span>
     </aside>
         <p class="phpdocumentor-summary">Get list of who a user is following.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1671,7 +1722,7 @@ earliest followings: 'date_followed_earliest'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">529</span>
+        <span class="phpdocumentor-element-found-in__line">548</span>
     </aside>
         <p class="phpdocumentor-summary">Get list of who a user is followed by.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1769,7 +1820,7 @@ earliest followings: 'date_followed_earliest'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">565</span>
+        <span class="phpdocumentor-element-found-in__line">584</span>
     </aside>
         <p class="phpdocumentor-summary">Get list of who you are following.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1861,7 +1912,7 @@ earliest followings: 'date_followed_earliest'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">588</span>
+        <span class="phpdocumentor-element-found-in__line">607</span>
     </aside>
         <p class="phpdocumentor-summary">Get list of your own followers.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1943,7 +1994,7 @@ earliest followings: 'date_followed_earliest'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">616</span>
+        <span class="phpdocumentor-element-found-in__line">635</span>
     </aside>
         <p class="phpdocumentor-summary">Search for Instagram users.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2045,7 +2096,7 @@ many user IDs.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">661</span>
+        <span class="phpdocumentor-element-found-in__line">680</span>
     </aside>
         <p class="phpdocumentor-summary">Get business account details.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2096,7 +2147,7 @@ many user IDs.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">677</span>
+        <span class="phpdocumentor-element-found-in__line">696</span>
     </aside>
         <p class="phpdocumentor-summary">Get a business account&#039;s former username(s).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2147,7 +2198,7 @@ many user IDs.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">693</span>
+        <span class="phpdocumentor-element-found-in__line">712</span>
     </aside>
         <p class="phpdocumentor-summary">Get a business account&#039;s shared follower base with similar accounts.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2198,7 +2249,7 @@ many user IDs.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">710</span>
+        <span class="phpdocumentor-element-found-in__line">729</span>
     </aside>
         <p class="phpdocumentor-summary">Get a business account&#039;s active ads on feed.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2258,7 +2309,7 @@ many user IDs.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">727</span>
+        <span class="phpdocumentor-element-found-in__line">746</span>
     </aside>
         <p class="phpdocumentor-summary">Get a business account&#039;s active ads on stories.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2318,7 +2369,7 @@ many user IDs.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">746</span>
+        <span class="phpdocumentor-element-found-in__line">765</span>
     </aside>
         <p class="phpdocumentor-summary">Helper function for getting active ads for business accounts.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2394,7 +2445,7 @@ many user IDs.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">789</span>
+        <span class="phpdocumentor-element-found-in__line">809</span>
     </aside>
         <p class="phpdocumentor-summary">Search for users by linking your address book to Instagram.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2404,6 +2455,10 @@ many user IDs.</p></section>
                             <span class="phpdocumentor-signature__argument__name">$contacts</span> :
                 <span class="phpdocumentor-signature__argument__return-type">array</span>
                             </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$source</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;account_creation&#039;</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-LinkAddressBookResponse.html"><abbr title="\InstagramAPI\Response\LinkAddressBookResponse">LinkAddressBookResponse</abbr></a></span>
     </code>
@@ -2418,6 +2473,11 @@ same response about your currently linked address book every time!</p></section>
                     <span class="phpdocumentor-signature__argument__name">$contacts</span>
                     : <span class="phpdocumentor-signature__argument__return-type">array</span>
                                     </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$source</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;account_creation&#039;</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
     
@@ -2455,7 +2515,7 @@ same response about your currently linked address book every time!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">813</span>
+        <span class="phpdocumentor-element-found-in__line">833</span>
     </aside>
         <p class="phpdocumentor-summary">Unlink your address book from Instagram.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2494,7 +2554,7 @@ same response about your currently linked address book every time!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">837</span>
+        <span class="phpdocumentor-element-found-in__line">857</span>
     </aside>
         <p class="phpdocumentor-summary">Discover new people via Facebook&#039;s algorithm.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2547,7 +2607,7 @@ same response about your currently linked address book every time!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">864</span>
+        <span class="phpdocumentor-element-found-in__line">884</span>
     </aside>
         <p class="phpdocumentor-summary">Get suggested users related to a user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2598,7 +2658,7 @@ same response about your currently linked address book every time!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">885</span>
+        <span class="phpdocumentor-element-found-in__line">905</span>
     </aside>
         <p class="phpdocumentor-summary">Get suggested users via account badge.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2652,7 +2712,7 @@ matches the number on the badge, and it usually only has a handful (1-4).</p></s
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">928</span>
+        <span class="phpdocumentor-element-found-in__line">948</span>
     </aside>
         <p class="phpdocumentor-summary">Hide suggested user, so that they won&#039;t be suggested again.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2729,7 +2789,7 @@ functions like People::discoverPeople().</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">950</span>
+        <span class="phpdocumentor-element-found-in__line">971</span>
     </aside>
         <p class="phpdocumentor-summary">Follow a user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2741,6 +2801,10 @@ functions like People::discoverPeople().</p></section></dd>
                             </span>
                     <span class="phpdocumentor-signature__argument">
             [,                 <span class="phpdocumentor-signature__argument__name">$mediaId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$loggingInfoToken</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
@@ -2760,6 +2824,11 @@ functions like People::discoverPeople().</p></section></dd>
                     : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                      = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The media ID in Instagram's internal format (ie &quot;3482384834_43294&quot;).</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$loggingInfoToken</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The logging info token associated to the media.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -2789,7 +2858,7 @@ functions like People::discoverPeople().</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">983</span>
+        <span class="phpdocumentor-element-found-in__line">1010</span>
     </aside>
         <p class="phpdocumentor-summary">Unfollow a user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2849,7 +2918,7 @@ functions like People::discoverPeople().</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1017</span>
+        <span class="phpdocumentor-element-found-in__line">1044</span>
     </aside>
         <p class="phpdocumentor-summary">Enable high priority for a user you are following.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2905,7 +2974,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1037</span>
+        <span class="phpdocumentor-element-found-in__line">1064</span>
     </aside>
         <p class="phpdocumentor-summary">Disable high priority for a user you are following.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2956,7 +3025,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1057</span>
+        <span class="phpdocumentor-element-found-in__line">1084</span>
     </aside>
         <p class="phpdocumentor-summary">Turn on IGTV notifications.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3007,7 +3076,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1077</span>
+        <span class="phpdocumentor-element-found-in__line">1104</span>
     </aside>
         <p class="phpdocumentor-summary">Turn off IGTV notifications.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3058,7 +3127,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1097</span>
+        <span class="phpdocumentor-element-found-in__line">1124</span>
     </aside>
         <p class="phpdocumentor-summary">Turn on story notifications.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3109,7 +3178,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1117</span>
+        <span class="phpdocumentor-element-found-in__line">1144</span>
     </aside>
         <p class="phpdocumentor-summary">Turn off story notifications.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3160,7 +3229,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1138</span>
+        <span class="phpdocumentor-element-found-in__line">1165</span>
     </aside>
         <p class="phpdocumentor-summary">Report a user as spam.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3220,7 +3289,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1162</span>
+        <span class="phpdocumentor-element-found-in__line">1189</span>
     </aside>
         <p class="phpdocumentor-summary">Block a user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3271,7 +3340,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1182</span>
+        <span class="phpdocumentor-element-found-in__line">1209</span>
     </aside>
         <p class="phpdocumentor-summary">Restrict a user account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3322,7 +3391,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1202</span>
+        <span class="phpdocumentor-element-found-in__line">1229</span>
     </aside>
         <p class="phpdocumentor-summary">Unrestrict a user account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3373,7 +3442,7 @@ timeline posts will stay visible for longer on your homescreen.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1227</span>
+        <span class="phpdocumentor-element-found-in__line">1254</span>
     </aside>
         <p class="phpdocumentor-summary">Mute stories, posts or both from a user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3442,7 +3511,7 @@ Available options: 'story', 'post' or 'all'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1246</span>
+        <span class="phpdocumentor-element-found-in__line">1273</span>
     </aside>
         <p class="phpdocumentor-summary">Unmute stories, posts or both from a user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3510,7 +3579,7 @@ Available options: 'story', 'post' or 'all'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1269</span>
+        <span class="phpdocumentor-element-found-in__line">1296</span>
     </aside>
         <p class="phpdocumentor-summary">Helper function to mute user media.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3601,7 +3670,7 @@ Available options: 'story', 'post' or 'all'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1306</span>
+        <span class="phpdocumentor-element-found-in__line">1333</span>
     </aside>
         <p class="phpdocumentor-summary">Unblock a user.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3652,7 +3721,7 @@ Available options: 'story', 'post' or 'all'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1326</span>
+        <span class="phpdocumentor-element-found-in__line">1353</span>
     </aside>
         <p class="phpdocumentor-summary">Get a list of all blocked users.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3703,7 +3772,7 @@ Available options: 'story', 'post' or 'all'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1349</span>
+        <span class="phpdocumentor-element-found-in__line">1376</span>
     </aside>
         <p class="phpdocumentor-summary">Block a user&#039;s ability to see your stories.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3770,7 +3839,7 @@ Available options: 'story', 'post' or 'all'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1372</span>
+        <span class="phpdocumentor-element-found-in__line">1399</span>
     </aside>
         <p class="phpdocumentor-summary">Unblock a user so that they can see your stories again.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3828,7 +3897,7 @@ Available options: 'story', 'post' or 'all'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1390</span>
+        <span class="phpdocumentor-element-found-in__line">1417</span>
     </aside>
         <p class="phpdocumentor-summary">Get the list of users who are blocked from seeing your stories.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3867,7 +3936,7 @@ Available options: 'story', 'post' or 'all'.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1414</span>
+        <span class="phpdocumentor-element-found-in__line">1441</span>
     </aside>
         <p class="phpdocumentor-summary">Mute a friend&#039;s stories, so that you no longer see their stories.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3928,7 +3997,7 @@ stories.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1437</span>
+        <span class="phpdocumentor-element-found-in__line">1464</span>
     </aside>
         <p class="phpdocumentor-summary">Unmute a friend&#039;s stories, so that you see their stories again.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3987,7 +4056,7 @@ stories.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1454</span>
+        <span class="phpdocumentor-element-found-in__line">1481</span>
     </aside>
         <p class="phpdocumentor-summary">Get the list of users on your close friends list.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4026,7 +4095,7 @@ stories.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1467</span>
+        <span class="phpdocumentor-element-found-in__line">1494</span>
     </aside>
         <p class="phpdocumentor-summary">Get the list of suggested users for your close friends list.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4065,7 +4134,7 @@ stories.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1487</span>
+        <span class="phpdocumentor-element-found-in__line">1514</span>
     </aside>
         <p class="phpdocumentor-summary">Add or Remove users from your close friends list.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4144,7 +4213,7 @@ stories.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1512</span>
+        <span class="phpdocumentor-element-found-in__line">1539</span>
     </aside>
         <p class="phpdocumentor-summary">Gets a list of ranked users to display in Android&#039;s share UI.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4183,7 +4252,7 @@ stories.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1526</span>
+        <span class="phpdocumentor-element-found-in__line">1555</span>
     </aside>
         <p class="phpdocumentor-summary">Gets a list of users who&#039;s stories or posts you mute.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -4209,6 +4278,45 @@ stories.</p></section>
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-MutedUsersResponse.html"><abbr title="\InstagramAPI\Response\MutedUsersResponse">MutedUsersResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_getNonExpiredFriendRequests"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getNonExpiredFriendRequests()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/People.php"><a href="../files/src-request-people.html"><abbr title="src/Request/People.php">People.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1571</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get non expired friend requests.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getNonExpiredFriendRequests</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-NonExpiredRequestsInfoResponse.html"><abbr title="\InstagramAPI\Response\NonExpiredRequestsInfoResponse">NonExpiredRequestsInfoResponse</abbr></a></span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-NonExpiredRequestsInfoResponse.html"><abbr title="\InstagramAPI\Response\NonExpiredRequestsInfoResponse">NonExpiredRequestsInfoResponse</abbr></a></span>
             
 </article>
                                                                     <a id="method___construct"></a>

@@ -121,16 +121,23 @@
      * ChallengeRequired!
      */
     &#039;LoginRequiredException&#039; =&gt; [&#039;login_required&#039;],
+    &#039;LoginAndSignupPageException&#039; =&gt; [&#039;LoginAndSignupPage&#039;],
+    &#039;IPLoginBlockException&#039; =&gt; [
+        &#039;RleLoginBlocked&#039;,
+        // exception_name
+        &#039;ip_block&#039;,
+    ],
     &#039;Checkpoint\\CheckpointRequiredException&#039; =&gt; [
         &#039;checkpoint_required&#039;,
         // message
         &#039;checkpoint_challenge_required&#039;,
     ],
+    &#039;AccountDeletionException&#039; =&gt; [&#039;/You requested to delete(.*?)/&#039;],
     &#039;Checkpoint\\ChallengeRequiredException&#039; =&gt; [&#039;challenge_required&#039;],
     &#039;Checkpoint\\ChallengeFinishedException&#039; =&gt; [&#039;challenge_finished&#039;],
     &#039;Checkpoint\\SubmitPhoneException&#039; =&gt; [&#039;submit_phone&#039;],
     &#039;Checkpoint\\SubmitEmailException&#039; =&gt; [&#039;submit_email&#039;],
-    &#039;Checkpoint\\SelectVerifyMethodException&#039; =&gt; [&#039;select_verify_method&#039;, &#039;select_contact_point_recovery&#039;],
+    &#039;Checkpoint\\SelectVerifyMethodException&#039; =&gt; [&#039;select_verify_method&#039;, &#039;select_contact_point_recovery&#039;, &#039;review_contact_point_change&#039;],
     &#039;Checkpoint\\VerifyCodeException&#039; =&gt; [
         &#039;Please check the code we sent you and try again.&#039;,
         // message
@@ -140,11 +147,12 @@
         // step_name
         &#039;verify_sms_code&#039;,
     ],
-    &#039;Checkpoint\\DeltaLoginReviewException&#039; =&gt; [&#039;delta_login_review&#039;],
+    &#039;Checkpoint\\DeltaLoginReviewException&#039; =&gt; [&#039;delta_login_review&#039;, &#039;delta_acknowledge_approved&#039;],
     // step name
     &#039;Checkpoint\\EscalationInformationalException&#039; =&gt; [&#039;escalation_challenge_informational&#039;],
     // step name
     &#039;FeedbackRequiredException&#039; =&gt; [&#039;feedback_required&#039;],
+    &#039;Checkpoint\\BirthdayRequiredException&#039; =&gt; [&#039;add_birthday&#039;],
     &#039;ConsentRequiredException&#039; =&gt; [&#039;consent_required&#039;],
     &#039;IncorrectPasswordException&#039; =&gt; [
         // &quot;The password you entered is incorrect&quot;.
@@ -163,14 +171,9 @@
         &#039;/account(.*?)disabled(.*?)violating/&#039;,
     ],
     &#039;SentryBlockException&#039; =&gt; [&#039;sentry_block&#039;],
-    &#039;InvalidUserException&#039; =&gt; [
-        // &quot;The username you entered doesn&#039;t appear to belong to an account&quot;
-        &#039;/username(.*?)doesn\&#039;t(.*?)belong/&#039;,
-        // message
-        &#039;invalid_user&#039;,
-    ],
-    &#039;Checkpoint\\ChangePasswordException&#039; =&gt; [&#039;/reset(.*?)password/&#039;],
-    &#039;Checkpoint\\RecaptchaChallengeException&#039; =&gt; [&#039;RecaptchaChallengeForm&#039;],
+    &#039;InvalidUserException&#039; =&gt; [&#039;invalid_user&#039;],
+    &#039;Checkpoint\\ChangePasswordException&#039; =&gt; [&#039;/reset(.*?)password/&#039;, &#039;set_new_password&#039;, &#039;change_password&#039;],
+    &#039;Checkpoint\\RecaptchaChallengeException&#039; =&gt; [&#039;RecaptchaChallengeForm&#039;, &#039;RecaptchaRestrictChallengeForm&#039;],
     &#039;Checkpoint\\EscalationChallengeInformationException&#039; =&gt; [&#039;EscalationChallengeInformationalForm&#039;, &#039;EscalationChallengeAppealForm&#039;],
     &#039;Checkpoint\\SubmitPhoneNumberFormException&#039; =&gt; [&#039;SubmitPhoneNumberForm&#039;],
     &#039;Checkpoint\\VerifySMSCodeFormForSMSCaptchaException&#039; =&gt; [&#039;VerifySMSCodeFormForSMSCaptcha&#039;],
@@ -238,16 +241,23 @@
      * ChallengeRequired!
      */
     &#039;LoginRequiredException&#039; =&gt; [&#039;login_required&#039;],
+    &#039;LoginAndSignupPageException&#039; =&gt; [&#039;LoginAndSignupPage&#039;],
+    &#039;IPLoginBlockException&#039; =&gt; [
+        &#039;RleLoginBlocked&#039;,
+        // exception_name
+        &#039;ip_block&#039;,
+    ],
     &#039;Checkpoint\\CheckpointRequiredException&#039; =&gt; [
         &#039;checkpoint_required&#039;,
         // message
         &#039;checkpoint_challenge_required&#039;,
     ],
+    &#039;AccountDeletionException&#039; =&gt; [&#039;/You requested to delete(.*?)/&#039;],
     &#039;Checkpoint\\ChallengeRequiredException&#039; =&gt; [&#039;challenge_required&#039;],
     &#039;Checkpoint\\ChallengeFinishedException&#039; =&gt; [&#039;challenge_finished&#039;],
     &#039;Checkpoint\\SubmitPhoneException&#039; =&gt; [&#039;submit_phone&#039;],
     &#039;Checkpoint\\SubmitEmailException&#039; =&gt; [&#039;submit_email&#039;],
-    &#039;Checkpoint\\SelectVerifyMethodException&#039; =&gt; [&#039;select_verify_method&#039;, &#039;select_contact_point_recovery&#039;],
+    &#039;Checkpoint\\SelectVerifyMethodException&#039; =&gt; [&#039;select_verify_method&#039;, &#039;select_contact_point_recovery&#039;, &#039;review_contact_point_change&#039;],
     &#039;Checkpoint\\VerifyCodeException&#039; =&gt; [
         &#039;Please check the code we sent you and try again.&#039;,
         // message
@@ -257,11 +267,12 @@
         // step_name
         &#039;verify_sms_code&#039;,
     ],
-    &#039;Checkpoint\\DeltaLoginReviewException&#039; =&gt; [&#039;delta_login_review&#039;],
+    &#039;Checkpoint\\DeltaLoginReviewException&#039; =&gt; [&#039;delta_login_review&#039;, &#039;delta_acknowledge_approved&#039;],
     // step name
     &#039;Checkpoint\\EscalationInformationalException&#039; =&gt; [&#039;escalation_challenge_informational&#039;],
     // step name
     &#039;FeedbackRequiredException&#039; =&gt; [&#039;feedback_required&#039;],
+    &#039;Checkpoint\\BirthdayRequiredException&#039; =&gt; [&#039;add_birthday&#039;],
     &#039;ConsentRequiredException&#039; =&gt; [&#039;consent_required&#039;],
     &#039;IncorrectPasswordException&#039; =&gt; [
         // &quot;The password you entered is incorrect&quot;.
@@ -280,14 +291,9 @@
         &#039;/account(.*?)disabled(.*?)violating/&#039;,
     ],
     &#039;SentryBlockException&#039; =&gt; [&#039;sentry_block&#039;],
-    &#039;InvalidUserException&#039; =&gt; [
-        // &quot;The username you entered doesn&#039;t appear to belong to an account&quot;
-        &#039;/username(.*?)doesn\&#039;t(.*?)belong/&#039;,
-        // message
-        &#039;invalid_user&#039;,
-    ],
-    &#039;Checkpoint\\ChangePasswordException&#039; =&gt; [&#039;/reset(.*?)password/&#039;],
-    &#039;Checkpoint\\RecaptchaChallengeException&#039; =&gt; [&#039;RecaptchaChallengeForm&#039;],
+    &#039;InvalidUserException&#039; =&gt; [&#039;invalid_user&#039;],
+    &#039;Checkpoint\\ChangePasswordException&#039; =&gt; [&#039;/reset(.*?)password/&#039;, &#039;set_new_password&#039;, &#039;change_password&#039;],
+    &#039;Checkpoint\\RecaptchaChallengeException&#039; =&gt; [&#039;RecaptchaChallengeForm&#039;, &#039;RecaptchaRestrictChallengeForm&#039;],
     &#039;Checkpoint\\EscalationChallengeInformationException&#039; =&gt; [&#039;EscalationChallengeInformationalForm&#039;, &#039;EscalationChallengeAppealForm&#039;],
     &#039;Checkpoint\\SubmitPhoneNumberFormException&#039; =&gt; [&#039;SubmitPhoneNumberForm&#039;],
     &#039;Checkpoint\\VerifySMSCodeFormForSMSCaptchaException&#039; =&gt; [&#039;VerifySMSCodeFormForSMSCaptcha&#039;],
@@ -338,7 +344,7 @@ of the API! Nothing else.</section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/ServerMessageThrower.php"><a href="../files/src-exception-servermessagethrower.html"><abbr title="src/Exception/ServerMessageThrower.php">ServerMessageThrower.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">142</span>
+        <span class="phpdocumentor-element-found-in__line">149</span>
     </aside>
         <p class="phpdocumentor-summary">Parses a server message and throws the appropriate exception.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -430,7 +436,7 @@ object (if available).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/ServerMessageThrower.php"><a href="../files/src-exception-servermessagethrower.html"><abbr title="src/Exception/ServerMessageThrower.php">ServerMessageThrower.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">273</span>
+        <span class="phpdocumentor-element-found-in__line">290</span>
     </aside>
         <p class="phpdocumentor-summary">Nicely reformats externally generated exception messages.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

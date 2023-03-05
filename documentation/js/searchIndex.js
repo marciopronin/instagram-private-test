@@ -191,6 +191,11 @@ Search.appendIndex(
             "summary": "Get\u0020request\u0020ID.",
             "url": "../classes/InstagramAPI-Client.html#method__getRequestId"
         },                {
+            "fqsen": "\\InstagramAPI\\Client\u003A\u003A_orderHeaders\u0028\u0029",
+            "name": "_orderHeaders",
+            "summary": "Order\u0020headers.",
+            "url": "../classes/InstagramAPI-Client.html#method__orderHeaders"
+        },                {
             "fqsen": "\\InstagramAPI\\Client\u003A\u003AsetLastRequest\u0028\u0029",
             "name": "setLastRequest",
             "summary": "Sets\u0020the\u0020last\u0020processed\u0020request.",
@@ -416,25 +421,10 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Constants.html#constant_IG_SIG_KEY"
         },                {
-            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AEXPERIMENTS",
-            "name": "EXPERIMENTS",
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003AMOBILE_CONFIG_EXPERIMTENTS",
+            "name": "MOBILE_CONFIG_EXPERIMTENTS",
             "summary": "",
-            "url": "../classes/InstagramAPI-Constants.html#constant_EXPERIMENTS"
-        },                {
-            "fqsen": "\\InstagramAPI\\Constants\u003A\u003ALOGIN_EXPERIMENTS",
-            "name": "LOGIN_EXPERIMENTS",
-            "summary": "",
-            "url": "../classes/InstagramAPI-Constants.html#constant_LOGIN_EXPERIMENTS"
-        },                {
-            "fqsen": "\\InstagramAPI\\Constants\u003A\u003ALAUNCHER_CONFIGS",
-            "name": "LAUNCHER_CONFIGS",
-            "summary": "",
-            "url": "../classes/InstagramAPI-Constants.html#constant_LAUNCHER_CONFIGS"
-        },                {
-            "fqsen": "\\InstagramAPI\\Constants\u003A\u003ALAUNCHER_LOGIN_CONFIGS",
-            "name": "LAUNCHER_LOGIN_CONFIGS",
-            "summary": "",
-            "url": "../classes/InstagramAPI-Constants.html#constant_LAUNCHER_LOGIN_CONFIGS"
+            "url": "../classes/InstagramAPI-Constants.html#constant_MOBILE_CONFIG_EXPERIMTENTS"
         },                {
             "fqsen": "\\InstagramAPI\\Constants\u003A\u003ASIG_KEY_VERSION",
             "name": "SIG_KEY_VERSION",
@@ -480,11 +470,6 @@ Search.appendIndex(
             "name": "BATCH_QUERY",
             "summary": "",
             "url": "../classes/InstagramAPI-Constants.html#constant_BATCH_QUERY"
-        },                {
-            "fqsen": "\\InstagramAPI\\Constants\u003A\u003ABATCH_SCALE",
-            "name": "BATCH_SCALE",
-            "summary": "",
-            "url": "../classes/InstagramAPI-Constants.html#constant_BATCH_SCALE"
         },                {
             "fqsen": "\\InstagramAPI\\Constants\u003A\u003ABATCH_VERSION",
             "name": "BATCH_VERSION",
@@ -580,6 +565,11 @@ Search.appendIndex(
             "name": "PACKAGE_NAME",
             "summary": "",
             "url": "../classes/InstagramAPI-Constants.html#constant_PACKAGE_NAME"
+        },                {
+            "fqsen": "\\InstagramAPI\\Constants\u003A\u003APROFILE_PIC",
+            "name": "PROFILE_PIC",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Constants.html#constant_PROFILE_PIC"
         },                {
             "fqsen": "\\InstagramAPI\\Constants\u003A\u003AFEED_TIMELINE",
             "name": "FEED_TIMELINE",
@@ -826,6 +816,11 @@ Search.appendIndex(
             "summary": "The\u0020device\u0020user\u0027s\u0020locale,\u0020such\u0020as\u0020\u0022en_US\u0022.",
             "url": "../classes/InstagramAPI-Devices-Device.html#property__userLocale"
         },                {
+            "fqsen": "\\InstagramAPI\\Devices\\Device\u003A\u003A\u0024_acceptLanguage",
+            "name": "_acceptLanguage",
+            "summary": "Device\u0020Accept\u0020Language.",
+            "url": "../classes/InstagramAPI-Devices-Device.html#property__acceptLanguage"
+        },                {
             "fqsen": "\\InstagramAPI\\Devices\\Device\u003A\u003A\u0024_deviceString",
             "name": "_deviceString",
             "summary": "Which\u0020device\u0020string\u0020we\u0020were\u0020built\u0020with\u0020internally.",
@@ -895,6 +890,11 @@ Search.appendIndex(
             "name": "_iosDpi",
             "summary": "",
             "url": "../classes/InstagramAPI-Devices-Device.html#property__iosDpi"
+        },                {
+            "fqsen": "\\InstagramAPI\\Devices\\Device\u003A\u003A\u0024_enableResolutionCheck",
+            "name": "_enableResolutionCheck",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Devices-Device.html#property__enableResolutionCheck"
         },                {
             "fqsen": "\\InstagramAPI\\Devices\\DeviceInterface",
             "name": "DeviceInterface",
@@ -1321,6 +1321,11 @@ Search.appendIndex(
             "summary": "Gets\u0020the\u0020current\u0020proxy\u0020used\u0020for\u0020requests.",
             "url": "../classes/InstagramAPI-Instagram.html#method_getProxy"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetCustomResolver\u0028\u0029",
+            "name": "setCustomResolver",
+            "summary": "Set\u0020custom\u0020resolver.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setCustomResolver"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetResolveHost\u0028\u0029",
             "name": "setResolveHost",
             "summary": "Set\u0020the\u0020host\u0020to\u0020resolve.",
@@ -1340,6 +1345,16 @@ Search.appendIndex(
             "name": "setCustomDeviceId",
             "summary": "Set\u0020a\u0020custom\u0020device\u0020ID.",
             "url": "../classes/InstagramAPI-Instagram.html#method_setCustomDeviceId"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetVersionCode\u0028\u0029",
+            "name": "setVersionCode",
+            "summary": "Set\u0020version\u0020code.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setVersionCode"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetVersionCode\u0028\u0029",
+            "name": "getVersionCode",
+            "summary": "Get\u0020version\u0020code.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getVersionCode"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetOutputInterface\u0028\u0029",
             "name": "setOutputInterface",
@@ -1390,6 +1405,16 @@ Search.appendIndex(
             "name": "getAcceptLanguage",
             "summary": "Get\u0020Accept\u0020Language.",
             "url": "../classes/InstagramAPI-Instagram.html#method_getAcceptLanguage"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetAppStartupCountry\u0028\u0029",
+            "name": "setAppStartupCountry",
+            "summary": "Set\u0020app\u0020startup\u0020country.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setAppStartupCountry"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetAppStartupCountry\u0028\u0029",
+            "name": "getAppStartupCountry",
+            "summary": "Get\u0020app\u0020startup\u0020country.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getAppStartupCountry"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetPlatform\u0028\u0029",
             "name": "getPlatform",
@@ -1566,6 +1591,61 @@ Search.appendIndex(
             "summary": "Get\u0020auto\u0020disable\u0020retries\u0020media\u0020upload.",
             "url": "../classes/InstagramAPI-Instagram.html#method_getIsDisabledAutoRetriesMediaUpload"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetCarrier\u0028\u0029",
+            "name": "getCarrier",
+            "summary": "Getcarrier.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getCarrier"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetCarrier\u0028\u0029",
+            "name": "setCarrier",
+            "summary": "Set\u0020carrier.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setCarrier"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetGyroscopeEnabled\u0028\u0029",
+            "name": "setGyroscopeEnabled",
+            "summary": "Set\u0020gyroscope\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setGyroscopeEnabled"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetGyroscopeEnabled\u0028\u0029",
+            "name": "getGyroscopeEnabled",
+            "summary": "Get\u0020gyroscope\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getGyroscopeEnabled"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetBackgroundState\u0028\u0029",
+            "name": "setBackgroundState",
+            "summary": "Set\u0020background\u0020state.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setBackgroundState"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetBackgroundState\u0028\u0029",
+            "name": "getBackgroundState",
+            "summary": "Get\u0020background\u0020state.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getBackgroundState"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetDeviceInitState\u0028\u0029",
+            "name": "setDeviceInitState",
+            "summary": "Set\u0020device\u0020init\u0020state.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setDeviceInitState"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetDeviceInitState\u0028\u0029",
+            "name": "getDeviceInitState",
+            "summary": "Get\u0020device\u0020init\u0020state.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getDeviceInitState"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetGivenConsent\u0028\u0029",
+            "name": "setGivenConsent",
+            "summary": "Set\u0020given\u0020consent.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_setGivenConsent"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AgetGivenConsent\u0028\u0029",
+            "name": "getGivenConsent",
+            "summary": "Get\u0020given\u0020consent.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_getGivenConsent"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024enableResolutionCheck",
+            "name": "enableResolutionCheck",
+            "summary": "Enable\u0020resolution\u0020check.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_enableResolutionCheck"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsetUserGuzzleOptions\u0028\u0029",
             "name": "setUserGuzzleOptions",
             "summary": "Set\u0020user\u0020Guzzle\u0020Options.",
@@ -1610,6 +1690,11 @@ Search.appendIndex(
             "name": "sendTwoFactorLoginSMS",
             "summary": "Request\u0020a\u0020new\u0020security\u0020code\u0020SMS\u0020for\u0020a\u0020Two\u0020Factor\u0020login\u0020account.",
             "url": "../classes/InstagramAPI-Instagram.html#method_sendTwoFactorLoginSMS"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AsendTwoFactorLoginWhatsapp\u0028\u0029",
+            "name": "sendTwoFactorLoginWhatsapp",
+            "summary": "Request\u0020a\u0020new\u0020security\u0020code\u0020via\u0020WhatsApp\u0020for\u0020a\u0020Two\u0020Factor\u0020login\u0020account.",
+            "url": "../classes/InstagramAPI-Instagram.html#method_sendTwoFactorLoginWhatsapp"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003AcheckTrustedNotificationStatus\u0028\u0029",
             "name": "checkTrustedNotificationStatus",
@@ -1766,6 +1851,16 @@ Search.appendIndex(
             "summary": "Global\u0020flag\u0020for\u0020users\u0020who\u0020want\u0020to\u0020enable\u0020cURL\u0020debug.",
             "url": "../classes/InstagramAPI-Instagram.html#property_curlDebug"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024retryOnNetworkException",
+            "name": "retryOnNetworkException",
+            "summary": "Retry\u0020on\u0020NetworkExpcetion.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_retryOnNetworkException"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024disableLoginBloks",
+            "name": "disableLoginBloks",
+            "summary": "Disable\u0020login\u0020bloks.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_disableLoginBloks"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024uuid",
             "name": "uuid",
             "summary": "UUID.",
@@ -1826,6 +1921,11 @@ Search.appendIndex(
             "summary": "Custom\u0020Device\u0020string.",
             "url": "../classes/InstagramAPI-Instagram.html#property_customDeviceId"
         },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024versionCode",
+            "name": "versionCode",
+            "summary": "Version\u0020Code.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_versionCode"
+        },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024loginAttemptCount",
             "name": "loginAttemptCount",
             "summary": "Login\u0020attempt\u0020counter.",
@@ -1880,6 +1980,11 @@ Search.appendIndex(
             "name": "acceptLanguage",
             "summary": "Accept\u0020language.",
             "url": "../classes/InstagramAPI-Instagram.html#property_acceptLanguage"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024appStartupCountry",
+            "name": "appStartupCountry",
+            "summary": "Accept\u0020language.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_appStartupCountry"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024eventBatch",
             "name": "eventBatch",
@@ -1945,6 +2050,36 @@ Search.appendIndex(
             "name": "loginWaterfallId",
             "summary": "Login\u0020Waterfall\u0020ID.",
             "url": "../classes/InstagramAPI-Instagram.html#property_loginWaterfallId"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024carrier",
+            "name": "carrier",
+            "summary": "Carrier.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_carrier"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024customResolver",
+            "name": "customResolver",
+            "summary": "Custom\u0020resolver.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_customResolver"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024gyroscopeEnabled",
+            "name": "gyroscopeEnabled",
+            "summary": "Gyroscope\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_gyroscopeEnabled"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024background",
+            "name": "background",
+            "summary": "Background\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_background"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024givenConsent",
+            "name": "givenConsent",
+            "summary": "Given\u0020consent.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_givenConsent"
+        },                {
+            "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024devicecInitState",
+            "name": "devicecInitState",
+            "summary": "Device\u0020init\u0020state\u0020enabled.",
+            "url": "../classes/InstagramAPI-Instagram.html#property_devicecInitState"
         },                {
             "fqsen": "\\InstagramAPI\\Instagram\u003A\u003A\u0024account",
             "name": "account",
@@ -2900,6 +3035,11 @@ Search.appendIndex(
             "name": "JPEG_QUALITY",
             "summary": "Output\u0020JPEG\u0020quality.",
             "url": "../classes/InstagramAPI-Media-Photo-InstagramPhoto.html#constant_JPEG_QUALITY"
+        },                {
+            "fqsen": "\\InstagramAPI\\Media\\Photo\\InstagramPhoto\u003A\u003AWEBP_QUALITY",
+            "name": "WEBP_QUALITY",
+            "summary": "Output\u0020WEBP\u0020quality.",
+            "url": "../classes/InstagramAPI-Media-Photo-InstagramPhoto.html#constant_WEBP_QUALITY"
         },                {
             "fqsen": "\\InstagramAPI\\Media\\Photo\\PhotoDetails",
             "name": "PhotoDetails",
@@ -6686,6 +6826,11 @@ Search.appendIndex(
             "summary": "Create\u0020an\u0020account\u0020with\u0020validated\u0020phone\u0020number.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_createValidated"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AcreateSecundary\u0028\u0029",
+            "name": "createSecundary",
+            "summary": "Create\u0020secundary\u0020account.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_createSecundary"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AcheckPhoneNumber\u0028\u0029",
             "name": "checkPhoneNumber",
             "summary": "Check\u0020if\u0020phone\u0020number\u0020is\u0020valid.",
@@ -6811,6 +6956,11 @@ Search.appendIndex(
             "summary": "Check\u0020if\u0020an\u0020email\u0020is\u0020available\u0020\u0028not\u0020already\u0020registered\u0029.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_checkEmail"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AgetSignupConfig\u0028\u0029",
+            "name": "getSignupConfig",
+            "summary": "Get\u0020signup\u0020config.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_getSignupConfig"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AgetUsernameSuggestions\u0028\u0029",
             "name": "getUsernameSuggestions",
             "summary": "Get\u0020username\u0020suggestions.",
@@ -6896,6 +7046,16 @@ Search.appendIndex(
             "summary": "Tell\u0020Instagram\u0020to\u0020send\u0020you\u0020a\u0020message\u0020to\u0020verify\u0020your\u0020email\u0020address.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_sendConfirmEmail"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AverifyEmailCode\u0028\u0029",
+            "name": "verifyEmailCode",
+            "summary": "Verify\u0020email\u0020code.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_verifyEmailCode"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AconfirmEmail\u0028\u0029",
+            "name": "confirmEmail",
+            "summary": "Confirm\u0020verification\u0020email.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_confirmEmail"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AsendSMSCode\u0028\u0029",
             "name": "sendSMSCode",
             "summary": "Tell\u0020Instagram\u0020to\u0020send\u0020you\u0020an\u0020SMS\u0020code\u0020to\u0020verify\u0020your\u0020phone\u0020number.",
@@ -6956,6 +7116,11 @@ Search.appendIndex(
             "summary": "TODO.",
             "url": "../classes/InstagramAPI-Request-Account.html#method_getProcessContactPointSignals"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AsendGoogleTokenUsers\u0028\u0029",
+            "name": "sendGoogleTokenUsers",
+            "summary": "Send\u0020Google\u0020token\u0020users.",
+            "url": "../classes/InstagramAPI-Request-Account.html#method_sendGoogleTokenUsers"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Account\u003A\u003AsendRecoveryFlowEmail\u0028\u0029",
             "name": "sendRecoveryFlowEmail",
             "summary": "Send\u0020recovery\u0020flow\u0020via\u0020email.",
@@ -7011,6 +7176,11 @@ Search.appendIndex(
             "summary": "Get\u0020account\u0020statistics.",
             "url": "../classes/InstagramAPI-Request-Business.html#method_getPostInsights"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Business\u003A\u003AgetAdsActivity\u0028\u0029",
+            "name": "getAdsActivity",
+            "summary": "Get\u0020ads\u0020activity.",
+            "url": "../classes/InstagramAPI-Request-Business.html#method_getAdsActivity"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Business\u003A\u003AgetWhitelistSettings\u0028\u0029",
             "name": "getWhitelistSettings",
             "summary": "Get\u0020whitelist\u0020settings.",
@@ -7051,6 +7221,11 @@ Search.appendIndex(
             "summary": "Request\u0020verficiation\u0020method.",
             "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_requestVerificationCode"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AsendSetNewPasswordCheck\u0028\u0029",
+            "name": "sendSetNewPasswordCheck",
+            "summary": "Send\u0020force\u0020password\u0020change.",
+            "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_sendSetNewPasswordCheck"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AsendVerificationCode\u0028\u0029",
             "name": "sendVerificationCode",
             "summary": "Send\u0020verficiation\u0020method.",
@@ -7065,6 +7240,11 @@ Search.appendIndex(
             "name": "sendVerificationEmail",
             "summary": "Set\u0020email\u0020for\u0020checkpoint\u0020verification.",
             "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_sendVerificationEmail"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AsendSetBirthDate\u0028\u0029",
+            "name": "sendSetBirthDate",
+            "summary": "Set\u0020birth\u0020date.",
+            "url": "../classes/InstagramAPI-Request-Checkpoint.html#method_sendSetBirthDate"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Checkpoint\u003A\u003AsendAcceptEscalationInformational\u0028\u0029",
             "name": "sendAcceptEscalationInformational",
@@ -7165,6 +7345,11 @@ Search.appendIndex(
             "name": "getStickerTray",
             "summary": "Get\u0020sticker\u0020tray.",
             "url": "../classes/InstagramAPI-Request-Creative.html#method_getStickerTray"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Creative\u003A\u003AgetClipsAssets\u0028\u0029",
+            "name": "getClipsAssets",
+            "summary": "Get\u0020clips\u0020assets.",
+            "url": "../classes/InstagramAPI-Request-Creative.html#method_getClipsAssets"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Creative\u003A\u003AgetFaceModels\u0028\u0029",
             "name": "getFaceModels",
@@ -7275,6 +7460,11 @@ Search.appendIndex(
             "name": "unmuteThread",
             "summary": "Unmute\u0020direct\u0020thread.",
             "url": "../classes/InstagramAPI-Request-Direct.html#method_unmuteThread"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Direct\u003A\u003AfetchAndSubscribePresence\u0028\u0029",
+            "name": "fetchAndSubscribePresence",
+            "summary": "Fetch\u0020and\u0020subscribe\u0020user\u0020presence.",
+            "url": "../classes/InstagramAPI-Request-Direct.html#method_fetchAndSubscribePresence"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Direct\u003A\u003AcreateGroupThread\u0028\u0029",
             "name": "createGroupThread",
@@ -7508,7 +7698,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Discover\u003A\u003AprofileSuBadge\u0028\u0029",
             "name": "profileSuBadge",
-            "summary": "TODO.",
+            "summary": "DEPRECATED.",
             "url": "../classes/InstagramAPI-Request-Discover.html#method_profileSuBadge"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Discover\u003A\u003AsurfaceWithSu\u0028\u0029",
@@ -7520,6 +7710,11 @@ Search.appendIndex(
             "name": "getChainingUsers",
             "summary": "Get\u0020recommended\u0020users\u0020based\u0020on\u0020another\u0020user.",
             "url": "../classes/InstagramAPI-Request-Discover.html#method_getChainingUsers"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Discover\u003A\u003AgetDiscoveryAccounts\u0028\u0029",
+            "name": "getDiscoveryAccounts",
+            "summary": "Get\u0020recommended\u0020users\u0020for\u0020you.",
+            "url": "../classes/InstagramAPI-Request-Discover.html#method_getDiscoveryAccounts"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event",
             "name": "Event",
@@ -8026,6 +8221,11 @@ Search.appendIndex(
             "summary": "Sends\u0020follow\u0020button\u0020tapped.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendFollowButtonTapped"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendRecommendedFollowButtonTapped\u0028\u0029",
+            "name": "sendRecommendedFollowButtonTapped",
+            "summary": "Sends\u0020recommended\u0020follow\u0020button\u0020tapped.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendRecommendedFollowButtonTapped"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendSearchFollowButtonClicked\u0028\u0029",
             "name": "sendSearchFollowButtonClicked",
             "summary": "Sends\u0020follow\u0020button\u0020tapped.",
@@ -8218,7 +8418,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendInstagramInstallWithReferrer\u0028\u0029",
             "name": "sendInstagramInstallWithReferrer",
-            "summary": "Send\u0020emergency\u0020push\u0020initial\u0020version.",
+            "summary": "Send\u0020Instagram\u0020install\u0020with\u0020referrer.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendInstagramInstallWithReferrer"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AlegacyFbTokenOnIgAccessControl\u0028\u0029",
@@ -8226,10 +8426,40 @@ Search.appendIndex(
             "summary": "Send\u0020legacy\u0020FB\u0020token\u0020on\u0020IG\u0020access\u0020control.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_legacyFbTokenOnIgAccessControl"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendPhoneIdUpdate\u0028\u0029",
+            "name": "sendPhoneIdUpdate",
+            "summary": "Send\u0020phone\u0020ID\u0020update.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendPhoneIdUpdate"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendAppInstallations\u0028\u0029",
+            "name": "sendAppInstallations",
+            "summary": "Send\u0020app\u0020installations.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendAppInstallations"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendQuickPromotion\u0028\u0029",
             "name": "sendQuickPromotion",
             "summary": "Send\u0020Quick\u0020Promotions\u0020events.",
             "url": "../classes/InstagramAPI-Request-Event.html#method_sendQuickPromotion"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendClientEventSync\u0028\u0029",
+            "name": "sendClientEventSync",
+            "summary": "Send\u0020client\u0020event\u0020sync.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendClientEventSync"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendAttributionSdkDebug\u0028\u0029",
+            "name": "sendAttributionSdkDebug",
+            "summary": "Send\u0020attribution\u0020SDK\u0020debug.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendAttributionSdkDebug"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendFxSsoLibrary\u0028\u0029",
+            "name": "sendFxSsoLibrary",
+            "summary": "Send\u0020fxSSO\u0020Library.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendFxSsoLibrary"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Event\u003A\u003AsendInstagramFeedRequestSent\u0028\u0029",
+            "name": "sendInstagramFeedRequestSent",
+            "summary": "Send\u0020Instagram\u0020feed\u0020request\u0020sent.",
+            "url": "../classes/InstagramAPI-Request-Event.html#method_sendInstagramFeedRequestSent"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Hashtag",
             "name": "Hashtag",
@@ -8381,30 +8611,20 @@ Search.appendIndex(
             "summary": "Configures\u0020parameters\u0020for\u0020a\u0020whole\u0020album\u0020of\u0020uploaded\u0020media\u0020files.",
             "url": "../classes/InstagramAPI-Request-Internal.html#method_configureTimelineAlbum"
         },                {
-            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003A_saveExperiments\u0028\u0029",
-            "name": "_saveExperiments",
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003A_saveExperimentsMobileConfig\u0028\u0029",
+            "name": "_saveExperimentsMobileConfig",
             "summary": "Saves\u0020active\u0020experiments.",
-            "url": "../classes/InstagramAPI-Request-Internal.html#method__saveExperiments"
+            "url": "../classes/InstagramAPI-Request-Internal.html#method__saveExperimentsMobileConfig"
         },                {
-            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003A_saveExperimentsLauncher\u0028\u0029",
-            "name": "_saveExperimentsLauncher",
-            "summary": "Saves\u0020active\u0020experiments.",
-            "url": "../classes/InstagramAPI-Request-Internal.html#method__saveExperimentsLauncher"
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AgetMobileConfig\u0028\u0029",
+            "name": "getMobileConfig",
+            "summary": "Get\u0020MobileConfig.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_getMobileConfig"
         },                {
-            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AsyncDeviceFeatures\u0028\u0029",
-            "name": "syncDeviceFeatures",
-            "summary": "Perform\u0020an\u0020Instagram\u0020\u0022feature\u0020synchronization\u0022\u0020call\u0020for\u0020device.",
-            "url": "../classes/InstagramAPI-Request-Internal.html#method_syncDeviceFeatures"
-        },                {
-            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AsyncUserFeatures\u0028\u0029",
-            "name": "syncUserFeatures",
-            "summary": "Perform\u0020an\u0020Instagram\u0020\u0022feature\u0020synchronization\u0022\u0020call\u0020for\u0020account.",
-            "url": "../classes/InstagramAPI-Request-Internal.html#method_syncUserFeatures"
-        },                {
-            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AsendLauncherSync\u0028\u0029",
-            "name": "sendLauncherSync",
-            "summary": "Send\u0020launcher\u0020sync.",
-            "url": "../classes/InstagramAPI-Request-Internal.html#method_sendLauncherSync"
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AfetchHeaders\u0028\u0029",
+            "name": "fetchHeaders",
+            "summary": "Fetch\u0020headers.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_fetchHeaders"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AgetDeviceCapabilitiesDecisions\u0028\u0029",
             "name": "getDeviceCapabilitiesDecisions",
@@ -8418,7 +8638,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AlogResurrectAttribution\u0028\u0029",
             "name": "logResurrectAttribution",
-            "summary": "TODO.",
+            "summary": "DEPRECATION\u0020CHECK.",
             "url": "../classes/InstagramAPI-Request-Internal.html#method_logResurrectAttribution"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AreadMsisdnHeader\u0028\u0029",
@@ -8501,6 +8721,11 @@ Search.appendIndex(
             "summary": "Store\u0020client\u0020push\u0020permissions.",
             "url": "../classes/InstagramAPI-Request-Internal.html#method_storeClientPushPermissions"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AsendGraph\u0028\u0029",
+            "name": "sendGraph",
+            "summary": "Send\u0020Graph\u0020query.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_sendGraph"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AstartNewUserFlow\u0028\u0029",
             "name": "startNewUserFlow",
             "summary": "Starts\u0020new\u0020user\u0020flow\u0020when\u0020registering\u0020with\u0020phone\u0020number.",
@@ -8515,6 +8740,21 @@ Search.appendIndex(
             "name": "getOnBoardingSteps",
             "summary": "Get\u0020consent\u0020steps\u0020for\u0020new\u0020user\u0020flow.",
             "url": "../classes/InstagramAPI-Request-Internal.html#method_getOnBoardingSteps"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AnewAccountNuxSeen\u0028\u0029",
+            "name": "newAccountNuxSeen",
+            "summary": "New\u0020account\u0020nux\u0020seen.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_newAccountNuxSeen"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AsendPrivacyConsentPromptAction\u0028\u0029",
+            "name": "sendPrivacyConsentPromptAction",
+            "summary": "Send\u0020privacy\u0020consent\u0020prompt\u0020action.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_sendPrivacyConsentPromptAction"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AsendPrivacyConsentPromptCallback\u0028\u0029",
+            "name": "sendPrivacyConsentPromptCallback",
+            "summary": "Send\u0020privacy\u0020consent\u0020prompt\u0020callback.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_sendPrivacyConsentPromptCallback"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AnewUserFlow\u0028\u0029",
             "name": "newUserFlow",
@@ -8615,6 +8855,21 @@ Search.appendIndex(
             "name": "_splitVideoIntoSegments",
             "summary": "Split\u0020the\u0020video\u0020file\u0020into\u0020segments.",
             "url": "../classes/InstagramAPI-Request-Internal.html#method__splitVideoIntoSegments"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AgetSupportedCapabilities\u0028\u0029",
+            "name": "getSupportedCapabilities",
+            "summary": "Get\u0020supported\u0020capabilities.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_getSupportedCapabilities"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AwriteSupportedCapabilities\u0028\u0029",
+            "name": "writeSupportedCapabilities",
+            "summary": "Write\u0020capabilities.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_writeSupportedCapabilities"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003AgetAsyncNdxIgSteps\u0028\u0029",
+            "name": "getAsyncNdxIgSteps",
+            "summary": "Get\u0020async\u0020ndx\u0020IG\u0020steps.",
+            "url": "../classes/InstagramAPI-Request-Internal.html#method_getAsyncNdxIgSteps"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Internal\u003A\u003A_getTargetSegmentDuration\u0028\u0029",
             "name": "_getTargetSegmentDuration",
@@ -8781,6 +9036,16 @@ Search.appendIndex(
             "summary": "Disable\u0020viewer\u0020comments\u0020on\u0020your\u0020live\u0020broadcast.",
             "url": "../classes/InstagramAPI-Request-Live.html#method_disableComments"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AenableRequestToJoin\u0028\u0029",
+            "name": "enableRequestToJoin",
+            "summary": "Enable\u0020Request\u0020To\u0020Join\u0020on\u0020your\u0020live\u0020broadcast.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_enableRequestToJoin"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AdisableRequestToJoin\u0028\u0029",
+            "name": "disableRequestToJoin",
+            "summary": "Disable\u0020Request\u0020To\u0020Join\u0020on\u0020your\u0020live\u0020broadcast.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_disableRequestToJoin"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003Alike\u0028\u0029",
             "name": "like",
             "summary": "Like\u0020a\u0020broadcast.",
@@ -8895,6 +9160,21 @@ Search.appendIndex(
             "name": "revokeModerator",
             "summary": "Revoke\u0020moderator.",
             "url": "../classes/InstagramAPI-Request-Live.html#method_revokeModerator"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AresignModeratorRequest\u0028\u0029",
+            "name": "resignModeratorRequest",
+            "summary": "Resign\u0020moderator\u0020request.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_resignModeratorRequest"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AremoveUser\u0028\u0029",
+            "name": "removeUser",
+            "summary": "Remove\u0020user\u0020from\u0020live.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_removeUser"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Live\u003A\u003AscheduleEvent\u0028\u0029",
+            "name": "scheduleEvent",
+            "summary": "Schedule\u0020live\u0020event.",
+            "url": "../classes/InstagramAPI-Request-Live.html#method_scheduleEvent"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Location",
             "name": "Location",
@@ -9145,6 +9425,11 @@ Search.appendIndex(
             "name": "getUploadId",
             "summary": "",
             "url": "../classes/InstagramAPI-Request-Metadata-Internal.html#method_getUploadId"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Metadata\\Internal\u003A\u003AsetUploadId\u0028\u0029",
+            "name": "setUploadId",
+            "summary": "Sets\u0020upload\u0020id.",
+            "url": "../classes/InstagramAPI-Request-Metadata-Internal.html#method_setUploadId"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Metadata\\Internal\u003A\u003AsetVideoUploadUrls\u0028\u0029",
             "name": "setVideoUploadUrls",
@@ -9630,6 +9915,11 @@ Search.appendIndex(
             "name": "getMutedUsers",
             "summary": "Gets\u0020a\u0020list\u0020of\u0020users\u0020who\u0027s\u0020stories\u0020or\u0020posts\u0020you\u0020mute.",
             "url": "../classes/InstagramAPI-Request-People.html#method_getMutedUsers"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\People\u003A\u003AgetNonExpiredFriendRequests\u0028\u0029",
+            "name": "getNonExpiredFriendRequests",
+            "summary": "Get\u0020non\u0020expired\u0020friend\u0020requests.",
+            "url": "../classes/InstagramAPI-Request-People.html#method_getNonExpiredFriendRequests"
         },                {
             "fqsen": "\\InstagramAPI\\Request\\Push",
             "name": "Push",
@@ -10131,6 +10421,16 @@ Search.appendIndex(
             "summary": "Get\u0020username\u0020profile\u0020info.",
             "url": "../classes/InstagramAPI-Request-Web.html#method_getUserInfo"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AgetTopSearch\u0028\u0029",
+            "name": "getTopSearch",
+            "summary": "Top\u0020search.",
+            "url": "../classes/InstagramAPI-Request-Web.html#method_getTopSearch"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AgetMediaInfo\u0028\u0029",
+            "name": "getMediaInfo",
+            "summary": "Get\u0020media\u0020info.",
+            "url": "../classes/InstagramAPI-Request-Web.html#method_getMediaInfo"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AgetPasswordChanges\u0028\u0029",
             "name": "getPasswordChanges",
             "summary": "Gets\u0020information\u0020about\u0020password\u0020changes.",
@@ -10145,6 +10445,11 @@ Search.appendIndex(
             "name": "updateDateOfBirth",
             "summary": "Update\u0020date\u0020of\u0020birth.",
             "url": "../classes/InstagramAPI-Request-Web.html#method_updateDateOfBirth"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Web\u003A\u003AeditProfile\u0028\u0029",
+            "name": "editProfile",
+            "summary": "Edit\u0020profile.",
+            "url": "../classes/InstagramAPI-Request-Web.html#method_editProfile"
         },                {
             "fqsen": "\\InstagramAPI\\Request",
             "name": "Request",
@@ -10430,6 +10735,11 @@ Search.appendIndex(
             "name": "_requestPriority",
             "summary": "Request\u0020priority.",
             "url": "../classes/InstagramAPI-Request.html#property__requestPriority"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\u003A\u003A\u0024_customResolver",
+            "name": "_customResolver",
+            "summary": "Custom\u0020resolver.",
+            "url": "../classes/InstagramAPI-Request.html#property__customResolver"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\AboutThisAccountResponse",
             "name": "AboutThisAccountResponse",
@@ -14916,6 +15226,11 @@ Search.appendIndex(
             "summary": "ResumableUploadResponse.",
             "url": "../classes/InstagramAPI-Response-ResumableUploadResponse.html"
         },                {
+            "fqsen": "\\InstagramAPI\\Response\\ResumableUploadResponse\u003A\u003AisOk\u0028\u0029",
+            "name": "isOk",
+            "summary": "Checks\u0020if\u0020the\u0020response\u0020was\u0020successful.",
+            "url": "../classes/InstagramAPI-Response-ResumableUploadResponse.html#method_isOk"
+        },                {
             "fqsen": "\\InstagramAPI\\Response\\ResumableUploadResponse\u003A\u003AJSON_PROPERTY_MAP",
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
@@ -16431,6 +16746,11 @@ Search.appendIndex(
             "summary": "",
             "url": "../classes/InstagramAPI-Signatures.html#method_generateUUID"
         },                {
+            "fqsen": "\\InstagramAPI\\Signatures\u003A\u003AgenerateSpecialUUID\u0028\u0029",
+            "name": "generateSpecialUUID",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Signatures.html#method_generateSpecialUUID"
+        },                {
             "fqsen": "\\InstagramAPI\\Utils",
             "name": "Utils",
             "summary": "",
@@ -16986,6 +17306,11 @@ Search.appendIndex(
             "summary": "Discover\u0020reels.",
             "url": "../classes/InstagramAPI-Request-Reel.html#method_discover"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AdiscoverStream\u0028\u0029",
+            "name": "discoverStream",
+            "summary": "Discover\u0020stream\u0020reels.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_discoverStream"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AsendSeenState\u0028\u0029",
             "name": "sendSeenState",
             "summary": "Send\u0020seen\u0020state.",
@@ -17001,20 +17326,55 @@ Search.appendIndex(
             "summary": "Get\u0020user\u0020reels.",
             "url": "../classes/InstagramAPI-Request-Reel.html#method_getUserReels"
         },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetHashtagReels\u0028\u0029",
+            "name": "getHashtagReels",
+            "summary": "Get\u0020hashtag\u0020reels.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_getHashtagReels"
+        },                {
             "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetMusic\u0028\u0029",
             "name": "getMusic",
-            "summary": "Get\u0020music\u0020for\u0020reels.\u0020NOT\u0020FINISHED.",
+            "summary": "Get\u0020music\u0020for\u0020reels.",
             "url": "../classes/InstagramAPI-Request-Reel.html#method_getMusic"
         },                {
-            "fqsen": "\\InstagramAPI\\Response\\UserReelsResponse",
-            "name": "UserReelsResponse",
-            "summary": "UserReelsResponse.",
-            "url": "../classes/InstagramAPI-Response-UserReelsResponse.html"
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetLocationReels\u0028\u0029",
+            "name": "getLocationReels",
+            "summary": "Get\u0020reels\u0020from\u0020a\u0020location\u0020ID.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_getLocationReels"
         },                {
-            "fqsen": "\\InstagramAPI\\Response\\UserReelsResponse\u003A\u003AJSON_PROPERTY_MAP",
-            "name": "JSON_PROPERTY_MAP",
-            "summary": "",
-            "url": "../classes/InstagramAPI-Response-UserReelsResponse.html#constant_JSON_PROPERTY_MAP"
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetUserLikedReels\u0028\u0029",
+            "name": "getUserLikedReels",
+            "summary": "Get\u0020liked\u0020reels\u0020of\u0020a\u0020user.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_getUserLikedReels"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetShareToFbConfig\u0028\u0029",
+            "name": "getShareToFbConfig",
+            "summary": "Get\u0020share\u0020to\u0020FB\u0020config.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_getShareToFbConfig"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AsetDefaultShareToFbConfig\u0028\u0029",
+            "name": "setDefaultShareToFbConfig",
+            "summary": "Set\u0020default\u0020share\u0020to\u0020FB\u0020config.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_setDefaultShareToFbConfig"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AallowRemixes\u0028\u0029",
+            "name": "allowRemixes",
+            "summary": "Allow\/Disallow\u0020remixes\u0020of\u0020uploaded\u0020reel.\u0020It\u0020is\u0020enabled\u0020by\u0020default\u0020on\u0020uploaded\u0020medias.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_allowRemixes"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AremoveFromProfile\u0028\u0029",
+            "name": "removeFromProfile",
+            "summary": "It\u0020removes\u0020the\u0020reel\u0020only\u0020from\u0020the\u0020profile\u0020grid,\u0020reel\u0020is\u0020still\u0020visible\u0020at\u0020the\u0020reels\u0020section.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_removeFromProfile"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetClipsInfoForCreation\u0028\u0029",
+            "name": "getClipsInfoForCreation",
+            "summary": "Get\u0020clips\u0020info\u0020for\u0020creation.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_getClipsInfoForCreation"
+        },                {
+            "fqsen": "\\InstagramAPI\\Request\\Reel\u003A\u003AgetVideosChaining\u0028\u0029",
+            "name": "getVideosChaining",
+            "summary": "Get\u0020videos\u0020chaining.",
+            "url": "../classes/InstagramAPI-Request-Reel.html#method_getVideosChaining"
         },                {
             "fqsen": "\\InstagramAPI\\Response\\AllUserSeriesResponse",
             "name": "AllUserSeriesResponse",
@@ -17645,6 +18005,206 @@ Search.appendIndex(
             "name": "JSON_PROPERTY_MAP",
             "summary": "",
             "url": "../classes/InstagramAPI-Response-TopSearchResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Exception\\AccountDeletionException",
+            "name": "AccountDeletionException",
+            "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
+            "url": "../classes/InstagramAPI-Exception-AccountDeletionException.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Exception\\Checkpoint\\BirthdayRequiredException",
+            "name": "BirthdayRequiredException",
+            "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
+            "url": "../classes/InstagramAPI-Exception-Checkpoint-BirthdayRequiredException.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Exception\\IPLoginBlockException",
+            "name": "IPLoginBlockException",
+            "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
+            "url": "../classes/InstagramAPI-Exception-IPLoginBlockException.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Exception\\LoginAndSignupPageException",
+            "name": "LoginAndSignupPageException",
+            "summary": "All\u0020server\u002Dresponse\u0020API\u0020related\u0020exceptions\u0020must\u0020derive\u0020from\u0020this\u0020class.",
+            "url": "../classes/InstagramAPI-Exception-LoginAndSignupPageException.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\ConfirmEmailResponse",
+            "name": "ConfirmEmailResponse",
+            "summary": "ConfirmEmailResponse.",
+            "url": "../classes/InstagramAPI-Response-ConfirmEmailResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\ConfirmEmailResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-ConfirmEmailResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\CrossPostingDestinationStatusResponse",
+            "name": "CrossPostingDestinationStatusResponse",
+            "summary": "CrossPostingDestinationStatusResponse.",
+            "url": "../classes/InstagramAPI-Response-CrossPostingDestinationStatusResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\CrossPostingDestinationStatusResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-CrossPostingDestinationStatusResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\DirectPresenceResponse",
+            "name": "DirectPresenceResponse",
+            "summary": "DirectPresenceResponse.",
+            "url": "../classes/InstagramAPI-Response-DirectPresenceResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\DirectPresenceResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-DirectPresenceResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\DiscoveryAccountsResponse",
+            "name": "DiscoveryAccountsResponse",
+            "summary": "DiscoveryAccountsResponse.",
+            "url": "../classes/InstagramAPI-Response-DiscoveryAccountsResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\DiscoveryAccountsResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-DiscoveryAccountsResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\MobileConfigResponse",
+            "name": "MobileConfigResponse",
+            "summary": "MobileConfigResponse.",
+            "url": "../classes/InstagramAPI-Response-MobileConfigResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\MobileConfigResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-MobileConfigResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\DiscoveryAccountsCategories",
+            "name": "DiscoveryAccountsCategories",
+            "summary": "DiscoveryAccountsCategories.",
+            "url": "../classes/InstagramAPI-Response-Model-DiscoveryAccountsCategories.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\DiscoveryAccountsCategories\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-DiscoveryAccountsCategories.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\FormData",
+            "name": "FormData",
+            "summary": "FormData.",
+            "url": "../classes/InstagramAPI-Response-Model-FormData.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\FormData\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-FormData.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\LinkedFbInfo",
+            "name": "LinkedFbInfo",
+            "summary": "LinkedFbInfo.",
+            "url": "../classes/InstagramAPI-Response-Model-LinkedFbInfo.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\LinkedFbInfo\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-LinkedFbInfo.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\LinkedFbUser",
+            "name": "LinkedFbUser",
+            "summary": "LinkedFbUser.",
+            "url": "../classes/InstagramAPI-Response-Model-LinkedFbUser.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\LinkedFbUser\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-LinkedFbUser.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\LiveMetadata",
+            "name": "LiveMetadata",
+            "summary": "LiveMetadata.",
+            "url": "../classes/InstagramAPI-Response-Model-LiveMetadata.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\LiveMetadata\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-LiveMetadata.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\SuggestionsWithMetadata",
+            "name": "SuggestionsWithMetadata",
+            "summary": "SuggestionsWithMetadata.",
+            "url": "../classes/InstagramAPI-Response-Model-SuggestionsWithMetadata.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\SuggestionsWithMetadata\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-SuggestionsWithMetadata.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\UsernameSuggestions",
+            "name": "UsernameSuggestions",
+            "summary": "UsernameSuggestions.",
+            "url": "../classes/InstagramAPI-Response-Model-UsernameSuggestions.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\UsernameSuggestions\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-UsernameSuggestions.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\XpostDestination",
+            "name": "XpostDestination",
+            "summary": "XpostDestination.",
+            "url": "../classes/InstagramAPI-Response-Model-XpostDestination.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\Model\\XpostDestination\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-Model-XpostDestination.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\NonExpiredRequestsInfoResponse",
+            "name": "NonExpiredRequestsInfoResponse",
+            "summary": "NonExpiredRequestsInfoResponse.",
+            "url": "../classes/InstagramAPI-Response-NonExpiredRequestsInfoResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\NonExpiredRequestsInfoResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-NonExpiredRequestsInfoResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\ReelShareToFbConfigResponse",
+            "name": "ReelShareToFbConfigResponse",
+            "summary": "ReelShareToFbConfigResponse.",
+            "url": "../classes/InstagramAPI-Response-ReelShareToFbConfigResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\ReelShareToFbConfigResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-ReelShareToFbConfigResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\ReelsResponse",
+            "name": "ReelsResponse",
+            "summary": "ReelsResponse.",
+            "url": "../classes/InstagramAPI-Response-ReelsResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\ReelsResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-ReelsResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\UpcomingEventsResponse",
+            "name": "UpcomingEventsResponse",
+            "summary": "UpcomingEventsResponse.",
+            "url": "../classes/InstagramAPI-Response-UpcomingEventsResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\UpcomingEventsResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-UpcomingEventsResponse.html#constant_JSON_PROPERTY_MAP"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\WebFormDataResponse",
+            "name": "WebFormDataResponse",
+            "summary": "WebFormDataResponse.",
+            "url": "../classes/InstagramAPI-Response-WebFormDataResponse.html"
+        },                {
+            "fqsen": "\\InstagramAPI\\Response\\WebFormDataResponse\u003A\u003AJSON_PROPERTY_MAP",
+            "name": "JSON_PROPERTY_MAP",
+            "summary": "",
+            "url": "../classes/InstagramAPI-Response-WebFormDataResponse.html#constant_JSON_PROPERTY_MAP"
         },                {
             "fqsen": "\\",
             "name": "\\",

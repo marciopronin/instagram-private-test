@@ -1,3 +1,14 @@
+# Stable release v21.7.3
+## Date: 06/03/2023
+
+### Examples
+
+- **Examples:** Update examples
+
+### Documentation
+
+- **Documentation:** Update documentation
+
 # Stable release v21.7.2
 ## Date: 02/03/2023
 

@@ -190,7 +190,7 @@ try {
     }
 
     // Perform like.
-    $ig->media->like($item->getId(), 0, 'feed_contextual_location', false, ['entity_page_id' => $locationId, 'entity_page_name' => $queryLocation]);
+    $ig->media->like($item->getId(), 0, 'feed_contextual_location', false, ['logging_info_token' => $item->getLoggingInfoToken(), 'entity_page_id' => $locationId, 'entity_page_name' => $queryLocation]);
     // Send organic like.
     $ig->event->sendOrganicLike($item, 'feed_contextual_location', $locationId, $queryLocation, $ig->session_id);
     // forceSendBatch() should be only used if you are "closing" the app so all the events that

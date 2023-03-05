@@ -42,6 +42,7 @@ try {
         }
     }
     $extraData['double_tap'] = 1;
+    $extraData['logging_info_token'] = $item->getLoggingInfoToken();
     $ig->media->like($mediaId, 0, 'feed_short_url', false, $extraData);
     $ig->event->sendOrganicLike($item, 'feed_short_url', null, null, $ig->session_id);
     $ig->event->updateAppState('background');

@@ -724,7 +724,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">127</span>
+        <span class="phpdocumentor-element-found-in__line">129</span>
     </aside>
         <p class="phpdocumentor-summary">Get the global story feed which contains everyone you follow.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -734,6 +734,14 @@
             [                <span class="phpdocumentor-signature__argument__name">$reason</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                  = <span class="phpdocumentor-signature__argument__default-value">&#039;pull_to_refresh&#039;</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$requestId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$traySessionId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ReelsTrayFeedResponse.html"><abbr title="\InstagramAPI\Response\ReelsTrayFeedResponse">ReelsTrayFeedResponse</abbr></a></span>
     </code>
@@ -749,6 +757,16 @@ a specific user's story feed matters to you.</p></section>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                      = <span class="phpdocumentor-signature__argument__default-value">&#039;pull_to_refresh&#039;</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>(optional) Reason for the request.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$requestId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$traySessionId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -785,7 +803,7 @@ a specific user's story feed matters to you.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">150</span>
+        <span class="phpdocumentor-element-found-in__line">172</span>
     </aside>
         <p class="phpdocumentor-summary">Get multiple users&#039; latest stories at once.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -836,7 +854,7 @@ a specific user's story feed matters to you.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">185</span>
+        <span class="phpdocumentor-element-found-in__line">207</span>
     </aside>
         <p class="phpdocumentor-summary">Get a specific user&#039;s story reel feed.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -897,7 +915,7 @@ if that user doesn't have any active story anymore.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">211</span>
+        <span class="phpdocumentor-element-found-in__line">233</span>
     </aside>
         <p class="phpdocumentor-summary">Get a specific user&#039;s story feed with broadcast details.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -961,7 +979,7 @@ saved Instagram Live Replays). The other &quot;get user stories&quot; funcs don'
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">238</span>
+        <span class="phpdocumentor-element-found-in__line">260</span>
     </aside>
         <p class="phpdocumentor-summary">Get multiple users&#039; story feeds (or specific highlight-details) at once.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1034,7 +1052,7 @@ Simply pass their <code class="prettyprint">id</code> values as the argument to 
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">272</span>
+        <span class="phpdocumentor-element-found-in__line">294</span>
     </aside>
         <p class="phpdocumentor-summary">Get injected stories (ads).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1103,7 +1121,7 @@ Simply pass their <code class="prettyprint">id</code> values as the argument to 
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">331</span>
+        <span class="phpdocumentor-element-found-in__line">353</span>
     </aside>
         <p class="phpdocumentor-summary">Get your archived story media feed.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1142,7 +1160,7 @@ Simply pass their <code class="prettyprint">id</code> values as the argument to 
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">348</span>
+        <span class="phpdocumentor-element-found-in__line">370</span>
     </aside>
         <p class="phpdocumentor-summary">Get archive badge count.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1181,7 +1199,7 @@ Simply pass their <code class="prettyprint">id</code> values as the argument to 
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">370</span>
+        <span class="phpdocumentor-element-found-in__line">392</span>
     </aside>
         <p class="phpdocumentor-summary">Get the list of users who have seen one of your story items.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1243,7 +1261,7 @@ allow you to see the viewer list for other people's stories!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">397</span>
+        <span class="phpdocumentor-element-found-in__line">419</span>
     </aside>
         <p class="phpdocumentor-summary">Vote on a story poll.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1320,7 +1338,7 @@ allow you to see the viewer list for other people's stories!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">429</span>
+        <span class="phpdocumentor-element-found-in__line">451</span>
     </aside>
         <p class="phpdocumentor-summary">Vote on a story slider.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1397,7 +1415,7 @@ allow you to see the viewer list for other people's stories!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">463</span>
+        <span class="phpdocumentor-element-found-in__line">485</span>
     </aside>
         <p class="phpdocumentor-summary">Get the list of users who have voted an option in a story poll.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1484,7 +1502,7 @@ allow you to see the results from other people's polls!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">496</span>
+        <span class="phpdocumentor-element-found-in__line">518</span>
     </aside>
         <p class="phpdocumentor-summary">Respond to a question sticker on a story.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1571,7 +1589,7 @@ allow you to see the results from other people's polls!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">531</span>
+        <span class="phpdocumentor-element-found-in__line">553</span>
     </aside>
         <p class="phpdocumentor-summary">Get all responses of a story question.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1640,7 +1658,7 @@ allow you to see the results from other people's polls!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">558</span>
+        <span class="phpdocumentor-element-found-in__line">580</span>
     </aside>
         <p class="phpdocumentor-summary">Deletes an answer to a story question.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1702,7 +1720,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">577</span>
+        <span class="phpdocumentor-element-found-in__line">599</span>
     </aside>
         <p class="phpdocumentor-summary">Gets the created story countdowns of the current account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1741,7 +1759,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">592</span>
+        <span class="phpdocumentor-element-found-in__line">614</span>
     </aside>
         <p class="phpdocumentor-summary">Follows a story countdown to subscribe to a notification when the countdown is finished.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1792,7 +1810,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">611</span>
+        <span class="phpdocumentor-element-found-in__line">633</span>
     </aside>
         <p class="phpdocumentor-summary">Unfollows a story countdown to unsubscribe from a notification when the countdown is finished.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1843,7 +1861,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">634</span>
+        <span class="phpdocumentor-element-found-in__line">656</span>
     </aside>
         <p class="phpdocumentor-summary">Respond to a quiz sticker on a story.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1913,7 +1931,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">658</span>
+        <span class="phpdocumentor-element-found-in__line">680</span>
     </aside>
         <p class="phpdocumentor-summary">Get all responses of a story quiz.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1982,7 +2000,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">683</span>
+        <span class="phpdocumentor-element-found-in__line">705</span>
     </aside>
         <p class="phpdocumentor-summary">Get all votes of a story slider.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2051,7 +2069,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">706</span>
+        <span class="phpdocumentor-element-found-in__line">728</span>
     </aside>
         <p class="phpdocumentor-summary">Get list of charities for use in the donation sticker on stories.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2102,7 +2120,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">728</span>
+        <span class="phpdocumentor-element-found-in__line">750</span>
     </aside>
         <p class="phpdocumentor-summary">Searches a list of charities for use in the donation sticker on stories.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2162,7 +2180,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">765</span>
+        <span class="phpdocumentor-element-found-in__line">787</span>
     </aside>
         <p class="phpdocumentor-summary">Creates the array for a donation sticker.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2333,7 +2351,7 @@ to delete an answer!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">845</span>
+        <span class="phpdocumentor-element-found-in__line">867</span>
     </aside>
         <p class="phpdocumentor-summary">Mark story media items as seen.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2418,7 +2436,7 @@ Other request-collections have THEIR OWN special story-marking functions!</p></s
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">863</span>
+        <span class="phpdocumentor-element-found-in__line">885</span>
     </aside>
         <p class="phpdocumentor-summary">Get your story settings.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2460,7 +2478,7 @@ stories.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">885</span>
+        <span class="phpdocumentor-element-found-in__line">907</span>
     </aside>
         <p class="phpdocumentor-summary">Set your story settings.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2540,7 +2558,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">925</span>
+        <span class="phpdocumentor-element-found-in__line">947</span>
     </aside>
         <p class="phpdocumentor-summary">Get private stories members.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2586,7 +2604,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">943</span>
+        <span class="phpdocumentor-element-found-in__line">965</span>
     </aside>
         <p class="phpdocumentor-summary">Add private stories members.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2662,7 +2680,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">970</span>
+        <span class="phpdocumentor-element-found-in__line">992</span>
     </aside>
         <p class="phpdocumentor-summary">Remove private stories members.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2738,7 +2756,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">998</span>
+        <span class="phpdocumentor-element-found-in__line">1020</span>
     </aside>
         <p class="phpdocumentor-summary">Bulk Add/Remove viewers from your private stories allow list.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2823,7 +2841,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1025</span>
+        <span class="phpdocumentor-element-found-in__line">1047</span>
     </aside>
         <p class="phpdocumentor-summary">Get story allow list viewers.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2881,7 +2899,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1045</span>
+        <span class="phpdocumentor-element-found-in__line">1067</span>
     </aside>
         <p class="phpdocumentor-summary">Add story allow list viewer.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2966,7 +2984,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1074</span>
+        <span class="phpdocumentor-element-found-in__line">1096</span>
     </aside>
         <p class="phpdocumentor-summary">Remove story allow list viewer.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3051,7 +3069,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1105</span>
+        <span class="phpdocumentor-element-found-in__line">1127</span>
     </aside>
         <p class="phpdocumentor-summary">Bulk Add/Remove viewers from your story allow list.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3139,7 +3157,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1136</span>
+        <span class="phpdocumentor-element-found-in__line">1158</span>
     </aside>
         <p class="phpdocumentor-summary">Send story like.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3217,7 +3235,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1157</span>
+        <span class="phpdocumentor-element-found-in__line">1179</span>
     </aside>
         <p class="phpdocumentor-summary">Unsend story like.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3295,7 +3313,7 @@ archive once it has disappeared from your story feed. Valid values
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Story.php"><a href="../files/src-request-story.html"><abbr title="src/Request/Story.php">Story.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1179</span>
+        <span class="phpdocumentor-element-found-in__line">1201</span>
     </aside>
         <p class="phpdocumentor-summary">Perform story interactions.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

@@ -205,7 +205,7 @@ try {
         }
 
         // Perform like.
-        $ig->media->like($items[$itemCounter]->getId(), 0, 'feed_contextual_location', false, ['entity_page_name' => $queryLocation, 'entity_page_id' => $locationId]);
+        $ig->media->like($items[$itemCounter]->getId(), 0, 'feed_contextual_location', false, ['logging_info_token' => $items[$itemCounter]->getLoggingInfoToken(), 'entity_page_name' => $queryLocation, 'entity_page_id' => $locationId]);
         // Send organic like.
         $ig->event->sendOrganicLike($items[$itemCounter], 'feed_contextual_location', null, null, $ig->session_id);
         $ig->event->sendNavigation('back', 'feed_contextual_location', 'feed_location', null, null,

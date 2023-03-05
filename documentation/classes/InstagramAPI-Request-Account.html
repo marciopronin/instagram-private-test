@@ -83,7 +83,7 @@
         <aside class="phpdocumentor-element-found-in">
             <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
             :
-            <span class="phpdocumentor-element-found-in__line">29</span>
+            <span class="phpdocumentor-element-found-in__line">30</span>
         </aside>
 
         <p class="phpdocumentor-class__summary">Account-related functions, such as profile editing and security.</p>
@@ -146,6 +146,13 @@
                                                                 <span class="phpdocumentor-tag-link">string</span>
                                                                                 <section class="phpdocumentor-description"><p>ToS version.</p></section>
                 </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">param</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link">array|null</span>
+                                                                                <section class="phpdocumentor-description"><p>SN Data.</p></section>
+                </dd>
                                                 <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
@@ -178,6 +185,11 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_createValidated">createValidated()</a></th>
                     <td class="phpdocumentor-cell">Create an account with validated phone number.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-AccountCreateResponse.html"><abbr title="\InstagramAPI\Response\AccountCreateResponse">AccountCreateResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_createSecundary">createSecundary()</a></th>
+                    <td class="phpdocumentor-cell">Create secundary account.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-AccountCreateResponse.html"><abbr title="\InstagramAPI\Response\AccountCreateResponse">AccountCreateResponse</abbr></a></td>
                 </tr>
                             <tr>
@@ -306,6 +318,11 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-CheckEmailResponse.html"><abbr title="\InstagramAPI\Response\CheckEmailResponse">CheckEmailResponse</abbr></a></td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_getSignupConfig">getSignupConfig()</a></th>
+                    <td class="phpdocumentor-cell">Get signup config.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_getUsernameSuggestions">getUsernameSuggestions()</a></th>
                     <td class="phpdocumentor-cell">Get username suggestions.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-UsernameSuggestionsResponse.html"><abbr title="\InstagramAPI\Response\UsernameSuggestionsResponse">UsernameSuggestionsResponse</abbr></a></td>
@@ -391,6 +408,16 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-SendConfirmEmailResponse.html"><abbr title="\InstagramAPI\Response\SendConfirmEmailResponse">SendConfirmEmailResponse</abbr></a></td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_verifyEmailCode">verifyEmailCode()</a></th>
+                    <td class="phpdocumentor-cell">Verify email code.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_confirmEmail">confirmEmail()</a></th>
+                    <td class="phpdocumentor-cell">Confirm verification email.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ConfirmEmailResponse.html"><abbr title="\InstagramAPI\Response\ConfirmEmailResponse">ConfirmEmailResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_sendSMSCode">sendSMSCode()</a></th>
                     <td class="phpdocumentor-cell">Tell Instagram to send you an SMS code to verify your phone number.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-SendSMSCodeResponse.html"><abbr title="\InstagramAPI\Response\SendSMSCodeResponse">SendSMSCodeResponse</abbr></a></td>
@@ -443,11 +470,16 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_getCrossPostingDestinationStatus">getCrossPostingDestinationStatus()</a></th>
                     <td class="phpdocumentor-cell">Get cross posting destination (Cross posting to Facebook).</td>
-                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-CrossPostingDestinationStatusResponse.html"><abbr title="\InstagramAPI\Response\CrossPostingDestinationStatusResponse">CrossPostingDestinationStatusResponse</abbr></a></td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_getProcessContactPointSignals">getProcessContactPointSignals()</a></th>
                     <td class="phpdocumentor-cell">TODO.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Account.html#method_sendGoogleTokenUsers">sendGoogleTokenUsers()</a></th>
+                    <td class="phpdocumentor-cell">Send Google token users.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
                 </tr>
                             <tr>
@@ -535,7 +567,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">31</span>
+        <span class="phpdocumentor-element-found-in__line">32</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -571,7 +603,11 @@
                     <span class="phpdocumentor-signature__argument">
             [,                 <span class="phpdocumentor-signature__argument__name">$tosVersion</span> :
                 <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;eu&#039;</span> ]            </span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;row&#039;</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$sndata</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type">mixed</span>
     </code>
@@ -617,7 +653,12 @@
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$tosVersion</span>
                     : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                     = <span class="phpdocumentor-signature__argument__default-value">&#039;eu&#039;</span>                </dt>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;row&#039;</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$sndata</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
     
@@ -638,7 +679,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">102</span>
+        <span class="phpdocumentor-element-found-in__line">113</span>
     </aside>
         <p class="phpdocumentor-summary">Create an account with validated phone number.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -675,7 +716,11 @@
                     <span class="phpdocumentor-signature__argument">
             [,                 <span class="phpdocumentor-signature__argument__name">$tosVersion</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;eu&#039;</span> ]            </span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;row&#039;</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$sndata</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-AccountCreateResponse.html"><abbr title="\InstagramAPI\Response\AccountCreateResponse">AccountCreateResponse</abbr></a></span>
     </code>
@@ -721,8 +766,82 @@
                             <dt class="phpdocumentor-argument-list__entry">
                     <span class="phpdocumentor-signature__argument__name">$tosVersion</span>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                     = <span class="phpdocumentor-signature__argument__default-value">&#039;eu&#039;</span>                </dt>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;row&#039;</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>ToS version.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$sndata</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array|null</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>SN Data.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-AccountCreateResponse.html"><abbr title="\InstagramAPI\Response\AccountCreateResponse">AccountCreateResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_createSecundary"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">createSecundary()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">190</span>
+    </aside>
+        <p class="phpdocumentor-summary">Create secundary account.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">createSecundary</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$password</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$firstName</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-AccountCreateResponse.html"><abbr title="\InstagramAPI\Response\AccountCreateResponse">AccountCreateResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Username.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$password</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The password that is going to be set for the account.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$firstName</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>First name.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -752,7 +871,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">171</span>
+        <span class="phpdocumentor-element-found-in__line">230</span>
     </aside>
         <p class="phpdocumentor-summary">Check if phone number is valid.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -803,7 +922,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">197</span>
+        <span class="phpdocumentor-element-found-in__line">256</span>
     </aside>
         <p class="phpdocumentor-summary">Request registration SMS code.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -872,7 +991,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">226</span>
+        <span class="phpdocumentor-element-found-in__line">286</span>
     </aside>
         <p class="phpdocumentor-summary">Validate signup sms code.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -941,7 +1060,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">252</span>
+        <span class="phpdocumentor-element-found-in__line">312</span>
     </aside>
         <p class="phpdocumentor-summary">Send email verification code.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1001,7 +1120,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">278</span>
+        <span class="phpdocumentor-element-found-in__line">338</span>
     </aside>
         <p class="phpdocumentor-summary">Check confirmation code.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1070,7 +1189,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">301</span>
+        <span class="phpdocumentor-element-found-in__line">361</span>
     </aside>
         <p class="phpdocumentor-summary">Get login activity and suspicious login attempts.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1109,7 +1228,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">317</span>
+        <span class="phpdocumentor-element-found-in__line">377</span>
     </aside>
         <p class="phpdocumentor-summary">Logout session.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1160,7 +1279,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">340</span>
+        <span class="phpdocumentor-element-found-in__line">400</span>
     </aside>
         <p class="phpdocumentor-summary">Approve (Confirm it was you) a suspicious login.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1227,29 +1346,17 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">362</span>
+        <span class="phpdocumentor-element-found-in__line">420</span>
     </aside>
         <p class="phpdocumentor-summary">Get details about child and main IG accounts.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getAccountFamily</span>(
-                    <span class="phpdocumentor-signature__argument">
-            [                <span class="phpdocumentor-signature__argument__name">$useAuth</span> :
-                <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">true</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-UserInfoResponse.html"><abbr title="\InstagramAPI\Response\UserInfoResponse">UserInfoResponse</abbr></a></span>
     </code>
 
     
-            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-        <dl class="phpdocumentor-argument-list">
-                            <dt class="phpdocumentor-argument-list__entry">
-                    <span class="phpdocumentor-signature__argument__name">$useAuth</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                     = <span class="phpdocumentor-signature__argument__default-value">true</span>                </dt>
-                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Indicates if auth is required for this request</p></section></dd>
-                    </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
     <dl class="phpdocumentor-tag-list">
@@ -1278,7 +1385,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">376</span>
+        <span class="phpdocumentor-element-found-in__line">433</span>
     </aside>
         <p class="phpdocumentor-summary">Get unseen facebook notifications.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1317,7 +1424,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">393</span>
+        <span class="phpdocumentor-element-found-in__line">450</span>
     </aside>
         <p class="phpdocumentor-summary">Get details about the currently logged in account.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1364,7 +1471,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">410</span>
+        <span class="phpdocumentor-element-found-in__line">467</span>
     </aside>
         <p class="phpdocumentor-summary">Edit your gender.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1407,7 +1514,7 @@ function, so that you act like the real app!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">442</span>
+        <span class="phpdocumentor-element-found-in__line">499</span>
     </aside>
         <p class="phpdocumentor-summary">Edit your birthday.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1468,7 +1575,7 @@ function, so that you act like the real app!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">478</span>
+        <span class="phpdocumentor-element-found-in__line">535</span>
     </aside>
         <p class="phpdocumentor-summary">Edit your biography.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1539,7 +1646,7 @@ function, so that you act like the real app!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">504</span>
+        <span class="phpdocumentor-element-found-in__line">561</span>
     </aside>
         <p class="phpdocumentor-summary">Changes your account&#039;s profile picture.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1597,7 +1704,7 @@ function, so that you act like the real app!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">527</span>
+        <span class="phpdocumentor-element-found-in__line">585</span>
     </aside>
         <p class="phpdocumentor-summary">Remove your account&#039;s profile picture.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1636,7 +1743,7 @@ function, so that you act like the real app!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">558</span>
+        <span class="phpdocumentor-element-found-in__line">616</span>
     </aside>
         <p class="phpdocumentor-summary">Edit your profile.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1750,7 +1857,7 @@ which you've already verified with checkUsername().</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">607</span>
+        <span class="phpdocumentor-element-found-in__line">667</span>
     </aside>
         <p class="phpdocumentor-summary">Get anonymous profile picture.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1789,7 +1896,7 @@ which you've already verified with checkUsername().</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">620</span>
+        <span class="phpdocumentor-element-found-in__line">680</span>
     </aside>
         <p class="phpdocumentor-summary">Sets your account to public.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1828,7 +1935,7 @@ which you've already verified with checkUsername().</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">640</span>
+        <span class="phpdocumentor-element-found-in__line">700</span>
     </aside>
         <p class="phpdocumentor-summary">Sets your account to private.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1867,7 +1974,7 @@ which you've already verified with checkUsername().</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">665</span>
+        <span class="phpdocumentor-element-found-in__line">725</span>
     </aside>
         <p class="phpdocumentor-summary">Switches your account to business profile.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1915,7 +2022,7 @@ call Account::setBusinessInfo().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">678</span>
+        <span class="phpdocumentor-element-found-in__line">738</span>
     </aside>
         <p class="phpdocumentor-summary">Switches your account to personal profile.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1954,7 +2061,7 @@ call Account::setBusinessInfo().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">698</span>
+        <span class="phpdocumentor-element-found-in__line">758</span>
     </aside>
         <p class="phpdocumentor-summary">Sets contact information for business profile.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2023,7 +2130,7 @@ call Account::setBusinessInfo().</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">732</span>
+        <span class="phpdocumentor-element-found-in__line">792</span>
     </aside>
         <p class="phpdocumentor-summary">Check if an Instagram username is available (not already registered).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2083,7 +2190,7 @@ to be sure that the new username is available.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">757</span>
+        <span class="phpdocumentor-element-found-in__line">817</span>
     </aside>
         <p class="phpdocumentor-summary">Check if an email is available (not already registered).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2141,6 +2248,57 @@ to be sure that the new username is available.</p></section>
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-CheckEmailResponse.html"><abbr title="\InstagramAPI\Response\CheckEmailResponse">CheckEmailResponse</abbr></a></span>
             
 </article>
+                                    <a id="method_getSignupConfig"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getSignupConfig()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">850</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get signup config.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getSignupConfig</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$username</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$username</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Username.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_getUsernameSuggestions"></a>
 <article
         class="
@@ -2152,7 +2310,7 @@ to be sure that the new username is available.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">792</span>
+        <span class="phpdocumentor-element-found-in__line">873</span>
     </aside>
         <p class="phpdocumentor-summary">Get username suggestions.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2221,7 +2379,7 @@ to be sure that the new username is available.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">816</span>
+        <span class="phpdocumentor-element-found-in__line">897</span>
     </aside>
         <p class="phpdocumentor-summary">Get account spam filter status.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2260,7 +2418,7 @@ to be sure that the new username is available.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">831</span>
+        <span class="phpdocumentor-element-found-in__line">912</span>
     </aside>
         <p class="phpdocumentor-summary">Set account spam filter status (on/off).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2311,7 +2469,7 @@ to be sure that the new username is available.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">849</span>
+        <span class="phpdocumentor-element-found-in__line">930</span>
     </aside>
         <p class="phpdocumentor-summary">Get whether the comment category filter is disabled.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2350,7 +2508,7 @@ to be sure that the new username is available.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">862</span>
+        <span class="phpdocumentor-element-found-in__line">943</span>
     </aside>
         <p class="phpdocumentor-summary">Get account spam filter keywords.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2389,7 +2547,7 @@ to be sure that the new username is available.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">877</span>
+        <span class="phpdocumentor-element-found-in__line">958</span>
     </aside>
         <p class="phpdocumentor-summary">Set account spam filter keywords.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2440,7 +2598,7 @@ to be sure that the new username is available.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">898</span>
+        <span class="phpdocumentor-element-found-in__line">979</span>
     </aside>
         <p class="phpdocumentor-summary">Change your account&#039;s password.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2500,7 +2658,7 @@ to be sure that the new username is available.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">926</span>
+        <span class="phpdocumentor-element-found-in__line">1007</span>
     </aside>
         <p class="phpdocumentor-summary">Get account security info and backup codes.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2550,7 +2708,7 @@ PHONE NUMBER! WITHOUT THE CODES, YOU RISK LOSING YOUR ACCOUNT!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">945</span>
+        <span class="phpdocumentor-element-found-in__line">1026</span>
     </aside>
         <p class="phpdocumentor-summary">Get account security info and backup codes.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2596,7 +2754,7 @@ PHONE NUMBER! WITHOUT THE CODES, YOU RISK LOSING YOUR ACCOUNT!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">969</span>
+        <span class="phpdocumentor-element-found-in__line">1050</span>
     </aside>
         <p class="phpdocumentor-summary">Request that Instagram enables two factor SMS authentication.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2656,7 +2814,7 @@ authentication. You must then give that code to enableTwoFactorSMS().</p></secti
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1002</span>
+        <span class="phpdocumentor-element-found-in__line">1083</span>
     </aside>
         <p class="phpdocumentor-summary">Enable Two Factor authentication.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2743,7 +2901,7 @@ PHONE NUMBER! WITHOUT THE CODES, YOU RISK LOSING YOUR ACCOUNT!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1029</span>
+        <span class="phpdocumentor-element-found-in__line">1110</span>
     </aside>
         <p class="phpdocumentor-summary">Disable Two Factor authentication.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2782,7 +2940,7 @@ PHONE NUMBER! WITHOUT THE CODES, YOU RISK LOSING YOUR ACCOUNT!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1043</span>
+        <span class="phpdocumentor-element-found-in__line">1124</span>
     </aside>
         <p class="phpdocumentor-summary">Save presence status to the storage.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2823,7 +2981,7 @@ PHONE NUMBER! WITHOUT THE CODES, YOU RISK LOSING YOUR ACCOUNT!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1060</span>
+        <span class="phpdocumentor-element-found-in__line">1141</span>
     </aside>
         <p class="phpdocumentor-summary">Get presence status.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2862,7 +3020,7 @@ PHONE NUMBER! WITHOUT THE CODES, YOU RISK LOSING YOUR ACCOUNT!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1077</span>
+        <span class="phpdocumentor-element-found-in__line">1158</span>
     </aside>
         <p class="phpdocumentor-summary">Enable presence.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2903,7 +3061,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1101</span>
+        <span class="phpdocumentor-element-found-in__line">1182</span>
     </aside>
         <p class="phpdocumentor-summary">Disable presence.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2943,17 +3101,29 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1123</span>
+        <span class="phpdocumentor-element-found-in__line">1206</span>
     </aside>
         <p class="phpdocumentor-summary">Tell Instagram to send you a message to verify your email address.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">sendConfirmEmail</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$email</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-SendConfirmEmailResponse.html"><abbr title="\InstagramAPI\Response\SendConfirmEmailResponse">SendConfirmEmailResponse</abbr></a></span>
     </code>
 
     
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$email</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>If the email is already set, it is not required.</p></section></dd>
+                    </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
     <dl class="phpdocumentor-tag-list">
@@ -2971,6 +3141,117 @@ last active on Instagram apps.</p></section>
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-SendConfirmEmailResponse.html"><abbr title="\InstagramAPI\Response\SendConfirmEmailResponse">SendConfirmEmailResponse</abbr></a></span>
             
 </article>
+                                    <a id="method_verifyEmailCode"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">verifyEmailCode()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1235</span>
+    </aside>
+        <p class="phpdocumentor-summary">Verify email code.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">verifyEmailCode</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$email</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$code</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$email</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The email.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$code</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>The received code.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_confirmEmail"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">confirmEmail()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1261</span>
+    </aside>
+        <p class="phpdocumentor-summary">Confirm verification email.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">confirmEmail</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$confirmationLink</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ConfirmEmailResponse.html"><abbr title="\InstagramAPI\Response\ConfirmEmailResponse">ConfirmEmailResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$confirmationLink</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Confirmation link.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ConfirmEmailResponse.html"><abbr title="\InstagramAPI\Response\ConfirmEmailResponse">ConfirmEmailResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_sendSMSCode"></a>
 <article
         class="
@@ -2982,7 +3263,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1142</span>
+        <span class="phpdocumentor-element-found-in__line">1286</span>
     </aside>
         <p class="phpdocumentor-summary">Tell Instagram to send you an SMS code to verify your phone number.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3033,7 +3314,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1167</span>
+        <span class="phpdocumentor-element-found-in__line">1311</span>
     </aside>
         <p class="phpdocumentor-summary">Submit the SMS code you received to verify your phone number.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3100,7 +3381,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1189</span>
+        <span class="phpdocumentor-element-found-in__line">1333</span>
     </aside>
         <p class="phpdocumentor-summary">Generate TOTP Code.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3139,7 +3420,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1207</span>
+        <span class="phpdocumentor-element-found-in__line">1351</span>
     </aside>
         <p class="phpdocumentor-summary">Enable TOTP Two factor authentication.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3190,7 +3471,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1227</span>
+        <span class="phpdocumentor-element-found-in__line">1372</span>
     </aside>
         <p class="phpdocumentor-summary">Set contact point prefill.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3200,6 +3481,10 @@ last active on Instagram apps.</p></section>
                             <span class="phpdocumentor-signature__argument__name">$usage</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$prelogin</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
     </code>
@@ -3212,6 +3497,11 @@ last active on Instagram apps.</p></section>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Either &quot;prefill&quot; or &quot;auto_confirmation&quot;.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$prelogin</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">true</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Pre-login state.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -3241,7 +3531,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1249</span>
+        <span class="phpdocumentor-element-found-in__line">1398</span>
     </aside>
         <p class="phpdocumentor-summary">Get name prefill.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3280,17 +3570,30 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1265</span>
+        <span class="phpdocumentor-element-found-in__line">1418</span>
     </aside>
         <p class="phpdocumentor-summary">Get prefill candidates.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getPrefillCandidates</span>(
+                    <span class="phpdocumentor-signature__argument">
+            [                <span class="phpdocumentor-signature__argument__name">$clientContactPoints</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-PrefillCandidatesResponse.html"><abbr title="\InstagramAPI\Response\PrefillCandidatesResponse">PrefillCandidatesResponse</abbr></a></span>
     </code>
 
+        <section class="phpdocumentor-description"><p>DEPRECATED</p></section>
     
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$clientContactPoints</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">null</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>phone (read from SIM) or/and email (read from google account manager).</p></section></dd>
+                    </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
     <dl class="phpdocumentor-tag-list">
@@ -3319,7 +3622,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1282</span>
+        <span class="phpdocumentor-element-found-in__line">1459</span>
     </aside>
         <p class="phpdocumentor-summary">Get account badge notifications for the &quot;Switch account&quot; menu.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3358,7 +3661,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1301</span>
+        <span class="phpdocumentor-element-found-in__line">1478</span>
     </aside>
         <p class="phpdocumentor-summary">Get Facebook ID.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3397,7 +3700,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1318</span>
+        <span class="phpdocumentor-element-found-in__line">1495</span>
     </aside>
         <p class="phpdocumentor-summary">Get linked accounts status.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3436,12 +3739,51 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1331</span>
+        <span class="phpdocumentor-element-found-in__line">1508</span>
     </aside>
         <p class="phpdocumentor-summary">Get cross posting destination (Cross posting to Facebook).</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">getCrossPostingDestinationStatus</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-CrossPostingDestinationStatusResponse.html"><abbr title="\InstagramAPI\Response\CrossPostingDestinationStatusResponse">CrossPostingDestinationStatusResponse</abbr></a></span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-CrossPostingDestinationStatusResponse.html"><abbr title="\InstagramAPI\Response\CrossPostingDestinationStatusResponse">CrossPostingDestinationStatusResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_getProcessContactPointSignals"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getProcessContactPointSignals()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1522</span>
+    </aside>
+        <p class="phpdocumentor-summary">TODO.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getProcessContactPointSignals</span>(
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
     </code>
@@ -3464,23 +3806,23 @@ last active on Instagram apps.</p></section>
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
             
 </article>
-                                    <a id="method_getProcessContactPointSignals"></a>
+                                    <a id="method_sendGoogleTokenUsers"></a>
 <article
         class="
             phpdocumentor-method
             phpdocumentor-method--public
                                                         "
 >
-    <h4 class="phpdocumentor-method__name">getProcessContactPointSignals()</h4>
+    <h4 class="phpdocumentor-method__name">sendGoogleTokenUsers()</h4>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1345</span>
+        <span class="phpdocumentor-element-found-in__line">1541</span>
     </aside>
-        <p class="phpdocumentor-summary">TODO.</p>
+        <p class="phpdocumentor-summary">Send Google token users.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
-                                <span class="phpdocumentor-signature__name">getProcessContactPointSignals</span>(
+                                <span class="phpdocumentor-signature__name">sendGoogleTokenUsers</span>(
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
     </code>
@@ -3514,7 +3856,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1366</span>
+        <span class="phpdocumentor-element-found-in__line">1559</span>
     </aside>
         <p class="phpdocumentor-summary">Send recovery flow via email.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3565,7 +3907,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1389</span>
+        <span class="phpdocumentor-element-found-in__line">1582</span>
     </aside>
         <p class="phpdocumentor-summary">Send recovery flow via phone.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3625,7 +3967,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1416</span>
+        <span class="phpdocumentor-element-found-in__line">1609</span>
     </aside>
         <p class="phpdocumentor-summary">Get accounts multi login.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3677,7 +4019,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1440</span>
+        <span class="phpdocumentor-element-found-in__line">1633</span>
     </aside>
         <p class="phpdocumentor-summary">Set if user can tag you in media posts.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3728,7 +4070,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1462</span>
+        <span class="phpdocumentor-element-found-in__line">1655</span>
     </aside>
         <p class="phpdocumentor-summary">Set if user can mention you in media posts.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3779,7 +4121,7 @@ last active on Instagram apps.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Account.php"><a href="../files/src-request-account.html"><abbr title="src/Request/Account.php">Account.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1482</span>
+        <span class="phpdocumentor-element-found-in__line">1675</span>
     </aside>
         <p class="phpdocumentor-summary">Get synced Facebook pages IDs.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

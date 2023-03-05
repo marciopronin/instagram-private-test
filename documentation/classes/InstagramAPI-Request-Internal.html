@@ -83,7 +83,7 @@
         <aside class="phpdocumentor-element-found-in">
             <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
             :
-            <span class="phpdocumentor-element-found-in__line">35</span>
+            <span class="phpdocumentor-element-found-in__line">36</span>
         </aside>
 
         <p class="phpdocumentor-class__summary">Collection of various INTERNAL library functions.</p>
@@ -168,29 +168,19 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-ConfigureResponse.html"><abbr title="\InstagramAPI\Response\ConfigureResponse">ConfigureResponse</abbr></a></td>
                 </tr>
                             <tr>
-                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method__saveExperiments">_saveExperiments()</a></th>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method__saveExperimentsMobileConfig">_saveExperimentsMobileConfig()</a></th>
                     <td class="phpdocumentor-cell">Saves active experiments.</td>
                     <td class="phpdocumentor-cell">mixed</td>
                 </tr>
                             <tr>
-                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method__saveExperimentsLauncher">_saveExperimentsLauncher()</a></th>
-                    <td class="phpdocumentor-cell">Saves active experiments.</td>
-                    <td class="phpdocumentor-cell">mixed</td>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_getMobileConfig">getMobileConfig()</a></th>
+                    <td class="phpdocumentor-cell">Get MobileConfig.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-MobileConfigResponse.html"><abbr title="\InstagramAPI\Response\MobileConfigResponse">MobileConfigResponse</abbr></a></td>
                 </tr>
                             <tr>
-                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_syncDeviceFeatures">syncDeviceFeatures()</a></th>
-                    <td class="phpdocumentor-cell">Perform an Instagram &quot;feature synchronization&quot; call for device.</td>
-                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-SyncResponse.html"><abbr title="\InstagramAPI\Response\SyncResponse">SyncResponse</abbr></a></td>
-                </tr>
-                            <tr>
-                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_syncUserFeatures">syncUserFeatures()</a></th>
-                    <td class="phpdocumentor-cell">Perform an Instagram &quot;feature synchronization&quot; call for account.</td>
-                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-SyncResponse.html"><abbr title="\InstagramAPI\Response\SyncResponse">SyncResponse</abbr></a></td>
-                </tr>
-                            <tr>
-                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_sendLauncherSync">sendLauncherSync()</a></th>
-                    <td class="phpdocumentor-cell">Send launcher sync.</td>
-                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-LauncherSyncResponse.html"><abbr title="\InstagramAPI\Response\LauncherSyncResponse">LauncherSyncResponse</abbr></a></td>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_fetchHeaders">fetchHeaders()</a></th>
+                    <td class="phpdocumentor-cell">Fetch headers.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_getDeviceCapabilitiesDecisions">getDeviceCapabilitiesDecisions()</a></th>
@@ -204,7 +194,7 @@
                 </tr>
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_logResurrectAttribution">logResurrectAttribution()</a></th>
-                    <td class="phpdocumentor-cell">TODO.</td>
+                    <td class="phpdocumentor-cell">DEPRECATION CHECK.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
                 </tr>
                             <tr>
@@ -288,6 +278,11 @@
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_sendGraph">sendGraph()</a></th>
+                    <td class="phpdocumentor-cell">Send Graph query.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_startNewUserFlow">startNewUserFlow()</a></th>
                     <td class="phpdocumentor-cell">Starts new user flow when registering with phone number.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
@@ -300,6 +295,21 @@
                             <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_getOnBoardingSteps">getOnBoardingSteps()</a></th>
                     <td class="phpdocumentor-cell">Get consent steps for new user flow.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_newAccountNuxSeen">newAccountNuxSeen()</a></th>
+                    <td class="phpdocumentor-cell">New account nux seen.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_sendPrivacyConsentPromptAction">sendPrivacyConsentPromptAction()</a></th>
+                    <td class="phpdocumentor-cell">Send privacy consent prompt action.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_sendPrivacyConsentPromptCallback">sendPrivacyConsentPromptCallback()</a></th>
+                    <td class="phpdocumentor-cell">Send privacy consent prompt callback.</td>
                     <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
                 </tr>
                             <tr>
@@ -403,6 +413,21 @@
                     <td class="phpdocumentor-cell">\InstagramAPI\Media\Video\VideoDetails[]</td>
                 </tr>
                             <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_getSupportedCapabilities">getSupportedCapabilities()</a></th>
+                    <td class="phpdocumentor-cell">Get supported capabilities.</td>
+                    <td class="phpdocumentor-cell">string</td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_writeSupportedCapabilities">writeSupportedCapabilities()</a></th>
+                    <td class="phpdocumentor-cell">Write capabilities.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
+                    <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method_getAsyncNdxIgSteps">getAsyncNdxIgSteps()</a></th>
+                    <td class="phpdocumentor-cell">Get async ndx IG steps.</td>
+                    <td class="phpdocumentor-cell"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></td>
+                </tr>
+                            <tr>
                     <th class="phpdocumentor-heading"><a href="../classes/InstagramAPI-Request-Internal.html#method__getTargetSegmentDuration">_getTargetSegmentDuration()</a></th>
                     <td class="phpdocumentor-cell">Get target segment duration in seconds.</td>
                     <td class="phpdocumentor-cell">int</td>
@@ -438,7 +463,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">38</span>
+        <span class="phpdocumentor-element-found-in__line">39</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -460,7 +485,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">41</span>
+        <span class="phpdocumentor-element-found-in__line">42</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -482,7 +507,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">44</span>
+        <span class="phpdocumentor-element-found-in__line">45</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -504,7 +529,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">47</span>
+        <span class="phpdocumentor-element-found-in__line">48</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -526,7 +551,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">50</span>
+        <span class="phpdocumentor-element-found-in__line">51</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
@@ -575,7 +600,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">70</span>
+        <span class="phpdocumentor-element-found-in__line">71</span>
     </aside>
         <p class="phpdocumentor-summary">UPLOADS A *SINGLE* PHOTO.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -675,7 +700,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">144</span>
+        <span class="phpdocumentor-element-found-in__line">155</span>
     </aside>
         <p class="phpdocumentor-summary">Upload the data for a photo to Instagram.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -749,7 +774,7 @@
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">202</span>
+        <span class="phpdocumentor-element-found-in__line">213</span>
     </aside>
         <p class="phpdocumentor-summary">Configures parameters for a *SINGLE* uploaded photo file.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -830,7 +855,7 @@ TO AVOID ADDING BUGGY AND UNMAINTAINABLE SPIDERWEB CODE!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">550</span>
+        <span class="phpdocumentor-element-found-in__line">579</span>
     </aside>
         <p class="phpdocumentor-summary">Uploads a raw video file.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -914,7 +939,7 @@ TO AVOID ADDING BUGGY AND UNMAINTAINABLE SPIDERWEB CODE!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">623</span>
+        <span class="phpdocumentor-element-found-in__line">652</span>
     </aside>
         <p class="phpdocumentor-summary">UPLOADS A *SINGLE* VIDEO.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1014,7 +1039,7 @@ TO AVOID ADDING BUGGY AND UNMAINTAINABLE SPIDERWEB CODE!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">685</span>
+        <span class="phpdocumentor-element-found-in__line">714</span>
     </aside>
         <p class="phpdocumentor-summary">Performs a resumable upload of a photo file, with support for retries.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1098,7 +1123,7 @@ TO AVOID ADDING BUGGY AND UNMAINTAINABLE SPIDERWEB CODE!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">745</span>
+        <span class="phpdocumentor-element-found-in__line">780</span>
     </aside>
         <p class="phpdocumentor-summary">Asks Instagram for parameters for uploading a new video.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1158,7 +1183,7 @@ TO AVOID ADDING BUGGY AND UNMAINTAINABLE SPIDERWEB CODE!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">783</span>
+        <span class="phpdocumentor-element-found-in__line">818</span>
     </aside>
         <p class="phpdocumentor-summary">Configures parameters for a *SINGLE* uploaded video file.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1239,7 +1264,7 @@ TO AVOID ADDING BUGGY AND UNMAINTAINABLE SPIDERWEB CODE!</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1139</span>
+        <span class="phpdocumentor-element-found-in__line">1272</span>
     </aside>
         <p class="phpdocumentor-summary">Configures parameters for a whole album of uploaded media files.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1310,26 +1335,26 @@ for the album itself (its caption, location, etc).</p></section></dd>
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ConfigureResponse.html"><abbr title="\InstagramAPI\Response\ConfigureResponse">ConfigureResponse</abbr></a></span>
             
 </article>
-                                    <a id="method__saveExperiments"></a>
+                                    <a id="method__saveExperimentsMobileConfig"></a>
 <article
         class="
             phpdocumentor-method
             phpdocumentor-method--protected
                                                         "
 >
-    <h4 class="phpdocumentor-method__name">_saveExperiments()</h4>
+    <h4 class="phpdocumentor-method__name">_saveExperimentsMobileConfig()</h4>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1276</span>
+        <span class="phpdocumentor-element-found-in__line">1409</span>
     </aside>
         <p class="phpdocumentor-summary">Saves active experiments.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">protected</span>
-                                <span class="phpdocumentor-signature__name">_saveExperiments</span>(
+                                <span class="phpdocumentor-signature__name">_saveExperimentsMobileConfig</span>(
                     <span class="phpdocumentor-signature__argument">
-                            <span class="phpdocumentor-signature__argument__name">$syncResponse</span> :
-                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Response-SyncResponse.html"><abbr title="\InstagramAPI\Response\SyncResponse">SyncResponse</abbr></a></span>
+                            <span class="phpdocumentor-signature__argument__name">$mobileConfigResponse</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
                             </span>
                 )
         : <span class="phpdocumentor-signature__response_type">mixed</span>
@@ -1339,8 +1364,8 @@ for the album itself (its caption, location, etc).</p></section></dd>
             <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
         <dl class="phpdocumentor-argument-list">
                             <dt class="phpdocumentor-argument-list__entry">
-                    <span class="phpdocumentor-signature__argument__name">$syncResponse</span>
-                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Response-SyncResponse.html"><abbr title="\InstagramAPI\Response\SyncResponse">SyncResponse</abbr></a></span>
+                    <span class="phpdocumentor-signature__argument__name">$mobileConfigResponse</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
                     </dl>
@@ -1361,191 +1386,29 @@ for the album itself (its caption, location, etc).</p></section></dd>
         <span class="phpdocumentor-signature__response_type">mixed</span>
             
 </article>
-                                    <a id="method__saveExperimentsLauncher"></a>
-<article
-        class="
-            phpdocumentor-method
-            phpdocumentor-method--protected
-                                                        "
->
-    <h4 class="phpdocumentor-method__name">_saveExperimentsLauncher()</h4>
-    <aside class="phpdocumentor-element-found-in">
-        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
-        :
-        <span class="phpdocumentor-element-found-in__line">1314</span>
-    </aside>
-        <p class="phpdocumentor-summary">Saves active experiments.</p>
-        <code class="phpdocumentor-signature phpdocumentor-code ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
-                                <span class="phpdocumentor-signature__name">_saveExperimentsLauncher</span>(
-                    <span class="phpdocumentor-signature__argument">
-                            <span class="phpdocumentor-signature__argument__name">$syncResponse</span> :
-                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Response-LauncherSyncResponse.html"><abbr title="\InstagramAPI\Response\LauncherSyncResponse">LauncherSyncResponse</abbr></a></span>
-                            </span>
-                )
-        : <span class="phpdocumentor-signature__response_type">mixed</span>
-    </code>
-
-    
-            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-        <dl class="phpdocumentor-argument-list">
-                            <dt class="phpdocumentor-argument-list__entry">
-                    <span class="phpdocumentor-signature__argument__name">$syncResponse</span>
-                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/InstagramAPI-Response-LauncherSyncResponse.html"><abbr title="\InstagramAPI\Response\LauncherSyncResponse">LauncherSyncResponse</abbr></a></span>
-                                    </dt>
-                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
-                    </dl>
-    
-            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-SettingsException.html"><abbr title="\InstagramAPI\Exception\SettingsException">SettingsException</abbr></a></span>
-                                                                                <section class="phpdocumentor-description"></section>
-                </dd>
-                        </dl>
-
-
-            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
-            
-</article>
-                                    <a id="method_syncDeviceFeatures"></a>
+                                    <a id="method_getMobileConfig"></a>
 <article
         class="
             phpdocumentor-method
             phpdocumentor-method--public
                                                         "
 >
-    <h4 class="phpdocumentor-method__name">syncDeviceFeatures()</h4>
+    <h4 class="phpdocumentor-method__name">getMobileConfig()</h4>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1345</span>
+        <span class="phpdocumentor-element-found-in__line">1498</span>
     </aside>
-        <p class="phpdocumentor-summary">Perform an Instagram &quot;feature synchronization&quot; call for device.</p>
+        <p class="phpdocumentor-summary">Get MobileConfig.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
-                                <span class="phpdocumentor-signature__name">syncDeviceFeatures</span>(
-                    <span class="phpdocumentor-signature__argument">
-            [                <span class="phpdocumentor-signature__argument__name">$prelogin</span> :
-                <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
-                    <span class="phpdocumentor-signature__argument">
-            [,                 <span class="phpdocumentor-signature__argument__name">$useCsrfToken</span> :
-                <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
-                )
-        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-SyncResponse.html"><abbr title="\InstagramAPI\Response\SyncResponse">SyncResponse</abbr></a></span>
-    </code>
-
-    
-            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-        <dl class="phpdocumentor-argument-list">
-                            <dt class="phpdocumentor-argument-list__entry">
-                    <span class="phpdocumentor-signature__argument__name">$prelogin</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
-                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
-                            <dt class="phpdocumentor-argument-list__entry">
-                    <span class="phpdocumentor-signature__argument__name">$useCsrfToken</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
-                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
-                    </dl>
-    
-            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
-                                                                                <section class="phpdocumentor-description"></section>
-                </dd>
-                        </dl>
-
-
-            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-SyncResponse.html"><abbr title="\InstagramAPI\Response\SyncResponse">SyncResponse</abbr></a></span>
-            
-</article>
-                                    <a id="method_syncUserFeatures"></a>
-<article
-        class="
-            phpdocumentor-method
-            phpdocumentor-method--public
-                                                        "
->
-    <h4 class="phpdocumentor-method__name">syncUserFeatures()</h4>
-    <aside class="phpdocumentor-element-found-in">
-        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
-        :
-        <span class="phpdocumentor-element-found-in__line">1382</span>
-    </aside>
-        <p class="phpdocumentor-summary">Perform an Instagram &quot;feature synchronization&quot; call for account.</p>
-        <code class="phpdocumentor-signature phpdocumentor-code ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-                                <span class="phpdocumentor-signature__name">syncUserFeatures</span>(
-                )
-        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-SyncResponse.html"><abbr title="\InstagramAPI\Response\SyncResponse">SyncResponse</abbr></a></span>
-    </code>
-
-    
-    
-            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
-                                                                                <section class="phpdocumentor-description"></section>
-                </dd>
-                        </dl>
-
-
-            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-SyncResponse.html"><abbr title="\InstagramAPI\Response\SyncResponse">SyncResponse</abbr></a></span>
-            
-</article>
-                                    <a id="method_sendLauncherSync"></a>
-<article
-        class="
-            phpdocumentor-method
-            phpdocumentor-method--public
-                                                        "
->
-    <h4 class="phpdocumentor-method__name">sendLauncherSync()</h4>
-    <aside class="phpdocumentor-element-found-in">
-        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
-        :
-        <span class="phpdocumentor-element-found-in__line">1417</span>
-    </aside>
-        <p class="phpdocumentor-summary">Send launcher sync.</p>
-        <code class="phpdocumentor-signature phpdocumentor-code ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-                                <span class="phpdocumentor-signature__name">sendLauncherSync</span>(
+                                <span class="phpdocumentor-signature__name">getMobileConfig</span>(
                     <span class="phpdocumentor-signature__argument">
                             <span class="phpdocumentor-signature__argument__name">$prelogin</span> :
                 <span class="phpdocumentor-signature__argument__return-type">bool</span>
                             </span>
-                    <span class="phpdocumentor-signature__argument">
-            [,                 <span class="phpdocumentor-signature__argument__name">$idIsUuid</span> :
-                <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">true</span> ]            </span>
-                    <span class="phpdocumentor-signature__argument">
-            [,                 <span class="phpdocumentor-signature__argument__name">$useCsrfToken</span> :
-                <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
-                    <span class="phpdocumentor-signature__argument">
-            [,                 <span class="phpdocumentor-signature__argument__name">$loginConfigs</span> :
-                <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
                 )
-        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-LauncherSyncResponse.html"><abbr title="\InstagramAPI\Response\LauncherSyncResponse">LauncherSyncResponse</abbr></a></span>
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-MobileConfigResponse.html"><abbr title="\InstagramAPI\Response\MobileConfigResponse">MobileConfigResponse</abbr></a></span>
     </code>
 
     
@@ -1556,21 +1419,6 @@ for the album itself (its caption, location, etc).</p></section></dd>
                     : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                                     </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Indicates if the request is done before login request.</p></section></dd>
-                            <dt class="phpdocumentor-argument-list__entry">
-                    <span class="phpdocumentor-signature__argument__name">$idIsUuid</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                     = <span class="phpdocumentor-signature__argument__default-value">true</span>                </dt>
-                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Indicates if the id parameter is the UUID.</p></section></dd>
-                            <dt class="phpdocumentor-argument-list__entry">
-                    <span class="phpdocumentor-signature__argument__name">$useCsrfToken</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
-                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Indicates if a csrf token should be included.</p></section></dd>
-                            <dt class="phpdocumentor-argument-list__entry">
-                    <span class="phpdocumentor-signature__argument__name">$loginConfigs</span>
-                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
-                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Indicates if login configs should be used.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -1586,7 +1434,46 @@ for the album itself (its caption, location, etc).</p></section></dd>
 
 
             <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-LauncherSyncResponse.html"><abbr title="\InstagramAPI\Response\LauncherSyncResponse">LauncherSyncResponse</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-MobileConfigResponse.html"><abbr title="\InstagramAPI\Response\MobileConfigResponse">MobileConfigResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_fetchHeaders"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">fetchHeaders()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1535</span>
+    </aside>
+        <p class="phpdocumentor-summary">Fetch headers.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">fetchHeaders</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
             
 </article>
                                     <a id="method_getDeviceCapabilitiesDecisions"></a>
@@ -1600,7 +1487,7 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1453</span>
+        <span class="phpdocumentor-element-found-in__line">1551</span>
     </aside>
         <p class="phpdocumentor-summary">Get decisions about device capabilities.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1639,7 +1526,7 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1468</span>
+        <span class="phpdocumentor-element-found-in__line">1566</span>
     </aside>
         <p class="phpdocumentor-summary">Registers advertising identifier.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1678,9 +1565,9 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1483</span>
+        <span class="phpdocumentor-element-found-in__line">1582</span>
     </aside>
-        <p class="phpdocumentor-summary">TODO.</p>
+        <p class="phpdocumentor-summary">DEPRECATION CHECK.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">public</span>
                                 <span class="phpdocumentor-signature__name">logResurrectAttribution</span>(
@@ -1717,7 +1604,7 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1504</span>
+        <span class="phpdocumentor-element-found-in__line">1603</span>
     </aside>
         <p class="phpdocumentor-summary">Reads MSISDN header.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1777,7 +1664,7 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1535</span>
+        <span class="phpdocumentor-element-found-in__line">1634</span>
     </aside>
         <p class="phpdocumentor-summary">Bootstraps MSISDN header.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1835,7 +1722,7 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1550</span>
+        <span class="phpdocumentor-element-found-in__line">1649</span>
     </aside>
         <code class="phpdocumentor-signature phpdocumentor-code ">
         <span class="phpdocumentor-signature__visibility">protected</span>
@@ -1875,7 +1762,7 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1579</span>
+        <span class="phpdocumentor-element-found-in__line">1678</span>
     </aside>
         <p class="phpdocumentor-summary">Get Facebook dod resources.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1914,7 +1801,7 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1602</span>
+        <span class="phpdocumentor-element-found-in__line">1703</span>
     </aside>
         <p class="phpdocumentor-summary">Get zero rating token hash result.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1924,6 +1811,14 @@ for the album itself (its caption, location, etc).</p></section></dd>
             [                <span class="phpdocumentor-signature__argument__name">$reason</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                  = <span class="phpdocumentor-signature__argument__default-value">&#039;token_expired&#039;</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$result</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$prelogin</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-TokenResultResponse.html"><abbr title="\InstagramAPI\Response\TokenResultResponse">TokenResultResponse</abbr></a></span>
     </code>
@@ -1936,6 +1831,16 @@ for the album itself (its caption, location, etc).</p></section></dd>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                      = <span class="phpdocumentor-signature__argument__default-value">&#039;token_expired&#039;</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>One of: &quot;token_expired&quot;, &quot;mqtt_token_push&quot;, &quot;token_stale&quot;, &quot;provisioning_time_mismatch&quot;.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$result</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">true</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>result</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$prelogin</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">true</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Prelogin</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -1965,7 +1870,7 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1626</span>
+        <span class="phpdocumentor-element-found-in__line">1739</span>
     </aside>
         <p class="phpdocumentor-summary">Get megaphone log.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2004,7 +1909,7 @@ for the album itself (its caption, location, etc).</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1650</span>
+        <span class="phpdocumentor-element-found-in__line">1763</span>
     </aside>
         <p class="phpdocumentor-summary">Get hidden entities for users, places and hashtags via Facebook&#039;s algorithm.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2045,7 +1950,7 @@ has a useful purpose, then we should move it somewhere else.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1663</span>
+        <span class="phpdocumentor-element-found-in__line">1776</span>
     </aside>
         <p class="phpdocumentor-summary">Get Facebook OTA (Over-The-Air) update information.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2084,7 +1989,7 @@ has a useful purpose, then we should move it somewhere else.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1685</span>
+        <span class="phpdocumentor-element-found-in__line">1798</span>
     </aside>
         <p class="phpdocumentor-summary">Fetch profiler traces config.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2130,7 +2035,7 @@ has a useful purpose, then we should move it somewhere else.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1701</span>
+        <span class="phpdocumentor-element-found-in__line">1814</span>
     </aside>
         <p class="phpdocumentor-summary">Get profile &quot;notices&quot;.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2171,7 +2076,7 @@ has a useful purpose, then we should move it somewhere else.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1719</span>
+        <span class="phpdocumentor-element-found-in__line">1832</span>
     </aside>
         <p class="phpdocumentor-summary">Fetch quick promotions data.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2214,7 +2119,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1752</span>
+        <span class="phpdocumentor-element-found-in__line">1855</span>
     </aside>
         <p class="phpdocumentor-summary">Get Arlink download info.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2224,6 +2129,7 @@ you have 18 years old or more.</p></section>
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-ArlinkDownloadInfoResponse.html"><abbr title="\InstagramAPI\Response\ArlinkDownloadInfoResponse">ArlinkDownloadInfoResponse</abbr></a></span>
     </code>
 
+        <section class="phpdocumentor-description"><p>DEPRECATION CHECK.</p></section>
     
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -2253,7 +2159,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1766</span>
+        <span class="phpdocumentor-element-found-in__line">1869</span>
     </aside>
         <p class="phpdocumentor-summary">Get quick promotions cooldowns.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2292,7 +2198,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1785</span>
+        <span class="phpdocumentor-element-found-in__line">1888</span>
     </aside>
         <p class="phpdocumentor-summary">Report a problem.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2344,7 +2250,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1802</span>
+        <span class="phpdocumentor-element-found-in__line">1905</span>
     </aside>
         <p class="phpdocumentor-summary">Get viewable statuses.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2383,7 +2289,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1815</span>
+        <span class="phpdocumentor-element-found-in__line">1918</span>
     </aside>
         <p class="phpdocumentor-summary">Store client push permissions.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2394,6 +2300,93 @@ you have 18 years old or more.</p></section>
     </code>
 
     
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_sendGraph"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">sendGraph()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">1942</span>
+    </aside>
+        <p class="phpdocumentor-summary">Send Graph query.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">sendGraph</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$clientDoc</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$vars</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$friendlyName</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$pretty</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$clientLibrary</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;graphservice&#039;</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$clientDoc</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$vars</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$friendlyName</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$pretty</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$clientLibrary</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">&#039;graphservice&#039;</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
     <dl class="phpdocumentor-tag-list">
@@ -2422,7 +2415,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1833</span>
+        <span class="phpdocumentor-element-found-in__line">1994</span>
     </aside>
         <p class="phpdocumentor-summary">Starts new user flow when registering with phone number.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2461,7 +2454,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1854</span>
+        <span class="phpdocumentor-element-found-in__line">2014</span>
     </aside>
         <p class="phpdocumentor-summary">Check user age eligibility.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2530,7 +2523,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1880</span>
+        <span class="phpdocumentor-element-found-in__line">2043</span>
     </aside>
         <p class="phpdocumentor-summary">Get consent steps for new user flow.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2544,6 +2537,18 @@ you have 18 years old or more.</p></section>
             [,                 <span class="phpdocumentor-signature__argument__name">$regMethod</span> :
                 <span class="phpdocumentor-signature__argument__return-type">string</span>
                  = <span class="phpdocumentor-signature__argument__default-value">&#039;email&#039;</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$seenSteps</span> :
+                <span class="phpdocumentor-signature__argument__return-type">array</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$finish</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$tosAccepted</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span> ]            </span>
                 )
         : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
     </code>
@@ -2561,6 +2566,21 @@ you have 18 years old or more.</p></section>
                     : <span class="phpdocumentor-signature__argument__return-type">string</span>
                      = <span class="phpdocumentor-signature__argument__default-value">&#039;email&#039;</span>                </dt>
                 <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Registration method. 'email' or 'phone'.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$seenSteps</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">array</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">[]</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Seen steps.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$finish</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Progress state has finished.</p></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$tosAccepted</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">true</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>ToS Accepted.</p></section></dd>
                     </dl>
     
             <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
@@ -2586,6 +2606,177 @@ you have 18 years old or more.</p></section>
         <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
             
 </article>
+                                    <a id="method_newAccountNuxSeen"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">newAccountNuxSeen()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">2085</span>
+    </aside>
+        <p class="phpdocumentor-summary">New account nux seen.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">newAccountNuxSeen</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$waterfallId</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$waterfallId</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Waterfall ID.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_sendPrivacyConsentPromptAction"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">sendPrivacyConsentPromptAction()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">2109</span>
+    </aside>
+        <p class="phpdocumentor-summary">Send privacy consent prompt action.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">sendPrivacyConsentPromptAction</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$flowName</span> :
+                <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$form</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$flowName</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$form</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Form.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_sendPrivacyConsentPromptCallback"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">sendPrivacyConsentPromptCallback()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">2169</span>
+    </aside>
+        <p class="phpdocumentor-summary">Send privacy consent prompt callback.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">sendPrivacyConsentPromptCallback</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$response</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><abbr title="\InstagramAPI\Request\GenericResponse">GenericResponse</abbr></span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            [,                 <span class="phpdocumentor-signature__argument__name">$init</span> :
+                <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span> ]            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$response</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\InstagramAPI\Request\GenericResponse">GenericResponse</abbr></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$init</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                     = <span class="phpdocumentor-signature__argument__default-value">false</span>                </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"><p>Init.</p></section></dd>
+                    </dl>
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
                                     <a id="method_newUserFlow"></a>
 <article
         class="
@@ -2597,7 +2788,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1920</span>
+        <span class="phpdocumentor-element-found-in__line">2228</span>
     </aside>
         <p class="phpdocumentor-summary">Starts new user flow when registering with phone number.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2657,7 +2848,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">1955</span>
+        <span class="phpdocumentor-element-found-in__line">2263</span>
     </aside>
         <p class="phpdocumentor-summary">Send consent policy to Instagram.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2735,7 +2926,7 @@ you have 18 years old or more.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2018</span>
+        <span class="phpdocumentor-element-found-in__line">2326</span>
     </aside>
         <p class="phpdocumentor-summary">Internal helper for marking story media items as seen.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2847,7 +3038,7 @@ media Items.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2093</span>
+        <span class="phpdocumentor-element-found-in__line">2401</span>
     </aside>
         <p class="phpdocumentor-summary">Configure media entity (album, video, ...) with retries.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2919,7 +3110,7 @@ media Items.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2188</span>
+        <span class="phpdocumentor-element-found-in__line">2504</span>
     </aside>
         <p class="phpdocumentor-summary">Update media with PDQ hash info.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2979,7 +3170,7 @@ media Items.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2225</span>
+        <span class="phpdocumentor-element-found-in__line">2541</span>
     </aside>
         <p class="phpdocumentor-summary">Performs a resumable upload of a media file, with support for retries.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3078,7 +3269,7 @@ media Items.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2305</span>
+        <span class="phpdocumentor-element-found-in__line">2623</span>
     </aside>
         <p class="phpdocumentor-summary">Performs an upload of a photo file, without support for retries.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3152,7 +3343,7 @@ media Items.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2342</span>
+        <span class="phpdocumentor-element-found-in__line">2660</span>
     </aside>
         <p class="phpdocumentor-summary">Performs a resumable upload of a photo file, with support for retries.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3233,7 +3424,7 @@ media Items.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2408</span>
+        <span class="phpdocumentor-element-found-in__line">2749</span>
     </aside>
         <p class="phpdocumentor-summary">Determine whether to use resumable photo uploader based on target feed and internal metadata.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3283,7 +3474,7 @@ media Items.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2434</span>
+        <span class="phpdocumentor-element-found-in__line">2775</span>
     </aside>
         <p class="phpdocumentor-summary">Get the first missing range (start-end) from a HTTP &quot;Range&quot; header.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3324,7 +3515,7 @@ media Items.</p></section></dd>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2481</span>
+        <span class="phpdocumentor-element-found-in__line">2822</span>
     </aside>
         <p class="phpdocumentor-summary">Performs a chunked upload of a video file, with support for retries.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3410,7 +3601,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2668</span>
+        <span class="phpdocumentor-element-found-in__line">3011</span>
     </aside>
         <p class="phpdocumentor-summary">Performs a segmented upload of a video file, with support for retries.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3498,7 +3689,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2792</span>
+        <span class="phpdocumentor-element-found-in__line">3135</span>
     </aside>
         <p class="phpdocumentor-summary">Performs a resumable upload of a video file, with support for retries.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3579,7 +3770,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2843</span>
+        <span class="phpdocumentor-element-found-in__line">3186</span>
     </aside>
         <p class="phpdocumentor-summary">Determine whether to use segmented video uploader based on target feed and internal metadata.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3629,7 +3820,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2925</span>
+        <span class="phpdocumentor-element-found-in__line">3268</span>
     </aside>
         <p class="phpdocumentor-summary">Determine whether to use resumable video uploader based on target feed and internal metadata.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3679,7 +3870,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2972</span>
+        <span class="phpdocumentor-element-found-in__line">3315</span>
     </aside>
         <p class="phpdocumentor-summary">Get retry context for media upload.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3708,7 +3899,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">2990</span>
+        <span class="phpdocumentor-element-found-in__line">3333</span>
     </aside>
         <p class="phpdocumentor-summary">Get params for photo upload job.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3758,7 +3949,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3033</span>
+        <span class="phpdocumentor-element-found-in__line">3376</span>
     </aside>
         <p class="phpdocumentor-summary">Get params for video upload job.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3808,7 +3999,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3087</span>
+        <span class="phpdocumentor-element-found-in__line">3430</span>
     </aside>
         <p class="phpdocumentor-summary">Find the segments after ffmpeg processing.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3858,7 +4049,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3115</span>
+        <span class="phpdocumentor-element-found-in__line">3458</span>
     </aside>
         <p class="phpdocumentor-summary">Split the video file into segments.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3925,6 +4116,113 @@ waste time with chunks that are already successfully uploaded.</p></section>
         <span class="phpdocumentor-signature__response_type">\InstagramAPI\Media\Video\VideoDetails[]</span>
             
 </article>
+                                    <a id="method_getSupportedCapabilities"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getSupportedCapabilities()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">3546</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get supported capabilities.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getSupportedCapabilities</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+        
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_writeSupportedCapabilities"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">writeSupportedCapabilities()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">3592</span>
+    </aside>
+        <p class="phpdocumentor-summary">Write capabilities.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">writeSupportedCapabilities</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
+                                    <a id="method_getAsyncNdxIgSteps"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getAsyncNdxIgSteps()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">3608</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get async ndx IG steps.</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getAsyncNdxIgSteps</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+    </code>
+
+    
+    
+            <h5 class="phpdocumentor-tag-list__heading">Tags</h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="../classes/InstagramAPI-Exception-InstagramException.html"><abbr title="\InstagramAPI\Exception\InstagramException">InstagramException</abbr></a></span>
+                                                                                <section class="phpdocumentor-description"></section>
+                </dd>
+                        </dl>
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/InstagramAPI-Response-GenericResponse.html"><abbr title="\InstagramAPI\Response\GenericResponse">GenericResponse</abbr></a></span>
+            
+</article>
                                     <a id="method__getTargetSegmentDuration"></a>
 <article
         class="
@@ -3936,7 +4234,7 @@ waste time with chunks that are already successfully uploaded.</p></section>
     <aside class="phpdocumentor-element-found-in">
         <abbr class="phpdocumentor-element-found-in__file" title="src/Request/Internal.php"><a href="../files/src-request-internal.html"><abbr title="src/Request/Internal.php">Internal.php</abbr></a></abbr>
         :
-        <span class="phpdocumentor-element-found-in__line">3207</span>
+        <span class="phpdocumentor-element-found-in__line">3623</span>
     </aside>
         <p class="phpdocumentor-summary">Get target segment duration in seconds.</p>
         <code class="phpdocumentor-signature phpdocumentor-code ">

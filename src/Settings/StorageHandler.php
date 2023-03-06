@@ -57,6 +57,8 @@ class StorageHandler
         'direct_region',
         'mid',
         'rur',
+        'shbid',
+        'shbts',
         'salt_ids',
     ];
 

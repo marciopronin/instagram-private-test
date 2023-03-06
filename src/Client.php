@@ -222,13 +222,6 @@ class Client
     protected $_rur = '';
 
     /**
-     * DS User ID.
-     *
-     * @var string
-     */
-    protected $_dsUserId = '';
-
-    /**
      * MID.
      *
      * @var string
@@ -1086,6 +1079,19 @@ class Client
             $headers['set_headers']['X-Pigeon-Session-Id'] = $this->_pigeonSession;
             $headers['set_headers']['X-Pigeon-Rawclienttime'] = $this->_getPigeonRawClientTime();
 
+            if ($this->_parent->settings->get('rur') !== null) {
+                $this->_rur = $this->_parent->settings->get('rur');
+            }
+            if ($this->_parent->settings->get('mid') !== null) {
+                $this->_mid = $this->_parent->settings->get('mid');
+            }
+            if ($this->_parent->settings->get('shbid') !== null) {
+                $this->_shbid = $this->_parent->settings->get('shbid');
+            }
+            if ($this->_parent->settings->get('shbts') !== null) {
+                $this->_shbts = $this->_parent->settings->get('shbts');
+            }
+
             $this->_directRegionHint = ($this->_parent->settings->get('direct_region') !== null) ? $this->_parent->settings->get('direct_region') : '';
             $this->wwwClaim = ($this->_parent->settings->get('www_claim') !== null) ? $this->_parent->settings->get('www_claim') : '0';
 
@@ -1113,20 +1119,20 @@ class Client
                 $headers['set_headers']['IG-U-SHBTS'] = $this->_shbts;
             }
 
-            if ($this->_dsUserId !== '') {
-                $headers['set_headers']['IG-U-DS-USER-ID'] = $this->_dsUserId;
+            if ($this->_parent->account_id !== null) {
+                $headers['set_headers']['IG-U-DS-USER-ID'] = $this->_parent->account_id;
             }
 
             if ($this->_rur !== '') {
-                $headers['set_headers']['IG-U-RUR'] = $this->_parent->settings->get('rur');
+                $headers['set_headers']['IG-U-RUR'] = $this->_rur;
             }
 
             if ($this->_directRegionHint !== '') {
                 $headers['set_headers']['IG-U-IG-DIRECT-REGION-HINT'] = $this->_directRegionHint;
             }
 
-            if ($this->_parent->settings->get('mid') !== null) {
-                $headers['set_headers']['X-MID'] = $this->_parent->settings->get('mid');
+            if ($this->_mid !== '') {
+                $headers['set_headers']['X-MID'] = $this->_mid;
             }
 
             $headers['set_headers']['X-IG-Bandwidth-TotalBytes-B'] = strval($this->totalBytes);
@@ -1170,7 +1176,6 @@ class Client
         $this->wwwClaim = $response->getHeaderLine('x-ig-set-www-claim');
         $this->_shbid = $response->getHeaderLine('ig-set-ig-u-shbid');
         $this->_shbts = $response->getHeaderLine('ig-set-ig-u-shbts');
-        $this->_dsUserId = $response->getHeaderLine('ig-set-ig-u-ds-user-id');
         $this->_rur = $response->getHeaderLine('ig-set-ig-u-rur');
         $this->_directRegionHint = $response->getHeaderLine('ig-set-ig-u-ig-direct-region-hint');
         $this->_mid = $response->getHeaderLine('ig-set-x-mid');
@@ -1186,6 +1191,12 @@ class Client
         }
         if ($this->_rur !== '') {
             $this->_parent->settings->set('rur', $this->_rur);
+        }
+        if ($this->_shbid !== '') {
+            $this->_parent->settings->set('shbid', $this->_shbid);
+        }
+        if ($this->_shbts !== '') {
+            $this->_parent->settings->set('shbts', $this->_shbts);
         }
 
         $authorizationHeader = $response->getHeaderLine('ig-set-authorization');

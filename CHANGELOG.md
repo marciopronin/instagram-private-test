@@ -1,3 +1,11 @@
+# Stable release v21.7.4
+## Date: 06/03/2023
+
+### Updates and fixes
+
+- **StorageHandler:** Update PERSISTENT_KEYS to store shbid and shbts values.
+- **Client:** Update client to store and use stored shbid and shbts values.
+
 # Stable release v21.7.3
 ## Date: 06/03/2023
 

@@ -1,3 +1,10 @@
+# Stable release v21.8.1
+## Date: 13/03/2023
+
+### Updates and fixes
+
+- **Checkpoint:** Update `_getWebFormRequest()` and `_getWebCookieString()`
+
 # Stable release v21.8.0
 ## Date: 13/03/2023
 

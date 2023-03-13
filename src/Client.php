@@ -910,7 +910,7 @@ class Client
         HttpRequestInterface $request,
         array $guzzleOptions = [])
     {
-        $disableCookies = ($request->getUri()->getPath() === '/logging_client_events') ? true : false;
+        $disableCookies = ($request->getUri()->getPath() === '/logging_client_events' || $request->getUri()->getPath() === '/challenge/') ? true : false;
 
         // Add critically important options for authenticating the request.
         $guzzleOptions = $this->_buildGuzzleOptions($guzzleOptions, $disableCookies);

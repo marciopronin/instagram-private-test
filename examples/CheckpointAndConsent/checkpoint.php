@@ -138,8 +138,8 @@ try {
                         */
                         $recaptcha = new NoCaptchaProxyless();
                         $recaptcha->setKey('ANTI-CAPTCHA-KEY'); // This is the API KEY
-                        $recaptcha->setWebsiteURL('https://instagram.com/'); // It could be https://i.instagram.com as well
-                        $recaptcha->setWebsiteKey('6LebnxwUAAAAAGm3yH06pfqQtcMH0AYDwlsXnh-u'); // This sitekey is always the same.
+                        $recaptcha->setWebsiteURL('https://fbsbx.com/captcha/recaptcha/iframe'); // It could be https://i.instagram.com as well
+                        $recaptcha->setWebsiteKey('6Lc9qjcUAAAAADTnJq5kJMjN9aD1lxpRLMnCS2TR'); // This sitekey is always the same.
 
                         $recaptcha->createTask(); // returns ID of task but it is set internally.
                         if ($recaptcha->waitForResult()) { // timeout 300 seconds (5 minutes)
@@ -151,8 +151,8 @@ try {
                         // $sitekey = $e->getResponse()->getSitekey();
                         //$googleResponse = trim(fgets(STDIN));
                         $ig->settings->set('csrftoken', $e->getResponse()->getCsrftoken());
-                        $ig->checkpoint->sendCaptchaResponse($checkApiPath, $googleResponse);
-                        break;
+                        $ig->checkpoint->sendCaptchaResponse($e->getResponse()->getChallengeUrl(), $googleResponse);
+                        break 2; // Captcha solved!
                     case $e instanceof InstagramAPI\Exception\Checkpoint\EscalationChallengeInformationException:
                         $ig->checkpoint->sendAcceptEscalationInformational($e->getResponse()->getChallengeUrl());
                         break 2;

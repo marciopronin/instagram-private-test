@@ -1,3 +1,15 @@
+# Stable release v21.8.2
+## Date: 14/03/2023
+
+### Updates and fixes
+
+- **Checkpoint:** Update `_getWebFormRequest()` and `_getWebCookieString()`
+- **Client:** Update `_guzzleRequest()`
+
+### Examples
+
+- **Example:** Update checkpoint example
+
 # Stable release v21.8.1
 ## Date: 13/03/2023
 

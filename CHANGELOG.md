@@ -1,3 +1,17 @@
+# Stable release v21.8.0
+## Date: 13/03/2023
+
+### New features
+
+- **Checkpoint:** Added `_getWebCookieString()`
+- **Model:** New model `WebChallengeConfig`
+
+### Updates and fixes
+
+- **StorageHandler:** Update PERSISTENT_KEYS to store csrftoken. It will be used only for web challenge.
+- **Checkpoint:** Update `_getWebFormRequest()`
+- **Response:** Update `WebCheckpointResponse`
+
 # Stable release v21.7.4
 ## Date: 06/03/2023
 

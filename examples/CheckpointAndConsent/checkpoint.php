@@ -138,7 +138,7 @@ try {
                         */
                         $recaptcha = new NoCaptchaProxyless();
                         $recaptcha->setKey('ANTI-CAPTCHA-KEY'); // This is the API KEY
-                        $recaptcha->setWebsiteURL('https://instagram.com'); // It could be https://i.instagram.com as well
+                        $recaptcha->setWebsiteURL('https://instagram.com/'); // It could be https://i.instagram.com as well
                         $recaptcha->setWebsiteKey('6LebnxwUAAAAAGm3yH06pfqQtcMH0AYDwlsXnh-u'); // This sitekey is always the same.
 
                         $recaptcha->createTask(); // returns ID of task but it is set internally.
@@ -150,7 +150,8 @@ try {
                         }
                         // $sitekey = $e->getResponse()->getSitekey();
                         //$googleResponse = trim(fgets(STDIN));
-                        $ig->checkpoint->sendCaptchaResponse($e->getResponse()->getChallengeUrl(), $googleResponse);
+                        $ig->settings->set('csrftoken', $e->getResponse()->getCsrftoken());
+                        $ig->checkpoint->sendCaptchaResponse($checkApiPath, $googleResponse);
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\EscalationChallengeInformationException:
                         $ig->checkpoint->sendAcceptEscalationInformational($e->getResponse()->getChallengeUrl());

@@ -59,6 +59,7 @@ class StorageHandler
         'rur',
         'shbid',
         'shbts',
+        'csrftoken',
         'salt_ids',
     ];
 

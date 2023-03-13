@@ -256,12 +256,26 @@ class Checkpoint extends RequestCollection
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->setAddDefaultHeaders(false)
+            ->addHeader('Cookie', $this->_getWebCookieString())
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
-            ->addHeader('X-IG-WWW-Claim', 0)
+            ->addHeader('X-IG-WWW-Claim', ($this->settings->get('www_claim') !== null) ? $this->settings->get('www_claim') : 0)
             ->addHeader('User-Agent', sprintf('%s %s', Constants::WEB_CHALLENGE_USER_AGENT, $this->ig->device->getUserAgent()))
-            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            //->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-CSRFToken', ($this->settings->get('csrftoken') !== null) ? $this->settings->get('csrftoken') : $this->ig->client->getToken())
             ->addHeader('X-IG-App-ID', '1217981644879628')
             ->addHeader('X-Instagram-AJAX', 'c795b4273c42');
+    }
+
+    protected function _getWebCookieString()
+    {
+        $cookieString = sprintf('authorization=%s; ', $this->settings->get('authorization_header'));
+        $cookieString .= sprintf('csrftoken=%s; ', $this->settings->get('csrftoken'));
+        $cookieString .= sprintf('ds_user_id=%s; ', $this->settings->get('account_id'));
+        $cookieString .= sprintf('ig_did=%s; ', $this->ig->uuid);
+        $cookieString .= sprintf('mid=%s; ', $this->settings->get('mid'));
+        $cookieString .= sprintf('rur=%s', $this->settings->get('rur'));
+
+        return $cookieString;
     }
 
     /**

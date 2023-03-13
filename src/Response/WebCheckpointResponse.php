@@ -9,24 +9,28 @@ use InstagramAPI\Response;
  *
  * @method Model\WebChallenge getChallenge()
  * @method string getChallengeType()
+ * @method Model\WebChallengeConfig getConfig()
  * @method Model\ChallengeEntryData getEntryData()
  * @method mixed getMessage()
  * @method string getStatus()
  * @method Model\_Message[] get_Messages()
  * @method bool isChallenge()
  * @method bool isChallengeType()
+ * @method bool isConfig()
  * @method bool isEntryData()
  * @method bool isMessage()
  * @method bool isStatus()
  * @method bool is_Messages()
  * @method $this setChallenge(Model\WebChallenge $value)
  * @method $this setChallengeType(string $value)
+ * @method $this setConfig(Model\WebChallengeConfig $value)
  * @method $this setEntryData(Model\ChallengeEntryData $value)
  * @method $this setMessage(mixed $value)
  * @method $this setStatus(string $value)
  * @method $this set_Messages(Model\_Message[] $value)
  * @method $this unsetChallenge()
  * @method $this unsetChallengeType()
+ * @method $this unsetConfig()
  * @method $this unsetEntryData()
  * @method $this unsetMessage()
  * @method $this unsetStatus()
@@ -38,6 +42,7 @@ class WebCheckpointResponse extends Response
         'entry_data'           => 'Model\ChallengeEntryData',
         'challenge'            => 'Model\WebChallenge',
         'challengeType'        => 'string',
+        'config'               => 'Model\WebChallengeConfig',
     ];
 
     public function getChallengeType()
@@ -71,6 +76,15 @@ class WebCheckpointResponse extends Response
             return $this->_getProperty('entry_data')->_getProperty('Challenge')[0]->_getProperty('fields')->_getProperty('choice');
         } else {
             return $this->_getProperty('challenge')->_getProperty('fields')->_getProperty('choice');
+        }
+    }
+
+    public function getCsrftoken()
+    {
+        if ($this->_getProperty('config') !== null) {
+            return $this->_getProperty('config')->_getProperty('csrf_token');
+        } else {
+            return null;
         }
     }
 }

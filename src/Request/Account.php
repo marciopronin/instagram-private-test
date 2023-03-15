@@ -1704,4 +1704,25 @@ class Account extends RequestCollection
 
         return $pages;
     }
+
+    /**
+     * Get security emails.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function getSecurityEmails()
+    {
+        return $this->ig->request('apps/com.instagram.account_security.screens.email_sent_list/')
+            ->setSignedPost(false)
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
 }

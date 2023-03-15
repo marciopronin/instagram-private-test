@@ -113,6 +113,28 @@ class Direct extends RequestCollection
     }
 
     /**
+     * Get spam inbox data.
+     *
+     * @param string|null $cursorId Next "cursor ID", used for pagination.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\DirectPendingInboxResponse
+     */
+    public function getSpamInbox(
+        $cursorId = null)
+    {
+        $request = $this->ig->request('direct_v2/spam_inbox/')
+            ->addParam('visual_message_return_type', 'unseen')
+            ->addParam('persistentBadging', 'true');
+        if ($cursorId !== null) {
+            $request->addParam('cursor', $cursorId);
+        }
+
+        return $request->getResponse(new Response\DirectPendingInboxResponse());
+    }
+
+    /**
      * Approve pending threads by given identifiers.
      *
      * @param array $threads One or more thread identifiers.

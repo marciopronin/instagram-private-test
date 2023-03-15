@@ -1,3 +1,11 @@
+# Stable release v21.9.0
+## Date: 15/03/2023
+
+### New features
+
+- **Account:** Added `getSecurityEmails()`
+- **Direct:** Added `getSpamInbox()`
+
 # Stable release v21.8.2
 ## Date: 14/03/2023
 

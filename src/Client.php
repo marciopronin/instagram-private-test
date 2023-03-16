@@ -925,7 +925,7 @@ class Client
             } catch (\Exception $e) {
                 $exp = true;
                 // Re-wrap Guzzle's exception using our own NetworkException.
-                if ($retry === 2 || !\InstagramAPI\Instagram::$retryOnNetworkException) {
+                if ($retry === ($this->_parent->retriesOnNetworkFailure - 1) || !\InstagramAPI\Instagram::$retryOnNetworkException) {
                     throw new \InstagramAPI\Exception\NetworkException($e);
                 }
             }
@@ -934,7 +934,7 @@ class Client
             }
             $retry++;
             sleep(5);
-        } while (\InstagramAPI\Instagram::$retryOnNetworkException && $retry < 3);
+        } while (\InstagramAPI\Instagram::$retryOnNetworkException && $retry < $this->_parent->retriesOnNetworkFailure);
 
         // Detect very serious HTTP status codes in the response.
         $httpCode = $response->getStatusCode();

@@ -516,6 +516,14 @@ class Instagram implements ExperimentsInterface
     public $customResolver = null;
 
     /**
+     * Number of retries to be made when retry
+     * on network failure is enabled.
+     *
+     * @var int
+     */
+    public $retriesOnNetworkFailure = 3;
+
+    /**
      * Gyroscope enabled.
      *
      * @var bool
@@ -765,6 +773,18 @@ class Instagram implements ExperimentsInterface
         $value)
     {
         $this->customResolver = $value;
+    }
+
+    /**
+     * Set number of retries to make on
+     * network failure.
+     *
+     * @param int $value.
+     */
+    public function setRetriesOnNetworkFailure(
+        $value)
+    {
+        $this->retriesOnNetworkFailure = $value;
     }
 
     /**

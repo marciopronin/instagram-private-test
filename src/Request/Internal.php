@@ -368,7 +368,7 @@ class Internal extends RequestCollection
                     ->addPost('client_shared_at', (string) time())
                     ->addPost('source_type', '3')
                     ->addPost('configure_mode', '1')
-                    ->addPost('allow_multi_configures', '1')
+                    //->addPost('allow_multi_configures', '1')
                     //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     ->addPost('client_timestamp', (string) (time() - mt_rand(3, 10)))
                     ->addPost('upload_id', $uploadId)
@@ -968,7 +968,7 @@ class Internal extends RequestCollection
                 $request
                     ->addPost('configure_mode', '1')
                     //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
-                    ->addPost('allow_multi_configures', '1')
+                    //->addPost('allow_multi_configures', '1')
                     ->addPost('story_media_creation_date', time() - mt_rand(10, 20))
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time())

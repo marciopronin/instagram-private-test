@@ -1,3 +1,15 @@
+# Stable release v21.11.0
+## Date: 16/03/2023
+
+### New features
+
+- **Instagram:** Added `setRetriesOnNetworkFailure()`
+
+### Updates and fixes
+
+- **Client:** Update `_guzzleRequest()`
+- **Internal:** Upadte `configureSinglePhoto()` and `configureSingleVideo()`
+
 # Stable release v21.10.0
 ## Date: 16/03/2023
 
@@ -8,7 +20,7 @@
 ### Updates and fixes
 
 - **Client:** Update `api()`
-- **Internal:** Upadte `configureSingleVideo()` and `configureSingleVideo()`
+- **Internal:** Upadte `configureSinglePhoto()` and `configureSingleVideo()`
 - **Event:** Update `_getModuleClass()`
 
 # Stable release v21.9.0

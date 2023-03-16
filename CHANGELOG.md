@@ -1,3 +1,16 @@
+# Stable release v21.10.0
+## Date: 16/03/2023
+
+### New features
+
+- **Reel:** Added `checkOffensiveText()`
+
+### Updates and fixes
+
+- **Client:** Update `api()`
+- **Internal:** Upadte `configureSingleVideo()` and `configureSingleVideo()`
+- **Event:** Update `_getModuleClass()`
+
 # Stable release v21.9.0
 ## Date: 15/03/2023
 

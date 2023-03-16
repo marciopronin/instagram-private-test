@@ -344,6 +344,9 @@ class Event extends RequestCollection
             case 'private_story_share_sheet':
                 $class = 'PrivateStoryShareSheetFragment';
                 break;
+            case 'direct_story_audience_picker':
+                $class = 'DirectPrivateStoryRecipientFragment';
+                break;
             case 'change_email':
                 $class = 'ChangeEmailFragment';
                 break;

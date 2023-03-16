@@ -391,6 +391,26 @@ class Reel extends RequestCollection
     }
 
     /**
+     * Check offensive text.
+     *
+     * @param string $text Text to check.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function checkOffensiveText(
+        $text = '')
+    {
+        return $this->ig->request('warning/check_offensive_text/')
+            ->addPost('text', $text)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('request_type', 'caption')
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get videos chaining.
      *
      * @param string|null $chainingMedia Chaining media ID (Parent).

@@ -1143,8 +1143,12 @@ class Client
                 $this->_parent->settings->set('salt_ids', $this->generateNewFlowId(1061163349));
             }
 
+            if (strpos($request->getUri(), 'media/configure') !== false) {
+                $this->_parent->settings->set('salt_ids', $this->generateFlowId(1061163349, 1));
+            }
+
             if ($this->_parent->settings->get('salt_ids') !== null) {
-                $headers['set_headers']['X-IG-Salt-Ids'] = $this->_parent->settings->get('salt_ids');
+                $headers['set_headers']['X-IG-SALT-IDS'] = $this->_parent->settings->get('salt_ids');
             }
         }
 
@@ -1384,7 +1388,7 @@ class Client
             'X-IG-Timezone-Offset',
             'X-IG-Nav-Chain',
             'X-IG-Client-Endpoint',
-            'X-IG-Salt-Ids',
+            'X-IG-SALT-IDS',
             'X-FB-Connection-Type',
             'X-IG-Connection-Type',
             'X-IG-Capabilities',

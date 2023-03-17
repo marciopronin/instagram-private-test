@@ -277,6 +277,7 @@ class Event extends RequestCollection
                 $class = 'DirectSearchInboxFragment';
                 break;
             case 'reel_profile':
+            case 'reel_feed_timeline':
                 $class = 'ReelViewerFragment';
                 break;
             case 'edit_profile':
@@ -328,6 +329,9 @@ class Event extends RequestCollection
                 break;
             case 'clips_share_sheet':
                 $class = 'ClipsShareSheetFragment';
+                break;
+            case 'private_stories_share_sheet':
+                $class = 'PrivateStoryShareSheetFragment';
                 break;
             case 'reels_share_to_fb_upsell_fragment':
                 $class = 'ReelsShareToFbUpsellFragment';
@@ -3963,6 +3967,10 @@ class Event extends RequestCollection
                     'dest_module'   => 'quick_capture_fragment',
                 ],
                 [
+                    'clickpoint'    => 'your_story_dialog_option',
+                    'dest_module'   => 'stories_precapture_camera',
+                ],
+                [
                     'clickpoint'    => 'inferred_source',
                     'dest_module'   => 'profile',
                 ],
@@ -4005,6 +4013,18 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'reels_share_to_fb_upsell_fragment',
+                ],
+            ],
+            'private_stories_share_sheet'    => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'direct_story_audience_picker',
+                ],
+            ],
+            'direct_story_audience_picker'    => [
+                [
+                    'clickpoint'    => 'story_posted_from_camera',
+                    'dest_module'   => 'feed_timeline',
                 ],
             ],
             'reels_share_to_fb_upsell_fragment'    => [
@@ -4363,6 +4383,10 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'button',
                     'dest_module'   => 'clips_share_sheet',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'private_stories_share_sheet',
                 ],
             ],
             'story_stickers_tray' => [
@@ -5105,6 +5129,12 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'story_posted_from_camera',
                     'dest_module'   => 'feed_timeline',
+                ],
+            ],
+            'stories_precapture_camera' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'reel_composer_preview',
                 ],
             ],
             'app_background_detector' => [

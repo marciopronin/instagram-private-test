@@ -1,3 +1,15 @@
+# Stable release v21.11.1
+## Date: 17/01/2022
+
+### Updates and fixes
+
+- **Event:** Update `_getModuleClass()`
+- **Event:** Update `_validateNavigationPath()`
+
+### Examples
+
+- **Example:** Added example uploadStoryFromTimeline
+
 # Stable release v21.11.0
 ## Date: 16/03/2023
 

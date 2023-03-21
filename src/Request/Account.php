@@ -1714,7 +1714,7 @@ class Account extends RequestCollection
      */
     public function getSecurityEmails()
     {
-        return $this->ig->request('apps/com.instagram.account_security.screens.email_sent_list/')
+        return $this->ig->request('bloks/apps/com.instagram.account_security.screens.email_sent_list/')
             ->setSignedPost(false)
             ->addPost('bk_client_context', json_encode((object) [
                 'bloks_version' => Constants::BLOCK_VERSIONING_ID,

@@ -1,3 +1,10 @@
+# Stable release v21.11.2
+## Date: 21/03/2023
+
+### Updates and fixes
+
+- **Account:** Update `getSecurityEmails()`
+
 # Stable release v21.11.1
 ## Date: 17/01/2022
 

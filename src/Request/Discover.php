@@ -534,4 +534,22 @@ class Discover extends RequestCollection
             ->addParam('entry_point', $entryPoint)
             ->getResponse(new Response\DiscoveryAccountsResponse());
     }
+
+    /**
+     * Get recommended users for you.
+     *
+     * @param bool $fromNux
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\DiscoveryAccountsResponse
+     */
+    public function getRecommendedAccounts(
+        $fromNux = false)
+    {
+        return $this->ig->request('discover/sectioned_ayml/')
+            ->setSignedPost(false)
+            ->addParam('request_from_nux', ($fromNux) ? 'true' : 'false')
+            ->getResponse(new Response\DiscoveryAccountsResponse());
+    }
 }

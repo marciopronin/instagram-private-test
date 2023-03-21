@@ -3899,6 +3899,10 @@ class Event extends RequestCollection
                     'dest_module'   => 'newsfeed_you',
                 ],
                 [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'newsfeed_you',
+                ],
+                [
                     'clickpoint'    => 'main_profile',
                     'dest_module'   => 'self_profile',
                 ],
@@ -6526,10 +6530,13 @@ class Event extends RequestCollection
      *
      * This event should be sent when tapped the suggested follow button.
      *
-     * @param string $userId   The user ID.
-     * @param string $module   Module.
-     * @param int    $position Position.
-     * @param bool   $follow   Follow flag.
+     * @param string $userId         The user ID.
+     * @param string $module         Module.
+     * @param int    $position       Position.
+     * @param bool   $follow         Follow flag.
+     * @param string $viewModule     View module.
+     * @param string $social_context Social context.
+     * @param mixed  $socialContext
      *
      * @throws \InstagramAPI\Exception\InstagramException
      */
@@ -6537,12 +6544,14 @@ class Event extends RequestCollection
         $userId,
         $module,
         $position,
-        $follow = true)
+        $follow = true,
+        $viewModule = 'hscroll_aymf_feed_unit',
+        $socialContext = 'Instagram recommended')
     {
         $extra = [
             'target_id'             => $userId,
             'position'              => $position,
-            'view_module'           => 'hscroll_aymf_feed_unit',
+            'view_module'           => $viewModule,
             'algorithm'             => 'unknown',
             'view_state_item_type'  => 0,
             'container_module'      => $module,
@@ -6550,7 +6559,7 @@ class Event extends RequestCollection
             'follow_status'         => ($follow === true) ? 'following' : 'not_following',
             'follow_impression_id'  => null,
             'ranking_algorithm'     => 'su_default',
-            'social_context'        => 'Instagram recommended',
+            'social_context'        => $socialContext,
             'insertion_context'     => null,
             'display_format'        => 'fish-eye',
             'netego_unit_id'        => null,

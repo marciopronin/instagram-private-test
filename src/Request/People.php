@@ -826,14 +826,18 @@ class People extends RequestCollection
     /**
      * Unlink your address book from Instagram.
      *
+     * @param bool $userInitiated.
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\UnlinkAddressBookResponse
      */
-    public function unlinkAddressBook()
+    public function unlinkAddressBook(
+        $userInitiated = true)
     {
         return $this->ig->request('address_book/unlink/')
-            ->addPost('user_initiated', 'true')
+            ->setSignedPost(false)
+            ->addPost('user_initiated', ($userInitiated) ? 'true' : 'false')
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_uuid', $this->ig->uuid)

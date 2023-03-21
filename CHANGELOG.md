@@ -1,3 +1,17 @@
+# Stable release v21.12.0
+## Date: 21/03/2023
+
+### New features
+
+- **Discover:** Added `getRecommendedAccounts()`
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+- **Event:** Update `sendRecommendedFollowButtonTapped()`
+- **People:** Update `unlinkAddressBook()`
+- **Model and Responses:** Update `DiscoveryAccountsCategories` and added `DiscoverySuggestions` and `DiscoverySuggestedGroup`
+
 # Stable release v21.11.2
 ## Date: 21/03/2023
 

@@ -1824,6 +1824,10 @@ class Instagram implements ExperimentsInterface
                 }
             }
 
+            if ($response->getLoggedInUser()->getUsername() === 'Instagram User') {
+                throw new \InstagramAPI\Exception\AccountDisabledException('Account has been suspended.');
+            }
+
             /*
             try {
                 $this->account->getAccountsMultiLogin($response->getMacLoginNonce());

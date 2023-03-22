@@ -274,7 +274,7 @@ class Anticaptcha
     public function setErrorMessage(
         $message
     ): void {
-        $this->errorMessage = $message;
+        $this->_errorMessage = $message;
     }
 
     /**

@@ -3203,7 +3203,19 @@ class Instagram implements ExperimentsInterface
                     $this->client->stopEmulatingBatch();
                 }
             } else {
-                //TODO
+                try {
+                    $this->story->getReelsTrayFeed('cold_start');
+                } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                    if (!self::$manuallyManageLoginException) {
+                        // If our session cookies are expired, we were now told to login,
+                        // so handle that by running a forced relogin in that case!
+                        return $this->_login($this->username, $this->password, true, $appRefreshInterval);
+                    } else {
+                        throw $e;
+                    }
+                } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
+                    // This can have EmptyResponse, and that's ok.
+                }
             }
 
             // Users normally resume their sessions, meaning that their

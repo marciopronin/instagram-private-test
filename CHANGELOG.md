@@ -1,3 +1,11 @@
+# Stable release v21.12.1
+## Date: 22/03/2023
+
+### Updates and fixes
+
+- **Anticaptcha:** Update `setErrorMessage()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v21.12.0
 ## Date: 21/03/2023
 

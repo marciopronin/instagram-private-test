@@ -881,7 +881,7 @@ class Instagram implements ExperimentsInterface
      */
     public function getVersionCode()
     {
-        $this->versionCode;
+        return $this->versionCode;
     }
 
     /**

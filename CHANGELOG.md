@@ -1,7 +1,16 @@
+# Stable release v21.13.1
+## Date: 23/03/2023
+
+## Update to this release is recommended as soon as possible!!
+
+### Updates and fixes
+
+- **Instagram:** Update `getVersionCode()`. Fixed a bug where version code was not returned and thus generating an incomplete User Agent. Update to this release is recommended as soon as possible!!
+
 # Stable release v21.13.0
 ## Date: 23/03/2023
 
-### new features
+### New features
 
 - **Instagram:** Added `setCustomDevices()`
 

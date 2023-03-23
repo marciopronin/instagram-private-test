@@ -1,3 +1,10 @@
+# Stable release v21.13.2
+## Date: 23/03/2023
+
+### Updates and fixes
+
+- **Constats:** Update constants to 274.0.0.26.90 version
+
 # Stable release v21.13.1
 ## Date: 23/03/2023
 

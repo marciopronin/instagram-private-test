@@ -825,6 +825,24 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
+     * Set a custom list if device string.
+     *
+     * A random deviece string will be picked from the provided list.
+     * If the provided device string is not valid, a device from
+     * the good devices list will be chosen randomly.
+     *
+     * @param string[]|null $value Device string.
+     */
+    public function setCustomDevices(
+        $value)
+    {
+        if (is_array($value)) {
+            $deviceString = array_rand($value);
+            $this->customDeviceString = is_string($deviceString) ? $deviceString : null;
+        }
+    }
+
+    /**
      * Set a custom device ID.
      *
      * @param string|null $value Device string.

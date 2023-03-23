@@ -1,3 +1,10 @@
+# Stable release v21.13.0
+## Date: 23/03/2023
+
+### new features
+
+- **Instagram:** Added `setCustomDevices()`
+
 # Stable release v21.12.2
 ## Date: 23/03/2023
 

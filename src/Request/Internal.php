@@ -1515,14 +1515,14 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', 'eb4868dff48d6b6a7a942933d0df98f81825d40379f9c7bdac650cc34528eb47')
+                ->addPost('query_hash', '75a020b8fb8fd76fa8e67924be66890e96188c3c922a46a85e029d301fd36c1d')
                 ->addPost('ts', time())
                 ->addPost('family_device_id', strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '55c57830cb8ba9ab1a7fafd27eb4af4198fc3dd1f932e7ab1135b52bc5b74a3d');
+                ->addPost('query_hash', '2a05bd235e1c4f17abd1ae5888071f1f18c35aab3a926067033aa1ebbeaf813e');
         }
 
         $result = $request->getResponse(new Response\MobileConfigResponse());
@@ -1714,7 +1714,7 @@ class Internal extends RequestCollection
         if ($result === true) {
             $endpoint = 'zr/token/result/';
         } else {
-            $endpoint = 'zr/tokens/';
+            $endpoint = 'zr/dual_tokens/';
         }
         $request = $this->ig->request($endpoint)
             ->setNeedsAuth(false)
@@ -1722,7 +1722,7 @@ class Internal extends RequestCollection
             ->addPost('custom_device_id', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('fetch_reason', $reason)
-            ->addPost('token_hash', (string) $this->ig->settings->get('zr_token'));
+            ->addPost('normal_token_hash', (string) $this->ig->settings->get('zr_token'));
 
         if ($prelogin === false) {
             $request->addPost('_uuid', $this->ig->uuid);
@@ -1730,7 +1730,7 @@ class Internal extends RequestCollection
 
         /** @var Response\TokenResultResponse $result */
         $result = $request->getResponse(new Response\TokenResultResponse());
-        $this->_saveZeroRatingToken($result->getToken());
+        $this->_saveZeroRatingToken($result->getNormalToken());
 
         return $result;
     }

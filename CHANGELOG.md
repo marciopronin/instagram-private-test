@@ -1,3 +1,17 @@
+# Stable release v21.14.0
+## Date: 27/03/2023
+
+### New features
+
+- **Instagram:** New static property has been added to override GoodDevices autofallback check, `overrideGoodDevicesCheck`.
+
+### Updates and fixes
+
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `fetchZeroRatingToken()`. Endpoint and response has been updated to correctly obtain rewrite rules.
+- **Response:** Update TokenResultResponse
+- **Reel:** Update `discover()`
+
 # Stable release v21.13.2
 ## Date: 23/03/2023
 

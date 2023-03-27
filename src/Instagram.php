@@ -191,6 +191,13 @@ class Instagram implements ExperimentsInterface
     public static $disableLoginBloks = false;
 
     /**
+     * Override GoodDevices check.
+     *
+     * @var bool
+     */
+    public static $overrideGoodDevicesCheck = false;
+
+    /**
      * UUID.
      *
      * @var string
@@ -837,7 +844,7 @@ class Instagram implements ExperimentsInterface
         $value)
     {
         if (is_array($value)) {
-            $deviceString = array_rand($value);
+            $deviceString = $value[array_rand($value)];
             $this->customDeviceString = is_string($deviceString) ? $deviceString : null;
         }
     }
@@ -2433,12 +2440,12 @@ class Instagram implements ExperimentsInterface
         // Generate the user's device instance, which will be created from the
         // user's last-used device IF they've got a valid, good one stored.
         // But if they've got a BAD/none, this will create a brand-new device.
-        if ($this->customDeviceString !== null) {
-            $savedDeviceString = $this->customDeviceString;
-            $autoFallback = false;
-        } else {
+
+        $autoFallback = self::$overrideGoodDevicesCheck ? false : true;
+        if ($this->settings->get('devicestring') !== null) {
             $savedDeviceString = $this->settings->get('devicestring');
-            $autoFallback = true;
+        } elseif ($this->customDeviceString !== null) {
+            $savedDeviceString = $this->customDeviceString;
         }
 
         $this->device = new Devices\Device(

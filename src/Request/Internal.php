@@ -41,14 +41,36 @@ class Internal extends RequestCollection
     /** @var int Number of retries for resumable uploader. */
     const MAX_RESUMABLE_RETRIES = 15;
 
-    /** @var int Number of retries for each media configuration. */
-    const MAX_CONFIGURE_RETRIES = 25;
-
     /** @var int Minimum video chunk size in bytes. */
     const MIN_CHUNK_SIZE = 204800;
 
     /** @var int Maximum video chunk size in bytes. */
     const MAX_CHUNK_SIZE = 5242880;
+
+    /** @var int Number of retries for each media configuration. */
+    protected $_maxConfigureRetries = 25;
+
+    /**
+     * Set max configure retries.
+     *
+     * @param int $value Max Configure retries.
+     */
+    public function setMaxConfigureRetries(
+        $value)
+    {
+        if (is_int($value) === false || ($value < 0 || $value > 25)) {
+            throw new \InvalidArgumentException('The supplied value for max configure retries is not valid.');
+        }
+        $this->_maxConfigureRetries = $value;
+    }
+
+    /**
+     * Get max configure retries.
+     */
+    public function getMaxConfigureRetries()
+    {
+        return $this->_maxConfigureRetries;
+    }
 
     /**
      * UPLOADS A *SINGLE* PHOTO.
@@ -2411,7 +2433,7 @@ class Internal extends RequestCollection
         $lastError = null;
         while (true) {
             // Check for max retry-limit, and throw if we exceeded it.
-            if (++$attempt > self::MAX_CONFIGURE_RETRIES) {
+            if (++$attempt > $this->getMaxConfigureRetries()) {
                 if ($lastError === null) {
                     throw new \RuntimeException('All configuration retries have failed.');
                 }

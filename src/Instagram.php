@@ -2446,6 +2446,9 @@ class Instagram implements ExperimentsInterface
             $savedDeviceString = $this->settings->get('devicestring');
         } elseif ($this->customDeviceString !== null) {
             $savedDeviceString = $this->customDeviceString;
+        } else {
+            $savedDeviceString = null;
+            $autoFallback = true;
         }
 
         $this->device = new Devices\Device(

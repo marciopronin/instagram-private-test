@@ -1,3 +1,15 @@
+# Stable release v21.15.0
+## Date: 29/03/2023
+
+### New features
+
+- **Internal:** Added new functions to configure maximum number of configure retries. `setMaxConfigureRetries()` and `getMaxConfigureRetries()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_setUser()`.
+- **InstagramMedia:** Fixed a warning of creation of dynamic property.
+
 # Stable release v21.14.0
 ## Date: 27/03/2023
 

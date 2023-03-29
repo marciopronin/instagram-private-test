@@ -101,6 +101,9 @@ abstract class InstagramMedia
      * themselves, which means we should be VERY strict about applying it. */
     protected $_hasUserForceTargetAspectRatio;
 
+    /** @var bool Whether the output should be in JPEG format or not. */
+    protected $_jpgOutput;
+
     /**
      * Constructor.
      *

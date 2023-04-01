@@ -1,3 +1,11 @@
+# Stable release v21.15.1
+## Date: 01/04/2023
+
+### Updates and fixes
+
+- **Checkpoint:** Update `sendCaptchaResponse()`.
+- **Internal:** Update `getQPCooldowns()`
+
 # Stable release v21.15.0
 ## Date: 29/03/2023
 

@@ -295,6 +295,7 @@ class Checkpoint extends RequestCollection
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
+            ->setIsSilentFail(true)
             ->addPost('g-recaptcha-response', $response)
             ->getResponse(new Response\WebCheckpointResponse());
     }

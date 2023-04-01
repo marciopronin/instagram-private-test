@@ -1898,7 +1898,6 @@ class Internal extends RequestCollection
     {
         return $this->ig->request('qp/get_cooldowns/')
             ->addParam('signed_body', Signatures::generateSignature(json_encode((object) [])).'.{}')
-            ->addParam('ig_sig_key_version', Constants::SIG_KEY_VERSION)
             ->getResponse(new Response\QPCooldownsResponse());
     }
 

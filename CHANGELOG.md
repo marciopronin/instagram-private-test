@@ -1,3 +1,16 @@
+# Stable release v21.16.0
+## Date: 13/04/2023
+
+### New features
+
+- **Instagram:** Added new bloks login system. Can be enabled by: `\InstagramAPI\Instgram::$useBloksLogin = true`. While it is fully operational, use with caution since we currently do not know all possible situations if anything fails.
+- **Bloks:** New system to parse, decode and map bloks responses.
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`.
+- **Utils:** Update `encryptPassword()`
+
 # Stable release v21.15.1
 ## Date: 01/04/2023
 

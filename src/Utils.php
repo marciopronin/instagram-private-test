@@ -232,32 +232,35 @@ class Utils
      * @param string $password    Password.
      * @param string $publicKeyId Public Key ID.
      * @param string $publicKey   Public Key.
+     * @param mixed  $isBloks
      *
      * @return string
      */
     public static function encryptPassword(
         $password,
         $publicKeyId,
-        $publicKey)
+        $publicKey,
+        $isBloks = false)
     {
         $key = openssl_random_pseudo_bytes(32);
         $iv = openssl_random_pseudo_bytes(12);
         $time = time();
 
-        /* Disabled
         // Fallback mode.
         if (empty($publicKey) || empty($publicKeyId)) {
-            $publicKey = openssl_pkey_get_public(Constants::IG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY);
-            $publicKeyId = Constants::IG_LOGIN_DEFAULT_ANDROID_PUBLIC_KEY_ID;
+            $publicKey = openssl_pkey_get_public(Constants::IG_LOGIN_DEFAULT_PUBLIC_KEY);
+            $publicKeyId = Constants::IG_LOGIN_DEFAULT_PUBLIC_KEY_ID;
+            openssl_public_encrypt($key, $encryptedAesKey, $publicKey);
+        } else {
+            openssl_public_encrypt($key, $encryptedAesKey, base64_decode($publicKey));
         }
-        */
 
-        openssl_public_encrypt($key, $encryptedAesKey, base64_decode($publicKey));
         $encrypted = openssl_encrypt($password, 'aes-256-gcm', $key, OPENSSL_RAW_DATA, $iv, $tag, strval($time));
-
         $payload = base64_encode("\x01" | pack('n', intval($publicKeyId)).$iv.pack('s', strlen($encryptedAesKey)).$encryptedAesKey.$tag.$encrypted);
 
-        return sprintf('#PWD_INSTAGRAM:4:%s:%s', $time, $payload);
+        $version = ($isBloks) ? '1' : '4';
+
+        return sprintf('#PWD_INSTAGRAM:%s:%s:%s', $version, $time, $payload);
     }
 
     /**

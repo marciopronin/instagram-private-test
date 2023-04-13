@@ -198,6 +198,13 @@ class Instagram implements ExperimentsInterface
     public static $overrideGoodDevicesCheck = false;
 
     /**
+     * Use bloks login.
+     *
+     * @var bool
+     */
+    public static $useBloksLogin = false;
+
+    /**
      * UUID.
      *
      * @var string
@@ -263,6 +270,13 @@ class Instagram implements ExperimentsInterface
      * @var Client
      */
     public $client;
+
+    /**
+     * Bloks class.
+     *
+     * @var Bloks
+     */
+    public $bloks;
 
     /**
      * The account settings storage.
@@ -717,6 +731,7 @@ class Instagram implements ExperimentsInterface
             ]
         );
         $this->client = new Client($this);
+        $this->bloks = new Bloks();
         $this->experiments = [];
     }
 
@@ -1791,66 +1806,281 @@ class Instagram implements ExperimentsInterface
             $this->event->sendFxSsoLibrary('auth_token_write_start', null, 'log_in');
             $this->event->sendFxSsoLibrary('auth_token_write_failure', 'provider_not_found', 'log_in');
 
-            try {
-                $request = $this->request('accounts/login/')
+            if (self::$useBloksLogin) {
+                $this->loginAttemptCount = 1;
+                $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.process_client_data_and_redirect/')
                     ->setNeedsAuth(false)
-                    ->addPost('jazoest', Utils::generateJazoest($this->phone_id))
-                    ->addPost('device_id', $this->device_id)
-                    ->addPost('username', $this->username)
-                    ->addPost('enc_password', Utils::encryptPassword($password, $this->settings->get('public_key_id'), $this->settings->get('public_key')))
-                    //->addPost('_csrftoken', $this->client->getToken())
-                    ->addPost('phone_id', $this->phone_id)
-                    ->addPost('adid', $this->advertising_id)
-                    ->addPost('login_attempt_count', $this->loginAttemptCount);
+                    ->setSignedPost(false)
+                    ->addPost('params', json_encode([
+                        'logged_out_user'           => '',
+                        'family_device_id'          => $this->phone_id,
+                        'device_id'                 => $this->device_id,
+                        'offline_experiment_group'  => 'caa_launch_ig4a_combined_60_percent',
+                        'waterfall_id'              => $waterfallId,
+                        'show_internal_settings'    => false,
+                        'qe_device_id'              => $this->uuid,
+                        'account_list'              => [],
+                        'blocked_uid'               => [],
+                    ]))
+                    ->addPost('bk_client_context', json_encode([
+                        'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                        'styles_id'     => 'instagram',
+                    ]))
+                    ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+                    ->getResponse(new Response\GenericResponse());
 
-                if ($deletionToken !== null) {
-                    $request->addPost('stop_deletion_token', $deletionToken);
-                }
-
-                if ($this->getPlatform() === 'android') {
-                    $request->addPost('country_codes', json_encode(
-                        [
-                            [
-                                'country_code' => Utils::getCountryCode(explode('_', $this->getLocale())[1]),
-                                'source'       => [
-                                    'default',
-                                ],
-                            ],
-                        ]
-                    ))
-                        ->addPost('guid', $this->uuid)
-                        ->addPost('google_tokens', '[]');
-                } elseif ($this->getPlatform() === 'ios') {
-                    $request->addPost('reg_login', '0');
-                }
-                $response = $request->getResponse(new Response\LoginResponse());
-                if ($response->getLoggedInUser()->getIsBusiness() !== null) {
-                    $this->settings->set('business_account', $response->getLoggedInUser()->getIsBusiness());
-                }
-            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
-                // Login failed because checkpoint is required.
-                // Return server response to tell user they to bypass checkpoint.
-                throw $e;
-            } catch (\InstagramAPI\Exception\InstagramException $e) {
-                if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
-                    // Login failed because two-factor login is required.
-                    // Return server response to tell user they need 2-factor.
-                    return $e->getResponse();
-                } elseif ($e->hasResponse() && ($e->getResponse()->getInvalidCredentials() === true)) {
-                    $this->loginAttemptCount++;
-
-                    throw $e;
-                } else {
-                    if ($e->getResponse() === null) {
-                        throw new \InstagramAPI\Exception\NetworkException($e);
+                $responseArr = $response->asArray();
+                $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+                $firstDataBlok = null;
+                $secondDataBlok = null;
+                $thirdDataBlok = null;
+                foreach ($mainBloks as $mainBlok) {
+                    if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
+                        $firstDataBlok = $mainBlok;
                     }
-                    // Login failed for some other reason... Re-throw error.
-                    throw $e;
+                    if (str_contains($mainBlok, 'typeahead_id') && str_contains($mainBlok, 'text_input_id') && str_contains($mainBlok, 'text_component_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
+                        $secondDataBlok = $mainBlok;
+                    }
+                    if ($firstDataBlok !== null && $secondDataBlok !== null) {
+                        break;
+                    }
                 }
-            }
+                if ($firstDataBlok === null) {
+                    throw new \InstagramAPI\Exception\InstagramException('Login bloks values not found! Please report this with debug log.');
+                }
 
-            if ($response->getLoggedInUser()->getUsername() === 'Instagram User') {
-                throw new \InstagramAPI\Exception\AccountDisabledException('Account has been suspended.');
+                $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->bloks->findOffsets($parsed, 'offline_experiment_group'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+
+                $firstMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+
+                $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL_INFRA_THEME'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+
+                $secondMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+
+                $response = $this->request('bloks/apps/com.bloks.www.caa.login.cp_text_input_type_ahead/')
+                    ->setNeedsAuth(false)
+                    ->setSignedPost(false)
+                    ->addPost('params', json_encode([
+                        'client_input_params'           => [
+                            'account_centers'   => [],
+                            'query'             => $username,
+                        ],
+                        'server_params'         => [
+                            'text_input_id'                     => $secondMap['text_input_id'][1],
+                            'typeahead_id'                      => $secondMap['typeahead_id'][1],
+                            'text_component_id'                 => $secondMap['text_component_id'][1],
+                            'INTERNAL__latency_qpl_marker_id'   => $secondMap['INTERNAL__latency_qpl_marker_id'][1],
+                            'INTERNAL_INFRA_THEME'              => $secondMap['INTERNAL_INFRA_THEME'][1],
+                            'fdid'                              => $secondMap['fdid'],
+                            'screen_id'                         => $secondMap['screen_id'][1],
+                            'INTERNAL__latency_qpl_instance_id' => $secondMap['INTERNAL__latency_qpl_instance_id'][1],
+                        ],
+                    ]))
+                    ->addPost('bk_client_context', json_encode([
+                        'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                        'styles_id'     => 'instagram',
+                    ]))
+                    ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+                    ->getResponse(new Response\GenericResponse());
+
+                $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/')
+                    ->setNeedsAuth(false)
+                    ->setSignedPost(false)
+                    ->addPost('params', json_encode([
+                        'client_input_params'           => [
+                            'device_id'                     => $this->device_id,
+                            'login_attempt_count'           => $this->loginAttemptCount,
+                            'secure_family_device_id'       => '',
+                            'machine_id'                    => $this->settings->get('mid'),
+                            'accounts_list'                 => [],
+                            'auth_secure_device_id'         => '',
+                            'password'                      => Utils::encryptPassword($password, '', '', true), // Encrypt password with default key and type 1.
+                            'family_device_id'              => $this->phone_id,
+                            'fb_ig_device_id'               => [],
+                            'device_emails'                 => [],
+                            'try_num'                       => $this->loginAttemptCount,
+                            'event_flow'                    => 'login_manual',
+                            'event_step'                    => 'home_page',
+                            'openid_tokens'                 => (object) [],
+                            'contact_point'                 => $username,
+                        ],
+                        'server_params'         => [
+                            'username_text_input_id'            => $firstMap['username_text_input_id'],
+                            'device_id'                         => $this->device_id,
+                            'server_login_source'               => $firstMap['server_login_source'],
+                            'waterfall_id'                      => $firstMap['waterfall_id'],
+                            'login_source'                      => $firstMap['login_source'],
+                            'INTERNAL__latency_qpl_instance_id' => $firstMap['INTERNAL__latency_qpl_instance_id'][1],
+                            'is_platform_login'                 => intval($firstMap['is_platform_login'][1]),
+                            'credential_type'                   => $firstMap['credential_type'],
+                            'family_device_id'                  => $this->phone_id,
+                            'INTERNAL__latency_qpl_marker_id'   => $firstMap['INTERNAL__latency_qpl_marker_id'][1],
+                            'offline_experiment_group'          => $firstMap['offline_experiment_group'],
+                            'password_text_input_id'            => $firstMap['password_text_input_id'],
+                            'qe_device_id'                      => $this->uuid,
+                            'ar_event_source'                   => $firstMap['ar_event_source'],
+                        ],
+                    ]))
+                    ->addPost('bk_client_context', json_encode([
+                        'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                        'styles_id'     => 'instagram',
+                    ]))
+                    ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+                    ->getResponse(new Response\LoginResponse());
+
+                $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+
+                if (is_array($loginResponseWithHeaders)) {
+                    $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\exception_message\\'), 0, -2);
+
+                    foreach ($offsets as $offset) {
+                        if (isset($loginResponseWithHeaders[$offset])) {
+                            $loginResponseWithHeaders = $loginResponseWithHeaders[$offset];
+                        } else {
+                            break;
+                        }
+                    }
+
+                    $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
+                    foreach ($errorMap as $key => $value) {
+                        if (!is_array($errorMap[$key])) {
+                            $errorMap[stripslashes($key)] = stripslashes($value);
+                        }
+                        unset($errorMap[$key]);
+                    }
+
+                    if (isset($errorMap['exception_message'])) {
+                        print_r($errorMap);
+                        switch ($errorMap['exception_message']) {
+                            case 'Login Error: An unexpected error occurred. Please try logging in again.':
+                                throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
+                                break;
+                            case 'Incorrect Password: The password you entered is incorrect. Please try again.':
+                                throw new \InstagramAPI\Exception\IncorrectPasswordException($errorMap['exception_message']);
+                                break;
+                            default:
+                                if (isset($errorMap['event_category'])) {
+                                    if ($errorMap['event_category'] === 'checkpoint') {
+                                        $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\error_user_msg\\'), 0, -2);
+
+                                        foreach ($offsets as $offset) {
+                                            if (isset($loginResponseWithHeaders[$offset])) {
+                                                $loginResponseWithHeaders = $loginResponseWithHeaders[$offset];
+                                            } else {
+                                                break;
+                                            }
+                                        }
+
+                                        $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
+                                        foreach ($errorMap as $key => $value) {
+                                            if (!is_array($errorMap[$key])) {
+                                                $errorMap[stripslashes($key)] = stripslashes($value);
+                                            }
+                                            unset($errorMap[$key]);
+                                        }
+                                    }
+                                }
+
+                                throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
+                                break;
+                        }
+                    }
+                }
+
+                $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
+                $loginResponse = new Response\LoginResponse(json_decode($loginResponseWithHeaders['login_response'], true));
+                $headers = json_decode($loginResponseWithHeaders['headers'], true);
+
+                $this->settings->set('public_key', $headers['IG-Set-Password-Encryption-Pub-Key']);
+                $this->settings->set('public_key_id', $headers['IG-Set-Password-Encryption-Key-Id']);
+                $this->settings->set('authorization_header', $headers['IG-Set-Authorization']);
+
+                if ($loginResponse->getLoggedInUser()->getUsername() === 'Instagram User') {
+                    throw new \InstagramAPI\Exception\AccountDisabledException('Account has been suspended.');
+                }
+                if ($loginResponse->getLoggedInUser()->getIsBusiness() !== null) {
+                    $this->settings->set('business_account', $loginResponse->getLoggedInUser()->getIsBusiness());
+                }
+            } else {
+                try {
+                    $request = $this->request('accounts/login/')
+                        ->setNeedsAuth(false)
+                        ->addPost('jazoest', Utils::generateJazoest($this->phone_id))
+                        ->addPost('device_id', $this->device_id)
+                        ->addPost('username', $this->username)
+                        ->addPost('enc_password', Utils::encryptPassword($password, $this->settings->get('public_key_id'), $this->settings->get('public_key')))
+                        //->addPost('_csrftoken', $this->client->getToken())
+                        ->addPost('phone_id', $this->phone_id)
+                        ->addPost('adid', $this->advertising_id)
+                        ->addPost('login_attempt_count', $this->loginAttemptCount);
+
+                    if ($deletionToken !== null) {
+                        $request->addPost('stop_deletion_token', $deletionToken);
+                    }
+
+                    if ($this->getPlatform() === 'android') {
+                        $request->addPost('country_codes', json_encode(
+                            [
+                                [
+                                    'country_code' => Utils::getCountryCode(explode('_', $this->getLocale())[1]),
+                                    'source'       => [
+                                        'default',
+                                    ],
+                                ],
+                            ]
+                        ))
+                            ->addPost('guid', $this->uuid)
+                            ->addPost('google_tokens', '[]');
+                    } elseif ($this->getPlatform() === 'ios') {
+                        $request->addPost('reg_login', '0');
+                    }
+                    $loginResponse = $request->getResponse(new Response\LoginResponse());
+                    if ($loginResponse->getLoggedInUser()->getIsBusiness() !== null) {
+                        $this->settings->set('business_account', $loginResponse->getLoggedInUser()->getIsBusiness());
+                    }
+                } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                    // Login failed because checkpoint is required.
+                    // Return server response to tell user they to bypass checkpoint.
+                    throw $e;
+                } catch (\InstagramAPI\Exception\InstagramException $e) {
+                    if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
+                        // Login failed because two-factor login is required.
+                        // Return server response to tell user they need 2-factor.
+                        return $e->getResponse();
+                    } elseif ($e->hasResponse() && ($e->getResponse()->getInvalidCredentials() === true)) {
+                        $this->loginAttemptCount++;
+
+                        throw $e;
+                    } else {
+                        if ($e->getResponse() === null) {
+                            throw new \InstagramAPI\Exception\NetworkException($e);
+                        }
+                        // Login failed for some other reason... Re-throw error.
+                        throw $e;
+                    }
+                }
+
+                if ($loginResponse->getLoggedInUser()->getUsername() === 'Instagram User') {
+                    throw new \InstagramAPI\Exception\AccountDisabledException('Account has been suspended.');
+                }
             }
 
             /*
@@ -1878,12 +2108,12 @@ class Instagram implements ExperimentsInterface
             $this->event->sendScreenshotDetector();
             $this->event->sendNavigationTabImpression(0);
             $this->loginAttemptCount = 0;
-            $this->_updateLoginState($response);
+            $this->_updateLoginState($loginResponse);
 
             $this->_sendLoginFlow(true, $appRefreshInterval);
 
             // Full (re-)login successfully completed. Return server response.
-            return $response;
+            return $loginResponse;
         }
 
         // Attempt to resume an existing session, or full re-login if necessary.

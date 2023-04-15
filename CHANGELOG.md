@@ -1,3 +1,10 @@
+# Stable release v21.16.1
+## Date: 15/04/2023
+
+### Updates and fixes
+
+- **Bloks:** Update `_fixJsonString()`
+
 # Stable release v21.16.0
 ## Date: 13/04/2023
 

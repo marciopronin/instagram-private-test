@@ -99,8 +99,8 @@ class Bloks
         $search = ['\\\\', '\\"', "\n", '\\r', '\\t', '\\b', '\\f', "\x0d"];
         $replace = ['\\', '"', '\\n', "\r", "\t", "\b", "\f", ''];
         $json_string = str_replace($search, $replace, $string);
-        $search = ['\\\\\\', '\\\\\\\\\\\\', '\"login_response\":\\', 'Secure\"', '\",\"headers\":\"', '\",\"cookies\":\"'];
-        $replace = ['\\', '\\\\\\', '"login_response":', 'Secure"', '","headers":"', '","cookies":"'];
+        $search = ['\\\\\\', '\\\\\\\\\\\\', '\"login_response\":\\', 'Secure\"', '\",\"headers\":\"', '\",\"cookies\":\"', '\",\"cookies\"'];
+        $replace = ['\\', '\\\\\\', '"login_response":', 'Secure"', '","headers":"', '","cookies":"', '","cookies"'];
         $json_string = str_replace($search, $replace, $json_string);
 
         return $json_string;

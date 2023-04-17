@@ -1,3 +1,10 @@
+# Stable release v21.16.2
+## Date: 17/04/2023
+
+### Updates and fixes
+
+- **Model:** Update Item model
+
 # Stable release v21.16.1
 ## Date: 15/04/2023
 

@@ -143,7 +143,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method string[] getSavedCollectionIds()
  * @method mixed getScreenshotterUserIds()
  * @method bool getShowOneTapFbShareTooltip()
- * @method string getSocialContext()
+ * @method mixed getSocialContext()
  * @method User[] getSponsorTags()
  * @method Stories getStories()
  * @method StoryAppAttribution getStoryAppAttribution()
@@ -517,7 +517,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setSavedCollectionIds(string[] $value)
  * @method $this setScreenshotterUserIds(mixed $value)
  * @method $this setShowOneTapFbShareTooltip(bool $value)
- * @method $this setSocialContext(string $value)
+ * @method $this setSocialContext(mixed $value)
  * @method $this setSponsorTags(User[] $value)
  * @method $this setStories(Stories $value)
  * @method $this setStoryAppAttribution(StoryAppAttribution $value)
@@ -880,7 +880,7 @@ class Item extends AutoPropertyMapper
         'placeholder'                                 => 'Placeholder',
         'algorithm'                                   => 'string',
         'connection_id'                               => 'string',
-        'social_context'                              => 'string',
+        'social_context'                              => '',
         'icon'                                        => '',
         'media_ids'                                   => 'string[]',
         'media_id'                                    => 'string',

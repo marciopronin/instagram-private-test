@@ -3453,8 +3453,8 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->internal->getQPFetch();
-                    $this->direct->getRankedRecipients('reshare', true);
-                    $this->direct->getRankedRecipients('raven', true);
+                    //$this->direct->getRankedRecipients('reshare', true);
+                    //$this->direct->getRankedRecipients('raven', true);
                 } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {

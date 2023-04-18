@@ -1,3 +1,10 @@
+# Stable release v21.16.3
+## Date: 18/04/2023
+
+### Updates and fixes
+
+- **Instagram:** Update login flow
+
 # Stable release v21.16.2
 ## Date: 17/04/2023
 

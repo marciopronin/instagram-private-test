@@ -1,3 +1,10 @@
+# Stable release v21.17.1
+## Date: 20/04/2023
+
+### Updates and fixes
+
+- **Instagram:** CRITICAL! `uuid` value should be the same as `device_id`.
+
 # Stable release v21.17.0
 ## Date: 20/04/2023
 

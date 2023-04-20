@@ -244,4 +244,142 @@ class Business extends RequestCollection
             ->addParam('product_types', 'branded_content')
             ->getResponse(new Response\MonetizationProductsEligibilityDataResponse());
     }
+
+    /**
+     * Get insights summary.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return array
+     */
+    public function getInsightsSummary()
+    {
+        $response = $this->ig->request('bloks/apps/com.instagram.insights.account.timeframe.summary.container/')
+            ->setSignedPost(false)
+            ->addPost('target_id', $this->ig->account_id)
+            ->addPost('screen_id', 100)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $firstDataBlok = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'insight_type') && str_contains($mainBlok, 'is_owner_viewing_target') && str_contains($mainBlok, 'duration_ms') && str_contains($mainBlok, 'start_timestamp')) {
+                $firstDataBlok = $mainBlok;
+            }
+        }
+        $parsed = $this->ig->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+        $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'start_timestamp'), 0, -2);
+
+        foreach ($offsets as $offset) {
+            if (isset($parsed[$offset])) {
+                $parsed = $parsed[$offset];
+            } else {
+                break;
+            }
+        }
+
+        $firstMap = $this->ig->bloks->cleanData($this->ig->bloks->map_arrays($parsed[0], $parsed[1]));
+
+        return $firstMap;
+    }
+
+    /**
+     * Get common insights.
+     *
+     * NOT FINISHED YET. STILL RESEARCHING.
+     *
+     * @param mixed $startDate
+     * @param mixed $endDate
+     * @param mixed $period
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return array
+     */
+    public function getCommonInsights(
+        $startDate,
+        $endDate,
+        $period)
+    {
+        $response = $this->ig->request('bloks/apps/com.instagram.insights.common.date_picker.date_picker_surface/')
+            ->setSignedPost(false)
+            ->addPost('target_id', $this->ig->account_id)
+            ->addPost('initial_start_date', $startDate)
+            ->addPost('initial_end_date', $endDate)
+            ->addPost('initial_period', $period)
+            ->addPost('component_id', '1000445040')
+            ->addPost('was_opened_in_screen', 1)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('logger_params_json', json_encode([
+                'insight_type'              => 'account',
+                'surface_type'              => 'account_overview',
+                'container_type'            => 'time_range_selector',
+                'target_id'                 => intval($this->ig->account_id),
+                'ig_user_id'                => intval($this->ig->account_id),
+                'is_owner_viewing_target'   => true,
+                'origin'                    => 'unknown',
+                'period'                    => $period,
+                'unit'                      => 'date_picker',
+                'EXPOSURE_LOGGER_THRESHOLD' => 0.3,
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $bloks = [];
+        foreach ($mainBloks as $mainBlok) {
+            $bloks[] = $this->ig->bloks->parseBlok($mainBlok, 'bk.action.map.Make');
+        }
+
+        return $bloks;
+    }
+
+    /**
+     * Get insights interactions.
+     *
+     * NOT FINISHED YET. STILL RESEARCHING.
+     *
+     * @param mixed $period
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return array
+     */
+    public function getInsightsInteractions(
+        $period)
+    {
+        $response = $this->ig->request('bloks/apps/com.instagram.insights.account.content_interactions_breakout.timeframe.container/')
+            ->setSignedPost(false)
+            ->addPost('origin', 'unknown')
+            ->addPost('period', 'THIS_WEEK')
+            ->addPost('target_id', $this->ig->account_id)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $bloks = [];
+        foreach ($mainBloks as $mainBlok) {
+            $bloks[] = $this->ig->bloks->parseBlok($mainBlok, 'bk.action.map.Make');
+        }
+
+        return $bloks;
+    }
 }

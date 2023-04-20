@@ -1,3 +1,14 @@
+# Stable release v21.17.0
+## Date: 20/04/2023
+
+### New features
+
+- **Bloks:** Add `cleanData()`
+- **Business:** Add `getInsightsSummary()`
+- **Business:** Add `getCommonInsights()`
+- **Business:** Add `getInsightsInteractions()`
+- **Live:** Add `getShareUrl()`
+
 # Stable release v21.16.3
 ## Date: 18/04/2023
 

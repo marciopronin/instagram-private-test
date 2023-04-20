@@ -1260,4 +1260,23 @@ class Live extends RequestCollection
             ->addPost('show_on_profile', true)
             ->getResponse(new Response\UpcomingEventsResponse());
     }
+
+    /**
+     * Get live URL.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\LiveShareResponse
+     */
+    public function getShareUrl(
+        $broadcastId)
+    {
+        return $this->ig->request("third_party_sharing/{$this->ig->username}/live/{$broadcastId}/get_live_url/")
+            ->addParam('exposed_to_experiment', 'false')
+            ->addParam('share_to_app', 'copy_link')
+            ->addParam('containermodule', '')
+            ->getResponse(new Response\LiveShareResponse());
+    }
 }

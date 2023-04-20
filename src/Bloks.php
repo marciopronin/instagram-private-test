@@ -214,6 +214,34 @@ class Bloks
         return $result;
     }
 
+    public function cleanData(
+        $array)
+    {
+        $result = [];
+        foreach ($array as $k=>$v) {
+            if (!is_array($v)) {
+                $result[$k] = $v;
+            } else {
+                switch ($v[0]) {
+                    case 'bk.action.i64.Const':
+                    case 'bk.action.i32.Const':
+                    case 'bk.action.bool.Const':
+                        $result[$k] = $v[1];
+                        break;
+                    case 'bk.action.array.Get':
+                    case 'bk.action.bloks.GetState':
+                        print_r($this->cleanData(array_slice($v, 1)));
+                        $result[$k] = $this->cleanData(array_slice($v, 1));
+                        // no break
+                    default:
+                        break;
+                }
+            }
+        }
+
+        return $result;
+    }
+
     public function parseBlok(
         $bloksResponse,
         $blok)

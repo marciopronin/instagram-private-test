@@ -2732,9 +2732,7 @@ class Instagram implements ExperimentsInterface
             } else {
                 $this->settings->set('phone_id', $this->settings->get('device_id'));
             }
-            //$this->settings->set('uuid', Signatures::generateUUID(true, true));
-            // _uuid and device_id values are the same.
-            $this->settings->set('uuid', $this->settings->get('device_id'));
+            $this->settings->set('uuid', Signatures::generateUUID(true, true));
 
             if ($loginType === 'facebook') {
                 $this->settings->set('fb_access_token', $password);

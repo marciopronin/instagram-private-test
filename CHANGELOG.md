@@ -1,3 +1,15 @@
+# Stable release v21.17.2
+## Date: 21/04/2023
+
+### New features
+
+- **Instagram:** Add `bloksInfo` property
+- **Internal:** Add `getBloksSaveCredentialsScreen()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()` and `_sendLoginFlow()`
+
 # Stable release v21.17.0
 ## Date: 20/04/2023
 

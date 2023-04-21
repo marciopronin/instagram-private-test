@@ -3639,6 +3639,42 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Get bloks save credentials screen.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getBloksSaveCredentialsScreen()
+    {
+        return $this->ig->request('bloks/apps/com.bloks.www.caa.login.save-credentials/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'account_centers'   => [],
+                    'query'             => $this->ig->username,
+                ],
+                'erver_params'          => [
+                    'text_input_id'                     => $this->ig->bloksInfo['text_input_id'][1],
+                    'typeahead_id'                      => $this->ig->bloksInfo['typeahead_id'][1],
+                    'text_component_id'                 => $this->ig->bloksInfo['text_component_id'][1],
+                    'INTERNAL__latency_qpl_marker_id'   => $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'][1],
+                    'INTERNAL_INFRA_THEME'              => $this->ig->bloksInfo['INTERNAL_INFRA_THEME'][1],
+                    'fdid'                              => $this->ig->bloksInfo['fdid'],
+                    'waterfall_id'                      => $this->ig->bloksInfo['waterfall_id'],
+                    'screen_id'                         => $this->ig->bloksInfo['screen_id'][1],
+                    'INTERNAL__latency_qpl_instance_id' => $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'][1],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get target segment duration in seconds.
      *
      * @param int $targetFeed One of the FEED_X constants.

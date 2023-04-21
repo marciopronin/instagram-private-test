@@ -572,6 +572,13 @@ class Instagram implements ExperimentsInterface
      */
     public $devicecInitState = false;
 
+    /**
+     * Bloks info.
+     *
+     * @var array
+     */
+    public $bloksInfo = [];
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -1833,7 +1840,6 @@ class Instagram implements ExperimentsInterface
                 $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
                 $firstDataBlok = null;
                 $secondDataBlok = null;
-                $thirdDataBlok = null;
                 foreach ($mainBloks as $mainBlok) {
                     if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
                         $firstDataBlok = $mainBlok;
@@ -1861,6 +1867,7 @@ class Instagram implements ExperimentsInterface
                 }
 
                 $firstMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                $this->bloksInfo = array_merge($firstMap, $this->bloksInfo);
 
                 $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
                 $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL_INFRA_THEME'), 0, -2);
@@ -1874,6 +1881,7 @@ class Instagram implements ExperimentsInterface
                 }
 
                 $secondMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                $this->bloksInfo = array_merge($secondMap, $this->bloksInfo);
 
                 $response = $this->request('bloks/apps/com.bloks.www.caa.login.cp_text_input_type_ahead/')
                     ->setNeedsAuth(false)
@@ -1968,7 +1976,6 @@ class Instagram implements ExperimentsInterface
                     }
 
                     if (isset($errorMap['exception_message'])) {
-                        print_r($errorMap);
                         switch ($errorMap['exception_message']) {
                             case 'Login Error: An unexpected error occurred. Please try logging in again.':
                                 throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
@@ -2012,6 +2019,10 @@ class Instagram implements ExperimentsInterface
                 $this->settings->set('public_key', $headers['IG-Set-Password-Encryption-Pub-Key']);
                 $this->settings->set('public_key_id', $headers['IG-Set-Password-Encryption-Key-Id']);
                 $this->settings->set('authorization_header', $headers['IG-Set-Authorization']);
+
+                if (isset($headers['ig-set-ig-u-rur']) && $headers['ig-set-ig-u-rur'] !== '') {
+                    $this->settings->set('rur', $headers['ig-set-ig-u-rur']);
+                }
 
                 if ($loginResponse->getLoggedInUser()->getUsername() === 'Instagram User') {
                     throw new \InstagramAPI\Exception\AccountDisabledException('Account has been suspended.');
@@ -3109,6 +3120,7 @@ class Instagram implements ExperimentsInterface
                 $this->account->getAccountFamily();
                 $this->event->sendZeroCarrierSignal();
                 $this->internal->getMobileConfig(false);
+                $this->internal->getBloksSaveCredentialsScreen();
                 $this->internal->getAsyncNdxIgSteps();
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;

@@ -1,3 +1,11 @@
+# Stable release v21.17.3
+## Date: 21/04/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **Internal:** Fixed typo in `getBloksSaveCredentialsScreen()`
+
 # Stable release v21.17.2
 ## Date: 21/04/2023
 

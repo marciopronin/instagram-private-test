@@ -3654,7 +3654,7 @@ class Internal extends RequestCollection
                     'account_centers'   => [],
                     'query'             => $this->ig->username,
                 ],
-                'erver_params'          => [
+                'server_params'          => [
                     'text_input_id'                     => $this->ig->bloksInfo['text_input_id'][1],
                     'typeahead_id'                      => $this->ig->bloksInfo['typeahead_id'][1],
                     'text_component_id'                 => $this->ig->bloksInfo['text_component_id'][1],

@@ -1785,11 +1785,14 @@ class Instagram implements ExperimentsInterface
         if (!$this->isMaybeLoggedIn || $forceLogin) {
             if ($this->loginAttemptCount === 0 && !self::$skipLoginFlowAtMyOwnRisk) {
                 $this->_sendPreLoginFlow();
-            } else {
+            }
+            /* THIS IS NOT USED ANYMORE IN BLOKS LOGIN
+            else {
                 $mobileConfigResponse = $this->internal->getMobileConfig(true)->getHttpResponse();
                 $this->settings->set('public_key', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
                 $this->settings->set('public_key_id', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-key-id'));
             }
+            */
 
             $this->event->sendStringImpressions(['2131231876' => 1, '2131231882' => 1, '2131886885' => 2, '2131887195' => 1, '2131887196' => 1, '2131888193' => 4, '2131888472' => 1, '2131890367' => 1, '2131891325' => 1, '2131892179' => 1, '2131892669' => 1, '2131892673' => 1, '2131893765' => 1, '2131893766' => 1, '2131893767' => 1, '2131893768' => 1, '2131893769' => 1, '2131893770' => 1, '2131893771' => 1, '2131893772' => 1, '2131893773' => 1, '2131893774' => 1, '2131893775' => 1, '2131893776' => 1, '2131893777' => 1, '2131893778' => 1, '2131893779' => 1, '2131893780' => 1, '2131893781' => 1, '2131893782' => 1, '2131893783' => 1, '2131893784' => 1, '2131893785' => 1, '2131893788' => 1, '2131893789' => 1, '2131893790' => 1, '2131893791' => 2, '2131893792' => 1, '2131893793' => 1, '2131893806' => 1, '2131893898' => 1, '2131894010' => 1, '2131894018' => 1, '2131896911' => 1, '2131898165' => 1]);
             $this->event->sendFlowSteps('login', 'log_in_username_focus', $waterfallId, $startTime);
@@ -2930,23 +2933,32 @@ class Instagram implements ExperimentsInterface
                     // pass
                 }
                 */
+
+                /*
+                //THIS WAS USED IN PRELOGIN FOR OBTAINING DEVICE EXPERIMENTS AND PUBLIC KEY TO ENCRYPT PASSWORDS
+                //SEEMS IT IS NOT BEING USED ANYMORE WITH BLOKS LOGIN
+
                 $mobileConfigResponse = $this->internal->getMobileConfig(true)->getHttpResponse();
                 $this->settings->set('public_key', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
                 $this->settings->set('public_key_id', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-key-id'));
+                */
+
                 //$this->internal->bootstrapMsisdnHeader();
+                /*
                 try {
                     //$this->internal->logAttribution();
-                    /*$this->internal->sendGraph('455411352809009551099714876', [
+                    $this->internal->sendGraph('455411352809009551099714876', [
                         'input' => [
                             'app_scoped_id'     => $this->uuid,
                             'appid'             => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
                             'family_device_id'  => $this->phone_id,
                         ]
-                    ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);*/
+                    ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
                     $this->people->getNonExpiredFriendRequests();
                 } catch (\InstagramAPI\Exception\InstagramException $e) {
                     // pass
                 }
+                */
             } finally {
                 // Stops emulating batch requests.
                 $this->client->stopEmulatingBatch();
@@ -2955,6 +2967,7 @@ class Instagram implements ExperimentsInterface
             // Start emulating batch requests with Pidgeon Raw Client Time.
             $this->client->startEmulatingBatch();
         } else {
+            // IOS. PROBABLY USING BLOKS LOGIN INSTEAD OF THE FOLLOWING.
             $mobileConfigResponse = $this->internal->getMobileConfig(true)->getHttpResponse();
             $this->settings->set('public_key', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
             $this->settings->set('public_key_id', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-key-id'));
@@ -2973,7 +2986,8 @@ class Instagram implements ExperimentsInterface
             if ($this->getPlatform() === 'ios') {
                 $this->account->getNamePrefill();
             }
-            $this->internal->getMobileConfig(true);
+            // WAS USED BEFORE BLOKS LOGIN
+            //$this->internal->getMobileConfig(true);
 
             /* QE SYNC DISABLED
             try {
@@ -3119,6 +3133,7 @@ class Instagram implements ExperimentsInterface
             try {
                 $this->account->getAccountFamily();
                 $this->event->sendZeroCarrierSignal();
+                $this->internal->getMobileConfig(true);
                 $this->internal->getMobileConfig(false);
                 $this->internal->getBloksSaveCredentialsScreen();
                 $this->internal->getAsyncNdxIgSteps();

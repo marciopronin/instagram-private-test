@@ -1,3 +1,11 @@
+# Stable release v21.17.4
+## Date: 21/04/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendPreLoginFlow()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v21.17.3
 ## Date: 21/04/2023
 

@@ -1,3 +1,14 @@
+# Stable release v21.17.5
+## Date: 22/04/2023
+
+### Updates and fixes
+
+- **Instagram:** Added backwards compatibility for legacy login
+- **Request:** Added backwards compatibility for legacy login
+- **Highlight:** Update `getUserFeed()`
+- **Internal:** Update `getSupportedCapabilities()`
+- **Timeline:** Update `getTimelineFeed()`
+
 # Stable release v21.17.4
 ## Date: 21/04/2023
 

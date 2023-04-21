@@ -3578,7 +3578,7 @@ class Internal extends RequestCollection
             'segment_enabled_story_raven');
         $segmentationUnknown = $this->ig->isExperimentEnabled(
             'qe_ig_android_reel_raven_video_segmented_upload_universe',
-            'segment_enabled_unknown', true);
+            'segment_enabled_unknown', false);
         if ($segmentation || $segmentationUnknown) {
             $supportedCapabilities[] = [
                 'name'  => 'segmentation',
@@ -3591,7 +3591,7 @@ class Internal extends RequestCollection
             'value' => 'ETC2_COMPRESSION',
         ];
 
-        $wordTracker = $this->ig->isExperimentEnabled('ig_android_cameracore_world_tracker_v2', 'enabled');
+        $wordTracker = $this->ig->isExperimentEnabled('ig_android_cameracore_world_tracker_v2', 'enabled', true);
         if ($wordTracker) {
             $supportedCapabilities[] = [
                 'name'  => 'world_tracker',

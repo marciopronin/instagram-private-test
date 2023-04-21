@@ -255,8 +255,8 @@ class Timeline extends RequestCollection
             ->addPost('battery_level', $this->ig->getBatteryLevel())
             ->addPost('is_charging', $this->ig->getIsDeviceCharging())
             ->addPost('will_sound_on', (int) $this->ig->getSoundEnabled())
-            //->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'));
-            ->addPost('timezone_offset', '7200')
+            ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
+            //->addPost('timezone_offset', '7200')
             ->addPost('session_id', $this->ig->session_id);
 
         if ($maxId !== null) {

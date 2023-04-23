@@ -3219,7 +3219,7 @@ class Instagram implements ExperimentsInterface
                 $this->event->sendStoriesRequest($traySessionId, $requestId, 'cold_start');
 
                 $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
-                $this->people->getSharePrefill();
+                $this->people->getSharePrefill(true);
                 $this->internal->sendGraph('20527889288964126383169629012', [
                     'languages'     => ['nolang'],
                     'service_ids'   => ['MUTED_WORDS'],
@@ -3241,11 +3241,13 @@ class Instagram implements ExperimentsInterface
             } catch (\Exception $e) {
                 // pass
             }
+            $this->people->getSharePrefill();
 
             try {
                 //$this->internal->logResurrectAttribution();
                 //$this->internal->getDeviceCapabilitiesDecisions();
-                //$this->people->getBootstrapUsers();
+                $this->people->getCreatorInfo($this->account_id);
+                $this->people->getBootstrapUsers();
                 $this->people->getInfoById($this->account_id);
                 $this->account->getLinkageStatus();
                 $this->business->getMonetizationProductsEligibilityData();
@@ -3304,6 +3306,11 @@ class Instagram implements ExperimentsInterface
                 $this->_registerPushChannels();
 
                 try {
+                    $this->direct->getHasInteropUpgraded();
+                    $this->internal->getNotificationsSettings();
+                    $this->reel->getShareToFbConfig();
+                    $this->internal->getViewableStatuses(true);
+                    $this->account->getPresenceStatus();
                     $this->people->getSharePrefill();
                     $this->direct->getPresences();
                     $this->account->getProcessContactPointSignals();
@@ -3544,6 +3551,34 @@ class Instagram implements ExperimentsInterface
         $this->client->saveCookieJar();
 
         return null;
+    }
+
+    /**
+     * Perform post force logout actions.
+     *
+     * @param int    $logoutReason Logout reason.
+     * @param string $path         Path.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     *
+     * @see Instagram::login()
+     */
+    public function performPostForceLogoutActions(
+        $logoutReason,
+        $path)
+    {
+        return $this->request('perform_post_force_logout_actions/')
+            ->addPost('user_id', $this->account_id)
+            ->addPost('_uid', $this->account_id)
+            //->addPost('_csrftoken', $this->client->getToken())
+            ->addPost('guid', $this->uuid)
+            ->addPost('device_id', $this->device_id)
+            ->addPost('path', $path)
+            ->addPost('_uuid', $this->uuid)
+            ->addPost('logout_reason', $logoutReason)
+            ->getResponse(new Response\GenericResponse());
     }
 
     /**

@@ -60,6 +60,8 @@ class Direct extends RequestCollection
         }
         if ($prefetch) {
             $request->addHeader('X-IG-Prefetch-Request', 'foreground');
+        } else {
+            $request->addParam('is_prefetching', 'false');
         }
         if ($filter !== 'all') {
             $request->addParam('selected_filter', $filter);

@@ -37,12 +37,13 @@ class Discover extends RequestCollection
         $request = $this->ig->request('discover/topical_explore/')
             ->addHeader('X-IG-Prefetch-Request', 'foreground')
             ->addParam('is_prefetch', $isPrefetch)
-            ->addParam('omit_cover_media', true)
+            //->addParam('omit_cover_media', true)
             ->addParam('is_ptr', false)
             ->addParam('reels_configuration', $this->ig->getExperimentParam('ig_android_stories_tray_pagination_killswitch', 'explore_reels_configuration') === null ? 'hide_hero' : 'default')
             ->addParam('use_sectional_payload', true)
             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-            ->addParam('session_id', $sessionId);
+            ->addParam('session_id', $sessionId)
+            ->addPost('paging_token', json_encode((object) []));
 
         if ($clusterDisabled === false) {
             $request->addParam('cluster_id', $clusterId);

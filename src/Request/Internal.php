@@ -1925,14 +1925,22 @@ class Internal extends RequestCollection
     /**
      * Get viewable statuses.
      *
+     * @param bool $includeAuthors Include authors.
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\GetViewableStatusesResponse
      */
-    public function getViewableStatuses()
+    public function getViewableStatuses(
+        $includeAuthors = false)
     {
-        return $this->ig->request('status/get_viewable_statuses/')
-                        ->getResponse(new Response\GetViewableStatusesResponse());
+        $request = $this->ig->request('status/get_viewable_statuses/');
+
+        if ($includeAuthors === true) {
+            $request->addParam('include_authors', 'true');
+        }
+
+        return $request->getResponse(new Response\GetViewableStatusesResponse());
     }
 
     /**
@@ -1950,6 +1958,20 @@ class Internal extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_uuid', $this->ig->uuid)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Get notification settings.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getNotificationsSettings()
+    {
+        return $this->ig->request('notifications/get_notification_settings/')
+            ->addPost('content_type', 'instagram_direct')
             ->getResponse(new Response\GenericResponse());
     }
 

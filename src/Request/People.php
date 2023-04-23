@@ -1536,15 +1536,18 @@ class People extends RequestCollection
     /**
      * Gets a list of ranked users to display in Android's share UI.
      *
+     * @param mixed $nullState
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\SharePrefillResponse
      */
-    public function getSharePrefill()
+    public function getSharePrefill(
+        $nullState = false)
     {
         return $this->ig->request('banyan/banyan/')
             ->addParam('is_private_share', false)
-            ->addParam('views', '["reshare_share_sheet","direct_user_search_keypressed","story_share_sheet","direct_user_search_nullstate","direct_inbox_active_now","forwarding_recipient_sheet","call_recipients"]')
+            ->addParam('views', ($nullState) ? '["direct_ibc_nullstate"]' : '["reshare_share_sheet","direct_user_search_keypressed","story_share_sheet","direct_user_search_nullstate","direct_inbox_active_now","forwarding_recipient_sheet","call_recipients"]')
             ->addParam('is_real_time', false)
             ->getResponse(new Response\SharePrefillResponse());
     }
@@ -1576,5 +1579,25 @@ class People extends RequestCollection
     {
         return $this->ig->request('trusted_friend/get_non_expired_requests_info/')
             ->getResponse(new Response\NonExpiredRequestsInfoResponse());
+    }
+
+    /**
+     * Get creator info.
+     *
+     * @param string $userId      Numerical UserPK ID.
+     * @param string $surfaceType Platform.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UserInfoResponse
+     */
+    public function getCreatorInfo(
+        $userId,
+        $surfaceType = 'android')
+    {
+        return $this->ig->request('creator/creator_info')
+            ->addParam('surface_type', $surfaceType)
+            ->addParam('user_id', $userId)
+            ->getResponse(new Response\UserInfoResponse());
     }
 }

@@ -1,3 +1,20 @@
+# Stable release v21.18.0
+## Date: 25/04/2023
+
+### New features
+
+- **People:** Add `getCreatorInfo()`
+- **Internal:** Add `getNotificationsSettings()`
+
+### Updates and fixes
+
+- **Instagram:** Update login flow
+- **Direct:** Update `getInbox()`
+- **People:** Update `getSharePrefill()`
+- **Discover:** Update `getExploreFeed()`
+- **Internal:** Update `getViewableStatuses()`
+- **Instagram:** Update `performPostForceLogoutActions()`
+
 # Stable release v21.17.5
 ## Date: 22/04/2023
 

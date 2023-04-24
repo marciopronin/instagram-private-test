@@ -1,3 +1,10 @@
+# Stable release v21.18.1
+## Date: 25/04/2023
+
+### Updates and fixes
+
+- **Discover:** Update `getExploreFeed()`
+
 # Stable release v21.18.0
 ## Date: 25/04/2023
 

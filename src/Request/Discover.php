@@ -43,7 +43,7 @@ class Discover extends RequestCollection
             ->addParam('use_sectional_payload', true)
             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
             ->addParam('session_id', $sessionId)
-            ->addPost('paging_token', json_encode((object) []));
+            ->addParam('paging_token', json_encode((object) []));
 
         if ($clusterDisabled === false) {
             $request->addParam('cluster_id', $clusterId);

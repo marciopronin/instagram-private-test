@@ -1610,6 +1610,7 @@ class Instagram implements ExperimentsInterface
      *                                        want to set it to an even LOWER value
      *                                        than the default 30 minutes!
      * @param string|null $deletionToken      Deletion token. Stop account deletion.
+     * @param bool        $loggedOut          If account was forced to log out.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1624,13 +1625,14 @@ class Instagram implements ExperimentsInterface
         $username,
         $password,
         $appRefreshInterval = 1800,
-        $deletionToken = null)
+        $deletionToken = null,
+        $loggedOut = false)
     {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to login().');
         }
 
-        return $this->_login($username, $password, false, $appRefreshInterval, $deletionToken);
+        return $this->_login($username, $password, false, $appRefreshInterval, $deletionToken, $loggedOut);
     }
 
     /**
@@ -1740,6 +1742,7 @@ class Instagram implements ExperimentsInterface
      *                                        previous session.
      * @param int         $appRefreshInterval
      * @param string|null $deletionToken      Deletion token. Stop account deletion.
+     * @param bool        $loggedOut          If account was forced to log out.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1753,7 +1756,8 @@ class Instagram implements ExperimentsInterface
         $password,
         $forceLogin = false,
         $appRefreshInterval = 1800,
-        $deletionToken = null)
+        $deletionToken = null,
+        $loggedOut = false)
     {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to _login().');
@@ -1773,71 +1777,54 @@ class Instagram implements ExperimentsInterface
         $this->loginWaterfallId = $waterfallId;
         $startTime = round(microtime(true) * 1000);
 
-        $this->event->sendInstagramInstallWithReferrer($this->loginWaterfallId, 0);
-        $this->event->sendInstagramInstallWithReferrer($this->loginWaterfallId, 1);
-
-        $this->event->sendFlowSteps('landing', 'step_view_loaded', $waterfallId, $startTime);
-        $this->event->sendFlowSteps('landing', 'landing_created', $waterfallId, $startTime);
-
-        $this->event->sendPhoneId($waterfallId, $startTime, 'request');
+        if ($loggedOut === false) {
+            $this->event->sendInstagramInstallWithReferrer($this->loginWaterfallId, 0);
+            $this->event->sendInstagramInstallWithReferrer($this->loginWaterfallId, 1);
+            $this->event->sendFlowSteps('landing', 'step_view_loaded', $waterfallId, $startTime);
+            $this->event->sendFlowSteps('landing', 'landing_created', $waterfallId, $startTime);
+            $this->event->sendPhoneId($waterfallId, $startTime, 'request');
+        }
 
         // Perform a full relogin if necessary.
         if (!$this->isMaybeLoggedIn || $forceLogin) {
-            if ($this->loginAttemptCount === 0 && !self::$skipLoginFlowAtMyOwnRisk) {
+            if ($this->loginAttemptCount === 0 && !self::$skipLoginFlowAtMyOwnRisk && !$loggedOut) {
                 $this->_sendPreLoginFlow();
             }
-            // THIS IS NOT USED ANYMORE IN BLOKS LOGIN
-            if (self::$useBloksLogin === false) {
-                $mobileConfigResponse = $this->internal->getMobileConfig(true)->getHttpResponse();
-                $this->settings->set('public_key', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
-                $this->settings->set('public_key_id', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-key-id'));
+
+            if ($loggedOut === false) {
+                // THIS IS NOT USED ANYMORE IN BLOKS LOGIN
+                if (self::$useBloksLogin === false) {
+                    $mobileConfigResponse = $this->internal->getMobileConfig(true)->getHttpResponse();
+                    $this->settings->set('public_key', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-pub-key'));
+                    $this->settings->set('public_key_id', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-key-id'));
+                }
+
+                $this->event->sendStringImpressions(['2131231876' => 1, '2131231882' => 1, '2131886885' => 2, '2131887195' => 1, '2131887196' => 1, '2131888193' => 4, '2131888472' => 1, '2131890367' => 1, '2131891325' => 1, '2131892179' => 1, '2131892669' => 1, '2131892673' => 1, '2131893765' => 1, '2131893766' => 1, '2131893767' => 1, '2131893768' => 1, '2131893769' => 1, '2131893770' => 1, '2131893771' => 1, '2131893772' => 1, '2131893773' => 1, '2131893774' => 1, '2131893775' => 1, '2131893776' => 1, '2131893777' => 1, '2131893778' => 1, '2131893779' => 1, '2131893780' => 1, '2131893781' => 1, '2131893782' => 1, '2131893783' => 1, '2131893784' => 1, '2131893785' => 1, '2131893788' => 1, '2131893789' => 1, '2131893790' => 1, '2131893791' => 2, '2131893792' => 1, '2131893793' => 1, '2131893806' => 1, '2131893898' => 1, '2131894010' => 1, '2131894018' => 1, '2131896911' => 1, '2131898165' => 1]);
+                $this->event->sendFlowSteps('login', 'log_in_username_focus', $waterfallId, $startTime);
+                $this->event->sendFlowSteps('login', 'log_in_password_focus', $waterfallId, $startTime);
+                $this->event->sendFlowSteps('login', 'log_in_attempt', $waterfallId, $startTime);
+                $this->event->sendFlowSteps('login', 'sim_card_state', $waterfallId, $startTime);
+                $this->event->sendStringImpressions(['17039371' => 2, '17039886' => 2, '17040255' => 1, '17040256' => 1, '17040257' => 1, '17040645' => 1, '2131232017' => 1, '2131232109' => 1, '2131232164' => 1, '2131232213' => 1, '2131232214' => 1, '2131232227' => 1, '2131232228' => 1, '2131232373' => 1, '2131232374' => 1, '2131232482' => 1, '2131232484' => 1, '2131232609' => 1, '2131232621' => 1, '2131886419' => 1, '2131886885' => 4, '2131887050' => 1, '2131887411' => 1, '2131888159' => 1, '2131890407' => 1, '2131890652' => 1, '2131891238' => 1, '2131891283' => 1, '2131892179' => 1, '2131892675' => 3, '2131892749' => 1, '2131892925' => 3, '2131893604' => 1, '2131894671' => 1, '2131894713' => 2, '2131895369' => 1, '2131895744' => 1, '2131896364' => 1, '2131898082' => 1, '2131898155' => 1]);
+                $this->event->sendStringImpressions(['2131231967' => 1, '2131232008' => 1, '2131232152' => 1, '2131232466' => 1, '2131232682' => 1, '2131886420' => 1, '2131886709' => 1, '2131887421' => 1, '2131888159' => 1, '2131889830' => 1, '2131890107' => 5, '2131890302' => 1, '2131890652' => 1, '2131890810' => 4, '2131890813' => 4, '2131892646' => 1, '2131892913' => 1, '2131893117' => 3, '2131893560' => 1, '2131893562' => 1, '2131893668' => 1, '2131893810' => 1, '2131893811' => 1, '2131894468' => 1, '2131896103' => 1, '2131896230' => 1, '2131896432' => 2, '2131896577' => 1, '2131897080' => 3, '2131897172' => 3, '2131897229' => 1, '2131897678' => 2]);
+
+                $this->event->sendAttributionSdkDebug([
+                    'event_name'    => 'report_events',
+                    'event_types'   => '[LOGIN]',
+                ]);
+                $this->event->sendAttributionSdkDebug([
+                    'event_name'    => 'report_events_compliant',
+                    'event_types'   => '[LOGIN]',
+                ]);
+
+                $this->event->sendFxSsoLibrary('auth_token_write_start', null, 'log_in');
+                $this->event->sendFxSsoLibrary('auth_token_write_failure', 'provider_not_found', 'log_in');
+                $this->event->sendFxSsoLibrary('auth_token_write_start', null, 'log_in');
+                $this->event->sendFxSsoLibrary('auth_token_write_failure', 'provider_not_found', 'log_in');
             }
-
-            $this->event->sendStringImpressions(['2131231876' => 1, '2131231882' => 1, '2131886885' => 2, '2131887195' => 1, '2131887196' => 1, '2131888193' => 4, '2131888472' => 1, '2131890367' => 1, '2131891325' => 1, '2131892179' => 1, '2131892669' => 1, '2131892673' => 1, '2131893765' => 1, '2131893766' => 1, '2131893767' => 1, '2131893768' => 1, '2131893769' => 1, '2131893770' => 1, '2131893771' => 1, '2131893772' => 1, '2131893773' => 1, '2131893774' => 1, '2131893775' => 1, '2131893776' => 1, '2131893777' => 1, '2131893778' => 1, '2131893779' => 1, '2131893780' => 1, '2131893781' => 1, '2131893782' => 1, '2131893783' => 1, '2131893784' => 1, '2131893785' => 1, '2131893788' => 1, '2131893789' => 1, '2131893790' => 1, '2131893791' => 2, '2131893792' => 1, '2131893793' => 1, '2131893806' => 1, '2131893898' => 1, '2131894010' => 1, '2131894018' => 1, '2131896911' => 1, '2131898165' => 1]);
-            $this->event->sendFlowSteps('login', 'log_in_username_focus', $waterfallId, $startTime);
-            $this->event->sendFlowSteps('login', 'log_in_password_focus', $waterfallId, $startTime);
-            $this->event->sendFlowSteps('login', 'log_in_attempt', $waterfallId, $startTime);
-            $this->event->sendFlowSteps('login', 'sim_card_state', $waterfallId, $startTime);
-            $this->event->sendStringImpressions(['17039371' => 2, '17039886' => 2, '17040255' => 1, '17040256' => 1, '17040257' => 1, '17040645' => 1, '2131232017' => 1, '2131232109' => 1, '2131232164' => 1, '2131232213' => 1, '2131232214' => 1, '2131232227' => 1, '2131232228' => 1, '2131232373' => 1, '2131232374' => 1, '2131232482' => 1, '2131232484' => 1, '2131232609' => 1, '2131232621' => 1, '2131886419' => 1, '2131886885' => 4, '2131887050' => 1, '2131887411' => 1, '2131888159' => 1, '2131890407' => 1, '2131890652' => 1, '2131891238' => 1, '2131891283' => 1, '2131892179' => 1, '2131892675' => 3, '2131892749' => 1, '2131892925' => 3, '2131893604' => 1, '2131894671' => 1, '2131894713' => 2, '2131895369' => 1, '2131895744' => 1, '2131896364' => 1, '2131898082' => 1, '2131898155' => 1]);
-            $this->event->sendStringImpressions(['2131231967' => 1, '2131232008' => 1, '2131232152' => 1, '2131232466' => 1, '2131232682' => 1, '2131886420' => 1, '2131886709' => 1, '2131887421' => 1, '2131888159' => 1, '2131889830' => 1, '2131890107' => 5, '2131890302' => 1, '2131890652' => 1, '2131890810' => 4, '2131890813' => 4, '2131892646' => 1, '2131892913' => 1, '2131893117' => 3, '2131893560' => 1, '2131893562' => 1, '2131893668' => 1, '2131893810' => 1, '2131893811' => 1, '2131894468' => 1, '2131896103' => 1, '2131896230' => 1, '2131896432' => 2, '2131896577' => 1, '2131897080' => 3, '2131897172' => 3, '2131897229' => 1, '2131897678' => 2]);
-
-            $this->event->sendAttributionSdkDebug([
-                'event_name'    => 'report_events',
-                'event_types'   => '[LOGIN]',
-            ]);
-            $this->event->sendAttributionSdkDebug([
-                'event_name'    => 'report_events_compliant',
-                'event_types'   => '[LOGIN]',
-            ]);
-
-            $this->event->sendFxSsoLibrary('auth_token_write_start', null, 'log_in');
-            $this->event->sendFxSsoLibrary('auth_token_write_failure', 'provider_not_found', 'log_in');
-            $this->event->sendFxSsoLibrary('auth_token_write_start', null, 'log_in');
-            $this->event->sendFxSsoLibrary('auth_token_write_failure', 'provider_not_found', 'log_in');
 
             if (self::$useBloksLogin) {
                 $this->loginAttemptCount = 1;
-                $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.process_client_data_and_redirect/')
-                    ->setNeedsAuth(false)
-                    ->setSignedPost(false)
-                    ->addPost('params', json_encode([
-                        'logged_out_user'           => '',
-                        'family_device_id'          => $this->phone_id,
-                        'device_id'                 => $this->device_id,
-                        'offline_experiment_group'  => 'caa_launch_ig4a_combined_60_percent',
-                        'waterfall_id'              => $waterfallId,
-                        'show_internal_settings'    => false,
-                        'qe_device_id'              => $this->uuid,
-                        'account_list'              => [],
-                        'blocked_uid'               => [],
-                    ]))
-                    ->addPost('bk_client_context', json_encode([
-                        'bloks_version' => Constants::BLOCK_VERSIONING_ID,
-                        'styles_id'     => 'instagram',
-                    ]))
-                    ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
-                    ->getResponse(new Response\GenericResponse());
-
+                $response = $this->processLoginClientDataAndRedirect();
                 $responseArr = $response->asArray();
                 $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
                 $firstDataBlok = null;
@@ -1885,31 +1872,23 @@ class Instagram implements ExperimentsInterface
                 $secondMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
                 $this->bloksInfo = array_merge($secondMap, $this->bloksInfo);
 
-                $response = $this->request('bloks/apps/com.bloks.www.caa.login.cp_text_input_type_ahead/')
-                    ->setNeedsAuth(false)
-                    ->setSignedPost(false)
-                    ->addPost('params', json_encode([
-                        'client_input_params'           => [
-                            'account_centers'   => [],
-                            'query'             => $username,
+                if ($loggedOut === false) {
+                    $response = $this->sendLoginTextInputTypeAhead($username);
+                } else {
+                    $response = $this->getLoginPasswordEntry();
+                }
+
+                if ($loggedOut === false) {
+                    $accountList = [];
+                } else {
+                    $accountList = [
+                        [
+                            'uid'               => $this->account_id,
+                            'credential_type'   => 'none',
+                            'token'             => '',
                         ],
-                        'server_params'         => [
-                            'text_input_id'                     => $secondMap['text_input_id'][1],
-                            'typeahead_id'                      => $secondMap['typeahead_id'][1],
-                            'text_component_id'                 => $secondMap['text_component_id'][1],
-                            'INTERNAL__latency_qpl_marker_id'   => $secondMap['INTERNAL__latency_qpl_marker_id'][1],
-                            'INTERNAL_INFRA_THEME'              => $secondMap['INTERNAL_INFRA_THEME'][1],
-                            'fdid'                              => $secondMap['fdid'],
-                            'screen_id'                         => $secondMap['screen_id'][1],
-                            'INTERNAL__latency_qpl_instance_id' => $secondMap['INTERNAL__latency_qpl_instance_id'][1],
-                        ],
-                    ]))
-                    ->addPost('bk_client_context', json_encode([
-                        'bloks_version' => Constants::BLOCK_VERSIONING_ID,
-                        'styles_id'     => 'instagram',
-                    ]))
-                    ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
-                    ->getResponse(new Response\GenericResponse());
+                    ];
+                }
 
                 $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/')
                     ->setNeedsAuth(false)
@@ -1920,14 +1899,14 @@ class Instagram implements ExperimentsInterface
                             'login_attempt_count'           => $this->loginAttemptCount,
                             'secure_family_device_id'       => '',
                             'machine_id'                    => $this->settings->get('mid'),
-                            'accounts_list'                 => [],
+                            'accounts_list'                 => $accountList,
                             'auth_secure_device_id'         => '',
                             'password'                      => Utils::encryptPassword($password, '', '', true), // Encrypt password with default key and type 1.
                             'family_device_id'              => $this->phone_id,
                             'fb_ig_device_id'               => [],
                             'device_emails'                 => [],
                             'try_num'                       => $this->loginAttemptCount,
-                            'event_flow'                    => 'login_manual',
+                            'event_flow'                    => ($loggedOut === false) ? 'login_manual' : 'aymh',
                             'event_step'                    => 'home_page',
                             'openid_tokens'                 => (object) [],
                             'contact_point'                 => $username,
@@ -2132,6 +2111,127 @@ class Instagram implements ExperimentsInterface
         // Attempt to resume an existing session, or full re-login if necessary.
         // NOTE: The "return" here gives a LoginResponse in case of re-login.
         return $this->_sendLoginFlow(false, $appRefreshInterval);
+    }
+
+    /**
+     * Process login client data and redirect.
+     *
+     * @param bool $isLoggedOut If states comes from logged_out.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function processLoginClientDataAndRedirect(
+        $isLoggedOut = false)
+    {
+        if ($isLoggedOut) {
+            $accountList = [
+                [
+                    'uid'               => $this->account_id,
+                    'credential_type'   => 'none',
+                    'token'             => '',
+                ],
+            ];
+        } else {
+            $accountList = [];
+        }
+
+        return $this->request('bloks/apps/com.bloks.www.bloks.caa.login.process_client_data_and_redirect/')
+        ->setNeedsAuth(false)
+        ->setSignedPost(false)
+        ->addPost('params', json_encode([
+            'logged_out_user'           => '',
+            'family_device_id'          => $this->phone_id,
+            'device_id'                 => $this->device_id,
+            'offline_experiment_group'  => 'caa_launch_ig4a_combined_60_percent',
+            'waterfall_id'              => $this->loginWaterfallId,
+            'show_internal_settings'    => false,
+            'qe_device_id'              => $this->uuid,
+            'account_list'              => $accountList,
+            'blocked_uid'               => [],
+        ]))
+        ->addPost('bk_client_context', json_encode([
+            'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+            'styles_id'     => 'instagram',
+        ]))
+        ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+        ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Send login text input typy ahead.
+     *
+     * @param bool $username Username.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function sendLoginTextInputTypeAhead(
+        $username)
+    {
+        return $this->request('bloks/apps/com.bloks.www.caa.login.cp_text_input_type_ahead/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'account_centers'   => [],
+                    'query'             => $username,
+                ],
+                'server_params'         => [
+                    'text_input_id'                     => $this->bloksInfo['text_input_id'][1],
+                    'typeahead_id'                      => $this->bloksInfo['typeahead_id'][1],
+                    'text_component_id'                 => $this->bloksInfo['text_component_id'][1],
+                    'INTERNAL__latency_qpl_marker_id'   => $this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1],
+                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'][1],
+                    'fdid'                              => $this->bloksInfo['fdid'],
+                    'screen_id'                         => $this->bloksInfo['screen_id'][1],
+                    'INTERNAL__latency_qpl_instance_id' => $this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Get login password entry.
+     *
+     * @param bool $username Username.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getLoginPasswordEntry()
+    {
+        return $this->request('bloks/apps/com.bloks.www.caa.login.aymh_password_entry/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'user_id'   => $this->account_id,
+                ],
+                'server_params'         => [
+                    'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
+                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'][1],
+                    'device_id'                         => $this->device_id,
+                    'is_platform_login'                 => 0,
+                    'qe_device_id'                      => $this->uuid,
+                    'family_device_id'                  => $this->phone_id,
+                    'INTERNAL_INFRA_screen_id'          => $this->bloksInfo['INTERNAL_INFRA_screen_id'][1],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
     }
 
     /**
@@ -3137,7 +3237,9 @@ class Instagram implements ExperimentsInterface
                 $this->event->sendZeroCarrierSignal();
                 $this->internal->getMobileConfig(true);
                 $this->internal->getMobileConfig(false);
-                $this->internal->getBloksSaveCredentialsScreen();
+                if (self::$useBloksLogin === true) {
+                    $this->internal->getBloksSaveCredentialsScreen();
+                }
                 $this->internal->getAsyncNdxIgSteps();
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;

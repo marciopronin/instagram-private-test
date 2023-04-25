@@ -1,3 +1,16 @@
+# Stable release v21.19.0
+## Date: 25/04/2023
+
+### New features
+
+- **Instagram:** Add `processLoginClientDataAndRedirect()`
+- **Instagram:** Add `sendLoginTextInputTypeAhead()`
+- **instagram:** Add `getLoginPasswordEntry()`
+
+### Updates and fixes
+
+- **Instagram:** Update login flow
+
 # Stable release v21.18.1
 ## Date: 25/04/2023
 

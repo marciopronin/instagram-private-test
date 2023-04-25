@@ -162,20 +162,25 @@ class Signatures
 
     public static function generateSpecialUUID()
     {
-        do {
-            $uuid = self::generateUUID();
-            $hash = md5($uuid.'caa_v1_full_test_triage_android');
-            $val = gmp_mod(gmp_init(sprintf('0x%s', substr($hash, strlen($hash) - 15, 16))), 10000);
+        //do {
+        $uuid = self::generateUUID();
+        $hash = md5($uuid.'caa_v1_full_test_triage_android');
+        $val = gmp_mod(gmp_init(sprintf('0x%s', substr($hash, strlen($hash) - 15, 16))), 10000);
 
-            if ($val >= 0) {
-                $res = gmp_intval(gmp_div_q($val, 400));
-                if ($res >= 17) {
-                    $res = -1;
-                }
+        if ($val >= 0) {
+            $res = gmp_intval(gmp_div_q($val, 400));
+            if ($res >= 17) {
+                $res = -1;
             }
-            $res = -1;
-        } while ($res !== -1);
+        }
+        // } while($res !== -1);
 
-        return $uuid;
+        if ($res < 10) {
+            $exp = 'caa_iteration_v3_perf_ig_4';
+        } else {
+            $exp = 'caa_launch_ig4a_combined_60_percent';
+        }
+
+        return ['phone_id' => $uuid, 'offline_experiment' => $exp];
     }
 }

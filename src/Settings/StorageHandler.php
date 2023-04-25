@@ -61,6 +61,7 @@ class StorageHandler
         'shbts',
         'csrftoken',
         'salt_ids',
+        'offline_experiment', // Bloks offline experiments for login.
     ];
 
     /**

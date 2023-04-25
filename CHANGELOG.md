@@ -1,3 +1,12 @@
+# Stable release v21.19.1
+## Date: 25/04/2023
+
+### Updates and fixes
+
+- **Instagram:** Update offline experiment setting during login flow.
+- **Signatures:** Update `generateSpecialUUID()`
+- **Settings:** Update PERSISTENT_KEYS
+
 # Stable release v21.19.0
 ## Date: 25/04/2023
 

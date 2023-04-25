@@ -2144,7 +2144,7 @@ class Instagram implements ExperimentsInterface
             'logged_out_user'           => '',
             'family_device_id'          => $this->phone_id,
             'device_id'                 => $this->device_id,
-            'offline_experiment_group'  => 'caa_launch_ig4a_combined_60_percent',
+            'offline_experiment_group'  => $this->settings->get('offline_experiment'),
             'waterfall_id'              => $this->loginWaterfallId,
             'show_internal_settings'    => false,
             'qe_device_id'              => $this->uuid,
@@ -2217,7 +2217,7 @@ class Instagram implements ExperimentsInterface
                     'user_id'   => $this->account_id,
                 ],
                 'server_params'         => [
-                    'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
+                    'offline_experiment_group'          => $this->settings->get('offline_experiment'),
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'][1],
                     'device_id'                         => $this->device_id,
                     'is_platform_login'                 => 0,
@@ -2840,7 +2840,9 @@ class Instagram implements ExperimentsInterface
             }
 
             if ($this->getIsAndroid()) {
-                $phoneId = (self::$disableLoginBloks === false) ? Signatures::generateUUID() : Signatures::generateSpecialUUID();
+                $result = Signatures::generateSpecialUUID();
+                $phoneId = $result['phone_id'];
+                $this->settings->set('offline_experiment', $result['offline_experiment']);
                 $this->settings->set('phone_id', $phoneId);
             } else {
                 $this->settings->set('phone_id', $this->settings->get('device_id'));

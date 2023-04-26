@@ -1984,11 +1984,15 @@ class Instagram implements ExperimentsInterface
                                             }
                                             unset($errorMap[$key]);
                                         }
+                                    } elseif ($errorMap['event_category'] === 'two_fac') {
+                                        $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentTwoFactorAuthFlow');
+                                        $loginResponse = json_decode(stripslashes($loginResponse), true);
+                                        $loginResponse = new Response\LoginResponse($loginResponse);
+
+                                        return $loginResponse;
                                     }
                                 }
-
-                                throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
-                                break;
+                                //throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
                         }
                     }
                 }

@@ -1,3 +1,11 @@
+# Stable release v21.19.2
+## Date: 26/04/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`. 2FA is now compatible with bloks auth system.
+- **Bloks:** Update `parseBlok()`
+
 # Stable release v21.19.1
 ## Date: 25/04/2023
 

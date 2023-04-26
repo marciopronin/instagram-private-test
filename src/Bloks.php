@@ -251,6 +251,7 @@ class Bloks
 
         switch ($blok) {
             case 'bk.action.caa.HandleLoginResponse':
+            case 'bk.action.caa.PresentTwoFactorAuthFlow':
                 if (count($res) > 0) {
                     return $this->_extractJsonString($res[0]);
                 }

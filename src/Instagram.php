@@ -1829,6 +1829,7 @@ class Instagram implements ExperimentsInterface
                 $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
                 $firstDataBlok = null;
                 $secondDataBlok = null;
+                $thirdDataBlok = null;
                 foreach ($mainBloks as $mainBlok) {
                     if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
                         $firstDataBlok = $mainBlok;
@@ -1836,7 +1837,12 @@ class Instagram implements ExperimentsInterface
                     if (str_contains($mainBlok, 'typeahead_id') && str_contains($mainBlok, 'text_input_id') && str_contains($mainBlok, 'text_component_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
                         $secondDataBlok = $mainBlok;
                     }
-                    if ($firstDataBlok !== null && $secondDataBlok !== null) {
+                    if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
+                        $thirdDataBlok = $mainBlok;
+                    }
+                    if ($firstDataBlok !== null && $secondDataBlok !== null && $loggedOut === false) {
+                        break;
+                    } elseif ($firstDataBlok !== null && $secondDataBlok !== null && $thirdDataBlok !== null) {
                         break;
                     }
                 }
@@ -1871,6 +1877,22 @@ class Instagram implements ExperimentsInterface
 
                 $secondMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
                 $this->bloksInfo = array_merge($secondMap, $this->bloksInfo);
+
+                if ($thirdDataBlok !== null) {
+                    $parsed = $this->bloks->parseBlok($thirdDataBlok, 'bk.action.map.Make');
+                    $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL_INFRA_screen_id'), 0, -2);
+
+                    foreach ($offsets as $offset) {
+                        if (isset($parsed[$offset])) {
+                            $parsed = $parsed[$offset];
+                        } else {
+                            break;
+                        }
+                    }
+
+                    $thirdMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                    $this->bloksInfo = array_merge($thirdMap, $this->bloksInfo);
+                }
 
                 if ($loggedOut === false) {
                     $response = $this->sendLoginTextInputTypeAhead($username);
@@ -3483,9 +3505,15 @@ class Instagram implements ExperimentsInterface
                         $this->story->getReelsTrayFeed('cold_start');
                     } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
                         if (!self::$manuallyManageLoginException) {
-                            // If our session cookies are expired, we were now told to login,
-                            // so handle that by running a forced relogin in that case!
-                            return $this->_login($this->username, $this->password, true, $appRefreshInterval);
+                            if (isset($e->getResponse()->asArray()['logout_reason'])) {
+                                $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
+
+                                return $this->_login($this->username, $this->password, false, $appRefreshInterval, true);
+                            } else {
+                                // If our session cookies are expired, we were now told to login,
+                                // so handle that by running a forced relogin in that case!
+                                return $this->_login($this->username, $this->password, true, $appRefreshInterval);
+                            }
                         } else {
                             throw $e;
                         }
@@ -3613,9 +3641,15 @@ class Instagram implements ExperimentsInterface
                     $this->story->getReelsTrayFeed('cold_start');
                 } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
                     if (!self::$manuallyManageLoginException) {
-                        // If our session cookies are expired, we were now told to login,
-                        // so handle that by running a forced relogin in that case!
-                        return $this->_login($this->username, $this->password, true, $appRefreshInterval);
+                        if (isset($e->getResponse()->asArray()['logout_reason'])) {
+                            $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
+
+                            return $this->_login($this->username, $this->password, false, $appRefreshInterval, true);
+                        } else {
+                            // If our session cookies are expired, we were now told to login,
+                            // so handle that by running a forced relogin in that case!
+                            return $this->_login($this->username, $this->password, true, $appRefreshInterval);
+                        }
                     } else {
                         throw $e;
                     }

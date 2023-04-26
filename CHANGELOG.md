@@ -1,3 +1,11 @@
+# Stable release v21.19.3
+## Date: 26/04/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`.
+- **Instagram:** Update `_sendLoginFlow()`.Forced logged out session will be handled.
+
 # Stable release v21.19.2
 ## Date: 26/04/2023
 

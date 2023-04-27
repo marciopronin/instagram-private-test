@@ -1989,32 +1989,45 @@ class Instagram implements ExperimentsInterface
                             default:
                                 if (isset($errorMap['event_category'])) {
                                     if ($errorMap['event_category'] === 'checkpoint') {
-                                        $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\error_user_msg\\'), 0, -2);
+                                        $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentCheckpointsFlow');
+                                        $loginResponse = json_decode(stripslashes($loginResponse), true);
+                                        $loginResponse = new Response\LoginResponse($loginResponse);
 
-                                        foreach ($offsets as $offset) {
-                                            if (isset($loginResponseWithHeaders[$offset])) {
-                                                $loginResponseWithHeaders = $loginResponseWithHeaders[$offset];
-                                            } else {
-                                                break;
-                                            }
-                                        }
+                                        $e = new \InstagramAPI\Exception\Checkpoint\ChallengeRequiredException();
+                                        $e->setResponse($loginResponse);
 
-                                        $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
-                                        foreach ($errorMap as $key => $value) {
-                                            if (!is_array($errorMap[$key])) {
-                                                $errorMap[stripslashes($key)] = stripslashes($value);
-                                            }
-                                            unset($errorMap[$key]);
+                                        throw $e;
+                                    /*
+                                    $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\error_user_msg\\'), 0, -2);
+
+                                    foreach ($offsets as $offset) {
+                                        if (isset($loginResponseWithHeaders[$offset])) {
+                                            $loginResponseWithHeaders = $loginResponseWithHeaders[$offset];
+                                        } else {
+                                            break;
                                         }
+                                    }
+
+                                    $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
+                                    foreach ($errorMap as $key => $value) {
+                                        if (!is_array($errorMap[$key])) {
+                                            $errorMap[stripslashes($key)] = stripslashes($value);
+                                        }
+                                        unset($errorMap[$key]);
+                                    }
+                                    */
                                     } elseif ($errorMap['event_category'] === 'two_fac') {
                                         $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentTwoFactorAuthFlow');
                                         $loginResponse = json_decode(stripslashes($loginResponse), true);
                                         $loginResponse = new Response\LoginResponse($loginResponse);
 
                                         return $loginResponse;
+                                    } else {
+                                        throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
                                     }
+                                } else {
+                                    throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
                                 }
-                                //throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
                         }
                     }
                 }
@@ -2249,7 +2262,7 @@ class Instagram implements ExperimentsInterface
                     'is_platform_login'                 => 0,
                     'qe_device_id'                      => $this->uuid,
                     'family_device_id'                  => $this->phone_id,
-                    'INTERNAL_INFRA_screen_id'          => $this->bloksInfo['INTERNAL_INFRA_screen_id'][1],
+                    'INTERNAL_INFRA_screen_id'          => isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->bloksInfo['INTERNAL_INFRA_screen_id'][1] : '',
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -3508,7 +3521,7 @@ class Instagram implements ExperimentsInterface
                             if (isset($e->getResponse()->asArray()['logout_reason'])) {
                                 $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
 
-                                return $this->_login($this->username, $this->password, false, $appRefreshInterval, true);
+                                return $this->_login($this->username, $this->password, true, $appRefreshInterval, true);
                             } else {
                                 // If our session cookies are expired, we were now told to login,
                                 // so handle that by running a forced relogin in that case!
@@ -3644,7 +3657,7 @@ class Instagram implements ExperimentsInterface
                         if (isset($e->getResponse()->asArray()['logout_reason'])) {
                             $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
 
-                            return $this->_login($this->username, $this->password, false, $appRefreshInterval, true);
+                            return $this->_login($this->username, $this->password, true, $appRefreshInterval, true);
                         } else {
                             // If our session cookies are expired, we were now told to login,
                             // so handle that by running a forced relogin in that case!
@@ -3711,7 +3724,7 @@ class Instagram implements ExperimentsInterface
         $logoutReason,
         $path)
     {
-        return $this->request('perform_post_force_logout_actions/')
+        return $this->request('accounts/perform_post_force_logout_actions/')
             ->addPost('user_id', $this->account_id)
             ->addPost('_uid', $this->account_id)
             //->addPost('_csrftoken', $this->client->getToken())

@@ -1,3 +1,12 @@
+# Stable release v21.19.4
+## Date: 27/04/2023
+
+### Updates and fixes
+
+- **Bloks:** `_fixJsonString()` and `parseBlok()`
+- **Instagram:** Update `_login()`.
+- **Instagram:** Update `performPostForceLogoutActions()`.
+
 # Stable release v21.19.3
 ## Date: 26/04/2023
 

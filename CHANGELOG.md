@@ -1,3 +1,14 @@
+# Stable release v21.20.0
+## Date: 28/04/2023
+
+### New features
+
+- **Story:** Add `getReelsMediaStream()`
+
+### Updates and fixes
+
+- **Constants:** Update constants to 280.0.0.18.114
+
 # Stable release v21.19.4
 ## Date: 27/04/2023
 

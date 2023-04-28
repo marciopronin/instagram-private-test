@@ -190,6 +190,40 @@ class Story extends RequestCollection
     }
 
     /**
+     * Get multiple users' stories at once.
+     *
+     * @param string|string[] $feedList List of numerical UserPK IDs.
+     * @param string          $source   (optional) Source app-module where the request was made.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\ReelsMediaResponse
+     */
+    public function getReelsMediaStream(
+        $feedList,
+        $source = 'feed_timeline')
+    {
+        if (!is_array($feedList)) {
+            $feedList = [$feedList];
+        }
+
+        foreach ($feedList as &$value) {
+            $value = (string) $value;
+        }
+        unset($value); // Clear reference.
+
+        return $this->ig->request('feed/reels_media_stream/')
+            ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
+            ->addPost('reel_ids', $feedList) // Must be string[] array.
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            ->addPost('source', $source)
+            ->addPost('batch_size', count($feedList))
+            ->getResponse(new Response\ReelsMediaResponse());
+    }
+
+    /**
      * Get a specific user's story reel feed.
      *
      * This function gets the user's story Reel object directly, which always

@@ -1,3 +1,11 @@
+# Stable release v21.20.2
+## Date: 02/04/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `getLoginPasswordEntry()`
+- **Instagram:** Update `sendLoginTextInputTypeAhead()`
+
 # Stable release v21.20.1
 ## Date: 02/04/2023
 

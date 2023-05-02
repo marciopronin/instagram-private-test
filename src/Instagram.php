@@ -2226,7 +2226,7 @@ class Instagram implements ExperimentsInterface
                     'typeahead_id'                      => $this->bloksInfo['typeahead_id'][1],
                     'text_component_id'                 => $this->bloksInfo['text_component_id'][1],
                     'INTERNAL__latency_qpl_marker_id'   => $this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1],
-                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'][1],
+                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'fdid'                              => $this->bloksInfo['fdid'],
                     'screen_id'                         => $this->bloksInfo['screen_id'][1],
                     'INTERNAL__latency_qpl_instance_id' => $this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1],
@@ -2260,7 +2260,7 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     'offline_experiment_group'          => $this->settings->get('offline_experiment'),
-                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'][1],
+                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'device_id'                         => $this->device_id,
                     'is_platform_login'                 => 0,
                     'qe_device_id'                      => $this->uuid,

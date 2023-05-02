@@ -1991,7 +1991,10 @@ class Instagram implements ExperimentsInterface
                                     if ($errorMap['event_category'] === 'checkpoint') {
                                         $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentCheckpointsFlow');
                                         $loginResponse = json_decode(stripslashes($loginResponse), true);
-                                        $loginResponse = new Response\LoginResponse($loginResponse);
+                                        if (isset($loginResponse['error'])) {
+                                            $loginResponse = $loginResponse['error']['error_data'];
+                                        }
+                                        $loginResponse = new Response\CheckpointResponse($loginResponse);
 
                                         $e = new \InstagramAPI\Exception\Checkpoint\ChallengeRequiredException();
                                         $e->setResponse($loginResponse);
@@ -3725,6 +3728,7 @@ class Instagram implements ExperimentsInterface
         $path)
     {
         return $this->request('accounts/perform_post_force_logout_actions/')
+            ->setNeedsAuth(false)
             ->addPost('user_id', $this->account_id)
             ->addPost('_uid', $this->account_id)
             //->addPost('_csrftoken', $this->client->getToken())

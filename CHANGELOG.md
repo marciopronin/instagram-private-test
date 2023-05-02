@@ -1,3 +1,16 @@
+# Stable release v21.20.1
+## Date: 02/04/2023
+
+### Updates and fixes
+
+- **Bloks:** Update `_fixJsonString()` and `parseBlok()`
+- **Response:** Update CheckpointResponse
+- **Instagram:** Update `_login()`. Challenge support for bloks authentication
+
+### Examples
+
+- **Example:** Update checkpoint example
+
 # Stable release v21.20.0
 ## Date: 28/04/2023
 

@@ -33,7 +33,11 @@ try {
         $webForm = false;
         $challenge = $e->getResponse()->getChallenge();
         if (!is_array($challenge)) {
-            $checkApiPath = substr($challenge->getApiPath(), 1);
+            if ($challenge === null) {
+                $checkApiPath = substr($e->getResponse()->asArray()['api_path'], 1);
+            } else {
+                $checkApiPath = substr($challenge->getApiPath(), 1);
+            }
         } else {
             $checkApiPath = substr($challenge['api_path'], 1);
         }
@@ -50,7 +54,7 @@ try {
                             if ($iterations > 5) {
                                 $webForm = true;
                             }
-                            if ((is_array($e->getResponse()->getChallenge()) === false) && ($e->getResponse()->getChallenge()->getChallengeContext() !== null)) {
+                            if ($e->getResponse()->getChallenge() !== null && (is_array($e->getResponse()->getChallenge()) === false) && ($e->getResponse()->getChallenge()->getChallengeContext() !== null)) {
                                 $challengeContext = $e->getResponse()->getChallenge()->getChallengeContext();
                             } else {
                                 $challengeContext = null;

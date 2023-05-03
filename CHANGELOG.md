@@ -1,3 +1,17 @@
+# Stable release v21.21.0
+## Date: 03/04/2023
+
+### New features
+
+- **Internal:** Add `getNotes()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **People:** Update `getInfoById()`
+- **Internal:** Update `sendGraph()`
+- **Bloks:** Update `cleanData()`
+
 # Stable release v21.20.2
 ## Date: 02/04/2023
 

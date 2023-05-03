@@ -36,6 +36,7 @@ class People extends RequestCollection
      *                                "self_likers_self_likers_photo_view_profile",
      *                                "self_likers_self_likers_video_view_profile".
      * @param string|null $entrypoint Entrypoint.
+     * @param bool        $isPrefetch Is prefetch.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -44,7 +45,8 @@ class People extends RequestCollection
     public function getInfoById(
         $userId,
         $module = null,
-        $entrypoint = null)
+        $entrypoint = null,
+        $isPrefetch = false)
     {
         $request = $this->ig->request("users/{$userId}/info/");
 
@@ -54,6 +56,9 @@ class People extends RequestCollection
 
         if ($module !== null) {
             $request->addParam('from_module', $module);
+        }
+        if ($isPrefetch === true) {
+            $request->addParam('is_prefetch', 'true');
         }
 
         return $request->getResponse(new Response\UserInfoResponse());

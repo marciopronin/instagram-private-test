@@ -230,7 +230,6 @@ class Bloks
                         break;
                     case 'bk.action.array.Get':
                     case 'bk.action.bloks.GetState':
-                        print_r($this->cleanData(array_slice($v, 1)));
                         $result[$k] = $this->cleanData(array_slice($v, 1));
                         // no break
                     default:

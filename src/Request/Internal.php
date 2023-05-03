@@ -1978,11 +1978,12 @@ class Internal extends RequestCollection
     /**
      * Send Graph query.
      *
-     * @param mixed $clientDoc
-     * @param mixed $vars
-     * @param mixed $friendlyName
-     * @param mixed $pretty
-     * @param mixed $clientLibrary
+     * @param string $clientDoc
+     * @param array  $vars
+     * @param string $friendlyName
+     * @param string $rootName
+     * @param bool   $pretty
+     * @param string $clientLibrary
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1992,6 +1993,7 @@ class Internal extends RequestCollection
         $clientDoc,
         $vars,
         $friendlyName,
+        $rootName,
         $pretty,
         $clientLibrary = 'graphservice')
     {
@@ -2002,6 +2004,7 @@ class Internal extends RequestCollection
             ->setAddDefaultHeaders(false)
             ->addHeader('X-Graphql-Client-Library', $clientLibrary)
             ->addHeader('X-Fb-Friendly-Name', $friendlyName)
+            ->addHeader('X-Root-Field-Name', $rootName)
             ->addPost('client_doc_id', $clientDoc)
             ->addPost('locale', $this->ig->getLocale())
             ->addPost('variables', json_encode($vars));
@@ -2346,6 +2349,19 @@ class Internal extends RequestCollection
         }
 
         return $request->getResponse(new Response\ConsentRequiredResponse());
+    }
+
+    /**
+     * Get notes.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getNotes()
+    {
+        return $this->ig->request('notes/get_notes/')
+            ->getResponse(new Response\GenericResponse());
     }
 
     /**

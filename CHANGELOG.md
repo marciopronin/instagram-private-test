@@ -1,3 +1,11 @@
+# Stable release v21.21.1
+## Date: 04/04/2023
+
+### Updates and fixes
+
+- **Internal:** Update `getBloksSaveCredentialsScreen()`
+- **Story:** Update `getArchiveBadgeCount()`
+
 # Stable release v21.21.0
 ## Date: 03/04/2023
 

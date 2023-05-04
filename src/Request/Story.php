@@ -404,8 +404,9 @@ class Story extends RequestCollection
     public function getArchiveBadgeCount()
     {
         return $this->ig->request('archive/reel/profile_archive_badge/')
-            ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-            ->addParam('_uuid', $this->ig->uuid)
+            ->setSignedPost(false)
+            ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
+            ->addPost('_uuid', $this->ig->uuid)
             //->addParam('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\ArchiveBadgeCountResponse());
     }

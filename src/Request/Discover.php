@@ -35,6 +35,10 @@ class Discover extends RequestCollection
         $clusterDisabled = true)
     {
         $request = $this->ig->request('discover/topical_explore/')
+            ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
+            ->addHeader('X-CM-Latency', '-1.000')
+            ->addHeader('X-Ads-Opt-Out', '0')
+            ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             ->addHeader('X-IG-Prefetch-Request', 'foreground')
             ->addParam('is_prefetch', $isPrefetch)
             //->addParam('omit_cover_media', true)

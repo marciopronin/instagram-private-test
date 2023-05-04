@@ -3287,6 +3287,7 @@ class Instagram implements ExperimentsInterface
                 $this->account->getAccountFamily();
                 if (self::$useBloksLogin === true) {
                     $this->internal->getBloksSaveCredentialsScreen();
+                    sleep(mt_rand(1, 3));
                 }
 
                 try {

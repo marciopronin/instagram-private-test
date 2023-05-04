@@ -242,7 +242,7 @@ class Timeline extends RequestCollection
             ->setSignedPost(false)
             ->setIsBodyCompressed(true)
             ->setRequestPriority(0)
-            ->addHeader('X-Google-AD-ID', $this->ig->advertising_id)
+            //->addHeader('X-Google-AD-ID', $this->ig->advertising_id)
             ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
             ->addHeader('X-CM-Latency', '-1.000')
             ->addHeader('X-Ads-Opt-Out', '0')

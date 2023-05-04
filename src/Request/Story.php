@@ -348,31 +348,38 @@ class Story extends RequestCollection
 
         $request = $this->ig->request('feed/injected_reels_media/')
             ->setIsBodyCompressed(true)
+            ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
+            ->addHeader('X-CM-Latency', '-1.000')
+            ->addHeader('X-Ads-Opt-Out', '0')
+            ->addHeader('X-DEVICE-ID', $this->ig->uuid)
+            ->addPost('num_items_in_pool', '0')
+            ->addPost('has_camera_permission', '0')
+            ->addPost('is_prefetch', 'true')
+            ->addPost('is_ads_sensitive', 'false')
+            ->addPost('is_carry_over_first_page', 'false')
+            ->addPost('client_doc_id', '33469793817914901585514067303')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
+            ->addPost('phone_id', $this->ig->phone_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('inserted_netego_indices', [])
             ->addPost('ad_and_netego_request_information', [])
             ->addPost('inserted_ad_indices', [])
             ->addPost('ad_request_index', '0')
-            ->addPost('is_inventory_based_request_enabled', '0')
-            ->addPost('is_ad_pod_enabled', '0')
-            ->addHeader('battery_level', $this->ig->getBatteryLevel())
+            ->addPost('is_inventory_based_request_enabled', 'true')
+            ->addPost('is_ad_pod_enabled', 'true')
+            ->addPost('battery_level', $this->ig->getBatteryLevel())
             ->addPost('tray_session_id', $traySessionId)
             ->addPost('viewer_session_id', md5($traySessionId))
             ->addPost('reel_position', '0')
-            ->addHeader('is_charging', $this->ig->getIsDeviceCharging())
-            ->addHeader('will_sound_on', (int) $this->ig->getSoundEnabled())
-            ->addPost('surface_q_id', '2247106998672735')
+            ->addPost('is_charging', $this->ig->getIsDeviceCharging())
+            ->addPost('will_sound_on', (int) $this->ig->getSoundEnabled())
+            ->addPost('is_dark_mode', '0')
             ->addPost('tray_user_ids', $storyUserIds)
-            ->addPost('is_media_based_insertion_enabled', '1')
+            ->addPost('is_media_based_insertion_enabled', 'true')
             ->addPost('entry_point_index', ($entryIndex !== 0) ? strval($entryIndex) : '0')
+            ->addPost('earliest_request_position', '0')
             ->addPost('is_first_page', ($entryIndex !== 0) ? '0' : '1');
-
-        if ($this->ig->getIsAndroid()) {
-            $request->addHeader('phone_id', $this->ig->phone_id)
-                    ->addPost('device_id', $this->ig->uuid);
-        }
 
         return $request->getResponse(new Response\ReelsMediaResponse());
     }

@@ -3673,6 +3673,7 @@ class Internal extends RequestCollection
     public function getAsyncNdxIgSteps()
     {
         return $this->ig->request('devices/ndx/api/async_get_ndx_ig_steps/')
+            ->addParam('ndx_request_source', 'NDX_IG4A_MA_FEATURE')
             ->getResponse(new Response\GenericResponse());
     }
 

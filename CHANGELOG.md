@@ -1,3 +1,16 @@
+# Stable release v21.21.2
+## Date: 04/04/2023
+
+### Updates and fixes
+
+- **Internal:** Update `getAsyncNdxIgSteps()`
+- **Instagram:** Update `_sendLoginFlow()`
+- **Direct:** Update `getPresences()`
+- **Story:** Update `getInjectedStories()`
+- **Timeline:** Update `getTimelineFeed()`
+- **Discover:** Update `getExploreFeed()`
+- **Constants:** Update `BATCH_SURFACES` and `BATCH_QUERY`
+
 # Stable release v21.21.1
 ## Date: 04/04/2023
 

@@ -2205,6 +2205,7 @@ class Instagram implements ExperimentsInterface
             'qe_device_id'              => $this->uuid,
             'account_list'              => $accountList,
             'blocked_uid'               => [],
+            'INTERNAL_INFRA_THEME'      => 'default',
         ]))
         ->addPost('bk_client_context', json_encode([
             'bloks_version' => Constants::BLOCK_VERSIONING_ID,

@@ -1,5 +1,13 @@
+# Stable release v21.21.3
+## Date: 05/05/2023
+
+### Updates and fixes
+
+- **Internal:** Update `getMobileConfig()`
+- **Instagram:** Update `processLoginClientDataAndRedirect()`
+
 # Stable release v21.21.2
-## Date: 04/04/2023
+## Date: 04/05/2023
 
 ### Updates and fixes
 
@@ -12,7 +20,7 @@
 - **Constants:** Update `BATCH_SURFACES` and `BATCH_QUERY`
 
 # Stable release v21.21.1
-## Date: 04/04/2023
+## Date: 04/05/2023
 
 ### Updates and fixes
 
@@ -20,7 +28,7 @@
 - **Story:** Update `getArchiveBadgeCount()`
 
 # Stable release v21.21.0
-## Date: 03/04/2023
+## Date: 03/05/2023
 
 ### New features
 
@@ -34,7 +42,7 @@
 - **Bloks:** Update `cleanData()`
 
 # Stable release v21.20.2
-## Date: 02/04/2023
+## Date: 02/05/2023
 
 ### Updates and fixes
 
@@ -42,7 +50,7 @@
 - **Instagram:** Update `sendLoginTextInputTypeAhead()`
 
 # Stable release v21.20.1
-## Date: 02/04/2023
+## Date: 02/05/2023
 
 ### Updates and fixes
 

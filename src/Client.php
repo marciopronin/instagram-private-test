@@ -1381,6 +1381,7 @@ class Client
             'X-IG-App-Startup-Country',
             'X-Bloks-Version-Id',
             'X-IG-WWW-Claim',
+            'X-IG-Transfer-Encoding',
             'X-Bloks-Is-Layout-RTL',
             'X-IG-Device-ID',
             'X-IG-Family-Device-ID',

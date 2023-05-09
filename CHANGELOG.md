@@ -1,3 +1,11 @@
+# Stable release v21.21.5
+## Date: 09/05/2023
+
+### Updates and fixes
+
+- **Client:** Update `_orderHeaders()`
+- **Timeline:** Update `getTimelineFeed()`
+
 # Stable release v21.21.4
 ## Date: 08/05/2023
 

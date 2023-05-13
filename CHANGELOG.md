@@ -1,3 +1,14 @@
+# Stable release v21.22.0
+## Date: 13/05/2023
+
+### New features
+
+- **People:** Add `getInfoByNameStream()`
+
+### Updates and fixes
+
+- **Event:** Update `sendRecommendedUserImpression()`
+
 # Stable release v21.21.5
 ## Date: 09/05/2023
 

@@ -88,6 +88,31 @@ class People extends RequestCollection
     }
 
     /**
+     * Get details about a specific user via their username.
+     *
+     * NOTE: The real app only uses this endpoint for profiles opened via URL.
+     *
+     * @param string $username Username as string (NOT as a numerical ID).
+     * @param string $module   From which app module (page) you have opened the profile.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UserInfoResponse
+     */
+    public function getInfoByNameStream(
+        $username,
+        $module = 'deep_link_util')
+    {
+        return $this->ig->request("users/{$username}/usernameinfo_stream/")
+            ->setSignedPost(false)
+            ->addPost('is_prefetch', 'false')
+            ->addPost('entry_point', 'profile')
+            ->addPost('from_module', $module)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->getResponse(new Response\UserInfoResponse());
+    }
+
+    /**
      * Get the numerical UserPK ID for a specific user via their username.
      *
      * This is just a convenient helper function. You may prefer to use

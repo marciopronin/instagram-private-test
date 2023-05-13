@@ -3096,7 +3096,7 @@ class Event extends RequestCollection
         $position,
         $module = 'newsfeed_you')
     {
-        if ($module === 'newsfeed_you') {
+        if ($module === 'newsfeed_you' || $module === 'discover_people') {
             $extra = [
                 'position'           => $position,
                 'view'               => 'fullscreen',
@@ -3113,7 +3113,6 @@ class Event extends RequestCollection
                 'view_module'               => 'hscroll_aymf_feed_unit',
                 'algorithm'                 => 'unknown',
                 'view_state_item_type'      => 0,
-                'feed_timeline'             => $module,
                 'follow_impression_id'      => 0,
                 'follow_impression_length'  => 182,
                 'ranking_algorithm'         => 'su_default',

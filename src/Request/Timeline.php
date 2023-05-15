@@ -247,7 +247,7 @@ class Timeline extends RequestCollection
             ->addHeader('X-CM-Latency', '-1.000')
             ->addHeader('X-Ads-Opt-Out', '0')
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
-            ->addHeader('X-IG-Transfer-Encoding', 'chunked')
+            //->addHeader('X-IG-Transfer-Encoding', 'chunked')
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)

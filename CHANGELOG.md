@@ -1,3 +1,10 @@
+# Stable release v21.22.1
+## Date: 15/05/2023
+
+### Updates and fixes
+
+- **Timeline:** Update `getTimelineFeed()`
+
 # Stable release v21.22.0
 ## Date: 13/05/2023
 

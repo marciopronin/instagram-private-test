@@ -457,4 +457,17 @@ class Reel extends RequestCollection
 
         return $request->getResponse(new Response\ReelsResponse());
     }
+
+    /**
+     * Get interests (topics).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\CreationInterestPickerResponse
+     */
+    public function getInterests()
+    {
+        return $this->ig->request('clips/creation_interest_picker/')
+            ->getResponse(new Response\CreationInterestPickerResponse());
+    }
 }

@@ -1,3 +1,15 @@
+# Stable release v21.23.0
+## Date: 16/05/2023
+
+### New features
+
+- **Reel:** Add `getInterests()`
+- **Model and Responses:** Added model and responses for interest topics
+
+### Updates and fixes
+
+- **Internal:** Update `configureSingleVideo()`. New options for reels.
+
 # Stable release v21.22.1
 ## Date: 15/05/2023
 

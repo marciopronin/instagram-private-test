@@ -1081,7 +1081,7 @@ class Client
                     ];
 
         if ($request->getUri()->getHost() !== parse_url(Constants::GRAPH_API_URL, PHP_URL_HOST)) {
-            if ($this->_parent->account_id !== null) {
+            if ($this->_parent->account_id !== null || strpos($request->getUri(), 'bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request') !== false) {
                 $headers['set_headers']['X-Pigeon-Session-Id'] = $this->getPigeonSession();
             }
             $headers['set_headers']['X-Pigeon-Rawclienttime'] = $this->_getPigeonRawClientTime();

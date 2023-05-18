@@ -1,3 +1,10 @@
+# Stable release v21.23.2
+## Date: 18/05/2023
+
+### Updates and fixes
+
+- **Client:** Update `api()`
+
 # Stable release v21.23.1
 ## Date: 18/05/2023
 

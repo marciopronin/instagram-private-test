@@ -1,3 +1,10 @@
+# Stable release v21.23.3
+## Date: 18/05/2023
+
+### Updates and fixes
+
+- **Internal:** Update `configureSinglePhoto()`
+
 # Stable release v21.23.2
 ## Date: 18/05/2023
 

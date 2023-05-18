@@ -360,7 +360,8 @@ class Internal extends RequestCollection
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('caption', $captionText)
                     ->addPost('source_type', '4')
-                    ->addPost('media_folder', 'Camera')
+                    ->addPost('include_e2ee_mentioned_user_list', 'false')
+                    //->addPost('media_folder', 'Camera')
                     ->addPost('upload_id', $uploadId);
                    // ->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
 

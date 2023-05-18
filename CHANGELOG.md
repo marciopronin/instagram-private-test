@@ -1,3 +1,12 @@
+# Stable release v21.23.1
+## Date: 18/05/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Client:** Update `api()`
+- **Client:** Update `mapServerResponse()`
+
 # Stable release v21.23.0
 ## Date: 16/05/2023
 

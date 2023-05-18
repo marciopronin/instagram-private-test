@@ -816,6 +816,11 @@ class Client
                     // their server. When this flag is false, ALL further attempts
                     // at AUTHENTICATED requests will be aborted by our library.
                     $this->_parent->isMaybeLoggedIn = false;
+                    $this->_parent->settings->set('rur', '');
+                    $this->_parent->settings->set('www_claim', '');
+                    $this->_parent->settings->set('account_id', '');
+                    $this->_parent->settings->set('authorization_header', 'Bearer IGT:2:'); // Header won't be added into request until a new authorization is obtained.
+                    $this->_parent->account_id = null;
 
                     throw $e; // Re-throw.
                 }
@@ -1076,7 +1081,9 @@ class Client
                     ];
 
         if ($request->getUri()->getHost() !== parse_url(Constants::GRAPH_API_URL, PHP_URL_HOST)) {
-            $headers['set_headers']['X-Pigeon-Session-Id'] = $this->_pigeonSession;
+            if ($this->_parent->account_id !== null) {
+                $headers['set_headers']['X-Pigeon-Session-Id'] = $this->getPigeonSession();
+            }
             $headers['set_headers']['X-Pigeon-Rawclienttime'] = $this->_getPigeonRawClientTime();
 
             if ($this->_parent->settings->get('rur') !== null) {

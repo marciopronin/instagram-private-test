@@ -1847,7 +1847,7 @@ class Instagram implements ExperimentsInterface
                     }
                 }
                 if ($firstDataBlok === null) {
-                    throw new \InstagramAPI\Exception\InstagramException('Login bloks values not found! Please report this with debug log.');
+                    throw new \InstagramAPI\Exception\AccountStateException('Delete user settings and try login again.');
                 }
 
                 $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');

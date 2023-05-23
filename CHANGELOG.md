@@ -1,3 +1,10 @@
+# Stable release v21.23.5
+## Date: 23/05/2023
+
+### Updates and fixes
+
+- **Internal:** Update `configureSingleVideo()`
+
 # Stable release v21.23.4
 ## Date: 23/05/2023
 

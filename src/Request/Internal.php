@@ -927,6 +927,8 @@ class Internal extends RequestCollection
         $igtvAds = (isset($externalMetadata['igtv_ads_toggled_on']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_ads_toggled_on'] : null;
         /** @var array IGTV share preview to feed. ONLY TV MEDIA! */
         $igtvShareToFeed = (isset($externalMetadata['igtv_share_preview_to_feed']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_share_preview_to_feed'] : null;
+        /** @var array REELS (CLIPS) share preview to feed. ONLY REEL MEDIA! */
+        $reelShareToFeed = (isset($externalMetadata['reel_share_preview_to_feed']) && $targetFeed == Constants::FEED_REELS) ? $externalMetadata['reel_share_preview_to_feed'] : null;
         /** @var array REELS (CLIPS) interest topics. ONLY REEL MEDIA! */
         $reelTopics = (isset($externalMetadata['interest_topics']) && $targetFeed == Constants::FEED_REELS) ? $externalMetadata['interest_topics'] : null;
 

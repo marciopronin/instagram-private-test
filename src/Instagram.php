@@ -202,7 +202,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var bool
      */
-    public static $useBloksLogin = false;
+    public static $useBloksLogin = true;
 
     /**
      * UUID.
@@ -2029,11 +2029,23 @@ class Instagram implements ExperimentsInterface
                                         $msg = "You can't use Instagram because your account didn't follow our Community Guidelines. This decision can't be reversed either because we've already reviewed it, or because 180 days have passed since your account was disabled";
                                         if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
                                             $loginResponse = new Response\LoginResponse([
-                                                'error_type'    => 'inactive user',
+                                                'error_type'    => 'inactive_user',
                                                 'status'        => 'fail',
                                                 'message'       => $msg,
                                             ]);
                                             $e = new \InstagramAPI\Exception\AccountDisabledException();
+                                            $e->setResponse($loginResponse);
+
+                                            throw $e;
+                                        }
+                                        $msg = 'Please wait a few minutes before you try again';
+                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                            $loginResponse = new Response\LoginResponse([
+                                                'error_type'    => 'too_many_attempts',
+                                                'status'        => 'fail',
+                                                'message'       => $msg,
+                                            ]);
+                                            $e = new \InstagramAPI\Exception\TooManyAttemptsException();
                                             $e->setResponse($loginResponse);
 
                                             throw $e;

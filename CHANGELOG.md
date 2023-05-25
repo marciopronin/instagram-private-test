@@ -1,3 +1,13 @@
+# Stable release v21.23.6
+## Date: 25/05/2023
+
+Bloks login system will be enabled by default in this version. Test the release before using it in production.
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Exception:** Added new exception `TooManyAttemptsException`
+
 # Stable release v21.23.5
 ## Date: 23/05/2023
 

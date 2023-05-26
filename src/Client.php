@@ -1044,15 +1044,9 @@ class Client
                 $uploadedBytes = null; // Don't display.
             }
 
-            if (in_array($request->getUri()->getPath(), Constants::ZR_EXCLUSION)) {
-                $uri = (string) $request->getUri();
-            } else {
-                $uri = $this->_zeroRating->rewrite((string) $request->getUri());
-            }
-
             $this->_printDebug(
                 $request->getMethod(),
-                $uri,
+                $this->_zeroRating->rewrite((string) $request->getUri()),
                 $uploadedBody,
                 $uploadedBytes,
                 $guzzleResponse,

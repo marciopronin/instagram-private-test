@@ -1,3 +1,10 @@
+# Stable release v21.23.8
+## Date: 26/05/2023
+
+### Updates and fixes
+
+- **ZR rules:** Revert changed to better apply endpoint rules
+
 # Stable release v21.23.7
 ## Date: 26/05/2023
 

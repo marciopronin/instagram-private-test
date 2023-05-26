@@ -816,6 +816,7 @@ class Client
                     // their server. When this flag is false, ALL further attempts
                     // at AUTHENTICATED requests will be aborted by our library.
                     $this->_parent->isMaybeLoggedIn = false;
+                    $this->_parent->settings->set('mid', '');
                     $this->_parent->settings->set('rur', '');
                     $this->_parent->settings->set('www_claim', '');
                     $this->_parent->settings->set('account_id', '');
@@ -1043,9 +1044,15 @@ class Client
                 $uploadedBytes = null; // Don't display.
             }
 
+            if (in_array($request->getUri()->getPath(), Constants::ZR_EXCLUSION)) {
+                $uri = (string) $request->getUri();
+            } else {
+                $uri = $this->_zeroRating->rewrite((string) $request->getUri());
+            }
+
             $this->_printDebug(
                 $request->getMethod(),
-                $this->_zeroRating->rewrite((string) $request->getUri()),
+                $uri,
                 $uploadedBody,
                 $uploadedBytes,
                 $guzzleResponse,

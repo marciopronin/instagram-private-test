@@ -1,3 +1,14 @@
+# Stable release v21.23.7
+## Date: 26/05/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Constants:** Added `ZR_EXCLUSION` for hosts where rewrite rules do not apply
+- **Client:** Update `_apiRequest()`
+- **Client:** Update `api()`
+- **Middleware/ZeroRating:** Update `__invoke()`
+
 # Stable release v21.23.6
 ## Date: 25/05/2023
 

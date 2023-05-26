@@ -1847,7 +1847,15 @@ class Instagram implements ExperimentsInterface
                     }
                 }
                 if ($firstDataBlok === null) {
-                    throw new \InstagramAPI\Exception\AccountStateException('Delete user settings and try login again.');
+                    $this->isMaybeLoggedIn = false;
+                    $this->settings->set('mid', '');
+                    $this->settings->set('rur', '');
+                    $this->settings->set('www_claim', '');
+                    $this->settings->set('account_id', '');
+                    $this->settings->set('authorization_header', 'Bearer IGT:2:'); // Header won't be added into request until a new authorization is obtained.
+                    $this->account_id = null;
+
+                    throw new \InstagramAPI\Exception\AccountStateException('Try login again.');
                 }
 
                 $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');

@@ -10,6 +10,10 @@ class Constants
         2   => 'https://i.instagram.com/api/v2/',
     ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
+    const ZR_EXCLUSION = [
+        '/logging_client_events',
+        '/graphql_www',
+    ];
     const IG_VERSION = '283.0.0.20.105';
     const IG_IOS_VERSION = '212.1.0.25.118';
     const VERSION_CODE = [

@@ -2041,7 +2041,7 @@ class Instagram implements ExperimentsInterface
                                                 'status'        => 'fail',
                                                 'message'       => $msg,
                                             ]);
-                                            $e = new \InstagramAPI\Exception\AccountDisabledException();
+                                            $e = new \InstagramAPI\Exception\AccountDisabledException($msg);
                                             $e->setResponse($loginResponse);
 
                                             throw $e;
@@ -2053,7 +2053,19 @@ class Instagram implements ExperimentsInterface
                                                 'status'        => 'fail',
                                                 'message'       => $msg,
                                             ]);
-                                            $e = new \InstagramAPI\Exception\TooManyAttemptsException();
+                                            $e = new \InstagramAPI\Exception\TooManyAttemptsException($msg);
+                                            $e->setResponse($loginResponse);
+
+                                            throw $e;
+                                        }
+                                        $msg = "We can't find an account with ";
+                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                            $loginResponse = new Response\LoginResponse([
+                                                'error_type'    => 'invalid_username',
+                                                'status'        => 'fail',
+                                                'message'       => sprintf('%s%s', $msg, $username),
+                                            ]);
+                                            $e = new \InstagramAPI\Exception\InvalidUsernameException(sprintf('%s%s', $msg, $username));
                                             $e->setResponse($loginResponse);
 
                                             throw $e;

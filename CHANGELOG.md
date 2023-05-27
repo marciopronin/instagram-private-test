@@ -1,3 +1,10 @@
+# Stable release v21.23.9
+## Date: 27/05/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`. Added unmapped blok exception when invalid username is entered
+
 # Stable release v21.23.8
 ## Date: 26/05/2023
 

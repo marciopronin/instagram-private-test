@@ -97,8 +97,8 @@ class Checkpoint extends RequestCollection
         return $this->ig->request($checkpointUrl)
            ->setNeedsAuth(false)
            ->setSignedPost(false)
-           ->addPost('enc_new_password1', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
-           ->addPost('enc_new_password2', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
+           ->addPost('enc_new_password1', Utils::encryptPassword($password, '', '', true))
+           ->addPost('enc_new_password2', Utils::encryptPassword($password, '', '', true))
            ->addPost('guid', $this->ig->uuid)
            ->addPost('device_id', $this->ig->device_id)
            //->addPost('_csrftoken', $this->ig->client->getToken())
@@ -401,8 +401,8 @@ class Checkpoint extends RequestCollection
 
         return $request
             ->setIsSilentFail(true)
-            ->addPost('enc_new_password1', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
-            ->addPost('enc_new_password2', Utils::encryptPassword($password, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
+            ->addPost('enc_new_password1', Utils::encryptPassword($password, '', '', true))
+            ->addPost('enc_new_password2', Utils::encryptPassword($password, '', '', true))
             ->getResponse(new Response\WebCheckpointResponse());
     }
 

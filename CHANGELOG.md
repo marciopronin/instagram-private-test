@@ -1,3 +1,10 @@
+# Stable release v21.23.10
+## Date: 27/05/2023
+
+### Updates and fixes
+
+- **Checkpoint:** Update Checkpoint
+
 # Stable release v21.23.9
 ## Date: 27/05/2023
 

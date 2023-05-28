@@ -1,3 +1,10 @@
+# Stable release v21.23.11
+## Date: 28/05/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`. Added unmapped blok exception when unexpected server error
+
 # Stable release v21.23.10
 ## Date: 27/05/2023
 

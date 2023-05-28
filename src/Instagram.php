@@ -2070,6 +2070,18 @@ class Instagram implements ExperimentsInterface
 
                                             throw $e;
                                         }
+                                        $msg = 'Login Error: An unexpected error occurred. Please try logging in again.';
+                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                            $loginResponse = new Response\LoginResponse([
+                                                'error_type'    => 'unexpected_login_error',
+                                                'status'        => 'fail',
+                                                'message'       => $msg,
+                                            ]);
+                                            $e = new \InstagramAPI\Exception\UnexpectedLoginErrorException($msg);
+                                            $e->setResponse($loginResponse);
+
+                                            throw $e;
+                                        }
                                     } else {
                                         throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
                                     }

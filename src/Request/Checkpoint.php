@@ -384,6 +384,27 @@ class Checkpoint extends RequestCollection
     }
 
     /**
+     * Send review login web form. (It was me = 0, It wasn't me = 1).
+     *
+     * @param string $checkpointUrl Checkpoint URL.
+     * @param int    $option        Option.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\WebCheckpointResponse
+     */
+    public function sendWebReviewLoginForm(
+        $checkpointUrl,
+        $option)
+    {
+        $request = $this->_getWebFormRequest($checkpointUrl);
+
+        return $request
+            ->addPost('choice', $option)
+            ->getResponse(new Response\WebCheckpointResponse());
+    }
+
+    /**
      * Send force password change.
      *
      * @param string $checkpointUrl Checkpoint URL.

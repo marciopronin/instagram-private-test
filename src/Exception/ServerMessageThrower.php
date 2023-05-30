@@ -119,6 +119,7 @@ class ServerMessageThrower
         'Checkpoint\VerifySMSCodeFormException'              => ['VerifySMSCodeForm'],
         'Checkpoint\LegacyForceSetNewPasswordFormException'  => ['LegacyForceSetNewPasswordForm'],
         'Checkpoint\ReviewContactPointChangeFormException'   => ['ReviewContactPointChangeForm'],
+        'Checkpoint\ReviewLoginFormException'                => ['ReviewLoginForm'],
     ];
 
     /**
@@ -190,6 +191,7 @@ class ServerMessageThrower
             }
             if ($serverResponse->hasChallenge()
                 && $serverResponse->getMessage() === ''
+                && $serverResponse->hasErrorType()
                 && $serverResponse->getErrorType() !== 'two_factor_required'
                 && $serverResponse->getErrorType() !== null) {
                 $serverErrorType = $serverResponse->getChallengeType();

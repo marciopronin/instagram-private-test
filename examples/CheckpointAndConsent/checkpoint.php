@@ -195,6 +195,10 @@ try {
                         $newPassword = trim(fgets(STDIN));
                         $ig->checkpoint->sendSetNewPassword($e->getResponse()->getChallengeUrl(), $newPassword);
                         break 2;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\ReviewLoginFormException:
+                        $choice = 0; // It was me = 0, It wasn't me = 1.
+                        $ig->checkpoint->sendWebReviewLoginForm($e->getResponse()->getChallengeUrl(), $choice);
+                        break 2;
                     default:
                         throw new InstagramAPI\Exception\Checkpoint\UnknownChallengeStepException();
                 }

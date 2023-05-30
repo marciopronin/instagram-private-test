@@ -1,3 +1,18 @@
+# Stable release v21.24.0
+## Date: 30/05/2023
+
+### New features
+
+- **Checkpoint:** Added `sendWebReviewLoginForm()`
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`.
+
+### Examples
+
+- **Example:** Updated `checkpoint` example
+
 # Stable release v21.23.12
 ## Date: 30/05/2023
 

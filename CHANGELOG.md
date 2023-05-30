@@ -1,3 +1,10 @@
+# Stable release v21.23.12
+## Date: 30/05/2023
+
+### Updates and fixes
+
+- **Response:** Update `CheckpointResponse()`.
+
 # Stable release v21.23.11
 ## Date: 28/05/2023
 

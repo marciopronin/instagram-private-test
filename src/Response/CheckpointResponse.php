@@ -10,7 +10,7 @@ use InstagramAPI\Response;
  * @method string getAction()
  * @method string getApiPath()
  * @method Model\Challenge getChallenge()
- * @method Model\Challenge getChallengeContext()
+ * @method mixed getChallengeContext()
  * @method bool getLock()
  * @method bool getLogout()
  * @method mixed getMessage()
@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  * @method $this setAction(string $value)
  * @method $this setApiPath(string $value)
  * @method $this setChallenge(Model\Challenge $value)
- * @method $this setChallengeContext(Model\Challenge $value)
+ * @method $this setChallengeContext(mixed $value)
  * @method $this setLock(bool $value)
  * @method $this setLogout(bool $value)
  * @method $this setMessage(mixed $value)
@@ -72,7 +72,7 @@ class CheckpointResponse extends Response
         'lock'              => 'bool',
         'logout'            => 'bool',
         'step_name'         => 'string',
-        'challenge_context' => 'Model\Challenge',
+        'challenge_context' => '',
         'challenge'         => 'Model\Challenge',
         'step_data'         => 'Model\StepData',
         'user_id'           => 'string',

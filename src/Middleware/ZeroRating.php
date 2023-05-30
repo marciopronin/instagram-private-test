@@ -3,6 +3,7 @@
 namespace InstagramAPI\Middleware;
 
 use GuzzleHttp\Psr7\Uri;
+use InstagramAPI\Constants;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -91,7 +92,7 @@ class ZeroRating
             RequestInterface $request,
             array $options
         ) use ($handler) {
-            if (empty($this->_rules)) {
+            if (empty($this->_rules) || in_array($request->getUri()->getPath(), Constants::ZR_EXCLUSION)) {
                 return $handler($request, $options);
             }
 

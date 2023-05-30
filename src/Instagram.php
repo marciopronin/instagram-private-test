@@ -3336,7 +3336,7 @@ class Instagram implements ExperimentsInterface
                 }
 
                 try {
-                    $this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', '', false, 'pando');
+                    $this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', 'viewer', false, 'pando');
                 } catch (\Exception $e) {
                     // pass
                 }
@@ -3345,7 +3345,7 @@ class Instagram implements ExperimentsInterface
                 $this->internal->getMobileConfig(false);
 
                 try {
-                    $this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', '', false, 'pando');
+                    $this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', 'viewer', false, 'pando');
                 } catch (\Exception $e) {
                     // pass
                 }
@@ -3464,7 +3464,7 @@ class Instagram implements ExperimentsInterface
                 $this->people->getCreatorInfo($this->account_id);
                 $this->people->getBootstrapUsers();
                 $this->media->getBlockedMedia();
-                $this->internal->sendGraph('27901845295083252414505722198', ['is_pando' => true], 'FetchAttributionEventComplianceAction', '', true, 'pando');
+                $this->internal->sendGraph('27901845295083252414505722198', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
                 $this->people->getInfoById($this->account_id);
                 $this->creative->sendSupportedCapabilities();
                 $this->account->getProcessContactPointSignals();
@@ -3494,7 +3494,7 @@ class Instagram implements ExperimentsInterface
                     ],
                     'log_only'              => true,
                 ],
-            ], 'ReportAttributionEventsMutation', '', true, 'pando');
+            ], 'ReportAttributionEventsMutation', 'report_attribution_events', true, 'pando');
             } catch (\Exception $e) {
                 // pass
             } finally {

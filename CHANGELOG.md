@@ -1,3 +1,14 @@
+# Stable release v21.24.1
+## Date: 30/05/2023
+
+### Updates and fixes
+
+- **Client:** Update `_apiRequest()`
+- **Constants:** Added ZR_EXCLUSION endpoints
+- **Instagram:** Update `sendGraph()` calls
+- **Internal:** Update `sendGraph()`
+- **ZeroRating:** Update `__invoke()` to skip ZR_EXCLUSION endpoints to be rewritten
+
 # Stable release v21.24.0
 ## Date: 30/05/2023
 

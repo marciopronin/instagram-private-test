@@ -9,6 +9,10 @@ class Constants
         1   => 'https://i.instagram.com/api/v1/',
         2   => 'https://i.instagram.com/api/v2/',
     ];
+    const ZR_EXCLUSION = [
+        '/graphql_www',
+        '/api/v1/creator/creator_info',
+    ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
     const IG_VERSION = '283.0.0.20.105';
     const IG_IOS_VERSION = '212.1.0.25.118';

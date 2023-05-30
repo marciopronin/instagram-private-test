@@ -2025,8 +2025,7 @@ class Internal extends RequestCollection
             ->addPost('variables', json_encode($vars));
 
         if ($clientLibrary === 'graphservice') {
-            $request->addPost('fb_api_req_friendly_name', $friendlyName)
-                    ->addPost('fb_api_caller_class', 'graphservice')
+            $request->addPost('fb_api_caller_class', 'graphservice')
                     ->addPost('fb_api_analytics_tags', json_encode(['GraphServices']));
         }
         if ($clientLibrary === 'pando') {
@@ -2042,7 +2041,8 @@ class Internal extends RequestCollection
         }
 
         if ($clientLibrary === 'graphservice' || $clientLibrary === 'pando') {
-            $request->addPost('pretty', $pretty)
+            $request->addPost('fb_api_req_friendly_name', $friendlyName)
+                    ->addPost('pretty', $pretty)
                     ->addPost('format', 'json')
                     ->addPost('method', 'post')
                     ->addPost('server_timestamps', 'true');

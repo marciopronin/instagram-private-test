@@ -99,6 +99,7 @@ class ServerMessageThrower
             '/account(.*?)disabled(.*?)violating/',
         ],
         'SentryBlockException'         => ['sentry_block'],
+        'UFACBloksException'           => ['ufac_www_bloks'],
         'InvalidUserException'         => [
             'invalid_user', // error_type
         ],

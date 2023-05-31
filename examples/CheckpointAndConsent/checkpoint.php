@@ -175,6 +175,7 @@ try {
                         $ig->checkpoint->sendWebFormSecurityCode($e->getResponse()->getChallengeUrl(), $securityCode);
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\UFACBlockingFormException:
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\UFACBloksException:
                         echo 'Account on moderation';
                         exit();
                         break 2;

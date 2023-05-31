@@ -1,3 +1,14 @@
+# Stable release v21.24.2
+## Date: 31/05/2023
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+
+### Examples
+
+- **Example:** Update checkpoint example
+
 # Stable release v21.24.1
 ## Date: 30/05/2023
 

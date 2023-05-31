@@ -1989,7 +1989,7 @@ class Instagram implements ExperimentsInterface
                     if (isset($errorMap['exception_message'])) {
                         switch ($errorMap['exception_message']) {
                             case 'Login Error: An unexpected error occurred. Please try logging in again.':
-                                throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
+                                throw new \InstagramAPI\Exception\UnexpectedLoginErrorException($errorMap['exception_message']);
                                 break;
                             case 'Incorrect Password: The password you entered is incorrect. Please try again.':
                                 throw new \InstagramAPI\Exception\IncorrectPasswordException($errorMap['exception_message']);
@@ -2070,7 +2070,7 @@ class Instagram implements ExperimentsInterface
 
                                             throw $e;
                                         }
-                                        $msg = 'Login Error: An unexpected error occurred. Please try logging in again.';
+                                        $msg = 'An unexpected error occurred. Please try logging in again.';
                                         if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
                                             $loginResponse = new Response\LoginResponse([
                                                 'error_type'    => 'unexpected_login_error',

@@ -98,9 +98,9 @@ class ServerMessageThrower
             // "Your account has been disabled for violating our terms".
             '/account(.*?)disabled(.*?)violating/',
         ],
-        'SentryBlockException'         => ['sentry_block'],
-        'UFACBloksException'           => ['ufac_www_bloks'],
-        'InvalidUserException'         => [
+        'SentryBlockException'          => ['sentry_block'],
+        'Checkpoint\UFACBloksException' => ['ufac_www_bloks'],
+        'InvalidUserException'          => [
             'invalid_user', // error_type
         ],
         'Checkpoint\ChangePasswordException'                 => ['/reset(.*?)password/', 'set_new_password', 'change_password'],

@@ -2082,6 +2082,18 @@ class Instagram implements ExperimentsInterface
 
                                             throw $e;
                                         }
+                                        $msg = 'You requested to delete';
+                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                            $loginResponse = new Response\LoginResponse([
+                                                'error_type'    => 'account_deletion_requested',
+                                                'status'        => 'fail',
+                                                'message'       => sprintf('You requested to delete your account: %s', $username),
+                                            ]);
+                                            $e = new \InstagramAPI\Exception\AccountDeletionException(sprintf('You requested to delete your account: %s', $username));
+                                            $e->setResponse($loginResponse);
+
+                                            throw $e;
+                                        }
                                     } else {
                                         throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
                                     }

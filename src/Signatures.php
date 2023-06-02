@@ -160,10 +160,14 @@ class Signatures
         return $uuid;
     }
 
-    public static function generateSpecialUUID()
+    public static function generateSpecialUUID(
+        $uuid = null)
     {
         //do {
-        $uuid = self::generateUUID();
+        if ($uuid === null) {
+            $uuid = self::generateUUID();
+        }
+
         $hash = md5($uuid.'caa_v1_full_test_triage_android');
         $val = gmp_mod(gmp_init(sprintf('0x%s', substr($hash, strlen($hash) - 15, 16))), 10000);
 

@@ -1,3 +1,12 @@
+# Stable release v21.24.6
+## Date: 02/06/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_setUser()`
+- **Internal:** Update `getMobileConfig()`
+- **Signatures:** Update `generateSpecialUUID()`
+
 # Stable release v21.24.5
 ## Date: 02/06/2023
 

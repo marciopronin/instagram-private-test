@@ -2984,6 +2984,10 @@ class Instagram implements ExperimentsInterface
         if (empty($this->settings->get('session_id'))) {
             $this->settings->set('session_id', Signatures::generateUUID());
         }
+        if (empty($this->settings->get('offline_experiment'))) {
+            $result = Signatures::generateSpecialUUID($this->settings->get('phone_id'));
+            $this->settings->set('offline_experiment', $result['offline_experiment']);
+        }
 
         // Store various important parameters for easy access.
         $this->username = $username;

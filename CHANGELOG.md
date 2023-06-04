@@ -1,3 +1,10 @@
+# Stable release v21.24.8
+## Date: 04/06/2023
+
+### Updates and fixes
+
+- **Signatures:** Update `generateSpecialUUID()`
+
 # Stable release v21.24.7
 ## Date: 02/06/2023
 

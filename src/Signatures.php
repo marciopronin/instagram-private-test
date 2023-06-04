@@ -178,13 +178,29 @@ class Signatures
             }
         }
         // } while($res !== -1);
-
-        if ($res < 10) {
-            $exp = 'caa_iteration_v3_perf_ig_4';
-        } else {
-            $exp = 'caa_launch_ig4a_combined_60_percent';
+        /*
+         if($res < 10) {
+             $exp = 'caa_iteration_v3_perf_ig_4';
+         } else {
+             $exp = 'caa_launch_ig4a_combined_60_percent';
+         }
+         */
+        $exp = null;
+        if ($res >= 0) {
+            if ($res < 5) {
+                $exp = boolval((0x410BEF00081E7B >> 1) & ~(1 << (8 * PHP_INT_SIZE - 1)) & 0x1);
+            } elseif ($res < 7) {
+                $exp = boolval((0x410BEF000A1E7D >> 1) & ~(1 << (8 * PHP_INT_SIZE - 1)) & 0x1);
+            } elseif ($res < 8) {
+                $exp = boolval((0x410BEF00081E7B >> 1) & ~(1 << (8 * PHP_INT_SIZE - 1)) & 0x1);
+            } elseif ($res < 10) {
+                $exp = boolval((0x410BEF00091E7C >> 1) & ~(1 << (8 * PHP_INT_SIZE - 1)) & 0x1);
+            }
         }
 
-        return ['phone_id' => $uuid, 'offline_experiment' => $exp];
+        $exp = ($exp === null) ? boolval((0x410BEF00071E7A >> 1) & ~(1 << (8 * PHP_INT_SIZE - 1)) & 0x1) : $exp;
+        $offlineExperiment = ($exp === true) ? 'caa_iteration_v3_perf_ig_4' : 'not_in_experiment';
+
+        return ['phone_id' => $uuid, 'offline_experiment' => $offlineExperiment];
     }
 }

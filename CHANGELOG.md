@@ -1,3 +1,18 @@
+# Stable release v21.25.0
+## Date: 04/06/2023
+
+### New features
+
+- **Checkpoint:** Added `sendAcceptScrapingWarning()`  and `sendWebAcceptScrapingWarning()`
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+
+### Example
+
+- **Example:** Update checkpoint example
+
 # Stable release v21.24.8
 ## Date: 04/06/2023
 

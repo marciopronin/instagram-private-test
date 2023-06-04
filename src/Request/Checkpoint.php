@@ -81,6 +81,27 @@ class Checkpoint extends RequestCollection
     }
 
     /**
+     * Accept scraping warning.
+     *
+     * @param string $checkpointUrl Checkpoint URL.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\CheckpointResponse
+     */
+    public function sendAcceptScrapingWarning(
+        $checkpointUrl)
+    {
+        return $this->ig->request($checkpointUrl)
+           ->setNeedsAuth(false)
+           ->setSignedPost(false)
+           ->addPost('guid', $this->ig->uuid)
+           ->addPost('device_id', $this->ig->device_id)
+           //->addPost('_csrftoken', $this->ig->client->getToken())
+           ->getResponse(new Response\CheckpointResponse());
+    }
+
+    /**
      * Send force password change.
      *
      * @param string $checkpointUrl Checkpoint URL.
@@ -424,6 +445,24 @@ class Checkpoint extends RequestCollection
             ->setIsSilentFail(true)
             ->addPost('enc_new_password1', Utils::encryptPassword($password, '', '', true))
             ->addPost('enc_new_password2', Utils::encryptPassword($password, '', '', true))
+            ->getResponse(new Response\WebCheckpointResponse());
+    }
+
+    /**
+     * Accept scraping warning.
+     *
+     * @param string $checkpointUrl Checkpoint URL.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\WebCheckpointResponse
+     */
+    public function sendWebAcceptScrapingWarning(
+        $checkpointUrl)
+    {
+        $request = $this->_getWebFormRequest($checkpointUrl);
+
+        return $request
             ->getResponse(new Response\WebCheckpointResponse());
     }
 

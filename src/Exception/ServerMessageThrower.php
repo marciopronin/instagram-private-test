@@ -98,9 +98,10 @@ class ServerMessageThrower
             // "Your account has been disabled for violating our terms".
             '/account(.*?)disabled(.*?)violating/',
         ],
-        'SentryBlockException'          => ['sentry_block'],
-        'Checkpoint\UFACBloksException' => ['ufac_www_bloks'],
-        'InvalidUserException'          => [
+        'SentryBlockException'                  => ['sentry_block'],
+        'Checkpoint\ScrapingWarningException'   => ['scraping_warning'],
+        'Checkpoint\UFACBloksException'         => ['ufac_www_bloks'],
+        'InvalidUserException'                  => [
             'invalid_user', // error_type
         ],
         'Checkpoint\ChangePasswordException'                 => ['/reset(.*?)password/', 'set_new_password', 'change_password'],
@@ -121,6 +122,7 @@ class ServerMessageThrower
         'Checkpoint\LegacyForceSetNewPasswordFormException'  => ['LegacyForceSetNewPasswordForm'],
         'Checkpoint\ReviewContactPointChangeFormException'   => ['ReviewContactPointChangeForm'],
         'Checkpoint\ReviewLoginFormException'                => ['ReviewLoginForm'],
+        'Checkpoint\ScrapingWarningFormException'            => ['ScrapingWarningForm'],
     ];
 
     /**

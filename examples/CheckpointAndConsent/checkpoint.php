@@ -136,6 +136,9 @@ try {
                     case $e instanceof InstagramAPI\Exception\Checkpoint\DeltaLoginReviewException:
                         $ig->checkpoint->requestVerificationCode($checkApiPath, 0);
                         break 2;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\ScrapingWarningException:
+                        $ig->checkpoint->sendAcceptScrapingWarning($checkApiPath);
+                        break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\RecaptchaChallengeException:
                         /*
                             This implementation is using proxyless, there is other class to do the same with proxy.
@@ -159,6 +162,9 @@ try {
                         break 2; // Captcha solved!
                     case $e instanceof InstagramAPI\Exception\Checkpoint\EscalationChallengeInformationException:
                         $ig->checkpoint->sendAcceptEscalationInformational($e->getResponse()->getChallengeUrl());
+                        break 2;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\ScrapingWarningFormException:
+                        $ig->checkpoint->sendWebAcceptScrapingWarning($e->getResponse()->getChallengeUrl());
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SubmitPhoneNumberFormException:
                         $phone = trim(fgets(STDIN));

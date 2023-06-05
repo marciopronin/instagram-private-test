@@ -2096,6 +2096,18 @@ class Instagram implements ExperimentsInterface
 
                                             throw $e;
                                         }
+                                        $msg = 'You entered the wrong code too many times. Wait a few minutes and try again.';
+                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                            $loginResponse = new Response\LoginResponse([
+                                                'error_type'    => 'too_many_attempts_wrong_code',
+                                                'status'        => 'fail',
+                                                'message'       => $msg,
+                                            ]);
+                                            $e = new \InstagramAPI\Exception\TooManyAttemptsException('You entered the wrong code too many times. Wait a few minutes and try again.');
+                                            $e->setResponse($loginResponse);
+
+                                            throw $e;
+                                        }
                                     } else {
                                         throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
                                     }

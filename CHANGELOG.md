@@ -1,3 +1,11 @@
+# Stable release v21.25.1
+## Date: 05/06/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Signatures:** Update `generateSpecialUUID()`
+
 # Stable release v21.25.0
 ## Date: 04/06/2023
 

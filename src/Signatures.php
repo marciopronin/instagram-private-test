@@ -167,8 +167,8 @@ class Signatures
         if ($uuid === null) {
             $uuid = self::generateUUID();
         }
-
-        $hash = md5($uuid.'caa_v1_full_test_triage_android');
+        /*
+        $hash = md5($uuid . 'caa_v1_full_test_triage_android');
         $val = gmp_mod(gmp_init(sprintf('0x%s', substr($hash, strlen($hash) - 15, 16))), 10000);
 
         if ($val >= 0) {
@@ -177,6 +177,7 @@ class Signatures
                 $res = -1;
             }
         }
+        */
         // } while($res !== -1);
         /*
          if($res < 10) {
@@ -185,11 +186,12 @@ class Signatures
              $exp = 'caa_launch_ig4a_combined_60_percent';
          }
          */
+        /*
         $exp = null;
         if ($res >= 0) {
             if ($res < 5) {
                 $exp = boolval((0x410BEF00081E7B >> 1) & ~(1 << (8 * PHP_INT_SIZE - 1)) & 0x1);
-            } elseif ($res < 7) {
+            } elseif (7 > $res) {
                 $exp = boolval((0x410BEF000A1E7D >> 1) & ~(1 << (8 * PHP_INT_SIZE - 1)) & 0x1);
             } elseif ($res < 8) {
                 $exp = boolval((0x410BEF00081E7B >> 1) & ~(1 << (8 * PHP_INT_SIZE - 1)) & 0x1);
@@ -200,6 +202,8 @@ class Signatures
 
         $exp = ($exp === null) ? boolval((0x410BEF00071E7A >> 1) & ~(1 << (8 * PHP_INT_SIZE - 1)) & 0x1) : $exp;
         $offlineExperiment = ($exp === true) ? 'caa_iteration_v3_perf_ig_4' : 'not_in_experiment';
+        */
+        $offlineExperiment = 'caa_iteration_v3_perf_ig_4';
 
         return ['phone_id' => $uuid, 'offline_experiment' => $offlineExperiment];
     }

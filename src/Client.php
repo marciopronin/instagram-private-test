@@ -819,9 +819,9 @@ class Client
                     $this->_parent->settings->set('mid', '');
                     $this->_parent->settings->set('rur', '');
                     $this->_parent->settings->set('www_claim', '');
-                    $this->_parent->settings->set('account_id', '');
+                    //$this->_parent->settings->set('account_id', '');
                     $this->_parent->settings->set('authorization_header', 'Bearer IGT:2:'); // Header won't be added into request until a new authorization is obtained.
-                    $this->_parent->account_id = null;
+                    //$this->_parent->account_id = null;
 
                     throw $e; // Re-throw.
                 }

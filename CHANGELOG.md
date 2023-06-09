@@ -1,3 +1,12 @@
+# Stable release v21.25.2
+## Date: 09/06/2023
+
+### Updates and fixes
+
+**Constants:** Update to 286.0.0.20.69
+**Internal:** Update `getMobileConfig()`
+**Client:** Update `mapServerResponse()`
+
 # Stable release v21.25.1
 ## Date: 05/06/2023
 

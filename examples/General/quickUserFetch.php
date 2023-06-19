@@ -6,9 +6,9 @@ date_default_timezone_set('UTC');
 require __DIR__.'/../../vendor/autoload.php';
 
 // ///// CONFIG ///////
-$username       = '';
-$password       = '';
-$debug          = true;
+$username = '';
+$password = '';
+$debug = true;
 $truncatedDebug = false;
 // ////////////////////
 
@@ -31,10 +31,10 @@ try {
 
     $ig->event->sendNavigation('button', 'feed_short_url', 'profile');
     $userInfo = $ig->people->getInfoByName($userToCheck);
-    $userId   = $userInfo->getUser()->getPk();
+    $userId = $userInfo->getUser()->getPk();
 
     $userFeed = $ig->timeline->getUserFeed($userId);
-    $items    = $userFeed->getItems();
+    $items = $userFeed->getItems();
 
     $ig->event->updateAppState('background');
     $ig->event->forceSendBatch();

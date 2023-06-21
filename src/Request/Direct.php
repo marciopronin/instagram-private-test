@@ -268,7 +268,7 @@ class Direct extends RequestCollection
     public function getPresences()
     {
         return $this->ig->request('direct_v2/get_presence/')
-            ->addParam('suggested_followers_limit', '100')
+            //->addParam('suggested_followers_limit', '100')
             ->getResponse(new Response\PresencesResponse());
     }
 

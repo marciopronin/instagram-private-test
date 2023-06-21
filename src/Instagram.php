@@ -3494,7 +3494,7 @@ class Instagram implements ExperimentsInterface
                 $this->highlight->getUserFeed($this->account_id);
                 //$this->internal->logResurrectAttribution();
                 //$this->internal->getDeviceCapabilitiesDecisions();
-                $this->people->getCreatorInfo($this->account_id);
+                //$this->people->getCreatorInfo($this->account_id);
                 $this->people->getBootstrapUsers();
                 $this->media->getBlockedMedia();
                 $this->internal->sendGraph('27901845295083252414505722198', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
@@ -3538,7 +3538,7 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
-                $this->account->getLinkageStatus();
+                //$this->account->getLinkageStatus();
                 $this->internal->storeClientPushPermissions();
                 //$this->business->getMonetizationProductsEligibilityData();
             } catch (\Exception $e) {
@@ -3574,21 +3574,23 @@ class Instagram implements ExperimentsInterface
                 //$this->story->getReelsMediaFeed($this->account_id);
                 $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), null, true);
                 //$this->internal->sendGraph('2360595178779351530479091981', ['is_pando' => true, 'fb_profile_image_size' => 200], 'FxIGMasterAccountQuery', 'fxcal_accounts', false, 'pando');
+                /*
                 $this->internal->sendGraph('21564406653994218282552117012', [
-                    'is_pando'        => true,
+                    'is_pando' => true,
                     'configs_request' => [
                         'crosspost_app_surface_list' => [
                             [
                                 'cross_app_share_type'  => 'CROSSPOST',
                                 'destination_app'       => 'FB',
                                 'destination_surface'   => 'REELS',
-                                'source_surface'        => 'REELS',
-                            ],
+                                'source_surface'        => 'REELS'
+                            ]
                         ],
-                        'source_app' => 'IG',
-                    ],
+                        'source_app' => 'IG'
+                    ]
                 ], 'CrossPostingContentCompatibilityConfig', 'xcxp_unified_crossposting_configs_root', false, 'pando');
-                $this->internal->getNotes();
+                */
+                //$this->internal->getNotes();
                 $this->reel->getShareToFbConfig();
 
                 try {

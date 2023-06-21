@@ -1,3 +1,13 @@
+# Stable release v21.25.8
+## Date: 21/06/2023
+
+### Updates and fixes
+
+- **Client:** Update `api()`
+- **Direct:** Update `getPresences()`
+- **Discover:** Update `getExploreFeed()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v21.25.7
 ## Date: 21/06/2023
 

@@ -1081,7 +1081,7 @@ class Client
                         'set_headers' => [
                             // Keep the API's HTTPS connection alive in Guzzle for future
                             // re-use, to greatly speed up all further queries after this.
-                            'Connection'       => 'close',
+                            //'Connection'       => 'close',
                             'Accept-Encoding'  => Constants::ACCEPT_ENCODING,
                             'Accept-Language'  => $this->_parent->getAcceptLanguage(),
                         ],

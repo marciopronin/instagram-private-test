@@ -41,14 +41,14 @@ class Discover extends RequestCollection
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             ->addHeader('X-IG-Prefetch-Request', 'foreground')
             ->addParam('is_prefetch', $isPrefetch)
-            ->addParam('phone_id', $this->ig->phone_id)
+            //->addParam('phone_id', $this->ig->phone_id)
             //->addParam('omit_cover_media', true)
             ->addParam('is_ptr', false)
             ->addParam('reels_configuration', $this->ig->getExperimentParam('ig_android_stories_tray_pagination_killswitch', 'explore_reels_configuration') === null ? 'hide_hero' : 'default')
             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-            ->addParam('is_charging', $this->ig->getIsDeviceCharging())
-            ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
-            ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
+            //->addParam('is_charging', $this->ig->getIsDeviceCharging())
+            //->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
+            //->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
             ->addParam('session_id', $sessionId);
         //->addParam('paging_token', json_encode((Object)[]));
 

@@ -1,3 +1,10 @@
+# Stable release v21.25.6
+## Date: 21/06/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+
 # Stable release v21.25.5
 ## Date: 21/06/2023
 

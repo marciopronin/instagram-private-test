@@ -1941,6 +1941,7 @@ class Instagram implements ExperimentsInterface
                             'openid_tokens'                 => (object) [],
                             'client_known_key_hash'         => '',
                             'contact_point'                 => $username,
+                            'encrypted_msisdn'              => '',
                         ],
                         'server_params'         => [
                             'username_text_input_id'                        => $firstMap['username_text_input_id'],
@@ -2276,7 +2277,7 @@ class Instagram implements ExperimentsInterface
             'qe_device_id'              => $this->uuid,
             'account_list'              => $accountList,
             'blocked_uid'               => [],
-            'INTERNAL_INFRA_THEME'      => 'default',
+            'INTERNAL_INFRA_THEME'      => 'harm_f',
         ]))
         ->addPost('bk_client_context', json_encode([
             'bloks_version' => Constants::BLOCK_VERSIONING_ID,
@@ -2313,6 +2314,7 @@ class Instagram implements ExperimentsInterface
                     'INTERNAL__latency_qpl_marker_id'   => $this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1],
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'fdid'                              => $this->bloksInfo['fdid'],
+                    'waterfall_id'                      => $this->loginWaterfallId,
                     'screen_id'                         => $this->bloksInfo['screen_id'][1],
                     'INTERNAL__latency_qpl_instance_id' => $this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1],
                 ],

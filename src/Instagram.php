@@ -573,6 +573,13 @@ class Instagram implements ExperimentsInterface
     public $devicecInitState = false;
 
     /**
+     * CDN RMD.
+     *
+     * @var bool
+     */
+    public $cdn_rmd = false;
+
+    /**
      * Bloks info.
      *
      * @var array
@@ -3367,21 +3374,12 @@ class Instagram implements ExperimentsInterface
                     $this->internal->getBloksSaveCredentialsScreen();
                     sleep(mt_rand(1, 3));
                 }
+                //$this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', 'viewer', false, 'pando');
 
-                try {
-                    $this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', 'viewer', false, 'pando');
-                } catch (\Exception $e) {
-                    // pass
-                }
                 $this->event->sendZeroCarrierSignal();
                 $this->internal->getMobileConfig(true);
                 $this->internal->getMobileConfig(false);
 
-                try {
-                    $this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', 'viewer', false, 'pando');
-                } catch (\Exception $e) {
-                    // pass
-                }
                 $this->_registerPushChannels();
                 $this->internal->getAsyncNdxIgSteps();
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
@@ -3464,12 +3462,16 @@ class Instagram implements ExperimentsInterface
 
                 $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
 
+                $this->internal->sendGraph('33052919472135518510885263591', ['is_pando' => true], 'BasicAdsOptInQuery', 'xfb_user_basic_ads_preferences', false, 'pando');
+
                 try {
                     $this->account->getBadgeNotifications();
                     $this->internal->getLoomFetchConfig();
                 } catch (\Exception $e) {
                     // pass
                 }
+
+                $this->internal->cdnRmd();
 
                 $this->people->getSharePrefill(true);
                 $this->internal->sendGraph('20527889286411119358419418429', [
@@ -3494,10 +3496,10 @@ class Instagram implements ExperimentsInterface
                 $this->highlight->getUserFeed($this->account_id);
                 //$this->internal->logResurrectAttribution();
                 //$this->internal->getDeviceCapabilitiesDecisions();
-                //$this->people->getCreatorInfo($this->account_id);
+                $this->people->getCreatorInfo($this->account_id);
                 $this->people->getBootstrapUsers();
                 $this->media->getBlockedMedia();
-                $this->internal->sendGraph('27901845295083252414505722198', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
+                $this->internal->sendGraph('279018452917733073575656047369', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
                 $this->people->getInfoById($this->account_id);
                 $this->creative->sendSupportedCapabilities();
                 $this->account->getProcessContactPointSignals();
@@ -3516,18 +3518,40 @@ class Instagram implements ExperimentsInterface
                 $this->reel->discover();
                 //$this->timeline->getTimelineFeed(); TODO
                 $this->internal->sendGraph('18293997046226642457734318433', [
-                'is_pando' => true,
-                'input'    => [
-                    'actor_id'              => $this->account_id,
-                    'client_mutation_id'    => \InstagramAPI\Signatures::generateUUID(),
-                    'events'                => [
-                        'adid'                  => null,
-                        'event_name'            => 'RESURRECTION',
-                        'no_advertisement_id'   => false,
+                    'is_pando' => true,
+                    'input'    => [
+                        'actor_id'              => $this->account_id,
+                        'client_mutation_id'    => \InstagramAPI\Signatures::generateUUID(),
+                        'events'                => [
+                            'adid'                  => null,
+                            'event_name'            => 'RESURRECTION',
+                            'no_advertisement_id'   => false,
+                        ],
+                        'log_only'              => true,
                     ],
-                    'log_only'              => true,
-                ],
-            ], 'ReportAttributionEventsMutation', 'report_attribution_events', true, 'pando');
+                ], 'ReportAttributionEventsMutation', 'report_attribution_events', true, 'pando');
+
+                $this->internal->sendGraph('176575339118291536801493724773', ['is_pando' => true], 'IGFxLinkedAccountsQuery', 'fx_linked_accounts', false, 'pando');
+                $this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
+                $this->internal->sendGraph('13513772661704761708109730075', [
+                    'is_pando' => true,
+                    'input'    => [
+                        'caller_context'    => [
+                            'caller'                => 'StartupManager',
+                            'function_credential'   => 'function_credential',
+                        ],
+                        'key'   => '1L1D',
+                    ],
+                ], 'IGOneLinkMiddlewareWhatsAppBusinessQuery', 'xfb_one_link_monoschema', false, 'pando');
+                $this->internal->sendGraph('14088097634272511800572157181', [
+                    'is_pando'         => true,
+                    'client_states'    => [
+                        'impression_count'      => 1,
+                        'last_impression_time'  => 0,
+                        'sequence_number'       => 0,
+                        'variant'               => 'BOTTOMSHEET_XAR_REELS',
+                    ],
+                ], 'SyncCXPNoticeStateMutation', 'xcxp_sync_notice_state', false, 'pando');
             } catch (\Exception $e) {
                 // pass
             } finally {
@@ -3557,7 +3581,6 @@ class Instagram implements ExperimentsInterface
                     $this->direct->getPresences();
                     $this->direct->getHasInteropUpgraded();
                     //$this->internal->getNotificationsSettings();
-                    $this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
                 } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {
@@ -3573,7 +3596,7 @@ class Instagram implements ExperimentsInterface
             try {
                 //$this->story->getReelsMediaFeed($this->account_id);
                 $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), null, true);
-                //$this->internal->sendGraph('2360595178779351530479091981', ['is_pando' => true, 'fb_profile_image_size' => 200], 'FxIGMasterAccountQuery', 'fxcal_accounts', false, 'pando');
+                $this->internal->sendGraph('2360595178779351530479091981', ['is_pando' => true, 'fb_profile_image_size' => 200], 'FxIGMasterAccountQuery', 'fxcal_accounts', false, 'pando');
                 /*
                 $this->internal->sendGraph('21564406653994218282552117012', [
                     'is_pando' => true,
@@ -3590,7 +3613,7 @@ class Instagram implements ExperimentsInterface
                     ]
                 ], 'CrossPostingContentCompatibilityConfig', 'xcxp_unified_crossposting_configs_root', false, 'pando');
                 */
-                //$this->internal->getNotes();
+                $this->internal->getNotes();
                 $this->reel->getShareToFbConfig();
 
                 try {

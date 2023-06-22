@@ -1526,7 +1526,7 @@ class Account extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('device_id', $this->ig->uuid)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }

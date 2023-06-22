@@ -1971,7 +1971,7 @@ class Internal extends RequestCollection
             ->setSignedPost(false)
             ->addPost('enabled', 'true')
             //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('device_id', $this->ig->uuid)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1988,6 +1988,30 @@ class Internal extends RequestCollection
         return $this->ig->request('notifications/get_notification_settings/')
             ->addPost('content_type', 'instagram_direct')
             ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * CDN RMD.
+     *
+     * @param mixed $interface
+     * @param mixed $reason
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function cdnRmd(
+        $interface = 'Unknown',
+        $reason = 'SESSION_CHANGE')
+    {
+        $response = $this->ig->request('ti/cdn_rmd/')
+            ->addParam('net_iface', $interface)
+            ->addParam('reason', $reason)
+            ->getResponse(new Response\GenericResponse());
+
+        $this->ig->cdn_rmd = true;
+
+        return $response;
     }
 
     /**
@@ -2017,7 +2041,6 @@ class Internal extends RequestCollection
             ->setNeedsAuth(false)
             ->setIsSilentFail(true)
             ->setAddDefaultHeaders(false)
-            ->addHeader('X-Fb-Rmd', 'state=URL_ELIGIBLE')
             ->addHeader('X-IG-App-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
             ->addHeader('X-IG-Capabilities', Constants::X_IG_Capabilities)
             ->addHeader('X-Graphql-Client-Library', $clientLibrary)
@@ -2028,6 +2051,10 @@ class Internal extends RequestCollection
             ->addPost('client_doc_id', $clientDoc)
             ->addPost('locale', $this->ig->getLocale())
             ->addPost('variables', json_encode($vars));
+
+        if ($this->ig->cdn_rmd === true) {
+            $request->addHeader('X-Fb-Rmd', 'state=URL_ELIGIBLE');
+        }
 
         if ($clientLibrary === 'graphservice') {
             $request->addPost('fb_api_caller_class', 'graphservice')

@@ -1,3 +1,17 @@
+# Stable release v21.26.0
+## Date: 22/06/2023
+
+### New features
+
+- **Internal:** Add `cdnRmd()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **Internal:** Update `sendGraph()`
+- **Account:** Update `getProcessContactPointSignals()`
+- **Internal:** Update `storeClientPushPermissions()`
+
 # Stable release v21.25.8
 ## Date: 21/06/2023
 

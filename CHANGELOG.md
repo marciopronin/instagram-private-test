@@ -1,3 +1,14 @@
+# Stable release v21.27.0
+## Date: 23/06/2023
+
+### New feature
+
+- **Instagram:** Add `bypassCalls()`
+
+### Updates and fixes
+
+- **Request:** Update `getResponse()`
+
 # Stable release v21.26.2
 ## Date: 23/06/2023
 

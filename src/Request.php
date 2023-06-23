@@ -948,6 +948,12 @@ class Request
     public function getResponse(
         Response $responseObject)
     {
+        foreach ($this->_parent->bypassCalls as $call) {
+            if (str_contains($this->getUrl(), $call)) {
+                return $responseObject;
+            }
+        }
+
         // Set this request as the most recently processed request
         $this->_parent->client->setLastRequest($this);
         // Check for API response success and put its response in the object.

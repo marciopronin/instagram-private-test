@@ -530,6 +530,13 @@ class Instagram implements ExperimentsInterface
     public $enableResolutionCheck = false;
 
     /**
+     * Bypass call list.
+     *
+     * @var string[]
+     */
+    public $bypassCalls = [];
+
+    /**
      * Custom resolver.
      *
      * @var callable
@@ -1569,6 +1576,25 @@ class Instagram implements ExperimentsInterface
         $value)
     {
         $this->enableResolutionCheck = $value;
+    }
+
+    /**
+     * Bypasses calls.
+     *
+     * It skips specified api endpoints. Some IPs refuses certain endpoint
+     * causing a logged_out error. By identifying the endpoint causing the logged_out,
+     * you can use this function to skip them.
+     *
+     * @param string|string[] $endpoints Endpoints.
+     */
+    public function bypassCalls(
+        $endpoints)
+    {
+        if (!is_array($endpoints)) {
+            $endpoints = [$endpoints];
+        }
+
+        $this->bypassCalls = $endpoints;
     }
 
     /**

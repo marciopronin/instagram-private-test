@@ -431,7 +431,7 @@ class Request
                 $this->_headers['X-IG-App-Startup-Country'] = ($this->_parent->getAppStartupCountry() !== null) ? $this->_parent->getAppStartupCountry() : explode('_', $this->_parent->getLocale())[1];
             }
             $this->_headers['X-IG-Mapped-Locale'] = $this->_parent->getLocale();
-            $this->_headers['IG-INTENDED-USER-ID'] = empty($this->_parent->settings->get('account_id')) ? 0 : $this->_parent->settings->get('account_id');
+            $this->_headers['IG-INTENDED-USER-ID'] = empty($this->_parent->settings->get('account_id')) || isset($this->_posts['mobileconfigsessionless']) ? 0 : $this->_parent->settings->get('account_id');
 
             if ($this->_parent->getIsLowDataModeEnabled() === true) {
                 $this->_headers['X-IG-Low-Data-Mode-Image'] = 'true';
@@ -453,7 +453,7 @@ class Request
                 $this->_headers['X-Bloks-Version-Id'] = Constants::BLOCK_VERSIONING_ID;
                 $this->_headers['X-Bloks-Is-Layout-RTL'] = 'false';
                 //$this->_headers['X-Bloks-Is-Panorama-Enabled'] = 'true';
-                if ($this->_parent->getNavChain() !== '') {
+                if ($this->_parent->getNavChain() !== '' && $this->_parent->settings->get('nav_started') === 'true') {
                     $this->_headers['X-IG-Nav-Chain'] = $this->_parent->getNavChain();
                 }
             } else {

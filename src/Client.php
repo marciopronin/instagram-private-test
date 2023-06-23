@@ -1115,7 +1115,7 @@ class Client
                 $headers['set_headers']['X-IG-Bandwidth-Speed-KBPS'] = '-1.000';
             }
 
-            if (($this->_parent->settings->get('authorization_header') !== null) && ($this->_parent->settings->get('authorization_header') !== 'Bearer IGT:2:')) {
+            if (($this->_parent->settings->get('authorization_header') !== null) && ($this->_parent->settings->get('authorization_header') !== 'Bearer IGT:2:') && (strpos($request->getBody()->getContents(), 'mobileconfigsessionless') === false)) {
                 $headers['set_headers']['Authorization'] = $this->_parent->settings->get('authorization_header');
             }
 
@@ -1133,7 +1133,7 @@ class Client
                 $headers['set_headers']['IG-U-SHBTS'] = $this->_shbts;
             }
 
-            if ($this->_parent->account_id !== null) {
+            if ($this->_parent->account_id !== null && (strpos($request->getBody()->getContents(), 'mobileconfigsessionless') === false)) {
                 $headers['set_headers']['IG-U-DS-USER-ID'] = $this->_parent->account_id;
             }
 

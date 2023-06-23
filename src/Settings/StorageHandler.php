@@ -62,6 +62,7 @@ class StorageHandler
         'csrftoken',
         'salt_ids',
         'offline_experiment', // Bloks offline experiments for login.
+        'nav_started',
     ];
 
     /**

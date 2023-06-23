@@ -1628,7 +1628,7 @@ class People extends RequestCollection
         $surfaceType = 'android',
         $entrypoint = 'self_profile')
     {
-        return $this->ig->request('creator/creator_info')
+        return $this->ig->request('creator/creator_info/')
             ->addParam('entry_point', $entrypoint)
             ->addParam('surface_type', $surfaceType)
             ->addParam('user_id', $userId)

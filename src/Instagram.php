@@ -1963,6 +1963,7 @@ class Instagram implements ExperimentsInterface
                             'family_device_id'                              => $this->phone_id,
                             'INTERNAL__latency_qpl_marker_id'               => $firstMap['INTERNAL__latency_qpl_marker_id'][1],
                             'offline_experiment_group'                      => $firstMap['offline_experiment_group'],
+                            'INTERNAL_INFRA_THEME'                          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                             'password_text_input_id'                        => $firstMap['password_text_input_id'],
                             'qe_device_id'                                  => $this->uuid,
                             'ar_event_source'                               => $firstMap['ar_event_source'],
@@ -2979,6 +2980,7 @@ class Instagram implements ExperimentsInterface
                 $result = Signatures::generateSpecialUUID();
                 $phoneId = $result['phone_id'];
                 $this->settings->set('offline_experiment', $result['offline_experiment']);
+                $this->settings->set('nav_started', 'false');
                 $this->settings->set('phone_id', $phoneId);
             } else {
                 $this->settings->set('phone_id', $this->settings->get('device_id'));
@@ -3468,6 +3470,7 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->account->getBadgeNotifications();
+                    $this->settings->set('nav_started', 'true');
                     $this->internal->getLoomFetchConfig();
                 } catch (\Exception $e) {
                     // pass
@@ -3535,16 +3538,16 @@ class Instagram implements ExperimentsInterface
 
                 $this->internal->sendGraph('176575339118291536801493724773', ['is_pando' => true], 'IGFxLinkedAccountsQuery', 'fx_linked_accounts', false, 'pando');
                 $this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
-                $this->internal->sendGraph('13513772661704761708109730075', [
+                /*$this->internal->sendGraph('13513772661704761708109730075', [
                     'is_pando' => true,
                     'input'    => [
                         'caller_context'    => [
                             'caller'                => 'StartupManager',
-                            'function_credential'   => 'function_credential',
+                            'function_credential'   => 'function_credential'
                         ],
-                        'key'   => '1L1D',
+                        'key'   => '1L1D'
                     ],
-                ], 'IGOneLinkMiddlewareWhatsAppBusinessQuery', 'xfb_one_link_monoschema', false, 'pando');
+                ], 'IGOneLinkMiddlewareWhatsAppBusinessQuery', 'xfb_one_link_monoschema', false, 'pando');*/
                 $this->internal->sendGraph('14088097634272511800572157181', [
                     'is_pando'         => true,
                     'client_states'    => [
@@ -3554,7 +3557,7 @@ class Instagram implements ExperimentsInterface
                         'variant'               => 'BOTTOMSHEET_XAR_REELS',
                     ],
                 ], 'SyncCXPNoticeStateMutation', 'xcxp_sync_notice_state', false, 'pando');
-                $this->internal->sendGraph('176575339118291536801493724773', ['is_pando' => true], 'HasAvatarQuery', 'viewer', false, 'pando');
+                //$this->internal->sendGraph('176575339118291536801493724773', ['is_pando' => true], 'HasAvatarQuery', 'viewer', false, 'pando');
             } catch (\Exception $e) {
                 // pass
             } finally {
@@ -3599,7 +3602,13 @@ class Instagram implements ExperimentsInterface
             try {
                 //$this->story->getReelsMediaFeed($this->account_id);
                 $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), null, true);
-                $this->internal->sendGraph('2360595178779351530479091981', ['is_pando' => true, 'fb_profile_image_size' => 200], 'FxIGMasterAccountQuery', 'fxcal_accounts', false, 'pando');
+                /*
+                try {
+                    $this->internal->sendGraph('2360595178779351530479091981', ['is_pando' => true, 'fb_profile_image_size' => 200], 'FxIGMasterAccountQuery', 'fxcal_accounts', false, 'pando');
+                }  catch (\Exception $e) {
+                    // pass
+                }
+                */
                 /*
                 $this->internal->sendGraph('21564406653994218282552117012', [
                     'is_pando' => true,
@@ -3657,6 +3666,7 @@ class Instagram implements ExperimentsInterface
                 $this->client->stopEmulatingBatch();
             }
 
+            /*
             // Batch request 5
             $this->client->startEmulatingBatch();
 
@@ -3668,6 +3678,7 @@ class Instagram implements ExperimentsInterface
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
             }
+            */
 
             /*
             try {

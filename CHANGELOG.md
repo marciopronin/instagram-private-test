@@ -1,5 +1,22 @@
+# Stable release v21.26.2
+## Date: 23/06/2023
+
+### Updates and fixes
+
+- **Direct:** Update `getPresences()`
+- **Instagram:** Update `_sendLoginFlow()`
+- **Internal:** Update `sendGraph()`
+- **Internal:** Update `getSupportedCapabilities()`
+- **Client:** Update `api()`
+- **Instagram:** Update `_login()`
+- **Request:** Update `_addDefaultHeaders()`
+- **People:** Update `getCreatorInfo()`
+- **StorageHandler:** Update `PERSISTENT_KEYS`
+
 # Stable release v21.26.1
 ## Date: 23/06/2023
+
+### Updates and fixes
 
 - **Internal:** Update `getAsyncNdxIgSteps()`
 - **Internal:** Update `getQPFetch()`

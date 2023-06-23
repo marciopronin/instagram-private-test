@@ -2054,7 +2054,7 @@ class Internal extends RequestCollection
             ->addHeader('X-Fb-Friendly-Name', $friendlyName)
             ->addHeader('X-Root-Field-Name', $rootName)
             ->addHeader('IG-INTENDED-USER-ID', empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'))
-            ->addHeader('X-Tigon-Is-Retry', 'false')
+            ->addHeader('X-Tigon-Is-Retry', 'False')
             ->addPost('client_doc_id', $clientDoc)
             ->addPost('locale', $this->ig->getLocale())
             ->addPost('variables', json_encode($vars));
@@ -3683,7 +3683,7 @@ class Internal extends RequestCollection
             'value' => 'ETC2_COMPRESSION',
         ];
 
-        $wordTracker = $this->ig->isExperimentEnabled('ig_android_cameracore_world_tracker_v2', 'enabled', true);
+        $wordTracker = $this->ig->isExperimentEnabled('ig_android_cameracore_world_tracker_v2', 'enabled', false);
         if ($wordTracker) {
             $supportedCapabilities[] = [
                 'name'  => 'world_tracker',

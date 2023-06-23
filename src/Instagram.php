@@ -3381,7 +3381,7 @@ class Instagram implements ExperimentsInterface
                 $this->internal->getMobileConfig(false);
 
                 $this->_registerPushChannels();
-                $this->internal->getAsyncNdxIgSteps();
+                $this->internal->getAsyncNdxIgSteps('NDX_IG4A_MA_FEATURE');
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
@@ -3464,6 +3464,8 @@ class Instagram implements ExperimentsInterface
 
                 $this->internal->sendGraph('33052919472135518510885263591', ['is_pando' => true], 'BasicAdsOptInQuery', 'xfb_user_basic_ads_preferences', false, 'pando');
 
+                $this->internal->getAsyncNdxIgSteps('NDX_IG_IMMERSIVE');
+
                 try {
                     $this->account->getBadgeNotifications();
                     $this->internal->getLoomFetchConfig();
@@ -3473,11 +3475,11 @@ class Instagram implements ExperimentsInterface
 
                 $this->internal->cdnRmd();
 
-                $this->people->getSharePrefill(true);
+                $this->people->getSharePrefill();
                 $this->internal->sendGraph('20527889286411119358419418429', [
                     'languages'     => ['nolang'],
                     'service_ids'   => ['MUTED_WORDS'],
-                ], 'IGContentFilterDictionaryLookupQuery', 'ig_content_filter_dictionary_lookup_query', true, 'minimal');
+                ], 'IGContentFilterDictionaryLookupQuery', 'ig_content_filter_dictionary_lookup_query', false, 'pando');
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
@@ -3529,7 +3531,7 @@ class Instagram implements ExperimentsInterface
                         ],
                         'log_only'              => true,
                     ],
-                ], 'ReportAttributionEventsMutation', 'report_attribution_events', true, 'pando');
+                ], 'ReportAttributionEventsMutation', 'report_attribution_events', false, 'pando');
 
                 $this->internal->sendGraph('176575339118291536801493724773', ['is_pando' => true], 'IGFxLinkedAccountsQuery', 'fx_linked_accounts', false, 'pando');
                 $this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
@@ -3552,6 +3554,7 @@ class Instagram implements ExperimentsInterface
                         'variant'               => 'BOTTOMSHEET_XAR_REELS',
                     ],
                 ], 'SyncCXPNoticeStateMutation', 'xcxp_sync_notice_state', false, 'pando');
+                $this->internal->sendGraph('176575339118291536801493724773', ['is_pando' => true], 'HasAvatarQuery', 'viewer', false, 'pando');
             } catch (\Exception $e) {
                 // pass
             } finally {
@@ -3615,6 +3618,15 @@ class Instagram implements ExperimentsInterface
                 */
                 $this->internal->getNotes();
                 $this->reel->getShareToFbConfig();
+                $this->internal->sendGraph('215817804115327440933115577895',
+                    [
+                        'is_pando'      => true,
+                        'user_id'       => $this->account_id,
+                        'query_params'  => [
+                            'instruction_key_ids'   => ['4546360412114313'], // mobile config 57985
+                            'refresh_only'          => true,
+                        ],
+                    ], 'IGAvatarStickersForKeysQuery', 'fetch__IGUser', false, 'pando');
 
                 try {
                     $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');

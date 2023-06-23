@@ -1875,6 +1875,7 @@ class Internal extends RequestCollection
     public function getQPFetch()
     {
         return $this->ig->request('qp/batch_fetch/')
+            ->addPost('is_sdk', 'true')
             ->addPost('vc_policy', 'default')
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
@@ -2005,6 +2006,12 @@ class Internal extends RequestCollection
         $reason = 'SESSION_CHANGE')
     {
         $response = $this->ig->request('ti/cdn_rmd/')
+            ->setAddDefaultHeaders(false)
+            ->addHeader('X-IG-App-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
+            ->addHeader('X-IG-Capabilities', Constants::X_IG_Capabilities)
+            ->addHeader('X-Fb-Privacy-Context', '4760009080727693')
+            ->addHeader('X-Tigon-Is-Retry', 'false')
+            ->addHeader('X-Fb-Rmd', 'fail=NoUrlMap;v=;ip=;tkn=;reqTime=-1090386208;recvTime=-1239979508')
             ->addParam('net_iface', $interface)
             ->addParam('reason', $reason)
             ->getResponse(new Response\GenericResponse());
@@ -3713,14 +3720,17 @@ class Internal extends RequestCollection
     /**
      * Get async ndx IG steps.
      *
+     * @param string $source Source.
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\GenericResponse
      */
-    public function getAsyncNdxIgSteps()
+    public function getAsyncNdxIgSteps(
+        $source)
     {
         return $this->ig->request('devices/ndx/api/async_get_ndx_ig_steps/')
-            ->addParam('ndx_request_source', 'NDX_IG4A_MA_FEATURE')
+            ->addParam('ndx_request_source', $source)
             ->getResponse(new Response\GenericResponse());
     }
 

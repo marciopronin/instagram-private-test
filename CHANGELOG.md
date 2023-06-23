@@ -1,3 +1,12 @@
+# Stable release v21.26.1
+## Date: 23/06/2023
+
+- **Internal:** Update `getAsyncNdxIgSteps()`
+- **Internal:** Update `getQPFetch()`
+- **People:** Update `getSharePrefill()`
+- **Constants:** Update BATCH constants
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v21.26.0
 ## Date: 22/06/2023
 

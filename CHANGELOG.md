@@ -1,3 +1,15 @@
+# Stable release v21.27.2
+## Date: 28/06/2023
+
+### Updates and fixes
+
+- **Internal:** Adapted experiment value getter
+- **Internal:** Update `_saveExperimentsMobileConfig()`
+- **Request:** Adapted experiment value getter
+- **Story:** Adapted experiment value getter
+- **Discover:** Adapted experiment value getter
+- **StorgaHandler:** Update `EXPERIMENT_KEYS`. Named params are deprecated and only mobile config IDs will be used
+
 # Stable release v21.27.1
 ## Date: 28/06/2023
 

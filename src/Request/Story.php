@@ -153,8 +153,8 @@ class Story extends RequestCollection
             $request->addPost('tray_session_id', Signatures::generateUUID());
         }
 
-        if ($this->ig->isExperimentEnabled('ig_android_stories_tray_pagination_killswitch', 'is_enabled', true)) {
-            $request->addPost('page_size', $this->ig->getExperimentParam('ig_android_stories_tray_pagination_killswitch', 'default_page_size', 50));
+        if ($this->ig->isExperimentEnabled('25215', 0, true)) {
+            $request->addPost('page_size', $this->ig->getExperimentParam('25215', 1, 50));
         }
 
         return $request->getResponse(new Response\ReelsTrayFeedResponse());

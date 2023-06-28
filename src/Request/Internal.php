@@ -346,7 +346,8 @@ class Internal extends RequestCollection
                     'source_height' => $photoHeight,
                 ]);
 
-        if ($this->ig->isExperimentEnabled('ig_android_eu_configure_disabled', 'route_to_us', false)) {
+        // 'ig_android_eu_configure_disabled', 'route_to_us'
+        if ($this->ig->isExperimentEnabled('26156', 0, false)) {
             $request->addHeader('X-IG-EU-CONFIGURE-DISABLED', 'true');
         }
 
@@ -1451,7 +1452,7 @@ class Internal extends RequestCollection
         $mobileConfigResponse)
     {
         //$paramsMap = fopen(__DIR__.'/../data/params_map.txt', 'r');
-        $mappedExperiments = [];
+        //$mappedExperiments = [];
         //$found = false;
 
         /*
@@ -1478,6 +1479,7 @@ class Internal extends RequestCollection
         }
         */
 
+        /*
         $paramsMap = json_decode(file_get_contents(__DIR__.'/../data/mobileconfig.json'));
 
         foreach ($paramsMap as $exp) {
@@ -1492,34 +1494,28 @@ class Internal extends RequestCollection
                 }
             }
         }
+        */
 
         $experiments = [];
 
         foreach ($mobileConfigResponse['configs'] as $k => $v) {
             $exps = [];
-            if (isset($mappedExperiments[$k])) {
-                $fields = $v['fields'];
-                asort($fields);
-                $c = 0;
-                foreach ($fields as $k2 => $v2) {
-                    if (isset($mappedExperiments[$k])) {
-                        if (isset($v2['bln'])) {
-                            $val = boolval($v2['bln']);
-                        } elseif (isset($v2['str'])) {
-                            $val = $v2['str'];
-                        } elseif (isset($v2['i64'])) {
-                            $val = intval($v2['i64']);
-                        } else {
-                            $val = null;
-                        }
-                        if (isset($mappedExperiments[$k]['exps'][$c])) {
-                            $exps[$mappedExperiments[$k]['exps'][$c]] = $val;
-                        }
-                    }
-                    $c++;
+            $fields = $v['fields'];
+            asort($fields);
+            $c = 0;
+            foreach ($fields as $k2 => $v2) {
+                if (isset($v2['bln'])) {
+                    $val = boolval($v2['bln']);
+                } elseif (isset($v2['str'])) {
+                    $val = $v2['str'];
+                } elseif (isset($v2['i64'])) {
+                    $val = intval($v2['i64']);
+                } else {
+                    $val = null;
                 }
-                $experiments[$mappedExperiments[$k]['name']] = $exps;
+                $exps[$k2] = $val;
             }
+            $experiments[$k] = $exps;
         }
 
         // Save the experiments and the last time we refreshed them.
@@ -3360,8 +3356,8 @@ class Internal extends RequestCollection
             case Constants::FEED_STORY:
             case Constants::FEED_DIRECT_STORY:
                 $result = $this->ig->isExperimentEnabled(
-                    'ig_android_reel_raven_video_segmented_upload_universe',
-                    'segment_enabled_story_raven');
+                    '34393', //ig_android_reel_raven_video_segmented_upload_universe',
+                    7); //'segment_enabled_story_raven');
                 break;
             case Constants::FEED_TV:
                 $result = true;

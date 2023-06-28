@@ -438,8 +438,8 @@ class Request
                 $this->_headers['X-IG-Low-Data-Mode-Video'] = 'true';
             }
 
-            if ($this->_parent->isExperimentEnabled('qe_ig_traffic_routing_universe', 'is_in_cr_routing_experiment', false)) {
-                $this->_headers['X-IG-CONCURRENT-ENABLED'] = $this->_parent->isExperimentEnabled('qe_ig_traffic_routing_universe', 'route_to_cr_header', false);
+            if ($this->_parent->isExperimentEnabled('34426', 3, false)) {
+                $this->_headers['X-IG-CONCURRENT-ENABLED'] = $this->_parent->isExperimentEnabled('34426', 5, false);
             }
 
             if ($this->_parent->getPlatform() === 'android') {

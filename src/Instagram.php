@@ -1983,11 +1983,11 @@ class Instagram implements ExperimentsInterface
                             'server_login_source'                           => $firstMap['server_login_source'],
                             'waterfall_id'                                  => $firstMap['waterfall_id'],
                             'login_source'                                  => $firstMap['login_source'],
-                            'INTERNAL__latency_qpl_instance_id'             => $firstMap['INTERNAL__latency_qpl_instance_id'][1],
+                            'INTERNAL__latency_qpl_instance_id'             => intval($firstMap['INTERNAL__latency_qpl_instance_id'][1]),
                             'is_platform_login'                             => intval($firstMap['is_platform_login'][1]),
                             'credential_type'                               => $firstMap['credential_type'],
                             'family_device_id'                              => $this->phone_id,
-                            'INTERNAL__latency_qpl_marker_id'               => $firstMap['INTERNAL__latency_qpl_marker_id'][1],
+                            'INTERNAL__latency_qpl_marker_id'               => intval($firstMap['INTERNAL__latency_qpl_marker_id'][1]),
                             'offline_experiment_group'                      => $firstMap['offline_experiment_group'],
                             'INTERNAL_INFRA_THEME'                          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                             'password_text_input_id'                        => $firstMap['password_text_input_id'],
@@ -2342,15 +2342,15 @@ class Instagram implements ExperimentsInterface
                     'query'             => $username,
                 ],
                 'server_params'         => [
-                    'text_input_id'                     => $this->bloksInfo['text_input_id'][1],
-                    'typeahead_id'                      => $this->bloksInfo['typeahead_id'][1],
-                    'text_component_id'                 => $this->bloksInfo['text_component_id'][1],
-                    'INTERNAL__latency_qpl_marker_id'   => $this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1],
+                    'text_input_id'                     => intval($this->bloksInfo['text_input_id'][1]),
+                    'typeahead_id'                      => intval($this->bloksInfo['typeahead_id'][1]),
+                    'text_component_id'                 => intval($this->bloksInfo['text_component_id'][1]),
+                    'INTERNAL__latency_qpl_marker_id'   => intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]),
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'fdid'                              => $this->bloksInfo['fdid'],
                     'waterfall_id'                      => $this->loginWaterfallId,
-                    'screen_id'                         => $this->bloksInfo['screen_id'][1],
-                    'INTERNAL__latency_qpl_instance_id' => $this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1],
+                    'screen_id'                         => intval($this->bloksInfo['screen_id'][1]),
+                    'INTERNAL__latency_qpl_instance_id' => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -3502,7 +3502,7 @@ class Instagram implements ExperimentsInterface
                     // pass
                 }
 
-                $this->internal->cdnRmd();
+                //$this->internal->cdnRmd();
 
                 $this->people->getSharePrefill();
                 $this->internal->sendGraph('20527889286411119358419418429', [

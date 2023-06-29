@@ -3522,12 +3522,15 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
-                $this->timeline->getUserFeed($this->account_id);
-                $this->people->getInfoById($this->account_id, null, null, true); // Prefetch
-                $this->highlight->getUserFeed($this->account_id);
+                $feedTimelineItems = $feed->getFeedItems();
+                if (count($feedTimelineItems) !== 1 && $feedTimelineItems[0]->getEndOfFeedDemarcator() === null) {
+                    $this->timeline->getUserFeed($this->account_id);
+                    $this->people->getInfoById($this->account_id, null, null, true); // Prefetch
+                    $this->highlight->getUserFeed($this->account_id);
+                    $this->people->getCreatorInfo($this->account_id);
+                }
                 //$this->internal->logResurrectAttribution();
                 //$this->internal->getDeviceCapabilitiesDecisions();
-                $this->people->getCreatorInfo($this->account_id);
                 $this->people->getBootstrapUsers();
                 $this->media->getBlockedMedia();
                 $this->internal->sendGraph('279018452917733073575656047369', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');

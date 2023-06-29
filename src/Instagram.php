@@ -3656,7 +3656,9 @@ class Instagram implements ExperimentsInterface
                 */
                 $this->internal->getNotes();
                 $this->reel->getShareToFbConfig();
-                $this->internal->sendGraph('215817804115327440933115577895',
+
+                try {
+                    $this->internal->sendGraph('215817804115327440933115577895',
                     [
                         'is_pando'      => true,
                         'user_id'       => $this->account_id,
@@ -3665,6 +3667,9 @@ class Instagram implements ExperimentsInterface
                             'refresh_only'          => true,
                         ],
                     ], 'IGAvatarStickersForKeysQuery', 'fetch__IGUser', false, 'pando');
+                } catch (\Exception $e) {
+                    // pass
+                }
 
                 try {
                     $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
@@ -3677,7 +3682,7 @@ class Instagram implements ExperimentsInterface
                 } catch (\Exception $e) {
                     // pass
                 }
-                $this->internal->getQPFetch();
+                $this->internal->getQPFetch(['FLOATING_BANNER', 'MEGAPHONE', 'TOOLTIP', 'INTERSTITIAL', 'BOTTOMSHEET']);
                 $this->people->getSharePrefill();
                 $this->account->getBadgeNotifications();
 
@@ -3851,7 +3856,7 @@ class Instagram implements ExperimentsInterface
                 $this->client->startEmulatingBatch();
 
                 try {
-                    $this->internal->getQPFetch();
+                    $this->internal->getQPFetch(['FLOATING_BANNER', 'MEGAPHONE', 'TOOLTIP', 'INTERSTITIAL', 'BOTTOMSHEET']);
                     //$this->direct->getRankedRecipients('reshare', true);
                     //$this->direct->getRankedRecipients('raven', true);
                 } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {

@@ -69,6 +69,9 @@ class Direct extends RequestCollection
         if ($filter !== null) {
             $request->addParam('fetch_reason', $fetchReason);
         }
+        if ($fetchReason === 'initial_snapshot') {
+            $request->addParam('batch_size', 10);
+        }
         if ($seqId !== null) {
             $request->addParam('seq_id', $seqId);
         }

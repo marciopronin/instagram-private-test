@@ -1,3 +1,17 @@
+# Stable release v21.28.0
+## Date: 29/06/2023
+
+### New features
+
+- **Internal:** Update `_getQuickPromotionSurface()`
+- **Internal:** Update `_getQuickPromotionSurfaceQueryString()`
+
+### Updates and fixes
+
+- **Direct:** Update `getInbox()`
+- **Instagram:** Update `_sendLoginFlow()`
+- **Internal:** Update `getQPFetch()`
+
 # Stable release v21.27.3
 ## Date: 29/06/2023
 

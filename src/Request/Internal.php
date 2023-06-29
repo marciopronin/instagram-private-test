@@ -1864,20 +1864,27 @@ class Internal extends RequestCollection
      * policy where Instagram asks you to accept new policy and accept that
      * you have 18 years old or more.
      *
+     * @param string[] $surfaces Quick Promotion Surface.
+     *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\FetchQPDataResponse
      */
-    public function getQPFetch()
+    public function getQPFetch(
+        $surfaces = null)
     {
+        if ($surfaces !== null) {
+            $qps = $this->_getQuickPromotionSurface($surfaces);
+        }
+
         return $this->ig->request('qp/batch_fetch/')
             ->addPost('is_sdk', 'true')
             ->addPost('vc_policy', 'default')
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('surfaces_to_triggers', Constants::BATCH_SURFACES)
-            ->addPost('surfaces_to_queries', Constants::BATCH_QUERY)
+            ->addPost('surfaces_to_triggers', ($surfaces === null) ? Constants::BATCH_SURFACES : json_encode($qps['triggers']))
+            ->addPost('surfaces_to_queries', ($surfaces === null) ? Constants::BATCH_QUERY : json_encode($qps['queries']))
             ->addPost('version', Constants::BATCH_VERSION)
             ->addPost('scale', ceil(intval(substr($this->ig->device->getDPI(), 0, -3)) / 160))
             ->getResponse(new Response\FetchQPDataResponse());
@@ -3784,5 +3791,88 @@ class Internal extends RequestCollection
         }
 
         return (int) $duration;
+    }
+
+    /**
+     * Get quick promotion surface.
+     *
+     * @param string[] $surfaces Quick Promotion Surface.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return string
+     */
+    protected function _getQuickPromotionSurface(
+        $surfaces)
+    {
+        $qps = [
+            'queries'    => [],
+            'triggers'   => [],
+        ];
+        foreach ($surfaces as $surface) {
+            switch ($surface) {
+                case 'MEGAPHONE':
+                    $qps['queries'] += ['4715' => $this->_getQuickPromotionSurfaceQueryString(true)];
+                    $qps['triggers'] += ['4715' => ['instagram_feed_header', 'instagram_post_created', 'instagram_story_created']];
+                    break;
+                case 'TOOLTIP':
+                    $qps['queries'] += ['5858' => $this->_getQuickPromotionSurfaceQueryString(false)];
+                    $qps['triggers'] += ['5858' => ['instagram_feed_tool_tip', 'instagram_navigation_tooltip', 'instagram_featured_product_media_tooltip', 'instagram_feed_promote_cta_tooltip']];
+                    break;
+                case 'INTERSTITIAL':
+                    $qps['queries'] += ['5734' => $this->_getQuickPromotionSurfaceQueryString(true)];
+                    $qps['triggers'] += ['5734' => ['instagram_feed_prompt', 'instagram_branded_content_story_shared', 'instagram_shopping_enable_auto_highlight_interstitial', 'instagram_story_created']];
+                    break;
+                case 'STORIES_TRAY':
+                    $qps['queries'] += ['6319' => $this->_getQuickPromotionSurfaceQueryString(false)];
+                    break;
+                case 'MESSAGE_FOOTER':
+                    $qps['queries'] += ['8034' => $this->_getQuickPromotionSurfaceQueryString(false)];
+                    break;
+                case 'FLOATING_BANNER':
+                    $qps['queries'] += ['8972' => $this->_getQuickPromotionSurfaceQueryString(false)];
+                    $qps['triggers'] += ['8972' => ['instagram_feed_banner']];
+                    break;
+                case 'RTC_PEEK':
+                    $qps['queries'] += ['9643' => $this->_getQuickPromotionSurfaceQueryString(false)];
+                    break;
+                case 'TWO_BY_TWO_TILE':
+                    $qps['queries'] += ['9775' => $this->_getQuickPromotionSurfaceQueryString(false)];
+                    break;
+                case 'REELS_MIDCARD':
+                    $qps['queries'] += ['10671' => $this->_getQuickPromotionSurfaceQueryString(true)];
+                    break;
+                case 'BOTTOMSHEET':
+                    $qps['queries'] += ['11383' => $this->_getQuickPromotionSurfaceQueryString(false)];
+                    $qps['triggers'] += ['11383' => ['instagram_feed_bottomsheet']];
+                    break;
+                case 'BARCELONA_MEGAPHONE':
+                    $qps['queries'] += ['11451' => $this->_getQuickPromotionSurfaceQueryString(true)];
+                    break;
+                default:
+                    throw new \InvalidArgumentException("Unsupported surface {$surface}.");
+            }
+        }
+
+        return $qps;
+    }
+
+    /**
+     * Get quick promotion surface query string.
+     *
+     * @param bool $darkMode Dark mode.
+     *
+     * @return string
+     */
+    protected function _getQuickPromotionSurfaceQueryString(
+        $darkMode)
+    {
+        $query = '{viewer(){eligible_promotions.trigger_context_v2(<trigger_context_v2>).ig_parameters(<ig_parameters>).trigger_name(<trigger_name>).surface_nux_id(<surface>).external_gating_permitted_qps(<external_gating_permitted_qps>).supports_client_filters(true).include_holdouts(true){edges{client_ttl_seconds,log_eligibility_waterfall,is_holdout,priority,time_range{start,end},node{id,promotion_id,logging_data,is_server_force_pass,max_impressions,triggers,contextual_filters{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}}}}}},is_uncancelable,template{name,parameters{name,required,bool_value,string_value,color_value}},creatives{title{text},content{text},footer{text},social_context{text},social_context_images,primary_action{title{text},url,limit,dismiss_promotion},secondary_action{title{text},url,limit,dismiss_promotion},dismiss_action{title{text},url,limit,dismiss_promotion},bullet_list{title,subtitle,icon{uri,width,height}}image.scale(<scale>){uri,width,height}';
+        if ($darkMode) {
+            $query .= ',dark_mode_image.scale(<scale>){uri,width,height}';
+        }
+        $query .= '}}}}}}';
+
+        return $query;
     }
 }

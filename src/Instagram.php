@@ -1801,7 +1801,7 @@ class Instagram implements ExperimentsInterface
             $this->_setUser('regular', $username, $password);
 
             if ($this->settings->get('pending_events') !== null) {
-                $this->eventBatch = json_decode($this->settings->get('pending_events'));
+                $this->eventBatch = json_decode($this->settings->get('pending_events'), true);
                 $this->settings->set('pending_events', '');
             }
         }
@@ -2143,6 +2143,20 @@ class Instagram implements ExperimentsInterface
 
                                             throw $e;
                                         }
+                                        $msg = 'Sorry, there was a problem with your request.';
+                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                            $loginResponse = new Response\LoginResponse([
+                                                'error_type'    => 'server_or_ip_error',
+                                                'status'        => 'fail',
+                                                'message'       => $msg,
+                                            ]);
+                                            $e = new \InstagramAPI\Exception\InstagramException($msg);
+                                            $e->setResponse($loginResponse);
+
+                                            throw $e;
+                                        }
+
+                                        throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
                                     } else {
                                         throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
                                     }
@@ -2502,7 +2516,7 @@ class Instagram implements ExperimentsInterface
             $this->_setUser('regular', $username, 'NOPASSWORD');
 
             if ($this->settings->get('pending_events') !== null) {
-                $this->eventBatch = json_decode($this->settings->get('pending_events'));
+                $this->eventBatch = json_decode($this->settings->get('pending_events'), true);
                 $this->settings->set('pending_events', '');
             }
         }

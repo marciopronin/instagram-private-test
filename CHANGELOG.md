@@ -1,3 +1,14 @@
+# Stable release v21.29.0
+## Date: 05/07/2023
+
+### New features
+
+- **Instagram:** Add `getHomeTemplate()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+
 # Stable release v21.28.2
 ## Date: 05/07/2023
 

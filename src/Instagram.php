@@ -1864,7 +1864,8 @@ class Instagram implements ExperimentsInterface
 
             if (self::$useBloksLogin) {
                 $this->loginAttemptCount = 1;
-                $response = $this->processLoginClientDataAndRedirect();
+                //$response = $this->processLoginClientDataAndRedirect();
+                $response = $this->getHomeTemplate();
                 $responseArr = $response->asArray();
                 $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
                 $firstDataBlok = null;
@@ -1899,7 +1900,7 @@ class Instagram implements ExperimentsInterface
                 }
 
                 $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
-                $offsets = array_slice($this->bloks->findOffsets($parsed, 'offline_experiment_group'), 0, -2);
+                $offsets = array_slice($this->bloks->findOffsets($parsed, 'username_text_input_id'), 0, -2);
 
                 foreach ($offsets as $offset) {
                     if (isset($parsed[$offset])) {
@@ -1988,14 +1989,14 @@ class Instagram implements ExperimentsInterface
                             'device_id'                                     => $this->device_id,
                             'should_trigger_override_login_success_action'  => 0,
                             'server_login_source'                           => $firstMap['server_login_source'],
-                            'waterfall_id'                                  => $firstMap['waterfall_id'],
+                            //'waterfall_id'                                  => $firstMap['waterfall_id'],
                             'login_source'                                  => $firstMap['login_source'],
                             'INTERNAL__latency_qpl_instance_id'             => intval($firstMap['INTERNAL__latency_qpl_instance_id'][1]),
                             'is_platform_login'                             => intval($firstMap['is_platform_login'][1]),
                             'credential_type'                               => $firstMap['credential_type'],
                             'family_device_id'                              => $this->phone_id,
                             'INTERNAL__latency_qpl_marker_id'               => intval($firstMap['INTERNAL__latency_qpl_marker_id'][1]),
-                            'offline_experiment_group'                      => $firstMap['offline_experiment_group'],
+                            //'offline_experiment_group'                      => $firstMap['offline_experiment_group'],
                             'INTERNAL_INFRA_THEME'                          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                             'password_text_input_id'                        => $firstMap['password_text_input_id'],
                             'qe_device_id'                                  => $this->uuid,
@@ -2343,6 +2344,29 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
+     * Get home template.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getHomeTemplate()
+    {
+        return $this->request('bloks/apps/com.bloks.www.caa.login.home_template/')
+        ->setNeedsAuth(false)
+        ->setSignedPost(false)
+        ->addPost('params', json_encode([
+            'INTERNAL_INFRA_THEME'      => 'harm_f',
+        ]))
+        ->addPost('bk_client_context', json_encode([
+            'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+            'styles_id'     => 'instagram',
+        ]))
+        ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+        ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Send login text input typy ahead.
      *
      * @param bool $username Username.
@@ -2359,7 +2383,29 @@ class Instagram implements ExperimentsInterface
             ->setSignedPost(false)
             ->addPost('params', json_encode([
                 'client_input_params'           => [
-                    'account_centers'   => [],
+                    'account_centers'   => [
+                        [
+                            'profiles'  => [
+                                'id'    => [
+                                    'is_derived'            => 0,
+                                    'credentials'           => [],
+                                    'account_center_id'     => '',
+                                    'profile_picture_url'   => '',
+                                    'notification_count'    => 0,
+                                    'token'                 => '',
+                                    'last_access_time'      => 0,
+                                    'has_smartlock'         => 0,
+                                    'credential_type'       => '',
+                                    'password'              => '',
+                                    'user_id'               => '',
+                                    'name'                  => '',
+                                    'username'              => '',
+                                    'account_source'        => '',
+                                ],
+                            ],
+                            'id'        => '',
+                        ],
+                    ],
                     'query'             => $username,
                 ],
                 'server_params'         => [
@@ -2368,8 +2414,8 @@ class Instagram implements ExperimentsInterface
                     'text_component_id'                 => intval($this->bloksInfo['text_component_id'][1]),
                     'INTERNAL__latency_qpl_marker_id'   => intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]),
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
-                    'fdid'                              => $this->bloksInfo['fdid'],
-                    'waterfall_id'                      => $this->loginWaterfallId,
+                    //'fdid'                              => $this->bloksInfo['fdid'],
+                    //'waterfall_id'                      => $this->loginWaterfallId,
                     'screen_id'                         => intval($this->bloksInfo['screen_id'][1]),
                     'INTERNAL__latency_qpl_instance_id' => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),
                 ],
@@ -2401,7 +2447,7 @@ class Instagram implements ExperimentsInterface
                     'user_id'   => $this->account_id,
                 ],
                 'server_params'         => [
-                    'offline_experiment_group'          => $this->settings->get('offline_experiment'),
+                    //'offline_experiment_group'          => $this->settings->get('offline_experiment'),
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'device_id'                         => $this->device_id,
                     'is_platform_login'                 => 0,

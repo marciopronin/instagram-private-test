@@ -1,3 +1,10 @@
+# Stable release v21.29.1
+## Date: 06/07/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_saveExperimentsMobileConfig()`
+
 # Stable release v21.29.0
 ## Date: 05/07/2023
 

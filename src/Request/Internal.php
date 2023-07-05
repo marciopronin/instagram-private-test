@@ -1513,7 +1513,7 @@ class Internal extends RequestCollection
                 } else {
                     $val = null;
                 }
-                $exps[$k2] = $val;
+                $exps[$v2['k']] = $val;
             }
             $experiments[$k] = $exps;
         }
@@ -3688,7 +3688,7 @@ class Internal extends RequestCollection
             'value' => 'ETC2_COMPRESSION',
         ];
 
-        $wordTracker = $this->ig->isExperimentEnabled('32236', 0, false);
+        $wordTracker = $this->ig->isExperimentEnabled('32236', 0, true);
         if ($wordTracker) {
             $supportedCapabilities[] = [
                 'name'  => 'world_tracker',

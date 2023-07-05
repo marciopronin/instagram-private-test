@@ -3654,7 +3654,7 @@ class Instagram implements ExperimentsInterface
                     ],
                 ], 'ReportAttributionEventsMutation', 'report_attribution_events', false, 'pando');
 
-                $this->internal->sendGraph('176575339118291536801493724773', ['is_pando' => true], 'IGFxLinkedAccountsQuery', 'fx_linked_accounts', false, 'pando');
+                $this->internal->sendGraph('43230821013683556483393399494', ['is_pando' => true], 'IGFxLinkedAccountsQuery', 'fx_linked_accounts', false, 'pando');
                 $this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
                 /*$this->internal->sendGraph('13513772661704761708109730075', [
                     'is_pando' => true,

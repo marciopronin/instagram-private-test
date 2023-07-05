@@ -1115,7 +1115,7 @@ class Client
                 $headers['set_headers']['X-IG-Bandwidth-Speed-KBPS'] = '-1.000';
             }
 
-            if (($this->_parent->settings->get('authorization_header') !== null) && ($this->_parent->settings->get('authorization_header') !== 'Bearer IGT:2:') && (strpos($request->getBody()->getContents(), 'mobileconfigsessionless') === false)) {
+            if (($this->_parent->settings->get('authorization_header') !== null) && ($this->_parent->settings->get('authorization_header') !== 'Bearer IGT:2:') && ($this->_parent->isSessionless !== true)) {
                 $headers['set_headers']['Authorization'] = $this->_parent->settings->get('authorization_header');
             }
 
@@ -1133,11 +1133,11 @@ class Client
                 $headers['set_headers']['IG-U-SHBTS'] = $this->_shbts;
             }
 
-            if ($this->_parent->account_id !== null && (strpos($request->getBody()->getContents(), 'mobileconfigsessionless') === false)) {
+            if ($this->_parent->account_id !== null && ($this->_parent->isSessionless !== true)) {
                 $headers['set_headers']['IG-U-DS-USER-ID'] = $this->_parent->account_id;
             }
 
-            if ($this->_rur !== '') {
+            if ($this->_rur !== '' && ($this->_parent->isSessionless !== true)) {
                 $headers['set_headers']['IG-U-RUR'] = $this->_rur;
             }
 
@@ -1207,20 +1207,26 @@ class Client
         if ($this->_mid !== '') {
             $this->_parent->settings->set('mid', $this->_mid);
         }
-        if ($this->_rur !== '') {
-            $this->_parent->settings->set('rur', $this->_rur);
-        }
-        if ($this->_shbid !== '') {
-            $this->_parent->settings->set('shbid', $this->_shbid);
-        }
-        if ($this->_shbts !== '') {
-            $this->_parent->settings->set('shbts', $this->_shbts);
+        if ($this->_pigeonBatch !== true) {
+            if ($this->_rur !== '') {
+                $this->_parent->settings->set('rur', $this->_rur);
+            }
+            if ($this->_shbid !== '') {
+                $this->_parent->settings->set('shbid', $this->_shbid);
+            }
+            if ($this->_shbts !== '') {
+                $this->_parent->settings->set('shbts', $this->_shbts);
+            }
         }
 
         $authorizationHeader = $response->getHeaderLine('ig-set-authorization');
 
         if ($authorizationHeader !== '') {
             $this->_parent->settings->set('authorization_header', $authorizationHeader);
+        }
+        if ($this->_rur === '' && $authorizationHeader !== '') {
+            $this->_rur = strtoupper($response->getHeaderLine('x-ig-origin-region'));
+            $this->_parent->settings->set('rur', $this->_rur);
         }
 
         $this->bandwidthM = ceil(1000 * (microtime(true) - $start));

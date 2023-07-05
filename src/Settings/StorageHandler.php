@@ -109,6 +109,8 @@ class StorageHandler
         //'ig_android_video_segmented_upload_universe',
         '26156', //ig_android_eu_configure_disabled',
         '48235', //ig_android_panavision_consumption_launcher',
+        '32236', //ig_android_cameracore_world_tracker_v2,
+        '34393', //qe_ig_android_reel_raven_video_segmented_upload_universe,
     ];
 
     /**

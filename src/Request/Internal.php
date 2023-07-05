@@ -970,7 +970,7 @@ class Internal extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('nav_chain', $this->ig->getNavChain());
 
-        if ($this->ig->isExperimentEnabled('ig_android_eu_configure_disabled', 'route_to_us', false)) {
+        if ($this->ig->isExperimentEnabled('26156', 0, false)) {
             $request->addHeader('X-IG-EU-CONFIGURE-DISABLED', 'true');
         }
 
@@ -1542,6 +1542,7 @@ class Internal extends RequestCollection
             ->addPost('fetch_type', 'ASYNC_FULL');
 
         if ($prelogin) {
+            $this->ig->isSessionless = true;
             $request
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
@@ -1559,6 +1560,7 @@ class Internal extends RequestCollection
         }
 
         $result = $request->getResponse(new Response\MobileConfigResponse());
+        $this->ig->isSessionless = false;
         $this->_saveExperimentsMobileConfig($result->asArray());
 
         return $result;
@@ -3669,11 +3671,11 @@ class Internal extends RequestCollection
     {
         $supportedCapabilities = Constants::SUPPORTED_CAPABILITIES;
         $segmentation = $this->ig->isExperimentEnabled(
-            'qe_ig_android_reel_raven_video_segmented_upload_universe',
-            'segment_enabled_story_raven');
+            '34393',
+            7);
         $segmentationUnknown = $this->ig->isExperimentEnabled(
-            'qe_ig_android_reel_raven_video_segmented_upload_universe',
-            'segment_enabled_unknown', false);
+            '34393',
+            12, false);
         if ($segmentation || $segmentationUnknown) {
             $supportedCapabilities[] = [
                 'name'  => 'segmentation',
@@ -3686,7 +3688,7 @@ class Internal extends RequestCollection
             'value' => 'ETC2_COMPRESSION',
         ];
 
-        $wordTracker = $this->ig->isExperimentEnabled('ig_android_cameracore_world_tracker_v2', 'enabled', false);
+        $wordTracker = $this->ig->isExperimentEnabled('32236', 0, false);
         if ($wordTracker) {
             $supportedCapabilities[] = [
                 'name'  => 'world_tracker',

@@ -580,6 +580,13 @@ class Instagram implements ExperimentsInterface
     public $devicecInitState = false;
 
     /**
+     * Is sessionless.
+     *
+     * @var bool
+     */
+    public $isSessionless = false;
+
+    /**
      * CDN RMD.
      *
      * @var bool
@@ -1205,7 +1212,7 @@ class Instagram implements ExperimentsInterface
      */
     public function getSoundEnabled()
     {
-        return $this->soundEnabled;
+        return intval($this->soundEnabled);
     }
 
     /**
@@ -1226,7 +1233,7 @@ class Instagram implements ExperimentsInterface
      */
     public function getIsDeviceCharging()
     {
-        return strval($this->isDeviceCharging);
+        return intval($this->isDeviceCharging);
     }
 
     /**
@@ -3420,10 +3427,6 @@ class Instagram implements ExperimentsInterface
 
                 $this->event->sendZeroCarrierSignal();
                 $this->internal->getMobileConfig(true);
-                $this->internal->getMobileConfig(false);
-
-                $this->_registerPushChannels();
-                $this->internal->getAsyncNdxIgSteps('NDX_IG4A_MA_FEATURE');
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
@@ -3431,12 +3434,21 @@ class Instagram implements ExperimentsInterface
             } finally {
                 // Stops emulating batch requests.
                 $this->client->stopEmulatingBatch();
+
+                try {
+                    $this->internal->getMobileConfig(false);
+                    $this->_registerPushChannels();
+                } catch (\Exception $e) {
+                    // pass
+                }
             }
 
             // Batch request 2
             $this->client->startEmulatingBatch();
 
             try {
+                $this->internal->getAsyncNdxIgSteps('NDX_IG4A_MA_FEATURE');
+
                 $requestId = \InstagramAPI\Signatures::generateUUID();
                 $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch');
                 $feed = $this->timeline->getTimelineFeed(null, [
@@ -3487,13 +3499,7 @@ class Instagram implements ExperimentsInterface
                 throw $e;
             } catch (\Exception $e) {
                 // pass
-            } finally {
-                // Stops emulating batch requests
-                $this->client->stopEmulatingBatch();
             }
-
-            // Batch request 3
-            $this->client->startEmulatingBatch();
 
             try {
                 //$this->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', true);
@@ -3507,9 +3513,23 @@ class Instagram implements ExperimentsInterface
                 $this->internal->sendGraph('33052919472135518510885263591', ['is_pando' => true], 'BasicAdsOptInQuery', 'xfb_user_basic_ads_preferences', false, 'pando');
 
                 $this->internal->getAsyncNdxIgSteps('NDX_IG_IMMERSIVE');
+            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                throw $e;
+            } catch (\Exception $e) {
+                // pass
+            } finally {
+                // Stops emulating batch requests
+                $this->client->stopEmulatingBatch();
 
                 try {
                     $this->account->getBadgeNotifications();
+                } catch (\Exception $e) {
+                    // pass
+                }
+            }
+
+            try {
+                try {
                     $this->settings->set('nav_started', 'true');
                     $this->internal->getLoomFetchConfig();
                 } catch (\Exception $e) {
@@ -3517,6 +3537,7 @@ class Instagram implements ExperimentsInterface
                 }
 
                 //$this->internal->cdnRmd();
+                $this->direct->getPresences();
 
                 $this->people->getSharePrefill();
                 $this->internal->sendGraph('20527889286411119358419418429', [
@@ -3527,12 +3548,9 @@ class Instagram implements ExperimentsInterface
                 throw $e;
             } catch (\Exception $e) {
                 // pass
-            } finally {
-                // Stops emulating batch requests
-                $this->client->stopEmulatingBatch();
             }
 
-            // Batch request 4
+            // Batch request 3
             $this->client->startEmulatingBatch();
 
             try {
@@ -3548,9 +3566,8 @@ class Instagram implements ExperimentsInterface
                 $this->people->getBootstrapUsers();
                 $this->media->getBlockedMedia();
                 $this->internal->sendGraph('279018452917733073575656047369', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
+                $this->reel->discover();
                 $this->people->getInfoById($this->account_id);
-                $this->creative->sendSupportedCapabilities();
-                $this->account->getProcessContactPointSignals();
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
@@ -3558,12 +3575,24 @@ class Instagram implements ExperimentsInterface
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
+
+                try {
+                    $this->creative->sendSupportedCapabilities();
+                } catch (\Exception $e) {
+                    // pass
+                }
             }
 
+            try {
+                $this->account->getProcessContactPointSignals();
+            } catch (\Exception $e) {
+                // pass
+            }
+
+            // Batch request 4
             $this->client->startEmulatingBatch();
 
             try {
-                $this->reel->discover();
                 //$this->timeline->getTimelineFeed(); TODO
                 $this->internal->sendGraph('18293997046226642457734318433', [
                     'is_pando' => true,
@@ -3601,33 +3630,11 @@ class Instagram implements ExperimentsInterface
                     ],
                 ], 'SyncCXPNoticeStateMutation', 'xcxp_sync_notice_state', false, 'pando');
                 //$this->internal->sendGraph('176575339118291536801493724773', ['is_pando' => true], 'HasAvatarQuery', 'viewer', false, 'pando');
-            } catch (\Exception $e) {
-                // pass
-            } finally {
-                // Stops emulating batch requests
-                $this->client->stopEmulatingBatch();
-            }
 
-            $this->client->startEmulatingBatch();
-
-            try {
-                //$this->account->getLinkageStatus();
-                $this->internal->storeClientPushPermissions();
-                //$this->business->getMonetizationProductsEligibilityData();
-            } catch (\Exception $e) {
-                // pass
-            } finally {
-                // Stops emulating batch requests
-                $this->client->stopEmulatingBatch();
-            }
-
-            $this->client->startEmulatingBatch();
-
-            try {
                 try {
+                    $this->internal->storeClientPushPermissions();
                     $this->internal->getViewableStatuses(true);
                     $this->account->getPresenceStatus();
-                    $this->direct->getPresences();
                     $this->direct->getHasInteropUpgraded();
                     //$this->internal->getNotificationsSettings();
                 } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
@@ -3635,16 +3642,58 @@ class Instagram implements ExperimentsInterface
                 } catch (\Exception $e) {
                     // pass
                 }
+            } catch (\Exception $e) {
+                // pass
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
+
+                try {
+                    $this->direct->getInbox(null, null, 0, null);
+                } catch (\Exception $e) {
+                    // pass
+                }
             }
 
+            try {
+                $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), null, true);
+            } catch (\Exception $e) {
+                // pass
+            }
+
+            // Batch request 5
             $this->client->startEmulatingBatch();
 
             try {
+                try {
+                    $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
+
+                    //$this->internal->sendGraph('243882031010379133527862780970', [], 'FBToIGDefaultAudienceBottomSheetQuery', false, 'graphservice');
+                    //$this->internal->sendGraph('338246149711919572858330660779', ['is_pando' => true], 'FBToIGDefaultAudienceSettingQuery', true, 'pando');
+                } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                    throw $e;
+                } catch (\Exception $e) {
+                    // pass
+                }
+            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                throw $e;
+            } catch (\Exception $e) {
+                // pass
+            } finally {
+                // Stops emulating batch requests
+                $this->client->stopEmulatingBatch();
+
+                try {
+                    $this->account->getBadgeNotifications();
+                } catch (\Exception $e) {
+                    // pass
+                }
+            }
+
+            $this->client->startEmulatingBatch();
+            // Batch request 5
+            try {
                 //$this->story->getReelsMediaFeed($this->account_id);
-                $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), null, true);
                 /*
                 try {
                     $this->internal->sendGraph('2360595178779351530479091981', ['is_pando' => true, 'fb_profile_image_size' => 200], 'FxIGMasterAccountQuery', 'fxcal_accounts', false, 'pando');
@@ -3685,21 +3734,8 @@ class Instagram implements ExperimentsInterface
                     // pass
                 }
 
-                try {
-                    $this->direct->getInbox(null, null, 20, 10, false, 'all', 'initial_snapshot');
-                    $this->direct->getInbox(null, null, 0, null);
-
-                    //$this->internal->sendGraph('243882031010379133527862780970', [], 'FBToIGDefaultAudienceBottomSheetQuery', false, 'graphservice');
-                    //$this->internal->sendGraph('338246149711919572858330660779', ['is_pando' => true], 'FBToIGDefaultAudienceSettingQuery', true, 'pando');
-                } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
-                    throw $e;
-                } catch (\Exception $e) {
-                    // pass
-                }
                 $this->internal->getQPFetch(['FLOATING_BANNER', 'MEGAPHONE', 'TOOLTIP', 'INTERSTITIAL', 'BOTTOMSHEET']);
                 $this->people->getSharePrefill();
-                $this->account->getBadgeNotifications();
-
                 /*
                 if ($this->getPlatform() === 'android') {
                     $this->internal->getArlinkDownloadInfo();
@@ -3712,6 +3748,12 @@ class Instagram implements ExperimentsInterface
             } finally {
                 // Stops emulating batch requests
                 $this->client->stopEmulatingBatch();
+
+                try {
+                    $this->people->getSharePrefill();
+                } catch (\Exception $e) {
+                    // pass
+                }
             }
 
             /*

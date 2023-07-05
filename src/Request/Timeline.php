@@ -281,9 +281,9 @@ class Timeline extends RequestCollection
             } else {
                 $request->addPost('seen_posts', $options['seen_posts']);
             }
-        } elseif ($maxId === null) {
+        }/* elseif ($maxId === null) {
             $request->addPost('seen_posts', '');
-        }
+        }*/
 
         if (isset($options['unseen_posts'])) {
             if (is_array($options['unseen_posts'])) {
@@ -291,9 +291,9 @@ class Timeline extends RequestCollection
             } else {
                 $request->addPost('unseen_posts', $options['unseen_posts']);
             }
-        } elseif ($maxId === null) {
+        } /*elseif ($maxId === null) {
             $request->addPost('unseen_posts', '');
-        }
+        }*/
 
         if (isset($options['feed_view_info'])) {
             if (is_array($options['feed_view_info'])) {
@@ -301,9 +301,9 @@ class Timeline extends RequestCollection
             } else {
                 $request->addPost('feed_view_info', json_encode([$options['feed_view_info']]));
             }
-        } elseif ($maxId === null) {
+        }/* elseif ($maxId === null) {
             $request->addPost('feed_view_info', '[]');
-        }
+        }*/
 
         if (!empty($options['push_disabled'])) {
             $request->addPost('push_disabled', 'true');
@@ -321,8 +321,11 @@ class Timeline extends RequestCollection
             $request->addPost('is_dark_mode', 0);
         }
 
-        $request->addPost('has_camera_permission', isset($options['has_camera_permission']) ? $options['has_camera_permission'] : 1)
-                ->addPost('panavision_mode', ''); //$this->ig->isExperimentEnabled('ig_android_panavision_consumption_launcher', 'is_immersive_enabled', ''));
+        $request->addPost('has_camera_permission', isset($options['has_camera_permission']) ? $options['has_camera_permission'] : 1);
+
+        if ($this->ig->isExperimentEnabled('48235', 0, false)) {
+            $request->addPost('panavision_mode', '1'); //$this->ig->isExperimentEnabled('ig_android_panavision_consumption_launcher', 'is_immersive_enabled', ''));
+        }
 
         return $request->getResponse(new Response\TimelineFeedResponse());
     }

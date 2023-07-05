@@ -1,3 +1,16 @@
+# Stable release v21.28.2
+## Date: 05/07/2023
+
+### Updates and fixes
+
+- **Client:** Update `api()`
+- **Internal:** Update `getSupportedCapabilities()`
+- **Discover:** Update `getExploreFeed()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+- **Model/PageInfo:** Update model
+- **Timeline:** Update `getTimelineFeed()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v21.28.1
 ## Date: 01/07/2023
 

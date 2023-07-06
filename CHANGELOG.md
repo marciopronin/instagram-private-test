@@ -1,3 +1,11 @@
+# Stable release v21.29.2
+## Date: 06/07/2023
+
+### Updates and fixes
+
+- **Event:** Update `prepareAndSendExploreImpression()`
+- **Event:** Update `prepareAndSendThumbnailImpression()`
+
 # Stable release v21.29.1
 ## Date: 06/07/2023
 

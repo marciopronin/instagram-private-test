@@ -1,3 +1,10 @@
+# Stable release v21.29.4
+## Date: 06/07/2023
+
+### Updates and fixes
+
+- **Internal:** Update `_getQuickPromotionSurfaceQueryString()`
+
 # Stable release v21.29.3
 ## Date: 06/07/2023
 

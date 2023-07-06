@@ -260,6 +260,10 @@ class Timeline extends RequestCollection
             //->addPost('timezone_offset', '7200')
             ->addPost('session_id', $this->ig->session_id);
 
+        if ($this->ig->isExperimentEnabled('58152', 0, false)) {
+            $request->addPost('can_support_carousel_mentions', '1');
+        }
+
         if ($maxId !== null) {
             $request->addPost('reason', 'pagination');
             $request->addPost('max_id', $maxId);

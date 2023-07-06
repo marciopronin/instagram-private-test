@@ -1,3 +1,13 @@
+# Stable release v21.29.3
+## Date: 06/07/2023
+
+### Updates and fixes
+
+- **Discover:** Update `getExploreFeed()`
+- **Internal:** Update `getSupportedCapabilities()`
+- **Timeline:** Update `getTimelineFeed()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+
 # Stable release v21.29.2
 ## Date: 06/07/2023
 

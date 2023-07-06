@@ -35,23 +35,26 @@ class Discover extends RequestCollection
         $clusterDisabled = true)
     {
         $request = $this->ig->request('discover/topical_explore/')
-            ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
-            ->addHeader('X-CM-Latency', '-1.000')
-            ->addHeader('X-Ads-Opt-Out', '0')
-            ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             ->addHeader('X-IG-Prefetch-Request', 'foreground')
             ->addParam('is_prefetch', $isPrefetch)
-            ->addParam('phone_id', $this->ig->phone_id)
             //->addParam('omit_cover_media', true)
             ->addParam('is_ptr', false)
             ->addParam('reels_configuration', $this->ig->getExperimentParam('25215', 13) === null ? 'hide_hero' : 'default')
             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-            ->addParam('is_charging', $this->ig->getIsDeviceCharging())
-            ->addParam('battery_level', $this->ig->getBatteryLevel())
-            ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
-            ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
             ->addParam('session_id', $sessionId);
         //->addParam('paging_token', json_encode((Object)[]));
+
+        if ($this->ig->isExperimentEnabled('48862', 0, true)) {
+            $request->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
+                    ->addHeader('X-CM-Latency', '-1.000')
+                    ->addHeader('X-Ads-Opt-Out', '0')
+                    ->addHeader('X-DEVICE-ID', $this->ig->uuid)
+                    ->addParam('phone_id', $this->ig->phone_id)
+                    ->addParam('is_charging', $this->ig->getIsDeviceCharging())
+                    ->addParam('battery_level', $this->ig->getBatteryLevel())
+                    ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
+                    ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled());
+        }
 
         if ($clusterDisabled === false) {
             $request->addParam('cluster_id', $clusterId);

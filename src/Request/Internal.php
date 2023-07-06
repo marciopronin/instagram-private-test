@@ -3670,13 +3670,17 @@ class Internal extends RequestCollection
     public function getSupportedCapabilities()
     {
         $supportedCapabilities = Constants::SUPPORTED_CAPABILITIES;
+        /*
         $segmentation = $this->ig->isExperimentEnabled(
             '34393',
             7);
         $segmentationUnknown = $this->ig->isExperimentEnabled(
             '34393',
             12, false);
-        if ($segmentation || $segmentationUnknown) {
+        */
+        $v = $this->ig->getExperimentParam('31167', 0, 0);
+
+        if ($v >= 30) {
             $supportedCapabilities[] = [
                 'name'  => 'segmentation',
                 'value' => 'segmentation_enabled',

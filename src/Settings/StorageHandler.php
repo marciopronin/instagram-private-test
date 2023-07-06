@@ -111,6 +111,9 @@ class StorageHandler
         '48235', //ig_android_panavision_consumption_launcher',
         '32236', //ig_android_cameracore_world_tracker_v2,
         '34393', //qe_ig_android_reel_raven_video_segmented_upload_universe,
+        '48862', // add extra params and header (topical explore)
+        '58152', // used in feed timeline (can_support_carousel_mentions)
+        '31167', // segmentation enabled
     ];
 
     /**

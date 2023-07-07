@@ -1,3 +1,11 @@
+# Stable release v21.29.5
+## Date: 07/07/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **Discover:** Update `getExploreFeed()`
+
 # Stable release v21.29.4
 ## Date: 06/07/2023
 

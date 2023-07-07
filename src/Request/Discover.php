@@ -45,7 +45,8 @@ class Discover extends RequestCollection
         //->addParam('paging_token', json_encode((Object)[]));
 
         if ($this->ig->isExperimentEnabled('48862', 0, true)) {
-            $request->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
+            $request->addHeader('X-Google-AD-ID', $this->ig->advertising_id)
+                    ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
                     ->addHeader('X-CM-Latency', '-1.000')
                     ->addHeader('X-Ads-Opt-Out', '0')
                     ->addHeader('X-DEVICE-ID', $this->ig->uuid)

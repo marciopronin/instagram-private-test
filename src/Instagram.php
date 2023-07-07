@@ -3601,7 +3601,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $feedTimelineItems = $feed->getFeedItems();
-                if (count($feedTimelineItems) !== 1 && $feedTimelineItems[0]->getEndOfFeedDemarcator() === null) {
+                if (count($feedTimelineItems) > 0 && $feedTimelineItems[0]->getEndOfFeedDemarcator() === null) {
                     $this->timeline->getUserFeed($this->account_id);
                     $this->people->getInfoById($this->account_id, null, null, true); // Prefetch
                     $this->highlight->getUserFeed($this->account_id);
@@ -3781,7 +3781,6 @@ class Instagram implements ExperimentsInterface
                 }
 
                 $this->internal->getQPFetch(['FLOATING_BANNER', 'MEGAPHONE', 'TOOLTIP', 'INTERSTITIAL', 'BOTTOMSHEET']);
-                $this->people->getSharePrefill();
                 /*
                 if ($this->getPlatform() === 'android') {
                     $this->internal->getArlinkDownloadInfo();

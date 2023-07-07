@@ -3610,6 +3610,7 @@ class Instagram implements ExperimentsInterface
                 //$this->internal->logResurrectAttribution();
                 //$this->internal->getDeviceCapabilitiesDecisions();
                 $this->people->getBootstrapUsers();
+                $this->settings->set('salt_ids', '332016926,332019702,332008904');
                 $this->media->getBlockedMedia();
                 $this->internal->sendGraph('279018452917733073575656047369', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
                 $this->reel->discover();
@@ -3730,6 +3731,7 @@ class Instagram implements ExperimentsInterface
                 $this->client->stopEmulatingBatch();
 
                 try {
+                    $this->settings->set('salt_ids', '132191320,332016926,332019702,332008904');
                     $this->account->getBadgeNotifications();
                 } catch (\Exception $e) {
                     // pass
@@ -3764,6 +3766,7 @@ class Instagram implements ExperimentsInterface
                 ], 'CrossPostingContentCompatibilityConfig', 'xcxp_unified_crossposting_configs_root', false, 'pando');
                 */
                 $this->internal->getNotes();
+                $this->settings->set('salt_ids', '332016926,332019702,332008904');
                 $this->reel->getShareToFbConfig();
 
                 try {
@@ -3795,6 +3798,7 @@ class Instagram implements ExperimentsInterface
                 $this->client->stopEmulatingBatch();
 
                 try {
+                    $this->settings->set('salt_ids', '');
                     $this->people->getSharePrefill();
                 } catch (\Exception $e) {
                     // pass

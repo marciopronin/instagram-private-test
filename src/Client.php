@@ -1153,6 +1153,7 @@ class Client
             $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = strval($this->totalTime);
             //$headers['set_headers']['X-MID'] = $this->getMid();
 
+            /*
             if (strpos($request->getUri(), 'notifications/badge') !== false) {
                 $this->_parent->settings->set('salt_ids', $this->generateNewFlowId(1061163349));
             }
@@ -1160,8 +1161,9 @@ class Client
             if (strpos($request->getUri(), 'media/configure') !== false) {
                 $this->_parent->settings->set('salt_ids', $this->generateFlowId(1061163349, 1));
             }
+            */
 
-            if ($this->_parent->settings->get('salt_ids') !== null) {
+            if ($this->_parent->settings->get('salt_ids') !== null && $this->_parent->settings->get('salt_ids') !== '') {
                 $headers['set_headers']['X-IG-SALT-IDS'] = $this->_parent->settings->get('salt_ids');
             }
         }

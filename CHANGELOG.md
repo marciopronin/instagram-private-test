@@ -1,3 +1,12 @@
+# Stable release v21.29.9
+## Date: 10/07/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+- **Internal:** Update `getQPFetch()`
+
 # Stable release v21.29.8
 ## Date: 09/07/2023
 

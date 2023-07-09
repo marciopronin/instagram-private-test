@@ -3600,7 +3600,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $feedTimelineItems = $feed->getFeedItems();
-                if (count($feedTimelineItems) > 0 && $feedTimelineItems[0]->getEndOfFeedDemarcator() === null) {
+                if (count($feedTimelineItems) > 0 && $feedTimelineItems[0]->getEndOfFeedDemarcator() !== null) {
                     $this->timeline->getUserFeed($this->account_id);
                     $this->people->getInfoById($this->account_id, null, null, true); // Prefetch
                     $this->highlight->getUserFeed($this->account_id);

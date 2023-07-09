@@ -1879,7 +1879,7 @@ class Internal extends RequestCollection
             $qps = $this->_getQuickPromotionSurface($surfaces);
         }
 
-        return $this->ig->request('qp/batch_fetch/')
+        $request = $this->ig->request('qp/batch_fetch/')
             ->addPost('is_sdk', 'true')
             ->addPost('vc_policy', 'default')
             //->addPost('_csrftoken', $this->ig->client->getToken())
@@ -1888,8 +1888,14 @@ class Internal extends RequestCollection
             ->addPost('surfaces_to_triggers', ($surfaces === null) ? Constants::BATCH_SURFACES : json_encode($qps['triggers']))
             ->addPost('surfaces_to_queries', ($surfaces === null) ? Constants::BATCH_QUERY : json_encode($qps['queries']))
             ->addPost('version', Constants::BATCH_VERSION)
-            ->addPost('scale', ceil(intval(substr($this->ig->device->getDPI(), 0, -3)) / 160))
-            ->getResponse(new Response\FetchQPDataResponse());
+            ->addPost('scale', ceil(intval(substr($this->ig->device->getDPI(), 0, -3)) / 160));
+
+        // fdid_in_qp_context
+        if ($this->ig->isExperimentEnabled('54557', 1, false)) {
+            $request->addPost('trigger_context', json_encode(['family_device_id' => $this->ig->phone_id, 'app_scoped_device_id' => $this->ig->uuid]));
+        }
+
+        return $request->getResponse(new Response\FetchQPDataResponse());
     }
 
     /**

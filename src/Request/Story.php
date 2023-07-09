@@ -136,7 +136,7 @@ class Story extends RequestCollection
             ->setRequestPriority(0)
             ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('reason', $reason)
-            ->addPost('timezone_offset', date('Z'))
+            ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('reel_tray_impressions', json_encode([], JSON_FORCE_OBJECT))
             ->addPost('_uuid', $this->ig->uuid);

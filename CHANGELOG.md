@@ -1,3 +1,10 @@
+# Stable release v21.29.8
+## Date: 09/07/2023
+
+### Updates and fixes
+
+- **Story:** Update `getReelsTrayFeed()`
+
 # Stable release v21.29.7
 ## Date: 09/07/2023
 

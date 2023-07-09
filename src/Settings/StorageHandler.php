@@ -114,6 +114,7 @@ class StorageHandler
         '48862', // add extra params and header (topical explore)
         '58152', // used in feed timeline (can_support_carousel_mentions)
         '31167', // segmentation enabled
+        '54280', // banyan/banyan (IBCShareSheetParams)
     ];
 
     /**

@@ -1578,7 +1578,7 @@ class People extends RequestCollection
         return $this->ig->request('banyan/banyan/')
             ->addParam('is_private_share', false)
             ->addParam('views', ($nullState) ? '["direct_ibc_nullstate"]' : '["reshare_share_sheet","direct_user_search_keypressed","story_share_sheet","direct_user_search_nullstate","direct_inbox_active_now","forwarding_recipient_sheet","call_recipients","direct_ibc_inbox_discovery"]')
-            ->addParam('IBCShareSheetParams', json_encode(['size' => 3]))
+            ->addParam('IBCShareSheetParams', json_encode(['size' => max($this->ig->getExperimentParam('54280', 2, 5), (int) $this->ig->getExperimentParam('54280', 5, 5))]))
             ->addParam('is_real_time', false)
             ->getResponse(new Response\SharePrefillResponse());
     }

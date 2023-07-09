@@ -1,3 +1,16 @@
+# Stable release v21.29.7
+## Date: 09/07/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Discover:** Update `getExploreFeed()`
+- **People:** Update `getSharePrefill()`
+- **StoraeHandler:** Update `EXPERIMENT_KEYS`
+- **Internal:** Update `api()`
+- **Response:** Update `MultiAccountsResponse`
+- **Story:** Update `getInjectedStories()`
+
 # Stable release v21.29.6
 ## Date: 07/07/2023
 

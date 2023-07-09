@@ -348,8 +348,9 @@ class Story extends RequestCollection
 
         $request = $this->ig->request('feed/injected_reels_media/')
             ->setIsBodyCompressed(true)
+            ->addHeader('X-Google-AD-ID', $this->ig->advertising_id)
             ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
-            ->addHeader('X-CM-Latency', '-1.000')
+            ->addHeader('X-CM-Latency', $this->ig->client->latency)
             ->addHeader('X-Ads-Opt-Out', '0')
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             ->addPost('num_items_in_pool', '0')

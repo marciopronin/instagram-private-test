@@ -1960,7 +1960,6 @@ class Instagram implements ExperimentsInterface
                         ],
                     ];
                 }
-
                 $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/')
                     ->setNeedsAuth(false)
                     ->setSignedPost(false)
@@ -1980,7 +1979,6 @@ class Instagram implements ExperimentsInterface
                             'event_flow'                    => ($loggedOut === false) ? 'login_manual' : 'aymh',
                             'event_step'                    => 'home_page',
                             'openid_tokens'                 => (object) [],
-                            'client_known_key_hash'         => '',
                             'contact_point'                 => $username,
                             'encrypted_msisdn'              => '',
                         ],
@@ -1994,12 +1992,12 @@ class Instagram implements ExperimentsInterface
                             'INTERNAL__latency_qpl_instance_id'             => intval($firstMap['INTERNAL__latency_qpl_instance_id'][1]),
                             'is_platform_login'                             => intval($firstMap['is_platform_login'][1]),
                             'credential_type'                               => $firstMap['credential_type'],
-                            'family_device_id'                              => $this->phone_id,
+                            //'family_device_id'                              => $this->phone_id,
                             'INTERNAL__latency_qpl_marker_id'               => intval($firstMap['INTERNAL__latency_qpl_marker_id'][1]),
                             //'offline_experiment_group'                      => $firstMap['offline_experiment_group'],
                             'INTERNAL_INFRA_THEME'                          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                             'password_text_input_id'                        => $firstMap['password_text_input_id'],
-                            'qe_device_id'                                  => $this->uuid,
+                            //'qe_device_id'                                  => $this->uuid,
                             'ar_event_source'                               => $firstMap['ar_event_source'],
                         ],
                     ]))
@@ -3464,9 +3462,10 @@ class Instagram implements ExperimentsInterface
             }
 
             try {
-                $this->account->getAccountFamily();
+                $response = $this->account->getAccountFamily();
+                $this->request($response->getCurrentAccount()->getProfilePicUrl())->getRawResponse();
                 if (self::$useBloksLogin === true) {
-                    $this->internal->getBloksSaveCredentialsScreen();
+                    $response = $this->internal->getBloksSaveCredentialsScreen();
                     sleep(mt_rand(1, 3));
                 }
                 //$this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', 'viewer', false, 'pando');
@@ -3612,6 +3611,7 @@ class Instagram implements ExperimentsInterface
                 $this->people->getBootstrapUsers();
                 $this->settings->set('salt_ids', '332016926,332019702,332008904');
                 $this->media->getBlockedMedia();
+                $this->story->getInjectedStories([$this->account_id], $traySessionId);
                 $this->internal->sendGraph('279018452917733073575656047369', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
                 $this->reel->discover();
                 $this->people->getInfoById($this->account_id);

@@ -161,30 +161,44 @@ class Client
     /**
      * Total time elapsed.
      *
-     * @var string
+     * @var int
      */
     public $totalTime = 0;
 
     /**
      * Total Bytes received.
      *
-     * @var string
+     * @var int
      */
     public $totalBytes = 0;
 
     /**
      * Bytes received in the latest response.
      *
-     * @var string
+     * @var int
      */
     public $bandwidthB = 0;
 
     /**
      * Time elapsed in the latest response.
      *
-     * @var string
+     * @var int
      */
     public $bandwidthM = 0;
+
+    /**
+     * CM Latency.
+     *
+     * @var int
+     */
+    public $latency = -1.000;
+
+    /**
+     * CM Latency request counter.
+     *
+     * @var int
+     */
+    protected $_latencyRequestCounter = 0;
 
     /**
      * IG WWW Claim.
@@ -1232,11 +1246,21 @@ class Client
         }
 
         $this->bandwidthM = ceil(1000 * (microtime(true) - $start));
-        $this->bandwidthB = $response->getHeaderLine('Content-Length');
+        $this->bandwidthB = intval($response->getHeaderLine('Content-Length'));
 
         if ($this->bandwidthB >= 50000 && $this->bandwidthM >= 50) {
             $this->totalTime += $this->bandwidthM;
             $this->totalBytes += $this->bandwidthB;
+        }
+
+        $connectionQuality = $response->getHeaderLine('X-FB-Connection-Quality');
+        if ($connectionQuality !== '') {
+            $re = '/rtt=(\d+)/m';
+            preg_match_all($re, $connectionQuality, $matches, PREG_SET_ORDER, 0);
+            $rtt = intval($matches[0][1]);
+
+            $this->latency = ($this->_latencyRequestCounter < 1) ? number_format(($this->latency * -0.181818 + 0.181818 * $rtt), 3) : number_format((($this->latency * $this->_latencyRequestCounter * -0.181818 + $rtt) / ($this->_latencyRequestCounter * -0.181818 + 4.900000E-324)), 3);
+            $this->_latencyRequestCounter++;
         }
 
         return $response;

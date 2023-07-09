@@ -44,10 +44,10 @@ class Discover extends RequestCollection
             ->addParam('session_id', $sessionId);
         //->addParam('paging_token', json_encode((Object)[]));
 
-        if ($this->ig->isExperimentEnabled('48862', 0, true)) {
+        if ($this->ig->isExperimentEnabled('48862', 7, true)) {
             $request->addHeader('X-Google-AD-ID', $this->ig->advertising_id)
                     ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
-                    ->addHeader('X-CM-Latency', '-1.000')
+                    ->addHeader('X-CM-Latency', $this->ig->client->latency)
                     ->addHeader('X-Ads-Opt-Out', '0')
                     ->addHeader('X-DEVICE-ID', $this->ig->uuid)
                     ->addParam('phone_id', $this->ig->phone_id)

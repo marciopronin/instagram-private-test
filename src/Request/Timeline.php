@@ -244,7 +244,7 @@ class Timeline extends RequestCollection
             ->setRequestPriority(0)
             ->addHeader('X-Google-AD-ID', $this->ig->advertising_id)
             ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
-            ->addHeader('X-CM-Latency', '-1.000')
+            ->addHeader('X-CM-Latency', $this->ig->client->latency)
             ->addHeader('X-Ads-Opt-Out', '0')
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             //->addHeader('X-IG-Transfer-Encoding', 'chunked')

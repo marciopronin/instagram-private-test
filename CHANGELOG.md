@@ -1,3 +1,13 @@
+# Stable release v21.29.10
+## Date: 10/07/2023
+
+### Updates and fixes
+
+- **Internal:** Update `getMobileConfig()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+- **Direct:** Update `getInbox()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v21.29.9
 ## Date: 10/07/2023
 

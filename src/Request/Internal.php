@@ -1548,7 +1548,6 @@ class Internal extends RequestCollection
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
                 ->addPost('query_hash', '3fc28452c5d0b042ed937552b15e8947c292067a6a04ad28400647c40a824544')
-                ->addPost('ts', time())
                 ->addPost('family_device_id', strtoupper($this->ig->phone_id));
         } else {
             $request
@@ -1561,7 +1560,9 @@ class Internal extends RequestCollection
 
         $result = $request->getResponse(new Response\MobileConfigResponse());
         $this->ig->isSessionless = false;
-        $this->_saveExperimentsMobileConfig($result->asArray());
+        if ($prelogin !== true) {
+            $this->_saveExperimentsMobileConfig($result->asArray());
+        }
 
         return $result;
     }

@@ -2274,8 +2274,6 @@ class Instagram implements ExperimentsInterface
                 'event_types'   => '[LOGIN]',
             ]);
 
-            $this->event->sendNavigation('cold_start', 'login', 'feed_timeline');
-
             $this->event->sendNavigationTabImpression(1);
             $this->event->sendScreenshotDetector();
             $this->event->sendNavigationTabImpression(0);
@@ -3071,7 +3069,6 @@ class Instagram implements ExperimentsInterface
                 $result = Signatures::generateSpecialUUID();
                 $phoneId = $result['phone_id'];
                 $this->settings->set('offline_experiment', $result['offline_experiment']);
-                $this->settings->set('nav_started', 'false');
                 $this->settings->set('phone_id', $phoneId);
             } else {
                 $this->settings->set('phone_id', $this->settings->get('device_id'));
@@ -3231,6 +3228,7 @@ class Instagram implements ExperimentsInterface
         // Calling this non-token API will put a csrftoken in our cookie
         // jar. We must do this before any functions that require a token.
 
+        $this->settings->set('nav_started', 'false');
         if ($this->getIsAndroid()) {
             // Start emulating batch requests with Pidgeon Raw Client Time.
             $this->client->startEmulatingBatch();
@@ -3575,6 +3573,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 try {
+                    $this->event->sendNavigation('cold_start', 'login', 'feed_timeline');
                     $this->settings->set('nav_started', 'true');
                     $this->internal->getLoomFetchConfig();
                 } catch (\Exception $e) {

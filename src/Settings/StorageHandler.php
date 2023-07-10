@@ -116,6 +116,8 @@ class StorageHandler
         '31167', // segmentation enabled
         '54280', // banyan/banyan (IBCShareSheetParams)
         '52645', // fdid_in_qp_context
+        '59489', // direct settings (batch_size)
+        '45863', // direct settings (no_pending_badge)
     ];
 
     /**

@@ -1,3 +1,13 @@
+# Stable release v21.29.11
+## Date: 10/07/2023
+
+### Updates and fixes
+
+- **People:** Update `getSharePrefill()`
+- **Direct:** Update `getInbox()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v21.29.10
 ## Date: 10/07/2023
 

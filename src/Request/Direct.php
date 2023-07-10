@@ -41,7 +41,6 @@ class Direct extends RequestCollection
         $cursorId = null,
         $seqId = null,
         $limit = 20,
-        $threadMessageLimit = 10,
         $prefetch = false,
         $filter = 'all',
         $fetchReason = null)
@@ -79,8 +78,8 @@ class Direct extends RequestCollection
         if ($seqId !== null) {
             $request->addParam('seq_id', $seqId);
         }
-        if ($threadMessageLimit !== null) {
-            $request->addParam('thread_message_limit', $threadMessageLimit);
+        if ($fetchReason === 'initial_snapshot') {
+            $request->addParam('thread_message_limit', $this->ig->getExperimentParam('31748', 18, 20));
         }
 
         return $request->getResponse(new Response\DirectInboxResponse());

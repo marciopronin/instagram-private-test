@@ -1,3 +1,10 @@
+# Stable release v21.29.14
+## Date: 12/07/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `isExperimentEnabled()`
+
 # Stable release v21.29.13
 ## Date: 12/07/2023
 

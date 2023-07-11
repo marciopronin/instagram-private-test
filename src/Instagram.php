@@ -4120,17 +4120,23 @@ class Instagram implements ExperimentsInterface
      * @param string $experiment
      * @param string $param
      * @param bool   $default
+     * @param bool   $useDefault
      *
      * @return bool
      */
     public function isExperimentEnabled(
         $experiment,
         $param,
-        $default = false)
+        $default = false,
+        $useDefault = false)
     {
-        return isset($this->experiments[$experiment][$param])
-            ? in_array($this->experiments[$experiment][$param], ['enabled', 'true', '1'])
-            : $default;
+        if ($useDefault === false) {
+            return isset($this->experiments[$experiment][$param])
+                ? in_array($this->experiments[$experiment][$param], ['enabled', 'true', '1'])
+                : $default;
+        } else {
+            return $default;
+        }
     }
 
     /**

@@ -118,7 +118,8 @@ class StorageHandler
         '52645', // fdid_in_qp_context
         '59489', // direct settings (batch_size)
         '45863', // direct settings (no_pending_badge)
-        '31748', // direct settings (thread_message_limit)
+        '26104', // direct settings (thread_message_limit)
+        '41171', // igd_active_tray (suggestions_enabled, suggested_followers_limit)
     ];
 
     /**

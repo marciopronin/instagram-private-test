@@ -2161,6 +2161,18 @@ class Instagram implements ExperimentsInterface
 
                                             throw $e;
                                         }
+                                        $msg = "The username you entered doesn't appear to belong to an account. Please check your username and try again.";
+                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                            $loginResponse = new Response\LoginResponse([
+                                                'error_type'    => 'invalid_username',
+                                                'status'        => 'fail',
+                                                'message'       => $msg,
+                                            ]);
+                                            $e = new \InstagramAPI\Exception\InvalidUserException(sprintf('%s If the username exists, it is very likely the IP used is flagged.', $msg));
+                                            $e->setResponse($loginResponse);
+
+                                            throw $e;
+                                        }
 
                                         throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
                                     } else {
@@ -3855,6 +3867,10 @@ class Instagram implements ExperimentsInterface
                         }
                     } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
                         // This can have EmptyResponse, and that's ok.
+                    } catch (\Exception $e) {
+                        if (isset($e->getResponse()->asArray()['require_login'])) {
+                            return $this->_login($this->username, $this->password, true, $appRefreshInterval);
+                        }
                     }
                     $feed = $this->timeline->getTimelineFeed(null, [
                         'is_pull_to_refresh' => $isSessionExpired ? null : mt_rand(1, 3) < 3,
@@ -3902,7 +3918,7 @@ class Instagram implements ExperimentsInterface
 
                     try {
                         $this->people->getSharePrefill();
-                        $this->people->getRecentActivityInbox();
+                        //$this->people->getRecentActivityInbox();
                     } catch (\Exception $e) {
                         //pass
                     }
@@ -3920,7 +3936,7 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     //$this->people->getSharePrefill();
-                    $this->people->getRecentActivityInbox();
+                    //$this->people->getRecentActivityInbox();
                     $this->internal->writeSupportedCapabilities();
                     $this->people->getInfoById($this->account_id);
                     //$this->internal->getDeviceCapabilitiesDecisions();
@@ -3991,6 +4007,10 @@ class Instagram implements ExperimentsInterface
                     }
                 } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
                     // This can have EmptyResponse, and that's ok.
+                } catch (\Exception $e) {
+                    if (isset($e->getResponse()->asArray()['require_login'])) {
+                        return $this->_login($this->username, $this->password, true, $appRefreshInterval);
+                    }
                 }
             }
 
@@ -4119,17 +4139,23 @@ class Instagram implements ExperimentsInterface
      * @param string $experiment
      * @param string $param
      * @param mixed  $default
+     * @param bool   $useDefault
      *
      * @return mixed
      */
     public function getExperimentParam(
         $experiment,
         $param,
-        $default = null)
+        $default = null,
+        $useDefault = false)
     {
-        return isset($this->experiments[$experiment][$param])
-            ? $this->experiments[$experiment][$param]
-            : $default;
+        if ($useDefault === false) {
+            return isset($this->experiments[$experiment][$param])
+                ? $this->experiments[$experiment][$param]
+                : $default;
+        } else {
+            return $default;
+        }
     }
 
     /**

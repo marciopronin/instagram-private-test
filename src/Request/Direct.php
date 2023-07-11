@@ -79,7 +79,7 @@ class Direct extends RequestCollection
             $request->addParam('seq_id', $seqId);
         }
         if ($fetchReason === 'initial_snapshot') {
-            $request->addParam('thread_message_limit', $this->ig->getExperimentParam('31748', 18, 20));
+            $request->addParam('thread_message_limit', $this->ig->getExperimentParam('26104', 1, 10, true));
         }
 
         return $request->getResponse(new Response\DirectInboxResponse());
@@ -273,9 +273,13 @@ class Direct extends RequestCollection
      */
     public function getPresences()
     {
-        return $this->ig->request('direct_v2/get_presence/')
-            ->addParam('suggested_followers_limit', '100')
-            ->getResponse(new Response\PresencesResponse());
+        $request = $this->ig->request('direct_v2/get_presence/');
+
+        if ($this->ig->isExperimentEnabled('41171', 1, false)) {
+            $request->addParam('suggested_followers_limit', $this->ig->getExperimentParam('41171', 4, 0));
+        }
+
+        return $request->getResponse(new Response\PresencesResponse());
     }
 
     /**

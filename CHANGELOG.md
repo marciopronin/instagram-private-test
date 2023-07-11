@@ -1,3 +1,13 @@
+# Stable release v21.29.12
+## Date: 11/07/2023
+
+### Updates and fixes
+
+- **Direct:** Update `getPresences`
+- **People:** Update `getSharePrefill()`
+- **Instagram:** Update `_login()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+
 # Stable release v21.29.11
 ## Date: 10/07/2023
 

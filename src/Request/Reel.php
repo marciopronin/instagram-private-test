@@ -53,6 +53,7 @@ class Reel extends RequestCollection
         $request = $this->ig->request('clips/discover/')
             ->setSignedPost(false)
             //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('should_refetch_chaining_media', 'false')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('server_driven_cache_config', json_encode(
                 [

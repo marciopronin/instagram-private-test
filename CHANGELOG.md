@@ -1,3 +1,11 @@
+# Stable release v21.29.13
+## Date: 12/07/2023
+
+### Updates and fixes
+
+- **Reel:** Update `discover()`
+- **Direct:** Update `getInbox()`
+
 # Stable release v21.29.12
 ## Date: 11/07/2023
 

@@ -72,7 +72,7 @@ class Direct extends RequestCollection
         if ($batchSize !== null) {
             $request->addParam('batch_size', $batchSize);
         }
-        if ($this->ig->isExperimentEnabled('45863', 0, false)) {
+        if ($this->ig->isExperimentEnabled('45863', 0, false, true)) {
             $request->addParam('no_pending_badge', 'true');
         }
         if ($seqId !== null) {

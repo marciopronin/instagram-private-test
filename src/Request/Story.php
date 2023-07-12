@@ -371,7 +371,7 @@ class Story extends RequestCollection
             ->addPost('is_ad_pod_enabled', 'true')
             ->addPost('battery_level', $this->ig->getBatteryLevel())
             ->addPost('tray_session_id', $traySessionId)
-            ->addPost('viewer_session_id', md5($traySessionId))
+            ->addPost('viewer_session_id', $traySessionId)
             ->addPost('reel_position', '0')
             ->addPost('is_charging', $this->ig->getIsDeviceCharging())
             ->addPost('will_sound_on', (int) $this->ig->getSoundEnabled())

@@ -1575,9 +1575,25 @@ class People extends RequestCollection
     public function getSharePrefill(
         $nullState = false)
     {
+        $views = [
+            'reshare_share_sheet',
+            'direct_user_search_keypressed',
+            'story_share_sheet',
+            'direct_user_search_nullstate',
+            'direct_inbox_active_now',
+            'forwarding_recipient_sheet',
+            'call_recipients',
+            'reels_share_sheet',
+            'direct_ibc_inbox_discovery',
+        ];
+
+        if ($this->ig->isExperimentEnabled('56721', 0, false) !== true) {
+            unset($views[7]);
+        }
+
         return $this->ig->request('banyan/banyan/')
             ->addParam('is_private_share', false)
-            ->addParam('views', ($nullState) ? '["direct_ibc_nullstate"]' : '["reshare_share_sheet","direct_user_search_keypressed","story_share_sheet","direct_user_search_nullstate","direct_inbox_active_now","forwarding_recipient_sheet","call_recipients","direct_ibc_inbox_discovery"]')
+            ->addParam('views', ($nullState) ? '["direct_ibc_nullstate"]' : json_encode(array_values($views)))
             ->addParam('IBCShareSheetParams', json_encode(['size' => max($this->ig->getExperimentParam('54280', 2, 5), (int) $this->ig->getExperimentParam('54280', 5, 3))]))
             ->addParam('is_real_time', false)
             ->getResponse(new Response\SharePrefillResponse());

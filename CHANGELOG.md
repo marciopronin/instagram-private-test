@@ -1,3 +1,12 @@
+# Stable release v21.29.15
+## Date: 12/07/2023
+
+### Updates and fixes
+
+- **People:** Update `getSharePrefill()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS()`
+- **Story:** Update `getInjectedStories()`
+
 # Stable release v21.29.14
 ## Date: 12/07/2023
 

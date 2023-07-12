@@ -117,9 +117,10 @@ class StorageHandler
         '54280', // banyan/banyan (IBCShareSheetParams)
         '52645', // fdid_in_qp_context
         '59489', // direct settings (batch_size)
-        '45863', // direct settings (no_pending_badge)
+        '45863', // direct settings (no_pending_badge) 0x8107C0000012F7
         '26104', // direct settings (thread_message_limit)
         '41171', // igd_active_tray (suggestions_enabled, suggested_followers_limit)
+        '56721', // banyan/banyan (views) 0x810DA0000023D2
     ];
 
     /**

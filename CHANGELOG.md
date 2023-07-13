@@ -1,3 +1,12 @@
+# Stable release v21.29.17
+## Date: 13/07/2023
+
+### Updates and fixes
+
+- **Story:** Update `getInjectedStories()`
+- **Direct:** Update `getInbox()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v21.29.16
 ## Date: 13/07/2023
 

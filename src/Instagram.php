@@ -380,6 +380,13 @@ class Instagram implements ExperimentsInterface
     public $soundEnabled = false;
 
     /**
+     * Camera enabled.
+     *
+     * @var bool
+     */
+    public $cameraEnabled = false;
+
+    /**
      * Device charging.
      *
      * @var bool
@@ -1224,6 +1231,27 @@ class Instagram implements ExperimentsInterface
         $value)
     {
         $this->soundEnabled = $value;
+    }
+
+    /**
+     * Get camera enabled.
+     *
+     * @return int
+     */
+    public function getCameraEnabled()
+    {
+        return intval($this->cameraEnabled);
+    }
+
+    /**
+     * Set camera enabled.
+     *
+     * @param bool $value.
+     */
+    public function setCameraEnabled(
+        $value)
+    {
+        $this->cameraEnabled = $value;
     }
 
     /**
@@ -3867,10 +3895,6 @@ class Instagram implements ExperimentsInterface
                         }
                     } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
                         // This can have EmptyResponse, and that's ok.
-                    } catch (\Exception $e) {
-                        if (isset($e->getResponse()->asArray()['require_login'])) {
-                            return $this->_login($this->username, $this->password, true, $appRefreshInterval);
-                        }
                     }
                     $feed = $this->timeline->getTimelineFeed(null, [
                         'is_pull_to_refresh' => $isSessionExpired ? null : mt_rand(1, 3) < 3,
@@ -4007,10 +4031,6 @@ class Instagram implements ExperimentsInterface
                     }
                 } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
                     // This can have EmptyResponse, and that's ok.
-                } catch (\Exception $e) {
-                    if (isset($e->getResponse()->asArray()['require_login'])) {
-                        return $this->_login($this->username, $this->password, true, $appRefreshInterval);
-                    }
                 }
             }
 

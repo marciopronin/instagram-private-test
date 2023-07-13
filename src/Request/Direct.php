@@ -68,10 +68,6 @@ class Direct extends RequestCollection
         if ($filter !== null) {
             $request->addParam('fetch_reason', $fetchReason);
         }
-        $batchSize = $this->ig->getExperimentParam('59489', 1, null);
-        if ($batchSize !== null) {
-            $request->addParam('batch_size', $batchSize);
-        }
         if ($this->ig->isExperimentEnabled('45863', 0, false, true)) {
             $request->addParam('no_pending_badge', 'true');
         }
@@ -79,6 +75,10 @@ class Direct extends RequestCollection
             $request->addParam('seq_id', $seqId);
         }
         if ($fetchReason === 'initial_snapshot') {
+            $batchSize = $this->ig->getExperimentParam('59489', 1, null);
+            if ($batchSize !== null) {
+                $request->addParam('batch_size', $batchSize);
+            }
             $request->addParam('thread_message_limit', $this->ig->getExperimentParam('26104', 1, 10, true));
         }
 

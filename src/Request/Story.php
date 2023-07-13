@@ -354,7 +354,7 @@ class Story extends RequestCollection
             ->addHeader('X-Ads-Opt-Out', '0')
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             ->addPost('num_items_in_pool', '0')
-            ->addPost('has_camera_permission', '0')
+            ->addPost('has_camera_permission', $this->ig->getCameraEnabled())
             ->addPost('is_prefetch', 'true')
             ->addPost('is_ads_sensitive', 'false')
             ->addPost('is_carry_over_first_page', 'false')
@@ -380,7 +380,7 @@ class Story extends RequestCollection
             ->addPost('is_media_based_insertion_enabled', 'true')
             ->addPost('entry_point_index', ($entryIndex !== 0) ? strval($entryIndex) : '0')
             ->addPost('earliest_request_position', '0')
-            ->addPost('is_first_page', ($entryIndex !== 0) ? '0' : '1');
+            ->addPost('is_first_page', ($entryIndex !== 0) ? 'false' : 'true');
 
         return $request->getResponse(new Response\ReelsMediaResponse());
     }

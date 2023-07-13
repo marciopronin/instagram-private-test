@@ -1,3 +1,10 @@
+# Stable release v21.29.18
+## Date: 13/07/2023
+
+### Updates and fixes
+
+- **Push:** Update `_getFbns()`
+
 # Stable release v21.29.17
 ## Date: 13/07/2023
 

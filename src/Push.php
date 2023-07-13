@@ -157,24 +157,30 @@ class Push implements EventEmitterInterface
     /** @var Fbns\Auth */
     protected $_fbnsAuth;
 
+    /** @var bool */
+    protected $_register;
+
     /**
      * Push constructor.
      *
      * @param LoopInterface        $loop
      * @param Instagram            $instagram
      * @param LoggerInterface|null $logger
+     * @param mixed                $register
      *
      * @throws \RuntimeException
      */
     public function __construct(
         LoopInterface $loop,
         Instagram $instagram,
-        LoggerInterface $logger = null)
+        LoggerInterface $logger = null,
+        $register = true)
     {
         if (PHP_SAPI !== 'cli') {
             throw new \RuntimeException('The Push client can only run from the command line.');
         }
 
+        $this->_register = $register;
         $this->_instagram = $instagram;
         $this->_loop = $loop;
         $this->_logger = $logger;
@@ -245,10 +251,12 @@ class Push implements EventEmitterInterface
                 $this->_logger->error(sprintf('Failed to read FBNS token: %s', $e->getMessage()));
             }
             // Register the new token.
-            try {
-                $this->_instagram->push->register('mqtt', $token);
-            } catch (\Exception $e) {
-                $this->emit('error', [$e]);
+            if ($this->_register) {
+                try {
+                    $this->_instagram->push->register('mqtt', $token);
+                } catch (\Exception $e) {
+                    $this->emit('error', [$e]);
+                }
             }
             // Save the newly received token to the storage.
             // NOTE: We save it even if the registration failed, since we now

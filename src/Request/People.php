@@ -1591,12 +1591,16 @@ class People extends RequestCollection
             unset($views[7]);
         }
 
-        return $this->ig->request('banyan/banyan/')
+        $request = $this->ig->request('banyan/banyan/')
             ->addParam('is_private_share', false)
-            ->addParam('views', ($nullState) ? '["direct_ibc_nullstate"]' : json_encode(array_values($views)))
-            ->addParam('IBCShareSheetParams', json_encode(['size' => max($this->ig->getExperimentParam('54280', 2, 5), (int) $this->ig->getExperimentParam('54280', 5, 3))]))
-            ->addParam('is_real_time', false)
-            ->getResponse(new Response\SharePrefillResponse());
+            ->addParam('views', ($nullState) ? '["direct_ibc_nullstate"]' : json_encode(array_values($views)));
+
+        if ($this->ig->isExperimentEnabled('54280', 0, true)) {
+            $request->addParam('IBCShareSheetParams', json_encode(['size' => max($this->ig->getExperimentParam('54280', 2, 5), (int) $this->ig->getExperimentParam('54280', 5, 3))]));
+        }
+        $request->addParam('is_real_time', false);
+
+        return $request->getResponse(new Response\SharePrefillResponse());
     }
 
     /**

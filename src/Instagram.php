@@ -601,6 +601,13 @@ class Instagram implements ExperimentsInterface
     public $cdn_rmd = false;
 
     /**
+     * Is login flow.
+     *
+     * @var bool
+     */
+    public $isLoginFlow = false;
+
+    /**
      * Bloks info.
      *
      * @var array
@@ -2069,6 +2076,7 @@ class Instagram implements ExperimentsInterface
                                 if (isset($errorMap['event_category'])) {
                                     if ($errorMap['event_category'] === 'checkpoint') {
                                         $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentCheckpointsFlow');
+                                        $loginResponse = preg_replace('/challenge_context\\\\":\\\\[a-zA-Z0-9]/m', 'challenge_context\":\"\\', $loginResponse);
                                         $loginResponse = json_decode(stripslashes($loginResponse), true);
                                         if (isset($loginResponse['error'])) {
                                             $loginResponse = $loginResponse['error']['error_data'];
@@ -3455,6 +3463,8 @@ class Instagram implements ExperimentsInterface
             return null;
         }
 
+        $this->isLoginFlow = true;
+
         // SUPER IMPORTANT:
         //
         // STOP trying to ask us to remove this code section!
@@ -4067,6 +4077,7 @@ class Instagram implements ExperimentsInterface
         // cookies to the storage, to ensure that the storage doesn't miss them
         // in case something bad happens to PHP after this moment.
         $this->client->saveCookieJar();
+        $this->isLoginFlow = false;
 
         return null;
     }

@@ -1,3 +1,11 @@
+# Stable release v21.29.20
+## Date: 17/07/2023
+
+### Updates and fixes
+
+- **Constants:** Update to 291.1.0.34.111
+- **Client:** Update `api()`
+
 # Stable release v21.29.19
 ## Date: 15/07/2023
 

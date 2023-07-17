@@ -271,6 +271,104 @@ class Client
     protected $_ig_user_salt_ids = '';
 
     /**
+     * Mapped RUR values.
+     *
+     * @var array
+     */
+    protected $_mappedValues = [
+        'push/register'                 => null,
+        'launcher/mobileconfig'         => null,
+        'feed/timeline'                 => null,
+        'highlights_tray'               => null,
+        'media/blocked'                 => null,
+        'notifications/badge'           => null,
+        'scores/bootstrap'              => null,
+        'feed/user'                     => null,
+        'write_supported_capabilities'  => null,
+        '/users/'                       => null,
+        'share_to_fb_config'            => null,
+        'notes/get_notes'               => null,
+        'qp/batch_fetch'                => null,
+        'direct_v2/inbox'               => null,
+        'get_viewable_statuses'         => null,
+        'store_client_push_permissions' => null,
+    ];
+
+    /**
+     * Update on RUR values.
+     *
+     * @var array
+     */
+    protected $_loginMap = [
+        'push/register' => [
+            'devices/ndx/api/async_get_ndx_ig_steps',
+            'feed/timeline',
+            'feed/reels_tray',
+            'notifications/badge',
+            'loom/fetch_config',
+            'banyan/banyan',
+        ],
+        'launcher/mobileconfig' => [
+            'devices/ndx/api/async_get_ndx_ig_steps',
+            'feed/timeline',
+            'feed/reels_tray',
+            'notifications/badge',
+            'loom/fetch_config',
+            'banyan/banyan',
+        ],
+        'feed/timeline' => [
+            'feed/user/',
+            '/users/',
+            'highlights_tray',
+            'creator_info',
+            'scores/bootstrap',
+            'media/blocked/',
+            'write_supported_capabilities',
+        ],
+        'highlights_tray' => [
+            'batch_fetch',
+        ],
+        'media/blocked' => [
+            'user/share_to_fb_config',
+        ],
+        'notifications/badge' => [
+            'creator_info',
+            'direct_v2/get_presence',
+        ],
+        'scores/bootstrap' => [
+            'notes/get_notes',
+        ],
+        'feed/user' => [
+            'topical_explore',
+        ],
+        'write_supported_capabilities' => [
+            'direct_v2/inbox',
+        ],
+        '/users/' => [
+            'get_viewable_statuses',
+        ],
+        'share_to_fb_config' => [
+            'has_interop_upgraded',
+        ],
+        'notes/get_notes' => [
+            'get_presence_disabled',
+        ],
+        'qp/batch_fetch' => [
+            'store_client_push_permissions',
+        ],
+        'direct_v2/inbox' => [
+            'user_xposting_destination',
+            'process_contact_point_signals',
+        ],
+        'get_viewable_statuses' => [
+            'clips/discover',
+        ],
+        'store_client_push_permissions' => [
+            'banyan/banyan',
+        ],
+    ];
+
+    /**
      * Constructor.
      *
      * @param \InstagramAPI\Instagram $parent
@@ -1151,8 +1249,30 @@ class Client
                 $headers['set_headers']['IG-U-DS-USER-ID'] = $this->_parent->account_id;
             }
 
-            if ($this->_rur !== '' && ($this->_parent->isSessionless !== true)) {
-                $headers['set_headers']['IG-U-RUR'] = $this->_rur;
+            if ($this->_parent->isSessionless !== true) {
+                if ($this->_parent->isLoginFlow) {
+                    if (!in_array($request->getUri()->getPath(), ['/api/v1/zr/dual_tokens/', '/api/v1/multiple_accounts/get_account_family/', '/api/v1/bloks/apps/com.bloks.www.caa.login.save-credentials/', '/api/v1/push/register/', '/api/v1/launcher/mobileconfig/'])) {
+                        foreach ($this->_loginMap as $origin => $destination) {
+                            foreach ($destination as $key => $value) {
+                                if (str_contains($request->getUri(), $value)) {
+                                    if ($origin === 'push/register' || $origin === 'launcher/mobileconfig') {
+                                        if ($this->_mappedValues['push/register'] === null) {
+                                            $this->_mappedValues['push/register'] = $this->_mappedValues['launcher/mobileconfig'];
+                                        }
+                                    }
+                                    $headers['set_headers']['IG-U-RUR'] = $this->_mappedValues[$origin];
+                                    break 2;
+                                }
+                            }
+                        }
+                    } else {
+                        $headers['set_headers']['IG-U-RUR'] = $this->_parent->settings->get('rur');
+                    }
+                } else {
+                    if ($this->_rur !== '') {
+                        $headers['set_headers']['IG-U-RUR'] = $this->_rur;
+                    }
+                }
             }
 
             if ($this->_directRegionHint !== '') {
@@ -1223,15 +1343,24 @@ class Client
         if ($this->_mid !== '') {
             $this->_parent->settings->set('mid', $this->_mid);
         }
-        if ($this->_pigeonBatch !== true) {
+        if ($this->_shbid !== '') {
+            $this->_parent->settings->set('shbid', $this->_shbid);
+        }
+        if ($this->_shbts !== '') {
+            $this->_parent->settings->set('shbts', $this->_shbts);
+        }
+
+        if ($this->_parent->isLoginFlow) {
+            foreach ($this->_mappedValues as $key => $value) {
+                if (str_contains($request->getUri(), $key)) {
+                    if ($this->_rur !== '') {
+                        $this->_mappedValues[$key] = $this->_rur;
+                    }
+                }
+            }
+        } else {
             if ($this->_rur !== '') {
                 $this->_parent->settings->set('rur', $this->_rur);
-            }
-            if ($this->_shbid !== '') {
-                $this->_parent->settings->set('shbid', $this->_shbid);
-            }
-            if ($this->_shbts !== '') {
-                $this->_parent->settings->set('shbts', $this->_shbts);
             }
         }
 

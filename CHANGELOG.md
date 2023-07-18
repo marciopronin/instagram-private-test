@@ -1,3 +1,26 @@
+# Stable release v21.30.0
+## Date: 18/07/2023
+
+### New features
+
+- **Instagram:** Add `_processSuccesfulLoginResponse()`. Refactorization.
+- **Instagram:** Add `_parseLoginErrors()`. Refactorization.
+- **Instagram:** Add `_throwLoginException()`. Refactorization.
+- **Instagram:** Add `finishTwoFactorVerification()`. 2FA Bloks version.
+- **Instagram:** Add `getTwoFactorBloksScreen()`.
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Internal:** Update `getMobileConfig()`
+- **Client:** Update `api()`
+- **Response:** Update `LoginResponse`
+
+### Examples
+
+- **Example:** Add twoFactorLoginBloks
+- **Example:** Add twoFactorLoginCombined (legacy and bloks 2FA)
+
 # Stable release v21.29.20
 ## Date: 17/07/2023
 

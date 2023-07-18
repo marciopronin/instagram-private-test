@@ -26,6 +26,7 @@ use InstagramAPI\Response;
  * @method bool getHasPlacedOrders()
  * @method string getHelpUrl()
  * @method mixed getInvalidCredentials()
+ * @method bool getIsBloks()
  * @method bool getIsBusiness()
  * @method mixed getIsCallToActionEnabled()
  * @method bool getIsPrivate()
@@ -33,6 +34,7 @@ use InstagramAPI\Response;
  * @method bool getLock()
  * @method Model\User getLoggedInUser()
  * @method string getMacLoginNonce()
+ * @method string getMaskedCp()
  * @method mixed getMessage()
  * @method Model\Nametag getNametag()
  * @method int getNationalNumber()
@@ -45,6 +47,8 @@ use InstagramAPI\Response;
  * @method bool getShowInsightsTerms()
  * @method string getStatus()
  * @method int getTotalIgtvVideos()
+ * @method string getTwoFactorChallenge()
+ * @method string getTwoFactorContext()
  * @method Model\TwoFactorInfo getTwoFactorInfo()
  * @method mixed getTwoFactorRequired()
  * @method string getUsername()
@@ -68,6 +72,7 @@ use InstagramAPI\Response;
  * @method bool isHasPlacedOrders()
  * @method bool isHelpUrl()
  * @method bool isInvalidCredentials()
+ * @method bool isIsBloks()
  * @method bool isIsBusiness()
  * @method bool isIsCallToActionEnabled()
  * @method bool isIsPrivate()
@@ -75,6 +80,7 @@ use InstagramAPI\Response;
  * @method bool isLock()
  * @method bool isLoggedInUser()
  * @method bool isMacLoginNonce()
+ * @method bool isMaskedCp()
  * @method bool isMessage()
  * @method bool isNametag()
  * @method bool isNationalNumber()
@@ -87,6 +93,8 @@ use InstagramAPI\Response;
  * @method bool isShowInsightsTerms()
  * @method bool isStatus()
  * @method bool isTotalIgtvVideos()
+ * @method bool isTwoFactorChallenge()
+ * @method bool isTwoFactorContext()
  * @method bool isTwoFactorInfo()
  * @method bool isTwoFactorRequired()
  * @method bool isUsername()
@@ -110,6 +118,7 @@ use InstagramAPI\Response;
  * @method $this setHasPlacedOrders(bool $value)
  * @method $this setHelpUrl(string $value)
  * @method $this setInvalidCredentials(mixed $value)
+ * @method $this setIsBloks(bool $value)
  * @method $this setIsBusiness(bool $value)
  * @method $this setIsCallToActionEnabled(mixed $value)
  * @method $this setIsPrivate(bool $value)
@@ -117,6 +126,7 @@ use InstagramAPI\Response;
  * @method $this setLock(bool $value)
  * @method $this setLoggedInUser(Model\User $value)
  * @method $this setMacLoginNonce(string $value)
+ * @method $this setMaskedCp(string $value)
  * @method $this setMessage(mixed $value)
  * @method $this setNametag(Model\Nametag $value)
  * @method $this setNationalNumber(int $value)
@@ -129,6 +139,8 @@ use InstagramAPI\Response;
  * @method $this setShowInsightsTerms(bool $value)
  * @method $this setStatus(string $value)
  * @method $this setTotalIgtvVideos(int $value)
+ * @method $this setTwoFactorChallenge(string $value)
+ * @method $this setTwoFactorContext(string $value)
  * @method $this setTwoFactorInfo(Model\TwoFactorInfo $value)
  * @method $this setTwoFactorRequired(mixed $value)
  * @method $this setUsername(string $value)
@@ -152,6 +164,7 @@ use InstagramAPI\Response;
  * @method $this unsetHasPlacedOrders()
  * @method $this unsetHelpUrl()
  * @method $this unsetInvalidCredentials()
+ * @method $this unsetIsBloks()
  * @method $this unsetIsBusiness()
  * @method $this unsetIsCallToActionEnabled()
  * @method $this unsetIsPrivate()
@@ -159,6 +172,7 @@ use InstagramAPI\Response;
  * @method $this unsetLock()
  * @method $this unsetLoggedInUser()
  * @method $this unsetMacLoginNonce()
+ * @method $this unsetMaskedCp()
  * @method $this unsetMessage()
  * @method $this unsetNametag()
  * @method $this unsetNationalNumber()
@@ -171,6 +185,8 @@ use InstagramAPI\Response;
  * @method $this unsetShowInsightsTerms()
  * @method $this unsetStatus()
  * @method $this unsetTotalIgtvVideos()
+ * @method $this unsetTwoFactorChallenge()
+ * @method $this unsetTwoFactorContext()
  * @method $this unsetTwoFactorInfo()
  * @method $this unsetTwoFactorRequired()
  * @method $this unsetUsername()
@@ -218,5 +234,9 @@ class LoginResponse extends Response
         'challenge'                     => 'Model\Challenge',
         'action'                        => 'string',
         'mac_login_nonce'               => 'string',
+        'two_factor_challenge'          => 'string', // custom
+        'two_factor_context'            => 'string', // custom
+        'masked_cp'                     => 'string', // custom
+        'is_bloks'                      => 'bool',   // custom
     ];
 }

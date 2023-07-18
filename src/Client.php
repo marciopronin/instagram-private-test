@@ -1386,10 +1386,12 @@ class Client
         if ($connectionQuality !== '') {
             $re = '/rtt=(\d+)/m';
             preg_match_all($re, $connectionQuality, $matches, PREG_SET_ORDER, 0);
-            $rtt = intval($matches[0][1]);
+            if ($matches) {
+                $rtt = intval($matches[0][1]);
 
-            $this->latency = ($this->_latencyRequestCounter < 1) ? number_format(($this->latency * -0.181818 + 0.181818 * $rtt), 3) : number_format((($this->latency * $this->_latencyRequestCounter * -0.181818 + $rtt) / ($this->_latencyRequestCounter * -0.181818 + 4.900000E-324)), 3);
-            $this->_latencyRequestCounter++;
+                $this->latency = ($this->_latencyRequestCounter < 1) ? number_format(($this->latency * -0.181818 + 0.181818 * $rtt), 3) : number_format((($this->latency * $this->_latencyRequestCounter * -0.181818 + $rtt) / ($this->_latencyRequestCounter * -0.181818 + 4.900000E-324)), 3);
+                $this->_latencyRequestCounter++;
+            }
         }
 
         return $response;

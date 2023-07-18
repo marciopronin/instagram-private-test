@@ -2046,199 +2046,100 @@ class Instagram implements ExperimentsInterface
                 $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
 
                 if (is_array($loginResponseWithHeaders)) {
-                    $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\exception_message\\'), 0, -2);
+                    $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
 
-                    foreach ($offsets as $offset) {
-                        if (isset($loginResponseWithHeaders[$offset])) {
-                            $loginResponseWithHeaders = $loginResponseWithHeaders[$offset];
-                        } else {
-                            break;
-                        }
-                    }
+                    $re = '/(com\.bloks\.www\.two_factor_login\.\w+)/m';
+                    preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+                    if ($matches) {
+                        $endpoint = $matches[0][1];
+                        $responseArr = $response->asArray();
+                        $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
 
-                    $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
-                    foreach ($errorMap as $key => $value) {
-                        if (!is_array($errorMap[$key])) {
-                            $errorMap[stripslashes($key)] = stripslashes($value);
-                        }
-                        unset($errorMap[$key]);
-                    }
-
-                    if (isset($errorMap['exception_message'])) {
-                        switch ($errorMap['exception_message']) {
-                            case 'Login Error: An unexpected error occurred. Please try logging in again.':
-                                throw new \InstagramAPI\Exception\UnexpectedLoginErrorException($errorMap['exception_message']);
+                        foreach ($mainBloks as $mainBlok) {
+                            if (str_contains($mainBlok, 'two_step_verification_context') && str_contains($mainBlok, 'flow_source')) {
+                                $firstDataBlok = $mainBlok;
                                 break;
-                            case 'Incorrect Password: The password you entered is incorrect. Please try again.':
-                                throw new \InstagramAPI\Exception\IncorrectPasswordException($errorMap['exception_message']);
+                            }
+                        }
+
+                        $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+                        $offsets = array_slice($this->bloks->findOffsets($parsed, 'two_step_verification_context'), 0, -2);
+
+                        foreach ($offsets as $offset) {
+                            if (isset($parsed[$offset])) {
+                                $parsed = $parsed[$offset];
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $twoFactorMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                        $this->bloksInfo = array_merge($twoFactorMap, $this->bloksInfo);
+
+                        // 2FA Bloks
+                        $response = $this->getTwoFactorBloksScreen($endpoint);
+
+                        $responseArr = $response->asArray();
+                        $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+
+                        foreach ($mainBloks as $mainBlok) {
+                            if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'flow_source') && str_contains($mainBlok, 'two_step_verification_context')) {
+                                $firstDataBlok = $mainBlok;
+                                break;
+                            }
+                        }
+
+                        $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+                        $offsets = array_slice($this->bloks->findOffsets($parsed, 'two_step_verification_context'), 0, -2);
+
+                        foreach ($offsets as $offset) {
+                            if (isset($parsed[$offset])) {
+                                $parsed = $parsed[$offset];
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $twoFactorMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                        $this->bloksInfo = array_merge($twoFactorMap, $this->bloksInfo);
+
+                        $twoFactorResponse = [
+                            'two_factor_context'    => $this->bloksInfo['two_step_verification_context'],
+                            'two_factor_required'   => true,
+                            'is_bloks'              => true,
+                        ];
+
+                        switch ($endpoint) {
+                            case 'com.bloks.www.two_factor_login.enter_totp_code':
+                                $twoFactorResponse['two_factor_challenge'] = 'totp';
+
+                                return new Response\LoginResponse($twoFactorResponse);
+                                break;
+                            case 'com.bloks.www.two_factor_login.enter_backup_code':
+                                $twoFactorResponse['two_factor_challenge'] = 'backup';
+
+                                return new Response\LoginResponse($twoFactorResponse);
+                                break;
+                            case 'com.bloks.www.two_factor_login.enter_sms_code':
+                                $twoFactorResponse['two_factor_challenge'] = 'sms';
+                                $twoFactorResponse['masked_cp'] = $this->bloksInfo['masked_cp'];
+
+                                return new Response\LoginResponse($twoFactorResponse);
+                                break;
+                            case 'com.bloks.www.two_factor_login.enter_email_code':
+                                $twoFactorResponse['two_factor_challenge'] = 'email';
+
+                                return new Response\LoginResponse($twoFactorResponse);
                                 break;
                             default:
-                                if (isset($errorMap['event_category'])) {
-                                    if ($errorMap['event_category'] === 'checkpoint') {
-                                        $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentCheckpointsFlow');
-                                        $loginResponse = preg_replace('/challenge_context\\\\":\\\\[a-zA-Z0-9]/m', 'challenge_context\":\"\\', $loginResponse);
-                                        $loginResponse = json_decode(stripslashes($loginResponse), true);
-                                        if (isset($loginResponse['error'])) {
-                                            $loginResponse = $loginResponse['error']['error_data'];
-                                        }
-                                        $loginResponse = new Response\CheckpointResponse($loginResponse);
-
-                                        $e = new \InstagramAPI\Exception\Checkpoint\ChallengeRequiredException();
-                                        $e->setResponse($loginResponse);
-
-                                        throw $e;
-                                    /*
-                                    $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\error_user_msg\\'), 0, -2);
-
-                                    foreach ($offsets as $offset) {
-                                        if (isset($loginResponseWithHeaders[$offset])) {
-                                            $loginResponseWithHeaders = $loginResponseWithHeaders[$offset];
-                                        } else {
-                                            break;
-                                        }
-                                    }
-
-                                    $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
-                                    foreach ($errorMap as $key => $value) {
-                                        if (!is_array($errorMap[$key])) {
-                                            $errorMap[stripslashes($key)] = stripslashes($value);
-                                        }
-                                        unset($errorMap[$key]);
-                                    }
-                                    */
-                                    } elseif ($errorMap['event_category'] === 'two_fac') {
-                                        $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentTwoFactorAuthFlow');
-                                        $loginResponse = json_decode(stripslashes($loginResponse), true);
-                                        $loginResponse = new Response\LoginResponse($loginResponse);
-
-                                        return $loginResponse;
-                                    } elseif ($errorMap['event_category'] === 'login_home_page_interaction') {
-                                        $msg = "You can't use Instagram because your account didn't follow our Community Guidelines. This decision can't be reversed either because we've already reviewed it, or because 180 days have passed since your account was disabled";
-                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
-                                            $loginResponse = new Response\LoginResponse([
-                                                'error_type'    => 'inactive_user',
-                                                'status'        => 'fail',
-                                                'message'       => $msg,
-                                            ]);
-                                            $e = new \InstagramAPI\Exception\AccountDisabledException($msg);
-                                            $e->setResponse($loginResponse);
-
-                                            throw $e;
-                                        }
-                                        $msg = 'Please wait a few minutes before you try again';
-                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
-                                            $loginResponse = new Response\LoginResponse([
-                                                'error_type'    => 'too_many_attempts',
-                                                'status'        => 'fail',
-                                                'message'       => $msg,
-                                            ]);
-                                            $e = new \InstagramAPI\Exception\TooManyAttemptsException($msg);
-                                            $e->setResponse($loginResponse);
-
-                                            throw $e;
-                                        }
-                                        $msg = "We can't find an account with ";
-                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
-                                            $loginResponse = new Response\LoginResponse([
-                                                'error_type'    => 'invalid_username',
-                                                'status'        => 'fail',
-                                                'message'       => sprintf('%s%s', $msg, $username),
-                                            ]);
-                                            $e = new \InstagramAPI\Exception\InvalidUsernameException(sprintf('%s%s', $msg, $username));
-                                            $e->setResponse($loginResponse);
-
-                                            throw $e;
-                                        }
-                                        $msg = 'An unexpected error occurred. Please try logging in again.';
-                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
-                                            $loginResponse = new Response\LoginResponse([
-                                                'error_type'    => 'unexpected_login_error',
-                                                'status'        => 'fail',
-                                                'message'       => $msg,
-                                            ]);
-                                            $e = new \InstagramAPI\Exception\UnexpectedLoginErrorException($msg);
-                                            $e->setResponse($loginResponse);
-
-                                            throw $e;
-                                        }
-                                        $msg = 'You requested to delete';
-                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
-                                            $loginResponse = new Response\LoginResponse([
-                                                'error_type'    => 'account_deletion_requested',
-                                                'status'        => 'fail',
-                                                'message'       => sprintf('You requested to delete your account: %s', $username),
-                                            ]);
-                                            $e = new \InstagramAPI\Exception\AccountDeletionException(sprintf('You requested to delete your account: %s', $username));
-                                            $e->setResponse($loginResponse);
-
-                                            throw $e;
-                                        }
-                                        $msg = 'You entered the wrong code too many times. Wait a few minutes and try again.';
-                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
-                                            $loginResponse = new Response\LoginResponse([
-                                                'error_type'    => 'too_many_attempts_wrong_code',
-                                                'status'        => 'fail',
-                                                'message'       => $msg,
-                                            ]);
-                                            $e = new \InstagramAPI\Exception\TooManyAttemptsException('You entered the wrong code too many times. Wait a few minutes and try again.');
-                                            $e->setResponse($loginResponse);
-
-                                            throw $e;
-                                        }
-                                        $msg = 'Sorry, there was a problem with your request.';
-                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
-                                            $loginResponse = new Response\LoginResponse([
-                                                'error_type'    => 'server_or_ip_error',
-                                                'status'        => 'fail',
-                                                'message'       => $msg,
-                                            ]);
-                                            $e = new \InstagramAPI\Exception\InstagramException($msg);
-                                            $e->setResponse($loginResponse);
-
-                                            throw $e;
-                                        }
-                                        $msg = "The username you entered doesn't appear to belong to an account. Please check your username and try again.";
-                                        if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
-                                            $loginResponse = new Response\LoginResponse([
-                                                'error_type'    => 'invalid_username',
-                                                'status'        => 'fail',
-                                                'message'       => $msg,
-                                            ]);
-                                            $e = new \InstagramAPI\Exception\InvalidUserException(sprintf('%s If the username exists, it is very likely the IP used is flagged.', $msg));
-                                            $e->setResponse($loginResponse);
-
-                                            throw $e;
-                                        }
-
-                                        throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
-                                    } else {
-                                        throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
-                                    }
-                                } else {
-                                    throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
-                                }
+                                throw new \InstagramAPI\Exception\InstagramException('Two factor method not implemented yet.');
                         }
                     }
+
+                    $this->_throwLoginException($response, $errorMap);
                 }
 
-                $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
-                $loginResponse = new Response\LoginResponse(json_decode($loginResponseWithHeaders['login_response'], true));
-                $headers = json_decode($loginResponseWithHeaders['headers'], true);
-
-                $this->settings->set('public_key', $headers['IG-Set-Password-Encryption-Pub-Key']);
-                $this->settings->set('public_key_id', $headers['IG-Set-Password-Encryption-Key-Id']);
-                $this->settings->set('authorization_header', $headers['IG-Set-Authorization']);
-
-                if (isset($headers['ig-set-ig-u-rur']) && $headers['ig-set-ig-u-rur'] !== '') {
-                    $this->settings->set('rur', $headers['ig-set-ig-u-rur']);
-                }
-
-                if ($loginResponse->getLoggedInUser()->getUsername() === 'Instagram User') {
-                    throw new \InstagramAPI\Exception\AccountDisabledException('Account has been suspended.');
-                }
-                if ($loginResponse->getLoggedInUser()->getIsBusiness() !== null) {
-                    $this->settings->set('business_account', $loginResponse->getLoggedInUser()->getIsBusiness());
-                }
+                $loginResponse = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, $appRefreshInterval);
             } else {
                 try {
                     $request = $this->request('accounts/login/')
@@ -2462,6 +2363,37 @@ class Instagram implements ExperimentsInterface
                     //'waterfall_id'                      => $this->loginWaterfallId,
                     'screen_id'                         => intval($this->bloksInfo['screen_id'][1]),
                     'INTERNAL__latency_qpl_instance_id' => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Send login text input typy ahead.
+     *
+     * @param string $endpoint Endpoint.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getTwoFactorBloksScreen(
+        $endpoint)
+    {
+        return $this->request("bloks/apps/{$endpoint}/")
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'server_params'         => [
+                    'two_step_verification_context' => $this->bloksInfo['two_step_verification_context'],
+                    'INTERNAL_INFRA_THEME'          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    'flow_source'                   => $this->bloksInfo['flow_source'],
+                    'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2900,6 +2832,78 @@ class Instagram implements ExperimentsInterface
         ->addPost('trusted_notification_polling_nonces', json_encode([$pollingNonce]))
         //->addPost('_csrftoken', $this->client->getToken())
         ->getResponse(new Response\TwoFactorNotificationStatusResponse());
+    }
+
+    /**
+     * Finish a two-factor authenticated login (Bloks version).
+     *
+     * This function finishes a two-factor challenge that was provided by the
+     * regular `login()` function. If you successfully answer their challenge,
+     * you will be logged in after this function call.
+     *
+     * @param string $username         Your Instagram username used for login.
+     *                                 Email and phone aren't allowed here.
+     * @param string $password         Your Instagram password.
+     * @param string $challenge        2FA challenge type.
+     * @param string $verificationCode Verification code.
+     * @param bool   $trustDevice      If you want to trust the used Device ID.
+     * @param mixed  $context
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\LoginResponse
+     */
+    public function finishTwoFactorVerification(
+        $username,
+        $password,
+        $context,
+        $challenge,
+        $verificationCode,
+        $trustDevice = true)
+    {
+        if (empty($verificationCode)) {
+            throw new \InvalidArgumentException('You must provide a verification code and two-factor identifier to finishTwoFactorLogin().');
+        }
+
+        // Remove all whitespace from the verification code.
+        $verificationCode = preg_replace('/\s+/', '', $verificationCode);
+
+        $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.verify_code.async/')
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'auth_secure_device_id'         => '',
+                    'machine_id'                    => $this->settings->get('mid'),
+                    'code'                          => $verificationCode,
+                    'should_trust_device'           => intval($trustDevice),
+                    'family_device_id'              => $this->phone_id,
+                    'device_id'                     => $this->device_id,
+                ],
+                'server_params'         => [
+                    'challenge'                                     => $challenge,
+                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1] : '',
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1] : '',
+                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+
+        $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+        $this->_throwLoginException($response, $errorMap);
+        $response = $this->_processSuccesfulLoginResponse($response, 1800);
+        //$this->_updateLoginState($response);
+        //$this->_sendLoginFlow(true, $appRefreshInterval);
+
+        return $response;
     }
 
     /**
@@ -4143,6 +4147,277 @@ class Instagram implements ExperimentsInterface
         $this->client->saveCookieJar();
 
         return $response;
+    }
+
+    /**
+     * Process successful login response (Bloks).
+     *
+     * @param string $loginResponseWithHeaders Login response in JSON format.
+     * @param int    $appRefreshInterval       How frequently `login()` should act
+     *                                         like an Instagram app that's been
+     *                                         closed and reopened and needs to
+     *                                         "refresh its state", by asking for
+     *                                         extended account state details.
+     *                                         Default: After `1800` seconds, meaning
+     *                                         `30` minutes after the last
+     *                                         state-refreshing `login()` call.
+     *                                         This CANNOT be longer than `6` hours.
+     *                                         Read `_sendLoginFlow()`! The shorter
+     *                                         your delay is the BETTER. You may even
+     *                                         want to set it to an even LOWER value
+     *                                         than the default 30 minutes!
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\AccountDisabledException
+     *
+     * @return \InstagramAPI\Response\LoginResponse
+     *
+     * @see Instagram::login()
+     */
+    protected function _processSuccesfulLoginResponse(
+        $loginResponseWithHeaders,
+        $appRefreshInterval = 1800)
+    {
+        $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
+        $loginResponse = new Response\LoginResponse(json_decode($loginResponseWithHeaders['login_response'], true));
+        $headers = json_decode($loginResponseWithHeaders['headers'], true);
+
+        $this->settings->set('public_key', $headers['IG-Set-Password-Encryption-Pub-Key']);
+        $this->settings->set('public_key_id', $headers['IG-Set-Password-Encryption-Key-Id']);
+        $this->settings->set('authorization_header', $headers['IG-Set-Authorization']);
+
+        if (isset($headers['ig-set-ig-u-rur']) && $headers['ig-set-ig-u-rur'] !== '') {
+            $this->settings->set('rur', $headers['ig-set-ig-u-rur']);
+        }
+
+        if ($loginResponse->getLoggedInUser()->getUsername() === 'Instagram User') {
+            throw new \InstagramAPI\Exception\AccountDisabledException('Account has been suspended.');
+        }
+        if ($loginResponse->getLoggedInUser()->getIsBusiness() !== null) {
+            $this->settings->set('business_account', $loginResponse->getLoggedInUser()->getIsBusiness());
+        }
+
+        $this->_updateLoginState($loginResponse);
+        $this->_sendLoginFlow(true, $appRefreshInterval);
+
+        return $loginResponse;
+    }
+
+    /**
+     * Parse login errors (Bloks).
+     *
+     * @param array $loginResponseWithHeaders Login bloks array.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return array
+     *
+     * @see Instagram::login()
+     */
+    protected function _parseLoginErrors(
+        $loginResponseWithHeaders)
+    {
+        $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\exception_message\\'), 0, -2);
+
+        if ($offsets) {
+            foreach ($offsets as $offset) {
+                if (isset($loginResponseWithHeaders[$offset])) {
+                    $loginResponseWithHeaders = $loginResponseWithHeaders[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
+            foreach ($errorMap as $key => $value) {
+                if (!is_array($errorMap[$key])) {
+                    $errorMap[stripslashes($key)] = stripslashes($value);
+                }
+                unset($errorMap[$key]);
+            }
+        } else {
+            $errorMap = [];
+        }
+
+        return $errorMap;
+    }
+
+    /**
+     * Throw login exceptions (Bloks).
+     *
+     * @param \InstagramAPI\Response\LoginResponse $response Login response.
+     * @param array                                $errorMap Error map.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\AccountDeletionException
+     * @throws \InstagramAPI\Exception\InvalidUsernameException
+     * @throws \InstagramAPI\Exception\TooManyAttemptsException
+     * @throws \InstagramAPI\Exception\AccountDisabledException
+     * @throws \InstagramAPI\Exception\IncorrectPasswordException
+     * @throws \InstagramAPI\Exception\UnexpectedLoginErrorException
+     * @throws \InstagramAPI\Exception\Checkpoint\ChallengeRequiredException
+     *
+     * @see Instagram::login()
+     */
+    protected function _throwLoginException(
+        $response,
+        $errorMap)
+    {
+        if (isset($errorMap['exception_message'])) {
+            switch ($errorMap['exception_message']) {
+                case 'Login Error: An unexpected error occurred. Please try logging in again.':
+                    throw new \InstagramAPI\Exception\UnexpectedLoginErrorException($errorMap['exception_message']);
+                    break;
+                case 'Incorrect Password: The password you entered is incorrect. Please try again.':
+                    throw new \InstagramAPI\Exception\IncorrectPasswordException($errorMap['exception_message']);
+                    break;
+                default:
+                    if (isset($errorMap['event_category'])) {
+                        if ($errorMap['event_category'] === 'checkpoint') {
+                            $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentCheckpointsFlow');
+                            $loginResponse = preg_replace('/challenge_context\\\\":\\\\[a-zA-Z0-9]/m', 'challenge_context\":\"\\', $loginResponse);
+                            $loginResponse = json_decode(stripslashes($loginResponse), true);
+                            if (isset($loginResponse['error'])) {
+                                $loginResponse = $loginResponse['error']['error_data'];
+                            }
+                            $loginResponse = new Response\CheckpointResponse($loginResponse);
+
+                            $e = new \InstagramAPI\Exception\Checkpoint\ChallengeRequiredException();
+                            $e->setResponse($loginResponse);
+
+                            throw $e;
+                        /*
+                        $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\error_user_msg\\'), 0, -2);
+
+                        foreach ($offsets as $offset) {
+                            if (isset($loginResponseWithHeaders[$offset])) {
+                                $loginResponseWithHeaders = $loginResponseWithHeaders[$offset];
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
+                        foreach ($errorMap as $key => $value) {
+                            if (!is_array($errorMap[$key])) {
+                                $errorMap[stripslashes($key)] = stripslashes($value);
+                            }
+                            unset($errorMap[$key]);
+                        }
+                        */
+                        } elseif ($errorMap['event_category'] === 'two_fac') {
+                            $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentTwoFactorAuthFlow');
+                            $loginResponse = json_decode(stripslashes($loginResponse), true);
+                            $loginResponse = new Response\LoginResponse($loginResponse);
+
+                            return $loginResponse;
+                        } elseif ($errorMap['event_category'] === 'login_home_page_interaction') {
+                            $msg = "You can't use Instagram because your account didn't follow our Community Guidelines. This decision can't be reversed either because we've already reviewed it, or because 180 days have passed since your account was disabled";
+                            if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                $loginResponse = new Response\LoginResponse([
+                                    'error_type'    => 'inactive_user',
+                                    'status'        => 'fail',
+                                    'message'       => $msg,
+                                ]);
+                                $e = new \InstagramAPI\Exception\AccountDisabledException($msg);
+                                $e->setResponse($loginResponse);
+
+                                throw $e;
+                            }
+                            $msg = 'Please wait a few minutes before you try again';
+                            if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                $loginResponse = new Response\LoginResponse([
+                                    'error_type'    => 'too_many_attempts',
+                                    'status'        => 'fail',
+                                    'message'       => $msg,
+                                ]);
+                                $e = new \InstagramAPI\Exception\TooManyAttemptsException($msg);
+                                $e->setResponse($loginResponse);
+
+                                throw $e;
+                            }
+                            $msg = "We can't find an account with ";
+                            if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                $loginResponse = new Response\LoginResponse([
+                                    'error_type'    => 'invalid_username',
+                                    'status'        => 'fail',
+                                    'message'       => sprintf('%s%s', $msg, $username),
+                                ]);
+                                $e = new \InstagramAPI\Exception\InvalidUsernameException(sprintf('%s%s', $msg, $username));
+                                $e->setResponse($loginResponse);
+
+                                throw $e;
+                            }
+                            $msg = 'An unexpected error occurred. Please try logging in again.';
+                            if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                $loginResponse = new Response\LoginResponse([
+                                    'error_type'    => 'unexpected_login_error',
+                                    'status'        => 'fail',
+                                    'message'       => $msg,
+                                ]);
+                                $e = new \InstagramAPI\Exception\UnexpectedLoginErrorException($msg);
+                                $e->setResponse($loginResponse);
+
+                                throw $e;
+                            }
+                            $msg = 'You requested to delete';
+                            if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                $loginResponse = new Response\LoginResponse([
+                                    'error_type'    => 'account_deletion_requested',
+                                    'status'        => 'fail',
+                                    'message'       => sprintf('You requested to delete your account: %s', $username),
+                                ]);
+                                $e = new \InstagramAPI\Exception\AccountDeletionException(sprintf('You requested to delete your account: %s', $username));
+                                $e->setResponse($loginResponse);
+
+                                throw $e;
+                            }
+                            $msg = 'You entered the wrong code too many times. Wait a few minutes and try again.';
+                            if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                $loginResponse = new Response\LoginResponse([
+                                    'error_type'    => 'too_many_attempts_wrong_code',
+                                    'status'        => 'fail',
+                                    'message'       => $msg,
+                                ]);
+                                $e = new \InstagramAPI\Exception\TooManyAttemptsException('You entered the wrong code too many times. Wait a few minutes and try again.');
+                                $e->setResponse($loginResponse);
+
+                                throw $e;
+                            }
+                            $msg = 'Sorry, there was a problem with your request.';
+                            if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                $loginResponse = new Response\LoginResponse([
+                                    'error_type'    => 'server_or_ip_error',
+                                    'status'        => 'fail',
+                                    'message'       => $msg,
+                                ]);
+                                $e = new \InstagramAPI\Exception\InstagramException($msg);
+                                $e->setResponse($loginResponse);
+
+                                throw $e;
+                            }
+                            $msg = "The username you entered doesn't appear to belong to an account. Please check your username and try again.";
+                            if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {
+                                $loginResponse = new Response\LoginResponse([
+                                    'error_type'    => 'invalid_username',
+                                    'status'        => 'fail',
+                                    'message'       => $msg,
+                                ]);
+                                $e = new \InstagramAPI\Exception\InvalidUserException(sprintf('%s If the username exists, it is very likely the IP used is flagged.', $msg));
+                                $e->setResponse($loginResponse);
+
+                                throw $e;
+                            }
+
+                            throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
+                        } else {
+                            throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
+                        }
+                    } else {
+                        throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
+                    }
+            }
+        }
     }
 
     /**

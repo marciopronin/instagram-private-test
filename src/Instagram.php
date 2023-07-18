@@ -2135,10 +2135,11 @@ class Instagram implements ExperimentsInterface
                                 throw new \InstagramAPI\Exception\InstagramException('Two factor method not implemented yet.');
                         }
                     }
-
-                    $this->_throwLoginException($response, $errorMap);
                 }
-
+                $twoFactorResponse = $this->_throwLoginException($response, $errorMap);
+                if ($twoFactorResponse !== null) {
+                    return $twoFactorResponse;
+                }
                 $loginResponse = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, $appRefreshInterval);
             } else {
                 try {

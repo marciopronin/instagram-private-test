@@ -2863,8 +2863,24 @@ class Instagram implements ExperimentsInterface
         $verificationCode,
         $trustDevice = true)
     {
-        if (empty($verificationCode)) {
-            throw new \InvalidArgumentException('You must provide a verification code and two-factor identifier to finishTwoFactorLogin().');
+        if (empty($username) || empty($password)) {
+            throw new \InvalidArgumentException('You must provide a username and password to finishTwoFactorVerification().');
+        }
+        if (empty($verificationCode) || empty($context)) {
+            throw new \InvalidArgumentException('You must provide a verification code and two-factor identifier to finishTwoFactorVerification().');
+        }
+        if (!in_array($challenge, ['totp', 'backup', 'sms', 'email'], true)) {
+            throw new \InvalidArgumentException('You must provide a valid 2FA challenge type.');
+        }
+
+        // Switch the currently active user/pass if the details are different.
+        // NOTE: The username and password AREN'T actually necessary for THIS
+        // endpoint, but this extra step helps people who statelessly embed the
+        // library directly into a webpage, so they can `finishTwoFactorVerification()`
+        // on their second page load without having to begin any new `login()`
+        // call (since they did that in their previous webpage's library calls).
+        if ($this->username !== $username || $this->password !== $password) {
+            $this->_setUser('regular', $username, $password);
         }
 
         // Remove all whitespace from the verification code.
@@ -2898,9 +2914,11 @@ class Instagram implements ExperimentsInterface
 
         $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
 
-        $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
-        $this->_throwLoginException($response, $errorMap);
-        $response = $this->_processSuccesfulLoginResponse($response, 1800);
+        if (is_array($loginResponseWithHeaders)) {
+            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+            $this->_throwLoginException($response, $errorMap);
+        }
+        $response = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
         //$this->_updateLoginState($response);
         //$this->_sendLoginFlow(true, $appRefreshInterval);
 

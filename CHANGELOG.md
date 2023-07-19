@@ -1,3 +1,10 @@
+# Stable release v21.30.3
+## Date: 19/07/2023
+
+### Updates and fixes
+
+- **Instagram:** Added compatibility for different 2FA endpoints
+
 # Stable release v21.30.2
 ## Date: 19/07/2023
 

@@ -1995,6 +1995,7 @@ class Instagram implements ExperimentsInterface
                         ],
                     ];
                 }
+
                 $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/')
                     ->setNeedsAuth(false)
                     ->setSignedPost(false)
@@ -2049,9 +2050,11 @@ class Instagram implements ExperimentsInterface
                     $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
 
                     $re = '/(com\.bloks\.www\.two_factor_login\.\w+)/m';
-                    preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
-                    if ($matches) {
-                        $endpoint = $matches[0][1];
+                    preg_match_all($re, $response->asJson(), $firstMatch, PREG_SET_ORDER, 0);
+                    $re = '/(com\.bloks\.www\.two_step_verification\.\w+)/m';
+                    preg_match_all($re, $response->asJson(), $secondMatch, PREG_SET_ORDER, 0);
+                    if ($firstMatch || $secondMatch) {
+                        $endpoint = empty($firstMatch) ? $secondMatch[0][1] : $firstMatch[0][1];
                         $responseArr = $response->asArray();
                         $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
 
@@ -2111,22 +2114,26 @@ class Instagram implements ExperimentsInterface
 
                         switch ($endpoint) {
                             case 'com.bloks.www.two_factor_login.enter_totp_code':
+                            case 'com.bloks.www.two_step_verification.enter_totp_code':
                                 $twoFactorResponse['two_factor_challenge'] = 'totp';
 
                                 return new Response\LoginResponse($twoFactorResponse);
                                 break;
                             case 'com.bloks.www.two_factor_login.enter_backup_code':
+                            case 'com.bloks.www.two_step_verification.enter_backup_code':
                                 $twoFactorResponse['two_factor_challenge'] = 'backup';
 
                                 return new Response\LoginResponse($twoFactorResponse);
                                 break;
                             case 'com.bloks.www.two_factor_login.enter_sms_code':
+                            case 'com.bloks.www.two_step_verification.enter_sms_code':
                                 $twoFactorResponse['two_factor_challenge'] = 'sms';
                                 $twoFactorResponse['masked_cp'] = $this->bloksInfo['masked_cp'];
 
                                 return new Response\LoginResponse($twoFactorResponse);
                                 break;
                             case 'com.bloks.www.two_factor_login.enter_email_code':
+                            case 'com.bloks.www.two_step_verification.enter_email_code':
                                 $twoFactorResponse['two_factor_challenge'] = 'email';
 
                                 return new Response\LoginResponse($twoFactorResponse);
@@ -2688,7 +2695,6 @@ class Instagram implements ExperimentsInterface
         $response = $request->getResponse(new Response\LoginResponse());
 
         $this->_updateLoginState($response);
-
         $this->_sendLoginFlow(true, $appRefreshInterval);
 
         return $response;
@@ -2915,6 +2921,9 @@ class Instagram implements ExperimentsInterface
         $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
 
         if (is_array($loginResponseWithHeaders)) {
+            if (str_contains($response->asJson(), 'BLOKS_TWO_STEP_VERIFICATION_ENTER_CODE:error_message:0')) {
+                throw new \InstagramAPI\Exception\InstagramException('Invalid 2FA code');
+            }
             $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
             $this->_throwLoginException($response, $errorMap);
         }

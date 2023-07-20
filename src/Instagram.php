@@ -2046,6 +2046,7 @@ class Instagram implements ExperimentsInterface
 
                 $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
 
+                $errorMap = [];
                 if (is_array($loginResponseWithHeaders)) {
                     $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
 

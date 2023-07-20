@@ -2138,6 +2138,12 @@ class Instagram implements ExperimentsInterface
 
                                 return new Response\LoginResponse($twoFactorResponse);
                                 break;
+                            case 'com.bloks.www.two_factor_login.enter_whatsapp_code':
+                            case 'com.bloks.www.two_step_verification.enter_whatsapp_code':
+                                $twoFactorResponse['two_factor_challenge'] = 'whatsapp';
+
+                                return new Response\LoginResponse($twoFactorResponse);
+                                break;
                             default:
                                 throw new \InstagramAPI\Exception\InstagramException('Two factor method not implemented yet.');
                         }
@@ -2905,8 +2911,8 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     'challenge'                                     => $challenge,
-                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1] : '',
-                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1] : '',
+                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
                     'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
                     'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
                 ],
@@ -4207,7 +4213,11 @@ class Instagram implements ExperimentsInterface
         $appRefreshInterval = 1800)
     {
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
-        $loginResponse = new Response\LoginResponse(json_decode($loginResponseWithHeaders['login_response'], true));
+        $loginResponse = json_decode($loginResponseWithHeaders['login_response'], true);
+        if (!isset($loginResponse['status'])) {
+            $loginResponse['status'] = 'ok';
+        }
+        $loginResponse = new Response\LoginResponse($loginResponse);
         $headers = json_decode($loginResponseWithHeaders['headers'], true);
 
         $this->settings->set('public_key', $headers['IG-Set-Password-Encryption-Pub-Key']);

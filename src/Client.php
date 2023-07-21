@@ -387,7 +387,7 @@ class Client
         $this->_resolveHost = null;
 
         // Set Pigeon Session ID.
-        $this->_pigeonSession = sprintf('%s-%s-0', 'UFS', Signatures::generateUUID());
+        $this->_pigeonSession = ($this->_parent->getCustomPigeonSessionId() === null) ? sprintf('%s-%s-0', 'UFS', Signatures::generateUUID()) : $this->_parent->getCustomPigeonSessionId();
         $this->_requestUuid = uniqid();
 
         // Create a default handler stack with Guzzle's auto-selected "best

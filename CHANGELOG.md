@@ -1,3 +1,10 @@
+# Stable release v21.31.0
+## Date: 21/07/2023
+
+### New features
+
+- **Instagram:** Added development functionality to set custom pigeon session ID.
+
 # Stable release v21.30.5
 ## Date: 20/07/2023
 

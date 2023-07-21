@@ -331,6 +331,13 @@ class Instagram implements ExperimentsInterface
     public $loginAttemptCount = 0;
 
     /**
+     * Custom pigeon session id.
+     *
+     * @var string
+     */
+    public $customPigeonSessionId = null;
+
+    /**
      * The radio type used for requests.
      *
      * @var array
@@ -974,6 +981,28 @@ class Instagram implements ExperimentsInterface
     public function getOutputInterface()
     {
         return $this->client->getOutputInterface();
+    }
+
+    /**
+     * Set custom pigeon session ID.
+     *
+     * WARNING: Do NOT use this function unless you know
+     * what you are doing.
+     *
+     * @param string $value custom pigeon session id.
+     */
+    public function setCustomPigeonSessionId(
+        $value)
+    {
+        $this->customPigeonSessionId = $value;
+    }
+
+    /**
+     * Return custom pigeon session ID.
+     */
+    public function getCustomPigeonSessionId()
+    {
+        return $this->customPigeonSessionId;
     }
 
     /**

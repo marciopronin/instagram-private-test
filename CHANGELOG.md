@@ -1,3 +1,10 @@
+# Stable release v21.31.1
+## Date: 23/07/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `finishTwoFactorVerification()`
+
 # Stable release v21.31.0
 ## Date: 21/07/2023
 

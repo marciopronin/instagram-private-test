@@ -1,3 +1,11 @@
+# Stable release v21.31.2
+## Date: 27/07/2023
+
+### Updates and fixes
+
+- **Client:** Update `mapServerResponse()`
+- **Client:** Update `getPigeonSession()`
+
 # Stable release v21.31.1
 ## Date: 23/07/2023
 

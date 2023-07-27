@@ -387,7 +387,7 @@ class Client
         $this->_resolveHost = null;
 
         // Set Pigeon Session ID.
-        $this->_pigeonSession = ($this->_parent->getCustomPigeonSessionId() === null) ? sprintf('%s-%s-0', 'UFS', Signatures::generateUUID()) : $this->_parent->getCustomPigeonSessionId();
+        $this->_pigeonSession = sprintf('%s-%s-0', 'UFS', Signatures::generateUUID());
         $this->_requestUuid = uniqid();
 
         // Create a default handler stack with Guzzle's auto-selected "best
@@ -506,7 +506,7 @@ class Client
      */
     public function getPigeonSession()
     {
-        return $this->_pigeonSession;
+        return ($this->_parent->getCustomPigeonSessionId() === null) ? $this->_pigeonSession : $this->_parent->getCustomPigeonSessionId();
     }
 
     /**
@@ -823,6 +823,12 @@ class Client
         if (!is_array($jsonArray)) {
             $httpStatusCode = $httpResponse !== null ? $httpResponse->getStatusCode() : null;
             switch ($httpStatusCode) {
+                case 200:
+                    $multiResponse = explode(PHP_EOL, $rawResponse);
+                    if (!empty($multiResponse[1])) {
+                        $jsonArray = array_merge($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));
+                    }
+                    break;
                 case 400:
                     throw new \InstagramAPI\Exception\BadRequestException('Invalid request options.');
                 case 404:

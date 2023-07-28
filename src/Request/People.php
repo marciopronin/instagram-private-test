@@ -182,8 +182,10 @@ class People extends RequestCollection
      * liking your posts, commenting on your posts, tagging you in photos or in
      * comments, people who started following you, etc.
      *
-     * @param bool  $prefetch   Indicates if request is called due to prefetch.
-     * @param mixed $markAsSeen
+     * @param bool        $prefetch   Indicates if request is called due to prefetch.
+     * @param bool        $markAsSeen
+     * @param string      $feedType   Feed type.
+     * @param string|null $maxId      Next "maximum ID", used for pagination.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -191,11 +193,19 @@ class People extends RequestCollection
      */
     public function getRecentActivityInbox(
         $prefetch = false,
-        $markAsSeen = false)
+        $markAsSeen = false,
+        $feedType = 'all',
+        $maxId = null)
     {
         $request = $this->ig->request('news/inbox/')
                             ->addParam('mark_as_seen', $markAsSeen)
-                            ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'));
+                            ->addParam('feed_type', $feedType)
+                            ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
+                            ->addParam('timezone_name', ($this->ig->getTimezoneName() !== null) ? $this->ig->getTimezoneName() : date_default_timezone_get());
+
+        if ($maxId !== null) {
+            $request->addParam('max_id', $maxId);
+        }
         if ($prefetch) {
             $request->addHeader('X-IG-Prefetch-Request', 'foreground');
         }

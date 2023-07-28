@@ -352,6 +352,13 @@ class Instagram implements ExperimentsInterface
     public $timezoneOffset = null;
 
     /**
+     * Timezone name.
+     *
+     * @var string
+     */
+    public $timezoneName = null;
+
+    /**
      * The platform used for requests.
      *
      * @var string
@@ -1049,6 +1056,27 @@ class Instagram implements ExperimentsInterface
     public function getTimezoneOffset()
     {
         return $this->timezoneOffset;
+    }
+
+    /**
+     * Set the timezone name.
+     *
+     * @param string $value Timezone name.
+     */
+    public function setTimezoneName(
+        $value)
+    {
+        $this->timezoneName = $value;
+    }
+
+    /**
+     * Get timezone name.
+     *
+     * @return string
+     */
+    public function getTimezoneName()
+    {
+        return $this->timezoneName;
     }
 
     /**

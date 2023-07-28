@@ -1,3 +1,16 @@
+# Stable release v21.32.0
+## Date: 28/07/2023
+
+### New feature
+
+- **Instagram:** Add function to set timezone name `setTimezoneName()`, default value will be taken from PHP function `date_default_timezone_get()`
+
+### Updates and fixes
+
+- **Constants:** Update version to 293.0.2.28.93
+- **Internal:** Update `getMobileConfig()`
+- **People:** Update `getRecentActivityInbox()`
+
 # Stable release v21.31.2
 ## Date: 27/07/2023
 

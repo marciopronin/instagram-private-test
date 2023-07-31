@@ -415,8 +415,8 @@ class Internal extends RequestCollection
                     ->addPost('camera_entry_point', '360');
 
                 $request->addPost('media_transformation_info', json_encode([
-                    'width'                 => $videoDetails->getWidth(),
-                    'height'                => $videoDetails->getHeight(),
+                    'width'                 => $photoWidth,
+                    'height'                => $photoHeight,
                     'x_transform'           => 0,
                     'y_transform'           => 0,
                     'zoom'                  => number_format(1, 1),

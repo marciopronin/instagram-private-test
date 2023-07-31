@@ -322,7 +322,6 @@ class Internal extends RequestCollection
 
         // Build the request...
         $request = $this->ig->request($endpoint)
-            ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
@@ -361,10 +360,17 @@ class Internal extends RequestCollection
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('caption', $captionText)
                     ->addPost('source_type', '4')
-                    ->addPost('include_e2ee_mentioned_user_list', 'false')
+                    ->addPost('include_e2ee_mentioned_user_list', '1')
+                    ->addPost('scene_capture_type', '')
                     //->addPost('media_folder', 'Camera')
                     ->addPost('upload_id', $uploadId);
                    // ->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
+
+                if ($internalMetadata->isBestieMedia()) {
+                    $request->addPost('audience', 'besties');
+                } else {
+                    $request->addPost('audience', 'default');
+                }
 
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
@@ -386,9 +392,13 @@ class Internal extends RequestCollection
             case Constants::FEED_STORY:
                 if ($internalMetadata->isBestieMedia()) {
                     $request->addPost('audience', 'besties');
+                } else {
+                    $request->addPost('audience', 'default');
                 }
 
                 $request
+                    ->addPost('include_e2ee_mentioned_user_list', '1')
+                    ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
                     ->addPost('client_shared_at', (string) time())
                     ->addPost('source_type', '3')
                     ->addPost('configure_mode', '1')
@@ -396,13 +406,23 @@ class Internal extends RequestCollection
                     //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     ->addPost('client_timestamp', (string) (time() - mt_rand(3, 10)))
                     ->addPost('upload_id', $uploadId)
-                    ->addPost('original_media_type', 'photo')
+                    ->addPost('original_media_type', '1') // photo
                     ->addPost('scene_capture_type', '')
                     ->addPost('creation_surface', 'camera')
                     ->addPost('capture_type', 'normal')
                     ->addPost('has_original_sound', '1')
                     ->addPost('composition_id', Signatures::generateUUID())
-                    ->addPost('camera_entry_point', '11');
+                    ->addPost('camera_entry_point', '360');
+
+                $request->addPost('media_transformation_info', json_encode([
+                    'width'                 => $videoDetails->getWidth(),
+                    'height'                => $videoDetails->getHeight(),
+                    'x_transform'           => 0,
+                    'y_transform'           => 0,
+                    'zoom'                  => number_format(1, 1),
+                    'rotation'              => number_format(0, 1),
+                    'background_coverage'   => number_format(0, 1),
+                ]));
 
                 if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
                     $story_cta = '[{"links":[{"webUri":'.json_encode($link).'}]}]';
@@ -944,7 +964,6 @@ class Internal extends RequestCollection
         // Build the request...
         $request = $this->ig->request($endpoint)
             ->addParam('video', 1)
-            ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
             ->addPost('video_result', $internalMetadata->getVideoUploadResponse() !== null ? (string) $internalMetadata->getVideoUploadResponse()->getResult() : '')
             ->addPost('upload_id', $uploadId)
             ->addPost('poster_frame_index', 0)
@@ -979,7 +998,14 @@ class Internal extends RequestCollection
 
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE:
-                $request->addPost('caption', $captionText);
+                if ($internalMetadata->isBestieMedia()) {
+                    $request->addPost('audience', 'besties');
+                } else {
+                    $request->addPost('audience', 'default');
+                }
+                $request->addPost('caption', $captionText)
+                    ->addPost('include_e2ee_mentioned_user_list', '1');
+
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
                     $request->addPost('usertags', json_encode($usertags));
@@ -989,17 +1015,33 @@ class Internal extends RequestCollection
             case Constants::FEED_STORY:
                 if ($internalMetadata->isBestieMedia()) {
                     $request->addPost('audience', 'besties');
+                } else {
+                    $request->addPost('audience', 'default');
                 }
 
                 $request
+                    ->addPost('include_e2ee_mentioned_user_list', '1')
+                    ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
                     ->addPost('configure_mode', '1')
                     //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     //->addPost('allow_multi_configures', '1')
-                    ->addPost('story_media_creation_date', time() - mt_rand(10, 20))
+                    //->addPost('story_media_creation_date', time() - mt_rand(10, 20))
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time())
+                    ->addPost('date_time_original', sprintf('%sT%s.000Z', date('Ymd'), date('His')))
                     ->addPost('composition_id', Signatures::generateUUID())
-                    ->addPost('camera_entry_point', '11');
+                    ->addPost('camera_entry_point', '360')
+                    ->addPost('original_media_type', '2'); // video
+
+                $request->addPost('media_transformation_info', json_encode([
+                    'width'                 => $videoDetails->getWidth(),
+                    'height'                => $videoDetails->getHeight(),
+                    'x_transform'           => 0,
+                    'y_transform'           => 0,
+                    'zoom'                  => number_format(1, 1),
+                    'rotation'              => number_format(0, 1),
+                    'background_coverage'   => number_format(0, 1),
+                ]));
 
                 if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
                     $story_cta = '[{"links":[{"webUri":'.json_encode($link).'}]}]';
@@ -1121,7 +1163,7 @@ class Internal extends RequestCollection
                     ->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE (STORIES)
                     ->addPost('recipient_users', $internalMetadata->getDirectUsers())
                     ->addPost('thread_ids', $internalMetadata->getDirectThreads())
-                    ->addPost('story_media_creation_date', time() - mt_rand(10, 20))
+                    //->addPost('story_media_creation_date', time() - mt_rand(10, 20))
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time());
 
@@ -1130,6 +1172,11 @@ class Internal extends RequestCollection
                 }
                 break;
             case Constants::FEED_REELS:
+                if ($internalMetadata->isBestieMedia()) {
+                    $request->addPost('audience', 'besties');
+                } else {
+                    $request->addPost('audience', 'default');
+                }
                 $request
                     ->addHeader('Is_clips_video', '1')
                     ->addHeader('retry_context', json_encode(
@@ -1139,14 +1186,19 @@ class Internal extends RequestCollection
                             'num_step_manual_retry' => 0,
                         ])
                     )
+                    ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
                     ->addPost('is_shared_to_fb', isset($externalMetadata['share_to_fb']) ? strval(intval($externalMetadata['share_to_fb'])) : '0')
                     ->addPost('caption', $captionText)
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('device_id', $this->ig->device_id)
                     ->addPost('camera_session_id', Signatures::generateUUID())
                     ->addPost('is_clips_edited', '0')
-                    ->addPost('camera_entry_point', '168')
+                    ->addPost('like_and_view_counts_disabled', '0')
+                    ->addPost('is_gifting_enabled', '1')
+                    ->addPost('camera_entry_point', '360')
                     ->addPost('disable_comments', '0')
+                    ->addPost('include_e2ee_mentioned_user_list', '1')
+                    ->addPost('third_party_downloads_enabled', '1')
                     ->addPost('is_created_with_sound_sync', '0')
                     ->addPost('clips_creation_entry_point', 'clips')
                     ->addPost('clips', [
@@ -1163,14 +1215,14 @@ class Internal extends RequestCollection
                                 'index'                 => 0,
                                 'face_effect_id'        => null,
                                 'speed'                 => 100,
-                                'source'                => 'camera',
+                                'source_type'           => '1',
                                 'duration_ms'           => round($videoDetails->getDuration(), 3) * 1000,
                                 'audio_type'            => 'original',
                                 'from_draft'            => '0',
                                 'camera_position'       => '2',
                                 'media_folder'          => null,
                                 'media_type'            => 'video',
-                                'original_media_type'   => 'video',
+                                'original_media_type'   => '2', // video
                             ],
                         ],
                     ])
@@ -1185,6 +1237,8 @@ class Internal extends RequestCollection
                     ->addPost('is_created_with_contextual_music_recs', '0')
                     ->addPost('video_subtitles_enabled', '1')
                     ->addPost('template_clips_media_id', 'null')
+                    ->addPost('enable_smart_thumbnail', '0')
+                    ->addPost('is_template_disabled', '0')
                     ->addPost('is_creator_requesting_mashup', '0')
                     ->addPost('capture_type', 'clips_v2');
 
@@ -1269,7 +1323,7 @@ class Internal extends RequestCollection
         }
 
         if ($targetFeed == Constants::FEED_STORY) {
-            $request->addPost('story_media_creation_date', time());
+            //$request->addPost('story_media_creation_date', time());
             if ($usertags !== null) {
                 // Reel Mention example:
                 // [{\"y\":0.3407772676161919,\"rotation\":0,\"user_id\":\"USER_ID\",\"x\":0.39892578125,\"width\":0.5619921875,\"height\":0.06011525487256372}]
@@ -1333,7 +1387,7 @@ class Internal extends RequestCollection
         }
 
         // Build the album's per-children metadata.
-        $date = date('Y:m:d H:i:s');
+        $date = sprintf('%sT%s.000Z', date('Ymd'), date('His'));
         $childrenMetadata = [];
         foreach ($media as $item) {
             /** @var InternalMetadata $itemInternalMetadata */
@@ -3518,6 +3572,7 @@ class Internal extends RequestCollection
             'upload_media_width'       => (string) $videoDetails->getWidth(),
             'upload_media_duration_ms' => (string) $videoDetails->getDurationInMsec(),
             'media_type'               => ($targetFeed === Constants::FEED_DIRECT_AUDIO) ? (string) Constants::FEED_DIRECT_AUDIO : (string) Response\Model\Item::VIDEO,
+            'sticker_burnin_params'    => json_encode([]),
         ];
         // Target feed's specific params.
         switch ($targetFeed) {
@@ -3531,6 +3586,9 @@ class Internal extends RequestCollection
                 break;
             case Constants::FEED_STORY:
                 $result['for_album'] = '1';
+                $result['content_tags'] = 'sticker_burnin_params';
+                $result['extract_cover_frame'] = '1';
+                $result['IG-FB-Xpost-entry-point-v2'] = '1';
                 break;
             case Constants::FEED_DIRECT_STORY:
                 $result['for_direct_story'] = '1';
@@ -3543,6 +3601,7 @@ class Internal extends RequestCollection
                 break;
             case Constants::FEED_REELS:
                 $result['is_clips_video'] = '1';
+                $result['content_tags'] = 'sticker_burnin_params';
                 break;
             default:
         }

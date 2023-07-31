@@ -1,3 +1,16 @@
+# Stable release v21.33.0
+## Date: 28/07/2023
+
+### New feature
+
+- **Direct:** Add `getPresencesActiveNow()`
+
+### Updates and fixes
+
+- **Internal:** Update `configureSinglePhoto()`
+- **Internal:** Update `configureSingleVideo()`
+- **Internal:** Update `_getVideoUploadParams()`
+
 # Stable release v21.32.0
 ## Date: 28/07/2023
 

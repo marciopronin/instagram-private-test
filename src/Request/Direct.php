@@ -283,6 +283,20 @@ class Direct extends RequestCollection
     }
 
     /**
+     * Get a list of activity statuses for users who you follow or message that are active now.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\PresencesResponse
+     */
+    public function getPresencesActiveNow()
+    {
+        return $this->ig->request('direct_v2/get_presence_active_now/')
+            ->addParam('suggested_followers_limit', $this->ig->getExperimentParam('41171', 4, 0))
+            ->getResponse(new Response\PresencesResponse());
+    }
+
+    /**
      * Get ranked list of recipients.
      *
      * WARNING: This is a special, very heavily throttled API endpoint.

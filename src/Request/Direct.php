@@ -51,8 +51,16 @@ class Direct extends RequestCollection
 
         $request = $this->ig->request('direct_v2/inbox/')
             ->addParam('persistentBadging', 'true')
-            ->addParam('visual_message_return_type', 'unseen')
-            ->addParam('limit', $limit);
+            ->addParam('visual_message_return_type', 'unseen');
+
+        $limit = $this->ig->getExperimentParam('59489', 7, 0);
+        if ($limit <= 0) {
+            $limit = $this->ig->getExperimentParam('56394', 0, -1);
+            $request->addParam('limit', $limit == -1 ? 20 : $limit);
+        } else {
+            $request->addParam('limit', $limit);
+        }
+
         if ($cursorId !== null) {
             $request->addParam('cursor', $cursorId);
             $request->addParam('direction', 'older');
@@ -357,8 +365,15 @@ class Direct extends RequestCollection
         }
         $request = $this->ig->request('direct_v2/threads/get_by_participants/')
             ->addParam('recipient_users', '['.implode(',', $users).']')
-            ->addParam('seq_id', '1')
-            ->addParam('limit', '20');
+            ->addParam('seq_id', '1');
+
+        $limit = $this->ig->getExperimentParam('59489', 7, 0);
+        if ($limit <= 0) {
+            $limit = $this->ig->getExperimentParam('56394', 0, -1);
+            $request->addParam('limit', $limit == -1 ? 20 : $limit);
+        } else {
+            $request->addParam('limit', $limit);
+        }
 
         return $request->getResponse(new Response\DirectThreadResponse());
     }
@@ -380,8 +395,15 @@ class Direct extends RequestCollection
         $seqId = null)
     {
         $request = $this->ig->request("direct_v2/threads/$threadId/")
-            ->addParam('limit', 20)
             ->addParam('visual_message_return_type', 'unseen');
+
+        $limit = $this->ig->getExperimentParam('59489', 7, 0);
+        if ($limit <= 0) {
+            $limit = $this->ig->getExperimentParam('56394', 0, -1);
+            $request->addParam('limit', $limit == -1 ? 20 : $limit);
+        } else {
+            $request->addParam('limit', $limit);
+        }
 
         if ($cursorId !== null) {
             $request->addParam('cursor', $cursorId)

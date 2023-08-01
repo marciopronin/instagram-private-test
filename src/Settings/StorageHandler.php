@@ -116,7 +116,8 @@ class StorageHandler
         '31167', // segmentation enabled
         '54280', // banyan/banyan (IBCShareSheetParams)
         '52645', // fdid_in_qp_context
-        '59489', // direct settings (batch_size)
+        '59489', // direct settings (batch_size, limit)
+        '56394', // direct settings (limit)
         '45863', // direct settings (no_pending_badge) 0x8107C0000012F7
         '26104', // direct settings (thread_message_limit)
         '41171', // igd_active_tray (suggestions_enabled, suggested_followers_limit)

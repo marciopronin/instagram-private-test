@@ -1,3 +1,13 @@
+# Stable release v21.33.2
+## Date: 01/08/2023
+
+### Updates and fixes
+
+- **Direct:** Update `getInbox()`
+- **Direct:** Update `getThreadByParticipants()`
+- **Direct:** Update `getThread()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+
 # Stable release v21.33.1
 ## Date: 31/07/2023
 

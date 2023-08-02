@@ -2211,7 +2211,7 @@ class Instagram implements ExperimentsInterface
                 if ($twoFactorResponse !== null) {
                     return $twoFactorResponse;
                 }
-                $loginResponse = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, $appRefreshInterval);
+                $loginResponse = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, $appRefreshInterval, false);
             } else {
                 try {
                     $request = $this->request('accounts/login/')
@@ -4258,6 +4258,7 @@ class Instagram implements ExperimentsInterface
      *                                         your delay is the BETTER. You may even
      *                                         want to set it to an even LOWER value
      *                                         than the default 30 minutes!
+     * @param bool   $loginFlow                Perform login flow.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\AccountDisabledException
@@ -4268,7 +4269,8 @@ class Instagram implements ExperimentsInterface
      */
     protected function _processSuccesfulLoginResponse(
         $loginResponseWithHeaders,
-        $appRefreshInterval = 1800)
+        $appRefreshInterval = 1800,
+        $loginFlow = true)
     {
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
         $loginResponse = json_decode($loginResponseWithHeaders['login_response'], true);
@@ -4294,7 +4296,9 @@ class Instagram implements ExperimentsInterface
         }
 
         $this->_updateLoginState($loginResponse);
-        $this->_sendLoginFlow(true, $appRefreshInterval);
+        if ($loginFlow === true) {
+            $this->_sendLoginFlow(true, $appRefreshInterval);
+        }
 
         return $loginResponse;
     }

@@ -239,7 +239,29 @@ class Location extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('session_id', $this->ig->session_id)
-            ->addPost('tab', $tab);
+            ->addPost('exclude_bloks_widgets', 'true');
+
+        if ($tab !== null) {
+            if ($tab !== 'ranked' && $tab !== 'recent' && $tab !== 'clips' && $tab !== 'account') {
+                throw new \InvalidArgumentException('Tab section must be \'ranked\', \'recent\', \'account\' or \'clips\'.');
+            }
+            $request->addPost('tab', $tab);
+        } else {
+            $supportedTabs = [];
+            if ($this->ig->isExperimentEnabled('52317', 1, false) || $this->ig->isExperimentEnabled('52317', 2, false)) {
+                $supportedTabs[] = 'top';
+            }
+            if ($this->ig->isExperimentEnabled('45177', 0, false) && $this->ig->isExperimentEnabled('52317', 1, false)) {
+                $supportedTabs[] = 'recent';
+            }
+            if ($this->ig->isExperimentEnabled('52317', 2, false)) {
+                $supportedTabs[] = 'igtv';
+            }
+            if ($this->ig->isExperimentEnabled('48536', 0, false)) {
+                $supportedTabs[] = 'account';
+            }
+            $request->addPost('supported_tabs', json_encode($supportedTabs));
+        }
 
         if ($nextMediaIds !== null) {
             if (!is_array($nextMediaIds) || !array_filter($nextMediaIds, 'is_int')) {

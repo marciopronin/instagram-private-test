@@ -61,6 +61,7 @@ class Hashtag extends RequestCollection
      * @param string      $tab       Section tab for hashtags.
      * @param string|null $maxId     Next "maximum ID", used for pagination.
      * @param string|null $pageId    Next "page ID", used for pagination.
+     * @param string|null $filter    Media sorting filter. 'default' or 'top_recent_posts'.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -70,9 +71,10 @@ class Hashtag extends RequestCollection
     public function getSection(
         $hashtag,
         $rankToken,
-        $tab = 'top',
+        $tab = 'ranked',
         $maxId = null,
-        $pageId = null)
+        $pageId = null,
+        $filter = 'default')
     {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
@@ -85,12 +87,32 @@ class Hashtag extends RequestCollection
             ->addPost('include_persistent', true);
 
         if ($tab !== null) {
-            if ($tab !== 'top' && $tab !== 'recent' && $tab !== 'clips') {
-                throw new \InvalidArgumentException('Tab section must be \'top\', \'recent\', \'places\' or \'clips\'.');
+            if ($tab !== 'ranked' && $tab !== 'recent' && $tab !== 'clips' && $tab !== 'account') {
+                throw new \InvalidArgumentException('Tab section must be \'ranked\', \'recent\', \'account\' or \'clips\'.');
             }
             $request->addPost('tab', $tab);
         } else {
-            $request->addPost('supported_tabs', '["top","recent","clips"]');
+            $supportedTabs = [];
+            if ($this->ig->isExperimentEnabled('52317', 1, false) || $this->ig->isExperimentEnabled('52317', 2, false)) {
+                $supportedTabs[] = 'top';
+            }
+            if ($this->ig->isExperimentEnabled('45177', 0, false) && $this->ig->isExperimentEnabled('52317', 1, false)) {
+                $supportedTabs[] = 'recent';
+            }
+            if ($this->ig->isExperimentEnabled('52317', 2, false)) {
+                $supportedTabs[] = 'igtv';
+            }
+            if ($this->ig->isExperimentEnabled('48536', 0, false)) {
+                $supportedTabs[] = 'account';
+            }
+            $request->addPost('supported_tabs', json_encode($supportedTabs));
+        }
+
+        if ($filter !== null) {
+            if ($filter !== 'default' && $filter !== 'top_recent_posts') {
+                throw new \InvalidArgumentException('Media filter must be \'default\' or \'top_recent_posts\'.');
+            }
+            $request->addPost('media_recency_filter', $filter);
         }
 
         if ($maxId !== null) {

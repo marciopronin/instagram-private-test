@@ -1,3 +1,12 @@
+# Stable release v21.33.3
+## Date: 02/08/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Hashtag:** Update `getSection()`
+- **Location:** Update `getFeed()`
+
 # Stable release v21.33.2
 ## Date: 01/08/2023
 

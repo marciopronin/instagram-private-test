@@ -2170,40 +2170,46 @@ class Instagram implements ExperimentsInterface
                             'is_bloks'              => true,
                         ];
 
-                        switch ($endpoint) {
-                            case 'com.bloks.www.two_factor_login.enter_totp_code':
-                            case 'com.bloks.www.two_step_verification.enter_totp_code':
-                                $twoFactorResponse['two_factor_challenge'] = 'totp';
+                        if ($endpoint === 'com.bloks.www.two_step_verification.entrypoint') {
+                            $twoFactorResponse['two_factor_challenge'] = $this->bloksInfo['challenge'];
 
-                                return new Response\LoginResponse($twoFactorResponse);
-                                break;
-                            case 'com.bloks.www.two_factor_login.enter_backup_code':
-                            case 'com.bloks.www.two_step_verification.enter_backup_code':
-                                $twoFactorResponse['two_factor_challenge'] = 'backup';
+                            return new Response\LoginResponse($twoFactorResponse);
+                        } else {
+                            switch ($endpoint) {
+                                case 'com.bloks.www.two_factor_login.enter_totp_code':
+                                case 'com.bloks.www.two_step_verification.enter_totp_code':
+                                    $twoFactorResponse['two_factor_challenge'] = 'totp';
 
-                                return new Response\LoginResponse($twoFactorResponse);
-                                break;
-                            case 'com.bloks.www.two_factor_login.enter_sms_code':
-                            case 'com.bloks.www.two_step_verification.enter_sms_code':
-                                $twoFactorResponse['two_factor_challenge'] = 'sms';
-                                $twoFactorResponse['masked_cp'] = $this->bloksInfo['masked_cp'];
+                                    return new Response\LoginResponse($twoFactorResponse);
+                                    break;
+                                case 'com.bloks.www.two_factor_login.enter_backup_code':
+                                case 'com.bloks.www.two_step_verification.enter_backup_code':
+                                    $twoFactorResponse['two_factor_challenge'] = 'backup';
 
-                                return new Response\LoginResponse($twoFactorResponse);
-                                break;
-                            case 'com.bloks.www.two_factor_login.enter_email_code':
-                            case 'com.bloks.www.two_step_verification.enter_email_code':
-                                $twoFactorResponse['two_factor_challenge'] = 'email';
+                                    return new Response\LoginResponse($twoFactorResponse);
+                                    break;
+                                case 'com.bloks.www.two_factor_login.enter_sms_code':
+                                case 'com.bloks.www.two_step_verification.enter_sms_code':
+                                    $twoFactorResponse['two_factor_challenge'] = 'sms';
+                                    $twoFactorResponse['masked_cp'] = $this->bloksInfo['masked_cp'];
 
-                                return new Response\LoginResponse($twoFactorResponse);
-                                break;
-                            case 'com.bloks.www.two_factor_login.enter_whatsapp_code':
-                            case 'com.bloks.www.two_step_verification.enter_whatsapp_code':
-                                $twoFactorResponse['two_factor_challenge'] = 'whatsapp';
+                                    return new Response\LoginResponse($twoFactorResponse);
+                                    break;
+                                case 'com.bloks.www.two_factor_login.enter_email_code':
+                                case 'com.bloks.www.two_step_verification.enter_email_code':
+                                    $twoFactorResponse['two_factor_challenge'] = 'email';
 
-                                return new Response\LoginResponse($twoFactorResponse);
-                                break;
-                            default:
-                                throw new \InstagramAPI\Exception\InstagramException('Two factor method not implemented yet.');
+                                    return new Response\LoginResponse($twoFactorResponse);
+                                    break;
+                                case 'com.bloks.www.two_factor_login.enter_whatsapp_code':
+                                case 'com.bloks.www.two_step_verification.enter_whatsapp_code':
+                                    $twoFactorResponse['two_factor_challenge'] = 'whatsapp';
+
+                                    return new Response\LoginResponse($twoFactorResponse);
+                                    break;
+                                default:
+                                    throw new \InstagramAPI\Exception\InstagramException('Two factor method not implemented yet.');
+                            }
                         }
                     }
                 }

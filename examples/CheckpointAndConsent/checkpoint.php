@@ -56,6 +56,8 @@ try {
                             }
                             if ($e->getResponse()->getChallenge() !== null && (is_array($e->getResponse()->getChallenge()) === false) && ($e->getResponse()->getChallenge()->getChallengeContext() !== null)) {
                                 $challengeContext = $e->getResponse()->getChallenge()->getChallengeContext();
+                            } elseif ($e->getResponse()->getChallengeContext() !== null) {
+                                $challengeContext = $e->getResponse()->getChallengeContext();
                             } else {
                                 $challengeContext = null;
                             }
@@ -138,6 +140,9 @@ try {
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\ScrapingWarningException:
                         $ig->checkpoint->sendAcceptScrapingWarning($checkApiPath);
+                        break 2;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\ReviewLinkedAccountsException:
+                        $ig->checkpoint->sendAcceptReviewLinkedAccounts($checkApiPath);
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\RecaptchaChallengeException:
                         /*

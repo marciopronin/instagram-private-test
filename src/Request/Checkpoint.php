@@ -102,6 +102,28 @@ class Checkpoint extends RequestCollection
     }
 
     /**
+     * Accept review linked accounts.
+     *
+     * @param string $checkpointUrl Checkpoint URL.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\CheckpointResponse
+     */
+    public function sendAcceptReviewLinkedAccounts(
+        $checkpointUrl)
+    {
+        return $this->ig->request($checkpointUrl)
+           ->setNeedsAuth(false)
+           ->setSignedPost(false)
+           ->addPost('guid', $this->ig->uuid)
+           ->addPost('device_id', $this->ig->device_id)
+           ->addPost('choice', 0)
+           //->addPost('_csrftoken', $this->ig->client->getToken())
+           ->getResponse(new Response\CheckpointResponse());
+    }
+
+    /**
      * Send force password change.
      *
      * @param string $checkpointUrl Checkpoint URL.

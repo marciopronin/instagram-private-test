@@ -1,3 +1,18 @@
+# Stable release v21.34.0
+## Date: 10/08/2023
+
+### New features
+
+- **Checkpoint:** Added `sendAcceptReviewLinkedAccounts()`
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+
+### Examples
+
+- **Example:** Update checkpoint example
+
 # Stable release v21.33.5
 ## Date: 10/08/2023
 

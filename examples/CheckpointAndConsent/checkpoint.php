@@ -54,10 +54,14 @@ try {
                             if ($iterations > 5) {
                                 $webForm = true;
                             }
-                            if ($e->getResponse()->getChallenge() !== null && (is_array($e->getResponse()->getChallenge()) === false) && ($e->getResponse()->getChallenge()->getChallengeContext() !== null)) {
-                                $challengeContext = $e->getResponse()->getChallenge()->getChallengeContext();
-                            } elseif ($e->getResponse()->getChallengeContext() !== null) {
-                                $challengeContext = $e->getResponse()->getChallengeContext();
+                            if ($e->getResponse() instanceof InstagramAPI\Response\LoginResponse) {
+                                if ($e->getResponse()->getChallenge() !== null && (is_array($e->getResponse()->getChallenge()) === false) && ($e->getResponse()->getChallenge()->getChallengeContext() !== null)) {
+                                    $challengeContext = $e->getResponse()->getChallenge()->getChallengeContext();
+                                } elseif ($e->getResponse()->getChallengeContext() !== null) {
+                                    $challengeContext = $e->getResponse()->getChallengeContext();
+                                } else {
+                                    $challengeContext = null;
+                                }
                             } else {
                                 $challengeContext = null;
                             }

@@ -3750,12 +3750,14 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
-                $feedTimelineItems = $feed->getFeedItems();
-                if (count($feedTimelineItems) > 0 && $feedTimelineItems[0]->getEndOfFeedDemarcator() !== null) {
-                    $this->timeline->getUserFeed($this->account_id);
-                    $this->people->getInfoById($this->account_id, null, null, true); // Prefetch
-                    $this->highlight->getUserFeed($this->account_id);
-                    $this->people->getCreatorInfo($this->account_id);
+                if ($feed !== null) {
+                    $feedTimelineItems = $feed->getFeedItems();
+                    if (count($feedTimelineItems) > 0 && $feedTimelineItems[0]->getEndOfFeedDemarcator() !== null) {
+                        $this->timeline->getUserFeed($this->account_id);
+                        $this->people->getInfoById($this->account_id, null, null, true); // Prefetch
+                        $this->highlight->getUserFeed($this->account_id);
+                        $this->people->getCreatorInfo($this->account_id);
+                    }
                 }
                 //$this->internal->logResurrectAttribution();
                 //$this->internal->getDeviceCapabilitiesDecisions();

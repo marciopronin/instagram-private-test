@@ -1,3 +1,14 @@
+# Stable release v21.34.2
+## Date: 13/08/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `sendLoginFlow()`
+
+### Examples
+
+- **Example:** Update checkpoint example
+
 # Stable release v21.34.1
 ## Date: 10/08/2023
 

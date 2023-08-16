@@ -2171,7 +2171,16 @@ class Instagram implements ExperimentsInterface
                         ];
 
                         if ($endpoint === 'com.bloks.www.two_step_verification.entrypoint') {
-                            $twoFactorResponse['two_factor_challenge'] = $this->bloksInfo['challenge'];
+                            if (isset($this->bloksInfo['challenge'])) {
+                                $challenge = $this->bloksInfo['challenge'];
+                            } else {
+                                if (str_contains($response->asJson(), 'Check your notifications')) {
+                                    $challenge = 'notification';
+                                } else {
+                                    $challenge = 'unknown';
+                                }
+                            }
+                            $twoFactorResponse['two_factor_challenge'] = $challenge;
 
                             return new Response\LoginResponse($twoFactorResponse);
                         } else {

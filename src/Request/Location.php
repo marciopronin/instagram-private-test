@@ -245,7 +245,7 @@ class Location extends RequestCollection
             if ($tab !== 'ranked' && $tab !== 'recent' && $tab !== 'clips' && $tab !== 'account') {
                 throw new \InvalidArgumentException('Tab section must be \'ranked\', \'recent\', \'account\' or \'clips\'.');
             }
-            $request->addPost('tab', $tab);
+            $locationFeed->addPost('tab', $tab);
         } else {
             $supportedTabs = [];
             if ($this->ig->isExperimentEnabled('52317', 1, false) || $this->ig->isExperimentEnabled('52317', 2, false)) {
@@ -260,7 +260,7 @@ class Location extends RequestCollection
             if ($this->ig->isExperimentEnabled('48536', 0, false)) {
                 $supportedTabs[] = 'account';
             }
-            $request->addPost('supported_tabs', json_encode($supportedTabs));
+            $locationFeed->addPost('supported_tabs', json_encode($supportedTabs));
         }
 
         if ($nextMediaIds !== null) {

@@ -1,3 +1,11 @@
+# Stable release v21.34.3
+## Date: 16/08/2023
+
+### Updates and fixes
+
+- **Location:** Fixed typo `getFeed()`
+- **Instagram:** Update `_login()`
+
 # Stable release v21.34.2
 ## Date: 13/08/2023
 

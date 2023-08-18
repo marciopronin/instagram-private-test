@@ -1,3 +1,12 @@
+# Stable release v21.34.4
+## Date: 19/08/2023
+
+### Updates and fixes
+
+- **Constants:** Update to 296.0.0.35.109
+- **Instagram:** Update `_throwLoginException()`
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v21.34.3
 ## Date: 16/08/2023
 

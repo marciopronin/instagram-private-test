@@ -4458,9 +4458,9 @@ class Instagram implements ExperimentsInterface
                                 $loginResponse = new Response\LoginResponse([
                                     'error_type'    => 'invalid_username',
                                     'status'        => 'fail',
-                                    'message'       => sprintf('%s%s', $msg, $username),
+                                    'message'       => sprintf('%s%s', $msg, $this->username),
                                 ]);
-                                $e = new \InstagramAPI\Exception\InvalidUsernameException(sprintf('%s%s', $msg, $username));
+                                $e = new \InstagramAPI\Exception\InvalidUsernameException(sprintf('%s%s', $msg, $this->username));
                                 $e->setResponse($loginResponse);
 
                                 throw $e;

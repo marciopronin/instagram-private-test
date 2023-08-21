@@ -140,7 +140,8 @@ try {
                         $ig->checkpoint->sendVerificationEmail($checkApiPath, $email);
                         break;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\DeltaLoginReviewException:
-                        $ig->checkpoint->requestVerificationCode($checkApiPath, 0);
+                        $choice = (is_array($e->getResponse()->getStepData())) ? 0 : $e->getResponse()->getStepData()->getChoice();
+                        $ig->checkpoint->requestVerificationCode($checkApiPath, $choice);
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\ScrapingWarningException:
                         $ig->checkpoint->sendAcceptScrapingWarning($checkApiPath);

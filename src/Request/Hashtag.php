@@ -87,10 +87,12 @@ class Hashtag extends RequestCollection
             ->addPost('include_persistent', true);
 
         if ($tab !== null) {
+            /*
             if ($tab !== 'ranked' && $tab !== 'recent' && $tab !== 'clips' && $tab !== 'account') {
                 throw new \InvalidArgumentException('Tab section must be \'ranked\', \'recent\', \'account\' or \'clips\'.');
             }
             $request->addPost('tab', $tab);
+            */
         } else {
             $supportedTabs = [];
             if ($this->ig->isExperimentEnabled('52317', 1, false) || $this->ig->isExperimentEnabled('52317', 2, false)) {

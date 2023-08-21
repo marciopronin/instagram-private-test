@@ -1,3 +1,14 @@
+# Stable release v21.34.5
+## Date: 21/08/2023
+
+### Updates and fixes
+
+- **Hashtag:** Update `getSection()`
+
+### Examples
+
+- **Example:** Update checkpoint
+
 # Stable release v21.34.4
 ## Date: 19/08/2023
 

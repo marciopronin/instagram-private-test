@@ -1,3 +1,11 @@
+# Stable release v21.34.6
+## Date: 23/08/2023
+
+### Updates and fixes
+
+- **Constants:** Update to 297.0.0.33.109
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v21.34.5
 ## Date: 21/08/2023
 

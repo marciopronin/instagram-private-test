@@ -825,7 +825,7 @@ class Client
             switch ($httpStatusCode) {
                 case 200:
                     $multiResponse = explode(PHP_EOL, $rawResponse);
-                    if (!empty($multiResponse[1])) {
+                    if (!empty($multiResponse[1]) && !str_contains($multiResponse[0], '<!DOCTYPE html>')) {
                         $jsonArray = array_merge($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));
                     }
                     break;

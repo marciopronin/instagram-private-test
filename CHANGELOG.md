@@ -1,3 +1,17 @@
+# Stable release v21.35.0
+## Date: 29/08/2023
+
+### New features
+
+- **Internal:** Added `facebookUpload()`
+- **Internal:** Added `_uploadSegmentedVideoFacebook()`
+
+### Updates and fixes
+
+- **Client:** Update `mapServerResponse()`
+- **Metadata/Internal:** Added `getFbAttachmentId()` and `setFbAttachmentId()`
+- **Direct:** Update `sendAudio()`
+
 # Stable release v21.34.6
 ## Date: 23/08/2023
 

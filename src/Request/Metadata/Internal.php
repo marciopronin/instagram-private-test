@@ -23,6 +23,9 @@ final class Internal
     /** @var string */
     private $_uploadId;
 
+    /** @var string */
+    private $_fbAttachmentId;
+
     /** @var VideoUploadUrl[] */
     private $_videoUploadUrls;
 
@@ -154,6 +157,25 @@ final class Internal
         $uploadId)
     {
         $this->_uploadId = $uploadId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFbAttachmentId()
+    {
+        return $this->_fbAttachmentId;
+    }
+
+    /**
+     * Sets FB Attachment id.
+     *
+     * @param string $fbAttachmentId
+     */
+    public function setFbAttachmentId(
+        $fbAttachmentId)
+    {
+        $this->_fbAttachmentId = $fbAttachmentId;
     }
 
     /**

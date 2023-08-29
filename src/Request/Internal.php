@@ -1347,6 +1347,73 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Uploads using facebook uploader.
+     *
+     * @param int                   $targetFeed       One of the FEED_X constants.
+     * @param string                $videoFilename    The video filename.
+     * @param InternalMetadata|null $internalMetadata (optional) Internal library-generated metadata object.
+     * @param mixed                 $filename
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
+     *
+     * @return InternalMetadata Updated internal metadata object.
+     */
+    public function facebookUpload(
+        $targetFeed,
+        $filename,
+        InternalMetadata $internalMetadata = null)
+    {
+        if ($internalMetadata === null) {
+            $internalMetadata = new InternalMetadata();
+        }
+
+        if ($targetFeed !== Constants::FEED_DIRECT_AUDIO) {
+            throw new \InstagramException('Only Direct audio is supported at the moment.');
+        }
+
+        try {
+            switch ($targetFeed) {
+                case Constants::FEED_DIRECT_AUDIO:
+                    try {
+                        if ($internalMetadata->getVideoDetails() === null) {
+                            $internalMetadata->setVideoDetails($targetFeed, $filename);
+                        }
+                    } catch (\Exception $e) {
+                        throw new \InvalidArgumentException(
+                            sprintf('Failed to get photo details: %s', $e->getMessage()),
+                            $e->getCode(),
+                            $e
+                        );
+                    }
+
+                    $videoDetails = $internalMetadata->getVideoDetails();
+
+                    $uploadParams = $this->_getVideoUploadParams($targetFeed, $internalMetadata);
+                    $uploadParams = Utils::reorderByHashCode($uploadParams);
+                    $response = $this->_uploadSegmentedVideoFacebook($targetFeed, $internalMetadata);
+                    $internalMetadata->setFbAttachmentId($response->getMediaId());
+                    break;
+                default:
+                    break;
+            }
+        } catch (InstagramException $e) {
+            // Pass Instagram's error as is.
+            throw $e;
+        } catch (\Exception $e) {
+            // Wrap runtime errors.
+            throw new UploadFailedException(
+                sprintf('Upload of "%s" failed: %s', basename($filename), $e->getMessage()),
+                $e->getCode(),
+                $e
+            );
+        }
+
+        return $internalMetadata;
+    }
+
+    /**
      * Configures parameters for a whole album of uploaded media files.
      *
      * WARNING TO CONTRIBUTORS: THIS IS ONLY FOR *TIMELINE ALBUMS*. DO NOT MAKE
@@ -3302,6 +3369,74 @@ class Internal extends RequestCollection
         );
 
         return $result;
+    }
+
+    /**
+     * Performs a segmented upload of a video file, with support for retries using Facebook uploader.
+     *
+     * @param int              $targetFeed       One of the FEED_X constants.
+     * @param InternalMetadata $internalMetadata Internal library-generated metadata object.
+     *
+     * @throws \Exception
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     * @throws \LogicException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    protected function _uploadSegmentedVideoFacebook(
+        $targetFeed,
+        InternalMetadata $internalMetadata)
+    {
+        $videoDetails = $internalMetadata->getVideoDetails();
+
+        // We must split the video into segments before running any requests.
+        //$segments = $this->_splitVideoIntoSegments($targetFeed, $videoDetails);
+
+        $uploadParams = $this->_getVideoUploadParams($targetFeed, $internalMetadata);
+        $uploadParams = Utils::reorderByHashCode($uploadParams);
+
+        switch ($targetFeed) {
+            case Constants::FEED_DIRECT_AUDIO:
+                $uploaderType = 'messenger_audio';
+                break;
+            default:
+                $uploaderType = 'messenger_image';
+        }
+
+        // Upload the segments.
+        try {
+            $offset = 0;
+            $endpoint = sprintf(
+                'https://rupload.facebook.com/%s/%s_%d_%d',
+                $uploaderType,
+                $internalMetadata->getUploadId(),
+                0,
+                Utils::hashCode($videoDetails->getFilename()) & 0xfffffff
+            );
+
+            $offsetTemplate = new Request($this->ig, $endpoint, $this->ig->customResolver);
+            if ($targetFeed === Constants::FEED_DIRECT_AUDIO) {
+                $offsetTemplate->addHeader('Audio_type', 'FILE_ATTACHMENT');
+            }
+
+            // 1 => Audio, 2 => Video, 3 => Mixed.
+            //->addHeader('Segment-Type', $segment->getAudioCodec() !== null ? 1 : 2)
+
+            $uploadTemplate = clone $offsetTemplate;
+            $uploadTemplate
+                ->addHeader('X-Entity-Type', 'video/mp4')
+                ->addHeader('X-Entity-Name', basename(parse_url($endpoint, PHP_URL_PATH)))
+                ->addHeader('X-Entity-Length', $videoDetails->getFilesize());
+
+            $response = $this->_uploadResumableMedia($videoDetails, $offsetTemplate, $uploadTemplate, false);
+            // Offset seems to be used just for ordering the segments.
+            $offset += $videoDetails->getFilesize();
+        } catch (\Exception $e) {
+        }
+
+        return $response;
     }
 
     /**

@@ -1046,7 +1046,7 @@ class Direct extends RequestCollection
         // Direct videos use different upload IDs.
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
         // Attempt to upload the video data.
-        $internalMetadata = $this->ig->internal->uploadVideo(Constants::FEED_DIRECT_AUDIO, $videoFilename, $internalMetadata);
+        $internalMetadata = $this->ig->internal->facebookUpload(Constants::FEED_DIRECT_AUDIO, $videoFilename, $internalMetadata);
 
         // We must use the same client_context and mutation_token for all attempts to prevent double-posting.
         if (!isset($options['client_context']) || !isset($options['mutation_token'])) {
@@ -1058,6 +1058,7 @@ class Direct extends RequestCollection
         // Send the uploaded video to recipients.
         try {
             /** @var \InstagramAPI\Response\DirectSendItemResponse $result */
+            /*
             $result = $this->ig->internal->configureWithRetries(
                 function () use ($internalMetadata, $recipients, $options) {
                     $videoUploadResponse = $internalMetadata->getVideoUploadResponse();
@@ -1068,6 +1069,11 @@ class Direct extends RequestCollection
                     ]));
                 }
             );
+            */
+            $result = $this->_sendDirectItem('share_voice', $recipients, array_merge($options, [
+                'upload_id'         => $internalMetadata->getUploadId(),
+                'attachment_fbid'   => $internalMetadata->getFbAttachmentId(),
+            ]));
         } catch (InstagramException $e) {
             // Pass Instagram's error as is.
             throw $e;
@@ -1715,12 +1721,16 @@ class Direct extends RequestCollection
                 }
                 break;
             case 'share_voice':
-                $request = $this->ig->request('direct_v2/threads/broadcast/share_voice/');
+                $request = $this->ig->request('direct_v2/threads/broadcast/voice_attachment/');
                 // Check and set upload_id.
                 if (!isset($options['upload_id'])) {
                     throw new \InvalidArgumentException('No upload_id provided.');
                 }
                 $request->addPost('upload_id', $options['upload_id']);
+                if (!isset($options['attachment_fbid'])) {
+                    throw new \InvalidArgumentException('No attachment_fbid provided.');
+                }
+                $request->addPost('attachment_fbid', $options['attachment_fbid']);
 
                 $samplingFreq = (isset($options['waveform_sampling_frequency_hz']) ? $options['waveform_sampling_frequency_hz'] : 10);
                 $waveform = [];

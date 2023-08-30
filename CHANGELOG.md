@@ -1,3 +1,11 @@
+# Stable release v21.35.1
+## Date: 30/08/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_throwLoginException()`
+- **Bloks:** Update `_fixJsonString()`
+
 # Stable release v21.35.0
 ## Date: 29/08/2023
 

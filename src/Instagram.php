@@ -4393,6 +4393,7 @@ class Instagram implements ExperimentsInterface
                         if ($errorMap['event_category'] === 'checkpoint') {
                             $loginResponse = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.PresentCheckpointsFlow');
                             $loginResponse = preg_replace('/challenge_context\\\\":\\\\[a-zA-Z0-9]/m', 'challenge_context\":\"\\', $loginResponse);
+                            $loginResponse = preg_replace('/challenge_context":"\W/m', 'challenge_context":{', $loginResponse);
                             $loginResponse = json_decode(stripslashes($loginResponse), true);
                             if (isset($loginResponse['error'])) {
                                 $loginResponse = $loginResponse['error']['error_data'];

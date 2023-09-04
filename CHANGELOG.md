@@ -1,3 +1,10 @@
+# Stable release v21.35.2
+## Date: 04/09/2023
+
+### Updates and fixes
+
+- **Client:** Update `mapServerResponse()`
+
 # Stable release v21.35.1
 ## Date: 30/08/2023
 

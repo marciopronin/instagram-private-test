@@ -824,9 +824,13 @@ class Client
             $httpStatusCode = $httpResponse !== null ? $httpResponse->getStatusCode() : null;
             switch ($httpStatusCode) {
                 case 200:
-                    $multiResponse = explode(PHP_EOL, $rawResponse);
-                    if (!empty($multiResponse[1]) && !str_contains($multiResponse[0], '<!DOCTYPE html>')) {
-                        $jsonArray = array_merge($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));
+                    if ($jsonArray !== null) {
+                        $multiResponse = explode(PHP_EOL, $rawResponse);
+                        if (!empty($multiResponse[1]) && !str_contains($multiResponse[0], '<!DOCTYPE html>')) {
+                            $jsonArray = array_merge($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));
+                        }
+                    } else {
+                        throw new \InstagramAPI\Exception\EmptyResponseException('No response from server. Either a connection or configuration error.');
                     }
                     break;
                 case 400:

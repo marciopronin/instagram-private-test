@@ -2954,7 +2954,7 @@ class Instagram implements ExperimentsInterface
         if (empty($verificationCode) || empty($context)) {
             throw new \InvalidArgumentException('You must provide a verification code and two-factor identifier to finishTwoFactorVerification().');
         }
-        if (!in_array($challenge, ['totp', 'backup', 'sms', 'email', 'whatsapp'], true)) {
+        if (!in_array($challenge, ['totp', 'backup', 'sms', 'email', 'whatsapp', 'notification'], true)) {
             throw new \InvalidArgumentException('You must provide a valid 2FA challenge type.');
         }
 

@@ -1,3 +1,14 @@
+# Stable release v21.36.0
+## Date: 06/09/2023
+
+### New features
+
+- **Instagram:** Added `selectTwoFactorMethod()`
+
+### Examples
+
+- **Example:** Added `twoFactorLoginCombinedChangeMethod`
+
 # Stable release v21.35.3
 ## Date: 05/09/2023
 

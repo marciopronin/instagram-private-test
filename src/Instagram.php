@@ -2954,7 +2954,7 @@ class Instagram implements ExperimentsInterface
         if (empty($verificationCode) || empty($context)) {
             throw new \InvalidArgumentException('You must provide a verification code and two-factor identifier to finishTwoFactorVerification().');
         }
-        if (!in_array($challenge, ['totp', 'backup', 'sms', 'email', 'whatsapp', 'notification'], true)) {
+        if (!in_array($challenge, ['totp', 'backup', 'backup_codes', 'sms', 'email', 'whatsapp', 'notification'], true)) {
             throw new \InvalidArgumentException('You must provide a valid 2FA challenge type.');
         }
 
@@ -3007,6 +3007,129 @@ class Instagram implements ExperimentsInterface
             $this->_throwLoginException($response, $errorMap);
         }
         $response = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
+        //$this->_updateLoginState($response);
+        //$this->_sendLoginFlow(true, $appRefreshInterval);
+
+        return $response;
+    }
+
+    /**
+     * 2FA method picker.
+     *
+     * @param string $context   2FA context.
+     * @param string $challenge 2FA challenge type.
+     * @param mixed  $method
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\LoginResponse
+     */
+    public function selectTwoFactorMethod(
+        $context,
+        $method)
+    {
+        if (!in_array($method, ['totp', 'backup_codes', 'sms', 'email', 'whatsapp', 'notification'], true)) {
+            throw new \InvalidArgumentException('You must provide a valid 2FA method type.');
+        }
+
+        $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.method_picker/')
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'is_whatsapp_installed'         => 0,
+                ],
+                'server_params'         => [
+                    'INTERNAL_INFRA_screen_id'                      => isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
+                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL__latency_qpl_marker_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($map, $this->bloksInfo);
+        }
+
+        $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.method_picker.navigation.async/')
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'selected_method'         => $method,
+                ],
+                'server_params'         => [
+                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        switch ($method) {
+            case 'totp':
+                $endpoint = 'bloks/apps/com.bloks.www.two_factor_login.enter_totp_code/';
+                break;
+            case 'backup_codes':
+                $endpoint = 'bloks/apps/com.bloks.www.two_factor_login.enter_backup_code/';
+                break;
+            case 'sms':
+                $endpoint = 'bloks/apps/com.bloks.www.two_factor_login.enter_sms_code/';
+                break;
+            case 'email':
+                $endpoint = 'bloks/apps/com.bloks.www.two_factor_login.enter_email_code/';
+                break;
+            case 'whatsapp':
+                $endpoint = 'bloks/apps/com.bloks.www.two_factor_login.enter_whatsapp_code/';
+                break;
+        }
+
+        $response = $this->request($endpoint)
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'server_params'         => [
+                    'INTERNAL_INFRA_screen_id'                      => isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e8o7m7:2',
+                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
         //$this->_updateLoginState($response);
         //$this->_sendLoginFlow(true, $appRefreshInterval);
 

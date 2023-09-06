@@ -2193,7 +2193,7 @@ class Instagram implements ExperimentsInterface
                                     break;
                                 case 'com.bloks.www.two_factor_login.enter_backup_code':
                                 case 'com.bloks.www.two_step_verification.enter_backup_code':
-                                    $twoFactorResponse['two_factor_challenge'] = 'backup';
+                                    $twoFactorResponse['two_factor_challenge'] = 'backup_codes';
 
                                     return new Response\LoginResponse($twoFactorResponse);
                                     break;

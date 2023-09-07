@@ -1,3 +1,18 @@
+# Stable release v21.37.0
+## Date: 07/09/2023
+
+### New features
+
+- **Instagram:** Added `getAvailableTwoFactorMethods()`
+
+### Updates and fixes
+
+- **Instagram:** Updated `selectTwoFactorMethod()`
+
+### Examples
+
+- **Example:** Updated `twoFactorLoginCombinedChangeMethod`
+
 # Stable release v21.36.1
 ## Date: 06/09/2023
 

@@ -22,13 +22,14 @@ try {
         $twoFactorChallenge = $loginResponse->getTwoFactorChallenge(); // 2FA TYPE ('totp', 'backup_codes', 'sms' and 'email')
         $twoFactorContext = $loginResponse->getTwoFactorContext();
 
-        // Received challenge (2FA method) is `notification` but you want to use `backup_codes` instead:
+        // Received challenge (2FA method) is `notification` but you want to use other method instead:
         if ($twoFactorChallenge !== 'backup_codes') {
-            $twoFactorChallenge = 'backup_codes';
+            $availableMethods = $ig->getAvailableTwoFactorMethods($twoFactorContext);
+            if (in_array('backup_codes', $availableMethods)) {
+                $twoFactorChallenge = 'backup_codes';
+                $ig->selectTwoFactorMethod($twoFactorContext, $twoFactorChallenge);
+            }
         }
-
-        // Changes 2FA verification method.
-        $ig->selectTwoFactorMethod($twoFactorContext, $twoFactorChallenge);
 
         $verificationCode = trim(fgets(STDIN));
         $ig->finishTwoFactorVerification($username, $password, $twoFactorContext, $twoFactorChallenge, $verificationCode);

@@ -3014,25 +3014,18 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
-     * 2FA method picker.
+     * Get available 2FA methods.
      *
-     * @param string $context   2FA context.
-     * @param string $challenge 2FA challenge type.
-     * @param mixed  $method
+     * @param string $context 2FA context.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse
+     * @return string[]
      */
-    public function selectTwoFactorMethod(
-        $context,
-        $method)
+    public function getAvailableTwoFactorMethods(
+        $context)
     {
-        if (!in_array($method, ['totp', 'backup_codes', 'sms', 'email', 'whatsapp', 'notification'], true)) {
-            throw new \InvalidArgumentException('You must provide a valid 2FA method type.');
-        }
-
         $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.method_picker/')
             ->setNeedsAuth(false)
             ->addPost('params', json_encode([
@@ -3074,6 +3067,47 @@ class Instagram implements ExperimentsInterface
 
             $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
             $this->bloksInfo = array_merge($map, $this->bloksInfo);
+        }
+
+        $responseJ = $response->asJson();
+        $methods = [];
+        if (str_contains($responseJ, 'sms')) {
+            $methods[] = 'sms';
+        }
+        if (str_contains($responseJ, 'backup_codes')) {
+            $methods[] = 'backup_codes';
+        }
+        if (str_contains($responseJ, 'email')) {
+            $methods[] = 'email';
+        }
+        if (str_contains($responseJ, 'totp')) {
+            $methods[] = 'totp';
+        }
+        if (str_contains($responseJ, 'whatsapp')) {
+            $methods[] = 'whatsapp';
+        }
+
+        return $methods;
+    }
+
+    /**
+     * 2FA method picker.
+     *
+     * @param string $context   2FA context.
+     * @param string $challenge 2FA challenge type.
+     * @param mixed  $method
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function selectTwoFactorMethod(
+        $context,
+        $method)
+    {
+        if (!in_array($method, ['totp', 'backup_codes', 'sms', 'email', 'whatsapp', 'notification'], true)) {
+            throw new \InvalidArgumentException('You must provide a valid 2FA method type.');
         }
 
         $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.method_picker.navigation.async/')
@@ -3129,9 +3163,6 @@ class Instagram implements ExperimentsInterface
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\GenericResponse());
-
-        //$this->_updateLoginState($response);
-        //$this->_sendLoginFlow(true, $appRefreshInterval);
 
         return $response;
     }

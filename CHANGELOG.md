@@ -1,3 +1,19 @@
+# Stable release v21.38.0
+## Date: 08/09/2023
+
+### New features
+
+- **Checkpoint:** Added `sendAcceptDummyStep()`
+- **Exception:** Added `DummyStepException`
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Updated `EXCEPTION_MAP`
+
+### Examples
+
+- **Example:** Updated `checkpoint`
+
 # Stable release v21.37.0
 ## Date: 07/09/2023
 

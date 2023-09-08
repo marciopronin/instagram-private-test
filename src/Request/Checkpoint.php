@@ -102,6 +102,27 @@ class Checkpoint extends RequestCollection
     }
 
     /**
+     * Accept dummy step.
+     *
+     * @param string $checkpointUrl Checkpoint URL.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\CheckpointResponse
+     */
+    public function sendAcceptDummyStep(
+        $checkpointUrl)
+    {
+        return $this->ig->request($checkpointUrl)
+           ->setNeedsAuth(false)
+           ->setSignedPost(false)
+           ->addPost('guid', $this->ig->uuid)
+           ->addPost('device_id', $this->ig->device_id)
+           //->addPost('_csrftoken', $this->ig->client->getToken())
+           ->getResponse(new Response\CheckpointResponse());
+    }
+
+    /**
      * Accept review linked accounts.
      *
      * @param string $checkpointUrl Checkpoint URL.

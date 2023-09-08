@@ -146,6 +146,9 @@ try {
                     case $e instanceof InstagramAPI\Exception\Checkpoint\ScrapingWarningException:
                         $ig->checkpoint->sendAcceptScrapingWarning($checkApiPath);
                         break 2;
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\DummyStepException:
+                        $ig->checkpoint->sendAcceptDummyStep($checkApiPath);
+                        break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\ReviewLinkedAccountsException:
                         $ig->checkpoint->sendAcceptReviewLinkedAccounts($checkApiPath);
                         break 2;

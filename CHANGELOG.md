@@ -1,3 +1,14 @@
+# Stable release v21.39.0
+## Date: 08/09/2023
+
+### New features
+
+- **Instagram:** Added `requestTwoFactorCode()`
+
+### Updates and fixes
+
+- **Instagram:** Updated `selectTwoFactorMethod()`
+
 # Stable release v21.38.0
 ## Date: 08/09/2023
 

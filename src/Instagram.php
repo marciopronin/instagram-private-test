@@ -3138,13 +3138,13 @@ class Instagram implements ExperimentsInterface
                 $endpoint = 'bloks/apps/com.bloks.www.two_factor_login.enter_backup_code/';
                 break;
             case 'sms':
-                $endpoint = 'bloks/apps/com.bloks.www.two_factor_login.enter_sms_code/';
+                $endpoint = 'bloks/apps/com.bloks.www.two_step_verification.enter_sms_code/';
                 break;
             case 'email':
-                $endpoint = 'bloks/apps/com.bloks.www.two_factor_login.enter_email_code/';
+                $endpoint = 'bloks/apps/com.bloks.www.two_step_verification.enter_email_code/';
                 break;
             case 'whatsapp':
-                $endpoint = 'bloks/apps/com.bloks.www.two_factor_login.enter_whatsapp_code/';
+                $endpoint = 'bloks/apps/com.bloks.www.two_step_verification.enter_whatsapp_code/';
                 break;
         }
 
@@ -3156,6 +3156,83 @@ class Instagram implements ExperimentsInterface
                     'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
                     'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
                 ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        if ($method === 'sms' || $method === 'whatsapp') {
+            $responseArr = $response->asArray();
+            $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+            $dataBlock = null;
+            foreach ($mainBloks as $mainBlok) {
+                if (str_contains($mainBlok, 'masked_cp')) {
+                    $dataBlock = $mainBlok;
+                }
+            }
+            if ($dataBlock !== null) {
+                $parsed = $this->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+                $offsets = array_slice($this->bloks->findOffsets($parsed, 'masked_cp'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+
+                $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                $this->bloksInfo = array_merge($map, $this->bloksInfo);
+            }
+        }
+
+        if ($method === 'sms' || $method === 'whatsapp') {
+            $this->requestTwoFactorCode($context, $method);
+        }
+
+        return $response;
+    }
+
+    /**
+     * 2FA Bloks code request.
+     *
+     * @param string $context   2FA context.
+     * @param string $challenge 2FA challenge type.
+     * @param mixed  $method
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function requestTwoFactorCode(
+        $context,
+        $method)
+    {
+        if (!in_array($method, ['totp', 'backup_codes', 'sms', 'email', 'whatsapp', 'notification'], true)) {
+            throw new \InvalidArgumentException('You must provide a valid 2FA method type.');
+        }
+
+        $serverParams = [
+            'challenge'                                     => $method,
+            'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : '',
+            'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+            'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
+            'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+        ];
+
+        if ($method === 'sms' || $method === 'whatsapp') {
+            $serverParams['masked_cp'] = $this->bloksInfo['masked_cp'];
+        }
+
+        $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.send_code.async/')
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'server_params'         => $serverParams,
             ]))
             ->addPost('bk_client_context', json_encode([
                 'bloks_version' => Constants::BLOCK_VERSIONING_ID,

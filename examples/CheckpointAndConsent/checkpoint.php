@@ -100,12 +100,17 @@ try {
                         // If the checkpoint was bypassed, you will be able to do any other request normally.
                         $challenge = $ig->checkpoint->sendVerificationCode($checkApiPath, $code);
 
-                        if ($challenge->getLoggedInUser() !== null) {
-                            // If code was successfully verified, update login state and send login flow.
-                            $ig->finishCheckpoint($challenge);
-                            // Break switch and while loop.
+                        try {
+                            if ($challenge->getLoggedInUser() !== null) {
+                                // If code was successfully verified, update login state and send login flow.
+                                $ig->finishCheckpoint($challenge);
+                                // Break switch and while loop.
+                                break 2;
+                            }
+                        } catch (Exception $ex) {
                             break 2;
-                        } elseif ($challenge->getAction() === 'close') {
+                        }
+                        if ($challenge->getAction() === 'close') {
                             break 2;
                         }
                         break;
@@ -120,12 +125,17 @@ try {
                         $password = trim(fgets(STDIN));
                         $challenge = $ig->checkpoint->sendSetNewPasswordCheck($checkApiPath, $password);
 
-                        if ($challenge->getLoggedInUser() !== null) {
-                            // If code was successfully verified, update login state and send login flow.
-                            $ig->finishCheckpoint($challenge);
-                            // Break switch and while loop.
+                        try {
+                            if ($challenge->getLoggedInUser() !== null) {
+                                // If code was successfully verified, update login state and send login flow.
+                                $ig->finishCheckpoint($challenge);
+                                // Break switch and while loop.
+                                break 2;
+                            }
+                        } catch (Exception $ex) {
                             break 2;
-                        } elseif ($challenge->getAction() === 'close') {
+                        }
+                        if ($challenge->getAction() === 'close') {
                             break 2;
                         }
                         break;

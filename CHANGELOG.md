@@ -1,3 +1,10 @@
+# Stable release v21.39.3
+## Date: 13/09/2023
+
+### Examples
+
+- **Example:** Update checkpoint
+
 # Stable release v21.39.2
 ## Date: 13/09/2023
 

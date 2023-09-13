@@ -14,7 +14,7 @@ class Bloks
             if (is_array($value)) {
                 $results = array_merge($results, $this->parseResponse($value, $str));
             } elseif (is_string($value)) {
-                $re = '/^( \(bk\.action\.core\.TakeLast.*)/m';
+                $re = '/^(\s?\(bk\.action\.core\.TakeLast.*)/m';
                 preg_match_all($re, $value, $matches, PREG_SET_ORDER, 0);
                 if (!empty($matches[0])) {
                     $results = array_merge($results, $matches[0]);

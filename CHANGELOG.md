@@ -1,3 +1,10 @@
+# Stable release v21.39.1
+## Date: 13/09/2023
+
+### Updates and fixes
+
+- **Bloks:** Updated `parseResponse()`
+
 # Stable release v21.39.0
 ## Date: 08/09/2023
 

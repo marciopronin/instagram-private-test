@@ -2101,7 +2101,21 @@ class Instagram implements ExperimentsInterface
                     ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
                     ->getResponse(new Response\LoginResponse());
 
-                $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+                $mainBloks = $this->bloks->parseResponse($response->asArray(), '(bk.action.caa.HandleLoginResponse');
+
+                $firstDataBlok = null;
+                foreach ($mainBloks as $mainBlok) {
+                    if (str_contains($mainBlok, 'logged_in_user')) {
+                        $firstDataBlok = $mainBlok;
+                        break;
+                    }
+                }
+
+                if ($firstDataBlok !== null) {
+                    $loginResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
+                } else {
+                    $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+                }
 
                 $errorMap = [];
                 if (is_array($loginResponseWithHeaders)) {
@@ -4526,7 +4540,12 @@ class Instagram implements ExperimentsInterface
             $loginResponse['status'] = 'ok';
         }
         $loginResponse = new Response\LoginResponse($loginResponse);
-        $headers = json_decode($loginResponseWithHeaders['headers'], true);
+        $headersJson = $loginResponseWithHeaders['headers'];
+        $headersJson = preg_replace('/"{"request_index/m', '{"request_index', $headersJson);
+        $headersJson = preg_replace('/_server\\\\\/"}"/m', 'server\/"}', $headersJson);
+        $headersJson = preg_replace('/"co\wp""/m', '\\"coop\\""', $headersJson);
+
+        $headers = json_decode($headersJson, true);
 
         $this->settings->set('public_key', $headers['IG-Set-Password-Encryption-Pub-Key']);
         $this->settings->set('public_key_id', $headers['IG-Set-Password-Encryption-Key-Id']);

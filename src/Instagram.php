@@ -3212,6 +3212,44 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
+     * Check trusted notification status (Bloks).
+     *
+     * @param string $context 2FA context.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function checkTrustedNotificationBloksStatus(
+        $context)
+    {
+        $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.has_been_allowed.async/')
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'auth_secure_device_id'     => '',
+                    'device_id'                 => $this->device_id,
+                    'family_device_id'          => $this->phone_id,
+                    'machine_id'                => $this->settings->get('mid'),
+                ],
+                'server_params'         => [
+                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        return $response;
+    }
+
+    /**
      * 2FA Bloks code request.
      *
      * @param string $context   2FA context.

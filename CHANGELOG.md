@@ -1,3 +1,16 @@
+# Stable release v21.40.0
+## Date: 19/09/2023
+
+### New features
+
+- **Instagram:** Added `checkTrustedNotificationBloksStatus()`
+
+### Updates and fixes
+
+- **Client:** Update `_guzzleRequest()`
+- **Internal:** Update `configureSingleVideo()`
+- **Internal:** Update `configureSinglePhoto()`
+
 # Stable release v21.39.4
 ## Date: 15/09/2023
 

@@ -325,6 +325,7 @@ class Internal extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('device_id', $this->ig->device_id)
             ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('edits',
                 [
@@ -410,8 +411,10 @@ class Internal extends RequestCollection
                     ->addPost('scene_capture_type', '')
                     ->addPost('creation_surface', 'camera')
                     ->addPost('capture_type', 'normal')
-                    ->addPost('has_original_sound', '1')
+                    //->addPost('has_original_sound', '1')
+                    ->addPost('creation_surface', 'camera')
                     ->addPost('composition_id', Signatures::generateUUID())
+                    ->addPost('attempt_id', Signatures::generateUUID())
                     ->addPost('camera_entry_point', '360');
 
                 $request->addPost('media_transformation_info', json_encode([
@@ -528,6 +531,11 @@ class Internal extends RequestCollection
                             ->addPost('share_to_facebook', 1)
                             ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
                 }
+                if (isset($externalMetadata['fb_access_token'])) {
+                    $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
+                } else {
+                    $request->addPost('no_token_crosspost', '1');
+                }
                 if (isset($externalMetadata['xpost'])) {
                     $request->addPost('xpost_surface', 'auto_xpost');
                 }
@@ -568,7 +576,6 @@ class Internal extends RequestCollection
                     ->addPost('source_type', '4')
                     ->addPost('keep_shoppable_products', '0')
                     ->addPost('igtv_share_preview_to_feed', '1')
-                    ->addPost('device_id', $this->ig->device_id)
                     ->addPost('caption', $captionText)
                     ->addPost('title', $igtvTitle)
                     ->addPost('upload_id', $uploadId)
@@ -971,6 +978,7 @@ class Internal extends RequestCollection
             ->addPost('audio_muted', false) // $videoDetails->getAudioCodec() === null
             ->addPost('filter_type', 0)
             ->addPost('source_type', 4)
+            ->addPost('device_id', $this->ig->device_id)
             ->addPost('camera_position', 'back')
             ->addPost('device',
                 [
@@ -1030,6 +1038,7 @@ class Internal extends RequestCollection
                     ->addPost('client_timestamp', time())
                     ->addPost('date_time_original', sprintf('%sT%s.000Z', date('Ymd'), date('His')))
                     ->addPost('composition_id', Signatures::generateUUID())
+                    ->addPost('attempt_id', Signatures::generateUUID())
                     ->addPost('camera_entry_point', '360')
                     ->addPost('original_media_type', '2'); // video
 
@@ -1154,6 +1163,11 @@ class Internal extends RequestCollection
                             ->addPost('share_to_facebook', 1)
                             ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
                 }
+                if (isset($externalMetadata['fb_access_token'])) {
+                    $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
+                } else {
+                    $request->addPost('no_token_crosspost', '1');
+                }
                 if (isset($externalMetadata['xpost'])) {
                     $request->addPost('xpost_surface', 'auto_xpost');
                 }
@@ -1190,7 +1204,6 @@ class Internal extends RequestCollection
                     ->addPost('is_shared_to_fb', isset($externalMetadata['share_to_fb']) ? strval(intval($externalMetadata['share_to_fb'])) : '0')
                     ->addPost('caption', $captionText)
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-                    ->addPost('device_id', $this->ig->device_id)
                     ->addPost('camera_session_id', Signatures::generateUUID())
                     ->addPost('is_clips_edited', '0')
                     ->addPost('like_and_view_counts_disabled', '0')

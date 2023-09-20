@@ -411,10 +411,10 @@ class Internal extends RequestCollection
                     ->addPost('scene_capture_type', '')
                     ->addPost('creation_surface', 'camera')
                     ->addPost('capture_type', 'normal')
-                    //->addPost('has_original_sound', '1')
+                    ->addPost('has_original_sound', '1')
                     ->addPost('creation_surface', 'camera')
                     ->addPost('composition_id', Signatures::generateUUID())
-                    ->addPost('attempt_id', Signatures::generateUUID())
+                    //->addPost('attempt_id', Signatures::generateUUID())
                     ->addPost('camera_entry_point', '360');
 
                 $request->addPost('media_transformation_info', json_encode([
@@ -427,10 +427,12 @@ class Internal extends RequestCollection
                     'background_coverage'   => number_format(0, 1),
                 ]));
 
+                /*
                 if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
                     $story_cta = '[{"links":[{"webUri":'.json_encode($link).'}]}]';
                     $request->addPost('story_cta', $story_cta);
                 }
+                */
                 if ($linkSticker !== null) {
                     Utils::throwIfInvalidStoryLinkSticker($linkSticker);
 
@@ -1038,7 +1040,7 @@ class Internal extends RequestCollection
                     ->addPost('client_timestamp', time())
                     ->addPost('date_time_original', sprintf('%sT%s.000Z', date('Ymd'), date('His')))
                     ->addPost('composition_id', Signatures::generateUUID())
-                    ->addPost('attempt_id', Signatures::generateUUID())
+                    //->addPost('attempt_id', Signatures::generateUUID())
                     ->addPost('camera_entry_point', '360')
                     ->addPost('original_media_type', '2'); // video
 
@@ -1052,10 +1054,12 @@ class Internal extends RequestCollection
                     'background_coverage'   => number_format(0, 1),
                 ]));
 
+                /*
                 if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
                     $story_cta = '[{"links":[{"webUri":'.json_encode($link).'}]}]';
                     $request->addPost('story_cta', $story_cta);
                 }
+                */
                 if ($linkSticker !== null) {
                     Utils::throwIfInvalidStoryLinkSticker($linkSticker);
 

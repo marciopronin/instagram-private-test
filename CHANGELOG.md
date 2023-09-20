@@ -1,3 +1,11 @@
+# Stable release v21.40.1
+## Date: 20/09/2023
+
+### Updates and fixes
+
+- **Internal:** Update `configureSingleVideo()`
+- **Internal:** Update `configureSinglePhoto()`
+
 # Stable release v21.40.0
 ## Date: 19/09/2023
 

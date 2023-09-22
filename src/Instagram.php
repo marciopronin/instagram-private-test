@@ -157,17 +157,6 @@ class Instagram implements ExperimentsInterface
     public static $overrideDeprecatedThrower = false;
 
     /**
-     * Global flag for users who want to run deprecated functions.
-     *
-     * YOU ENABLE THIS AT YOUR OWN RISK! WE GIVE _ZERO_ SUPPORT FOR THIS MODE!
-     *
-     * @var bool
-     *
-     * @see Instagram::__construct()
-     */
-    public static $disableHttp2 = false;
-
-    /**
      * Global flag for users who want to enable cURL debug.
      *
      * @var bool

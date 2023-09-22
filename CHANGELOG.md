@@ -1,3 +1,16 @@
+# Stable release v21.41.0
+## Date: 21/09/2023
+
+### New features
+
+- **Media:** Add new `checkOffensiveMultiText()`
+
+### Updates and fixes
+
+- **Instagram:** Remove `$disableHttp2` flag
+- **Client:** Remove `$disableHttp2` flag
+- **Discover:** Add `search()`
+
 # Stable release v21.40.1
 ## Date: 20/09/2023
 

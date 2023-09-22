@@ -223,7 +223,7 @@ class Discover extends RequestCollection
             throw new \InvalidArgumentException('Query must be a non-empty string.');
         }
         $request = $this->_paginateWithMultiExclusion(
-            $this->ig->request('fbsearch/topsearch_flat/')
+            $this->ig->request('fbsearch/ig_typeahead/')
                 ->addParam('search_surface', 'top_search_page')
                 ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                 ->addParam('count', 30)

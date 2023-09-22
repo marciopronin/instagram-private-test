@@ -969,12 +969,6 @@ class Client
     {
         $curlOptions = [];
 
-        if (\InstagramAPI\Instagram::$disableHttp2 === false) {
-            $curlOptions = [
-                CURLOPT_HTTP_VERSION    => CURL_HTTP_VERSION_2_0,
-            ];
-        }
-
         if ($this->_resolveHost !== null) {
             $curlOptions[CURLOPT_RESOLVE] = is_array($this->_resolveHost) ? $this->_resolveHost : [$this->_resolveHost];
         }

@@ -728,6 +728,29 @@ class Media extends RequestCollection
     }
 
     /**
+     * Check offensive multi text.
+     *
+     * @param string[] $textList    Text list.
+     * @param string   $requestType Request type.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\CheckOffensiveCommentResponse
+     */
+    public function checkOffensiveMultiText(
+        $textList,
+        $requestType = 'caption')
+    {
+        return $this->ig->request('warning/check_offensive_multi_text/')
+            ->addPost('request_type', $requestType)
+            ->addPost('text', $textList)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\CheckOffensiveCommentResponse());
+    }
+
+    /**
      * Validate a web URL for acceptable use as external link.
      *
      * This endpoint lets you check if the URL is allowed by Instagram, and is

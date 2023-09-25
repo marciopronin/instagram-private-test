@@ -205,6 +205,7 @@ try {
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\UFACBlockingFormException:
                     case $e instanceof InstagramAPI\Exception\Checkpoint\UFACBloksException:
+                    case $e instanceof InstagramAPI\Exception\Checkpoint\SelfieCaptchaException:
                         echo 'Account on moderation';
                         exit();
                         break 2;

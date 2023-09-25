@@ -1,3 +1,15 @@
+# Stable release v21.41.1
+## Date: 25/09/2023
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+- **Exception:** Add SelfieCaptchaException
+
+### Examples
+
+- **Example:** Update checkpoint
+
 # Stable release v21.41.0
 ## Date: 21/09/2023
 

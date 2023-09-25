@@ -101,6 +101,7 @@ class ServerMessageThrower
         'SentryBlockException'                      => ['sentry_block'],
         'Checkpoint\ScrapingWarningException'       => ['scraping_warning'],
         'Checkpoint\ReviewLinkedAccountsException'  => ['review_linked_accounts'],
+        'Checkpoint\SelfieCaptchaException'         => ['selfie_captcha'],
         'Checkpoint\UFACBloksException'             => ['ufac_www_bloks'],
         'InvalidUserException'                      => [
             'invalid_user', // error_type

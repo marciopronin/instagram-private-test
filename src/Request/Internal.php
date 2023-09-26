@@ -136,6 +136,11 @@ class Internal extends RequestCollection
             $configure = $this->ig->internal->configureWithRetries(
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Configure the uploaded image and attach it to our timeline/story/IGTV.
+                    if (isset($externalMetadata['share_to_fb_destination_id'])) {
+                        $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
+                        $externalMetadata['crosspost'] = true;
+                    }
+
                     return $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
                 }
             );
@@ -528,15 +533,19 @@ class Internal extends RequestCollection
                     $stickerIds[] = 'media_simple_'.reset($attachedMedia)['media_id'];
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
-                    $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
-                            ->addPost('xpost_surface', 'ig_story_composer')
-                            ->addPost('share_to_facebook', 1)
-                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+                    $request->addPost('allow_multi_configures', '1')
+                            ->addPost('xpost_surface', 'auto_xpost');
                 }
-                if (isset($externalMetadata['fb_access_token'])) {
-                    $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
-                } else {
-                    $request->addPost('no_token_crosspost', '1');
+                if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['crosspost'])) {
+                    $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
+                            ->addPost('share_to_facebook', '1')
+                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+
+                    if (isset($externalMetadata['fb_access_token'])) {
+                        $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
+                    } else {
+                        $request->addPost('no_token_crosspost', '1');
+                    }
                 }
                 if (isset($externalMetadata['xpost'])) {
                     $request->addPost('xpost_surface', 'auto_xpost');
@@ -1162,15 +1171,19 @@ class Internal extends RequestCollection
                     $stickerIds[] = 'media_simple_'.reset($attachedMedia)['media_id'];
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
-                    $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
-                            ->addPost('xpost_surface', 'ig_story_composer')
-                            ->addPost('share_to_facebook', 1)
-                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+                    $request->addPost('allow_multi_configures', '1')
+                            ->addPost('xpost_surface', 'auto_xpost');
                 }
-                if (isset($externalMetadata['fb_access_token'])) {
-                    $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
-                } else {
-                    $request->addPost('no_token_crosspost', '1');
+                if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['crosspost'])) {
+                    $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
+                            ->addPost('share_to_facebook', '1')
+                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+
+                    if (isset($externalMetadata['fb_access_token'])) {
+                        $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
+                    } else {
+                        $request->addPost('no_token_crosspost', '1');
+                    }
                 }
                 if (isset($externalMetadata['xpost'])) {
                     $request->addPost('xpost_surface', 'auto_xpost');
@@ -1253,19 +1266,30 @@ class Internal extends RequestCollection
                     ])
                     ->addPost('is_created_with_contextual_music_recs', '0')
                     ->addPost('video_subtitles_enabled', '1')
-                    ->addPost('template_clips_media_id', 'null')
                     ->addPost('enable_smart_thumbnail', '0')
                     ->addPost('is_template_disabled', '0')
                     ->addPost('is_creator_requesting_mashup', '0')
                     ->addPost('capture_type', 'clips_v2');
 
                 if (isset($externalMetadata['share_to_fb'])) {
-                    $request->addPost('cross_app_share_type', '1'); // 1- Shared on fb recommended 2- shared as fb profile
+                    $request->addPost('cross_app_share_type', $externalMetadata['share_to_fb']); // 1- Shared on fb recommended 2- shared as fb profile
+                }
+
+                if (isset($externalMetadata['share_to_fb_destination_id'])) {
+                    $request->addPost('is_shared_to_fb', '0')
+                            ->addPost('share_to_fb_destination_audience_type', 'PUBLIC');
                 }
 
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
-                            ->addPost('share_to_facebook', '1');
+                            ->addPost('share_to_facebook', '1')
+                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+
+                    if (isset($externalMetadata['fb_access_token'])) {
+                        $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
+                    } else {
+                        $request->addPost('no_token_crosspost', '1');
+                    }
                 }
 
                 if ($reelShareToFeed !== null) {

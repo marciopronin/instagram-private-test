@@ -969,6 +969,24 @@ class Client
     {
         $curlOptions = [];
 
+        //$curlOptions = [
+        //    CURLOPT_SSLVERSION          => CURL_SSLVERSION_TLSv1_3, // 0x0303 (771)
+        //    CURLOPT_TLS13_CIPHERS       => 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256', // 0x1301 (4865), 0x1302 (4866), 0x1303 (4867)
+        //    CURLOPT_SSL_EC_CURVES       => 'X25519:P-256',
+        //    CURLOPT_SSL_ENABLE_ALPN     => true,
+        // supported_versions (43)
+        // supported_groups (10)
+        // key_share (51)
+        // signature_algorithms (13)
+        // server_name (0)
+        // application_layer_protocol_negotiation (16)
+        // psk_key_exchange_modes (45)
+        // supported_groups => x25519 = 0x001d (29), secp256r1 = 0x0017 (23)
+        //];
+        // SSL context can't be manipulated in PHP since CURLOPT_SSL_CTX_FUNCTION is not exposed
+        // A middle proxy would be required to manipulate extensions to only include: supported_versions, supported_groups, signature_algorithms, server_name, application_layer_protocol_negotiation, psk_key_exchange_modes, supported_groups
+        // JA3 = 771,4865-4866-4867,43-10-51-13-0-16-45,29-23, => 7a29c223fb122ec64d10f0a159e07996
+
         if ($this->_resolveHost !== null) {
             $curlOptions[CURLOPT_RESOLVE] = is_array($this->_resolveHost) ? $this->_resolveHost : [$this->_resolveHost];
         }
@@ -1032,7 +1050,7 @@ class Client
         HttpRequestInterface $request,
         array $guzzleOptions = [])
     {
-        $disableCookies = ($request->getUri()->getPath() === '/logging_client_events' || ($request->getUri()->getPath() === '/challenge/' && $request->getUri()->getPath() !== '/api/v1/challenge/web/action/')) ? true : false;
+        $disableCookies = ($request->getUri()->getPath() === '/logging_client_events' || $request->getUri()->getPath() === '/challenge/' || str_contains($request->getUri()->getPath(), 'web/action')) ? true : false;
 
         // Add critically important options for authenticating the request.
         $guzzleOptions = $this->_buildGuzzleOptions($guzzleOptions, $disableCookies);

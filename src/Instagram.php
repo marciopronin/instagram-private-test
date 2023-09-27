@@ -1956,6 +1956,9 @@ class Instagram implements ExperimentsInterface
                     if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
                         $firstDataBlok = $mainBlok;
                     }
+                    if (str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
+                        $firstDataBlokBack = $mainBlok;
+                    }
                     if (str_contains($mainBlok, 'typeahead_id') && str_contains($mainBlok, 'text_input_id') && str_contains($mainBlok, 'text_component_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
                         $secondDataBlok = $mainBlok;
                     }
@@ -1968,6 +1971,13 @@ class Instagram implements ExperimentsInterface
                         break;
                     }
                 }
+
+                if ($firstDataBlok === null) {
+                    $firstDataBlok = $firstDataBlokBack;
+                    $this->bloksInfo['INTERNAL__latency_qpl_instance_id'] = [0, 0];
+                    $this->bloksInfo['INTERNAL__latency_qpl_marker_id'] = [0, 0];
+                }
+
                 if ($firstDataBlok === null) {
                     $this->isMaybeLoggedIn = false;
                     $this->settings->set('mid', '');
@@ -2065,22 +2075,22 @@ class Instagram implements ExperimentsInterface
                             'encrypted_msisdn'              => '',
                         ],
                         'server_params'         => [
-                            'username_text_input_id'                        => $firstMap['username_text_input_id'],
+                            'username_text_input_id'                        => isset($firstMap['username_text_input_id']) ? $firstMap['username_text_input_id'] : '',
                             'device_id'                                     => $this->device_id,
                             'should_trigger_override_login_success_action'  => 0,
-                            'server_login_source'                           => $firstMap['server_login_source'],
+                            'server_login_source'                           => isset($firstMap['server_login_source']) ? $firstMap['server_login_source'] : 'login',
                             //'waterfall_id'                                  => $firstMap['waterfall_id'],
-                            'login_source'                                  => $firstMap['login_source'],
-                            'INTERNAL__latency_qpl_instance_id'             => intval($firstMap['INTERNAL__latency_qpl_instance_id'][1]),
-                            'is_platform_login'                             => intval($firstMap['is_platform_login'][1]),
-                            'credential_type'                               => $firstMap['credential_type'],
+                            'login_source'                                  => isset($firstMap['login_source']) ? $firstMap['login_source'] : 'Login',
+                            'INTERNAL__latency_qpl_instance_id'             => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),
+                            'is_platform_login'                             => intval($this->bloksInfo['is_platform_login'][1]),
+                            'credential_type'                               => isset($firstMap['credential_type']) ? $firstMap['credential_type'] : 'password',
                             //'family_device_id'                              => $this->phone_id,
-                            'INTERNAL__latency_qpl_marker_id'               => intval($firstMap['INTERNAL__latency_qpl_marker_id'][1]),
+                            'INTERNAL__latency_qpl_marker_id'               => intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]),
                             //'offline_experiment_group'                      => $firstMap['offline_experiment_group'],
                             'INTERNAL_INFRA_THEME'                          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
-                            'password_text_input_id'                        => $firstMap['password_text_input_id'],
+                            'password_text_input_id'                        => isset($firstMap['password_text_input_id']) ? $firstMap['password_text_input_id'] : '',
                             //'qe_device_id'                                  => $this->uuid,
-                            'ar_event_source'                               => $firstMap['ar_event_source'],
+                            'ar_event_source'                               => isset($firstMap['ar_event_source']) ? $firstMap['ar_event_source'] : 'login_home_page',
                         ],
                     ]))
                     ->addPost('bk_client_context', json_encode([

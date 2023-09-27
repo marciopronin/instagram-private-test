@@ -1,3 +1,11 @@
+# Stable release v21.41.3
+## Date: 27/09/2023
+
+### Updates and fixes
+
+- **Client:** Update `_guzzleRequest()`
+- **Instagram:** Update `_login_()`
+
 # Stable release v21.41.2
 ## Date: 26/09/2023
 

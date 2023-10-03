@@ -1,3 +1,12 @@
+# Stable release v21.42.0
+## Date: 03/09/2023
+
+**WIP:** Improving bloks parser
+
+### Updates and fixes
+
+- **Instagram:** Added `getForgotPasswordLink()`
+
 # Stable release v21.41.4
 ## Date: 27/09/2023
 

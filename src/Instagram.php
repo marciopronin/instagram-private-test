@@ -2561,13 +2561,15 @@ class Instagram implements ExperimentsInterface
      * Request login/reset password link.
      *
      * @param string $username Username.
+     * @param string $method   Method. 'phone' or 'email'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\GenericResponse
      */
     public function getForgotPasswordLink(
-        $username)
+        $username,
+        $method = 'phone')
     {
         $this->_setUser('regular', $username, 'nopass');
         $response = $this->getHomeTemplate();
@@ -2790,7 +2792,7 @@ class Instagram implements ExperimentsInterface
                 'client_input_params'           => [
                     'emails'                                => [],
                     'selected_xapp_contactpoint_index'      => -1,
-                    'auth_option'                           => 'phone',
+                    'auth_option'                           => $method,
                     'tokens'                                => [],
                     'machine_id'                            => $this->settings->get('mid'),
                     'selected_phone_number_index'           => -1,

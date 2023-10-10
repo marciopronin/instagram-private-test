@@ -11,6 +11,7 @@ use InstagramAPI\Response;
  * @method string getApiPath()
  * @method Model\Challenge getChallenge()
  * @method mixed getChallengeContext()
+ * @method string getChallengeTypeEnumStr()
  * @method bool getLock()
  * @method bool getLogout()
  * @method mixed getMessage()
@@ -25,6 +26,7 @@ use InstagramAPI\Response;
  * @method bool isApiPath()
  * @method bool isChallenge()
  * @method bool isChallengeContext()
+ * @method bool isChallengeTypeEnumStr()
  * @method bool isLock()
  * @method bool isLogout()
  * @method bool isMessage()
@@ -39,6 +41,7 @@ use InstagramAPI\Response;
  * @method $this setApiPath(string $value)
  * @method $this setChallenge(Model\Challenge $value)
  * @method $this setChallengeContext(mixed $value)
+ * @method $this setChallengeTypeEnumStr(string $value)
  * @method $this setLock(bool $value)
  * @method $this setLogout(bool $value)
  * @method $this setMessage(mixed $value)
@@ -53,6 +56,7 @@ use InstagramAPI\Response;
  * @method $this unsetApiPath()
  * @method $this unsetChallenge()
  * @method $this unsetChallengeContext()
+ * @method $this unsetChallengeTypeEnumStr()
  * @method $this unsetLock()
  * @method $this unsetLogout()
  * @method $this unsetMessage()
@@ -67,16 +71,17 @@ use InstagramAPI\Response;
 class CheckpointResponse extends Response
 {
     const JSON_PROPERTY_MAP = [
-        'url'               => 'string',
-        'api_path'          => 'string',
-        'lock'              => 'bool',
-        'logout'            => 'bool',
-        'step_name'         => 'string',
-        'challenge_context' => '',
-        'challenge'         => 'Model\Challenge',
-        'step_data'         => 'Model\StepData',
-        'user_id'           => 'string',
-        'nonce_code'        => 'string',
-        'action'            => 'string',
+        'url'                       => 'string',
+        'api_path'                  => 'string',
+        'lock'                      => 'bool',
+        'logout'                    => 'bool',
+        'step_name'                 => 'string',
+        'challenge_context'         => '',
+        'challenge'                 => 'Model\Challenge',
+        'step_data'                 => 'Model\StepData',
+        'user_id'                   => 'string',
+        'nonce_code'                => 'string',
+        'action'                    => 'string',
+        'challenge_type_enum_str'   => 'string',
     ];
 }

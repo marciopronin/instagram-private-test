@@ -1,3 +1,13 @@
+# Stable release v21.42.3
+## Date: 10/10/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+- **ServerMessageThrower:** Update `autoThrow()`
+- **Response:** Update CheckpointResponse
+
 # Stable release v21.42.2
 ## Date: 06/10/2023
 

@@ -1952,6 +1952,7 @@ class Instagram implements ExperimentsInterface
                 $firstDataBlok = null;
                 $secondDataBlok = null;
                 $thirdDataBlok = null;
+                $fourthDataBlock = null;
                 foreach ($mainBloks as $mainBlok) {
                     if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
                         $firstDataBlok = $mainBlok;

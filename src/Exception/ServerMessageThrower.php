@@ -110,6 +110,7 @@ class ServerMessageThrower
         'Checkpoint\DummyStepException'                      => ['dummy_step'],
         'Checkpoint\RecaptchaChallengeException'             => ['RecaptchaChallengeForm', 'RecaptchaRestrictChallengeForm'],
         'Checkpoint\EscalationChallengeInformationException' => [
+            'ESCALATION',
             'EscalationChallengeInformationalForm',
             'EscalationChallengeAppealForm',
         ],
@@ -178,6 +179,9 @@ class ServerMessageThrower
             if ($serverResponse->hasStepName()
                 && is_string($serverResponse->getStepName())) {
                 $serverErrorType = $serverResponse->getStepName();
+                if ($serverErrorType === '') {
+                    $serverErrorType = $serverResponse->getChallengeTypeEnumStr();
+                }
                 $messages[] = $serverErrorType;
             }
             if ($serverResponse->hasEntryData()) {

@@ -1,3 +1,14 @@
+# Stable release v21.43.0
+## Date: 16/10/2023
+
+**WIP:** Bloks parser improvements and refactorization.
+**WIP:** Account center integration.
+
+### New features
+
+- **Account:** Add `getAccountCenterLinkedAccounts()`
+- **Account:** Add `setDefaultSharingTarget()`
+
 # Stable release v21.42.3
 ## Date: 10/10/2023
 

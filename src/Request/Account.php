@@ -1706,6 +1706,115 @@ class Account extends RequestCollection
     }
 
     /**
+     * Get account center linked accounts.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return array
+     */
+    public function getAccountCenterLinkedAccounts()
+    {
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post/')
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'server_params'         => [
+                    'requested_screen_component_type'   => 2,
+                    'should_show_done_button'           => 0,
+                    'entrypoint'                        => 'app_settings',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'account_identifier')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'account_identifier'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
+
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account/')
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'server_params'         => [
+                    'requested_screen_component_type'   => 2,
+                    'account_identifier'                => $this->ig->bloksInfo['account_identifier'],
+                    'INTERNAL_INFRA_screen_id'          => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $re = '/:"(.*),\sFacebook.*f32\.Eq,\s\\\\"(\d+)/m';
+        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+        return $matches;
+    }
+
+    /**
+     * Set default sharing target.
+     *
+     * @param int $sourceAccountId Account ID.
+     * @param int targetIdentityId  Page ID.
+     * @param mixed $targetIdentityId
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function setDefaultSharingTarget(
+        $sourceAccountId,
+        $targetIdentityId)
+    {
+        return $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.post.target.async/')
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'client_input_params'         => [
+                    'family_device_id'  => $this->ig->phone_id,
+                ],
+                'server_params'         => [
+                    'target_identity_type'              => 'EntPage',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f',
+                    'source_account_id'                 => $sourceAccountId,  // Account ID
+                    'target_identity_id'                => $targetIdentityId, // PAGE ID
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get security emails.
      *
      * @throws \InstagramAPI\Exception\InstagramException

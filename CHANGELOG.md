@@ -1,3 +1,23 @@
+# Stable release v21.44.0
+## Date: 17/10/2023
+
+### New features
+
+- **Account:** Add `addEmailContactPoint()`
+- **Account:** Add `verifyEmailContactPoint()`
+- **Account:** Add `deletePhoneContactPoint()`
+- **Account:** Add `getLinkingAuthBlob()`
+
+### Models and resposes
+
+- **Response:** Added LinkingAuthBlobResponse
+
+### Updates and fixes
+
+- **Instagram:** Update `_processSuccesfulLoginResponse()`
+- **StorageHandler:** Update `PERSISTENT_KEYS`
+
+
 # Stable release v21.43.1
 ## Date: 16/10/2023
 

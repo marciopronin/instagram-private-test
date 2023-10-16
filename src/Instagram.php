@@ -4880,6 +4880,10 @@ class Instagram implements ExperimentsInterface
         if ($loginResponse->getLoggedInUser()->getIsBusiness() !== null) {
             $this->settings->set('business_account', $loginResponse->getLoggedInUser()->getIsBusiness());
         }
+        $this->settings->set('fbid_v2', $loginResponse->getLoggedInUser()->getFbidV2());
+        if ($loginResponse->getLoggedInUser()->getPhoneNumber() !== null) {
+            $this->settings->set('phone_number', $loginResponse->getLoggedInUser()->getPhoneNumber());
+        }
 
         $this->_updateLoginState($loginResponse);
         if ($loginFlow === true) {

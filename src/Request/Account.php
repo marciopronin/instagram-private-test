@@ -1826,7 +1826,7 @@ class Account extends RequestCollection
         $targetIdentityId)
     {
         return $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.post.target.async/')
-            ->setNeedsAuth(false)
+            ->setSignedPost(false)
             ->addPost('params', json_encode([
                 'client_input_params'         => [
                     'family_device_id'  => $this->ig->phone_id,
@@ -1844,6 +1844,342 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Add email contact point.
+     *
+     * @param string $email Email.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function addEmailContactPoint(
+        $email)
+    {
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'server_params'         => [
+                    'entrypoint'                        => 'app_settings',
+                    'should_show_done_button'           => 0,
+                    'INTERNAL_INFRA_screen_id'          => 'CONTACT_POINT_SETTINGS',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'INTERNAL_INFRA_screen_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
+
+        $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.select_type/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'server_params'         => [
+                    'contact_point_event_type'          => 'add',
+                    'contact_point_source'              => 'fx_settings',
+                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'INTERNAL_INFRA_screen_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
+        $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.add/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'server_params'         => [
+                    'contact_point_type'                => 'email',
+                    'contact_point_source'              => 'fx_settings',
+                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'INTERNAL__latency_qpl_marker_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
+
+        $authBlob = $this->getLinkingAuthBlob()->getJsonSerializedBlob();
+
+        $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.add.async/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'country'                           => null,
+                    'family_device_id'                  => $this->ig->phone_id,
+                    'ig_account_encrypted_auth_proof'   => $authBlob,
+                    'selected_accounts'                 => [$this->ig->settings->get('fbid_v2')],
+                    'contact_point'                     => $email,
+                ],
+                'server_params'         => [
+                    'contact_point_event_type'          => 'add',
+                    'contact_point_type'                => 'email',
+                    'contact_point_source'              => 'fx_settings',
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f',
+                    'machine_id'                        => null,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'INTERNAL_INFRA_screen_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
+
+        $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.verify/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'server_params'         => [
+                    'contact_point_event_type'          => 'add',
+                    'contact_point_type'                => 'email',
+                    'contact_point_source'              => 'fx_settings',
+                    'normalized_contact_point'          => $email,
+                    'selected_accounts'                 => $this->ig->settings->get('fbid_v2'),
+                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'INTERNAL__latency_qpl_marker_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
+
+        return $authBlob;
+    }
+
+    /**
+     * Verify email contact point.
+     *
+     * @param string $email    Email.
+     * @param string $code     Code.
+     * @param string $authBlob Auth blob.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function verifyEmailContactPoint(
+        $email,
+        $code,
+        $authBlob)
+    {
+        $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.verify.async/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'pin_code'                          => $code,
+                    'family_device_id'                  => $this->ig->phone_id,
+                    'selected_accounts'                 => [$this->ig->settings->get('fbid_v2')],
+                    'contact_point'                     => $email,
+                ],
+                'server_params'         => [
+                    'contact_point_event_type'          => 'add',
+                    'contact_point_type'                => 'email',
+                    'contact_point_source'              => 'fx_settings',
+                    'ig_account_encrypted_auth_proof'   => $authBlob,
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f',
+                    'machine_id'                        => null,
+                    'normalized_contact_point'          => $email,
+                    'selected_accounts'                 => $this->ig->settings->get('fbid_v2'),
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Delete phone contact point.
+     *
+     * @param string     $phone       Phone number.
+     * @param mixed|null $phoneNumber
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function deletePhoneContactPoint(
+        $phoneNumber = null)
+    {
+        if ($phoneNumber === null) {
+            $phoneNumber = $this->ig->settings->get('phone_number');
+        }
+        $authBlob = $this->getLinkingAuthBlob()->getJsonSerializedBlob();
+        $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.delete.async/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'family_device_id'                  => $this->ig->phone_id,
+                    'ig_account_encrypted_auth_proof'   => $authBlob,
+                ],
+                'server_params'         => [
+                    'contact_point_type'                => 'phone_number',
+                    'contact_point_source'              => 'fx_settings',
+                    'ig_account_encrypted_auth_proof'   => $authBlob,
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f',
+                    'machine_id'                        => null,
+                    'normalized_contact_point'          => $phoneNumber,
+                    'selected_accounts'                 => $this->ig->settings->get('fbid_v2'),
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Get linking auth blob.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return LinkingAuthBlobResponse
+     */
+    public function getLinkingAuthBlob()
+    {
+        return $this->ig->request('fxcal/get_native_linking_auth_blob/')
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->getResponse(new Response\LinkingAuthBlobResponse());
     }
 
     /**

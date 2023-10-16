@@ -63,6 +63,8 @@ class StorageHandler
         'salt_ids',
         'offline_experiment', // Bloks offline experiments for login.
         'nav_started',
+        'fbid_v2',
+        'phone_number',
     ];
 
     /**

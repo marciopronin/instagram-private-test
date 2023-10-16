@@ -1716,7 +1716,7 @@ class Account extends RequestCollection
     public function getAccountCenterLinkedAccounts()
     {
         $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post/')
-            ->setNeedsAuth(false)
+            ->setSignedPost(false)
             ->addPost('params', json_encode([
                 'server_params'         => [
                     'requested_screen_component_type'   => 2,
@@ -1734,9 +1734,15 @@ class Account extends RequestCollection
         $responseArr = $response->asArray();
         $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
         $dataBlock = null;
+        $secondBlock = null;
         foreach ($mainBloks as $mainBlok) {
             if (str_contains($mainBlok, 'account_identifier')) {
-                $dataBlock = $mainBlok;
+                if ($dataBlock === null) {
+                    $dataBlock = $mainBlok;
+                }
+            }
+            if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
+                $secondBlock = $mainBlok;
             }
         }
         if ($dataBlock !== null) {
@@ -1754,9 +1760,24 @@ class Account extends RequestCollection
             $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
             $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
         }
+        if ($secondBlock !== null) {
+            $parsed = $this->ig->bloks->parseBlok($secondBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'INTERNAL_INFRA_screen_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
 
         $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account/')
-            ->setNeedsAuth(false)
+            ->setSignedPost(false)
             ->addPost('params', json_encode([
                 'server_params'         => [
                     'requested_screen_component_type'   => 2,
@@ -1771,10 +1792,21 @@ class Account extends RequestCollection
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\GenericResponse());
 
-        $re = '/:"(.*),\sFacebook.*f32\.Eq,\s\\\\"(\d+)/m';
+        $re = '/(\w+\s?\w+),\sFacebook.*f32.Eq,\s\\\\\"(\d+)\\\\/U';
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
 
-        return $matches;
+        $results = [];
+        if (!empty($matches)) {
+            foreach ($matches as $match) {
+                $results[$match[1]] = ['id' => $match[2]];
+                preg_match_all(sprintf('/%d\),\s\\\\"(\w+)/m', $match[2]), $response->asJson(), $submatches, PREG_SET_ORDER, 0);
+                if (!empty($submatches)) {
+                    $results[$match[1]]['entity'] = $submatches[0][1] === 'EntPage' ? 'PAGE' : 'USER';
+                }
+            }
+        }
+
+        return $results;
     }
 
     /**

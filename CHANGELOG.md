@@ -1,3 +1,11 @@
+# Stable release v21.44.1
+## Date: 17/10/2023
+
+### Updates and fixes
+
+- **Account:** Update `addEmailContactPoint()`
+- **Account:** Update `deletePhoneContactPoint()`
+
 # Stable release v21.44.0
 ## Date: 17/10/2023
 
@@ -16,7 +24,6 @@
 
 - **Instagram:** Update `_processSuccesfulLoginResponse()`
 - **StorageHandler:** Update `PERSISTENT_KEYS`
-
 
 # Stable release v21.43.1
 ## Date: 16/10/2023

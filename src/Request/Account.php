@@ -1899,6 +1899,10 @@ class Account extends RequestCollection
             $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
         }
 
+        if (isset($this->ig->bloksInfo['normalized_contact_point'])) {
+            $this->ig->settings->set('phone_number', $this->ig->bloksInfo['normalized_contact_point']);
+        }
+
         $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.select_type/')
             ->setSignedPost(false)
             ->addPost('params', json_encode([
@@ -2136,8 +2140,32 @@ class Account extends RequestCollection
     public function deletePhoneContactPoint(
         $phoneNumber = null)
     {
-        if ($phoneNumber === null) {
+        if ($phoneNumber === null && !empty($this->ig->settings->get('phone_number'))) {
             $phoneNumber = $this->ig->settings->get('phone_number');
+        } else {
+            $response = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point/')
+                ->setSignedPost(false)
+                ->addPost('params', json_encode([
+                    'server_params'         => [
+                        'entrypoint'                        => 'app_settings',
+                        'should_show_done_button'           => 0,
+                        'INTERNAL_INFRA_screen_id'          => 'CONTACT_POINT_SETTINGS',
+                    ],
+                ]))
+                ->addPost('bk_client_context', json_encode([
+                    'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                    'styles_id'     => 'instagram',
+                ]))
+                ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+                ->getResponse(new Response\GenericResponse());
+
+            $re = '/(\+\d+)/m';
+            preg_match($re, $response->asJson(), $matches, PREG_OFFSET_CAPTURE, 0);
+
+            if (!empty($matches)) {
+                $this->ig->settings->set('phone_number', $matches[0][0]);
+                $phoneNumber = $matches[0][0];
+            }
         }
         $authBlob = $this->getLinkingAuthBlob()->getJsonSerializedBlob();
         $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.delete.async/')

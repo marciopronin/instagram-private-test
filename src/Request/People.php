@@ -150,7 +150,15 @@ class People extends RequestCollection
         $module = 'self_profile',
         $entrypoint = null)
     {
-        return $this->getInfoById($this->ig->account_id, $module, $entrypoint);
+        $response = $this->getInfoById($this->ig->account_id, $module, $entrypoint);
+        if ($response->getUser()->getFbidV2() !== null) {
+            $this->ig->settings->set('fbid_v2', $response->getUser()->getFbidV2());
+        }
+        if ($response->getUser()->getPhoneNumber() !== null) {
+            $this->ig->settings->set('phone_number', $response->getUser()->getPhoneNumber());
+        }
+
+        return $response;
     }
 
     /**

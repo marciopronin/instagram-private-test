@@ -1,3 +1,10 @@
+# Stable release v21.44.2
+## Date: 18/10/2023
+
+### Updates and fixes
+
+- **People:** Update `getSelfInfo()`
+
 # Stable release v21.44.1
 ## Date: 17/10/2023
 

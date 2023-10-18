@@ -1731,6 +1731,10 @@ class Account extends RequestCollection
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\GenericResponse());
 
+        if (str_contains($response->asJson(), 'Something Went Wrong')) {
+            throw new \InstagramAPI\Exception\InstagramException('Instagram error. You can try again later or use another account.');
+        }
+
         $responseArr = $response->asArray();
         $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
         $dataBlock = null;

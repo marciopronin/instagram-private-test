@@ -1731,10 +1731,6 @@ class Account extends RequestCollection
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\GenericResponse());
 
-        if (str_contains($response->asJson(), 'Something Went Wrong')) {
-            throw new \InstagramAPI\Exception\InstagramException('Instagram error. You can try again later or use another account.');
-        }
-
         $responseArr = $response->asArray();
         $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
         $dataBlock = null;
@@ -1778,6 +1774,10 @@ class Account extends RequestCollection
 
             $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
             $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
+
+        if (!isset($this->ig->bloksInfo['account_identifier']) || empty($this->ig->bloksInfo['account_identifier'])) {
+            return [];
         }
 
         $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account/')

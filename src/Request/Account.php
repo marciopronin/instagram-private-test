@@ -1811,9 +1811,9 @@ class Account extends RequestCollection
             foreach ($matches as $match) {
                 $results[$match[1]] = ['id' => $match[2]];
                 if ($match[2] === $default) {
-                    $results[$match[1]] = ['default' => true];
+                    $results[$match[1]]['default'] = true;
                 } else {
-                    $results[$match[1]] = ['default' => false];
+                    $results[$match[1]]['default'] = false;
                 }
                 preg_match_all(sprintf('/%d\),\s\\\\"(\w+)/m', $match[2]), $response->asJson(), $submatches, PREG_SET_ORDER, 0);
                 if (!empty($submatches)) {

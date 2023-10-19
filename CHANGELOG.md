@@ -1,3 +1,12 @@
+# Stable release v21.44.6
+## Date: 19/10/2023
+
+### Updates and fixes
+
+- **Constant:** Update constants to 305.0.0.34.110
+- **Account:** Update `getAccountCenterLinkedAccounts()`
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v21.44.5
 ## Date: 19/10/2023
 
@@ -10,14 +19,14 @@
 
 ### Updates and fixes
 
-- **People:** Update `getAccountCenterLinkedAccounts()`
+- **Account:** Update `getAccountCenterLinkedAccounts()`
 
 # Stable release v21.44.3
 ## Date: 18/10/2023
 
 ### Updates and fixes
 
-- **People:** Update `getAccountCenterLinkedAccounts()`
+- **Account:** Update `getAccountCenterLinkedAccounts()`
 
 # Stable release v21.44.2
 ## Date: 18/10/2023

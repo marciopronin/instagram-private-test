@@ -1796,6 +1796,13 @@ class Account extends RequestCollection
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\GenericResponse());
 
+        $re = '/radio_button_selected_id:\d+","mode":".","initial":"(\d+)"/m';
+        preg_match_all($re, $response->asJson(), $active, PREG_SET_ORDER, 0);
+        $default = null;
+        if (!empty($active)) {
+            $default = $active[0][1];
+        }
+
         $re = '/(\w+\s?\w+),\sFacebook.*f32.Eq,\s\\\\\"(\d+)\\\\/U';
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
 
@@ -1803,6 +1810,11 @@ class Account extends RequestCollection
         if (!empty($matches)) {
             foreach ($matches as $match) {
                 $results[$match[1]] = ['id' => $match[2]];
+                if ($match[2] === $default) {
+                    $results[$match[1]] = ['default' => true];
+                } else {
+                    $results[$match[1]] = ['default' => false];
+                }
                 preg_match_all(sprintf('/%d\),\s\\\\"(\w+)/m', $match[2]), $response->asJson(), $submatches, PREG_SET_ORDER, 0);
                 if (!empty($submatches)) {
                     $results[$match[1]]['entity'] = $submatches[0][1] === 'EntPage' ? 'PAGE' : 'USER';

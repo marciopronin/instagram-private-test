@@ -1,3 +1,11 @@
+# Stable release v21.45.0
+## Date: 24/10/2023
+
+### New features
+
+- **Media:** Add `pin()`
+- **Media:** Add `unpin()`
+
 # Stable release v21.44.6
 ## Date: 19/10/2023
 

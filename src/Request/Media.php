@@ -774,6 +774,46 @@ class Media extends RequestCollection
     }
 
     /**
+     * Pin a media item.
+     *
+     * @param string $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function pin(
+        $mediaId)
+    {
+        return $this->ig->request('users/pin_timeline_media/')
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('post_id', $mediaId)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Unpin a media item.
+     *
+     * @param string $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function unpin(
+        $mediaId)
+    {
+        return $this->ig->request('users/unpin_timeline_media/')
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('post_id', $mediaId)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Save a media item.
      *
      * @param string $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").

@@ -1,3 +1,10 @@
+# Stable release v21.45.3
+## Date: 27/10/2023
+
+### Updates and fixes
+
+- **Response:** Update `FBSearchResponse`
+
 # Stable release v21.45.2
 ## Date: 27/10/2023
 

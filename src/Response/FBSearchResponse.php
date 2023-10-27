@@ -7,7 +7,7 @@ use InstagramAPI\Response;
 /**
  * FBSearchResponse.
  *
- * @method bool getClearClientCache()
+ * @method mixed getClearClientCache()
  * @method bool getHasMore()
  * @method Model\SearchList[] getList()
  * @method mixed getMessage()
@@ -21,7 +21,7 @@ use InstagramAPI\Response;
  * @method bool isRankToken()
  * @method bool isStatus()
  * @method bool is_Messages()
- * @method $this setClearClientCache(bool $value)
+ * @method $this setClearClientCache(mixed $value)
  * @method $this setHasMore(bool $value)
  * @method $this setList(Model\SearchList[] $value)
  * @method $this setMessage(mixed $value)
@@ -41,7 +41,7 @@ class FBSearchResponse extends Response
     const JSON_PROPERTY_MAP = [
         'has_more'              => 'bool',
         'list'                  => 'Model\SearchList[]',
-        'clear_client_cache'    => 'bool',
+        'clear_client_cache'    => '',
         'has_more'              => 'bool',
         'rank_token'            => 'string',
     ];

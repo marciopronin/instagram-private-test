@@ -1,3 +1,12 @@
+# Stable release v21.45.1
+## Date: 27/10/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_throwLoginException()`
+- **Event:** Update `prepareAndSendExploreImpression()`
+- **Event:** Update `prepareAndSendThumbnailImpression()`
+
 # Stable release v21.45.0
 ## Date: 24/10/2023
 

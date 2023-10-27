@@ -2868,6 +2868,7 @@ class Event extends RequestCollection
                 case 'one_by_two_left_right':
                 case 'two_by_two_ad_left_with_fallback':
                 case 'one_by_two_left_with_ad':
+                case 'one_by_two_right_with_ad':
                     // TODO: More information is required.
                     break;
                 default:
@@ -3050,6 +3051,7 @@ class Event extends RequestCollection
                 case 'one_by_two_left_right':
                 case 'two_by_two_ad_left_with_fallback':
                 case 'one_by_two_left_with_ad':
+                case 'one_by_two_right_with_ad':
                     // TODO: More information is required.
                     break;
                 default:

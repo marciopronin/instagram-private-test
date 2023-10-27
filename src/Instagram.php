@@ -5002,6 +5002,16 @@ class Instagram implements ExperimentsInterface
                             $loginResponse = new Response\LoginResponse($loginResponse);
 
                             return $loginResponse;
+                        } elseif ($errorMap['event_category'] === 'FIRST_PASSWORD_FAILURE') {
+                            $loginResponse = new Response\LoginResponse([
+                                'error_type'    => 'incorrect_password',
+                                'status'        => 'fail',
+                                'message'       => 'Invalid password or older password used.',
+                            ]);
+                            $e = new \InstagramAPI\Exception\IncorrectPasswordException($msg);
+                            $e->setResponse($loginResponse);
+
+                            throw $e;
                         } elseif ($errorMap['event_category'] === 'login_home_page_interaction') {
                             $msg = "You can't use Instagram because your account didn't follow our Community Guidelines. This decision can't be reversed either because we've already reviewed it, or because 180 days have passed since your account was disabled";
                             if (str_contains(json_encode($response->asArray()['layout']['bloks_payload']['tree']), $msg)) {

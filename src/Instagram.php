@@ -5003,10 +5003,11 @@ class Instagram implements ExperimentsInterface
 
                             return $loginResponse;
                         } elseif ($errorMap['event_category'] === 'FIRST_PASSWORD_FAILURE') {
+                            $msg = 'Invalid password or older password used.';
                             $loginResponse = new Response\LoginResponse([
                                 'error_type'    => 'incorrect_password',
                                 'status'        => 'fail',
-                                'message'       => 'Invalid password or older password used.',
+                                'message'       => $msg,
                             ]);
                             $e = new \InstagramAPI\Exception\IncorrectPasswordException($msg);
                             $e->setResponse($loginResponse);

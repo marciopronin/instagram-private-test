@@ -1950,11 +1950,12 @@ class Instagram implements ExperimentsInterface
                 $responseArr = $response->asArray();
                 $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
                 $firstDataBlok = null;
+                $firstDataBlokBack = null;
                 $secondDataBlok = null;
                 $thirdDataBlok = null;
                 $fourthDataBlock = null;
                 foreach ($mainBloks as $mainBlok) {
-                    if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
+                    if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
                         $firstDataBlok = $mainBlok;
                     }
                     if (str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
@@ -1995,7 +1996,7 @@ class Instagram implements ExperimentsInterface
                 }
 
                 $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
-                $offsets = array_slice($this->bloks->findOffsets($parsed, 'username_text_input_id'), 0, -2);
+                $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL__latency_qpl_instance_id'), 0, -2);
 
                 foreach ($offsets as $offset) {
                     if (isset($parsed[$offset])) {

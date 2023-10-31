@@ -4922,7 +4922,7 @@ class Instagram implements ExperimentsInterface
             $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
             foreach ($errorMap as $key => $value) {
                 if (!is_array($errorMap[$key])) {
-                    $errorMap[stripslashes($key)] = stripslashes($value);
+                    $errorMap[stripslashes($key)] = str_replace(['/', '\\'], '', $value);
                 }
                 unset($errorMap[$key]);
             }
@@ -4954,7 +4954,7 @@ class Instagram implements ExperimentsInterface
         $response,
         $errorMap)
     {
-        if (isset($errorMap['exception_message'])) {
+        if (isset($errorMap['exception_message']) && !empty($errorMap['exception_message'])) {
             switch ($errorMap['exception_message']) {
                 case 'Login Error: An unexpected error occurred. Please try logging in again.':
                     throw new \InstagramAPI\Exception\UnexpectedLoginErrorException($errorMap['exception_message']);
@@ -5068,9 +5068,9 @@ class Instagram implements ExperimentsInterface
                                 $loginResponse = new Response\LoginResponse([
                                     'error_type'    => 'account_deletion_requested',
                                     'status'        => 'fail',
-                                    'message'       => sprintf('You requested to delete your account: %s', $username),
+                                    'message'       => sprintf('You requested to delete your account: %s', $this->username),
                                 ]);
-                                $e = new \InstagramAPI\Exception\AccountDeletionException(sprintf('You requested to delete your account: %s', $username));
+                                $e = new \InstagramAPI\Exception\AccountDeletionException(sprintf('You requested to delete your account: %s', $this->username));
                                 $e->setResponse($loginResponse);
 
                                 throw $e;

@@ -1981,6 +1981,20 @@ class Instagram implements ExperimentsInterface
                     $firstDataBlok = $firstDataBlokBack;
                     $this->bloksInfo['INTERNAL__latency_qpl_instance_id'] = [0, 0];
                     $this->bloksInfo['INTERNAL__latency_qpl_marker_id'] = [0, 0];
+                } else {
+                    $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+                    $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL__latency_qpl_instance_id'), 0, -2);
+
+                    foreach ($offsets as $offset) {
+                        if (isset($parsed[$offset])) {
+                            $parsed = $parsed[$offset];
+                        } else {
+                            break;
+                        }
+                    }
+
+                    $firstMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                    $this->bloksInfo = array_merge($firstMap, $this->bloksInfo);
                 }
 
                 if ($firstDataBlok === null) {
@@ -1994,20 +2008,6 @@ class Instagram implements ExperimentsInterface
 
                     throw new \InstagramAPI\Exception\AccountStateException('Try login again.');
                 }
-
-                $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
-                $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL__latency_qpl_instance_id'), 0, -2);
-
-                foreach ($offsets as $offset) {
-                    if (isset($parsed[$offset])) {
-                        $parsed = $parsed[$offset];
-                    } else {
-                        break;
-                    }
-                }
-
-                $firstMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-                $this->bloksInfo = array_merge($firstMap, $this->bloksInfo);
 
                 $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
                 $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL_INFRA_THEME'), 0, -2);

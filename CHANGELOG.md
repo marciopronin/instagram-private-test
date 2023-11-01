@@ -1,3 +1,10 @@
+# Stable release v21.45.7
+## Date: 02/11/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_throwLoginException()`
+
 # Stable release v21.45.6
 ## Date: 31/10/2023
 

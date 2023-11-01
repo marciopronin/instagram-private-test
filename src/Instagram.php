@@ -4954,7 +4954,7 @@ class Instagram implements ExperimentsInterface
         $response,
         $errorMap)
     {
-        if (isset($errorMap['exception_message']) && !empty($errorMap['exception_message'])) {
+        if (isset($errorMap['exception_message'])) {
             switch ($errorMap['exception_message']) {
                 case 'Login Error: An unexpected error occurred. Please try logging in again.':
                     throw new \InstagramAPI\Exception\UnexpectedLoginErrorException($errorMap['exception_message']);

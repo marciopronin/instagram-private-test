@@ -3382,6 +3382,9 @@ class Instagram implements ExperimentsInterface
         if (str_contains($responseJ, 'whatsapp')) {
             $methods[] = 'whatsapp';
         }
+        if (str_contains($responseJ, 'approve_from_another_device')) {
+            $methods[] = 'notification';
+        }
 
         return $methods;
     }

@@ -1,3 +1,10 @@
+# Stable release v21.45.10
+## Date: 06/11/2023
+
+### Updates and fixes
+
+- **People:** Update functions
+
 # Stable release v21.45.9
 ## Date: 02/11/2023
 

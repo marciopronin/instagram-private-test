@@ -1015,6 +1015,7 @@ class People extends RequestCollection
      * @param string      $userId           Numerical UserPK ID.
      * @param string|null $mediaId          The media ID in Instagram's internal format (ie "3482384834_43294").
      * @param string|null $loggingInfoToken The logging info token associated to the media.
+     * @param string      $containerModule  Container module.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1023,7 +1024,8 @@ class People extends RequestCollection
     public function follow(
         $userId,
         $mediaId = null,
-        $loggingInfoToken = null)
+        $loggingInfoToken = null,
+        $containerModule = 'profile')
     {
         $request = $this->ig->request("friendships/create/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1031,7 +1033,8 @@ class People extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('nav_chain', $this->ig->getNavChain())
-            ->addPost('device_id', $this->ig->device_id);
+            ->addPost('device_id', $this->ig->device_id)
+            ->addPost('container_module', $containerModule);
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('radio_type', $this->ig->radio_type);

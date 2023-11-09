@@ -272,6 +272,8 @@ class Internal extends RequestCollection
         /** @var array|null Array of usertagging instructions, in the format
          * [['position'=>[0.5,0.5], 'user_id'=>'123'], ...]. ONLY FOR TIMELINE PHOTOS! */
         $usertags = (isset($externalMetadata['usertags']) && $targetFeed == Constants::FEED_TIMELINE) ? $externalMetadata['usertags'] : null;
+        /** @var array Coauthor ID */
+        $coauthor = (isset($externalMetadata['invite_coauthor_user_id']) && $targetFeed == Constants::FEED_TIMELINE) ? $externalMetadata['invite_coauthor_user_id'] : null;
         /** @var array|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
          * AND YOU MUST HAVE A BUSINESS INSTAGRAM ACCOUNT TO POST A STORY LINK! */
         $link = (isset($externalMetadata['link']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link'] : null;
@@ -381,6 +383,21 @@ class Internal extends RequestCollection
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
                     $request->addPost('usertags', json_encode($usertags));
+
+                    if ($coauthor !== null) {
+                        if (is_array($coauthor) && count($coauthor) > 1) {
+                            if (count($coauthor) > 5) {
+                                throw new \InvalidArgumentException('Maximum coauthors allowed is 5.');
+                            }
+                            $request->addPost('invite_coauthor_user_ids', $coauthor);
+                        } else {
+                            if (is_array($coauthor)) {
+                                $coauthor = $coauthor[0];
+                            }
+                            $request->addPost('invite_coauthor_user_id', $coauthor);
+                        }
+                        $request->addPost('internal_features', 'coauthor_post');
+                    }
                 }
                 if ($productTags !== null) {
                     Utils::throwIfInvalidProductTags($productTags);
@@ -920,6 +937,8 @@ class Internal extends RequestCollection
          * your video. ONLY USED IN STORY VIDEOS! TODO: Actually, it's not even
          * implemented for stories. */
         $usertags = (isset($externalMetadata['usertags'])) ? $externalMetadata['usertags'] : null;
+        /** @var array Coauthor ID */
+        $coauthor = (isset($externalMetadata['invite_coauthor_user_id']) && ($targetFeed == Constants::FEED_TIMELINE || $targetFeed == Constants::FEED_REELS)) ? $externalMetadata['invite_coauthor_user_id'] : null;
         /** @var Response\Model\Location|null A Location object describing where
          * the media was taken. */
         $location = (isset($externalMetadata['location'])) ? $externalMetadata['location'] : null;
@@ -1029,6 +1048,20 @@ class Internal extends RequestCollection
                     Utils::throwIfInvalidUsertags($usertags);
                     $request->addPost('usertags', json_encode($usertags));
                     //->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
+                    if ($coauthor !== null) {
+                        if (is_array($coauthor) && count($coauthor) > 1) {
+                            if (count($coauthor) > 5) {
+                                throw new \InvalidArgumentException('Maximum coauthors allowed is 5.');
+                            }
+                            $request->addPost('invite_coauthor_user_ids', $coauthor);
+                        } else {
+                            if (is_array($coauthor)) {
+                                $coauthor = $coauthor[0];
+                            }
+                            $request->addPost('invite_coauthor_user_id', $coauthor);
+                        }
+                        $request->addPost('internal_features', 'coauthor_post');
+                    }
                 }
                 break;
             case Constants::FEED_STORY:
@@ -1308,6 +1341,20 @@ class Internal extends RequestCollection
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
                     $request->addPost('usertags', json_encode($usertags));
+                    if ($coauthor !== null) {
+                        if (is_array($coauthor) && count($coauthor) > 1) {
+                            if (count($coauthor) > 5) {
+                                throw new \InvalidArgumentException('Maximum coauthors allowed is 5.');
+                            }
+                            $request->addPost('invite_coauthor_user_ids', $coauthor);
+                        } else {
+                            if (is_array($coauthor)) {
+                                $coauthor = $coauthor[0];
+                            }
+                            $request->addPost('invite_coauthor_user_id', $coauthor);
+                        }
+                        $request->addPost('internal_features', 'coauthor_post');
+                    }
                 }
                 if ($storyQuiz !== null) {
                     Utils::throwIfInvalidStoryQuiz($storyQuiz);
@@ -1709,13 +1756,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', 'aa89d9bdf3ae70257c8a64627d650242c69b46d11558f21af94368337e205fb4')
+                ->addPost('query_hash', 'e2fcdcea4c615d1e367b9bf296600d023cf388445e54fb51aa5fceb1684a18c5')
                 ->addPost('family_device_id', strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', 'f4398bcbce594148a8201c8f3639c13dc25cb16a8a055c404141783a140dd0b2')
+                ->addPost('query_hash', 'e072bc34e6a7873781b0b7af6c6c1cfdb7206aed0e5b497cdd914d86d2eacb7f')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }

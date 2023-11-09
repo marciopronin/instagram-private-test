@@ -1,3 +1,13 @@
+# Stable release v21.45.11
+## Date: 09/11/2023
+
+### Updates and fixes
+
+- **Constants:** Update version to 308.0.0.36.109
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `configureSinglePhoto()`
+- **Internal:** Update `configureSingleVideo()`
+
 # Stable release v21.45.10
 ## Date: 06/11/2023
 

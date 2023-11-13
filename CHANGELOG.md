@@ -1,3 +1,11 @@
+# Stable release v21.45.12
+## Date: 13/11/2023
+
+### Updates and fixes
+
+- **Internal:** Update `getNotificationsSettings()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v21.45.11
 ## Date: 09/11/2023
 

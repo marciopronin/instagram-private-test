@@ -2208,7 +2208,7 @@ class Internal extends RequestCollection
     public function getNotificationsSettings()
     {
         return $this->ig->request('notifications/get_notification_settings/')
-            ->addPost('content_type', 'instagram_direct')
+            ->addParam('content_type', 'instagram_direct')
             ->getResponse(new Response\GenericResponse());
     }
 

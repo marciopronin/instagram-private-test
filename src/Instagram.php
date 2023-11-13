@@ -4435,7 +4435,7 @@ class Instagram implements ExperimentsInterface
                     $this->internal->getViewableStatuses(true);
                     $this->account->getPresenceStatus();
                     $this->direct->getHasInteropUpgraded();
-                    //$this->internal->getNotificationsSettings();
+                    $this->internal->getNotificationsSettings();
                 } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {

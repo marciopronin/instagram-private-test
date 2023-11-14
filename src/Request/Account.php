@@ -512,6 +512,73 @@ class Account extends RequestCollection
     }
 
     /**
+     * Update profile name.
+     *
+     * It can only by updated two times within 14 days.
+     *
+     * @param string $name Profile name.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UserInfoResponse
+     */
+    public function setProfileName(
+        $name)
+    {
+        return $this->ig->request('accounts/update_profile_name/')
+            ->setSignedPost(false)
+            ->addPost('first_name', $$name)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\UserInfoResponse());
+    }
+
+    /**
+     * Update profile name via Account Center (Bloks).
+     *
+     * It can only by updated two times within 14 days.
+     *
+     * @param string $name Profile name.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function setProfileNameBloks(
+        $name)
+    {
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fxim.settings.name.change.async/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'client_input_params' => [
+                    'full_name'         => $name,
+                    'family_device_id'  => $this->ig->phone_id,
+                ],
+                'server_params' => [
+                    'should_validate_full_name_with_space'  => 0,
+                    'identity_ids'                          => $this->ig->settings->get('fbid_v2'),
+                    'INTERNAL_INFRA_THEME'                  => 'harm_f',
+                    'should_dismiss_screen_after-save'      => 0,
+                    'is_meta_verified_profile_editing_flow' => 0,
+                    'machine_id'                            => null,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+                'ttrc_join_id'  => Signatures::generateUUID(),
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        return $response;
+    }
+
+    /**
      * Edit your biography.
      *
      * You are able to add `@mentions` and `#hashtags` to your biography, but

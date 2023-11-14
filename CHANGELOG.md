@@ -1,3 +1,11 @@
+# Stable release v21.46.0
+## Date: 14/11/2023
+
+### New features
+
+- **Account:** Added `setProfileName()`
+- **Account:** Added `setProfileNameBloks()`
+
 # Stable release v21.45.12
 ## Date: 13/11/2023
 

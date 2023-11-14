@@ -1,3 +1,19 @@
+# Stable release v21.46.1
+## Date: 14/11/2023
+
+### Updates and fixes
+
+- **Internal:** Updated `uploadSinglePhoto()`
+- **Internal:** Updated `configureSinglePhoto()`
+- **Internal:** Updated `configureSingleVideo()`
+- **Utils:** Updated `throwIfInvalidStoryHashtagSticker()`
+- **Utils:** Updated `throwIfInvalidStoryMentionSticker()`
+
+### Examples
+
+- **Example:** Added `uploadStoryHashtags`
+- **Example:** Updated `uploadStoryMentions`
+
 # Stable release v21.46.0
 ## Date: 14/11/2023
 

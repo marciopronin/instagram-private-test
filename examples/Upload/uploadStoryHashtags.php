@@ -16,8 +16,8 @@ $truncatedDebug = false;
 $photoFilename = '';
 // ////////////////////
 
-// ///// TARGET USER ////////
-$userId = '';
+// ///// TAG NAME ////////
+$tagName = ''; // Without #
 // //////////////////////////
 
 $ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
@@ -31,9 +31,9 @@ try {
 
 // Now create the metadata array:
 $metadata = [
-    'story_mentions' => [
+    'hashtags' => [
         [
-            'user_id'          => $userId,
+            'tag_name'         => $tagName,
             'x'                => 0.5,
             'y'                => 0.5,
             'width'            => 1.0,
@@ -41,9 +41,8 @@ $metadata = [
             'rotation'         => 0.0,
             'is_sticker'       => true,
             'tap_state'        => 0,
-            'display_type'     => 'mention_username',
-            'tap_state_str_id' => 'mention_sticker_hero', // mention_sticker_subtle, mention_sticker_rainbow, mention_sticker_gradient
-            'type'             => 'mention',
+            'tap_state_str_id' => 'hashtag_sticker_hero', // hashtag_sticker_subtle, hashtag_sticker_rainbow, hashtag_sticker_gradient
+            'type'             => 'hashtag',
         ],
     ],
 ];

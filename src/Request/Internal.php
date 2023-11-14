@@ -137,6 +137,7 @@ class Internal extends RequestCollection
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Configure the uploaded image and attach it to our timeline/story/IGTV.
                     if (isset($externalMetadata['share_to_fb_destination_id'])) {
+                        $externalMetadata['client_shared_at'] = time();
                         $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
                         $externalMetadata['crosspost'] = true;
                     }
@@ -420,9 +421,9 @@ class Internal extends RequestCollection
                 }
 
                 $request
-                    ->addPost('include_e2ee_mentioned_user_list', '1')
+                    //->addPost('include_e2ee_mentioned_user_list', '1')
                     ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
-                    ->addPost('client_shared_at', (string) time())
+                    ->addPost('client_shared_at', isset($externalMetadata['client_shared_at']) ? (string) $externalMetadata['client_shared_at'] : (string) time())
                     ->addPost('source_type', '3')
                     ->addPost('configure_mode', '1')
                     //->addPost('allow_multi_configures', '1')
@@ -465,12 +466,13 @@ class Internal extends RequestCollection
                     Utils::throwIfInvalidProductTags($productTags);
                     $request->addPost('product_tags', json_encode($productTags));
                 }
-                if ($hashtags !== null && $captionText !== '') {
-                    Utils::throwIfInvalidStoryHashtags($captionText, $hashtags);
-                    $request
-                        ->addPost('story_hashtags', json_encode($hashtags))
-                        ->addPost('caption', $captionText)
-                        ->addPost('mas_opt_in', 'NOT_PROMPTED');
+                if ($hashtags !== null) {
+                    Utils::throwIfInvalidStoryHashtagSticker($hashtags);
+
+                    foreach ($hashtags as $hashtag) {
+                        $tapModels[] = $hashtag;
+                        $stickerIds[] = 'hashtag_sticker';
+                    }
                 }
                 if ($locationSticker !== null && $location !== null) {
                     Utils::throwIfInvalidStoryLocationSticker($locationSticker);
@@ -478,12 +480,13 @@ class Internal extends RequestCollection
                     $tapModels[] = $locationSticker;
                     $stickerIds[] = 'location_sticker';
                 }
-                if ($storyMentions !== null && $captionText !== '') {
-                    Utils::throwIfInvalidStoryMentions($storyMentions);
-                    $request
-                        ->addPost('reel_mentions', json_encode($storyMentions))
-                        ->addPost('caption', str_replace(' ', '+', $captionText).'+')
-                        ->addPost('mas_opt_in', 'NOT_PROMPTED');
+                if ($storyMentions !== null) {
+                    Utils::throwIfInvalidStoryMentionSticker($storyMentions);
+
+                    foreach ($storyMentions as $storyMention) {
+                        $tapModels[] = $storyMention;
+                        $stickerIds[] = 'mention_sticker';
+                    }
                 }
                 if ($storyPoll !== null) {
                     Utils::throwIfInvalidStoryPoll($storyPoll);
@@ -551,7 +554,7 @@ class Internal extends RequestCollection
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
                     $request->addPost('allow_multi_configures', '1')
-                            ->addPost('xpost_surface', 'auto_xpost');
+                            ->addPost('xpost_surface', 'ig_story_composer');
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['crosspost'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
@@ -565,7 +568,7 @@ class Internal extends RequestCollection
                     }
                 }
                 if (isset($externalMetadata['xpost'])) {
-                    $request->addPost('xpost_surface', 'auto_xpost');
+                    $request->addPost('xpost_surface', 'ig_story_composer');
                 }
                 break;
             case Constants::FEED_DIRECT_STORY:
@@ -1108,12 +1111,13 @@ class Internal extends RequestCollection
                     $tapModels[] = $linkSticker;
                     $stickerIds[] = 'link_sticker_default';
                 }
-                if ($hashtags !== null && $captionText !== '') {
-                    Utils::throwIfInvalidStoryHashtags($captionText, $hashtags);
-                    $request
-                        ->addPost('story_hashtags', json_encode($hashtags))
-                        ->addPost('caption', $captionText)
-                        ->addPost('mas_opt_in', 'NOT_PROMPTED');
+                if ($hashtags !== null) {
+                    Utils::throwIfInvalidStoryHashtagSticker($hashtags);
+
+                    foreach ($hashtags as $hashtag) {
+                        $tapModels[] = $hashtag;
+                        $stickerIds[] = 'hashtag_sticker';
+                    }
                 }
                 if ($locationSticker !== null && $location !== null) {
                     Utils::throwIfInvalidStoryLocationSticker($locationSticker);
@@ -1121,12 +1125,13 @@ class Internal extends RequestCollection
                     $tapModels[] = $locationSticker;
                     $stickerIds[] = 'location_sticker';
                 }
-                if ($storyMentions !== null && $captionText !== '') {
-                    Utils::throwIfInvalidStoryMentions($storyMentions);
-                    $request
-                        ->addPost('reel_mentions', json_encode($storyMentions))
-                        ->addPost('caption', str_replace(' ', '+', $captionText).'+')
-                        ->addPost('mas_opt_in', 'NOT_PROMPTED');
+                if ($storyMentions !== null) {
+                    Utils::throwIfInvalidStoryMentionSticker($storyMentions);
+
+                    foreach ($storyMentions as $storyMention) {
+                        $tapModels[] = $storyMention;
+                        $stickerIds[] = 'mention_sticker';
+                    }
                 }
                 if ($storyMusic !== null) {
                     //Utils::throwIfInvalidStoryCountdown($storyCountdown);
@@ -1205,7 +1210,7 @@ class Internal extends RequestCollection
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
                     $request->addPost('allow_multi_configures', '1')
-                            ->addPost('xpost_surface', 'auto_xpost');
+                            ->addPost('xpost_surface', 'ig_story_composer');
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['crosspost'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
@@ -1219,7 +1224,7 @@ class Internal extends RequestCollection
                     }
                 }
                 if (isset($externalMetadata['xpost'])) {
-                    $request->addPost('xpost_surface', 'auto_xpost');
+                    $request->addPost('xpost_surface', 'ig_story_composer');
                 }
                 break;
             case Constants::FEED_DIRECT_STORY:

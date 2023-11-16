@@ -3293,7 +3293,21 @@ class Instagram implements ExperimentsInterface
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\GenericResponse());
 
-        $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+        $mainBloks = $this->bloks->parseResponse($response->asArray(), '(bk.action.caa.HandleLoginResponse');
+
+        $firstDataBlok = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'logged_in_user')) {
+                $firstDataBlok = $mainBlok;
+                break;
+            }
+        }
+
+        if ($firstDataBlok !== null) {
+            $loginResponseWithHeaders = $bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
+        } else {
+            $loginResponseWithHeaders = $bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+        }
 
         if (is_array($loginResponseWithHeaders)) {
             if (str_contains($response->asJson(), 'BLOKS_TWO_STEP_VERIFICATION_ENTER_CODE:error_message:0')) {

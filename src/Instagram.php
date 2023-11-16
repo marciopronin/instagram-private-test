@@ -3304,9 +3304,9 @@ class Instagram implements ExperimentsInterface
         }
 
         if ($firstDataBlok !== null) {
-            $loginResponseWithHeaders = $bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
+            $loginResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
         } else {
-            $loginResponseWithHeaders = $bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+            $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
         }
 
         if (is_array($loginResponseWithHeaders)) {

@@ -1,3 +1,10 @@
+# Stable release v21.46.3
+## Date: 20/11/2023
+
+### Updates and fixes
+
+- **Model:** Update `StepData` model
+
 # Stable release v21.46.2
 ## Date: 16/11/2023
 

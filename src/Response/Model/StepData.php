@@ -28,6 +28,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method string getSecurityCode()
  * @method int getSmsResendDelay()
  * @method string getUserAgent()
+ * @method string getWhatsapp()
  * @method bool isBigBlueToken()
  * @method bool isChoice()
  * @method bool isCity()
@@ -49,6 +50,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isSecurityCode()
  * @method bool isSmsResendDelay()
  * @method bool isUserAgent()
+ * @method bool isWhatsapp()
  * @method $this setBigBlueToken(string $value)
  * @method $this setChoice(string $value)
  * @method $this setCity(string $value)
@@ -70,6 +72,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setSecurityCode(string $value)
  * @method $this setSmsResendDelay(int $value)
  * @method $this setUserAgent(string $value)
+ * @method $this setWhatsapp(string $value)
  * @method $this unsetBigBlueToken()
  * @method $this unsetChoice()
  * @method $this unsetCity()
@@ -91,6 +94,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this unsetSecurityCode()
  * @method $this unsetSmsResendDelay()
  * @method $this unsetUserAgent()
+ * @method $this unsetWhatsapp()
  */
 class StepData extends AutoPropertyMapper
 {
@@ -107,6 +111,7 @@ class StepData extends AutoPropertyMapper
         'phone_number'              => 'string',
         'phone_number_formatted'    => 'string',
         'email'                     => 'string',
+        'whatsapp'                  => 'string',
         'fb_access_token'           => 'string',
         'big_blue_token'            => 'string',
         'google_oauth_token'        => 'string',

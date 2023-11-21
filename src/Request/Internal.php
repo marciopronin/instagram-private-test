@@ -835,8 +835,10 @@ class Internal extends RequestCollection
             }
 
             // Validate and upload the thumbnail.
-            $internalMetadata->setPhotoDetails($targetFeed, $videoThumbnail->getFile());
-            $this->uploadPhotoData($targetFeed, $internalMetadata);
+            if ($targetFeed !== Constants::FEED_REELS && $targetFeed !== Constants::FEED_STORY) {
+                $internalMetadata->setPhotoDetails($targetFeed, $videoThumbnail->getFile());
+                $this->uploadPhotoData($targetFeed, $internalMetadata);
+            }
 
             return $pdqHashes;
         } catch (InstagramException $e) {
@@ -3013,11 +3015,12 @@ class Internal extends RequestCollection
         } else {
             $url = 'https://i.instagram.com/rupload_igphoto';
         }
-        $endpoint = sprintf('%s/%s_%d_%d',
+        $endpoint = sprintf('%s/%s_%d_-%d',
             $url,
             $internalMetadata->getUploadId(),
             0,
-            Utils::hashCode($photoDetails->getFilename())
+            //Utils::hashCode($photoDetails->getFilename())
+            time()
         );
 
         $uploadParams = $this->_getPhotoUploadParams($targetFeed, $internalMetadata);
@@ -3360,36 +3363,47 @@ class Internal extends RequestCollection
         $videoDetails = $internalMetadata->getVideoDetails();
 
         // We must split the video into segments before running any requests.
-        $segments = $this->_splitVideoIntoSegments($targetFeed, $videoDetails);
+        //$segments = $this->_splitVideoIntoSegments($targetFeed, $videoDetails);
+        $segments = [$videoDetails]; // 1 segment, no split.
 
         $uploadParams = $this->_getVideoUploadParams($targetFeed, $internalMetadata);
         $uploadParams = Utils::reorderByHashCode($uploadParams);
 
+        $ts = intval(microtime(true) * 1000);
+
+        /*
         // This request gives us a stream identifier.
         $startRequest = new Request($this->ig, sprintf(
-            'https://i.instagram.com/rupload_igvideo/%s?segmented=true&phase=start',
-            Signatures::generateUUID()
+            'https://i.instagram.com/rupload_igvideo/%s-%d-%d-%d-%d',
+            md5($segments[0]->getFilename()),
+            0,
+            $segments[0]->getFilesize(),
+            $ts,
+            $ts
         ), $this->ig->customResolver);
         $startRequest
             ->setAddDefaultHeaders(false)
-            ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams))
+            ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams));
             // Dirty hack to make a POST request.
-            ->setBody(GuzzleUtils::streamFor());
-        /** @var Response\SegmentedStartResponse $startResponse */
+            //->setBody(GuzzleUtils::streamFor());
+        // @var Response\SegmentedStartResponse $startResponse
         $startResponse = $startRequest->getResponse(new Response\SegmentedStartResponse());
-        $streamId = $startResponse->getStreamId();
+        //$streamId = $startResponse->getStreamId(); Seems Stream ID is not longer being used.
+        */
 
         // Upload the segments.
         try {
             $offset = 0;
             // Yep, no UUID here like in other resumable uploaders. Seems like a bug.
-            $waterfallId = Utils::generateUploadId();
+            $waterfallId = sprintf('%s_%s_Mixed_0', $internalMetadata->getUploadId(), bin2hex(random_bytes(6))); //Utils::generateUploadId();
             foreach ($segments as $segment) {
                 $endpoint = sprintf(
-                    'https://i.instagram.com/rupload_igvideo/%s-%d-%d?segmented=true&phase=transfer',
+                    'https://i.instagram.com/rupload_igvideo/%s-%d-%d-%d-%d',
                     md5($segment->getFilename()),
                     0,
-                    $segment->getFilesize()
+                    $segment->getFilesize(),
+                    $ts,
+                    $ts
                 );
 
                 $offsetTemplate = new Request($this->ig, $endpoint, $this->ig->customResolver);
@@ -3398,7 +3412,7 @@ class Internal extends RequestCollection
                     ->addHeader('Segment-Start-Offset', $offset)
                     // 1 => Audio, 2 => Video, 3 => Mixed.
                     ->addHeader('Segment-Type', $segment->getAudioCodec() !== null ? 1 : 2)
-                    ->addHeader('Stream-Id', $streamId)
+                    //->addHeader('Stream-Id', $streamId)
                     ->addHeader('X_FB_VIDEO_WATERFALL_ID', $waterfallId)
                     ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams));
 
@@ -3429,17 +3443,19 @@ class Internal extends RequestCollection
                     $internalMetadata->getIsCarousel()
                 );
 
-                $this->_uploadResumableMedia($segment, $offsetTemplate, $uploadTemplate, false);
+                $result = $this->_uploadResumableMedia($segment, $offsetTemplate, $uploadTemplate, false);
                 // Offset seems to be used just for ordering the segments.
                 $offset += $segment->getFilesize();
             }
         } finally {
             // Remove the segments, because we don't need them anymore.
+            /*
             foreach ($segments as $segment) {
                 @unlink($segment->getFilename());
-            }
+            }*/
         }
 
+        /*
         // Finalize the upload.
         $endRequest = new Request($this->ig, sprintf(
             'https://i.instagram.com/rupload_igvideo/%s?segmented=true&phase=end',
@@ -3451,8 +3467,9 @@ class Internal extends RequestCollection
             ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams))
             // Dirty hack to make a POST request.
             ->setBody(GuzzleUtils::streamFor());
-        /** @var Response\GenericResponse $result */
+        // @var Response\GenericResponse $result
         $result = $endRequest->getResponse(new Response\GenericResponse());
+        */
 
         $this->ig->event->uploadMediaSuccess(
             $internalMetadata->getUploadId(),
@@ -3814,9 +3831,10 @@ class Internal extends RequestCollection
                 break;
             case Constants::FEED_STORY:
                 $result['for_album'] = '1';
-                $result['content_tags'] = 'sticker_burnin_params';
+                $result['content_tags'] = 'use_default_cover';
                 $result['extract_cover_frame'] = '1';
-                $result['IG-FB-Xpost-entry-point-v2'] = '1';
+                $result['upload_engine_config_enum'] = '0';
+                $result['IG-FB-Xpost-entry-point-v2'] = 'story';
                 break;
             case Constants::FEED_DIRECT_STORY:
                 $result['for_direct_story'] = '1';
@@ -3829,7 +3847,7 @@ class Internal extends RequestCollection
                 break;
             case Constants::FEED_REELS:
                 $result['is_clips_video'] = '1';
-                $result['content_tags'] = 'sticker_burnin_params';
+                $result['content_tags'] = 'use_default_cover';
                 break;
             default:
         }

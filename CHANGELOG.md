@@ -1,3 +1,14 @@
+# Stable release v21.46.5
+## Date: 22/11/2023
+
+### Updates and fixes
+
+- **Internal:** Update `uploadSingleVideo()`
+- **Internal:** Update `uploadVideoThumbnail()`
+- **Internal:** Update `_uploadResumablePhoto()`
+- **Internal:** Update `_getVideoUploadParams()`
+- **Response:** Update `SegmentedStartResponse()`
+
 # Stable release v21.46.4
 ## Date: 21/11/2023
 

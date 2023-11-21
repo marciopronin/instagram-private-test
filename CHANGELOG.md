@@ -1,3 +1,13 @@
+# Stable release v21.46.4
+## Date: 21/11/2023
+
+### Updates and fixes
+
+**Constants:** Update constants to 309.0.0.40.113
+**Client:** Update `_orderHeaders()`
+**Internal:** Update `getMobileConfig()`
+**Request:** Update `_addDefaultHeaders)=`
+
 # Stable release v21.46.3
 ## Date: 20/11/2023
 

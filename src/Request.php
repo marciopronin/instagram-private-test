@@ -441,6 +441,7 @@ class Request
             if ($this->_parent->isExperimentEnabled('34426', 3, false)) {
                 $this->_headers['X-IG-CONCURRENT-ENABLED'] = $this->_parent->isExperimentEnabled('34426', 5, false);
             }
+            $this->_headers['X-Bloks-Is-Prism-Enabled'] = $this->_parent->isExperimentEnabled('59489', 0, false) ? 'true' : 'false';
 
             if ($this->_parent->getPlatform() === 'android') {
                 $this->_headers['X-IG-App-Locale'] = $this->_parent->getLocale();

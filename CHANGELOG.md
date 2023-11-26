@@ -1,3 +1,17 @@
+# Stable release v21.47.0
+## Date: 26/11/2023
+
+### New features
+
+- **Reel:** Added `search()`
+
+### Updates and fixes
+
+- **Discover:** Update `search()`
+- **People:** Update `search()`
+- **Event:** Update `_sendBatchEvents()`
+- **Event:** Update `_addBatchBody()`
+
 # Stable release v21.46.5
 ## Date: 22/11/2023
 

@@ -693,7 +693,7 @@ class People extends RequestCollection
 
         $request = $this->_paginateWithExclusion(
             $this->ig->request('fbsearch/account_serp/')
-                ->addParam('q', $query)
+                ->addParam('query', $query)
                 ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                 ->addParam('search_surface', $searchSurface)
                 ->addParam('count', 30),

@@ -224,9 +224,9 @@ class Discover extends RequestCollection
         }
         $request = $this->_paginateWithMultiExclusion(
             $this->ig->request('fbsearch/ig_typeahead/')
-                ->addParam('search_surface', 'top_search_page')
+                ->addParam('search_surface', 'typeahead_search_page')
                 ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-                ->addParam('count', 30)
+                ->addParam('count', 30) //hardcoded
                 ->addParam('query', $query)
                 ->addParam('context', 'blended'),
             $excludeList,

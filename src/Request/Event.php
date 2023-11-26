@@ -28,6 +28,7 @@ class Event extends RequestCollection
             'app_id'            => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
             'app_ver'           => Constants::IG_VERSION,
             'build_num'         => $this->ig->getVersionCode(),
+            'consent_state'     => 0,
             'device'            => $this->ig->device->getDevice(),
             'os_ver'            => $this->ig->device->getAndroidRelease(),
             'device_id'         => $this->ig->uuid,
@@ -614,6 +615,7 @@ class Event extends RequestCollection
           ->addHeader('X-FB-Client-IP', 'true')
           ->addHeader('X-FB-Server-Cluster', 'true')
           ->addPost('access_token', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID.'|'.Constants::GRAPH_API_ACCESS_TOKEN)
+          ->addPost('ffdb_token', '')
           ->addPost('format', 'json')
           ->addPost('sent_time', round(microtime(true), 3))
           ->setAddDefaultHeaders(false);

@@ -471,4 +471,57 @@ class Reel extends RequestCollection
         return $this->ig->request('clips/creation_interest_picker/')
             ->getResponse(new Response\CreationInterestPickerResponse());
     }
+
+    /**
+     * Search for reels.
+     *
+     * @param string         $query         Reel to search.
+     * @param string[]|int[] $excludeList   Array of numerical IDs for media (ie "4021088339")
+     *                                      to exclude from the response, allowing you to skip medias
+     *                                      from a previous call to get more results.
+     * @param string|null    $rankToken     A rank token from a first call response.
+     * @param string         $searchSurface
+     *
+     * @throws \InvalidArgumentException                  If invalid query or
+     *                                                    trying to exclude too
+     *                                                    many user IDs.
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\ReelsSerpResponse
+     */
+    public function search(
+        $query,
+        array $excludeList = [],
+        $rankToken = null,
+        $searchSurface = 'clips_serp_page')
+    {
+        // Do basic query validation.
+        if (!is_string($query) || $query === '') {
+            throw new \InvalidArgumentException('Query must be a non-empty string.');
+        }
+
+        $request = $this->_paginateWithExclusion(
+            $this->ig->request('fbsearch/reels_serp/')
+                ->addParam('query', $query)
+                ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
+                ->addParam('search_surface', $searchSurface)
+                ->addParam('count', 30),
+            $excludeList,
+            $rankToken
+        );
+
+        try {
+            /** @var Response\ReelsSerpResponse $result */
+            $result = $request->getResponse(new Response\ReelsSerpResponse());
+        } catch (RequestHeadersTooLargeException $e) {
+            $result = new Response\ReelsSerpResponse([
+                'has_more'              => false,
+                'reels_max_id'          => '',
+                'reels_serp_modules'    => [],
+                'rank_token'            => $rankToken,
+            ]);
+        }
+
+        return $result;
+    }
 }

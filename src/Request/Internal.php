@@ -835,7 +835,7 @@ class Internal extends RequestCollection
             }
 
             // Validate and upload the thumbnail.
-            if ($targetFeed !== Constants::FEED_REELS && $targetFeed !== Constants::FEED_STORY) {
+            if ($targetFeed !== Constants::FEED_STORY) {
                 $internalMetadata->setPhotoDetails($targetFeed, $videoThumbnail->getFile());
                 $this->uploadPhotoData($targetFeed, $internalMetadata);
             }

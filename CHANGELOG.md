@@ -1,3 +1,10 @@
+# Stable release v21.47.1
+## Date: 27/11/2023
+
+### Updates and fixes
+
+- **Internal:** Update `uploadVideoThumbnail()`
+
 # Stable release v21.47.0
 ## Date: 26/11/2023
 

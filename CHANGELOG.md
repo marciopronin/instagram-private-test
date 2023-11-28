@@ -1,3 +1,15 @@
+# Stable release v21.48.0
+## Date: 29/11/2023
+
+### New features
+
+- **Instagram:** Added `finishTwoFactorGenericVerification()`
+
+### Updates and fixes
+
+- **Instagram:** Update `getTwoFactorBloksScreen()`
+- **Instagram:** Update `_login()`
+
 # Stable release v21.47.1
 ## Date: 27/11/2023
 

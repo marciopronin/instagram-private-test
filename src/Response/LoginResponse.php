@@ -29,6 +29,7 @@ use InstagramAPI\Response;
  * @method bool getIsBloks()
  * @method bool getIsBusiness()
  * @method mixed getIsCallToActionEnabled()
+ * @method bool getIsGeneric()
  * @method bool getIsPrivate()
  * @method bool getIsVerified()
  * @method bool getLock()
@@ -75,6 +76,7 @@ use InstagramAPI\Response;
  * @method bool isIsBloks()
  * @method bool isIsBusiness()
  * @method bool isIsCallToActionEnabled()
+ * @method bool isIsGeneric()
  * @method bool isIsPrivate()
  * @method bool isIsVerified()
  * @method bool isLock()
@@ -121,6 +123,7 @@ use InstagramAPI\Response;
  * @method $this setIsBloks(bool $value)
  * @method $this setIsBusiness(bool $value)
  * @method $this setIsCallToActionEnabled(mixed $value)
+ * @method $this setIsGeneric(bool $value)
  * @method $this setIsPrivate(bool $value)
  * @method $this setIsVerified(bool $value)
  * @method $this setLock(bool $value)
@@ -167,6 +170,7 @@ use InstagramAPI\Response;
  * @method $this unsetIsBloks()
  * @method $this unsetIsBusiness()
  * @method $this unsetIsCallToActionEnabled()
+ * @method $this unsetIsGeneric()
  * @method $this unsetIsPrivate()
  * @method $this unsetIsVerified()
  * @method $this unsetLock()
@@ -238,5 +242,6 @@ class LoginResponse extends Response
         'two_factor_context'            => 'string', // custom
         'masked_cp'                     => 'string', // custom
         'is_bloks'                      => 'bool',   // custom
+        'is_generic'                    => 'bool',   // custom
     ];
 }

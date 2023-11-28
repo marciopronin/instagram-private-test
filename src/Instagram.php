@@ -2143,7 +2143,7 @@ class Instagram implements ExperimentsInterface
 
                     $re = '/(com\.bloks\.www\.two_factor_login\.\w+)/m';
                     preg_match_all($re, $response->asJson(), $firstMatch, PREG_SET_ORDER, 0);
-                    $re = '/(com\.bloks\.www\.two_step_verification\.\w+)/m';
+                    $re = '/(?!.*\bcode_entry_help\b)(com\.bloks\.www(\.ap)?\.two_step_verification\.\w+)/m';
                     preg_match_all($re, $response->asJson(), $secondMatch, PREG_SET_ORDER, 0);
                     if ($firstMatch || $secondMatch) {
                         $endpoint = empty($firstMatch) ? $secondMatch[0][1] : $firstMatch[0][1];
@@ -2157,8 +2157,19 @@ class Instagram implements ExperimentsInterface
                             }
                         }
 
-                        $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
-                        $offsets = array_slice($this->bloks->findOffsets($parsed, 'two_step_verification_context'), 0, -2);
+                        if ($firstDataBlok !== null) {
+                            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+                            $offsets = array_slice($this->bloks->findOffsets($parsed, 'two_step_verification_context'), 0, -2);
+                        } else {
+                            foreach ($mainBloks as $mainBlok) {
+                                if (str_contains($mainBlok, 'context_data') && str_contains($mainBlok, 'generic_code_entry')) {
+                                    $firstDataBlok = $mainBlok;
+                                    break;
+                                }
+                            }
+                            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+                            $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
+                        }
 
                         foreach ($offsets as $offset) {
                             if (isset($parsed[$offset])) {
@@ -2169,7 +2180,7 @@ class Instagram implements ExperimentsInterface
                         }
 
                         $twoFactorMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-                        $this->bloksInfo = array_merge($twoFactorMap, $this->bloksInfo);
+                        $this->bloksInfo = array_merge($this->bloksInfo, $twoFactorMap);
 
                         // 2FA Bloks
                         $response = $this->getTwoFactorBloksScreen($endpoint);
@@ -2177,15 +2188,27 @@ class Instagram implements ExperimentsInterface
                         $responseArr = $response->asArray();
                         $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
 
-                        foreach ($mainBloks as $mainBlok) {
-                            if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'flow_source') && str_contains($mainBlok, 'two_step_verification_context')) {
-                                $firstDataBlok = $mainBlok;
-                                break;
+                        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry') {
+                            foreach ($mainBloks as $mainBlok) {
+                                if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'context_data')) {
+                                    $firstDataBlok = $mainBlok;
+                                    break;
+                                }
                             }
-                        }
 
-                        $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
-                        $offsets = array_slice($this->bloks->findOffsets($parsed, 'two_step_verification_context'), 0, -2);
+                            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+                            $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
+                        } else {
+                            foreach ($mainBloks as $mainBlok) {
+                                if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'flow_source') && str_contains($mainBlok, 'two_step_verification_context')) {
+                                    $firstDataBlok = $mainBlok;
+                                    break;
+                                }
+                            }
+
+                            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+                            $offsets = array_slice($this->bloks->findOffsets($parsed, 'two_step_verification_context'), 0, -2);
+                        }
 
                         foreach ($offsets as $offset) {
                             if (isset($parsed[$offset])) {
@@ -2196,12 +2219,13 @@ class Instagram implements ExperimentsInterface
                         }
 
                         $twoFactorMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-                        $this->bloksInfo = array_merge($twoFactorMap, $this->bloksInfo);
+                        $this->bloksInfo = array_merge($this->bloksInfo, $twoFactorMap);
 
                         $twoFactorResponse = [
-                            'two_factor_context'    => $this->bloksInfo['two_step_verification_context'],
+                            'two_factor_context'    => isset($twoFactorMap['two_step_verification_context']) ? $twoFactorMap['two_step_verification_context'] : $twoFactorMap['context_data'],
                             'two_factor_required'   => true,
                             'is_bloks'              => true,
+                            'is_generic'            => isset($twoFactorMap['context_data']),
                         ];
 
                         if ($endpoint === 'com.bloks.www.two_step_verification.entrypoint') {
@@ -2247,6 +2271,11 @@ class Instagram implements ExperimentsInterface
                                 case 'com.bloks.www.two_factor_login.enter_whatsapp_code':
                                 case 'com.bloks.www.two_step_verification.enter_whatsapp_code':
                                     $twoFactorResponse['two_factor_challenge'] = 'whatsapp';
+
+                                    return new Response\LoginResponse($twoFactorResponse);
+                                    break;
+                                case 'com.bloks.www.ap.two_step_verification.code_entry':
+                                    $twoFactorResponse['two_factor_challenge'] = 'generic_code_entry';
 
                                     return new Response\LoginResponse($twoFactorResponse);
                                     break;
@@ -2506,16 +2535,25 @@ class Instagram implements ExperimentsInterface
     public function getTwoFactorBloksScreen(
         $endpoint)
     {
+        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry') {
+            $serverParams = [
+                'context_data'                  => $this->bloksInfo['context_data'],
+                'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
+            ];
+        } else {
+            $serverParams = [
+                'two_step_verification_context' => $this->bloksInfo['two_step_verification_context'],
+                'INTERNAL_INFRA_THEME'          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                'flow_source'                   => $this->bloksInfo['flow_source'],
+                'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
+            ];
+        }
+
         return $this->request("bloks/apps/{$endpoint}/")
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->addPost('params', json_encode([
-                'server_params'         => [
-                    'two_step_verification_context' => $this->bloksInfo['two_step_verification_context'],
-                    'INTERNAL_INFRA_THEME'          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
-                    'flow_source'                   => $this->bloksInfo['flow_source'],
-                    'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
-                ],
+                'server_params'         => $serverParams,
             ]))
             ->addPost('bk_client_context', json_encode([
                 'bloks_version' => Constants::BLOCK_VERSIONING_ID,
@@ -3311,6 +3349,101 @@ class Instagram implements ExperimentsInterface
 
         if (is_array($loginResponseWithHeaders)) {
             if (str_contains($response->asJson(), 'BLOKS_TWO_STEP_VERIFICATION_ENTER_CODE:error_message:0')) {
+                throw new \InstagramAPI\Exception\InstagramException('Invalid 2FA code');
+            }
+            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+            $this->_throwLoginException($response, $errorMap);
+        }
+        $response = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
+        //$this->_updateLoginState($response);
+        //$this->_sendLoginFlow(true, $appRefreshInterval);
+
+        return $response;
+    }
+
+    /**
+     * Finish a two-factor generic authenticated login (Bloks version).
+     *
+     * This function finishes a two-factor challenge that was provided by the
+     * regular `login()` function. If you successfully answer their challenge,
+     * you will be logged in after this function call.
+     *
+     * @param string $username         Your Instagram username used for login.
+     *                                 Email and phone aren't allowed here.
+     * @param string $password         Your Instagram password.
+     * @param string $challenge        2FA challenge type.
+     * @param string $verificationCode Verification code.
+     * @param bool   $trustDevice      If you want to trust the used Device ID.
+     * @param mixed  $context
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\LoginResponse
+     */
+    public function finishTwoFactorGenericVerification(
+        $username,
+        $password,
+        $context,
+        $verificationCode)
+    {
+        if (empty($username) || empty($password)) {
+            throw new \InvalidArgumentException('You must provide a username and password to finishTwoFactorVerification().');
+        }
+        if (empty($verificationCode) || empty($context)) {
+            throw new \InvalidArgumentException('You must provide a verification code and two-factor identifier to finishTwoFactorVerification().');
+        }
+
+        // Switch the currently active user/pass if the details are different.
+        // NOTE: The username and password AREN'T actually necessary for THIS
+        // endpoint, but this extra step helps people who statelessly embed the
+        // library directly into a webpage, so they can `finishTwoFactorVerification()`
+        // on their second page load without having to begin any new `login()`
+        // call (since they did that in their previous webpage's library calls).
+        if ($this->username !== $username || $this->password !== $password) {
+            $this->_setUser('regular', $username, $password);
+        }
+
+        // Remove all whitespace from the verification code.
+        $verificationCode = preg_replace('/\s+/', '', $verificationCode);
+
+        $response = $this->request('bloks/apps/com.bloks.www.ap.two_step_verification.code_entry_async/')
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'code'                          => $verificationCode,
+                ],
+                'server_params'         => [
+                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+                    'context_data'                                  => $context, //$this->bloksInfo['context_data'],
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $mainBloks = $this->bloks->parseResponse($response->asArray(), '(bk.action.caa.HandleLoginResponse');
+
+        $firstDataBlok = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'logged_in_user')) {
+                $firstDataBlok = $mainBlok;
+                break;
+            }
+        }
+
+        if ($firstDataBlok !== null) {
+            $loginResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
+        } else {
+            $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+        }
+
+        if (is_array($loginResponseWithHeaders)) {
+            if (str_contains($response->asJson(), 'try a new one')) {
                 throw new \InstagramAPI\Exception\InstagramException('Invalid 2FA code');
             }
             $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);

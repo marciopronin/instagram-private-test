@@ -1,3 +1,10 @@
+# Stable release v21.48.1
+## Date: 29/11/2023
+
+### Updates and fixes
+
+- **Internal:** Update `uploadSingleVideo()`
+
 # Stable release v21.48.0
 ## Date: 29/11/2023
 

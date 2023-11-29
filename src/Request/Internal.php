@@ -762,6 +762,12 @@ class Internal extends RequestCollection
             $configure = $this->ig->internal->configureWithRetries(
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Attempt to configure video parameters.
+                    if (isset($externalMetadata['share_to_fb_destination_id'])) {
+                        $externalMetadata['client_shared_at'] = time();
+                        $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
+                        $externalMetadata['crosspost'] = true;
+                    }
+
                     return $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
                 }
             );

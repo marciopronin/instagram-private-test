@@ -1616,7 +1616,7 @@ class People extends RequestCollection
             ->addParam('is_private_share', false)
             ->addParam('views', ($nullState) ? '["direct_ibc_nullstate"]' : json_encode(array_values($views)));
 
-        if ($this->ig->isExperimentEnabled('54280', 0, true)) {
+        if ($this->ig->isExperimentEnabled('54280', 0, false)) {
             $request->addParam('IBCShareSheetParams', json_encode(['size' => max($this->ig->getExperimentParam('54280', 2, 5), (int) $this->ig->getExperimentParam('54280', 5, 3))]));
         }
         $request->addParam('is_real_time', false);

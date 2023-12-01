@@ -22,7 +22,7 @@ class Bloks
             }
         }
 
-        return $results;
+        return array_unique($results);
     }
 
     public function getBloks(

@@ -1,3 +1,11 @@
+# Stable release v21.48.2
+## Date: 1/12/2023
+
+### Updates and fixes
+
+- **Account:** Update `getAccountCenterLinkedAccounts()`
+- **Bloks:** Update `parseResponse()`
+
 # Stable release v21.48.1
 ## Date: 29/11/2023
 

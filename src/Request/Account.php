@@ -1775,12 +1775,15 @@ class Account extends RequestCollection
     /**
      * Get account center linked accounts.
      *
+     * @param bool $iter Account iteration.
+     *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return array
      */
-    public function getAccountCenterLinkedAccounts()
+    public function getAccountCenterLinkedAccounts(
+        $iter = false)
     {
         $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post/')
             ->setSignedPost(false)
@@ -1804,13 +1807,18 @@ class Account extends RequestCollection
         $secondBlock = null;
         foreach ($mainBloks as $mainBlok) {
             if (str_contains($mainBlok, 'account_identifier')) {
-                if ($dataBlock === null) {
+                if ($dataBlock === null && $iter === false) {
                     $dataBlock = $mainBlok;
                 }
+                if ($iter) {
+                    $iter = false;
+                }
             }
+            /*
             if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
                 $secondBlock = $mainBlok;
             }
+            */
         }
         if ($dataBlock !== null) {
             $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
@@ -1825,8 +1833,9 @@ class Account extends RequestCollection
             }
 
             $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
-            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+            $this->ig->bloksInfo = array_merge($this->ig->bloksInfo, $map);
         }
+        /*
         if ($secondBlock !== null) {
             $parsed = $this->ig->bloks->parseBlok($secondBlock, 'bk.action.map.Make');
             $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'INTERNAL_INFRA_screen_id'), 0, -2);
@@ -1842,6 +1851,7 @@ class Account extends RequestCollection
             $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
             $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
         }
+        */
 
         if (!isset($this->ig->bloksInfo['account_identifier']) || empty($this->ig->bloksInfo['account_identifier'])) {
             return [];

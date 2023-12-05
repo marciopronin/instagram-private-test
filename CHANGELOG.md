@@ -1,3 +1,10 @@
+# Stable release v21.48.4
+## Date: 5/12/2023
+
+### Updates and fixes
+
+- **People:** Update `getAccountCenterLinkedAccounts()`
+
 # Stable release v21.48.3
 ## Date: 1/12/2023
 

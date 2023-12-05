@@ -1775,15 +1775,12 @@ class Account extends RequestCollection
     /**
      * Get account center linked accounts.
      *
-     * @param bool $iter Account iteration.
-     *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return array
      */
-    public function getAccountCenterLinkedAccounts(
-        $iter = false)
+    public function getAccountCenterLinkedAccounts()
     {
         $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post/')
             ->setSignedPost(false)
@@ -1804,36 +1801,81 @@ class Account extends RequestCollection
         $responseArr = $response->asArray();
         $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
         $dataBlock = null;
-        $secondBlock = null;
+        //$secondBlock = null;
+        $accountIdentifiers = [];
+        $results = [];
         foreach ($mainBloks as $mainBlok) {
             if (str_contains($mainBlok, 'account_identifier')) {
-                if ($dataBlock === null && $iter === false) {
-                    $dataBlock = $mainBlok;
+                $parsed = $this->ig->bloks->parseBlok($mainBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'account_identifier'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
                 }
-                if ($iter) {
-                    $iter = false;
+
+                $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+                $this->ig->bloksInfo = array_merge($this->ig->bloksInfo, $map);
+
+                if (!isset($this->ig->bloksInfo['account_identifier']) || empty($this->ig->bloksInfo['account_identifier'])) {
+                    return [];
                 }
+
+                try {
+                    $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account/')
+                    ->setSignedPost(false)
+                    ->addPost('params', json_encode([
+                        'server_params'         => [
+                            'requested_screen_component_type'   => 2,
+                            'account_identifier'                => $this->ig->bloksInfo['account_identifier'],
+                            'INTERNAL_INFRA_screen_id'          => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'],
+                        ],
+                    ]))
+                    ->addPost('bk_client_context', json_encode([
+                        'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                        'styles_id'     => 'instagram',
+                    ]))
+                    ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+                    ->getResponse(new Response\GenericResponse());
+                } catch (\Exception $e) {
+                    continue;
+                }
+
+                $re = '/radio_button_selected_id:\d+","mode":".","initial":"(\d+)"/m';
+                preg_match_all($re, $response->asJson(), $active, PREG_SET_ORDER, 0);
+                $default = null;
+                if (!empty($active)) {
+                    $default = $active[0][1];
+                }
+
+                $re = '/(\w+\s?\w+),\sFacebook.*f32.Eq,\s\\\\\"(\d+)\\\\/U';
+                preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+                if (!empty($matches)) {
+                    foreach ($matches as $match) {
+                        $results[$match[1]] = ['id' => $match[2]];
+                        if ($match[2] === $default) {
+                            $results[$match[1]]['default'] = true;
+                        } else {
+                            $results[$match[1]]['default'] = false;
+                        }
+                        preg_match_all(sprintf('/%d\),\s\\\\"(\w+)/m', $match[2]), $response->asJson(), $submatches, PREG_SET_ORDER, 0);
+                        if (!empty($submatches)) {
+                            $results[$match[1]]['entity'] = $submatches[0][1] === 'EntPage' ? 'PAGE' : 'USER';
+                        }
+                    }
+                }
+
+                return $results;
             }
             /*
             if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
                 $secondBlock = $mainBlok;
             }
             */
-        }
-        if ($dataBlock !== null) {
-            $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
-            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'account_identifier'), 0, -2);
-
-            foreach ($offsets as $offset) {
-                if (isset($parsed[$offset])) {
-                    $parsed = $parsed[$offset];
-                } else {
-                    break;
-                }
-            }
-
-            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
-            $this->ig->bloksInfo = array_merge($this->ig->bloksInfo, $map);
         }
         /*
         if ($secondBlock !== null) {
@@ -1852,53 +1894,6 @@ class Account extends RequestCollection
             $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
         }
         */
-
-        if (!isset($this->ig->bloksInfo['account_identifier']) || empty($this->ig->bloksInfo['account_identifier'])) {
-            return [];
-        }
-
-        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.post.account/')
-            ->setSignedPost(false)
-            ->addPost('params', json_encode([
-                'server_params'         => [
-                    'requested_screen_component_type'   => 2,
-                    'account_identifier'                => $this->ig->bloksInfo['account_identifier'],
-                    'INTERNAL_INFRA_screen_id'          => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'],
-                ],
-            ]))
-            ->addPost('bk_client_context', json_encode([
-                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
-                'styles_id'     => 'instagram',
-            ]))
-            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
-            ->getResponse(new Response\GenericResponse());
-
-        $re = '/radio_button_selected_id:\d+","mode":".","initial":"(\d+)"/m';
-        preg_match_all($re, $response->asJson(), $active, PREG_SET_ORDER, 0);
-        $default = null;
-        if (!empty($active)) {
-            $default = $active[0][1];
-        }
-
-        $re = '/(\w+\s?\w+),\sFacebook.*f32.Eq,\s\\\\\"(\d+)\\\\/U';
-        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
-
-        $results = [];
-        if (!empty($matches)) {
-            foreach ($matches as $match) {
-                $results[$match[1]] = ['id' => $match[2]];
-                if ($match[2] === $default) {
-                    $results[$match[1]]['default'] = true;
-                } else {
-                    $results[$match[1]]['default'] = false;
-                }
-                preg_match_all(sprintf('/%d\),\s\\\\"(\w+)/m', $match[2]), $response->asJson(), $submatches, PREG_SET_ORDER, 0);
-                if (!empty($submatches)) {
-                    $results[$match[1]]['entity'] = $submatches[0][1] === 'EntPage' ? 'PAGE' : 'USER';
-                }
-            }
-        }
-
         return $results;
     }
 

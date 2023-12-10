@@ -1,3 +1,10 @@
+# Stable release v21.48.5
+## Date: 9/12/2023
+
+### Updates and fixes
+
+- **Constants:** Update to 309.1.0.41.113
+
 # Stable release v21.48.4
 ## Date: 5/12/2023
 

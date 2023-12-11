@@ -5027,6 +5027,16 @@ class Instagram implements ExperimentsInterface
         $loginFlow = true)
     {
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
+        $re = '/"full_name":"(.*?)","/m';
+        preg_match_all($re, $loginResponseWithHeaders['login_response'], $matches, PREG_SET_ORDER, 0);
+        if ($matches) {
+            $loginResponse = $matches[0][1];
+            $loginResponse = str_replace('\"', '"', $loginResponse);
+            $loginResponse = str_replace('"', '\"', $loginResponse);
+            $re = '/("full_name":")(.*?)(",")/m';
+            $loginResponseWithHeaders['login_response'] = preg_replace($re, '$1'.$loginResponse.'$3', $loginResponseWithHeaders['login_response']);
+        }
+
         $loginResponse = json_decode($loginResponseWithHeaders['login_response'], true);
         if (!isset($loginResponse['status'])) {
             $loginResponse['status'] = 'ok';

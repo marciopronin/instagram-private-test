@@ -48,7 +48,7 @@ class Constants
 
     // HTTP Protocol Constants.
     const ACCEPT_LANGUAGE = 'en-US'; // "language-COUNTRY".
-    const ACCEPT_ENCODING = 'gzip, deflate';
+    const ACCEPT_ENCODING = 'gzip, deflate, br';
     const CONTENT_TYPE = 'application/x-www-form-urlencoded; charset=UTF-8';
     const X_IG_Connection_Type = 'WIFI';
     const X_IG_Capabilities = '3brTv10=';

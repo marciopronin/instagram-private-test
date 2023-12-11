@@ -1,3 +1,11 @@
+# Stable release v21.48.7
+## Date: 12/12/2023
+
+### Updates and fixes
+
+- **Timeline:** Update `getTimelineFeed()`
+- **Constants:** Update `ACCEPT_ENCODING`
+
 # Stable release v21.48.6
 ## Date: 11/12/2023
 

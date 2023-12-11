@@ -277,6 +277,10 @@ class Timeline extends RequestCollection
         } else {
             $request->addPost('reason', isset($options['reason']) ? $options['reason'] : Constants::REASONS[0]); // cold_start_fetch
             $request->addPost('is_pull_to_refresh', '0');
+
+            if (isset($options['reason']) && $options['reason'] === Constants::REASONS[0]) {
+                $request->addHeader('X-Ig-App-Start-Request', '1');
+            }
         }
 
         if (isset($options['seen_posts'])) {

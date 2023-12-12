@@ -17,10 +17,12 @@ class Constants
     const IG_VERSION = '309.1.0.41.113';
     const IG_IOS_VERSION = '212.1.0.25.118';
     const VERSION_CODE = [
-        '542365160', // arm64 - Android 9+ - 640,560dpi (default)
-        '542365160', // arm64 - Android 9+ - nodpi
-        '542365160', // armv7 - Android 5+ - nodpi
-        '542365160', // armv7 - Android 5+ - 560,640dpi
+        '542365160',
+        '541635894',
+        '541635892',
+        '541635874',
+        '541635890',
+        '541635884',
     ];
 
     const IG_IOS_VERSION_CODE = '329643252';

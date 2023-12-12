@@ -1,3 +1,13 @@
+# Stable release v21.48.8
+## Date: 13/12/2023
+
+### Updates and fixes
+
+- **Client:** Update `_buildGuzzleOptions()`
+- **Constants:** Update `VERSION_CODE`
+- **Instagram:** Update `_setUser()`
+- **StorageHandler:** Update `PERSISTENT_KEYS`
+
 # Stable release v21.48.7
 ## Date: 12/12/2023
 

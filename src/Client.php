@@ -967,7 +967,9 @@ class Client
         array $guzzleOptions = [],
         $disableCookies = false)
     {
-        $curlOptions = [];
+        $curlOptions = [
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2_0, // HTTP2.0
+        ];
 
         //$curlOptions = [
         //    CURLOPT_SSLVERSION          => CURL_SSLVERSION_TLSv1_3, // 0x0303 (771)

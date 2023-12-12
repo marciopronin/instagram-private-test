@@ -65,6 +65,7 @@ class StorageHandler
         'nav_started',
         'fbid_v2',
         'phone_number',
+        'version_code',
     ];
 
     /**

@@ -310,7 +310,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var string
      */
-    public $versionCode = Constants::VERSION_CODE[0];
+    public $versionCode = null;
 
     /**
      * Login attempt counter.
@@ -934,11 +934,11 @@ class Instagram implements ExperimentsInterface
         $random = false)
     {
         if ($random === true) {
-            $versionCode = array_rand(Constants::VERSION_CODE);
+            $versionCode = Constants::VERSION_CODE[array_rand(Constants::VERSION_CODE)];
         } else {
-            $versionCode = (!in_array($value, Constants::VERSION_CODE)) ? Constants::VERSION_CODE[0] : $value;
+            $versionCode = (!in_array($value, Constants::VERSION_CODE)) ? Constants::VERSION_CODE[array_rand(Constants::VERSION_CODE)] : $value;
         }
-        $this->versionCode = $value;
+        $this->versionCode = $versionCode;
     }
 
     /**
@@ -3916,6 +3916,13 @@ class Instagram implements ExperimentsInterface
             $autoFallback = true;
         }
 
+        if (empty($this->settings->get('version_code'))) {
+            $this->setVersionCode('', true);
+            $this->settings->set('version_code', $this->getVersionCode());
+        } else {
+            $this->setVersionCode($this->settings->get('version_code'));
+        }
+
         $this->device = new Devices\Device(
             Constants::IG_VERSION,
             $this->getVersionCode(),
@@ -3962,6 +3969,7 @@ class Instagram implements ExperimentsInterface
             }
 
             if ($this->getIsAndroid()) {
+                $this->settings->set('version_code', $this->getVersionCode());
                 $result = Signatures::generateSpecialUUID();
                 $phoneId = $result['phone_id'];
                 $this->settings->set('offline_experiment', $result['offline_experiment']);

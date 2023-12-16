@@ -136,13 +136,16 @@ class Internal extends RequestCollection
             $configure = $this->ig->internal->configureWithRetries(
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Configure the uploaded image and attach it to our timeline/story/IGTV.
+                    $isShared = null;
                     if (isset($externalMetadata['share_to_fb_destination_id'])) {
                         $externalMetadata['client_shared_at'] = time();
-                        $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
+                        $isShared = $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
                         $externalMetadata['crosspost'] = true;
                     }
 
-                    return $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
+                    $response = $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
+
+                    return ($isShared === null) ? $response : $isShared;
                 }
             );
 
@@ -762,13 +765,15 @@ class Internal extends RequestCollection
             $configure = $this->ig->internal->configureWithRetries(
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Attempt to configure video parameters.
+                    $isShared = null;
                     if (isset($externalMetadata['share_to_fb_destination_id'])) {
                         $externalMetadata['client_shared_at'] = time();
-                        $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
+                        $isShared = $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
                         $externalMetadata['crosspost'] = true;
                     }
+                    $response = $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
 
-                    return $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
+                    return ($isShared === null) ? $response : $isShared;
                 }
             );
             // $this->updateMediaWithPdqHashes($internalMetadata->getUploadId(), $pdqHashes);

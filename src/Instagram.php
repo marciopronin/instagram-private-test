@@ -5042,7 +5042,7 @@ class Instagram implements ExperimentsInterface
             $loginResponse = str_replace('\"', '"', $loginResponse);
             $loginResponse = str_replace('"', '\"', $loginResponse);
             $re = '/("full_name":")(.*?)(",")/m';
-            $loginResponseWithHeaders['login_response'] = preg_replace($re, '$1'.$loginResponse.'$3', $loginResponseWithHeaders['login_response']);
+            $loginResponseWithHeaders['login_response'] = preg_replace($re, '${1}'.$loginResponse.'${3}', $loginResponseWithHeaders['login_response']);
         }
 
         $loginResponse = json_decode($loginResponseWithHeaders['login_response'], true);

@@ -1,3 +1,12 @@
+# Stable release v21.48.9
+## Date: 16/12/2023
+
+### Updates and fixes
+
+- **Instagram:** Update `_processSuccesfulLoginResponse()`
+- **Internal:** Update `uploadSinglePhoto()`
+- **Internal:** Update `uploadSingleVideo()`
+
 # Stable release v21.48.8
 ## Date: 13/12/2023
 

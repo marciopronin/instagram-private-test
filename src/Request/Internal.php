@@ -289,6 +289,10 @@ class Internal extends RequestCollection
         $filter = null; // COMMENTED OUT SO USERS UNDERSTAND THEY CAN'T USE THIS!
         /** @var array Hashtags to use for the media. ONLY STORY MEDIA! */
         $hashtags = (isset($externalMetadata['hashtags']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['hashtags'] : null;
+        /** @var array Story captions text metadata to use for the media. ONLY STORY MEDIA! */
+        $storyTextMetadata = (isset($externalMetadata['story_caption_text_metadata']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_caption_text_metadata'] : null;
+        /** @var array Story captions to use for the media. ONLY STORY MEDIA! */
+        $storyCaptions = (isset($externalMetadata['story_captions']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_captions'] : null;
         /** @var array Mentions to use for the media. ONLY STORY MEDIA! */
         $storyMentions = (isset($externalMetadata['story_mentions']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_mentions'] : null;
         /** @var array Story poll to use for the media. ONLY STORY MEDIA! */
@@ -364,6 +368,7 @@ class Internal extends RequestCollection
 
         $stickerIds = [];
         $tapModels = [];
+        $staticModels = [];
 
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE:
@@ -459,6 +464,15 @@ class Internal extends RequestCollection
                     $request->addPost('story_cta', $story_cta);
                 }
                 */
+                if ($captionText !== '' && $storyTextMetadata !== null) {
+                    $request->addPost('caption', $captionText)
+                            ->addPost('rich_text_format_types', json_encode(['modern_refreshed_v2']))
+                            ->addPost('text_metadata', $storyTextMetadata);
+
+                    if ($storyCaption !== null) {
+                        $request->addPost('story_captions', $storyCaption);
+                    }
+                }
                 if ($linkSticker !== null) {
                     Utils::throwIfInvalidStoryLinkSticker($linkSticker);
 
@@ -488,7 +502,14 @@ class Internal extends RequestCollection
 
                     foreach ($storyMentions as $storyMention) {
                         $tapModels[] = $storyMention;
-                        $stickerIds[] = 'mention_sticker';
+                        if ($storyMention['is_sticker']) {
+                            $stickerIds[] = 'mention_sticker';
+                        } else {
+                            $static = $storyMention;
+                            $static['str_id'] = 'text_sticker_'.Signatures::generateUUID();
+                            $static['sticker_type'] = 'text_sticker';
+                            $staticModels[] = $static;
+                        }
                     }
                 }
                 if ($storyPoll !== null) {
@@ -622,6 +643,9 @@ class Internal extends RequestCollection
         }
 
         $request->addPost('tap_models', json_encode($tapModels, JSON_UNESCAPED_SLASHES));
+        if (!empty($staticModels)) {
+            $request->addPost('static_models', json_encode($staticModels, JSON_UNESCAPED_SLASHES));
+        }
 
         if (!empty($stickerIds)) {
             $storyStickerIds = null;
@@ -969,6 +993,10 @@ class Internal extends RequestCollection
         $linkSticker = (isset($externalMetadata['link_sticker']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link_sticker'] : null;
         /** @var array Hashtags to use for the media. ONLY STORY MEDIA! */
         $hashtags = (isset($externalMetadata['hashtags']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['hashtags'] : null;
+        /** @var array Story captions text metadata to use for the media. ONLY STORY MEDIA! */
+        $storyTextMetadata = (isset($externalMetadata['story_caption_text_metadata']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_caption_text_metadata'] : null;
+        /** @var array Story captions to use for the media. ONLY STORY MEDIA! */
+        $storyCaptions = (isset($externalMetadata['story_captions']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_captions'] : null;
         /** @var array Mentions to use for the media. ONLY STORY MEDIA! */
         $storyMentions = (isset($externalMetadata['story_mentions']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['story_mentions'] : null;
         /** @var array Story music to use for the media. ONLY STORY MEDIA */
@@ -1049,6 +1077,7 @@ class Internal extends RequestCollection
 
         $stickerIds = [];
         $tapModels = [];
+        $staticModels = [];
 
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE:
@@ -1085,6 +1114,16 @@ class Internal extends RequestCollection
                     $request->addPost('audience', 'besties');
                 } else {
                     $request->addPost('audience', 'default');
+                }
+
+                if ($captionText !== '' && $storyTextMetadata !== null) {
+                    $request->addPost('caption', $captionText)
+                            ->addPost('rich_text_format_types', json_encode(['modern_refreshed_v2']))
+                            ->addPost('text_metadata', $storyTextMetadata);
+
+                    if ($storyCaption !== null) {
+                        $request->addPost('story_captions', $storyCaption);
+                    }
                 }
 
                 $request
@@ -1143,7 +1182,14 @@ class Internal extends RequestCollection
 
                     foreach ($storyMentions as $storyMention) {
                         $tapModels[] = $storyMention;
-                        $stickerIds[] = 'mention_sticker';
+                        if ($storyMention['is_sticker']) {
+                            $stickerIds[] = 'mention_sticker';
+                        } else {
+                            $static = $storyMention;
+                            $static['str_id'] = 'text_sticker_'.Signatures::generateUUID();
+                            $static['sticker_type'] = 'text_sticker';
+                            $staticModels[] = $static;
+                        }
                     }
                 }
                 if ($storyMusic !== null) {
@@ -1416,6 +1462,9 @@ class Internal extends RequestCollection
 
         if (!empty($tapModels)) {
             $request->addPost('tap_models', json_encode($tapModels, JSON_UNESCAPED_SLASHES));
+        }
+        if (!empty($staticModels)) {
+            $request->addPost('static_models', json_encode($staticModels, JSON_UNESCAPED_SLASHES));
         }
 
         if (!empty($stickerIds)) {

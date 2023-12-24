@@ -1,3 +1,10 @@
+# Stable release v21.48.11
+## Date: 23/12/2023
+
+### Updates and fixes
+
+- **Event:** Update `sendProfileAction()`
+
 # Stable release v21.48.10
 ## Date: 20/12/2023
 

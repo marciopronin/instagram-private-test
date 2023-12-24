@@ -24,7 +24,7 @@ class Event extends RequestCollection
     {
         $body =
         [
-            'time'              => ($batch[0]['time'] * 1000) - mt_rand(0, 50),
+            'time'              => ($batch[0]['time'] * 1000) - mt_rand(0, 500),
             'app_id'            => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
             'app_ver'           => Constants::IG_VERSION,
             'build_num'         => $this->ig->getVersionCode(),
@@ -1903,22 +1903,29 @@ class Event extends RequestCollection
                 $extra['media_tracking_token_attribution'] = null;
                 break;
             case 'follow':
-                $followStatus = 'not_following';
-                $clickpoint = isset($options['click_point']) ? $options['click_point'] : 'button_tray';
-                $extra['media_id_attribution'] = isset($options['media_id_attribution']) ? $options['media_id_attribution'] : null;
-                $extra['media_tracking_token_attribution'] = isset($options['media_tracking_token_attribution']) ? $options['media_tracking_token_attribution'] : null;
-                $extra['hashtag_id'] = null;
-                $extra['hashtag_name'] = null;
-                $module = 'profile';
-                break;
             case 'unfollow':
-                $followStatus = 'following';
+                $followStatus = ($action === 'follow') ? 'not_following' : 'following';
                 $clickpoint = isset($options['click_point']) ? $options['click_point'] : 'button_tray';
-                $module = 'profile';
                 $extra['media_id_attribution'] = isset($options['media_id_attribution']) ? $options['media_id_attribution'] : null;
                 $extra['media_tracking_token_attribution'] = isset($options['media_tracking_token_attribution']) ? $options['media_tracking_token_attribution'] : null;
                 $extra['hashtag_id'] = null;
                 $extra['hashtag_name'] = null;
+                $extra['product_id'] = null;
+                $extra['product_collection_type'] = null;
+                $extra['subscribed_status'] = null;
+                $extra['starting_clips_media_id'] = null;
+                $extra['starting_clips_media_ranking_token'] = null;
+                $extra['ranking_info_token'] = null;
+                $extra['direct_thread_id'] = null;
+                $extra['profile_user_type'] = null;
+                $extra['request_id'] = null;
+                $extra['direct_source'] = null;
+                $extra['direct_source_type'] = null;
+                $extra['time_on_profile'] = null;
+                $extra['highlight_reel_id_str'] = null;
+                $extra['seen_state_ring'] = null;
+                $extra['search_context'] = null;
+                $module = isset($options['follow_suggested']) ? 'self_profile' : 'profile';
                 break;
             case 'edit_profile':
                 $followStatus = 'self';

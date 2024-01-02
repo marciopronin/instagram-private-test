@@ -1,3 +1,12 @@
+# Stable release v21.48.12
+## Date: 01/01/2024
+
+### Updates and fixes
+
+- **Constants:** Update to 312.1.0.34.111
+- **Internal:** Update `getMobileConfig()`
+- **Instagram:** Update `_login()`
+
 # Stable release v21.48.11
 ## Date: 23/12/2023
 

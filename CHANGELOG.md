@@ -1,3 +1,14 @@
+# Stable release v21.49.0
+## Date: 03/01/2024
+
+### New features
+
+- **Internal:** Add `createAndroidKeystore()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendPreLoginFlow()`
+
 # Stable release v21.48.12
 ## Date: 01/01/2024
 

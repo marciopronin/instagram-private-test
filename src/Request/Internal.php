@@ -2048,6 +2048,23 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Create android Keystore.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function createAndroidKeystore()
+    {
+        return $this->ig->request('attestation/create_android_keystore/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->addPost('app_scoped_device_id', $this->ig->uuid)
+            ->addPost('key_hash', '')
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get megaphone log.
      *
      * @throws \InstagramAPI\Exception\InstagramException

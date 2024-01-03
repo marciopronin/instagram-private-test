@@ -4158,6 +4158,7 @@ class Instagram implements ExperimentsInterface
             try {
                 try {
                     $this->internal->fetchZeroRatingToken('token_expired', false);
+                    $this->internal->createAndroidKeystore();
                     //$this->account->setContactPointPrefill('prefill');
                     /*
                     $this->internal->sendGraph('455411352809009551099714876', [

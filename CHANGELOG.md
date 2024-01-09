@@ -1,3 +1,11 @@
+# Stable release v21.49.2
+## Date: 09/01/2024
+
+### Updates and fixes
+
+- **Utils:** Update `throwIfInvalidStoryMentionSticker()`
+- **Push:** Update `register()`
+
 # Stable release v21.49.1
 ## Date: 08/01/2024
 

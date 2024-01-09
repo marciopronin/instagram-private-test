@@ -1242,7 +1242,7 @@ class Utils
                         }
                         break;
                     case 'tap_state_str_id':
-                        if ($v !== 'mention_sticker_subtle' && $v !== 'mention_sticker_hero' && $v !== 'mention_sticker_rainbow' && $v !== 'mention_sticker_gradient') {
+                        if ($v !== 'mention_sticker_subtle' && $v !== 'mention_sticker_hero' && $v !== 'mention_sticker_rainbow' && $v !== 'mention_sticker_gradient' && $v !== 'mention_text') {
                             throw new \InvalidArgumentException(sprintf('Invalid value "%s" for story mention array-key "%s".', $v, $k));
                         }
                         break;

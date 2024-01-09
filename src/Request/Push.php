@@ -39,7 +39,7 @@ class Push extends RequestCollection
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('device_type', $pushChannel === 'mqtt' ? 'android_mqtt' : 'android_fcm')
-                    ->addPost('is_main_push_channel', $pushChannel === 'mqtt')
+                    ->addPost('is_main_push_channel', $pushChannel === 'mqtt' ? 'true' : 'false')
                     ->addPost('device_sub_type', 0)
                     ->addPost('guid', $this->ig->uuid);
         } else {

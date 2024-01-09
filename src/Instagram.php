@@ -2991,7 +2991,13 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $str = explode('?', $link);
+                if (!isset($str[1])) {
+                    throw new \InstagramAPI\Exception\InvalidLoginLinkException($e);
+                }
                 parse_str($str[1], $params);
+                if (!isset($params['uid']) && !isset($params['token'])) {
+                    throw new \InstagramAPI\Exception\InvalidLoginLinkException($e);
+                }
 
                 $request = $this->request('accounts/one_click_login/')
                     ->setNeedsAuth(false)

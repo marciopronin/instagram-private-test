@@ -1,3 +1,11 @@
+# Stable release v21.49.4
+## Date: 12/01/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_setUser()`
+- **Instagram:** Update `_loginWithEmailLink()`
+
 # Stable release v21.49.3
 ## Date: 11/01/2024
 

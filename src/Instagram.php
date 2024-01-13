@@ -2992,11 +2992,11 @@ class Instagram implements ExperimentsInterface
             try {
                 $str = explode('?', $link);
                 if (!isset($str[1])) {
-                    throw new \InstagramAPI\Exception\InvalidLoginLinkException($e);
+                    throw new \InstagramAPI\Exception\InvalidLoginLinkException();
                 }
                 parse_str($str[1], $params);
                 if (!isset($params['uid']) && !isset($params['token'])) {
-                    throw new \InstagramAPI\Exception\InvalidLoginLinkException($e);
+                    throw new \InstagramAPI\Exception\InvalidLoginLinkException();
                 }
 
                 $request = $this->request('accounts/one_click_login/')
@@ -3968,7 +3968,7 @@ class Instagram implements ExperimentsInterface
         $resetCookieJar = false;
         if ($deviceString !== $savedDeviceString // Brand new device, or missing
             || empty($this->settings->get('uuid')) // one of the critically...
-            || empty($this->settings->get('phone_id')) // ...important device...
+            || $this->settings->get('phone_id') === null // ...important device... Empty string values could be valid.
             || empty($this->settings->get('device_id'))) { // ...parameters.
             // Erase all previously stored device-specific settings and cookies.
             $this->settings->eraseDeviceSettings();

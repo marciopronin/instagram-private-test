@@ -1,3 +1,12 @@
+# Stable release v21.49.5
+## Date: 14/01/2024
+
+### Updates and fixes
+
+- **Constants:** Update to 313.0.0.26.328
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `configureSingleVideo()`
+
 # Stable release v21.49.4
 ## Date: 12/01/2024
 

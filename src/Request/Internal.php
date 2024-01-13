@@ -1121,8 +1121,8 @@ class Internal extends RequestCollection
                             ->addPost('rich_text_format_types', json_encode(['modern_refreshed_v2']))
                             ->addPost('text_metadata', $storyTextMetadata);
 
-                    if ($storyCaption !== null) {
-                        $request->addPost('story_captions', $storyCaption);
+                    if ($storyCaptions !== null) {
+                        $request->addPost('story_captions', $storyCaptions);
                     }
                 }
 
@@ -1823,13 +1823,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '4b4d5d0d4ef2f269eb5cd59adc5601462f8e01d5595b05e08913652a73d0604b')
+                ->addPost('query_hash', '82896c4c17e3256b73aefc87ec62dd89dc317e1e717633922e64c8f05c2bb4b1')
                 ->addPost('family_device_id', strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', 'be52f7979930c439d8edf2b6c91a818663e8ac01d98f624397972afd912663a0')
+                ->addPost('query_hash', 'dc57a8a2141c095abacff80d7d16685caaf7791e39b5f74af1ac2b4593195251')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }

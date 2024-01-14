@@ -1,3 +1,12 @@
+# Stable release v21.49.6
+## Date: 15/01/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_setUser()`
+- **Internal:** Update `getMobileConfig()`
+- **Request:** Update `_addDefaultHeaders()`
+
 # Stable release v21.49.5
 ## Date: 14/01/2024
 

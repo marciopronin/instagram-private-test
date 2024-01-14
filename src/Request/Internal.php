@@ -1824,7 +1824,7 @@ class Internal extends RequestCollection
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
                 ->addPost('query_hash', '82896c4c17e3256b73aefc87ec62dd89dc317e1e717633922e64c8f05c2bb4b1')
-                ->addPost('family_device_id', strtoupper($this->ig->phone_id));
+                ->addPost('family_device_id', $this->ig->phone_id === null ? $this->ig->phone_id : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')

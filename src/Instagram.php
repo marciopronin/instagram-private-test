@@ -3968,7 +3968,7 @@ class Instagram implements ExperimentsInterface
         $resetCookieJar = false;
         if ($deviceString !== $savedDeviceString // Brand new device, or missing
             || empty($this->settings->get('uuid')) // one of the critically...
-            || $this->settings->get('phone_id') === null // ...important device... Empty string values could be valid.
+            //|| $this->settings->get('phone_id') === null // ...important device... Empty string values could be valid.
             || empty($this->settings->get('device_id'))) { // ...parameters.
             // Erase all previously stored device-specific settings and cookies.
             $this->settings->eraseDeviceSettings();
@@ -4033,6 +4033,7 @@ class Instagram implements ExperimentsInterface
         $this->advertising_id = $this->settings->get('advertising_id');
         $this->device_id = $this->settings->get('device_id');
         $this->phone_id = $this->settings->get('phone_id');
+
         $this->session_id = $this->settings->get('session_id');
         if ($loginType === 'facebook') {
             $this->fb_access_token = $this->settings->get('fb_access_token');

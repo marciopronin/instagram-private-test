@@ -423,7 +423,9 @@ class Request
             $this->_headers['X-IG-Connection-Type'] = ($this->_parent->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)';
             //$this->_headers['X-IG-Connection-Speed'] = $this->_parent->getConnectionSpeed();
             $this->_headers['X-IG-Device-ID'] = $this->_parent->uuid;
-            $this->_headers['X-IG-Family-Device-ID'] = $this->_parent->phone_id;
+            if ($this->_parent->phone_id !== null) {
+                $this->_headers['X-IG-Family-Device-ID'] = $this->_parent->phone_id;
+            }
             $this->_headers['X-FB-HTTP-Engine'] = Constants::X_FB_HTTP_Engine;
             $this->_headers['X-FB-Client-IP'] = 'True';
             $this->_headers['X-FB-Server-Cluster'] = 'True';

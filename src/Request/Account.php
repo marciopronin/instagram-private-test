@@ -1791,6 +1791,7 @@ class Account extends RequestCollection
                     'entrypoint'                        => 'app_settings',
                 ],
             ]))
+            ->addPost('_uuid', $this->ig->uuid)
             ->addPost('bk_client_context', json_encode([
                 'bloks_version' => Constants::BLOCK_VERSIONING_ID,
                 'styles_id'     => 'instagram',
@@ -1834,6 +1835,7 @@ class Account extends RequestCollection
                             'INTERNAL_INFRA_screen_id'          => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'],
                         ],
                     ]))
+                    ->addPost('_uuid', $this->ig->uuid)
                     ->addPost('bk_client_context', json_encode([
                         'bloks_version' => Constants::BLOCK_VERSIONING_ID,
                         'styles_id'     => 'instagram',

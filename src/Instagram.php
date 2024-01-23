@@ -5181,6 +5181,7 @@ class Instagram implements ExperimentsInterface
         if (isset($errorMap['exception_message'])) {
             switch ($errorMap['exception_message']) {
                 case 'Login Error: An unexpected error occurred. Please try logging in again.':
+                case "Unmapped IG Error: This IG Error was not mapped to an Error Code. To fix it, update the error tool under 'CAA' to map it to an Error Code.":
                     throw new \InstagramAPI\Exception\UnexpectedLoginErrorException($errorMap['exception_message']);
                     break;
                 case 'Incorrect Password: The password you entered is incorrect. Please try again.':

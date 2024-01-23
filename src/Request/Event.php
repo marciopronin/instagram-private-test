@@ -358,6 +358,9 @@ class Event extends RequestCollection
             case 'bloks-idfa-dialog':
                 $class = 'IgBloksIdfaDialog';
                 break;
+            case 'com.bloks.www.caa.login.save-credentials':
+                $class = 'com.bloks.www.caa.login.save-credentials';
+                break;
             default:
                 $class = false;
         }
@@ -5127,6 +5130,12 @@ class Event extends RequestCollection
                 [
                     'clickpoint'    => 'cold_start',
                     'dest_module'   => 'feed_timeline',
+                ],
+            ],
+            'login_bloks' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'com.bloks.www.caa.login.save-credentials',
                 ],
             ],
             'replay_feed_timeline' => [

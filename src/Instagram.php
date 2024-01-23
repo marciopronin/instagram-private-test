@@ -500,7 +500,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var int
      */
-    public $navChainStep = 0;
+    public $navChainStep = 1;
 
     /**
      * Previous navigation chain class.
@@ -2463,8 +2463,10 @@ class Instagram implements ExperimentsInterface
         return $this->request('bloks/apps/com.bloks.www.caa.login.home_template/')
         ->setNeedsAuth(false)
         ->setSignedPost(false)
-        ->addPost('params', json_encode([
-            'INTERNAL_INFRA_THEME'      => 'harm_f',
+        ->addPost('server_params', json_encode([
+            'qe_device_id_server'      => $this->uuid,
+            'family_device_id_server'  => '',
+            'device_id_server'         => $this->device_id,
         ]))
         ->addPost('bk_client_context', json_encode([
             'bloks_version' => Constants::BLOCK_VERSIONING_ID,
@@ -4407,6 +4409,7 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->internal->getMobileConfig(false);
+                    $this->event->sendNavigation('button', 'login_bloks', 'com.bloks.www.caa.login.save-credentials');
                     $this->_registerPushChannels();
                 } catch (\Exception $e) {
                     // pass
@@ -4421,6 +4424,7 @@ class Instagram implements ExperimentsInterface
 
                 $requestId = \InstagramAPI\Signatures::generateUUID();
                 $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch');
+                $this->setNavChain('');
                 $feed = $this->timeline->getTimelineFeed(null, [
                     'reason'        => Constants::REASONS[0],
                     'request_id'    => $requestId,

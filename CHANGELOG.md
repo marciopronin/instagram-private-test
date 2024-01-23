@@ -1,3 +1,12 @@
+# Stable release v21.49.10
+## Date: 23/01/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `getHomeTemplate()`
+- **Instagram:** Update `_sendLoginFlow()`
+- **Event:** Update `_validateNavigationPath()`
+
 # Stable release v21.49.9
 ## Date: 23/01/2024
 

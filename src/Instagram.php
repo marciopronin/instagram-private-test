@@ -173,6 +173,13 @@ class Instagram implements ExperimentsInterface
     public static $retryOnNetworkException = false;
 
     /**
+     * Send async.
+     *
+     * @var bool
+     */
+    public static $sendAsync = false;
+
+    /**
      * Disable login bloks.
      *
      * @var bool
@@ -192,6 +199,13 @@ class Instagram implements ExperimentsInterface
      * @var bool
      */
     public static $useBloksLogin = true;
+
+    /**
+     * Request promises.
+     *
+     * @var \GuzzleHttp\Promise\Promise
+     */
+    public $promises = [];
 
     /**
      * UUID.
@@ -4475,6 +4489,8 @@ class Instagram implements ExperimentsInterface
                 // pass
             }
 
+            self::$sendAsync = true;
+
             try {
                 //$this->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', true);
 
@@ -4736,20 +4752,21 @@ class Instagram implements ExperimentsInterface
                     // pass
                 }
             }
+            self::$sendAsync = false;
 
-            /*
-            // Batch request 5
-            $this->client->startEmulatingBatch();
+        /*
+        // Batch request 5
+        $this->client->startEmulatingBatch();
 
-            try {
-                $this->internal->getQPCooldowns();
-            } catch (\Exception $e) {
-                // pass
-            } finally {
-                // Stops emulating batch requests
-                $this->client->stopEmulatingBatch();
-            }
-            */
+        try {
+            $this->internal->getQPCooldowns();
+        } catch (\Exception $e) {
+            // pass
+        } finally {
+            // Stops emulating batch requests
+            $this->client->stopEmulatingBatch();
+        }
+        */
 
             /*
             try {
@@ -4848,6 +4865,7 @@ class Instagram implements ExperimentsInterface
                     $this->client->stopEmulatingBatch();
                 }
 
+                self::$sendAsync = true;
                 // Batch Request 2
                 $this->client->startEmulatingBatch();
 
@@ -4905,6 +4923,7 @@ class Instagram implements ExperimentsInterface
                     // Stops emulating batch requests.
                     $this->client->stopEmulatingBatch();
                 }
+                self::$sendAsync = false;
             } else {
                 try {
                     $this->story->getReelsTrayFeed('cold_start');

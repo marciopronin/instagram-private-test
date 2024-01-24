@@ -1,3 +1,23 @@
+# Stable release v21.50.0
+## Date: 24/01/2024
+
+## New features
+
+- **Client:** Add `_detectHttpCode()`
+- **Client:** Add `_prepareLogging()`
+- **Client:** Add `_processResponseHeaders()`
+- **Request:** Add `_getRawResponse()`
+- **Instagram:** Add `sendAsync` property
+
+## Updates and fixes
+
+- **Client:** Update `_guzzleRequest()`
+- **Client:** Update `_apiRequest()`
+- **Client:** Update `api()`
+- **Request:** Update `getRawResponse()`
+- **Instagram:** Update `_sendLoginFlow()`
+
+
 # Stable release v21.49.11
 ## Date: 23/01/2024
 

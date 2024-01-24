@@ -845,7 +845,7 @@ class Request
      * @throws \RuntimeException
      * @throws InstagramException
      *
-     * @return HttpResponseInterface
+     * @return HttpResponseInterface|Promise
      */
     public function getHttpResponse()
     {
@@ -883,6 +883,30 @@ class Request
     public function getRawResponse()
     {
         $httpResponse = $this->getHttpResponse(); // Throws.
+
+        if ($httpResponse instanceof \GuzzleHttp\Promise\Promise) {
+            return $httpResponse->then(
+                function ($promisedResponse) {
+                    return $this->_getRawResponse($promisedResponse);
+                }
+            );
+        } else {
+            return $this->_getRawResponse($httpResponse);
+        }
+    }
+
+    /**
+     * Return the raw HTTP response body.
+     *
+     * @param HttpResponseInterface|Promise $httpResponse HTTP response.
+     *
+     * @throws InstagramException
+     *
+     * @return string
+     */
+    protected function _getRawResponse(
+        $httpResponse)
+    {
         $body = (string) $httpResponse->getBody();
 
         preg_match_all('/window._sharedData = (.*);<\/script>/m', $body, $matches, PREG_SET_ORDER, 0);

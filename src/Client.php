@@ -6,6 +6,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Cookie\SetCookie;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Promise\Promise as Promise;
 use GuzzleHttp\Psr7\Utils as GuzzleUtils;
 use InstagramAPI\Exception\InstagramException;
 use InstagramAPI\Exception\LoginRequiredException;
@@ -798,19 +799,36 @@ class Client
      *
      * The result is placed directly inside `$responseObject`.
      *
-     * @param Response              $responseObject An instance of a class object whose
-     *                                              properties to fill with the response.
-     * @param string                $rawResponse    A raw JSON response string
-     *                                              from Instagram's server.
-     * @param HttpResponseInterface $httpResponse   HTTP response object.
-     * @param bool                  $silentFail     Silent fail flag.
+     * @param Response                      $responseObject An instance of a class object whose
+     *                                                      properties to fill with the response.
+     * @param string                        $rawResponse    A raw JSON response string
+     *                                                      from Instagram's server.
+     * @param HttpResponseInterface|Promise $httpResponse   HTTP response object.
+     * @param bool                          $silentFail     Silent fail flag.
      *
      * @throws InstagramException In case of invalid or failed API response.
      */
     public function mapServerResponse(
         Response $responseObject,
         $rawResponse,
-        HttpResponseInterface $httpResponse,
+        $httpResponse,
+        $silentFail)
+    {
+        if ($httpResponse instanceof \GuzzleHttp\Promise\Promise) {
+            return $httpResponse->then(
+                function ($promise) use ($responseObject, $rawResponse, $silentFail) {
+                    return $this->_mapServerResponse($responseObject, $rawResponse, $promise, $silentFail);
+                }
+            );
+        } else {
+            return $this->_mapServerResponse($responseObject, $rawResponse, $httpResponse, $silentFail);
+        }
+    }
+
+    protected function _mapServerResponse(
+        Response $responseObject,
+        $rawResponse,
+        $httpResponse,
         $silentFail)
     {
         // Attempt to decode the raw JSON to an array.
@@ -1042,42 +1060,74 @@ class Client
      * @param HttpRequestInterface $request       HTTP request to send.
      * @param array                $guzzleOptions Extra Guzzle options for this request.
      *
-     * @throws \InstagramAPI\Exception\NetworkException                For any network/socket related errors.
-     * @throws \InstagramAPI\Exception\ThrottledException              When we're throttled by server.
-     * @throws \InstagramAPI\Exception\RequestHeadersTooLargeException When request is too large.
+     * @throws \InstagramAPI\Exception\NetworkException For any network/socket related errors.
      *
-     * @return HttpResponseInterface
+     * @return HttpResponseInterface|Promise
      */
     protected function _guzzleRequest(
         HttpRequestInterface $request,
         array $guzzleOptions = [])
     {
+        // When async batches ends, it will wait until all promises are resolved.
+        if (\InstagramAPI\Instagram::$sendAsync === false) {
+            \GuzzleHttp\Promise\settle($this->_parent->promises)->wait();
+            $this->_parent->promises = [];
+        }
         $disableCookies = ($request->getUri()->getPath() === '/logging_client_events' || $request->getUri()->getPath() === '/challenge/' || str_contains($request->getUri()->getPath(), 'web/action')) ? true : false;
 
         // Add critically important options for authenticating the request.
         $guzzleOptions = $this->_buildGuzzleOptions($guzzleOptions, $disableCookies);
 
-        // Attempt the request. Will throw in case of socket errors!
-        $retry = 0;
-        do {
-            $exp = false;
+        if (\InstagramAPI\Instagram::$sendAsync === false) {
+            // Attempt the request. Will throw in case of socket errors!
+            $retry = 0;
+            do {
+                $exp = false;
 
-            try {
-                $response = $this->_guzzleClient->send($request, $guzzleOptions);
-            } catch (\Exception $e) {
-                $exp = true;
-                // Re-wrap Guzzle's exception using our own NetworkException.
-                if ($retry === ($this->_parent->retriesOnNetworkFailure - 1) || !\InstagramAPI\Instagram::$retryOnNetworkException) {
-                    throw new \InstagramAPI\Exception\NetworkException($e);
+                try {
+                    $response = $this->_guzzleClient->send($request, $guzzleOptions);
+                } catch (\Exception $e) {
+                    $exp = true;
+                    // Re-wrap Guzzle's exception using our own NetworkException.
+                    if ($retry === ($this->_parent->retriesOnNetworkFailure - 1) || !\InstagramAPI\Instagram::$retryOnNetworkException) {
+                        throw new \InstagramAPI\Exception\NetworkException($e);
+                    }
                 }
-            }
-            if ($exp === false) {
-                break;
-            }
-            $retry++;
-            sleep(5);
-        } while (\InstagramAPI\Instagram::$retryOnNetworkException && $retry < $this->_parent->retriesOnNetworkFailure);
+                if ($exp === false) {
+                    break;
+                }
+                $retry++;
+                sleep(5);
+            } while (\InstagramAPI\Instagram::$retryOnNetworkException && $retry < $this->_parent->retriesOnNetworkFailure);
 
+            $this->_detectHttpCode($response);
+
+            return $response;
+        } else {
+            $promise = $this->_guzzleClient->sendAsync($request, $guzzleOptions);
+            $promise->then(
+                function ($response) {
+                    $this->_detectHttpCode($response);
+                }
+            );
+            $this->_parent->promises[] = $promise;
+
+            return $promise;
+        }
+    }
+
+    /**
+     * Detect serious HTTP codes in response.
+     *
+     * @param HttpResponseInterface $response      HTTP response.
+     * @param array                 $guzzleOptions Extra Guzzle options for this request.
+     *
+     * @throws \InstagramAPI\Exception\ThrottledException              When we're throttled by server.
+     * @throws \InstagramAPI\Exception\RequestHeadersTooLargeException When request is too large.
+     */
+    protected function _detectHttpCode(
+        $response)
+    {
         // Detect very serious HTTP status codes in the response.
         $httpCode = $response->getStatusCode();
         switch ($httpCode) {
@@ -1097,10 +1147,6 @@ class Client
         if ((time() - $this->_cookieJarLastSaved) > self::COOKIE_AUTOSAVE_INTERVAL) {
             $this->saveCookieJar();
         }
-
-        // The response may still have serious but "valid response" errors, such
-        // as "400 Bad Request". But it's up to the CALLER to handle those!
-        return $response;
     }
 
     /**
@@ -1130,7 +1176,7 @@ class Client
      * @throws \InstagramAPI\Exception\NetworkException   For any network/socket related errors.
      * @throws \InstagramAPI\Exception\ThrottledException When we're throttled by server.
      *
-     * @return HttpResponseInterface
+     * @return HttpResponseInterface|Promise
      */
     protected function _apiRequest(
         HttpRequestInterface $request,
@@ -1151,6 +1197,47 @@ class Client
         // Perform the API request and retrieve the raw HTTP response body.
         $guzzleResponse = $this->_guzzleRequest($request, $guzzleOptions);
 
+        if ($guzzleResponse instanceof \GuzzleHttp\Promise\Promise) {
+            $guzzleResponse->then(
+                function ($promise) use ($requestId, $request, $libraryOptions) {
+                    $this->_prepareLogging($requestId, $promise, $request, $libraryOptions);
+                }
+            );
+        } else {
+            $this->_prepareLogging($requestId, $guzzleResponse, $request, $libraryOptions);
+        }
+
+        return $guzzleResponse;
+    }
+
+    /**
+     * Prepare logging.
+     *
+     * Available library options are:
+     * - 'noDebug': Can be set to TRUE to forcibly hide debugging output for
+     *   this request. The user controls debugging globally, but this is an
+     *   override that prevents them from seeing certain requests that you may
+     *   not want to trigger debugging (such as perhaps individual steps of a
+     *   file upload process). However, debugging SHOULD be allowed in MOST cases!
+     *   So only use this feature if you have a very good reason.
+     * - 'debugUploadedBody': Set to TRUE to make debugging display the data that
+     *   was uploaded in the body of the request. DO NOT use this if your function
+     *   uploaded binary data, since printing those bytes would kill the terminal!
+     * - 'debugUploadedBytes': Set to TRUE to make debugging display the size of
+     *   the uploaded body data. Should ALWAYS be TRUE when uploading binary data.
+     *
+     * @param string                        $requestId      Request ID.
+     * @param HttpResponseInterface|Promise $guzzleResponse HTTP request to send.
+     * @param HttpRequestInterface          $request        HTTP request to send.
+     * @param array                         $libraryOptions Additional options for controlling Library features
+     *                                                      such as the debugging output.
+     */
+    protected function _prepareLogging(
+        $requestId,
+        $guzzleResponse,
+        HttpRequestInterface $request,
+        array $libraryOptions = []
+    ) {
         if ($this->_parent->logger !== null) {
             $this->_parent->logger->info('response',
                 [
@@ -1195,8 +1282,6 @@ class Client
                 (string) $guzzleResponse->getBody(),
                 $this->_parent->debug);
         }
-
-        return $guzzleResponse;
     }
 
     /**
@@ -1207,7 +1292,7 @@ class Client
      *
      * @throws InstagramException
      *
-     * @return HttpResponseInterface
+     * @return HttpResponseInterface|Promise
      */
     public function api(
         HttpRequestInterface $request,
@@ -1351,6 +1436,33 @@ class Client
             'debugUploadedBytes' => !$isFormData,
         ]);
 
+        if ($response instanceof \GuzzleHttp\Promise\Promise) {
+            $response->then(
+                function ($promise) use ($start, $request) {
+                    $this->_processResponseHeaders($start, $request, $promise);
+                }
+            );
+        } else {
+            $this->_processResponseHeaders($start, $request, $response);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Process response headers.
+     *
+     * @param float                         $start    Start time.
+     * @param HttpRequestInterface          $request  HTTP request to send.
+     * @param HttpResponseInterface|Promise $response HTTP response.
+     *
+     * @throws InstagramException
+     */
+    protected function _processResponseHeaders(
+        $start,
+        $request,
+        $response)
+    {
         $this->wwwClaim = $response->getHeaderLine('x-ig-set-www-claim');
         $this->_shbid = $response->getHeaderLine('ig-set-ig-u-shbid');
         $this->_shbts = $response->getHeaderLine('ig-set-ig-u-shbts');
@@ -1417,8 +1529,6 @@ class Client
                 $this->_latencyRequestCounter++;
             }
         }
-
-        return $response;
     }
 
     /**

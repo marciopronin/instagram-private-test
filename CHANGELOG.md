@@ -1,6 +1,10 @@
 # Stable release v21.50.0
 ## Date: 24/01/2024
 
+## Backward breaks!
+
+- Guzzle Promises has been added. New dependency is required. Run composer.json
+
 ## New features
 
 - **Client:** Add `_detectHttpCode()`

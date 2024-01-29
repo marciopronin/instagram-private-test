@@ -1,4 +1,4 @@
-# Stable release v21.50.0
+# Stable release v21.50.1
 ## Date: 24/01/2024
 
 ## Backward breaks!

@@ -1,3 +1,14 @@
+# Stable release v21.51.0
+## Date: 31/01/2024
+
+### New features
+
+- **Timeline:** Added `getUserFeedStream()`
+
+### Updates and fixes
+
+- **Client:** Update `_mapServerResponse()`
+
 # Stable release v21.50.1
 ## Date: 24/01/2024
 

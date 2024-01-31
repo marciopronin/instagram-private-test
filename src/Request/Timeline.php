@@ -368,6 +368,26 @@ class Timeline extends RequestCollection
     }
 
     /**
+     * Get a user's timeline feed stream.
+     *
+     * @param string      $userId Numerical UserPK ID.
+     * @param string|null $maxId  Next "maximum ID", used for pagination.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UserFeedResponse
+     */
+    public function getUserFeedStream(
+        $userId,
+        $maxId = null)
+    {
+        return $this->ig->request("feed/user_stream/{$userId}/")
+            ->setSignedPost(false)
+            ->addPost('max_id', $maxId)
+            ->getResponse(new Response\UserFeedResponse());
+    }
+
+    /**
      * Get your own timeline feed.
      *
      * @param string|null $maxId          Next "maximum ID", used for pagination.

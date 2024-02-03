@@ -545,7 +545,7 @@ class Direct extends RequestCollection
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('subscriptions_off', 'false')
-            ->addPost('request_data', [$userId])
+            ->addPost('request_data', json_encode([$userId]))
             ->getResponse(new Response\DirectPresenceResponse());
     }
 

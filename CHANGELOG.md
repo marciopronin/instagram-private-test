@@ -1,3 +1,10 @@
+# Stable release v21.51.1
+## Date: 02/02/2024
+
+### Updates and fixes
+
+- **Direct:** Update `fetchAndSubscribePresence()`
+
 # Stable release v21.51.0
 ## Date: 31/01/2024
 

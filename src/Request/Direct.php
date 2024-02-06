@@ -365,7 +365,7 @@ class Direct extends RequestCollection
         }
         $request = $this->ig->request('direct_v2/threads/get_by_participants/')
             ->addParam('recipient_users', '['.implode(',', $users).']')
-            ->addParam('seq_id', '1');
+            ->addParam('seq_id', $this->ig->navigationSequence);
 
         $limit = $this->ig->getExperimentParam('59489', 7, 0);
         if ($limit <= 0) {

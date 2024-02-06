@@ -65,6 +65,58 @@ class People extends RequestCollection
     }
 
     /**
+     * Get details about a specific user via their numerical UserPK ID Stream.
+     *
+     * NOTE: The real app uses this particular endpoint for _all_ user lookups
+     * except "@mentions" (where it uses `getInfoByName()` instead).
+     *
+     * @param string      $userId     Numerical UserPK ID.
+     * @param string|null $module     From which app module (page) you have opened the profile. One of (incomplete):
+     *                                "comment_likers",
+     *                                "comment_owner",
+     *                                "followers",
+     *                                "following",
+     *                                "likers_likers_media_view_profile",
+     *                                "likers_likers_photo_view_profile",
+     *                                "likers_likers_video_view_profile",
+     *                                "newsfeed",
+     *                                "self_followers",
+     *                                "self_following",
+     *                                "self_likers_self_likers_media_view_profile",
+     *                                "self_likers_self_likers_photo_view_profile",
+     *                                "self_likers_self_likers_video_view_profile",
+     *                                "reel_search_item_header".
+     * @param string|null $entrypoint Entrypoint.
+     * @param bool        $isPrefetch Is prefetch.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UserInfoResponse
+     */
+    public function getInfoByIdStream(
+        $userId,
+        $module = null,
+        $entrypoint = null,
+        $isPrefetch = false)
+    {
+        $request = $this->ig->request("users/{$userId}/info_stream/")
+            ->setSignedPost(false);
+
+        if ($entrypoint !== null) {
+            $request->addParam('entry_point', $entrypoint);
+        }
+
+        if ($module !== null) {
+            $request->addParam('from_module', $module);
+        }
+        if ($isPrefetch === true) {
+            $request->addParam('is_prefetch', 'true');
+        }
+
+        return $request->getResponse(new Response\UserInfoResponse());
+    }
+
+    /**
      * Get details about a specific user via their username.
      *
      * NOTE: The real app only uses this endpoint for profiles opened via "@mentions".

@@ -842,7 +842,7 @@ class Client
             $httpStatusCode = $httpResponse !== null ? $httpResponse->getStatusCode() : null;
             switch ($httpStatusCode) {
                 case 200:
-                    if ($jsonArray === null && strlen($rawResponse) > 0) {
+                    if ($jsonArray === null && is_string($rawResponse) && strlen($rawResponse) > 0) {
                         $multiResponse = explode(PHP_EOL, $rawResponse);
                         if (!empty($multiResponse[1]) && !str_contains($multiResponse[0], '<!DOCTYPE html>')) {
                             $jsonArray = array_merge($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));

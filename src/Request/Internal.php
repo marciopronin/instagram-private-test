@@ -469,8 +469,8 @@ class Internal extends RequestCollection
                             ->addPost('rich_text_format_types', json_encode(['modern_refreshed_v2']))
                             ->addPost('text_metadata', $storyTextMetadata);
 
-                    if ($storyCaption !== null) {
-                        $request->addPost('story_captions', $storyCaption);
+                    if ($storyCaptions !== null) {
+                        $request->addPost('story_captions', $storyCaptions);
                     }
                 }
                 if ($linkSticker !== null) {

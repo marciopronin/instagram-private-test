@@ -1,3 +1,16 @@
+# Stable release v21.52.0
+## Date: 06/02/2024
+
+### New features
+
+- **People:** Add `getInfoByIdStream()`
+
+### Updates and fixes
+
+- **Internal:** Update `configureSinglePhoto()`
+- **Client:** Update `_mapServerResponse()`
+- **Direct:** Update `getThreadByParticipants()`
+
 # Stable release v21.51.1
 ## Date: 02/02/2024
 

@@ -814,10 +814,12 @@ class Client
         $httpResponse,
         $silentFail)
     {
-        if ($httpResponse instanceof \GuzzleHttp\Promise\Promise) {
-            return $httpResponse->then(
-                function ($promise) use ($responseObject, $rawResponse, $silentFail) {
-                    return $this->_mapServerResponse($responseObject, $rawResponse, $promise, $silentFail);
+        if ($httpResponse instanceof \GuzzleHttp\Promise\Promise || $rawResponse instanceof \GuzzleHttp\Promise\Promise) {
+            $promiseCombined = \GuzzleHttp\Promise\All([$rawResponse, $httpResponse]);
+
+            return $promiseCombined->then(
+                function ($promises) use ($responseObject, $silentFail) {
+                    return $this->_mapServerResponse($responseObject, $promises[0], $promises[1], $silentFail);
                 }
             );
         } else {

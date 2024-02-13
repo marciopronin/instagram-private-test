@@ -3511,7 +3511,7 @@ class Instagram implements ExperimentsInterface
                     'is_whatsapp_installed'         => 0,
                 ],
                 'server_params'         => [
-                    'INTERNAL_INFRA_screen_id'                      => isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
+                    'INTERNAL_INFRA_screen_id'                      => 'method_picker', //isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
                     'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
                     'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
                 ],

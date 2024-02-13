@@ -95,22 +95,20 @@ class People extends RequestCollection
      */
     public function getInfoByIdStream(
         $userId,
-        $module = null,
-        $entrypoint = null,
+        $module = 'search_typeahead',
+        $entrypoint = 'profile',
         $isPrefetch = false)
     {
         $request = $this->ig->request("users/{$userId}/info_stream/")
-            ->setSignedPost(false);
+            ->setSignedPost(false)
+            ->addPost('is_prefetch', $isPrefetch === true ? 'true' : 'false');
 
         if ($entrypoint !== null) {
-            $request->addParam('entry_point', $entrypoint);
+            $request->addPost('entry_point', $entrypoint);
         }
 
         if ($module !== null) {
-            $request->addParam('from_module', $module);
-        }
-        if ($isPrefetch === true) {
-            $request->addParam('is_prefetch', 'true');
+            $request->addPost('from_module', $module);
         }
 
         return $request->getResponse(new Response\UserInfoResponse());

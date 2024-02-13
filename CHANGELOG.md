@@ -1,3 +1,12 @@
+# Stable release v21.52.3
+## Date: 13/02/2024
+
+### Updates and fixes
+
+- **Live:** Update `create()`
+- **Instagram:** Update `getAvailableTwoFactorMethods()`
+- **People:** Update `getInfoByIdStream()`
+
 # Stable release v21.52.2
 ## Date: 08/02/2024
 

@@ -754,12 +754,15 @@ class Live extends RequestCollection
         $request = $this->ig->request('live/create/')
             ->setSignedPost(false)
             ->addPost('user_pay_enabled', 'false')
+            ->addPost('camera_session_id', $cameraSession)
+            ->addPost('source_type', 5)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('preview_height', $previewHeight)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('should_use_rsys_rtc_infra', false)
+            ->addPost('should_use_rsys_rtc_infra', 'false')
             ->addPost('broadcast_type', 'RTMP_SWAP_ENABLED')
             ->addPost('preview_width', $previewWidth)
+            ->addPost('sup_active', 'false')
             ->addPost('internal_only', 0)
             ->addPost('visibility', $visibility);
 

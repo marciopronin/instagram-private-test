@@ -1,3 +1,18 @@
+# Stable release v21.53.0
+## Date: 16/02/2024
+
+### New features
+
+- **People:** Add `getFollowersQuery()`
+
+### Fixes and updates
+
+- **Constants:** Update to 318.0.0.30.110
+- **Instagram:** Update `_sendLoginFlow()`
+- **Live:** Update `create()`
+- **Internal:** Update `sendGraph()`
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v21.52.3
 ## Date: 13/02/2024
 

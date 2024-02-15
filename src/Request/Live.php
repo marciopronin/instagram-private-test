@@ -754,7 +754,7 @@ class Live extends RequestCollection
         $request = $this->ig->request('live/create/')
             ->setSignedPost(false)
             ->addPost('user_pay_enabled', 'false')
-            ->addPost('camera_session_id', $cameraSession)
+            ->addPost('camera_session_id', Signatures::generateUUID())
             ->addPost('source_type', 5)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('preview_height', $previewHeight)

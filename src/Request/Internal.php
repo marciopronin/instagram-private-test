@@ -1823,13 +1823,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', 'cfed15e1365120553735b9ce2247979d04d8e6f97371253bfdc477f3e965e99a')
+                ->addPost('query_hash', '0d8594f797327df4e1cd1ddb97aabcce8441c88889635079ede8afb7ca4ce679')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', 'cc6a8ef596decaea5a03e96552dd5544fb0f82fce2553347364a9f568992151b')
+                ->addPost('query_hash', '79f5c98d22ed86339894e15070f90c9bb2d5fa69da1f99f721a0715a997ea323')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -2335,6 +2335,7 @@ class Internal extends RequestCollection
      * @param string $rootName
      * @param bool   $pretty
      * @param string $clientLibrary
+     * @param string $queryEndpoint
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -2346,9 +2347,11 @@ class Internal extends RequestCollection
         $friendlyName,
         $rootName,
         $pretty,
-        $clientLibrary = 'graphservice')
+        $clientLibrary = 'graphservice',
+        $queryEndpoint = false)
     {
-        $request = $this->ig->request('https://i.instagram.com/graphql_www')
+        $endpoint = $queryEndpoint ? 'graphql/query' : 'graphql_www';
+        $request = $this->ig->request("https://i.instagram.com/{$endpoint}")
             ->setSignedPost(false)
             ->setNeedsAuth(false)
             ->setIsSilentFail(true)

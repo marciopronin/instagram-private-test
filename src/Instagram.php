@@ -4794,7 +4794,7 @@ class Instagram implements ExperimentsInterface
                             if (isset($e->getResponse()->asArray()['logout_reason'])) {
                                 $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
 
-                                return $this->_login($this->username, $this->password, true, $appRefreshInterval, true);
+                                return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
                             } else {
                                 // If our session cookies are expired, we were now told to login,
                                 // so handle that by running a forced relogin in that case!
@@ -4932,7 +4932,7 @@ class Instagram implements ExperimentsInterface
                         if (isset($e->getResponse()->asArray()['logout_reason'])) {
                             $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
 
-                            return $this->_login($this->username, $this->password, true, $appRefreshInterval, true);
+                            return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
                         } else {
                             // If our session cookies are expired, we were now told to login,
                             // so handle that by running a forced relogin in that case!

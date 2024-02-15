@@ -664,6 +664,38 @@ class People extends RequestCollection
     }
 
     /**
+     * Get followers by graphql query.
+     *
+     * @param string $userId      Numerical UserPK ID.
+     * @param string $rankToken   The list UUID. You must use the same value for all pages of the list.
+     * @param string $searchQuery Limit the userlist to ones matching the query.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getFollowersQuery(
+        $userId,
+        $rankToken,
+        $searchQuery = '')
+    {
+        return $this->ig->internal->sendGraph('284797047911869366832842874808', [
+            [
+                'include_friendship_status' => false,
+                'query'                     => $searchQuery,
+                'is_pando'                  => true,
+                'request_data'              => [
+                    'enableGroups'          => true,
+                    'rank_token'            => $rankToken,
+                ],
+                'search_surface'            => 'follow_list_page',
+                'user_id'                   => $userId,
+            ],
+        ], 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true);
+    }
+
+    /**
      * Get list of who you are following.
      *
      * @param string      $rankToken   The list UUID. You must use the same value for all pages of the list.

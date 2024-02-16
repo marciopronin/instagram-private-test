@@ -1,3 +1,12 @@
+# Stable release v21.53.1
+## Date: 16/02/2024
+
+### Fixes and updates
+
+- **Client:** Update `_orderHeaders()`
+- **People:** Update `getFollowersQuery()`
+- **Internal:** Update `sendGraph()`
+
 # Stable release v21.53.0
 ## Date: 16/02/2024
 

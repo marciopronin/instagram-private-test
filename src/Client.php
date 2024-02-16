@@ -1671,6 +1671,7 @@ class Client
     {
         $headersOrder = [
             'Host',
+            'X-Fb-Request-Analytics-Tags',
             'X-Fb-Rmd',
             'X-Ads-Opt-Out',
             'X-Google-AD-ID',

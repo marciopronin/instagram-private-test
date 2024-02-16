@@ -2376,7 +2376,8 @@ class Internal extends RequestCollection
                     ->addPost('fb_api_analytics_tags', json_encode(['GraphServices']));
         }
         if ($clientLibrary === 'pando') {
-            $request->addPost('enable_canonical_naming', 'true')
+            $request->addHeader('X-Fb-Request-Analytics-Tags', '{"network_tags":{"product":"567067343352427","purpose":"none","request_category":"graphql","retry_attempt":"0"},"application_tags":"pando"}')
+                    ->addPost('enable_canonical_naming', 'true')
                     ->addPost('enable_canonical_variable_overrides', 'true')
                     ->addPost('enable_canonical_naming_ambiguous_type_prefixing', 'true');
         }

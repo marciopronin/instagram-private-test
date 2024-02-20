@@ -697,8 +697,18 @@ class People extends RequestCollection
         if ($maxId !== null) {
             $data['max_id'] = $maxId;
         }
+        $response = $this->ig->internal->sendGraph('284797047911869366832842874808', $data, 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true);
+        $arr = $response->asArray();
+        if (isset($arr['data'])) {
+            $data = $arr['data'];
+            foreach ($data as $k => $v) {
+                if (is_array($v[$k])) {
+                    return new Response\FollowerAndFollowingResponse($v[$k]);
+                }
+            }
+        }
 
-        return $this->ig->internal->sendGraph('284797047911869366832842874808', $data, 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true);
+        return $response;
     }
 
     /**

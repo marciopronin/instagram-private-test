@@ -1,3 +1,10 @@
+# Stable release v21.53.2
+## Date: 20/02/2024
+
+### Fixes and updates
+
+- **People:** Update `getFollowersQuery()`
+
 # Stable release v21.53.1
 ## Date: 16/02/2024
 

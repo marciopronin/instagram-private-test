@@ -989,6 +989,28 @@ class Live extends RequestCollection
     }
 
     /**
+     * Share to Reels.
+     *
+     * @param string $broadcastId The broadcast ID in Instagram's internal format (ie "17854587811139572").
+     * @param string $coverPhoto  The cover to be used in IGTV.
+     * @param array  $metadata    External metadata: 'igtv_title', 'igtv_series_id'.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function shareToReels(
+        $broadcastId,
+        $coverPhoto,
+        array $metadata = [])
+    {
+        $internalMetadata = new InternalMetadata();
+        $internalMetadata->setBroadcastId($broadcastId);
+
+        return $this->ig->internal->uploadSinglePhoto(Constants::FEED_REELS, $coverPhoto, $internalMetadata, $metadata);
+    }
+
+    /**
      * Set subscription (notification) preferences.
      *
      * @param string $userId     Numerical UserPK ID.

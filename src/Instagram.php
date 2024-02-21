@@ -2189,7 +2189,7 @@ class Instagram implements ExperimentsInterface
                             $offsets = array_slice($this->bloks->findOffsets($parsed, 'two_step_verification_context'), 0, -2);
                         } else {
                             foreach ($mainBloks as $mainBlok) {
-                                if (str_contains($mainBlok, 'context_data') && str_contains($mainBlok, 'generic_code_entry')) {
+                                if (str_contains($mainBlok, 'context_data') && (str_contains($mainBlok, 'generic_code_entry') || str_contains($mainBlok, 'method_picker'))) {
                                     $firstDataBlok = $mainBlok;
                                     break;
                                 }
@@ -2215,7 +2215,7 @@ class Instagram implements ExperimentsInterface
                         $responseArr = $response->asArray();
                         $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
 
-                        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry') {
+                        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && ($this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker')) {
                             foreach ($mainBloks as $mainBlok) {
                                 if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'context_data')) {
                                     $firstDataBlok = $mainBlok;

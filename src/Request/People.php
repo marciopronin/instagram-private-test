@@ -702,8 +702,8 @@ class People extends RequestCollection
         if (isset($arr['data'])) {
             $data = $arr['data'];
             foreach ($data as $k => $v) {
-                if (is_array($v[$k])) {
-                    return new Response\FollowerAndFollowingResponse($v[$k]);
+                if (is_array($data[$k])) {
+                    return new Response\FollowerAndFollowingResponse($data[$k]);
                 }
             }
         }

@@ -1,3 +1,17 @@
+# Stable release v21.53.3
+## Date: 21/02/2024
+
+### New features
+
+- **Live:** Add `shareToReels()`
+
+### Fixes and updates
+
+- **Internal:** Update `_getPhotoUploadParams()`
+- **Internal:** Update `configureSinglePhoto()`
+- **Instagram:** Update `_login()`
+- **People:** Update `getFollowersQuery()`
+
 # Stable release v21.53.2
 ## Date: 20/02/2024
 

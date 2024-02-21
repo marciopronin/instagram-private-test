@@ -102,6 +102,7 @@ class Internal extends RequestCollection
             && $targetFeed !== Constants::FEED_DIRECT
             && $targetFeed !== Constants::FEED_DIRECT_STORY
             && $targetFeed !== Constants::FEED_TV
+            && $targetFeed !== Constants::FEED_REELS
         ) {
             throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
         }
@@ -258,6 +259,9 @@ class Internal extends RequestCollection
         case Constants::FEED_TV:
             $endpoint = 'media/configure_to_igtv/';
             break;
+        case Constants::FEED_REELS:
+            $endpoint = 'media/configure_to_clips/';
+            break;
         default:
             throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
         }
@@ -321,6 +325,8 @@ class Internal extends RequestCollection
         $igtvSeriesId = (isset($externalMetadata['igtv_series_id']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_series_id'] : null;
         /** @var array IGTV composer session ID. ONLY TV MEDIA! */
         $igtvSessionId = (isset($externalMetadata['igtv_session_id']) && $targetFeed == Constants::FEED_TV) ? $externalMetadata['igtv_session_id'] : null;
+        /** @var array REELS (CLIPS) share preview to feed. ONLY REEL MEDIA! */
+        $reelShareToFeed = (isset($externalMetadata['reel_share_preview_to_feed']) && $targetFeed == Constants::FEED_REELS) ? $externalMetadata['reel_share_preview_to_feed'] : null;
 
         // Fix very bad external user-metadata values.
         if (!is_string($captionText)) {
@@ -610,15 +616,34 @@ class Internal extends RequestCollection
                 }
                 break;
             case Constants::FEED_TV:
-                if ($igtvTitle === null) {
-                    throw new \InvalidArgumentException('You must provide a title for the media.');
-                }
-                if ($igtvSessionId === null) {
-                    throw new \InvalidArgumentException('You must provide a session ID for the media.');
+            case Constants::FEED_REELS:
+                if ($targetFeed === Constants::FEED_TV) {
+                    if ($igtvTitle === null) {
+                        throw new \InvalidArgumentException('You must provide a title for the media.');
+                    }
+                    if ($igtvSessionId === null) {
+                        throw new \InvalidArgumentException('You must provide a session ID for the media.');
+                    }
+                    $request
+                        ->addHeader('is_igtv_video', '1')
+                        ->addPost('title', $igtvTitle)
+                        ->addPost('igtv_composer_session_id', $igtvSessionId);
+
+                    if ($igtvSeriesId !== null) {
+                        $request->addPost('igtv_series_id', $igtvSeriesId);
+                    }
+                } else {
+                    $request->addPost('is_clips_video', '1')
+                            ->addPost('audience', 'default');
+
+                    if ($reelShareToFeed !== null) {
+                        $request->addPost('clips_share_preview_to_feed', $reelShareToFeed === true ? '1' : '0');
+                    } else {
+                        $request->addPost('clips_share_preview_to_feed', '1');
+                    }
                 }
 
                 $request
-                    ->addHeader('is_igtv_video', '1')
                     ->addHeader('retry_context', json_encode(
                         [
                             'num_reupload'          => 0,
@@ -632,13 +657,8 @@ class Internal extends RequestCollection
                     ->addPost('keep_shoppable_products', '0')
                     ->addPost('igtv_share_preview_to_feed', '1')
                     ->addPost('caption', $captionText)
-                    ->addPost('title', $igtvTitle)
-                    ->addPost('upload_id', $uploadId)
-                    ->addPost('igtv_composer_session_id', $igtvSessionId);
+                    ->addPost('upload_id', $uploadId);
 
-                if ($igtvSeriesId !== null) {
-                    $request->addPost('igtv_series_id', $igtvSeriesId);
-                }
                 break;
         }
 
@@ -3868,6 +3888,12 @@ class Internal extends RequestCollection
                 if ($internalMetadata->getBroadcastId() !== null) {
                     $result['broadcast_id'] = (string) $internalMetadata->getBroadcastId();
                     $result['is_post_live_igtv'] = '1';
+                }
+                break;
+            case Constants::FEED_REELS:
+                if ($internalMetadata->getBroadcastId() !== null) {
+                    $result['broadcast_id'] = (string) $internalMetadata->getBroadcastId();
+                    $result['is_post_live_clips'] = '1';
                 }
                 break;
             default:

@@ -712,6 +712,54 @@ class People extends RequestCollection
     }
 
     /**
+     * Get following by graphql query.
+     *
+     * @param string      $userId      Numerical UserPK ID.
+     * @param string      $rankToken   The list UUID. You must use the same value for all pages of the list.
+     * @param string      $searchQuery Limit the userlist to ones matching the query.
+     * @param string|null $maxId       Next "maximum ID", used for pagination.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getFollowingQuery(
+        $userId,
+        $rankToken,
+        $searchQuery = '',
+        $maxId = null)
+    {
+        $data = [
+            'include_friendship_status' => false,
+            'query'                     => $searchQuery,
+            'is_pando'                  => true,
+            'request_data'              => [
+                'enableGroups'          => true,
+                'rank_token'            => $rankToken,
+            ],
+            'search_surface'            => 'follow_list_page',
+            'user_id'                   => $userId,
+        ];
+
+        if ($maxId !== null) {
+            $data['max_id'] = $maxId;
+        }
+        $response = $this->ig->internal->sendGraph('284797047911869366832842874808', $data, 'FollowingList', 'xdt_api__v1__friendships__following', 'false', 'pando', true);
+        $arr = $response->asArray();
+        if (isset($arr['data'])) {
+            $data = $arr['data'];
+            foreach ($data as $k => $v) {
+                if (is_array($data[$k])) {
+                    return new Response\FollowerAndFollowingResponse($data[$k]);
+                }
+            }
+        }
+
+        return $response;
+    }
+
+    /**
      * Get list of who you are following.
      *
      * @param string      $rankToken   The list UUID. You must use the same value for all pages of the list.

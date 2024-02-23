@@ -1,3 +1,14 @@
+# Stable release v21.53.4
+## Date: 23/02/2024
+
+### New features
+
+- **People:** Update `getFollowingQuery()`
+
+### Fixes and updates
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+
 # Stable release v21.53.3
 ## Date: 21/02/2024
 

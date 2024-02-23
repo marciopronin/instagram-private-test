@@ -55,7 +55,7 @@ class ServerMessageThrower
          * So in that example, CheckpointRequired MUST be listed above
          * ChallengeRequired!
          */
-        'LoginRequiredException'                  => ['login_required'],
+        'LoginRequiredException'                  => ['login_required', 'Please wait a few minutes before you try again.'],
         'LoginAndSignupPageException'             => ['LoginAndSignupPage'],
         'IPLoginBlockException'                   => [
             'RleLoginBlocked', // exception_name

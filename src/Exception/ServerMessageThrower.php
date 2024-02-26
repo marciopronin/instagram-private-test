@@ -68,6 +68,7 @@ class ServerMessageThrower
         'AccountDeletionException'                 => [
             '/You requested to delete(.*?)/',
         ],
+        'RetryUploadFlowException'                 => ['retry_entire_upload_flow'],
         'Checkpoint\ChallengeRequiredException'    => ['challenge_required'],
         'Checkpoint\ChallengeFinishedException'    => ['challenge_finished'],
         'Checkpoint\SubmitPhoneException'          => ['submit_phone'],
@@ -212,6 +213,11 @@ class ServerMessageThrower
                 if (isset($resp['challengeType'])) {
                     $serverErrorType = $serverResponse->getChallengeType();
                     $messages[] = $serverErrorType;
+                }
+            }
+            if ($serverResponse->hasRetryEntireUploadFlow()) {
+                if ($serverResponse->getRetryEntireUploadFlow() === true) {
+                    $messages[] = 'retry_entire_upload_flow';
                 }
             }
         }

@@ -1,3 +1,20 @@
+# Stable release v21.53.5
+## Date: 26/02/2024
+
+### Fixes and updates
+
+- **Internal:** Update `getMobileConfig()`
+- **Instagram:** Update `_setUser()`
+- **Constants:** Update to `319.0.0.43.110`
+- **Event:** Update `_validateNavigationPath()`
+- **Internal:** Update `configureWithRetries()`
+- **Internal:** Update `_uploadResumableMedia()`
+- **ResumableUploadResponse:** Update `ResumableUploadResponse` model
+- **ConfigureResponse:** Update `ConfigureResponse` model
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+- **ServerMessageThrower:** Update `autoThrow()`
+
+
 # Stable release v21.53.4
 ## Date: 23/02/2024
 

@@ -11,6 +11,7 @@ use InstagramAPI\Response;
  * @method Model\Item getMedia()
  * @method mixed getMessage()
  * @method Model\DirectMessageMetadata[] getMessageMetadata()
+ * @method bool getRetryEntireUploadFlow()
  * @method string getStatus()
  * @method string getUploadId()
  * @method Model\_Message[] get_Messages()
@@ -18,6 +19,7 @@ use InstagramAPI\Response;
  * @method bool isMedia()
  * @method bool isMessage()
  * @method bool isMessageMetadata()
+ * @method bool isRetryEntireUploadFlow()
  * @method bool isStatus()
  * @method bool isUploadId()
  * @method bool is_Messages()
@@ -25,6 +27,7 @@ use InstagramAPI\Response;
  * @method $this setMedia(Model\Item $value)
  * @method $this setMessage(mixed $value)
  * @method $this setMessageMetadata(Model\DirectMessageMetadata[] $value)
+ * @method $this setRetryEntireUploadFlow(bool $value)
  * @method $this setStatus(string $value)
  * @method $this setUploadId(string $value)
  * @method $this set_Messages(Model\_Message[] $value)
@@ -32,6 +35,7 @@ use InstagramAPI\Response;
  * @method $this unsetMedia()
  * @method $this unsetMessage()
  * @method $this unsetMessageMetadata()
+ * @method $this unsetRetryEntireUploadFlow()
  * @method $this unsetStatus()
  * @method $this unsetUploadId()
  * @method $this unset_Messages()
@@ -39,9 +43,10 @@ use InstagramAPI\Response;
 class ConfigureResponse extends Response
 {
     const JSON_PROPERTY_MAP = [
-        'upload_id'         => 'string',
-        'media'             => 'Model\Item',
-        'client_sidecar_id' => 'string',
-        'message_metadata'  => 'Model\DirectMessageMetadata[]',
+        'upload_id'                 => 'string',
+        'media'                     => 'Model\Item',
+        'client_sidecar_id'         => 'string',
+        'message_metadata'          => 'Model\DirectMessageMetadata[]',
+        'retry_entire_upload_flow'  => 'bool',
     ];
 }

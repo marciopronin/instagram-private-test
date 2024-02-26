@@ -13,6 +13,7 @@ use InstagramAPI\Exception\FeedbackRequiredException;
 use InstagramAPI\Exception\InstagramException;
 use InstagramAPI\Exception\LoginRequiredException;
 use InstagramAPI\Exception\NetworkException;
+use InstagramAPI\Exception\RetryUploadFlowException;
 use InstagramAPI\Exception\SettingsException;
 use InstagramAPI\Exception\ThrottledException;
 use InstagramAPI\Exception\UploadFailedException;
@@ -1843,13 +1844,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '0d8594f797327df4e1cd1ddb97aabcce8441c88889635079ede8afb7ca4ce679')
+                ->addPost('query_hash', 'f08b9ee12874d9fe96a82c83dc054bddb65207403ee1569aca0c781ce76fa050')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '79f5c98d22ed86339894e15070f90c9bb2d5fa69da1f99f721a0715a997ea323')
+                ->addPost('query_hash', '86803530f1568fcfc050a3bad30a7c0c35abee38290d7598fff63cb7c59788ea')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -2875,6 +2876,8 @@ class Internal extends RequestCollection
                 throw $e;
             } catch (FeedbackRequiredException $e) {
                 throw $e;
+            } catch (RetryUploadFlowException $e) {
+                throw $e;
             } catch (ConsentRequiredException $e) {
                 throw $e;
             } catch (CheckpointRequiredException $e) {
@@ -3037,6 +3040,8 @@ class Internal extends RequestCollection
                 } catch (LoginRequiredException $e) {
                     throw $e;
                 } catch (FeedbackRequiredException $e) {
+                    throw $e;
+                } catch (RetryUploadFlowException $e) {
                     throw $e;
                 } catch (ConsentRequiredException $e) {
                     throw $e;

@@ -4834,6 +4834,10 @@ class Event extends RequestCollection
                     'dest_module'   => 'newsfeed_you',
                 ],
                 [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'direct_thread',
+                ],
+                [
                     'clickpoint'    => 'main_profile',
                     'dest_module'   => 'self_profile',
                 ],

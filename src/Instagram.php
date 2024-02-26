@@ -3955,6 +3955,10 @@ class Instagram implements ExperimentsInterface
             $this->setVersionCode('', true);
             $this->settings->set('version_code', $this->getVersionCode());
         } else {
+            if (!in_array($this->settings->get('version_code'), Constants::VERSION_CODE)) {
+                $this->setVersionCode('', true);
+                $this->settings->set('version_code', $this->getVersionCode());
+            }
             $this->setVersionCode($this->settings->get('version_code'));
         }
 

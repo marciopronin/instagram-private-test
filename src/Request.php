@@ -272,18 +272,23 @@ class Request
      *
      * @param string $key
      * @param mixed  $value
+     * @param bool   $nativeBool
      *
      * @return self
      */
     public function addPost(
         $key,
-        $value)
+        $value,
+        $nativeBool = false)
     {
-        if ($value === true) {
-            $value = 'true';
-        } elseif ($value === false) {
-            $value = 'false';
+        if ($nativeBool === false) {
+            if ($value === true) {
+                $value = 'true';
+            } elseif ($value === false) {
+                $value = 'false';
+            }
         }
+
         $this->_posts[$key] = $value;
 
         return $this;
@@ -444,6 +449,8 @@ class Request
                 $this->_headers['X-IG-CONCURRENT-ENABLED'] = $this->_parent->isExperimentEnabled('34426', 5, false);
             }
             $this->_headers['X-Bloks-Is-Prism-Enabled'] = $this->_parent->isExperimentEnabled('59489', 0, false) ? 'true' : 'false';
+            $this->_headers['X-Bloks-Prism-Colors-Enabled'] = 'false';
+            $this->_headers['X-Bloks-Prism-Font-Enabled'] = 'false';
 
             if ($this->_parent->getPlatform() === 'android') {
                 $this->_headers['X-IG-App-Locale'] = $this->_parent->getLocale();

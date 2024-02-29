@@ -345,6 +345,7 @@ class Internal extends RequestCollection
         // Build the request...
         $request = $this->ig->request($endpoint)
             //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addHeader('retry_context', json_encode($this->_getRetryContext()))
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
@@ -359,7 +360,7 @@ class Internal extends RequestCollection
                 [
                     'manufacturer'      => $this->ig->device->getManufacturer(),
                     'model'             => $this->ig->device->getModel(),
-                    'android_version'   => $this->ig->device->getAndroidVersion(),
+                    'android_version'   => intval($this->ig->device->getAndroidVersion()),
                     'android_release'   => $this->ig->device->getAndroidRelease(),
                 ])
             ->addPost('extra',
@@ -437,15 +438,17 @@ class Internal extends RequestCollection
 
                 $request
                     //->addPost('include_e2ee_mentioned_user_list', '1')
+                    ->addHeader('retry_context', json_encode($this->_getRetryContext()))
                     ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
                     ->addPost('client_shared_at', isset($externalMetadata['client_shared_at']) ? (string) $externalMetadata['client_shared_at'] : (string) time())
                     ->addPost('source_type', '3')
                     ->addPost('configure_mode', '1')
-                    //->addPost('allow_multi_configures', '1')
+                    ->addPost('allow_multi_configures', '1')
                     //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     ->addPost('client_timestamp', (string) (time() - mt_rand(3, 10)))
                     ->addPost('upload_id', $uploadId)
                     ->addPost('original_media_type', '1') // photo
+                    ->addPost('camera_session_id', Signatures::generateUUID())
                     ->addPost('scene_capture_type', '')
                     ->addPost('creation_surface', 'camera')
                     ->addPost('capture_type', 'normal')
@@ -584,8 +587,7 @@ class Internal extends RequestCollection
                     $stickerIds[] = 'media_simple_'.reset($attachedMedia)['media_id'];
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
-                    $request->addPost('allow_multi_configures', '1')
-                            ->addPost('xpost_surface', 'ig_story_composer');
+                    $request->addPost('xpost_surface', 'ig_story_composer');
                 }
                 if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['crosspost'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
@@ -645,13 +647,6 @@ class Internal extends RequestCollection
                 }
 
                 $request
-                    ->addHeader('retry_context', json_encode(
-                        [
-                            'num_reupload'          => 0,
-                            'num_step_auto_retry'   => 0,
-                            'num_step_manual_retry' => 0,
-                        ])
-                    )
                     ->addPost('igtv_ads_toggled_on', '0')
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('source_type', '4')
@@ -1065,12 +1060,13 @@ class Internal extends RequestCollection
 
         // Build the request...
         $request = $this->ig->request($endpoint)
+            ->addHeader('retry_context', json_encode($this->_getRetryContext()))
             ->addParam('video', 1)
             ->addPost('video_result', $internalMetadata->getVideoUploadResponse() !== null ? (string) $internalMetadata->getVideoUploadResponse()->getResult() : '')
             ->addPost('upload_id', $uploadId)
             ->addPost('poster_frame_index', 0)
-            ->addPost('length', number_format($videoDetails->getDuration(), 3))
-            ->addPost('audio_muted', false) // $videoDetails->getAudioCodec() === null
+            ->addPost('length', $videoDetails->getDuration())
+            ->addPost('audio_muted', false, true) // $videoDetails->getAudioCodec() === null
             ->addPost('filter_type', 0)
             ->addPost('source_type', 4)
             ->addPost('device_id', $this->ig->device_id)
@@ -1079,7 +1075,7 @@ class Internal extends RequestCollection
                 [
                     'manufacturer'      => $this->ig->device->getManufacturer(),
                     'model'             => $this->ig->device->getModel(),
-                    'android_version'   => $this->ig->device->getAndroidVersion(),
+                    'android_version'   => intval($this->ig->device->getAndroidVersion()),
                     'android_release'   => $this->ig->device->getAndroidRelease(),
                 ])
             ->addPost('extra',
@@ -1149,17 +1145,26 @@ class Internal extends RequestCollection
 
                 $request
                     ->addPost('include_e2ee_mentioned_user_list', '1')
+                    ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
                     ->addPost('configure_mode', '1')
                     //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
-                    //->addPost('allow_multi_configures', '1')
+                    ->addPost('allow_multi_configures', '1')
                     //->addPost('story_media_creation_date', time() - mt_rand(10, 20))
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time())
+                    ->addPost('camera_session_id', Signatures::generateUUID())
                     ->addPost('date_time_original', sprintf('%sT%s.000Z', date('Ymd'), date('His')))
                     ->addPost('composition_id', Signatures::generateUUID())
                     //->addPost('attempt_id', Signatures::generateUUID())
                     ->addPost('camera_entry_point', '360')
+                    ->addPost('clips', [
+                        [
+                            'length'          => $videoDetails->getDuration(),
+                            'source_type'     => '3',
+                            'camera_position' => 'back',
+                        ],
+                    ])
                     ->addPost('original_media_type', '2'); // video
 
                 $request->addPost('media_transformation_info', json_encode([
@@ -1328,13 +1333,6 @@ class Internal extends RequestCollection
                 }
                 $request
                     ->addHeader('Is_clips_video', '1')
-                    ->addHeader('retry_context', json_encode(
-                        [
-                            'num_reupload'          => 0,
-                            'num_step_auto_retry'   => 0,
-                            'num_step_manual_retry' => 0,
-                        ])
-                    )
                     ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
                     ->addPost('is_shared_to_fb', isset($externalMetadata['share_to_fb']) ? strval(intval($externalMetadata['share_to_fb'])) : '0')
                     ->addPost('caption', $captionText)
@@ -1656,7 +1654,7 @@ class Internal extends RequestCollection
                     'device' => [
                             'manufacturer'      => $this->ig->device->getManufacturer(),
                             'model'             => $this->ig->device->getModel(),
-                            'android_version'   => $this->ig->device->getAndroidVersion(),
+                            'android_version'   => intval($this->ig->device->getAndroidVersion()),
                             'android_release'   => $this->ig->device->getAndroidRelease(),
                         ],
                     'extra' => [
@@ -1685,7 +1683,7 @@ class Internal extends RequestCollection
                     'device'              => [
                             'manufacturer'      => $this->ig->device->getManufacturer(),
                             'model'             => $this->ig->device->getModel(),
-                            'android_version'   => $this->ig->device->getAndroidVersion(),
+                            'android_version'   => intval($this->ig->device->getAndroidVersion()),
                             'android_release'   => $this->ig->device->getAndroidRelease(),
                         ],
                     'clips' => [
@@ -1716,7 +1714,7 @@ class Internal extends RequestCollection
                 [
                     'manufacturer'      => $this->ig->device->getManufacturer(),
                     'model'             => $this->ig->device->getModel(),
-                    'android_version'   => $this->ig->device->getAndroidVersion(),
+                    'android_version'   => intval($this->ig->device->getAndroidVersion()),
                     'android_release'   => $this->ig->device->getAndroidRelease(),
                 ])
             ->addPost('children_metadata', $childrenMetadata);

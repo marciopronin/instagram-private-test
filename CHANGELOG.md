@@ -1,3 +1,13 @@
+# Stable release v21.53.7
+## Date: 29/02/2024
+
+### Fixes and updates
+
+- **Request:** Update `addPost()`
+- **Request:** Update `_addDefaultHeaders()`
+- **Internal:** Update `configureSingleVideo()`
+- **Internal:** Update `configureSinglePhoto()`
+
 # Stable release v21.53.6
 ## Date: 29/02/2024
 

@@ -272,21 +272,17 @@ class Request
      *
      * @param string $key
      * @param mixed  $value
-     * @param bool   $nativeBool
      *
      * @return self
      */
     public function addPost(
         $key,
-        $value,
-        $nativeBool = false)
+        $value)
     {
-        if ($nativeBool === false) {
-            if ($value === true) {
-                $value = 'true';
-            } elseif ($value === false) {
-                $value = 'false';
-            }
+        if ($value === true) {
+            $value = 'true';
+        } elseif ($value === false) {
+            $value = 'false';
         }
 
         $this->_posts[$key] = $value;

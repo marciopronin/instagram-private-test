@@ -370,7 +370,7 @@ class Internal extends RequestCollection
                 ]);
 
         // 'ig_android_eu_configure_disabled', 'route_to_us'
-        if ($this->ig->isExperimentEnabled('26156', 0, false)) {
+        if ($this->ig->isExperimentEnabled('26156', 0, false) || !$this->ig->getIsEUUser()) {
             $request->addHeader('X-IG-EU-CONFIGURE-DISABLED', 'true');
         }
 
@@ -1066,7 +1066,7 @@ class Internal extends RequestCollection
             ->addPost('upload_id', $uploadId)
             ->addPost('poster_frame_index', 0)
             ->addPost('length', $videoDetails->getDuration())
-            ->addPost('audio_muted', false, true) // $videoDetails->getAudioCodec() === null
+            ->addPost('audio_muted', false) // $videoDetails->getAudioCodec() === null
             ->addPost('filter_type', 0)
             ->addPost('source_type', 4)
             ->addPost('device_id', $this->ig->device_id)
@@ -1088,7 +1088,7 @@ class Internal extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('nav_chain', $this->ig->getNavChain());
 
-        if ($this->ig->isExperimentEnabled('26156', 0, false)) {
+        if ($this->ig->isExperimentEnabled('26156', 0, false) || !$this->ig->getIsEUUser()) {
             $request->addHeader('X-IG-EU-CONFIGURE-DISABLED', 'true');
         }
 

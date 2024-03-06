@@ -3,6 +3,7 @@
 namespace InstagramAPI\Request;
 
 use InstagramAPI\Constants;
+use InstagramAPI\Exception\RequestHeadersTooLargeException;
 use InstagramAPI\Response;
 
 /**

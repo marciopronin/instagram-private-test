@@ -283,7 +283,7 @@ class Internal extends RequestCollection
         $usertags = (isset($externalMetadata['usertags']) && $targetFeed == Constants::FEED_TIMELINE) ? $externalMetadata['usertags'] : null;
         /** @var array Coauthor ID */
         $coauthor = (isset($externalMetadata['invite_coauthor_user_id']) && $targetFeed == Constants::FEED_TIMELINE) ? $externalMetadata['invite_coauthor_user_id'] : null;
-        /** @var array|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
+        /** @var string|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
          * AND YOU MUST HAVE A BUSINESS INSTAGRAM ACCOUNT TO POST A STORY LINK! */
         $link = (isset($externalMetadata['link']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link'] : null;
         /** @var string|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
@@ -1001,7 +1001,7 @@ class Internal extends RequestCollection
         /** @var array|null Array of story location sticker instructions. ONLY
          * USED FOR STORY MEDIA! */
         $locationSticker = (isset($externalMetadata['location_sticker']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['location_sticker'] : null;
-        /** @var array|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
+        /** @var string|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
          * AND YOU MUST HAVE A BUSINESS INSTAGRAM ACCOUNT TO POST A STORY LINK! */
         $link = (isset($externalMetadata['link']) && $targetFeed == Constants::FEED_STORY) ? $externalMetadata['link'] : null;
         /** @var string|null Link to attach to the media. ONLY USED FOR STORY MEDIA,
@@ -1544,7 +1544,7 @@ class Internal extends RequestCollection
         }
 
         if ($targetFeed !== Constants::FEED_DIRECT_AUDIO) {
-            throw new \InstagramException('Only Direct audio is supported at the moment.');
+            throw new InstagramException('Only Direct audio is supported at the moment.');
         }
 
         try {

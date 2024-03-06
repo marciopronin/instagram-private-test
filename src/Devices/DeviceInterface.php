@@ -90,4 +90,11 @@ interface DeviceInterface
      * @return string
      */
     public function getCPU();
+
+    /**
+     * Get is VP9 compatible.
+     *
+     * @return string
+     */
+    public function getIsVP9Compatible();
 }

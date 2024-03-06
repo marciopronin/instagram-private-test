@@ -19,7 +19,7 @@ class PhotoDetails extends MediaDetails
      *
      * @see https://help.instagram.com/1631821640426723
      */
-    const MIN_WIDTH = 600;
+    const MIN_WIDTH = 432;
 
     /**
      * Maximum allowed image width.

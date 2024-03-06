@@ -331,7 +331,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var int
      */
-    public $loginAttemptCount = 0;
+    public $loginAttemptCount = 1;
 
     /**
      * Custom pigeon session id.
@@ -1922,7 +1922,7 @@ class Instagram implements ExperimentsInterface
 
         // Perform a full relogin if necessary.
         if (!$this->isMaybeLoggedIn || $forceLogin) {
-            if ($this->loginAttemptCount === 0 && !self::$skipLoginFlowAtMyOwnRisk && !$loggedOut) {
+            if ($this->loginAttemptCount === 1 && !self::$skipLoginFlowAtMyOwnRisk && !$loggedOut) {
                 $this->_sendPreLoginFlow();
             }
 
@@ -1958,7 +1958,7 @@ class Instagram implements ExperimentsInterface
             }
 
             if (self::$useBloksLogin) {
-                $this->loginAttemptCount = 1;
+                //$this->loginAttemptCount = 1;
                 //$response = $this->processLoginClientDataAndRedirect();
                 $response = $this->getHomeTemplate();
                 $responseArr = $response->asArray();
@@ -2666,7 +2666,7 @@ class Instagram implements ExperimentsInterface
         $this->bloksInfo = array_merge($this->bloksInfo, $map);
 
         $waterfallId = \InstagramAPI\Signatures::generateUUID();
-        $request = $this->request('bloks/apps/com.bloks.www.caa.ar.search/')
+        $response = $this->request('bloks/apps/com.bloks.www.caa.ar.search/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->addPost('params', json_encode([
@@ -2952,7 +2952,6 @@ class Instagram implements ExperimentsInterface
                     throw $e;
                 }
             }
-            $this->loginAttemptCount = 0;
             $this->_updateLoginState($response);
 
             $this->_sendLoginFlow(true, $appRefreshInterval);
@@ -3001,7 +3000,7 @@ class Instagram implements ExperimentsInterface
         }
 
         if (!$this->isMaybeLoggedIn || $forceLogin) {
-            if ($this->loginAttemptCount === 0 && !self::$skipLoginFlowAtMyOwnRisk) {
+            if ($this->loginAttemptCount === 1 && !self::$skipLoginFlowAtMyOwnRisk) {
                 $this->_sendPreLoginFlow();
             }
 
@@ -3044,7 +3043,6 @@ class Instagram implements ExperimentsInterface
                 }
             }
 
-            $this->loginAttemptCount = 0;
             $this->_updateLoginState($response);
 
             $this->_sendLoginFlow(true, $appRefreshInterval);
@@ -4083,6 +4081,7 @@ class Instagram implements ExperimentsInterface
                 $this->account_id = $authorizationData['ds_user_id'];
             }
         }
+        $this->loginAttemptCount = 1;
 
         // Configures Client for current user AND updates isMaybeLoggedIn state
         // if it fails to load the expected cookies from the user's jar.
@@ -5208,6 +5207,8 @@ class Instagram implements ExperimentsInterface
                     throw new \InstagramAPI\Exception\UnexpectedLoginErrorException($errorMap['exception_message']);
                     break;
                 case 'Incorrect Password: The password you entered is incorrect. Please try again.':
+                    $this->loginAttemptCount++;
+
                     throw new \InstagramAPI\Exception\IncorrectPasswordException($errorMap['exception_message']);
                     break;
                 default:
@@ -5252,6 +5253,7 @@ class Instagram implements ExperimentsInterface
 
                             return $loginResponse;
                         } elseif ($errorMap['event_category'] === 'FIRST_PASSWORD_FAILURE') {
+                            $this->loginAttemptCount++;
                             $msg = 'Invalid password or older password used.';
                             $loginResponse = new Response\LoginResponse([
                                 'error_type'    => 'incorrect_password',

@@ -1165,7 +1165,7 @@ class Utils
         array $tallies)
     {
         $requiredKeys = ['text', 'count', 'font_size'];
-        if (count($tallies) < 2 && count($tallies) > 4) {
+        if (count($tallies) < 2 || count($tallies) > 4) {
             throw new \InvalidArgumentException(sprintf('Invalid number of tallies.'));
         }
 

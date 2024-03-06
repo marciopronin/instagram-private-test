@@ -18,7 +18,7 @@ class VideoDetails extends MediaDetails
      *
      * @var int
      */
-    const MIN_WIDTH = 600;
+    const MIN_WIDTH = 432;
 
     /**
      * Maximum allowed video width.

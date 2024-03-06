@@ -1,3 +1,18 @@
+# Stable release v21.53.9
+## Date: 06/03/2024
+
+### Fixes and updates
+
+- **DeviceInterface:** Update `DeviceInterface`
+- **PhotoDetails:** Update `MIN_WIDTH`
+- **VideoDetails:** Update `MIN_WIDTH`
+- **Internal:** Update `facebookUpload()`
+- **Internal:** Update `configureSinglePhoto()`
+- **Internal:** Update `configureSingleVideo()`
+- **Reel:** Update reel use
+- **Utils:** Update `_throwIfInvalidStoryPollTallies()`
+- **Instagram:** Update login attempt account
+
 # Stable release v21.53.8
 ## Date: 01/03/2024
 

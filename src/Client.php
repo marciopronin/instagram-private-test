@@ -601,7 +601,7 @@ class Client
         $cookies = $this->_cookieJar->toArray();
 
         // Throws if data can't be encoded as JSON (will never happen).
-        $jsonStr = \GuzzleHttp\json_encode($cookies);
+        $jsonStr = \GuzzleHttp\Utils::jsonEncode($cookies);
 
         return $jsonStr;
     }
@@ -815,7 +815,7 @@ class Client
         $silentFail)
     {
         if ($httpResponse instanceof \GuzzleHttp\Promise\Promise || $rawResponse instanceof \GuzzleHttp\Promise\Promise) {
-            $promiseCombined = \GuzzleHttp\Promise\All([$rawResponse, $httpResponse]);
+            $promiseCombined = \GuzzleHttp\Promise\Utils::all([$rawResponse, $httpResponse]);
 
             return $promiseCombined->then(
                 function ($promises) use ($responseObject, $silentFail) {
@@ -849,7 +849,8 @@ class Client
                         if (!empty($multiResponse[1]) && !str_contains($multiResponse[0], '<!DOCTYPE html>')) {
                             $jsonArray = array_merge($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));
                         }
-                    } else {
+                    }
+                    if (!is_array($jsonArray)) {
                         throw new \InstagramAPI\Exception\EmptyResponseException('No response from server. Either a connection or configuration error.');
                     }
                     break;
@@ -1072,7 +1073,7 @@ class Client
     {
         // When async batches ends, it will wait until all promises are resolved.
         if (\InstagramAPI\Instagram::$sendAsync === false) {
-            \GuzzleHttp\Promise\settle($this->_parent->promises)->wait();
+            \GuzzleHttp\Promise\Utils::settle($this->_parent->promises)->wait();
             $this->_parent->promises = [];
         }
         $disableCookies = ($request->getUri()->getPath() === '/logging_client_events' || $request->getUri()->getPath() === '/challenge/' || str_contains($request->getUri()->getPath(), 'web/action')) ? true : false;

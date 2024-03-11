@@ -115,6 +115,18 @@ class Timeline extends RequestCollection
             if (isset($item['usertags'])) {
                 $item['usertags'] = ['in' => $item['usertags']];
                 Utils::throwIfInvalidUsertags($item['usertags']);
+
+                if (isset($item['invite_coauthor_user_ids'])) {
+                    if (is_array($item['invite_coauthor_user_ids']) && count($item['invite_coauthor_user_ids']) > 1) {
+                        if (count($item['invite_coauthor_user_ids']) > 5) {
+                            throw new \InvalidArgumentException('Maximum coauthors allowed is 5.');
+                        }
+                    } else {
+                        if (is_array($item['invite_coauthor_user_ids'])) {
+                            $item['invite_coauthor_user_ids'] = $item['invite_coauthor_user_ids'][0];
+                        }
+                    }
+                }
             }
 
             $itemInternalMetadata->setWaterfallID($externalMetadata['waterfall_id']);

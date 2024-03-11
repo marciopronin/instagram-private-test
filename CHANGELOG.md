@@ -1,3 +1,12 @@
+# Stable release v21.53.10
+## Date: 11/03/2024
+
+### Fixes and updates
+
+- **Constants:** Update to 321.0.0.39.106
+- **Internal:** Update `configureTimelineAlbum()`
+- **Timeline:** Update `uploadAlbum()`
+
 # Stable release v21.53.9
 ## Date: 06/03/2024
 

@@ -1641,64 +1641,90 @@ class Internal extends RequestCollection
             $photoHeight = $itemInternalMetadata->getPhotoDetails()->getHeight();
 
             switch ($item['type']) {
-            case 'photo':
-                // Build this item's configuration.
-                $photoConfig = [
-                    'upload_id'           => $uploadId,
-                    'source_type'         => 4,
-                    'edits'               => [
-                            'crop_original_size'    => [(float) $photoWidth, (float) $photoHeight],
-                            'crop_zoom'             => 1.0,
-                            'crop_center'           => [0.0, -0.0],
-                        ],
-                    'device' => [
-                            'manufacturer'      => $this->ig->device->getManufacturer(),
-                            'model'             => $this->ig->device->getModel(),
-                            'android_version'   => intval($this->ig->device->getAndroidVersion()),
-                            'android_release'   => $this->ig->device->getAndroidRelease(),
-                        ],
-                    'extra' => [
-                            'source_width'  => $photoWidth,
-                            'source_height' => $photoHeight,
-                        ],
-                ];
+                case 'photo':
+                    // Build this item's configuration.
+                    $photoConfig = [
+                        'upload_id'           => $uploadId,
+                        'source_type'         => 4,
+                        'edits'               => [
+                                'crop_original_size'    => [(float) $photoWidth, (float) $photoHeight],
+                                'crop_zoom'             => 1.0,
+                                'crop_center'           => [0.0, -0.0],
+                            ],
+                        'device' => [
+                                'manufacturer'      => $this->ig->device->getManufacturer(),
+                                'model'             => $this->ig->device->getModel(),
+                                'android_version'   => intval($this->ig->device->getAndroidVersion()),
+                                'android_release'   => $this->ig->device->getAndroidRelease(),
+                            ],
+                        'extra' => [
+                                'source_width'  => $photoWidth,
+                                'source_height' => $photoHeight,
+                            ],
+                    ];
 
-                if (isset($item['usertags'])) {
-                    // NOTE: These usertags were validated in Timeline::uploadAlbum.
-                    $photoConfig['usertags'] = json_encode(['in' => $item['usertags']]);
-                }
+                    if (isset($item['usertags'])) {
+                        // NOTE: These usertags were validated in Timeline::uploadAlbum.
+                        $photoConfig['usertags'] = json_encode(['in' => $item['usertags']]);
 
-                $childrenMetadata[] = $photoConfig;
-                break;
-            case 'video':
-                // Get all of the INTERNAL per-VIDEO metadata.
-                $videoDetails = $itemInternalMetadata->getVideoDetails();
+                        if (isset($item['invite_coauthor_user_ids'])) {
+                            if (is_array($item['invite_coauthor_user_ids']) && count($item['invite_coauthor_user_ids']) > 1) {
+                                $photoConfig['invite_coauthor_user_ids'] = $item['invite_coauthor_user_ids'];
+                            } else {
+                                $coauthor = null;
+                                if (is_array($item['invite_coauthor_user_ids'])) {
+                                    $photoConfig['invite_coauthor_user_id'] = $item['invite_coauthor_user_ids'][0];
+                                }
+                                $photoConfig['invite_coauthor_user_id'] = $item['invite_coauthor_user_ids'];
+                            }
+                            $photoConfig['internal_features'] = 'coauthor_post';
+                        }
+                    }
 
-                // Build this item's configuration.
-                $videoConfig = [
-                    'date_time_original'  => $date,
-                    'poster_frame_index'  => 0,
-                    'upload_id'           => $uploadId,
-                    'source_type'         => '4',
-                    'device'              => [
-                            'manufacturer'      => $this->ig->device->getManufacturer(),
-                            'model'             => $this->ig->device->getModel(),
-                            'android_version'   => intval($this->ig->device->getAndroidVersion()),
-                            'android_release'   => $this->ig->device->getAndroidRelease(),
-                        ],
-                    'clips' => [
-                            'length'          => round($videoDetails->getDuration(), 1),
-                            'source_type'     => '4',
-                        ],
-                ];
+                    $childrenMetadata[] = $photoConfig;
+                    break;
+                case 'video':
+                    // Get all of the INTERNAL per-VIDEO metadata.
+                    $videoDetails = $itemInternalMetadata->getVideoDetails();
 
-                if (isset($item['usertags'])) {
-                    // NOTE: These usertags were validated in Timeline::uploadAlbum.
-                    $videoConfig['usertags'] = json_encode(['in' => $item['usertags']]);
-                }
+                    // Build this item's configuration.
+                    $videoConfig = [
+                        'date_time_original'  => $date,
+                        'poster_frame_index'  => 0,
+                        'upload_id'           => $uploadId,
+                        'source_type'         => '4',
+                        'device'              => [
+                                'manufacturer'      => $this->ig->device->getManufacturer(),
+                                'model'             => $this->ig->device->getModel(),
+                                'android_version'   => intval($this->ig->device->getAndroidVersion()),
+                                'android_release'   => $this->ig->device->getAndroidRelease(),
+                            ],
+                        'clips' => [
+                                'length'          => round($videoDetails->getDuration(), 1),
+                                'source_type'     => '4',
+                            ],
+                    ];
 
-                $childrenMetadata[] = $videoConfig;
-                break;
+                    if (isset($item['usertags'])) {
+                        // NOTE: These usertags were validated in Timeline::uploadAlbum.
+                        $videoConfig['usertags'] = json_encode(['in' => $item['usertags']]);
+
+                        if (isset($item['invite_coauthor_user_ids'])) {
+                            if (is_array($item['invite_coauthor_user_ids']) && count($item['invite_coauthor_user_ids']) > 1) {
+                                $videoConfig['invite_coauthor_user_ids'] = $item['invite_coauthor_user_ids'];
+                            } else {
+                                $coauthor = null;
+                                if (is_array($item['invite_coauthor_user_ids'])) {
+                                    $videoConfig['invite_coauthor_user_id'] = $item['invite_coauthor_user_ids'][0];
+                                }
+                                $videoConfig['invite_coauthor_user_id'] = $item['invite_coauthor_user_ids'];
+                            }
+                            $videoConfig['internal_features'] = 'coauthor_post';
+                        }
+                    }
+
+                    $childrenMetadata[] = $videoConfig;
+                    break;
             }
         }
 
@@ -1729,6 +1755,15 @@ class Internal extends RequestCollection
                 ->addPost('media_longitude', $location->getLng())
                 ->addPost('exif_latitude', 0.0)
                 ->addPost('exif_longitude', 0.0);
+        }
+
+        if (isset($item['invite_coauthor_user_ids'])) {
+            if (is_array($item['invite_coauthor_user_ids'])) {
+                $request->addPost('invite_coauthor_user_ids', $item['invite_coauthor_user_ids']);
+            } else {
+                $request->addPost('invite_coauthor_user_id', $item['invite_coauthor_user_ids']);
+            }
+            $request->addPost('internal_features', 'coauthor_post');
         }
 
         $configure = $request->getResponse(new Response\ConfigureResponse());

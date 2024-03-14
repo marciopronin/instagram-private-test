@@ -1,3 +1,17 @@
+# Stable release v21.53.11
+## Date: 14/03/2024
+
+### New features
+
+- **Account:** Update `setUsername()`
+
+### Fixes and updates
+
+- **Instagram:** Update `getTwoFactorBloksScreen()`
+- **People:** Update `getFollowersQuery()`
+- **People:** Update `getFollowingQuery()`
+- **Account:** Update `setProfileName()`
+
 # Stable release v21.53.10
 ## Date: 11/03/2024
 

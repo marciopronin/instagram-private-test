@@ -528,7 +528,28 @@ class Account extends RequestCollection
     {
         return $this->ig->request('accounts/update_profile_name/')
             ->setSignedPost(false)
-            ->addPost('first_name', $$name)
+            ->addPost('first_name', $name)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\UserInfoResponse());
+    }
+
+    /**
+     * Update username to a new one.
+     *
+     * @param string $newUsername New username.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UserInfoResponse
+     */
+    public function setUsername(
+        $newUsername)
+    {
+        return $this->ig->request('accounts/update_profile_username/')
+            ->setSignedPost(false)
+            ->addPost('username', $newUsername)
             ->addPost('_uuid', $this->ig->uuid)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UserInfoResponse());

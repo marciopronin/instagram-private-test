@@ -2564,7 +2564,7 @@ class Instagram implements ExperimentsInterface
     public function getTwoFactorBloksScreen(
         $endpoint)
     {
-        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry') {
+        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker') {
             $serverParams = [
                 'context_data'                  => $this->bloksInfo['context_data'],
                 'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],

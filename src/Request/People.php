@@ -685,13 +685,13 @@ class People extends RequestCollection
         $data = [
             'include_friendship_status' => false,
             'query'                     => $searchQuery,
-            'is_pando'                  => true,
             'request_data'              => [
                 'enableGroups'          => true,
                 'rank_token'            => $rankToken,
             ],
             'search_surface'            => 'follow_list_page',
             'user_id'                   => $userId,
+            'include_biography'         => false,
         ];
 
         if ($maxId !== null) {
@@ -731,15 +731,16 @@ class People extends RequestCollection
         $maxId = null)
     {
         $data = [
-            'include_friendship_status' => false,
-            'query'                     => $searchQuery,
-            'is_pando'                  => true,
-            'request_data'              => [
-                'enableGroups'          => true,
-                'rank_token'            => $rankToken,
-            ],
-            'search_surface'            => 'follow_list_page',
             'user_id'                   => $userId,
+            'include_friendship_status' => false,
+            'include_biography'         => false,
+            'query'                     => $searchQuery,
+            'request_data'              => [
+                'rank_token'            => $rankToken,
+                'includes_hashtags'     => true,
+                'search_surface'        => 'follow_list_page',
+            ],
+            'enable_groups'             => true,
         ];
 
         if ($maxId !== null) {

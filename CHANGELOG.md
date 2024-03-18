@@ -1,3 +1,11 @@
+# Stable release v21.53.13
+## Date: 19/03/2024
+
+### Fixes and updates
+
+- **People:** Update `getFollowingQuery()`
+- **People:** Update `getFollowersQuery()`
+
 # Stable release v21.53.12
 ## Date: 18/03/2024
 

@@ -1,3 +1,11 @@
+# Stable release v21.53.12
+## Date: 18/03/2024
+
+### Fixes and updates
+
+- **Constants:** Update 322.0.0.37.95
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v21.53.11
 ## Date: 14/03/2024
 

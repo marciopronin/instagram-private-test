@@ -4488,6 +4488,8 @@ class Instagram implements ExperimentsInterface
                 }
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
+            } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                throw $e;
             } catch (\Exception $e) {
                 // pass
             }

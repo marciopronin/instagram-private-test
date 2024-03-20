@@ -1,3 +1,12 @@
+# Stable release v21.53.14
+## Date: 21/03/2024
+
+### Fixes and updates
+
+- **Instagram:** Update `_login()`
+- **Internal:** Update `sendGraph()`
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+
 # Stable release v21.53.13
 ## Date: 19/03/2024
 

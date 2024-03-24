@@ -1,3 +1,13 @@
+# Stable release v21.53.15
+## Date: 24/03/2024
+
+Work in Progress! More fixes and improvements should be expected in the next hours.
+
+### Fixes and updates
+
+- **Constants:** Update to `323.0.0.35.65`
+- **Request:** Update `_addDefaultHeaders()`
+
 # Stable release v21.53.14
 ## Date: 21/03/2024
 

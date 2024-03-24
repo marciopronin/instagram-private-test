@@ -444,10 +444,18 @@ class Request
             if ($this->_parent->isExperimentEnabled('34426', 3, false)) {
                 $this->_headers['X-IG-CONCURRENT-ENABLED'] = $this->_parent->isExperimentEnabled('34426', 5, false);
             }
+
+            if ($this->_parent->isExperimentEnabled('58922', 15, false)) {
+                $this->_headers['X-IG-BLOKS-SERIALIZE-PAYLOAD'] = 'true';
+            }
+
             $this->_headers['X-Bloks-Is-Prism-Enabled'] = $this->_parent->isExperimentEnabled('59489', 0, false) ? 'true' : 'false';
             $this->_headers['X-Bloks-Prism-Colors-Enabled'] = 'false';
             $this->_headers['X-Bloks-Prism-Font-Enabled'] = 'false';
 
+            if ($this->_parent->isExperimentEnabled('59489', 0, false)) {
+                $this->_headers['X-Bloks-Prism-Button-Version'] = '0';
+            }
             if ($this->_parent->getPlatform() === 'android') {
                 $this->_headers['X-IG-App-Locale'] = $this->_parent->getLocale();
                 $this->_headers['X-IG-Device-Locale'] = $this->_parent->getLocale();

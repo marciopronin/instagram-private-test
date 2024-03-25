@@ -1,3 +1,14 @@
+# Stable release v21.53.16
+## Date: 25/03/2024
+
+Work in Progress! More fixes and improvements should be expected in the next hours.
+
+### Fixes and updates
+
+- **Instagram:** Update to `sendLoginTextInputTypeAhead`
+- **Instagram:** Update `_login()`
+- **Instagram:** Update `processLoginClientDataAndRedirect()`
+
 # Stable release v21.53.15
 ## Date: 24/03/2024
 

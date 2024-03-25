@@ -2105,6 +2105,10 @@ class Instagram implements ExperimentsInterface
                             'fb_ig_device_id'               => [],
                             'device_emails'                 => [],
                             'try_num'                       => $this->loginAttemptCount,
+                            'lois_settings'                 => [
+                                'lara_override' => '',
+                                'lois_token'    => '',
+                            ],
                             'event_flow'                    => ($loggedOut === false) ? 'login_manual' : 'aymh',
                             'event_step'                    => 'home_page',
                             'headers_infra_flow_id'         => '',
@@ -2115,9 +2119,12 @@ class Instagram implements ExperimentsInterface
                         ],
                         'server_params'         => [
                             'should_trigger_override_login_2fa_action'      => 0,
+                            'is_from_logged_out'                            => intval($loggedOut),
                             'username_text_input_id'                        => isset($firstMap['username_text_input_id']) ? $firstMap['username_text_input_id'] : '',
-                            'device_id'                                     => $this->device_id,
+                            'layered_homepage_experiment_group'             => null,
                             'should_trigger_override_login_success_action'  => 0,
+                            'device_id'                                     => $this->device_id,
+                            'login_credential_type'                         => 'none',
                             'server_login_source'                           => isset($firstMap['server_login_source']) ? $firstMap['server_login_source'] : 'login',
                             'waterfall_id'                                  => null, //$firstMap['waterfall_id'],
                             'login_source'                                  => isset($firstMap['login_source']) ? $firstMap['login_source'] : 'Login',
@@ -2129,14 +2136,10 @@ class Instagram implements ExperimentsInterface
                             'caller'                                        => 'gslr',
                             'family_device_id'                              => null, //$this->phone_id,
                             'INTERNAL__latency_qpl_marker_id'               => intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]),
-                            //'offline_experiment_group'                      => $firstMap['offline_experiment_group'],
-                            'lois_settings'                                 => [
-                                'lara_override' => '',
-                                'lois_token'    => '',
-                            ],
+                            'offline_experiment_group'                      => isset($firstMap['offline_experiment_group']) ? $firstMap['offline_experiment_group'] : 'caa_iteration_v3_perf_ig_4',
                             'INTERNAL_INFRA_THEME'                          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                             'password_text_input_id'                        => isset($firstMap['password_text_input_id']) ? $firstMap['password_text_input_id'] : '',
-                            //'qe_device_id'                                  => $this->uuid,
+                            'qe_device_id'                                  => $this->uuid,
                             'is_from_logged_in_switcher'                    => 0,
                             'ar_event_source'                               => isset($firstMap['ar_event_source']) ? $firstMap['ar_event_source'] : 'login_home_page',
                         ],
@@ -2445,17 +2448,20 @@ class Instagram implements ExperimentsInterface
         ->setNeedsAuth(false)
         ->setSignedPost(false)
         ->addPost('params', json_encode([
-            'logged_out_user'           => '',
-            'qpl_join_id'               => Signatures::generateUUID(),
-            'family_device_id'          => $this->phone_id,
-            'device_id'                 => $this->device_id,
-            'offline_experiment_group'  => $this->settings->get('offline_experiment'),
-            'waterfall_id'              => $this->loginWaterfallId,
-            'show_internal_settings'    => false,
-            'qe_device_id'              => $this->uuid,
-            'account_list'              => $accountList,
-            'blocked_uid'               => [],
-            'INTERNAL_INFRA_THEME'      => 'harm_f',
+            'is_from_logged_out'            => $isLoggedOut,
+            'logged_out_user'               => '',
+            'qpl_join_id'                   => Signatures::generateUUID(),
+            'family_device_id'              => $this->phone_id,
+            'device_id'                     => $this->device_id,
+            'offline_experiment_group'      => $this->settings->get('offline_experiment'),
+            'waterfall_id'                  => $this->loginWaterfallId,
+            'show_internal_settings'        => false,
+            'disable_auto_login'            => false,
+            'qe_device_id'                  => $this->uuid,
+            'is_from_logged_in_switcher'    => false,
+            'account_list'                  => $accountList,
+            'blocked_uid'                   => [],
+            'INTERNAL_INFRA_THEME'          => 'harm_f',
         ]))
         ->addPost('bk_client_context', json_encode([
             'bloks_version' => Constants::BLOCK_VERSIONING_ID,
@@ -2509,6 +2515,7 @@ class Instagram implements ExperimentsInterface
                 'client_input_params'           => [
                     'account_centers'   => [
                         [
+                            /*
                             'profiles'  => [
                                 'id'    => [
                                     'is_derived'            => 0,
@@ -2528,6 +2535,7 @@ class Instagram implements ExperimentsInterface
                                 ],
                             ],
                             'id'        => '',
+                            */
                         ],
                     ],
                     'query'             => $username,
@@ -2539,7 +2547,7 @@ class Instagram implements ExperimentsInterface
                     'INTERNAL__latency_qpl_marker_id'   => intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]),
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     //'fdid'                              => $this->bloksInfo['fdid'],
-                    //'waterfall_id'                      => $this->loginWaterfallId,
+                    'waterfall_id'                      => $this->loginWaterfallId,
                     'screen_id'                         => intval($this->bloksInfo['screen_id'][1]),
                     'INTERNAL__latency_qpl_instance_id' => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),
                 ],

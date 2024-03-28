@@ -1869,6 +1869,8 @@ class Internal extends RequestCollection
             ->addPost('bool_opt_policy', 0)
             ->addPost('api_version', 3)
             ->addPost('device_id', $this->ig->uuid)
+            ->addPost('use_case', 'STANDARD')
+            ->addPost('fetch_mode', 'CONFIG_SYNC_ONLY')
             ->addPost('fetch_type', 'ASYNC_FULL');
 
         if ($prelogin) {
@@ -1877,13 +1879,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '2b1bd65882435974b51a290fbba523cf2f1ec765cff84eafe973cb1dc7ac5c7a')
+                ->addPost('query_hash', 'd318499bf8ab92a88ef0551edb70e689fd4e864bc516907186b2890dad3b9dc9')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '5df7fbe7fe56cceeb98ac8718b1dd165a1542d2a51886880f8adba659b27ed59')
+                ->addPost('query_hash', '00e4dcab4f85a037501211cac13501c3bc8ee57783ee75484998a03d4f22231c')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }

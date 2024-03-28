@@ -1,3 +1,46 @@
+# Stable release v21.53.17
+## Date: 28/03/2024
+
+Work in Progress! Update to this version is recommended for stability purposes.
+
+### Fixes and updates
+
+- **Constants:** Update to 324.0.0.27.50
+- **Internal:** Update `getMobileConfig()`. New params were added.
+
+Mobile experiments will be used for fetching account and device specific features and capabilities when using the app. Decoded in the following format (script will be added soon):
+
+```
+$exp = '0x810F04000F334B';
+
+$v1 = unsignedRightShiftGMP($exp, 54) & 0x3F;
+$v2 = unsignedRightShiftGMP($exp, 0x20) & 0xFFFF;
+
+$v3 = $v1 >= 3 ? $v1 : 1;
+
+if (isset($configKeys[$v3][$v2])) {
+    printf("Param specifier: %s\n", $exp);
+    printf("Config ID: %d\n", $configKeys[$v3][$v2]);
+    printf("Field ID: %d\n", getParamId($exp));
+    printf("Enabled if not set: %s\n", isEnabledIfNotSet($exp) ? 'true' : 'false');
+
+    $v1 = unsignedRightShiftGMP($exp, 0x30) & 0x3F;
+    switch ($v1) {
+        case 3:
+            $default = getDefaultValueType2($exp);
+            break;
+        case 4:
+            $default = getDefaultValueType0($exp);
+            break;
+        default:
+            $default = getDefaultValueType1($exp);
+    }
+    printf("Default value if not set: %s\n", $default);
+} else {
+    printf('Experiment %s not found! :(', $exp);
+}
+```
+
 # Stable release v21.53.16
 ## Date: 25/03/2024
 

@@ -2514,8 +2514,7 @@ class Instagram implements ExperimentsInterface
             ->addPost('params', json_encode([
                 'client_input_params'           => [
                     'account_centers'   => [
-                        [
-                            /*
+                       /* [
                             'profiles'  => [
                                 'id'    => [
                                     'is_derived'            => 0,
@@ -2535,8 +2534,8 @@ class Instagram implements ExperimentsInterface
                                 ],
                             ],
                             'id'        => '',
-                            */
-                        ],
+
+                        ], */
                     ],
                     'query'             => $username,
                 ],
@@ -2546,7 +2545,7 @@ class Instagram implements ExperimentsInterface
                     'text_component_id'                 => intval($this->bloksInfo['text_component_id'][1]),
                     'INTERNAL__latency_qpl_marker_id'   => intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]),
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
-                    //'fdid'                              => $this->bloksInfo['fdid'],
+                    'fdid'                              => isset($this->bloksInfo['fdid']) ? $this->bloksInfo['fdid'] : $this->phone_id,
                     'waterfall_id'                      => $this->loginWaterfallId,
                     'screen_id'                         => intval($this->bloksInfo['screen_id'][1]),
                     'INTERNAL__latency_qpl_instance_id' => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),

@@ -1,3 +1,10 @@
+# Stable release v21.53.18
+## Date: 28/03/2024
+
+### Fixes and updates
+
+- **Instagram:** Update to `sendLoginTextInputTypeAhead()`
+
 # Stable release v21.53.17
 ## Date: 28/03/2024
 

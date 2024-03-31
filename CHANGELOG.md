@@ -1,3 +1,10 @@
+# Stable release v21.53.20
+## Date: 31/03/2024
+
+### New features
+
+- **Devtools:** Config script was added. It will allow to decode mobile config experiments ID and its default value.
+
 # Stable release v21.53.18
 ## Date: 28/03/2024
 

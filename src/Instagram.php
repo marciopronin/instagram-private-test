@@ -2543,11 +2543,11 @@ class Instagram implements ExperimentsInterface
                     'text_input_id'                     => intval($this->bloksInfo['text_input_id'][1]),
                     'typeahead_id'                      => intval($this->bloksInfo['typeahead_id'][1]),
                     'text_component_id'                 => intval($this->bloksInfo['text_component_id'][1]),
-                    'INTERNAL__latency_qpl_marker_id'   => intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]),
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'fdid'                              => isset($this->bloksInfo['fdid']) ? $this->bloksInfo['fdid'] : $this->phone_id,
                     'waterfall_id'                      => $this->loginWaterfallId,
-                    'screen_id'                         => intval($this->bloksInfo['screen_id'][1]),
+                    'screen_id'                         => isset($this->bloksInfo['screen_id'][1]) ? intval($this->bloksInfo['screen_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id' => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),
                 ],
             ]))
@@ -4201,8 +4201,8 @@ class Instagram implements ExperimentsInterface
                             'family_device_id'  => $this->phone_id,
                         ]
                     ], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false); */
-                } catch (\InstagramAPI\Exception\InstagramException $e) {
-                    // pass
+                } catch (\Exception $e) {
+                    // pass. Checkpoint wont happen on this step and if server is congested an HTML response will be returned. Exception EmptyResponseException.
                 }
 
                 //$this->event->sendZeroCarrierSignal();

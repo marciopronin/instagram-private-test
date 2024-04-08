@@ -1,3 +1,13 @@
+# Stable release v21.53.21
+## Date: 08/04/2024
+
+Minor fixes to handle exception. WIP: New version and stability changes
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendPreLoginFlow()`
+- **Instagram:** Update `sendLoginTextInputTypeAhead()`
+
 # Stable release v21.53.20
 ## Date: 31/03/2024
 

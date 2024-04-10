@@ -257,7 +257,7 @@ class People extends RequestCollection
     {
         $request = $this->ig->request('news/inbox/')
                             ->addParam('mark_as_seen', $markAsSeen)
-                            ->addParam('feed_type', $feedType)
+                            //->addParam('feed_type', $feedType)
                             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                             ->addParam('timezone_name', ($this->ig->getTimezoneName() !== null) ? $this->ig->getTimezoneName() : date_default_timezone_get());
 
@@ -1821,5 +1821,19 @@ class People extends RequestCollection
             ->addParam('surface_type', $surfaceType)
             ->addParam('user_id', $userId)
             ->getResponse(new Response\UserInfoResponse());
+    }
+
+    /**
+     * Get limited interactions reminder.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getLimitedInteractionsReminder()
+    {
+        return $this->ig->request('users/get_limited_interactions_reminder/')
+            ->addParam('signed_body', Signatures::generateSignature(json_encode((object) []).'.{}'))
+            ->getResponse(new Response\GenericResponse());
     }
 }

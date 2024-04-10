@@ -2129,7 +2129,7 @@ class Instagram implements ExperimentsInterface
                             'waterfall_id'                                  => null, //$firstMap['waterfall_id'],
                             'login_source'                                  => isset($firstMap['login_source']) ? $firstMap['login_source'] : 'Login',
                             'INTERNAL__latency_qpl_instance_id'             => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),
-                            'reg_flow_source'                               => 'login_home_native_integration_point',
+                            'reg_flow_source'                               => 'login_home_native_integration_point', // cacheable_aymh_screen
                             'is_caa_perf_enabled'                           => 1,
                             'is_platform_login'                             => intval($this->bloksInfo['is_platform_login'][1]),
                             'credential_type'                               => isset($firstMap['credential_type']) ? $firstMap['credential_type'] : 'password',

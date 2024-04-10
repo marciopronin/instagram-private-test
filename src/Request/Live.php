@@ -1304,4 +1304,17 @@ class Live extends RequestCollection
             ->addParam('containermodule', '')
             ->getResponse(new Response\LiveShareResponse());
     }
+
+    /**
+     * Get good time for live.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getGoodTimeForLive()
+    {
+        return $this->ig->request('live/get_good_time_for_live/')
+            ->getResponse(new Response\GenericResponse());
+    }
 }

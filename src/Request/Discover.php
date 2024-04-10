@@ -319,6 +319,69 @@ class Discover extends RequestCollection
     }
 
     /**
+     * Search results that are not profiled.
+     *
+     * @param string      $query       The username/full name, hashtag or location to search for.
+     * @param string      $latitude    (optional) Latitude.
+     * @param string      $longitude   (optional) Longitude.
+     * @param array       $excludeList Array of grouped numerical entity IDs (ie "users" => ["4021088339"])
+     *                                 to exclude from the response, allowing you to skip entities
+     *                                 from a previous call to get more results. The following entities are supported:
+     *                                 "users", "places", "tags".
+     * @param string|null $rankToken   (When paginating) The rank token from the previous page's response.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\TopSearchResponse
+     *
+     * @see TopSearchResponse::getRankToken() To get a rank token from the response.
+     * @see examples/paginateWithExclusion.php For a rank token example (but with a different type of exclude list).
+     */
+    public function nonProfiledSearch(
+        $query,
+        $latitude = null,
+        $longitude = null,
+        array $excludeList = [],
+        $rankToken = null)
+    {
+        // Do basic query validation.
+        if (!is_string($query) || $query === '') {
+            throw new \InvalidArgumentException('Query must be a non-empty string.');
+        }
+        $request = $this->_paginateWithMultiExclusion(
+            $this->ig->request('fbsearch/non_profiled_serp/')
+                ->addParam('search_surface', 'popular_serp')
+                ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
+                ->addParam('count', 30)
+                ->addParam('query', $query),
+            $excludeList,
+            $rankToken
+        );
+
+        if ($latitude !== null && $longitude !== null) {
+            $request
+                ->addParam('lat', $latitude)
+                ->addParam('lng', $longitude);
+        }
+
+        try {
+            /** @var Response\TopSearchResponse $result */
+            $result = $request->getResponse(new Response\TopSearchResponse());
+        } catch (RequestHeadersTooLargeException $e) {
+            $result = new Response\TopSearchResponse([
+                'has_more'   => false,
+                'hashtags'   => [],
+                'users'      => [],
+                'places'     => [],
+                'rank_token' => $rankToken,
+            ]);
+        }
+
+        return $result;
+    }
+
+    /**
      * Register recent search click.
      *
      * @param string $entityType One of: "hashtag", "place" or "user".

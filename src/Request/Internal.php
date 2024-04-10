@@ -1879,13 +1879,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', 'd318499bf8ab92a88ef0551edb70e689fd4e864bc516907186b2890dad3b9dc9')
+                ->addPost('query_hash', '30d63de54d9b2dc302482e04be46404b374880a4776b35c4613769c107f39d76')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '00e4dcab4f85a037501211cac13501c3bc8ee57783ee75484998a03d4f22231c')
+                ->addPost('query_hash', '9330bf914e3610f04c84feba3b4f49f96b8f3b67eb27ba1171db5f222807b3d0')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -4213,6 +4213,7 @@ class Internal extends RequestCollection
     {
         return $this->ig->request('bloks/apps/com.bloks.www.caa.login.save-credentials/')
             ->setSignedPost(false)
+            ->addPost('qe_device_id', $this->ig->uuid)
             ->addPost('offline_experiment_group', $this->ig->settings->get('offline_experiment'))
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('family_device_id', $this->ig->phone_id)

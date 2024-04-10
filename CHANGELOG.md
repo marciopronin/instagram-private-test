@@ -1,3 +1,19 @@
+# Stable release v21.54.0
+## Date: 11/04/2024
+
+### New features
+
+- **Discover:** Add `nonProfiledSearch()`
+- **People:** Add `getLimitedInteractionsReminder()`
+- **Live:** Add `getGoodTimeForLive()`
+
+### Updates and fixes
+
+- **Constants:** Update to `326.0.0.42.90`
+- **Internal:** Update `getBloksSaveCredentialsScreen()`
+- **Internal:** Update `getMobileConfig()`
+- **People:** Update `getRecentActivityInbox()`
+
 # Stable release v21.53.21
 ## Date: 08/04/2024
 

@@ -437,8 +437,8 @@ class Internal extends RequestCollection
                 }
 
                 $request
-                    //->addPost('include_e2ee_mentioned_user_list', '1')
                     ->addHeader('retry_context', json_encode($this->_getRetryContext()))
+                    ->addPost('include_e2ee_mentioned_user_list', '1')
                     ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
                     ->addPost('client_shared_at', isset($externalMetadata['client_shared_at']) ? (string) $externalMetadata['client_shared_at'] : (string) time())
                     ->addPost('source_type', '3')
@@ -452,10 +452,10 @@ class Internal extends RequestCollection
                     ->addPost('scene_capture_type', '')
                     ->addPost('creation_surface', 'camera')
                     ->addPost('capture_type', 'normal')
-                    ->addPost('has_original_sound', '1')
+                    //->addPost('has_original_sound', '1')
                     ->addPost('creation_surface', 'camera')
                     ->addPost('composition_id', Signatures::generateUUID())
-                    //->addPost('attempt_id', Signatures::generateUUID())
+                    ->addPost('attempt_id', Signatures::generateUUID())
                     ->addPost('camera_entry_point', '360');
 
                 $request->addPost('media_transformation_info', json_encode([
@@ -3537,7 +3537,7 @@ class Internal extends RequestCollection
             $offset = 0;
             // Yep, no UUID here like in other resumable uploaders. Seems like a bug.
             $waterfallId = sprintf('%s_%s_Mixed_0', $internalMetadata->getUploadId(), bin2hex(random_bytes(6))); //Utils::generateUploadId();
-            foreach ($segments as $segment) {
+            foreach ($segments as $idx => $segment) {
                 $endpoint = sprintf(
                     'https://i.instagram.com/rupload_igvideo/%s-%d-%d-%d-%d',
                     md5($segment->getFilename()),
@@ -3556,6 +3556,10 @@ class Internal extends RequestCollection
                     //->addHeader('Stream-Id', $streamId)
                     ->addHeader('X_FB_VIDEO_WATERFALL_ID', $waterfallId)
                     ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams));
+
+                if ($offset === 0) {
+                    $initRequest = clone $offsetTemplate;
+                }
 
                 $uploadTemplate = clone $offsetTemplate;
                 $uploadTemplate

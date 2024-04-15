@@ -1,3 +1,11 @@
+# Stable release v21.54.1
+## Date: 15/04/2024
+
+### Updates and fixes
+
+- **Internal:** Update `_uploadSegmentedVideo()`
+- **Internal:** Update `configureSingleVideo()`
+
 # Stable release v21.54.0
 ## Date: 11/04/2024
 

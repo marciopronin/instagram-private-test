@@ -1,3 +1,17 @@
+# Stable release v21.54.2
+## Date: 17/04/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `sendLoginTextInputTypeAhead()`
+- **Instagram:** Update `getForgotPasswordLink()`
+- **Instagram:** Update `finishTwoFactorVerification()`
+- **Instagram:** Update `finishTwoFactorGenericVerification()`
+- **Instagram:** Update `selectTwoFactorMethod()`
+- **Instagram:** Update `checkTrustedNotificationBloksStatus()`
+- **Instagram:** Update `requestTwoFactorCode()`
+- **Instagram:** Update `_login()`
+
 # Stable release v21.54.1
 ## Date: 15/04/2024
 

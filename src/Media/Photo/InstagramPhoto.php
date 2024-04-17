@@ -5,6 +5,7 @@ namespace InstagramAPI\Media\Photo;
 use InstagramAPI\Media\Geometry\Dimensions;
 use InstagramAPI\Media\Geometry\Rectangle;
 use InstagramAPI\Media\InstagramMedia;
+use InstagramAPI\Media\SSIM\SSIM;
 use InstagramAPI\Utils;
 
 /**
@@ -73,6 +74,7 @@ class InstagramPhoto extends InstagramMedia
 
             try {
                 $output = $this->_processResource($resource, $srcRect, $dstRect, $canvas);
+                $this->ssimAndMsssim = SSIM::getSsimAndMsssim($resource, $output);
             } finally {
                 @imagedestroy($resource);
             }

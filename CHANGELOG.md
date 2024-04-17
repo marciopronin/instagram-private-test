@@ -1,3 +1,17 @@
+# Stable release v21.55.0
+## Date: 18/04/2024
+
+### New features
+
+- **SSIM:** Added new SSIM and MS-SSIM algorithms.
+- **Metadata/Internal:** Added `setMsssimAndSsim()`
+- **InstagramMedia:** Added `getSsimAndMsssim()`
+
+### Updates and fixes
+
+- **InstagramPhoto:** Update `_createOutputFile()`
+- **Event:** Update `sendProfileAction()`
+
 # Stable release v21.54.3
 ## Date: 17/04/2024
 

@@ -1872,6 +1872,7 @@ class Event extends RequestCollection
             'unfollow',
             'edit_profile',
             'tap_followers',
+            'tap_following',
             'tap_follow_sheet',
             'tap_follow_details',
             'mute_feed_posts',
@@ -1964,6 +1965,7 @@ class Event extends RequestCollection
                 $module = ($options['module'] === 'self') ? 'self_profile' : 'profile';
                 break;
             case 'tap_followers':
+            case 'tap_following':
                 $followStatus = isset($options['follow_status']) ? $options['follow_status'] : 'not_following';
                 $clickpoint = 'swipe';
                 $module = ($options['module'] === 'self') ? 'self_unified_follow_lists' : 'unified_follow_lists';

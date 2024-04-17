@@ -56,6 +56,12 @@ final class Internal
     /** @var string */
     private $_broadcastId;
 
+    /** @var float */
+    private $_msssim;
+
+    /** @var float */
+    private $_ssim;
+
     /**
      * Constructor.
      *
@@ -395,5 +401,38 @@ final class Internal
     public function getBroadcastId()
     {
         return $this->_broadcastId;
+    }
+
+    /**
+     * Set SSIM and MSSSIM.
+     *
+     * @param array
+     * @param mixed $values
+     */
+    public function setMsssimAndSsim(
+        $values)
+    {
+        $this->_ssim = $values['ssim'];
+        $this->_msssim = $values['msssim'];
+    }
+
+    /**
+     * Get MSSSIM.
+     *
+     * @return float
+     */
+    public function getMsssim()
+    {
+        return $this->_msssim;
+    }
+
+    /**
+     * Get SSIM.
+     *
+     * @return float
+     */
+    public function getSsim()
+    {
+        return $this->_ssim;
     }
 }

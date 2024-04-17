@@ -104,6 +104,9 @@ abstract class InstagramMedia
     /** @var bool Whether the output should be in JPEG format or not. */
     protected $_jpgOutput;
 
+    /** @var array SSIM and MSSSIM. */
+    public $ssimAndMsssim = null;
+
     /**
      * Constructor.
      *
@@ -404,6 +407,19 @@ abstract class InstagramMedia
         }
 
         return $this->_outputFile;
+    }
+
+    /**
+     * Gets SSIM and MSSSIM values.
+     *
+     * @throws \Exception
+     * @throws \RuntimeException
+     *
+     * @return array indexes.
+     */
+    public function getSsimAndMsssim()
+    {
+        return $this->ssimAndMsssim;
     }
 
     /**

@@ -2216,11 +2216,11 @@ class Instagram implements ExperimentsInterface
                         $response = $this->getTwoFactorBloksScreen($endpoint);
 
                         $responseArr = $response->asArray();
-                        $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+                        $mainBloks = $this->bloks->parseResponse($responseArr, 'bk.action.map.Make');
 
                         if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && ($this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker')) {
                             foreach ($mainBloks as $mainBlok) {
-                                if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'context_data')) {
+                                if (str_contains($mainBlok, 'context_data')) {
                                     $firstDataBlok = $mainBlok;
                                     break;
                                 }
@@ -2230,7 +2230,7 @@ class Instagram implements ExperimentsInterface
                             $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
                         } else {
                             foreach ($mainBloks as $mainBlok) {
-                                if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'flow_source') && str_contains($mainBlok, 'two_step_verification_context')) {
+                                if (str_contains($mainBlok, 'flow_source') && str_contains($mainBlok, 'two_step_verification_context')) {
                                     $firstDataBlok = $mainBlok;
                                     break;
                                 }
@@ -5176,7 +5176,7 @@ class Instagram implements ExperimentsInterface
 
             $errorMap = $this->bloks->map_arrays($loginResponseWithHeaders[0], $loginResponseWithHeaders[1]);
             foreach ($errorMap as $key => $value) {
-                if (!is_array($errorMap[$key])) {
+                if (!is_array($errorMap[$key]) && $value !== null) {
                     $errorMap[stripslashes($key)] = str_replace(['/', '\\'], '', $value);
                 }
                 unset($errorMap[$key]);

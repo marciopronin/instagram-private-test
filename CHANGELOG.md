@@ -1,3 +1,12 @@
+# Stable release v21.54.3
+## Date: 17/04/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_parseLoginErrors()`
+- **Instagram:** Update `_login()`
+- **Bloks:** Update `parseResponse()`
+
 # Stable release v21.54.2
 ## Date: 17/04/2024
 

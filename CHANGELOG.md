@@ -1,3 +1,10 @@
+# Stable release v21.55.3
+## Date: 19/04/2024
+
+### Updates and fixes
+
+- **Constants:** Update `327.2.0.50.93`
+
 # Stable release v21.55.2
 ## Date: 19/04/2024
 

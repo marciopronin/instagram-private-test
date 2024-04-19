@@ -1,3 +1,11 @@
+# Stable release v21.55.1
+## Date: 19/04/2024
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+- **ServerMessageThrower:** Update `autoThrow()`
+
 # Stable release v21.55.0
 ## Date: 18/04/2024
 

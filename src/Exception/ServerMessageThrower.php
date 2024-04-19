@@ -55,7 +55,7 @@ class ServerMessageThrower
          * So in that example, CheckpointRequired MUST be listed above
          * ChallengeRequired!
          */
-        'LoginRequiredException'                  => ['login_required'],
+        'LoginRequiredException'                  => ['login_required', 'require_login'],
         'LoginAndSignupPageException'             => ['LoginAndSignupPage'],
         'IPLoginBlockException'                   => [
             'RleLoginBlocked', // exception_name
@@ -218,6 +218,11 @@ class ServerMessageThrower
             if ($serverResponse->hasRetryEntireUploadFlow()) {
                 if ($serverResponse->getRetryEntireUploadFlow() === true) {
                     $messages[] = 'retry_entire_upload_flow';
+                }
+            }
+            if ($serverResponse->hasRequireLogin()) {
+                if ($serverResponse->getRequireLogin() === true) {
+                    $messages[] = 'require_login';
                 }
             }
         }

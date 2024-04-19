@@ -134,12 +134,15 @@ class Story extends RequestCollection
         $request = $this->ig->request('feed/reels_tray/')
             ->setSignedPost(false)
             ->setRequestPriority(0)
-            ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('reason', $reason)
             ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('reel_tray_impressions', json_encode([], JSON_FORCE_OBJECT))
             ->addPost('_uuid', $this->ig->uuid);
+
+        if ($reason === 'pull_to_refresh') {
+            $request->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities());
+        }
 
         if ($requestId !== null) {
             $request->addPost('request_id', $requestId);

@@ -1,3 +1,12 @@
+# Stable release v21.55.2
+## Date: 19/04/2024
+
+### Updates and fixes
+
+- **Constants:** Update `327.2.0.50.93`
+- **Internal:** Update `getMobileConfig()`
+- **Story:** Update `getReelsTrayFeed()`
+
 # Stable release v21.55.1
 ## Date: 19/04/2024
 

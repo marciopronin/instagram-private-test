@@ -1,3 +1,10 @@
+# Stable release v21.55.4
+## Date: 23/04/2024
+
+### Updates and fixes
+
+- **Instagram:** Update bloks params
+
 # Stable release v21.55.3
 ## Date: 19/04/2024
 

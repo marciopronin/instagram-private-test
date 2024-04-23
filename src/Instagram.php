@@ -2138,6 +2138,7 @@ class Instagram implements ExperimentsInterface
                             'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                             'offline_experiment_group'                      => isset($firstMap['offline_experiment_group']) ? $firstMap['offline_experiment_group'] : 'caa_iteration_v3_perf_ig_4',
                             'INTERNAL_INFRA_THEME'                          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                            'is_from_landing_page'                          => 0,
                             'password_text_input_id'                        => isset($firstMap['password_text_input_id']) ? $firstMap['password_text_input_id'] : '',
                             'qe_device_id'                                  => $this->uuid,
                             'is_from_logged_in_switcher'                    => 0,
@@ -4413,6 +4414,10 @@ class Instagram implements ExperimentsInterface
             }
 
             try {
+                $this->internal->getLoomFetchConfig();
+                $this->business->getMonetizationProductsEligibilityData();
+                $this->business->getMonetizationProductsGating();
+
                 $response = $this->account->getAccountFamily();
                 $this->request($response->getCurrentAccount()->getProfilePicUrl())->getRawResponse();
                 if (self::$useBloksLogin === true) {
@@ -4445,6 +4450,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->internal->getAsyncNdxIgSteps('NDX_IG4A_MA_FEATURE');
+                $this->people->getLimitedInteractionsReminder();
 
                 $requestId = \InstagramAPI\Signatures::generateUUID();
                 $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch');
@@ -4534,7 +4540,6 @@ class Instagram implements ExperimentsInterface
                 try {
                     $this->event->sendNavigation('cold_start', 'login', 'feed_timeline');
                     $this->settings->set('nav_started', 'true');
-                    $this->internal->getLoomFetchConfig();
                 } catch (\Exception $e) {
                     // pass
                 }

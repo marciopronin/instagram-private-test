@@ -1,3 +1,15 @@
+# Stable release v21.56.0
+## Date: 23/04/2024
+
+### New features
+
+- **Business:** Add `getMonetizationProductsGating()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Business:** Update `getMonetizationProductsEligibilityData()`
+
 # Stable release v21.55.4
 ## Date: 23/04/2024
 

@@ -241,7 +241,21 @@ class Business extends RequestCollection
     public function getMonetizationProductsEligibilityData()
     {
         return $this->ig->request('business/eligibility/get_monetization_products_eligibility_data/')
-            ->addParam('product_types', 'branded_content')
+            ->addParam('product_types', 'branded_content,user_pay')
+            ->getResponse(new Response\MonetizationProductsEligibilityDataResponse());
+    }
+
+    /**
+     * Get monetization products eligibility data.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\MonetizationProductsEligibilityDataResponse
+     */
+    public function getMonetizationProductsGating()
+    {
+        return $this->ig->request('creators/partner_program/get_monetization_products_gating/')
+            ->addParam('product_types', '')
             ->getResponse(new Response\MonetizationProductsEligibilityDataResponse());
     }
 

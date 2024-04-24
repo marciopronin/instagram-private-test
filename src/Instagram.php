@@ -2128,7 +2128,7 @@ class Instagram implements ExperimentsInterface
                             'server_login_source'                           => isset($firstMap['server_login_source']) ? $firstMap['server_login_source'] : 'login',
                             'waterfall_id'                                  => null, //$firstMap['waterfall_id'],
                             'login_source'                                  => isset($firstMap['login_source']) ? $firstMap['login_source'] : 'Login',
-                            'INTERNAL__latency_qpl_instance_id'             => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),
+                            'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                             'reg_flow_source'                               => 'login_home_native_integration_point', // cacheable_aymh_screen
                             'is_caa_perf_enabled'                           => 1,
                             'is_platform_login'                             => intval($this->bloksInfo['is_platform_login'][1]),
@@ -2549,7 +2549,7 @@ class Instagram implements ExperimentsInterface
                     'fdid'                              => isset($this->bloksInfo['fdid']) ? $this->bloksInfo['fdid'] : $this->phone_id,
                     'waterfall_id'                      => $this->loginWaterfallId,
                     'screen_id'                         => isset($this->bloksInfo['screen_id'][1]) ? intval($this->bloksInfo['screen_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id' => intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]),
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2762,7 +2762,7 @@ class Instagram implements ExperimentsInterface
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'context_data'                      => $this->bloksInfo['context_data'],
                     'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'is_platform_login'                 => 0,
                 ],
             ]))
@@ -2880,7 +2880,7 @@ class Instagram implements ExperimentsInterface
                     'context_data'                      => $this->bloksInfo['context_data'],
                     'cuid'                              => $this->bloksInfo['logged_in_identifier'],
                     'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'family_device_id'                  => $this->phone_id,
                     'device_id'                         => $this->device_id,
                     'waterfall_id'                      => $this->bloksInfo['waterfall_id'],
@@ -3360,7 +3360,7 @@ class Instagram implements ExperimentsInterface
                 'server_params'         => [
                     'challenge'                                     => $challenge,
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
                     'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
                 ],
@@ -3456,7 +3456,7 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'context_data'                                  => $context, //$this->bloksInfo['context_data'],
                 ],
             ]))
@@ -3605,7 +3605,7 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
                     'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
                 ],
@@ -3707,7 +3707,7 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
                     'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
                 ],
@@ -3767,7 +3767,7 @@ class Instagram implements ExperimentsInterface
         $serverParams = [
             'challenge'                                     => $method,
             'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-            'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : '',
+            'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
             'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
             'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
         ];

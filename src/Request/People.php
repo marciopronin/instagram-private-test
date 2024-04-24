@@ -1682,52 +1682,54 @@ class People extends RequestCollection
      */
     public function getCloseFriends()
     {
-        return $this->ig->request('friendships/besties/')
+        return $this->ig->request('stories/private_stories/members/')
+            ->addParam('is_list_creation', 'false')
+            ->addParam('pagination_enabled', 'true')
+            ->addParam('page_size', 40)
             ->getResponse(new Response\CloseFriendsResponse());
     }
 
     /**
-     * Get the list of suggested users for your close friends list.
+     * Add user to your close friends list.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
-     *
-     * @return \InstagramAPI\Response\CloseFriendsResponse
-     */
-    public function getSuggestedCloseFriends()
-    {
-        return $this->ig->request('friendships/bestie_suggestions/')
-            ->getResponse(new Response\CloseFriendsResponse());
-    }
-
-    /**
-     * Add or Remove users from your close friends list.
-     *
-     * Note: You probably shouldn't touch $module and $source as there is only one way to modify your close friends.
-     *
-     * @param array  $add    Users to add to your close friends list.
-     * @param array  $remove Users to remove from your close friends list.
-     * @param string $module (optional) From which app module (page) you have change your close friends list.
-     * @param string $source (optional) Source page of app-module of where you changed your close friends list.
+     * @param string $userId User ID to add to your close friends list.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\GenericResponse
      */
-    public function setCloseFriends(
-        array $add,
-        array $remove,
-        $module = 'favorites_home_list',
-        $source = 'audience_manager')
+    public function addCloseFriend(
+        $userId)
     {
-        return $this->ig->request('friendships/set_besties/')
-            ->setSignedPost(true)
-            ->addPost('module', $module)
-            ->addPost('source', $source)
+        return $this->ig->request('stories/private_stories/add_member/')
+            ->setSignedPost(false)
+            ->addPost('source', 'audience_selection')
+            ->addPost('module', 'settings')
             //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('remove', $remove)
-            ->addPost('add', $add)
+            ->addPost('user_id', $userId)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Remove user from your close friends list.
+     *
+     * @param string $userId User ID to add to your close friends list.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function removeCloseFriend(
+        $userId)
+    {
+        return $this->ig->request('stories/private_stories/remove_member/')
+            ->setSignedPost(false)
+            ->addPost('source', 'audience_selection')
+            ->addPost('module', 'settings')
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
 

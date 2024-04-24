@@ -1,3 +1,20 @@
+# Stable release v22.0.0
+## Date: 24/04/2024
+
+## Backward breaks!
+
+- **People:** Deprecated `getSuggestedCloseFriends()`. Use `getCloseFriends()` instead.
+- **People:** Deprecated `setCloseFriends()`. Use `addCloseFriend()` and `removeCloseFriend()` instead.
+
+### New features
+
+- **People:** Add `addCloseFriend()`
+- **People:** Add `removeCloseFriend()`
+
+### Updates and fixes
+
+- **People:** Update `getCloseFriends()`
+
 # Stable release v21.56.0
 ## Date: 23/04/2024
 

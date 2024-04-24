@@ -321,9 +321,9 @@ class Timeline extends RequestCollection
             } else {
                 $request->addPost('feed_view_info', json_encode([$options['feed_view_info']]));
             }
-        }/* elseif ($maxId === null) {
+        } elseif ($maxId === null) {
             $request->addPost('feed_view_info', '[]');
-        }*/
+        }
 
         if (!empty($options['push_disabled'])) {
             $request->addPost('push_disabled', 'true');

@@ -1,3 +1,13 @@
+# Stable release v22.0.1
+## Date: 24/04/2024
+
+### Updates and fixes
+
+- **People:** Update `getSharePrefill()`
+- **Timeline:** Update `getTimelineFeed()`
+- **Instagram:** Update `_sendLoginFlow()`
+- **Internal:** Update `_getQuickPromotionSurface()`
+
 # Stable release v22.0.0
 ## Date: 24/04/2024
 

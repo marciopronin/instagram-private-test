@@ -4319,6 +4319,10 @@ class Internal extends RequestCollection
                 case 'BARCELONA_MEGAPHONE':
                     $qps['queries'] += ['11451' => $this->_getQuickPromotionSurfaceQueryString(true)];
                     break;
+                case 'LOGIN_INTERSTITIAL':
+                    $qps['queries'] += ['11483' => $this->_getQuickPromotionSurfaceQueryString(false)];
+                    $qps['triggers'] += ['11483' => ['app_foreground', 'session_start']];
+                    break;
                 default:
                     throw new \InvalidArgumentException("Unsupported surface {$surface}.");
             }

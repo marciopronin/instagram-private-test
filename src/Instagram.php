@@ -4531,6 +4531,7 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->account->getBadgeNotifications();
+                    $this->internal->getQPFetch(['LOGIN_INTERSTITIAL']);
                 } catch (\Exception $e) {
                     // pass
                 }
@@ -4547,7 +4548,7 @@ class Instagram implements ExperimentsInterface
                 //$this->internal->cdnRmd();
                 $this->direct->getPresences();
 
-                $this->people->getSharePrefill();
+                $this->people->getSharePrefill(true);
                 $this->internal->sendGraph('20527889286411119358419418429', [
                     'languages'     => ['nolang'],
                     'service_ids'   => ['MUTED_WORDS'],
@@ -4748,7 +4749,6 @@ class Instagram implements ExperimentsInterface
                     // pass
                 }
 
-                $this->internal->getQPFetch(['FLOATING_BANNER', 'MEGAPHONE', 'TOOLTIP', 'INTERSTITIAL', 'BOTTOMSHEET']);
                 /*
                 if ($this->getPlatform() === 'android') {
                     $this->internal->getArlinkDownloadInfo();
@@ -4764,7 +4764,8 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->settings->set('salt_ids', '');
-                    $this->people->getSharePrefill();
+                    $this->internal->getQPFetch(['FLOATING_BANNER', 'MEGAPHONE', 'TOOLTIP', 'INTERSTITIAL', 'BOTTOMSHEET']);
+                    $this->people->getSharePrefill(true);
                 } catch (\Exception $e) {
                     // pass
                 }

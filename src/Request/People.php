@@ -489,9 +489,27 @@ class People extends RequestCollection
      */
     public function getPendingFriendships()
     {
-        $request = $this->ig->request('friendships/pending/');
+        $data = [
+            'is_pando'                              => true,
+            '_request_data'                         => [
+                'forced_user_id'                    => null,
+                'include_follow_requests_summary'   => false,
+                'response_without_su'               => 'false',
+            ],
+        ];
 
-        return $request->getResponse(new Response\FollowerAndFollowingResponse());
+        $response = $this->ig->internal->sendGraph('33138429310749575540181764401', $data, 'PendingFollows', 'xdt_api__v1__friendships__pending', 'false', 'pando', true);
+        $arr = $response->asArray();
+        if (isset($arr['data'])) {
+            $data = $arr['data'];
+            foreach ($data as $k => $v) {
+                if ($k === '1$xdt_api__v1__friendships__pending(_request_data:$_request_data)') {
+                    return new Response\FollowerAndFollowingResponse($data[$k]);
+                }
+            }
+        }
+
+        return $response;
     }
 
     /**
@@ -535,6 +553,23 @@ class People extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
+            ->addPost('radio_type', $this->ig->radio_type)
+            ->getResponse(new Response\FriendshipResponse());
+    }
+
+    /**
+     * Reject all friendship request.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\FriendshipResponse
+     */
+    public function rejectAllFriendshipRequests()
+    {
+        return $this->ig->request('friendships/remove_all/')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('_uid', $this->ig->account_id)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('radio_type', $this->ig->radio_type)
             ->getResponse(new Response\FriendshipResponse());
     }

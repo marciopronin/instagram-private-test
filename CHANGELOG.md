@@ -1,3 +1,15 @@
+# Stable release v22.1.0
+## Date: 26/04/2024
+
+### New features
+
+- **People:** Add `rejectAllFriendshipRequests()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+- **People:** Update `getPendingFriendships()`
+
 # Stable release v22.0.3
 ## Date: 26/04/2024
 

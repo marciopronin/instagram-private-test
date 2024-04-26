@@ -4829,7 +4829,11 @@ class Instagram implements ExperimentsInterface
                     ]);
 
                     $items = $feed->getFeedItems();
-                    $items = array_slice($items, 0, 2);
+                    if (is_array($items)) {
+                        $items = array_slice($items, 0, 2);
+                    } else {
+                        $items = [];
+                    }
 
                     foreach ($items as $item) {
                         if ($item->getMediaOrAd() !== null) {

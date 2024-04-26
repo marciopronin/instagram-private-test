@@ -1,3 +1,14 @@
+# Stable release v22.0.3
+## Date: 26/04/2024
+
+### Updates and fixes
+
+- **Internal:** Update `_getVideoUploadParams()`
+- **Internal:** Update `configureSinglePhoto()`
+- **Internal:** Update `_uploadResumablePhoto()`
+- **Utils:** Update `_throwIfInvalidStoryStickerPlacement()`
+- **Internal:** Update `configureSingleVideo()`
+
 # Stable release v22.0.2
 ## Date: 24/04/2024
 

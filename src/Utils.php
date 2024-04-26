@@ -1467,10 +1467,10 @@ class Utils
         array $storySticker,
         $type)
     {
-        $requiredKeys = ['x', 'y', 'width', 'height', 'rotation'];
+        $requiredKeys = ['x', 'y', 'z', 'width', 'height', 'rotation'];
 
         // Ensure that all required hashtag array keys exist.
-        $missingKeys = array_keys(array_diff_key(['x' => 1, 'y' => 1, 'width' => 1, 'height' => 1, 'rotation' => 0], $storySticker));
+        $missingKeys = array_keys(array_diff_key(['x' => 1, 'y' => 1, 'z' => 1, 'width' => 1, 'height' => 1, 'rotation' => 0], $storySticker));
         if (count($missingKeys)) {
             throw new \InvalidArgumentException(sprintf('Missing keys "%s" for "%s".', implode(', ', $missingKeys), $type));
         }
@@ -1483,6 +1483,7 @@ class Utils
             switch ($k) {
                 case 'x':
                 case 'y':
+                case 'z':
                 case 'width':
                 case 'height':
                 case 'rotation':

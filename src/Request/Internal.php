@@ -446,13 +446,14 @@ class Internal extends RequestCollection
                     ->addPost('allow_multi_configures', '1')
                     //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     ->addPost('client_timestamp', (string) (time() - mt_rand(3, 10)))
+                    ->addPost('publish_id', 1)
                     ->addPost('upload_id', $uploadId)
                     ->addPost('original_media_type', '1') // photo
                     ->addPost('camera_session_id', Signatures::generateUUID())
                     ->addPost('scene_capture_type', '')
                     ->addPost('creation_surface', 'camera')
                     ->addPost('capture_type', 'normal')
-                    //->addPost('has_original_sound', '1')
+                    ->addPost('has_original_sound', '1')
                     ->addPost('creation_surface', 'camera')
                     ->addPost('composition_id', Signatures::generateUUID())
                     ->addPost('attempt_id', Signatures::generateUUID())
@@ -1153,6 +1154,7 @@ class Internal extends RequestCollection
                     //->addPost('story_media_creation_date', time() - mt_rand(10, 20))
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time())
+                    ->addPost('publish_id', 1)
                     ->addPost('camera_session_id', Signatures::generateUUID())
                     ->addPost('date_time_original', sprintf('%sT%s.000Z', date('Ymd'), date('His')))
                     ->addPost('composition_id', Signatures::generateUUID())
@@ -3156,12 +3158,12 @@ class Internal extends RequestCollection
         } else {
             $url = 'https://i.instagram.com/rupload_igphoto';
         }
-        $endpoint = sprintf('%s/%s_%d_-%d',
+        $endpoint = sprintf('%s/%s_%d_%d',
             $url,
             $internalMetadata->getUploadId(),
             0,
-            //Utils::hashCode($photoDetails->getFilename())
-            time()
+            Utils::hashCode($photoDetails->getFilename())
+            //time()
         );
 
         $uploadParams = $this->_getPhotoUploadParams($targetFeed, $internalMetadata);
@@ -3981,9 +3983,9 @@ class Internal extends RequestCollection
                 $result['hflip'] = 'false';
                 break;
             case Constants::FEED_STORY:
-                $result['for_album'] = '1';
-                $result['content_tags'] = 'use_default_cover';
-                $result['extract_cover_frame'] = '1';
+                //$result['for_album'] = '1';
+                //$result['content_tags'] = 'use_default_cover';
+                //$result['extract_cover_frame'] = '1';
                 $result['upload_engine_config_enum'] = '0';
                 $result['IG-FB-Xpost-entry-point-v2'] = 'story';
                 break;

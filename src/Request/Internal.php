@@ -4047,9 +4047,10 @@ class Internal extends RequestCollection
                 $result['hflip'] = 'false';
                 break;
             case Constants::FEED_STORY:
-                //$result['for_album'] = '1';
-                //$result['content_tags'] = 'use_default_cover';
-                //$result['extract_cover_frame'] = '1';
+                $result['for_album'] = '1';
+                $result['for_direct_story'] = '1';
+                $result['content_tags'] = 'use_default_cover';
+                $result['extract_cover_frame'] = '1';
                 $result['upload_engine_config_enum'] = '0';
                 $result['IG-FB-Xpost-entry-point-v2'] = 'story';
                 break;

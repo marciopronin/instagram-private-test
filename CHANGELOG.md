@@ -1,3 +1,8 @@
+# Stable release v22.3.2
+## Date: 02/05/2024
+
+- **Internal:** Update `_getVideoUploadParams()`
+
 # Stable release v22.3.1
 ## Date: 02/05/2024
 

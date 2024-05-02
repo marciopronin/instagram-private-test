@@ -2418,12 +2418,15 @@ class Internal extends RequestCollection
             ->addHeader('X-IG-Capabilities', Constants::X_IG_Capabilities)
             ->addHeader('X-Graphql-Client-Library', $clientLibrary)
             ->addHeader('X-Fb-Friendly-Name', $friendlyName)
-            ->addHeader('X-Root-Field-Name', $rootName)
             ->addHeader('IG-INTENDED-USER-ID', empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'))
             ->addHeader('X-Tigon-Is-Retry', 'False')
             ->addPost('client_doc_id', $clientDoc)
             ->addPost('locale', $queryEndpoint ? 'user' : $this->ig->getLocale())
             ->addPost('variables', json_encode($vars));
+
+        if ($rootName !== null) {
+            $request->addHeader('X-Root-Field-Name', $rootName);
+        }
 
         if ($this->ig->cdn_rmd === true) {
             $request->addHeader('X-Fb-Rmd', 'state=URL_ELIGIBLE');

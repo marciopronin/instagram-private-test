@@ -1119,22 +1119,24 @@ class People extends RequestCollection
      * This matches you with other people using multiple algorithms such as
      * "friends of friends", "location", "people using similar hashtags", etc.
      *
-     * @param string|null $maxId Next "maximum ID", used for pagination.
+     * @param string      $module From which app module (page) accesed.
+     * @param string|null $maxId  Next "maximum ID", used for pagination.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\DiscoverPeopleResponse
      */
     public function discoverPeople(
+        $module = 'discover_people',
         $maxId = null)
     {
         $request = $this->ig->request('discover/ayml/')
             ->setSignedPost(false)
-            ->addPost('phone_id', $this->ig->phone_id)
+            //->addPost('phone_id', $this->ig->phone_id)
             ->addPost('module', 'discover_people')
-            ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('paginate', true);
+            ->addPost('_uuid', $this->ig->uuid);
+        //->addPost('_csrftoken', $this->ig->client->getToken())
+        //->addPost('paginate', true);
 
         if ($maxId !== null) {
             $request->addPost('max_id', $maxId);
@@ -1247,6 +1249,7 @@ class People extends RequestCollection
         $containerModule = 'profile')
     {
         $request = $this->ig->request("friendships/create/{$userId}/")
+            ->addPost('include_follow_friction_check', '1')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())

@@ -1,3 +1,11 @@
+# Stable release v22.3.1
+## Date: 02/05/2024
+
+- **People:** Update `discoverPeople()`
+- **Internal:** Update `sendGraph()`
+- **Account:** Update `changeProfilePicture()`
+- **People:** Update `follow()`
+
 # Stable release v22.3.0
 ## Date: 02/05/2024
 

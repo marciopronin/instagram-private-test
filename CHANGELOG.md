@@ -1,3 +1,10 @@
+# Stable release v22.3.0
+## Date: 02/05/2024
+
+### New features
+
+- **People:** Add `getUserInfoQuery()`
+
 # Stable release v22.2.0
 ## Date: 30/04/2024
 

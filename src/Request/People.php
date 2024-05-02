@@ -212,6 +212,43 @@ class People extends RequestCollection
     }
 
     /**
+     * Get user info graphql query.
+     *
+     * @param string $userId     Numerical UserPK ID.
+     * @param string $fromModule From which app module (page) you have opened the profile.
+     * @param string $entrypoint Target module.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\UserInfoResponse
+     */
+    public function getUserInfoQuery(
+        $userId,
+        $fromModule = 'search_typeahead',
+        $entrypoint = 'profile')
+    {
+        $data = [
+            'user_id'       => $userId,
+            'use_defer'     => false,
+            'from_module'   => $fromModule,
+            'entry_point'   => $entrypoint,
+        ];
+
+        $response = $this->ig->internal->sendGraph('2019601596199014297027407026', $data, 'ProfileUserInfo', 'xdt_users__info', 'false', 'pando', true);
+        $arr = $response->asArray();
+        if (isset($arr['data'])) {
+            $data = $arr['data'];
+            foreach ($data as $k => $v) {
+                if ($k === '1$xdt_users__info(entry_point:$entry_point,from_module:$from_module,user_id:$user_id)') {
+                    return new Response\UserInfoResponse($data[$k]);
+                }
+            }
+        }
+
+        return $response;
+    }
+
+    /**
      * Get about this account info.
      *
      * This is only valid for verified accounts.

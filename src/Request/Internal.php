@@ -2570,6 +2570,67 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Get common push ndx screen.
+     *
+     * @param mixed $postImporter
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getCommonPushNdxScreen(
+        $postImporter = false)
+    {
+        $request = $this->ig->request('bloks/apps/com.instagram.ndx.common.push_ig_ndx_screen/')
+            ->setSignedPost(false)
+            ->addPost('app_id', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
+            ->addPost('app_scoped_device_id', $this->ig->uuid)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('qp_id', ($postImporter === false) ? 3 : 0)
+            ->addPost('ndx_eligible_flows', ($postImporter === false) ? json_encode(['ndx_eligible_flows']) : json_encode(['']))
+            ->addPost('ig_ndx_source', 'NDX_IG_IMMERSIVE')
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID);
+
+        if ($postImporter === true) {
+            $request->addPost('family_device_id', $this->ig->phone_id)
+                    ->addPost('current_ndx_flow_index', 1)
+                    ->addPost('total_ndx_steps', 1);
+        }
+
+        return $request->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Get contact importer screen.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getContactImporterScreen()
+    {
+        return $this->ig->request('bloks/apps/com.instagram.ndx.contact_importer.contact_importer_screen/')
+            ->setSignedPost(false)
+            ->addPost('current_ndx_flow_index', 0)
+            ->addPost('total_ndx_steps', 1)
+            ->addPost('app_scoped_device_id', $this->ig->uuid)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('qp_id', 0)
+            ->addPost('ndx_eligible_flows', json_encode(['']))
+            ->addPost('ig_ndx_source', 'NDX_IG_IMMERSIVE')
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Send privacy consent prompt action.
      *
      * @param bool  $form     Form.

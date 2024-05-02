@@ -1,3 +1,15 @@
+# Stable release v22.2.0
+## Date: 30/04/2024
+
+### New features
+
+- **Internal:** Add `getCommonPushNdxScreen()`
+- **Internal:** Add `getContactImporterScreen()`
+
+### Updates and fixes
+
+- **Utils:** Add `_throwIfInvalidStoryStickerPlacement()`
+
 # Stable release v22.1.0
 ## Date: 26/04/2024
 

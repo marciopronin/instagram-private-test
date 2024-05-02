@@ -1469,6 +1469,10 @@ class Utils
     {
         $requiredKeys = ['x', 'y', 'z', 'width', 'height', 'rotation'];
 
+        if (!isset($storySticker['z'])) {
+            $storySticker['z'] = 0;
+        }
+
         // Ensure that all required hashtag array keys exist.
         $missingKeys = array_keys(array_diff_key(['x' => 1, 'y' => 1, 'z' => 1, 'width' => 1, 'height' => 1, 'rotation' => 0], $storySticker));
         if (count($missingKeys)) {

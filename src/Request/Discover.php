@@ -76,6 +76,47 @@ class Discover extends RequestCollection
     }
 
     /**
+     * Get mixed media.
+     *
+     * @param string $containerModule Container module.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\DiscoverChainingFeedResponse
+     */
+    public function getMixedMedia(
+        $containerModule = 'clips_viewer_clips_tab')
+    {
+        $request = $this->ig->request('mixed_media/discover/')
+            ->setSignedPost(false)
+            ->addPost('seen_reels', json_encode([]))
+            ->addPost('use_mmd_service', 'true')
+            ->addPost('should_refetch_chaining_media', 'false')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('mixed_media_types', json_encode(
+                [
+                    'carousel_with_photo_in_first_position' => true,
+                    'carousel_with_video_in_first_position' => true,
+                    'carousel_with_music'                   => true,
+                    'photo_without_music'                   => true,
+                    'photo_with_music'                      => true,
+                ])
+            )
+            ->addPost('server_driven_cache_config', json_encode(
+                [
+                    'serve_from_server_cache'       => true,
+                    'cohort_to_ttl_map'             => '',
+                    'serve_on_foreground_prefetch'  => 'true',
+                    'serve_on_background_prefetch'  => 'true',
+                    'meta'                          => '',
+                ])
+            )
+            ->addPost('container_module', $containerModule)
+            ->getResponse(new Response\DiscoverChainingFeedResponse());
+    }
+
+    /**
      * Explore reels.
      *
      * @param string|null $maxId Next "maximum ID", used for pagination.

@@ -2092,20 +2092,21 @@ class Instagram implements ExperimentsInterface
                     ->setSignedPost(false)
                     ->addPost('params', json_encode([
                         'client_input_params'           => [
-                            'device_id'                     => $this->device_id,
-                            'login_attempt_count'           => $this->loginAttemptCount,
-                            'secure_family_device_id'       => '',
-                            'machine_id'                    => $this->settings->get('mid'),
-                            'accounts_list'                 => $accountList,
-                            'auth_secure_device_id'         => '',
-                            'has_whatsapp_installed'        => 0,
-                            'password'                      => Utils::encryptPassword($password, '', '', true), // Encrypt password with default key and type 1.
-                            'sso_token_map_json_string'     => '',
-                            'family_device_id'              => $this->phone_id,
-                            'fb_ig_device_id'               => [],
-                            'device_emails'                 => [],
-                            'try_num'                       => $this->loginAttemptCount,
-                            'lois_settings'                 => [
+                            'should_show_nested_nta_from_aymh'  => 0,
+                            'device_id'                         => $this->device_id,
+                            'login_attempt_count'               => $this->loginAttemptCount,
+                            'secure_family_device_id'           => '',
+                            'machine_id'                        => $this->settings->get('mid'),
+                            'accounts_list'                     => $accountList,
+                            'auth_secure_device_id'             => '',
+                            'has_whatsapp_installed'            => 0,
+                            'password'                          => Utils::encryptPassword($password, '', '', true), // Encrypt password with default key and type 1.
+                            'sso_token_map_json_string'         => '',
+                            'family_device_id'                  => $this->phone_id,
+                            'fb_ig_device_id'                   => [],
+                            'device_emails'                     => [],
+                            'try_num'                           => $this->loginAttemptCount,
+                            'lois_settings'                     => [
                                 'lara_override' => '',
                                 'lois_token'    => '',
                             ],
@@ -2457,12 +2458,13 @@ class Instagram implements ExperimentsInterface
             'offline_experiment_group'      => $this->settings->get('offline_experiment'),
             'waterfall_id'                  => $this->loginWaterfallId,
             'show_internal_settings'        => false,
+            'last_auto_login_time'          => 0,
             'disable_auto_login'            => false,
             'qe_device_id'                  => $this->uuid,
             'is_from_logged_in_switcher'    => false,
             'account_list'                  => $accountList,
             'blocked_uid'                   => [],
-            'INTERNAL_INFRA_THEME'          => 'harm_f',
+            'INTERNAL_INFRA_THEME'          => 'HARMONIZATION_F',
         ]))
         ->addPost('bk_client_context', json_encode([
             'bloks_version' => Constants::BLOCK_VERSIONING_ID,
@@ -2514,6 +2516,10 @@ class Instagram implements ExperimentsInterface
             ->setSignedPost(false)
             ->addPost('params', json_encode([
                 'client_input_params'           => [
+                    'lois_settings'     => [
+                        'lara_override' => '',
+                        'lois_token'    => '',
+                    ],
                     'account_centers'   => [
                        /* [
                             'profiles'  => [
@@ -2541,6 +2547,7 @@ class Instagram implements ExperimentsInterface
                     'query'             => $username,
                 ],
                 'server_params'         => [
+                    'is_from_logged_out'                => 0,
                     'text_input_id'                     => intval($this->bloksInfo['text_input_id'][1]),
                     'typeahead_id'                      => intval($this->bloksInfo['typeahead_id'][1]),
                     'text_component_id'                 => intval($this->bloksInfo['text_component_id'][1]),
@@ -4415,8 +4422,11 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->internal->getLoomFetchConfig();
-                $this->business->getMonetizationProductsEligibilityData();
-                $this->business->getMonetizationProductsGating();
+
+                if ($this->settings->get('business_account')) {
+                    $this->business->getMonetizationProductsEligibilityData();
+                    $this->business->getMonetizationProductsGating();
+                }
 
                 $response = $this->account->getAccountFamily();
                 $this->request($response->getCurrentAccount()->getProfilePicUrl())->getRawResponse();
@@ -4439,6 +4449,13 @@ class Instagram implements ExperimentsInterface
                 try {
                     $this->internal->getMobileConfig(false);
                     $this->event->sendNavigation('button', 'login_bloks', 'com.bloks.www.caa.login.save-credentials');
+
+                    $this->internal->sendGraph('8463128007441046037090177764',
+                        [
+                            'configType' => 'viper',
+                        ],
+                        'IgmConfigSyncQuery', 'xig_twoMeasurement_platform_config', false, 'pando');
+
                     $this->_registerPushChannels();
                 } catch (\Exception $e) {
                     // pass
@@ -4451,6 +4468,8 @@ class Instagram implements ExperimentsInterface
             try {
                 $this->internal->getAsyncNdxIgSteps('NDX_IG4A_MA_FEATURE');
                 $this->people->getLimitedInteractionsReminder();
+
+                $this->people->getSharePrefill();
 
                 $requestId = \InstagramAPI\Signatures::generateUUID();
                 $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch');
@@ -4519,6 +4538,7 @@ class Instagram implements ExperimentsInterface
                 $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
 
                 $this->internal->sendGraph('33052919472135518510885263591', ['is_pando' => true], 'BasicAdsOptInQuery', 'xfb_user_basic_ads_preferences', false, 'pando');
+                $this->internal->sendGraph('35850666251457231147855668495', [], 'AFSOptInQuery', 'AFSStatusGraphQLWrapper', false, 'pando');
 
                 $this->internal->getAsyncNdxIgSteps('NDX_IG_IMMERSIVE');
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
@@ -4531,6 +4551,12 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->account->getBadgeNotifications();
+
+                    $this->internal->sendGraph('20527889286411119358419418429', [
+                        'languages'     => ['nolang'],
+                        'service_ids'   => ['MUTED_WORDS'],
+                    ], 'IGContentFilterDictionaryLookupQuery', 'ig_content_filter_dictionary_lookup_query', false, 'pando');
+
                     $this->internal->getQPFetch(['LOGIN_INTERSTITIAL']);
                 } catch (\Exception $e) {
                     // pass
@@ -4547,12 +4573,6 @@ class Instagram implements ExperimentsInterface
 
                 //$this->internal->cdnRmd();
                 $this->direct->getPresences();
-
-                $this->people->getSharePrefill(true);
-                $this->internal->sendGraph('20527889286411119358419418429', [
-                    'languages'     => ['nolang'],
-                    'service_ids'   => ['MUTED_WORDS'],
-                ], 'IGContentFilterDictionaryLookupQuery', 'ig_content_filter_dictionary_lookup_query', false, 'pando');
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
@@ -4607,6 +4627,16 @@ class Instagram implements ExperimentsInterface
 
             try {
                 //$this->timeline->getTimelineFeed(); TODO
+                $this->internal->sendGraph('97942539015262622076776956304',
+                    [
+                        'usecase'           => 'IG_ADS_PREFETCH',
+                        'test_id'           => '59705010009496',
+                        'purpose'           => 'product::ads_personalization',
+                        'version'           => '0.0.5',
+                        'client_msg_type'   => 'INFER',
+                    ],
+                    'OnDeviceFLFeatures', 'on_device_fl_features', false, 'pando');
+
                 $this->internal->sendGraph('18293997046226642457734318433', [
                     'is_pando' => true,
                     'input'    => [
@@ -4620,9 +4650,20 @@ class Instagram implements ExperimentsInterface
                         'log_only'              => true,
                     ],
                 ], 'ReportAttributionEventsMutation', 'report_attribution_events', false, 'pando');
+            } catch (\Exception $e) {
+                // pass
+            }
 
+            try {
+                $this->discover->getMixedMedia();
+                $this->internal->writeSupportedCapabilities();
+            } catch (\Exception $e) {
+                // pass
+            }
+
+            try {
                 $this->internal->sendGraph('43230821013683556483393399494', ['is_pando' => true], 'IGFxLinkedAccountsQuery', 'fx_linked_accounts', false, 'pando');
-                $this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
+                //$this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
                 /*$this->internal->sendGraph('13513772661704761708109730075', [
                     'is_pando' => true,
                     'input'    => [

@@ -454,7 +454,7 @@ class Request
             $this->_headers['X-Bloks-Prism-Font-Enabled'] = 'false';
 
             if ($this->_parent->isExperimentEnabled('59489', 0, false)) {
-                $this->_headers['X-Bloks-Prism-Button-Version'] = '0';
+                $this->_headers['X-Bloks-Prism-Button-Version'] = 'CONTROL'; //0
             }
             if ($this->_parent->getPlatform() === 'android') {
                 $this->_headers['X-IG-App-Locale'] = $this->_parent->getLocale();

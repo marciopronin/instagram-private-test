@@ -1,3 +1,17 @@
+# Stable release v22.4.0
+## Date: 08/05/2024
+
+### New features
+
+- **Discover:** Add `getMixedMedia()`
+
+### Updates and fixes
+
+- **Instagram:** Update `sendLoginTextInputTypeAhead()`
+- **Instagram:** Update `processLoginClientDataAndRedirect()`
+- **Request:** Update `_addDefaultHeaders()`
+- **Instagram:** Update `_login()`
+
 # Stable release v22.3.2
 ## Date: 02/05/2024
 

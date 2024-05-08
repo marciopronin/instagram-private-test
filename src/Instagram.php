@@ -4916,10 +4916,14 @@ class Instagram implements ExperimentsInterface
                     try {
                         $this->people->getSharePrefill();
                         //$this->people->getRecentActivityInbox();
+                    } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                        throw $e;
                     } catch (\Exception $e) {
                         //pass
                     }
                 } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                    throw $e;
+                } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {
                     // pass
@@ -4940,6 +4944,8 @@ class Instagram implements ExperimentsInterface
                     //$this->internal->getDeviceCapabilitiesDecisions();
                 } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
+                } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                    throw $e;
                 } catch (\Exception $e) {
                     // pass
                 } finally {
@@ -4956,6 +4962,8 @@ class Instagram implements ExperimentsInterface
                     $this->direct->getInbox();
                 } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
                     // This can have EmptyResponse, and that's ok.
+                } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                    throw $e;
                 } finally {
                     // Stops emulating batch requests.
                     $this->client->stopEmulatingBatch();

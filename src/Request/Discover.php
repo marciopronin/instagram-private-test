@@ -299,14 +299,19 @@ class Discover extends RequestCollection
     /**
      * Search for TOP media.
      *
-     * @param string      $query       The username/full name, hashtag or location to search for.
-     * @param string      $latitude    (optional) Latitude.
-     * @param string      $longitude   (optional) Longitude.
-     * @param array       $excludeList Array of grouped numerical entity IDs (ie "users" => ["4021088339"])
-     *                                 to exclude from the response, allowing you to skip entities
-     *                                 from a previous call to get more results. The following entities are supported:
-     *                                 "users", "places", "tags".
-     * @param string|null $rankToken   (When paginating) The rank token from the previous page's response.
+     * @param string      $query        The username/full name, hashtag or location to search for.
+     * @param string      $latitude     (optional) Latitude.
+     * @param string      $longitude    (optional) Longitude.
+     * @param array       $excludeList  Array of grouped numerical entity IDs (ie "users" => ["4021088339"])
+     *                                  to exclude from the response, allowing you to skip entities
+     *                                  from a previous call to get more results. The following entities are supported:
+     *                                  "users", "places", "tags".
+     * @param string|null $rankToken    (When paginating) The rank token from the previous page's response.
+     * @param mixed       $hasMoreReels
+     * @param mixed|null  $reelsMaxId
+     * @param mixed|null  $pageIndex
+     * @param mixed|null  $pageToken
+     * @param mixed|null  $pagingToken
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -320,22 +325,38 @@ class Discover extends RequestCollection
         $query,
         $latitude = null,
         $longitude = null,
-        array $excludeList = [],
-        $rankToken = null)
+        $rankToken = null,
+        $hasMoreReels = false,
+        $reelsMaxId = null,
+        $pageIndex = null,
+        $pageToken = null,
+        $pagingToken = null)
     {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
             throw new \InvalidArgumentException('Query must be a non-empty string.');
         }
-        $request = $this->_paginateWithMultiExclusion(
-            $this->ig->request('fbsearch/top_serp/')
+        $request = $this->ig->request('fbsearch/top_serp/')
                 ->addParam('search_surface', 'top_serp')
                 ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                 ->addParam('count', 30)
-                ->addParam('query', $query),
-            $excludeList,
-            $rankToken
-        );
+                ->addParam('query', $query);
+
+        if ($hasMoreReels) {
+            $request->addParam('has_more_reels', 'true');
+        }
+        if ($reelsMaxId !== null) {
+            $request->addParam('reels_max_id', $reelsMaxId);
+        }
+        if ($pageIndex !== null) {
+            $request->addParam('page_index', $pageIndex);
+        }
+        if ($pageToken !== null) {
+            $request->addParam('page_token', $pageToken);
+        }
+        if ($pagingToken !== null) {
+            $request->addParam('paging_token', $pagingToken);
+        }
 
         if ($latitude !== null && $longitude !== null) {
             $request

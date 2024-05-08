@@ -1,3 +1,12 @@
+# Stable release v22.4.1
+## Date: 08/05/2024
+
+### Updates and fixes
+
+- **Constants:** Update `330.0.0.40.92`
+- **Instagram:** Update `_sendLoginFlow()`
+- **Discover:** Update `topSearch()`
+
 # Stable release v22.4.0
 ## Date: 08/05/2024
 

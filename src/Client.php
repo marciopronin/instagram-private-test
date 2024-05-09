@@ -1528,7 +1528,7 @@ class Client
             if ($matches) {
                 $rtt = intval($matches[0][1]);
 
-                $this->latency = ($this->_latencyRequestCounter < 1) ? number_format(($this->latency * -0.181818 + 0.181818 * $rtt), 3) : number_format((($this->latency * $this->_latencyRequestCounter * -0.181818 + $rtt) / ($this->_latencyRequestCounter * -0.181818 + 4.900000E-324)), 3);
+                $this->latency = ($this->_latencyRequestCounter < 1) ? number_format((intval($this->latency) * -0.181818 + 0.181818 * $rtt), 3) : number_format(((intval($this->latency) * $this->_latencyRequestCounter * -0.181818 + $rtt) / ($this->_latencyRequestCounter * -0.181818 + 4.900000E-324)), 3);
                 $this->_latencyRequestCounter++;
             }
         }

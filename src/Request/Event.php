@@ -76,7 +76,7 @@ class Event extends RequestCollection
             'pk'                                            => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
             'release_channel'                               => 'prod',
             'radio_type'                                    => $this->ig->getRadioType(),
-            'pigeon_reserved_keyword_requested_latency'     => -1, // TODO
+            'pigeon_reserved_keyword_requested_latency'     => -1.0, // TODO
         ];
 
         return $commonProperties + $event; // + instead of array_merge to keep numeric string keys.
@@ -101,7 +101,7 @@ class Event extends RequestCollection
             'log_type'      => 'client_event',
             'bg'            => $this->ig->getBackgroundState(),
             'name'          => $name,
-            'time'          => sprintf('%.12E', round(microtime(true), 2)),
+            'time'          => str_replace('+', '', sprintf('%.12E', round(microtime(true), 2))),
             'sampling_rate' => 1,
             'extra'         => $this->_addCommonProperties($extra),
         ];
@@ -625,7 +625,7 @@ class Event extends RequestCollection
 
         switch ($this->ig->getEventsCompressedMode()) {
             case 0:
-                $batch = json_encode($batches);
+                $batch = json_encode($batches, JSON_PRESERVE_ZERO_FRACTION);
                 $request->addPost('cmethod', 'deflate')
                         ->addFileData(
                             'cmsg',
@@ -651,7 +651,7 @@ class Event extends RequestCollection
                 ];
                 $request->addPost('compressed', 0)
                         ->addPost('multi_batch', 1)
-                        ->addPost('message', json_encode($message));
+                        ->addPost('message', json_encode($message, JSON_PRESERVE_ZERO_FRACTION));
                         // no break
             case 2:
                 if (count($batches) > 1) {
@@ -673,7 +673,7 @@ class Event extends RequestCollection
                     ];
                     $request->addPost('compressed', 1)
                             ->addPost('multi_batch', 1)
-                            ->addPost('message', base64_encode(gzdeflate(json_encode($message), -1, ZLIB_ENCODING_DEFLATE)));
+                            ->addPost('message', base64_encode(gzdeflate(json_encode($message, JSON_PRESERVE_ZERO_FRACTION), -1, ZLIB_ENCODING_DEFLATE)));
                 } else {
                     $batches[0]['tier'] = 'micro_batch';
                     $batches[0]['sent_time'] = sprintf('%.12E', round(microtime(true), 2));
@@ -686,7 +686,7 @@ class Event extends RequestCollection
                     $batches[0]['app_ver'] = Constants::IG_VERSION;
 
                     $request->addPost('compressed', 1)
-                            ->addPost('message', base64_encode(gzdeflate(json_encode($batches[0]), -1, ZLIB_ENCODING_DEFLATE)));
+                            ->addPost('message', base64_encode(gzdeflate(json_encode($batches[0], JSON_PRESERVE_ZERO_FRACTION), -1, ZLIB_ENCODING_DEFLATE)));
                 }
         }
 

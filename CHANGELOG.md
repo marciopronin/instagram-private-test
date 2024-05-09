@@ -1,3 +1,13 @@
+# Stable release v22.4.2
+## Date: 09/05/2024
+
+### Updates and fixes
+
+- **Client:** Update `_processResponseHeaders()`
+- **Event:** Update `_addEventBody()`
+- **Event:** Update `_sendBatchEvents()`
+- **Internal:** Keep float values
+
 # Stable release v22.4.1
 ## Date: 08/05/2024
 

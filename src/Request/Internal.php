@@ -399,7 +399,7 @@ class Internal extends RequestCollection
 
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
-                    $request->addPost('usertags', json_encode($usertags));
+                    $request->addPost('usertags', json_encode($usertags, JSON_PRESERVE_ZERO_FRACTION));
 
                     if ($coauthor !== null) {
                         if (is_array($coauthor) && count($coauthor) > 1) {
@@ -418,7 +418,7 @@ class Internal extends RequestCollection
                 }
                 if ($productTags !== null) {
                     Utils::throwIfInvalidProductTags($productTags);
-                    $request->addPost('product_tags', json_encode($productTags));
+                    $request->addPost('product_tags', json_encode($productTags, JSON_PRESERVE_ZERO_FRACTION));
                 }
                 if ($altText !== null) {
                     $request->addPost('custom_accessibility_caption', $altText);
@@ -492,7 +492,7 @@ class Internal extends RequestCollection
                 }
                 if ($productTags !== null) {
                     Utils::throwIfInvalidProductTags($productTags);
-                    $request->addPost('product_tags', json_encode($productTags));
+                    $request->addPost('product_tags', json_encode($productTags, JSON_PRESERVE_ZERO_FRACTION));
                 }
                 if ($hashtags !== null) {
                     Utils::throwIfInvalidStoryHashtagSticker($hashtags);
@@ -534,14 +534,14 @@ class Internal extends RequestCollection
                 if ($storySlider !== null) {
                     Utils::throwIfInvalidStorySlider($storySlider);
                     $request
-                        ->addPost('story_sliders', json_encode($storySlider));
+                        ->addPost('story_sliders', json_encode($storySlider, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'emoji_slider_'.$storySlider[0]['emoji'];
                 }
                 if ($storyEmojiReaction !== null) {
                     //Utils::throwIfInvalidStorySlider($storyEmojiReaction);
                     $request
-                        ->addPost('story_reaction_stickers', json_encode($storyEmojiReaction));
+                        ->addPost('story_reaction_stickers', json_encode($storyEmojiReaction, JSON_PRESERVE_ZERO_FRACTION));
 
                     $tapModels[] = $storyEmojiReaction;
                     $stickerIds[] = 'emoji_reaction_'.$storyEmojiReaction[0]['emoji'];
@@ -549,34 +549,34 @@ class Internal extends RequestCollection
                 if ($storyQuestion !== null) {
                     Utils::throwIfInvalidStoryQuestion($storyQuestion);
                     $request
-                        ->addPost('story_questions', json_encode($storyQuestion));
+                        ->addPost('story_questions', json_encode($storyQuestion, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'question_sticker_ama';
                 }
                 if ($storyCountdown !== null) {
                     Utils::throwIfInvalidStoryCountdown($storyCountdown);
                     $request
-                        ->addPost('story_countdowns', json_encode($storyCountdown));
+                        ->addPost('story_countdowns', json_encode($storyCountdown, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'countdown_sticker_time';
                 }
                 if ($storyQuiz !== null) {
                     Utils::throwIfInvalidStoryQuiz($storyQuiz);
                     $request
-                        ->addPost('story_quizs', json_encode($storyQuiz));
+                        ->addPost('story_quizs', json_encode($storyQuiz, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'quiz_story_sticker_default';
                 }
                 if ($chatSticker !== null) {
                     Utils::throwIfInvalidChatSticker($chatSticker);
                     $request
-                        ->addPost('story_chats', json_encode($chatSticker));
+                        ->addPost('story_chats', json_encode($chatSticker, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'chat_sticker_bundle_id';
                 }
                 if ($storyFundraisers !== null) {
                     $request
-                        ->addPost('story_fundraisers', json_encode($storyFundraisers));
+                        ->addPost('story_fundraisers', json_encode($storyFundraisers, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'fundraiser_sticker_id';
                 }
@@ -1109,7 +1109,7 @@ class Internal extends RequestCollection
 
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
-                    $request->addPost('usertags', json_encode($usertags));
+                    $request->addPost('usertags', json_encode($usertags, JSON_PRESERVE_ZERO_FRACTION));
                     //->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
                     if ($coauthor !== null) {
                         if (is_array($coauthor) && count($coauthor) > 1) {
@@ -1177,7 +1177,7 @@ class Internal extends RequestCollection
                     'zoom'                  => number_format(1, 1),
                     'rotation'              => number_format(0, 1),
                     'background_coverage'   => number_format(0, 1),
-                ]));
+                ], JSON_PRESERVE_ZERO_FRACTION));
 
                 /*
                 if (is_string($link) && Utils::hasValidWebURLSyntax($link)) {
@@ -1223,8 +1223,8 @@ class Internal extends RequestCollection
                 if ($storyMusic !== null) {
                     //Utils::throwIfInvalidStoryCountdown($storyCountdown);
                     $request
-                        ->addPost('story_music_stickers', json_encode($storyMusic[0]['story_music_stickers']))
-                        ->addPost('story_music_lyric_stickers', json_encode($storyMusic[0]['story_music_lyric_stickers']))
+                        ->addPost('story_music_stickers', json_encode($storyMusic[0]['story_music_stickers'], JSON_PRESERVE_ZERO_FRACTION))
+                        ->addPost('story_music_lyric_stickers', json_encode($storyMusic[0]['story_music_lyric_stickers'], JSON_PRESERVE_ZERO_FRACTION))
                         ->addPost('story_music_metadata', json_encode($storyMusic[0]['story_music_metadata']))
                         ->addPost('internal_features', 'music_lyrics_sticker');
 
@@ -1242,14 +1242,14 @@ class Internal extends RequestCollection
                 if ($storySlider !== null) {
                     Utils::throwIfInvalidStorySlider($storySlider);
                     $request
-                        ->addPost('story_sliders', json_encode($storySlider));
+                        ->addPost('story_sliders', json_encode($storySlider, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'emoji_slider_'.$storySlider[0]['emoji'];
                 }
                 if ($storyEmojiReaction !== null) {
                     //Utils::throwIfInvalidStorySlider($storyEmojiReaction);
                     $request
-                        ->addPost('story_reaction_stickers', json_encode($storyEmojiReaction));
+                        ->addPost('story_reaction_stickers', json_encode($storyEmojiReaction, JSON_PRESERVE_ZERO_FRACTION));
 
                     $tapModels[] = $storyEmojiReaction;
                     $stickerIds[] = 'emoji_reaction_'.$storyEmojiReaction[0]['emoji'];
@@ -1257,34 +1257,34 @@ class Internal extends RequestCollection
                 if ($storyQuestion !== null) {
                     Utils::throwIfInvalidStoryQuestion($storyQuestion);
                     $request
-                        ->addPost('story_questions', json_encode($storyQuestion));
+                        ->addPost('story_questions', json_encode($storyQuestion, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'question_sticker_ama';
                 }
                 if ($storyCountdown !== null) {
                     Utils::throwIfInvalidStoryCountdown($storyCountdown);
                     $request
-                        ->addPost('story_countdowns', json_encode($storyCountdown));
+                        ->addPost('story_countdowns', json_encode($storyCountdown, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'countdown_sticker_time';
                 }
                 if ($storyQuiz !== null) {
                     Utils::throwIfInvalidStoryQuiz($storyQuiz);
                     $request
-                        ->addPost('story_quizs', json_encode($storyQuiz));
+                        ->addPost('story_quizs', json_encode($storyQuiz, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'quiz_story_sticker_default';
                 }
                 if ($chatSticker !== null) {
                     Utils::throwIfInvalidChatSticker($chatSticker);
                     $request
-                        ->addPost('story_chats', json_encode($chatSticker));
+                        ->addPost('story_chats', json_encode($chatSticker, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'chat_sticker_bundle_id';
                 }
                 if ($storyFundraisers !== null) {
                     $request
-                        ->addPost('story_fundraisers', json_encode($storyFundraisers));
+                        ->addPost('story_fundraisers', json_encode($storyFundraisers, JSON_PRESERVE_ZERO_FRACTION));
 
                     $stickerIds[] = 'fundraiser_sticker_id';
                 }
@@ -1425,7 +1425,7 @@ class Internal extends RequestCollection
                 }
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
-                    $request->addPost('usertags', json_encode($usertags));
+                    $request->addPost('usertags', json_encode($usertags, JSON_PRESERVE_ZERO_FRACTION));
                     if ($coauthor !== null) {
                         if (is_array($coauthor) && count($coauthor) > 1) {
                             if (count($coauthor) > 5) {
@@ -1507,7 +1507,7 @@ class Internal extends RequestCollection
                 // that and just give us an array with these clean values, don't
                 // try to encode it in any way, we do all encoding to match the above.
                 // This post field will get wrapped in another json_encode call during transfer.
-                $request->addPost('reel_mentions', json_encode($usertags));
+                $request->addPost('reel_mentions', json_encode($usertags, JSON_PRESERVE_ZERO_FRACTION));
             }
         }
 
@@ -1667,7 +1667,7 @@ class Internal extends RequestCollection
 
                     if (isset($item['usertags'])) {
                         // NOTE: These usertags were validated in Timeline::uploadAlbum.
-                        $photoConfig['usertags'] = json_encode(['in' => $item['usertags']]);
+                        $photoConfig['usertags'] = json_encode(['in' => $item['usertags']], JSON_PRESERVE_ZERO_FRACTION);
 
                         if (isset($item['invite_coauthor_user_ids'])) {
                             if (is_array($item['invite_coauthor_user_ids']) && count($item['invite_coauthor_user_ids']) > 1) {
@@ -1709,7 +1709,7 @@ class Internal extends RequestCollection
 
                     if (isset($item['usertags'])) {
                         // NOTE: These usertags were validated in Timeline::uploadAlbum.
-                        $videoConfig['usertags'] = json_encode(['in' => $item['usertags']]);
+                        $videoConfig['usertags'] = json_encode(['in' => $item['usertags']], JSON_PRESERVE_ZERO_FRACTION);
 
                         if (isset($item['invite_coauthor_user_ids'])) {
                             if (is_array($item['invite_coauthor_user_ids']) && count($item['invite_coauthor_user_ids']) > 1) {
@@ -2422,7 +2422,7 @@ class Internal extends RequestCollection
             ->addHeader('X-Tigon-Is-Retry', 'False')
             ->addPost('client_doc_id', $clientDoc)
             ->addPost('locale', $queryEndpoint ? 'user' : $this->ig->getLocale())
-            ->addPost('variables', json_encode($vars));
+            ->addPost('variables', json_encode($vars, JSON_PRESERVE_ZERO_FRACTION));
 
         if ($rootName !== null) {
             $request->addHeader('X-Root-Field-Name', $rootName);
@@ -3070,7 +3070,7 @@ class Internal extends RequestCollection
                 'frame_time'    => round(Constants::PDQ_VIDEO_TIME_FRAMES[$idx] * 1000),
             ];
         }
-        $request->addPost('pdq_hash_info', json_encode($pdqHashInfo));
+        $request->addPost('pdq_hash_info', json_encode($pdqHashInfo, JSON_PRESERVE_ZERO_FRACTION));
 
         return $request->getResponse(new Response\GenericResponse());
     }

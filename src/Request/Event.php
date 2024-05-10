@@ -361,6 +361,9 @@ class Event extends RequestCollection
             case 'com.bloks.www.caa.login.save-credentials':
                 $class = 'com.bloks.www.caa.login.save-credentials';
                 break;
+            case 'com.bloks.www.caa.login.login_homepage':
+                $class = 'com.bloks.www.caa.login.login_homepage';
+                break;
             default:
                 $class = false;
         }
@@ -498,31 +501,46 @@ class Event extends RequestCollection
         $name,
         $module)
     {
-        return
-        ($name === 'explore_home_impression' && $module === 'explore_popular'
-           || $name === 'instagram_organic_impression' && $module === 'reel_profile'
-           || $name === 'instagram_organic_sub_impression' && $module === 'reel_profile'
-           || $name === 'instagram_organic_impression' && $module === 'feed_contextual_profile'
-           || $name === 'instagram_organic_impression' && $module === 'feed_contextual_chain'
-           || $name === 'instagram_organic_impression' && $module === 'feed_timeline'
-           || $name === 'instagram_organic_time_spent' && $module === 'feed_contextual_profile'
-           || $name === 'instagram_organic_time_spent' && $module === 'feed_contextual_chain'
-           || $name === 'instagram_organic_time_spent' && $module === 'feed_timeline'
-           || $name === 'instagram_organic_viewed_impression' && $module === 'feed_contextual_profile'
-           || $name === 'instagram_organic_viewed_impression' && $module === 'feed_contextual_chain'
-           || $name === 'instagram_organic_viewed_impression' && $module === 'feed_timeline'
-           || $name === 'instagram_wellbeing_warning_system_success_creation' && $module === 'comments_v2'
-           || $name === 'android_string_impressions' && $module === 'IgResourcesAnalyticsModule') ?
-        [
-            'tags'  => (
-              $name === 'android_string_impressions'
-              || $name === 'instagram_wellbeing_warning_system_success_creation'
-              || $name === 'direct_inbox_tab_impression'
-              || $name === 'ig_direct_inbox_fetch_success_rate'
-              || $name === 'direct_inbox_thread_impression'
-            ) ? 1 : 32,
-        ]
-        : [];
+        switch ($name) {
+            case 'fx_access_library':
+            case 'instagram_client_password_encryption_encrypt_attempt':
+            case 'ig_navigation_tab_impression':
+            case 'ig4a_ndx_request':
+            case 'device_permissions':
+                return ['tags' => 8388609];
+            case 'caa_login_client_events_ig':
+                return ['tags' => 8404992];
+            case 'time_spent_bit_array':
+            case 'navigation':
+            case 'ig_android_story_screenshot_directory':
+                return ['tags' => 8388608];
+            default:
+                return
+                ($name === 'explore_home_impression' && $module === 'explore_popular'
+                || $name === 'instagram_organic_impression' && $module === 'reel_profile'
+                || $name === 'instagram_organic_sub_impression' && $module === 'reel_profile'
+                || $name === 'instagram_organic_impression' && $module === 'feed_contextual_profile'
+                || $name === 'instagram_organic_impression' && $module === 'feed_contextual_chain'
+                || $name === 'instagram_organic_impression' && $module === 'feed_timeline'
+                || $name === 'instagram_organic_time_spent' && $module === 'feed_contextual_profile'
+                || $name === 'instagram_organic_time_spent' && $module === 'feed_contextual_chain'
+                || $name === 'instagram_organic_time_spent' && $module === 'feed_timeline'
+                || $name === 'instagram_organic_viewed_impression' && $module === 'feed_contextual_profile'
+                || $name === 'instagram_organic_viewed_impression' && $module === 'feed_contextual_chain'
+                || $name === 'instagram_organic_viewed_impression' && $module === 'feed_timeline'
+                || $name === 'instagram_wellbeing_warning_system_success_creation' && $module === 'comments_v2'
+                || $name === 'android_string_impressions' && $module === 'IgResourcesAnalyticsModule') ?
+                [
+                    'tags'  => (
+                    $name === 'android_string_impressions'
+                    || $name === 'instagram_wellbeing_warning_system_success_creation'
+                    || $name === 'direct_inbox_tab_impression'
+                    || $name === 'ig_direct_inbox_fetch_success_rate'
+                    || $name === 'direct_inbox_thread_impression'
+                    ) ? 1 : 32,
+                ]
+                : [];
+        }
     }
 
     /**
@@ -5144,6 +5162,22 @@ class Event extends RequestCollection
                     'dest_module'   => 'com.bloks.www.caa.login.save-credentials',
                 ],
             ],
+            'com.bloks.www.caa.login.save-credentials' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'com.bloks.www.caa.login.save-credentials',
+                ],
+            ],
+            'com.bloks.www.caa.login.login_homepage' => [
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'com.bloks.www.caa.login.save-credentials',
+                ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'com.bloks.www.caa.login.login_homepage',
+                ],
+            ],
             'replay_feed_timeline' => [
                 [
                     'clickpoint'    => 'back',
@@ -6156,14 +6190,14 @@ class Event extends RequestCollection
             $extra['tabs'] = [
                 'main_home',
                 'main_search',
+                'main_camera',
                 'main_clips',
-                'main_inbox',
                 'main_profile',
             ];
         } elseif ($mode === 1) {
             $extra['headers'] = [
                 'main_direct',
-                'main_story_creation',
+                'main_activity',
             ];
         }
 
@@ -7843,6 +7877,94 @@ class Event extends RequestCollection
         }
 
         $event = $this->_addEventBody('instagram_feed_request_sent', 'feed_timeline', $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send password encryption attempt.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendPasswordEncryptionAttempt()
+    {
+        $extra = [
+            'version'   => Constants::IG_PASSWORD_ENCRYPTION_VERSION,
+            'key'       => Constants::IG_LOGIN_DEFAULT_PUBLIC_KEY,
+            'key_id'    => Constants::IG_LOGIN_DEFAULT_PUBLIC_KEY_ID,
+            'tag'       => Constants::IG_PASSWORD_ENCRYPTION_TAG,
+        ];
+
+        $event = $this->_addEventBody('instagram_client_password_encryption_encrypt_attempt', 'com.bloks.www.caa.login.login_homepage', $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send ndx action.
+     *
+     * @param string $flowName
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendNdxAction(
+        $flowName)
+    {
+        $extra = [
+            'flow_name'     => $flowName,
+            'step_latency'  => mt_rand(1000, 3000),
+            'ig_appid'      => Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
+            'ig_ndx_source' => 'NDX_IG4A_MA_FEATURE',
+        ];
+
+        switch ($flowName) {
+            case 'ig_server_eligibility_check':
+            case 'contact_importer':
+            case 'multiple_account':
+            case 'location_service':
+            case 'phone_number_acquisition':
+            case 'email_acquisition':
+                $extra['action'] = 'pass_ig_server_filter';
+                break;
+            case 'ig4a_ndx_request':
+                $extra['action'] = 'finish';
+                break;
+            default:
+                break;
+        }
+
+        $event = $this->_addEventBody('ig4a_ndx_request', null, $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send device permissions.
+     *
+     * @param string $module Module.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendDevicePermissions(
+        $module)
+    {
+        $extra = [
+            'event_target'                  => 'app_status',
+            'event_type'                    => 'deny',
+            'permission_access_purposes'    => [
+                'unkown',
+            ],
+            'surface'                       => 'instagram_android',
+            'experience_id'                 => Signatures::generateUUID(),
+            'user_fbid'                     => $this->ig->settings->get('fbid_v2'),
+            'source'                        => 'IG4A_NDX',
+        ];
+
+        if ($module === 'InstagramDevicePermissionLocationPublicAPI') {
+            $extra['event_data'] = [
+                'access_level'  => 'UNSPECIFIED',
+                'data_type'     => 'LOCATION_FOREGROUND',
+            ];
+        }
+
+        $event = $this->_addEventBody('device_permissions', 'InstagramDevicePermissionLocationPublicAPI', $extra);
         $this->_addEventData($event, 1);
     }
 }

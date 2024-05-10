@@ -1,3 +1,19 @@
+# Stable release v22.5.0
+## Date: 10/05/2024
+
+### New features
+
+- **Event:** Add `sendPasswordEncryptionAttempt()`
+- **Event:** Add `sendDevicePermissions()`
+
+### Updates and fixes
+
+- **Event:** Update `_validateNavigationPath()`
+- **Event:** Update `_getModuleClass()`
+- **Instagram:** Update `_login()`
+- **Instagram:** Update `_sendLoginFlow()`
+- **Event:** Update `sendNavigationTabImpression()`
+
 # Stable release v22.4.2
 ## Date: 09/05/2024
 

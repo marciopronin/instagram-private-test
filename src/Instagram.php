@@ -2087,6 +2087,9 @@ class Instagram implements ExperimentsInterface
                     ];
                 }
 
+                $this->event->sendNavigation('button', 'com.bloks.www.caa.login.login_homepage', 'com.bloks.www.caa.login.login_homepage');
+                $this->event->sendPasswordEncryptionAttempt();
+
                 $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/')
                     ->setNeedsAuth(false)
                     ->setSignedPost(false)
@@ -4448,7 +4451,7 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->internal->getMobileConfig(false);
-                    $this->event->sendNavigation('button', 'login_bloks', 'com.bloks.www.caa.login.save-credentials');
+                    $this->event->sendNavigation('button', 'com.bloks.www.caa.login.login_homepage', 'com.bloks.www.caa.login.save-credentials');
 
                     $this->internal->sendGraph('8463128007441046037090177764',
                         [
@@ -4467,6 +4470,16 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->internal->getAsyncNdxIgSteps('NDX_IG4A_MA_FEATURE');
+                $this->event->sendNdxAction('ig_server_eligibility_check');
+                $this->event->sendNdxAction('ig4a_ndx_request');
+                $this->event->sendNdxAction('contact_importer');
+                $this->event->sendNdxAction('multiple_account');
+                $this->event->sendNdxAction('phone_number_acquisition');
+                $this->event->sendNdxAction('email_acquisition');
+                $this->event->sendNdxAction('location_service');
+
+                $this->event->sendDevicePermissions('InstagramDevicePermissionLocationPublicAPI');
+
                 $this->people->getLimitedInteractionsReminder();
 
                 $this->people->getSharePrefill();
@@ -4478,6 +4491,7 @@ class Instagram implements ExperimentsInterface
                     'reason'        => Constants::REASONS[0],
                     'request_id'    => $requestId,
                 ]);
+                $this->event->sendNavigation('cold_start', 'login', 'feed_timeline');
                 $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch', true);
                 $items = $feed->getFeedItems();
                 $items = array_slice($items, 0, 2);

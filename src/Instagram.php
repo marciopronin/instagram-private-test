@@ -4865,7 +4865,11 @@ class Instagram implements ExperimentsInterface
                     } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
                         if (!self::$manuallyManageLoginException) {
                             if (isset($e->getResponse()->asArray()['logout_reason'])) {
-                                $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
+                                try {
+                                    $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
+                                } catch (\Exception $e) {
+                                    //pass
+                                }
 
                                 return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
                             } else {
@@ -5015,7 +5019,11 @@ class Instagram implements ExperimentsInterface
                 } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
                     if (!self::$manuallyManageLoginException) {
                         if (isset($e->getResponse()->asArray()['logout_reason'])) {
-                            $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
+                            try {
+                                $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
+                            } catch (\Exception $e) {
+                                //pass
+                            }
 
                             return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
                         } else {

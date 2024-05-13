@@ -1,3 +1,10 @@
+# Stable release v22.5.1
+## Date: 13/05/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v22.5.0
 ## Date: 10/05/2024
 

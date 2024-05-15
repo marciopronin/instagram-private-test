@@ -4936,6 +4936,8 @@ class Instagram implements ExperimentsInterface
                         //$this->people->getRecentActivityInbox();
                     } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
                         throw $e;
+                    } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                        throw $e;
                     } catch (\Exception $e) {
                         //pass
                     }

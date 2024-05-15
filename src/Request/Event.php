@@ -676,7 +676,7 @@ class Event extends RequestCollection
                     $message = [
                         'request_info'  => [
                             'tier'              => 'micro_batch',
-                            'sent_time'         => sprintf('%.12E', round(microtime(true), 2)),
+                            'sent_time'         => str_replace('+', '', sprintf('%.12E', round(microtime(true), 2))),
                             'carrier'           => $this->ig->getCarrier(),
                             'conn'              => Constants::X_IG_Connection_Type,
                         ],
@@ -694,7 +694,7 @@ class Event extends RequestCollection
                             ->addPost('message', base64_encode(gzdeflate(json_encode($message, JSON_PRESERVE_ZERO_FRACTION), -1, ZLIB_ENCODING_DEFLATE)));
                 } else {
                     $batches[0]['tier'] = 'micro_batch';
-                    $batches[0]['sent_time'] = sprintf('%.12E', round(microtime(true), 2));
+                    $batches[0]['sent_time'] = str_replace('+', '', sprintf('%.12E', round(microtime(true), 2)));
                     $batches[0]['carrier'] = $this->ig->getCarrier();
                     $batches[0]['conn'] = Constants::X_IG_Connection_Type;
                     $batches[0]['config_checksum'] = empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum');
@@ -7965,6 +7965,88 @@ class Event extends RequestCollection
         }
 
         $event = $this->_addEventBody('device_permissions', 'InstagramDevicePermissionLocationPublicAPI', $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send IG camera database created.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendIgCameraDatabaseCreated()
+    {
+        $extra = [
+            'database_version'                  => 0,
+            'database_filepath'                 => sprintf('/data/user/0/com.instagram.android/databases/clips_%s', $this->ig->account_id),
+            'entry_point'                       => mt_rand(30, 40),
+            'camera_session_id'                 => '',
+            'event_type'                        => 1,
+        ];
+
+        $event = $this->_addEventBody('ig_camera_database_created', 'ig_camera_client_events', $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send IG zero token fetch success.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendIgZeroTokenFetchSuccess()
+    {
+        $extra = [
+            'carrier_id'                  => 0,
+            'carrier_name'                => '',
+        ];
+
+        $event = $this->_addEventBody('ig_zero_token_fetch_success', null, $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send IG launcher config exposure. Experiment 53873.
+     *
+     * @param string $configId Config ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendIgLauncherConfigExposure(
+        $configId)
+    {
+        $extra = [
+            'id'            => $this->ig->account_id,
+            'config_name'   => '_',
+            'logging_id'    => [
+                $configId,
+            ],
+            'extra_ids'     => '',
+        ];
+
+        $event = $this->_addEventBody('ig_launcher_config_exposure', null, $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send IG client delivery funnel start.
+     *
+     * @param string $viewerSessionId Viewer Session ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendIgClientDeliveryFunnelStart(
+        $viewerSessionId)
+    {
+        $extra = [
+            'container_module'              => 'feed_timeline',
+            'viewer_session_id'             => $viewerSessionId,
+            'tray_session_id'               => null,
+            'ad_client_delivery_session_id' => Signatures::generateUUID(),
+            'afs_enablement_status'         => null,
+            'basic_ads_graphql_tier'        => 'BASIC_ADS_TIER_NONE',
+            'basic_ads_launcher_tier'       => 'BASIC_ADS_TIER_NONE',
+        ];
+
+        $event = $this->_addEventBody('instagram_client_delivery_funnel_start', 'feed_timeline', $extra);
         $this->_addEventData($event, 1);
     }
 }

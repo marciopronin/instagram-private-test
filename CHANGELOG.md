@@ -1,3 +1,21 @@
+# Stable release v22.6.0
+## Date: 15/05/2024
+
+### New features
+
+- **Event:** Add `sendIgCameraDatabaseCreated()`
+- **Event:** Add `sendIgZeroTokenFetchSuccess()`
+- **Event:** Add `sendIgLauncherConfigExposure()`
+- **Event:** Add `sendIgClientDeliveryFunnelStart()`
+
+### Updates and fixes
+
+Update composer requirements.
+
+- **Event:** Update `_addEventBody()`
+- **Event:** Update `_sendBatchEvents()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v22.5.1
 ## Date: 13/05/2024
 

@@ -1,3 +1,16 @@
+# Stable release v22.7.0
+## Date: 17/05/2024
+
+### New features
+
+- **Story:** Add `crosspost()`
+
+### Updates and fixes
+
+- **Internal:** Update `uploadSingleVideo()`
+- **Internal:** Update `uploadSinglePhoto()`
+- **Internal:** Update `configureWithRetries()`
+
 # Stable release v22.6.0
 ## Date: 15/05/2024
 

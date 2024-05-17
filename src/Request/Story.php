@@ -1232,6 +1232,37 @@ class Story extends RequestCollection
     }
 
     /**
+     * Crosspost story.
+     *
+     * @param string $storyId         The story media item's ID in Instagram's internal format (ie "1542304813904481224").
+     * @param string $destinationId   Destination ID.
+     * @param string $destinationType USER or PAGE.
+     * @param mixed  $containerModule
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function crosspost(
+        $storyId,
+        $destinationId,
+        $destinationType,
+        $containerModule = 'ig_self_story')
+    {
+        return $this->ig->request("media/{$storyId}/share/")
+            ->addPost('xpost_surface', $containerModule)
+            ->addPost('share_to_fb_destination_type', $destinationType)
+            ->addPost('media_id', $storyId)
+            ->addPost('share_to_fb_destination_id', $destinationId)
+            ->addPost('share_to_facebook', '1')
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('waterfall_id', Signatures::generateUUID())
+            ->addPost('use_fb_post_time', '1')
+            ->addPost('no_token_crosspost', '1')
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Perform story interactions.
      *
      * @param string $endpoint        Story interactions endpoint.

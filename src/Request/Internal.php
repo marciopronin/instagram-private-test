@@ -145,7 +145,15 @@ class Internal extends RequestCollection
                         $externalMetadata['crosspost'] = true;
                     }
 
-                    $response = $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
+                    try {
+                        $response = $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
+                    } catch (\Exception $e) {
+                        if ($externalMetadata['crosspost']) {
+                            throw new CrosspostConfigureException($isShared->getMedia()->getPk());
+                        } else {
+                            throw $e;
+                        }
+                    }
 
                     return ($isShared === null) ? $response : $isShared;
                 }
@@ -162,6 +170,8 @@ class Internal extends RequestCollection
             }
         } catch (InstagramException $e) {
             // Pass Instagram's error as is.
+            throw $e;
+        } catch (CrosspostConfigureException $e) {
             throw $e;
         } catch (\Exception $e) {
             // Wrap runtime errors.
@@ -812,7 +822,16 @@ class Internal extends RequestCollection
                         $isShared = $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
                         $externalMetadata['crosspost'] = true;
                     }
-                    $response = $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
+
+                    try {
+                        $response = $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
+                    } catch (\Exception $e) {
+                        if ($externalMetadata['crosspost']) {
+                            throw new CrosspostConfigureException($isShared->getMedia()->getPk());
+                        } else {
+                            throw $e;
+                        }
+                    }
 
                     return ($isShared === null) ? $response : $isShared;
                 }
@@ -822,6 +841,8 @@ class Internal extends RequestCollection
             // Pass Instagram's error as is.
             throw $e;
         } catch (NetworkException $e) {
+            throw $e;
+        } catch (CrosspostConfigureException $e) {
             throw $e;
         } catch (\Exception $e) {
             // Wrap runtime errors.

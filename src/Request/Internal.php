@@ -139,6 +139,7 @@ class Internal extends RequestCollection
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Configure the uploaded image and attach it to our timeline/story/IGTV.
                     $isShared = null;
+                    $externalMetadata['crosspost'] = false;
                     if (isset($externalMetadata['share_to_fb_destination_id'])) {
                         $externalMetadata['client_shared_at'] = time();
                         $isShared = $this->configureSinglePhoto($targetFeed, $internalMetadata, $externalMetadata);
@@ -817,6 +818,7 @@ class Internal extends RequestCollection
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Attempt to configure video parameters.
                     $isShared = null;
+                    $externalMetadata['crosspost'] = false;
                     if (isset($externalMetadata['share_to_fb_destination_id'])) {
                         $externalMetadata['client_shared_at'] = time();
                         $isShared = $this->configureSingleVideo($targetFeed, $internalMetadata, $externalMetadata);
@@ -1902,13 +1904,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', 'eba6ae08baa2eba74e1b08b8907e5e84fa80a938eff710abcd14effb270891fd')
+                ->addPost('query_hash', '18054336f6d0850d42c117929d3ae41d0b98420aa5acc3b645a5a41311629c1a')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '733bc1d3281f33ebabab08ee18d2d261414b78f20e17131c7754286d12cb6b3d')
+                ->addPost('query_hash', 'cfe65793ce090e4bdeaea364e300bb9c1dee38bb9e09428a2a4aca71eb9e970d')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }

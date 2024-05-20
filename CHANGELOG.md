@@ -1,3 +1,21 @@
+# Stable release v22.7.1
+## Date: 20/05/2024
+
+### Updates and fixes
+
+- **Constants:** Update to 331.0.0.37.90
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `uploadSingleVideo()`
+- **Internal:** Update `uploadSinglePhoto()`
+
+# Stable release v22.7.1
+## Date: 20/05/2024
+
+### Updates and fixes
+
+- **Constants:** Update to 331.0.0.37.90
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v22.7.0
 ## Date: 17/05/2024
 

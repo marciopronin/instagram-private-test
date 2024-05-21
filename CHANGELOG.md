@@ -1,3 +1,11 @@
+# Stable release v22.8.0
+## Date: 21/05/2024
+
+### Updates and fixes
+
+- **Events:** Add `sendBackgroundEvents()`
+- **Events:** Add `sendSessionThroughput()`
+
 # Stable release v22.7.1
 ## Date: 20/05/2024
 

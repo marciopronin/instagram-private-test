@@ -507,6 +507,8 @@ class Event extends RequestCollection
             case 'ig_navigation_tab_impression':
             case 'ig4a_ndx_request':
             case 'device_permissions':
+            case 'instagram_session_throughput':
+            case 'location_state_event':
                 return ['tags' => 8388609];
             case 'caa_login_client_events_ig':
                 return ['tags' => 8404992];
@@ -8048,5 +8050,114 @@ class Event extends RequestCollection
 
         $event = $this->_addEventBody('instagram_client_delivery_funnel_start', 'feed_timeline', $extra);
         $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send IG client delivery funnel start.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendSessionThroughput()
+    {
+        $total_ms = mt_rand(250000, 600000);
+        $extra = [
+            'ig_user_id'                            => $this->ig->account_id,
+            'total_bytes_downloaded'                => mt_rand(2000000, 5000000),
+            'throughput_measurement_count'          => mt_rand(10, 23),
+            'total_ram_in_bytes'                    => mt_rand(8589034592, 8589934592),
+            'session_end_time'                      => round(microtime(true) * 1000) - mt_rand(15000, 20000),
+            'session_start_time'                    => round(microtime(true) * 1000) - $total_ms,
+            'min_throughput_kilobits_per_sec'       => mt_rand() / mt_getrandmax() + mt_rand(1000, 3000),
+            'max_throughput_kilobits_per_sec'       => mt_rand() / mt_getrandmax() + mt_rand(20000, 50000),
+            'session_throughput_kilobits_per_sec'   => mt_rand() / mt_getrandmax() + mt_rand(6000, 12000),
+            'total_download_time_ms'                => mt_rand(2000, 10000),
+        ];
+
+        $event = $this->_addEventBody('instagram_session_throughput', 'ig_session_throughput', $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Send location state event.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendLocationState()
+    {
+        $extra = [
+            'ls_state'  => 'OFF',
+            'precise'   => false,
+            'reason'    => 'PERMISSION_DENIED',
+        ];
+
+        $event = $this->_addEventBody('location_state_event', 'location', $extra);
+        $this->_addEventData($event, 1);
+    }
+
+    /**
+     * Helper function to send background sync events.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     */
+    public function sendBackgroundEvents()
+    {
+        $c = mt_rand(0, 1);
+        for ($i = 0; $i < $c; $i++) {
+            $this->sendClientEventSync('31', 1, 0);
+        }
+
+        $c = mt_rand(0, 1);
+        for ($i = 0; $i < $c; $i++) {
+            $this->sendClientEventSync('27', 3, 0, [
+                'task_labels'       => [],
+                'app_state'         => 0,
+                'task_queue_name'   => 'ig_set_supports_e2ee_spamd_storage',
+                'error_msg'         => 'No Network Response Data',
+                'task_ids'          => [
+                    mt_rand(1, 3),
+                ],
+            ]);
+        }
+
+        $c = mt_rand(0, 1);
+        for ($i = 0; $i < $c; $i++) {
+            $this->sendClientEventSync('34', 2, 0);
+        }
+
+        $c = mt_rand(0, 1);
+        for ($i = 0; $i < $c; $i++) {
+            $this->sendClientEventSync('29', 3, 0, [
+                'task_labels'       => [],
+                'app_state'         => 0,
+                'task_queue_name'   => 'ig_set_e2ee_eligibility',
+                'error_msg'         => 'DASM ERROR -- dasm_error: 1, dasm_msg: program validation failed: sniff failed, sqlite_error: 0, sqlite_extended_error: 0, sqlite_msg: <null>, failed_stmt: <null>, step: 0, op: <null>',
+                'task_ids'          => [
+                    mt_rand(1, 3),
+                ],
+            ]);
+        }
+
+        $c = mt_rand(0, 1);
+        for ($i = 0; $i < $c; $i++) {
+            $this->sendClientEventSync('34', 2, 0);
+        }
+
+        $c = mt_rand(0, 1);
+        for ($i = 0; $i < $c; $i++) {
+            $this->sendClientEventSync('31', 1, 0);
+        }
+
+        $c = mt_rand(0, 1);
+        for ($i = 0; $i < $c; $i++) {
+            $this->sendClientEventSync('27', 3, 0, [
+                'task_labels'       => [],
+                'app_state'         => 0,
+                'task_queue_name'   => 'cpq_v2',
+                'error_msg'         => 'No Network Response Data',
+                'task_ids'          => [
+                    mt_rand(1, 3),
+                ],
+            ]);
+        }
     }
 }

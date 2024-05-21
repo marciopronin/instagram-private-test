@@ -1,3 +1,11 @@
+# Stable release v22.8.1
+## Date: 21/05/2024
+
+### Updates and fixes
+
+- **Internal:** Update `configureSinglePhoto()`
+- **Internal:** Update `configureSingleVideo()`
+
 # Stable release v22.8.0
 ## Date: 21/05/2024
 

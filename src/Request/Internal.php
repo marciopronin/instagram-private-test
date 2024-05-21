@@ -601,7 +601,7 @@ class Internal extends RequestCollection
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
                     $request->addPost('xpost_surface', 'ig_story_composer');
                 }
-                if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['crosspost'])) {
+                if (isset($externalMetadata['share_to_fb_destination_id']) && $externalMetadata['crosspost']) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
                             ->addPost('share_to_facebook', '1')
                             ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
@@ -1322,7 +1322,7 @@ class Internal extends RequestCollection
                     $request->addPost('allow_multi_configures', '1')
                             ->addPost('xpost_surface', 'ig_story_composer');
                 }
-                if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['crosspost'])) {
+                if (isset($externalMetadata['share_to_fb_destination_id']) && $externalMetadata['crosspost']) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
                             ->addPost('share_to_facebook', '1')
                             ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');

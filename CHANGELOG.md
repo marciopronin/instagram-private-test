@@ -1,3 +1,12 @@
+# Stable release v22.8.2
+## Date: 22/05/2024
+
+### Updates and fixes
+
+New sitekey for captcha: 6LdktRgnAAAAAFQ6icovYI2-masYLFjEFyzQzpix
+
+- **Example:** Update checkpoint
+
 # Stable release v22.8.1
 ## Date: 21/05/2024
 

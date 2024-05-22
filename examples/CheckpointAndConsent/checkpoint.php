@@ -169,8 +169,8 @@ try {
                         $recaptcha = new NoCaptchaProxyless();
                         $recaptcha->setKey('ANTI-CAPTCHA-KEY'); // This is the API KEY
                         $recaptcha->setWebsiteURL('https://fbsbx.com/captcha/recaptcha/iframe'); // It could be https://i.instagram.com as well
-                        $recaptcha->setWebsiteKey('6Lc9qjcUAAAAADTnJq5kJMjN9aD1lxpRLMnCS2TR'); // This sitekey is always the same.
-
+                        $recaptcha->setWebsiteKey('6LdktRgnAAAAAFQ6icovYI2-masYLFjEFyzQzpix'); // This sitekey is always the same.
+                        // Older sitekey: 6Lc9qjcUAAAAADTnJq5kJMjN9aD1lxpRLMnCS2TR
                         $recaptcha->createTask(); // returns ID of task but it is set internally.
                         if ($recaptcha->waitForResult()) { // timeout 300 seconds (5 minutes)
                             $googleResponse = $recaptcha->getTaskSolution();

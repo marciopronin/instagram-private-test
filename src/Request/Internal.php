@@ -9,6 +9,7 @@ use InstagramAPI\Constants;
 use InstagramAPI\Exception\Checkpoint\ChallengeRequiredException;
 use InstagramAPI\Exception\Checkpoint\CheckpointRequiredException;
 use InstagramAPI\Exception\ConsentRequiredException;
+use InstagramAPI\Exception\CrosspostConfigureException;
 use InstagramAPI\Exception\FeedbackRequiredException;
 use InstagramAPI\Exception\InstagramException;
 use InstagramAPI\Exception\LoginRequiredException;
@@ -2434,7 +2435,7 @@ class Internal extends RequestCollection
         $endpoint = $queryEndpoint ? 'graphql/query' : 'graphql_www';
         $request = $this->ig->request("https://i.instagram.com/{$endpoint}")
             ->setSignedPost(false)
-            ->setNeedsAuth(false)
+            ->setNeedsAuth(true)
             ->setIsSilentFail(true)
             ->setAddDefaultHeaders(false)
             ->addHeader('X-IG-App-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)

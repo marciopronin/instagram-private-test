@@ -1,3 +1,14 @@
+# Stable release v22.8.3
+## Date: 27/05/2024
+
+### Updates and fixes
+
+- **Internal:** Update `sendGraph()`
+- **Constants:** Update to 332.0.0.38.90
+- **Constants:** Update beta capabilities SUPPORTED_BETA_SDK_VERSIONS
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update missing exception
+
 # Stable release v22.8.2
 ## Date: 22/05/2024
 

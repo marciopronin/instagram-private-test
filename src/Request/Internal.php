@@ -1905,13 +1905,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '18054336f6d0850d42c117929d3ae41d0b98420aa5acc3b645a5a41311629c1a')
+                ->addPost('query_hash', '3e31adb62618a82837449e6c7269d2cce0a6966217883e473625ac648d2d3521')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', 'cfe65793ce090e4bdeaea364e300bb9c1dee38bb9e09428a2a4aca71eb9e970d')
+                ->addPost('query_hash', '0b196a546d69538f7673698ecce79a0e57cad9720c114c01ecebb9c346175bf5')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -2951,10 +2951,11 @@ class Internal extends RequestCollection
             ->addPost('container_module', $module)
             ->addPost('reels', $reels)
             ->addPost('reel_media_skipped', $skippedItems)
-            ->addPost('live_vods', [])
-            ->addPost('live_vods_skipped', [])
-            ->addPost('nuxes', [])
-            ->addPost('nuxes_skipped', [])
+            ->addPost('live_vods', (object) [])
+            ->addPost('live_vods_skipped', (object) [])
+            ->addPost('nuxes', (object) [])
+            ->addPost('nuxes_skipped', (object) [])
+            ->addPost('force_seen_story_ids', [])
             ->addParam('reel', 1)
             ->addParam('live_vod', 0)
             ->getResponse(new Response\MediaSeenResponse());

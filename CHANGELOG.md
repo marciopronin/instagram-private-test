@@ -1,3 +1,13 @@
+# Stable release v22.8.5
+## Date: 29/05/2024
+
+### Updates and fixes
+
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `markStoryMediaSeen()`
+- **Event:** Update `_getTagsForNameAndModule()`
+- **Event:** Update `sendOrganicMediaImpression()`
+
 # Stable release v22.8.4
 ## Date: 28/05/2024
 

@@ -509,6 +509,7 @@ class Event extends RequestCollection
             case 'device_permissions':
             case 'instagram_session_throughput':
             case 'location_state_event':
+            case 'instagram_organic_viewed_impression':
                 return ['tags' => 8388609];
             case 'caa_login_client_events_ig':
                 return ['tags' => 8404992];
@@ -516,6 +517,8 @@ class Event extends RequestCollection
             case 'navigation':
             case 'ig_android_story_screenshot_directory':
                 return ['tags' => 8388608];
+            case 'instagram_organic_impression':
+                return ['tags' => 8388641];
             default:
                 return
                 ($name === 'explore_home_impression' && $module === 'explore_popular'
@@ -2191,47 +2194,23 @@ class Event extends RequestCollection
         array $options = [])
     {
         $extra = [
-            'c_pk_list'                         => [],
+            'is_from_merlin_infra'              => false,
             'm_pk'                              => $item->getId(),
-            'is_dark_mode'                      => 0,
-            'a_pk_long'                         => $item->getUser()->getPk(),
-            'm_t'                               => $item->getMediaType(),
-            'ad_pause_duration'                 => -1,
-            'time'                              => -1,
-            'elapsed_time_since_last_item'      => -1,
-            'push_down_offset'                  => -1,
-            'context_sheet_duration'            => -1,
-            'tap_x_position'                    => -1,
-            'current_play_time'                 => -1,
-            'delivery_flags'                    => 'n',
-            'ad_videos_consumed'                => -1,
-            'igtv_video_width'                  => -1,
-            'inventory_source'                  => 'media_or_ad',
-            'is_eof'                            => false,
-            'is_merlin_double_logging_enabled'  => false,
-            'tracking_token'                    => $item->getOrganicTrackingToken(),
-            'aspect_ratio'                      => -1,
-            'source_of_action'                  => $module,
-            'contact_button_option'             => -1,
-            'two_measurement_debugging_fields'  => [
-                'scroll_velocity'   => sprintf('0.00%s', gmp_strval(gmp_random_range('1000000000000000', '9000000000000000'))),
-                'last_action'       => '',
-                'last_actions'      => '',
-            ],
-            'dark_mode_state'                   => -1,
-            'duration'                          => -1,
-            'is_acp_delivered'                  => false,
-            'tap_y_position'                    => -1,
             'a_pk'                              => $item->getUser()->getPk(),
-            'rating_and_review_cta_info'        => [
-                'review_count'                      => -1,
-                'is_iaw_banner_enabled'             => false,
-                'rating_and_review_display_format'  => -1,
-                'rating_score'                      => -1,
-                'display_text'                      => 'unavailable',
-                'rating_and_review_stars'           => [],
-            ],
-            'm_ts'                              => (int) $item->getTakenAt(),
+            'm_t'                               => $item->getMediaType(),
+            'is_dark_mode'                      => 0,
+            'dark_mode_state'                   => -1,
+            'shopping_session_id'               => 0,
+            'has_stories_reshare_view_shop_cta' => -1,
+            'is_second_channel_enabled'         => false,
+            'canonical_nav_chain'               => $this->ig->getNavChain(),
+            'device_aspect_ratio_category'      => null,
+            'device_fold_orientation'           => null,
+            'device_fold_state'                 => null,
+            'device_is_in_multi_window_mode'    => null,
+            'pigeon_reserved_keyword_log_type'  => 'client_event',
+            'pigeon_reserved_keyword_bg'        => false,
+            'pigeon_reserved_keyword_module'    => $module,
         ];
 
         if ($module === 'profile' || $module === 'feed_short_url'
@@ -2285,27 +2264,21 @@ class Event extends RequestCollection
             if (!isset($options['story_ranking_token']) && !isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
                 throw new \InvalidArgumentException('Required options were not set.');
             }
-            $extra['action'] = 'webclick';
-            $extra['follow_status'] = isset($options['following']) ? $options['following'] : 'not_following';
-            $extra['elapsed_time_since_last_item'] = -1;
-            $extra['viewer_session_id'] = $options['viewer_session_id'];
-            $extra['tray_session_id'] = $options['tray_session_id'];
             $extra['reel_id'] = $item->getUser()->getPk();
-            $extra['is_pride_reel'] = false;
-            $extra['is_besties_reel'] = false;
-            $extra['reel_position'] = 0;
-            $extra['reel_viewer_position'] = 0;
-            $extra['reel_type'] = 'story';
-            $extra['reel_size'] = isset($options['reel_size']) ? $options['reel_size'] : 0;
-            $extra['tray_position'] = 0;
-            $extra['is_video_to_carousel'] = false;
             $extra['session_reel_counter'] = 1;
-            $extra['time_elapsed'] = 0;
+            $extra['reel_size'] = isset($options['reel_size']) ? $options['reel_size'] : 0;
+            $extra['elapsed_time_since_last_item'] = -1;
             $extra['reel_start_position'] = 0;
-
-            if (!empty($options['story_ranking_token'])) {
-                $extra['story_ranking_token'] = $options['story_ranking_token'];
-            }
+            $extra['reel_position'] = 0;
+            $extra['reel_type'] = 'story';
+            $extra['reel_viewer_position'] = 0;
+            $extra['carousel_opt_in_position'] = -1;
+            $extra['is_video_to_carousel'] = false;
+            $extra['tray_position'] = 0;
+            $extra['tray_session_id'] = $options['tray_session_id'];
+            $extra['viewer_session_id'] = $options['viewer_session_id'];
+            $extra['story_ranking_token'] = !empty($options['story_ranking_token']) ? $options['story_ranking_token'] : null;
+            $extra['time_elapsed'] = 0.0;
         } else {
             throw new \InvalidArgumentException('Module not supported.');
         }

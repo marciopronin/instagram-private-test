@@ -1995,6 +1995,7 @@ class Instagram implements ExperimentsInterface
                     $firstDataBlok = $firstDataBlokBack;
                     $this->bloksInfo['INTERNAL__latency_qpl_instance_id'] = [0, 0];
                     $this->bloksInfo['INTERNAL__latency_qpl_marker_id'] = [0, 0];
+                    $this->bloksInfo['INTERNAL_INFRA_THEME'] = 'HARMONIZATION_F';
                 } else {
                     $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
                     $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL__latency_qpl_instance_id'), 0, -2);
@@ -2011,6 +2012,7 @@ class Instagram implements ExperimentsInterface
                     $this->bloksInfo = array_merge($firstMap, $this->bloksInfo);
                 }
 
+                /*
                 if ($firstDataBlok === null) {
                     $this->isMaybeLoggedIn = false;
                     $this->settings->set('mid', '');
@@ -2022,6 +2024,7 @@ class Instagram implements ExperimentsInterface
 
                     throw new \InstagramAPI\Exception\AccountStateException('Try login again.');
                 }
+                */
 
                 $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
                 $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL_INFRA_THEME'), 0, -2);

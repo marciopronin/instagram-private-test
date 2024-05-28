@@ -1,3 +1,10 @@
+# Stable release v22.8.4
+## Date: 28/05/2024
+
+### Updates and fixes
+
+- **Instagram:** `_login()`
+
 # Stable release v22.8.3
 ## Date: 27/05/2024
 

@@ -1,3 +1,14 @@
+# Stable release v22.8.6
+## Date: 31/05/2024
+
+### Updates and fixes
+
+- **Constants:** Update Web User Agent
+- **Web:** Update `login()`
+- **Web:** Update headers
+- **Client:** Update `_guzzleRequest()`
+- **Client:** Update `api()`
+
 # Stable release v22.8.5
 ## Date: 29/05/2024
 

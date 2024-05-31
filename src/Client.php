@@ -1076,7 +1076,8 @@ class Client
             \GuzzleHttp\Promise\Utils::settle($this->_parent->promises)->wait();
             $this->_parent->promises = [];
         }
-        $disableCookies = ($request->getUri()->getPath() === '/logging_client_events' || $request->getUri()->getPath() === '/challenge/' || str_contains($request->getUri()->getPath(), 'web/action')) ? true : false;
+
+        $disableCookies = ($request->getUri()->getPath() === '/logging_client_events' || $request->getUri()->getPath() === '/challenge/' || str_contains($request->getUri()->getPath(), 'web/action') || $request->getUri()->getHost() === parse_url('https://i.instagram.com', PHP_URL_HOST)) ? true : false;
 
         // Add critically important options for authenticating the request.
         $guzzleOptions = $this->_buildGuzzleOptions($guzzleOptions, $disableCookies);
@@ -1311,7 +1312,7 @@ class Client
                         ],
                     ];
 
-        if ($request->getUri()->getHost() !== parse_url(Constants::GRAPH_API_URL, PHP_URL_HOST)) {
+        if ($request->getUri()->getHost() !== parse_url(Constants::GRAPH_API_URL, PHP_URL_HOST) && $request->getUri()->getHost() !== parse_url('https://www.instagram.com', PHP_URL_HOST)) {
             if ($this->_parent->account_id !== null || strpos($request->getUri(), 'bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request') !== false) {
                 $headers['set_headers']['X-Pigeon-Session-Id'] = $this->getPigeonSession();
             }

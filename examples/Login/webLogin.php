@@ -21,17 +21,6 @@ try {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }
 
-$re = '/handleWithCustomApplyEach\(ScheduledApplyEach,(.*)\);}\);}\);<\/script>/m';
-preg_match_all($re, $ig->web->sendPreLogin(), $matches, PREG_SET_ORDER, 0);
-$data = json_decode($matches[0][1], true);
-
-foreach ($data['define'] as $entry) {
-    if ($entry[0] === 'XIGSharedData') {
-        $csrftoken = $entry[2]['native']['config']['csrf_token'];
-        break;
-    }
-}
-
-$ig->web->login($username, $password, $csrftoken);
+$ig->web->sendPreLogin();
+$ig->web->login($username, $password);
 $ig->client->saveCookieJar();
-echo $ig->client->getCookieJarAsJSON();

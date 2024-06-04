@@ -1,3 +1,11 @@
+# Stable release v22.8.7
+## Date: 05/06/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `getTimezoneOffset()`
+- **Account:** Update `getAccountCenterLinkedAccounts()
+
 # Stable release v22.8.6
 ## Date: 31/05/2024
 

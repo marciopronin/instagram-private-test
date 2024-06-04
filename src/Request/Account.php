@@ -1810,6 +1810,8 @@ class Account extends RequestCollection
                 'server_params'         => [
                     'requested_screen_component_type'   => 2,
                     'should_show_done_button'           => 0,
+                    'INTERNAL_INFRA_THEME'              => 'harm_f',
+                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
                     'entrypoint'                        => 'app_settings',
                 ],
             ]))
@@ -1890,6 +1892,19 @@ class Account extends RequestCollection
                         if (!empty($submatches)) {
                             $results[$match[1]]['entity'] = $submatches[0][1] === 'EntPage' ? 'PAGE' : 'USER';
                         }
+                    }
+                } else {
+                    $re = '/"([^"]*, Facebook[^"]*)"/m';
+                    preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+                    $re = '/\\\\"story\\\\", \(bk\.action\.i64\.Const, (\d+)\), (\d),/m';
+                    preg_match_all($re, $response->asJson(), $data, PREG_SET_ORDER, 0);
+
+                    foreach ($matches as $key=> $value) {
+                        $results[$value[1]] = [
+                            'id'        => $data[$key][1],
+                            'entity'    => $data[$key][2] === '1' ? 'USER' : 'PAGE',
+                        ];
                     }
                 }
 

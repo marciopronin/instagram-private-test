@@ -5259,7 +5259,7 @@ class Instagram implements ExperimentsInterface
     protected function _parseLoginErrors(
         $loginResponseWithHeaders)
     {
-        $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\exception_message\\'), 0, -2);
+        $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\login_error_dialog_shown\\'), 0, -2);
 
         if ($offsets) {
             foreach ($offsets as $offset) {

@@ -1,3 +1,10 @@
+# Stable release v22.8.8
+## Date: 05/06/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_parseLoginErrors()`
+
 # Stable release v22.8.7
 ## Date: 05/06/2024
 

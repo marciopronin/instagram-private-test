@@ -1,3 +1,16 @@
+# Stable release v22.8.10
+## Date: 10/06/2024
+
+### Updates and fixes
+
+- **Constants:** Update to 334.0.0.42.95
+- **Constants:** Update SUPPORTED_CAPABILITIES
+- **Direct:** Update `getPresencesActiveNow()`
+- **Timeline:** Update `getTimelineFeed()`
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `configureSingleVideo()`
+- **Internal:** Update `configureSinglePhoto()`
+
 # Stable release v22.8.9
 ## Date: 06/06/2024
 

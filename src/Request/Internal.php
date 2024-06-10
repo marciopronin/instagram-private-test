@@ -687,7 +687,7 @@ class Internal extends RequestCollection
         }
 
         if ($location instanceof Response\Model\Location) {
-            if ($targetFeed === Constants::FEED_TIMELINE) {
+            if ($targetFeed === Constants::FEED_TIMELINE || $targetFeed === Constants::FEED_REELS) {
                 $request->addPost('location', Utils::buildMediaLocationJSON($location));
 
                 $request
@@ -1536,7 +1536,7 @@ class Internal extends RequestCollection
         }
 
         if ($location instanceof Response\Model\Location) {
-            if ($targetFeed === Constants::FEED_TIMELINE) {
+            if ($targetFeed === Constants::FEED_TIMELINE || $targetFeed === Constants::FEED_REELS) {
                 $request->addPost('location', Utils::buildMediaLocationJSON($location));
             }
         }
@@ -1905,13 +1905,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '3e31adb62618a82837449e6c7269d2cce0a6966217883e473625ac648d2d3521')
+                ->addPost('query_hash', '20d33913537bc53f05ac2c5952f2862c0aeb83c078b8a534860e6d4794f5502a')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '0b196a546d69538f7673698ecce79a0e57cad9720c114c01ecebb9c346175bf5')
+                ->addPost('query_hash', '685c262c7dbf267e6269526751b9958fc6e4515e309fcc150ff9f299b5a57f74')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }

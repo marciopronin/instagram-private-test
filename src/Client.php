@@ -1675,6 +1675,7 @@ class Client
             'Host',
             'X-Fb-Request-Analytics-Tags',
             'X-Fb-Rmd',
+            'X-Ig-Accept-Hint',
             'X-Ads-Opt-Out',
             'X-Google-AD-ID',
             'X-DEVICE-ID',

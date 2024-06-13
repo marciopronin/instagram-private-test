@@ -2210,7 +2210,7 @@ class Instagram implements ExperimentsInterface
                             $offsets = array_slice($this->bloks->findOffsets($parsed, 'two_step_verification_context'), 0, -2);
                         } else {
                             foreach ($mainBloks as $mainBlok) {
-                                if (str_contains($mainBlok, 'context_data') && (str_contains($mainBlok, 'generic_code_entry') || str_contains($mainBlok, 'method_picker'))) {
+                                if (str_contains($mainBlok, 'context_data') || (str_contains($mainBlok, 'generic_code_entry') || str_contains($mainBlok, 'method_picker'))) {
                                     $firstDataBlok = $mainBlok;
                                     break;
                                 }
@@ -2236,7 +2236,7 @@ class Instagram implements ExperimentsInterface
                         $responseArr = $response->asArray();
                         $mainBloks = $this->bloks->parseResponse($responseArr, 'bk.action.map.Make');
 
-                        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && ($this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker')) {
+                        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && ($this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || isset($this->bloksInfo['context_data']) || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker')) {
                             foreach ($mainBloks as $mainBlok) {
                                 if (str_contains($mainBlok, 'context_data')) {
                                     $firstDataBlok = $mainBlok;
@@ -2273,10 +2273,10 @@ class Instagram implements ExperimentsInterface
                             'two_factor_context'    => isset($twoFactorMap['two_step_verification_context']) ? $twoFactorMap['two_step_verification_context'] : $twoFactorMap['context_data'],
                             'two_factor_required'   => true,
                             'is_bloks'              => true,
-                            'is_generic'            => isset($twoFactorMap['context_data']),
+                            'is_generic'            => isset($twoFactorMap['context_data']) && $endpoint !== 'com.bloks.www.ap.two_step_verification.entrypoint_async',
                         ];
 
-                        if ($endpoint === 'com.bloks.www.two_step_verification.entrypoint') {
+                        if ($endpoint === 'com.bloks.www.two_step_verification.entrypoint' || $endpoint === 'com.bloks.www.ap.two_step_verification.entrypoint_async') {
                             if (isset($this->bloksInfo['challenge'])) {
                                 $challenge = $this->bloksInfo['challenge'];
                             } else {
@@ -2595,7 +2595,7 @@ class Instagram implements ExperimentsInterface
     public function getTwoFactorBloksScreen(
         $endpoint)
     {
-        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker') {
+        if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || isset($this->bloksInfo['context_data']) || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker') {
             $serverParams = [
                 'context_data'                  => $this->bloksInfo['context_data'],
                 'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
@@ -3533,7 +3533,7 @@ class Instagram implements ExperimentsInterface
     public function getAvailableTwoFactorMethods(
         $context)
     {
-        $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.method_picker/')
+        $response = $this->request('bloks/apps/com.bloks.www.ap.two_step_verification.challenge_picker/')
             ->setNeedsAuth(false)
             ->addPost('params', json_encode([
                 'client_input_params'           => [
@@ -3541,8 +3541,8 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     'INTERNAL_INFRA_screen_id'                      => 'method_picker', //isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
-                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
-                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                    'context_data'                                  => $context, //$this->bloksInfo['two_step_verification_context'],
+                    //'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -3553,7 +3553,7 @@ class Instagram implements ExperimentsInterface
             ->getResponse(new Response\GenericResponse());
 
         $responseArr = $response->asArray();
-        $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $mainBloks = $this->bloks->parseResponse($responseArr, 'bk.action.map.Make');
         $dataBlock = null;
         foreach ($mainBloks as $mainBlok) {
             if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id')) {
@@ -3563,6 +3563,28 @@ class Instagram implements ExperimentsInterface
         if ($dataBlock !== null) {
             $parsed = $this->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
             $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL__latency_qpl_marker_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($map, $this->bloksInfo);
+        }
+
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'two_step_verification_context')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'two_step_verification_context'), 0, -2);
 
             foreach ($offsets as $offset) {
                 if (isset($parsed[$offset])) {
@@ -3629,7 +3651,7 @@ class Instagram implements ExperimentsInterface
                 'server_params'         => [
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
+                    'two_step_verification_context'                 => isset($this->bloksInfo['two_step_verification_context']) ? $this->bloksInfo['two_step_verification_context'] : $context, //$this->bloksInfo['two_step_verification_context'],
                     'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
                 ],
             ]))
@@ -3721,6 +3743,7 @@ class Instagram implements ExperimentsInterface
     {
         $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.has_been_allowed.async/')
             ->setNeedsAuth(false)
+            ->setSignedPost(false)
             ->addPost('params', json_encode([
                 'client_input_params'           => [
                     'auth_secure_device_id'     => '',
@@ -3729,10 +3752,12 @@ class Instagram implements ExperimentsInterface
                     'machine_id'                => $this->settings->get('mid'),
                 ],
                 'server_params'         => [
+                    'machine_id'                                    => null,
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
-                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                    'device_id'                                     => null,
+                    'two_step_verification_context'                 => isset($this->bloksInfo['two_step_verification_context']) ? $this->bloksInfo['two_step_verification_context'] : $context, //$this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'login_challenges', //$this->bloksInfo['flow_source'],
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([

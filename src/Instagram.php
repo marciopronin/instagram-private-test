@@ -3524,6 +3524,7 @@ class Instagram implements ExperimentsInterface
      * Get available 2FA methods.
      *
      * @param string $context 2FA context.
+     * @param mixed  $method
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -3531,19 +3532,32 @@ class Instagram implements ExperimentsInterface
      * @return string[]
      */
     public function getAvailableTwoFactorMethods(
-        $context)
+        $context,
+        $method = false)
     {
-        $response = $this->request('bloks/apps/com.bloks.www.ap.two_step_verification.challenge_picker/')
+        $endpoint = ($method === false) ? 'bloks/apps/com.bloks.www.two_step_verification.method_picker/' : 'bloks/apps/com.bloks.www.ap.two_step_verification.challenge_picker/';
+
+        if ($method === false) {
+            $serverParams = [
+                'INTERNAL_INFRA_screen_id'                      => isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
+                'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
+                'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+            ];
+        } else {
+            $serverParams = [
+                'INTERNAL_INFRA_screen_id'                      => 'method_picker', //isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
+                'context_data'                                  => $context, //$this->bloksInfo['two_step_verification_context'],
+                //'flow_source'                                 => 'two_factor_login', //$this->bloksInfo['flow_source'],
+            ];
+        }
+
+        $response = $this->request($endpoint)
             ->setNeedsAuth(false)
             ->addPost('params', json_encode([
                 'client_input_params'           => [
                     'is_whatsapp_installed'         => 0,
                 ],
-                'server_params'         => [
-                    'INTERNAL_INFRA_screen_id'                      => 'method_picker', //isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
-                    'context_data'                                  => $context, //$this->bloksInfo['two_step_verification_context'],
-                    //'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
-                ],
+                'server_params'         => $serverParams,
             ]))
             ->addPost('bk_client_context', json_encode([
                 'bloks_version' => Constants::BLOCK_VERSIONING_ID,

@@ -1,3 +1,11 @@
+# Stable release v22.8.13
+## Date: 14/06/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Instagram:** Update `getAvailableTwoFactorMethods()`
+
 # Stable release v22.8.12
 ## Date: 13/06/2024
 

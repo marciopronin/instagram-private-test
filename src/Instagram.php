@@ -1969,8 +1969,11 @@ class Instagram implements ExperimentsInterface
 
             if (self::$useBloksLogin) {
                 //$this->loginAttemptCount = 1;
-                //$response = $this->processLoginClientDataAndRedirect();
-                $response = $this->getHomeTemplate();
+                try {
+                    $response = $this->getHomeTemplate();
+                } catch (\Exception $e) {
+                    $response = $this->processLoginClientDataAndRedirect();
+                }
                 $responseArr = $response->asArray();
                 $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
                 $firstDataBlok = null;
@@ -2273,7 +2276,7 @@ class Instagram implements ExperimentsInterface
                             'two_factor_context'    => isset($twoFactorMap['two_step_verification_context']) ? $twoFactorMap['two_step_verification_context'] : $twoFactorMap['context_data'],
                             'two_factor_required'   => true,
                             'is_bloks'              => true,
-                            'is_generic'            => isset($twoFactorMap['context_data']) && $endpoint !== 'com.bloks.www.ap.two_step_verification.entrypoint_async',
+                            'is_generic'            => isset($twoFactorMap['context_data']) && str_contains($response->asJson(), 'generic_code_entry'),
                         ];
 
                         if ($endpoint === 'com.bloks.www.two_step_verification.entrypoint' || $endpoint === 'com.bloks.www.ap.two_step_verification.entrypoint_async') {

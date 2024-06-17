@@ -36,6 +36,8 @@ class InstagramPhoto extends InstagramMedia
      */
     const WEBP_QUALITY = 100;
 
+    protected $_options = [];
+
     /**
      * Constructor.
      *
@@ -52,6 +54,7 @@ class InstagramPhoto extends InstagramMedia
     {
         parent::__construct($inputFile, $options);
         $this->_details = new PhotoDetails($this->_inputFile);
+        $this->_options = $options;
     }
 
     /** {@inheritdoc} */
@@ -74,7 +77,9 @@ class InstagramPhoto extends InstagramMedia
 
             try {
                 $output = $this->_processResource($resource, $srcRect, $dstRect, $canvas);
-                $this->ssimAndMsssim = SSIM::getSsimAndMsssim($resource, $output);
+                if ($this->_options['targetFeed'] !== Constants::FEED_LIVE) {
+                    $this->ssimAndMsssim = SSIM::getSsimAndMsssim($resource, $output);
+                }
             } finally {
                 @imagedestroy($resource);
             }

@@ -1,3 +1,13 @@
+# Stable release v22.8.14
+## Date: 17/06/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `checkTrustedNotificationBloksStatus()`
+- **InstagramPhoto:** Update `_createOutputFile()`
+- **Constants:** Update `FEED_LIVE`
+- **People:** Update `getInfoByIdStream()`
+
 # Stable release v22.8.13
 ## Date: 14/06/2024
 

@@ -3774,7 +3774,7 @@ class Instagram implements ExperimentsInterface
                     'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'device_id'                                     => null,
                     'two_step_verification_context'                 => isset($this->bloksInfo['two_step_verification_context']) ? $this->bloksInfo['two_step_verification_context'] : $context, //$this->bloksInfo['two_step_verification_context'],
-                    'flow_source'                                   => 'login_challenges', //$this->bloksInfo['flow_source'],
+                    'flow_source'                                   => 'two_factor_login', //'login_challenges', //$this->bloksInfo['flow_source'],
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([

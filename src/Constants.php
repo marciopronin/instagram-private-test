@@ -103,6 +103,7 @@ class Constants
     const FEED_TV = 6;
     const FEED_REELS = 9; // Clips
     const FEED_DIRECT_AUDIO = 11;
+    const FEED_LIVE = 12;
 
     // Story view modes.
     const STORY_VIEW_MODE_ONCE = 'once';

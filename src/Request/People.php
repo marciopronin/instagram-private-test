@@ -111,6 +111,9 @@ class People extends RequestCollection
             $request->addPost('from_module', $module);
         }
 
+        $request->addPost('_uuid', $this->ig->uuid)
+                ->addPost('is_app_start', 'true');
+
         return $request->getResponse(new Response\UserInfoResponse());
     }
 
@@ -1836,7 +1839,7 @@ class People extends RequestCollection
 
         $request = $this->ig->request('banyan/banyan/')
             ->addParam('is_private_share', false)
-            ->addParam('views', ($nullState === null) ? '["direct_ibc_nullstate"]' : json_encode(array_values($views)));
+            ->addParam('views', ($nullState === false) ? '["direct_ibc_nullstate"]' : json_encode(array_values($views)));
 
         if ($this->ig->isExperimentEnabled('54280', 0, false)) {
             $request->addParam('IBCShareSheetParams', json_encode(['size' => max($this->ig->getExperimentParam('54280', 2, 5), (int) $this->ig->getExperimentParam('54280', 5, 3))]));

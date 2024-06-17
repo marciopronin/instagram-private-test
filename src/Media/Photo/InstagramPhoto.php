@@ -2,6 +2,7 @@
 
 namespace InstagramAPI\Media\Photo;
 
+use InstagramAPI\Constants;
 use InstagramAPI\Media\Geometry\Dimensions;
 use InstagramAPI\Media\Geometry\Rectangle;
 use InstagramAPI\Media\InstagramMedia;

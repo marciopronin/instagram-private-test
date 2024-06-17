@@ -1,3 +1,10 @@
+# Stable release v22.8.15
+## Date: 17/06/2024
+
+### Updates and fixes
+
+- **Constants:** Update `FEED_LIVE`
+
 # Stable release v22.8.14
 ## Date: 17/06/2024
 

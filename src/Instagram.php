@@ -1060,7 +1060,7 @@ class Instagram implements ExperimentsInterface
     {
         if ($this->getTimezoneName() !== null) {
             try {
-                $datetime = new DateTime('now', new DateTimeZone($this->getTimezoneName()));
+                $datetime = new \DateTime('now', new \DateTimeZone($this->getTimezoneName()));
 
                 return $datetime->getOffset();
             } catch (\Exception $e) {

@@ -1,3 +1,10 @@
+# Stable release v22.8.16
+## Date: 18/06/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `getTimezoneOffset()`
+
 # Stable release v22.8.15
 ## Date: 17/06/2024
 

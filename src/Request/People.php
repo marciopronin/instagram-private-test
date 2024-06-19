@@ -1234,6 +1234,37 @@ class People extends RequestCollection
     }
 
     /**
+     * Bulk follow. This query is used during registration process.
+     *
+     * @param string[] $userIds Array of Numerical UserPK ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\FriendshipsShowManyResponse
+     */
+    public function bulkFollow(
+        array $userIds)
+    {
+        $data = [
+            'user_ids'          => $userIds,
+            'request_from_nux'  => true,
+        ];
+
+        $response = $this->ig->internal->sendGraph('39921106346623902447469060860', $data, 'FriendshipBulkFollowRequest', 'xdt_create_many', 'false', 'pando', true);
+        $arr = $response->asArray();
+        if (isset($arr['data'])) {
+            $data = $arr['data'];
+            foreach ($data as $k => $v) {
+                if ($k === '1$xdt_create_many(data:$data)') {
+                    return new Response\FriendshipsShowManyResponse($data[$k]);
+                }
+            }
+        }
+
+        return $response;
+    }
+
+    /**
      * Follow a user.
      *
      * @param string      $userId           Numerical UserPK ID.

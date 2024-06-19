@@ -1,3 +1,10 @@
+# Stable release v22.9.0
+## Date: 19/06/2024
+
+### New features
+
+- **People:** Update `bulkFollow()`
+
 # Stable release v22.8.16
 ## Date: 18/06/2024
 

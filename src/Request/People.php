@@ -1246,8 +1246,10 @@ class People extends RequestCollection
         array $userIds)
     {
         $data = [
-            'user_ids'          => $userIds,
-            'request_from_nux'  => true,
+            'data' => [
+                'user_ids'          => $userIds,
+                'request_from_nux'  => true,
+            ],
         ];
 
         $response = $this->ig->internal->sendGraph('39921106346623902447469060860', $data, 'FriendshipBulkFollowRequest', 'xdt_create_many', 'false', 'pando', true);

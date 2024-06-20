@@ -2777,6 +2777,40 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Send privacy consent prompt callback.
+     *
+     * @param string $category
+     * @param string $reasons
+     * @param string $errorCode
+     * @param string $extraData
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getSentryBlockDialog(
+        $category,
+        $reasons,
+        $errorCode,
+        $extraData)
+    {
+        return $this->ig->request('bloks/apps/com.instagram.sentry_block_dialogue_unification.screens.sentry_block_dialogue_unification/')
+            ->setSignedPost(false)
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('dialogue', 0)
+            ->addPost('category', $category)
+            ->addPost('reasons_thrown', $reasons)
+            ->addPost('error_code', $errorCode)
+            ->addPost('restriction_extra_data', $extraData)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Starts new user flow when registering with phone number.
      *
      * @param string $email       Email for registration.

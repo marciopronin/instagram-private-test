@@ -1,3 +1,10 @@
+# Stable release v22.10.0
+## Date: 20/06/2024
+
+### New features
+
+- **Internal:** Add `getSentryBlockDialog()`
+
 # Stable release v22.9.1
 ## Date: 19/06/2024
 

@@ -2326,6 +2326,33 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Upload bug report.
+     *
+     * @param array $postData
+     * @param array $fileData
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function uploadBugReport(
+        $postData,
+        $fileData = null)
+    {
+        $request = $this->ig->request('https://graphql.instagram.com/bug_report_file_upload/')
+            ->setSignedPost(false);
+
+        foreach ($postData as $key => $value) {
+            $request->addPost($key, $value);
+        }
+        foreach ($fileData as $key => $value) {
+            $request->addFile($key, $value);
+        }
+
+        return $request->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get viewable statuses.
      *
      * @param bool $includeAuthors Include authors.
@@ -2432,7 +2459,11 @@ class Internal extends RequestCollection
         $clientLibrary = 'graphservice',
         $queryEndpoint = false)
     {
-        $endpoint = $queryEndpoint ? 'graphql/query' : 'graphql_www';
+        if (is_string($queryEndpoint)) {
+            $endpoint = $queryEndpoint;
+        } else {
+            $endpoint = $queryEndpoint ? 'graphql/query' : 'graphql_www';
+        }
         $request = $this->ig->request("https://i.instagram.com/{$endpoint}")
             ->setSignedPost(false)
             ->setNeedsAuth(true)
@@ -2445,7 +2476,7 @@ class Internal extends RequestCollection
             ->addHeader('IG-INTENDED-USER-ID', empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'))
             ->addHeader('X-Tigon-Is-Retry', 'False')
             ->addPost('client_doc_id', $clientDoc)
-            ->addPost('locale', $queryEndpoint ? 'user' : $this->ig->getLocale())
+            ->addPost('locale', is_bool($queryEndpoint) && $queryEndpoint ? 'user' : $this->ig->getLocale())
             ->addPost('variables', json_encode($vars, JSON_PRESERVE_ZERO_FRACTION));
 
         if ($rootName !== null) {

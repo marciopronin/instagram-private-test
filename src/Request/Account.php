@@ -2357,4 +2357,104 @@ class Account extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Get help options.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function getHelpOptions()
+    {
+        return $this->ig->request('bloks/apps/com.instagram.portable.settings.help/')
+            ->setSignedPost(false)
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Create bug ID.
+     *
+     * @param string $description
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function createBugId(
+        $description)
+    {
+        return $this->ig->internal->sendGraph('293839176013550553288378882913',
+        [
+            'input' => [
+                'attachment_file_names' => json_encode([
+                    'screenshot_0.png'                      => 1,
+                    'mobileconfigs.txt'                     => 1,
+                    'appearance_theme_state.json'           => 1,
+                    'fan_club_data.json'                    => 1,
+                    'reels_viewer_last_seen_media.json'     => 1,
+                    'feed_requests.txt'                     => 1,
+                    'main_feed_last_seen_medias.json'       => 1,
+                    'realtime_client.json'                  => 1,
+                    'direct_mutation_manager.txt'           => 1,
+                    'direct_interop_gating_status.json'     => 1,
+                    'direct_notification_traces.json'       => 1,
+                    'logcat.txt'                            => 1,
+                    'stacktrace.txt'                        => 1,
+                    'fb_liger_reporting.txt'                => 1,
+                    'RecentPendingMedia.json'               => 1,
+                    'IngestionLogcat.txt'                   => 1,
+                    'RecentUploadAttemptErrors.json'        => 1,
+                ]),
+                'build_num'                     => $this->ig->getVersionCode(),
+                'category_id'                   => '493186350727442',
+                'claim'                         => $this->ig->client->wwwClaim,
+                'description'                   => $description,
+                'endpoint'                      => 'com.instagram.portable.settings.help:com.instagram.portable.settings.help',
+                'files'                         => [],
+                'has_complete_logs_consent'     => true,
+                'misc_info'                     => json_encode([
+                    'IG_UserId'                             => $this->ig->account_id,
+                    'IG_Username'                           => $this->ig->username,
+                    'fbns_token'                            => $this->ig->settings->get('fbns_token'),
+                    'transport_type_account'                => 'ig_advanced_crypto_transport',
+                    'user_interop_status'                   => 'DIRECT_INTEROP_GATING_STATUS_ELIGIBLE_AND_UPGRADED',
+                    'direct_last_viewed_thread_is_interop'  => 'false',
+                    'device_id'                             => $this->ig->device_id,
+                    'Git_Hash'                              => 'MASTER',
+                    'Branch'                                => 'master',
+                    'OS_Version'                            => $this->ig->device->getAndroidVersion(),
+                    'Manufacturer'                          => $this->ig->device->getManufacturer(),
+                    'Model'                                 => $this->ig->device->getModel(),
+                    'Locale'                                => 'English (United States)',
+                    'Build_Type'                            => 'RELEASE',
+                    'source'                                => 'bloks',
+                    'client_server_join_key'                => 'dKNAQNZLZNBppesuPeKV',
+                    'invalid_attachment_file_names'         => [
+                        'media_publisher.txt'       => 1,
+                        'ad_delivery_logging.json'  => 1,
+                        'mobile_network_stack.txt'  => 1,
+                    ],
+                    'last_played_video_ids'                 => [],
+                    'ar_engine_supported'                   => 'true',
+                    'available_disk_space_bytes'            => strval(mt_rand(6089027072, 17489027072)),
+                    'black_box_trace_id'                    => 'BdA1RkollNA',
+                    'promotion_id'                          => '1490312904699955',
+                    'deviceVolume'                          => number_format(1 / mt_rand(1, 10), 1),
+                    'device_silent_mode'                    => 'NORMAL',
+                    'm_target_sdk_version'                  => 34,
+                ]),
+                'nav_chain'                     => $this->ig->getNavChain(),
+                'source'                        => 'bloks',
+            ],
+        ],
+        'IGBugReportSubmitMutation', null, false, 'minimal', 'api/v1/wwwgraphql/ig/query/');
+    }
 }

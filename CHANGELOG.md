@@ -1,3 +1,18 @@
+# Stable release v22.11.0
+## Date: 21/06/2024
+
+### New features
+
+- **Account:** Add `getHelpOptions()`
+- **Account:** Add `createBugId()`
+- **Internal:** Add `uploadBugReport()`
+
+### Updates and fixes
+
+- **Internal:** Update `sendGraph()`
+- **Request:** Update `addFileData()`
+- **Request:** Update `addFile()`
+
 # Stable release v22.10.0
 ## Date: 20/06/2024
 

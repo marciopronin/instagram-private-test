@@ -341,9 +341,34 @@ class Request
             $filename = $filepath;
         }
         $filename = basename($filename);
+        $info = new \SplFileInfo($filename);
+        $ext = $info->getExtension();
+
+        switch ($ext) {
+            case 'txt':
+                $headers = $headers + [
+                    'Content-Type'   => 'text/plain',
+                ];
+                break;
+            case 'json':
+                $headers = $headers + [
+                    'Content-Type'  => 'application/octet-stream',
+                ];
+                break;
+            case 'png':
+                $headers = $headers + [
+                    'Content-Type'  => 'image/png',
+                ];
+                break;
+            default:
+                $headers = $headers + [
+                    'Content-Type'  => 'application/octet-stream',
+                ];
+                break;
+        }
+
         // Default headers.
         $headers = $headers + [
-            'Content-Type'              => 'application/octet-stream',
             'Content-Transfer-Encoding' => 'binary',
         ];
         $this->_files[$key] = [
@@ -372,9 +397,35 @@ class Request
         array $headers = [])
     {
         $filename = basename($filename);
+
+        $info = new \SplFileInfo($filename);
+        $ext = $info->getExtension();
+
+        switch ($ext) {
+            case 'txt':
+                $headers = $headers + [
+                    'Content-Type'   => 'text/plain',
+                ];
+                break;
+            case 'json':
+                $headers = $headers + [
+                    'Content-Type'  => 'application/octet-stream',
+                ];
+                break;
+            case 'png':
+                $headers = $headers + [
+                    'Content-Type'  => 'image/png',
+                ];
+                break;
+            default:
+                $headers = $headers + [
+                    'Content-Type'  => 'application/octet-stream',
+                ];
+                break;
+        }
+
         // Default headers.
         $headers = $headers + [
-            'Content-Type'              => 'application/octet-stream',
             'Content-Transfer-Encoding' => 'binary',
         ];
         $this->_files[$key] = [

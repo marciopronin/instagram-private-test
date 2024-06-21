@@ -14,19 +14,19 @@ class Constants
         '/api/v1/creator/creator_info',
     ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
-    const IG_VERSION = '334.0.0.42.95';
+    const IG_VERSION = '336.0.0.35.90';
     const IG_IOS_VERSION = '212.1.0.25.118';
     const VERSION_CODE = [
-        '606558446',
-        '606558548',
-        '606558496',
-        '606558551',
-        '606558532',
-        '606558430',
-        '606558538',
-        '606558400',
-        '606558434',
-        '606558444',
+        '612069150',
+        '612069201',
+        '612069164',
+        '612068811',
+        '612068832',
+        '612068913',
+        '612068916',
+        '612069194',
+        '612068839',
+        '612068901',
     ];
 
     const IG_IOS_VERSION_CODE = '329643252';
@@ -45,7 +45,7 @@ class Constants
     const IG_LOGIN_PUBLIC_KEY = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS1NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXZjdTFLTURSMXZ6dUJyOWlZS1c4XG5LV21oVDhDVlVCUmtjaGlPODg2MUg3eklPWVJ3a1Fya2VIQSswbWtCbzNMeTFQaUxYRGtiS1FaeWVxWmJzcGtlXG40ZTdXZ0ZOd1QyM2pIZlJNVi9jTlB4alBFeTRreE5FYnpMRVQ2R2xXZXBHZFhGaHpIZm5TMVBpbkdRemowWk9VXG5aTTNwUWpnR1JMOWZBZjhicnQxZXdoUTVYdHB2S0ZkUHlRcTVCa2VGRURLb0luRHNDL3lLRFdSQXgydHdnUEZyXG5DWVV6QUI4L3lYdUwzMEVyVEhUNzlidDN5VG52MWZSdEUxOXRST0lsQnVxcnV3U0JrOWdHcS9MdXZTRUNnc2w1XG56NFZjcEhYaGdadDZNaHJBajZ5OXZBQXhPMlJWcnQwTXE0T1k0SGd5WXo5V2xyMXZBeFhYR0FBWUl2cmhBWUxQXG43UUlEQVFBQgotLS0tLUVORCBQVUJMSUMgS0VZLS0tLS0K';
 
     // Endpoint Constants.
-    const BLOCK_VERSIONING_ID = '1d85eb04419079358b68b92be6f523d99f895154273fd6dd5eb7d3df20e4453c';
+    const BLOCK_VERSIONING_ID = '271ff68d6cfba85994ccdbd6f4a8fb2f914f5dbc4d429f54c937233887d4d025';
     const IOS_BLOCKS_VERSIONING_ID = '0d38efe9f67cf51962782e8aae19001881099884d8d86c683d374fc1b89ffad1';
     const BATCH_SURFACES = '{"8972":["instagram_feed_banner"],"4715":["instagram_feed_header","instagram_post_created","instagram_story_created"],"5858":["instagram_feed_tool_tip","instagram_navigation_tooltip","instagram_featured_product_media_tooltip","instagram_feed_promote_cta_tooltip"],"5734":["instagram_feed_prompt","instagram_branded_content_story_shared","instagram_shopping_enable_auto_highlight_interstitial","instagram_story_created"],"11383":["instagram_feed_bottomsheet"]}';
     const BATCH_QUERY = '{"8972":"Query QuickPromotionSurfaceQuery: Viewer{viewer(){eligible_promotions.trigger_context_v2(<trigger_context_v2>).ig_parameters(<ig_parameters>).trigger_name(<trigger_name>).surface_nux_id(<surface>).external_gating_permitted_qps(<external_gating_permitted_qps>).supports_client_filters(true).include_holdouts(true){edges{client_ttl_seconds,log_eligibility_waterfall,is_holdout,priority,time_range{start,end},node{id,promotion_id,logging_data,is_server_force_pass,max_impressions,triggers,contextual_filters{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}}}}}},is_uncancelable,template{name,parameters{name,required,bool_value,string_value,color_value}},creatives{title{text},content{text},footer{text},social_context{text},social_context_images,primary_action{title{text},url,limit,dismiss_promotion},secondary_action{title{text},url,limit,dismiss_promotion},dismiss_action{title{text},url,limit,dismiss_promotion},bullet_list{title,subtitle,icon{uri,width,height}}image.scale(<scale>){uri,width,height}}}}}}}","4715":"Query QuickPromotionSurfaceQuery: Viewer{viewer(){eligible_promotions.trigger_context_v2(<trigger_context_v2>).ig_parameters(<ig_parameters>).trigger_name(<trigger_name>).surface_nux_id(<surface>).external_gating_permitted_qps(<external_gating_permitted_qps>).supports_client_filters(true).include_holdouts(true){edges{client_ttl_seconds,log_eligibility_waterfall,is_holdout,priority,time_range{start,end},node{id,promotion_id,logging_data,is_server_force_pass,max_impressions,triggers,contextual_filters{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}}}}}},is_uncancelable,template{name,parameters{name,required,bool_value,string_value,color_value}},creatives{title{text},content{text},footer{text},social_context{text},social_context_images,primary_action{title{text},url,limit,dismiss_promotion},secondary_action{title{text},url,limit,dismiss_promotion},dismiss_action{title{text},url,limit,dismiss_promotion},bullet_list{title,subtitle,icon{uri,width,height}}image.scale(<scale>){uri,width,height},dark_mode_image.scale(<scale>){uri,width,height}}}}}}}","5858":"Query QuickPromotionSurfaceQuery: Viewer{viewer(){eligible_promotions.trigger_context_v2(<trigger_context_v2>).ig_parameters(<ig_parameters>).trigger_name(<trigger_name>).surface_nux_id(<surface>).external_gating_permitted_qps(<external_gating_permitted_qps>).supports_client_filters(true).include_holdouts(true){edges{client_ttl_seconds,log_eligibility_waterfall,is_holdout,priority,time_range{start,end},node{id,promotion_id,logging_data,is_server_force_pass,max_impressions,triggers,contextual_filters{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}}}}}},is_uncancelable,template{name,parameters{name,required,bool_value,string_value,color_value}},creatives{title{text},content{text},footer{text},social_context{text},social_context_images,primary_action{title{text},url,limit,dismiss_promotion},secondary_action{title{text},url,limit,dismiss_promotion},dismiss_action{title{text},url,limit,dismiss_promotion},bullet_list{title,subtitle,icon{uri,width,height}}image.scale(<scale>){uri,width,height}}}}}}}","5734":"Query QuickPromotionSurfaceQuery: Viewer{viewer(){eligible_promotions.trigger_context_v2(<trigger_context_v2>).ig_parameters(<ig_parameters>).trigger_name(<trigger_name>).surface_nux_id(<surface>).external_gating_permitted_qps(<external_gating_permitted_qps>).supports_client_filters(true).include_holdouts(true){edges{client_ttl_seconds,log_eligibility_waterfall,is_holdout,priority,time_range{start,end},node{id,promotion_id,logging_data,is_server_force_pass,max_impressions,triggers,contextual_filters{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}}}}}},is_uncancelable,template{name,parameters{name,required,bool_value,string_value,color_value}},creatives{title{text},content{text},footer{text},social_context{text},social_context_images,primary_action{title{text},url,limit,dismiss_promotion},secondary_action{title{text},url,limit,dismiss_promotion},dismiss_action{title{text},url,limit,dismiss_promotion},bullet_list{title,subtitle,icon{uri,width,height}}image.scale(<scale>){uri,width,height},dark_mode_image.scale(<scale>){uri,width,height}}}}}}}","11383":"Query QuickPromotionSurfaceQuery: Viewer{viewer(){eligible_promotions.trigger_context_v2(<trigger_context_v2>).ig_parameters(<ig_parameters>).trigger_name(<trigger_name>).surface_nux_id(<surface>).external_gating_permitted_qps(<external_gating_permitted_qps>).supports_client_filters(true).include_holdouts(true){edges{client_ttl_seconds,log_eligibility_waterfall,is_holdout,priority,time_range{start,end},node{id,promotion_id,logging_data,is_server_force_pass,max_impressions,triggers,contextual_filters{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}}}}}},is_uncancelable,template{name,parameters{name,required,bool_value,string_value,color_value}},creatives{title{text},content{text},footer{text},social_context{text},social_context_images,primary_action{title{text},url,limit,dismiss_promotion},secondary_action{title{text},url,limit,dismiss_promotion},dismiss_action{title{text},url,limit,dismiss_promotion},bullet_list{title,subtitle,icon{uri,width,height}}image.scale(<scale>){uri,width,height}}}}}}}"}';
@@ -57,7 +57,7 @@ class Constants
     // HTTP Protocol Constants.
     const ACCEPT_LANGUAGE = 'en-US'; // "language-COUNTRY".
     const ACCEPT_ENCODING = 'gzip, deflate, br';
-    const CONTENT_TYPE = 'application/x-www-form-urlencoded; charset=UTF-8';
+    const CONTENT_TYPE = 'application/x-www-form-urlencoded';
     const X_IG_Connection_Type = 'WIFI';
     const X_IG_Capabilities = '3brTv10=';
     const IOS_X_IG_Capabilities = '36r/F38=';
@@ -72,7 +72,7 @@ class Constants
         ],
         [
             'name'  => 'SUPPORTED_BETA_SDK_VERSIONS',
-            'value' => '183.0-beta,184.0-beta,185.0-beta',
+            'value' => '184.0-beta,185.0-beta,186.0-beta',
         ],
         [
             'name'  => 'FACE_TRACKER_VERSION',

@@ -1,3 +1,12 @@
+# Stable release v22.11.1
+## Date: 22/06/2024
+
+### Updates and fixes
+
+- **Constants:** Update to 336.0.0.35.90
+- **Internal:** Update `_getPhotoUploadParams()`
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v22.11.0
 ## Date: 21/06/2024
 

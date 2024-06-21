@@ -1905,13 +1905,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '20d33913537bc53f05ac2c5952f2862c0aeb83c078b8a534860e6d4794f5502a')
+                ->addPost('query_hash', '1faf9e9aa8e94261bb00749d471da9a9fd8e7055216bcce6ddbe09539c71f43f')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '685c262c7dbf267e6269526751b9958fc6e4515e309fcc150ff9f299b5a57f74')
+                ->addPost('query_hash', '291d7379ecc5de34b88a04414a075fadaa83657e68da6930bde401c678b33f74')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -4069,7 +4069,7 @@ class Internal extends RequestCollection
         $result = [
             'upload_id'         => (string) $internalMetadata->getUploadId(),
             'retry_context'     => json_encode($this->_getRetryContext()),
-            'image_compression' => '{"lib_name":"moz","lib_version":"3.1.m","quality":"93"}',
+            'image_compression' => ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) ? '{"lib_name":"libwebp","lib_version":"26","quality":"96"}' : '{"lib_name":"moz","lib_version":"3.1.m","quality":"93"}',
             'xsharing_user_ids' => json_encode([]),
             'media_type'        => $internalMetadata->getVideoDetails() !== null
                 ? (string) Response\Model\Item::VIDEO

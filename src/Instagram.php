@@ -2675,18 +2675,60 @@ class Instagram implements ExperimentsInterface
         $method = 'phone')
     {
         $this->_setUser('regular', $username, 'nopass');
-        $response = $this->getHomeTemplate();
+        $response = $this->processLoginClientDataAndRedirect();
         $responseArr = $response->asArray();
         $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
         $firstDataBlok = null;
+        $firstDataBlokBack = null;
+        $secondDataBlok = null;
+        $thirdDataBlok = null;
+        $fourthDataBlock = null;
         foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'context_data')) {
+            if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
                 $firstDataBlok = $mainBlok;
+            }
+            if (str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
+                $firstDataBlokBack = $mainBlok;
+            }
+            if (str_contains($mainBlok, 'typeahead_id') && str_contains($mainBlok, 'text_input_id') && str_contains($mainBlok, 'text_component_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
+                $secondDataBlok = $mainBlok;
+            }
+            if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
+                $thirdDataBlok = $mainBlok;
+            }
+            if (str_contains($mainBlok, 'context_data')) {
+                $fourthDataBlock = $mainBlok;
+            }
+            if ($firstDataBlok !== null && $secondDataBlok !== null) {
+                break;
+            } elseif ($firstDataBlok !== null && $secondDataBlok !== null && $thirdDataBlok !== null) {
+                break;
             }
         }
 
-        $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
-        $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
+        if ($firstDataBlok === null) {
+            $firstDataBlok = $firstDataBlokBack;
+            $this->bloksInfo['INTERNAL__latency_qpl_instance_id'] = [0, 0];
+            $this->bloksInfo['INTERNAL__latency_qpl_marker_id'] = [0, 0];
+            $this->bloksInfo['INTERNAL_INFRA_THEME'] = 'HARMONIZATION_F';
+        } else {
+            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL__latency_qpl_instance_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $firstMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($firstMap, $this->bloksInfo);
+        }
+
+        $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
+        $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL_INFRA_THEME'), 0, -2);
 
         foreach ($offsets as $offset) {
             if (isset($parsed[$offset])) {
@@ -2696,8 +2738,40 @@ class Instagram implements ExperimentsInterface
             }
         }
 
-        $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-        $this->bloksInfo = array_merge($this->bloksInfo, $map);
+        $secondMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+        $this->bloksInfo = array_merge($secondMap, $this->bloksInfo);
+
+        if ($thirdDataBlok !== null) {
+            $parsed = $this->bloks->parseBlok($thirdDataBlok, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL_INFRA_screen_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $thirdMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($thirdMap, $this->bloksInfo);
+        }
+
+        if ($fourthDataBlock !== null) {
+            $parsed = $this->bloks->parseBlok($fourthDataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $fourthMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($fourthMap, $this->bloksInfo);
+        }
 
         $waterfallId = \InstagramAPI\Signatures::generateUUID();
         $response = $this->request('bloks/apps/com.bloks.www.caa.ar.search/')
@@ -2711,7 +2785,7 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     //'offline_experiment_group'          => $this->settings->get('offline_experiment'),
-                    'context_data'                      => $this->bloksInfo['context_data'],
+                    //'context_data'                      => $this->bloksInfo['context_data'],
                     'back_nav_action'                   => 'BACK',
                     'is_platform_login'                 => 0,
                     'INTERNAL_INFRA_screen_id'          => 'CAA_ACCOUNT_RECOVERY_SEARCH',
@@ -2732,7 +2806,7 @@ class Instagram implements ExperimentsInterface
             if (str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id')) {
                 $firstDataBlok = $mainBlok;
             }
-            if (str_contains($mainBlok, 'context_data')) {
+            if (str_contains($mainBlok, 'context_data') && str_contains($mainBlok, 'access_flow_version')) {
                 $secondDataBlok = $mainBlok;
             }
         }
@@ -2749,7 +2823,7 @@ class Instagram implements ExperimentsInterface
         }
 
         $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-        $this->bloksInfo = array_merge($this->bloksInfo, $map);
+        $this->bloksInfo = array_merge($map, $this->bloksInfo);
 
         $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
         $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
@@ -2763,33 +2837,47 @@ class Instagram implements ExperimentsInterface
         }
 
         $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-        $this->bloksInfo = array_merge($this->bloksInfo, $map);
+        $this->bloksInfo = array_merge($map, $this->bloksInfo);
 
         $response = $this->request('bloks/apps/com.bloks.www.caa.ar.search.async/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->addPost('params', json_encode([
                 'client_input_params'           => [
-                    'text_input_id'             => isset($this->bloksInfo['text_input_id']) ? $this->bloksInfo['text_input_id'] : '',
-                    'ig_android_qe_device_id'   => isset($this->bloksInfo['ig_android_qe_device_id']) ? $this->bloksInfo['ig_android_qe_device_id'] : '',
-                    'ig_oauth_token'            => [],
-                    'is_whatsapp_installed'     => 0,
-                    'sfdid'                     => isset($this->bloksInfo['sfdid']) ? $this->bloksInfo['sfdid'] : '',
-                    'fetched_email_token_list'  => (object) [],
-                    'search_query'              => $username,
-                    'fetched_email_list'        => [],
-                    'sso_accounts_auth_data'    => [],
-                    'android_build_type'        => 'release',
-                    'encrypted_msisdn'          => '',
-                    'identification_error_num'  => 0,
+                    'text_input_id'                 => '',
+                    'flash_call_permissions_status' => [
+                        'READ_PHONE_STATE'  => 'GRANTED',
+                        'READ_CALL_LOG'     => 'GRANTED',
+                        'CALL_PHONE'        => 'GRANTED',
+                    ],
+                    'was_headers_prefill_available'     => 0,
+                    'sfdid'                             => isset($this->bloksInfo['sfdid']) ? $this->bloksInfo['sfdid'] : '',
+                    'fetched_email_token_list'          => (object) [],
+                    'search_query'                      => $username,
+                    'android_build_type'                => 'release',
+                    'accounts_list'                     => (object) [],
+                    'ig_android_qe_device_id'           => $this->uuid,
+                    'ig_oauth_token'                    => [],
+                    'is_whatsapp_installed'             => 0,
+                    'lois_settings'                     => [
+                        'lara_override' => '',
+                        'lois_token'    => '',
+                    ],
+                    'was_headers_prefill_used'      => 0,
+                    'headers_infra_flow_id'         => '',
+                    'fetched_email_list'            => [],
+                    'sso_accounts_auth_data'        => [],
+                    'encrypted_msisdn'              => '',
                 ],
                 'server_params'         => [
                     'event_request_id'                  => isset($this->bloksInfo['event_request_id']) ? $this->bloksInfo['event_request_id'] : '',
+                    'is_from_logged_out'                => 0,
+                    'layered_homepage_experiment_group' => null,
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    'access_flow_version'               => 'F2_FLOW',
                     'context_data'                      => $this->bloksInfo['context_data'],
                     'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'is_platform_login'                 => 0,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2803,90 +2891,164 @@ class Instagram implements ExperimentsInterface
         $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
         $firstDataBlok = null;
         foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id') && str_contains($mainBlok, 'context_data') && str_contains($mainBlok, 'back_nav_action')) {
+            if (str_contains($mainBlok, 'context_data') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
                 $firstDataBlok = $mainBlok;
             }
         }
 
-        $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
-        $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
+        if ($firstDataBlok !== null) {
+            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
 
-        foreach ($offsets as $offset) {
-            if (isset($parsed[$offset])) {
-                $parsed = $parsed[$offset];
-            } else {
-                break;
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
             }
+
+            $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($this->bloksInfo, $map);
         }
 
-        $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-        $this->bloksInfo = array_merge($this->bloksInfo, $map);
-
-        $response = $this->request('bloks/apps/com.bloks.www.caa.ar.initiate_view/')
-            ->setNeedsAuth(false)
-            ->setSignedPost(false)
-            ->addPost('params', json_encode([
-                'client_input_params'           => [
-                    'device_id'             => $this->device_id,
-                    'machine_id'            => $this->settings->get('mid'),
-                ],
-                'server_params'         => [
-                    'context_data'                      => $this->bloksInfo['context_data'],
-                    'back_nav_action'                   => 'BACK',
-                    'device_id'                         => $this->device_id,
-                    'family_device_id'                  => $this->phone_id,
-                    'waterfall_id'                      => $this->bloksInfo['waterfall_id'],
-                    'INTERNAL_INFRA_screen_id'          => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
-                    'is_platform_login'                 => 0,
-                ],
-            ]))
-            ->addPost('bk_client_context', json_encode([
-                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
-                'styles_id'     => 'instagram',
-            ]))
-            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
-            ->getResponse(new Response\GenericResponse());
-
-        $responseArr = $response->asArray();
-        $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
-        $firstDataBlok = null;
         $secondDataBlok = null;
         foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'context_data')) {
-                $firstDataBlok = $mainBlok;
-            }
-            if (str_contains($mainBlok, 'logged_in_identifier')) {
+            if (str_contains($mainBlok, 'cuid')) {
                 $secondDataBlok = $mainBlok;
             }
         }
 
-        $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
-        $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
+        if ($secondDataBlok !== null) {
+            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'cuid'), 0, -2);
 
-        foreach ($offsets as $offset) {
-            if (isset($parsed[$offset])) {
-                $parsed = $parsed[$offset];
-            } else {
-                break;
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($map, $this->bloksInfo);
+        }
+
+        $secondDataBlok = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'lookup_query')) {
+                $secondDataBlok = $mainBlok;
             }
         }
 
-        $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-        $this->bloksInfo = array_merge($this->bloksInfo, $map);
+        if ($secondDataBlok !== null) {
+            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'lookup_query'), 0, -2);
 
-        $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
-        $offsets = array_slice($this->bloks->findOffsets($parsed, 'logged_in_identifier'), 0, -2);
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
 
-        foreach ($offsets as $offset) {
-            if (isset($parsed[$offset])) {
-                $parsed = $parsed[$offset];
-            } else {
-                break;
+            $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($map, $this->bloksInfo);
+
+            $keysArray = $this->bloksInfo['account'][0];
+            $valuesArray = $this->bloksInfo['account'][1];
+
+            $this->bloksInfo = array_merge($this->bloksInfo, $this->bloks->recursiveArrayMerge($keysArray, $valuesArray));
+        }
+
+        if (!isset($this->bloksInfo['cuid'])) {
+            throw new \InstagramAPI\Exception\InstagramException('Something went wrong, try again later.');
+        }
+
+        $response = $this->request('bloks/apps/com.bloks.www.caa.ar.auth_method.async/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'lois_settings'                     => [
+                        'lara_override' => '',
+                        'lois_token'    => '',
+                    ],
+                    'android_build_type'            => 'release',
+                ],
+                'server_params'         => [
+                    'is_from_logged_out'                    => 0,
+                    'layered_homepage_experiment_group'     => null,
+                    'device_id'                             => $this->device_id,
+                    'waterfall_id'                          => $this->bloksInfo['waterfall_id'],
+                    'machine_id'                            => $this->settings->get('mid'),
+                    'INTERNAL__latency_qpl_instance_id'     => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                    'is_platform_login'                     => 0,
+                    'context_data'                          => $this->bloksInfo['context_data'],
+                    'auth_method'                           => 'push_to_session',
+                    'INTERNAL__latency_qpl_marker_id'       => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
+                    'family_device_id'                      => $this->phone_id,
+                    'offline_experiment_group'              => 'caa_iteration_v3_perf_ig_4',
+                    'is_feta_account'                       => 0,
+                    'INTERNAL_INFRA_THEME'                  => 'harm_f,default,harm_f',
+                    'is_auth_method_rejected'               => 1,
+                    'access_flow_version'                   => 'F2_FLOW',
+                    'account'                               => [
+                        'foa_sso_data'                  => null,
+                        'lara_auth_method'              => 'push_to_session',
+                        'cuid'                          => $this->bloksInfo['cuid'],
+                        'is_vetted_device'              => 0,
+                        'name'                          => $this->bloksInfo['name'],
+                        'lookup_type'                   => 'username',
+                        'contactpoints'                 => [
+                            'data'  => [
+                                [
+                                    'type'      => 'email',
+                                    'display'   => json_decode('"'.array_unique($this->bloks->findValueWithSubstringRecursive($this->bloksInfo, '****'), SORT_REGULAR)[0][0].'"'),
+                                    'id'        => $this->bloksInfo['lookup_query'],
+                                ],
+                            ],
+                        ],
+                        'profile_pic_url'               => stripslashes(stripslashes($this->bloksInfo['profile_pic_url'])),
+                        'lookup_query'                  => $this->bloksInfo['lookup_query'],
+                    ],
+                    'is_from_logged_in_switcher'        => 0,
+                    'qe_device_id'                      => $this->uuid,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $firstDataBlok = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'context_data')) {
+                $firstDataBlok = $mainBlok;
             }
         }
 
-        $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-        $this->bloksInfo = array_merge($this->bloksInfo, $map);
+        if ($firstDataBlok !== null) {
+            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($this->bloksInfo, $map);
+        }
 
         return $this->request('bloks/apps/com.bloks.www.caa.ar.auth_option_selection.async/')
             ->setNeedsAuth(false)
@@ -2894,8 +3056,12 @@ class Instagram implements ExperimentsInterface
             ->addPost('params', json_encode([
                 'client_input_params'           => [
                     'emails'                                => [],
-                    'selected_xapp_contactpoint_index'      => -1,
+                    'selected_xapp_contactpoint_index'      => null,
                     'auth_option'                           => $method,
+                    'lois_settings'                         => [
+                        'lara_override' => '',
+                        'lois_token'    => '',
+                    ],
                     'tokens'                                => [],
                     'machine_id'                            => $this->settings->get('mid'),
                     'selected_phone_number_index'           => -1,
@@ -2903,17 +3069,25 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     'event_request_id'                  => $this->bloksInfo['event_request_id'],
-                    'context_data'                      => $this->bloksInfo['context_data'],
-                    'cuid'                              => $this->bloksInfo['logged_in_identifier'],
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'family_device_id'                  => $this->phone_id,
+                    'is_from_logged_out'                => 0,
+                    'is_device_vetted'                  => 0,
+                    'layered_homepage_experiment_group' => null,
+                    'cuid'                              => $this->bloksInfo['cuid'],
                     'device_id'                         => $this->device_id,
                     'waterfall_id'                      => $this->bloksInfo['waterfall_id'],
-                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'is_oauth_eligible'                 => 0,
-                    'auth_options'                      => ['phone', 'password'],
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                    'is_multiple_account_flow'          => 0,
                     'is_platform_login'                 => 0,
+                    'context_data'                      => $this->bloksInfo['context_data'],
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
+                    'family_device_id'                  => $this->phone_id,
+                    'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f,default,harm_f',
+                    'auth_options'                      => ['push_to_session', 'email', 'password'],
+                    'access_flow_version'               => 'F2_FLOW',
+                    'is_from_logged_in_switcher'        => 0,
+                    'qe_device_id'                      => $this->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([

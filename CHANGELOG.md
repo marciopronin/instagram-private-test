@@ -1,3 +1,15 @@
+# Stable release v22.12.0
+## Date: 22/06/2024
+
+### New features
+
+- **Bloks:** Add `recursiveArrayMerge()`
+- **Bloks:** Add `findValueWithSubstringRecursive()`
+
+### Updates and fixes
+
+- **Instagram:** Update `getForgotPasswordLink()`
+
 # Stable release v22.11.1
 ## Date: 22/06/2024
 

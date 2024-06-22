@@ -220,6 +220,44 @@ class Bloks
         return $result;
     }
 
+    public function recursiveArrayMerge(
+        array $array1,
+        array $array2)
+    {
+        $merged = $array1;
+
+        foreach ($array2 as $key => $value) {
+            if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
+                $merged[$key] = $this->recursiveArrayMerge($merged[$key], $value);
+            } else {
+                $merged[$key] = $value;
+            }
+        }
+
+        return $merged;
+    }
+
+    public function findValueWithSubstringRecursive(
+        $array,
+        $substring)
+    {
+        $results = [];
+
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                // Recursive call for sub-array
+                $subResults = $this->findValueWithSubstringRecursive($value, $substring);
+                if (!empty($subResults)) {
+                    $results = array_merge($results, $subResults);
+                }
+            } elseif (strpos($value, $substring) !== false) {
+                $results[] = [$value];
+            }
+        }
+
+        return $results;
+    }
+
     public function cleanData(
         $array)
     {

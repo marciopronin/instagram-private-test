@@ -1969,11 +1969,8 @@ class Instagram implements ExperimentsInterface
 
             if (self::$useBloksLogin) {
                 //$this->loginAttemptCount = 1;
-                try {
-                    $response = $this->getHomeTemplate();
-                } catch (\Exception $e) {
-                    $response = $this->processLoginClientDataAndRedirect();
-                }
+                //$response = $this->getHomeTemplate();
+                $response = $this->processLoginClientDataAndRedirect();
                 $responseArr = $response->asArray();
                 $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
                 $firstDataBlok = null;

@@ -1,3 +1,13 @@
+# Stable release v22.12.4
+## Date: 28/06/2024
+
+### Updates and fixes
+
+- **Discover:** Update `getExploreFeed()`
+- **Direct:** Update `getInbox()`
+- **Constants:** Update to 337.0.0.35.102
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v22.12.3
 ## Date: 27/06/2024
 

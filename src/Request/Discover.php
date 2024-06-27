@@ -38,8 +38,9 @@ class Discover extends RequestCollection
             ->addHeader('X-IG-Prefetch-Request', 'foreground')
             ->addParam('is_prefetch', $isPrefetch)
             //->addParam('omit_cover_media', true)
-            ->addParam('is_ptr', false)
+            ->addParam('is_ptr', 'false')
             ->addParam('reels_configuration', $this->ig->getExperimentParam('25215', 13) === null ? 'hide_hero' : 'default')
+            ->addParam('is_nonpersonalized_explore', 'false')
             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
             ->addParam('session_id', $sessionId);
         //->addParam('paging_token', json_encode((Object)[]));

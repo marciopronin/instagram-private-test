@@ -8,6 +8,7 @@ use InstagramAPI\Exception\ThrottledException;
 use InstagramAPI\Exception\UploadFailedException;
 use InstagramAPI\Request\Metadata\Internal as InternalMetadata;
 use InstagramAPI\Response;
+use InstagramAPI\Signatures;
 use InstagramAPI\Utils;
 
 /**
@@ -51,7 +52,9 @@ class Direct extends RequestCollection
 
         $request = $this->ig->request('direct_v2/inbox/')
             ->addParam('persistentBadging', 'true')
-            ->addParam('visual_message_return_type', 'unseen');
+            ->addParam('visual_message_return_type', 'unseen')
+            ->addParam('eb_device_id', '0') // 0x2081091D005B1C12
+            ->addPatam('igd_request_log_tracking_id', Signatures::generateUUID());
 
         $limit = $this->ig->getExperimentParam('59489', 7, 0);
         if ($limit <= 0) {
@@ -1410,8 +1413,9 @@ class Direct extends RequestCollection
         array $options = [])
     {
         return $this->_sendDirectItem('live', $recipients, array_merge($options, [
-            'broadcast_id' => $broadcastId,
-        ]));
+            'broadcast_id'      => $broadcastId,
+            'send_attribution'  => 'live_broadcast',
+        ]), true);
     }
 
     /**
@@ -1628,6 +1632,7 @@ class Direct extends RequestCollection
      *                           "video" uses "client_context", "mutation_token", "upload_id" and "video_result";
      *                           "links" uses "client_context", "mutation_token", "link_text" and "link_urls".
      *                           "live" uses "client_context", "mutation_token" and "text".
+     * @param mixed  $signedPost
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1637,12 +1642,10 @@ class Direct extends RequestCollection
     protected function _sendDirectItem(
         $type,
         array $recipients,
-        array $options = [])
+        array $options = [],
+        $signedPost = false)
     {
         $recipients = $this->_prepareRecipients($recipients, false);
-
-        // Most requests are unsigned, but some use signing by overriding this.
-        $signedPost = false;
 
         // Handle the request...
         switch ($type) {
@@ -1785,7 +1788,9 @@ class Direct extends RequestCollection
                 if (!isset($options['broadcast_id'])) {
                     throw new \InvalidArgumentException('No broadcast_id provided.');
                 }
-                $request->addPost('broadcast_id', $options['broadcast_id']);
+                $request->addPost('broadcast_id', $options['broadcast_id'])
+                        ->addPost('btt_dual_send', 'false')
+                        ->addPost('is_ae_dual_send', 'false');
                 // Set text if provided.
                 if (isset($options['text']) && strlen($options['text'])) {
                     $request->addPost('text', $options['text']);

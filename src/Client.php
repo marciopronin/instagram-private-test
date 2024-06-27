@@ -1418,25 +1418,25 @@ class Client
             if (strpos($request->getUri(), sprintf('/users/%s/info', $this->_parent->account_id)) !== false) {
                 $this->_parent->settings->set('salt_ids', '');
             }
-            if (strpos($request->getUri(), 'discover/topical_explore', $this->_parent->account_id) !== false) {
+            if (strpos($request->getUri(), 'discover/topical_explore') !== false) {
                 $this->_parent->settings->set('salt_ids', '332008142,332009826,332019700,332020325');
             }
-            if (strpos($request->getUri(), 'scores/bootstrap', $this->_parent->account_id) !== false) {
+            if (strpos($request->getUri(), 'scores/bootstrap') !== false) {
                 $this->_parent->settings->set('salt_ids', '220137859');
             }
-            if (strpos($request->getUri(), 'feed/user', $this->_parent->account_id) !== false) {
+            if (strpos($request->getUri(), 'feed/user') !== false) {
                 $this->_parent->settings->set('salt_ids', '332017383,332014186,332009051,332006902,220137859');
             }
-            if (strpos($request->getUri(), 'fbsearch/register_recent_search_click', $this->_parent->account_id) !== false) {
+            if (strpos($request->getUri(), 'fbsearch/register_recent_search_click') !== false) {
                 $this->_parent->settings->set('salt_ids', '332017383,332014186,332009051,332006902');
             }
-            if (strpos($request->getUri(), '/info', $this->_parent->account_id) !== false) {
+            if (strpos($request->getUri(), '/info') !== false) {
                 $this->_parent->settings->set('salt_ids', '');
             }
-            if (strpos($request->getUri(), 'fbsearch/keyword_typeahead', $this->_parent->account_id) !== false) {
+            if (strpos($request->getUri(), 'fbsearch/keyword_typeahead') !== false) {
                 $this->_parent->settings->set('salt_ids', '220137859');
             }
-            if (strpos($request->getUri(), 'fbsearch/typeahead_stream', $this->_parent->account_id) !== false) {
+            if (strpos($request->getUri(), 'fbsearch/typeahead_stream') !== false) {
                 $this->_parent->settings->set('salt_ids', '220137859');
             }
             /*

@@ -1,3 +1,11 @@
+# Stable release v22.12.2
+## Date: 27/06/2024
+
+### Updates and fixes
+
+- **Client:** Update `_orderHeaders()`
+- **Client:** Update `api()`
+
 # Stable release v22.12.1
 ## Date: 24/06/2024
 

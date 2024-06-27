@@ -1400,11 +1400,46 @@ class Client
             $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = strval($this->totalTime);
             //$headers['set_headers']['X-MID'] = $this->getMid();
 
-            /*
-            if (strpos($request->getUri(), 'notifications/badge') !== false) {
-                $this->_parent->settings->set('salt_ids', $this->generateNewFlowId(1061163349));
+            if (strpos($request->getUri(), 'banyan/banyan') !== false) {
+                $this->_parent->settings->set('salt_ids', '332020310');
             }
-
+            if (strpos($request->getUri(), 'async_get_ndx_ig_steps') !== false) {
+                $this->_parent->settings->set('salt_ids', '220140399,332020310,974460658');
+            }
+            if (strpos($request->getUri(), 'feed/timeline') !== false) {
+                $this->_parent->settings->set('salt_ids', '220140399,332020310,974466465,974460658');
+            }
+            if (strpos($request->getUri(), 'feed/timeline') !== false) {
+                $this->_parent->settings->set('salt_ids', '220140399,332020310,974466465,974460658');
+            }
+            if (strpos($request->getUri(), 'media/blocked') !== false) {
+                $this->_parent->settings->set('salt_ids', '332020310,974466465');
+            }
+            if (strpos($request->getUri(), sprintf('/users/%s/info', $this->_parent->account_id)) !== false) {
+                $this->_parent->settings->set('salt_ids', '');
+            }
+            if (strpos($request->getUri(), 'discover/topical_explore', $this->_parent->account_id) !== false) {
+                $this->_parent->settings->set('salt_ids', '332008142,332009826,332019700,332020325');
+            }
+            if (strpos($request->getUri(), 'scores/bootstrap', $this->_parent->account_id) !== false) {
+                $this->_parent->settings->set('salt_ids', '220137859');
+            }
+            if (strpos($request->getUri(), 'feed/user', $this->_parent->account_id) !== false) {
+                $this->_parent->settings->set('salt_ids', '332017383,332014186,332009051,332006902,220137859');
+            }
+            if (strpos($request->getUri(), 'fbsearch/register_recent_search_click', $this->_parent->account_id) !== false) {
+                $this->_parent->settings->set('salt_ids', '332017383,332014186,332009051,332006902');
+            }
+            if (strpos($request->getUri(), '/info', $this->_parent->account_id) !== false) {
+                $this->_parent->settings->set('salt_ids', '');
+            }
+            if (strpos($request->getUri(), 'fbsearch/keyword_typeahead', $this->_parent->account_id) !== false) {
+                $this->_parent->settings->set('salt_ids', '220137859');
+            }
+            if (strpos($request->getUri(), 'fbsearch/typeahead_stream', $this->_parent->account_id) !== false) {
+                $this->_parent->settings->set('salt_ids', '220137859');
+            }
+            /*
             if (strpos($request->getUri(), 'media/configure') !== false) {
                 $this->_parent->settings->set('salt_ids', $this->generateFlowId(1061163349, 1));
             }
@@ -1700,6 +1735,9 @@ class Client
             'X-Bloks-Version-Id',
             'X-IG-WWW-Claim',
             'X-Bloks-Is-Prism-Enabled',
+            'X-Bloks-Prism-Button-Version',
+            'X-Bloks-Prism-Colors-Enabled',
+            'X-Bloks-Prism-Font-Enabled',
             'X-IG-Transfer-Encoding',
             'X-Bloks-Is-Layout-RTL',
             'X-IG-Device-ID',

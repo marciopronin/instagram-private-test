@@ -54,7 +54,7 @@ class Direct extends RequestCollection
             ->addParam('persistentBadging', 'true')
             ->addParam('visual_message_return_type', 'unseen')
             ->addParam('eb_device_id', '0') // 0x2081091D005B1C12
-            ->addPatam('igd_request_log_tracking_id', Signatures::generateUUID());
+            ->addParam('igd_request_log_tracking_id', Signatures::generateUUID());
 
         $limit = $this->ig->getExperimentParam('59489', 7, 0);
         if ($limit <= 0) {

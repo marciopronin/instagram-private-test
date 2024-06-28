@@ -1,3 +1,10 @@
+# Stable release v22.12.5
+## Date: 28/06/2024
+
+### Updates and fixes
+
+- **Direct:** Update `getInbox()`. Fixes typo.
+
 # Stable release v22.12.4
 ## Date: 28/06/2024
 

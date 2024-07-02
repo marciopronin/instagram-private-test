@@ -4450,6 +4450,10 @@ class Event extends RequestCollection
                     'clickpoint'    => 'button',
                     'dest_module'   => 'discover_people',
                 ],
+                [
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'search_typeahead',
+                ],
             ],
             'search_typeahead' => [
                 [

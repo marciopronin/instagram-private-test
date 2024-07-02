@@ -2939,6 +2939,19 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Get nav bar camera destination.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getNavBarCameraDestination()
+    {
+        return $this->ig->request('creatives/nav_bar_camera_destination/')
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Internal helper for marking story media items as seen.
      *
      * This is used by story-related functions in other request-collections!

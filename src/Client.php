@@ -277,22 +277,29 @@ class Client
      * @var array
      */
     protected $_mappedValues = [
-        'push/register'                 => null,
-        'launcher/mobileconfig'         => null,
-        'feed/timeline'                 => null,
-        'highlights_tray'               => null,
-        'media/blocked'                 => null,
-        'notifications/badge'           => null,
-        'scores/bootstrap'              => null,
-        'feed/user'                     => null,
-        'write_supported_capabilities'  => null,
-        '/users/'                       => null,
-        'share_to_fb_config'            => null,
-        'notes/get_notes'               => null,
-        'qp/batch_fetch'                => null,
-        'direct_v2/inbox'               => null,
-        'get_viewable_statuses'         => null,
-        'store_client_push_permissions' => null,
+        'push/register'                             => null,
+        //'launcher/mobileconfig'                   => null,
+        //'feed/timeline'                           => null,
+        'devices/ndx/api/async_get_ndx_ig_steps'    => null,
+        //'highlights_tray'                         => null,
+        'media/blocked'                             => null,
+        //'notifications/badge'                     => null,
+        //'feed/user'                               => null,
+        //'write_supported_capabilities'            => null,
+        //'/users/'                                 => null,
+        'share_to_fb_config'                        => null,
+        'notes/get_notes'                           => null,
+        'batch_fetch'                               => null,
+        'direct_v2/inbox'                           => null,
+        'get_viewable_statuses'                     => null,
+        'store_client_push_permissions'             => null,
+        'creatives/nav_bar_camera_destination'      => null,
+        'banyan/banyan'                             => null,
+        'nullstate_dynamic_sections'                => null,
+        'bootstrap/users'                           => null,
+        'keyword_typeahead'                         => null,
+        'typeahead_stream'                          => null,
+        'dual_tokens'                               => null,
     ];
 
     /**
@@ -306,9 +313,15 @@ class Client
             'feed/timeline',
             'feed/reels_tray',
             'notifications/badge',
-            'loom/fetch_config',
             'banyan/banyan',
+            // Second part
+            'share_to_fb_config',
+            'creatives/nav_bar_camera_destination',
+            '/info/',
+            'creatives/write_supported_capabilities',
+            'get_limited_interactions_reminder',
         ],
+        /*
         'launcher/mobileconfig' => [
             'devices/ndx/api/async_get_ndx_ig_steps',
             'feed/timeline',
@@ -325,12 +338,21 @@ class Client
             'scores/bootstrap',
             'media/blocked/',
             'write_supported_capabilities',
+
         ],
-        'highlights_tray' => [
+        */
+        'devices/ndx/api/async_get_ndx_ig_steps' => [
             'batch_fetch',
         ],
-        'media/blocked' => [
-            'user/share_to_fb_config',
+        'batch_fetch' => [
+            'media/blocked',
+        ],
+        'media/blocked/' => [
+            'push/register',
+        ],
+        /*
+        'highlights_tray' => [
+            'batch_fetch',
         ],
         'notifications/badge' => [
             'creator_info',
@@ -343,29 +365,64 @@ class Client
             'topical_explore',
         ],
         'write_supported_capabilities' => [
-            'direct_v2/inbox',
+            'direct_v2/inbox'
         ],
         '/users/' => [
             'get_viewable_statuses',
+
         ],
+        */
         'share_to_fb_config' => [
-            'has_interop_upgraded',
+            'accounts/get_presence_disabled',
+            'direct_v2/has_interop_upgraded',
+            'direct_v2/get_presence',
+            'direct_v2/inbox',
+            'direct_v2/async_get_pending_requests_preview',
+            'notes/get_notes',
         ],
         'notes/get_notes' => [
-            'get_presence_disabled',
+            'banyan/banyan',
         ],
-        'qp/batch_fetch' => [
-            'store_client_push_permissions',
+        'banyan/banyan'   => [
+            'clips/autoplay_configs',
+            'discover/topical_explore',
+            'batch_fetch',
+            'nullstate_dynamic_sections',
+            'recent_searches',
+        ],
+        'nullstate_dynamic_sections' => [
+            'bootstrap/users',
+            'typeahead_stream',
+            'keyword_typeahead',
+        ],
+        'bootstrap/users' => [
+            'keyword_typeahead',
+        ],
+        'typeahead_stream' => [
+            'typeahead_stream',
+            'keyword_typeahead',
+        ],
+        'keyword_typeahead' => [
+            'typeahead_stream',
         ],
         'direct_v2/inbox' => [
             'user_xposting_destination',
             'process_contact_point_signals',
         ],
+        /*
         'get_viewable_statuses' => [
-            'clips/discover',
+            'clips/discover'
         ],
+        */
         'store_client_push_permissions' => [
-            'banyan/banyan',
+            'batch_fetch',
+        ],
+        'creatives/nav_bar_camera_destination' => [
+            'store_client_push_permissions',
+            'injected_reels_media',
+        ],
+        'dual_tokens' => [
+            'graphql_www',
         ],
     ];
 
@@ -1364,15 +1421,17 @@ class Client
 
             if ($this->_parent->isSessionless !== true) {
                 if ($this->_parent->isLoginFlow) {
-                    if (!in_array($request->getUri()->getPath(), ['/api/v1/zr/dual_tokens/', '/api/v1/multiple_accounts/get_account_family/', '/api/v1/bloks/apps/com.bloks.www.caa.login.save-credentials/', '/api/v1/push/register/', '/api/v1/launcher/mobileconfig/'])) {
+                    if (!in_array($request->getUri()->getPath(), ['/api/v1/zr/dual_tokens/', '/api/v1/loom/fetch_config/', '/api/v1/multiple_accounts/get_account_family/', '/api/v1/business/eligibility/get_monetization_products_eligibility_data/', '/api/v1/creators/partner_program/get_monetization_products_gating/', '/api/v1/bloks/apps/com.bloks.www.caa.login.save-credentials/', '/api/v1/push/register/', '/api/v1/launcher/mobileconfig/'])) {
                         foreach ($this->_loginMap as $origin => $destination) {
                             foreach ($destination as $key => $value) {
                                 if (str_contains($request->getUri(), $value)) {
+                                    /*
                                     if ($origin === 'push/register' || $origin === 'launcher/mobileconfig') {
                                         if ($this->_mappedValues['push/register'] === null) {
                                             $this->_mappedValues['push/register'] = $this->_mappedValues['launcher/mobileconfig'];
                                         }
                                     }
+                                    */
                                     $headers['set_headers']['IG-U-RUR'] = $this->_mappedValues[$origin];
                                     break 2;
                                 }

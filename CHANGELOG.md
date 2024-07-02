@@ -1,3 +1,25 @@
+# Stable release v22.13.0
+## Date: 01/07/2024
+
+### New features
+
+- **Internal:** Add `getNavBarCameraDestination()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Story:** Update `markMediaSeen()`
+- *+Event:** Update `_validateNavigationPath()`
+
+# Stable release v22.12.6
+## Date: 28/06/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Client:** Update `_mappedValues` and `_loginMap`
+- **Client:** Update `api()`
+
 # Stable release v22.12.5
 ## Date: 28/06/2024
 

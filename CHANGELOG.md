@@ -1,3 +1,10 @@
+# Stable release v22.13.1
+## Date: 03/07/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `getForgotPasswordLink()`
+
 # Stable release v22.13.0
 ## Date: 01/07/2024
 
@@ -9,7 +16,7 @@
 
 - **Instagram:** Update `_login()`
 - **Story:** Update `markMediaSeen()`
-- *+Event:** Update `_validateNavigationPath()`
+- **Event:** Update `_validateNavigationPath()`
 
 # Stable release v22.12.6
 ## Date: 28/06/2024

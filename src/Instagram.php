@@ -2785,21 +2785,99 @@ class Instagram implements ExperimentsInterface
         }
 
         $waterfallId = \InstagramAPI\Signatures::generateUUID();
+        $response = $this->request('bloks/apps/com.bloks.www.caa.ar.search.prefill.async/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'username_input'                    => '',
+                    'device_id'                         => $this->device_id,
+                    'lois_settings'                     => [
+                        'lara_override' => '',
+                        'lois_token'    => '',
+                    ],
+                    'qe_device_id'      => $this->uuid,
+                ],
+                'server_params'         => [
+                    'is_from_logged_out'                => 0,
+                    'layered_homepage_experiment_group' => null,
+                    'device_id'                         => $this->device_id,
+                    'waterfall_id'                      => $waterfallId,
+                    'event_source'                      => 'login_home_page',
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                    'should_push_screen'                => 1,
+                    'is_platform_login'                 => 0,
+                    'back_nav_action'                   => 'BACK',
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
+                    'cds_screen_animation_type'         => 'default',
+                    'family_device_id'                  => $this->phone_id,
+                    'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f',
+                    'access_flow_version'               => 'F2_FLOW',
+                    'is_from_logged_in_switcher'        => 0,
+                    'current_step'                      => 'LOGIN',
+                    'qe_device_id'                      => $this->uuid,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $firstDataBlok = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'context_data')) {
+                $firstDataBlok = $mainBlok;
+            }
+        }
+
+        if ($firstDataBlok !== null) {
+            $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
+            $offsets = array_slice($this->bloks->findOffsets($parsed, 'context_data'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->bloksInfo = array_merge($this->bloksInfo, $map);
+        }
+
         $response = $this->request('bloks/apps/com.bloks.www.caa.ar.search/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->addPost('params', json_encode([
                 'client_input_params'           => [
-                    'device_id'             => $this->device_id,
-                    'family_device_id'      => $this->phone_id,
-                    'waterfall_id'          => $waterfallId,
+                    'device_id'                         => $this->device_id,
+                    'family_device_id'                  => $this->phone_id,
+                    'lois_settings'                     => [
+                        'lara_override' => '',
+                        'lois_token'    => '',
+                    ],
+                    'waterfall_id'      => $waterfallId,
+                    'qe_device_id'      => $this->uuid,
                 ],
                 'server_params'         => [
-                    //'offline_experiment_group'          => $this->settings->get('offline_experiment'),
-                    //'context_data'                      => $this->bloksInfo['context_data'],
+                    'is_from_logged_out'                => 0,
+                    'context_data'                      => $this->bloksInfo['context_data'],
                     'back_nav_action'                   => 'BACK',
-                    'is_platform_login'                 => 0,
+                    'family_device_id'                  => $this->phone_id,
+                    'device_id'                         => $this->device_id,
+                    'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
+                    'waterfall_id'                      => $waterfallId,
                     'INTERNAL_INFRA_screen_id'          => 'CAA_ACCOUNT_RECOVERY_SEARCH',
+                    'access_flow_version'               => 'F2_FLOW',
+                    'qe_device_id'                      => $this->uuid,
+                    'is_platform_login'                 => 0,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2884,11 +2962,19 @@ class Instagram implements ExperimentsInterface
                     'event_request_id'                  => isset($this->bloksInfo['event_request_id']) ? $this->bloksInfo['event_request_id'] : '',
                     'is_from_logged_out'                => 0,
                     'layered_homepage_experiment_group' => null,
-                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
-                    'access_flow_version'               => 'F2_FLOW',
+                    'device_id'                         => $this->device_id,
+                    'waterfall_id'                      => $waterfallId,
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                    'is_platform_login'                 => 0,
                     'context_data'                      => $this->bloksInfo['context_data'],
                     'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                    'family_device_id'                  => $this->phone_id,
+                    'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f', //$this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    'access_flow_version'               => 'F2_FLOW',
+                    'is_from_logged_in_switcher'        => 0,
+                    'qe_device_id'                      => $this->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2974,9 +3060,57 @@ class Instagram implements ExperimentsInterface
             $this->bloksInfo = array_merge($this->bloksInfo, $this->bloks->recursiveArrayMerge($keysArray, $valuesArray));
         }
 
+        /*
         if (!isset($this->bloksInfo['cuid'])) {
             throw new \InstagramAPI\Exception\InstagramException('Something went wrong, try again later.');
         }
+        */
+
+        $serverParams = [
+            'event_request_id'                  => $this->bloksInfo['event_request_id'],
+            'is_from_logged_out'                => 0,
+            'layered_homepage_experiment_group' => null,
+            'device_id'                         => $this->device_id,
+            'waterfall_id'                      => $this->bloksInfo['waterfall_id'],
+            'machine_id'                        => $this->settings->get('mid'),
+            'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+            'is_platform_login'                 => 0,
+            'context_data'                      => $this->bloksInfo['context_data'],
+            'auth_method'                       => 'push_to_session',
+            'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
+            'family_device_id'                  => $this->phone_id,
+            'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
+            'is_feta_account'                   => 0,
+            'INTERNAL_INFRA_THEME'              => 'harm_f,default,harm_f',
+            'is_auth_method_rejected'           => 0,
+            'access_flow_version'               => 'F2_FLOW',
+            'is_from_logged_in_switcher'        => 0,
+            'qe_device_id'                      => $this->uuid,
+        ];
+
+        /*
+        if (isset($this->bloksInfo['cuid'])) {
+            $serverParams['account'] = [
+                'foa_sso_data'                  => null,
+                'lara_auth_method'              => 'push_to_session',
+                'cuid'                          => $this->bloksInfo['cuid'],
+                'is_vetted_device'              => 0,
+                'name'                          => $this->bloksInfo['name'],
+                'lookup_type'                   => 'username',
+                'contactpoints'                 => [
+                    'data'  => [
+                        [
+                            'type'      => 'email',
+                            'display'   => json_decode('"' . array_unique($this->bloks->findValueWithSubstringRecursive($this->bloksInfo, '****'), SORT_REGULAR)[0][0] . '"'),
+                            'id'        => $this->bloksInfo['lookup_query'],
+                        ]
+                    ]
+                ],
+                'profile_pic_url'               => stripslashes(stripslashes($this->bloksInfo['profile_pic_url'])),
+                'lookup_query'                  => $this->bloksInfo['lookup_query'],
+            ];
+        }
+            */
 
         $response = $this->request('bloks/apps/com.bloks.www.caa.ar.auth_method.async/')
             ->setNeedsAuth(false)
@@ -2987,47 +3121,10 @@ class Instagram implements ExperimentsInterface
                         'lara_override' => '',
                         'lois_token'    => '',
                     ],
+                    'machine_id'                    => $this->settings->get('mid'),
                     'android_build_type'            => 'release',
                 ],
-                'server_params'         => [
-                    'is_from_logged_out'                    => 0,
-                    'layered_homepage_experiment_group'     => null,
-                    'device_id'                             => $this->device_id,
-                    'waterfall_id'                          => $this->bloksInfo['waterfall_id'],
-                    'machine_id'                            => $this->settings->get('mid'),
-                    'INTERNAL__latency_qpl_instance_id'     => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'is_platform_login'                     => 0,
-                    'context_data'                          => $this->bloksInfo['context_data'],
-                    'auth_method'                           => 'push_to_session',
-                    'INTERNAL__latency_qpl_marker_id'       => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'family_device_id'                      => $this->phone_id,
-                    'offline_experiment_group'              => 'caa_iteration_v3_perf_ig_4',
-                    'is_feta_account'                       => 0,
-                    'INTERNAL_INFRA_THEME'                  => 'harm_f,default,harm_f',
-                    'is_auth_method_rejected'               => 1,
-                    'access_flow_version'                   => 'F2_FLOW',
-                    'account'                               => [
-                        'foa_sso_data'                  => null,
-                        'lara_auth_method'              => 'push_to_session',
-                        'cuid'                          => $this->bloksInfo['cuid'],
-                        'is_vetted_device'              => 0,
-                        'name'                          => $this->bloksInfo['name'],
-                        'lookup_type'                   => 'username',
-                        'contactpoints'                 => [
-                            'data'  => [
-                                [
-                                    'type'      => 'email',
-                                    'display'   => json_decode('"'.array_unique($this->bloks->findValueWithSubstringRecursive($this->bloksInfo, '****'), SORT_REGULAR)[0][0].'"'),
-                                    'id'        => $this->bloksInfo['lookup_query'],
-                                ],
-                            ],
-                        ],
-                        'profile_pic_url'               => stripslashes(stripslashes($this->bloksInfo['profile_pic_url'])),
-                        'lookup_query'                  => $this->bloksInfo['lookup_query'],
-                    ],
-                    'is_from_logged_in_switcher'        => 0,
-                    'qe_device_id'                      => $this->uuid,
-                ],
+                'server_params'         => $serverParams,
             ]))
             ->addPost('bk_client_context', json_encode([
                 'bloks_version' => Constants::BLOCK_VERSIONING_ID,
@@ -3060,6 +3157,14 @@ class Instagram implements ExperimentsInterface
             $map = $this->bloks->map_arrays($parsed[0], $parsed[1]);
             $this->bloksInfo = array_merge($this->bloksInfo, $map);
         }
+
+        $re = sprintf('/"%s\\\\",\s\\\\"(\d+)\\\\"/m', $username);
+        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+        if (!$matches) {
+            throw new \InstagramAPI\Exception\InstagramException('Something went wrong, try again later.');
+        }
+        $this->bloksInfo['cuid'] = $matches[0][1];
 
         return $this->request('bloks/apps/com.bloks.www.caa.ar.auth_option_selection.async/')
             ->setNeedsAuth(false)

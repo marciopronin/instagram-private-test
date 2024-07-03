@@ -3068,7 +3068,6 @@ class Instagram implements ExperimentsInterface
 
         $serverParams = [
             'event_request_id'                  => $this->bloksInfo['event_request_id'],
-            'is_from_logged_out'                => 0,
             'layered_homepage_experiment_group' => null,
             'device_id'                         => $this->device_id,
             'waterfall_id'                      => $this->bloksInfo['waterfall_id'],
@@ -3076,13 +3075,13 @@ class Instagram implements ExperimentsInterface
             'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
             'is_platform_login'                 => 0,
             'context_data'                      => $this->bloksInfo['context_data'],
-            'auth_method'                       => 'push_to_session',
+            'auth_method'                       => $method,
             'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
             'family_device_id'                  => $this->phone_id,
             'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
             'is_feta_account'                   => 0,
             'INTERNAL_INFRA_THEME'              => 'harm_f,default,harm_f',
-            'is_auth_method_rejected'           => 0,
+            'is_auth_method_rejected'           => 1,
             'access_flow_version'               => 'F2_FLOW',
             'is_from_logged_in_switcher'        => 0,
             'qe_device_id'                      => $this->uuid,
@@ -3121,7 +3120,6 @@ class Instagram implements ExperimentsInterface
                         'lara_override' => '',
                         'lois_token'    => '',
                     ],
-                    'machine_id'                    => $this->settings->get('mid'),
                     'android_build_type'            => 'release',
                 ],
                 'server_params'         => $serverParams,
@@ -3137,7 +3135,7 @@ class Instagram implements ExperimentsInterface
         $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
         $firstDataBlok = null;
         foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'context_data')) {
+            if (str_contains($mainBlok, 'context_data') && str_contains($mainBlok, $method)) {
                 $firstDataBlok = $mainBlok;
             }
         }
@@ -3178,8 +3176,8 @@ class Instagram implements ExperimentsInterface
                         'lara_override' => '',
                         'lois_token'    => '',
                     ],
-                    'tokens'                                => [],
                     'machine_id'                            => $this->settings->get('mid'),
+                    'tokens'                                => [],
                     'selected_phone_number_index'           => -1,
                     'android_build_type'                    => 'release',
                 ],

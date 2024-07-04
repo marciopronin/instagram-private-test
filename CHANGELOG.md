@@ -1,3 +1,10 @@
+# Stable release v22.13.3
+## Date: 04/07/2024
+
+### Updates and fixes
+
+- **People:** Update `follow()`
+
 # Stable release v22.13.2
 ## Date: 03/07/2024
 

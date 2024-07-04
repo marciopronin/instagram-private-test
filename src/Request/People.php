@@ -1269,10 +1269,11 @@ class People extends RequestCollection
     /**
      * Follow a user.
      *
-     * @param string      $userId           Numerical UserPK ID.
-     * @param string|null $mediaId          The media ID in Instagram's internal format (ie "3482384834_43294").
-     * @param string|null $loggingInfoToken The logging info token associated to the media.
-     * @param string      $containerModule  Container module.
+     * @param string      $userId                     Numerical UserPK ID.
+     * @param string|null $mediaId                    The media ID in Instagram's internal format (ie "3482384834_43294").
+     * @param string|null $loggingInfoToken           The logging info token associated to the media.
+     * @param string      $containerModule            Container module.
+     * @param string      $includeFollowFrictionCheck Include follow friction check. Either '1' or '0'.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -1282,10 +1283,11 @@ class People extends RequestCollection
         $userId,
         $mediaId = null,
         $loggingInfoToken = null,
-        $containerModule = 'profile')
+        $containerModule = 'profile',
+        $includeFollowFrictionCheck = '1')
     {
         $request = $this->ig->request("friendships/create/{$userId}/")
-            ->addPost('include_follow_friction_check', '1')
+            ->addPost('include_follow_friction_check', $includeFollowFrictionCheck)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             //->addPost('_csrftoken', $this->ig->client->getToken())

@@ -3066,6 +3066,9 @@ class Instagram implements ExperimentsInterface
         }
         */
 
+        $re = sprintf('/"%s\\\\",\s\\\\"(\d+)\\\\"/m', $username);
+        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
         $serverParams = [
             'event_request_id'                  => $this->bloksInfo['event_request_id'],
             'layered_homepage_experiment_group' => null,
@@ -3156,11 +3159,13 @@ class Instagram implements ExperimentsInterface
             $this->bloksInfo = array_merge($this->bloksInfo, $map);
         }
 
-        $re = sprintf('/"%s\\\\",\s\\\\"(\d+)\\\\"/m', $username);
-        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
-
         if (!$matches) {
-            throw new \InstagramAPI\Exception\InstagramException('Something went wrong, try again later.');
+            $re = sprintf('/"%s\\\\",\s\\\\"(\d+)\\\\"/m', $username);
+            preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+            if (!$matches) {
+                throw new \InstagramAPI\Exception\InstagramException('Something went wrong, try again later.');
+            }
         }
         $this->bloksInfo['cuid'] = $matches[0][1];
 

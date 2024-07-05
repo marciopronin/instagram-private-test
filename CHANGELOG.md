@@ -1,3 +1,10 @@
+# Stable release v22.13.4
+## Date: 05/07/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `getForgotPasswordLink()`
+
 # Stable release v22.13.3
 ## Date: 04/07/2024
 

@@ -1905,13 +1905,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '57214f4fb11e270251039dec12fe8120fe547676d04c280ccb180d51e0d76197')
+                ->addPost('query_hash', '802d2e9652ee34dabcf67c276a248aae0ce5787e4c683aac1a06d9488a97a892')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', 'd9a8066e1ded60b9c4480f4e143a469534dcd8cf04de60bb720c074958c5146f')
+                ->addPost('query_hash', '049912235f4b30fea07ae317f7222d51719cb8faac17ddb2ecbcc27b28240099')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }

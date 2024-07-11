@@ -1,3 +1,10 @@
+# Stable release v22.13.6
+## Date: 11/07/2024
+
+### Updates and fixes
+
+- **Constants:** Update version codes
+
 # Stable release v22.13.5
 ## Date: 10/07/2024
 

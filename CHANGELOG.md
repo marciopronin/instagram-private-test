@@ -1,3 +1,12 @@
+# Stable release v22.14.0
+## Date: 12/07/2024
+
+### New features
+
+- **Account:** Add `selectTwoFactorMethod()`
+- **Account:** Add `twoFactorTotpGenerateKey()`
+- **Account:** Add `twoFactorTotpEnable()`
+
 # Stable release v22.13.6
 ## Date: 11/07/2024
 

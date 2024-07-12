@@ -2457,4 +2457,211 @@ class Account extends RequestCollection
         ],
         'IGBugReportSubmitMutation', null, false, 'minimal', 'api/v1/wwwgraphql/ig/query/');
     }
+
+    /**
+     * Select Two Factor Method.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function selectTwoFactorMethod()
+    {
+        return $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.two_factor.select_method/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'ig_auth_proof_json'                => $this->ig->settings->get('authorization_header'),
+                    'machine_id'                        => $this->ig->settings->get('mid'),
+                ],
+                'server_params'         => [
+                    'should_show_done_button'           => 0,
+                    'account_type'                      => 1,
+                    'account_id'                        => $this->ig->settings->get('fbid_v2'),
+                    'INTERNAL_INFRA_screen_id'          => '0',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Generate two factor key.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function twoFactorTotpGenerateKey()
+    {
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.two_factor.totp.generate_key/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'device_id'                         => $this->ig->device_id,
+                    'machine_id'                        => $this->ig->settings->get('mid'),
+                    'family_device_id'                  => $this->ig->phone_id,
+                ],
+                'server_params'         => [
+                    'ig_auth_proof_json'                => $this->ig->settings->get('authorization_header'),
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_marker_id'   => 0,
+                    'INTERNAL__latency_qpl_instance_id' => 0,
+                    'account_id'                        => $this->ig->settings->get('fbid_v2'),
+                    'account_type'                      => 1,
+                    'INTERNAL_INFRA_THEME'              => 'harm_f',
+                    'requested_screen_component_type'   => null,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'key_text')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'key_text'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
+
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.two_factor.totp.key/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'machine_id'                        => $this->ig->settings->get('mid'),
+                ],
+                'server_params'         => [
+                    'account_id'                        => $this->ig->settings->get('fbid_v2'),
+                    'ig_auth_proof_json'                => $this->ig->settings->get('authorization_header'),
+                    'key_text'                          => $this->ig->bloksInfo['key_text'],
+                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                    'key_id'                            => $this->ig->bloksInfo['key_id'],
+                    'qr_code_uri'                       => stripslashes(stripslashes($this->ig->bloksInfo['qr_code_uri'])),
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        $dataBlock = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'totp_key_id')) {
+                $dataBlock = $mainBlok;
+            }
+        }
+        if ($dataBlock !== null) {
+            $parsed = $this->ig->bloks->parseBlok($dataBlock, 'bk.action.map.Make');
+            $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'totp_key_id'), 0, -2);
+
+            foreach ($offsets as $offset) {
+                if (isset($parsed[$offset])) {
+                    $parsed = $parsed[$offset];
+                } else {
+                    break;
+                }
+            }
+
+            $map = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            $this->ig->bloksInfo = array_merge($map, $this->ig->bloksInfo);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Generate two factor key.
+     *
+     * @param mixed $totpCode
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return GenericResponse
+     */
+    public function twoFactorTotpEnable(
+        $totpCode)
+    {
+        $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.two_factor.totp.code/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'machine_id'                        => $this->ig->settings->get('mid'),
+                ],
+                'server_params'         => [
+                    'ig_auth_proof_json'                 => $this->ig->settings->get('authorization_header'),
+                    'account_id'                         => $this->ig->settings->get('fbid_v2'),
+                    'totp_key_id'                        => $this->ig->bloksInfo['totp_key_id'],
+                    'INTERNAL_INFRA_screen_id'           => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        return $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.two_factor.totp.enable/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'device_id'                         => $this->ig->device_id,
+                    'machine_id'                        => $this->ig->settings->get('mid'),
+                    'family_device_id'                  => $this->ig->phone_id,
+                    'verification_code'                 => $totpCode,
+                ],
+                'server_params'         => [
+                    'ig_auth_proof_json'                => $this->ig->settings->get('authorization_header'),
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_marker_id'   => 0,
+                    'INTERNAL__latency_qpl_instance_id' => 0,
+                    'account_id'                        => $this->ig->settings->get('fbid_v2'),
+                    'account_type'                      => 1,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
 }

@@ -2096,6 +2096,8 @@ class Instagram implements ExperimentsInterface
                     $this->bloksInfo = array_merge($fourthMap, $this->bloksInfo);
                 }
 
+                $this->loginOauthTokenFetch();
+
                 if ($loggedOut === false) {
                     $response = $this->sendLoginTextInputTypeAhead($username);
                 } else {
@@ -2122,7 +2124,6 @@ class Instagram implements ExperimentsInterface
                     ->setSignedPost(false)
                     ->addPost('params', json_encode([
                         'client_input_params'           => [
-                            'should_show_nested_nta_from_aymh'  => 0,
                             'device_id'                         => $this->device_id,
                             'login_attempt_count'               => $this->loginAttemptCount,
                             'secure_family_device_id'           => '',
@@ -2151,29 +2152,32 @@ class Instagram implements ExperimentsInterface
                         'server_params'         => [
                             'should_trigger_override_login_2fa_action'      => 0,
                             'is_from_logged_out'                            => intval($loggedOut),
-                            'username_text_input_id'                        => isset($firstMap['username_text_input_id']) ? $firstMap['username_text_input_id'] : '',
-                            'layered_homepage_experiment_group'             => null,
                             'should_trigger_override_login_success_action'  => 0,
-                            'device_id'                                     => $this->device_id,
                             'login_credential_type'                         => 'none',
                             'server_login_source'                           => isset($firstMap['server_login_source']) ? $firstMap['server_login_source'] : 'login',
                             'waterfall_id'                                  => null, //$firstMap['waterfall_id'],
                             'login_source'                                  => isset($firstMap['login_source']) ? $firstMap['login_source'] : 'Login',
-                            'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                            'reg_flow_source'                               => 'login_home_native_integration_point', // cacheable_aymh_screen
-                            'is_caa_perf_enabled'                           => 1,
                             'is_platform_login'                             => intval($this->bloksInfo['is_platform_login'][1]),
-                            'credential_type'                               => isset($firstMap['credential_type']) ? $firstMap['credential_type'] : 'password',
-                            'caller'                                        => 'gslr',
-                            'family_device_id'                              => null, //$this->phone_id,
                             'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                            'offline_experiment_group'                      => isset($firstMap['offline_experiment_group']) ? $firstMap['offline_experiment_group'] : 'caa_iteration_v3_perf_ig_4',
-                            'INTERNAL_INFRA_THEME'                          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                            'offline_experiment_group'                      => null,
                             'is_from_landing_page'                          => 0,
                             'password_text_input_id'                        => isset($firstMap['password_text_input_id']) ? $firstMap['password_text_input_id'] : '',
-                            'qe_device_id'                                  => $this->uuid,
-                            'is_from_logged_in_switcher'                    => 0,
+                            'is_from_empty_password'                        => 0,
                             'ar_event_source'                               => isset($firstMap['ar_event_source']) ? $firstMap['ar_event_source'] : 'login_home_page',
+                            'username_text_input_id'                        => isset($firstMap['username_text_input_id']) ? $firstMap['username_text_input_id'] : '',
+                            'layered_homepage_experiment_group'             => null,
+                            'should_show_nested_nta_from_aymh'              => 1,
+                            'device_id'                                     => null,
+                            'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                            'reg_flow_source'                               => 'cacheable_aymh_screen', // cacheable_aymh_screen
+                            'is_caa_perf_enabled'                           => 1,
+                            'credential_type'                               => isset($firstMap['credential_type']) ? $firstMap['credential_type'] : 'password',
+                            'is_from_password_entry_page'                   => 0,
+                            'caller'                                        => 'gslr',
+                            'family_device_id'                              => null, //$this->phone_id,
+                            'INTERNAL_INFRA_THEME'                          => 'harm_f',
+                            'access_flow_version'                           => 'LEGACY_FLOW',
+                            'is_from_logged_in_switcher'                    => 0,
                         ],
                     ]))
                     ->addPost('bk_client_context', json_encode([
@@ -2492,8 +2496,10 @@ class Instagram implements ExperimentsInterface
             'disable_auto_login'            => false,
             'qe_device_id'                  => $this->uuid,
             'is_from_logged_in_switcher'    => false,
+            'switcher_logged_in_uid'        => '',
             'account_list'                  => $accountList,
             'blocked_uid'                   => [],
+            'launched_url'                  => '',
             'INTERNAL_INFRA_THEME'          => 'HARMONIZATION_F',
         ]))
         ->addPost('bk_client_context', json_encode([
@@ -2527,6 +2533,52 @@ class Instagram implements ExperimentsInterface
         ]))
         ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
         ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Login OAuth token fetch.
+     *
+     * @param bool $isLoggedOut If states comes from logged_out.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function loginOauthTokenFetch()
+    {
+        return $this->request('bloks/apps/com.bloks.www.caa.login.oauth.token.fetch.async/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'username_input'                    => '',
+                    'lois_settings'                     => [
+                        'lara_override' => '',
+                        'lois_token'    => '',
+                    ],
+                ],
+                'server_params'         => [
+                    'is_from_logged_out'                            => 0,
+                    'layered_homepage_experiment_group'             => null,
+                    'device_id'                                     => null,
+                    'waterfall_id'                                  => null,
+                    'machine_id'                                    => null,
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                    'is_platform_login'                             => 0,
+                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
+                    'family_device_id'                              => null,
+                    'offline_experiment_group'                      => null,
+                    'INTERNAL_INFRA_THEME'                          => 'harm_f',
+                    'access_flow_version'                           => 'LEGACY_FLOW',
+                    'is_from_logged_in_switcher'                    => 0,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\LoginResponse());
     }
 
     /**

@@ -1,3 +1,15 @@
+# Stable release v22.15.0
+## Date: 17/07/2024
+
+### New features
+
+- **Instagram:** Add `loginOauthTokenFetch()`
+
+### Updates and fixes
+
+- **Instagram:** Update `processLoginClientDataAndRedirect()`
+- **Instagram:** Update `_login()`
+
 # Stable release v22.14.0
 ## Date: 12/07/2024
 

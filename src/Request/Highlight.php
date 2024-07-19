@@ -38,6 +38,7 @@ class Highlight extends RequestCollection
             ->addParam('is_charging', $this->ig->getIsDeviceCharging())
             ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
             ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
+            ->addParam('should_include_my_week_preview', 'false')
             ->getResponse(new Response\HighlightFeedResponse());
     }
 

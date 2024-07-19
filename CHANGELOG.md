@@ -1,3 +1,14 @@
+# Stable release v22.15.1
+## Date: 19/07/2024
+
+### Updates and fixes
+
+- **Constants:** Update to 340.0.0.22.109
+- **Internal:** Update `getMobileConfig()`
+- **Highlight:** Update `getUserFeed()`
+- **Reel:** Update `discover()`
+- **Reel:** Update `getShareToFbConfig()`
+
 # Stable release v22.15.0
 ## Date: 17/07/2024
 

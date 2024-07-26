@@ -2536,9 +2536,52 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
-     * Login OAuth token fetch.
+     * Login no click form controller.
      *
-     * @param bool $isLoggedOut If states comes from logged_out.
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function loginNoClickFormController()
+    {
+        return $this->request('bloks/apps/com.bloks.www.bloks.caa.login.form.no.click.async.controller/')
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->addPost('params', json_encode([
+                'client_input_params'           => [
+                    'lois_settings'                     => [
+                        'lara_override' => '',
+                        'lois_token'    => '',
+                    ],
+                    'no_visit_count'    => 1,
+                ],
+                'server_params'         => [
+                    'is_from_logged_out'                            => 0,
+                    'layered_homepage_experiment_group'             => null,
+                    'device_id'                                     => $this->device_id,
+                    'waterfall_id'                                  => null,
+                    'machine_id'                                    => null,
+                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                    'is_platform_login'                             => 0,
+                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
+                    'family_device_id'                              => null,
+                    'offline_experiment_group'                      => null,
+                    'INTERNAL_INFRA_THEME'                          => 'harm_f',
+                    'access_flow_version'                           => 'F2_FLOW',
+                    'is_from_logged_in_switcher'                    => 0,
+                    'qe_device_id'                                  => $this->uuid,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\LoginResponse());
+    }
+
+    /**
+     * Login OAuth token fetch.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -2569,7 +2612,7 @@ class Instagram implements ExperimentsInterface
                     'family_device_id'                              => null,
                     'offline_experiment_group'                      => null,
                     'INTERNAL_INFRA_THEME'                          => 'harm_f',
-                    'access_flow_version'                           => 'LEGACY_FLOW',
+                    'access_flow_version'                           => 'F2_FLOW',
                     'is_from_logged_in_switcher'                    => 0,
                 ],
             ]))

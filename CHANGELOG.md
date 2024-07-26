@@ -1,3 +1,16 @@
+# Stable release v22.16.0
+## Date: 26/07/2024
+
+### New features
+
+- **Internal:** Add `getBloksHypercardEntrypoint()`. Part of login flow.
+- **Instagram:** Add `loginNoClickFormController()`. Part of login flow.
+
+### Updates and fixes
+
+- **Instagram:** Update `loginOauthTokenFetch()`
+- **People:** Update `getUserFeed()`
+
 # Stable release v22.15.1
 ## Date: 19/07/2024
 

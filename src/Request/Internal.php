@@ -4400,6 +4400,28 @@ class Internal extends RequestCollection
     }
 
     /**
+     * Get bloks hypercard entrypoint.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getBloksHypercardEntrypoint()
+    {
+        return $this->ig->request('bloks/apps/com.bloks.www.ig.pro_dash.entry_point.hypercard/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode(['server_params' => ['is_badged' => false]]))
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('family_device_id', $this->ig->phone_id)
+            ->addPost('bk_client_context', json_encode([
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Get target segment duration in seconds.
      *
      * @param int $targetFeed One of the FEED_X constants.

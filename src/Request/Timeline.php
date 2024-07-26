@@ -371,7 +371,7 @@ class Timeline extends RequestCollection
     {
         $request = $this->ig->request("feed/user/{$userId}/")
             ->addParam('exclude_comment', $excludeComment)
-            ->addParam('only_fetch_first_carousel_media', false);
+            ->addParam('should_delay_media_metadata_fetch', false);
 
         if ($maxId !== null) {
             $request->addParam('max_id', $maxId);

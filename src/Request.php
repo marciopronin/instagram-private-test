@@ -504,7 +504,7 @@ class Request
             $this->_headers['X-Bloks-Prism-Colors-Enabled'] = 'false';
             $this->_headers['X-Bloks-Prism-Font-Enabled'] = 'false';
 
-            if ($this->_parent->isExperimentEnabled('59489', 0, false)) {
+            if ($this->_parent->isExperimentEnabled('59489', 0, true)) {
                 $this->_headers['X-Bloks-Prism-Button-Version'] = 'CONTROL'; //0
             }
             if ($this->_parent->getPlatform() === 'android') {

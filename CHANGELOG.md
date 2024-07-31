@@ -1,3 +1,14 @@
+# Stable release v22.16.1
+## Date: 31/07/2024
+
+- **Constants:** Update to 342.0.0.33.103
+- **Highlight:** Update `getUserFeed()`
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `sendGraph()`
+- **Request:** Update `_addDefaultHeaders()`
+- **People:** Update `getFollowersQuery()`. If using any function to retrieve followers or followings, use this function only!
+- **People:** Update `getFollowingQuery()`. If using any function to retrieve followers or followings, use this function only!
+
 # Stable release v22.16.0
 ## Date: 26/07/2024
 

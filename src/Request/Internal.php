@@ -1905,13 +1905,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', 'f3dfd2349683ac6cb6e63a397ea9277c88a927e267d1caf4c43f3d5523a11ea0')
+                ->addPost('query_hash', 'a1c053814e8bbda55c1b693047a36f53d2fc7dcec5b2b3bbcc12c528e1041bdb')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '99fd5f91bb36a64a1415580929504a93b2077f2c07a17a589eb3d15c264341c6')
+                ->addPost('query_hash', 'd115e02f3f05181afcb191219b446306e057b9b386babac233fe14e1c6e49a8c')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -2444,7 +2444,8 @@ class Internal extends RequestCollection
      * @param string $rootName
      * @param bool   $pretty
      * @param string $clientLibrary
-     * @param string $queryEndpoint
+     * @param bool   $queryEndpoint
+     * @param bool   $gzip
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -2457,7 +2458,8 @@ class Internal extends RequestCollection
         $rootName,
         $pretty,
         $clientLibrary = 'graphservice',
-        $queryEndpoint = false)
+        $queryEndpoint = false,
+        $gzip = false)
     {
         if (is_string($queryEndpoint)) {
             $endpoint = $queryEndpoint;
@@ -2478,6 +2480,10 @@ class Internal extends RequestCollection
             ->addPost('client_doc_id', $clientDoc)
             ->addPost('locale', is_bool($queryEndpoint) && $queryEndpoint ? 'user' : $this->ig->getLocale())
             ->addPost('variables', json_encode($vars, JSON_PRESERVE_ZERO_FRACTION));
+
+        if ($gzip) {
+            $request->setIsBodyCompressed(true);
+        }
 
         if ($rootName !== null) {
             $request->addHeader('X-Root-Field-Name', $rootName);

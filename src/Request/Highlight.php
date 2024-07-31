@@ -27,7 +27,7 @@ class Highlight extends RequestCollection
     public function getUserFeed(
         $userId)
     {
-        return $this->ig->request("highlights/{$userId}/highlights_tray/")
+        $request = $this->ig->request("highlights/{$userId}/highlights_tray/")
             ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
             ->addHeader('X-CM-Latency', '-1.000')
             ->addHeader('X-Ads-Opt-Out', '0')
@@ -38,8 +38,13 @@ class Highlight extends RequestCollection
             ->addParam('is_charging', $this->ig->getIsDeviceCharging())
             ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
             ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
-            ->addParam('should_include_my_week_preview', 'false')
-            ->getResponse(new Response\HighlightFeedResponse());
+            ->addParam('should_include_my_week_preview', 'false');
+
+        if ($userId !== $this->ig->account_id) {
+            $request->addParam('max_highlights_to_fetch_on_pagination', 10);
+        }
+
+        return $request->getResponse(new Response\HighlightFeedResponse());
     }
 
     /**

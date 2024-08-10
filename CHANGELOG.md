@@ -1,3 +1,13 @@
+# Stable release v22.16.3
+## Date: 10/08/2024
+
+### WIP!
+
+### Updates and fixes
+
+- **Instagram:** Update to `_login()`
+- **People:** Update `getRecentActivityInbox()`
+
 # Stable release v22.16.2
 ## Date: 09/08/2024
 

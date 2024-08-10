@@ -305,7 +305,9 @@ class People extends RequestCollection
             $request->addParam('max_id', $maxId);
         }
         if ($prefetch) {
-            $request->addHeader('X-IG-Prefetch-Request', 'foreground');
+            $request->addHeader('X-IG-Prefetch-Request', 'foreground')
+                    ->addHeader('X-Ig-304-Eligible', 'true')
+                    ->addParam('could_truncate_feed', 'true');
         }
 
         return $request->getResponse(new Response\ActivityNewsResponse());

@@ -5057,6 +5057,20 @@ class Instagram implements ExperimentsInterface
                 self::$sendAsync = true;
 
                 $this->media->getBlockedMedia();
+                $this->internal->sendGraph('25336029839814386604447461985', [
+                    'params' => [
+                        'params'                => '{"qp_id":"924631039205678","surface_nux_id":"11483"}',
+                        'infra_params'          => ['device_id' => $this->device_id],
+                        'bloks_versioning_id'   => Constants::BLOCK_VERSIONING_ID,
+                        'app_id'                => 'com.bloks.www.qp.async.bloks_action',
+                    ],
+                    'bk_context'    => [
+                        'is_flipper_enabled'            => false,
+                        'theme_params'                  => [],
+                        'debug_tooling_metadata_token'  => null,
+                    ],
+                ], 'IGBloksAppRootQuery', 'bloks_app', false, 'pando', false, true);
+
                 $this->story->getInjectedStories([$this->account_id], $traySessionId);
                 $this->internal->sendGraph('279018452917733073575656047369', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
                 //$this->reel->discover();

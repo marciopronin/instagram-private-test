@@ -4996,7 +4996,7 @@ class Instagram implements ExperimentsInterface
                 $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
 
                 $this->internal->sendGraph('33052919472135518510885263591', ['is_pando' => true], 'BasicAdsOptInQuery', 'xfb_user_basic_ads_preferences', false, 'pando');
-                $this->internal->sendGraph('35850666251457231147855668495', [], 'AFSOptInQuery', 'AFSStatusGraphQLWrapper', false, 'pando');
+                //$this->internal->sendGraph('35850666251457231147855668495', [], 'AFSOptInQuery', 'AFSStatusGraphQLWrapper', false, 'pando');
 
                 $this->internal->getAsyncNdxIgSteps('NDX_IG_IMMERSIVE');
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
@@ -5072,7 +5072,7 @@ class Instagram implements ExperimentsInterface
                 ], 'IGBloksAppRootQuery', 'bloks_app', false, 'pando', false, true);
 
                 $this->story->getInjectedStories([$this->account_id], $traySessionId);
-                $this->internal->sendGraph('279018452917733073575656047369', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
+                //$this->internal->sendGraph('279018452917733073575656047369', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
                 //$this->reel->discover();
                 $this->people->getInfoById($this->account_id);
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
@@ -5101,6 +5101,7 @@ class Instagram implements ExperimentsInterface
             // Batch request 4
             $this->client->startEmulatingBatch();
 
+            /*
             try {
                 //$this->timeline->getTimelineFeed(); TODO
                 $this->internal->sendGraph('97942539015262622076776956304',
@@ -5109,7 +5110,7 @@ class Instagram implements ExperimentsInterface
                         'test_id'           => '59705010009496',
                         'purpose'           => 'product::ads_personalization',
                         'version'           => '0.0.5',
-                        'client_msg_type'   => 'INFER',
+                        'client_msg_type'   => 'INFER'
                     ],
                     'OnDeviceFLFeatures', 'on_device_fl_features', false, 'pando');
 
@@ -5126,9 +5127,11 @@ class Instagram implements ExperimentsInterface
                         'log_only'              => true,
                     ],
                 ], 'ReportAttributionEventsMutation', 'report_attribution_events', false, 'pando');
+
             } catch (\Exception $e) {
                 // pass
             }
+            */
 
             self::$sendAsync = false;
 
@@ -5257,6 +5260,7 @@ class Instagram implements ExperimentsInterface
                 $this->internal->getNotes();
                 $this->settings->set('salt_ids', '332016926,332019702,332008904');
 
+                /*
                 try {
                     $this->internal->sendGraph('215817804115327440933115577895',
                     [
@@ -5270,6 +5274,7 @@ class Instagram implements ExperimentsInterface
                 } catch (\Exception $e) {
                     // pass
                 }
+                */
 
                 /*
                 if ($this->getPlatform() === 'android') {

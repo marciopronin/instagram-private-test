@@ -755,7 +755,7 @@ class People extends RequestCollection
      */
     public function getFollowersQuery(
         $userId,
-        $rankToken,
+        $rankToken = '',
         $searchQuery = '',
         $maxId = null)
     {
@@ -769,12 +769,13 @@ class People extends RequestCollection
             'search_surface'            => 'follow_list_page',
             'user_id'                   => $userId,
             'include_biography'         => false,
+            'include_unseen_count'      => false,
         ];
 
         if ($maxId !== null) {
             $data['max_id'] = $maxId;
         }
-        $response = $this->ig->internal->sendGraph('284797047912213050552583965568', $data, 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true, true);
+        $response = $this->ig->internal->sendGraph('284797047913630204561481711004', $data, 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true, true);
         $arr = $response->asArray();
         if (isset($arr['data'])) {
             $data = $arr['data'];
@@ -803,15 +804,17 @@ class People extends RequestCollection
      */
     public function getFollowingQuery(
         $userId,
-        $rankToken,
+        $rankToken = '',
         $searchQuery = '',
         $maxId = null)
     {
         $data = [
             'user_id'                   => $userId,
             'include_friendship_status' => false,
+            'exclude_unused_fields'     => false,
             'include_biography'         => false,
             'query'                     => $searchQuery,
+            'include_unseen_count'      => false,
             'request_data'              => [
                 'rank_token'            => $rankToken,
                 'includes_hashtags'     => true,
@@ -823,7 +826,7 @@ class People extends RequestCollection
         if ($maxId !== null) {
             $data['max_id'] = $maxId;
         }
-        $response = $this->ig->internal->sendGraph('161046392815797863596808012372', $data, 'FollowingList', 'xdt_api__v1__friendships__following', 'false', 'pando', true, true);
+        $response = $this->ig->internal->sendGraph('161046392817932371769045968908', $data, 'FollowingList', 'xdt_api__v1__friendships__following', 'false', 'pando', true, true);
         $arr = $response->asArray();
         if (isset($arr['data'])) {
             $data = $arr['data'];

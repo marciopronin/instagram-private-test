@@ -1,3 +1,16 @@
+# Stable release v22.16.4
+## Date: 14/08/2024
+
+### WIP!
+
+### Updates and fixes
+
+- **Constants:** Update to 344.0.0.42.92. New version codes will be available within the next hours.
+- **People:** Update `getFollowersQuery()`
+- **People:** Update `getFollowingQuery()`
+- **Internal:** Update `getMobileConfig()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v22.16.3
 ## Date: 10/08/2024
 

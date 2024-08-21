@@ -14,10 +14,20 @@ class Constants
         '/api/v1/creator/creator_info',
     ];
     const GRAPH_API_URL = 'https://graph.instagram.com/logging_client_events';
-    const IG_VERSION = '344.0.0.42.92';
+    const IG_VERSION = '344.1.0.42.92';
     const IG_IOS_VERSION = '212.1.0.25.118';
     const VERSION_CODE = [
-        '632084290',
+        '632719598',
+        '632719612',
+        '632719609',
+        '632719608',
+        '632719551',
+        '632719589',
+        '632719535',
+        '632719602',
+        '632719582',
+        '632719615',
+        '632719543',
     ];
 
     const IG_IOS_VERSION_CODE = '329643252';

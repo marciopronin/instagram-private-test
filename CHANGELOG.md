@@ -1,3 +1,14 @@
+# Stable release v22.16.5
+## Date: 20/08/2024
+
+### WIP!
+
+### Updates and fixes
+
+- **Constants:** Update to 344.1.0.42.92
+- **Internal:** Update `_getVideoUploadParams()`
+- **Internal:** Update `configureSinglePhoto()`
+
 # Stable release v22.16.4
 ## Date: 14/08/2024
 

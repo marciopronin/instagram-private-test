@@ -394,6 +394,7 @@ class Internal extends RequestCollection
             case Constants::FEED_TIMELINE:
                 $date = date('Y:m:d H:i:s');
                 $request
+                    ->addPost('app_attribution_android_namespace', '')
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('caption', $captionText)
                     ->addPost('source_type', '4')
@@ -4147,6 +4148,10 @@ class Internal extends RequestCollection
         ];
         // Target feed's specific params.
         switch ($targetFeed) {
+            case Constants::FEED_TIMELINE:
+                $result['upload_engine_config_enum'] = '0';
+                $result['IG-FB-Xpost-entry-point-v2'] = 'feed';
+                break;
             case Constants::FEED_TIMELINE_ALBUM:
                 $result['is_sidecar'] = '1';
                 break;

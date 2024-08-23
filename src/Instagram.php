@@ -2122,9 +2122,11 @@ class Instagram implements ExperimentsInterface
                 $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/')
                     ->setNeedsAuth(false)
                     ->setSignedPost(false)
+                    ->addHeader('X-Ig-Attest-Params', '{"attestation":[{"version":2,"type":"keystore","errors":[-1004],"challenge_nonce":"","signed_nonce":"","key_hash":""}]}')
                     ->addPost('params', json_encode([
                         'client_input_params'           => [
                             'device_id'                         => $this->device_id,
+                            'sim_phones'                        => [],
                             'login_attempt_count'               => $this->loginAttemptCount,
                             'secure_family_device_id'           => '',
                             'machine_id'                        => $this->settings->get('mid'),

@@ -1,3 +1,19 @@
+# Stable release v22.17.0
+## Date: 23/08/2024
+
+### New features
+
+- **Account:** Add `getActiveCrosspostingAccount()`
+- **Request:** Add `setCombinedHttpEngine()`
+
+### Updates and fixes
+
+- **Constants:** Update to 345.0.0.48.95
+- **Instagram:** Update `_login()`
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `sendGraph()`
+- **Request:** Update `_addDefaultHeaders()`
+
 # Stable release v22.16.5
 ## Date: 20/08/2024
 

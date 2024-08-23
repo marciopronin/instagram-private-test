@@ -1906,13 +1906,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '00aee6fd4ae529466a5206628523a22ff8a64d889d79b2b6812cf77750491868')
+                ->addPost('query_hash', '8e96c4d085c170846cf67f3d0031257e1bcbd0daee9cf1823ed7f1a72f197e08')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '954aec42154065e05ef59951b72dc4c85cafcbf2947d23f533156f70294d4915')
+                ->addPost('query_hash', '4d582ae06496ce36c0e4b753e9ba925a10b4e124159192c1b610917e43404c4b')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -2502,7 +2502,8 @@ class Internal extends RequestCollection
             $request->addHeader('X-Fb-Request-Analytics-Tags', '{"network_tags":{"product":"567067343352427","purpose":"none","request_category":"graphql","retry_attempt":"0"},"application_tags":"pando"}')
                     ->addPost('enable_canonical_naming', 'true')
                     ->addPost('enable_canonical_variable_overrides', 'true')
-                    ->addPost('enable_canonical_naming_ambiguous_type_prefixing', 'true');
+                    ->addPost('enable_canonical_naming_ambiguous_type_prefixing', 'true')
+                    ->setCombinedHttpEngine(true);
         }
         if ($clientLibrary === 'minimal') {
             $request->addPost('strip_nulls', 'true')

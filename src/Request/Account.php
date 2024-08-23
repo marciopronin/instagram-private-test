@@ -1795,6 +1795,51 @@ class Account extends RequestCollection
     }
 
     /**
+     * Get active crossposting account (Business accounts. IG xpost to FB).
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return array
+     */
+    public function getActiveCrosspostingAccount()
+    {
+        $response = $this->ig->internal->sendGraph('25065272511213483404914864494',
+        [
+            'input' => [
+                'key'               => '1L1D',
+                'caller_context'    => [
+                    'function_credential'   => 'function_credential',
+                    'caller'                => 'ReelViewerFragment',
+                ],
+            ],
+        ],
+        'IGOneLinkMiddlewarePageQuery', 'xfb_one_link_monoschema', false, 'pando');
+
+        $arr = $response->asArray();
+        if (isset($arr['data'])) {
+            $data = $arr['data'];
+            foreach ($data as $k => $v) {
+                if ($k === '1$xfb_one_link_monoschema(input:$input)') {
+                    $info = $data[$k];
+                    if (isset($info['page_info'])) {
+                        $pageInfo = $info['page_info']['bpl_page'];
+
+                        return [
+                            $pageInfo['name']   => [
+                                'id'        => $pageInfo['id'],
+                                'entity'    => 'PAGE',
+                            ],
+                        ];
+                    }
+                }
+            }
+        } else {
+            return [];
+        }
+    }
+
+    /**
      * Get account center linked accounts.
      *
      * @throws \InvalidArgumentException

@@ -183,6 +183,15 @@ class Request
     protected $_customResolver = null;
 
     /**
+     * Combined HTTP Engine.
+     *
+     * Off by default
+     *
+     * @var bool
+     */
+    protected $_combinedHttpEngine = false;
+
+    /**
      * Constructor.
      *
      * @param Instagram  $parent
@@ -478,7 +487,7 @@ class Request
             if ($this->_parent->phone_id !== null) {
                 $this->_headers['X-IG-Family-Device-ID'] = $this->_parent->phone_id;
             }
-            $this->_headers['X-FB-HTTP-Engine'] = Constants::X_FB_HTTP_Engine;
+            $this->_headers['X-FB-HTTP-Engine'] = ($this->_combinedHttpEngine === true) ? Constants::X_FB_HTTP_Combined_Engine : Constants::X_FB_HTTP_Engine;
             $this->_headers['X-FB-Client-IP'] = 'True';
             $this->_headers['X-FB-Server-Cluster'] = 'True';
             if (\InstagramAPI\Instagram::$useBloksLogin === false) {
@@ -1079,6 +1088,19 @@ class Request
         }
 
         $this->_requestPriority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Enable combined HTTP engine.
+     *
+     * @param bool $enable Enable.
+     */
+    public function setCombinedHttpEngine(
+        $enable)
+    {
+        $this->_combinedHttpEngine = $enable;
 
         return $this;
     }

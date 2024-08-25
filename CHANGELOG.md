@@ -1,3 +1,10 @@
+# Stable release v22.17.2
+## Date: 25/08/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `loginOauthTokenFetch()`
+
 # Stable release v22.17.1
 ## Date: 24/08/2024
 

@@ -2614,7 +2614,7 @@ class Instagram implements ExperimentsInterface
                     'family_device_id'                              => null,
                     'offline_experiment_group'                      => null,
                     'INTERNAL_INFRA_THEME'                          => 'harm_f',
-                    'access_flow_version'                           => 'F2_FLOW',
+                    'access_flow_version'                           => 'LEGACY_FLOW',
                     'is_from_logged_in_switcher'                    => 0,
                 ],
             ]))

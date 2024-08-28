@@ -817,38 +817,68 @@ class Media extends RequestCollection
      * Save a media item.
      *
      * @param string $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").
+     * @param string $module  Module.
+     * @param array  $options Options.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\SaveAndUnsaveMedia
      */
     public function save(
-        $mediaId)
+        $mediaId,
+        $module = 'feed_timeline',
+        array $options = [])
     {
-        return $this->ig->request("media/{$mediaId}/save/")
-            ->addPost('_uuid', $this->ig->uuid)
+        $request = $this->ig->request("media/{$mediaId}/save/")
+            ->addPost('inventory_source', 'media_or_ad')
+            ->addPost('starting_clips_media_id', null)
+            ->addPost('delivery_class', 'organic')
+            ->addPost('module_name', $module)
+            ->addPost('client_position', isset($options['client_position']) ? $options['client_position'] : 0)
+            ->addPost('radio_type', $this->ig->radio_type)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->getResponse(new Response\SaveAndUnsaveMedia());
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('nav_chain', $this->ig->getNavChain());
+
+        if (isset($options['ranking_info_token'])) {
+            $request->addPost('ranking_info_token', $options['ranking_info_token']);
+        }
+        //->addPost('_csrftoken', $this->ig->client->getToken())
+        return $request->getResponse(new Response\SaveAndUnsaveMedia());
     }
 
     /**
      * Unsave a media item.
      *
      * @param string $mediaId The media ID in Instagram's internal format (ie "3482384834_43294").
+     * @param string $module  Module.
+     * @param array  $options Options.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return \InstagramAPI\Response\SaveAndUnsaveMedia
      */
     public function unsave(
-        $mediaId)
+        $mediaId,
+        $module = 'feed_timeline',
+        array $options = [])
     {
-        return $this->ig->request("media/{$mediaId}/unsave/")
-            ->addPost('_uuid', $this->ig->uuid)
+        $request = $this->ig->request("media/{$mediaId}/unsave/")
+            ->addPost('inventory_source', 'media_or_ad')
+            ->addPost('starting_clips_media_id', null)
+            ->addPost('delivery_class', 'organic')
+            ->addPost('module_name', $module)
+            ->addPost('client_position', isset($options['client_position']) ? $options['client_position'] : 0)
+            ->addPost('radio_type', $this->ig->radio_type)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->getResponse(new Response\SaveAndUnsaveMedia());
+            ->addPost('_uuid', $this->ig->uuid)
+            ->addPost('nav_chain', $this->ig->getNavChain());
+
+        if (isset($options['ranking_info_token'])) {
+            $request->addPost('ranking_info_token', $options['ranking_info_token']);
+        }
+        //->addPost('_csrftoken', $this->ig->client->getToken())
+        return $request->getResponse(new Response\SaveAndUnsaveMedia());
     }
 
     /**

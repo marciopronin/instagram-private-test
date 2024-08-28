@@ -1,3 +1,15 @@
+# Stable release v22.18.0
+## Date: 28/08/2024
+
+### New features
+
+- **Account:** Add `getActiveCrosspostingAccountUser()`
+
+### Updates and fixes
+
+- **Media:** Update `save()`
+- **Media:** Update `unsave()`
+
 # Stable release v22.17.2
 ## Date: 25/08/2024
 

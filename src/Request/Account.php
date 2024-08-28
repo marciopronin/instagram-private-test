@@ -1796,6 +1796,7 @@ class Account extends RequestCollection
 
     /**
      * Get active crossposting account (Business accounts. IG xpost to FB).
+     * This only retrieves linked FB pages.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1831,6 +1832,46 @@ class Account extends RequestCollection
                                 'entity'    => 'PAGE',
                             ],
                         ];
+                    }
+                }
+            }
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * Get active crossposting account (IG xpost to FB).
+     * This only retrieves linked FB user.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return array
+     */
+    public function getActiveCrosspostingAccountUser()
+    {
+        $response = $this->ig->internal->sendGraph('11674382495679744485820947859',
+        [
+            'caller_name'   => 'fx_product_foundation_client_FXOnline_client_cache',
+        ],
+        'FxIgLinkageCacheQuery', 'xe_client_cache_accounts', false, 'pando');
+
+        $arr = $response->asArray();
+        if (isset($arr['data'])) {
+            $data = $arr['data'];
+            foreach ($data as $k => $v) {
+                if ($k === '1$xe_client_cache_accounts(caller_name:$caller_name)') {
+                    $info = $data[$k];
+                    foreach ($info as $user) {
+                        if ($user['platform'] === 'FACEBOOK') {
+                            return [
+                                $user['username']   => [
+                                    'id'        => $user['id'],
+                                    'entity'    => 'USER',
+                                ],
+                            ];
+                        }
                     }
                 }
             }

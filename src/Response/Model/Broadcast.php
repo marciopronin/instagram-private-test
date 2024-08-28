@@ -37,6 +37,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method string getRtmpPlaybackUrl()
  * @method mixed getSeenRankedPosition()
  * @method int getTotalUniqueViewerCount()
+ * @method float getVideoDuration()
  * @method int getViewerCount()
  * @method bool isBroadcastMessage()
  * @method bool isBroadcastOwner()
@@ -68,6 +69,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method bool isRtmpPlaybackUrl()
  * @method bool isSeenRankedPosition()
  * @method bool isTotalUniqueViewerCount()
+ * @method bool isVideoDuration()
  * @method bool isViewerCount()
  * @method $this setBroadcastMessage(string $value)
  * @method $this setBroadcastOwner(User $value)
@@ -99,6 +101,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this setRtmpPlaybackUrl(string $value)
  * @method $this setSeenRankedPosition(mixed $value)
  * @method $this setTotalUniqueViewerCount(int $value)
+ * @method $this setVideoDuration(float $value)
  * @method $this setViewerCount(int $value)
  * @method $this unsetBroadcastMessage()
  * @method $this unsetBroadcastOwner()
@@ -130,6 +133,7 @@ use InstagramAPI\AutoPropertyMapper;
  * @method $this unsetRtmpPlaybackUrl()
  * @method $this unsetSeenRankedPosition()
  * @method $this unsetTotalUniqueViewerCount()
+ * @method $this unsetVideoDuration()
  * @method $this unsetViewerCount()
  */
 class Broadcast extends AutoPropertyMapper
@@ -172,5 +176,6 @@ class Broadcast extends AutoPropertyMapper
         'total_unique_viewer_count' => 'int',
         'internal_only'             => 'bool',
         'number_of_qualities'       => 'int',
+        'video_duration'            => 'float',
     ];
 }

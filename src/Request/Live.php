@@ -1136,7 +1136,7 @@ class Live extends RequestCollection
         if ($archive === true) {
             $setting = 'archive';
         } else {
-            $setting = 'unarchive';
+            $setting = 'do_not_archive';
         }
 
         return $this->ig->request('archive/live/live_archive_settings/')

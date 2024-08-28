@@ -1,3 +1,11 @@
+# Stable release v22.18.1
+## Date: 28/08/2024
+
+### Updates and fixes
+
+- **Live:** Update `setLiveArchiveSettings()`
+- **Model:** Update `Broadcast`
+
 # Stable release v22.18.0
 ## Date: 28/08/2024
 

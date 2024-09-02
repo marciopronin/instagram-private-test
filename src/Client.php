@@ -1523,6 +1523,7 @@ class Client
             $uri = $request->getUri()->withScheme('http');
             $request = $request->withUri($uri);
             $headers['set_headers']['targetproxy'] = $this->_parent->getMiddleForwardProxy();
+            $headers['set_headers']['key'] = $this->_parent->getMiddleProxyKey();
         }
 
         // Set up headers that are required for every request.

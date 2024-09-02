@@ -652,6 +652,13 @@ class Instagram implements ExperimentsInterface
      */
     public $middleForwardProxy = null;
 
+    /**
+     * Middle proxy key.
+     *
+     * @var string
+     */
+    public $middleProxyKey = 'D3f4ult#k3y';
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -875,6 +882,27 @@ class Instagram implements ExperimentsInterface
         $value)
     {
         $this->middleForwardProxy = $value;
+    }
+
+    /**
+     * Gets the current key used for middle proxy.
+     *
+     * @return string
+     */
+    public function getMiddleProxyKey()
+    {
+        return $this->middleProxyKey;
+    }
+
+    /**
+     * Set the key to use for middle proxy.
+     *
+     * @param string $value String.
+     */
+    public function setMiddleProxyKey(
+        $value)
+    {
+        $this->middleProxyKey = $value;
     }
 
     /**

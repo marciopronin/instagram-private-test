@@ -631,6 +631,27 @@ class Instagram implements ExperimentsInterface
      */
     public $bloksInfo = [];
 
+    /**
+     * TimelineFeed object from Login flow.
+     *
+     * @var TimelineFeedResponse|null
+     */
+    public $initTimelineFeed = null;
+
+    /**
+     * ReelsTrayFeed object from Login flow.
+     *
+     * @var ReelsTrayFeedResponse|null
+     */
+    public $initTrayFeed = null;
+
+    /**
+     * Middle forward proxy.
+     *
+     * @var string|null
+     */
+    public $middleForwardProxy = null;
+
     /** @var Request\Account Collection of Account related functions. */
     public $account;
     /** @var Request\Business Collection of Business related functions. */
@@ -843,6 +864,27 @@ class Instagram implements ExperimentsInterface
     public function getProxy()
     {
         return $this->client->getProxy();
+    }
+
+    /**
+     * Set the proxy to use for middle proxy.
+     *
+     * @param string|null $value String.
+     */
+    public function setMiddleForwardProxy(
+        $value)
+    {
+        $this->middleForwardProxy = $value;
+    }
+
+    /**
+     * Gets the current proxy used for middle proxy.
+     *
+     * @return string|null
+     */
+    public function getMiddleForwardProxy()
+    {
+        return $this->middleForwardProxy;
     }
 
     /**
@@ -1967,7 +2009,7 @@ class Instagram implements ExperimentsInterface
                 $this->event->sendFxSsoLibrary('auth_token_write_failure', 'provider_not_found', 'log_in');
             }
 
-            if (PHP_SAPI === 'cli') {
+            if (PHP_SAPI === 'cli' && $this->getMiddleForwardProxy() === null) {
                 $loop = \React\EventLoop\Factory::create();
                 $loop->addPeriodicTimer(0.5, function () use ($loop) {
                     if ($this->settings->get('fbns_token') !== null) {
@@ -4937,6 +4979,7 @@ class Instagram implements ExperimentsInterface
                     'reason'        => Constants::REASONS[0],
                     'request_id'    => $requestId,
                 ]);
+                $this->initTimelineFeed = $feed;
                 $this->event->sendNavigation('cold_start', 'login', 'feed_timeline');
                 $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch', true);
                 $items = $feed->getFeedItems();
@@ -4995,7 +5038,8 @@ class Instagram implements ExperimentsInterface
                 $traySessionId = \InstagramAPI\Signatures::generateUUID();
                 $this->event->sendStoriesRequest($traySessionId, $requestId, 'cold_start');
 
-                $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
+                $trayFeed = $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
+                $this->initTrayFeed = $trayFeed;
 
                 $this->internal->sendGraph('33052919472135518510885263591', ['is_pando' => true], 'BasicAdsOptInQuery', 'xfb_user_basic_ads_preferences', false, 'pando');
                 //$this->internal->sendGraph('35850666251457231147855668495', [], 'AFSOptInQuery', 'AFSStatusGraphQLWrapper', false, 'pando');
@@ -5335,7 +5379,8 @@ class Instagram implements ExperimentsInterface
                     // Act like a real logged in app client refreshing its news timeline.
                     // This also lets us detect if we're still logged in with a valid session.
                     try {
-                        $this->story->getReelsTrayFeed('cold_start');
+                        $trayFeed = $this->story->getReelsTrayFeed('cold_start');
+                        $this->initTrayFeed = $trayFeed;
                     } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
                         if (!self::$manuallyManageLoginException) {
                             if (isset($e->getResponse()->asArray()['logout_reason'])) {
@@ -5361,6 +5406,7 @@ class Instagram implements ExperimentsInterface
                         'is_pull_to_refresh' => $isSessionExpired ? null : mt_rand(1, 3) < 3,
                     ]);
 
+                    $this->initTimelineFeed = $feed;
                     $items = $feed->getFeedItems();
                     if (is_array($items)) {
                         $items = array_slice($items, 0, 2);

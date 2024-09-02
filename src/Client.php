@@ -1519,6 +1519,12 @@ class Client
 
         $headers['set_headers'] = $this->_orderHeaders($headers['set_headers'] + $request->getHeaders());
 
+        if ($this->_parent->getMiddleForwardProxy() !== null) {
+            $uri = $request->getUri()->withScheme('http');
+            $request = $request->withUri($uri);
+            $headers['set_headers']['targetproxy'] = $this->_parent->getMiddleForwardProxy();
+        }
+
         // Set up headers that are required for every request.
         $request = GuzzleUtils::modifyRequest($request, $headers);
 

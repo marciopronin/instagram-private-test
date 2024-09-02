@@ -1,3 +1,15 @@
+# Stable release v22.19.0
+## Date: 02/09/2024
+
+### New features
+
+- **Instagram:** Add `getMiddleForwardProxy()`
+- **Instagram:** Add `setMiddleForwardProxy()`
+
+### Updates and fixes
+
+- **Client:** Add suport for middle proxy.
+
 # Stable release v22.18.1
 ## Date: 28/08/2024
 

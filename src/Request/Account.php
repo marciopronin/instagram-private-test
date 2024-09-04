@@ -366,6 +366,41 @@ class Account extends RequestCollection
     }
 
     /**
+     * Get login activity and suspicious login attempts (Bloks).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function getLoginActivityBloks()
+    {
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.login_activities.unrecognized_logins/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'server_params' => [
+                    'INTERNAL_INFRA_THEME'      => 'harm_f,default,default,harm_f',
+                    'INTERNAL_INFRA_screen_id'  => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $arrayResponse = $response->asArray();
+
+        try {
+            return $arrayResponse['layout']['bloks_payload']['data'][0]['data']['initial'];
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
      * Logout session.
      *
      * @param $sessionId    Session ID.
@@ -382,6 +417,47 @@ class Account extends RequestCollection
             ->addPost('session_id', $sessionId)
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Logout session (Bloks).
+     *
+     * @param string $sessionId SessionID.
+     * @param int    $accountId Account ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function logoutSessionBloks(
+        $sessionId,
+        $accountId)
+    {
+        return $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.login_activities.unrecognized_logins.logout/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'client_params' => [
+                    'session_id'        => $sessionId,
+                    'account_type'      => 1,
+                    'account_id'        => $accountId,
+                    'family_device_id'  => $this->ig->phone_id,
+                ],
+                'server_params' => [
+                    'requested_screen_component_type'   => null,
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -408,6 +484,47 @@ class Account extends RequestCollection
         //->addPost('_csrftoken', $this->ig->client->getToken())
         ->addPost('_uuid', $this->ig->uuid)
         ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
+     * Approve (Confirm it was you) a suspicious login (Bloks).
+     *
+     * @param string $sessionId SessionID.
+     * @param int    $accountId Account ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     */
+    public function approveSuspiciousLoginBloks(
+        $sessionId,
+        $accountId)
+    {
+        return $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.avow_login/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'client_params' => [
+                    'session_id'        => $sessionId,
+                    'account_type'      => 1,
+                    'account_id'        => $accountId,
+                    'family_device_id'  => $this->ig->phone_id,
+                ],
+                'server_params' => [
+                    'requested_screen_component_type'   => null,
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
     }
 
     /**

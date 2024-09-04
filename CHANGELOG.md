@@ -1,3 +1,12 @@
+# Stable release v22.21.0
+## Date: 04/09/2024
+
+### New features
+
+- **Account:** Add `getLoginActivityBloks()`
+- **Account:** Add `logoutSessionBloks()`
+- **Account:** Add `approveSuspiciousLoginBloks()`
+
 # Stable release v22.20.0
 ## Date: 02/09/2024
 

@@ -537,6 +537,7 @@ class Account extends RequestCollection
     public function getAccountFamily()
     {
         return $this->ig->request('multiple_accounts/get_account_family/')
+            ->addHeader('X-Tigon-Is-Retry', 'False')
             ->getResponse(new Response\MultipleAccountFamilyResponse());
     }
 

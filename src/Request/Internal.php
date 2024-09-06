@@ -1906,13 +1906,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', '8e96c4d085c170846cf67f3d0031257e1bcbd0daee9cf1823ed7f1a72f197e08')
+                ->addPost('query_hash', '4dc61a3b0a6c1ba50020cc2a3705b2b6a72564cadd1b48523df1ef26e1946063')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '4d582ae06496ce36c0e4b753e9ba925a10b4e124159192c1b610917e43404c4b')
+                ->addPost('query_hash', '2f966945ba408eddc38b8760b227797f77976b80730f3079e57183a3078dea71')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -2216,6 +2216,7 @@ class Internal extends RequestCollection
     public function getLoomFetchConfig()
     {
         return $this->ig->request('loom/fetch_config/')
+            ->addHeader('X-Tigon-Is-Retry', 'True')
             ->getResponse(new Response\LoomFetchConfigResponse());
     }
 
@@ -2424,9 +2425,11 @@ class Internal extends RequestCollection
             ->setAddDefaultHeaders(false)
             ->addHeader('X-IG-App-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
             ->addHeader('X-IG-Capabilities', Constants::X_IG_Capabilities)
+            ->addHeader('X-Fb-Request-Analytics-Tags', '{"network_tags":{"product":"567067343352427","retry_attempt":"0"},"application_tags":"rmd"}')
             ->addHeader('X-Fb-Privacy-Context', '4760009080727693')
-            ->addHeader('X-Tigon-Is-Retry', 'false')
-            ->addHeader('X-Fb-Rmd', 'fail=NoUrlMap;v=;ip=;tkn=;reqTime=-1090386208;recvTime=-1239979508')
+            ->addHeader('X-Tigon-Is-Retry', 'False')
+            ->addHeader('X-Fb-Friendly-Name', 'rmd-mapfetcher')
+            ->addHeader('X-Fb-Rmd', 'fail=Server:NoUrlMap,Default:INVALID_MAP;v=;ip=;tkn=;reqTime=0;recvTime=0')
             ->addParam('net_iface', $interface)
             ->addParam('reason', $reason)
             ->getResponse(new Response\GenericResponse());

@@ -1,3 +1,14 @@
+# Stable release v22.21.1
+## Date: 06/09/2024
+
+### New features
+
+- **Constants:** Update to 347.0.0.40.103. New version codes available in the next hours.
+- **Account:** Update `getAccountFamily()`
+- **Internal:** Update `getMobileConfig()`
+- **Internal:** Update `getLoomFetchConfig()`
+- **Internal:** Update `cdnRmd()`
+
 # Stable release v22.21.0
 ## Date: 04/09/2024
 

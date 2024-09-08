@@ -1,7 +1,18 @@
+# Stable release v22.21.2
+## Date: 09/09/2024
+
+### Updates and fixes
+
+- **Constants:** Update version codes
+- **Internal:** Update `sendGraph()`
+- **Instagram:** Update `sendLoginFlow()`
+- **Instagram:** Update `finishTwoFactorVerification()`
+- **Response:** Update `LoginResponse`
+
 # Stable release v22.21.1
 ## Date: 06/09/2024
 
-### New features
+### Updates and fixes
 
 - **Constants:** Update to 347.0.0.40.103. New version codes available in the next hours.
 - **Account:** Update `getAccountFamily()`

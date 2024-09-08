@@ -2364,6 +2364,7 @@ class Instagram implements ExperimentsInterface
                             'two_factor_required'   => true,
                             'is_bloks'              => true,
                             'is_generic'            => isset($twoFactorMap['context_data']) && str_contains($response->asJson(), 'generic_code_entry'),
+                            'verification_picker'   => str_contains($response->asJson(), 'com.bloks.www.ap.two_step_verification.challenge_picker'),
                         ];
 
                         if ($endpoint === 'com.bloks.www.two_step_verification.entrypoint' || $endpoint === 'com.bloks.www.ap.two_step_verification.entrypoint_async') {
@@ -3875,7 +3876,7 @@ class Instagram implements ExperimentsInterface
         }
 
         if (is_array($loginResponseWithHeaders)) {
-            if (str_contains($response->asJson(), 'BLOKS_TWO_STEP_VERIFICATION_ENTER_CODE:error_message:0')) {
+            if (str_contains($response->asJson(), 'BLOKS_TWO_STEP_VERIFICATION_ENTER_CODE:error_message:')) {
                 throw new \InstagramAPI\Exception\InstagramException('Invalid 2FA code');
             }
             $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
@@ -4968,13 +4969,18 @@ class Instagram implements ExperimentsInterface
                     $this->internal->getMobileConfig(false);
                     $this->event->sendNavigation('button', 'com.bloks.www.caa.login.login_homepage', 'com.bloks.www.caa.login.save-credentials');
 
+                    /*
                     $this->internal->sendGraph('8463128007441046037090177764',
                         [
-                            'configType' => 'viper',
+                            'configType' => 'viper'
                         ],
                         'IgmConfigSyncQuery', 'xig_twoMeasurement_platform_config', false, 'pando');
-
+                    */
                     $this->_registerPushChannels();
+                    $this->internal->sendGraph('11424838746690953787234584958', [], 'FxIgFetaInfoQuery', 'fx_pf_feta_info', false, 'pando');
+                    $this->internal->sendGraph('11674382495679744485820947859', [
+                        'caller_name'   => 'fx_product_foundation_client_FXOnline_client_cache',
+                    ], 'FxIgLinkageCacheQuery', 'xe_client_cache_accounts', false, 'pando');
                     $this->internal->getNavBarCameraDestination();
                 } catch (\Exception $e) {
                     // pass
@@ -5069,8 +5075,8 @@ class Instagram implements ExperimentsInterface
                 $trayFeed = $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
                 $this->initTrayFeed = $trayFeed;
 
-                $this->internal->sendGraph('33052919472135518510885263591', ['is_pando' => true], 'BasicAdsOptInQuery', 'xfb_user_basic_ads_preferences', false, 'pando');
-                //$this->internal->sendGraph('35850666251457231147855668495', [], 'AFSOptInQuery', 'AFSStatusGraphQLWrapper', false, 'pando');
+                $this->internal->sendGraph('33052919472135518510885263591', [], 'BasicAdsOptInQuery', 'xfb_user_basic_ads_preferences', false, 'pando');
+                $this->internal->sendGraph('35850666251457231147855668495', [], 'AFSOptInQuery', 'AFSStatusGraphQLWrapper', false, 'pando');
 
                 $this->internal->getAsyncNdxIgSteps('NDX_IG_IMMERSIVE');
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
@@ -5084,7 +5090,7 @@ class Instagram implements ExperimentsInterface
                 try {
                     $this->account->getBadgeNotifications();
 
-                    $this->internal->sendGraph('20527889286411119358419418429', [
+                    $this->internal->sendGraph('205278892814757334779864170428', [
                         'languages'     => ['nolang'],
                         'service_ids'   => ['MUTED_WORDS'],
                     ], 'IGContentFilterDictionaryLookupQuery', 'ig_content_filter_dictionary_lookup_query', false, 'pando');
@@ -5133,10 +5139,10 @@ class Instagram implements ExperimentsInterface
                 $this->media->getBlockedMedia();
                 $this->internal->sendGraph('25336029839814386604447461985', [
                     'params' => [
-                        'params'                => '{"qp_id":"924631039205678","surface_nux_id":"11483"}',
+                        'params'                => '{"params":"{\"server_params\":{\"extras_json\":\"{\\\"is_account_linked\\\":true,\\\"newly_linked_accounts\\\":false}\",\"crosspost_upsell_variant\":\"bottomsheet_close_friends_story_feed\",\"should_dismiss\":false,\"crosspost_upsell_entrypoint\":\"IG_STORY_COMPOSER_CLOSE_FRIENDS_STORY_BUTTON\"}}"}',
                         'infra_params'          => ['device_id' => $this->device_id],
                         'bloks_versioning_id'   => Constants::BLOCK_VERSIONING_ID,
-                        'app_id'                => 'com.bloks.www.qp.async.bloks_action',
+                        'app_id'                => 'com.bloks.www.cxp.xposting_upsells.native_shell',
                     ],
                     'bk_context'    => [
                         'is_flipper_enabled'            => false,
@@ -5175,7 +5181,6 @@ class Instagram implements ExperimentsInterface
             // Batch request 4
             $this->client->startEmulatingBatch();
 
-            /*
             try {
                 //$this->timeline->getTimelineFeed(); TODO
                 $this->internal->sendGraph('97942539015262622076776956304',
@@ -5184,10 +5189,83 @@ class Instagram implements ExperimentsInterface
                         'test_id'           => '59705010009496',
                         'purpose'           => 'product::ads_personalization',
                         'version'           => '0.0.5',
-                        'client_msg_type'   => 'INFER'
+                        'client_msg_type'   => 'INFER',
                     ],
-                    'OnDeviceFLFeatures', 'on_device_fl_features', false, 'pando');
+                    'OnDeviceFLFeatures', 'on_device_fl_features', false, 'pando', false, true);
 
+                $rand = mt_rand(6000000000000000, 6099999999999999) / 10000000000000000;
+                $formatRand = rtrim(sprintf('%.16f', $rand), '0');
+
+                if (substr($formatRand, -1) == '.') {
+                    $formatRand .= '0';
+                }
+
+                $this->internal->sendGraph('387719987211424210844178051540',
+                    [
+                        'use_case_version'      => '0.0.5',
+                        'use_case'              => 'IG_ADS_PREFETCH',
+                        'flow'                  => 'PREDICT',
+                        'examples'              => [
+                            [
+                                'timestamp' => time(),
+                                'features'  => [
+                                    [
+                                        'value' => '10',
+                                        'id'    => '3614',
+                                    ],
+                                    [
+                                        'value' => $formatRand,
+                                        'id'    => -1,
+                                    ],
+                                    [
+                                        'value' => '40532000',
+                                        'id'    => '2620',
+                                    ],
+                                    [
+                                        'value' => '-1',
+                                        'id'    => '2474',
+                                    ],
+                                    [
+                                        'value' => '10',
+                                        'id'    => '100001',
+                                    ],
+                                    [
+                                        'value' => '0',
+                                        'id'    => '100002',
+                                    ],
+                                ],
+                                'id'        => $traySessionId,
+                                'context'   => $traySessionId,
+                            ],
+                        ],
+                    ],
+                    'DcpFeaturesUpload', 'xfb_post_dcp_features_upload', false, 'pando', false, true);
+
+                $this->internal->sendGraph('21631519914279241558813005594',
+                [
+                    'service_names' => [
+                        'CROSS_POSTING_SETTING',
+                    ],
+                    'custom_partner_params' => [
+                        [
+                            'value' => 'FB',
+                            'key'   => 'CROSSPOSTING_DESTINATION_APP',
+                        ],
+                        [
+                            'value' => '',
+                            'key'   => 'CROSSPOSTING_SHARE_TO_SURFACE',
+                        ],
+                        [
+                            'value' => 'true',
+                            'key'   => 'OVERRIDE_USER_VALIDATION_WITH_CXP_ELIGIBILITY_RULE',
+                        ],
+                    ],
+                    'client_caller_name'    => 'ig_android_service_cache_crossposting_setting',
+                    'caller_name'           => 'fx_product_foui_Afion_client_FXOnline_client_cache',
+                ],
+                'FxIgConnectedServicesInfoQuery', 'fx_service_cache', false, 'pando', false, true);
+
+                /*
                 $this->internal->sendGraph('18293997046226642457734318433', [
                     'is_pando' => true,
                     'input'    => [
@@ -5201,11 +5279,10 @@ class Instagram implements ExperimentsInterface
                         'log_only'              => true,
                     ],
                 ], 'ReportAttributionEventsMutation', 'report_attribution_events', false, 'pando');
-
+                */
             } catch (\Exception $e) {
                 // pass
             }
-            */
 
             self::$sendAsync = false;
 
@@ -5220,7 +5297,7 @@ class Instagram implements ExperimentsInterface
             self::$sendAsync = true;
 
             try {
-                $this->internal->sendGraph('43230821013683556483393399494', ['is_pando' => true], 'IGFxLinkedAccountsQuery', 'fx_linked_accounts', false, 'pando');
+                $this->internal->sendGraph('43230821013683556483393399494', [], 'IGFxLinkedAccountsQuery', 'fx_linked_accounts', false, 'pando');
                 //$this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
                 /*$this->internal->sendGraph('13513772661704761708109730075', [
                     'is_pando' => true,
@@ -5233,15 +5310,118 @@ class Instagram implements ExperimentsInterface
                     ],
                 ], 'IGOneLinkMiddlewareWhatsAppBusinessQuery', 'xfb_one_link_monoschema', false, 'pando');*/
                 $this->internal->sendGraph('14088097634272511800572157181', [
-                    'is_pando'         => true,
                     'client_states'    => [
-                        'impression_count'      => 1,
-                        'last_impression_time'  => 0,
-                        'sequence_number'       => 0,
-                        'variant'               => 'BOTTOMSHEET_XAR_REELS',
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_AUDIENCE_CHANGE_FEED',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_MIGRATION_FEED_WAVE2',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_MIGRATION_STORIES_WAVE2',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_REEL_CCP_MIGRATION_FEED',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_REEL_CCP_MIGRATION_STORY',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_STORY_REEL_CCP_MIGRATION_FEED',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_FEED_REEL_CCP_MIGRATION_STORY',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_UNIFIED_STORIES_FEED',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_UNLINKED_USER_FEED',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'BOTTOMSHEET_XAR_REELS',
+                            'sequence_number'       => 2,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'DIALOG_FEED',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'DIALOG_STORY',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'TOOLTIP_AUTOSHARE_FEED',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'TOOLTIP_CURRENTLY_SHARING_FEED',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'TOOLTIP_NUX_STORIES',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'TOOLTIP_PAGE_SHARE_FEED',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'TOOLTIP_SHORTCUT_DESTINATION_PICKER_NOT_SHARING_STORIES',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
+                        [
+                            'last_impression_time'  => 0,
+                            'variant'               => 'TOOLTIP_SHORTCUT_DESTINATION_PICKER_STORIES',
+                            'sequence_number'       => 0,
+                            'impression_count'      => 0,
+                        ],
                     ],
-                ], 'SyncCXPNoticeStateMutation', 'xcxp_sync_notice_state', false, 'pando');
-                //$this->internal->sendGraph('176575339118291536801493724773', ['is_pando' => true], 'HasAvatarQuery', 'viewer', false, 'pando');
+                ], 'SyncCXPNoticeStateMutation', 'xcxp_sync_notice_state', false, 'pando', false, true);
+                $this->internal->sendGraph('17657533919338591111083362666', [], 'HasAvatarQuery', 'viewer', false, 'pando');
 
                 try {
                     $this->internal->storeClientPushPermissions();

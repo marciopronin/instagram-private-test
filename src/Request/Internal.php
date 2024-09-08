@@ -2482,7 +2482,7 @@ class Internal extends RequestCollection
             ->addHeader('IG-INTENDED-USER-ID', empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'))
             ->addHeader('X-Tigon-Is-Retry', 'False')
             ->addPost('client_doc_id', $clientDoc)
-            ->addPost('locale', is_bool($queryEndpoint) && $queryEndpoint ? 'user' : $this->ig->getLocale())
+            ->addPost('locale', 'user')//is_bool($queryEndpoint) && $queryEndpoint ? 'user' : $this->ig->getLocale())
             ->addPost('variables', json_encode($vars, JSON_PRESERVE_ZERO_FRACTION));
 
         if ($gzip) {

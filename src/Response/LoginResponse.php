@@ -53,6 +53,7 @@ use InstagramAPI\Response;
  * @method Model\TwoFactorInfo getTwoFactorInfo()
  * @method mixed getTwoFactorRequired()
  * @method string getUsername()
+ * @method bool getVerificationPicker()
  * @method Model\_Message[] get_Messages()
  * @method bool isAccountType()
  * @method bool isAction()
@@ -100,6 +101,7 @@ use InstagramAPI\Response;
  * @method bool isTwoFactorInfo()
  * @method bool isTwoFactorRequired()
  * @method bool isUsername()
+ * @method bool isVerificationPicker()
  * @method bool is_Messages()
  * @method $this setAccountType(int $value)
  * @method $this setAction(string $value)
@@ -147,6 +149,7 @@ use InstagramAPI\Response;
  * @method $this setTwoFactorInfo(Model\TwoFactorInfo $value)
  * @method $this setTwoFactorRequired(mixed $value)
  * @method $this setUsername(string $value)
+ * @method $this setVerificationPicker(bool $value)
  * @method $this set_Messages(Model\_Message[] $value)
  * @method $this unsetAccountType()
  * @method $this unsetAction()
@@ -194,6 +197,7 @@ use InstagramAPI\Response;
  * @method $this unsetTwoFactorInfo()
  * @method $this unsetTwoFactorRequired()
  * @method $this unsetUsername()
+ * @method $this unsetVerificationPicker()
  * @method $this unset_Messages()
  */
 class LoginResponse extends Response
@@ -243,5 +247,6 @@ class LoginResponse extends Response
         'masked_cp'                     => 'string', // custom
         'is_bloks'                      => 'bool',   // custom
         'is_generic'                    => 'bool',   // custom
+        'verification_picker'           => 'bool',   // custom
     ];
 }

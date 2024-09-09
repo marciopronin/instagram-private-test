@@ -5004,11 +5004,13 @@ class Instagram implements ExperimentsInterface
 
                 $this->people->getLimitedInteractionsReminder();
 
+                $this->settings->set('salt_ids', '220140399,332020310');
                 $this->people->getSharePrefill();
 
                 $requestId = \InstagramAPI\Signatures::generateUUID();
                 $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch');
                 $this->setNavChain('');
+                $this->settings->set('salt_ids', '220140399,332020310,974466465,974460658');
                 $feed = $this->timeline->getTimelineFeed(null, [
                     'reason'        => Constants::REASONS[0],
                     'request_id'    => $requestId,
@@ -5117,6 +5119,8 @@ class Instagram implements ExperimentsInterface
             // Batch request 3
             $this->client->startEmulatingBatch();
 
+            $this->settings->set('salt_ids', '');
+
             try {
                 if ($feed !== null) {
                     $feedTimelineItems = $feed->getFeedItems();
@@ -5130,12 +5134,12 @@ class Instagram implements ExperimentsInterface
                 //$this->internal->logResurrectAttribution();
                 //$this->internal->getDeviceCapabilitiesDecisions();
                 //$this->people->getBootstrapUsers();
-                $this->settings->set('salt_ids', '332016926,332019702,332008904');
 
                 self::$sendAsync = false;
                 $this->internal->getQPFetch(['LOGIN_INTERSTITIAL']);
                 self::$sendAsync = true;
 
+                $this->settings->set('salt_ids', '');
                 $this->media->getBlockedMedia();
                 $this->internal->sendGraph('25336029839814386604447461985', [
                     'params' => [
@@ -5477,7 +5481,7 @@ class Instagram implements ExperimentsInterface
                 $this->client->stopEmulatingBatch();
 
                 try {
-                    $this->settings->set('salt_ids', '132191320,332016926,332019702,332008904');
+                    $this->settings->set('salt_ids', '220140399,332020310,974466465,974460658');
                     $this->account->getBadgeNotifications();
                 } catch (\Exception $e) {
                     // pass
@@ -5512,7 +5516,6 @@ class Instagram implements ExperimentsInterface
                 ], 'CrossPostingContentCompatibilityConfig', 'xcxp_unified_crossposting_configs_root', false, 'pando');
                 */
                 $this->internal->getNotes();
-                $this->settings->set('salt_ids', '332016926,332019702,332008904');
 
                 /*
                 try {

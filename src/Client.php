@@ -1459,45 +1459,41 @@ class Client
             $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = strval($this->totalTime);
             //$headers['set_headers']['X-MID'] = $this->getMid();
 
-            if (strpos($request->getUri(), 'banyan/banyan') !== false) {
-                $this->_parent->settings->set('salt_ids', '332020310');
+            if ($this->_parent->isLoginFlow !== true) {
+                $saltMap = [
+                    'direct_v2/get_presence'                => '332020310',
+                    'feed/timeline'                         => '',
+                    'feed/reels_tray'                       => '',
+                    'qp/batch_fetch'                        => '',
+                    'feed/reels_media_stream'               => '',
+                    'news/inbox'                            => '',
+                    'media/blocked'                         => '',
+                    sprintf('/users/%s/info', $this->_parent->account_id) => '',
+                    sprintf('feed/injected_reels_media', $this->_parent->account_id) => '974460658',
+                    'discover/topical_explore'              => '332008792,332011967,220137859',
+                    'scores/bootstrap'                      => '220137859',
+                    'android_modules/download'              => '332008792,332011967,220145826',
+                    'accounts/change_profile_picture'       => '332008792,332011967',
+                    'friendships/show_many'                 => '332008792,332011967',
+                    'user_profile/get_note_for_user'        => '332008792,332011967',
+                    'feed/user'                             => '',
+                    'fbsearch/nullstate_dynamic_sections'   => '',
+                    'fbsearch/register_recent_search_click' => '',
+                    '/info'                                 => '',
+                    'fbsearch/keyword_typeahead'            => '332008792,332011967,220137859',
+                    'fbsearch/typeahead_stream'             => '332008792,332011967,220137859',
+                    'discover/ayml'                         => '332008792,332011967',
+                    'clips/discover'                        => '',
+                ];
+
+                foreach ($saltMap as $uri => $saltIds) {
+                    if (strpos($request->getUri(), $uri) !== false) {
+                        $this->_parent->settings->set('salt_ids', $saltIds);
+                        break;
+                    }
+                }
             }
-            if (strpos($request->getUri(), 'async_get_ndx_ig_steps') !== false) {
-                $this->_parent->settings->set('salt_ids', '220140399,332020310,974460658');
-            }
-            if (strpos($request->getUri(), 'feed/timeline') !== false) {
-                $this->_parent->settings->set('salt_ids', '220140399,332020310,974466465,974460658');
-            }
-            if (strpos($request->getUri(), 'feed/timeline') !== false) {
-                $this->_parent->settings->set('salt_ids', '220140399,332020310,974466465,974460658');
-            }
-            if (strpos($request->getUri(), 'media/blocked') !== false) {
-                $this->_parent->settings->set('salt_ids', '332020310,974466465');
-            }
-            if (strpos($request->getUri(), sprintf('/users/%s/info', $this->_parent->account_id)) !== false) {
-                $this->_parent->settings->set('salt_ids', '');
-            }
-            if (strpos($request->getUri(), 'discover/topical_explore') !== false) {
-                $this->_parent->settings->set('salt_ids', '332008142,332009826,332019700,332020325');
-            }
-            if (strpos($request->getUri(), 'scores/bootstrap') !== false) {
-                $this->_parent->settings->set('salt_ids', '220137859');
-            }
-            if (strpos($request->getUri(), 'feed/user') !== false) {
-                $this->_parent->settings->set('salt_ids', '332017383,332014186,332009051,332006902,220137859');
-            }
-            if (strpos($request->getUri(), 'fbsearch/register_recent_search_click') !== false) {
-                $this->_parent->settings->set('salt_ids', '332017383,332014186,332009051,332006902');
-            }
-            if (strpos($request->getUri(), '/info') !== false) {
-                $this->_parent->settings->set('salt_ids', '');
-            }
-            if (strpos($request->getUri(), 'fbsearch/keyword_typeahead') !== false) {
-                $this->_parent->settings->set('salt_ids', '220137859');
-            }
-            if (strpos($request->getUri(), 'fbsearch/typeahead_stream') !== false) {
-                $this->_parent->settings->set('salt_ids', '220137859');
-            }
+
             /*
             if (strpos($request->getUri(), 'media/configure') !== false) {
                 $this->_parent->settings->set('salt_ids', $this->generateFlowId(1061163349, 1));

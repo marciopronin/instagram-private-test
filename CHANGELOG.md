@@ -1,3 +1,12 @@
+# Stable release v22.21.3
+## Date: 09/09/2024
+
+### Updates and fixes
+
+- **Account:** Update `changeProfilePicture()`
+- **Instagram:** Update login flow
+- **Client:** Update `api()`
+
 # Stable release v22.21.2
 ## Date: 09/09/2024
 

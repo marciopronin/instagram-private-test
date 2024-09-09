@@ -777,7 +777,7 @@ class Account extends RequestCollection
             //->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('use_fbuploader', 'true')
-            ->addPost('remove_birthday_selfie', 'false')
+            ->addPost('remove_birthday_selfie', 'False')
             ->addPost('upload_id', $internalMetadata->getUploadId())
             ->getResponse(new Response\UserInfoResponse());
     }

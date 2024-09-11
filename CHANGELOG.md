@@ -1,3 +1,12 @@
+# Stable release v22.21.4
+## Date: 11/09/2024
+
+### Updates and fixes
+
+- **People:** Update `getFollowersQuery()`
+- **Constants:** Update to 348.0.0.46.105
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v22.21.3
 ## Date: 09/09/2024
 

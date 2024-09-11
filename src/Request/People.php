@@ -760,7 +760,6 @@ class People extends RequestCollection
         $maxId = null)
     {
         $data = [
-            'include_friendship_status' => false,
             'query'                     => $searchQuery,
             'request_data'              => [
                 'enableGroups'          => true,
@@ -768,6 +767,7 @@ class People extends RequestCollection
             ],
             'search_surface'            => 'follow_list_page',
             'user_id'                   => $userId,
+            'exclude_unused_fields'     => false,
             'include_biography'         => false,
             'include_unseen_count'      => false,
         ];
@@ -775,6 +775,7 @@ class People extends RequestCollection
         if ($maxId !== null) {
             $data['max_id'] = $maxId;
         }
+
         $response = $this->ig->internal->sendGraph('28479704791492827239717517917', $data, 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true, true);
         $arr = $response->asArray();
         if (isset($arr['data'])) {

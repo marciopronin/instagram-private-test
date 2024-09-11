@@ -5156,7 +5156,7 @@ class Instagram implements ExperimentsInterface
                 ], 'IGBloksAppRootQuery', 'bloks_app', false, 'pando', false, true);
 
                 $this->story->getInjectedStories([$this->account_id], $traySessionId);
-                //$this->internal->sendGraph('279018452917733073575656047369', ['is_pando' => true], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
+                //$this->internal->sendGraph('279018452917733073575656047369', [], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
                 //$this->reel->discover();
                 $this->people->getInfoById($this->account_id);
             } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {

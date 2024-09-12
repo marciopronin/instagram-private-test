@@ -99,6 +99,9 @@ class InstagramPhoto extends InstagramMedia
                     }
                 }
             } finally {
+                if ($this->_jpgOutput) {
+                    Utils::checkExiftoolAndRemoveExif($outputFile);
+                }
                 @imagedestroy($output);
             }
         } catch (\Exception $e) {

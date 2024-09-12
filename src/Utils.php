@@ -70,7 +70,7 @@ class Utils
         $result = null;
         if (!$useNano) {
             while (true) {
-                $result = number_format(round(microtime(true) * 1000), 0, '', '');
+                $result = number_format(round(microtime(true) * 1000 / 4.2), 0, '', '');
                 if (self::$_lastUploadId !== null && $result === self::$_lastUploadId) {
                     // NOTE: Fast machines can process files too quick (< 0.001
                     // sec), which leads to identical upload IDs, which leads to
@@ -464,6 +464,26 @@ class Utils
         }
 
         return self::$ffprobeBin;
+    }
+
+    /**
+     * Check for exiftool.
+     *
+     * @param string $filepath Path to the photo file.
+     *
+     * @return bool if exiftool is present, otherwise FALSE.
+     */
+    public static function checkExiftoolAndRemoveExif(
+        $filepath)
+    {
+        @exec('exiftool -ver 2>&1', $output, $statusCode);
+        if ($statusCode === 0) {
+            @exec(sprintf('exiftool -all= -overwrite_original %s 2>&1', $filepath), $output, $statusCode);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -1,3 +1,15 @@
+# Stable release v22.22.0
+## Date: 12/09/2024
+
+### New features
+
+- **Utils:** Add `checkExiftoolAndRemoveExif()`
+
+### Updates and fixes
+
+- **Internal:** Update `_getPhotoUploadParams()`
+- **InstagramPhoto:** Update `_createOutputFile()`
+
 # Stable release v22.21.4
 ## Date: 11/09/2024
 

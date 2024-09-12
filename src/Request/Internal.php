@@ -4093,7 +4093,7 @@ class Internal extends RequestCollection
         $result = [
             'upload_id'         => (string) $internalMetadata->getUploadId(),
             'retry_context'     => json_encode($this->_getRetryContext()),
-            'image_compression' => ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) ? '{"lib_name":"libwebp","lib_version":"26","quality":"96"}' : '{"lib_name":"moz","lib_version":"3.1.m","quality":"93"}',
+            'image_compression' => ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) ? '{"lib_name":"libwebp","lib_version":"26","quality":"96"}' : '{"lib_name":"moz","lib_version":"3.1.m","quality":"90"}',
             'xsharing_user_ids' => json_encode([]),
             'media_type'        => $internalMetadata->getVideoDetails() !== null
                 ? (string) Response\Model\Item::VIDEO
@@ -4119,6 +4119,10 @@ class Internal extends RequestCollection
                     $result['broadcast_id'] = (string) $internalMetadata->getBroadcastId();
                     $result['is_post_live_clips'] = '1';
                 }
+                break;
+            case Constants::PROFILE_PIC:
+                unset($result['retry_context']);
+                unset($result['xsharing_user_ids']);
                 break;
             default:
         }

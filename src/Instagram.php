@@ -2195,6 +2195,7 @@ class Instagram implements ExperimentsInterface
                     ->addHeader('X-Ig-Attest-Params', '{"attestation":[{"version":2,"type":"keystore","errors":[-1004],"challenge_nonce":"","signed_nonce":"","key_hash":""}]}')
                     ->addPost('params', json_encode([
                         'client_input_params'           => [
+                            'should_show_nested_nta_from_aymh'  => 0,
                             'device_id'                         => $this->device_id,
                             'sim_phones'                        => [],
                             'login_attempt_count'               => $this->loginAttemptCount,
@@ -2231,7 +2232,7 @@ class Instagram implements ExperimentsInterface
                             'login_source'                                  => isset($firstMap['login_source']) ? $firstMap['login_source'] : 'Login',
                             'is_platform_login'                             => intval($this->bloksInfo['is_platform_login'][1]),
                             'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                            'offline_experiment_group'                      => null,
+                            'offline_experiment_group'                      => 'caa_iteration_v3_perf_ig_4',
                             'is_from_landing_page'                          => 0,
                             'password_text_input_id'                        => isset($firstMap['password_text_input_id']) ? $firstMap['password_text_input_id'] : '',
                             'is_from_empty_password'                        => 0,
@@ -2241,14 +2242,15 @@ class Instagram implements ExperimentsInterface
                             'should_show_nested_nta_from_aymh'              => 1,
                             'device_id'                                     => null,
                             'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                            'reg_flow_source'                               => 'cacheable_aymh_screen', // cacheable_aymh_screen
+                            'reg_flow_source'                               => 'login_home_native_integration_point', // cacheable_aymh_screen
                             'is_caa_perf_enabled'                           => 1,
                             'credential_type'                               => isset($firstMap['credential_type']) ? $firstMap['credential_type'] : 'password',
                             'is_from_password_entry_page'                   => 0,
                             'caller'                                        => 'gslr',
                             'family_device_id'                              => null, //$this->phone_id,
                             'INTERNAL_INFRA_THEME'                          => 'harm_f',
-                            'access_flow_version'                           => 'LEGACY_FLOW',
+                            'is_from_assistive_id'                          => 0,
+                            'access_flow_version'                           => 'F2_FLOW',
                             'is_from_logged_in_switcher'                    => 0,
                         ],
                     ]))

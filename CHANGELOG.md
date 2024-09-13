@@ -1,3 +1,14 @@
+# Stable release v22.22.1
+## Date: 13/09/2024
+
+### New features
+
+- **Web:** Add `getUserStoryFeedQuery()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+
 # Stable release v22.22.0
 ## Date: 12/09/2024
 

@@ -588,4 +588,33 @@ class Web extends RequestCollection
             ->addPost('chaining_enabled', 'on')
             ->getResponse(new Response\GenericResponse());
     }
+
+    /**
+     * Get a specific user's story feed with broadcast details GraphQL Query.
+     *
+     * @param string $userId Numerical UserPK ID.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return \InstagramAPI\Response\GenericResponse
+     *
+     * @see Story::getUserReelMediaFeed()
+     */
+    public function getUserStoryFeedQuery(
+        $userId)
+    {
+        return $this->ig->request('https://instagram.com/graphql/query')
+            ->setAddDefaultHeaders(false)
+            ->setSignedPost(false)
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-Fb-Friendly-Name', 'PolarisStoriesV3ReelPageStandaloneDirectQuery')
+            ->addHeader('X-Bloks-Version-Id', '022709c2f0737e27f95f3ca8fe06539bad6f7c77f58c2b18a303961c2aea2eb5')
+            ->addPost('fb_api_caller_class', 'RelayModern')
+            ->addPost('fb_api_req_friendly_name', 'PolarisStoriesV3ReelPageStandaloneDirectQuery')
+            ->addPost('variables', json_encode(['reel_ids_arr'  => [$userId]]))
+            ->addPost('server_timestamps', 'true')
+            ->addPost('doc_id', '8118053404899604')
+            ->getResponse(new Response\GenericResponse());
+    }
 }

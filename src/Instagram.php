@@ -5982,6 +5982,9 @@ class Instagram implements ExperimentsInterface
         if (empty($offsets)) {
             $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\exception_message\\'), 0, -2);
         }
+        if (empty($offsets)) {
+            $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\account_recovery_lookup_client_rate_limited\\'), 0, -2);
+        }
 
         if ($offsets) {
             foreach ($offsets as $offset) {
@@ -6027,7 +6030,10 @@ class Instagram implements ExperimentsInterface
         $response,
         $errorMap)
     {
-        if (isset($errorMap['exception_message'])) {
+        if (isset($errorMap['exception_message']) || $errorMap['event_category']) {
+            if (!isset($errorMap['exception_message'])) {
+                $errorMap['exception_message'] = '';
+            }
             switch ($errorMap['exception_message']) {
                 case 'Login Error: An unexpected error occurred. Please try logging in again.':
                 //case "Unmapped IG Error: This IG Error was not mapped to an Error Code. To fix it, update the error tool under 'CAA' to map it to an Error Code.";

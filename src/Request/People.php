@@ -776,7 +776,7 @@ class People extends RequestCollection
             $data['max_id'] = $maxId;
         }
 
-        $response = $this->ig->internal->sendGraph('28479704791492827239717517917', $data, 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true, true);
+        $response = $this->ig->internal->sendGraph('28479704797981382276527875753', $data, 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true, true);
         $arr = $response->asArray();
         if (isset($arr['data'])) {
             $data = $arr['data'];
@@ -811,7 +811,6 @@ class People extends RequestCollection
     {
         $data = [
             'user_id'                   => $userId,
-            'include_friendship_status' => false,
             'exclude_unused_fields'     => false,
             'include_biography'         => false,
             'query'                     => $searchQuery,
@@ -827,7 +826,7 @@ class People extends RequestCollection
         if ($maxId !== null) {
             $data['max_id'] = $maxId;
         }
-        $response = $this->ig->internal->sendGraph('16104639284251677615978450666', $data, 'FollowingList', 'xdt_api__v1__friendships__following', 'false', 'pando', true, true);
+        $response = $this->ig->internal->sendGraph('16104639283671106146912599053', $data, 'FollowingList', 'xdt_api__v1__friendships__following', 'false', 'pando', true, true);
         $arr = $response->asArray();
         if (isset($arr['data'])) {
             $data = $arr['data'];

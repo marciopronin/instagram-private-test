@@ -135,6 +135,20 @@ class Instagram implements ExperimentsInterface
     public static $skipAccountValidation = false;
 
     /**
+     * Global flag for users who want to run the library incorrectly.
+     *
+     * YOU ENABLE THIS AT YOUR OWN RISK! WE GIVE _ZERO_ SUPPORT FOR THIS MODE!
+     * THIS WILL SKIP ANY PRE AND POST LOGIN FLOW!
+     *
+     * THIS SHOULD BE ONLY USED FOR RESEARCHING AND EXPERIMENTAL PURPOSES.
+     *
+     * YOU HAVE BEEN WARNED. ANY DATA CORRUPTION YOU CAUSE IS YOUR OWN PROBLEM!
+     *
+     * @var bool
+     */
+    public static $runLoginRegisterPush = false;
+
+    /**
      * Global flag for users who want to manage login exceptions on their own.
      *
      * YOU ENABLE THIS AT YOUR OWN RISK! WE GIVE _ZERO_ SUPPORT FOR THIS MODE!
@@ -2037,7 +2051,7 @@ class Instagram implements ExperimentsInterface
                 $this->event->sendFxSsoLibrary('auth_token_write_failure', 'provider_not_found', 'log_in');
             }
 
-            if (PHP_SAPI === 'cli' && $this->getMiddleForwardProxy() === null) {
+            if (PHP_SAPI === 'cli' && $this->getMiddleForwardProxy() === null && self::$runLoginRegisterPush) {
                 $loop = \React\EventLoop\Factory::create();
                 $loop->addPeriodicTimer(0.5, function () use ($loop) {
                     if ($this->settings->get('fbns_token') !== null) {

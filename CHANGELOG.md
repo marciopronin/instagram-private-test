@@ -1,3 +1,12 @@
+# Stable release v22.22.5
+## Date: 20/09/2024
+
+### Updates and fixes
+
+- **Constants:** Update version codes
+- **Instagram:** Update `finishTwoFactorGenericVerification()`
+- **Instagram:** Update `_parseLoginErrors()`
+
 # Stable release v22.22.4
 ## Date: 19/09/2024
 

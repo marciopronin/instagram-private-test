@@ -18,6 +18,7 @@ class Constants
     const IG_IOS_VERSION = '212.1.0.25.118';
     const VERSION_CODE = [
         '643237796',
+        '643237786',
     ];
 
     const IG_IOS_VERSION_CODE = '329643252';

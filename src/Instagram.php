@@ -3990,6 +3990,9 @@ class Instagram implements ExperimentsInterface
             if (str_contains($response->asJson(), 'try a new one')) {
                 throw new \InstagramAPI\Exception\InstagramException('Invalid 2FA code');
             }
+            if (str_contains($response->asJson(), 'Post login failed')) {
+                throw new \InstagramAPI\Exception\InstagramException('Post login failed. Retry again.');
+            }
             $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
             $this->_throwLoginException($response, $errorMap);
         }
@@ -5999,6 +6002,16 @@ class Instagram implements ExperimentsInterface
         if (empty($offsets)) {
             $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\account_recovery_lookup_client_rate_limited\\'), 0, -2);
         }
+        $result = [];
+        $check = '\checkpoint\\';
+        array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
+            if ($value === $check) {
+                $result = ['event_category' => 'checkpoint'];
+            }
+        });
+        if (!empty($result)) {
+            return $result;
+        }
 
         if ($offsets) {
             foreach ($offsets as $offset) {
@@ -6044,7 +6057,7 @@ class Instagram implements ExperimentsInterface
         $response,
         $errorMap)
     {
-        if (isset($errorMap['exception_message']) || $errorMap['event_category']) {
+        if (isset($errorMap['exception_message']) || isset($errorMap['event_category'])) {
             if (!isset($errorMap['exception_message'])) {
                 $errorMap['exception_message'] = '';
             }

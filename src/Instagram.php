@@ -6009,6 +6009,14 @@ class Instagram implements ExperimentsInterface
                 $result = ['event_category' => 'checkpoint'];
             }
         });
+        if (empty($result)) {
+            $check = '\FIRST_PASSWORD_FAILURE\\';
+            array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
+                if ($value === $check) {
+                    $result = ['event_category' => 'FIRST_PASSWORD_FAILURE'];
+                }
+            });
+        }
         if (!empty($result)) {
             return $result;
         }

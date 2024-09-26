@@ -630,6 +630,98 @@ class Account extends RequestCollection
     }
 
     /**
+     * Edit your birthday (bloks).
+     *
+     * @param string $day   Day of birth.
+     * @param string $month Month of birth.
+     * @param string $year  Year of birth.
+     *
+     * @return \InstagramAPI\Response\UserInfoResponse
+     */
+    public function setBirthdayBloks(
+        $day,
+        $month,
+        $year)
+    {
+        $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.edit.birthday.confirmation.async/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'client_input_params'   => [],
+                'server_params'         => [
+                    'from_other_entrypoint'             => 0,
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'confirmation_dialog_title'         => 'Confirm changes to your birthday',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
+                    'requested_screen_component_type'   => null,
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'dialog_type'                       => 'edit_birthday',
+                    'timestamp'                         => strtotime(sprintf('%s-%s-%s', $day, $month, $year)),
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+                'ttrc_join_id'  => Signatures::generateUUID(),
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.edit.birthday.async/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'client_input_params'   => [
+                    'timestamp'                         => strtotime(sprintf('%s-%s-%s', $day, $month, $year)),
+                ],
+                'server_params' => [
+                    'from_other_entrypoint'             => 0,
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
+                    'requested_screen_component_type'   => null,
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'dialog_type'                       => 'edit_birthday',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+                'ttrc_join_id'  => Signatures::generateUUID(),
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.birthday.populate.history.async/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'client_input_params'   => [
+                ],
+                'server_params' => [
+                    'requested_screen_component_type'   => null,
+                    'machine_id'                        => null,
+                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+                'ttrc_join_id'  => Signatures::generateUUID(),
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            //->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        return $response;
+    }
+
+    /**
      * Update profile name.
      *
      * It can only by updated two times within 14 days.

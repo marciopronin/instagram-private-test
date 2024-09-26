@@ -1,3 +1,17 @@
+# Stable release v22.23.0
+## Date: 26/09/2024
+
+### New features
+
+- **Account:** Add `setBirthdayBloks()`
+
+### Updates and fixes
+
+- **Request:** Update `getResponse()`
+- **Constants:** Update version codes
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+- **Reel:** Update `discover()`
+
 # Stable release v22.22.6
 ## Date: 25/09/2024
 

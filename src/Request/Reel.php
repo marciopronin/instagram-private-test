@@ -54,20 +54,6 @@ class Reel extends RequestCollection
         $request = $this->ig->request('clips/discover/')
             ->setSignedPost(false)
             //->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('device_status', json_encode([
-                'battery_level'     => $this->ig->getBatteryLevel(),
-                'is_charging'       => $this->ig->getIsDeviceCharging(),
-                'screen_brightness' => 100,
-                'on_wifi'           => true,
-                'thermal_status'    => -1,
-                'is_powersave'      => false,
-                'hw_av1_dec'        => false,
-                'hw_vp9_dec'        => false,
-                'hw_avc_dec'        => false,
-                '10bit_av1_dec'     => false,
-                '10bit_vp9_dec'     => false,
-                'is_hlg_supported'  => false,
-            ]))
             ->addPost('should_refetch_chaining_media', 'false')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('server_driven_cache_config', json_encode(

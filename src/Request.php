@@ -1052,6 +1052,45 @@ class Request
             }
         }
 
+        if (($this->_parent->isMaybeLoggedIn && $this->_parent->isLoginFlow === false) && (strncmp($this->_url, 'http:', 5) !== 0 && strncmp($this->_url, 'https:', 6) !== 0 && strncmp($this->_url, 'www.', 4) !== 0)) {
+            if ((str_contains($this->_url, 'feed/reels_media') && $this->_parent->isExperimentEnabled('72192', 2, false)) ||
+            (str_contains($this->_url, 'feed/timeline')) ||
+            (str_contains($this->_url, 'feed/user') && $this->_parent->isExperimentEnabled('72192', 1, false)) ||
+            (str_contains($this->_url, 'discover/') && $this->_parent->isExperimentEnabled('72192', 4, false)) ||
+            (str_contains($this->_url, 'ads/async_ads/')) ||
+            (str_contains($this->_url, 'feed/injected_reels_media/') && $this->_parent->isExperimentEnabled('72192', 5, false)) ||
+                ($this->_parent->isExperimentEnabled('72192', 0, false))) {
+                $deviceStatus = [
+                    'battery_level'         => $this->_parent->getBatteryLevel(),
+                    'is_charging'           => $this->_parent->getIsDeviceCharging(),
+                    'screen_brightness'     => 100,
+                    'on_wifi'               => true,
+                    'thermal_status'        => -1,
+                    'is_powersave'          => false,
+                    'hw_av1_dec'            => false,
+                    'hw_vp9_dec'            => false,
+                    'hw_avc_dec'            => false,
+                    '10bit_hw_av1_dec'      => false,
+                    '10bit_hw_vp9_dec'      => false,
+                    'is_hlg_supported'      => false,
+                ];
+
+                if ($this->_parent->isExperimentEnabled('72192', 9, false)) {
+                    $deviceStatus['chip_vendor'] = $this->_parent->device->getManufacturer();
+                    $deviceStatus['chip_name'] = $this->_parent->device->getCpu();
+                    $deviceStatus['mips_sum'] = 0;
+                    $deviceStatus['core_count'] = 8;
+                    $deviceStatus['max_ghz_sum'] = 0;
+                    $deviceStatus['min_ghz_sum'] = 0;
+                }
+            }
+            if (!count($this->_posts)) {
+                $this->addParam('device_status', json_encode($deviceStatus));
+            } else {
+                $this->addPost('device_status', json_encode($deviceStatus));
+            }
+        }
+
         // Set this request as the most recently processed request
         $this->_parent->client->setLastRequest($this);
         // Check for API response success and put its response in the object.

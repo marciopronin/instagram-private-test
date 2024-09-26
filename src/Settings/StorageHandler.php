@@ -125,6 +125,7 @@ class StorageHandler
         '26104', // direct settings (thread_message_limit)
         '41171', // igd_active_tray (suggestions_enabled, suggested_followers_limit)
         '56721', // banyan/banyan (views) 0x810DA0000023D2
+        '72192', // device_status (post param) 0x810EA5000035AA
     ];
 
     /**

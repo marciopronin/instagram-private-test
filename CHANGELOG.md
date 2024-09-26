@@ -1,3 +1,8 @@
+# Stable release v22.23.1
+## Date: 26/09/2024
+
+- **Request:** Update `getResponse()`
+
 # Stable release v22.23.0
 ## Date: 26/09/2024
 

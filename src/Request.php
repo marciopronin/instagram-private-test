@@ -1083,11 +1083,12 @@ class Request
                     $deviceStatus['max_ghz_sum'] = 0;
                     $deviceStatus['min_ghz_sum'] = 0;
                 }
-            }
-            if (!count($this->_posts)) {
-                $this->addParam('device_status', json_encode($deviceStatus));
-            } else {
-                $this->addPost('device_status', json_encode($deviceStatus));
+
+                if (!count($this->_posts)) {
+                    $this->addParam('device_status', json_encode($deviceStatus));
+                } else {
+                    $this->addPost('device_status', json_encode($deviceStatus));
+                }
             }
         }
 

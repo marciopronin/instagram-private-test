@@ -52,7 +52,7 @@
         "clue/socks-react": "^0.8.2",
         "clue/http-proxy-react": "^1.1.0",
         "psr/log": "^1.0",
-        "valga/fbns-react": "0.3.1",
+        "miljan/fbns-react": "dev-master",
         "symfony/process": ">=5.4 <=6.4",
         "winbox/args": "1.0.0",
         "ramsey/uuid": "^3.9|^4.0"

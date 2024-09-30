@@ -725,6 +725,53 @@ class Account extends RequestCollection
     }
 
     /**
+     * Get personal info from Settings (Bloks).
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return string[]
+     */
+    public function getPersonalInfo()
+    {
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.settings.navigation/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'server_params' => [
+                    'should_show_done_button'   => 0,
+                    'is_deeplink'               => 0,
+                    'INTERNAL_INFRA_THEME'      => 'harm_f',
+                    'entrypoint'                => 'app_settings',
+                    'node_id'                   => 'personal_info',
+                    'INTERNAL_INFRA_screen_id'  => 'personal_info',
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $re = '/Contact\sinfo,\s(\w+@\w+\.\w+)|Birthday,\s(\w+\s\d+,\s\d+)/m';
+        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+        $info = [];
+        foreach ($matches as $match) {
+            if (str_contains($match[0], 'Contact info')) {
+                $info['contact'] = $match[1];
+            } else {
+                $timestamp = strtotime($match[2]);
+                $birthday = date('d/m/Y', $timestamp);
+                $info['birthday'] = $birthday;
+            }
+        }
+
+        return $info;
+    }
+
+    /**
      * Update profile name.
      *
      * It can only by updated two times within 14 days.
@@ -2209,7 +2256,7 @@ class Account extends RequestCollection
                     $re = '/\\\\"story\\\\", \(bk\.action\.i64\.Const, (\d+)\), (\d),/m';
                     preg_match_all($re, $response->asJson(), $data, PREG_SET_ORDER, 0);
 
-                    foreach ($matches as $key=> $value) {
+                    foreach ($matches as $key=>$value) {
                         $results[$value[1]] = [
                             'id'        => $data[$key][1],
                             'entity'    => $data[$key][2] === '1' ? 'USER' : 'PAGE',

@@ -1,5 +1,21 @@
+# Stable release v22.24.0
+## Date: 01/10/2024
+
+### New features
+
+- **Account:** Add `getPersonalInfo()`
+
+# Stable release v22.23.2
+## Date: 01/10/2024
+
+### Updates and fixes
+
+Update codestyle
+
 # Stable release v22.23.1
 ## Date: 26/09/2024
+
+### Updates and fixes
 
 - **Request:** Update `getResponse()`
 

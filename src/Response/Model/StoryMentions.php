@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StoryMentions extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'mentions_count_string' => 'string',
         'reels'                 => 'Reel[]',
     ];

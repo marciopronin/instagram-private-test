@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Collection extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'direction' => 'string',
         'children'  => 'Children[]',
         'id'        => 'string',

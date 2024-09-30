@@ -25,8 +25,8 @@ abstract class DirectCommand implements CommandInterface
     public function __construct(
         $action,
         $threadId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $this->_data = [];
 
         // Handle action.
@@ -106,8 +106,8 @@ abstract class DirectCommand implements CommandInterface
      * @return string
      */
     protected function _validateThreadId(
-        $threadId)
-    {
+        $threadId,
+    ) {
         if (!ctype_digit($threadId) && (!is_int($threadId) || $threadId < 0)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid thread identifier.', $threadId));
         }
@@ -125,8 +125,8 @@ abstract class DirectCommand implements CommandInterface
      * @return string
      */
     protected function _validateThreadItemId(
-        $threadItemId)
-    {
+        $threadItemId,
+    ) {
         if (!ctype_digit($threadItemId) && (!is_int($threadItemId) || $threadItemId < 0)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid thread item identifier.', $threadItemId));
         }
@@ -144,8 +144,8 @@ abstract class DirectCommand implements CommandInterface
      */
     protected function _reorderFieldsByWeight(
         array $fields,
-        array $weights)
-    {
+        array $weights,
+    ) {
         uksort($fields, function ($a, $b) use ($weights) {
             $a = isset($weights[$a]) ? $weights[$a] : PHP_INT_MAX;
             $b = isset($weights[$b]) ? $weights[$b] : PHP_INT_MAX;

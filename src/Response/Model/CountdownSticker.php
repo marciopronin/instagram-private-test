@@ -58,7 +58,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class CountdownSticker extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'countdown_id'           => 'string',
         'end_ts'                 => 'string',
         'text'                   => 'string',

@@ -14,7 +14,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Text extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'text' => 'string',
     ];
 }

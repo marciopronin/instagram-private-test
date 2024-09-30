@@ -18,7 +18,7 @@ class DirectConstraints implements ConstraintsInterface
      *
      * @see https://help.instagram.com/1469029763400082
      */
-    const MIN_RATIO = 0.1;
+    public const MIN_RATIO = 0.1;
 
     /**
      * Highest allowed general media aspect ratio (1.91:1, meaning landscape).
@@ -27,21 +27,21 @@ class DirectConstraints implements ConstraintsInterface
      *
      * @var float
      */
-    const MAX_RATIO = 6.2;
+    public const MAX_RATIO = 6.2;
 
     /**
      * Minimum allowed video duration.
      *
      * @var float
      */
-    const MIN_DURATION = 0.1;
+    public const MIN_DURATION = 0.1;
 
     /**
      * Maximum allowed video duration.
      *
      * @var float
      */
-    const MAX_DURATION = 20.0;
+    public const MAX_DURATION = 20.0;
 
     /**
      * The recommended aspect ratio for timeline media.
@@ -50,7 +50,7 @@ class DirectConstraints implements ConstraintsInterface
      *
      * @var float
      */
-    const RECOMMENDED_RATIO = 1.0;
+    public const RECOMMENDED_RATIO = 1.0;
 
     /**
      * The deviation for the recommended aspect ratio.
@@ -59,7 +59,7 @@ class DirectConstraints implements ConstraintsInterface
      *
      * @var float
      */
-    const RECOMMENDED_RATIO_DEVIATION = 0.0;
+    public const RECOMMENDED_RATIO_DEVIATION = 0.0;
 
     /** {@inheritdoc} */
     public function getMinAspectRatio()

@@ -86,7 +86,7 @@ use InstagramAPI\Response;
  */
 class TimelineFeedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'num_results'                    => 'int',
         'client_gap_enforcer_matrix'     => '',
         'is_direct_v2_enabled'           => 'bool',

@@ -6,14 +6,14 @@ date_default_timezone_set('UTC');
 require __DIR__.'/../../vendor/autoload.php';
 require __DIR__.'/NoCaptchaProxyless.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $loginResponse = $ig->login($username, $password);
@@ -179,7 +179,7 @@ try {
                             // Some logic for failure cases
                         }
                         // $sitekey = $e->getResponse()->getSitekey();
-                        //$googleResponse = trim(fgets(STDIN));
+                        // $googleResponse = trim(fgets(STDIN));
                         $ig->settings->set('csrftoken', $e->getResponse()->getCsrftoken());
                         $ig->checkpoint->sendCaptchaResponse($e->getResponse()->getChallengeUrl(), $googleResponse);
                         break 2; // Captcha solved!
@@ -207,7 +207,7 @@ try {
                     case $e instanceof InstagramAPI\Exception\Checkpoint\UFACBloksException:
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SelfieCaptchaException:
                         echo 'Account on moderation';
-                        exit();
+                        exit;
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SelectContactPointRecoveryFormException:
                         $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), $e->getResponse()->getVerificationChoice());
@@ -235,7 +235,7 @@ try {
                 }
             } catch (InstagramAPI\Exception\Checkpoint\ChallengeIterationsLimitException $ex) {
                 echo 'Account likely to be blocked.';
-                exit();
+                exit;
             } catch (Exception $ex) {
                 $e = $ex;
             }
@@ -245,6 +245,6 @@ try {
 
 try {
     // Your code
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

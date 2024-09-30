@@ -36,7 +36,7 @@ class ServerMessageThrower
      *
      * @var array
      */
-    const EXCEPTION_MAP = [
+    public const EXCEPTION_MAP = [
         /*
          * WARNING: We MUST be sure to list these exception messages in an order
          * which guarantees that they will be properly detected without being
@@ -158,9 +158,9 @@ class ServerMessageThrower
     public static function autoThrow(
         $prefixString,
         $serverMessage,
-        Response $serverResponse = null,
-        HttpResponseInterface $httpResponse = null)
-    {
+        ?Response $serverResponse = null,
+        ?HttpResponseInterface $httpResponse = null,
+    ) {
         // We will analyze both the `message` AND `error_type` (if available).
         $messages = [$serverMessage];
         $serverErrorType = null;
@@ -293,7 +293,7 @@ class ServerMessageThrower
         // Attach the server response to the exception, IF a response exists.
         // NOTE: Only possible on exceptions derived from InstagramException.
         if ($serverResponse instanceof Response
-            && $e instanceof \InstagramAPI\Exception\InstagramException) {
+            && $e instanceof InstagramException) {
             $e->setResponse($serverResponse);
         }
 
@@ -311,8 +311,8 @@ class ServerMessageThrower
      * @return string The cleaned-up message.
      */
     public static function prettifyMessage(
-        $message)
-    {
+        $message,
+    ) {
         // Some messages already have punctuation, and others need it. Prettify
         // the message by ensuring that it ALWAYS ends in punctuation, for
         // consistency with all of our internal error messages.

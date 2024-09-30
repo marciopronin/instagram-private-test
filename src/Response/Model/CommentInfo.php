@@ -46,7 +46,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class CommentInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'comment_likes_enabled'                            => 'bool',
         'comment_threading_enabled'                        => 'bool',
         'has_more_comments'                                => 'bool',

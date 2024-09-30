@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class BroadcastStatusItem extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'broadcast_status'       => 'string',
         'has_reduced_visibility' => 'bool',
         'cover_frame_url'        => 'string',

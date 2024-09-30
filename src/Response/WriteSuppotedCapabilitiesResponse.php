@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class WriteSuppotedCapabilitiesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'supported_capabilities'             => 'Model\SupportedCapabilities[]',
     ];
 }

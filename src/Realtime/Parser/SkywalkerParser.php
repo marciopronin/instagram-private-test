@@ -10,18 +10,18 @@ use InstagramAPI\Realtime\ParserInterface;
 
 class SkywalkerParser implements ParserInterface
 {
-    const FIELD_TOPIC = 1;
-    const FIELD_PAYLOAD = 2;
+    public const FIELD_TOPIC = 1;
+    public const FIELD_PAYLOAD = 2;
 
-    const TOPIC_DIRECT = 1;
-    const TOPIC_LIVE = 2;
-    const TOPIC_LIVEWITH = 3;
+    public const TOPIC_DIRECT = 1;
+    public const TOPIC_LIVE = 2;
+    public const TOPIC_LIVEWITH = 3;
 
-    const MODULE_DIRECT = 'direct';
-    const MODULE_LIVE = 'live';
-    const MODULE_LIVEWITH = 'livewith';
+    public const MODULE_DIRECT = 'direct';
+    public const MODULE_LIVE = 'live';
+    public const MODULE_LIVEWITH = 'livewith';
 
-    const TOPIC_TO_MODULE_ENUM = [
+    public const TOPIC_TO_MODULE_ENUM = [
         self::TOPIC_DIRECT   => self::MODULE_DIRECT,
         self::TOPIC_LIVE     => self::MODULE_LIVE,
         self::TOPIC_LIVEWITH => self::MODULE_LIVEWITH,
@@ -35,8 +35,8 @@ class SkywalkerParser implements ParserInterface
      */
     public function parseMessage(
         $topic,
-        $payload)
-    {
+        $payload,
+    ) {
         $msgTopic = $msgPayload = null;
         $reader = new Reader($payload);
         foreach ($reader()->value() as $id => $field) {
@@ -63,8 +63,8 @@ class SkywalkerParser implements ParserInterface
      */
     protected function _createMessage(
         $topic,
-        $payload)
-    {
+        $payload,
+    ) {
         if ($topic === null || $payload === null) {
             throw new \RuntimeException('Incomplete Skywalker message.');
         }

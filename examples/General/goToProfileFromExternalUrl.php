@@ -5,22 +5,22 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////// USER ////////
+// ///// USER ////////
 $user = '';
-////////////////////
+// //////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -44,7 +44,7 @@ try {
     $userId = $userInfo->getUser()->getPk();
     $ig->event->sendBadgingEvent('impression', 'photos_of_you', 0, 'profile_menu', 'dot_badge');
 
-    $traySession = \InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
     $ig->story->getUserStoryFeed($userId);
     $userFeed = $ig->timeline->getUserFeed($userId);
@@ -86,6 +86,6 @@ try {
 
     $ig->event->updateAppState('background');
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

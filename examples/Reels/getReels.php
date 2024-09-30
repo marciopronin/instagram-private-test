@@ -5,25 +5,25 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -44,7 +44,7 @@ try {
     $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', $searchSession)->getSectionalItems();
     $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
 
-    $reelSession = \InstagramAPI\Signatures::generateUUID();
+    $reelSession = InstagramAPI\Signatures::generateUUID();
 
     $items = $ig->reel->discover()->getItems();
     $seenReels = [];
@@ -74,7 +74,7 @@ try {
     // Send seen state.
     try {
         $ig->reel->sendSeenState($itemIds);
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         // pass
     }
 
@@ -82,6 +82,6 @@ try {
     $ig->reel->discover($chainingMedia, $seenReels, $sessionInfo);
 
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

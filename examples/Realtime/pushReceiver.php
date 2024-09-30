@@ -14,30 +14,30 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
-$loop = \React\EventLoop\Factory::create();
+$loop = React\EventLoop\Factory::create();
 if ($debug) {
-    $logger = new \Monolog\Logger('push');
-    $logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stdout', \Monolog\Logger::INFO));
+    $logger = new Monolog\Logger('push');
+    $logger->pushHandler(new Monolog\Handler\StreamHandler('php://stdout', Monolog\Logger::INFO));
 } else {
     $logger = null;
 }
-$push = new \InstagramAPI\Push($loop, $ig, $logger);
+$push = new InstagramAPI\Push($loop, $ig, $logger);
 $push->on('incoming', function (InstagramAPI\Push\Notification $push) {
     printf('%s%s', $push->getMessage(), PHP_EOL);
 });

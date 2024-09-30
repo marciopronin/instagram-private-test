@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StoryScreenshot extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'action_user_dict' => '\InstagramAPI\Response\Model\User',
         /*
          * A number describing what type of media this is.

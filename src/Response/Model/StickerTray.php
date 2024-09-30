@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StickerTray extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'section_name'      => 'string',
         'section_title'     => '',
         'show_separator'    => 'bool',

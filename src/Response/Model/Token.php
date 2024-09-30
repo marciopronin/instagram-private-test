@@ -54,7 +54,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Token extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'carrier_name'                    => 'string',
         'carrier_id'                      => 'int',
         'ttl'                             => 'int',
@@ -68,7 +68,7 @@ class Token extends AutoPropertyMapper
         'carrier_signal_config'           => '',
     ];
 
-    const DEFAULT_TTL = 3600;
+    public const DEFAULT_TTL = 3600;
 
     /**
      * Get token expiration timestamp.

@@ -23,8 +23,8 @@ class DirectTest extends TestCase
      * @return Message
      */
     protected function _buildMessage(
-        $payload)
-    {
+        $payload,
+    ) {
         return new Message('direct', Client::api_body_decode($payload));
     }
 

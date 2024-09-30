@@ -5,27 +5,27 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
-$requestId = \InstagramAPI\Signatures::generateUUID();
+$requestId = InstagramAPI\Signatures::generateUUID();
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -54,6 +54,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

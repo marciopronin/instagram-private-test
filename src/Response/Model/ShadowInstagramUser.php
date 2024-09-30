@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ShadowInstagramUser extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                => 'string',
         'instagram_user_id' => 'string',
         'followers_count'   => 'int',

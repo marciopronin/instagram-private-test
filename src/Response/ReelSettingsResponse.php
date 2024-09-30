@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class ReelSettingsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'message_prefs' => '',
         'blocked_reels' => 'Model\BlockedReels',
     ];

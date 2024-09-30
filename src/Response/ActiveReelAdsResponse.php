@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class ActiveReelAdsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'reels'          => 'Model\Reel[]',
         'next_max_id'    => 'string',
         'more_available' => 'bool',

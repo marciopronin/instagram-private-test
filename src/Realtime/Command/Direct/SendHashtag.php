@@ -4,7 +4,7 @@ namespace InstagramAPI\Realtime\Command\Direct;
 
 final class SendHashtag extends ShareItem
 {
-    const TYPE = 'hashtag';
+    public const TYPE = 'hashtag';
 
     /**
      * Constructor.
@@ -18,8 +18,8 @@ final class SendHashtag extends ShareItem
     public function __construct(
         $threadId,
         $hashtag,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         parent::__construct($threadId, self::TYPE, $options);
 
         if (!is_string($hashtag)) {

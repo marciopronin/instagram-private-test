@@ -78,7 +78,7 @@ use InstagramAPI\Response;
  */
 class LocationInfoResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'location_id'               => 'string',
         'facebook_places_id'        => 'string',
         'name'                      => 'string',

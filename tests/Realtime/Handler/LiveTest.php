@@ -17,8 +17,8 @@ class LiveTest extends TestCase
      * @return Message
      */
     protected function _buildMessage(
-        $payload)
-    {
+        $payload,
+    ) {
         return new Message('live', Client::api_body_decode($payload));
     }
 

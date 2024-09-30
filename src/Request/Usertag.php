@@ -20,14 +20,14 @@ class Usertag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\EditMediaResponse
+     * @return Response\EditMediaResponse
      */
     public function tagMedia(
         $mediaId,
         $userId,
         array $position,
-        $captionText = '')
-    {
+        $captionText = '',
+    ) {
         $usertags = [
             'removed' => [],
             'in'      => [
@@ -48,13 +48,13 @@ class Usertag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\EditMediaResponse
+     * @return Response\EditMediaResponse
      */
     public function untagMedia(
         $mediaId,
         $userId,
-        $captionText = '')
-    {
+        $captionText = '',
+    ) {
         $usertags = [
             'removed' => [
                 $userId,
@@ -72,15 +72,15 @@ class Usertag extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MediaInfoResponse
+     * @return Response\MediaInfoResponse
      */
     public function removeTag(
-        $mediaId)
-    {
+        $mediaId,
+    ) {
         return $this->ig->request('usertags/remove/')
             ->addPost('media_to_untag', $mediaId)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('container_module', 'self_comments_v2_newsfeed_you')
             ->getResponse(new Response\MediaInfoResponse());
     }
@@ -92,15 +92,15 @@ class Usertag extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MediaInfoResponse
+     * @return Response\MediaInfoResponse
      */
     public function removeSelfTag(
-        $mediaId)
-    {
+        $mediaId,
+    ) {
         return $this->ig->request("usertags/{$mediaId}/remove/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\MediaInfoResponse());
     }
 
@@ -112,12 +112,12 @@ class Usertag extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UsertagsResponse
+     * @return Response\UsertagsResponse
      */
     public function getUserFeed(
         $userId,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request("usertags/{$userId}/feed/");
 
         if ($maxId !== null) {
@@ -134,11 +134,11 @@ class Usertag extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UsertagsResponse
+     * @return Response\UsertagsResponse
      */
     public function getSelfUserFeed(
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         return $this->getUserFeed($this->ig->account_id, $maxId);
     }
 
@@ -149,15 +149,15 @@ class Usertag extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReviewPreferenceResponse
+     * @return Response\ReviewPreferenceResponse
      */
     public function setReviewPreference(
-        $enabled)
-    {
+        $enabled,
+    ) {
         return $this->ig->request('usertags/review_preference/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('enabled', (int) $enabled)
             ->getResponse(new Response\ReviewPreferenceResponse());
     }

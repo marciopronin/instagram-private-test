@@ -11,10 +11,10 @@ if (php_sapi_name() !== 'cli') {
 
 if (!defined('PHP_MAJOR_VERSION') || PHP_MAJOR_VERSION < 7) {
     echo 'This script requires PHP version 7 or higher! Please update your php installation before attempting to run this script again!';
-    exit();
+    exit;
 }
 
-//Argument Processing
+// Argument Processing
 $helpData = [];
 $helpData = registerArgument($helpData, $argv, 'help', 'Displays this message.', 'h', 'help');
 $helpData = registerArgument($helpData, $argv, 'promptLogin', 'Ignores config.php and prompts you for your username and password.', 'p', 'prompt-login');
@@ -49,7 +49,7 @@ if (help) {
         $dOption = json_decode($option, true);
         Utils::log($dOption['tacks']['mini'].($dOption['tacks']['full'] !== null ? ' ('.$dOption['tacks']['full'].'): ' : ': ').$dOption['description']);
     }
-    exit();
+    exit;
 }
 
 Utils::existsOrError(VENDOR_PATH.'/autoload.php', 'Instagram API Files');
@@ -72,7 +72,7 @@ if (promptLogin) {
         $sessionFolder = STORAGE_PATH;
     } else {
         Utils::log("\e[31m[x] Storage path: Please configure STORAGE_PATH in config.php.\e[0m");
-        exit();
+        exit;
     }
     $sessions = array_diff(scandir($sessionFolder), ['..', '.', '.DS_Store']);
     $sessions = array_values($sessions);
@@ -88,13 +88,13 @@ if (promptLogin) {
         $password = 'passwd';
     } else {
         Utils::log("\e[31m[x] Auth list: No authed sessions.\e[0m");
-        exit();
+        exit;
     }
 }
 
 if ($username == 'USERNAME' || $password == 'PASSWORD') {
     Utils::log('Default Username or Password have not been changed! Exiting...');
-    exit();
+    exit;
 }
 
 Utils::log('[>] Login: Starting Instagram logon, please wait...');
@@ -110,7 +110,7 @@ if (STORAGE_PATH !== '') {
 
 $debug = debugMode ? debugMode : DEBUG_MODE;
 
-//Run our login flow to handle two-factor and challenges
+// Run our login flow to handle two-factor and challenges
 $ig = Utils::loginFlow($username, $password, $debug, false, $storagePath);
 if (!$ig->isMaybeLoggedIn) {
     Utils::log("\e[31m[x] Login: Unsuccessful login.\e[0m");
@@ -124,7 +124,7 @@ $storyFeed = $ig->story->getUserStoryFeed($ig->account_id);
 
 if ($storyFeed->getPostLiveItem() === null || $storyFeed->getPostLiveItem()->getBroadcasts() === null) {
     Utils::log("\e[91m[x]\e[0m You do not have any saved live broadcasts :(. If you recently saved one, and you're getting this message, check back in a few minutes.\e[0m");
-    exit();
+    exit;
 }
 
 $postLiveIndex = 0;
@@ -149,7 +149,7 @@ if (!autoSelect && $preSelectedBroadcast === '0') {
 if ($preSelectedBroadcast !== '0') {
     if (!isset($postLiveCache[$preSelectedBroadcast])) {
         Utils::log('Invalid Livestream ID! Exiting...', $outputFile);
-        exit();
+        exit;
     }
     $postLiveIndex = $postLiveCache[$preSelectedBroadcast];
 }
@@ -157,7 +157,7 @@ if ($preSelectedBroadcast !== '0') {
 @$selectedBroadcast = $storyFeed->getPostLiveItem()->getBroadcasts()[$postLiveIndex];
 if ($selectedBroadcast === null) {
     Utils::log('Invalid Livestream ID! Exiting...', $outputFile);
-    exit();
+    exit;
 }
 Utils::log("\nSelected Broadcast ID: ".$selectedBroadcast->getId(), $outputFile);
 
@@ -201,7 +201,7 @@ switch ($cmd) {
  *
  * @return array The array of help data with the new argument.
  */
-function registerArgument(array $helpData, array $argv, string $name, string $description, string $tack, string $fullTack = null): array
+function registerArgument(array $helpData, array $argv, string $name, string $description, string $tack, ?string $fullTack = null): array
 {
     if ($fullTack !== null) {
         $fullTack = '--'.$fullTack;

@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class TopSearchResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_more'             => 'bool',
         'clear_client_cache'   => 'bool',
         'media_grid'           => 'Model\MediaGrid',

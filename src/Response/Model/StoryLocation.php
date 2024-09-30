@@ -55,7 +55,7 @@ use InstagramAPI\Response\PropertyCollection;
  */
 class StoryLocation extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         PropertyCollection\Sticker::class,
         'location'     => 'Location',
         'attribution'  => 'string',

@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class LauncherSyncResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'configs'    => 'Model\UnpredictableKeys\LauncherSyncUnpredictableContainer',
     ];
 }

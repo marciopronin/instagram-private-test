@@ -5,23 +5,23 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $query = '';
 $text = 'Example';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -35,7 +35,7 @@ try {
     try {
         $ig->people->getNewsInboxSeen();
     } catch (Exception $e) {
-        //pass
+        // pass
     }
     $inboxItems = $ig->people->getRecentActivityInbox()->getAymf()->getItems();
     foreach ($inboxItems as $key => $value) {
@@ -46,7 +46,7 @@ try {
 
     $ig->event->sendNavigation('main_home', 'newsfeed_you', 'feed_timeline');
     $ig->event->sendOrganicTimespent($item, true, mt_rand(1000, 2000), 'feed_timeline');
-    $clientContext = \InstagramAPI\Utils::generateClientContext();
+    $clientContext = InstagramAPI\Utils::generateClientContext();
     $ig->event->sendNavigation('on_launch_direct_inbox', 'feed_timeline', 'direct_inbox');
     $users = $ig->people->search($query, [], null, 'direct_recipient_list_page')->getUsers();
 
@@ -62,8 +62,8 @@ try {
     $ig->event->sendDirectUserSearchPicker($query);
     $ig->event->sendDirectUserSearchPicker($query);
 
-    $groupSession = \InstagramAPI\Signatures::generateUUID();
-    $sessionId = \InstagramAPI\Signatures::generateUUID();
+    $groupSession = InstagramAPI\Signatures::generateUUID();
+    $sessionId = InstagramAPI\Signatures::generateUUID();
     $ig->event->sendDirectUserSearchSelection($userId, $position, $groupSession);
     $ig->event->sendGroupCreation($groupSession);
     $ig->event->sendNavigation('button', 'direct_inbox', 'direct_thread', null, null, ['user_id' => $userId]);
@@ -83,6 +83,6 @@ try {
     $ig->event->sendNavigation('back', 'direct_thread', 'direct_inbox');
     $ig->event->sendNavigation('back', 'direct_inbox', 'feed_timeline');
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

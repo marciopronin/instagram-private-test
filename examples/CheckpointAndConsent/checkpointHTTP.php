@@ -5,7 +5,7 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-class ExtendedInstagram extends \InstagramAPI\Instagram
+class ExtendedInstagram extends InstagramAPI\Instagram
 {
     /**
      * Set the active account for the class instance.
@@ -15,25 +15,25 @@ class ExtendedInstagram extends \InstagramAPI\Instagram
      * @param string $username Your Instagram username.
      * @param string $password Your Instagram password.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramAPI\Exception\InstagramException
      */
     public function setUser(
         $username,
-        $password)
-    {
+        $password,
+    ) {
         $this->_setUser('regular', $username, $password);
     }
 }
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 $step = '';
 $checkApiPath = '';
-//////////////////////
+// ////////////////////
 
 $ig = new ExtendedInstagram($debug, $truncatedDebug);
 
@@ -110,6 +110,6 @@ try {
 
 try {
     // Your code
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

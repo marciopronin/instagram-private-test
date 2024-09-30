@@ -194,7 +194,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectThread extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'thread_id'                         => 'string',
         'thread_v2_id'                      => 'string',
         'users'                             => 'User[]',

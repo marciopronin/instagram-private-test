@@ -54,7 +54,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class TwoFactorInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'username'                              => 'string',
         'two_factor_identifier'                 => 'string',
         'phone_verification_settings'           => 'PhoneVerificationSettings',

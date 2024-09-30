@@ -42,7 +42,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StoryTvChannel extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'             => 'string',
         'items'          => 'Item[]',
         'title'          => 'string',

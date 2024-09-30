@@ -12,7 +12,7 @@ $debug = true;
 $truncatedDebug = false;
 // ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
@@ -35,7 +35,7 @@ try {
         $ig->event->sendFollowButtonTapped($user->getUser()->getPk(), 'discover_people');
     }
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }

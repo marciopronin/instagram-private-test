@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class _Message extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'key'  => '',
         'time' => '',
     ];

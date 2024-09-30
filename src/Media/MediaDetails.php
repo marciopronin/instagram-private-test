@@ -129,8 +129,8 @@ abstract class MediaDetails
         $filename,
         $filesize,
         $width,
-        $height)
-    {
+        $height,
+    ) {
         $this->_filename = $filename;
         $this->_filesize = $filesize;
         $this->_width = $width;
@@ -145,8 +145,8 @@ abstract class MediaDetails
      * @throws \InvalidArgumentException If Instagram won't allow this file.
      */
     public function validate(
-        ConstraintsInterface $constraints)
-    {
+        ConstraintsInterface $constraints,
+    ) {
         $mediaFilename = $this->getBasename();
 
         // Check rotation.
@@ -165,7 +165,11 @@ abstract class MediaDetails
         if ($aspectRatio < $minAspectRatio || $aspectRatio > $maxAspectRatio) {
             throw new \InvalidArgumentException(sprintf(
                 'Instagram only accepts %s media with aspect ratios between %.3f and %.3f. Your file "%s" has a %.4f aspect ratio.',
-                $constraints->getTitle(), $minAspectRatio, $maxAspectRatio, $mediaFilename, $aspectRatio
+                $constraints->getTitle(),
+                $minAspectRatio,
+                $maxAspectRatio,
+                $mediaFilename,
+                $aspectRatio
             ));
         }
     }

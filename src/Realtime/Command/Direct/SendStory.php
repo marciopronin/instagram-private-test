@@ -4,9 +4,9 @@ namespace InstagramAPI\Realtime\Command\Direct;
 
 final class SendStory extends ShareItem
 {
-    const TYPE = 'story_share';
+    public const TYPE = 'story_share';
 
-    const STORY_REGEXP = '#^\d+_\d+$#D';
+    public const STORY_REGEXP = '#^\d+_\d+$#D';
 
     /**
      * Constructor.
@@ -20,8 +20,8 @@ final class SendStory extends ShareItem
     public function __construct(
         $threadId,
         $storyId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         parent::__construct($threadId, self::TYPE, $options);
 
         if (!preg_match(self::STORY_REGEXP, $storyId)) {

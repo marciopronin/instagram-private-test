@@ -25,7 +25,7 @@ use InstagramAPI\Utils;
  *
  * @throws \InstagramAPI\Exception\InstagramException
  *
- * @return \InstagramAPI\Response\AccountCreateResponse
+ * @return Response\AccountCreateResponse
  */
 class Account extends RequestCollection
 {
@@ -38,8 +38,8 @@ class Account extends RequestCollection
         $firstName,
         $waterfallId,
         $tosVersion = 'row',
-        $sndata = null)
-    {
+        $sndata = null,
+    ) {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
         } elseif (in_array($password, Constants::BLACKLISTED_PASSWORDS, true)) {
@@ -53,7 +53,7 @@ class Account extends RequestCollection
             ->addPost('tos_version', $tosVersion)
             ->addPost('allow_contacts_sync', 'true')
             ->addPost('phone_id', $this->ig->phone_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('username', $username)
             ->addPost('first_name', $firstName)
             ->addPost('adid', $this->ig->advertising_id)
@@ -108,7 +108,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AccountCreateResponse
+     * @return Response\AccountCreateResponse
      */
     public function createValidated(
         $smsCode,
@@ -119,8 +119,8 @@ class Account extends RequestCollection
         $firstName,
         $waterfallId,
         $tosVersion = 'row',
-        $sndata = null)
-    {
+        $sndata = null,
+    ) {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
         } elseif (in_array($password, Constants::BLACKLISTED_PASSWORDS, true)) {
@@ -134,7 +134,7 @@ class Account extends RequestCollection
             ->addPost('tos_version', $tosVersion)
             ->addPost('allow_contacts_sync', 'true')
             ->addPost('phone_id', $this->ig->phone_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('username', $username)
             ->addPost('first_name', $firstName)
             ->addPost('adid', $this->ig->advertising_id)
@@ -185,13 +185,13 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AccountCreateResponse
+     * @return Response\AccountCreateResponse
      */
     public function createSecundary(
         $username,
         $password,
-        $firstName = '')
-    {
+        $firstName = '',
+    ) {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
         } elseif (in_array($password, Constants::BLACKLISTED_PASSWORDS, true)) {
@@ -225,11 +225,11 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function checkPhoneNumber(
-        $phone)
-    {
+        $phone,
+    ) {
         return $this->ig->request('accounts/check_phone_number/')
             ->setNeedsAuth(false)
             ->addPost('prefill_shown', 'False')
@@ -238,7 +238,7 @@ class Account extends RequestCollection
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('guid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -251,13 +251,13 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SendSignupSmsCodeResponse
+     * @return Response\SendSignupSmsCodeResponse
      */
     public function requestRegistrationSms(
         $phone,
         $waterfallId,
-        $username)
-    {
+        $username,
+    ) {
         $this->ig->setUserWithoutPassword($username);
 
         return $this->ig->request('accounts/send_signup_sms_code/')
@@ -265,7 +265,7 @@ class Account extends RequestCollection
             ->addPost('phone_number', $phone)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('android_build_type', 'release')
             ->addPost('guid', $this->ig->uuid)
             ->addPost('waterfall_id', $waterfallId)
@@ -281,18 +281,18 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function validateSignupSmsCode(
         $smsCode,
         $phone,
-        $waterfallId)
-    {
+        $waterfallId,
+    ) {
         return $this->ig->request('accounts/validate_signup_sms_code/')
             ->setNeedsAuth(false)
             ->addPost('verification_code', $smsCode)
             ->addPost('phone_number', $phone)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('waterfall_id', $waterfallId)
@@ -307,16 +307,16 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SendVerifyEmailResponse
+     * @return Response\SendVerifyEmailResponse
      */
     public function sendEmailVerificationCode(
         $email,
-        $waterfallId)
-    {
+        $waterfallId,
+    ) {
         return $this->ig->request('accounts/send_verify_email/')
             ->setNeedsAuth(false)
             ->addPost('email', $email)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('waterfall_id', $waterfallId)
@@ -333,18 +333,18 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckConfirmationCodeResponse
+     * @return Response\CheckConfirmationCodeResponse
      */
     public function checkConfirmationCode(
         $code,
         $email,
-        $waterfallId)
-    {
+        $waterfallId,
+    ) {
         return $this->ig->request('accounts/check_confirmation_code/')
             ->setNeedsAuth(false)
             ->addPost('code', $code)
             ->addPost('email', $email)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('waterfall_id', $waterfallId)
@@ -356,7 +356,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginActivityResponse
+     * @return Response\LoginActivityResponse
      */
     public function getLoginActivity()
     {
@@ -370,7 +370,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getLoginActivityBloks()
     {
@@ -388,7 +388,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $arrayResponse = $response->asArray();
@@ -403,19 +403,19 @@ class Account extends RequestCollection
     /**
      * Logout session.
      *
-     * @param $sessionId    Session ID.
+     * @param $sessionId Session ID.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function logoutSession(
-        $sessionId)
-    {
+        $sessionId,
+    ) {
         return $this->ig->request('session/login_activity/logout_session/')
             ->setSignedPost(false)
             ->addPost('session_id', $sessionId)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -428,12 +428,12 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function logoutSessionBloks(
         $sessionId,
-        $accountId)
-    {
+        $accountId,
+    ) {
         return $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.login_activities.unrecognized_logins.logout/')
             ->setSignedPost(false)
             ->addPost('params', json_encode((object) [
@@ -457,7 +457,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -469,19 +469,19 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      *
      * @see getLoginActivity() for obtaining login IDs, login timestamps and suspicious logins
      */
     public function approveSuspiciousLogin(
         $loginId,
-        $loginTimestamp)
-    {
+        $loginTimestamp,
+    ) {
         return $this->ig->request('session/login_activity/avow_login/')
         ->setSignedPost(false)
         ->addPost('login_timestamp', $loginTimestamp)
         ->addPost('login_id', $loginId)
-        //->addPost('_csrftoken', $this->ig->client->getToken())
+        // ->addPost('_csrftoken', $this->ig->client->getToken())
         ->addPost('_uuid', $this->ig->uuid)
         ->getResponse(new Response\GenericResponse());
     }
@@ -494,12 +494,12 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function approveSuspiciousLoginBloks(
         $sessionId,
-        $accountId)
-    {
+        $accountId,
+    ) {
         return $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.avow_login/')
             ->setSignedPost(false)
             ->addPost('params', json_encode((object) [
@@ -523,7 +523,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -532,7 +532,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function getAccountFamily()
     {
@@ -546,7 +546,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UnseenFacebookNotificationsResponse
+     * @return Response\UnseenFacebookNotificationsResponse
      */
     public function getUnseenFacebookNotifications()
     {
@@ -561,7 +561,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      *
      * @see People::getSelfInfo()
      */
@@ -580,23 +580,26 @@ class Account extends RequestCollection
      *
      * @param string $gender this can be male, female, empty or null for 'prefer not to say' or anything else for custom
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function setGender(
-        $gender = '')
-    {
+        $gender = '',
+    ) {
         switch (strtolower($gender)) {
-            case 'male':$gender_id = 1; break;
-            case 'female':$gender_id = 2; break;
+            case 'male':$gender_id = 1;
+                break;
+            case 'female':$gender_id = 2;
+                break;
             case null:
-            case '':$gender_id = 3; break;
+            case '':$gender_id = 3;
+                break;
             default:$gender_id = 4;
         }
 
         return $this->ig->request('accounts/set_gender/')
             ->setSignedPost(false)
             ->addPost('gender', $gender_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('custom_gender', $gender_id === 4 ? $gender : '')
             ->getResponse(new Response\UserInfoResponse());
@@ -612,19 +615,19 @@ class Account extends RequestCollection
      * @param string $month Month of birth.
      * @param string $year  Year of birth.
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function setBirthday(
         $day,
         $month,
-        $year)
-    {
+        $year,
+    ) {
         return $this->ig->request('accounts/set_birthday/')
             ->setSignedPost(false)
             ->addPost('day', $day)
             ->addPost('month', $month)
             ->addPost('year', $year)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\UserInfoResponse());
     }
@@ -636,13 +639,13 @@ class Account extends RequestCollection
      * @param string $month Month of birth.
      * @param string $year  Year of birth.
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function setBirthdayBloks(
         $day,
         $month,
-        $year)
-    {
+        $year,
+    ) {
         $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.edit.birthday.confirmation.async/')
             ->setSignedPost(false)
             ->addPost('params', json_encode((object) [
@@ -666,7 +669,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $response = $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.edit.birthday.async/')
@@ -692,7 +695,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.birthday.populate.history.async/')
@@ -715,7 +718,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         return $response;
@@ -731,16 +734,16 @@ class Account extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function setProfileName(
-        $name)
-    {
+        $name,
+    ) {
         return $this->ig->request('accounts/update_profile_name/')
             ->setSignedPost(false)
             ->addPost('first_name', $name)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UserInfoResponse());
     }
 
@@ -752,16 +755,16 @@ class Account extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function setUsername(
-        $newUsername)
-    {
+        $newUsername,
+    ) {
         return $this->ig->request('accounts/update_profile_username/')
             ->setSignedPost(false)
             ->addPost('username', $newUsername)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UserInfoResponse());
     }
 
@@ -775,11 +778,11 @@ class Account extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function setProfileNameBloks(
-        $name)
-    {
+        $name,
+    ) {
         $response = $this->ig->request('bloks/apps/com.bloks.www.fxim.settings.name.change.async/')
             ->setSignedPost(false)
             ->addPost('params', json_encode((object) [
@@ -803,7 +806,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         return $response;
@@ -826,13 +829,13 @@ class Account extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      *
      * @see Account::editProfile() should be called after this function!
      */
     public function setBiography(
-        $biography)
-    {
+        $biography,
+    ) {
         if (!is_string($biography) || mb_strlen($biography, 'utf8') > 150) {
             throw new \InvalidArgumentException('Please provide a 0 to 150 character string as biography.');
         }
@@ -842,7 +845,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UserInfoResponse());
     }
 
@@ -854,11 +857,11 @@ class Account extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function changeProfilePicture(
-        $photoFilename)
-    {
+        $photoFilename,
+    ) {
         $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename, ['jpgOutput' => true, 'targetFeed' => Constants::PROFILE_PIC]);
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
         $internalMetadata->setPhotoDetails(Constants::PROFILE_PIC, $photo->getFile());
@@ -866,7 +869,7 @@ class Account extends RequestCollection
 
         return $this->ig->request('accounts/change_profile_picture/')
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('use_fbuploader', 'true')
             ->addPost('remove_birthday_selfie', 'False')
@@ -879,14 +882,14 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function removeProfilePicture()
     {
         return $this->ig->request('accounts/remove_profile_picture/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UserInfoResponse());
     }
 
@@ -907,7 +910,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      *
      * @see Account::getCurrentUser() to get your current account details.
      * @see Account::checkUsername() to verify your new username first.
@@ -918,8 +921,8 @@ class Account extends RequestCollection
         $name,
         $biography,
         $email,
-        $newUsername = null)
-    {
+        $newUsername = null,
+    ) {
         if ($email === null || $email === '') {
             throw new \InvalidArgumentException('No email provided.');
         }
@@ -943,7 +946,7 @@ class Account extends RequestCollection
         return $this->ig->request('accounts/edit_profile/')
             ->addPost('primary_profile_link_type', '0')
             ->addPost('external_url', $url)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('phone_number', $phone)
             ->addPost('username', $username)
             ->addPost('show_fb_link_on_profile', 'false')
@@ -961,7 +964,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AnonymousProfilePictureResponse
+     * @return Response\AnonymousProfilePictureResponse
      */
     public function getAnonymousProfilePicture()
     {
@@ -974,13 +977,13 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function setPublic()
     {
         $request = $this->ig->request('accounts/set_public/')
             ->addPost('_uuid', $this->ig->uuid);
-        //->addPost('_csrftoken', $this->ig->client->getToken());
+        // ->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('_uid', $this->ig->account_id);
@@ -994,13 +997,13 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function setPrivate()
     {
         $request = $this->ig->request('accounts/set_private/')
             ->addPost('_uuid', $this->ig->uuid);
-        //->addPost('_csrftoken', $this->ig->client->getToken());
+        // ->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('_uid', $this->ig->account_id);
@@ -1017,7 +1020,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SwitchBusinessProfileResponse
+     * @return Response\SwitchBusinessProfileResponse
      *
      * @see Account::setBusinessInfo() sets required data to become a business profile.
      */
@@ -1032,14 +1035,14 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SwitchPersonalProfileResponse
+     * @return Response\SwitchPersonalProfileResponse
      */
     public function switchToPersonalProfile()
     {
         return $this->ig->request('accounts/convert_to_personal/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\SwitchPersonalProfileResponse());
     }
 
@@ -1052,13 +1055,13 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CreateBusinessInfoResponse
+     * @return Response\CreateBusinessInfoResponse
      */
     public function setBusinessInfo(
         $phoneNumber,
         $email,
-        $categoryId)
-    {
+        $categoryId,
+    ) {
         return $this->ig->request('accounts/create_business_info/')
             ->addPost('set_public', 'true')
             ->addPost('entry_point', 'setting')
@@ -1070,7 +1073,7 @@ class Account extends RequestCollection
             ->addPost('category_id', $categoryId)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\CreateBusinessInfoResponse());
     }
 
@@ -1084,20 +1087,20 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckUsernameResponse
+     * @return Response\CheckUsernameResponse
      *
      * @see Account::editProfile() to rename your account.
      */
     public function checkUsername(
-        $username)
-    {
+        $username,
+    ) {
         $this->ig->setUserWithoutPassword($username);
 
         return $this->ig->request('users/check_username/')
             ->setNeedsAuth(false)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('username', $username)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('is_group_creation', false)
             ->getResponse(new Response\CheckUsernameResponse());
     }
@@ -1111,13 +1114,13 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckEmailResponse
+     * @return Response\CheckEmailResponse
      */
     public function checkEmail(
         $email,
         $waterfallId,
-        $username)
-    {
+        $username,
+    ) {
         $this->ig->setUserWithoutPassword($username);
 
         $request = $this->ig->request('users/check_email/')
@@ -1144,11 +1147,11 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getSignupConfig(
-        $username)
-    {
+        $username,
+    ) {
         $this->ig->setUserWithoutPassword($username);
 
         return $this->ig->request('consent/get_signup_config/')
@@ -1167,17 +1170,17 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UsernameSuggestionsResponse
+     * @return Response\UsernameSuggestionsResponse
      */
     public function getUsernameSuggestions(
         $email,
         $waterfallId,
-        $usernameQuery = '')
-    {
+        $usernameQuery = '',
+    ) {
         return $this->ig->request('accounts/username_suggestions/')
             ->setNeedsAuth(false)
             ->addPost('phone_id', $this->ig->phone_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('guid', $this->ig->uuid)
             ->addPost('name', $usernameQuery)
             ->addPost('device_id', $this->ig->device_id)
@@ -1191,7 +1194,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CommentFilterResponse
+     * @return Response\CommentFilterResponse
      */
     public function getCommentFilter()
     {
@@ -1206,15 +1209,15 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CommentFilterSetResponse
+     * @return Response\CommentFilterSetResponse
      */
     public function setCommentFilter(
-        $config_value)
-    {
+        $config_value,
+    ) {
         return $this->ig->request('accounts/set_comment_filter/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('config_value', $config_value)
             ->getResponse(new Response\CommentFilterSetResponse());
     }
@@ -1224,7 +1227,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CommentCategoryFilterResponse
+     * @return Response\CommentCategoryFilterResponse
      */
     public function getCommentCategoryFilterDisabled()
     {
@@ -1237,7 +1240,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CommentFilterKeywordsResponse
+     * @return Response\CommentFilterKeywordsResponse
      */
     public function getCommentFilterKeywords()
     {
@@ -1252,15 +1255,15 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CommentFilterSetResponse
+     * @return Response\CommentFilterSetResponse
      */
     public function setCommentFilterKeywords(
-        $keywords)
-    {
+        $keywords,
+    ) {
         return $this->ig->request('accounts/set_comment_filter_keywords/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('keywords', $keywords)
             ->getResponse(new Response\CommentFilterSetResponse());
     }
@@ -1273,16 +1276,16 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ChangePasswordResponse
+     * @return Response\ChangePasswordResponse
      */
     public function changePassword(
         $oldPassword,
-        $newPassword)
-    {
+        $newPassword,
+    ) {
         return $this->ig->request('accounts/change_password/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('enc_old_password', Utils::encryptPassword($oldPassword, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('enc_new_password1', Utils::encryptPassword($newPassword, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
             ->addPost('enc_new_password2', Utils::encryptPassword($newPassword, $this->ig->settings->get('public_key_id'), $this->ig->settings->get('public_key')))
@@ -1299,7 +1302,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AccountSecurityInfoResponse
+     * @return Response\AccountSecurityInfoResponse
      *
      * @see Account::enableTwoFactorSMS()
      */
@@ -1309,7 +1312,7 @@ class Account extends RequestCollection
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\AccountSecurityInfoResponse());
     }
 
@@ -1318,7 +1321,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AccountSecurityInfoResponse
+     * @return Response\AccountSecurityInfoResponse
      *
      * @see Account::getSecurityInfo()
      */
@@ -1328,7 +1331,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\AccountSecurityInfoResponse());
     }
 
@@ -1342,19 +1345,19 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SendTwoFactorEnableSMSResponse
+     * @return Response\SendTwoFactorEnableSMSResponse
      *
      * @see Account::enableTwoFactorSMS()
      */
     public function sendTwoFactorEnableSMS(
-        $phoneNumber)
-    {
+        $phoneNumber,
+    ) {
         $cleanNumber = '+'.preg_replace('/[^0-9]/', '', $phoneNumber);
 
         return $this->ig->request('accounts/send_two_factor_enable_sms/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('phone_number', $cleanNumber)
             ->getResponse(new Response\SendTwoFactorEnableSMSResponse());
@@ -1374,7 +1377,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AccountSecurityInfoResponse
+     * @return Response\AccountSecurityInfoResponse
      *
      * @see Account::sendTwoFactorEnableSMS()
      * @see Account::getSecurityInfo()
@@ -1382,15 +1385,15 @@ class Account extends RequestCollection
     public function enableTwoFactorSMS(
         $phoneNumber,
         $verificationCode,
-        $trustDevice = false)
-    {
+        $trustDevice = false,
+    ) {
         $cleanNumber = '+'.preg_replace('/[^0-9]/', '', $phoneNumber);
 
         $this->ig->request('accounts/enable_sms_two_factor/')
             ->addPost('trust_this_device', ($trustDevice) ? '1' : '0')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('phone_number', $cleanNumber)
             ->addPost('verification_code', $verificationCode)
@@ -1404,14 +1407,14 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\DisableTwoFactorSMSResponse
+     * @return Response\DisableTwoFactorSMSResponse
      */
     public function disableTwoFactorSMS()
     {
         return $this->ig->request('accounts/disable_sms_two_factor/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\DisableTwoFactorSMSResponse());
     }
 
@@ -1421,8 +1424,8 @@ class Account extends RequestCollection
      * @param bool $disabled
      */
     protected function _savePresenceStatus(
-        $disabled)
-    {
+        $disabled,
+    ) {
         try {
             $this->ig->settings->set('presence_disabled', $disabled ? '1' : '0');
         } catch (SettingsException $e) {
@@ -1435,7 +1438,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PresenceStatusResponse
+     * @return Response\PresenceStatusResponse
      */
     public function getPresenceStatus()
     {
@@ -1452,7 +1455,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function enablePresence()
     {
@@ -1461,7 +1464,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('disabled', '0')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $this->_savePresenceStatus(false);
@@ -1476,7 +1479,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function disablePresence()
     {
@@ -1485,7 +1488,7 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('disabled', '1')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $this->_savePresenceStatus(true);
@@ -1500,11 +1503,11 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SendConfirmEmailResponse
+     * @return Response\SendConfirmEmailResponse
      */
     public function sendConfirmEmail(
-        $email = null)
-    {
+        $email = null,
+    ) {
         $request = $this->ig->request('accounts/send_confirm_email/')
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('send_source', 'personal_information')
@@ -1512,7 +1515,7 @@ class Account extends RequestCollection
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_uuid', $this->ig->uuid);
-        //->addPost('_csrftoken', $this->ig->client->getToken())
+        // ->addPost('_csrftoken', $this->ig->client->getToken())
 
         if ($email !== null) {
             $request->addPost('email', $email);
@@ -1529,12 +1532,12 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function verifyEmailCode(
         $email,
-        $code)
-    {
+        $code,
+    ) {
         $request = $this->ig->request('accounts/verify_email_code/')
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('send_source', 'personal_information')
@@ -1555,11 +1558,11 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ConfirmEmailResponse
+     * @return Response\ConfirmEmailResponse
      */
     public function confirmEmail(
-        $confirmationLink)
-    {
+        $confirmationLink,
+    ) {
         $re = '/^https:\/\/(www\.)?instagram.com\/accounts\/confirm_email\/(\w+)\/(\w+)/m';
         preg_match_all($re, $confirmationLink, $matches, PREG_OFFSET_CAPTURE, 0);
 
@@ -1580,18 +1583,18 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SendSMSCodeResponse
+     * @return Response\SendSMSCodeResponse
      */
     public function sendSMSCode(
-        $phoneNumber)
-    {
+        $phoneNumber,
+    ) {
         $cleanNumber = '+'.preg_replace('/[^0-9]/', '', $phoneNumber);
 
         return $this->ig->request('accounts/send_sms_code/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('phone_number', $cleanNumber)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\SendSMSCodeResponse());
     }
 
@@ -1603,14 +1606,14 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\VerifySMSCodeResponse
+     * @return Response\VerifySMSCodeResponse
      *
      * @see Account::sendSMSCode()
      */
     public function verifySMSCode(
         $phoneNumber,
-        $verificationCode)
-    {
+        $verificationCode,
+    ) {
         $cleanNumber = '+'.preg_replace('/[^0-9]/', '', $phoneNumber);
 
         return $this->ig->request('accounts/verify_sms_code/')
@@ -1618,7 +1621,7 @@ class Account extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('phone_number', $cleanNumber)
             ->addPost('verification_code', $verificationCode)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\VerifySMSCodeResponse());
     }
 
@@ -1627,7 +1630,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TotpCodeResponse
+     * @return Response\TotpCodeResponse
      */
     public function getTOTPCode()
     {
@@ -1645,11 +1648,11 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function enableTOTPAuthentication(
-        $code)
-    {
+        $code,
+    ) {
         return $this->ig->request('accounts/enable_totp_two_factor/')
             ->addPost('verification_code', $code)
             ->addPost('_uid', $this->ig->account_id)
@@ -1666,12 +1669,12 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function setContactPointPrefill(
         $usage,
-        $prelogin = true)
-    {
+        $prelogin = true,
+    ) {
         $request = $this->ig->request('accounts/contact_point_prefill/')
             ->addPost('usage', $usage);
 
@@ -1692,7 +1695,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getNamePrefill()
     {
@@ -1712,11 +1715,11 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PrefillCandidatesResponse
+     * @return Response\PrefillCandidatesResponse
      */
     public function getPrefillCandidates(
-        $clientContactPoints = null)
-    {
+        $clientContactPoints = null,
+    ) {
         $request = $this->ig->request('accounts/get_prefill_candidates/')
             ->setNeedsAuth(false)
             ->addPost('android_device_id', $this->ig->device_id)
@@ -1753,14 +1756,14 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BadgeNotificationsResponse
+     * @return Response\BadgeNotificationsResponse
      */
     public function getBadgeNotifications()
     {
         return $this->ig->request('notifications/badge/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_ids', $this->ig->account_id)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('device_id', $this->ig->uuid)
@@ -1772,7 +1775,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FacebookIdResponse
+     * @return Response\FacebookIdResponse
      */
     public function getFacebookId()
     {
@@ -1780,7 +1783,7 @@ class Account extends RequestCollection
             ->setSignedPost(false)
             ->setIsSilentFail(true)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\FacebookIdResponse());
     }
 
@@ -1789,7 +1792,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LinkageStatusResponse
+     * @return Response\LinkageStatusResponse
      */
     public function getLinkageStatus()
     {
@@ -1802,7 +1805,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CrossPostingDestinationStatusResponse
+     * @return Response\CrossPostingDestinationStatusResponse
      */
     public function getCrossPostingDestinationStatus()
     {
@@ -1816,7 +1819,7 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getProcessContactPointSignals()
     {
@@ -1826,7 +1829,7 @@ class Account extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1835,14 +1838,14 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function sendGoogleTokenUsers()
     {
         return $this->ig->request('accounts/google_token_users/')
             ->setNeedsAuth(false)
             ->addPost('google_tokens', '[]')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1853,18 +1856,18 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SendRecoveryFlowResponse
+     * @return Response\SendRecoveryFlowResponse
      */
     public function sendRecoveryFlowEmail(
-        $query)
-    {
+        $query,
+    ) {
         return $this->ig->request('accounts/send_recovery_flow_email/')
             ->addPost('guid', $this->ig->uuid)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('adid', $this->ig->advertising_id)
             ->addPost('query', $query)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\SendRecoveryFlowResponse());
     }
 
@@ -1876,12 +1879,12 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LookupPhoneResponse
+     * @return Response\LookupPhoneResponse
      */
     public function lookupPhone(
         $query,
-        $whatsAppInstalled = false)
-    {
+        $whatsAppInstalled = false,
+    ) {
         return $this->ig->request('users/lookup_phone/')
             ->addPost('supports_sms_code', 'true')
             ->addPost('use_whatsapp', $whatsAppInstalled)
@@ -1890,7 +1893,7 @@ class Account extends RequestCollection
             ->addPost('adid', $this->ig->advertising_id)
             ->addPost('query', $query)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\LookupPhoneResponse());
     }
 
@@ -1903,11 +1906,11 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MultiAccountsResponse
+     * @return Response\MultiAccountsResponse
      */
     public function getAccountsMultiLogin(
-        $macLoginNonce)
-    {
+        $macLoginNonce,
+    ) {
         return $this->ig->request('multiple_accounts/multi_account_login/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -1916,7 +1919,7 @@ class Account extends RequestCollection
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('guid', $this->ig->uuid)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\MultiAccountsResponse());
     }
 
@@ -1927,18 +1930,18 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function updateTagSettingsAction(
-        $set)
-    {
+        $set,
+    ) {
         return $this->ig->request('bloks/apps/com.instagram.bullying.privacy.tags_options.update_tag_setting_action/')
             ->setSignedPost(false)
             ->addPost('tag_setting', $set ? 'on' : 'off')
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('nest_data_manifest', 'true')
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1949,18 +1952,18 @@ class Account extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function updateMentionSettingsAction(
-        $set)
-    {
+        $set,
+    ) {
         return $this->ig->request('bloks/apps/com.instagram.bullying.privacy.mentions_options.update_mention_settting_action/')
             ->setSignedPost(false)
             ->addPost('tag_setting', $set ? 'on' : 'off')
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('nest_data_manifest', 'true')
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1990,7 +1993,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $re = '/\[{"\\\\u3401":{"#":true,"\$":"(\w+?\s?\w+?\s?\w+?\s?\w+?\S?\w+?\s?\w+?\s?\w+?)","&":"(Button|Selected\sButton)","\\\\u0087":".\(bk\.action\.array\.Make,.\\\\"&\\\\",.\(bk\.action\.core\.Match,.\(bk\.action\.core\.Match,.\(bk\.action\.bloks\.GetVariable2,.\\\\"\d+\\\\"\),.\(bk\.action\.array\.Make,.\(bk\.action.core\.Pattern,.\\\\"(\d+)/m';
@@ -2015,17 +2018,22 @@ class Account extends RequestCollection
      */
     public function getActiveCrosspostingAccount()
     {
-        $response = $this->ig->internal->sendGraph('25065272511213483404914864494',
-        [
-            'input' => [
-                'key'               => '1L1D',
-                'caller_context'    => [
-                    'function_credential'   => 'function_credential',
-                    'caller'                => 'ReelViewerFragment',
+        $response = $this->ig->internal->sendGraph(
+            '25065272511213483404914864494',
+            [
+                'input' => [
+                    'key'               => '1L1D',
+                    'caller_context'    => [
+                        'function_credential'   => 'function_credential',
+                        'caller'                => 'ReelViewerFragment',
+                    ],
                 ],
             ],
-        ],
-        'IGOneLinkMiddlewarePageQuery', 'xfb_one_link_monoschema', false, 'pando');
+            'IGOneLinkMiddlewarePageQuery',
+            'xfb_one_link_monoschema',
+            false,
+            'pando'
+        );
 
         $arr = $response->asArray();
         if (isset($arr['data'])) {
@@ -2061,11 +2069,16 @@ class Account extends RequestCollection
      */
     public function getActiveCrosspostingAccountUser()
     {
-        $response = $this->ig->internal->sendGraph('11674382495679744485820947859',
-        [
-            'caller_name'   => 'fx_product_foundation_client_FXOnline_client_cache',
-        ],
-        'FxIgLinkageCacheQuery', 'xe_client_cache_accounts', false, 'pando');
+        $response = $this->ig->internal->sendGraph(
+            '11674382495679744485820947859',
+            [
+                'caller_name'   => 'fx_product_foundation_client_FXOnline_client_cache',
+            ],
+            'FxIgLinkageCacheQuery',
+            'xe_client_cache_accounts',
+            false,
+            'pando'
+        );
 
         $arr = $response->asArray();
         if (isset($arr['data'])) {
@@ -2122,7 +2135,7 @@ class Account extends RequestCollection
         $responseArr = $response->asArray();
         $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
         $dataBlock = null;
-        //$secondBlock = null;
+        // $secondBlock = null;
         $accountIdentifiers = [];
         $results = [];
         foreach ($mainBloks as $mainBlok) {
@@ -2212,6 +2225,7 @@ class Account extends RequestCollection
             }
             */
         }
+
         /*
         if ($secondBlock !== null) {
             $parsed = $this->ig->bloks->parseBlok($secondBlock, 'bk.action.map.Make');
@@ -2246,8 +2260,8 @@ class Account extends RequestCollection
      */
     public function setDefaultSharingTarget(
         $sourceAccountId,
-        $targetIdentityId)
-    {
+        $targetIdentityId,
+    ) {
         return $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.post.target.async/')
             ->setSignedPost(false)
             ->addPost('params', json_encode([
@@ -2280,8 +2294,8 @@ class Account extends RequestCollection
      * @return GenericResponse
      */
     public function addEmailContactPoint(
-        $email)
-    {
+        $email,
+    ) {
         $response = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point/')
             ->setSignedPost(false)
             ->addPost('params', json_encode([
@@ -2518,8 +2532,8 @@ class Account extends RequestCollection
     public function verifyEmailContactPoint(
         $email,
         $code,
-        $authBlob)
-    {
+        $authBlob,
+    ) {
         $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.verify.async/')
             ->setSignedPost(false)
             ->addPost('params', json_encode([
@@ -2561,8 +2575,8 @@ class Account extends RequestCollection
      * @return GenericResponse
      */
     public function deletePhoneContactPoint(
-        $phoneNumber = null)
-    {
+        $phoneNumber = null,
+    ) {
         if ($phoneNumber === null && !empty($this->ig->settings->get('phone_number'))) {
             $phoneNumber = $this->ig->settings->get('phone_number');
         } else {
@@ -2650,7 +2664,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -2671,7 +2685,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -2685,73 +2699,79 @@ class Account extends RequestCollection
      * @return GenericResponse
      */
     public function createBugId(
-        $description)
-    {
-        return $this->ig->internal->sendGraph('293839176013550553288378882913',
-        [
-            'input' => [
-                'attachment_file_names' => json_encode([
-                    'screenshot_0.png'                      => 1,
-                    'mobileconfigs.txt'                     => 1,
-                    'appearance_theme_state.json'           => 1,
-                    'fan_club_data.json'                    => 1,
-                    'reels_viewer_last_seen_media.json'     => 1,
-                    'feed_requests.txt'                     => 1,
-                    'main_feed_last_seen_medias.json'       => 1,
-                    'realtime_client.json'                  => 1,
-                    'direct_mutation_manager.txt'           => 1,
-                    'direct_interop_gating_status.json'     => 1,
-                    'direct_notification_traces.json'       => 1,
-                    'logcat.txt'                            => 1,
-                    'stacktrace.txt'                        => 1,
-                    'fb_liger_reporting.txt'                => 1,
-                    'RecentPendingMedia.json'               => 1,
-                    'IngestionLogcat.txt'                   => 1,
-                    'RecentUploadAttemptErrors.json'        => 1,
-                ]),
-                'build_num'                     => $this->ig->getVersionCode(),
-                'category_id'                   => '493186350727442',
-                'claim'                         => $this->ig->client->wwwClaim,
-                'description'                   => $description,
-                'endpoint'                      => 'com.instagram.portable.settings.help:com.instagram.portable.settings.help',
-                'files'                         => [],
-                'has_complete_logs_consent'     => true,
-                'misc_info'                     => json_encode([
-                    'IG_UserId'                             => $this->ig->account_id,
-                    'IG_Username'                           => $this->ig->username,
-                    'fbns_token'                            => $this->ig->settings->get('fbns_token'),
-                    'transport_type_account'                => 'ig_advanced_crypto_transport',
-                    'user_interop_status'                   => 'DIRECT_INTEROP_GATING_STATUS_ELIGIBLE_AND_UPGRADED',
-                    'direct_last_viewed_thread_is_interop'  => 'false',
-                    'device_id'                             => $this->ig->device_id,
-                    'Git_Hash'                              => 'MASTER',
-                    'Branch'                                => 'master',
-                    'OS_Version'                            => $this->ig->device->getAndroidVersion(),
-                    'Manufacturer'                          => $this->ig->device->getManufacturer(),
-                    'Model'                                 => $this->ig->device->getModel(),
-                    'Locale'                                => 'English (United States)',
-                    'Build_Type'                            => 'RELEASE',
-                    'source'                                => 'bloks',
-                    'client_server_join_key'                => 'dKNAQNZLZNBppesuPeKV',
-                    'invalid_attachment_file_names'         => [
-                        'media_publisher.txt'       => 1,
-                        'ad_delivery_logging.json'  => 1,
-                        'mobile_network_stack.txt'  => 1,
-                    ],
-                    'last_played_video_ids'                 => [],
-                    'ar_engine_supported'                   => 'true',
-                    'available_disk_space_bytes'            => strval(mt_rand(6089027072, 17489027072)),
-                    'black_box_trace_id'                    => 'BdA1RkollNA',
-                    'promotion_id'                          => '1490312904699955',
-                    'deviceVolume'                          => number_format(1 / mt_rand(1, 10), 1),
-                    'device_silent_mode'                    => 'NORMAL',
-                    'm_target_sdk_version'                  => 34,
-                ]),
-                'nav_chain'                     => $this->ig->getNavChain(),
-                'source'                        => 'bloks',
+        $description,
+    ) {
+        return $this->ig->internal->sendGraph(
+            '293839176013550553288378882913',
+            [
+                'input' => [
+                    'attachment_file_names' => json_encode([
+                        'screenshot_0.png'                      => 1,
+                        'mobileconfigs.txt'                     => 1,
+                        'appearance_theme_state.json'           => 1,
+                        'fan_club_data.json'                    => 1,
+                        'reels_viewer_last_seen_media.json'     => 1,
+                        'feed_requests.txt'                     => 1,
+                        'main_feed_last_seen_medias.json'       => 1,
+                        'realtime_client.json'                  => 1,
+                        'direct_mutation_manager.txt'           => 1,
+                        'direct_interop_gating_status.json'     => 1,
+                        'direct_notification_traces.json'       => 1,
+                        'logcat.txt'                            => 1,
+                        'stacktrace.txt'                        => 1,
+                        'fb_liger_reporting.txt'                => 1,
+                        'RecentPendingMedia.json'               => 1,
+                        'IngestionLogcat.txt'                   => 1,
+                        'RecentUploadAttemptErrors.json'        => 1,
+                    ]),
+                    'build_num'                     => $this->ig->getVersionCode(),
+                    'category_id'                   => '493186350727442',
+                    'claim'                         => $this->ig->client->wwwClaim,
+                    'description'                   => $description,
+                    'endpoint'                      => 'com.instagram.portable.settings.help:com.instagram.portable.settings.help',
+                    'files'                         => [],
+                    'has_complete_logs_consent'     => true,
+                    'misc_info'                     => json_encode([
+                        'IG_UserId'                             => $this->ig->account_id,
+                        'IG_Username'                           => $this->ig->username,
+                        'fbns_token'                            => $this->ig->settings->get('fbns_token'),
+                        'transport_type_account'                => 'ig_advanced_crypto_transport',
+                        'user_interop_status'                   => 'DIRECT_INTEROP_GATING_STATUS_ELIGIBLE_AND_UPGRADED',
+                        'direct_last_viewed_thread_is_interop'  => 'false',
+                        'device_id'                             => $this->ig->device_id,
+                        'Git_Hash'                              => 'MASTER',
+                        'Branch'                                => 'master',
+                        'OS_Version'                            => $this->ig->device->getAndroidVersion(),
+                        'Manufacturer'                          => $this->ig->device->getManufacturer(),
+                        'Model'                                 => $this->ig->device->getModel(),
+                        'Locale'                                => 'English (United States)',
+                        'Build_Type'                            => 'RELEASE',
+                        'source'                                => 'bloks',
+                        'client_server_join_key'                => 'dKNAQNZLZNBppesuPeKV',
+                        'invalid_attachment_file_names'         => [
+                            'media_publisher.txt'       => 1,
+                            'ad_delivery_logging.json'  => 1,
+                            'mobile_network_stack.txt'  => 1,
+                        ],
+                        'last_played_video_ids'                 => [],
+                        'ar_engine_supported'                   => 'true',
+                        'available_disk_space_bytes'            => strval(mt_rand(6089027072, 17489027072)),
+                        'black_box_trace_id'                    => 'BdA1RkollNA',
+                        'promotion_id'                          => '1490312904699955',
+                        'deviceVolume'                          => number_format(1 / mt_rand(1, 10), 1),
+                        'device_silent_mode'                    => 'NORMAL',
+                        'm_target_sdk_version'                  => 34,
+                    ]),
+                    'nav_chain'                     => $this->ig->getNavChain(),
+                    'source'                        => 'bloks',
+                ],
             ],
-        ],
-        'IGBugReportSubmitMutation', null, false, 'minimal', 'api/v1/wwwgraphql/ig/query/');
+            'IGBugReportSubmitMutation',
+            null,
+            false,
+            'minimal',
+            'api/v1/wwwgraphql/ig/query/'
+        );
     }
 
     /**
@@ -2783,7 +2803,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -2821,7 +2841,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $responseArr = $response->asArray();
@@ -2869,7 +2889,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         $responseArr = $response->asArray();
@@ -2909,8 +2929,8 @@ class Account extends RequestCollection
      * @return GenericResponse
      */
     public function twoFactorTotpEnable(
-        $totpCode)
-    {
+        $totpCode,
+    ) {
         $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.two_factor.totp.code/')
             ->setSignedPost(false)
             ->addPost('params', json_encode([
@@ -2930,7 +2950,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
         return $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.two_factor.totp.enable/')
@@ -2957,7 +2977,7 @@ class Account extends RequestCollection
             ]))
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 }

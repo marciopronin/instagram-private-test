@@ -6,7 +6,7 @@ use InstagramAPI\Realtime\Command\DirectCommand;
 
 final class IndicateActivity extends DirectCommand
 {
-    const ACTION = 'indicate_activity';
+    public const ACTION = 'indicate_activity';
 
     /**
      * Constructor.
@@ -20,8 +20,8 @@ final class IndicateActivity extends DirectCommand
     public function __construct(
         $threadId,
         $status,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         parent::__construct(self::ACTION, $threadId, $options);
 
         $this->_data['activity_status'] = $status ? '1' : '0';

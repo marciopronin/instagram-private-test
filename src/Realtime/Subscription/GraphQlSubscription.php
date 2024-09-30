@@ -7,7 +7,7 @@ use InstagramAPI\Realtime\SubscriptionInterface;
 
 abstract class GraphQlSubscription implements SubscriptionInterface
 {
-    const TEMPLATE = '1/graphqlsubscriptions/%s/%s';
+    public const TEMPLATE = '1/graphqlsubscriptions/%s/%s';
 
     /** @var string */
     protected $_queryId;
@@ -23,8 +23,8 @@ abstract class GraphQlSubscription implements SubscriptionInterface
      */
     public function __construct(
         $queryId,
-        $inputData)
-    {
+        $inputData,
+    ) {
         $this->_queryId = $queryId;
         $this->_inputData = $inputData;
     }

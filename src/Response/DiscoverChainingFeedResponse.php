@@ -46,7 +46,7 @@ use InstagramAPI\Response;
  */
 class DiscoverChainingFeedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'auto_load_more_enabled'             => 'bool',
         'more_available'                     => 'bool',
         'next_max_id'                        => 'string',

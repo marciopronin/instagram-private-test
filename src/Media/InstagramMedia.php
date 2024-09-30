@@ -30,10 +30,10 @@ use InstagramAPI\Media\Geometry\Rectangle;
 abstract class InstagramMedia
 {
     /** @var int Crop Operation. */
-    const CROP = 1;
+    public const CROP = 1;
 
     /** @var int Expand Operation. */
-    const EXPAND = 2;
+    public const EXPAND = 2;
 
     /**
      * Override for the default temp path used by all class instances.
@@ -50,7 +50,7 @@ abstract class InstagramMedia
      *
      * @var string|null
      */
-    public static $defaultTmpPath = null;
+    public static $defaultTmpPath;
 
     /** @var bool Whether to output debugging info during calculation steps. */
     protected $_debug;
@@ -105,7 +105,7 @@ abstract class InstagramMedia
     protected $_jpgOutput;
 
     /** @var array SSIM and MSSSIM. */
-    public $ssimAndMsssim = null;
+    public $ssimAndMsssim;
 
     /**
      * Constructor.
@@ -199,8 +199,8 @@ abstract class InstagramMedia
      */
     public function __construct(
         $inputFile,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         // Assign variables for all options, to avoid bulky code repetition.
         $targetFeed = isset($options['targetFeed']) ? $options['targetFeed'] : Constants::FEED_TIMELINE;
         $horCropFocus = isset($options['horCropFocus']) ? $options['horCropFocus'] : null;
@@ -286,15 +286,21 @@ abstract class InstagramMedia
 
             // Select allowed aspect ratio range based on defaults and user input.
             if ($minAspectRatio !== null && ($minAspectRatio < $allowedMinRatio || $minAspectRatio > $allowedMaxRatio)) {
-                throw new \InvalidArgumentException(sprintf('Minimum aspect ratio must be between %.3f and %.3f.',
-                    $allowedMinRatio, $allowedMaxRatio));
+                throw new \InvalidArgumentException(sprintf(
+                    'Minimum aspect ratio must be between %.3f and %.3f.',
+                    $allowedMinRatio,
+                    $allowedMaxRatio
+                ));
             }
             if ($minAspectRatio === null) {
                 $minAspectRatio = $allowedMinRatio;
             }
             if ($maxAspectRatio !== null && ($maxAspectRatio < $allowedMinRatio || $maxAspectRatio > $allowedMaxRatio)) {
-                throw new \InvalidArgumentException(sprintf('Maximum aspect ratio must be between %.3f and %.3f.',
-                    $allowedMinRatio, $allowedMaxRatio));
+                throw new \InvalidArgumentException(sprintf(
+                    'Maximum aspect ratio must be between %.3f and %.3f.',
+                    $allowedMinRatio,
+                    $allowedMaxRatio
+                ));
             }
             if ($maxAspectRatio === null) {
                 $maxAspectRatio = $allowedMaxRatio;
@@ -306,12 +312,18 @@ abstract class InstagramMedia
             // Validate custom target aspect ratio legality if provided by user.
             if ($this->_hasUserForceTargetAspectRatio) {
                 if ($minAspectRatio !== null && $this->_forceTargetAspectRatio < $minAspectRatio) {
-                    throw new \InvalidArgumentException(sprintf('Custom target aspect ratio (%.5f) must be greater than or equal to the minimum aspect ratio (%.5f).',
-                                                                $this->_forceTargetAspectRatio, $minAspectRatio));
+                    throw new \InvalidArgumentException(sprintf(
+                        'Custom target aspect ratio (%.5f) must be greater than or equal to the minimum aspect ratio (%.5f).',
+                        $this->_forceTargetAspectRatio,
+                        $minAspectRatio
+                    ));
                 }
                 if ($maxAspectRatio !== null && $this->_forceTargetAspectRatio > $maxAspectRatio) {
-                    throw new \InvalidArgumentException(sprintf('Custom target aspect ratio (%.5f) must be lesser than or equal to the maximum aspect ratio (%.5f).',
-                                                                $this->_forceTargetAspectRatio, $maxAspectRatio));
+                    throw new \InvalidArgumentException(sprintf(
+                        'Custom target aspect ratio (%.5f) must be lesser than or equal to the maximum aspect ratio (%.5f).',
+                        $this->_forceTargetAspectRatio,
+                        $maxAspectRatio
+                    ));
                 }
             }
         }
@@ -534,22 +546,27 @@ abstract class InstagramMedia
             // change compared to the input, so that we can calculate how much
             // the canvas has rescaled. WARNING: These are 1-dimensional scales,
             // and only ONE value (the uncropped side) is valid for comparison.
-            $idealCanvas = new Dimensions($outputCanvas->getWidth() - $canvasInfo['mod2WidthDiff'],
-                                          $outputCanvas->getHeight() - $canvasInfo['mod2HeightDiff']);
+            $idealCanvas = new Dimensions(
+                $outputCanvas->getWidth() - $canvasInfo['mod2WidthDiff'],
+                $outputCanvas->getHeight() - $canvasInfo['mod2HeightDiff']
+            );
             $idealWidthScale = (float) ($idealCanvas->getWidth() / $inputCanvas->getWidth());
             $idealHeightScale = (float) ($idealCanvas->getHeight() / $inputCanvas->getHeight());
             $this->_debugDimensions(
-                $inputCanvas->getWidth(), $inputCanvas->getHeight(),
+                $inputCanvas->getWidth(),
+                $inputCanvas->getHeight(),
                 'CROP: Analyzing Original Input Canvas Size'
             );
             $this->_debugDimensions(
-                $idealCanvas->getWidth(), $idealCanvas->getHeight(),
+                $idealCanvas->getWidth(),
+                $idealCanvas->getHeight(),
                 'CROP: Analyzing Ideally Cropped (Non-Mod2-adjusted) Output Canvas Size'
             );
             $this->_debugText(
                 'CROP: Scale of Ideally Cropped Canvas vs Input Canvas',
                 'width=%.8f, height=%.8f',
-                $idealWidthScale, $idealHeightScale
+                $idealWidthScale,
+                $idealHeightScale
             );
 
             // Now determine HOW the IDEAL canvas has been cropped compared to
@@ -604,7 +621,8 @@ abstract class InstagramMedia
             $this->_debugText(
                 'CROP: Detecting Cropped Direction',
                 'cropped=%s, overallRescale=%.8f',
-                $hasCropped, $overallRescale
+                $hasCropped,
+                $overallRescale
             );
 
             // Alright, now calculate the dimensions of the "IDEALLY CROPPED
@@ -650,7 +668,8 @@ abstract class InstagramMedia
             // as close to the perfect aspect ratio as possible.
             $croppedInputCanvas = $idealCanvas->withRescaling(1 / $overallRescale, 'round');
             $this->_debugDimensions(
-                $croppedInputCanvas->getWidth(), $croppedInputCanvas->getHeight(),
+                $croppedInputCanvas->getWidth(),
+                $croppedInputCanvas->getHeight(),
                 'CROP: Rescaled Ideally Cropped Canvas to Input Dimension Space'
             );
 
@@ -665,17 +684,22 @@ abstract class InstagramMedia
             $this->_debugText(
                 'CROP: Rescaled Mod2 Adjustments to Input Dimension Space',
                 'width=%s, height=%s, widthRescaled=%s, heightRescaled=%s',
-                $canvasInfo['mod2WidthDiff'], $canvasInfo['mod2HeightDiff'],
-                $rescaledMod2WidthDiff, $rescaledMod2HeightDiff
+                $canvasInfo['mod2WidthDiff'],
+                $canvasInfo['mod2HeightDiff'],
+                $rescaledMod2WidthDiff,
+                $rescaledMod2HeightDiff
             );
 
             // Apply the Mod2 adjustments to the input cropping that we'll
             // perform. This ensures that ALL of the Mod2 croppings (in ANY
             // dimension) will always be pixel-perfect when we're at scale 1.0!
-            $croppedInputCanvas = new Dimensions($croppedInputCanvas->getWidth() + $rescaledMod2WidthDiff,
-                                                 $croppedInputCanvas->getHeight() + $rescaledMod2HeightDiff);
+            $croppedInputCanvas = new Dimensions(
+                $croppedInputCanvas->getWidth() + $rescaledMod2WidthDiff,
+                $croppedInputCanvas->getHeight() + $rescaledMod2HeightDiff
+            );
             $this->_debugDimensions(
-                $croppedInputCanvas->getWidth(), $croppedInputCanvas->getHeight(),
+                $croppedInputCanvas->getWidth(),
+                $croppedInputCanvas->getHeight(),
                 'CROP: Applied Mod2 Adjustments to Final Cropped Input Canvas'
             );
 
@@ -693,7 +717,8 @@ abstract class InstagramMedia
                                       ? $croppedInputCanvas->getHeight() : $inputCanvas->getHeight();
             $croppedInputCanvas = new Dimensions($croppedInputCanvasWidth, $croppedInputCanvasHeight);
             $this->_debugDimensions(
-                $croppedInputCanvas->getWidth(), $croppedInputCanvas->getHeight(),
+                $croppedInputCanvas->getWidth(),
+                $croppedInputCanvas->getHeight(),
                 'CROP: Clamped to Legal Input Max-Dimensions'
             );
 
@@ -706,7 +731,10 @@ abstract class InstagramMedia
             $this->_debugText(
                 'CROP: Initializing X/Y Variables to Full Input Canvas Size',
                 'x1=%s, x2=%s, y1=%s, y2=%s',
-                $x1, $x2, $y1, $y2
+                $x1,
+                $x2,
+                $y1,
+                $y2
             );
 
             // Calculate the width and height diffs between the original INPUT
@@ -723,7 +751,8 @@ abstract class InstagramMedia
             $this->_debugText(
                 'CROP: Calculated Input Canvas Crop Amounts',
                 'width=%s px, height=%s px',
-                $widthDiff, $heightDiff
+                $widthDiff,
+                $heightDiff
             );
 
             // After ALL of that work... we finally know how to crop the input
@@ -782,8 +811,13 @@ abstract class InstagramMedia
             $this->_debugText(
                 'CROP_SRC: Input Canvas Source Rectangle',
                 'x1=%s, x2=%s, y1=%s, y2=%s, width=%s, height=%s, aspect=%.8f',
-                $srcRect->getX1(), $srcRect->getX2(), $srcRect->getY1(), $srcRect->getY2(),
-                $srcRect->getWidth(), $srcRect->getHeight(), $srcRect->getAspectRatio()
+                $srcRect->getX1(),
+                $srcRect->getX2(),
+                $srcRect->getY1(),
+                $srcRect->getY2(),
+                $srcRect->getWidth(),
+                $srcRect->getHeight(),
+                $srcRect->getAspectRatio()
             );
 
             // Create a destination rectangle which completely fills the entire
@@ -800,8 +834,13 @@ abstract class InstagramMedia
             $this->_debugText(
                 'CROP_DST: Output Canvas Destination Rectangle',
                 'x1=%s, x2=%s, y1=%s, y2=%s, width=%s, height=%s, aspect=%.8f',
-                $dstRect->getX1(), $dstRect->getX2(), $dstRect->getY1(), $dstRect->getY2(),
-                $dstRect->getWidth(), $dstRect->getHeight(), $dstRect->getAspectRatio()
+                $dstRect->getX1(),
+                $dstRect->getX2(),
+                $dstRect->getY1(),
+                $dstRect->getY2(),
+                $dstRect->getWidth(),
+                $dstRect->getHeight(),
+                $dstRect->getAspectRatio()
             );
         } elseif ($this->_operation === self::EXPAND) {
             // We'll copy the entire original input media onto the new canvas.
@@ -810,8 +849,13 @@ abstract class InstagramMedia
             $this->_debugText(
                 'EXPAND_SRC: Input Canvas Source Rectangle',
                 'x1=%s, x2=%s, y1=%s, y2=%s, width=%s, height=%s, aspect=%.8f',
-                $srcRect->getX1(), $srcRect->getX2(), $srcRect->getY1(), $srcRect->getY2(),
-                $srcRect->getWidth(), $srcRect->getHeight(), $srcRect->getAspectRatio()
+                $srcRect->getX1(),
+                $srcRect->getX2(),
+                $srcRect->getY1(),
+                $srcRect->getY2(),
+                $srcRect->getWidth(),
+                $srcRect->getHeight(),
+                $srcRect->getAspectRatio()
             );
 
             // Determine the target dimensions to fit it on the new canvas,
@@ -833,7 +877,8 @@ abstract class InstagramMedia
             // values, since PHP allows the dst_w/dst_h to exceed beyond canvas!
             $dstRect = $srcRect->withRescaling($scale, 'ceil');
             $this->_debugDimensions(
-                $dstRect->getWidth(), $dstRect->getHeight(),
+                $dstRect->getWidth(),
+                $dstRect->getHeight(),
                 'EXPAND: Rescaled Input to Output Dimension Space'
             );
 
@@ -845,7 +890,8 @@ abstract class InstagramMedia
             $this->_debugText(
                 'EXPAND: Calculating Centered Destination on Output Canvas',
                 'dst_x=%s, dst_y=%s',
-                $dst_x, $dst_y
+                $dst_x,
+                $dst_y
             );
 
             // Build the final destination rectangle for the expanded canvas!
@@ -853,8 +899,13 @@ abstract class InstagramMedia
             $this->_debugText(
                 'EXPAND_DST: Output Canvas Destination Rectangle',
                 'x1=%s, x2=%s, y1=%s, y2=%s, width=%s, height=%s, aspect=%.8f',
-                $dstRect->getX1(), $dstRect->getX2(), $dstRect->getY1(), $dstRect->getY2(),
-                $dstRect->getWidth(), $dstRect->getHeight(), $dstRect->getAspectRatio()
+                $dstRect->getX1(),
+                $dstRect->getX2(),
+                $dstRect->getY1(),
+                $dstRect->getY2(),
+                $dstRect->getWidth(),
+                $dstRect->getHeight(),
+                $dstRect->getAspectRatio()
             );
         } else {
             throw new \RuntimeException(sprintf('Unsupported operation: %s.', $this->_operation));
@@ -875,7 +926,8 @@ abstract class InstagramMedia
     abstract protected function _createOutputFile(
         Rectangle $srcRect,
         Rectangle $dstRect,
-        Dimensions $canvas);
+        Dimensions $canvas,
+    );
 
     /**
      * Calculate a new canvas based on input size and requested modifications.
@@ -930,8 +982,8 @@ abstract class InstagramMedia
         $minAspectRatio = null,
         $maxAspectRatio = null,
         $forceTargetAspectRatio = null,
-        $allowNewAspectDeviation = false)
-    {
+        $allowNewAspectDeviation = false,
+    ) {
         /*
          * WARNING TO POTENTIAL CONTRIBUTORS:
          *
@@ -1134,17 +1186,20 @@ abstract class InstagramMedia
         if ($canvas->getWidth() < 1 || $canvas->getHeight() < 1) {
             throw new \RuntimeException(sprintf(
                 'Canvas calculation failed. Target width (%s) or height (%s) less than one pixel.',
-                $canvas->getWidth(), $canvas->getHeight()
+                $canvas->getWidth(),
+                $canvas->getHeight()
             ));
         } elseif ($canvas->getWidth() < $minWidth) {
             throw new \RuntimeException(sprintf(
                 'Canvas calculation failed. Target width (%s) less than minimum allowed (%s).',
-                $canvas->getWidth(), $minWidth
+                $canvas->getWidth(),
+                $minWidth
             ));
         } elseif ($canvas->getWidth() > $maxWidth) {
             throw new \RuntimeException(sprintf(
                 'Canvas calculation failed. Target width (%s) greater than maximum allowed (%s).',
-                $canvas->getWidth(), $maxWidth
+                $canvas->getWidth(),
+                $maxWidth
             ));
         } elseif ($isIllegalRatio) {
             if (!$allowNewAspectDeviation) {
@@ -1192,8 +1247,8 @@ abstract class InstagramMedia
     protected function _accurateHeightRecalc(
         $useFloorHeightRecalc,
         $targetAspectRatio,
-        $targetWidth)
-    {
+        $targetWidth,
+    ) {
         // Read the docs above to understand this CRITICALLY IMPORTANT code.
         $targetHeight = $useFloorHeightRecalc
                       ? (int) floor($targetWidth / $targetAspectRatio) // >=
@@ -1246,8 +1301,8 @@ abstract class InstagramMedia
         $maxWidth = 99999,
         $minAspectRatio = null,
         $maxAspectRatio = null,
-        $allowNewAspectDeviation = false)
-    {
+        $allowNewAspectDeviation = false,
+    ) {
         // Initialize to the calculated canvas size.
         $mod2Width = $targetWidth;
         $mod2Height = $targetHeight;
@@ -1343,9 +1398,15 @@ abstract class InstagramMedia
                 'ratioDeviation' => $ratioDeviation,
                 'rating'         => $rating,
             ];
-            $this->_debugDimensions($mod2Width, $offsetMod2Height, sprintf(
-                'MOD2_CANVAS_CHECK: Testing Height Mod2Ratio (h%s%s = %s)',
-                ($offset >= 0 ? '+' : ''), $offset, $rating)
+            $this->_debugDimensions(
+                $mod2Width,
+                $offsetMod2Height,
+                sprintf(
+                    'MOD2_CANVAS_CHECK: Testing Height Mod2Ratio (h%s%s = %s)',
+                    $offset >= 0 ? '+' : '',
+                    $offset,
+                    $rating
+                )
             );
         }
 
@@ -1373,7 +1434,9 @@ abstract class InstagramMedia
         $mod2Height = $bestHeight['height'];
         $this->_debugDimensions($mod2Width, $mod2Height, sprintf(
             'MOD2_CANVAS: Selected Most Ideal Height Mod2Ratio (h%s%s = %s)',
-            ($bestHeight['offset'] >= 0 ? '+' : ''), $bestHeight['offset'], $bestHeight['rating']
+            $bestHeight['offset'] >= 0 ? '+' : '',
+            $bestHeight['offset'],
+            $bestHeight['rating']
         ));
 
         // Decide what to do if there were no legal aspect ratios among our
@@ -1395,7 +1458,9 @@ abstract class InstagramMedia
                 // we have NO idea if they'd prefer any others! ;-)
                 $this->_debugDimensions($mod2Width, $mod2Height, sprintf(
                     'MOD2_CANVAS: Allowing Deviating Height Mod2Ratio (h%s%s = %s)',
-                    ($bestHeight['offset'] >= 0 ? '+' : ''), $bestHeight['offset'], $bestHeight['rating']
+                    $bestHeight['offset'] >= 0 ? '+' : '',
+                    $bestHeight['offset'],
+                    $bestHeight['rating']
                 ));
             }
         }
@@ -1411,8 +1476,8 @@ abstract class InstagramMedia
      * @return bool
      */
     protected function _isNumberMod2(
-        $number)
-    {
+        $number,
+    ) {
         // NOTE: The modulo operator correctly returns ints even for float input such as 1.999.
         return $number % 2 === 0;
     }
@@ -1427,8 +1492,8 @@ abstract class InstagramMedia
     protected function _debugText(
         $stepDescription,
         $formatMessage,
-        ...$args)
-    {
+        ...$args,
+    ) {
         if (!$this->_debug) {
             return;
         }
@@ -1450,8 +1515,8 @@ abstract class InstagramMedia
     protected function _debugDimensions(
         $width,
         $height,
-        $stepDescription = null)
-    {
+        $stepDescription = null,
+    ) {
         if (!$this->_debug) {
             return;
         }
@@ -1461,7 +1526,9 @@ abstract class InstagramMedia
             // rounding errors can make rejected ratios look valid.
             "[\033[1;33m%s\033[0m] w=%s h=%s (aspect %.8f)\n",
             $stepDescription !== null ? $stepDescription : 'DEBUG',
-            $width, $height, (float) ($width / $height)
+            $width,
+            $height,
+            (float) ($width / $height)
         );
     }
 }

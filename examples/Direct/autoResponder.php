@@ -5,28 +5,28 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////////////////////
+// ///////////////////
 $autoMessage = 'Thank you for contacting us! We will get back to you as soon as possible :)';
-////////////////////
+// //////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
-    $clientContext = \InstagramAPI\Utils::generateClientContext();
+    $clientContext = InstagramAPI\Utils::generateClientContext();
     $ig->event->sendNavigation('on_launch_direct_inbox', 'feed_timeline', 'direct_inbox');
     $ig->event->sendNavigationTabImpression(1);
 
@@ -58,6 +58,6 @@ try {
         sleep(mt_rand(1, 3));
     }
     $ig->event->sendNavigation('back', 'direct_inbox', 'feed_timeline');
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

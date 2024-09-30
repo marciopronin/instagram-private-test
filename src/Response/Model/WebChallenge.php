@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class WebChallenge extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'challengeType'             => 'string',
         'navigation'                => 'ChallengeNavigation',
         'fields'                    => 'ChallengeFields',

@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class ActiveFeedAdsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'feed_items'     => 'Model\FeedItem[]',
         'next_max_id'    => 'string',
         'more_available' => 'bool',

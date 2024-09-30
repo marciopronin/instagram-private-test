@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class XpostDestination extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'destination_id'           => 'string',
         'destination_name'         => 'string',
         'destination_type'         => 'string',

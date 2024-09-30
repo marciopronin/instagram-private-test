@@ -14,7 +14,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class FormerUsernameInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_former_usernames' => 'bool',
     ];
 }

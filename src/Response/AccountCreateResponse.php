@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class AccountCreateResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'account_created' => 'bool',
         'created_user'    => 'Model\User',
     ];

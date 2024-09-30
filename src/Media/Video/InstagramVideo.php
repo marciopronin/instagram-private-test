@@ -33,8 +33,8 @@ class InstagramVideo extends InstagramMedia
     public function __construct(
         $inputFile,
         array $options = [],
-        FFmpeg $ffmpeg = null)
-    {
+        ?FFmpeg $ffmpeg = null,
+    ) {
         parent::__construct($inputFile, $options);
         $this->_details = new VideoDetails($this->_inputFile);
 
@@ -54,8 +54,8 @@ class InstagramVideo extends InstagramMedia
     protected function _createOutputFile(
         Rectangle $srcRect,
         Rectangle $dstRect,
-        Dimensions $canvas)
-    {
+        Dimensions $canvas,
+    ) {
         $outputFile = null;
 
         try {
@@ -97,8 +97,8 @@ class InstagramVideo extends InstagramMedia
         Rectangle $srcRect,
         Rectangle $dstRect,
         Dimensions $canvas,
-        $outputFile)
-    {
+        $outputFile,
+    ) {
         // ffmpeg has a bug - https://trac.ffmpeg.org/ticket/6370 - it preserves rotate tag
         // in the output video when the input video has display matrix with rotate
         // and rotation was overridden manually.
@@ -162,8 +162,8 @@ class InstagramVideo extends InstagramMedia
      */
     protected function _ffmpegMustRunAgain(
         $attempt,
-        array $ffmpegOutput)
-    {
+        array $ffmpegOutput,
+    ) {
         return false;
     }
 
@@ -175,8 +175,8 @@ class InstagramVideo extends InstagramMedia
      * @return string[]
      */
     protected function _getInputFlags(
-        $attempt)
-    {
+        $attempt,
+    ) {
         return [];
     }
 
@@ -188,8 +188,8 @@ class InstagramVideo extends InstagramMedia
      * @return string[]
      */
     protected function _getOutputFlags(
-        $attempt)
-    {
+        $attempt,
+    ) {
         $result = [
             '-metadata:s:v rotate=""', // Strip rotation from metadata.
             '-f mp4', // Force output format to MP4.

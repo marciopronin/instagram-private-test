@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class MsisdnHeaderResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'phone_number'          => 'string',
         'url'                   => 'string',
         'remaining_ttl_seconds' => 'int',

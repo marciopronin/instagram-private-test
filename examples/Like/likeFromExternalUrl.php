@@ -5,18 +5,18 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -28,7 +28,7 @@ try {
                 ->media_id;
     $item = $ig->media->getInfo($mediaId)->getItems()[0];
     $extraData = [];
-    if ($item->getMediaType() === \InstagramAPI\Response\Model\Item::CAROUSEL) {
+    if ($item->getMediaType() === InstagramAPI\Response\Model\Item::CAROUSEL) {
         $extraData['carousel_media'] = 1;
         $extraData['carousel_index'] = 0;
     }
@@ -47,6 +47,6 @@ try {
     $ig->event->sendOrganicLike($item, 'feed_short_url', null, null, $ig->session_id);
     $ig->event->updateAppState('background');
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

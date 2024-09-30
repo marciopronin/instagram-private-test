@@ -54,7 +54,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class TVChannel extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'type'                  => 'string',
         'title'                 => 'string',
         'id'                    => 'string',

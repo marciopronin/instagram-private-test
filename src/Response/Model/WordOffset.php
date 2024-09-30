@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class WordOffset extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'start_index'                        => 'int',
         'end_index'                          => 'int',
         'start_offset_ms'                    => 'int',

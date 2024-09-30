@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class FriendshipsShowManyResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'friendship_statuses' => 'Model\UnpredictableKeys\FriendshipStatusUnpredictableContainer',
     ];
 }

@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class OnBoardCatalogResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'shopping_onboarding_state'         => 'string',
         'current_catalog_id'                => 'string',
         'is_business_targeted_for_shopping' => 'bool',

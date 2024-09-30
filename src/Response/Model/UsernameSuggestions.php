@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class UsernameSuggestions extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'username'          => 'string',
         'prototype'         => 'string',
     ];

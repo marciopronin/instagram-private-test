@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class LiveViewerInvite extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'text'      => 'string',
         'broadcast' => 'Broadcast',
         'title'     => 'string',

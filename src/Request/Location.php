@@ -20,11 +20,11 @@ class Location extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LocationInfoResponse
+     * @return Response\LocationInfoResponse
      */
     public function getInfo(
-        $locationId)
-    {
+        $locationId,
+    ) {
         return $this->ig->request("locations/{$locationId}/location_info/")
             ->getResponse(new Response\LocationInfoResponse());
     }
@@ -43,13 +43,13 @@ class Location extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LocationResponse
+     * @return Response\LocationResponse
      */
     public function search(
         $latitude,
         $longitude,
-        $query = null)
-    {
+        $query = null,
+    ) {
         $locations = $this->ig->request('location_search/')
             ->addParam('rank_token', $this->ig->account_id.'_'.Signatures::generateUUID())
             ->addParam('latitude', $latitude)
@@ -79,7 +79,7 @@ class Location extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FBLocationResponse
+     * @return Response\FBLocationResponse
      *
      * @see FBLocationResponse::getRankToken() To get a rank token from the response.
      * @see examples/paginateWithExclusion.php For an example.
@@ -87,8 +87,8 @@ class Location extends RequestCollection
     public function findPlaces(
         $query,
         array $excludeList = [],
-        $rankToken = null)
-    {
+        $rankToken = null,
+    ) {
         // Do basic query validation. Do NOT use throwIfInvalidHashtag here.
         if (!is_string($query) || $query === null) {
             throw new \InvalidArgumentException('Query must be a non-empty string.');
@@ -134,7 +134,7 @@ class Location extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FBLocationResponse
+     * @return Response\FBLocationResponse
      *
      * @see FBLocationResponse::getRankToken() To get a rank token from the response.
      * @see examples/paginateWithExclusion.php For an example.
@@ -144,8 +144,8 @@ class Location extends RequestCollection
         $longitude,
         $query = null,
         $excludeList = [],
-        $rankToken = null)
-    {
+        $rankToken = null,
+    ) {
         $location = $this->_paginateWithExclusion(
             $this->ig->request('fbsearch/places/')
                 ->addParam('lat', $latitude)
@@ -185,11 +185,11 @@ class Location extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\RelatedLocationResponse
+     * @return Response\RelatedLocationResponse
      */
     public function getRelated(
-        $locationId)
-    {
+        $locationId,
+    ) {
         return $this->ig->request("locations/{$locationId}/related/")
             ->addParam('visited', json_encode(['id' => $locationId, 'type' => 'location']))
             ->addParam('related_types', json_encode(['location']))
@@ -215,7 +215,7 @@ class Location extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LocationFeedResponse
+     * @return Response\LocationFeedResponse
      *
      * @see Signatures::generateUUID() To create a UUID.
      * @see examples/rankTokenUsage.php For an example.
@@ -226,8 +226,8 @@ class Location extends RequestCollection
         $tab = 'ranked',
         $nextMediaIds = null,
         $nextPage = null,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         Utils::throwIfInvalidRankToken($rankToken);
         if ($tab !== 'ranked' && $tab !== 'recent') {
             throw new \InvalidArgumentException('The provided section tab is invalid.');
@@ -237,7 +237,7 @@ class Location extends RequestCollection
             ->setSignedPost(false)
             ->addPost('rank_token', $rankToken)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('session_id', $this->ig->session_id)
             ->addPost('exclude_bloks_widgets', 'true');
 
@@ -290,11 +290,11 @@ class Location extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LocationStoryResponse
+     * @return Response\LocationStoryResponse
      */
     public function getStoryFeed(
-        $locationId)
-    {
+        $locationId,
+    ) {
         return $this->ig->request("locations/{$locationId}/story/")
             ->getResponse(new Response\LocationStoryResponse());
     }
@@ -330,7 +330,7 @@ class Location extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MediaSeenResponse
+     * @return Response\MediaSeenResponse
      *
      * @see Story::markMediaSeen()
      * @see Hashtag::markStoryMediaSeen()
@@ -338,8 +338,8 @@ class Location extends RequestCollection
     public function markStoryMediaSeen(
         Response\LocationStoryResponse $locationFeed,
         array $items,
-        array $skippedItems = [])
-    {
+        array $skippedItems = [],
+    ) {
         // Extract the Location Story-Tray ID from the user's location response.
         // NOTE: This can NEVER fail if the user has properly given us the exact
         // same location response that they got the story items from!

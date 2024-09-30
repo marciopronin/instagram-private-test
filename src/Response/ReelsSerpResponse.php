@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class ReelsSerpResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'reels_serp_modules'  => 'Model\ReelsSerpModule[]',
         'has_more'            => 'bool',
         'reels_max_id'        => 'string',

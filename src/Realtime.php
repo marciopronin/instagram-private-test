@@ -66,8 +66,8 @@ class Realtime implements EventEmitterInterface
     public function __construct(
         Instagram $instagram,
         LoopInterface $loop,
-        LoggerInterface $logger = null)
-    {
+        ?LoggerInterface $logger = null,
+    ) {
         if (PHP_SAPI !== 'cli') {
             throw new \RuntimeException('The Realtime client can only run from the command line.');
         }
@@ -148,8 +148,8 @@ class Realtime implements EventEmitterInterface
      */
     public function markDirectItemSeen(
         $threadId,
-        $threadItemId)
-    {
+        $threadItemId,
+    ) {
         try {
             $this->_client->sendCommand(new DirectCommand\MarkSeen($threadId, $threadItemId));
         } catch (\Exception $e) {
@@ -171,8 +171,8 @@ class Realtime implements EventEmitterInterface
      */
     public function indicateActivityInDirectThread(
         $threadId,
-        $activityFlag)
-    {
+        $activityFlag,
+    ) {
         try {
             $command = new DirectCommand\IndicateActivity($threadId, $activityFlag);
             $this->_client->sendCommand($command);
@@ -198,8 +198,8 @@ class Realtime implements EventEmitterInterface
     public function sendTextToDirect(
         $threadId,
         $message,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         try {
             $command = new DirectCommand\SendText($threadId, $message, $options);
             $this->_client->sendCommand($command);
@@ -223,8 +223,8 @@ class Realtime implements EventEmitterInterface
      */
     public function sendLikeToDirect(
         $threadId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         try {
             $command = new DirectCommand\SendLike($threadId, $options);
             $this->_client->sendCommand($command);
@@ -251,8 +251,8 @@ class Realtime implements EventEmitterInterface
     public function sendPostToDirect(
         $threadId,
         $mediaId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         try {
             $command = new DirectCommand\SendPost($threadId, $mediaId, $options);
             $this->_client->sendCommand($command);
@@ -279,8 +279,8 @@ class Realtime implements EventEmitterInterface
     public function sendStoryToDirect(
         $threadId,
         $storyId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         try {
             $command = new DirectCommand\SendStory($threadId, $storyId, $options);
             $this->_client->sendCommand($command);
@@ -307,8 +307,8 @@ class Realtime implements EventEmitterInterface
     public function sendProfileToDirect(
         $threadId,
         $userId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         try {
             $command = new DirectCommand\SendProfile($threadId, $userId, $options);
             $this->_client->sendCommand($command);
@@ -338,8 +338,8 @@ class Realtime implements EventEmitterInterface
     public function sendLocationToDirect(
         $threadId,
         $locationId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         try {
             $command = new DirectCommand\SendLocation($threadId, $locationId, $options);
             $this->_client->sendCommand($command);
@@ -366,10 +366,10 @@ class Realtime implements EventEmitterInterface
     public function sendHashtagToDirect(
         $threadId,
         $hashtag,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         try {
-            //$command = new DirectCommand\SendHashtag($threadId, $hashtag, $options);
+            // $command = new DirectCommand\SendHashtag($threadId, $hashtag, $options);
             $command = new DirectCommand\SendText($threadId, $hashtag, $options);
             $this->_client->sendCommand($command);
 
@@ -396,8 +396,8 @@ class Realtime implements EventEmitterInterface
         $threadId,
         $threadItemId,
         $reactionType,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         try {
             $command = new DirectCommand\SendReaction(
                 $threadId,
@@ -431,8 +431,8 @@ class Realtime implements EventEmitterInterface
         $threadId,
         $threadItemId,
         $reactionType,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         try {
             $command = new DirectCommand\SendReaction(
                 $threadId,
@@ -459,8 +459,8 @@ class Realtime implements EventEmitterInterface
      */
     public function receiveOfflineMessages(
         $sequenceId,
-        $snapshotMs)
-    {
+        $snapshotMs,
+    ) {
         try {
             $this->_client->sendCommand(new IrisSubscribe($sequenceId, $snapshotMs));
         } catch (\Exception $e) {
@@ -482,8 +482,8 @@ class Realtime implements EventEmitterInterface
      * @param int $timeout
      */
     public function setTimeout(
-        $timeout)
-    {
+        $timeout,
+    ) {
         if ($timeout < 1) {
             throw new \Exception('Timeout value can not be 0 or negative.');
         }

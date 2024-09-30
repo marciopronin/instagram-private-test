@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectSeenItemPayload extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'count'     => '',
         'timestamp' => 'string',
     ];

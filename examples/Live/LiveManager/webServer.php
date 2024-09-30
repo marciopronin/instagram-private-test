@@ -1,7 +1,7 @@
 <?php
 $requestUri = $_SERVER['REQUEST_URI'];
 
-//Send dummy data for now
+// Send dummy data for now
 if ($requestUri === '/tick') {
     header('Content-Type: application/json', true);
     http_response_code(200);

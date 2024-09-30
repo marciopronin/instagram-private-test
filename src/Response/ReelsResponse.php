@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class ReelsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'items'        => 'Model\Item[]',
         'paging_info'  => 'Model\PageInfo',
     ];

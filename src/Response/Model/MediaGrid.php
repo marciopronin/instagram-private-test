@@ -46,7 +46,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class MediaGrid extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'title'                        => 'string',
         'refinements'                  => '',
         'sections'                     => 'Section[]',

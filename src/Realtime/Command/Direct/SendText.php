@@ -4,7 +4,7 @@ namespace InstagramAPI\Realtime\Command\Direct;
 
 final class SendText extends SendItem
 {
-    const TYPE = 'text';
+    public const TYPE = 'text';
 
     /**
      * Constructor.
@@ -18,8 +18,8 @@ final class SendText extends SendItem
     public function __construct(
         $threadId,
         $text,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         parent::__construct($threadId, self::TYPE, $options);
 
         if (!is_string($text)) {

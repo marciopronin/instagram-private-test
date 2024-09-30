@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class RecoveryResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'phone_number_valid' => 'bool',
         'title'              => 'string',
         'body'               => 'string',

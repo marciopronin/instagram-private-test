@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Resource extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'resource_name'             => 'string',
         'resource_flavor'           => 'string',
         'download_url'              => 'string',

@@ -7,8 +7,8 @@ use InstagramAPI\Signatures;
 
 class ZeroProvisionSubscription extends GraphQlSubscription
 {
-    const QUERY = '17913953740109069';
-    const ID = 'zero_provision';
+    public const QUERY = '17913953740109069';
+    public const ID = 'zero_provision';
 
     /**
      * Constructor.
@@ -16,8 +16,8 @@ class ZeroProvisionSubscription extends GraphQlSubscription
      * @param string $deviceId
      */
     public function __construct(
-        $deviceId)
-    {
+        $deviceId,
+    ) {
         parent::__construct(self::QUERY, [
             'client_subscription_id' => Signatures::generateUUID(),
             'device_id'              => $deviceId,

@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class InsightsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'instagram_user' => 'Model\Insights',
     ];
 }

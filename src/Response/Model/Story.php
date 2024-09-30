@@ -50,7 +50,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Story extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'pk'            => 'string',
         'counts'        => 'Counts',
         'args'          => 'Args',

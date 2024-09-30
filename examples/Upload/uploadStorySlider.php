@@ -5,22 +5,22 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////// MEDIA ////////
+// ///// MEDIA ////////
 $photoFilename = '';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -54,21 +54,21 @@ $metadata = [
 
 $ig->event->sendNavigation('your_story_dialog_option', 'feed_timeline', 'quick_capture_fragment');
 
-$sessionId = \InstagramAPI\Signatures::generateUUID();
+$sessionId = InstagramAPI\Signatures::generateUUID();
 $ig->event->sendIGStartCameraSession($sessionId);
 
-$loggerId = \InstagramAPI\Signatures::generateUUID();
-$productSessionId = \InstagramAPI\Signatures::generateUUID();
+$loggerId = InstagramAPI\Signatures::generateUUID();
+$productSessionId = InstagramAPI\Signatures::generateUUID();
 $eventTime = mt_rand(200, 300) * 1000;
 $ig->event->sendCameraWaterfall('instagram_stories', 'add_outputs', $loggerId, $productSessionId, 'instagram_stories', $eventTime);
 
 $ig->event->sendCameraWaterfall('instagram_stories', 'set_input', $loggerId, $productSessionId, 'instagram_stories', $eventTime + 1);
 
-$waterfallId = \InstagramAPI\Signatures::generateUUID();
+$waterfallId = InstagramAPI\Signatures::generateUUID();
 $startTime = round(microtime(true) * 1000);
 $ig->event->sendNametagSessionStart('ig_nametag_session_start', $waterfallId, $startTime, $startTime, 'story_camera');
 
-$cameraShareId = \InstagramAPI\Signatures::generateUUID();
+$cameraShareId = InstagramAPI\Signatures::generateUUID();
 $ig->event->sendIgCameraShareMedia($cameraShareId, 1);
 
 $ig->event->sendNavigation('button', 'reel_composer_preview', 'reel_composer_camera');
@@ -83,7 +83,7 @@ try {
     // processing, and it never overwrites your original file.
     //
     // Also note that it has lots of options, so read its class documentation!
-    $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename, ['targetFeed' => \InstagramAPI\Constants::FEED_STORY]);
+    $photo = new InstagramAPI\Media\Photo\InstagramPhoto($photoFilename, ['targetFeed' => InstagramAPI\Constants::FEED_STORY]);
     $ig->story->uploadPhoto($photo->getFile(), $metadata);
 
     $ig->event->sendIgCameraEndPostCaptureSession($sessionId);
@@ -94,7 +94,7 @@ try {
     // NOTE: Providing metadata for story uploads is OPTIONAL. If you just want
     // to upload it without any tags/location/caption, simply do the following:
     // $ig->story->uploadPhoto($photo->getFile());
-} catch (\Exception $e) {
+} catch (Exception $e) {
     if ($e instanceof InstagramAPI\Exception\LoginRequiredException) {
         echo 'Password was changed or cookie expired. Please login again.';
     } else {

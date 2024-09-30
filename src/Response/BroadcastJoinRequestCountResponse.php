@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class BroadcastJoinRequestCountResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'fetch_ts'            => 'string',
         'num_total_requests'  => 'int',
         'num_new_requests'    => 'int',

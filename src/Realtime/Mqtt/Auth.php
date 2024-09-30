@@ -7,7 +7,7 @@ use InstagramAPI\Instagram;
 
 class Auth implements AuthInterface
 {
-    const AUTH_TYPE = 'cookie_auth';
+    public const AUTH_TYPE = 'cookie_auth';
 
     /**
      * @var Instagram
@@ -20,8 +20,8 @@ class Auth implements AuthInterface
      * @param Instagram $instagram
      */
     public function __construct(
-        Instagram $instagram)
-    {
+        Instagram $instagram,
+    ) {
         $this->_instagram = $instagram;
     }
 

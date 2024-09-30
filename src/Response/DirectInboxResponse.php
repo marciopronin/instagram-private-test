@@ -54,7 +54,7 @@ use InstagramAPI\Response;
  */
 class DirectInboxResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'viewer'                   => 'Model\User',
         'pending_requests_total'   => '',
         'seq_id'                   => 'string',

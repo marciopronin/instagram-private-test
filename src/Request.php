@@ -19,7 +19,7 @@ class Request
     /**
      * The Instagram class instance we belong to.
      *
-     * @var \InstagramAPI\Instagram
+     * @var Instagram
      */
     protected $_parent;
 
@@ -180,7 +180,7 @@ class Request
      *
      * @var callable
      */
-    protected $_customResolver = null;
+    protected $_customResolver;
 
     /**
      * Combined HTTP Engine.
@@ -201,8 +201,8 @@ class Request
     public function __construct(
         Instagram $parent,
         $url,
-        $customResolver = null)
-    {
+        $customResolver = null,
+    ) {
         $this->_parent = $parent;
         $this->_url = $url;
 
@@ -244,8 +244,8 @@ class Request
      * @return self
      */
     public function setVersion(
-        $apiVersion)
-    {
+        $apiVersion,
+    ) {
         if (!array_key_exists($apiVersion, Constants::API_URLS)) {
             throw new \InvalidArgumentException(sprintf('"%d" is not a supported API version.', $apiVersion));
         }
@@ -264,8 +264,8 @@ class Request
      */
     public function addParam(
         $key,
-        $value)
-    {
+        $value,
+    ) {
         if ($value === true) {
             $value = 'true';
         } elseif ($value === false) {
@@ -286,8 +286,8 @@ class Request
      */
     public function addPost(
         $key,
-        $value)
-    {
+        $value,
+    ) {
         if ($value === true) {
             $value = 'true';
         } elseif ($value === false) {
@@ -312,8 +312,8 @@ class Request
      */
     public function addUnsignedPost(
         $key,
-        $value)
-    {
+        $value,
+    ) {
         $this->addPost($key, $value);
         $this->_excludeSigned[] = $key;
 
@@ -336,8 +336,8 @@ class Request
         $key,
         $filepath,
         $filename = null,
-        array $headers = [])
-    {
+        array $headers = [],
+    ) {
         // Validate
         if (!is_file($filepath)) {
             throw new \InvalidArgumentException(sprintf('File "%s" does not exist.', $filepath));
@@ -403,8 +403,8 @@ class Request
         $key,
         $data,
         $filename,
-        array $headers = [])
-    {
+        array $headers = [],
+    ) {
         $filename = basename($filename);
 
         $info = new \SplFileInfo($filename);
@@ -465,8 +465,8 @@ class Request
      */
     public function addHeader(
         $key,
-        $value)
-    {
+        $value,
+    ) {
         $this->_headers[$key] = $value;
 
         return $this;
@@ -482,7 +482,7 @@ class Request
         if ($this->_defaultHeaders) {
             $this->_headers['X-FB-Connection-Type'] = ($this->_parent->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)';
             $this->_headers['X-IG-Connection-Type'] = ($this->_parent->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)';
-            //$this->_headers['X-IG-Connection-Speed'] = $this->_parent->getConnectionSpeed();
+            // $this->_headers['X-IG-Connection-Speed'] = $this->_parent->getConnectionSpeed();
             $this->_headers['X-IG-Device-ID'] = $this->_parent->uuid;
             if ($this->_parent->phone_id !== null) {
                 $this->_headers['X-IG-Family-Device-ID'] = $this->_parent->phone_id;
@@ -490,7 +490,7 @@ class Request
             $this->_headers['X-FB-HTTP-Engine'] = ($this->_combinedHttpEngine === true) ? Constants::X_FB_HTTP_Combined_Engine : Constants::X_FB_HTTP_Engine;
             $this->_headers['X-FB-Client-IP'] = 'True';
             $this->_headers['X-FB-Server-Cluster'] = 'True';
-            if (\InstagramAPI\Instagram::$useBloksLogin === false) {
+            if (Instagram::$useBloksLogin === false) {
                 $this->_headers['X-IG-App-Startup-Country'] = ($this->_parent->getAppStartupCountry() !== null) ? $this->_parent->getAppStartupCountry() : explode('_', $this->_parent->getLocale())[1];
             }
             $this->_headers['X-IG-Mapped-Locale'] = $this->_parent->getLocale();
@@ -514,7 +514,7 @@ class Request
             $this->_headers['X-Bloks-Prism-Font-Enabled'] = 'false';
 
             if ($this->_parent->isExperimentEnabled('59489', 0, true)) {
-                $this->_headers['X-Bloks-Prism-Button-Version'] = 'CONTROL'; //0
+                $this->_headers['X-Bloks-Prism-Button-Version'] = 'CONTROL'; // 0
             }
             if ($this->_parent->getPlatform() === 'android') {
                 $this->_headers['X-IG-App-Locale'] = $this->_parent->getLocale();
@@ -526,7 +526,7 @@ class Request
                 $this->_headers['X-IG-Capabilities'] = Constants::X_IG_Capabilities;
                 $this->_headers['X-Bloks-Version-Id'] = Constants::BLOCK_VERSIONING_ID;
                 $this->_headers['X-Bloks-Is-Layout-RTL'] = 'false';
-                //$this->_headers['X-Bloks-Is-Panorama-Enabled'] = 'true';
+                // $this->_headers['X-Bloks-Is-Panorama-Enabled'] = 'true';
                 if ($this->_parent->getNavChain() !== '' && $this->_parent->settings->get('nav_started') === 'true') {
                     $this->_headers['X-IG-Nav-Chain'] = $this->_parent->getNavChain();
                 }
@@ -550,8 +550,8 @@ class Request
      * @return self
      */
     public function setAddDefaultHeaders(
-        $flag)
-    {
+        $flag,
+    ) {
         $this->_defaultHeaders = $flag;
 
         return $this;
@@ -565,8 +565,8 @@ class Request
      * @return self
      */
     public function setGuzzleOptions(
-        array $guzzleOptions)
-    {
+        array $guzzleOptions,
+    ) {
         $this->_guzzleOptions = $guzzleOptions;
 
         return $this;
@@ -580,8 +580,8 @@ class Request
      * @return self
      */
     public function setBody(
-        StreamInterface $stream)
-    {
+        StreamInterface $stream,
+    ) {
         $this->_body = $stream;
 
         return $this;
@@ -595,8 +595,8 @@ class Request
      * @return self
      */
     public function setNeedsAuth(
-        $needsAuth)
-    {
+        $needsAuth,
+    ) {
         $this->_needsAuth = $needsAuth;
 
         return $this;
@@ -610,8 +610,8 @@ class Request
      * @return self
      */
     public function setSignedPost(
-        $signedPost = true)
-    {
+        $signedPost = true,
+    ) {
         $this->_signedPost = $signedPost;
 
         return $this;
@@ -625,8 +625,8 @@ class Request
      * @return self
      */
     public function setSignedGet(
-        $signedGet = false)
-    {
+        $signedGet = false,
+    ) {
         $this->_signedGet = $signedGet;
 
         return $this;
@@ -640,8 +640,8 @@ class Request
      * @return self
      */
     public function setIsSilentFail(
-        $silentFail = false)
-    {
+        $silentFail = false,
+    ) {
         $this->_silentFail = $silentFail;
 
         return $this;
@@ -655,9 +655,9 @@ class Request
      * @return self
      */
     public function checkDeprecatedVersion(
-        $deprecatedVersion)
-    {
-        if (\InstagramAPI\Instagram::$overrideDeprecatedThrower !== true) {
+        $deprecatedVersion,
+    ) {
+        if (Instagram::$overrideDeprecatedThrower !== true) {
             if (version_compare(Constants::IG_VERSION, $deprecatedVersion, '>=')) {
                 throw new InstagramException(sprintf('The function you are trying to use has been deprecated in version %s', $deprecatedVersion));
             }
@@ -674,8 +674,8 @@ class Request
      * @return self
      */
     public function setIsMultiResponse(
-        $flag = false)
-    {
+        $flag = false,
+    ) {
         $this->_isMultiResponse = $flag;
 
         return $this;
@@ -689,8 +689,8 @@ class Request
      * @return self
      */
     public function setIsBodyCompressed(
-        $isBodyCompressed = false)
-    {
+        $isBodyCompressed = false,
+    ) {
         $this->_isBodyCompressed = $isBodyCompressed;
 
         if ($isBodyCompressed === true) {
@@ -713,8 +713,8 @@ class Request
      * @return StreamInterface
      */
     protected function _getStreamForFile(
-        array $file)
-    {
+        array $file,
+    ) {
         if (isset($file['contents'])) {
             $result = GuzzleUtils::streamFor($file['contents']); // Throws.
         } elseif (isset($file['filepath'])) {
@@ -883,6 +883,7 @@ class Request
         $postData = $this->_getRequestBody(); // Throws.
         // Determine request method.
         $method = $postData !== null ? 'POST' : 'GET';
+
         // Build HTTP request object.
         return new HttpRequest( // Throws (they didn't document that properly).
             $method,
@@ -976,8 +977,8 @@ class Request
      * @return string
      */
     protected function _getRawResponse(
-        $httpResponse)
-    {
+        $httpResponse,
+    ) {
         $body = (string) $httpResponse->getBody();
 
         preg_match_all('/window._sharedData = (.*);<\/script>/m', $body, $matches, PREG_SET_ORDER, 0);
@@ -1023,8 +1024,8 @@ class Request
      * @return mixed
      */
     public function getDecodedResponse(
-        $assoc = true)
-    {
+        $assoc = true,
+    ) {
         // Important: Special JSON decoder.
         return Client::api_body_decode(
             $this->getRawResponse(), // Throws.
@@ -1044,8 +1045,8 @@ class Request
      * @return Response The provided responseObject with all JSON properties filled.
      */
     public function getResponse(
-        Response $responseObject)
-    {
+        Response $responseObject,
+    ) {
         foreach ($this->_parent->bypassCalls as $call) {
             if (str_contains($this->getUrl(), $call)) {
                 return $responseObject;
@@ -1053,13 +1054,13 @@ class Request
         }
 
         if (($this->_parent->isMaybeLoggedIn && $this->_parent->isLoginFlow === false) && (strncmp($this->_url, 'http:', 5) !== 0 && strncmp($this->_url, 'https:', 6) !== 0 && strncmp($this->_url, 'www.', 4) !== 0)) {
-            if ((str_contains($this->_url, 'feed/reels_media') && $this->_parent->isExperimentEnabled('72192', 2, false)) ||
-            (str_contains($this->_url, 'feed/timeline')) ||
-            (str_contains($this->_url, 'feed/user') && $this->_parent->isExperimentEnabled('72192', 1, false)) ||
-            (str_contains($this->_url, 'discover/') && $this->_parent->isExperimentEnabled('72192', 4, false)) ||
-            (str_contains($this->_url, 'ads/async_ads/')) ||
-            (str_contains($this->_url, 'feed/injected_reels_media/') && $this->_parent->isExperimentEnabled('72192', 5, false)) ||
-                ($this->_parent->isExperimentEnabled('72192', 0, false))) {
+            if ((str_contains($this->_url, 'feed/reels_media') && $this->_parent->isExperimentEnabled('72192', 2, false))
+            || str_contains($this->_url, 'feed/timeline')
+            || (str_contains($this->_url, 'feed/user') && $this->_parent->isExperimentEnabled('72192', 1, false))
+            || (str_contains($this->_url, 'discover/') && $this->_parent->isExperimentEnabled('72192', 4, false))
+            || str_contains($this->_url, 'ads/async_ads/')
+            || (str_contains($this->_url, 'feed/injected_reels_media/') && $this->_parent->isExperimentEnabled('72192', 5, false))
+                || $this->_parent->isExperimentEnabled('72192', 0, false)) {
                 $deviceStatus = [
                     'battery_level'         => $this->_parent->getBatteryLevel(),
                     'is_charging'           => $this->_parent->getIsDeviceCharging(),
@@ -1121,8 +1122,8 @@ class Request
      * @param int $priority Request priority.
      */
     public function setRequestPriority(
-        $priority)
-    {
+        $priority,
+    ) {
         if ($priority < 0 || $priority > 7) {
             throw new InstagramException(sprintf('priority can be [0-7], 3 is default. Selected: %d', $priority));
         }
@@ -1138,8 +1139,8 @@ class Request
      * @param bool $enable Enable.
      */
     public function setCombinedHttpEngine(
-        $enable)
-    {
+        $enable,
+    ) {
         $this->_combinedHttpEngine = $enable;
 
         return $this;

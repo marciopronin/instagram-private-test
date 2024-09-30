@@ -17,8 +17,8 @@ class JsonParser implements ParserInterface
      * @param string $module
      */
     public function __construct(
-        $module)
-    {
+        $module,
+    ) {
         $this->_module = $module;
     }
 
@@ -29,8 +29,8 @@ class JsonParser implements ParserInterface
      */
     public function parseMessage(
         $topic,
-        $payload)
-    {
+        $payload,
+    ) {
         $data = Client::api_body_decode($payload);
         if (!is_array($data)) {
             throw new \RuntimeException('Invalid JSON payload.');

@@ -34,9 +34,9 @@ class Direct extends RequestCollection
      * @param string|null $fetchReason        Values: manual_refresh or page_scroll.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectInboxResponse
+     * @return Response\DirectInboxResponse
      */
     public function getInbox(
         $cursorId = null,
@@ -44,8 +44,8 @@ class Direct extends RequestCollection
         $limit = 20,
         $prefetch = false,
         $filter = 'all',
-        $fetchReason = null)
-    {
+        $fetchReason = null,
+    ) {
         if ($limit < 0 || $limit > 20) {
             throw new \InvalidArgumentException('Invalid value provided to limit.');
         }
@@ -99,9 +99,9 @@ class Direct extends RequestCollection
     /**
      * Get if has interop upgraded.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\HasInteropUpgradedResponse
+     * @return Response\HasInteropUpgradedResponse
      */
     public function getHasInteropUpgraded()
     {
@@ -114,13 +114,13 @@ class Direct extends RequestCollection
      *
      * @param string|null $cursorId Next "cursor ID", used for pagination.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectPendingInboxResponse
+     * @return Response\DirectPendingInboxResponse
      */
     public function getPendingInbox(
-        $cursorId = null)
-    {
+        $cursorId = null,
+    ) {
         $request = $this->ig->request('direct_v2/pending_inbox/')
             ->addParam('visual_message_return_type', 'unseen')
             ->addParam('persistentBadging', 'true');
@@ -136,13 +136,13 @@ class Direct extends RequestCollection
      *
      * @param string|null $cursorId Next "cursor ID", used for pagination.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectPendingInboxResponse
+     * @return Response\DirectPendingInboxResponse
      */
     public function getSpamInbox(
-        $cursorId = null)
-    {
+        $cursorId = null,
+    ) {
         $request = $this->ig->request('direct_v2/spam_inbox/')
             ->addParam('visual_message_return_type', 'unseen')
             ->addParam('persistentBadging', 'true');
@@ -163,15 +163,15 @@ class Direct extends RequestCollection
      * @param array $options Options.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function approvePendingThreads(
         array $threads,
         $folder = null,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if (!count($threads)) {
             throw new \InvalidArgumentException('Please provide at least one thread to approve.');
         }
@@ -210,7 +210,7 @@ class Direct extends RequestCollection
         }
 
         return $request
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -222,13 +222,13 @@ class Direct extends RequestCollection
      * @param array $threads One or more thread identifiers.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function declinePendingThreads(
-        array $threads)
-    {
+        array $threads,
+    ) {
         if (!count($threads)) {
             throw new \InvalidArgumentException('Please provide at least one thread to decline.');
         }
@@ -253,7 +253,7 @@ class Direct extends RequestCollection
         }
 
         return $request
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -262,14 +262,14 @@ class Direct extends RequestCollection
     /**
      * Decline all pending threads.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function declineAllPendingThreads()
     {
         return $this->ig->request('direct_v2/threads/decline_all/')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -278,9 +278,9 @@ class Direct extends RequestCollection
     /**
      * Get a list of activity statuses for users who you follow or message.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\PresencesResponse
+     * @return Response\PresencesResponse
      */
     public function getPresences()
     {
@@ -296,9 +296,9 @@ class Direct extends RequestCollection
     /**
      * Get a list of activity statuses for users who you follow or message that are active now.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\PresencesResponse
+     * @return Response\PresencesResponse
      */
     public function getPresencesActiveNow()
     {
@@ -318,15 +318,15 @@ class Direct extends RequestCollection
      * @param bool        $showThreads Whether to include existing threads into response.
      * @param string|null $query       (optional) The user to search for.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectRankedRecipientsResponse|null Will be NULL if throttled by Instagram.
+     * @return Response\DirectRankedRecipientsResponse|null Will be NULL if throttled by Instagram.
      */
     public function getRankedRecipients(
         $mode,
         $showThreads,
-        $query = null)
-    {
+        $query = null,
+    ) {
         try {
             $request = $this->ig->request('direct_v2/ranked_recipients/')
                 ->addParam('mode', $mode)
@@ -349,13 +349,13 @@ class Direct extends RequestCollection
      * @param string[]|int[] $users Array of numerical UserPK IDs.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectThreadResponse
+     * @return Response\DirectThreadResponse
      */
     public function getThreadByParticipants(
-        array $users)
-    {
+        array $users,
+    ) {
         if (!count($users)) {
             throw new \InvalidArgumentException('Please provide at least one participant.');
         }
@@ -389,15 +389,15 @@ class Direct extends RequestCollection
      * @param string|null $cursorId Next "cursor ID", used for pagination.
      * @param string|null $seqId    Sequence ID.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectThreadResponse
+     * @return Response\DirectThreadResponse
      */
     public function getThread(
         $threadId,
         $cursorId = null,
-        $seqId = null)
-    {
+        $seqId = null,
+    ) {
         $request = $this->ig->request("direct_v2/threads/$threadId/")
             ->addParam('visual_message_return_type', 'unseen');
 
@@ -428,17 +428,17 @@ class Direct extends RequestCollection
      * @param string      $threadId Thread ID.
      * @param string|null $cursorId Next "cursor ID", used for pagination.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectVisualThreadResponse
+     * @return Response\DirectVisualThreadResponse
      *
      * @deprecated Visual inbox has been superseded by the unified inbox.
      * @see Direct::getThread()
      */
     public function getVisualThread(
         $threadId,
-        $cursorId = null)
-    {
+        $cursorId = null,
+    ) {
         $request = $this->ig->request("direct_v2/visual_threads/{$threadId}/");
         if ($cursorId !== null) {
             $request->addParam('cursor', $cursorId);
@@ -453,17 +453,17 @@ class Direct extends RequestCollection
      * @param string $threadId Thread ID.
      * @param string $title    New title.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectThreadResponse
+     * @return Response\DirectThreadResponse
      */
     public function updateThreadTitle(
         $threadId,
-        $title)
-    {
+        $title,
+    ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/update_title/")
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('title', trim($title))
             ->setSignedPost(false)
             ->getResponse(new Response\DirectThreadResponse());
@@ -479,17 +479,17 @@ class Direct extends RequestCollection
      * @param string $threadId Thread ID.
      * @param int    $folder   Folder ID.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectThreadResponse
+     * @return Response\DirectThreadResponse
      */
     public function moveThread(
         $threadId,
-        $folder)
-    {
+        $folder,
+    ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/move/")
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('folder', $folder)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -500,15 +500,15 @@ class Direct extends RequestCollection
      *
      * @param string $threadId Thread ID.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function muteThread(
-        $threadId)
-    {
+        $threadId,
+    ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/mute/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -519,15 +519,15 @@ class Direct extends RequestCollection
      *
      * @param string $threadId Thread ID.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function unmuteThread(
-        $threadId)
-    {
+        $threadId,
+    ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/unmute/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -538,13 +538,13 @@ class Direct extends RequestCollection
      *
      * @param string $userId Numerical UserPK ID.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectPresenceResponse
+     * @return Response\DirectPresenceResponse
      */
     public function fetchAndSubscribePresence(
-        $userId)
-    {
+        $userId,
+    ) {
         return $this->ig->request('direct_v2/fetch_and_subscribe_presence/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
@@ -566,14 +566,14 @@ class Direct extends RequestCollection
      * @param string|null    $threadTitle Name of the group thread.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectCreateGroupThreadResponse
+     * @return Response\DirectCreateGroupThreadResponse
      */
     public function createGroupThread(
         array $userIds,
-        $threadTitle = null)
-    {
+        $threadTitle = null,
+    ) {
         if (count($userIds) < 1) {
             throw new \InvalidArgumentException('You must invite at least 1 user to create a group.');
         }
@@ -587,7 +587,7 @@ class Direct extends RequestCollection
         }
 
         $request = $this->ig->request('direct_v2/create_group_thread/')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('recipient_users', json_encode($userIds))
             ->addPost('_uid', $this->ig->account_id);
@@ -609,14 +609,14 @@ class Direct extends RequestCollection
      * @param string[]|int[] $users    Array of numerical UserPK IDs.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectThreadResponse
+     * @return Response\DirectThreadResponse
      */
     public function addUsersToThread(
         $threadId,
-        array $users)
-    {
+        array $users,
+    ) {
         if (!count($users)) {
             throw new \InvalidArgumentException('Please provide at least one user.');
         }
@@ -630,7 +630,7 @@ class Direct extends RequestCollection
         }
 
         return $this->ig->request("direct_v2/threads/{$threadId}/add_user/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_ids', json_encode($users))
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
@@ -642,15 +642,15 @@ class Direct extends RequestCollection
      *
      * @param string $threadId Thread ID.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function leaveThread(
-        $threadId)
-    {
+        $threadId,
+    ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/leave/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -661,15 +661,15 @@ class Direct extends RequestCollection
      *
      * @param string $threadId Thread ID.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function hideThread(
-        $threadId)
-    {
+        $threadId,
+    ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/hide/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
@@ -691,15 +691,15 @@ class Direct extends RequestCollection
      *                           Other values: 'inbox_search', 'message_button', 'direct_thread' and 'more_menu'.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function sendText(
         array $recipients,
         $text,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if (!strlen($text)) {
             throw new \InvalidArgumentException('Text can not be empty.');
         }
@@ -739,16 +739,16 @@ class Direct extends RequestCollection
      * @param string $mediaId
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function sendStoryReaction(
         array $recipients,
         $reaction,
         $mediaId,
-        $options = [])
-    {
+        $options = [],
+    ) {
         // TODO: Add emoji checker on $reaction.
 
         if ($mediaId === null) {
@@ -778,17 +778,17 @@ class Direct extends RequestCollection
      *                           "text" (optional) - text message.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemsResponse
+     * @return Response\DirectSendItemsResponse
      *
      * @see https://help.instagram.com/1209246439090858 For more information.
      */
     public function sendPost(
         array $recipients,
         $mediaId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if (!preg_match('#^\d+_\d+$#D', $mediaId)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid media ID.', $mediaId));
         }
@@ -816,15 +816,15 @@ class Direct extends RequestCollection
      *                              "client_context" and "mutation_token" - predefined UUID used to prevent double-posting.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function sendPhoto(
         array $recipients,
         $photoFilename,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         // Direct videos use different upload IDs.
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
         // Attempt to upload the video data.
@@ -839,7 +839,7 @@ class Direct extends RequestCollection
 
         // Send the uploaded photo to recipients.
         try {
-            /** @var \InstagramAPI\Response\DirectSendItemResponse $result */
+            /** @var Response\DirectSendItemResponse $result */
             $result = $this->ig->internal->configureWithRetries(
                 function () use ($internalMetadata, $recipients, $options) {
                     // Attempt to configure photo parameters (which sends it to the thread).
@@ -879,17 +879,17 @@ class Direct extends RequestCollection
      *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSinglePhoto() for available metadata fields.
      */
     public function sendPermanentPhoto(
         array $recipients,
         $photoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
         $internalMetadata->setStoryViewMode(Constants::STORY_VIEW_MODE_PERMANENT);
@@ -909,17 +909,17 @@ class Direct extends RequestCollection
      *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSinglePhoto() for available metadata fields.
      */
     public function sendDisappearingPhoto(
         array $recipients,
         $photoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
         $internalMetadata->setStoryViewMode(Constants::STORY_VIEW_MODE_ONCE);
@@ -939,17 +939,17 @@ class Direct extends RequestCollection
      *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSinglePhoto() for available metadata fields.
      */
     public function sendReplayablePhoto(
         array $recipients,
         $photoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
         $internalMetadata->setStoryViewMode(Constants::STORY_VIEW_MODE_REPLAYABLE);
@@ -970,16 +970,16 @@ class Direct extends RequestCollection
      *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
+     * @throws InstagramException
+     * @throws UploadFailedException     If the video upload fails.
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function sendVideo(
         array $recipients,
         $videoFilename,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         // Direct videos use different upload IDs.
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
         // Attempt to upload the video data.
@@ -994,10 +994,11 @@ class Direct extends RequestCollection
 
         // Send the uploaded video to recipients.
         try {
-            /** @var \InstagramAPI\Response\DirectSendItemResponse $result */
+            /** @var Response\DirectSendItemResponse $result */
             $result = $this->ig->internal->configureWithRetries(
                 function () use ($internalMetadata, $recipients, $options) {
                     $videoUploadResponse = $internalMetadata->getVideoUploadResponse();
+
                     // Attempt to configure video parameters (which sends it to the thread).
                     return $this->_sendDirectItem('video', $recipients, array_merge($options, [
                         'upload_id'    => $internalMetadata->getUploadId(),
@@ -1037,16 +1038,16 @@ class Direct extends RequestCollection
      *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
+     * @throws InstagramException
+     * @throws UploadFailedException     If the video upload fails.
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function sendAudio(
         array $recipients,
         $videoFilename,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         // Direct videos use different upload IDs.
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
         // Attempt to upload the video data.
@@ -1061,7 +1062,7 @@ class Direct extends RequestCollection
 
         // Send the uploaded video to recipients.
         try {
-            /** @var \InstagramAPI\Response\DirectSendItemResponse $result */
+            /** @var Response\DirectSendItemResponse $result */
             /*
             $result = $this->ig->internal->configureWithRetries(
                 function () use ($internalMetadata, $recipients, $options) {
@@ -1109,18 +1110,18 @@ class Direct extends RequestCollection
      *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
+     * @throws InstagramException
+     * @throws UploadFailedException     If the video upload fails.
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSingleVideo() for available metadata fields.
      */
     public function sendDisappearingVideo(
         array $recipients,
         $videoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
         $internalMetadata->setStoryViewMode(Constants::STORY_VIEW_MODE_ONCE);
@@ -1140,18 +1141,18 @@ class Direct extends RequestCollection
      *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
+     * @throws InstagramException
+     * @throws UploadFailedException     If the video upload fails.
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSingleVideo() for available metadata fields.
      */
     public function sendReplayableVideo(
         array $recipients,
         $videoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
         $internalMetadata->setStoryViewMode(Constants::STORY_VIEW_MODE_REPLAYABLE);
@@ -1169,14 +1170,14 @@ class Direct extends RequestCollection
      * @param array $options    An associative array of optional parameters, including:
      *                          "client_context" and "mutation_token" - predefined UUID used to prevent double-posting.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function sendLike(
         array $recipients,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         return $this->_sendDirectItem('like', $recipients, $options);
     }
 
@@ -1193,15 +1194,15 @@ class Direct extends RequestCollection
      *                           "text" - text message.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function sendHashtag(
         array $recipients,
         $hashtag,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if (!strlen($hashtag)) {
             throw new \InvalidArgumentException('Hashtag can not be empty.');
         }
@@ -1227,17 +1228,17 @@ class Direct extends RequestCollection
      *                           "text" - text message.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      *
      * @see Location::search()
      */
     public function sendLocation(
         array $recipients,
         $locationId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if (!ctype_digit($locationId) && (!is_int($locationId) || $locationId < 0)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid location ID.', $locationId));
         }
@@ -1260,15 +1261,15 @@ class Direct extends RequestCollection
      *                           "text" - text message.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function sendProfile(
         array $recipients,
         $userId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if (!ctype_digit($userId) && (!is_int($userId) || $userId < 0)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid numerical UserPK ID.', $userId));
         }
@@ -1288,16 +1289,16 @@ class Direct extends RequestCollection
      *                             "client_context" and "mutation_token" - predefined UUID used to prevent double-posting.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function sendReaction(
         $threadId,
         $threadItemId,
         $reactionType,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         return $this->_handleReaction($threadId, $threadItemId, $reactionType, 'created', $options);
     }
 
@@ -1319,9 +1320,9 @@ class Direct extends RequestCollection
      *                           "text" - text message.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemsResponse
+     * @return Response\DirectSendItemsResponse
      *
      * @see https://help.instagram.com/188382041703187 For more information.
      */
@@ -1329,8 +1330,8 @@ class Direct extends RequestCollection
         array $recipients,
         $storyId,
         $reelId = null,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if (!preg_match('#^\d+_\d+$#D', $storyId)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid story ID.', $storyId));
         }
@@ -1338,10 +1339,12 @@ class Direct extends RequestCollection
             if (!preg_match('#^highlight:\d+$#D', $reelId)) {
                 throw new \InvalidArgumentException(sprintf('"%s" is not a valid reel ID.', $reelId));
             }
-            $options = array_merge($options,
+            $options = array_merge(
+                $options,
                 [
                     'reel_id' => $reelId,
-                ]);
+                ]
+            );
         }
         if (!isset($options['media_type'])) {
             throw new \InvalidArgumentException('Please provide media_type in options.');
@@ -1368,17 +1371,17 @@ class Direct extends RequestCollection
      *                           "text" (optional) - text message.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemsResponse
+     * @return Response\DirectSendItemsResponse
      *
      * @see https://help.instagram.com/1209246439090858 For more information.
      */
     public function shareReel(
         array $recipients,
         $mediaId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if (!preg_match('#^\d+_\d+$#D', $mediaId)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid media ID.', $mediaId));
         }
@@ -1403,15 +1406,15 @@ class Direct extends RequestCollection
      *                            "client_context" and "mutation_token" - predefined UUID used to prevent double-posting.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
      * @return Response\DirectSendItemResponse
      */
     public function sendLive(
         array $recipients,
         $broadcastId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         return $this->_sendDirectItem('live', $recipients, array_merge($options, [
             'broadcast_id'      => $broadcastId,
             'send_attribution'  => 'live_broadcast',
@@ -1428,16 +1431,16 @@ class Direct extends RequestCollection
      *                             "client_context" and "mutation_token" - predefined UUID used to prevent double-posting.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     public function deleteReaction(
         $threadId,
         $threadItemId,
         $reactionType,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         return $this->_handleReaction($threadId, $threadItemId, $reactionType, 'deleted', $options);
     }
 
@@ -1447,17 +1450,17 @@ class Direct extends RequestCollection
      * @param string $threadId     Thread ID.
      * @param string $threadItemId Thread item ID.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function deleteItem(
         $threadId,
-        $threadItemId)
-    {
+        $threadItemId,
+    ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/items/{$threadItemId}/delete/")
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->setSignedPost(false)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1469,21 +1472,21 @@ class Direct extends RequestCollection
      * @param string $threadItemId  Thread item ID.
      * @param string $clientContext Client context.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSeenItemResponse
+     * @return Response\DirectSeenItemResponse
      */
     public function markItemSeen(
         $threadId,
         $threadItemId,
-        $clientContext)
-    {
+        $clientContext,
+    ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/items/{$threadItemId}/seen/")
             ->addPost('action', 'mark_seen')
             ->addPost('thread_id', $threadId)
             ->addPost('item_id', $threadItemId)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('client_context', $clientContext)
             ->addPost('offline_threading_id', $clientContext)
             ->setSignedPost(false)
@@ -1499,14 +1502,14 @@ class Direct extends RequestCollection
      * @param string|string[] $threadItemIds One or more thread item IDs.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function markVisualItemsSeen(
         $threadId,
-        $threadItemIds)
-    {
+        $threadItemIds,
+    ) {
         if (!is_array($threadItemIds)) {
             $threadItemIds = [$threadItemIds];
         } elseif (!count($threadItemIds)) {
@@ -1517,7 +1520,7 @@ class Direct extends RequestCollection
             ->addPost('item_ids', '['.implode(',', $threadItemIds).']')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1530,14 +1533,14 @@ class Direct extends RequestCollection
      * @param string|string[] $threadItemIds One or more thread item IDs.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function markVisualItemsReplayed(
         $threadId,
-        $threadItemIds)
-    {
+        $threadItemIds,
+    ) {
         if (!is_array($threadItemIds)) {
             $threadItemIds = [$threadItemIds];
         } elseif (!count($threadItemIds)) {
@@ -1548,7 +1551,7 @@ class Direct extends RequestCollection
             ->addPost('item_ids', '['.implode(',', $threadItemIds).']')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1567,8 +1570,8 @@ class Direct extends RequestCollection
      */
     protected function _prepareRecipients(
         array $recipients,
-        $useQuotes)
-    {
+        $useQuotes,
+    ) {
         $result = [];
         // users
         if (isset($recipients['users'])) {
@@ -1635,16 +1638,16 @@ class Direct extends RequestCollection
      * @param mixed  $signedPost
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     protected function _sendDirectItem(
         $type,
         array $recipients,
         array $options = [],
-        $signedPost = false)
-    {
+        $signedPost = false,
+    ) {
         $recipients = $this->_prepareRecipients($recipients, false);
 
         // Handle the request...
@@ -1858,7 +1861,7 @@ class Direct extends RequestCollection
             ->addPost('client_context', $options['client_context'])
             ->addPost('mutation_token', $options['mutation_token'])
             ->addPost('offline_threading_id', $options['offline_threading_id'])
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('device_id', $this->ig->device_id)
@@ -1878,15 +1881,15 @@ class Direct extends RequestCollection
      *                           "story_share" uses "client_context", "mutation_token", "story_media_id", "media_type" and "text".
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemsResponse
+     * @return Response\DirectSendItemsResponse
      */
     protected function _sendDirectItems(
         $type,
         array $recipients,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         // Most requests are unsigned, but some use signing by overriding this.
         $signedPost = false;
 
@@ -1982,7 +1985,7 @@ class Direct extends RequestCollection
             ->addPost('client_context', $options['client_context'])
             ->addPost('mutation_token', $options['mutation_token'])
             ->addPost('offline_threading_id', $options['offline_threading_id'])
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\DirectSendItemsResponse());
@@ -1999,17 +2002,17 @@ class Direct extends RequestCollection
      *                               "client_context" and "mutation_token" - predefined UUID used to prevent double-posting.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\DirectSendItemResponse
+     * @return Response\DirectSendItemResponse
      */
     protected function _handleReaction(
         $threadId,
         $threadItemId,
         $reactionType,
         $reactionStatus,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if (!ctype_digit($threadId) && (!is_int($threadId) || $threadId < 0)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid thread ID.', $threadId));
         }

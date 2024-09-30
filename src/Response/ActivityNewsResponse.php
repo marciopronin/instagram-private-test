@@ -70,7 +70,7 @@ use InstagramAPI\Response;
  */
 class ActivityNewsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'new_stories'            => 'Model\Story[]',
         'old_stories'            => 'Model\Story[]',
         'continuation'           => '',

@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ServerDataInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'cluster'                => 'string',
         'nonce'                  => 'string',
         'conferenceName'         => 'string',

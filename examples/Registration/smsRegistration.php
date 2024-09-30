@@ -2,7 +2,7 @@
 
 require __DIR__.'/../../vendor/autoload.php';
 
-class ExtendedInstagram extends \InstagramAPI\Instagram
+class ExtendedInstagram extends InstagramAPI\Instagram
 {
     public function sendLoginFlow()
     {
@@ -10,26 +10,26 @@ class ExtendedInstagram extends \InstagramAPI\Instagram
     }
 }
 
-/////////////////
+// ///////////////
 $debug = true;
-/////////////////
+// ///////////////
 
-/////////////////
-$phone = ''; //+ccphone
+// ///////////////
+$phone = ''; // +ccphone
 $username = '';
 $password = '';
 $day = 01;
 $month = 01;
 $year = 1970;
 $firstName = 'First Name';
-/////////////////
+// ///////////////
 
 $ig = new ExtendedInstagram($debug);
 $ig->setUserWithoutPassword($username);
 
 $ig->setCarrier(''); // SET CARRIER
 
-$waterfallId = \InstagramAPI\Signatures::generateUUID();
+$waterfallId = InstagramAPI\Signatures::generateUUID();
 $startTime = time();
 
 $ig->setBackgroundState(true);
@@ -46,7 +46,7 @@ $ig->event->sendPhoneIdUpdate('initial_create'); // 0
 $ig->event->sendStringImpressions(['2131232191' => 1, '2131232194' => 1]); // 0
 $ig->event->sendStringImpressions(['2131959156' => 1]); // 0
 
-$ig->setBackgroundState(false); // 
+$ig->setBackgroundState(false);
 
 $ig->event->sendAppInstallations(); // 1
 $ig->event->sendInstagramInstallWithReferrer($waterfallId, 0); // 1
@@ -66,12 +66,12 @@ $ig->event->forceSendBatch();
 $ig->setGivenConsent(false); // temp
 
 $ig->event->updateAppState('foreground', 'not_initialized');
+
 try {
     $ig->account->setContactPointPrefill('prefill');
-} catch(\Exception) {
-    //pass
+} catch (Exception) {
+    // pass
 }
-
 
 $ig->internal->fetchZeroRatingToken('token_expired', false);
 $launcherResponse = $ig->internal->getMobileConfig(true)->getHttpResponse();
@@ -108,14 +108,14 @@ $ig->event->sendNavigation('button', 'phone_confirmation', 'one_page_registratio
 
 $parts = str_split($firstName, 4);
 $queryName = '';
-foreach($parts as $part) {
+foreach ($parts as $part) {
     $queryName .= $part;
     $suggestionResponse = $ig->account->getUsernameSuggestions('', $waterfallId, $queryName);
     usleep(300000);
 }
 $ig->event->forceSendBatch();
 $suggestions = $suggestionResponse->getSuggestionsWithMetadata()->getSuggestions();
-foreach($suggestions as $suggestion) {
+foreach ($suggestions as $suggestion) {
     if ($suggestion->getPrototype() === 'email') {
         $username = $suggestion->getUsername();
         break;
@@ -136,35 +136,38 @@ for ($i = 1; $i <= ($currentYear - $year); $i++) {
 
 usleep(mt_rand(1000000, 3000000));
 $operand = ($month > $currentMonth) ? 1 : -1;
-for ($i = 1; $i <= abs(($currentMonth - $month)); $i++) {
+for ($i = 1; $i <= abs($currentMonth - $month); $i++) {
     $ig->event->sendDobPick(sprintf('%d-%02d-%02d', $year, $currentMonth + ($operand * $i), $currentDay));
     usleep(mt_rand(1000, 3000));
 }
 
 usleep(mt_rand(1000000, 3000000));
 $operand = ($day > $currentDay) ? 1 : -1;
-for ($i = 1; $i <= abs(($currentDay - $day)); $i++) {
+for ($i = 1; $i <= abs($currentDay - $day); $i++) {
     $ig->event->sendDobPick(sprintf('%d-%02d-%02d', $year, $month, $currentDay + ($operand * $i)));
     usleep(mt_rand(1000, 3000));
 }
 
 $response = $ig->internal->checkAgeEligibility($day, $month, $year);
 if ($response->getEligibleToRegister() !== true) {
-    exit();
+    exit;
 }
 
 $ig->event->sendNavigation('button', 'add_birthday', 'username_sign_up');
 
-$ig->event->sendFlowSteps('username', 'step_view_loaded', $waterfallId, $startTime, 
+$ig->event->sendFlowSteps(
+    'username',
+    'step_view_loaded',
+    $waterfallId,
+    $startTime,
     [
         'is_facebook_app_installed' => false,
         'messenger_installed'       => false,
         'whatsapp_installed'        => false,
         'fb_lite_installed'         => false,
-        'flow'                      => 'phone'
+        'flow'                      => 'phone',
     ]
 );
-
 
 $ig->event->sendFlowSteps('username', 'step_view_loaded', $waterfallId, $startTime, ['flow' => 'phone']);
 $ig->event->sendNavigation('button', 'add_birthday', 'username_sign_up');
@@ -194,11 +197,11 @@ try {
         'sn_nonce'  => $nonce,
         'sn_result' => $result,
     ];
-    
+
     $response = $ig->account->createValidated($smsCode, $username, $password, $phone, sprintf('%d-%2d-%2d', $year, $month, $day), $firstName, $waterfallId, $tos, $sndata);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
-    exit();
+    exit;
 }
 
 // Sets active status
@@ -206,7 +209,6 @@ $ig->isMaybeLoggedIn = true;
 $ig->account_id = $response->getCreatedUser()->getPk();
 $ig->settings->set('account_id', $ig->account_id);
 $ig->settings->set('last_login', time());
-//
 
 $ig->event->sendFlowSteps('done', 'register_account_request_submitted', $waterfallId, $startTime, ['flow' => 'phone']);
 $ig->event->sendFlowSteps('done', 'register_account_created', $waterfallId, $startTime, ['flow' => 'phone', 'instagram_id' => $response->getUser()->getPk()]);
@@ -221,8 +223,8 @@ $ig->internal->sendGraph('18293997048434484603993202463', [
         'events'    => [
             'no_advertisement_id'   => false,
             'event_name'            => 'LOGIN',
-            'adid'                  => $ig->advertising_id
-        ]
+            'adid'                  => $ig->advertising_id,
+        ],
     ]], 'ReportAttributionEventsMutation', false);
 
 $ig->internal->newAccountNuxSeen($waterfallId);
@@ -238,8 +240,8 @@ $ig->internal->sendGraph('18293997048434484603993202463', [
         'events'    => [
             'no_advertisement_id'   => false,
             'event_name'            => 'REGISTRATION',
-            'adid'                  => $ig->advertising_id
-        ]
+            'adid'                  => $ig->advertising_id,
+        ],
     ]], 'ReportAttributionEventsMutation', false);
 
 $ig->internal->getMobileConfig(false);
@@ -263,65 +265,65 @@ $suggestedList = json_decode($ig->discover->getAyml('explore_people', null, true
 
 $ig->people->getFriendships($suggestedList);
 
-$seenSteps = [ 
+$seenSteps = [
     [
         'step_name' => 'CHECK_FOR_PHONE',
-        'value'     => 1
+        'value'     => 1,
     ],
     [
         'step_name' => 'CREATE_PASSWORD',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'IDENTITY_SYNCING',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'FB_CONNECT',
-        'value'     => 0
+        'value'     => 0,
     ],
     [
         'step_name' => 'FB_FOLLOW',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'UNKNOWN',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'IDENTITY_SYNCING_AFTER_NUX_LINKING',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'CONTACT_INVITE',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'ACCOUNT_PRIVACY',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'TAKE_PROFILE_PHOTO',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'ADD_PHONE',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'TURN_ON_ONETAP',
-        'value'     => -1
+        'value'     => -1,
     ],
     [
         'step_name' => 'DISCOVER_PEOPLE',
-        'value'     => 1
-    ]
+        'value'     => 1,
+    ],
 ];
 
 $ig->internal->sendGraph('45541135218358940417711832437', [
     'input' => [
         'app_scoped_id'     => $ig->uuid,
-        'appid'             => \InstagramAPI\Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
+        'appid'             => InstagramAPI\Constants::FACEBOOK_ANALYTICS_APPLICATION_ID,
         'family_device_id'  => $ig->phone_id,
     ]], 'FamilyDeviceIDAppScopedDeviceIDSyncMutation', false);
 

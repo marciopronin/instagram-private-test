@@ -8,7 +8,7 @@ use InstagramAPI\Realtime\Mqtt;
 
 class IrisSubscribe implements CommandInterface
 {
-    const INVALID_SEQUENCE_ID = -1;
+    public const INVALID_SEQUENCE_ID = -1;
 
     /** @var int */
     private $_sequenceId;
@@ -25,8 +25,8 @@ class IrisSubscribe implements CommandInterface
      */
     public function __construct(
         $sequenceId,
-        $snapshotMs)
-    {
+        $snapshotMs,
+    ) {
         if ($sequenceId === self::INVALID_SEQUENCE_ID) {
             throw new \InvalidArgumentException('Invalid Iris sequence identifier.');
         }

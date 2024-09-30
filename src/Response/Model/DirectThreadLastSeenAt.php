@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectThreadLastSeenAt extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'item_id'   => 'string',
         'timestamp' => '',
     ];

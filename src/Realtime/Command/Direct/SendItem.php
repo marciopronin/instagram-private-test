@@ -6,7 +6,7 @@ use InstagramAPI\Realtime\Command\DirectCommand;
 
 abstract class SendItem extends DirectCommand
 {
-    const ACTION = 'send_item';
+    public const ACTION = 'send_item';
 
     /**
      * Constructor.
@@ -20,8 +20,8 @@ abstract class SendItem extends DirectCommand
     public function __construct(
         $threadId,
         $itemType,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         parent::__construct(self::ACTION, $threadId, $options);
 
         // Handle action.

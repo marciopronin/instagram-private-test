@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class TabsInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'tabs'      => 'Tab[]',
         'selected'  => 'string',
     ];

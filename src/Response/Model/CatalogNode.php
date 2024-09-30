@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class CatalogNode extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                            => 'string',
         'full_price'                    => '',
         'current_price'                 => '',

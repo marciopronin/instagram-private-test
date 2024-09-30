@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class BootstrapUsersResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'surfaces' => 'Model\Surface[]',
         'users'    => 'Model\User[]',
     ];

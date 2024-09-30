@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class LoginButton extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'title'                                        => 'string',
         'stop_deletion_token'                          => 'string',
         'action'                                       => 'string',

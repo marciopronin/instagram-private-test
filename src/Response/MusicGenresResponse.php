@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class MusicGenresResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'items'             => 'Model\MusicGenreItem[]',
     ];
 }

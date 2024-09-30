@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Action extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'title'             => 'Text',
         'url'               => 'string',
         'limit'             => 'int',

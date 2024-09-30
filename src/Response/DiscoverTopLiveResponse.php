@@ -46,7 +46,7 @@ use InstagramAPI\Response;
  */
 class DiscoverTopLiveResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'broadcasts'             => 'Model\Broadcast[]',
         'post_live_broadcasts'   => 'Model\PostLiveItem[]',
         'score_map'              => '',

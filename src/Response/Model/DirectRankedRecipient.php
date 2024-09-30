@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectRankedRecipient extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'thread' => 'DirectThread',
         'user'   => 'User',
     ];

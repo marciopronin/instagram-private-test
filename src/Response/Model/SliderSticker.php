@@ -42,7 +42,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SliderSticker extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'slider_id'                 => 'string',
         'question'                  => 'string',
         'emoji'                     => 'string',

@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ThreadAction extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user_id'    => 'string',
         'action_log' => '\InstagramAPI\Response\Model\ActionLog',
     ];

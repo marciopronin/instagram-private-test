@@ -27,10 +27,10 @@ class Fbns implements PersistentInterface, EventEmitterInterface
     use PersistentTrait;
     use EventEmitterTrait;
 
-    const CONNECTION_TIMEOUT = 5;
+    public const CONNECTION_TIMEOUT = 5;
 
-    const DEFAULT_HOST = 'mqtt-mini.facebook.com';
-    const DEFAULT_PORT = 443;
+    public const DEFAULT_HOST = 'mqtt-mini.facebook.com';
+    public const DEFAULT_PORT = 443;
 
     /** @var EventEmitterInterface */
     protected $_target;
@@ -75,8 +75,8 @@ class Fbns implements PersistentInterface, EventEmitterInterface
         AuthInterface $auth,
         DeviceInterface $device,
         LoopInterface $loop,
-        LoggerInterface $logger)
-    {
+        LoggerInterface $logger,
+    ) {
         $this->_target = $target;
         $this->_connector = $connector;
         $this->_auth = $auth;

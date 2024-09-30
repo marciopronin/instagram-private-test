@@ -34,13 +34,13 @@ use InstagramAPI\Response;
  */
 class DirectSendItemsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'action'      => 'string',
         'status_code' => 'string',
         'payload'     => '', // Model\DirectSendItemPayload
-                             // The reason this is commented is because it
-                             // can be both DirectSendItemPayload and
-                             // DirectSendItemPayload[].
-                             // TODO: Think about multiple answer solution.
+        // The reason this is commented is because it
+        // can be both DirectSendItemPayload and
+        // DirectSendItemPayload[].
+        // TODO: Think about multiple answer solution.
     ];
 }

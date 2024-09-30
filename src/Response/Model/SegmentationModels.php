@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SegmentationModels extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'seg_predict_net.pb'                   => 'AssetModel',
         'seg_init_net.pb'                      => 'AssetModel',
     ];

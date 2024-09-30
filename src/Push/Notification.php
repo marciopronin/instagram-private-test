@@ -86,8 +86,8 @@ class Notification
      * @param string $json
      */
     protected function _parseJson(
-        $json)
-    {
+        $json,
+    ) {
         $data = Json::decode($json);
 
         $this->_json = $json;
@@ -154,8 +154,8 @@ class Notification
      * @param string $json
      */
     public function __construct(
-        $json)
-    {
+        $json,
+    ) {
         $this->_parseJson($json);
     }
 
@@ -309,8 +309,8 @@ class Notification
      * @return mixed
      */
     public function getActionParam(
-        $key)
-    {
+        $key,
+    ) {
         return isset($this->_actionParams[$key]) ? $this->_actionParams[$key] : null;
     }
 }

@@ -8,12 +8,12 @@ use InstagramAPI\Realtime\Payload\IrisSubscribeAck;
 
 class IrisHandler extends AbstractHandler implements HandlerInterface
 {
-    const MODULE = 'iris';
+    public const MODULE = 'iris';
 
     /** {@inheritdoc} */
     public function handleMessage(
-        Message $message)
-    {
+        Message $message,
+    ) {
         $iris = new IrisSubscribeAck($message->getData());
         if (!$iris->isSucceeded()) {
             throw new HandlerException(sprintf(

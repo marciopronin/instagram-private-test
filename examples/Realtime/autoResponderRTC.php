@@ -14,47 +14,49 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////////////////////
+// ///////////////////
 $autoMessage = 'Thank you for contacting us! We will get back to you as soon as possible :)';
-////////////////////
+// //////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
-$loop = \React\EventLoop\Factory::create();
+$loop = React\EventLoop\Factory::create();
 if ($debug) {
-    $logger = new \Monolog\Logger('rtc');
-    $logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stdout', \Monolog\Logger::INFO));
+    $logger = new Monolog\Logger('rtc');
+    $logger->pushHandler(new Monolog\Handler\StreamHandler('php://stdout', Monolog\Logger::INFO));
 } else {
     $logger = null;
 }
 
 $inboxResponse = $ig->direct->getInbox();
 
-$rtc = new \InstagramAPI\Realtime($ig, $loop, $logger);
+$rtc = new InstagramAPI\Realtime($ig, $loop, $logger);
 
 $rtc->on('connect', function () use ($rtc, $inboxResponse) {
-    $rtc->receiveOfflineMessages($inboxResponse->getSeqId(),
-    $inboxResponse->getSnapshotAtMs());
+    $rtc->receiveOfflineMessages(
+        $inboxResponse->getSeqId(),
+        $inboxResponse->getSnapshotAtMs()
+    );
 
     $threads = $inboxResponse->getThreads();
     $ig->event->sendDirectInboxTabImpression();
 
     // In this example we will be iterating each thread to load all the items of each.
-    $clientContext = \InstagramAPI\Utils::generateClientContext();
+    $clientContext = InstagramAPI\Utils::generateClientContext();
     foreach ($threads as $pos=>$thread) {
         $ig->event->sendDirectEnterThread($thread->getThreadId(), $thread->getUsers()[0]->getPk(), $pos);
         $ig->event->sendNavigation('inbox', 'direct_inbox', 'direct_thread');

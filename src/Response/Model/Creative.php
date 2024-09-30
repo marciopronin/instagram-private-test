@@ -42,7 +42,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Creative extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'title'            => 'Text',
         'content'          => 'Text',
         'footer'           => 'Text',

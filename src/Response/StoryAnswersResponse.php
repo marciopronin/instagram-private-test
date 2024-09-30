@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class StoryAnswersResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'responder_info' => 'Model\StoryQuestionResponderInfos',
     ];
 }

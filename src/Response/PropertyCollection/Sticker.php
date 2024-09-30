@@ -41,7 +41,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Sticker extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'x'         => 'float',
         'y'         => 'float',
         'z'         => 'float', // Unused by IG for now. So far it's always int(0).

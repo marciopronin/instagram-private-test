@@ -74,7 +74,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class PermanentItem extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'item_id'            => 'string',
         'user_id'            => 'string',
         'timestamp'          => 'string',

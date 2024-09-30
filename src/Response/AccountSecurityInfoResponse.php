@@ -46,7 +46,7 @@ use InstagramAPI\Response;
  */
 class AccountSecurityInfoResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'backup_codes'          => '',
         'is_phone_confirmed'    => '',
         'country_code'          => 'int',

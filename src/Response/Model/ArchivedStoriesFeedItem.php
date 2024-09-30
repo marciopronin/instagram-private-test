@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ArchivedStoriesFeedItem extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'timestamp'             => 'string',
         'media_count'           => 'int',
         'id'                    => 'string',

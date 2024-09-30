@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Effect extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'title'          => '',
         'id'             => 'string',
         'effect_id'      => 'string',

@@ -5,18 +5,18 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -28,32 +28,45 @@ try {
     $ig->people->getSelfInfo();
     $ig->story->getArchiveBadgeCount();
 
-    $ig->event->sendProfileAction('tap_follow_details', $ig->account_id,
+    $ig->event->sendProfileAction(
+        'tap_follow_details',
+        $ig->account_id,
         [
             [
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_profile',
             ],
-    ], ['module' => 'self']);
+        ],
+        ['module' => 'self']
+    );
 
     $ig->event->sendNavigation('button', 'self_profile', 'self_unified_follow_lists');
 
-    $ig->event->sendProfileAction('tap_followers', $ig->account_id,
+    $ig->event->sendProfileAction(
+        'tap_followers',
+        $ig->account_id,
         [
             [
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_profile',
             ],
-    ], ['module' => 'self']);
+        ],
+        ['module' => 'self']
+    );
 
-    $ig->event->sendNavigation('following', 'self_unified_follow_lists', 'self_unified_follow_lists', null, null,
+    $ig->event->sendNavigation(
+        'following',
+        'self_unified_follow_lists',
+        'self_unified_follow_lists',
+        null,
+        null,
         [
             'source_tab'    => 'following',
             'dest_tab'      => 'following',
         ]
     );
 
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
     $followings = $ig->people->getSelfFollowing($rankToken)->getUsers();
     $userId = $followings[0]->getPk();
 
@@ -71,6 +84,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

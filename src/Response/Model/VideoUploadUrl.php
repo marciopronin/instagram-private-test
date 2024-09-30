@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class VideoUploadUrl extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'url'     => 'string',
         'job'     => 'string',
         'expires' => 'float',

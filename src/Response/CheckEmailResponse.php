@@ -46,7 +46,7 @@ use InstagramAPI\Response;
  */
 class CheckEmailResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'valid'                           => 'bool',
         'available'                       => 'bool',
         'confirmed'                       => 'bool',

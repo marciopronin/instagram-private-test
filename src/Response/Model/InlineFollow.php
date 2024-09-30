@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class InlineFollow extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user_info'        => 'User',
         'following'        => 'bool',
         'outgoing_request' => 'bool',

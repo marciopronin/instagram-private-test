@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class PrivateStoriesMembersResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'members'             => 'Model\User[]',
         'suggested_users'     => 'Model\User[]',
     ];

@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class UploadPhotoResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'upload_id' => 'string',
         'media_id'  => 'string',
     ];

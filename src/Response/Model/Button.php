@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Button extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'text'             => 'string',
         'url'              => 'string',
         'action'           => '',

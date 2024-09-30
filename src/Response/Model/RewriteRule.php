@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class RewriteRule extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'matcher'    => 'string',
         'replacer'   => 'string',
     ];

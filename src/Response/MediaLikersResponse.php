@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class MediaLikersResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user_count' => 'int',
         'users'      => 'Model\User[]',
     ];

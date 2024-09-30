@@ -66,7 +66,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Caption extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'status'             => '',
         'user_id'            => 'string',
         'created_at_utc'     => 'string',

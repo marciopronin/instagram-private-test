@@ -19,11 +19,11 @@ class Hashtag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TagInfoResponse
+     * @return Response\TagInfoResponse
      */
     public function getInfo(
-        $hashtag)
-    {
+        $hashtag,
+    ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
 
@@ -39,11 +39,11 @@ class Hashtag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TagsStoryResponse
+     * @return Response\TagsStoryResponse
      */
     public function getStory(
-        $hashtag)
-    {
+        $hashtag,
+    ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
 
@@ -66,7 +66,7 @@ class Hashtag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TagFeedResponse
+     * @return Response\TagFeedResponse
      */
     public function getSection(
         $hashtag,
@@ -74,15 +74,15 @@ class Hashtag extends RequestCollection
         $tab = 'ranked',
         $maxId = null,
         $pageId = null,
-        $filter = 'default')
-    {
+        $filter = 'default',
+    ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
 
         $request = $this->ig->request("tags/{$urlHashtag}/sections/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('rank_token', $rankToken)
             ->addPost('include_persistent', true);
 
@@ -153,7 +153,7 @@ class Hashtag extends RequestCollection
      *                                                    many hashtags.
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SearchTagResponse
+     * @return Response\SearchTagResponse
      *
      * @see SearchTagResponse::getRankToken() To get a rank token from the response.
      * @see examples/paginateWithExclusion.php For an example.
@@ -161,8 +161,8 @@ class Hashtag extends RequestCollection
     public function search(
         $query,
         array $excludeList = [],
-        $rankToken = null)
-    {
+        $rankToken = null,
+    ) {
         // Do basic query validation. Do NOT use throwIfInvalidHashtag here.
         if (!is_string($query) || $query === '') {
             throw new \InvalidArgumentException('Query must be a non-empty string.');
@@ -200,18 +200,18 @@ class Hashtag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function follow(
-        $hashtag)
-    {
+        $hashtag,
+    ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
 
         return $this->ig->request("tags/follow/{$urlHashtag}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -223,18 +223,18 @@ class Hashtag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function unfollow(
-        $hashtag)
-    {
+        $hashtag,
+    ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
 
         return $this->ig->request("tags/unfollow/{$urlHashtag}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -246,11 +246,11 @@ class Hashtag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FollowChainingRecsResponse
+     * @return Response\FollowChainingRecsResponse
      */
     public function getFollowChainingRecs(
-        $hashtag)
-    {
+        $hashtag,
+    ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
 
@@ -266,11 +266,11 @@ class Hashtag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FollowChainingRecsResponse
+     * @return Response\FollowChainingRecsResponse
      */
     public function getAllFollowChainingRecs(
-        $hashtag)
-    {
+        $hashtag,
+    ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
 
@@ -292,15 +292,15 @@ class Hashtag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TagFeedResponse
+     * @return Response\TagFeedResponse
      *
      * @see Hashtag::getSection() To see the function that will replace this one in the future.
      */
     public function getFeed(
         $hashtag,
         $rankToken,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         Utils::throwIfInvalidHashtag($hashtag);
         Utils::throwIfInvalidRankToken($rankToken);
 
@@ -314,11 +314,11 @@ class Hashtag extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\HashtagsResponse
+     * @return Response\HashtagsResponse
      */
     public function getFollowing(
-        $userId)
-    {
+        $userId,
+    ) {
         return $this->ig->request("users/{$userId}/following_tags_info/")
             ->getResponse(new Response\HashtagsResponse());
     }
@@ -328,7 +328,7 @@ class Hashtag extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\HashtagsResponse
+     * @return Response\HashtagsResponse
      */
     public function getSelfFollowing()
     {
@@ -340,7 +340,7 @@ class Hashtag extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\HashtagsResponse
+     * @return Response\HashtagsResponse
      */
     public function getFollowSuggestions()
     {
@@ -378,7 +378,7 @@ class Hashtag extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MediaSeenResponse
+     * @return Response\MediaSeenResponse
      *
      * @see Story::markMediaSeen()
      * @see Location::markStoryMediaSeen()
@@ -386,8 +386,8 @@ class Hashtag extends RequestCollection
     public function markStoryMediaSeen(
         Response\TagsStoryResponse $hashtagFeed,
         array $items,
-        array $skippedItems = [])
-    {
+        array $skippedItems = [],
+    ) {
         // Extract the Hashtag Story-Tray ID from the user's hashtag response.
         // NOTE: This can NEVER fail if the user has properly given us the exact
         // same hashtag response that they got the story items from!

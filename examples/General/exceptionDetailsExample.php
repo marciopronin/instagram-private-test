@@ -5,18 +5,18 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -36,7 +36,7 @@ try {
 
 try {
     $ig->media->delete('123456'); // Invalid media ID, to trigger a server error.
-} catch (\InstagramAPI\Exception\InstagramException $e) {
+} catch (InstagramAPI\Exception\InstagramException $e) {
     echo 'Something went wrong (InstagramException): '.$e->getMessage()."\n";
 
     if ($e->hasResponse()) { // <-- VERY IMPORTANT TO CHECK FIRST!
@@ -53,7 +53,7 @@ try {
 
 try {
     $ig->media->delete('123456'); // Invalid media ID, to trigger a server error.
-} catch (\InstagramAPI\Exception\EndpointException $e) {
+} catch (InstagramAPI\Exception\EndpointException $e) {
     echo 'Something went wrong (EndpointException): '.$e->getMessage()."\n";
 
     if ($e->hasResponse()) { // <-- VERY IMPORTANT TO CHECK FIRST!

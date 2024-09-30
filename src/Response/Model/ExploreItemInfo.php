@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ExploreItemInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'num_columns'       => 'int',
         'total_num_columns' => 'int',
         'aspect_ratio'      => 'int',

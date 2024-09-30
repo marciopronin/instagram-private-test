@@ -22,21 +22,21 @@ use InstagramAPI\Response\Model\DirectThreadLastSeenAt;
 
 class DirectHandler extends AbstractHandler implements HandlerInterface
 {
-    const MODULE = 'direct';
+    public const MODULE = 'direct';
 
-    const THREAD_REGEXP = '#^/direct_v2/inbox/threads/(?<thread_id>[^/]+)$#D';
-    const ITEM_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)#D';
-    const REACTIONS_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)/reactions/likes/(?<user_id>[^/]+)$#D';
-    const ACTIVITY_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/activity_indicator_id/(?<context>[^/]+)$#D';
-    const STORY_REGEXP = '#^/direct_v2/visual_threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)$#D';
-    const SEEN_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/participants/(?<user_id>[^/]+)/has_seen$#D';
-    const SCREENSHOT_REGEXP = '#^/direct_v2/visual_thread/(?<thread_id>[^/]+)/screenshot$#D';
-    const BADGE_REGEXP = '#^/direct_v2/visual_action_badge/(?<thread_id>[^/]+)$#D';
+    public const THREAD_REGEXP = '#^/direct_v2/inbox/threads/(?<thread_id>[^/]+)$#D';
+    public const ITEM_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)#D';
+    public const REACTIONS_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)/reactions/likes/(?<user_id>[^/]+)$#D';
+    public const ACTIVITY_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/activity_indicator_id/(?<context>[^/]+)$#D';
+    public const STORY_REGEXP = '#^/direct_v2/visual_threads/(?<thread_id>[^/]+)/items/(?<item_id>[^/]+)$#D';
+    public const SEEN_REGEXP = '#^/direct_v2/threads/(?<thread_id>[^/]+)/participants/(?<user_id>[^/]+)/has_seen$#D';
+    public const SCREENSHOT_REGEXP = '#^/direct_v2/visual_thread/(?<thread_id>[^/]+)/screenshot$#D';
+    public const BADGE_REGEXP = '#^/direct_v2/visual_action_badge/(?<thread_id>[^/]+)$#D';
 
     /** {@inheritdoc} */
     public function handleMessage(
-        Message $message)
-    {
+        Message $message,
+    ) {
         $data = $message->getData();
 
         if (isset($data['event'])) {
@@ -56,8 +56,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _processEvent(
-        array $message)
-    {
+        array $message,
+    ) {
         if ($message['event'] === RealtimeEvent::PATCH) {
             $event = new PatchEvent($message);
             foreach ($event->getData() as $op) {
@@ -76,8 +76,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _processAction(
-        array $message)
-    {
+        array $message,
+    ) {
         if ($message['action'] === RealtimeAction::ACK) {
             $this->_target->emit('client-context-ack', [new AckAction($message)]);
         } else {
@@ -93,8 +93,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _handlePatchOp(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         switch ($op->getOp()) {
             case PatchEventOp::ADD:
                 $this->_handleAdd($op);
@@ -121,8 +121,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _handleAdd(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         $path = $op->getPath();
         if ($this->_pathStartsWith($path, '/direct_v2/threads')) {
             if (strpos($path, 'activity_indicator_id') !== false) {
@@ -149,8 +149,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _handleReplace(
-       PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         $path = $op->getPath();
         if ($this->_pathStartsWith($path, '/direct_v2/threads')) {
             if ($this->_pathEndsWith($path, 'has_seen')) {
@@ -187,8 +187,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _handleRemove(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         $path = $op->getPath();
         if ($this->_pathStartsWith($path, '/direct_v2')) {
             if (strpos($path, 'reactions/likes/') !== false) {
@@ -209,8 +209,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _handleNotify(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         $path = $op->getPath();
         if ($this->_pathStartsWith($path, '/direct_v2/threads')) {
             $this->_notifyThread($op);
@@ -229,8 +229,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      */
     protected function _upsertThread(
         PatchEventOp $op,
-        $insert)
-    {
+        $insert,
+    ) {
         $event = $insert ? 'thread-created' : 'thread-updated';
         if (!$this->_hasListeners($event)) {
             return;
@@ -258,8 +258,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      */
     protected function _upsertThreadItem(
         PatchEventOp $op,
-        $insert)
-    {
+        $insert,
+    ) {
         $event = $insert ? 'thread-item-created' : 'thread-item-updated';
         if (!$this->_hasListeners($event)) {
             return;
@@ -287,8 +287,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      */
     protected function _likeThreadItem(
         PatchEventOp $op,
-        $like)
-    {
+        $like,
+    ) {
         $event = $like ? 'thread-item-liked' : 'thread-item-unliked';
         if (!$this->_hasListeners($event)) {
             return;
@@ -318,8 +318,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _updateThreadActivity(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         if (!$this->_hasListeners('thread-activity')) {
             return;
         }
@@ -344,8 +344,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _updateDirectStory(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         if (!$this->_hasListeners('direct-story-updated')) {
             return;
         }
@@ -373,8 +373,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      */
     protected function _updateUnseenCount(
         $inbox,
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         if (!$this->_hasListeners('unseen-count-update')) {
             return;
         }
@@ -394,8 +394,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _updateSeen(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         if (!$this->_hasListeners('thread-seen')) {
             return;
         }
@@ -422,8 +422,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _notifyDirectStoryScreenshot(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         if (!$this->_hasListeners('direct-story-screenshot')) {
             return;
         }
@@ -448,8 +448,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _createDirectStory(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         if (!$this->_hasListeners('direct-story-created')) {
             return;
         }
@@ -479,8 +479,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _directStoryAction(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         if (!$this->_hasListeners('direct-story-action')) {
             return;
         }
@@ -508,8 +508,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _removeThreadItem(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         if (!$this->_hasListeners('thread-item-removed')) {
             return;
         }
@@ -529,8 +529,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _notifyThread(
-        PatchEventOp $op)
-    {
+        PatchEventOp $op,
+    ) {
         if (!$this->_hasListeners('thread-notify')) {
             return;
         }
@@ -559,8 +559,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      */
     protected function _pathStartsWith(
         $path,
-        $string)
-    {
+        $string,
+    ) {
         return strncmp($path, $string, strlen($string)) === 0;
     }
 
@@ -574,8 +574,8 @@ class DirectHandler extends AbstractHandler implements HandlerInterface
      */
     protected function _pathEndsWith(
         $path,
-        $string)
-    {
+        $string,
+    ) {
         $length = strlen($string);
 
         return substr_compare($path, $string, strlen($path) - $length, $length) === 0;

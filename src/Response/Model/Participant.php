@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Participant extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'answer'              => 'int',
         'id'                  => 'string',
         'user'                => 'User',

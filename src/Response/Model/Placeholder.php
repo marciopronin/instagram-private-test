@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Placeholder extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'is_linked' => 'bool',
         'title'     => 'string',
         'message'   => 'string',

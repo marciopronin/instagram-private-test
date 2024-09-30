@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class FaceModelsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'face_models' => 'Model\FaceModels',
     ];
 }

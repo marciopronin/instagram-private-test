@@ -68,8 +68,8 @@ class styleChecker
     public function __construct(
         $baseDir,
         array $inspectFolders,
-        $onlyShowInvalidFiles)
-    {
+        $onlyShowInvalidFiles,
+    ) {
         $this->_baseDir = realpath($baseDir);
         if ($this->_baseDir === false) {
             throw new InvalidArgumentException(sprintf('"%s" is not a valid path.', $baseDir));
@@ -86,8 +86,8 @@ class styleChecker
      * @return bool TRUE if the file has codestyle problems, otherwise FALSE.
      */
     private function _processFile(
-        $filePath)
-    {
+        $filePath,
+    ) {
         $hasProblems = false;
         $hasVisibilityProblems = false;
         $fileName = basename($filePath);

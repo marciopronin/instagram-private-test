@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class TraySuggestions extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'tray'            => 'StoryTray[]',
         'tray_title'      => 'string',
         'banner_title'    => 'string',

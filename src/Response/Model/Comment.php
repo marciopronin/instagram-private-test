@@ -123,11 +123,11 @@ use InstagramAPI\AutoPropertyMapper;
 class Comment extends AutoPropertyMapper
 {
     /** @var int Top-level comment. */
-    const PARENT = 0;
+    public const PARENT = 0;
     /** @var int Threaded reply to another comment. */
-    const CHILD = 2;
+    public const CHILD = 2;
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'status'                            => 'string',
         'user_id'                           => 'string',
         /*

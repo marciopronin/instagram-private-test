@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class ReelShareToFbConfigResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'default_share_to_fb_enabled'               => 'bool',
         'show_share_to_fb_prompt_in_creation_flow'  => 'bool',
         'show_share_to_fb_prompt_in_media_viewer'   => 'bool',

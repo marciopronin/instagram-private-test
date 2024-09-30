@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class AllUserSeriesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'channels'        => 'Model\Channel[]',
     ];
 }

@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class CrossPostingDestinationStatusResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'linked_fb_user'        => 'Model\LinkedFbUser',
         'xpost_destination'     => 'Model\XpostDestination',
     ];

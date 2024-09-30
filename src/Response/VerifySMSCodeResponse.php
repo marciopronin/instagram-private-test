@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class VerifySMSCodeResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'verified'     => 'bool',
         'phone_number' => 'string',
     ];

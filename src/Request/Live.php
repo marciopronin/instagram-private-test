@@ -18,7 +18,7 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SuggestedBroadcastsResponse
+     * @return Response\SuggestedBroadcastsResponse
      */
     public function getSuggestedBroadcasts()
     {
@@ -38,11 +38,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BroadcastInfoResponse
+     * @return Response\BroadcastInfoResponse
      */
     public function getInfo(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/info/")
             ->addParam('view_expired_broadcast', false)
             ->getResponse(new Response\BroadcastInfoResponse());
@@ -57,11 +57,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ViewerListResponse
+     * @return Response\ViewerListResponse
      */
     public function getViewerList(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/get_viewer_list/")
             ->getResponse(new Response\ViewerListResponse());
     }
@@ -73,11 +73,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FinalViewerListResponse
+     * @return Response\FinalViewerListResponse
      */
     public function getFinalViewerList(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/get_final_viewer_list/")
             ->getResponse(new Response\FinalViewerListResponse());
     }
@@ -90,12 +90,12 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PostLiveViewerListResponse
+     * @return Response\PostLiveViewerListResponse
      */
     public function getPostLiveViewerList(
         $broadcastId,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request("live/{$broadcastId}/get_post_live_viewers_list/");
         if ($maxId !== null) {
             $request->addParam('max_id', $maxId);
@@ -112,16 +112,16 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BroadcastHeartbeatAndViewerCountResponse
+     * @return Response\BroadcastHeartbeatAndViewerCountResponse
      */
     public function getHeartbeatAndViewerCount(
         $broadcastId,
-        $isViewer = false)
-    {
+        $isViewer = false,
+    ) {
         $request = $this->ig->request("live/{$broadcastId}/heartbeat_and_get_viewer_count/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid);
-        //->addPost('_csrftoken', $this->ig->client->getToken());
+        // ->addPost('_csrftoken', $this->ig->client->getToken());
         if ($isViewer) {
             $request->addPost('live_with_eligibility', 1);
         } else {
@@ -144,14 +144,14 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BroadcastJoinRequestCountResponse|null
+     * @return Response\BroadcastJoinRequestCountResponse|null
      */
     public function getJoinRequestCounts(
         $broadcastId,
         $lastTotalCount = 0,
         $lastSeenTs = 0,
-        $lastFetchTs = 0)
-    {
+        $lastFetchTs = 0,
+    ) {
         try {
             return $this->ig->request("live/{$broadcastId}/get_join_request_counts/")
                 ->addParam('last_total_count', $lastTotalCount)
@@ -177,14 +177,14 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BroadcastJoinResponse
+     * @return Response\BroadcastJoinResponse
      */
     public function join(
         $broadcastId,
         $sdpOffer,
         $targetHeight = 768,
-        $targetWidth = 400)
-    {
+        $targetWidth = 400,
+    ) {
         return $this->ig->request("live/{$broadcastId}/join/")
             ->addPost('sdp_offer', $sdpOffer)
             ->addPost('target_video_height', $targetHeight)
@@ -192,7 +192,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\BroadcastJoinResponse());
     }
 
@@ -206,14 +206,14 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function inviteFriend(
         $broadcastId,
         $userId,
         $encodedServerDataInfo,
-        $videoOffset)
-    {
+        $videoOffset,
+    ) {
         return $this->ig->request("live/{$broadcastId}/invite/")
             ->addPost('invitees', $userId)
             ->addPost('offset_to_video_start', $videoOffset)
@@ -221,7 +221,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -234,13 +234,13 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function kickFriend(
         $broadcastId,
         $userId,
-        $encodedServerDataInfo)
-    {
+        $encodedServerDataInfo,
+    ) {
         return $this->ig->request("live/{$broadcastId}/kickout/")
             ->addPost('users_to_be_removed', $userId)
             ->addPost('reason', 'remove_guest')
@@ -248,7 +248,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -261,13 +261,13 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function leaveConference(
         $broadcastId,
         $encodedServerDataInfo,
-        $numberOfParticipants = 0)
-    {
+        $numberOfParticipants = 0,
+    ) {
         return $this->ig->request("live/{$broadcastId}/kickout/")
             ->addPost('num_participants', $numberOfParticipants)
             ->addPost('reason', 'leave_broadcast')
@@ -275,7 +275,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -291,15 +291,15 @@ class Live extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function confirmEvent(
         $broadcastId,
         $encodedServerDataInfo,
         $messageType,
         $curVersion,
-        $transactionId)
-    {
+        $transactionId,
+    ) {
         $messageTypes = [
             'CONFERENCE_STATE',
             'SERVER_MEDIA_UPDATE',
@@ -317,7 +317,7 @@ class Live extends RequestCollection
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -329,16 +329,16 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function showQuestion(
         $broadcastId,
-        $questionId)
-    {
+        $questionId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/question/{$questionId}/activate/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -350,16 +350,16 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function hideQuestion(
         $broadcastId,
-        $questionId)
-    {
+        $questionId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/question/{$questionId}/deactivate/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -373,15 +373,15 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function question(
         $broadcastId,
-        $questionText)
-    {
+        $questionText,
+    ) {
         return $this->ig->request("live/{$broadcastId}/questions/")
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('text', $questionText)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -392,7 +392,7 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BroadcastQuestionsResponse
+     * @return Response\BroadcastQuestionsResponse
      */
     public function getQuestions()
     {
@@ -407,11 +407,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BroadcastQuestionsResponse
+     * @return Response\BroadcastQuestionsResponse
      */
     public function getLiveBroadcastQuestions(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/questions/")
             ->addParam('sources', 'story_and_live')
             ->getResponse(new Response\BroadcastQuestionsResponse());
@@ -422,7 +422,7 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PresencesResponse
+     * @return Response\PresencesResponse
      */
     public function getLivePresence()
     {
@@ -443,17 +443,17 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function wave(
         $broadcastId,
         $viewerId,
-        $waveType = 0)
-    {
+        $waveType = 0,
+    ) {
         return $this->ig->request("live/{$broadcastId}/wave/")
             ->addPost('viewer_id', $viewerId)
             ->addPost('wave_type', ($waveType === 0) ? 'wave' : 'wave_back')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -467,12 +467,12 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CommentBroadcastResponse
+     * @return Response\CommentBroadcastResponse
      */
     public function comment(
         $broadcastId,
-        $commentText)
-    {
+        $commentText,
+    ) {
         return $this->ig->request("live/{$broadcastId}/comment/")
             ->addPost('user_breadcrumb', Utils::generateUserBreadcrumb(mb_strlen($commentText)))
             ->addPost('idempotence_token', Signatures::generateUUID())
@@ -493,18 +493,18 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PinCommentBroadcastResponse
+     * @return Response\PinCommentBroadcastResponse
      */
     public function pinComment(
         $broadcastId,
-        $commentId)
-    {
+        $commentId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/pin_comment/")
             ->addPost('offset_to_video_start', 0)
             ->addPost('comment_id', $commentId)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\PinCommentBroadcastResponse());
     }
 
@@ -516,18 +516,18 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UnpinCommentBroadcastResponse
+     * @return Response\UnpinCommentBroadcastResponse
      */
     public function unpinComment(
         $broadcastId,
-        $commentId)
-    {
+        $commentId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/unpin_comment/")
             ->addPost('offset_to_video_start', 0)
             ->addPost('comment_id', $commentId)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UnpinCommentBroadcastResponse());
     }
 
@@ -541,14 +541,14 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BroadcastCommentsResponse
+     * @return Response\BroadcastCommentsResponse
      */
     public function getComments(
         $broadcastId,
         $lastCommentTs = 0,
         $joinRequestLastTs = 0,
-        $joinRequestLastCount = 0)
-    {
+        $joinRequestLastCount = 0,
+    ) {
         return $this->ig->request("live/{$broadcastId}/get_comment/")
             ->addParam('last_comment_ts', $lastCommentTs)
             ->addParam('join_request_last_seen_ts', $joinRequestLastTs)
@@ -566,13 +566,13 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PostLiveCommentsResponse
+     * @return Response\PostLiveCommentsResponse
      */
     public function getPostLiveComments(
         $broadcastId,
         $startingOffset = 0,
-        $encodingTag = 'instagram_dash_remuxed')
-    {
+        $encodingTag = 'instagram_dash_remuxed',
+    ) {
         return $this->ig->request("live/{$broadcastId}/get_post_live_comments/")
             ->addParam('starting_offset', $startingOffset)
             ->addParam('encoding_tag', $encodingTag)
@@ -586,15 +586,15 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\EnableDisableLiveCommentsResponse
+     * @return Response\EnableDisableLiveCommentsResponse
      */
     public function enableComments(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/unmute_comment/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\EnableDisableLiveCommentsResponse());
     }
 
@@ -605,15 +605,15 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\EnableDisableLiveCommentsResponse
+     * @return Response\EnableDisableLiveCommentsResponse
      */
     public function disableComments(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/mute_comment/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\EnableDisableLiveCommentsResponse());
     }
 
@@ -624,11 +624,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\EnableDisableLiveCommentsResponse
+     * @return Response\EnableDisableLiveCommentsResponse
      */
     public function enableRequestToJoin(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/enable_request_to_join/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
@@ -643,11 +643,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\EnableDisableLiveCommentsResponse
+     * @return Response\EnableDisableLiveCommentsResponse
      */
     public function disableRequestToJoin(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/disable_request_to_join/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
@@ -665,13 +665,13 @@ class Live extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BroadcastLikeResponse
+     * @return Response\BroadcastLikeResponse
      */
     public function like(
         $broadcastId,
         $likeCount = 1,
-        $burstLikeCount = 0)
-    {
+        $burstLikeCount = 0,
+    ) {
         if ($likeCount < 1 || $likeCount > 6) {
             throw new \InvalidArgumentException('Like count must be a number from 1 to 6.');
         }
@@ -679,7 +679,7 @@ class Live extends RequestCollection
         return $this->ig->request("live/{$broadcastId}/like/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_like_count', $likeCount)
             ->addPost('user_like_burst_count', $burstLikeCount)
             ->addPost('offset_to_video_start', 0)
@@ -694,12 +694,12 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BroadcastLikeCountResponse
+     * @return Response\BroadcastLikeCountResponse
      */
     public function getLikeCount(
         $broadcastId,
-        $likeTs = 0)
-    {
+        $likeTs = 0,
+    ) {
         return $this->ig->request("live/{$broadcastId}/get_like_count/")
             ->addParam('like_ts', $likeTs)
             ->getResponse(new Response\BroadcastLikeCountResponse());
@@ -714,13 +714,13 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PostLiveLikesResponse
+     * @return Response\PostLiveLikesResponse
      */
     public function getPostLiveLikes(
         $broadcastId,
         $startingOffset = 0,
-        $encodingTag = 'instagram_dash_remuxed')
-    {
+        $encodingTag = 'instagram_dash_remuxed',
+    ) {
         return $this->ig->request("live/{$broadcastId}/get_post_live_likes/")
             ->addParam('starting_offset', $startingOffset)
             ->addParam('encoding_tag', $encodingTag)
@@ -740,7 +740,7 @@ class Live extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CreateLiveResponse
+     * @return Response\CreateLiveResponse
      *
      * @see Live::start()
      * @see Live::end()
@@ -749,14 +749,14 @@ class Live extends RequestCollection
         $previewWidth = 1080,
         $previewHeight = 2076,
         $title = null,
-        $visibility = 0)
-    {
+        $visibility = 0,
+    ) {
         $request = $this->ig->request('live/create/')
             ->setSignedPost(false)
             ->addPost('user_pay_enabled', 'false')
             ->addPost('camera_session_id', Signatures::generateUUID())
             ->addPost('source_type', 5)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('preview_height', $previewHeight)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('should_use_rsys_rtc_infra', 'false')
@@ -795,7 +795,7 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StartLiveResponse
+     * @return Response\StartLiveResponse
      *
      * @see Live::create()
      * @see Live::end()
@@ -804,12 +804,12 @@ class Live extends RequestCollection
         $broadcastId,
         $latitude = null,
         $longitude = null,
-        $charityId = null)
-    {
+        $charityId = null,
+    ) {
         $request = $this->ig->request("live/{$broadcastId}/start/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid);
-        //->addPost('_csrftoken', $this->ig->client->getToken());
+        // ->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($latitude !== null && $longitude !== null) {
             $request->addPost('latitude', $latitude)
@@ -836,14 +836,14 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     private function _getQuestionStatus(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/question_status/")
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('allow_question_submission', true)
             ->getResponse(new Response\GenericResponse());
@@ -859,13 +859,13 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function resumeBroadcastAfterContentMatch(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/resume_broadcast_after_content_match/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -882,19 +882,19 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      *
      * @see Live::create()
      * @see Live::start()
      */
     public function end(
         $broadcastId,
-        $copyrightWarning = false)
-    {
+        $copyrightWarning = false,
+    ) {
         return $this->ig->request("live/{$broadcastId}/end_broadcast/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('end_after_copyright_warning', $copyrightWarning)
             ->getResponse(new Response\GenericResponse());
     }
@@ -908,11 +908,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GetPostLiveThumbnailsResponse
+     * @return Response\GetPostLiveThumbnailsResponse
      */
     public function getPostLiveThumbnails(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/get_post_live_thumbnails/")
             ->addParam('signed_body', Signatures::generateSignature(json_encode((object) []).'.{}'))
             ->getResponse(new Response\GetPostLiveThumbnailsResponse());
@@ -929,15 +929,15 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function addToPostLive(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/add_to_post_live/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -950,15 +950,15 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function deletePostLive(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/delete_post_live/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -971,13 +971,13 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function shareToIgtv(
         $broadcastId,
         $coverPhoto,
-        array $metadata = [])
-    {
+        array $metadata = [],
+    ) {
         if (!isset($metadata['igtv_title'])) {
             throw new \InvalidArgumentException('You must provide a valid title for IGTV.');
         }
@@ -997,13 +997,13 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function shareToReels(
         $broadcastId,
         $coverPhoto,
-        array $metadata = [])
-    {
+        array $metadata = [],
+    ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setBroadcastId($broadcastId);
 
@@ -1021,16 +1021,16 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function setSubscriptionPreference(
         $userId,
-        $preference = 'default')
-    {
+        $preference = 'default',
+    ) {
         return $this->ig->request("live/{$userId}/set_subscription_preference/")
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1041,11 +1041,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FundraiserInfoResponse
+     * @return Response\FundraiserInfoResponse
      */
     public function getFundraiserInfo(
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         return $this->ig->request("fundraiser/{$this->ig->account_id}/standalone_fundraiser_info/")
             ->getResponse(new Response\FundraiserInfoResponse());
     }
@@ -1057,11 +1057,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StoryCharitiesResponse
+     * @return Response\StoryCharitiesResponse
      */
     public function getDefaultCharities(
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request('fundraiser/story_charities_nullstate/');
 
         if ($maxId !== null) {
@@ -1078,11 +1078,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StoryCharitiesResponse
+     * @return Response\StoryCharitiesResponse
      */
     public function searchCharity(
-        $query)
-    {
+        $query,
+    ) {
         return $this->ig->request('fundraiser/story_charities_search/')
             ->addParam('query', $query)
             ->getResponse(new Response\StoryCharitiesResponse());
@@ -1095,11 +1095,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CharityDonationsResponse
+     * @return Response\CharityDonationsResponse
      */
     public function getCharityDonations(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/charity_donations/")
             ->getResponse(new Response\CharityDonationsResponse());
     }
@@ -1109,7 +1109,7 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LiveArchiveSettingsResponse
+     * @return Response\LiveArchiveSettingsResponse
      */
     public function getLiveArchiveSettings()
     {
@@ -1124,11 +1124,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LiveArchiveSettingsResponse
+     * @return Response\LiveArchiveSettingsResponse
      */
     public function setLiveArchiveSettings(
-        $archive)
-    {
+        $archive,
+    ) {
         if (!is_bool($archive)) {
             throw new \InvalidArgumentException('You must provide a valid value for archive.');
         }
@@ -1142,7 +1142,7 @@ class Live extends RequestCollection
         return $this->ig->request('archive/live/live_archive_settings/')
             ->addPost('live_archive_setting', $setting)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\LiveArchiveSettingsResponse());
     }
 
@@ -1151,7 +1151,7 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LiveArchiveResponse
+     * @return Response\LiveArchiveResponse
      */
     public function getArchivedLives()
     {
@@ -1166,15 +1166,15 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function deleteArchivedLive(
-        $archiveId)
-    {
+        $archiveId,
+    ) {
         return $this->ig->request('archive/live/delete/')
             ->addPost('archive_id', $archiveId)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -1186,12 +1186,12 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function addModerator(
         $broadcastId,
-        $userId)
-    {
+        $userId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/moderator/assign/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
@@ -1207,12 +1207,12 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function revokeModerator(
         $broadcastId,
-        $userId)
-    {
+        $userId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/moderator/revoke/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
@@ -1227,11 +1227,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function resignModeratorRequest(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/moderator/resign/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
@@ -1246,12 +1246,12 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function removeUser(
         $broadcastId,
-        $userId)
-    {
+        $userId,
+    ) {
         return $this->ig->request("live/{$broadcastId}/remove_user/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
@@ -1267,12 +1267,12 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UpcomingEventsResponse
+     * @return Response\UpcomingEventsResponse
      */
     public function scheduleEvent(
         $startTime,
-        $title = '')
-    {
+        $title = '',
+    ) {
         return $this->ig->request('upcoming_events/create/')
             ->addPost('start_time', $startTime)
             ->addPost('live_metadata', json_encode([
@@ -1293,11 +1293,11 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LiveShareResponse
+     * @return Response\LiveShareResponse
      */
     public function getShareUrl(
-        $broadcastId)
-    {
+        $broadcastId,
+    ) {
         return $this->ig->request("third_party_sharing/{$this->ig->username}/live/{$broadcastId}/get_live_url/")
             ->addParam('exposed_to_experiment', 'false')
             ->addParam('share_to_app', 'copy_link')
@@ -1310,7 +1310,7 @@ class Live extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getGoodTimeForLive()
     {

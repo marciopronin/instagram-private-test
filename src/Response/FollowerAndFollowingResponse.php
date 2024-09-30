@@ -46,7 +46,7 @@ use InstagramAPI\Response;
  */
 class FollowerAndFollowingResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'users'                             => 'Model\User[]',
         'suggested_users'                   => 'Model\SuggestedUsers',
         'truncate_follow_requests_at_index' => 'int',

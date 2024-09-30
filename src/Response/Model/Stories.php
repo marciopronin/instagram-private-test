@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Stories extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'is_portrait' => '',
         'tray'        => 'StoryTray[]',
         'id'          => 'string',

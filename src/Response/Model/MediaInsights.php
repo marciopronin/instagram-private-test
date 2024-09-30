@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class MediaInsights extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'reach_count'          => 'string[]',
         'impression_count'     => 'int',
         'engagement_count'     => 'int',

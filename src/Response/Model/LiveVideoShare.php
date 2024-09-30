@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class LiveVideoShare extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'text'                => 'string',
         'broadcast'           => 'Broadcast',
         'video_offset'        => 'int',

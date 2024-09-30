@@ -7,10 +7,10 @@ require __DIR__.'/config.php';
 require VENDOR_PATH.'/autoload.php';
 require_once __DIR__.'/utils.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $debug = false;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
 if ($argc > 2) {
     $username = $argv[1];
@@ -26,14 +26,14 @@ if ($argc > 2) {
     if ($username === null || $password === null) {
         echo 'Usage: php auth.php <username> <password>';
         echo 'Credentials for the accounts are missing.';
-        exit();
+        exit;
     }
 }
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -50,6 +50,6 @@ try {
         echo sprintf("ID: %s\n", $charity->getPk());
     }
     echo "----------------------------\n\n";
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

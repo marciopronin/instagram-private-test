@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Collection extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'collection_id'   => 'string',
         'collection_name' => 'string',
         'cover_media'     => 'Item',

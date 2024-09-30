@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class PresenceStatusResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'disabled'                 => 'bool',
         'thread_presence_disabled' => 'bool',
     ];

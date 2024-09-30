@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class WebFormDataResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'form_data'  => 'Model\FormData',
     ];
 }

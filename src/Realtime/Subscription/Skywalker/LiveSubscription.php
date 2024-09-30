@@ -6,8 +6,8 @@ use InstagramAPI\Realtime\Subscription\SkywalkerSubscription;
 
 class LiveSubscription extends SkywalkerSubscription
 {
-    const ID = 'live';
-    const TEMPLATE = 'ig/live_notification_subscribe/%s';
+    public const ID = 'live';
+    public const TEMPLATE = 'ig/live_notification_subscribe/%s';
 
     /** {@inheritdoc} */
     public function getId()

@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class WebUserInfoResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'logging_page_id'             => 'string',
         'show_suggested_profiles'     => 'bool',
         'show_follow_dialog'          => 'bool',

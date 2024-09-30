@@ -28,8 +28,8 @@ class InstagramThumbnail extends InstagramVideo
     public function __construct(
         $inputFile,
         array $options = [],
-        FFmpeg $ffmpeg = null)
-    {
+        ?FFmpeg $ffmpeg = null,
+    ) {
         parent::__construct($inputFile, $options, $ffmpeg);
 
         // The timeline and most feeds have the thumbnail at "00:00:01.000".
@@ -38,28 +38,28 @@ class InstagramThumbnail extends InstagramVideo
         // Handle per-feed timestamps and custom thumbnail timestamps.
         if (isset($options['targetFeed'])) {
             switch ($options['targetFeed']) {
-            case Constants::FEED_STORY:
-            case Constants::FEED_DIRECT_STORY:
-                // Stories always have the thumbnail at "00:00:00.000" instead.
-                $this->_thumbnailTimestamp = 0.0;
-                break;
-            case Constants::FEED_TIMELINE || Constants::FEED_TIMELINE_ALBUM || Constants::FEED_REELS:
-                if ($options['targetFeed'] === Constants::FEED_REELS) {
+                case Constants::FEED_STORY:
+                case Constants::FEED_DIRECT_STORY:
+                    // Stories always have the thumbnail at "00:00:00.000" instead.
                     $this->_thumbnailTimestamp = 0.0;
-                }
-                // Handle custom timestamp (only supported by timeline media).
-                // NOTE: Matches real app which only customizes timeline covers.
-                if (isset($options['thumbnailTimestamp'])) {
-                    $customTimestamp = $options['thumbnailTimestamp'];
-                    // If custom timestamp is a number, use as-is. Else assume
-                    // a "HH:MM:SS[.000]" string and convert it. Throws if bad.
-                    $this->_thumbnailTimestamp = is_int($customTimestamp) || is_float($customTimestamp)
-                                               ? (float) $customTimestamp
-                                               : Utils::hmsTimeToSeconds($customTimestamp);
-                }
-                break;
-            default:
-                // Keep the default.
+                    break;
+                case Constants::FEED_TIMELINE || Constants::FEED_TIMELINE_ALBUM || Constants::FEED_REELS:
+                    if ($options['targetFeed'] === Constants::FEED_REELS) {
+                        $this->_thumbnailTimestamp = 0.0;
+                    }
+                    // Handle custom timestamp (only supported by timeline media).
+                    // NOTE: Matches real app which only customizes timeline covers.
+                    if (isset($options['thumbnailTimestamp'])) {
+                        $customTimestamp = $options['thumbnailTimestamp'];
+                        // If custom timestamp is a number, use as-is. Else assume
+                        // a "HH:MM:SS[.000]" string and convert it. Throws if bad.
+                        $this->_thumbnailTimestamp = is_int($customTimestamp) || is_float($customTimestamp)
+                                                   ? (float) $customTimestamp
+                                                   : Utils::hmsTimeToSeconds($customTimestamp);
+                    }
+                    break;
+                default:
+                    // Keep the default.
             }
         }
 
@@ -102,8 +102,8 @@ class InstagramThumbnail extends InstagramVideo
     /** {@inheritdoc} */
     protected function _ffmpegMustRunAgain(
         $attempt,
-        array $ffmpegOutput)
-    {
+        array $ffmpegOutput,
+    ) {
         // If this was the first run, we must look for the "first frame is no
         // keyframe" error. It is a rare error which can happen when the user
         // wants to extract a frame from a timestamp that is before the first
@@ -129,8 +129,8 @@ class InstagramThumbnail extends InstagramVideo
 
     /** {@inheritdoc} */
     protected function _getInputFlags(
-        $attempt)
-    {
+        $attempt,
+    ) {
         // The seektime *must* be specified here, before the input file.
         // Otherwise ffmpeg will do a slow conversion of the whole file
         // (but discarding converted frames) until it gets to target time.
@@ -148,8 +148,8 @@ class InstagramThumbnail extends InstagramVideo
 
     /** {@inheritdoc} */
     protected function _getOutputFlags(
-        $attempt)
-    {
+        $attempt,
+    ) {
         return [
             '-vcodec libwebp',
             '-vframes 1',

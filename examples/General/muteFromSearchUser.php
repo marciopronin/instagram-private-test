@@ -5,29 +5,29 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $usernameToMute = 'selenagomez';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -86,7 +86,12 @@ try {
             $ig->event->sendSimilarEntityImpression($userId, $suggestions[$i]->getPk());
         }
     }
-    $ig->event->sendNavigation('button', 'search_users', 'profile', null, null,
+    $ig->event->sendNavigation(
+        'button',
+        'search_users',
+        'profile',
+        null,
+        null,
         [
             'rank_token'        => $rankToken,
             'query_text'        => $usernameToFollow,
@@ -97,7 +102,7 @@ try {
             'user_id'           => $userId,
         ]
     );
-    $traySession = \InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
     $ig->story->getUserStoryFeed($userId);
     $ig->event->reelTrayRefresh(
@@ -115,29 +120,32 @@ try {
     sleep(mt_rand(1, 2));
     $ig->event->sendProfileView($userId);
 
-    $ig->event->sendProfileAction('tap_follow_sheet', $userId,
-    [
+    $ig->event->sendProfileAction(
+        'tap_follow_sheet',
+        $userId,
         [
-            'module'        => 'blended_search',
-            'click_point'   => 'search_result',
-        ],
-        [
-            'module'        => 'blended_search',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'explore_popular',
-            'click_point'   => 'button',
-        ],
-        [
-            'module'        => 'explore_popular',
-            'click_point'   => 'explore_topic_load',
-        ],
-        [
-            'module'        => 'feed_timeline',
-            'click_point'   => 'main_search',
-        ],
-    ]);
+            [
+                'module'        => 'blended_search',
+                'click_point'   => 'search_result',
+            ],
+            [
+                'module'        => 'blended_search',
+                'click_point'   => 'button',
+            ],
+            [
+                'module'        => 'explore_popular',
+                'click_point'   => 'button',
+            ],
+            [
+                'module'        => 'explore_popular',
+                'click_point'   => 'explore_topic_load',
+            ],
+            [
+                'module'        => 'feed_timeline',
+                'click_point'   => 'main_search',
+            ],
+        ]
+    );
     $ig->event->sendNavigation('button', 'profile', 'media_mute_sheet');
 
     $ig->people->muteUserMedia($userId, 'post');
@@ -150,6 +158,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

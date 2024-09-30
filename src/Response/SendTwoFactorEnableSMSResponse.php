@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class SendTwoFactorEnableSMSResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'phone_verification_settings' => 'Model\PhoneVerificationSettings',
         'obfuscated_phone_number'     => '',
     ];

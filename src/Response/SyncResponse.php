@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class SyncResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'experiments' => 'Model\Experiment[]',
         'no_close'    => 'bool',
     ];

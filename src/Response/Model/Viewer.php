@@ -14,7 +14,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Viewer extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'eligible_promotions'   => 'EligiblePromotions',
     ];
 }

@@ -50,7 +50,7 @@ use InstagramAPI\Response;
  */
 class StoryCharitiesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'followed_charities'                => '',
         'suggested_charities'               => '',
         'nullstate_charities_sections'      => 'Model\CharitySection[]',

@@ -20,8 +20,8 @@ class Event extends RequestCollection
      * @return array
      */
     protected function _addBatchBody(
-        $batch)
-    {
+        $batch,
+    ) {
         $body =
         [
             'time'              => ($batch[0]['time'] * 1000) - mt_rand(0, 500),
@@ -33,11 +33,11 @@ class Event extends RequestCollection
             'os_ver'            => $this->ig->device->getAndroidRelease(),
             'device_id'         => $this->ig->uuid,
             'session_id'        => $this->ig->client->getPigeonSession(),
-            //'channel'           => 'regular',
-            //'log_type'          => 'client_event',
-            //'app_uid'           => $this->ig->account_id,
-            //'config_version'    => 'v2',
-            //'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
+            // 'channel'           => 'regular',
+            // 'log_type'          => 'client_event',
+            // 'app_uid'           => $this->ig->account_id,
+            // 'config_version'    => 'v2',
+            // 'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
             'seq'               => $this->ig->batchIndex,
             'app_uid'           => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
             'data'              => $batch,
@@ -69,8 +69,8 @@ class Event extends RequestCollection
      * @return array
      */
     protected function _addCommonProperties(
-        $event)
-    {
+        $event,
+    ) {
         $commonProperties =
         [
             'pk'                                            => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
@@ -94,8 +94,8 @@ class Event extends RequestCollection
     protected function _addEventBody(
         $name,
         $module,
-        $extra)
-    {
+        $extra,
+    ) {
         $event =
         [
             'log_type'      => 'client_event',
@@ -128,17 +128,17 @@ class Event extends RequestCollection
      */
     protected function _getModuleClass(
         $module,
-        $classSelector = null)
-    {
+        $classSelector = null,
+    ) {
         switch ($module) {
             case 'feed_timeline':
-                $class = 'MainFeedFragment'; //'MainFeedFragment';
+                $class = 'MainFeedFragment'; // 'MainFeedFragment';
                 break;
             case 'newsfeed_you':
-                $class = 'NewsfeedYouFragment'; //'NewsfeedYouFragment';
+                $class = 'NewsfeedYouFragment'; // 'NewsfeedYouFragment';
                 break;
             case 'explore_popular':
-                $class = 'ExploreFragment'; //'ExploreFragment';
+                $class = 'ExploreFragment'; // 'ExploreFragment';
                 break;
             case 'discover_people':
                 $class = 'ExplorePeopleFragment';
@@ -150,18 +150,18 @@ class Event extends RequestCollection
                 $class = 'TopSearchChildFragment';
                 break;
             case 'search_typeahead':
-                $class = 'SingleSearchTypeaheadTabFragment'; //'SingleSearchTypeaheadTabFragment';
+                $class = 'SingleSearchTypeaheadTabFragment'; // 'SingleSearchTypeaheadTabFragment';
                 break;
             case 'serp_top':
                 $class = 'TopSerpGridFragment';
                 break;
-            //case 'search':
-            //case 'search_result':
-            //case 'search_result':
-            //    $class = 'ACK'; //'TopSerpGridFragment';
-            //    break;
+                // case 'search':
+                // case 'search_result':
+                // case 'search_result':
+                //    $class = 'ACK'; //'TopSerpGridFragment';
+                //    break;
             case 'serp_places':
-                $class = 'PlacesSerpGridFragment'; //'PlacesSerpGridFragment';
+                $class = 'PlacesSerpGridFragment'; // 'PlacesSerpGridFragment';
                 break;
             case 'search_places':
                 $class = 'PlacesSearchChildFragment';
@@ -170,7 +170,7 @@ class Event extends RequestCollection
                 $class = 'UsersSearchChildFragment';
                 break;
             case 'serp_users':
-                $class = 'UserSerpGridFragment'; //'UserSerpGridFragment';
+                $class = 'UserSerpGridFragment'; // 'UserSerpGridFragment';
                 break;
             case 'search_tags':
                 $class = 'HashtagSearchChildFragment';
@@ -192,7 +192,7 @@ class Event extends RequestCollection
                 break;
             case 'search_edit_recent':
             case 'search_typeahead_edit_recent':
-                $class = 'EditSearchHistoryFragment'; //'EditSearchHistoryFragment';
+                $class = 'EditSearchHistoryFragment'; // 'EditSearchHistoryFragment';
                 break;
             case 'feed_hashtag':
                 $class = 'HashtagPageFragment';
@@ -206,9 +206,9 @@ class Event extends RequestCollection
             case 'feed_contextual_chain':
                 $class = 'DiscoveryChainingFeedFragment';
                 break;
-            //case 'feed_contextual_place':
-            //case 'feed_contextual_location':
-            //case 'feed_contextual_hashtag':
+                // case 'feed_contextual_place':
+                // case 'feed_contextual_location':
+                // case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
                 $class = 'ContextualFeedFragment'; // 'ContextualFeedFragment';
@@ -254,11 +254,11 @@ class Event extends RequestCollection
             case 'clips_viewer_clips_tab':
                 $class = 'ClipsViewerFragment';
                 break;
-            /*
-            case 'quick_capture_fragment':
-                $class = '155';
-                break;
-            */
+                /*
+                case 'quick_capture_fragment':
+                    $class = '155';
+                    break;
+                */
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';
                 break;
@@ -297,7 +297,7 @@ class Event extends RequestCollection
             case 'self_following':
                 $class = 'FollowListFragment';
                 break;
-            // login_landing
+                // login_landing
             case 'video_profile':
                 $class = 'VideoProfileTabFragment';
                 break;
@@ -391,8 +391,8 @@ class Event extends RequestCollection
     protected function _generateNavChain(
         $module,
         $clickPoint,
-        $classSelector = null)
-    {
+        $classSelector = null,
+    ) {
         $class = $this->_getModuleClass($module, $classSelector);
 
         /*
@@ -499,8 +499,8 @@ class Event extends RequestCollection
      */
     protected function _getTagsForNameAndModule(
         $name,
-        $module)
-    {
+        $module,
+    ) {
         switch ($name) {
             case 'fx_access_library':
             case 'instagram_client_password_encryption_encrypt_attempt':
@@ -537,7 +537,7 @@ class Event extends RequestCollection
                 || $name === 'android_string_impressions' && $module === 'IgResourcesAnalyticsModule') ?
                 [
                     'tags'  => (
-                    $name === 'android_string_impressions'
+                        $name === 'android_string_impressions'
                     || $name === 'instagram_wellbeing_warning_system_success_creation'
                     || $name === 'direct_inbox_tab_impression'
                     || $name === 'ig_direct_inbox_fetch_success_rate'
@@ -556,8 +556,8 @@ class Event extends RequestCollection
      */
     protected function _addEventData(
         $event,
-        $batch = 2)
-    {
+        $batch = 2,
+    ) {
         $this->ig->eventBatch[$batch][] = $event;
 
         foreach ($this->ig->eventBatch as $batch) {
@@ -605,8 +605,8 @@ class Event extends RequestCollection
      * @param mixed $response
      */
     protected function _updateChecksum(
-        $response)
-    {
+        $response,
+    ) {
         if (!empty($response['checksum'])) {
             $this->ig->settings->set('checksum', $response['checksum']);
         }
@@ -655,7 +655,7 @@ class Event extends RequestCollection
                             gzdeflate($batch),
                             $batchFilename
                         );
-                        // no break
+                // no break
             case 1:
                 $message = [
                     'request_info'  => [
@@ -675,7 +675,7 @@ class Event extends RequestCollection
                 $request->addPost('compressed', 0)
                         ->addPost('multi_batch', 1)
                         ->addPost('message', json_encode($message, JSON_PRESERVE_ZERO_FRACTION));
-                        // no break
+                // no break
             case 2:
                 if (count($batches) > 1) {
                     $message = [
@@ -770,8 +770,8 @@ class Event extends RequestCollection
         $name,
         $waterfallId,
         $startTime,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $currentTime = round(microtime(true) * 1000);
 
         $extra = [
@@ -885,8 +885,8 @@ class Event extends RequestCollection
     public function sendFunnelRegistration(
         $waterfallId,
         $startTime,
-        $instanceId)
-    {
+        $instanceId,
+    ) {
         $actions =
         [
             [
@@ -993,8 +993,8 @@ class Event extends RequestCollection
         $module,
         $hashtagId = null,
         $hashtagName = null,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if ($type !== 'instagram_thumbnail_impression' && $type !== 'instagram_thumbnail_click') {
             throw new \InvalidArgumentException(sprintf('%s is not a valid event name.', $type));
         }
@@ -1104,8 +1104,8 @@ class Event extends RequestCollection
         $timespent,
         $module,
         array $clusterData = [],
-        array $options = null)
-    {
+        ?array $options = null,
+    ) {
         if ($module === 'feed_contextual_profile' || $module === 'feed_contextual_self_profile' || $module === 'feed_short_url') {
             $extra = [
                 'm_pk'                      => $item->getId(),
@@ -1238,8 +1238,8 @@ class Event extends RequestCollection
         $traySessionId,
         $rankingToken,
         $followingUserStatus,
-        $source = 'reel_feed_timeline')
-    {
+        $source = 'reel_feed_timeline',
+    ) {
         $extra = [
             'm_pk'                      => $item->getId(),
             'a_pk'                      => $item->getUser()->getPk(),
@@ -1278,8 +1278,8 @@ class Event extends RequestCollection
         $traySessionId,
         $rankingToken,
         array $options = [],
-        $source = 'feed_timeline')
-    {
+        $source = 'feed_timeline',
+    ) {
         $extra = [
             'has_my_reel'                      => isset($options['has_my_reel']) ? strval($options['has_my_reel']) : '0',
             'has_my_replay_reel'               => isset($options['has_my_replay_reel']) ? strval($options['has_my_replay_reel']) : '0',
@@ -1320,8 +1320,8 @@ class Event extends RequestCollection
         $item,
         $requestId,
         $sessionId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'request_id'                      => $requestId,
             'session_id'                      => $sessionId,
@@ -1355,8 +1355,8 @@ class Event extends RequestCollection
         $section,
         $position,
         $tab = 'You',
-        $extraType = 'USER_SIMPLE')
-    {
+        $extraType = 'USER_SIMPLE',
+    ) {
         $extra = [
             'story_id'                  => $newsfeedItem->getPk(),
             'story_type'                => $newsfeedItem->getStoryType(),
@@ -1388,8 +1388,8 @@ class Event extends RequestCollection
     public function sendOrganicNumberOfLikes(
         $item,
         $module,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'm_pk'                          => $item->getId(),
             'a_pk'                          => $item->getUser()->getPk(),
@@ -1427,8 +1427,8 @@ class Event extends RequestCollection
         $module,
         $item,
         $feedSessionId,
-        $options)
-    {
+        $options,
+    ) {
         $extra = [
             'm_pk'                          => $item->getId(),
             'a_pk'                          => $item->getUser()->getPk(),
@@ -1463,8 +1463,8 @@ class Event extends RequestCollection
      */
     public function reelTrayRefresh(
         $options,
-        $refreshType)
-    {
+        $refreshType,
+    ) {
         $requiredKeys = ['tray_refresh_time', 'tray_session_id'];
         $missingKeys = array_diff($requiredKeys, array_keys($options));
         if (!empty($missingKeys)) {
@@ -1518,8 +1518,8 @@ class Event extends RequestCollection
     public function sendStoriesRequest(
         $traySessionId,
         $requestId,
-        $requestType = 'auto_refresh')
-    {
+        $requestType = 'auto_refresh',
+    ) {
         $extra = [
             'tray_session_id'        => $traySessionId,
             'request_id'             => $requestId,
@@ -1543,8 +1543,8 @@ class Event extends RequestCollection
     public function reelInFeedTrayHide(
         $traySessionId,
         $hideReason,
-        $trayId)
-    {
+        $trayId,
+    ) {
         $extra = [
             'tray_session_id'   => $traySessionId,
             'hide_reason'       => $hideReason,
@@ -1565,8 +1565,8 @@ class Event extends RequestCollection
      */
     public function sendStartMainFeedRequest(
         $mediaDepth,
-        $reason = 'pagination')
-    {
+        $reason = 'pagination',
+    ) {
         $extra = [
             'reason'                    => $reason,
             'is_background'             => false,
@@ -1591,8 +1591,8 @@ class Event extends RequestCollection
      */
     public function sendMainFeedLoadingMore(
         $paginationTime,
-        $position)
-    {
+        $position,
+    ) {
         $extra = [
             'position'                  => $position,
             'last_feed_update_time'     => $paginationTime,
@@ -1612,8 +1612,8 @@ class Event extends RequestCollection
      */
     public function sendEndMainFeedRequest(
         $mediaDepth,
-        $reason = 'pagination')
-    {
+        $reason = 'pagination',
+    ) {
         $extra = [
             'reason'                    => $reason,
             'is_background'             => false,
@@ -1655,8 +1655,8 @@ class Event extends RequestCollection
         $hashtagName = null,
         $sessionId = null,
         array $options = [],
-        $unlike = false)
-    {
+        $unlike = false,
+    ) {
         $extra = [
             'c_pk_list'                                     => [],
             'time'                                          => -1,
@@ -1761,8 +1761,8 @@ class Event extends RequestCollection
     public function sendOrganicComment(
         $item,
         $isFollowingUser,
-        $composeDuration)
-    {
+        $composeDuration,
+    ) {
         $extra = [
             'm_pk'                      => $item->getId(),
             'a_pk'                      => $item->getUser()->getPk(),
@@ -1795,8 +1795,8 @@ class Event extends RequestCollection
         $item,
         $userId,
         $commentId,
-        $sessionId)
-    {
+        $sessionId,
+    ) {
         $extra = [
             'm_pk'                      => $item->getId(),
             'a_pk'                      => $item->getUser()->getPk(),
@@ -1849,8 +1849,8 @@ class Event extends RequestCollection
         $userId,
         $commentId,
         $commentLikeCount,
-        $module = 'comments_v2')
-    {
+        $module = 'comments_v2',
+    ) {
         $extra = [
             'm_pk'              => $item->getId(),
             'a_pk'              => $item->getUser()->getPk(),
@@ -1888,8 +1888,8 @@ class Event extends RequestCollection
         $action,
         $userId,
         $navstack,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $actions = [
             'follow',
             'unfollow',
@@ -2049,8 +2049,8 @@ class Event extends RequestCollection
     public function sendUserReport(
         $userId,
         $action,
-        $module = 'profile')
-    {
+        $module = 'profile',
+    ) {
         $extra = [
             'actor_id'         => $this->ig->account_id,
             'action'           => $action,
@@ -2084,8 +2084,8 @@ class Event extends RequestCollection
     public function sendPhoneId(
         $waterfallId,
         $startTime,
-        $type)
-    {
+        $type,
+    ) {
         if (($type !== 'request') && ($type !== 'response')) {
             throw new \InvalidArgumentException(sprintf('Invalid request type %s.', $type));
         }
@@ -2093,18 +2093,18 @@ class Event extends RequestCollection
         $name = ($type === 'request') ? 'send_phone_id_request' : 'phone_id_response_received';
         $currentTime = round(microtime(true) * 1000);
         $extra = [
-             'waterfall_id'         => $waterfallId,
-             'start_time'           => $startTime,
-             'current_time'         => $currentTime,
-             'elapsed_time'         => $currentTime - $startTime,
-             'os_version'           => $this->ig->device->getAndroidVersion(),
-             'step'                 => 'landing',
-             'containermodule'      => 'landing_facebook',
-             'fb_family_device_id'  => $this->ig->phone_id,
-             'guid'                 => $this->ig->uuid,
-             'prefill_type'         => 'both',
-             'source'               => null,
-         ];
+            'waterfall_id'         => $waterfallId,
+            'start_time'           => $startTime,
+            'current_time'         => $currentTime,
+            'elapsed_time'         => $currentTime - $startTime,
+            'os_version'           => $this->ig->device->getAndroidVersion(),
+            'step'                 => 'landing',
+            'containermodule'      => 'landing_facebook',
+            'fb_family_device_id'  => $this->ig->phone_id,
+            'guid'                 => $this->ig->uuid,
+            'prefill_type'         => 'both',
+            'source'               => null,
+        ];
 
         $event = $this->_addEventBody($name, 'waterfall_log_in', $extra);
         $this->_addEventData($event, 1);
@@ -2118,8 +2118,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIGTvNotificationPreference(
-       $enable = true)
-    {
+        $enable = true,
+    ) {
         $extra = [
             'elapsed_time_since_last_item'  => -1,
         ];
@@ -2142,8 +2142,8 @@ class Event extends RequestCollection
     public function sendUnfollowSuccessful(
         $userId,
         $userIsPrivate,
-        $module)
-    {
+        $module,
+    ) {
         $extra = [
             'target_id'             => $userId,
             'target_is_private'     => $userIsPrivate,
@@ -2164,8 +2164,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendRemoveFollowerConfirmed(
-        $userId)
-    {
+        $userId,
+    ) {
         $extra = [
             'target_id'             => $userId,
         ];
@@ -2191,8 +2191,8 @@ class Event extends RequestCollection
     public function sendOrganicMediaImpression(
         $item,
         $module,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'is_from_merlin_infra'              => false,
             'm_pk'                              => $item->getId(),
@@ -2315,8 +2315,8 @@ class Event extends RequestCollection
     public function sendOrganicMediaSubImpression(
         $item,
         array $options = [],
-        $module = 'reel_profile')
-    {
+        $module = 'reel_profile',
+    ) {
         if (!isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
             throw new \InvalidArgumentException('Required options were not set.');
         }
@@ -2368,8 +2368,8 @@ class Event extends RequestCollection
     public function sendOrganicVpvdImpression(
         $item,
         array $options = [],
-        $module = 'reel_profile')
-    {
+        $module = 'reel_profile',
+    ) {
         if (!isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
             throw new \InvalidArgumentException('Required options were not set.');
         }
@@ -2441,8 +2441,8 @@ class Event extends RequestCollection
     public function sendOrganicCarouselImpression(
         $item,
         $requestId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'm_pk'                              => $item->getId(),
             'a_pk'                              => $item->getUser()->getPk(),
@@ -2488,8 +2488,8 @@ class Event extends RequestCollection
         $traySessionId,
         $rankingToken,
         $module = 'reel_feed_timeline',
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'm_pk'                              => $item->getId(),
             'a_pk'                              => $item->getUser()->getPk(),
@@ -2565,8 +2565,8 @@ class Event extends RequestCollection
         $traySessionId,
         $rankingToken,
         $module = 'reel_feed_timeline',
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'a_pk'                                  => $item->getUser()->getPk(),
             'action'					                           => isset($options['action']) ? $options['action'] : 'tap_forward',
@@ -2624,8 +2624,8 @@ class Event extends RequestCollection
         $userId,
         $viewerSessionId,
         $traySessionId,
-        $module = 'reel_profile')
-    {
+        $module = 'reel_profile',
+    ) {
         $extra = [
             'a_pk'                                  => $userId,
             'source_of_action'                      => $module,
@@ -2663,8 +2663,8 @@ class Event extends RequestCollection
      */
     public function sendExploreHomeImpression(
         $item,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'm_pk'                      => $item->getId(),
             'media_type'                => $item->getMediaType(),
@@ -2700,8 +2700,8 @@ class Event extends RequestCollection
      */
     public function sendExploreSwitch(
         $sessionId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'topic_nav_order'                      => isset($options['topic_nav_order']) ? $options['topic_nav_order'] : 0,
             'dest_topic_cluster_position'          => isset($options['dest_topic_cluster_position']) ? $options['dest_topic_cluster_position'] : 0,
@@ -2728,8 +2728,8 @@ class Event extends RequestCollection
      */
     public function preparePerfWithImpressions(
         $items,
-        $module)
-    {
+        $module,
+    ) {
         foreach ($items as $item) {
             if ($item->getMediaType() === 1) {
                 $imageResponse = $this->ig->request($item->getImageVersions2()->getCandidates()[0]->getUrl());
@@ -2781,8 +2781,8 @@ class Event extends RequestCollection
         $sections,
         $hashtagId = null,
         $hashtagName = null,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $row = 1;
         $column = 1;
         foreach ($sections as $section) {
@@ -2898,8 +2898,8 @@ class Event extends RequestCollection
     public function prepareAndSendExploreImpression(
         $clusterId,
         $sessionId,
-        $sections)
-    {
+        $sections,
+    ) {
         $clusters = [
             'For You'       => 'explore_all:0',
             'Animals'       => 'hashtag_inspired:1',
@@ -3080,8 +3080,8 @@ class Event extends RequestCollection
     public function sendSimilarUserImpression(
         $userId,
         $recommendedUserId,
-        $module = 'profile')
-    {
+        $module = 'profile',
+    ) {
         $extra = [
             'uid'           => $recommendedUserId,
             'uid_based_on'  => $userId,
@@ -3105,8 +3105,8 @@ class Event extends RequestCollection
     public function sendRecommendedUserImpression(
         $object,
         $position,
-        $module = 'newsfeed_you')
-    {
+        $module = 'newsfeed_you',
+    ) {
         if ($module === 'newsfeed_you' || $module === 'discover_people') {
             $extra = [
                 'position'           => $position,
@@ -3157,8 +3157,8 @@ class Event extends RequestCollection
         $recommendedUserId,
         $entityType = 'user',
         $module = 'profile',
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'entity_type'               => $entityType,
             'entity_id'                 => $recommendedUserId,
@@ -3192,8 +3192,8 @@ class Event extends RequestCollection
         $viewerSessionId = null,
         $traySessionId = null,
         $rankingToken = null,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'm_pk'                                      => $item->getId(),
             'a_pk'                                      => $item->getUser()->getPk(),
@@ -3261,8 +3261,8 @@ class Event extends RequestCollection
             $extra['media_thumbnail_section'] = 'grid';
             $extra['entity_page_name'] = $item->getUser()->getUsername();
             $extra['entity_page_id'] = $item->getUser()->getPk();
-        } elseif ($module === 'reel_feed_timeline' || $module === 'reel_profile' || $module === 'reel_follow_list' ||
-                  $module === 'reel_liker_list' || $module === 'reel_hashtag_feed' || $module === 'reel_location_feed' || $module === 'reel_comment') {
+        } elseif ($module === 'reel_feed_timeline' || $module === 'reel_profile' || $module === 'reel_follow_list'
+                  || $module === 'reel_liker_list' || $module === 'reel_hashtag_feed' || $module === 'reel_location_feed' || $module === 'reel_comment') {
             $event = 'instagram_organic_reel_viewed_impression';
             $extra['action'] = null;
             $extra['source_of_action'] = $module;
@@ -3351,8 +3351,8 @@ class Event extends RequestCollection
         $viewerSessionId = null,
         $traySessionId = null,
         array $options = [],
-        $module = 'reel_profile')
-    {
+        $module = 'reel_profile',
+    ) {
         if ($module === 'reel_profile') {
             $extra = [
                 'm_pk'                         => $item->getId(),
@@ -3421,8 +3421,8 @@ class Event extends RequestCollection
      */
     public function sendIgtvPreviewEnd(
         $item,
-        $module = 'feed_contextual_profile')
-    {
+        $module = 'feed_contextual_profile',
+    ) {
         $extra = [
             'm_pk'                          => $item->getId(),
             'elapsed_time_since_last_item'  => -1,
@@ -3452,8 +3452,8 @@ class Event extends RequestCollection
         $action,
         $entrypoint,
         $module = 'igtv_preview_feed_contextual_profile',
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'm_pk'                         => $item->getId(),
             'a_pk'                         => $item->getUser()->getPk(),
@@ -3502,8 +3502,8 @@ class Event extends RequestCollection
         $action,
         $item,
         $module,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if ($module === 'feed_contextual_profile') {
             $extra = [
                 'video_type'                  => $item->getProductType(),
@@ -3639,15 +3639,15 @@ class Event extends RequestCollection
     public function sendProfileView(
         $userId,
         $mediaId = null,
-        $trackingToken = null)
-    {
+        $trackingToken = null,
+    ) {
         $extra = [
-                'm_ix'                          => 0,
-                'carousel_index'                => 0,
-                'elapsed_time_since_last_item'  => -1.0,
-                'target_id'                     => $userId,
-                'actor_id'                      => $this->ig->account_id,
-                'is_acp_delivered'              => false,
+            'm_ix'                          => 0,
+            'carousel_index'                => 0,
+            'elapsed_time_since_last_item'  => -1.0,
+            'target_id'                     => $userId,
+            'actor_id'                      => $this->ig->account_id,
+            'is_acp_delivered'              => false,
         ];
 
         if (($mediaId !== null) && ($trackingToken !== null)) {
@@ -3670,8 +3670,8 @@ class Event extends RequestCollection
      */
     protected function _getNavDepthForModules(
         $fromModule,
-        $toModule)
-    {
+        $toModule,
+    ) {
         $navDepth = null;
 
         switch ($fromModule) {
@@ -3765,8 +3765,8 @@ class Event extends RequestCollection
     protected function _validateNavigationOptions(
         $fromModule,
         $toModule,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if ($fromModule === 'feed_timeline' && $toModule === 'explore_popular'
             || $fromModule === 'explore_popular' && $toModule === 'explore_popular'
             || $fromModule === 'profile' && $toModule === 'explore_popular') {
@@ -3846,8 +3846,8 @@ class Event extends RequestCollection
     protected function _validateNavigationPath(
         $fromModule,
         $toModule,
-        $clickPoint)
-    {
+        $clickPoint,
+    ) {
         if (in_array($clickPoint, ['main_home', 'main_search', 'main_inbox', 'main_camera', 'main_profile', 'main_clips'])) {
             return;
         }
@@ -4861,8 +4861,8 @@ class Event extends RequestCollection
                     'dest_module'   => 'likers',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_chain',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_chain',
                 ],
                 [
                     'clickpoint'   => 'followers',
@@ -4987,28 +4987,28 @@ class Event extends RequestCollection
             ],
             'likers' => [
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_profile',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_profile',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_self_profile',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_self_profile',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_timeline',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_timeline',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_hashtag',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_hashtag',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_chain',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_chain',
                 ],
                 [
-                   'clickpoint'    => 'button',
-                   'dest_module'   => 'profile',
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'profile',
                 ],
                 [
                     'clickpoint'    => 'button',
@@ -5051,12 +5051,12 @@ class Event extends RequestCollection
                     'dest_module'   => 'profile',
                 ],
                 [
-                     'clickpoint'    => 'back',
-                     'dest_module'   => 'feed_contextual_profile',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_profile',
                 ],
                 [
-                     'clickpoint'    => 'back',
-                     'dest_module'   => 'feed_timeline',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_timeline',
                 ],
                 [
                     'clickpoint'    => 'button',
@@ -5290,8 +5290,8 @@ class Event extends RequestCollection
         $toModule,
         $hashtagId = null,
         $hashtagName = null,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if ($hashtagId !== null) {
             $options['hashtag_id'] = $hashtagId;
         }
@@ -5302,7 +5302,7 @@ class Event extends RequestCollection
         $this->_validateNavigationPath($fromModule, $toModule, $clickPoint);
         $this->_validateNavigationOptions($fromModule, $toModule, $options);
 
-        //$navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
+        // $navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
         $classSelector = isset($options['class_selector']) ? $options['class_selector'] : null;
         $navChain = $this->_generateNavChain($toModule, $clickPoint, $classSelector);
 
@@ -5450,8 +5450,8 @@ class Event extends RequestCollection
         $sourceSection,
         $destinationSection,
         $module,
-        $flag = 'tab')
-    {
+        $flag = 'tab',
+    ) {
         $extra = [
             'current_section'        => $sourceSection,
             'destination_section'    => $destinationSection,
@@ -5476,8 +5476,8 @@ class Event extends RequestCollection
      */
     public function sendUpdateSessionChain(
         $module,
-        $clickPoint)
-    {
+        $clickPoint,
+    ) {
         $navChain = $this->_generateNavChain($module, $clickPoint);
         $extra = [
             'sessions_chain'  => $navChain,
@@ -5501,8 +5501,8 @@ class Event extends RequestCollection
     public function sendOpenPhotoCameraTab(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime,
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5526,8 +5526,8 @@ class Event extends RequestCollection
     public function sendShutterClickInCamera(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime,
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5550,8 +5550,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendStartGalleryEditSession(
-        $sessionId)
-    {
+        $sessionId,
+    ) {
         $extra = [
             'ig_userid'     => $this->ig->account_id,
             'session_id'    => $sessionId,
@@ -5576,8 +5576,8 @@ class Event extends RequestCollection
     public function sendFilterPhoto(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime,
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5602,8 +5602,8 @@ class Event extends RequestCollection
     public function sendFilterFinish(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime,
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5631,8 +5631,8 @@ class Event extends RequestCollection
         $waterfallId,
         $startTime,
         $currentTime,
-        $mediaType)
-    {
+        $mediaType,
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5660,8 +5660,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendEndGalleryEditSession(
-        $sessionId)
-    {
+        $sessionId,
+    ) {
         $extra = [
             'ig_userid'     => $this->ig->account_id,
             'session_id'    => $sessionId,
@@ -5682,8 +5682,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendStartShareSession(
-        $sessionId)
-    {
+        $sessionId,
+    ) {
         $extra = [
             'ig_userid'     => $this->ig->account_id,
             'session_id'    => $sessionId,
@@ -5708,8 +5708,8 @@ class Event extends RequestCollection
     public function sendShareMedia(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime,
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5741,8 +5741,8 @@ class Event extends RequestCollection
         $clientContext,
         $type,
         $recipients,
-        $channel = 'rest')
-    {
+        $channel = 'rest',
+    ) {
         if ($action !== 'send_intent' && $action !== 'send_attempt' && $action !== 'sent') {
             throw new \InvalidArgumentException(sprintf('%s is not a valid action.', $action));
         }
@@ -5794,8 +5794,8 @@ class Event extends RequestCollection
         $threadId,
         $threadItem,
         $action,
-        $channel = 'rest')
-    {
+        $channel = 'rest',
+    ) {
         $extra = [
             'type'           => 'thread_item_seen',
             'client_context' => $clientContext,
@@ -5824,8 +5824,8 @@ class Event extends RequestCollection
         $threadId,
         $hasUnseen,
         $position,
-        $folder = -1)
-    {
+        $folder = -1,
+    ) {
         $extra = [
             'thread_id'      => $threadId,
             'has_unseen'     => $hasUnseen,
@@ -5848,8 +5848,8 @@ class Event extends RequestCollection
      */
     public function sendThreadUnseenMessageImpression(
         $threadId,
-        $threadItem)
-    {
+        $threadItem,
+    ) {
         $extra = [
             'message_id'     => $threadItem->getItemId(),
             'message_type'   => $threadItem->getItemType(),
@@ -5871,8 +5871,8 @@ class Event extends RequestCollection
      */
     public function sendDirectFetchPagination(
         $action,
-        $cursor)
-    {
+        $cursor,
+    ) {
         $extra = [
             'action'     => $action,
             'fetch_uuid' => Signatures::generateUUID(),
@@ -5920,8 +5920,8 @@ class Event extends RequestCollection
         $userId,
         $position,
         $folder = 0,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'thread_id'                 => $threadId,
             'inviter'                   => $userId,
@@ -5949,8 +5949,8 @@ class Event extends RequestCollection
     public function sendExternalShareOption(
         $mediaId,
         $shareLocation = 'direct_share_sheet',
-        $shareOption = 'add_to_your_story')
-    {
+        $shareOption = 'add_to_your_story',
+    ) {
         $extra = [
             'media_id'          => $mediaId,
             'share_location'    => $shareLocation,
@@ -5971,8 +5971,8 @@ class Event extends RequestCollection
      */
     public function sendDirectShareMedia(
         $userId,
-        $threadId = null)
-    {
+        $threadId = null,
+    ) {
         $extra = [
             'thread_id' => $threadId,
             'a_pk'      => $userId,
@@ -6000,8 +6000,8 @@ class Event extends RequestCollection
         $useCase = 'activity_feed',
         $badgeValue = 0,
         $badgePosition = 'badge_position',
-        $badgeDisplayStyle = 'dot_badge')
-    {
+        $badgeDisplayStyle = 'dot_badge',
+    ) {
         $extra = [
             'event_type'            => $eventType,
             'use_case_id'           => $useCase,
@@ -6039,8 +6039,8 @@ class Event extends RequestCollection
         $followingUserStatus,
         $module,
         array $clusterData = [],
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if ($module === 'feed_contextual_profile' || $module === 'feed_contextual_self_profile' || $module === 'feed_short_url') {
             $extra = [
                 'm_pk'                      => $item->getId(),
@@ -6141,8 +6141,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendStringImpressions(
-        $impressions)
-    {
+        $impressions,
+    ) {
         $extra = [
             'impressions'   => $impressions,
             'string_locale' => $this->ig->getLocale(),
@@ -6159,8 +6159,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendNavigationTabImpression(
-        $mode)
-    {
+        $mode,
+    ) {
         $extra = [
             'app_device_id' => $this->ig->uuid,
         ];
@@ -6213,8 +6213,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendDirectUserSearchPicker(
-        $query)
-    {
+        $query,
+    ) {
         $extra = [
             'search_string'   => $query,
         ];
@@ -6240,8 +6240,8 @@ class Event extends RequestCollection
         $position,
         $uuid = null,
         $query = null,
-        $module = 'direct_recipient_picker')
-    {
+        $module = 'direct_recipient_picker',
+    ) {
         if ($module === 'direct_recipient_picker') {
             if ($uuid === null) {
                 throw new \InvalidArgumentException('UUID must not be null.');
@@ -6280,8 +6280,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendGroupCreation(
-        $groupSession)
-    {
+        $groupSession,
+    ) {
         $extra = [
             'group_session_id'   => $groupSession,
         ];
@@ -6298,8 +6298,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendGroupCreationEnter(
-        $groupSession)
-    {
+        $groupSession,
+    ) {
         $extra = [
             'group_session_id'   => $groupSession,
             'direct_module'      => 'inbox',
@@ -6324,8 +6324,8 @@ class Event extends RequestCollection
     public function sendEnterDirectThread(
         $threadId,
         $sessionId = null,
-        $entryPoint = 'inbox_new_message')
-    {
+        $entryPoint = 'inbox_new_message',
+    ) {
         $extra = [
             'entry_point'        => $entryPoint,
             'inviter'            => $this->ig->account_id,
@@ -6353,8 +6353,8 @@ class Event extends RequestCollection
      * @see follow example.
      */
     public function sendSearchInitiated(
-        $searchSession)
-    {
+        $searchSession,
+    ) {
         $extra = [
             'search_session_id'                 => $searchSession,
             'shopping_session_id'               => null,
@@ -6387,8 +6387,8 @@ class Event extends RequestCollection
         $resultsTypeList,
         $rankToken,
         $searchSession,
-        $module)
-    {
+        $module,
+    ) {
         $extra = [
             'search_session_id'                 => $searchSession,
             'results_list'                      => $results,
@@ -6432,8 +6432,8 @@ class Event extends RequestCollection
         $searchSession,
         $position,
         $selectedType,
-        $module)
-    {
+        $module,
+    ) {
         $positionList = [];
         for ($c = 0; $c < count($results); $c++) {
             $positionList[] = $c;
@@ -6510,8 +6510,8 @@ class Event extends RequestCollection
         $entityId,
         $hashtagId,
         $hashtagName,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'entity_type'            => 'hashtag',
             'entity_name'            => '#'.$entityName,
@@ -6544,8 +6544,8 @@ class Event extends RequestCollection
         $userId,
         $module,
         $entryModule = null,
-        $unfollow = false)
-    {
+        $unfollow = false,
+    ) {
         $extra = [
             'request_type'                    => ($unfollow === false) ? 'create' : 'destroy',
             'm_pk'                            => $userId,
@@ -6586,8 +6586,8 @@ class Event extends RequestCollection
         $position,
         $follow = true,
         $viewModule = 'hscroll_aymf_feed_unit',
-        $socialContext = 'Instagram recommended')
-    {
+        $socialContext = 'Instagram recommended',
+    ) {
         $extra = [
             'target_id'             => $userId,
             'position'              => $position,
@@ -6626,8 +6626,8 @@ class Event extends RequestCollection
         $userId,
         $module,
         $rankToken,
-        $unfollow = false)
-    {
+        $unfollow = false,
+    ) {
         $extra = [
             'rank_token'                      => sprintf('%s|%s', $this->ig->account_id, $rankToken),
             'user_id'                         => $userId,
@@ -6651,8 +6651,8 @@ class Event extends RequestCollection
     public function sendFeedButtonTapped(
         $module,
         $tab = 'top',
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         if ($module === 'feed_hashtag') {
             $name = 'hashtag_feed_button_tapped';
             $extra = [
@@ -6693,8 +6693,8 @@ class Event extends RequestCollection
         $mute,
         $muted,
         $userId,
-        $targetPrivate)
-    {
+        $targetPrivate,
+    ) {
         if ($type === 'post' && $mute === true) {
             $name = 'ig_mute_posts';
         } elseif ($type === 'posts' && $mute === false) {
@@ -6735,8 +6735,8 @@ class Event extends RequestCollection
     public function reportMediaAction(
         $action,
         $mediaId,
-        $module = 'feed_contextual_self_profile')
-    {
+        $module = 'feed_contextual_self_profile',
+    ) {
         $extra = [
             'actor_id'  => $this->ig->account_id,
             'action'    => $action,
@@ -6766,8 +6766,8 @@ class Event extends RequestCollection
         $option,
         $mediaId,
         $position,
-        $module = 'feed_contextual_self_profile')
-    {
+        $module = 'feed_contextual_self_profile',
+    ) {
         $extra = [
             'media_owner_id'    => $this->ig->account_id,
             'option'            => $option,
@@ -6793,8 +6793,8 @@ class Event extends RequestCollection
         $uploadId,
         $mediaType,
         $waterfallId,
-        $isCarousel)
-    {
+        $isCarousel,
+    ) {
         $extra = [
             'upload_id'         => $uploadId,
             'session_id'        => $uploadId,
@@ -6827,8 +6827,8 @@ class Event extends RequestCollection
         $uploadId,
         $mediaType,
         $waterfallId,
-        $isCarousel)
-    {
+        $isCarousel,
+    ) {
         if ($mediaType === 1) {
             $name = 'upload_photo_attempt';
         } else {
@@ -6865,8 +6865,8 @@ class Event extends RequestCollection
         $uploadId,
         $mediaType,
         $waterfallId,
-        $isCarousel)
-    {
+        $isCarousel,
+    ) {
         if ($mediaType === 1) {
             $name = 'upload_photo_success';
         } else {
@@ -6906,8 +6906,8 @@ class Event extends RequestCollection
         $status,
         $uploadId,
         $mediaType,
-        $waterfallId)
-    {
+        $waterfallId,
+    ) {
         if ($status === 'attempt') {
             $name = 'configure_media_attempt';
             $timeFromShare = 0;
@@ -6954,8 +6954,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIGStartCameraSession(
-        $sessionId)
-    {
+        $sessionId,
+    ) {
         $extra = [
             'session_id'               => $sessionId,
             'entry_point'              => 12,
@@ -6988,8 +6988,8 @@ class Event extends RequestCollection
         $loggerId,
         $productSessionId,
         $module,
-        $time)
-    {
+        $time,
+    ) {
         $extra = [
             'event'                                => $event,
             'product_name'                         => $product,
@@ -7031,8 +7031,8 @@ class Event extends RequestCollection
         $waterfallId,
         $startTime,
         $currentTime,
-        $origin)
-    {
+        $origin,
+    ) {
         $extra = [
             'waterfall_id'                                => $waterfallId,
             'start_time'                                  => $startTime,
@@ -7060,8 +7060,8 @@ class Event extends RequestCollection
      */
     public function sendIgCameraShareMedia(
         $sessionId,
-        $mediaType)
-    {
+        $mediaType,
+    ) {
         $extra = [
             'session_id'                                   => $sessionId,
             'entry_point'                                  => 12,
@@ -7090,8 +7090,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIgCameraEndPostCaptureSession(
-        $sessionId)
-    {
+        $sessionId,
+    ) {
         $extra = [
             'session_id'                                   => $sessionId,
             'entry_point'                                  => 12,
@@ -7113,8 +7113,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIgCameraEndSession(
-        $sessionId)
-    {
+        $sessionId,
+    ) {
         $extra = [
             'session_id'                                   => $sessionId,
             'entry_point'                                  => 12,
@@ -7153,8 +7153,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function enableNotificationSettings(
-        $channels)
-    {
+        $channels,
+    ) {
         if (!is_array($channels)) {
             $channels = [$channels];
         }
@@ -7181,8 +7181,8 @@ class Event extends RequestCollection
      */
     public function sendNetegoDelivery(
         $item,
-        $sessionId)
-    {
+        $sessionId,
+    ) {
         $extra = [
             'session_id'        => $sessionId,
             'id'                => $item->getId(),
@@ -7205,8 +7205,8 @@ class Event extends RequestCollection
      */
     public function sendAsyncAdControllerSuccess(
         $trackingToken,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'tracking_token'        => $trackingToken,
             'desired_action_pos'    => $options['desired_action_pos'],
@@ -7245,8 +7245,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendActiveInterval(
-        $startTime)
-    {
+        $startTime,
+    ) {
         $extra = [
             'event_type'    => 'interval_start',
             'start_time'    => $startTime,
@@ -7266,8 +7266,8 @@ class Event extends RequestCollection
      */
     public function sendZeroUrlRewrite(
         $url,
-        $rewrittenUrl)
-    {
+        $rewrittenUrl,
+    ) {
         $extra = [
             'url'               => $url,
             'rewritten_url'     => $rewrittenUrl,
@@ -7285,8 +7285,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendCellularDataOpt(
-        $dataSaver = false)
-    {
+        $dataSaver = false,
+    ) {
         $extra = [
             'data_saver_mode'               => $dataSaver,
             'high_quality_network_setting'  => 1,
@@ -7305,8 +7305,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendDarkModeOpt(
-        $darkMode = false)
-    {
+        $darkMode = false,
+    ) {
         $extra = [
             'os_dark_mode_settings'     => $darkMode,
             'dark_mode_in_app_toggle'   => intval($darkMode),
@@ -7346,8 +7346,8 @@ class Event extends RequestCollection
     public function sendPerfPercentPhotosRendered(
         $module,
         $mediaId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         $extra = [
             'media_id'                          => $mediaId,
             'is_grid_view'                      => isset($options['is_grid_view']) ? $options['is_grid_view'] : false,
@@ -7394,8 +7394,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function networkTrace(
-        $trace)
-    {
+        $trace,
+    ) {
         $extra = $this->_addCommonProperties($trace);
         $event = $this->_addEventBody('network_trace', null, $extra);
         $this->_addEventData($event);
@@ -7413,8 +7413,8 @@ class Event extends RequestCollection
     public function qeExposure(
         $id,
         $experiment,
-        $group)
-    {
+        $group,
+    ) {
         $extra = [
             'id'                => $id,
             'experiment'        => $experiment,
@@ -7469,8 +7469,8 @@ class Event extends RequestCollection
      */
     public function launcherBadge(
         $deviceId,
-        $badgeCount)
-    {
+        $badgeCount,
+    ) {
         $extra = [
             'device_id'         => $deviceId,
             'launcher_name'     => 'com.meizu.flyme.launcher',
@@ -7492,8 +7492,8 @@ class Event extends RequestCollection
      */
     public function updateAppState(
         $state,
-        $module = 'feed_timeline')
-    {
+        $module = 'feed_timeline',
+    ) {
         if ($state !== 'background' && $state !== 'foreground') {
             throw new \InvalidArgumentException(sprintf('%s is an invalid state.', $state));
         }
@@ -7515,8 +7515,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendDobPick(
-        $date)
-    {
+        $date,
+    ) {
         $extra = [
             'to_date' => $date,
         ];
@@ -7550,8 +7550,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendInstagramDeviceIds(
-        $waterfallId)
-    {
+        $waterfallId,
+    ) {
         $extra = [
             'app_device_id'         => $this->ig->uuid,
             'analytics_device_id'   => null,
@@ -7571,8 +7571,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendApkTestingExposure(
-        $installer = null)
-    {
+        $installer = null,
+    ) {
         $extra = [
             'build_num' => $this->ig->getVersionCode(),
             'installer' => $installer,
@@ -7590,8 +7590,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendApkSignatureV2(
-        $module = 'IgFamilyApplicationInitializer')
-    {
+        $module = 'IgFamilyApplicationInitializer',
+    ) {
         $extra = [
             'package_name'          => Constants::PACKAGE_NAME,
             'previous_signature'    => null,
@@ -7627,8 +7627,8 @@ class Event extends RequestCollection
      */
     public function sendInstagramInstallWithReferrer(
         $waterfallId,
-        $state)
-    {
+        $state,
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
         ];
@@ -7663,8 +7663,8 @@ class Event extends RequestCollection
     public function legacyFbTokenOnIgAccessControl(
         $event,
         $name,
-        $class)
-    {
+        $class,
+    ) {
         $extra = [
             'event_type'    => $event,
             'caller_name'   => $name,
@@ -7683,8 +7683,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendPhoneIdUpdate(
-        $type)
-    {
+        $type,
+    ) {
         $extra = [
             'custom_uuid'   => $this->ig->uuid,
             'new_id'        => $this->ig->phone_id,
@@ -7728,8 +7728,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendQuickPromotion(
-        $qpLocation)
-    {
+        $qpLocation,
+    ) {
         $extra = [
             'qp_location'   => 'PERSONAL_PROFILE',
             'extra_data'    => [
@@ -7759,8 +7759,8 @@ class Event extends RequestCollection
         $name,
         $eventType,
         $instanceId,
-        $annotations = null)
-    {
+        $annotations = null,
+    ) {
         $extra = [
             'event_type'            => $eventType,
             'category'              => 'Sync',
@@ -7784,8 +7784,8 @@ class Event extends RequestCollection
      */
     public function sendAttributionSdkDebug(
         $message,
-        $logLevel = 'info')
-    {
+        $logLevel = 'info',
+    ) {
         $extra = [
             'log_level'             => $logLevel,
             'message'               => $message,
@@ -7811,8 +7811,8 @@ class Event extends RequestCollection
         $reason,
         $token,
         $targetApp = 'FACEBOOK_DEBUG',
-        $logLocation = 'AccessLibrarySharedStorageManager')
-    {
+        $logLocation = 'AccessLibrarySharedStorageManager',
+    ) {
         $extra = [
             'fx_sso_library_event'                  => $event,
             'fx_sso_library_failure_reason'         => $reason,
@@ -7841,8 +7841,8 @@ class Event extends RequestCollection
     public function sendInstagramFeedRequestSent(
         $requestId,
         $type,
-        $completed = false)
-    {
+        $completed = false,
+    ) {
         $extra = [
             'request_id'        => $requestId,
             'session_id'        => $this->ig->client->getPigeonSession(),
@@ -7885,8 +7885,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendNdxAction(
-        $flowName)
-    {
+        $flowName,
+    ) {
         $extra = [
             'flow_name'     => $flowName,
             'step_latency'  => mt_rand(1000, 3000),
@@ -7922,8 +7922,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendDevicePermissions(
-        $module)
-    {
+        $module,
+    ) {
         $extra = [
             'event_target'                  => 'app_status',
             'event_type'                    => 'deny',
@@ -7990,8 +7990,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIgLauncherConfigExposure(
-        $configId)
-    {
+        $configId,
+    ) {
         $extra = [
             'id'            => $this->ig->account_id,
             'config_name'   => '_',
@@ -8013,8 +8013,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIgClientDeliveryFunnelStart(
-        $viewerSessionId)
-    {
+        $viewerSessionId,
+    ) {
         $extra = [
             'container_module'              => 'feed_timeline',
             'viewer_session_id'             => $viewerSessionId,

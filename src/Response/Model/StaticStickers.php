@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StaticStickers extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'include_in_recent' => '',
         'id'                => 'string',
         'stickers'          => 'Stickers[]',

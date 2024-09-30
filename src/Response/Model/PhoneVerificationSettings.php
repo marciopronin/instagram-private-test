@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class PhoneVerificationSettings extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'resend_sms_delay_sec'         => 'int',
         'max_sms_count'                => 'int',
         'robocall_count_down_time_sec' => 'int',

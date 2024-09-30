@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class SearchUserResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_more'    => 'bool',
         'num_results' => 'int',
         'users'       => 'Model\User[]',

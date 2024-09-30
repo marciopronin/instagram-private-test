@@ -6,7 +6,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Cookie\SetCookie;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Promise\Promise as Promise;
+use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Utils as GuzzleUtils;
 use InstagramAPI\Exception\InstagramException;
 use InstagramAPI\Exception\LoginRequiredException;
@@ -36,12 +36,12 @@ class Client
      *
      * @var int
      */
-    const COOKIE_AUTOSAVE_INTERVAL = 45;
+    public const COOKIE_AUTOSAVE_INTERVAL = 45;
 
     /**
      * The Instagram class instance we belong to.
      *
-     * @var \InstagramAPI\Instagram
+     * @var Instagram
      */
     protected $_parent;
 
@@ -92,22 +92,22 @@ class Client
     protected $_outputInterface;
 
     /**
-     * @var \GuzzleHttp\Client
+     * @var GuzzleClient
      */
     private $_guzzleClient;
 
     /**
-     * @var \InstagramAPI\Middleware\FakeCookies
+     * @var FakeCookies
      */
     private $_fakeCookies;
 
     /**
-     * @var \InstagramAPI\Middleware\ZeroRating
+     * @var ZeroRating
      */
     private $_zeroRating;
 
     /**
-     * @var \GuzzleHttp\Cookie\CookieJar
+     * @var CookieJar
      */
     private $_cookieJar;
 
@@ -278,15 +278,15 @@ class Client
      */
     protected $_mappedValues = [
         'push/register'                             => null,
-        //'launcher/mobileconfig'                   => null,
-        //'feed/timeline'                           => null,
+        // 'launcher/mobileconfig'                   => null,
+        // 'feed/timeline'                           => null,
         'devices/ndx/api/async_get_ndx_ig_steps'    => null,
-        //'highlights_tray'                         => null,
+        // 'highlights_tray'                         => null,
         'media/blocked'                             => null,
-        //'notifications/badge'                     => null,
-        //'feed/user'                               => null,
-        //'write_supported_capabilities'            => null,
-        //'/users/'                                 => null,
+        // 'notifications/badge'                     => null,
+        // 'feed/user'                               => null,
+        // 'write_supported_capabilities'            => null,
+        // '/users/'                                 => null,
         'share_to_fb_config'                        => null,
         'notes/get_notes'                           => null,
         'batch_fetch'                               => null,
@@ -429,14 +429,14 @@ class Client
     /**
      * Constructor.
      *
-     * @param \InstagramAPI\Instagram $parent
+     * @param Instagram $parent
      * @param array Options to be passed to the Guzzle Client.
      * @param mixed $options
      */
     public function __construct(
         $parent,
-        $options = [])
-    {
+        $options = [],
+    ) {
         $this->_parent = $parent;
 
         // Defaults.
@@ -479,7 +479,7 @@ class Client
         // In case user replaces handler by mistake.
         $options['handler'] = $stack; // Our middleware is now injected.
 
-        if (\InstagramAPI\Instagram::$curlDebug === true) {
+        if (Instagram::$curlDebug === true) {
             $options['debug'] = true;
         }
 
@@ -495,11 +495,11 @@ class Client
      *
      * @param bool $resetCookieJar (optional) Whether to clear current cookies.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws Exception\SettingsException
      */
     public function updateFromCurrentSettings(
-        $resetCookieJar = false)
-    {
+        $resetCookieJar = false,
+    ) {
         // Update our internal client state from the new user's settings.
         $this->_userAgent = $this->_parent->device->getUserAgent();
         $this->loadCookieJar($resetCookieJar);
@@ -527,11 +527,11 @@ class Client
      *
      * @param bool $resetCookieJar (optional) Whether to clear current cookies.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws Exception\SettingsException
      */
     public function loadCookieJar(
-        $resetCookieJar = false)
-    {
+        $resetCookieJar = false,
+    ) {
         // Mark any previous cookie jar for garbage collection.
         $this->_cookieJar = null;
 
@@ -609,13 +609,13 @@ class Client
      * @param string|null $domain (optional) Require a specific domain match.
      * @param string|null $path   (optional) Require a specific path match.
      *
-     * @return \GuzzleHttp\Cookie\SetCookie|null A cookie if found and non-expired, otherwise NULL.
+     * @return SetCookie|null A cookie if found and non-expired, otherwise NULL.
      */
     public function getCookie(
         $name,
         $domain = null,
-        $path = null)
-    {
+        $path = null,
+    ) {
         $foundCookie = null;
         if ($this->_cookieJar instanceof CookieJar) {
             /** @var SetCookie $cookie */
@@ -673,8 +673,8 @@ class Client
      * it during some important function calls such as login/logout. Client also
      * automatically calls it when enough time has elapsed since last save.
      *
-     * @throws \InvalidArgumentException                 If the JSON cannot be encoded.
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws \InvalidArgumentException   If the JSON cannot be encoded.
+     * @throws Exception\SettingsException
      */
     public function saveCookieJar()
     {
@@ -704,8 +704,8 @@ class Client
      *                           a custom CA bundle file.
      */
     public function setVerifySSL(
-        $state)
-    {
+        $state,
+    ) {
         $this->_verifySSL = $state;
     }
 
@@ -728,8 +728,8 @@ class Client
      *                                 Guzzle format, or NULL to disable proxying.
      */
     public function setProxy(
-        $value)
-    {
+        $value,
+    ) {
         $this->_proxy = $value;
         $this->_resetConnection = true;
     }
@@ -752,8 +752,8 @@ class Client
      * @param string $value String specifying the host used for resolving.
      */
     public function setResolveHost(
-        $value)
-    {
+        $value,
+    ) {
         $this->_resolveHost = $value;
     }
 
@@ -779,8 +779,8 @@ class Client
      *                           disable override and let Guzzle use any interface.
      */
     public function setOutputInterface(
-        $value)
-    {
+        $value,
+    ) {
         $this->_outputInterface = $value;
         $this->_resetConnection = true;
     }
@@ -815,10 +815,10 @@ class Client
         $uploadedBytes,
         HttpResponseInterface $response,
         $responseBody,
-        $debug)
-    {
+        $debug,
+    ) {
         $path = Debug::$debugLogPath;
-        if ($this->_parent->settings->getStorage() instanceof \InstagramAPI\Settings\Storage\File) {
+        if ($this->_parent->settings->getStorage() instanceof Settings\Storage\File) {
             if ($path === null) {
                 $path = $this->_parent->settings->getUserPath($this->_parent->username);
             }
@@ -869,9 +869,9 @@ class Client
         Response $responseObject,
         $rawResponse,
         $httpResponse,
-        $silentFail)
-    {
-        if ($httpResponse instanceof \GuzzleHttp\Promise\Promise || $rawResponse instanceof \GuzzleHttp\Promise\Promise) {
+        $silentFail,
+    ) {
+        if ($httpResponse instanceof Promise || $rawResponse instanceof Promise) {
             $promiseCombined = \GuzzleHttp\Promise\Utils::all([$rawResponse, $httpResponse]);
 
             return $promiseCombined->then(
@@ -888,8 +888,8 @@ class Client
         Response $responseObject,
         $rawResponse,
         $httpResponse,
-        $silentFail)
-    {
+        $silentFail,
+    ) {
         // Attempt to decode the raw JSON to an array.
         // Important: Special JSON decoder which handles 64-bit numbers!
         $jsonArray = $this->api_body_decode($rawResponse, true);
@@ -908,15 +908,15 @@ class Client
                         }
                     }
                     if (!is_array($jsonArray)) {
-                        throw new \InstagramAPI\Exception\EmptyResponseException('No response from server. Either a connection or configuration error.');
+                        throw new Exception\EmptyResponseException('No response from server. Either a connection or configuration error.');
                     }
                     break;
                 case 400:
-                    throw new \InstagramAPI\Exception\BadRequestException('Invalid request options.');
+                    throw new Exception\BadRequestException('Invalid request options.');
                 case 404:
-                    throw new \InstagramAPI\Exception\NotFoundException('Requested resource does not exist.');
+                    throw new Exception\NotFoundException('Requested resource does not exist.');
                 default:
-                    throw new \InstagramAPI\Exception\EmptyResponseException('No response from server. Either a connection or configuration error.');
+                    throw new Exception\EmptyResponseException('No response from server. Either a connection or configuration error.');
             }
         }
 
@@ -990,8 +990,8 @@ class Client
         // NOTE: It will contain the full server response object too, which
         // means that the user can look at the full response details via the
         // exception itself.
-        if (!$responseObject->isOk() || ($responseObject->hasStepName() && $responseObject->getStepName()) || ($responseObject->hasEntryData())) {
-            if ($responseObject instanceof \InstagramAPI\Response\DirectSendItemResponse && $responseObject->getPayload() !== null) {
+        if (!$responseObject->isOk() || ($responseObject->hasStepName() && $responseObject->getStepName()) || $responseObject->hasEntryData()) {
+            if ($responseObject instanceof Response\DirectSendItemResponse && $responseObject->getPayload() !== null) {
                 if (is_array($responseObject->getPayload())) {
                     $message = $responseObject->getPayload()['message'];
                 } else {
@@ -1019,9 +1019,9 @@ class Client
                     $this->_parent->settings->set('mid', '');
                     $this->_parent->settings->set('rur', '');
                     $this->_parent->settings->set('www_claim', '');
-                    //$this->_parent->settings->set('account_id', '');
+                    // $this->_parent->settings->set('account_id', '');
                     $this->_parent->settings->set('authorization_header', 'Bearer IGT:2:'); // Header won't be added into request until a new authorization is obtained.
-                    //$this->_parent->account_id = null;
+                    // $this->_parent->account_id = null;
 
                     throw $e; // Re-throw.
                 }
@@ -1043,13 +1043,13 @@ class Client
      */
     protected function _buildGuzzleOptions(
         array $guzzleOptions = [],
-        $disableCookies = false)
-    {
+        $disableCookies = false,
+    ) {
         $curlOptions = [
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2_0, // HTTP2.0
         ];
 
-        //$curlOptions = [
+        // $curlOptions = [
         //    CURLOPT_SSLVERSION          => CURL_SSLVERSION_TLSv1_3, // 0x0303 (771)
         //    CURLOPT_TLS13_CIPHERS       => 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256', // 0x1301 (4865), 0x1302 (4866), 0x1303 (4867)
         //    CURLOPT_SSL_EC_CURVES       => 'X25519:P-256',
@@ -1062,7 +1062,7 @@ class Client
         // application_layer_protocol_negotiation (16)
         // psk_key_exchange_modes (45)
         // supported_groups => x25519 = 0x001d (29), secp256r1 = 0x0017 (23)
-        //];
+        // ];
         // SSL context can't be manipulated in PHP since CURLOPT_SSL_CTX_FUNCTION is not exposed
         // A middle proxy would be required to manipulate extensions to only include: supported_versions, supported_groups, signature_algorithms, server_name, application_layer_protocol_negotiation, psk_key_exchange_modes, supported_groups
         // JA3 = 771,4865-4866-4867,43-10-51-13-0-16-45,29-23, => 7a29c223fb122ec64d10f0a159e07996
@@ -1120,16 +1120,16 @@ class Client
      * @param HttpRequestInterface $request       HTTP request to send.
      * @param array                $guzzleOptions Extra Guzzle options for this request.
      *
-     * @throws \InstagramAPI\Exception\NetworkException For any network/socket related errors.
+     * @throws Exception\NetworkException For any network/socket related errors.
      *
      * @return HttpResponseInterface|Promise
      */
     protected function _guzzleRequest(
         HttpRequestInterface $request,
-        array $guzzleOptions = [])
-    {
+        array $guzzleOptions = [],
+    ) {
         // When async batches ends, it will wait until all promises are resolved.
-        if (\InstagramAPI\Instagram::$sendAsync === false) {
+        if (Instagram::$sendAsync === false) {
             \GuzzleHttp\Promise\Utils::settle($this->_parent->promises)->wait();
             $this->_parent->promises = [];
         }
@@ -1139,7 +1139,7 @@ class Client
         // Add critically important options for authenticating the request.
         $guzzleOptions = $this->_buildGuzzleOptions($guzzleOptions, $disableCookies);
 
-        if (\InstagramAPI\Instagram::$sendAsync === false) {
+        if (Instagram::$sendAsync === false) {
             // Attempt the request. Will throw in case of socket errors!
             $retry = 0;
             do {
@@ -1150,8 +1150,8 @@ class Client
                 } catch (\Exception $e) {
                     $exp = true;
                     // Re-wrap Guzzle's exception using our own NetworkException.
-                    if ($retry === ($this->_parent->retriesOnNetworkFailure - 1) || !\InstagramAPI\Instagram::$retryOnNetworkException) {
-                        throw new \InstagramAPI\Exception\NetworkException($e);
+                    if ($retry === ($this->_parent->retriesOnNetworkFailure - 1) || !Instagram::$retryOnNetworkException) {
+                        throw new Exception\NetworkException($e);
                     }
                 }
                 if ($exp === false) {
@@ -1159,7 +1159,7 @@ class Client
                 }
                 $retry++;
                 sleep(5);
-            } while (\InstagramAPI\Instagram::$retryOnNetworkException && $retry < $this->_parent->retriesOnNetworkFailure);
+            } while (Instagram::$retryOnNetworkException && $retry < $this->_parent->retriesOnNetworkFailure);
 
             $this->_detectHttpCode($response);
 
@@ -1183,24 +1183,24 @@ class Client
      * @param HttpResponseInterface $response      HTTP response.
      * @param array                 $guzzleOptions Extra Guzzle options for this request.
      *
-     * @throws \InstagramAPI\Exception\ThrottledException              When we're throttled by server.
-     * @throws \InstagramAPI\Exception\RequestHeadersTooLargeException When request is too large.
+     * @throws Exception\ThrottledException              When we're throttled by server.
+     * @throws Exception\RequestHeadersTooLargeException When request is too large.
      */
     protected function _detectHttpCode(
-        $response)
-    {
+        $response,
+    ) {
         // Detect very serious HTTP status codes in the response.
         $httpCode = $response->getStatusCode();
         switch ($httpCode) {
-        case 429: // "429 Too Many Requests"
-            throw new \InstagramAPI\Exception\ThrottledException('Throttled by Instagram because of too many API requests.');
-            break;
-        case 431: // "431 Request Header Fields Too Large"
-            throw new \InstagramAPI\Exception\RequestHeadersTooLargeException('The request start-line and/or headers are too large to process.');
-            break;
-        // WARNING: Do NOT detect 404 and other higher-level HTTP errors here,
-        // since we catch those later during steps like mapServerResponse()
-        // and autoThrow. This is a warning to future contributors!
+            case 429: // "429 Too Many Requests"
+                throw new Exception\ThrottledException('Throttled by Instagram because of too many API requests.');
+                break;
+            case 431: // "431 Request Header Fields Too Large"
+                throw new Exception\RequestHeadersTooLargeException('The request start-line and/or headers are too large to process.');
+                break;
+                // WARNING: Do NOT detect 404 and other higher-level HTTP errors here,
+                // since we catch those later during steps like mapServerResponse()
+                // and autoThrow. This is a warning to future contributors!
         }
 
         // We'll periodically auto-save our cookies at certain intervals. This
@@ -1234,31 +1234,33 @@ class Client
      * @param array                $libraryOptions Additional options for controlling Library features
      *                                             such as the debugging output.
      *
-     * @throws \InstagramAPI\Exception\NetworkException   For any network/socket related errors.
-     * @throws \InstagramAPI\Exception\ThrottledException When we're throttled by server.
+     * @throws Exception\NetworkException   For any network/socket related errors.
+     * @throws Exception\ThrottledException When we're throttled by server.
      *
      * @return HttpResponseInterface|Promise
      */
     protected function _apiRequest(
         HttpRequestInterface $request,
         array $guzzleOptions = [],
-        array $libraryOptions = [])
-    {
+        array $libraryOptions = [],
+    ) {
         $requestId = $this->_getRequestId();
 
         if ($this->_parent->logger !== null) {
-            $this->_parent->logger->info('request',
+            $this->_parent->logger->info(
+                'request',
                 [
                     'uri'        => $this->_zeroRating->rewrite((string) $request->getUri()),
                     'request'    => (string) $request->getBody(),
                     'request_id' => $requestId,
-                ]);
+                ]
+            );
         }
 
         // Perform the API request and retrieve the raw HTTP response body.
         $guzzleResponse = $this->_guzzleRequest($request, $guzzleOptions);
 
-        if ($guzzleResponse instanceof \GuzzleHttp\Promise\Promise) {
+        if ($guzzleResponse instanceof Promise) {
             $guzzleResponse->then(
                 function ($promise) use ($requestId, $request, $libraryOptions) {
                     $this->_prepareLogging($requestId, $promise, $request, $libraryOptions);
@@ -1297,19 +1299,21 @@ class Client
         $requestId,
         $guzzleResponse,
         HttpRequestInterface $request,
-        array $libraryOptions = []
+        array $libraryOptions = [],
     ) {
         if ($this->_parent->logger !== null) {
-            $this->_parent->logger->info('response',
+            $this->_parent->logger->info(
+                'response',
                 [
                     'uri'        => $this->_zeroRating->rewrite((string) $request->getUri()),
                     'response'   => (string) $guzzleResponse->getBody(),
                     'request_id' => $requestId,
-                ]);
+                ]
+            );
         }
 
         // Debugging (must be shown before possible decoding error).
-        if ($this->_parent->debug && (!isset($libraryOptions['noDebug']) || !$libraryOptions['noDebug']) || \InstagramAPI\Debug::$debugLog) {
+        if ($this->_parent->debug && (!isset($libraryOptions['noDebug']) || !$libraryOptions['noDebug']) || Debug::$debugLog) {
             // Determine whether we should display the contents of the UPLOADED body.
             if (isset($libraryOptions['debugUploadedBody']) && $libraryOptions['debugUploadedBody']) {
                 $uploadedBody = (string) $request->getBody();
@@ -1341,7 +1345,8 @@ class Client
                 $uploadedBytes,
                 $guzzleResponse,
                 (string) $guzzleResponse->getBody(),
-                $this->_parent->debug);
+                $this->_parent->debug
+            );
         }
     }
 
@@ -1357,17 +1362,17 @@ class Client
      */
     public function api(
         HttpRequestInterface $request,
-        array $guzzleOptions = [])
-    {
+        array $guzzleOptions = [],
+    ) {
         $headers = [
-                        'set_headers' => [
-                            // Keep the API's HTTPS connection alive in Guzzle for future
-                            // re-use, to greatly speed up all further queries after this.
-                            //'Connection'       => 'close',
-                            'Accept-Encoding'  => Constants::ACCEPT_ENCODING,
-                            'Accept-Language'  => $this->_parent->getAcceptLanguage(),
-                        ],
-                    ];
+            'set_headers' => [
+                // Keep the API's HTTPS connection alive in Guzzle for future
+                // re-use, to greatly speed up all further queries after this.
+                // 'Connection'       => 'close',
+                'Accept-Encoding'  => Constants::ACCEPT_ENCODING,
+                'Accept-Language'  => $this->_parent->getAcceptLanguage(),
+            ],
+        ];
 
         if ($request->getUri()->getHost() !== parse_url(Constants::GRAPH_API_URL, PHP_URL_HOST) && $request->getUri()->getHost() !== parse_url('https://www.instagram.com', PHP_URL_HOST)) {
             if ($this->_parent->account_id !== null || strpos($request->getUri(), 'bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request') !== false) {
@@ -1457,33 +1462,33 @@ class Client
 
             $headers['set_headers']['X-IG-Bandwidth-TotalBytes-B'] = strval($this->totalBytes);
             $headers['set_headers']['X-IG-Bandwidth-TotalTime-MS'] = strval($this->totalTime);
-            //$headers['set_headers']['X-MID'] = $this->getMid();
+            // $headers['set_headers']['X-MID'] = $this->getMid();
 
             if ($this->_parent->isLoginFlow !== true) {
                 $saltMap = [
-                    'direct_v2/get_presence'                => '332020310',
-                    'feed/timeline'                         => '',
-                    'feed/reels_tray'                       => '',
-                    'qp/batch_fetch'                        => '',
-                    'feed/reels_media_stream'               => '',
-                    'news/inbox'                            => '',
-                    'media/blocked'                         => '',
-                    sprintf('/users/%s/info', $this->_parent->account_id) => '',
+                    'direct_v2/get_presence'                                         => '332020310',
+                    'feed/timeline'                                                  => '',
+                    'feed/reels_tray'                                                => '',
+                    'qp/batch_fetch'                                                 => '',
+                    'feed/reels_media_stream'                                        => '',
+                    'news/inbox'                                                     => '',
+                    'media/blocked'                                                  => '',
+                    sprintf('/users/%s/info', $this->_parent->account_id)            => '',
                     sprintf('feed/injected_reels_media', $this->_parent->account_id) => '974460658',
-                    'discover/topical_explore'              => '332008792,332011967,220137859',
-                    'scores/bootstrap'                      => '220137859',
-                    'android_modules/download'              => '332008792,332011967,220145826',
-                    'accounts/change_profile_picture'       => '332008792,332011967',
-                    'friendships/show_many'                 => '332008792,332011967',
-                    'user_profile/get_note_for_user'        => '332008792,332011967',
-                    'feed/user'                             => '',
-                    'fbsearch/nullstate_dynamic_sections'   => '',
-                    'fbsearch/register_recent_search_click' => '',
-                    '/info'                                 => '',
-                    'fbsearch/keyword_typeahead'            => '332008792,332011967,220137859',
-                    'fbsearch/typeahead_stream'             => '332008792,332011967,220137859',
-                    'discover/ayml'                         => '332008792,332011967',
-                    'clips/discover'                        => '',
+                    'discover/topical_explore'                                       => '332008792,332011967,220137859',
+                    'scores/bootstrap'                                               => '220137859',
+                    'android_modules/download'                                       => '332008792,332011967,220145826',
+                    'accounts/change_profile_picture'                                => '332008792,332011967',
+                    'friendships/show_many'                                          => '332008792,332011967',
+                    'user_profile/get_note_for_user'                                 => '332008792,332011967',
+                    'feed/user'                                                      => '',
+                    'fbsearch/nullstate_dynamic_sections'                            => '',
+                    'fbsearch/register_recent_search_click'                          => '',
+                    '/info'                                                          => '',
+                    'fbsearch/keyword_typeahead'                                     => '332008792,332011967,220137859',
+                    'fbsearch/typeahead_stream'                                      => '332008792,332011967,220137859',
+                    'discover/ayml'                                                  => '332008792,332011967',
+                    'clips/discover'                                                 => '',
                 ];
 
                 foreach ($saltMap as $uri => $saltIds) {
@@ -1537,7 +1542,7 @@ class Client
             'debugUploadedBytes' => !$isFormData,
         ]);
 
-        if ($response instanceof \GuzzleHttp\Promise\Promise) {
+        if ($response instanceof Promise) {
             $response->then(
                 function ($promise) use ($start, $request) {
                     $this->_processResponseHeaders($start, $request, $promise);
@@ -1562,8 +1567,8 @@ class Client
     protected function _processResponseHeaders(
         $start,
         $request,
-        $response)
-    {
+        $response,
+    ) {
         $this->wwwClaim = $response->getHeaderLine('x-ig-set-www-claim');
         $this->_shbid = $response->getHeaderLine('ig-set-ig-u-shbid');
         $this->_shbts = $response->getHeaderLine('ig-set-ig-u-shbts');
@@ -1626,7 +1631,7 @@ class Client
             if ($matches) {
                 $rtt = intval($matches[0][1]);
 
-                $this->latency = ($this->_latencyRequestCounter < 1) ? number_format((intval($this->latency) * -0.181818 + 0.181818 * $rtt), 3) : number_format(((intval($this->latency) * $this->_latencyRequestCounter * -0.181818 + $rtt) / ($this->_latencyRequestCounter * -0.181818 + 4.900000E-324)), 3);
+                $this->latency = ($this->_latencyRequestCounter < 1) ? number_format(intval($this->latency) * -0.181818 + 0.181818 * $rtt, 3) : number_format((intval($this->latency) * $this->_latencyRequestCounter * -0.181818 + $rtt) / ($this->_latencyRequestCounter * -0.181818 + 4.900000E-324), 3);
                 $this->_latencyRequestCounter++;
             }
         }
@@ -1647,8 +1652,8 @@ class Client
      */
     public static function api_body_decode(
         $json,
-        $assoc = true)
-    {
+        $assoc = true,
+    ) {
         return @json_decode($json, $assoc, 512, JSON_BIGINT_AS_STRING);
     }
 
@@ -1727,8 +1732,8 @@ class Client
      */
     public function generateFlowId(
         $val1,
-        $val2)
-    {
+        $val2,
+    ) {
         return $val1 | $val2 << 0x20;
     }
 
@@ -1740,8 +1745,8 @@ class Client
      * @return int
      */
     public function generateNewFlowId(
-        $val)
-    {
+        $val,
+    ) {
         return $val | $this->incrementAndGetUserFlowCounter() << 0x20;
     }
 
@@ -1766,8 +1771,8 @@ class Client
      * @return array
      */
     private function _orderHeaders(
-        $headers)
-    {
+        $headers,
+    ) {
         $headersOrder = [
             'Host',
             'X-Fb-Request-Analytics-Tags',
@@ -1856,8 +1861,8 @@ class Client
      * @param Request $endpoint The last processed request
      */
     public function setLastRequest(
-        $endpoint)
-    {
+        $endpoint,
+    ) {
         $this->_lastRequest = $endpoint;
     }
 

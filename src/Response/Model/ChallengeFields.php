@@ -46,7 +46,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ChallengeFields extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'g-recaptcha-response'          => 'string',
         'disable_num_days_remaining'    => 'int',
         'sitekey'                       => 'string',

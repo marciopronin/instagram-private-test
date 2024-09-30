@@ -12,12 +12,12 @@ $debug = true;
 $truncatedDebug = false;
 // ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
-\InstagramAPI\Instagram::$skipLoginFlowAtMyOwnRisk = true;
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
+InstagramAPI\Instagram::$skipLoginFlowAtMyOwnRisk = true;
 
 try {
     $loginResponse = $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }
 

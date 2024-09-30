@@ -59,7 +59,7 @@ class NoCaptchaProxyless extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param string $value Website URL to set.
      */
     public function setWebsiteURL(
-        $value
+        $value,
     ): void {
         $this->_websiteUrl = $value;
     }
@@ -70,7 +70,7 @@ class NoCaptchaProxyless extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param string $value Website key to set.
      */
     public function setWebsiteKey(
-        $value
+        $value,
     ): void {
         $this->_websiteKey = $value;
     }
@@ -81,7 +81,7 @@ class NoCaptchaProxyless extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param string $value Website SToken to set.
      */
     public function setWebsiteSToken(
-        $value
+        $value,
     ): void {
         $this->_websiteSToken = $value;
     }

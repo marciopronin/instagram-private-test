@@ -46,7 +46,7 @@ use InstagramAPI\Response;
  */
 class HighlightFeedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'auto_load_more_enabled' => 'bool',
         'next_max_id'            => 'string',
         'stories'                => 'Model\Story[]',

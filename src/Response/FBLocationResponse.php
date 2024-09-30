@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class FBLocationResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_more'   => 'bool',
         'items'      => 'Model\LocationItem[]',
         'rank_token' => 'string',

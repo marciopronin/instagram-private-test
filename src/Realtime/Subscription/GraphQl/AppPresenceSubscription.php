@@ -6,9 +6,9 @@ use InstagramAPI\Realtime\Subscription\GraphQlSubscription;
 
 class AppPresenceSubscription extends GraphQlSubscription
 {
-    const ID = 'presence_subscribe';
-    const QUERY = '17846944882223835';
-    const QUERY2 = '17875950769655493';
+    public const ID = 'presence_subscribe';
+    public const QUERY = '17846944882223835';
+    public const QUERY2 = '17875950769655493';
 
     /**
      * Constructor.
@@ -16,8 +16,8 @@ class AppPresenceSubscription extends GraphQlSubscription
      * @param string $subscriptionId
      */
     public function __construct(
-        $subscriptionId)
-    {
+        $subscriptionId,
+    ) {
         parent::__construct(self::QUERY, [
             'client_subscription_id' => $subscriptionId,
         ]);

@@ -26,7 +26,8 @@ interface DeviceInterface
      * @return string
      */
     public function getFbUserAgent(
-        $appName);
+        $appName,
+    );
 
     /**
      * Get the Android SDK/API version.

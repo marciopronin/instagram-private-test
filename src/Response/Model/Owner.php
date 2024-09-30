@@ -46,7 +46,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Owner extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'type'                 => '',
         'pk'                   => 'string',
         'name'                 => 'string',

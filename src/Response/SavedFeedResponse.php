@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class SavedFeedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'items'                  => 'Model\SavedFeedItem[]',
         'more_available'         => '',
         'next_max_id'            => 'string',

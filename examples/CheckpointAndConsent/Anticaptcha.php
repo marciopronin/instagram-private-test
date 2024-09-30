@@ -114,7 +114,7 @@ class Anticaptcha
      */
     public function waitForResult(
         $maxSeconds = 300,
-        $currentSecond = 0
+        $currentSecond = 0,
     ) {
         $postData = [
             'clientKey' => $this->_clientKey,
@@ -140,6 +140,7 @@ class Anticaptcha
         if ($this->taskInfo->errorId === 0) {
             if ($this->taskInfo->status === 'processing') {
                 $this->debout('task is still processing');
+
                 // repeating attempt
                 return $this->waitForResult($maxSeconds, $currentSecond + 1);
             }
@@ -191,7 +192,7 @@ class Anticaptcha
      */
     public function jsonPostRequest(
         $methodName,
-        $postData
+        $postData,
     ) {
         $url = "{$this->_scheme}://{$this->_host}/{$methodName}";
         if ($this->_verboseMode) {
@@ -232,7 +233,7 @@ class Anticaptcha
      * @param bool $mode Verbose mode.
      */
     public function setVerboseMode(
-        $mode
+        $mode,
     ): void {
         $this->_verboseMode = $mode;
     }
@@ -245,7 +246,7 @@ class Anticaptcha
      */
     public function debout(
         $message,
-        $color = 'white'
+        $color = 'white',
     ) {
         if (!$this->_verboseMode) {
             return false;
@@ -272,7 +273,7 @@ class Anticaptcha
      * @param string $message Message.
      */
     public function setErrorMessage(
-        $message
+        $message,
     ): void {
         $this->_errorMessage = $message;
     }
@@ -303,7 +304,7 @@ class Anticaptcha
      * @param string $taskId Task ID.
      */
     public function setTaskId(
-        $taskId
+        $taskId,
     ): void {
         $this->_taskId = $taskId;
     }
@@ -314,7 +315,7 @@ class Anticaptcha
      * @param string $host Host.
      */
     public function setHost(
-        $host
+        $host,
     ): void {
         $this->_host = $host;
     }
@@ -325,7 +326,7 @@ class Anticaptcha
      * @param string $scheme Scheme.
      */
     public function setScheme(
-        $scheme
+        $scheme,
     ): void {
         $this->_scheme = $scheme;
     }
@@ -336,7 +337,7 @@ class Anticaptcha
      * @param string $key
      */
     public function setKey(
-        $key
+        $key,
     ): void {
         $this->_clientKey = $key;
     }

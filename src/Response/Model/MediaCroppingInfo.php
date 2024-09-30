@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class MediaCroppingInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'profile_grid_crop' => '',
         'feed_preview_crop' => '',
         'square_crop'       => '',

@@ -66,7 +66,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ReelShare extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'tray'                => 'Item[]',
         'story_ranking_token' => 'string',
         'broadcasts'          => '',

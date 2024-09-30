@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class MeGraphData extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'taggable_catalogs' => 'CatalogData',
         'id'                => 'string',
     ];

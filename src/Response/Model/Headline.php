@@ -54,7 +54,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Headline extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'content_type'   => 'string',
         'user'           => 'User',
         'user_id'        => 'string',

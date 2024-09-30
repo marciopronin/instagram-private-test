@@ -12,11 +12,11 @@ use LazyJsonMapper\LazyJsonMapper;
 class AutoPropertyMapper extends LazyJsonMapper
 {
     /** @var bool */
-    const ALLOW_VIRTUAL_PROPERTIES = false;
+    public const ALLOW_VIRTUAL_PROPERTIES = false;
 
     /** @var bool */
-    const ALLOW_VIRTUAL_FUNCTIONS = true;
+    public const ALLOW_VIRTUAL_FUNCTIONS = true;
 
     /** @var bool */
-    const USE_MAGIC_LOOKUP_CACHE = true;
+    public const USE_MAGIC_LOOKUP_CACHE = true;
 }

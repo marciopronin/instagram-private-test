@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class QuestionSticker extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'question_id'         => 'string',
         'question'            => 'string',
         /*

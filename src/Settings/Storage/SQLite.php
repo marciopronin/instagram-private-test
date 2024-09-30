@@ -33,8 +33,8 @@ class SQLite extends PDOStorage
      * {@inheritdoc}
      */
     protected function _createPDO(
-        array $locationConfig)
-    {
+        array $locationConfig,
+    ) {
         // Determine the filename for the SQLite database.
         $sqliteFile = ((isset($locationConfig['dbfilename'])
                         && !empty($locationConfig['dbfilename']))
@@ -50,7 +50,7 @@ class SQLite extends PDOStorage
             ));
         }
 
-        return new PDO("sqlite:{$sqliteFile}");
+        return new \PDO("sqlite:{$sqliteFile}");
     }
 
     /**
@@ -102,7 +102,8 @@ class SQLite extends PDOStorage
         // that did NOT change last_modified. So our own UPDATEs of other fields
         // will trigger this automatic UPDATE, which does an UPDATE with a NEW
         // last_modified value, meaning that the trigger won't execute again!
-        $this->_pdo->exec('CREATE TRIGGER IF NOT EXISTS `'.$this->_dbTableName.'_update_last_modified`
+        $this->_pdo->exec(
+            'CREATE TRIGGER IF NOT EXISTS `'.$this->_dbTableName.'_update_last_modified`
             AFTER UPDATE
             ON `'.$this->_dbTableName.'`
             FOR EACH ROW

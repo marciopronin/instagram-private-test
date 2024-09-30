@@ -146,10 +146,10 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class CarouselMedia extends AutoPropertyMapper
 {
-    const PHOTO = 1;
-    const VIDEO = 2;
+    public const PHOTO = 1;
+    public const VIDEO = 2;
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'pk'                  => 'string',
         'id'                  => 'string',
         'carousel_parent_id'  => 'string',

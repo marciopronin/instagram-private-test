@@ -54,7 +54,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class FriendshipStatus extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'following'        => 'bool',
         'followed_by'      => 'bool',
         'incoming_request' => 'bool',

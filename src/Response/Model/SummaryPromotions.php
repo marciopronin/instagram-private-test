@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SummaryPromotions extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'edges'     => 'BusinessEdge[]',
         'page_info' => 'PageInfo',
     ];

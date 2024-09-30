@@ -7,22 +7,22 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////// MEDIA ID ////////
+// ///// MEDIA ID ////////
 $mediaId = '1772128724164452834'; // Only Media PK for this scenario.
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -34,7 +34,7 @@ try {
 // If we want to attach a media, we must find a valid media_id first.
 try {
     $mediaInfo = $ig->media->getInfo($mediaId)->getItems()[0];
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }
 
@@ -62,9 +62,9 @@ try {
     // This example will upload the image via our automatic photo processing
     // class. It will ensure that the story file matches the ~9:16 (portrait)
     // aspect ratio needed by Instagram stories.
-    $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($outputFile, ['targetFeed' => \InstagramAPI\Constants::FEED_STORY]);
+    $photo = new InstagramAPI\Media\Photo\InstagramPhoto($outputFile, ['targetFeed' => InstagramAPI\Constants::FEED_STORY]);
     $ig->story->uploadPhoto($photo->getFile(), $metadata);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     if ($e instanceof InstagramAPI\Exception\LoginRequiredException) {
         echo 'Password was changed or cookie expired. Please login again.';
     } else {

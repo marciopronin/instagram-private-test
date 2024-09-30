@@ -4,7 +4,7 @@ namespace InstagramAPI\Realtime\Command\Direct;
 
 final class SendProfile extends ShareItem
 {
-    const TYPE = 'profile';
+    public const TYPE = 'profile';
 
     /**
      * Constructor.
@@ -18,8 +18,8 @@ final class SendProfile extends ShareItem
     public function __construct(
         $threadId,
         $userId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         parent::__construct($threadId, self::TYPE, $options);
 
         if (!ctype_digit($userId) && (!is_int($userId) || $userId < 0)) {

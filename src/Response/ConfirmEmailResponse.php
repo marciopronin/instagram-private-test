@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class ConfirmEmailResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'is_profile_action_needed'  => 'bool',
         'title'                     => 'string',
         'body'                      => 'string',

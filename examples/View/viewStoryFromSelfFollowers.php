@@ -5,18 +5,18 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -38,7 +38,9 @@ try {
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'self_profile');
         $c++;
     }
-    $ig->event->sendProfileAction('tap_follow_details', $ig->account_id,
+    $ig->event->sendProfileAction(
+        'tap_follow_details',
+        $ig->account_id,
         [
             [
                 'module'        => 'self_profile',
@@ -48,10 +50,14 @@ try {
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_profile',
             ],
-    ], ['module' => 'self_profile']);
+        ],
+        ['module' => 'self_profile']
+    );
 
     $ig->event->sendNavigation('button', 'self_profile', 'self_unified_follow_lists');
-    $ig->event->sendProfileAction('tap_followers', $ig->account_id,
+    $ig->event->sendProfileAction(
+        'tap_followers',
+        $ig->account_id,
         [
             [
                 'module'        => 'self_profile',
@@ -61,20 +67,27 @@ try {
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_profile',
             ],
-    ], ['module' => 'self_profile']);
+        ],
+        ['module' => 'self_profile']
+    );
 
-    $ig->event->sendNavigation('followers', 'self_unified_follow_lists', 'self_unified_follow_lists', null, null,
+    $ig->event->sendNavigation(
+        'followers',
+        'self_unified_follow_lists',
+        'self_unified_follow_lists',
+        null,
+        null,
         [
             'source_tab'    => 'followers',
             'dest_tab'      => 'followers',
         ]
     );
 
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
     $followers = $ig->people->getFollowers($ig->account_id, $rankToken);
     if (empty($followers->getUsers())) {
         echo 'User has no followers';
-        exit();
+        exit;
     }
     $userId = $followers->getUsers()[0]->getPk();
 
@@ -111,16 +124,16 @@ try {
         }
         if ($storyFeed->getReel() === null) {
             echo 'User has no active stories';
-            exit();
+            exit;
         }
 
         $storyItems = $storyFeed->getReel()->getItems();
         $following = $storyFeed->getReel()->getUser()->getFriendshipStatus()->getFollowing();
         $ig->event->sendNavigation('button', 'profile', 'reel_profile');
 
-        $viewerSession = \InstagramAPI\Signatures::generateUUID();
-        $traySession = \InstagramAPI\Signatures::generateUUID();
-        $rankToken = \InstagramAPI\Signatures::generateUUID();
+        $viewerSession = InstagramAPI\Signatures::generateUUID();
+        $traySession = InstagramAPI\Signatures::generateUUID();
+        $rankToken = InstagramAPI\Signatures::generateUUID();
 
         $ig->event->sendReelPlaybackEntry($userId, $viewerSession, $traySession, 'reel_liker_list');
 
@@ -138,7 +151,8 @@ try {
                 $photosConsumed++;
             }
 
-            $ig->event->sendOrganicMediaSubImpression($storyItem,
+            $ig->event->sendOrganicMediaSubImpression(
+                $storyItem,
                 [
                     'tray_session_id'   => $traySession,
                     'viewer_session_id' => $viewerSession,
@@ -149,7 +163,10 @@ try {
                 'reel_profile'
             );
 
-            $ig->event->sendOrganicViewedSubImpression($storyItem, $viewerSession, $traySession,
+            $ig->event->sendOrganicViewedSubImpression(
+                $storyItem,
+                $viewerSession,
+                $traySession,
                 [
                     'tray_session_id'   => $traySession,
                     'viewer_session_id' => $viewerSession,
@@ -160,30 +177,38 @@ try {
                 'reel_profile'
             );
 
-            $ig->event->sendOrganicTimespent($storyItem, $following, mt_rand(1000, 2000), 'reel_profile', [],
-                 [
+            $ig->event->sendOrganicTimespent(
+                $storyItem,
+                $following,
+                mt_rand(1000, 2000),
+                'reel_profile',
+                [],
+                [
                     'tray_session_id'   => $traySession,
                     'viewer_session_id' => $viewerSession,
                     'following'         => $following,
                     'reel_size'         => $reelsize,
                     'reel_position'     => $cnt,
-                 ]
+                ]
             );
 
-            $ig->event->sendOrganicVpvdImpression($storyItem,
-                 [
+            $ig->event->sendOrganicVpvdImpression(
+                $storyItem,
+                [
                     'tray_session_id'       => $traySession,
                     'viewer_session_id'     => $viewerSession,
                     'following'             => $following,
                     'reel_size'             => $reelsize,
                     'reel_position'         => $cnt,
                     'client_sub_impression' => 1,
-                 ],
-                 'reel_profile'
+                ],
+                'reel_profile'
             );
 
             $ig->event->sendOrganicReelImpression($storyItem, $viewerSession, $traySession, $rankToken, true, 'reel_profile');
-            $ig->event->sendOrganicMediaImpression($storyItem, 'reel_profile',
+            $ig->event->sendOrganicMediaImpression(
+                $storyItem,
+                'reel_profile',
                 [
                     'story_ranking_token'   => $rankToken,
                     'tray_session_id'       => $traySession,
@@ -198,7 +223,11 @@ try {
 
         $ig->story->markMediaSeen($storyItems);
         $ig->event->sendReelPlaybackNavigation(end($storyItems), $viewerSession, $traySession, $rankToken, 'reel_liker_list');
-        $ig->event->sendReelSessionSummary($item, $viewerSession, $traySession, 'reel_liker_list',
+        $ig->event->sendReelSessionSummary(
+            $item,
+            $viewerSession,
+            $traySession,
+            'reel_liker_list',
             [
                 'tray_session_id'               => $traySession,
                 'viewer_session_id'             => $viewerSession,
@@ -219,6 +248,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

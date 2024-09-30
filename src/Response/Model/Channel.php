@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Channel extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'channel_id'   => 'string',
         'channel_type' => 'string',
         'title'        => 'string',

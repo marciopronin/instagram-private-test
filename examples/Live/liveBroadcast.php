@@ -5,27 +5,27 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////// MEDIA ////////
+// ///// MEDIA ////////
 $videoFilename = '';
 $coverPhoto = '';
-//////////////////////
+// ////////////////////
 
-/////// CHARITY ID ////////
+// ///// CHARITY ID ////////
 $charityId = null;
-///////////////////////////
+// /////////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -47,7 +47,7 @@ try {
     // NOTE: You can supply custom path to the ffmpeg binary, or just leave NULL
     // to autodetect it.
     $ffmpegPath = null;
-    $ffmpeg = \InstagramAPI\Media\Video\FFmpeg::factory($ffmpegPath);
+    $ffmpeg = InstagramAPI\Media\Video\FFmpeg::factory($ffmpegPath);
 
     // Tell Instagram that we want to perform a livestream.
     $stream = $ig->live->create();
@@ -60,8 +60,8 @@ try {
     // NOTE: The video is broadcasted asynchronously (in the background).
     $broadcastProcess = $ffmpeg->runAsync(sprintf(
         '-rtbufsize 256M -re -i %s -acodec libmp3lame -ar 44100 -b:a 128k -pix_fmt yuv420p -profile:v baseline -s 720x1280 -bufsize 6000k -vb 400k -maxrate 1500k -deinterlace -vcodec libx264 -preset veryfast -g 30 -r 30 -f flv %s',
-        \Winbox\Args::escape($videoFilename),
-        \Winbox\Args::escape($streamUploadUrl)
+        Winbox\Args::escape($videoFilename),
+        Winbox\Args::escape($streamUploadUrl)
     ));
 
     // The following loop performs important requests to obtain information
@@ -136,9 +136,9 @@ try {
 
     // Once the broadcast has ended, you can optionally add the finished
     // broadcast to your post-live feed (saved replay).
-    $igtvSessionId = \InstagramAPI\Signatures::generateUUID();
-    $cover = new \InstagramAPI\Media\Photo\InstagramPhoto($coverPhoto, ['targetFeed' => \InstagramAPI\Constants::FEED_TV]);
+    $igtvSessionId = InstagramAPI\Signatures::generateUUID();
+    $cover = new InstagramAPI\Media\Photo\InstagramPhoto($coverPhoto, ['targetFeed' => InstagramAPI\Constants::FEED_TV]);
     $ig->live->shareToIgtv($broadcastId, $cover->getFile(), ['igtv_title' => 'test', 'igtv_session_id' => $igtvSessionId]);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

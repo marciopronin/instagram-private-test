@@ -14,7 +14,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SharedFollowerAccountsInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_shared_follower_accounts' => 'bool',
     ];
 }

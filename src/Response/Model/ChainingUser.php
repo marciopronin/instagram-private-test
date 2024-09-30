@@ -50,7 +50,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ChainingUser extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'pg'                                   => 'string',
         'username'                             => 'string',
         'full_name'                            => 'string',

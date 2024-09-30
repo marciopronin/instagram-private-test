@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class GetPostLiveThumbnailsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'thumbnails'        => 'string[]',
         'title_prefill'     => 'string',
     ];

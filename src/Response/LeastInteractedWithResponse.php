@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class LeastInteractedWithResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'users'           => 'Model\User[]',
     ];
 }

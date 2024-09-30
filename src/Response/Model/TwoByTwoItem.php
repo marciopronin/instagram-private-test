@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class TwoByTwoItem extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'shopping'        => 'Shopping',
         'igtv'            => 'IGTV',
         'channel'         => 'Channel',

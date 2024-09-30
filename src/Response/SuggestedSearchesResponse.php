@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class SuggestedSearchesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'suggested'  => 'Model\Suggested[]',
         'rank_token' => 'string',
     ];

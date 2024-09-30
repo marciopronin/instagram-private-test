@@ -54,7 +54,7 @@ use InstagramAPI\Response;
  */
 class BroadcastHeartbeatAndViewerCountResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'broadcast_status'          => 'string',
         'viewer_count'              => 'int',
         'offset_to_video_start'     => 'int',

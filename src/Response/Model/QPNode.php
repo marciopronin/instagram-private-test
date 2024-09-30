@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class QPNode extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                 => 'string',
         'promotion_id'       => 'string',
         'max_impressions'    => 'int',

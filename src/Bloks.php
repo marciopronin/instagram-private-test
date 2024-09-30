@@ -6,8 +6,8 @@ class Bloks
 {
     public function parseResponse(
         $array,
-        $str)
-    {
+        $str,
+    ) {
         $results = [];
 
         foreach ($array as $key => $value) {
@@ -15,12 +15,12 @@ class Bloks
                 $results = array_merge($results, $this->parseResponse($value, $str));
             } elseif (is_string($value)) {
                 switch ($str) {
-                case 'bk.action.map.Make':
-                    $re = '/(\s?\(bk\.action\.map\.Make.*)/m';
-                    break;
-                default:
-                    $re = '/(\s?\(bk\.action\.core\.TakeLast.*)/m';
-            }
+                    case 'bk.action.map.Make':
+                        $re = '/(\s?\(bk\.action\.map\.Make.*)/m';
+                        break;
+                    default:
+                        $re = '/(\s?\(bk\.action\.core\.TakeLast.*)/m';
+                }
                 preg_match_all($re, $value, $matches, PREG_SET_ORDER, 0);
                 if (!empty($matches[0])) {
                     $results = array_merge($results, $matches[0]);
@@ -32,8 +32,8 @@ class Bloks
     }
 
     public function getBloks(
-        $str)
-    {
+        $str,
+    ) {
         $matches = [];
         $open = 0;
         $start = false;
@@ -61,8 +61,8 @@ class Bloks
 
     public function searchArray(
         $arr,
-        $value)
-    {
+        $value,
+    ) {
         $results = [];
         foreach ($arr as $key => $element) {
             if (is_array($element)) {
@@ -79,8 +79,8 @@ class Bloks
     public function findOffsets(
         $arr,
         $searchValue,
-        $offsets = [])
-    {
+        $offsets = [],
+    ) {
         foreach ($arr as $key => $value) {
             if ($value === $searchValue) {
                 array_unshift($offsets, $key);
@@ -100,8 +100,8 @@ class Bloks
     }
 
     protected function _fixJsonString(
-        $string)
-    {
+        $string,
+    ) {
         $search = ['\\\\', '\\"', "\n", '\\r', '\\t', '\\b', '\\f', "\x0d"];
         $replace = ['\\', '"', '\\n', "\r", "\t", "\b", "\f", ''];
         $json_string = str_replace($search, $replace, $string);
@@ -113,8 +113,8 @@ class Bloks
     }
 
     protected function _extractJsonString(
-        $string)
-    {
+        $string,
+    ) {
         $jsonStart = strpos($string, '{');
         $jsonEnd = strrpos($string, '}');
         if ($jsonStart !== false && $jsonEnd !== false && $jsonEnd > $jsonStart) {
@@ -128,8 +128,8 @@ class Bloks
     }
 
     public function parseMap(
-        $input)
-    {
+        $input,
+    ) {
         $output = [];
 
         $stack = [];
@@ -206,8 +206,8 @@ class Bloks
 
     public function map_arrays(
         $keys,
-        $values)
-    {
+        $values,
+    ) {
         $result = [];
         for ($i = 0; $i < count($keys); $i++) {
             if (array_key_exists($i, $values)) {
@@ -222,8 +222,8 @@ class Bloks
 
     public function recursiveArrayMerge(
         array $array1,
-        array $array2)
-    {
+        array $array2,
+    ) {
         $merged = $array1;
 
         foreach ($array2 as $key => $value) {
@@ -239,8 +239,8 @@ class Bloks
 
     public function findValueWithSubstringRecursive(
         $array,
-        $substring)
-    {
+        $substring,
+    ) {
         $results = [];
 
         foreach ($array as $key => $value) {
@@ -259,8 +259,8 @@ class Bloks
     }
 
     public function cleanData(
-        $array)
-    {
+        $array,
+    ) {
         $result = [];
         foreach ($array as $k=>$v) {
             if (!is_array($v)) {
@@ -287,8 +287,8 @@ class Bloks
 
     public function parseBlok(
         $bloksResponse,
-        $blok)
-    {
+        $blok,
+    ) {
         $bloks = $this->getBloks($bloksResponse);
         $res = $this->searchArray($bloks, $blok);
 

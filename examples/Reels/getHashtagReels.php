@@ -5,29 +5,29 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $queryHashtag = ''; // :)
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -103,7 +103,12 @@ try {
 
     $ig->discover->registerRecentSearchClick('hashtag', $hashtagId);
 
-    $ig->event->sendNavigation('search_result', 'search_tags', 'feed_hashtag', $hashtagId, $queryHashtag,
+    $ig->event->sendNavigation(
+        'search_result',
+        'search_tags',
+        'feed_hashtag',
+        $hashtagId,
+        $queryHashtag,
         [
             'query_text'        => $queryHashtag,
             'search_session_id' => $searchSession,
@@ -113,6 +118,6 @@ try {
     $reelsResponse = $ig->reel->getHashtagReels($queryHashtag);
 
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

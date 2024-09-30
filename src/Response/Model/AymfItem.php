@@ -760,7 +760,7 @@ namespace InstagramAPI\Response\Model;
  */
 class AymfItem extends Item
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'caption' => 'string',
         'uuid'    => 'string',
     ];

@@ -21,14 +21,14 @@ class Reel extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSingleVideo() for available metadata fields.
      */
     public function uploadVideo(
         $videoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         return $this->ig->internal->uploadSingleVideo(Constants::FEED_REELS, $videoFilename, null, $externalMetadata);
     }
 
@@ -43,17 +43,17 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function discover(
         $chainingMedia = null,
         $seenReels = null,
         $sessionInfo = null,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request('clips/discover/')
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('should_refetch_chaining_media', 'false')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('server_driven_cache_config', json_encode(
@@ -96,12 +96,12 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function discoverStream(
         $seenReels = null,
-        $sessionInfo = null)
-    {
+        $sessionInfo = null,
+    ) {
         $request = $this->ig->request('clips/discover/stream/')
             ->setSignedPost(false)
             ->addPost('server_driven_cache_config', json_encode([
@@ -131,13 +131,13 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function sendSeenState(
-        array $mediaIds = null)
-    {
+        ?array $mediaIds = null,
+    ) {
         $request = $this->ig->request('clips/write_seen_state/')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('impressions', $mediaIds);
@@ -154,15 +154,15 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function getHome(
         $maxId = null,
-        $module = 'clips_tab')
-    {
+        $module = 'clips_tab',
+    ) {
         $request = $this->ig->request('clips/home/')
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('container_module', $module);
 
@@ -182,15 +182,15 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function getUserReels(
         $userId,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request('clips/user/')
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('target_user_id', $userId);
 
@@ -210,12 +210,12 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function getHashtagReels(
         $hashtag,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request("clips/tags/{$hashtag}")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid);
@@ -235,14 +235,14 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function getMusic(
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request('clips/music/')
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid);
 
         if ($maxId !== null) {
@@ -261,12 +261,12 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function getLocationReels(
         $locationId,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request("clips/location/{$locationId}/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid);
@@ -287,12 +287,12 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function getUserLikedReels(
         $userId,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request('clips/liked/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
@@ -310,7 +310,7 @@ class Reel extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelShareToFbConfigResponse
+     * @return Response\ReelShareToFbConfigResponse
      */
     public function getShareToFbConfig()
     {
@@ -329,7 +329,7 @@ class Reel extends RequestCollection
                 '10bit_vp9_dec'     => false,
                 'is_hlg_supported'  => false,
             ]))
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\ReelShareToFbConfigResponse());
     }
 
@@ -341,14 +341,14 @@ class Reel extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function setDefaultShareToFbConfig(
         $enabled,
-        $sharingMode = 2)
-    {
+        $sharingMode = 2,
+    ) {
         return $this->ig->request('clips/user/set_default_share_to_fb_enabled/')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('default_share_to_fb_enabled', ($enabled === true) ? 'true' : 'false')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
@@ -366,12 +366,12 @@ class Reel extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function allowRemixes(
         $mediaId,
-        $enabled)
-    {
+        $enabled,
+    ) {
         return $this->ig->request('clips/item/set_mashups_allowed/')
             ->setSignedPost(false)
             ->addPost('media_id', $mediaId)
@@ -389,11 +389,11 @@ class Reel extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function removeFromProfile(
-        $mediaId)
-    {
+        $mediaId,
+    ) {
         return $this->ig->request('feed/profile_grid/remove/')
             ->setSignedPost(false)
             ->addPost('media_id', $mediaId)
@@ -406,7 +406,7 @@ class Reel extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getClipsInfoForCreation()
     {
@@ -421,11 +421,11 @@ class Reel extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function checkOffensiveText(
-        $text = '')
-    {
+        $text = '',
+    ) {
         return $this->ig->request('warning/check_offensive_text/')
             ->addPost('text', $text)
             ->addPost('_uuid', $this->ig->uuid)
@@ -445,17 +445,17 @@ class Reel extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function getVideosChaining(
         $chainingMedia = null,
         $seenReels = null,
         $sessionInfo = null,
-        $maxId = null)
-    {
+        $maxId = null,
+    ) {
         $request = $this->ig->request('clips/panavideochaining/')
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid);
 
         if ($chainingMedia !== null) {
@@ -479,7 +479,7 @@ class Reel extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CreationInterestPickerResponse
+     * @return Response\CreationInterestPickerResponse
      */
     public function getInterests()
     {
@@ -502,14 +502,14 @@ class Reel extends RequestCollection
      *                                                    many user IDs.
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsSerpResponse
+     * @return Response\ReelsSerpResponse
      */
     public function search(
         $query,
         array $excludeList = [],
         $rankToken = null,
-        $searchSurface = 'clips_serp_page')
-    {
+        $searchSurface = 'clips_serp_page',
+    ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
             throw new \InvalidArgumentException('Query must be a non-empty string.');

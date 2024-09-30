@@ -6,7 +6,7 @@ use InstagramAPI\Realtime\Command\DirectCommand;
 
 final class MarkSeen extends DirectCommand
 {
-    const ACTION = 'mark_seen';
+    public const ACTION = 'mark_seen';
 
     /**
      * Constructor.
@@ -20,8 +20,8 @@ final class MarkSeen extends DirectCommand
     public function __construct(
         $threadId,
         $threadItemId,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         parent::__construct(self::ACTION, $threadId, $options);
 
         $this->_data['item_id'] = $this->_validateThreadItemId($threadItemId);

@@ -8,7 +8,7 @@ use InstagramAPI\Realtime\ParserInterface;
 
 class IrisParser implements ParserInterface
 {
-    const MODULE = 'direct';
+    public const MODULE = 'direct';
 
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class IrisParser implements ParserInterface
      */
     public function parseMessage(
         $topic,
-        $payload)
-    {
+        $payload,
+    ) {
         $messages = Client::api_body_decode($payload);
         if (!is_array($messages)) {
             throw new \RuntimeException('Invalid Iris payload.');

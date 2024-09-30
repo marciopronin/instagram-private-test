@@ -94,7 +94,7 @@ use InstagramAPI\Response;
  */
 class PushPreferencesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'push_settings'                         => 'Model\PushSettings[]',
         'likes'                                 => '',
         'comments'                              => '',

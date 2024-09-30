@@ -13,8 +13,8 @@ namespace InstagramAPI\Media\PDQ;
  */
 class PDQHash
 {
-    const PDQHASH_NUM_SLOTS = 16;
-    const PDQHASH_HEX_LENGTH = 64;
+    public const PDQHASH_NUM_SLOTS = 16;
+    public const PDQHASH_HEX_LENGTH = 64;
 
     // 16 16-bit words: sliced this way for mutually indexed hashing (MIH).
     private $_slots = [];
@@ -51,17 +51,18 @@ class PDQHash
      * @return PDQHash newly created hash.
      */
     public function fromHexString(
-    /*string*/ $hex_string
-  )/*: PDQHash*/ {
+        /* string */
+        $hex_string,
+    ) {/* : PDQHash */
         if (strlen($hex_string) !== self::PDQHASH_HEX_LENGTH) {
             throw new MalformedPDQHashException(
-        $hex_string,
-        sprintf(
-          'Expected hash to have length %d, received hash with length %d',
-          self::PDQHASH_HEX_LENGTH,
-          strlen($hex_string)
-        )
-      );
+                $hex_string,
+                sprintf(
+                    'Expected hash to have length %d, received hash with length %d',
+                    self::PDQHASH_HEX_LENGTH,
+                    strlen($hex_string)
+                )
+            );
         }
 
         try {
@@ -69,9 +70,9 @@ class PDQHash
             $slots = unpack('n*', hex2bin($hex_string));
         } catch (ErrorException $_) {
             throw new MalformedPDQHashException(
-        $hex_string,
-        'Length is 64 but is not pure hexadecimal.'
-      );
+                $hex_string,
+                'Length is 64 but is not pure hexadecimal.'
+            );
         }
 
         $this->_slots = [];
@@ -132,8 +133,8 @@ class PDQHash
     }
 
     public function setBit(
-        $bit_index)
-    {
+        $bit_index,
+    ) {
         $slot_index = (int) ($bit_index / self::PDQHASH_NUM_SLOTS);
         $slot_bit_index = (int) ($bit_index % self::PDQHASH_NUM_SLOTS);
         $this->_slots[$slot_index] |= 1 << $slot_bit_index;
@@ -148,8 +149,8 @@ class PDQHash
      * @return int
      */
     public function hammingDistanceTo(
-        $that)
-    {
+        $that,
+    ) {
         $sum = 0;
         for ($i = 0; $i < self::PDQHASH_NUM_SLOTS; $i++) {
             $sum += self::__popCount16($this->_slots[$i] ^ $that->_slots[$i]);
@@ -160,8 +161,8 @@ class PDQHash
 
     public function isWithinHammingDistanceOf(
         $that,
-        $threshold)
-    {
+        $threshold,
+    ) {
         $current = 0;
         for ($i = 0; $i < self::PDQHASH_NUM_SLOTS; $i++) {
             $current += self::__popCount16($this->_slots[$i] ^ $that->_slots[$i]);
@@ -184,19 +185,19 @@ class PDQHash
     }
 
     private static function __popCount16(
-        $n)
-    {
+        $n,
+    ) {
         $n -= (($n >> 1) & 0x5555);
         $n = ((($n >> 2) & 0x3333) + ($n & 0x3333));
-        $n = ((($n >> 4) + $n) & 0x0f0f);
+        $n = ((($n >> 4) + $n) & 0x0F0F);
         $n += ($n >> 8);
 
-        return $n & 0x1f;
+        return $n & 0x1F;
     }
 
     private static function __popCount16Slow(
-        $n)
-    {
+        $n,
+    ) {
         $count = 0;
         for ($count = 0; $n != 0; $count++, $n &= $n - 1) {
         }

@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class BiographyEntities extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'entities'   => '',
         'raw_text'   => 'string',
         'nux_type'   => 'string',

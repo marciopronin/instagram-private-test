@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class LinkContext extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'link_url'       => 'string',
         'link_title'     => 'string',
         'link_summary'   => 'string',

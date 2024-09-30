@@ -62,7 +62,7 @@ use InstagramAPI\Response;
  */
 class LoomFetchConfigResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'system_control'   => 'Model\SystemControl',
         'GATE_APP_VERSION' => 'bool',
         'trace_control'    => 'Model\TraceControl',

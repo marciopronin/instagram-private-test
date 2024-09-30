@@ -5,24 +5,24 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////// USER ////////
+// ///// USER ////////
 $urlProfile = '';
-////////////////////
+// //////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
-\InstagramAPI\Instagram::$skipLoginFlowAtMyOwnRisk = true;
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
+InstagramAPI\Instagram::$skipLoginFlowAtMyOwnRisk = true;
 
 try {
     // Account should be already logged in!
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -34,7 +34,7 @@ try {
     preg_match_all($re, $urlProfile, $matches, PREG_SET_ORDER, 0);
 
     if (empty($matches)) {
-        exit();
+        exit;
     }
     $user = $matches[0][1];
 
@@ -50,7 +50,7 @@ try {
 
     $ig->people->getFriendship($userId);
     $ig->event->qeExposure($ig->account_id, 'ig_android_qr_code_nametag', 'deploy');
-    //$ig->event->sendNavigation('inferred_source', 'feed_timeline', 'profile', null, null, ['username' => $user, 'user_id' => $userId]);
+    // $ig->event->sendNavigation('inferred_source', 'feed_timeline', 'profile', null, null, ['username' => $user, 'user_id' => $userId]);
 
     try {
         $ig->internal->getQPFetch();
@@ -59,7 +59,7 @@ try {
     }
     $ig->event->sendBadgingEvent('impression', 'photos_of_you', 0, 'profile_menu', 'dot_badge');
 
-    $traySession = \InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
     $ig->story->getUserStoryFeed($userId);
     $userFeed = $ig->timeline->getUserFeed($userId);
@@ -131,7 +131,7 @@ try {
 
     $ig->event->sendProfileAction('notifications_entry_point_impression', $userId, $navstack);
 
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
     $chainingUsers = $ig->discover->getChainingUsers($userId, 'profile')->getUsers();
 
     foreach ($chainingUsers as $user) {
@@ -166,6 +166,6 @@ try {
 
     $ig->event->updateAppState('background');
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

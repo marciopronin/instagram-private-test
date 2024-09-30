@@ -636,8 +636,8 @@ namespace InstagramAPI\Response\Model;
  */
 class ChainingSuggestion extends User
 {
-    const JSON_PROPERTY_MAP = [
-       'chaining_info'                    => 'ChainingInfo',
-       'profile_chaining_secondary_label' => '',
-   ];
+    public const JSON_PROPERTY_MAP = [
+        'chaining_info'                    => 'ChainingInfo',
+        'profile_chaining_secondary_label' => '',
+    ];
 }

@@ -21,8 +21,8 @@ class Dimensions
      */
     public function __construct(
         $width,
-        $height)
-    {
+        $height,
+    ) {
         $this->_width = (int) $width;
         $this->_height = (int) $height;
         // NOTE: MUST `float`-cast to FORCE float even when dividing EQUAL ints.
@@ -81,8 +81,8 @@ class Dimensions
      */
     public function withRescaling(
         $newScale = 1.0,
-        $roundingFunc = 'round')
-    {
+        $roundingFunc = 'round',
+    ) {
         if (!is_float($newScale) && !is_int($newScale)) {
             throw new \InvalidArgumentException('The new scale must be a float or integer.');
         }

@@ -19,7 +19,7 @@ use InstagramAPI\Exception\SettingsException;
 use InstagramAPI\Exception\ThrottledException;
 use InstagramAPI\Exception\UploadFailedException;
 use InstagramAPI\Media\MediaDetails;
-use InstagramAPI\Media\PDQ\PDQHasher as PDQHasher;
+use InstagramAPI\Media\PDQ\PDQHasher;
 use InstagramAPI\Media\Video\FFmpeg;
 use InstagramAPI\Media\Video\InstagramThumbnail;
 use InstagramAPI\Media\Video\VideoDetails;
@@ -38,16 +38,16 @@ use Winbox\Args;
 class Internal extends RequestCollection
 {
     /** @var int Number of retries for each video chunk. */
-    const MAX_CHUNK_RETRIES = 5;
+    public const MAX_CHUNK_RETRIES = 5;
 
     /** @var int Number of retries for resumable uploader. */
-    const MAX_RESUMABLE_RETRIES = 15;
+    public const MAX_RESUMABLE_RETRIES = 15;
 
     /** @var int Minimum video chunk size in bytes. */
-    const MIN_CHUNK_SIZE = 204800;
+    public const MIN_CHUNK_SIZE = 204800;
 
     /** @var int Maximum video chunk size in bytes. */
-    const MAX_CHUNK_SIZE = 5242880;
+    public const MAX_CHUNK_SIZE = 5242880;
 
     /** @var int Number of retries for each media configuration. */
     protected $_maxConfigureRetries = 25;
@@ -58,8 +58,8 @@ class Internal extends RequestCollection
      * @param int $value Max Configure retries.
      */
     public function setMaxConfigureRetries(
-        $value)
-    {
+        $value,
+    ) {
         if (is_int($value) === false || ($value < 0 || $value > 25)) {
             throw new \InvalidArgumentException('The supplied value for max configure retries is not valid.');
         }
@@ -85,19 +85,19 @@ class Internal extends RequestCollection
      * @param array                 $externalMetadata (optional) User-provided metadata key-value pairs.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException
+     * @throws InstagramException
+     * @throws UploadFailedException
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSinglePhoto() for available metadata fields.
      */
     public function uploadSinglePhoto(
         $targetFeed,
         $photoFilename,
-        InternalMetadata $internalMetadata = null,
-        array $externalMetadata = [])
-    {
+        ?InternalMetadata $internalMetadata = null,
+        array $externalMetadata = [],
+    ) {
         // Make sure we only allow these particular feeds for this function.
         if ($targetFeed !== Constants::FEED_TIMELINE
             && $targetFeed !== Constants::FEED_STORY
@@ -135,7 +135,7 @@ class Internal extends RequestCollection
 
         // Configure the uploaded photo/share to IGTV and attach it to our timeline/IGTV.
         try {
-            /** @var \InstagramAPI\Response\ConfigureResponse $configure */
+            /** @var Response\ConfigureResponse $configure */
             $configure = $this->ig->internal->configureWithRetries(
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Configure the uploaded image and attach it to our timeline/story/IGTV.
@@ -194,13 +194,13 @@ class Internal extends RequestCollection
      * @param InternalMetadata $internalMetadata Internal library-generated metadata object.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException
+     * @throws InstagramException
+     * @throws UploadFailedException
      */
     public function uploadPhotoData(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         // Make sure we have photo details.
         if ($internalMetadata->getPhotoDetails() === null) {
             throw new \InvalidArgumentException('Photo details are missing from the internal metadata.');
@@ -251,32 +251,32 @@ class Internal extends RequestCollection
      * @param array            $externalMetadata (optional) User-provided metadata key-value pairs.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      */
     public function configureSinglePhoto(
         $targetFeed,
         InternalMetadata $internalMetadata,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         // Determine the target endpoint for the photo.
         switch ($targetFeed) {
-        case Constants::FEED_TIMELINE:
-            $endpoint = 'media/configure/';
-            break;
-        case Constants::FEED_DIRECT_STORY:
-        case Constants::FEED_STORY:
-            $endpoint = 'media/configure_to_story/';
-            break;
-        case Constants::FEED_TV:
-            $endpoint = 'media/configure_to_igtv/';
-            break;
-        case Constants::FEED_REELS:
-            $endpoint = 'media/configure_to_clips/';
-            break;
-        default:
-            throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
+            case Constants::FEED_TIMELINE:
+                $endpoint = 'media/configure/';
+                break;
+            case Constants::FEED_DIRECT_STORY:
+            case Constants::FEED_STORY:
+                $endpoint = 'media/configure_to_story/';
+                break;
+            case Constants::FEED_TV:
+                $endpoint = 'media/configure_to_igtv/';
+                break;
+            case Constants::FEED_REELS:
+                $endpoint = 'media/configure_to_clips/';
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
         }
 
         // Available external metadata parameters:
@@ -356,30 +356,36 @@ class Internal extends RequestCollection
 
         // Build the request...
         $request = $this->ig->request($endpoint)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addHeader('retry_context', json_encode($this->_getRetryContext()))
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('nav_chain', $this->ig->getNavChain())
-            ->addPost('edits',
+            ->addPost(
+                'edits',
                 [
                     'crop_original_size'    => [(float) $photoWidth, (float) $photoHeight],
                     'crop_zoom'             => 1.0,
                     'crop_center'           => [0.0, -0.0],
-                ])
-            ->addPost('device',
+                ]
+            )
+            ->addPost(
+                'device',
                 [
                     'manufacturer'      => $this->ig->device->getManufacturer(),
                     'model'             => $this->ig->device->getModel(),
                     'android_version'   => intval($this->ig->device->getAndroidVersion()),
                     'android_release'   => $this->ig->device->getAndroidRelease(),
-                ])
-            ->addPost('extra',
+                ]
+            )
+            ->addPost(
+                'extra',
                 [
                     'source_width'  => $photoWidth,
                     'source_height' => $photoHeight,
-                ]);
+                ]
+            );
 
         // 'ig_android_eu_configure_disabled', 'route_to_us'
         if ($this->ig->isExperimentEnabled('26156', 0, false) || !$this->ig->getIsEUUser()) {
@@ -400,9 +406,9 @@ class Internal extends RequestCollection
                     ->addPost('source_type', '4')
                     ->addPost('include_e2ee_mentioned_user_list', '1')
                     ->addPost('scene_capture_type', '')
-                    //->addPost('media_folder', 'Camera')
+                    // ->addPost('media_folder', 'Camera')
                     ->addPost('upload_id', $uploadId);
-                   // ->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
+                // ->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
 
                 if ($internalMetadata->isBestieMedia()) {
                     $request->addPost('audience', 'besties');
@@ -457,7 +463,7 @@ class Internal extends RequestCollection
                     ->addPost('source_type', '3')
                     ->addPost('configure_mode', '1')
                     ->addPost('allow_multi_configures', '1')
-                    //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
+                    // ->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     ->addPost('client_timestamp', (string) (time() - mt_rand(3, 10)))
                     ->addPost('publish_id', 1)
                     ->addPost('upload_id', $uploadId)
@@ -552,7 +558,7 @@ class Internal extends RequestCollection
                     $stickerIds[] = 'emoji_slider_'.$storySlider[0]['emoji'];
                 }
                 if ($storyEmojiReaction !== null) {
-                    //Utils::throwIfInvalidStorySlider($storyEmojiReaction);
+                    // Utils::throwIfInvalidStorySlider($storyEmojiReaction);
                     $request
                         ->addPost('story_reaction_stickers', json_encode($storyEmojiReaction, JSON_PRESERVE_ZERO_FRACTION));
 
@@ -713,16 +719,16 @@ class Internal extends RequestCollection
      * @param InternalMetadata|null $internalMetadata (optional) Internal library-generated metadata object.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
+     * @throws InstagramException
+     * @throws UploadFailedException     If the video upload fails.
      *
      * @return InternalMetadata Updated internal metadata object.
      */
     public function uploadVideo(
         $targetFeed,
         $videoFilename,
-        InternalMetadata $internalMetadata = null)
-    {
+        ?InternalMetadata $internalMetadata = null,
+    ) {
         if ($internalMetadata === null) {
             $internalMetadata = new InternalMetadata();
         }
@@ -784,19 +790,19 @@ class Internal extends RequestCollection
      * @param array                 $externalMetadata (optional) User-provided metadata key-value pairs.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
+     * @throws InstagramException
+     * @throws UploadFailedException     If the video upload fails.
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSingleVideo() for available metadata fields.
      */
     public function uploadSingleVideo(
         $targetFeed,
         $videoFilename,
-        InternalMetadata $internalMetadata = null,
-        array $externalMetadata = [])
-    {
+        ?InternalMetadata $internalMetadata = null,
+        array $externalMetadata = [],
+    ) {
         // Make sure we only allow these particular feeds for this function.
         if ($targetFeed !== Constants::FEED_TIMELINE
             && $targetFeed !== Constants::FEED_STORY
@@ -815,7 +821,7 @@ class Internal extends RequestCollection
 
         // Configure the uploaded video and attach it to our timeline/story.
         try {
-            /** @var \InstagramAPI\Response\ConfigureResponse $configure */
+            /** @var Response\ConfigureResponse $configure */
             $configure = $this->ig->internal->configureWithRetries(
                 function () use ($targetFeed, $internalMetadata, $externalMetadata) {
                     // Attempt to configure video parameters.
@@ -868,16 +874,16 @@ class Internal extends RequestCollection
      * @param array            $externalMetadata (optional) User-provided metadata key-value pairs.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException
+     * @throws InstagramException
+     * @throws UploadFailedException
      *
      * @return string[]        PDQ Hashes.
      */
     public function uploadVideoThumbnail(
         $targetFeed,
         InternalMetadata $internalMetadata,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         if ($internalMetadata->getVideoDetails() === null) {
             throw new \InvalidArgumentException('Video details are missing from the internal metadata.');
         }
@@ -937,17 +943,17 @@ class Internal extends RequestCollection
      * @param int              $targetFeed       One of the FEED_X constants.
      * @param InternalMetadata $internalMetadata Internal library-generated metadata object.
      *
-     * @throws \InstagramAPI\Exception\InstagramException If the request fails.
+     * @throws InstagramException If the request fails.
      *
-     * @return \InstagramAPI\Response\UploadJobVideoResponse
+     * @return Response\UploadJobVideoResponse
      */
     protected function _requestVideoUploadURL(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         $request = $this->ig->request('upload/video/')
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid);
 
         foreach ($this->_getVideoUploadParams($targetFeed, $internalMetadata) as $key => $value) {
@@ -975,15 +981,15 @@ class Internal extends RequestCollection
      * @param array            $externalMetadata (optional) User-provided metadata key-value pairs.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      */
     public function configureSingleVideo(
         $targetFeed,
         InternalMetadata $internalMetadata,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         $uploadParams = $this->_getVideoUploadParams($targetFeed, $internalMetadata);
 
         $this->ig->event->sendConfigureMedia(
@@ -995,21 +1001,21 @@ class Internal extends RequestCollection
 
         // Determine the target endpoint for the video.
         switch ($targetFeed) {
-        case Constants::FEED_TIMELINE:
-            $endpoint = 'media/configure/';
-            break;
-        case Constants::FEED_DIRECT_STORY:
-        case Constants::FEED_STORY:
-            $endpoint = 'media/configure_to_story/';
-            break;
-        case Constants::FEED_TV:
-            $endpoint = 'media/configure_to_igtv/';
-            break;
-        case Constants::FEED_REELS:
-            $endpoint = 'media/configure_to_clips/';
-            break;
-        default:
-            throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
+            case Constants::FEED_TIMELINE:
+                $endpoint = 'media/configure/';
+                break;
+            case Constants::FEED_DIRECT_STORY:
+            case Constants::FEED_STORY:
+                $endpoint = 'media/configure_to_story/';
+                break;
+            case Constants::FEED_TV:
+                $endpoint = 'media/configure_to_igtv/';
+                break;
+            case Constants::FEED_REELS:
+                $endpoint = 'media/configure_to_clips/';
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf('Bad target feed "%s".', $targetFeed));
         }
 
         // Available external metadata parameters:
@@ -1097,19 +1103,23 @@ class Internal extends RequestCollection
             ->addPost('source_type', 4)
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('camera_position', 'back')
-            ->addPost('device',
+            ->addPost(
+                'device',
                 [
                     'manufacturer'      => $this->ig->device->getManufacturer(),
                     'model'             => $this->ig->device->getModel(),
                     'android_version'   => intval($this->ig->device->getAndroidVersion()),
                     'android_release'   => $this->ig->device->getAndroidRelease(),
-                ])
-            ->addPost('extra',
+                ]
+            )
+            ->addPost(
+                'extra',
                 [
                     'source_width'  => $videoDetails->getWidth(),
                     'source_height' => $videoDetails->getHeight(),
-                ])
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+                ]
+            )
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('nav_chain', $this->ig->getNavChain());
@@ -1135,7 +1145,7 @@ class Internal extends RequestCollection
                 if ($usertags !== null) {
                     Utils::throwIfInvalidUsertags($usertags);
                     $request->addPost('usertags', json_encode($usertags, JSON_PRESERVE_ZERO_FRACTION));
-                    //->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
+                    // ->addPost('configure_mode', Constants::SHARE_TYPE['FOLLOWERS_SHARE']); // 0 - FOLLOWERS_SHARE
                     if ($coauthor !== null) {
                         if (is_array($coauthor) && count($coauthor) > 1) {
                             if (count($coauthor) > 5) {
@@ -1174,16 +1184,16 @@ class Internal extends RequestCollection
                     ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                     ->addPost('supported_capabilities_new', $this->getSupportedCapabilities())
                     ->addPost('configure_mode', '1')
-                    //->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
+                    // ->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE
                     ->addPost('allow_multi_configures', '1')
-                    //->addPost('story_media_creation_date', time() - mt_rand(10, 20))
+                    // ->addPost('story_media_creation_date', time() - mt_rand(10, 20))
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time())
                     ->addPost('publish_id', 1)
                     ->addPost('camera_session_id', Signatures::generateUUID())
                     ->addPost('date_time_original', sprintf('%sT%s.000Z', date('Ymd'), date('His')))
                     ->addPost('composition_id', Signatures::generateUUID())
-                    //->addPost('attempt_id', Signatures::generateUUID())
+                    // ->addPost('attempt_id', Signatures::generateUUID())
                     ->addPost('camera_entry_point', '360')
                     ->addPost('clips', [
                         [
@@ -1246,7 +1256,7 @@ class Internal extends RequestCollection
                     }
                 }
                 if ($storyMusic !== null) {
-                    //Utils::throwIfInvalidStoryCountdown($storyCountdown);
+                    // Utils::throwIfInvalidStoryCountdown($storyCountdown);
                     $request
                         ->addPost('story_music_stickers', json_encode($storyMusic[0]['story_music_stickers'], JSON_PRESERVE_ZERO_FRACTION))
                         ->addPost('story_music_lyric_stickers', json_encode($storyMusic[0]['story_music_lyric_stickers'], JSON_PRESERVE_ZERO_FRACTION))
@@ -1272,7 +1282,7 @@ class Internal extends RequestCollection
                     $stickerIds[] = 'emoji_slider_'.$storySlider[0]['emoji'];
                 }
                 if ($storyEmojiReaction !== null) {
-                    //Utils::throwIfInvalidStorySlider($storyEmojiReaction);
+                    // Utils::throwIfInvalidStorySlider($storyEmojiReaction);
                     $request
                         ->addPost('story_reaction_stickers', json_encode($storyEmojiReaction, JSON_PRESERVE_ZERO_FRACTION));
 
@@ -1344,7 +1354,7 @@ class Internal extends RequestCollection
                     ->addPost('configure_mode', Constants::SHARE_TYPE['REEL_SHARE']) // 2 - REEL_SHARE (STORIES)
                     ->addPost('recipient_users', $internalMetadata->getDirectUsers())
                     ->addPost('thread_ids', $internalMetadata->getDirectThreads())
-                    //->addPost('story_media_creation_date', time() - mt_rand(10, 20))
+                    // ->addPost('story_media_creation_date', time() - mt_rand(10, 20))
                     ->addPost('client_shared_at', time() - mt_rand(3, 10))
                     ->addPost('client_timestamp', time());
 
@@ -1502,7 +1512,7 @@ class Internal extends RequestCollection
                     ->addPost('caption', $captionText)
                     ->addPost('igtv_composer_session_id', $sessionId)
                     ->addPost('igtv_ads_toggled_on', boolval($igtvAds));
-                    //->addPost('configure_mode', Constants::SHARE_TYPE['IGTV']); // 8 - IGTV
+                // ->addPost('configure_mode', Constants::SHARE_TYPE['IGTV']); // 8 - IGTV
                 break;
         }
 
@@ -1524,7 +1534,7 @@ class Internal extends RequestCollection
         }
 
         if ($targetFeed == Constants::FEED_STORY) {
-            //$request->addPost('story_media_creation_date', time());
+            // $request->addPost('story_media_creation_date', time());
             if ($usertags !== null) {
                 // Reel Mention example:
                 // [{\"y\":0.3407772676161919,\"rotation\":0,\"user_id\":\"USER_ID\",\"x\":0.39892578125,\"width\":0.5619921875,\"height\":0.06011525487256372}]
@@ -1556,16 +1566,16 @@ class Internal extends RequestCollection
      * @param mixed                 $filename
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
+     * @throws InstagramException
+     * @throws UploadFailedException     If the video upload fails.
      *
      * @return InternalMetadata Updated internal metadata object.
      */
     public function facebookUpload(
         $targetFeed,
         $filename,
-        InternalMetadata $internalMetadata = null)
-    {
+        ?InternalMetadata $internalMetadata = null,
+    ) {
         if ($internalMetadata === null) {
             $internalMetadata = new InternalMetadata();
         }
@@ -1629,15 +1639,15 @@ class Internal extends RequestCollection
      *                                           for the album itself (its caption, location, etc).
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      */
     public function configureTimelineAlbum(
         array $media,
         InternalMetadata $internalMetadata,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = [],
+    ) {
         $endpoint = 'media/configure_sidecar/';
 
         $albumUploadId = $internalMetadata->getUploadId();
@@ -1674,20 +1684,20 @@ class Internal extends RequestCollection
                         'upload_id'           => $uploadId,
                         'source_type'         => 4,
                         'edits'               => [
-                                'crop_original_size'    => [(float) $photoWidth, (float) $photoHeight],
-                                'crop_zoom'             => 1.0,
-                                'crop_center'           => [0.0, -0.0],
-                            ],
+                            'crop_original_size'    => [(float) $photoWidth, (float) $photoHeight],
+                            'crop_zoom'             => 1.0,
+                            'crop_center'           => [0.0, -0.0],
+                        ],
                         'device' => [
-                                'manufacturer'      => $this->ig->device->getManufacturer(),
-                                'model'             => $this->ig->device->getModel(),
-                                'android_version'   => intval($this->ig->device->getAndroidVersion()),
-                                'android_release'   => $this->ig->device->getAndroidRelease(),
-                            ],
+                            'manufacturer'      => $this->ig->device->getManufacturer(),
+                            'model'             => $this->ig->device->getModel(),
+                            'android_version'   => intval($this->ig->device->getAndroidVersion()),
+                            'android_release'   => $this->ig->device->getAndroidRelease(),
+                        ],
                         'extra' => [
-                                'source_width'  => $photoWidth,
-                                'source_height' => $photoHeight,
-                            ],
+                            'source_width'  => $photoWidth,
+                            'source_height' => $photoHeight,
+                        ],
                     ];
 
                     if (isset($item['usertags'])) {
@@ -1721,15 +1731,15 @@ class Internal extends RequestCollection
                         'upload_id'           => $uploadId,
                         'source_type'         => '4',
                         'device'              => [
-                                'manufacturer'      => $this->ig->device->getManufacturer(),
-                                'model'             => $this->ig->device->getModel(),
-                                'android_version'   => intval($this->ig->device->getAndroidVersion()),
-                                'android_release'   => $this->ig->device->getAndroidRelease(),
-                            ],
+                            'manufacturer'      => $this->ig->device->getManufacturer(),
+                            'model'             => $this->ig->device->getModel(),
+                            'android_version'   => intval($this->ig->device->getAndroidVersion()),
+                            'android_release'   => $this->ig->device->getAndroidRelease(),
+                        ],
                         'clips' => [
-                                'length'          => round($videoDetails->getDuration(), 1),
-                                'source_type'     => '4',
-                            ],
+                            'length'          => round($videoDetails->getDuration(), 1),
+                            'source_type'     => '4',
+                        ],
                     ];
 
                     if (isset($item['usertags'])) {
@@ -1758,18 +1768,20 @@ class Internal extends RequestCollection
         // Build the request...
         $request = $this->ig->request($endpoint)
             ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('client_sidecar_id', $albumUploadId)
             ->addPost('caption', $captionText)
-            ->addPost('device',
+            ->addPost(
+                'device',
                 [
                     'manufacturer'      => $this->ig->device->getManufacturer(),
                     'model'             => $this->ig->device->getModel(),
                     'android_version'   => intval($this->ig->device->getAndroidVersion()),
                     'android_release'   => $this->ig->device->getAndroidRelease(),
-                ])
+                ]
+            )
             ->addPost('children_metadata', $childrenMetadata);
 
         if ($location instanceof Response\Model\Location) {
@@ -1803,14 +1815,14 @@ class Internal extends RequestCollection
      *
      * @param array $mobileConfigResponse
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     protected function _saveExperimentsMobileConfig(
-        $mobileConfigResponse)
-    {
-        //$paramsMap = fopen(__DIR__.'/../data/params_map.txt', 'r');
-        //$mappedExperiments = [];
-        //$found = false;
+        $mobileConfigResponse,
+    ) {
+        // $paramsMap = fopen(__DIR__.'/../data/params_map.txt', 'r');
+        // $mappedExperiments = [];
+        // $found = false;
 
         /*
         if ($paramsMap) {
@@ -1885,13 +1897,13 @@ class Internal extends RequestCollection
      *
      * @param bool $prelogin Indicates if the request is done before login request.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\MobileConfigResponse
+     * @return Response\MobileConfigResponse
      */
     public function getMobileConfig(
-        $prelogin)
-    {
+        $prelogin,
+    ) {
         $request = $this->ig->request('launcher/mobileconfig/')
             ->addPost('bool_opt_policy', 0)
             ->addPost('api_version', 3)
@@ -1929,9 +1941,9 @@ class Internal extends RequestCollection
     /**
      * Fetch headers.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function fetchHeaders()
     {
@@ -1945,9 +1957,9 @@ class Internal extends RequestCollection
     /**
      * Get decisions about device capabilities.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\CapabilitiesDecisionsResponse
+     * @return Response\CapabilitiesDecisionsResponse
      */
     public function getDeviceCapabilitiesDecisions()
     {
@@ -1960,9 +1972,9 @@ class Internal extends RequestCollection
     /**
      * Registers advertising identifier.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function logAttribution()
     {
@@ -1976,9 +1988,9 @@ class Internal extends RequestCollection
     /**
      * DEPRECATION CHECK.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function logResurrectAttribution()
     {
@@ -1986,7 +1998,7 @@ class Internal extends RequestCollection
             ->setIsSilentFail(true)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('adid', $this->ig->advertising_id)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1997,14 +2009,14 @@ class Internal extends RequestCollection
      * @param string $usage        Desired usage, either "ig_select_app" or "default".
      * @param bool   $useCsrfToken (Optional) Decides to include a csrf token in this request.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\MsisdnHeaderResponse
+     * @return Response\MsisdnHeaderResponse
      */
     public function readMsisdnHeader(
         $usage,
-        $useCsrfToken = false)
-    {
+        $useCsrfToken = false,
+    ) {
         $request = $this->ig->request('accounts/read_msisdn_header/')
             ->setNeedsAuth(false)
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
@@ -2026,15 +2038,15 @@ class Internal extends RequestCollection
      *
      * @param string $usage Mobile subno usage.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\MsisdnHeaderResponse
+     * @return Response\MsisdnHeaderResponse
      *
      * @since 10.24.0 app version.
      */
     public function bootstrapMsisdnHeader(
-        $usage = 'ig_select_app')
-    {
+        $usage = 'ig_select_app',
+    ) {
         $request = $this->ig->request('accounts/msisdn_header_bootstrap/')
             ->setNeedsAuth(false)
             ->addPost('mobile_subno_usage', $usage)
@@ -2048,8 +2060,8 @@ class Internal extends RequestCollection
      * @param Response\Model\Token|null $token
      */
     protected function _saveZeroRatingToken(
-        Response\Model\Token $token = null)
-    {
+        ?Response\Model\Token $token = null,
+    ) {
         if ($token === null) {
             return;
         }
@@ -2072,9 +2084,9 @@ class Internal extends RequestCollection
     /**
      * Get Facebook dod resources.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\FacebookDodRequestResourcesResponse
+     * @return Response\FacebookDodRequestResourcesResponse
      */
     public function getFacebookDodResources()
     {
@@ -2097,15 +2109,15 @@ class Internal extends RequestCollection
      * @param bool   $result   result
      * @param bool   $prelogin Prelogin
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\TokenResultResponse
+     * @return Response\TokenResultResponse
      */
     public function fetchZeroRatingToken(
         $reason = 'token_expired',
         $result = true,
-        $prelogin = true)
-    {
+        $prelogin = true,
+    ) {
         if ($result === true) {
             $endpoint = 'zr/token/result/';
         } else {
@@ -2133,9 +2145,9 @@ class Internal extends RequestCollection
     /**
      * Create android Keystore.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function createAndroidKeystore()
     {
@@ -2150,9 +2162,9 @@ class Internal extends RequestCollection
     /**
      * Get megaphone log.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\MegaphoneLogResponse
+     * @return Response\MegaphoneLogResponse
      */
     public function getMegaphoneLog()
     {
@@ -2163,7 +2175,7 @@ class Internal extends RequestCollection
             ->addPost('reason', '')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('uuid', md5(time()))
             ->getResponse(new Response\MegaphoneLogResponse());
     }
@@ -2174,9 +2186,9 @@ class Internal extends RequestCollection
      * TODO: We don't know what this function does. If we ever discover that it
      * has a useful purpose, then we should move it somewhere else.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\FacebookHiddenEntitiesResponse
+     * @return Response\FacebookHiddenEntitiesResponse
      */
     public function getFacebookHiddenSearchEntities()
     {
@@ -2187,9 +2199,9 @@ class Internal extends RequestCollection
     /**
      * Get Facebook OTA (Over-The-Air) update information.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\FacebookOTAResponse
+     * @return Response\FacebookOTAResponse
      */
     public function getFacebookOTA()
     {
@@ -2207,9 +2219,9 @@ class Internal extends RequestCollection
     /**
      * Fetch profiler traces config.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\LoomFetchConfigResponse
+     * @return Response\LoomFetchConfigResponse
      *
      * @see https://github.com/facebookincubator/profilo
      */
@@ -2226,9 +2238,9 @@ class Internal extends RequestCollection
      * This is just for some internal state information, such as
      * "has_change_password_megaphone". It's not for public use.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ProfileNoticeResponse
+     * @return Response\ProfileNoticeResponse
      */
     public function getProfileNotice()
     {
@@ -2246,13 +2258,13 @@ class Internal extends RequestCollection
      *
      * @param string[] $surfaces Quick Promotion Surface.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\FetchQPDataResponse
+     * @return Response\FetchQPDataResponse
      */
     public function getQPFetch(
-        $surfaces = null)
-    {
+        $surfaces = null,
+    ) {
         if ($surfaces !== null) {
             $qps = $this->_getQuickPromotionSurface($surfaces);
         }
@@ -2260,7 +2272,7 @@ class Internal extends RequestCollection
         $request = $this->ig->request('qp/batch_fetch/')
             ->addPost('is_sdk', 'true')
             ->addPost('vc_policy', 'default')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('surfaces_to_triggers', ($surfaces === null) ? Constants::BATCH_SURFACES : json_encode($qps['triggers']))
@@ -2281,9 +2293,9 @@ class Internal extends RequestCollection
      *
      * DEPRECATION CHECK.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ArlinkDownloadInfoResponse
+     * @return Response\ArlinkDownloadInfoResponse
      */
     public function getArlinkDownloadInfo()
     {
@@ -2295,9 +2307,9 @@ class Internal extends RequestCollection
     /**
      * Get quick promotions cooldowns.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\QPCooldownsResponse
+     * @return Response\QPCooldownsResponse
      */
     public function getQPCooldowns()
     {
@@ -2313,15 +2325,15 @@ class Internal extends RequestCollection
      *
      * @param string $feedbackUrl Feedback URL.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function reportProblem(
-        $feedbackUrl)
-    {
+        $feedbackUrl,
+    ) {
         return $this->ig->request($feedbackUrl)
-             //->addPost('_csrftoken', $this->ig->client->getToken())
+             // ->addPost('_csrftoken', $this->ig->client->getToken())
              ->addPost('_uid', $this->ig->account_id)
              ->addPost('_uuid', $this->ig->uuid)
              ->getResponse(new Response\GenericResponse());
@@ -2333,14 +2345,14 @@ class Internal extends RequestCollection
      * @param array $postData
      * @param array $fileData
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function uploadBugReport(
         $postData,
-        $fileData = null)
-    {
+        $fileData = null,
+    ) {
         $request = $this->ig->request('https://graphql.instagram.com/bug_report_file_upload/')
             ->setSignedPost(false);
 
@@ -2359,13 +2371,13 @@ class Internal extends RequestCollection
      *
      * @param bool $includeAuthors Include authors.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GetViewableStatusesResponse
+     * @return Response\GetViewableStatusesResponse
      */
     public function getViewableStatuses(
-        $includeAuthors = false)
-    {
+        $includeAuthors = false,
+    ) {
         $request = $this->ig->request('status/get_viewable_statuses/');
 
         if ($includeAuthors === true) {
@@ -2378,16 +2390,16 @@ class Internal extends RequestCollection
     /**
      * Store client push permissions.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function storeClientPushPermissions()
     {
         return $this->ig->request('notifications/store_client_push_permissions/')
             ->setSignedPost(false)
             ->addPost('enabled', 'true')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->uuid)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -2396,9 +2408,9 @@ class Internal extends RequestCollection
     /**
      * Get notification settings.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getNotificationsSettings()
     {
@@ -2413,14 +2425,14 @@ class Internal extends RequestCollection
      * @param mixed $interface
      * @param mixed $reason
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function cdnRmd(
         $interface = 'Unknown',
-        $reason = 'SESSION_CHANGE')
-    {
+        $reason = 'SESSION_CHANGE',
+    ) {
         $response = $this->ig->request('ti/cdn_rmd/')
             ->setAddDefaultHeaders(false)
             ->addHeader('X-IG-App-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
@@ -2451,9 +2463,9 @@ class Internal extends RequestCollection
      * @param bool   $queryEndpoint
      * @param bool   $gzip
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function sendGraph(
         $clientDoc,
@@ -2463,8 +2475,8 @@ class Internal extends RequestCollection
         $pretty,
         $clientLibrary = 'graphservice',
         $queryEndpoint = false,
-        $gzip = false)
-    {
+        $gzip = false,
+    ) {
         if (is_string($queryEndpoint)) {
             $endpoint = $queryEndpoint;
         } else {
@@ -2482,7 +2494,7 @@ class Internal extends RequestCollection
             ->addHeader('IG-INTENDED-USER-ID', empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'))
             ->addHeader('X-Tigon-Is-Retry', 'False')
             ->addPost('client_doc_id', $clientDoc)
-            ->addPost('locale', 'user')//is_bool($queryEndpoint) && $queryEndpoint ? 'user' : $this->ig->getLocale())
+            ->addPost('locale', 'user')// is_bool($queryEndpoint) && $queryEndpoint ? 'user' : $this->ig->getLocale())
             ->addPost('variables', json_encode($vars, JSON_PRESERVE_ZERO_FRACTION));
 
         if ($gzip) {
@@ -2529,15 +2541,15 @@ class Internal extends RequestCollection
     /**
      * Starts new user flow when registering with phone number.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function startNewUserFlow()
     {
         return $this->ig->request('consent/new_user_flow_begins/')
             ->setNeedsAuth(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -2549,19 +2561,19 @@ class Internal extends RequestCollection
      * @param int $month Month Number of the month of your birth date.
      * @param int $year  Year of your birth date.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\AgeEligibilityResponse
+     * @return Response\AgeEligibilityResponse
      */
     public function checkAgeEligibility(
         $day,
         $month,
-        $year)
-    {
+        $year,
+    ) {
         return $this->ig->request('consent/check_age_eligibility/')
             ->setSignedPost(false)
             ->setNeedsAuth(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('day', $day)
             ->addPost('month', $month)
             ->addPost('year', $year)
@@ -2577,21 +2589,22 @@ class Internal extends RequestCollection
      * @param bool   $finish      Progress state has finished.
      * @param bool   $tosAccepted ToS Accepted.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      * @throws \InstagramAPI\Exception\InvalidArgumentException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getOnBoardingSteps(
         $waterfallId,
         $regMethod = 'email',
         $seenSteps = [],
         $finish = false,
-        $tosAccepted = true)
-    {
+        $tosAccepted = true,
+    ) {
         if ($regMethod !== 'email' && $regMethod !== 'phone') {
             throw new \InvalidArgumentException(
-                sprintf('%s registration method not valid', $regMethod));
+                sprintf('%s registration method not valid', $regMethod)
+            );
         }
 
         return $this->ig->request('dynamic_onboarding/get_steps/')
@@ -2607,7 +2620,7 @@ class Internal extends RequestCollection
             ->addPost('network_type', 'WIFI-UNKNOWN')
             ->addPost('guid', $this->ig->uuid)
             ->addPost('is_ci', 'false')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->uuid)
             ->addPost('waterfall_id', $waterfallId)
             ->addPost('reg_flow_taken', $regMethod)
@@ -2620,13 +2633,13 @@ class Internal extends RequestCollection
      *
      * @param string $waterfallId Waterfall ID.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function newAccountNuxSeen(
-        $waterfallId)
-    {
+        $waterfallId,
+    ) {
         return $this->ig->request('nux/new_account_nux_seen/')
             ->addPost('is_fb4a_installed', 'false')
             ->addPost('phone_id', $this->ig->phone_id)
@@ -2643,13 +2656,13 @@ class Internal extends RequestCollection
      *
      * @param mixed $postImporter
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getCommonPushNdxScreen(
-        $postImporter = false)
-    {
+        $postImporter = false,
+    ) {
         $request = $this->ig->request('bloks/apps/com.instagram.ndx.common.push_ig_ndx_screen/')
             ->setSignedPost(false)
             ->addPost('app_id', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
@@ -2676,9 +2689,9 @@ class Internal extends RequestCollection
     /**
      * Get contact importer screen.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getContactImporterScreen()
     {
@@ -2705,14 +2718,14 @@ class Internal extends RequestCollection
      * @param bool  $form     Form.
      * @param mixed $flowName
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function sendPrivacyConsentPromptAction(
         $flowName,
-        $form = false)
-    {
+        $form = false,
+    ) {
         $request = $this->ig->request('bloks/apps/com.bloks.www.privacy.consent.prompt.action/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
@@ -2765,14 +2778,14 @@ class Internal extends RequestCollection
      * @param GenericResponse $response
      * @param bool            $init     Init.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function sendPrivacyConsentPromptCallback(
         $response,
-        $init = false)
-    {
+        $init = false,
+    ) {
         $re = '/[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}/m';
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
 
@@ -2799,12 +2812,12 @@ class Internal extends RequestCollection
                     'previous_prompts'  => [],
                     'experience_id'     => $experienceId,
                     'first_screen_id'   => null,
-            ],
-            'source'        => 'pft_user_cookie_choice',
-            'extra_params'  => [
-                'attribution_events_flush'  => 'true',
-            ],
-            'config_enum'   => 'user_cookie_choice_french_cnil',
+                ],
+                'source'        => 'pft_user_cookie_choice',
+                'extra_params'  => [
+                    'attribution_events_flush'  => 'true',
+                ],
+                'config_enum'   => 'user_cookie_choice_french_cnil',
             ],
         ];
 
@@ -2826,16 +2839,16 @@ class Internal extends RequestCollection
      * @param string $errorCode
      * @param string $extraData
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getSentryBlockDialog(
         $category,
         $reasons,
         $errorCode,
-        $extraData)
-    {
+        $extraData,
+    ) {
         return $this->ig->request('bloks/apps/com.instagram.sentry_block_dialogue_unification.screens.sentry_block_dialogue_unification/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
@@ -2858,20 +2871,20 @@ class Internal extends RequestCollection
      * @param string $email       Email for registration.
      * @param bool   $acceptedTos Accepted Instagrams' ToS.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ConsentRequiredResponse
+     * @return Response\ConsentRequiredResponse
      */
     public function newUserFlow(
         $email,
-        $acceptedTos = false)
-    {
+        $acceptedTos = false,
+    ) {
         $request = $this->ig->request('consent/new_user_flow/')
             ->setNeedsAuth(false)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('gdpr_s', '')
             ->addPost('guid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->device_id);
 
         if ($acceptedTos) {
@@ -2893,20 +2906,20 @@ class Internal extends RequestCollection
      * @param int  $month     Month Number of the month of your birth date.
      * @param int  $year      Year of your birth date.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\ConsentRequiredResponse
+     * @return Response\ConsentRequiredResponse
      */
     public function sendConsent(
         $screenKey = null,
         $day = null,
         $month = null,
-        $year = null)
-    {
+        $year = null,
+    ) {
         $request = $this->ig->request('consent/existing_user_flow/')
              ->setNeedsAuth(false)
              ->addPost('device_id', $this->ig->device_id)
-             //->addPost('_csrftoken', $this->ig->client->getToken())
+             // ->addPost('_csrftoken', $this->ig->client->getToken())
              ->addPost('_uid', $this->ig->account_id)
              ->addPost('_uuid', $this->ig->uuid);
 
@@ -2928,7 +2941,7 @@ class Internal extends RequestCollection
             case 'tos_and_two_age_button':
                 $request->addPost('current_screen_key', 'tos')
                         ->addPost('updates', json_encode(['age_consent_state' => '2', 'tos_data_policy_consent_state' => '2']));
-                        // no break
+                // no break
             default:
                 break;
         }
@@ -2939,9 +2952,9 @@ class Internal extends RequestCollection
     /**
      * Get notes.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getNotes()
     {
@@ -2952,9 +2965,9 @@ class Internal extends RequestCollection
     /**
      * Get nav bar camera destination.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getNavBarCameraDestination()
     {
@@ -2978,9 +2991,9 @@ class Internal extends RequestCollection
      *                                            media Items.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\MediaSeenResponse
+     * @return Response\MediaSeenResponse
      *
      * @see Story::markMediaSeen()
      * @see Location::markStoryMediaSeen()
@@ -2990,8 +3003,8 @@ class Internal extends RequestCollection
         array $items,
         $sourceId = null,
         $module = 'feed_timeline',
-        $skippedItems = [])
-    {
+        $skippedItems = [],
+    ) {
         // Build the list of seen media, with human randomization of seen-time.
         $reels = [];
         $maxSeenAt = time(); // Get current global UTC timestamp.
@@ -3036,7 +3049,7 @@ class Internal extends RequestCollection
             ->setIsBodyCompressed(true)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('container_module', $module)
             ->addPost('reels', $reels)
             ->addPost('reel_media_skipped', $skippedItems)
@@ -3058,13 +3071,13 @@ class Internal extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      * @throws \LogicException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
      * @return Response
      */
     public function configureWithRetries(
-        callable $configurator)
-    {
+        callable $configurator,
+    ) {
         $attempt = 0;
         $lastError = null;
         while (true) {
@@ -3132,9 +3145,9 @@ class Internal extends RequestCollection
                             'You need to reupload the media (%s).',
                             // We are reading a property that isn't defined in the class
                             // property map, so we must use "has" first, to ensure it exists.
-                            ($result->hasErrorTitle() && is_string($result->getErrorTitle())
+                            $result->hasErrorTitle() && is_string($result->getErrorTitle())
                              ? $result->getErrorTitle()
-                             : 'unknown error')
+                             : 'unknown error'
                         ));
                     } elseif ($result->isOk()) {
                         return $result;
@@ -3163,17 +3176,17 @@ class Internal extends RequestCollection
      * @param string   $uploadId  Media Upload ID.
      * @param string[] $pdqHashes Array of PDQ Hashes.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function updateMediaWithPdqHashes(
         $uploadId,
-        $pdqHashes)
-    {
+        $pdqHashes,
+    ) {
         $request = $this->ig->request('media/update_media_with_pdq_hash_info/')
              ->addPost('upload_id', $uploadId)
-             //->addPost('_csrftoken', $this->ig->client->getToken())
+             // ->addPost('_csrftoken', $this->ig->client->getToken())
              ->addPost('_uid', $this->ig->account_id)
              ->addPost('_uuid', $this->ig->uuid);
 
@@ -3200,7 +3213,7 @@ class Internal extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      * @throws \LogicException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
      * @return Response\ResumableUploadResponse
      */
@@ -3208,8 +3221,8 @@ class Internal extends RequestCollection
         MediaDetails $mediaDetails,
         Request $offsetTemplate,
         Request $uploadTemplate,
-        $skipGet)
-    {
+        $skipGet,
+    ) {
         // Open file handle.
         $handle = fopen($mediaDetails->getFilename(), 'rb');
         if ($handle === false) {
@@ -3284,19 +3297,19 @@ class Internal extends RequestCollection
      *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\UploadPhotoResponse
+     * @return Response\UploadPhotoResponse
      */
     protected function _uploadPhotoInOnePiece(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         // Prepare payload for the upload request.
         $request = $this->ig->request('upload/photo/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addFile(
                 'photo',
                 $internalMetadata->getPhotoDetails()->getFilename(),
@@ -3321,14 +3334,14 @@ class Internal extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      * @throws \LogicException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     protected function _uploadResumablePhoto(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         $photoDetails = $internalMetadata->getPhotoDetails();
 
         if ($targetFeed === Constants::FEED_DIRECT) {
@@ -3336,12 +3349,13 @@ class Internal extends RequestCollection
         } else {
             $url = 'https://i.instagram.com/rupload_igphoto';
         }
-        $endpoint = sprintf('%s/%s_%d_%d',
+        $endpoint = sprintf(
+            '%s/%s_%d_%d',
             $url,
             $internalMetadata->getUploadId(),
             0,
             Utils::hashCode($photoDetails->getFilename())
-            //time()
+            // time()
         );
 
         $uploadParams = $this->_getPhotoUploadParams($targetFeed, $internalMetadata);
@@ -3417,18 +3431,20 @@ class Internal extends RequestCollection
      */
     protected function _useResumablePhotoUploader(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE_ALBUM:
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_sidecar_photo_fbupload_universe',
-                    'is_enabled_fbupload_sidecar_photo');
+                    'is_enabled_fbupload_sidecar_photo'
+                );
                 break;
             default:
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_photo_fbupload_universe',
-                    'is_enabled_fbupload_photo');
+                    'is_enabled_fbupload_photo'
+                );
         }
 
         return $result;
@@ -3442,8 +3458,8 @@ class Internal extends RequestCollection
      * @return array|null
      */
     protected function _getFirstMissingRange(
-        $ranges)
-    {
+        $ranges,
+    ) {
         preg_match_all('/(?<start>\d+)-(?<end>\d+)\/(?<total>\d+)/', $ranges, $matches, PREG_SET_ORDER);
         if (!count($matches)) {
             return;
@@ -3484,14 +3500,14 @@ class Internal extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      * @throws \LogicException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\UploadVideoResponse
+     * @return Response\UploadVideoResponse
      */
     protected function _uploadVideoChunks(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         $videoFilename = $internalMetadata->getVideoDetails()->getFilename();
 
         // To support video uploads to albums, we MUST fake-inject the
@@ -3673,18 +3689,18 @@ class Internal extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      * @throws \LogicException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     protected function _uploadSegmentedVideo(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         $videoDetails = $internalMetadata->getVideoDetails();
 
         // We must split the video into segments before running any requests.
-        //$segments = $this->_splitVideoIntoSegments($targetFeed, $videoDetails);
+        // $segments = $this->_splitVideoIntoSegments($targetFeed, $videoDetails);
         $segments = [$videoDetails]; // 1 segment, no split.
 
         $uploadParams = $this->_getVideoUploadParams($targetFeed, $internalMetadata);
@@ -3716,7 +3732,7 @@ class Internal extends RequestCollection
         try {
             $offset = 0;
             // Yep, no UUID here like in other resumable uploaders. Seems like a bug.
-            $waterfallId = sprintf('%s_%s_Mixed_0', $internalMetadata->getUploadId(), bin2hex(random_bytes(6))); //Utils::generateUploadId();
+            $waterfallId = sprintf('%s_%s_Mixed_0', $internalMetadata->getUploadId(), bin2hex(random_bytes(6))); // Utils::generateUploadId();
             foreach ($segments as $idx => $segment) {
                 $endpoint = sprintf(
                     'https://i.instagram.com/rupload_igvideo/%s-%d-%d-%d-%d',
@@ -3733,7 +3749,7 @@ class Internal extends RequestCollection
                     ->addHeader('Segment-Start-Offset', $offset)
                     // 1 => Audio, 2 => Video, 3 => Mixed.
                     ->addHeader('Segment-Type', $segment->getAudioCodec() !== null ? 1 : 2)
-                    //->addHeader('Stream-Id', $streamId)
+                    // ->addHeader('Stream-Id', $streamId)
                     ->addHeader('X_FB_VIDEO_WATERFALL_ID', $waterfallId)
                     ->addHeader('X-Instagram-Rupload-Params', json_encode($uploadParams));
 
@@ -3816,18 +3832,18 @@ class Internal extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      * @throws \LogicException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     protected function _uploadSegmentedVideoFacebook(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         $videoDetails = $internalMetadata->getVideoDetails();
 
         // We must split the video into segments before running any requests.
-        //$segments = $this->_splitVideoIntoSegments($targetFeed, $videoDetails);
+        // $segments = $this->_splitVideoIntoSegments($targetFeed, $videoDetails);
 
         $uploadParams = $this->_getVideoUploadParams($targetFeed, $internalMetadata);
         $uploadParams = Utils::reorderByHashCode($uploadParams);
@@ -3848,7 +3864,7 @@ class Internal extends RequestCollection
                 $uploaderType,
                 $internalMetadata->getUploadId(),
                 0,
-                Utils::hashCode($videoDetails->getFilename()) & 0xfffffff
+                Utils::hashCode($videoDetails->getFilename()) & 0xFFFFFFF
             );
 
             $offsetTemplate = new Request($this->ig, $endpoint, $this->ig->customResolver);
@@ -3857,7 +3873,7 @@ class Internal extends RequestCollection
             }
 
             // 1 => Audio, 2 => Video, 3 => Mixed.
-            //->addHeader('Segment-Type', $segment->getAudioCodec() !== null ? 1 : 2)
+            // ->addHeader('Segment-Type', $segment->getAudioCodec() !== null ? 1 : 2)
 
             $uploadTemplate = clone $offsetTemplate;
             $uploadTemplate
@@ -3883,14 +3899,14 @@ class Internal extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      * @throws \LogicException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     protected function _uploadResumableVideo(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         $rurCookie = $this->ig->client->getCookie('rur', 'i.instagram.com');
         if ($rurCookie === null || $rurCookie->getValue() === '') {
             throw new \RuntimeException(
@@ -3900,7 +3916,8 @@ class Internal extends RequestCollection
 
         $videoDetails = $internalMetadata->getVideoDetails();
 
-        $endpoint = sprintf('https://i.instagram.com/rupload_igvideo/%s_%d_%d?target=%s',
+        $endpoint = sprintf(
+            'https://i.instagram.com/rupload_igvideo/%s_%d_%d?target=%s',
             $internalMetadata->getUploadId(),
             0,
             Utils::hashCode($videoDetails->getFilename()),
@@ -3940,8 +3957,8 @@ class Internal extends RequestCollection
      */
     protected function _useSegmentedVideoUploader(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         // ffmpeg is required for video segmentation.
         try {
             FFmpeg::factory();
@@ -3986,18 +4003,21 @@ class Internal extends RequestCollection
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_video_segmented_upload_universe',
                     'segment_enabled_feed',
-                    true);
+                    true
+                );
                 break;
             case Constants::FEED_DIRECT:
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_direct_video_segmented_upload_universe',
-                    'is_enabled_segment_direct');
+                    'is_enabled_segment_direct'
+                );
                 break;
             case Constants::FEED_STORY:
             case Constants::FEED_DIRECT_STORY:
                 $result = $this->ig->isExperimentEnabled(
-                    '34393', //ig_android_reel_raven_video_segmented_upload_universe',
-                    7); //'segment_enabled_story_raven');
+                    '34393', // ig_android_reel_raven_video_segmented_upload_universe',
+                    7
+                ); // 'segment_enabled_story_raven');
                 break;
             case Constants::FEED_TV:
                 $result = true;
@@ -4006,7 +4026,8 @@ class Internal extends RequestCollection
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_video_segmented_upload_universe',
                     'segment_enabled_unknown',
-                    true);
+                    true
+                );
         }
 
         return $result;
@@ -4022,33 +4043,38 @@ class Internal extends RequestCollection
      */
     protected function _useResumableVideoUploader(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE_ALBUM:
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_fbupload_sidecar_video_universe',
-                    'is_enabled_fbupload_sidecar_video');
+                    'is_enabled_fbupload_sidecar_video'
+                );
                 break;
             case Constants::FEED_TIMELINE:
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_upload_reliability_universe',
-                    'is_enabled_fbupload_followers_share');
+                    'is_enabled_fbupload_followers_share'
+                );
                 break;
             case Constants::FEED_DIRECT:
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_upload_reliability_universe',
-                    'is_enabled_fbupload_direct_share');
+                    'is_enabled_fbupload_direct_share'
+                );
                 break;
             case Constants::FEED_STORY:
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_upload_reliability_universe',
-                    'is_enabled_fbupload_reel_share');
+                    'is_enabled_fbupload_reel_share'
+                );
                 break;
             case Constants::FEED_DIRECT_STORY:
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_upload_reliability_universe',
-                    'is_enabled_fbupload_story_share');
+                    'is_enabled_fbupload_story_share'
+                );
                 break;
             case Constants::FEED_TV:
                 $result = true;
@@ -4056,7 +4082,8 @@ class Internal extends RequestCollection
             default:
                 $result = $this->ig->isExperimentEnabled(
                     'ig_android_upload_reliability_universe',
-                    'is_enabled_fbupload_unknown');
+                    'is_enabled_fbupload_unknown'
+                );
         }
 
         return $result;
@@ -4087,8 +4114,8 @@ class Internal extends RequestCollection
      */
     protected function _getPhotoUploadParams(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         // Common params.
         $result = [
             'upload_id'         => (string) $internalMetadata->getUploadId(),
@@ -4140,8 +4167,8 @@ class Internal extends RequestCollection
      */
     protected function _getVideoUploadParams(
         $targetFeed,
-        InternalMetadata $internalMetadata)
-    {
+        InternalMetadata $internalMetadata,
+    ) {
         $videoDetails = $internalMetadata->getVideoDetails();
         // Common params.
         $result = [
@@ -4205,8 +4232,8 @@ class Internal extends RequestCollection
      */
     protected function _findSegments(
         $outputDirectory,
-        $prefix)
-    {
+        $prefix,
+    ) {
         // Video segments will be uploaded before the audio one.
         $result = glob("{$outputDirectory}/{$prefix}.video.*.mp4");
 
@@ -4234,9 +4261,9 @@ class Internal extends RequestCollection
     protected function _splitVideoIntoSegments(
         $targetFeed,
         VideoDetails $videoDetails,
-        FFmpeg $ffmpeg = null,
-        $outputDirectory = null)
-    {
+        ?FFmpeg $ffmpeg = null,
+        $outputDirectory = null,
+    ) {
         if ($ffmpeg === null) {
             $ffmpeg = FFmpeg::factory();
         }
@@ -4286,6 +4313,7 @@ class Internal extends RequestCollection
             foreach ($files as $file) {
                 @unlink($file);
             }
+
             // Re-throw the exception.
             throw $e;
         }
@@ -4365,9 +4393,9 @@ class Internal extends RequestCollection
     /**
      * Write capabilities.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function writeSupportedCapabilities()
     {
@@ -4383,13 +4411,13 @@ class Internal extends RequestCollection
      *
      * @param string $source Source.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getAsyncNdxIgSteps(
-        $source)
-    {
+        $source,
+    ) {
         return $this->ig->request('devices/ndx/api/async_get_ndx_ig_steps/')
             ->addParam('ndx_request_source', $source)
             ->getResponse(new Response\GenericResponse());
@@ -4398,9 +4426,9 @@ class Internal extends RequestCollection
     /**
      * Get bloks save credentials screen.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getBloksSaveCredentialsScreen()
     {
@@ -4421,9 +4449,9 @@ class Internal extends RequestCollection
     /**
      * Get bloks hypercard entrypoint.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getBloksHypercardEntrypoint()
     {
@@ -4450,8 +4478,8 @@ class Internal extends RequestCollection
      * @return int
      */
     protected function _getTargetSegmentDuration(
-        $targetFeed)
-    {
+        $targetFeed,
+    ) {
         switch ($targetFeed) {
             case Constants::FEED_DIRECT:
             case Constants::FEED_TIMELINE:
@@ -4484,8 +4512,8 @@ class Internal extends RequestCollection
      * @return string
      */
     protected function _getQuickPromotionSurface(
-        $surfaces)
-    {
+        $surfaces,
+    ) {
         $qps = [
             'queries'    => [],
             'triggers'   => [],
@@ -4550,8 +4578,8 @@ class Internal extends RequestCollection
      * @return string
      */
     protected function _getQuickPromotionSurfaceQueryString(
-        $darkMode)
-    {
+        $darkMode,
+    ) {
         $query = 'Query QuickPromotionSurfaceQuery: Viewer{viewer(){eligible_promotions.trigger_context_v2(<trigger_context_v2>).ig_parameters(<ig_parameters>).trigger_name(<trigger_name>).surface_nux_id(<surface>).external_gating_permitted_qps(<external_gating_permitted_qps>).supports_client_filters(true).include_holdouts(true){edges{client_ttl_seconds,log_eligibility_waterfall,is_holdout,priority,time_range{start,end},node{id,promotion_id,logging_data,is_server_force_pass,max_impressions,triggers,contextual_filters{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}}}}}},is_uncancelable,template{name,parameters{name,required,bool_value,string_value,color_value}},creatives{title{text},content{text},footer{text},social_context{text},social_context_images,primary_action{title{text},url,limit,dismiss_promotion},secondary_action{title{text},url,limit,dismiss_promotion},dismiss_action{title{text},url,limit,dismiss_promotion},bullet_list{title,subtitle,icon{uri,width,height}}image.scale(<scale>){uri,width,height}';
         if ($darkMode) {
             $query .= ',dark_mode_image.scale(<scale>){uri,width,height}';

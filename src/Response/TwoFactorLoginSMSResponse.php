@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class TwoFactorLoginSMSResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'two_factor_required' => 'bool',
         'two_factor_info'     => 'Model\TwoFactorInfo',
     ];

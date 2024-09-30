@@ -54,7 +54,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StoryQuestionResponderInfos extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'question_id'                   => 'string',
         'question'                      => 'string',
         'question_type'                 => 'string',

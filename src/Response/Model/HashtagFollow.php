@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class HashtagFollow extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                                     => 'string',
         'name'                                   => 'string',
         'follow_status'                          => 'int',

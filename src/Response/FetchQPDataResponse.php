@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class FetchQPDataResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'request_status'          => 'string',
         'extra_info'              => 'Model\QPExtraInfo[]',
         'qp_data'                 => 'Model\QPData[]',

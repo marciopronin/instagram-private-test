@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SessionInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'cookies'                        => 'Cookie[]',
         'authorization_header'           => 'AuthorizationHeader',
     ];

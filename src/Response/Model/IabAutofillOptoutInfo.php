@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class IabAutofillOptoutInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'domain'                            => 'string',
         'is_iab_autofill_optout'            => 'bool',
     ];

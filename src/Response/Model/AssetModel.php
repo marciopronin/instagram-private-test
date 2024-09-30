@@ -34,7 +34,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class AssetModel extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'asset_compression_type'                   => 'string',
         'asset_url'                                => 'string',
         'id'                                       => 'string',

@@ -29,13 +29,13 @@ class InstagramPhoto extends InstagramMedia
      *
      * @var int
      */
-    const JPEG_QUALITY = 95;
+    public const JPEG_QUALITY = 95;
     /**
      * Output WEBP quality.
      *
      * @var int
      */
-    const WEBP_QUALITY = 100;
+    public const WEBP_QUALITY = 100;
 
     protected $_options = [];
 
@@ -51,8 +51,8 @@ class InstagramPhoto extends InstagramMedia
      */
     public function __construct(
         $inputFile,
-        array $options = [])
-    {
+        array $options = [],
+    ) {
         parent::__construct($inputFile, $options);
         $this->_details = new PhotoDetails($this->_inputFile);
         $this->_options = $options;
@@ -68,8 +68,8 @@ class InstagramPhoto extends InstagramMedia
     protected function _createOutputFile(
         Rectangle $srcRect,
         Rectangle $dstRect,
-        Dimensions $canvas)
-    {
+        Dimensions $canvas,
+    ) {
         $outputFile = null;
 
         try {
@@ -163,7 +163,7 @@ class InstagramPhoto extends InstagramMedia
         $source,
         Rectangle $srcRect,
         Rectangle $dstRect,
-        Dimensions $canvas
+        Dimensions $canvas,
     ) {
         // If our input image pixels are stored rotated, swap all coordinates.
         if ($this->_details->hasSwappedAxes()) {
@@ -192,12 +192,17 @@ class InstagramPhoto extends InstagramMedia
 
         // Copy the resized (and resampled) image onto the new canvas.
         if (imagecopyresampled(
-                $output, $source,
-                $dstRect->getX(), $dstRect->getY(),
-                $srcRect->getX(), $srcRect->getY(),
-                $dstRect->getWidth(), $dstRect->getHeight(),
-                $srcRect->getWidth(), $srcRect->getHeight()
-            ) === false) {
+            $output,
+            $source,
+            $dstRect->getX(),
+            $dstRect->getY(),
+            $srcRect->getX(),
+            $srcRect->getY(),
+            $dstRect->getWidth(),
+            $dstRect->getHeight(),
+            $srcRect->getWidth(),
+            $srcRect->getHeight()
+        ) === false) {
             throw new \RuntimeException('Failed to resample image.');
         }
 
@@ -219,8 +224,8 @@ class InstagramPhoto extends InstagramMedia
      */
     protected function _rotateResource(
         $original,
-        $bgColor)
-    {
+        $bgColor,
+    ) {
         $angle = 0;
         $flip = null;
         // Find out angle and flip.

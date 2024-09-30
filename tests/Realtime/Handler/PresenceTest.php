@@ -18,8 +18,8 @@ class PresenceTest extends TestCase
      * @return Message
      */
     protected function _buildMessage(
-        $payload)
-    {
+        $payload,
+    ) {
         return new Message('presence_subscribe', Client::api_body_decode($payload));
     }
 

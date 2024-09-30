@@ -5,28 +5,28 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $usernamesToFollow = ['selenagomez'];
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 // Explore and search session, will be used for the Graph API events.
-$searchSession = \InstagramAPI\Signatures::generateUUID();
+$searchSession = InstagramAPI\Signatures::generateUUID();
 
 $topicData =
 [
@@ -93,7 +93,12 @@ try {
                 $ig->event->sendSimilarEntityImpression($userId, $suggestions[$i]->getPk());
             }
         }
-        $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
+        $ig->event->sendNavigation(
+            'button',
+            'blended_search',
+            'profile',
+            null,
+            null,
             [
                 'rank_token'        => $rankToken,
                 'query_text'        => $usernameToFollow,
@@ -104,7 +109,7 @@ try {
                 'user_id'           => $userId,
             ]
         );
-        $traySession = \InstagramAPI\Signatures::generateUUID();
+        $traySession = InstagramAPI\Signatures::generateUUID();
         $ig->highlight->getUserFeed($userId);
         $ig->story->getUserStoryFeed($userId);
         $userFeed = $ig->timeline->getUserFeed($userId);
@@ -136,7 +141,9 @@ try {
         $ig->event->sendProfileView($userId);
         $ig->event->sendFollowButtonTapped($userId, 'profile', 'blended_search');
         $ig->people->follow($userId);
-        $ig->event->sendProfileAction('follow', $userId,
+        $ig->event->sendProfileAction(
+            'follow',
+            $userId,
             [
                 [
                     'module'        => 'blended_search',
@@ -161,7 +168,7 @@ try {
             ]
         );
 
-        $rankToken = \InstagramAPI\Signatures::generateUUID();
+        $rankToken = InstagramAPI\Signatures::generateUUID();
         $ig->event->sendSearchFollowButtonClicked($userId, 'profile', $rankToken);
 
         $chainingUsers = $ig->discover->getChainingUsers($userId, 'profile')->getUsers();
@@ -181,6 +188,6 @@ try {
     $ig->discover->clearSearchHistory();
     $ig->event->sendClearSearchHistory();
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

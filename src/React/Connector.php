@@ -38,8 +38,8 @@ class Connector implements ConnectorInterface
      */
     public function __construct(
         Instagram $instagram,
-        LoopInterface $loop)
-    {
+        LoopInterface $loop,
+    ) {
         $this->_instagram = $instagram;
         $this->_loop = $loop;
 
@@ -48,8 +48,8 @@ class Connector implements ConnectorInterface
 
     /** {@inheritdoc} */
     public function connect(
-        $uri)
-    {
+        $uri,
+    ) {
         $uriObj = new Uri($uri);
         $host = $this->_instagram->client->zeroRating()->rewrite($uriObj->getHost());
         $uriObj = $uriObj->withHost($host);
@@ -82,8 +82,8 @@ class Connector implements ConnectorInterface
      */
     protected function _getSecureConnector(
         array $secureContext = [],
-        $proxyAddress = null)
-    {
+        $proxyAddress = null,
+    ) {
         $connector = new SocketConnector($this->_loop, [
             'tcp'     => true,
             'tls'     => false,
@@ -113,8 +113,8 @@ class Connector implements ConnectorInterface
      */
     protected function _getProxyForHost(
         $host,
-        $proxyConfig = null)
-    {
+        $proxyConfig = null,
+    ) {
         // Empty config => no proxy.
         if (empty($proxyConfig)) {
             return;
@@ -151,8 +151,8 @@ class Connector implements ConnectorInterface
      * @see http://docs.guzzlephp.org/en/stable/request-options.html#verify
      */
     protected function _getSecureContext(
-        $config)
-    {
+        $config,
+    ) {
         $context = [];
         if ($config === true) {
             // PHP 5.6 or greater will find the system cert by default. When
@@ -194,8 +194,8 @@ class Connector implements ConnectorInterface
     protected function _wrapConnectorIntoProxy(
         ConnectorInterface $connector,
         $proxyAddress,
-        array $secureContext = [])
-    {
+        array $secureContext = [],
+    ) {
         if (strpos($proxyAddress, '://') === false) {
             $scheme = 'http';
         } else {

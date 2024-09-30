@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class PrimaryCountryInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'is_visible'              => 'bool',
         'has_country'             => 'bool',
         'country_name'            => 'string',

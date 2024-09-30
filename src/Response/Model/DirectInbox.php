@@ -42,7 +42,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectInbox extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_older'             => 'bool',
         'unseen_count'          => 'int',
         'unseen_count_ts'       => 'string', // Is a timestamp.

@@ -14,14 +14,14 @@ use InstagramAPI\AutoPropertyMapper;
  */
 abstract class RealtimeEvent extends AutoPropertyMapper
 {
-    const SUBSCRIBED = 'subscribed';
-    const UNSUBSCRIBED = 'unsubscribed';
-    const KEEPALIVE = 'keepalive';
-    const PATCH = 'patch';
-    const BROADCAST_ACK = 'broadcast-ack';
-    const ERROR = 'error';
+    public const SUBSCRIBED = 'subscribed';
+    public const UNSUBSCRIBED = 'unsubscribed';
+    public const KEEPALIVE = 'keepalive';
+    public const PATCH = 'patch';
+    public const BROADCAST_ACK = 'broadcast-ack';
+    public const ERROR = 'error';
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'event' => 'string',
     ];
 }

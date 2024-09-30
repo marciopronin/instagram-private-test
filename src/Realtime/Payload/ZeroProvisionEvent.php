@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ZeroProvisionEvent extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'device_id'             => 'string',
         'product_name'          => 'string',
         'zero_provisioned_time' => 'string',

@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class IOSLinks extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'linkType'    => 'int',
         'canvasDocId' => 'string',
     ];

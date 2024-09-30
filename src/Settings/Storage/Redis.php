@@ -32,7 +32,7 @@ class Redis implements StorageInterface
      * {@inheritdoc}
      */
     public function openLocation(
-        array $locationConfig
+        array $locationConfig,
     ) {
         if (isset($locationConfig['redis'])) {
             // Pre-provided connection to re-use instead of creating a new one.
@@ -76,7 +76,7 @@ class Redis implements StorageInterface
      * {@inheritdoc}
      */
     public function hasUser(
-        $username
+        $username,
     ) {
         return $this->_redis->hExists($username, 'settings');
     }
@@ -88,7 +88,7 @@ class Redis implements StorageInterface
      */
     public function moveUser(
         $oldUsername,
-        $newUsername
+        $newUsername,
     ) {
         // Verify that the old username settings exists and get data
         $oldUserData = $this->_redis->hmGet($oldUsername, ['settings', 'cookies']);
@@ -131,7 +131,7 @@ class Redis implements StorageInterface
      * {@inheritdoc}
      */
     public function deleteUser(
-        $username
+        $username,
     ) {
         $response = $this->_redis->hDel($username, 'settings', 'cookies');
         if ($response === 0) {
@@ -145,7 +145,7 @@ class Redis implements StorageInterface
      * {@inheritdoc}
      */
     public function openUser(
-        $username
+        $username,
     ) {
         $this->_username = $username;
 
@@ -184,7 +184,7 @@ class Redis implements StorageInterface
      */
     public function saveUserSettings(
         array $userSettings,
-        $triggerKey
+        $triggerKey,
     ) {
         // Store the settings as a JSON blob.
         $encodedData = json_encode($userSettings);
@@ -233,7 +233,7 @@ class Redis implements StorageInterface
      * {@inheritdoc}
      */
     public function saveUserCookies(
-        $rawData
+        $rawData,
     ) {
         // Store the raw cookie data as-provided.
         $response = $this->_redis->hSet($this->_username, 'cookies', $rawData);
@@ -273,7 +273,7 @@ class Redis implements StorageInterface
     /**
      * Check the connection by pinging it.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     private function _checkConnection()
     {

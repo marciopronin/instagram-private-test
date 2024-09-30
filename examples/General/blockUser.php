@@ -5,18 +5,18 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -25,7 +25,7 @@ try {
     $ig->event->sendNavigationTabClicked('main_home', 'main_profile', 'feed_timeline');
     $ig->event->sendNavigation('main_profile', 'feed_timeline', 'self_profile');
 
-    $traySession = \InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
 
     $ig->highlight->getSelfUserFeed();
     $ig->people->getSelfInfo();
@@ -55,15 +55,26 @@ try {
     $ig->event->sendProfileAction('tap_follow_details', $ig->account_id, $navstack, ['module' => 'self']);
     $ig->event->sendProfileAction('tap_followers', $ig->account_id, $navstack, ['module' => 'self']);
 
-    $ig->event->sendNavigation('button', 'self_profile', 'self_following', null, null,
-    [
-        'source_tab'    => 'following',
-        'dest_tab'      => 'following',
-    ]);
+    $ig->event->sendNavigation(
+        'button',
+        'self_profile',
+        'self_following',
+        null,
+        null,
+        [
+            'source_tab'    => 'following',
+            'dest_tab'      => 'following',
+        ]
+    );
 
     $ig->event->sendProfileAction('tap_followers', $ig->account_id, $navstack, ['module' => 'self']);
 
-    $ig->event->sendNavigation('following', 'self_unified_follow_lists', 'self_unified_follow_lists', null, null,
+    $ig->event->sendNavigation(
+        'following',
+        'self_unified_follow_lists',
+        'self_unified_follow_lists',
+        null,
+        null,
         [
             'source_tab'    => 'following',
             'dest_tab'      => 'following',
@@ -72,11 +83,11 @@ try {
 
     $ig->event->sendNavigation('button', 'self_unified_follow_lists', 'profile');
 
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
     $followings = $ig->people->getSelfFollowing($rankToken)->getUsers();
     $userId = $followings[0]->getPk();
 
-    $traySession = \InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
     $ig->story->getUserStoryFeed($userId);
     $userFeed = $ig->timeline->getUserFeed($userId);
@@ -128,7 +139,7 @@ try {
     usleep(mt_rand(1500000, 2500000));
     $ig->event->sendProfileView($userId);
 
-    $blockRequestId = \InstagramAPI\Signatures::generateUUID();
+    $blockRequestId = InstagramAPI\Signatures::generateUUID();
     $ig->event->sendUserReport($userId, 'open_user_overflow');
     $navstack =
     [
@@ -161,6 +172,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

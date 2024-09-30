@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class LoginActivityResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'suspicious_logins'             => 'Model\SuspiciousLogin[]',
         'sessions'                      => 'Model\Session[]',
     ];

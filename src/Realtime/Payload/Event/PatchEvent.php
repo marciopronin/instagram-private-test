@@ -34,7 +34,7 @@ use InstagramAPI\Realtime\Payload\RealtimeEvent;
  */
 class PatchEvent extends RealtimeEvent
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'data'          => 'PatchEventOp[]',
         'message_type'  => 'int',
         'seq_id'        => 'int',

@@ -5,31 +5,31 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $usersToFollow = ['selenagomez'];
-//////////////////////
+// ////////////////////
 
 // YOU SHOULD ONLY USE THIS TEMPLATE IN YOU ADD MORE ROUTINES IN BETWEEN
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -47,7 +47,7 @@ try {
     // Get explore feed sections and items.
     $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', $searchSession)->getSectionalItems();
     $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }
 
@@ -105,7 +105,12 @@ try {
                 $ig->event->sendSimilarEntityImpression($userId, $suggestions[$i]->getPk());
             }
         }
-        $ig->event->sendNavigation('button', 'search_users', 'profile', null, null,
+        $ig->event->sendNavigation(
+            'button',
+            'search_users',
+            'profile',
+            null,
+            null,
             [
                 'rank_token'        => $rankToken,
                 'query_text'        => $usernameToFollow,
@@ -116,7 +121,7 @@ try {
                 'user_id'           => $userId,
             ]
         );
-        $traySession = \InstagramAPI\Signatures::generateUUID();
+        $traySession = InstagramAPI\Signatures::generateUUID();
         $ig->highlight->getUserFeed($userId);
         $ig->story->getUserStoryFeed($userId);
         $userFeed = $ig->timeline->getUserFeed($userId);
@@ -135,7 +140,9 @@ try {
 
         usleep(mt_rand(1500000, 2500000));
         $ig->event->sendProfileView($userId);
-        $ig->event->sendFollowButtonTapped($userId, 'profile',
+        $ig->event->sendFollowButtonTapped(
+            $userId,
+            'profile',
             [
                 [
                     'module'        => 'blended_search',
@@ -160,7 +167,9 @@ try {
             ]
         );
         $ig->people->follow($userId);
-        $ig->event->sendProfileAction('follow', $userId,
+        $ig->event->sendProfileAction(
+            'follow',
+            $userId,
             [
                 [
                     'module'        => 'blended_search',
@@ -185,7 +194,7 @@ try {
             ]
         );
 
-        $rankToken = \InstagramAPI\Signatures::generateUUID();
+        $rankToken = InstagramAPI\Signatures::generateUUID();
         $ig->event->sendSearchFollowButtonClicked($userId, 'profile', $rankToken);
 
         $chainingUsers = $ig->discover->getChainingUsers($userId, 'profile')->getUsers();
@@ -206,6 +215,6 @@ try {
         $ig->event->updateAppState('profile', 'foreground');
         $ig->event->sendNavigation('back', 'profile', 'blended_search');
     }
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

@@ -5,23 +5,23 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////// MEDIA ////////
+// ///// MEDIA ////////
 $photoFilename = '';
 $captionText = '';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -39,25 +39,25 @@ try {
     // the input needs processing, and it never overwrites your original file.
     //
     // Also note that it has lots of options, so read its class documentation!
-    $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename);
+    $photo = new InstagramAPI\Media\Photo\InstagramPhoto($photoFilename);
 
     // Click on the camera icon and move to the gallery pick or camera.
     $ig->event->sendNavigation('camera_action_bar_button_main_feed', 'feed_timeline', 'gallery_picker');
     $startTime = round(microtime(true) * 1000);
-    $waterfallId = \InstagramAPI\Signatures::generateUUID();
+    $waterfallId = InstagramAPI\Signatures::generateUUID();
     // Open Photo camera tab
     $ig->event->sendOpenPhotoCameraTab($waterfallId, $startTime, round(microtime(true) * 1000));
     // Click on shutter (click to capture).
     $ig->event->sendShutterClickInCamera($waterfallId, $startTime, round(microtime(true) * 1000));
     // Start a new session ID for the gallery edit.
-    $editSessionId = \InstagramAPI\Signatures::generateUUID();
+    $editSessionId = InstagramAPI\Signatures::generateUUID();
     $ig->event->sendStartGalleryEditSession($editSessionId);
     // Navigate to the filter module.
     $ig->event->sendNavigation('button', 'gallery_picker', 'photo_filter');
     // Send filter photo event.
     $ig->event->sendFilterPhoto($waterfallId, $startTime, round(microtime(true) * 1000));
     // Send IG Media creation. Media is being generated.
-    $igMediaCreationWaterfallId = \InstagramAPI\Signatures::generateUUID();
+    $igMediaCreationWaterfallId = InstagramAPI\Signatures::generateUUID();
     $ig->event->sendIGMediaCreation($igMediaCreationWaterfallId, $startTime, round(microtime(true) * 1000), 'photo');
     // Finish media filter. We don't apply any filter.
     $ig->event->sendFilterFinish($waterfallId, $startTime, round(microtime(true) * 1000));
@@ -67,15 +67,15 @@ try {
     $ig->event->sendStartShareSession($editSessionId);
     // And now we tell Instagram we will start uploading the media.
     $ig->event->sendShareMedia($waterfallId, $startTime, round(microtime(true) * 1000));
-    //TODO; uploadPhoto should internally call some events related to the media ingest,
-    //TODO; upload success, media publish and related.
+    // TODO; uploadPhoto should internally call some events related to the media ingest,
+    // TODO; upload success, media publish and related.
     $ig->timeline->uploadPhoto($photo->getFile(), ['caption' => $captionText, 'waterfall_id' => $waterfallId]);
     $ig->event->sendNavigation('next', 'photo_filter', 'metadata_followers_share');
     sleep(mt_rand(1, 3));
     $ig->event->sendNavigation('next', 'metadata_followers_share', 'feed_timeline');
 
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     if ($e instanceof InstagramAPI\Exception\LoginRequiredException) {
         echo 'Password was changed or cookie expired. Please login again.';
     } else {

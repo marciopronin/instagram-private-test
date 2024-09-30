@@ -22,12 +22,12 @@ class Creative extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StickerAssetsResponse
+     * @return Response\StickerAssetsResponse
      */
     public function getStickerAssets(
         $stickerType = 'static_stickers',
-        array $location = null)
-    {
+        ?array $location = null,
+    ) {
         if ($stickerType != 'static_stickers') {
             throw new \InvalidArgumentException('You must provide a valid sticker type.');
         }
@@ -56,7 +56,7 @@ class Creative extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StickerTrayResponse
+     * @return Response\StickerTrayResponse
      */
     public function getStickerTray()
     {
@@ -73,7 +73,7 @@ class Creative extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getClipsAssets()
     {
@@ -92,14 +92,14 @@ class Creative extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FaceModelsResponse
+     * @return Response\FaceModelsResponse
      */
     public function getFaceModels()
     {
         return $this->ig->request('creatives/face_models/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('supported_model_compression_type', 'TAR_BROTLI')
             ->addPost('aml_facetracker_model_version', '14')
             ->getResponse(new Response\FaceModelsResponse());
@@ -110,14 +110,14 @@ class Creative extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SegmentationModelsResponse
+     * @return Response\SegmentationModelsResponse
      */
     public function getSegmentationModels()
     {
         return $this->ig->request('creatives/segmentation_models/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('supported_model_compression_type', 'TAR_BROTLI')
             ->addPost('aml_facetracker_model_version', '106')
             ->getResponse(new Response\SegmentationModelsResponse());
@@ -128,14 +128,14 @@ class Creative extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CameraModelsResponse
+     * @return Response\CameraModelsResponse
      */
     public function getCameraModels()
     {
         return $this->ig->request('creatives/camera_models/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('model_request_blobs', json_encode([
                 'type'                              => 'target_recognition',
                 'target_recognition_model_version'  => 9,
@@ -156,15 +156,15 @@ class Creative extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FaceEffectsResponse
+     * @return Response\FaceEffectsResponse
      */
     public function getFaceEffects(
-        array $location = null)
-    {
+        ?array $location = null,
+    ) {
         $request = $this->ig->request('creatives/face_effects/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities());
 
         if ($location !== null) {
@@ -182,7 +182,7 @@ class Creative extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WriteSuppotedCapabilitiesResponse
+     * @return Response\WriteSuppotedCapabilitiesResponse
      */
     public function sendSupportedCapabilities()
     {
@@ -190,7 +190,7 @@ class Creative extends RequestCollection
             ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\WriteSuppotedCapabilitiesResponse());
     }
 

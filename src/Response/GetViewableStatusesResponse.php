@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class GetViewableStatusesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'statuses'           => '',
     ];
 }

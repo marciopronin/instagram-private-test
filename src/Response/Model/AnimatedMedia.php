@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class AnimatedMedia extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'       => 'string',
         'images'   => 'AnimatedMediaImage',
     ];

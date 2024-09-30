@@ -82,7 +82,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Tag extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                           => 'string',
         'name'                         => 'string',
         'media_count'                  => 'int',

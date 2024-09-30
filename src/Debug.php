@@ -16,14 +16,14 @@ class Debug
     /*
      * The path to place debug logs into when $debugLog is true and file storage is not used.
      */
-    public static $debugLogPath = null;
+    public static $debugLogPath;
 
     public static function printRequest(
         $method,
         $endpoint,
         $path = null,
-        $cliDebug = false)
-    {
+        $cliDebug = false,
+    ) {
         if (PHP_SAPI === 'cli') {
             $cMethod = Utils::colouredString("{$method}:  ", 'light_blue');
         } else {
@@ -40,8 +40,8 @@ class Debug
     public static function printUpload(
         $uploadBytes,
         $path = null,
-        $cliDebug = false)
-    {
+        $cliDebug = false,
+    ) {
         if (PHP_SAPI === 'cli') {
             $dat = Utils::colouredString('→ '.$uploadBytes, 'yellow');
         } else {
@@ -59,8 +59,8 @@ class Debug
         $httpCode,
         $bytes,
         $path = null,
-        $cliDebug = false)
-    {
+        $cliDebug = false,
+    ) {
         if (PHP_SAPI === 'cli') {
             if ($cliDebug) {
                 echo Utils::colouredString("← {$httpCode} \t {$bytes}", 'green')."\n";
@@ -79,8 +79,8 @@ class Debug
         $response,
         $truncated = false,
         $path = null,
-        $cliDebug = false)
-    {
+        $cliDebug = false,
+    ) {
         if (PHP_SAPI === 'cli') {
             $res = Utils::colouredString('RESPONSE: ', 'cyan');
         } else {
@@ -98,7 +98,7 @@ class Debug
         if ($truncated && mb_strlen($response, 'utf8') > 1000) {
             $response = mb_substr($response, 0, 1000, 'utf8').'...';
         }
-        if (mb_strpos($response, "\x49"."\x46"."\x00"."\x01", 0, 'US-ASCII')) {
+        if (mb_strpos($response, "\x49\x46\x00\x01", 0, 'US-ASCII')) {
             $response = 'RAW DATA';
         }
 
@@ -113,27 +113,27 @@ class Debug
     public static function printPostData(
         $post,
         $path = null,
-        $cliDebug = false)
-    {
-        $gzip = mb_strpos($post, "\x1f"."\x8b"."\x08", 0, 'US-ASCII') === 0;
+        $cliDebug = false,
+    ) {
+        $gzip = mb_strpos($post, "\x1f\x8b\x08", 0, 'US-ASCII') === 0;
         if (PHP_SAPI === 'cli') {
             $dat = Utils::colouredString(($gzip ? 'DECODED ' : '').'DATA: ', 'yellow');
         } else {
             $dat = 'DATA: ';
         }
         if ($cliDebug) {
-            echo $dat.urldecode(($gzip ? zlib_decode($post) : $post))."\n";
+            echo $dat.urldecode($gzip ? zlib_decode($post) : $post)."\n";
         }
         if (self::$debugLog && ($path !== null)) {
-            file_put_contents(sprintf('%s/%s-%s', $path, date('d-m-Y'), self::$debugLogFile), 'DATA: '.urldecode(($gzip ? zlib_decode($post) : $post))."\n", FILE_APPEND | LOCK_EX);
+            file_put_contents(sprintf('%s/%s-%s', $path, date('d-m-Y'), self::$debugLogFile), 'DATA: '.urldecode($gzip ? zlib_decode($post) : $post)."\n", FILE_APPEND | LOCK_EX);
         }
     }
 
     public static function printEvent(
         $eventBatch,
         $path = null,
-        $cliDebug = false)
-    {
+        $cliDebug = false,
+    ) {
         $eventBatch = json_encode($eventBatch, JSON_PRETTY_PRINT);
         if (PHP_SAPI === 'cli') {
             $event = Utils::colouredString('BATCH EVENT: ', 'light_blue');

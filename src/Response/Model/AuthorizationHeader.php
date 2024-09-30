@@ -14,7 +14,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class AuthorizationHeader extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'value'                        => 'string',
     ];
 }

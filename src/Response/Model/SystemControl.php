@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SystemControl extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'upload_max_bytes'                     => 'int',
         'upload_time_period_sec'               => 'int',
         'upload_bytes_per_update'              => 'int',

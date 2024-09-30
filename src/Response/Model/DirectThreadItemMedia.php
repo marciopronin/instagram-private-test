@@ -34,11 +34,11 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectThreadItemMedia extends AutoPropertyMapper
 {
-    const PHOTO = 1;
-    const VIDEO = 2;
-    const AUDIO = 11;
+    public const PHOTO = 1;
+    public const VIDEO = 2;
+    public const AUDIO = 11;
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         /*
          * A number describing what type of media this is. Should be compared
          * against the `DirectThreadItemMedia::PHOTO` and

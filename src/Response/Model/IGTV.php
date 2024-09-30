@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class IGTV extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'media'                     => 'item',
         'display_content_metadata'  => 'bool',
         'tv_guide'                  => '',

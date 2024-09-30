@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class LiveArchiveSettingsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'live_archive_setting'             => 'string',
     ];
 }

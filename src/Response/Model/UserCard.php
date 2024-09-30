@@ -62,7 +62,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class UserCard extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user'              => 'User',
         'algorithm'         => 'string',
         'social_context'    => 'string',

@@ -50,7 +50,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class PostLiveItem extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'pk'                     => 'string',
         'user'                   => 'User',
         'broadcasts'             => 'Broadcast[]',

@@ -6,7 +6,7 @@ use PhpCsFixer\FixerRunner\Runner;
 use PhpCsFixer\Runner\Parallel\ParallelConfig;
 
 $finder = Finder::create()
-    ->exclude(['wiki', 'documentation', '.php-cs-fixer.dist.php'])
+    ->exclude(['wiki', 'documentation', '.php-cs-fixer.dist.php', '.php-cs-fixer.cache'])
     ->in(__DIR__);
 
 return (new Config())

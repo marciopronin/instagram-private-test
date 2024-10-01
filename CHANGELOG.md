@@ -1,3 +1,10 @@
+# Stable release v22.24.1
+## Date: 01/10/2024
+
+### Updates and fixes
+
+- **Client:** Update `_buildGuzzleOptions()`. Replaced `array_merge_recursive` by `array_replace_recursive`. Keys were not updating on existing ones.
+
 # Stable release v22.24.0
 ## Date: 01/10/2024
 

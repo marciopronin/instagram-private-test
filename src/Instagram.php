@@ -2242,7 +2242,7 @@ class Instagram implements ExperimentsInterface
                             'should_trigger_override_login_success_action'  => 0,
                             'login_credential_type'                         => 'none',
                             'server_login_source'                           => isset($firstMap['server_login_source']) ? $firstMap['server_login_source'] : 'login',
-                            'waterfall_id'                                  => null, // $firstMap['waterfall_id'],
+                            'waterfall_id'                                  => $waterfallId, // $firstMap['waterfall_id'],
                             'login_source'                                  => isset($firstMap['login_source']) ? $firstMap['login_source'] : 'Login',
                             'is_platform_login'                             => intval($this->bloksInfo['is_platform_login'][1]),
                             'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
@@ -2250,12 +2250,12 @@ class Instagram implements ExperimentsInterface
                             'is_from_landing_page'                          => 0,
                             'password_text_input_id'                        => isset($firstMap['password_text_input_id']) ? $firstMap['password_text_input_id'] : '',
                             'is_from_empty_password'                        => 0,
+                            'qe_device_id'                                  => $this->uuid,
                             'ar_event_source'                               => isset($firstMap['ar_event_source']) ? $firstMap['ar_event_source'] : 'login_home_page',
                             'username_text_input_id'                        => isset($firstMap['username_text_input_id']) ? $firstMap['username_text_input_id'] : '',
                             'layered_homepage_experiment_group'             => null,
-                            'should_show_nested_nta_from_aymh'              => 1,
-                            'device_id'                                     => null,
-                            'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                            'device_id'                                     => $this->device_id,
+                            'INTERNAL__latency_qpl_instance_id'             => '1.5544275200408E13', isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                             'reg_flow_source'                               => 'login_home_native_integration_point', // cacheable_aymh_screen
                             'is_caa_perf_enabled'                           => 1,
                             'credential_type'                               => isset($firstMap['credential_type']) ? $firstMap['credential_type'] : 'password',
@@ -6055,6 +6055,14 @@ class Instagram implements ExperimentsInterface
             array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
                 if ($value === $check) {
                     $result = ['event_category' => 'FIRST_PASSWORD_FAILURE'];
+                }
+            });
+        }
+        if (empty($result)) {
+            $check = '\login_failure\\';
+            array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
+                if ($value === $check) {
+                    $result = ['event_category' => 'login_home_page_interaction'];
                 }
             });
         }

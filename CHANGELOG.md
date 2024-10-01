@@ -1,3 +1,17 @@
+# Stable release v22.25.0
+## Date: 01/10/2024
+
+### New features
+
+- **Account:** Add `getUnrecognizedLoginsBloks()`
+
+### Updates and fixes
+
+- **Account:** Update `getLoginActivityBloks`
+- **Constants:** Update to `351.0.0.41.106`
+- **Request:** Update `_addDefaultHeaders()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+
 # Stable release v22.24.1
 ## Date: 01/10/2024
 

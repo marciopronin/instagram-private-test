@@ -501,11 +501,7 @@ class Request
                 $this->_headers['X-IG-Low-Data-Mode-Video'] = 'true';
             }
 
-            if ($this->_parent->isExperimentEnabled('34426', 3, false)) {
-                $this->_headers['X-IG-CONCURRENT-ENABLED'] = $this->_parent->isExperimentEnabled('34426', 5, false);
-            }
-
-            if ($this->_parent->isExperimentEnabled('58922', 15, false)) {
+            if ($this->_parent->isExperimentEnabled('67316', 15, false)) {
                 $this->_headers['X-IG-BLOKS-SERIALIZE-PAYLOAD'] = 'true';
             }
 

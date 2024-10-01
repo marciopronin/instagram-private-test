@@ -16,6 +16,7 @@ sessions/
 vendor/
 .php_cs
 .php_cs.cache
+.php-cs-fixer.cache
 devtools/exif-orientation-examples/
 
 # temporary editor files

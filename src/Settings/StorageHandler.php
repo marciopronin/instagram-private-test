@@ -107,7 +107,7 @@ class StorageHandler
         // 'ig_android_loom_universe',
         // 'ig_android_live_suggested_live_expansion',
         // 'ig_android_live_qa_broadcaster_v1_universe',
-        '34426', // ig_traffic_routing_universe',
+        // '34426', //ig_traffic_routing_universe',
         '25215', // 'ig_android_stories_tray_pagination_killswitch',
         // 'ig_android_video_segmented_upload_universe',
         '26156', // ig_android_eu_configure_disabled',
@@ -126,6 +126,7 @@ class StorageHandler
         '41171', // igd_active_tray (suggestions_enabled, suggested_followers_limit)
         '56721', // banyan/banyan (views) 0x810DA0000023D2
         '72192', // device_status (post param) 0x810EA5000035AA
+        '67316', // X-IG-BLOKS-SERIALIZE-PAYLOAD
     ];
 
     /**

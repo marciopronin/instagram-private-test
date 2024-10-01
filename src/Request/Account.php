@@ -372,7 +372,7 @@ class Account extends RequestCollection
      *
      * @return Response\GenericResponse
      */
-    public function getLoginActivityBloks()
+    public function getUnrecognizedLoginsBloks()
     {
         $response = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.login_activities.unrecognized_logins/')
             ->setSignedPost(false)
@@ -398,6 +398,56 @@ class Account extends RequestCollection
         } catch (\Exception $e) {
             return null;
         }
+    }
+
+    /**
+     * Get login activity.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return Response\GenericResponse
+     */
+    public function getLoginActivityBloks()
+    {
+        $response = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.login_activities/')
+            ->setSignedPost(false)
+            ->addPost('params', json_encode((object) [
+                'client_input_params' => [
+                    'profile_identifier'    => $this->ig->settings->get('fbid_v2'),
+                    'account_type'          => 1,
+                ],
+                'server_params' => [
+                    'is_device_management'              => 1,
+                    'requested_screen_component_type'   => 2,
+                    'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
+                    'INTERNAL_INFRA_screen_id'          => 'login_activities',
+                    'ig_auth_proof_json'                => $this->ig->settings->get('authorization_header'),
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $arrayResponse = $response->asArray();
+
+        $loginActivity = [];
+
+        try {
+            foreach ($arrayResponse['layout']['bloks_payload']['data'] as $data) {
+                if (isset($data['data']['key']) && str_contains($data['data']['key'], 'FX_LOGIN_ACTIVITIES_SESSIONS')) {
+                    $loginActivity[] = $data['data']['initial'];
+                }
+            }
+        } catch (\Exception $e) {
+            return $loginActivity;
+        }
+
+        return $loginActivity;
     }
 
     /**

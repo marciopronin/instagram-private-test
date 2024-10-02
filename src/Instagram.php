@@ -187,6 +187,13 @@ class Instagram implements ExperimentsInterface
     public static $retryOnNetworkException = false;
 
     /**
+     * Retry on NetworkExpcetion sleep.
+     *
+     * @var int
+     */
+    public static $retryOnNetworkExceptionSleep = 5;
+
+    /**
      * Send async.
      *
      * @var bool

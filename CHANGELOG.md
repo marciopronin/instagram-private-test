@@ -1,3 +1,14 @@
+# Stable release v22.25.3
+## Date: 02/10/2024
+
+### New features
+
+- **Instagram:** Add `retryOnNetworkExceptionSleep` static property. 
+
+### Updates and fixes
+
+- **Client:** Update `_guzzleRequest()`
+
 # Stable release v22.25.2
 ## Date: 02/10/2024
 

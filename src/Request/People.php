@@ -296,6 +296,7 @@ class People extends RequestCollection
         $maxId = null,
     ) {
         $request = $this->ig->request('news/inbox/')
+                            ->addParam('could_truncate_feed', 'true')
                             ->addParam('mark_as_seen', $markAsSeen)
                             // ->addParam('feed_type', $feedType)
                             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))

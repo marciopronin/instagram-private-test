@@ -122,11 +122,13 @@ class StorageHandler
         '59489', // direct settings (batch_size, limit)
         '56394', // direct settings (limit)
         '45863', // direct settings (no_pending_badge) 0x8107C0000012F7
-        '26104', // direct settings (thread_message_limit)
+        '26104', // direct settings (thread_message_limit) (maybe limit)
         '41171', // igd_active_tray (suggestions_enabled, suggested_followers_limit)
         '56721', // banyan/banyan (views) 0x810DA0000023D2
         '72192', // device_status (post param) 0x810EA5000035AA
         '67316', // X-IG-BLOKS-SERIALIZE-PAYLOAD
+        '76504', // X-Bloks-Prism-Button-Version 0x81117D00003FD1
+        '62246', // X-Bloks-Prism-Colors-Enabled 0x81093600052121
     ];
 
     /**

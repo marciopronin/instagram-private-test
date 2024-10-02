@@ -5497,7 +5497,7 @@ class Instagram implements ExperimentsInterface
                 $this->client->stopEmulatingBatch();
 
                 try {
-                    $this->direct->getInbox(null, null, 0);
+                    // $this->direct->getInbox(null, null, 0);
                 } catch (\Exception $e) {
                     // pass
                 }
@@ -5515,7 +5515,7 @@ class Instagram implements ExperimentsInterface
             try {
                 try {
                     $this->direct->getPresences();
-                    $this->direct->getInbox(null, null, 20, false, 'all', 'initial_snapshot');
+                    $this->direct->getInbox(null, null, 15, false, 'all', 'initial_snapshot');
 
                     // $this->internal->sendGraph('243882031010379133527862780970', [], 'FBToIGDefaultAudienceBottomSheetQuery', false, 'graphservice');
                     // $this->internal->sendGraph('338246149711919572858330660779', ['is_pando' => true], 'FBToIGDefaultAudienceSettingQuery', true, 'pando');

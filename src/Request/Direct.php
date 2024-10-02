@@ -41,7 +41,7 @@ class Direct extends RequestCollection
     public function getInbox(
         $cursorId = null,
         $seqId = null,
-        $limit = 20,
+        $limit = 15,
         $prefetch = false,
         $filter = 'all',
         $fetchReason = null,
@@ -56,6 +56,7 @@ class Direct extends RequestCollection
             ->addParam('eb_device_id', '0') // 0x2081091D005B1C12
             ->addParam('igd_request_log_tracking_id', Signatures::generateUUID());
 
+        /*
         $limit = $this->ig->getExperimentParam('59489', 7, 0);
         if ($limit <= 0) {
             $limit = $this->ig->getExperimentParam('56394', 0, -1);
@@ -63,6 +64,8 @@ class Direct extends RequestCollection
         } else {
             $request->addParam('limit', $limit);
         }
+        */
+        $request->addParam('limit', $this->ig->getExperimentParam('26104', 0, 15));
 
         if ($cursorId !== null) {
             $request->addParam('cursor', $cursorId);
@@ -79,9 +82,8 @@ class Direct extends RequestCollection
         if ($filter !== null) {
             $request->addParam('fetch_reason', $fetchReason);
         }
-        if ($this->ig->isExperimentEnabled('45863', 0, false, true)) {
-            $request->addParam('no_pending_badge', 'true');
-        }
+        // if ($this->ig->isExperimentEnabled('45863', 0, false, true)) {
+        $request->addParam('no_pending_badge', 'true');
         if ($seqId !== null) {
             $request->addParam('seq_id', $seqId);
         }
@@ -90,7 +92,7 @@ class Direct extends RequestCollection
             if ($batchSize !== null) {
                 $request->addParam('batch_size', $batchSize);
             }
-            $request->addParam('thread_message_limit', $this->ig->getExperimentParam('26104', 1, 10, true));
+            $request->addParam('thread_message_limit', $this->ig->getExperimentParam('26104', 1, 5));
         }
 
         return $request->getResponse(new Response\DirectInboxResponse());

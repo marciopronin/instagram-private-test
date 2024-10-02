@@ -1,3 +1,13 @@
+# Stable release v22.25.2
+## Date: 02/10/2024
+
+### Updates and fixes
+
+- **Direct:** Update `getInbox()`
+- **Instagram:** Update `_sendLoginFlow()`
+- **People:** Update `getRecentActivityInbox()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+
 # Stable release v22.25.1
 ## Date: 02/10/2024
 

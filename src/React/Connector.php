@@ -38,7 +38,7 @@ class Connector implements ConnectorInterface
      */
     public function __construct(
         Instagram $instagram,
-        LoopInterface $loop,
+        LoopInterface $loop
     ) {
         $this->_instagram = $instagram;
         $this->_loop = $loop;
@@ -48,7 +48,7 @@ class Connector implements ConnectorInterface
 
     /** {@inheritdoc} */
     public function connect(
-        $uri,
+        $uri
     ) {
         $uriObj = new Uri($uri);
         $host = $this->_instagram->client->zeroRating()->rewrite($uriObj->getHost());
@@ -82,7 +82,7 @@ class Connector implements ConnectorInterface
      */
     protected function _getSecureConnector(
         array $secureContext = [],
-        $proxyAddress = null,
+        $proxyAddress = null
     ) {
         $connector = new SocketConnector($this->_loop, [
             'tcp'     => true,
@@ -113,7 +113,7 @@ class Connector implements ConnectorInterface
      */
     protected function _getProxyForHost(
         $host,
-        $proxyConfig = null,
+        $proxyConfig = null
     ) {
         // Empty config => no proxy.
         if (empty($proxyConfig)) {
@@ -151,7 +151,7 @@ class Connector implements ConnectorInterface
      * @see http://docs.guzzlephp.org/en/stable/request-options.html#verify
      */
     protected function _getSecureContext(
-        $config,
+        $config
     ) {
         $context = [];
         if ($config === true) {
@@ -194,7 +194,7 @@ class Connector implements ConnectorInterface
     protected function _wrapConnectorIntoProxy(
         ConnectorInterface $connector,
         $proxyAddress,
-        array $secureContext = [],
+        array $secureContext = []
     ) {
         if (strpos($proxyAddress, '://') === false) {
             $scheme = 'http';

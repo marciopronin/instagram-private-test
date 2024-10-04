@@ -18,7 +18,7 @@ final class SendHashtag extends ShareItem
     public function __construct(
         $threadId,
         $hashtag,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($threadId, self::TYPE, $options);
 

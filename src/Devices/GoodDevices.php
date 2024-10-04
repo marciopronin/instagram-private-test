@@ -24838,7 +24838,7 @@ class GoodDevices
      * @return bool
      */
     public static function isGoodDevice(
-        $deviceString,
+        $deviceString
     ) {
         return in_array($deviceString, self::DEVICES, true);
     }
@@ -24851,7 +24851,7 @@ class GoodDevices
      * @return bool
      */
     public static function isVP9Compatible(
-        $deviceString,
+        $deviceString
     ) {
         return in_array($deviceString, self::VP9_COMPATIBLE_DEVICES, true);
     }

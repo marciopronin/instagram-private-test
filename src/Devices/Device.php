@@ -135,7 +135,7 @@ class Device implements DeviceInterface
         $platform = 'android',
         $iosModel = null,
         $iosDpi = null,
-        $enableResolutionCheck = false,
+        $enableResolutionCheck = false
     ) {
         $this->_appVersion = $appVersion;
         $this->_versionCode = $versionCode;
@@ -166,7 +166,7 @@ class Device implements DeviceInterface
      */
     protected function _initFromDeviceString(
         $deviceString,
-        $platform,
+        $platform
     ) {
         if ($platform === 'ios') {
             // Build our user agent.
@@ -209,8 +209,7 @@ class Device implements DeviceInterface
         $this->_dpi = $parts[1];
         $this->_resolution = $parts[2];
         $this->_manufacturer = $manufacturerAndBrand[0];
-        $this->_brand = (isset($manufacturerAndBrand[1])
-                         ? $manufacturerAndBrand[1] : null);
+        $this->_brand = ($manufacturerAndBrand[1] ?? null);
         $this->_model = $parts[4];
         $this->_device = $parts[5];
         $this->_cpu = $parts[6];
@@ -237,7 +236,7 @@ class Device implements DeviceInterface
 
     /** {@inheritdoc} */
     public function getFbUserAgent(
-        $appName,
+        $appName
     ) {
         if (!isset($this->_fbUserAgents[$appName])) {
             $this->_fbUserAgents[$appName] = UserAgent::buildFbUserAgent(

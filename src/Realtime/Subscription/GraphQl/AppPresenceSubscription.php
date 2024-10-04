@@ -16,7 +16,7 @@ class AppPresenceSubscription extends GraphQlSubscription
      * @param string $subscriptionId
      */
     public function __construct(
-        $subscriptionId,
+        $subscriptionId
     ) {
         parent::__construct(self::QUERY, [
             'client_subscription_id' => $subscriptionId,

@@ -38,7 +38,7 @@ class Account extends RequestCollection
         $firstName,
         $waterfallId,
         $tosVersion = 'row',
-        $sndata = null,
+        $sndata = null
     ) {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
@@ -119,7 +119,7 @@ class Account extends RequestCollection
         $firstName,
         $waterfallId,
         $tosVersion = 'row',
-        $sndata = null,
+        $sndata = null
     ) {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
@@ -190,7 +190,7 @@ class Account extends RequestCollection
     public function createSecundary(
         $username,
         $password,
-        $firstName = '',
+        $firstName = ''
     ) {
         if (strlen($password) < 6) {
             throw new \InstagramAPI\Exception\InstagramException('Passwords must be at least 6 characters.');
@@ -228,7 +228,7 @@ class Account extends RequestCollection
      * @return Response\GenericResponse
      */
     public function checkPhoneNumber(
-        $phone,
+        $phone
     ) {
         return $this->ig->request('accounts/check_phone_number/')
             ->setNeedsAuth(false)
@@ -256,7 +256,7 @@ class Account extends RequestCollection
     public function requestRegistrationSms(
         $phone,
         $waterfallId,
-        $username,
+        $username
     ) {
         $this->ig->setUserWithoutPassword($username);
 
@@ -286,7 +286,7 @@ class Account extends RequestCollection
     public function validateSignupSmsCode(
         $smsCode,
         $phone,
-        $waterfallId,
+        $waterfallId
     ) {
         return $this->ig->request('accounts/validate_signup_sms_code/')
             ->setNeedsAuth(false)
@@ -311,7 +311,7 @@ class Account extends RequestCollection
      */
     public function sendEmailVerificationCode(
         $email,
-        $waterfallId,
+        $waterfallId
     ) {
         return $this->ig->request('accounts/send_verify_email/')
             ->setNeedsAuth(false)
@@ -338,7 +338,7 @@ class Account extends RequestCollection
     public function checkConfirmationCode(
         $code,
         $email,
-        $waterfallId,
+        $waterfallId
     ) {
         return $this->ig->request('accounts/check_confirmation_code/')
             ->setNeedsAuth(false)
@@ -379,7 +379,7 @@ class Account extends RequestCollection
             ->addPost('params', json_encode((object) [
                 'server_params' => [
                     'INTERNAL_INFRA_THEME'      => 'harm_f,default,default,harm_f',
-                    'INTERNAL_INFRA_screen_id'  => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                    'INTERNAL_INFRA_screen_id'  => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] ?? '',
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [
@@ -460,7 +460,7 @@ class Account extends RequestCollection
      * @return Response\GenericResponse
      */
     public function logoutSession(
-        $sessionId,
+        $sessionId
     ) {
         return $this->ig->request('session/login_activity/logout_session/')
             ->setSignedPost(false)
@@ -482,7 +482,7 @@ class Account extends RequestCollection
      */
     public function logoutSessionBloks(
         $sessionId,
-        $accountId,
+        $accountId
     ) {
         return $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.login_activities.unrecognized_logins.logout/')
             ->setSignedPost(false)
@@ -496,8 +496,8 @@ class Account extends RequestCollection
                 'server_params' => [
                     'requested_screen_component_type'   => null,
                     'machine_id'                        => null,
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL__latency_qpl_marker_id'   => $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] ?? '',
+                    'INTERNAL__latency_qpl_instance_id' => $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] ?? '',
                     'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
                 ],
             ]))
@@ -525,7 +525,7 @@ class Account extends RequestCollection
      */
     public function approveSuspiciousLogin(
         $loginId,
-        $loginTimestamp,
+        $loginTimestamp
     ) {
         return $this->ig->request('session/login_activity/avow_login/')
         ->setSignedPost(false)
@@ -548,7 +548,7 @@ class Account extends RequestCollection
      */
     public function approveSuspiciousLoginBloks(
         $sessionId,
-        $accountId,
+        $accountId
     ) {
         return $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.avow_login/')
             ->setSignedPost(false)
@@ -562,8 +562,8 @@ class Account extends RequestCollection
                 'server_params' => [
                     'requested_screen_component_type'   => null,
                     'machine_id'                        => null,
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL__latency_qpl_marker_id'   => $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] ?? '',
+                    'INTERNAL__latency_qpl_instance_id' => $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] ?? '',
                     'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
                 ],
             ]))
@@ -633,7 +633,7 @@ class Account extends RequestCollection
      * @return Response\UserInfoResponse
      */
     public function setGender(
-        $gender = '',
+        $gender = ''
     ) {
         switch (strtolower($gender)) {
             case 'male':$gender_id = 1;
@@ -670,7 +670,7 @@ class Account extends RequestCollection
     public function setBirthday(
         $day,
         $month,
-        $year,
+        $year
     ) {
         return $this->ig->request('accounts/set_birthday/')
             ->setSignedPost(false)
@@ -694,7 +694,7 @@ class Account extends RequestCollection
     public function setBirthdayBloks(
         $day,
         $month,
-        $year,
+        $year
     ) {
         $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.edit.birthday.confirmation.async/')
             ->setSignedPost(false)
@@ -702,12 +702,12 @@ class Account extends RequestCollection
                 'client_input_params'   => [],
                 'server_params'         => [
                     'from_other_entrypoint'             => 0,
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'INTERNAL__latency_qpl_marker_id'   => $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] ?? '',
                     'confirmation_dialog_title'         => 'Confirm changes to your birthday',
                     'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
                     'requested_screen_component_type'   => null,
                     'machine_id'                        => null,
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL__latency_qpl_instance_id' => $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] ?? '',
                     'dialog_type'                       => 'edit_birthday',
                     'timestamp'                         => strtotime(sprintf('%s-%s-%s', $day, $month, $year)),
                 ],
@@ -730,11 +730,11 @@ class Account extends RequestCollection
                 ],
                 'server_params' => [
                     'from_other_entrypoint'             => 0,
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
+                    'INTERNAL__latency_qpl_marker_id'   => $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] ?? '',
                     'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
                     'requested_screen_component_type'   => null,
                     'machine_id'                        => null,
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL__latency_qpl_instance_id' => $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] ?? '',
                     'dialog_type'                       => 'edit_birthday',
                 ],
             ]))
@@ -756,8 +756,8 @@ class Account extends RequestCollection
                 'server_params' => [
                     'requested_screen_component_type'   => null,
                     'machine_id'                        => null,
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL__latency_qpl_marker_id'   => $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] ?? '',
+                    'INTERNAL__latency_qpl_instance_id' => $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] ?? '',
                     'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f',
                 ],
             ]))
@@ -834,7 +834,7 @@ class Account extends RequestCollection
      * @return Response\UserInfoResponse
      */
     public function setProfileName(
-        $name,
+        $name
     ) {
         return $this->ig->request('accounts/update_profile_name/')
             ->setSignedPost(false)
@@ -855,7 +855,7 @@ class Account extends RequestCollection
      * @return Response\UserInfoResponse
      */
     public function setUsername(
-        $newUsername,
+        $newUsername
     ) {
         return $this->ig->request('accounts/update_profile_username/')
             ->setSignedPost(false)
@@ -878,7 +878,7 @@ class Account extends RequestCollection
      * @return Response\GenericResponse
      */
     public function setProfileNameBloks(
-        $name,
+        $name
     ) {
         $response = $this->ig->request('bloks/apps/com.bloks.www.fxim.settings.name.change.async/')
             ->setSignedPost(false)
@@ -931,7 +931,7 @@ class Account extends RequestCollection
      * @see Account::editProfile() should be called after this function!
      */
     public function setBiography(
-        $biography,
+        $biography
     ) {
         if (!is_string($biography) || mb_strlen($biography, 'utf8') > 150) {
             throw new \InvalidArgumentException('Please provide a 0 to 150 character string as biography.');
@@ -957,7 +957,7 @@ class Account extends RequestCollection
      * @return Response\UserInfoResponse
      */
     public function changeProfilePicture(
-        $photoFilename,
+        $photoFilename
     ) {
         $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename, ['jpgOutput' => true, 'targetFeed' => Constants::PROFILE_PIC]);
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
@@ -1018,7 +1018,7 @@ class Account extends RequestCollection
         $name,
         $biography,
         $email,
-        $newUsername = null,
+        $newUsername = null
     ) {
         if ($email === null || $email === '') {
             throw new \InvalidArgumentException('No email provided.');
@@ -1157,7 +1157,7 @@ class Account extends RequestCollection
     public function setBusinessInfo(
         $phoneNumber,
         $email,
-        $categoryId,
+        $categoryId
     ) {
         return $this->ig->request('accounts/create_business_info/')
             ->addPost('set_public', 'true')
@@ -1189,7 +1189,7 @@ class Account extends RequestCollection
      * @see Account::editProfile() to rename your account.
      */
     public function checkUsername(
-        $username,
+        $username
     ) {
         $this->ig->setUserWithoutPassword($username);
 
@@ -1216,7 +1216,7 @@ class Account extends RequestCollection
     public function checkEmail(
         $email,
         $waterfallId,
-        $username,
+        $username
     ) {
         $this->ig->setUserWithoutPassword($username);
 
@@ -1247,7 +1247,7 @@ class Account extends RequestCollection
      * @return Response\GenericResponse
      */
     public function getSignupConfig(
-        $username,
+        $username
     ) {
         $this->ig->setUserWithoutPassword($username);
 
@@ -1272,7 +1272,7 @@ class Account extends RequestCollection
     public function getUsernameSuggestions(
         $email,
         $waterfallId,
-        $usernameQuery = '',
+        $usernameQuery = ''
     ) {
         return $this->ig->request('accounts/username_suggestions/')
             ->setNeedsAuth(false)
@@ -1309,7 +1309,7 @@ class Account extends RequestCollection
      * @return Response\CommentFilterSetResponse
      */
     public function setCommentFilter(
-        $config_value,
+        $config_value
     ) {
         return $this->ig->request('accounts/set_comment_filter/')
             ->addPost('_uuid', $this->ig->uuid)
@@ -1355,7 +1355,7 @@ class Account extends RequestCollection
      * @return Response\CommentFilterSetResponse
      */
     public function setCommentFilterKeywords(
-        $keywords,
+        $keywords
     ) {
         return $this->ig->request('accounts/set_comment_filter_keywords/')
             ->addPost('_uuid', $this->ig->uuid)
@@ -1377,7 +1377,7 @@ class Account extends RequestCollection
      */
     public function changePassword(
         $oldPassword,
-        $newPassword,
+        $newPassword
     ) {
         return $this->ig->request('accounts/change_password/')
             ->addPost('_uuid', $this->ig->uuid)
@@ -1447,7 +1447,7 @@ class Account extends RequestCollection
      * @see Account::enableTwoFactorSMS()
      */
     public function sendTwoFactorEnableSMS(
-        $phoneNumber,
+        $phoneNumber
     ) {
         $cleanNumber = '+'.preg_replace('/[^0-9]/', '', $phoneNumber);
 
@@ -1482,7 +1482,7 @@ class Account extends RequestCollection
     public function enableTwoFactorSMS(
         $phoneNumber,
         $verificationCode,
-        $trustDevice = false,
+        $trustDevice = false
     ) {
         $cleanNumber = '+'.preg_replace('/[^0-9]/', '', $phoneNumber);
 
@@ -1521,7 +1521,7 @@ class Account extends RequestCollection
      * @param bool $disabled
      */
     protected function _savePresenceStatus(
-        $disabled,
+        $disabled
     ) {
         try {
             $this->ig->settings->set('presence_disabled', $disabled ? '1' : '0');
@@ -1603,7 +1603,7 @@ class Account extends RequestCollection
      * @return Response\SendConfirmEmailResponse
      */
     public function sendConfirmEmail(
-        $email = null,
+        $email = null
     ) {
         $request = $this->ig->request('accounts/send_confirm_email/')
             ->addPost('phone_id', $this->ig->phone_id)
@@ -1633,7 +1633,7 @@ class Account extends RequestCollection
      */
     public function verifyEmailCode(
         $email,
-        $code,
+        $code
     ) {
         $request = $this->ig->request('accounts/verify_email_code/')
             ->addPost('phone_id', $this->ig->phone_id)
@@ -1658,7 +1658,7 @@ class Account extends RequestCollection
      * @return Response\ConfirmEmailResponse
      */
     public function confirmEmail(
-        $confirmationLink,
+        $confirmationLink
     ) {
         $re = '/^https:\/\/(www\.)?instagram.com\/accounts\/confirm_email\/(\w+)\/(\w+)/m';
         preg_match_all($re, $confirmationLink, $matches, PREG_OFFSET_CAPTURE, 0);
@@ -1683,7 +1683,7 @@ class Account extends RequestCollection
      * @return Response\SendSMSCodeResponse
      */
     public function sendSMSCode(
-        $phoneNumber,
+        $phoneNumber
     ) {
         $cleanNumber = '+'.preg_replace('/[^0-9]/', '', $phoneNumber);
 
@@ -1709,7 +1709,7 @@ class Account extends RequestCollection
      */
     public function verifySMSCode(
         $phoneNumber,
-        $verificationCode,
+        $verificationCode
     ) {
         $cleanNumber = '+'.preg_replace('/[^0-9]/', '', $phoneNumber);
 
@@ -1748,7 +1748,7 @@ class Account extends RequestCollection
      * @return Response\GenericResponse
      */
     public function enableTOTPAuthentication(
-        $code,
+        $code
     ) {
         return $this->ig->request('accounts/enable_totp_two_factor/')
             ->addPost('verification_code', $code)
@@ -1770,7 +1770,7 @@ class Account extends RequestCollection
      */
     public function setContactPointPrefill(
         $usage,
-        $prelogin = true,
+        $prelogin = true
     ) {
         $request = $this->ig->request('accounts/contact_point_prefill/')
             ->addPost('usage', $usage);
@@ -1815,7 +1815,7 @@ class Account extends RequestCollection
      * @return Response\PrefillCandidatesResponse
      */
     public function getPrefillCandidates(
-        $clientContactPoints = null,
+        $clientContactPoints = null
     ) {
         $request = $this->ig->request('accounts/get_prefill_candidates/')
             ->setNeedsAuth(false)
@@ -1956,7 +1956,7 @@ class Account extends RequestCollection
      * @return Response\SendRecoveryFlowResponse
      */
     public function sendRecoveryFlowEmail(
-        $query,
+        $query
     ) {
         return $this->ig->request('accounts/send_recovery_flow_email/')
             ->addPost('guid', $this->ig->uuid)
@@ -1980,7 +1980,7 @@ class Account extends RequestCollection
      */
     public function lookupPhone(
         $query,
-        $whatsAppInstalled = false,
+        $whatsAppInstalled = false
     ) {
         return $this->ig->request('users/lookup_phone/')
             ->addPost('supports_sms_code', 'true')
@@ -2006,7 +2006,7 @@ class Account extends RequestCollection
      * @return Response\MultiAccountsResponse
      */
     public function getAccountsMultiLogin(
-        $macLoginNonce,
+        $macLoginNonce
     ) {
         return $this->ig->request('multiple_accounts/multi_account_login/')
             ->setNeedsAuth(false)
@@ -2030,7 +2030,7 @@ class Account extends RequestCollection
      * @return Response\GenericResponse
      */
     public function updateTagSettingsAction(
-        $set,
+        $set
     ) {
         return $this->ig->request('bloks/apps/com.instagram.bullying.privacy.tags_options.update_tag_setting_action/')
             ->setSignedPost(false)
@@ -2052,7 +2052,7 @@ class Account extends RequestCollection
      * @return Response\GenericResponse
      */
     public function updateMentionSettingsAction(
-        $set,
+        $set
     ) {
         return $this->ig->request('bloks/apps/com.instagram.bullying.privacy.mentions_options.update_mention_settting_action/')
             ->setSignedPost(false)
@@ -2217,7 +2217,7 @@ class Account extends RequestCollection
                     'requested_screen_component_type'   => 2,
                     'should_show_done_button'           => 0,
                     'INTERNAL_INFRA_THEME'              => 'harm_f',
-                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                    'INTERNAL_INFRA_screen_id'          => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] ?? '',
                     'entrypoint'                        => 'app_settings',
                 ],
             ]))
@@ -2357,7 +2357,7 @@ class Account extends RequestCollection
      */
     public function setDefaultSharingTarget(
         $sourceAccountId,
-        $targetIdentityId,
+        $targetIdentityId
     ) {
         return $this->ig->request('bloks/apps/com.bloks.www.fxcal.xplat.settings.post.target.async/')
             ->setSignedPost(false)
@@ -2391,7 +2391,7 @@ class Account extends RequestCollection
      * @return GenericResponse
      */
     public function addEmailContactPoint(
-        $email,
+        $email
     ) {
         $response = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point/')
             ->setSignedPost(false)
@@ -2443,7 +2443,7 @@ class Account extends RequestCollection
                 'server_params'         => [
                     'contact_point_event_type'          => 'add',
                     'contact_point_source'              => 'fx_settings',
-                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                    'INTERNAL_INFRA_screen_id'          => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] ?? '',
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2482,7 +2482,7 @@ class Account extends RequestCollection
                 'server_params'         => [
                     'contact_point_type'                => 'email',
                     'contact_point_source'              => 'fx_settings',
-                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                    'INTERNAL_INFRA_screen_id'          => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] ?? '',
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2532,8 +2532,8 @@ class Account extends RequestCollection
                     'contact_point_event_type'          => 'add',
                     'contact_point_type'                => 'email',
                     'contact_point_source'              => 'fx_settings',
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL__latency_qpl_marker_id'   => $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] ?? '',
+                    'INTERNAL__latency_qpl_instance_id' => $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] ?? '',
                     'INTERNAL_INFRA_THEME'              => 'harm_f',
                     'machine_id'                        => null,
                 ],
@@ -2578,7 +2578,7 @@ class Account extends RequestCollection
                     'contact_point_source'              => 'fx_settings',
                     'normalized_contact_point'          => $email,
                     'selected_accounts'                 => $this->ig->settings->get('fbid_v2'),
-                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                    'INTERNAL_INFRA_screen_id'          => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] ?? '',
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2629,7 +2629,7 @@ class Account extends RequestCollection
     public function verifyEmailContactPoint(
         $email,
         $code,
-        $authBlob,
+        $authBlob
     ) {
         $request = $this->ig->request('bloks/apps/com.bloks.www.fx.settings.contact_point.verify.async/')
             ->setSignedPost(false)
@@ -2645,8 +2645,8 @@ class Account extends RequestCollection
                     'contact_point_type'                => 'email',
                     'contact_point_source'              => 'fx_settings',
                     'ig_account_encrypted_auth_proof'   => $authBlob,
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL__latency_qpl_marker_id'   => $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] ?? '',
+                    'INTERNAL__latency_qpl_instance_id' => $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] ?? '',
                     'INTERNAL_INFRA_THEME'              => 'harm_f',
                     'machine_id'                        => null,
                     'normalized_contact_point'          => $email,
@@ -2672,7 +2672,7 @@ class Account extends RequestCollection
      * @return GenericResponse
      */
     public function deletePhoneContactPoint(
-        $phoneNumber = null,
+        $phoneNumber = null
     ) {
         if ($phoneNumber === null && !empty($this->ig->settings->get('phone_number'))) {
             $phoneNumber = $this->ig->settings->get('phone_number');
@@ -2713,8 +2713,8 @@ class Account extends RequestCollection
                     'contact_point_type'                => 'phone_number',
                     'contact_point_source'              => 'fx_settings',
                     'ig_account_encrypted_auth_proof'   => $authBlob,
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] : '',
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] : '',
+                    'INTERNAL__latency_qpl_marker_id'   => $this->ig->bloksInfo['INTERNAL__latency_qpl_marker_id'] ?? '',
+                    'INTERNAL__latency_qpl_instance_id' => $this->ig->bloksInfo['INTERNAL__latency_qpl_instance_id'] ?? '',
                     'INTERNAL_INFRA_THEME'              => 'harm_f',
                     'machine_id'                        => null,
                     'normalized_contact_point'          => $phoneNumber,
@@ -2796,7 +2796,7 @@ class Account extends RequestCollection
      * @return GenericResponse
      */
     public function createBugId(
-        $description,
+        $description
     ) {
         return $this->ig->internal->sendGraph(
             '293839176013550553288378882913',
@@ -2975,7 +2975,7 @@ class Account extends RequestCollection
                     'account_id'                        => $this->ig->settings->get('fbid_v2'),
                     'ig_auth_proof_json'                => $this->ig->settings->get('authorization_header'),
                     'key_text'                          => $this->ig->bloksInfo['key_text'],
-                    'INTERNAL_INFRA_screen_id'          => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                    'INTERNAL_INFRA_screen_id'          => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] ?? '',
                     'key_id'                            => $this->ig->bloksInfo['key_id'],
                     'qr_code_uri'                       => stripslashes(stripslashes($this->ig->bloksInfo['qr_code_uri'])),
                 ],
@@ -3026,7 +3026,7 @@ class Account extends RequestCollection
      * @return GenericResponse
      */
     public function twoFactorTotpEnable(
-        $totpCode,
+        $totpCode
     ) {
         $this->ig->request('bloks/apps/com.bloks.www.fx.settings.security.two_factor.totp.code/')
             ->setSignedPost(false)
@@ -3038,7 +3038,7 @@ class Account extends RequestCollection
                     'ig_auth_proof_json'                 => $this->ig->settings->get('authorization_header'),
                     'account_id'                         => $this->ig->settings->get('fbid_v2'),
                     'totp_key_id'                        => $this->ig->bloksInfo['totp_key_id'],
-                    'INTERNAL_INFRA_screen_id'           => isset($this->ig->bloksInfo['INTERNAL_INFRA_screen_id']) ? $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] : '',
+                    'INTERNAL_INFRA_screen_id'           => $this->ig->bloksInfo['INTERNAL_INFRA_screen_id'] ?? '',
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([

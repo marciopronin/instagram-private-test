@@ -34,7 +34,7 @@ class Timeline extends RequestCollection
      */
     public function uploadPhoto(
         $photoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         return $this->ig->internal->uploadSinglePhoto(Constants::FEED_TIMELINE, $photoFilename, null, $externalMetadata);
     }
@@ -55,7 +55,7 @@ class Timeline extends RequestCollection
      */
     public function uploadVideo(
         $videoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         return $this->ig->internal->uploadSingleVideo(Constants::FEED_TIMELINE, $videoFilename, null, $externalMetadata);
     }
@@ -86,7 +86,7 @@ class Timeline extends RequestCollection
      */
     public function uploadAlbum(
         array $media,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         if (empty($media)) {
             throw new \InvalidArgumentException("List of media to upload can't be empty.");
@@ -236,7 +236,7 @@ class Timeline extends RequestCollection
      */
     public function getTimelineFeed(
         $maxId = null,
-        ?array $options = null,
+        ?array $options = null
     ) {
         /* NOT USED.
         $asyncAds = $this->ig->isExperimentEnabled(
@@ -289,7 +289,7 @@ class Timeline extends RequestCollection
             $request->addPost('reason', 'warm_start_fetch');
             $request->addPost('is_pull_to_refresh', '0');
         } else {
-            $request->addPost('reason', isset($options['reason']) ? $options['reason'] : Constants::REASONS[0]); // cold_start_fetch
+            $request->addPost('reason', $options['reason'] ?? Constants::REASONS[0]); // cold_start_fetch
             $request->addPost('is_pull_to_refresh', '0');
 
             if (isset($options['reason']) && $options['reason'] === Constants::REASONS[0]) {
@@ -343,7 +343,7 @@ class Timeline extends RequestCollection
             $request->addPost('is_dark_mode', 0);
         }
 
-        $request->addPost('has_camera_permission', isset($options['has_camera_permission']) ? $options['has_camera_permission'] : 1);
+        $request->addPost('has_camera_permission', $options['has_camera_permission'] ?? 1);
 
         if ($this->ig->isExperimentEnabled('48235', 0, false)) {
             $request->addPost('panavision_mode', '1'); // $this->ig->isExperimentEnabled('ig_android_panavision_consumption_launcher', 'is_immersive_enabled', ''));
@@ -368,7 +368,7 @@ class Timeline extends RequestCollection
     public function getUserFeed(
         $userId,
         $excludeComment = true,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("feed/user/{$userId}/")
             ->addParam('exclude_comment', $excludeComment)
@@ -393,7 +393,7 @@ class Timeline extends RequestCollection
      */
     public function getUserFeedStream(
         $userId,
-        $maxId = null,
+        $maxId = null
     ) {
         return $this->ig->request("feed/user_stream/{$userId}/")
             ->setSignedPost(false)
@@ -415,7 +415,7 @@ class Timeline extends RequestCollection
      */
     public function getSelfUserFeed(
         $maxId = null,
-        $excludeComment = true,
+        $excludeComment = true
     ) {
         return $this->getUserFeed($this->ig->account_id, $excludeComment, $maxId);
     }
@@ -451,7 +451,7 @@ class Timeline extends RequestCollection
      */
     public function archiveMedia(
         $mediaId,
-        $onlyMe = true,
+        $onlyMe = true
     ) {
         $endpoint = $onlyMe ? 'only_me' : 'undo_only_me';
 
@@ -477,7 +477,7 @@ class Timeline extends RequestCollection
      */
     public function hideFeedPost(
         $mediaId,
-        $userId,
+        $userId
     ) {
         return $this->ig->request('feed/hide_feed_post/')
             ->addPost('_uuid', $this->ig->uuid)
@@ -505,7 +505,7 @@ class Timeline extends RequestCollection
      */
     public function backup(
         $baseOutputPath = null,
-        $printProgress = true,
+        $printProgress = true
     ) {
         // Decide which path to use.
         if ($baseOutputPath === null) {

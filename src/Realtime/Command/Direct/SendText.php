@@ -18,7 +18,7 @@ final class SendText extends SendItem
     public function __construct(
         $threadId,
         $text,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($threadId, self::TYPE, $options);
 

@@ -14,7 +14,7 @@ abstract class ShareItem extends SendItem
     public function __construct(
         $threadId,
         $itemType,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($threadId, $itemType, $options);
 

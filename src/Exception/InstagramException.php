@@ -46,7 +46,7 @@ class InstagramException extends \RuntimeException
      * @param Response|null $response The response value.
      */
     public function setResponse(
-        ?Response $response = null,
+        ?Response $response = null
     ) {
         $this->_response = $response;
     }

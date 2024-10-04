@@ -27,7 +27,7 @@ final class SendReaction extends SendItem
         $threadItemId,
         $reaction,
         $status,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($threadId, self::TYPE, $options);
 

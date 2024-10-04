@@ -22,7 +22,7 @@ class Push extends RequestCollection
      */
     public function register(
         $pushChannel,
-        $token,
+        $token
     ) {
         // Make sure we only allow these for push channels.
         if ($pushChannel != 'mqtt' && $pushChannel != 'fcm') {
@@ -76,7 +76,7 @@ class Push extends RequestCollection
      * @return Response\PushPreferencesResponse
      */
     public function setPreferences(
-        array $preferences,
+        array $preferences
     ) {
         $request = $this->ig->request('push/preferences/');
         foreach ($preferences as $key => $value) {

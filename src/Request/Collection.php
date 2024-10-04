@@ -24,7 +24,7 @@ class Collection extends RequestCollection
      * @return Response\GetCollectionsListResponse
      */
     public function getList(
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('collections/list/')
         ->addParam('collection_types', '["ALL_MEDIA_AUTO_COLLECTION","MEDIA","PRODUCT_AUTO_COLLECTION"]');
@@ -47,7 +47,7 @@ class Collection extends RequestCollection
      */
     public function getFeed(
         $collectionId,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("feed/collection/{$collectionId}/");
         if ($maxId !== null) {
@@ -69,7 +69,7 @@ class Collection extends RequestCollection
      */
     public function create(
         $name,
-        $moduleName = 'feed_saved_add_to_collection',
+        $moduleName = 'feed_saved_add_to_collection'
     ) {
         return $this->ig->request('collections/create/')
             ->addPost('module_name', $moduleName)
@@ -92,7 +92,7 @@ class Collection extends RequestCollection
      * @return Response\DeleteCollectionResponse
      */
     public function delete(
-        $collectionId,
+        $collectionId
     ) {
         return $this->ig->request("collections/{$collectionId}/delete/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -118,7 +118,7 @@ class Collection extends RequestCollection
      */
     public function edit(
         $collectionId,
-        array $params,
+        array $params
     ) {
         $postData = [];
         if (isset($params['name']) && $params['name'] !== '') {
@@ -167,7 +167,7 @@ class Collection extends RequestCollection
     public function removeMedia(
         array $collectionIds,
         $mediaId,
-        $moduleName = 'feed_contextual_saved_collections',
+        $moduleName = 'feed_contextual_saved_collections'
     ) {
         return $this->ig->request("media/{$mediaId}/save/")
             ->addPost('module_name', $moduleName)

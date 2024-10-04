@@ -14,6 +14,6 @@ interface HandlerInterface
      * @throws HandlerException
      */
     public function handleMessage(
-        Message $message,
+        Message $message
     );
 }

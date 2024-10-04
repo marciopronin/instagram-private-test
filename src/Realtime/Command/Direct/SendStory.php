@@ -20,7 +20,7 @@ final class SendStory extends ShareItem
     public function __construct(
         $threadId,
         $storyId,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($threadId, self::TYPE, $options);
 

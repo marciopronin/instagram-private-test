@@ -23,7 +23,7 @@ class RealtimeConnectPacket extends BasePacket
     public static $packetType = Packet::TYPE_CONNECT;
 
     public function read(
-        PacketStream $stream,
+        PacketStream $stream
     ): void {
         parent::read($stream);
         $this->assertPacketFlags(0);
@@ -40,7 +40,7 @@ class RealtimeConnectPacket extends BasePacket
     }
 
     public function write(
-        PacketStream $stream,
+        PacketStream $stream
     ): void {
         $data = new PacketStream();
 
@@ -74,7 +74,7 @@ class RealtimeConnectPacket extends BasePacket
      * @throws \InvalidArgumentException
      */
     public function setProtocolLevel(
-        $value,
+        $value
     ) {
         if ($value != 3) {
             throw new \InvalidArgumentException(sprintf('Unknown protocol level %d.', $value));
@@ -99,7 +99,7 @@ class RealtimeConnectPacket extends BasePacket
      * @param string $value
      */
     public function setPayload(
-        $value,
+        $value
     ) {
         $this->payload = $value;
     }
@@ -122,7 +122,7 @@ class RealtimeConnectPacket extends BasePacket
      * @throws \InvalidArgumentException
      */
     public function setFlags(
-        $value,
+        $value
     ) {
         if ($value > 255) {
             throw new \InvalidArgumentException(
@@ -154,7 +154,7 @@ class RealtimeConnectPacket extends BasePacket
      * @throws \InvalidArgumentException
      */
     public function setKeepAlive(
-        $value,
+        $value
     ) {
         if ($value > 65535) {
             throw new \InvalidArgumentException(
@@ -186,7 +186,7 @@ class RealtimeConnectPacket extends BasePacket
      * @throws MalformedPacketException
      */
     public function setProtocolName(
-        $value,
+        $value
     ) {
         $this->assertValidStringLength($value);
 

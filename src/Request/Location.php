@@ -23,7 +23,7 @@ class Location extends RequestCollection
      * @return Response\LocationInfoResponse
      */
     public function getInfo(
-        $locationId,
+        $locationId
     ) {
         return $this->ig->request("locations/{$locationId}/location_info/")
             ->getResponse(new Response\LocationInfoResponse());
@@ -48,7 +48,7 @@ class Location extends RequestCollection
     public function search(
         $latitude,
         $longitude,
-        $query = null,
+        $query = null
     ) {
         $locations = $this->ig->request('location_search/')
             ->addParam('rank_token', $this->ig->account_id.'_'.Signatures::generateUUID())
@@ -87,7 +87,7 @@ class Location extends RequestCollection
     public function findPlaces(
         $query,
         array $excludeList = [],
-        $rankToken = null,
+        $rankToken = null
     ) {
         // Do basic query validation. Do NOT use throwIfInvalidHashtag here.
         if (!is_string($query) || $query === null) {
@@ -144,7 +144,7 @@ class Location extends RequestCollection
         $longitude,
         $query = null,
         $excludeList = [],
-        $rankToken = null,
+        $rankToken = null
     ) {
         $location = $this->_paginateWithExclusion(
             $this->ig->request('fbsearch/places/')
@@ -188,7 +188,7 @@ class Location extends RequestCollection
      * @return Response\RelatedLocationResponse
      */
     public function getRelated(
-        $locationId,
+        $locationId
     ) {
         return $this->ig->request("locations/{$locationId}/related/")
             ->addParam('visited', json_encode(['id' => $locationId, 'type' => 'location']))
@@ -226,7 +226,7 @@ class Location extends RequestCollection
         $tab = 'ranked',
         $nextMediaIds = null,
         $nextPage = null,
-        $maxId = null,
+        $maxId = null
     ) {
         Utils::throwIfInvalidRankToken($rankToken);
         if ($tab !== 'ranked' && $tab !== 'recent') {
@@ -293,7 +293,7 @@ class Location extends RequestCollection
      * @return Response\LocationStoryResponse
      */
     public function getStoryFeed(
-        $locationId,
+        $locationId
     ) {
         return $this->ig->request("locations/{$locationId}/story/")
             ->getResponse(new Response\LocationStoryResponse());
@@ -338,7 +338,7 @@ class Location extends RequestCollection
     public function markStoryMediaSeen(
         Response\LocationStoryResponse $locationFeed,
         array $items,
-        array $skippedItems = [],
+        array $skippedItems = []
     ) {
         // Extract the Location Story-Tray ID from the user's location response.
         // NOTE: This can NEVER fail if the user has properly given us the exact

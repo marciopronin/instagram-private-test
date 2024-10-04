@@ -75,7 +75,7 @@ class Fbns implements PersistentInterface, EventEmitterInterface
         AuthInterface $auth,
         DeviceInterface $device,
         LoopInterface $loop,
-        LoggerInterface $logger,
+        LoggerInterface $logger
     ) {
         $this->_target = $target;
         $this->_connector = $connector;

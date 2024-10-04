@@ -435,7 +435,7 @@ class Client
      */
     public function __construct(
         $parent,
-        $options = [],
+        $options = []
     ) {
         $this->_parent = $parent;
 
@@ -498,7 +498,7 @@ class Client
      * @throws Exception\SettingsException
      */
     public function updateFromCurrentSettings(
-        $resetCookieJar = false,
+        $resetCookieJar = false
     ) {
         // Update our internal client state from the new user's settings.
         $this->_userAgent = $this->_parent->device->getUserAgent();
@@ -530,7 +530,7 @@ class Client
      * @throws Exception\SettingsException
      */
     public function loadCookieJar(
-        $resetCookieJar = false,
+        $resetCookieJar = false
     ) {
         // Mark any previous cookie jar for garbage collection.
         $this->_cookieJar = null;
@@ -614,7 +614,7 @@ class Client
     public function getCookie(
         $name,
         $domain = null,
-        $path = null,
+        $path = null
     ) {
         $foundCookie = null;
         if ($this->_cookieJar instanceof CookieJar) {
@@ -704,7 +704,7 @@ class Client
      *                           a custom CA bundle file.
      */
     public function setVerifySSL(
-        $state,
+        $state
     ) {
         $this->_verifySSL = $state;
     }
@@ -728,7 +728,7 @@ class Client
      *                                 Guzzle format, or NULL to disable proxying.
      */
     public function setProxy(
-        $value,
+        $value
     ) {
         $this->_proxy = $value;
         $this->_resetConnection = true;
@@ -752,7 +752,7 @@ class Client
      * @param string $value String specifying the host used for resolving.
      */
     public function setResolveHost(
-        $value,
+        $value
     ) {
         $this->_resolveHost = $value;
     }
@@ -779,7 +779,7 @@ class Client
      *                           disable override and let Guzzle use any interface.
      */
     public function setOutputInterface(
-        $value,
+        $value
     ) {
         $this->_outputInterface = $value;
         $this->_resetConnection = true;
@@ -815,7 +815,7 @@ class Client
         $uploadedBytes,
         HttpResponseInterface $response,
         $responseBody,
-        $debug,
+        $debug
     ) {
         $path = Debug::$debugLogPath;
         if ($this->_parent->settings->getStorage() instanceof Settings\Storage\File) {
@@ -869,7 +869,7 @@ class Client
         Response $responseObject,
         $rawResponse,
         $httpResponse,
-        $silentFail,
+        $silentFail
     ) {
         if ($httpResponse instanceof Promise || $rawResponse instanceof Promise) {
             $promiseCombined = \GuzzleHttp\Promise\Utils::all([$rawResponse, $httpResponse]);
@@ -888,7 +888,7 @@ class Client
         Response $responseObject,
         $rawResponse,
         $httpResponse,
-        $silentFail,
+        $silentFail
     ) {
         // Attempt to decode the raw JSON to an array.
         // Important: Special JSON decoder which handles 64-bit numbers!
@@ -1043,7 +1043,7 @@ class Client
      */
     protected function _buildGuzzleOptions(
         array $guzzleOptions = [],
-        $disableCookies = false,
+        $disableCookies = false
     ) {
         $curlOptions = [
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2_0, // HTTP2.0
@@ -1126,7 +1126,7 @@ class Client
      */
     protected function _guzzleRequest(
         HttpRequestInterface $request,
-        array $guzzleOptions = [],
+        array $guzzleOptions = []
     ) {
         // When async batches ends, it will wait until all promises are resolved.
         if (Instagram::$sendAsync === false) {
@@ -1187,7 +1187,7 @@ class Client
      * @throws Exception\RequestHeadersTooLargeException When request is too large.
      */
     protected function _detectHttpCode(
-        $response,
+        $response
     ) {
         // Detect very serious HTTP status codes in the response.
         $httpCode = $response->getStatusCode();
@@ -1242,7 +1242,7 @@ class Client
     protected function _apiRequest(
         HttpRequestInterface $request,
         array $guzzleOptions = [],
-        array $libraryOptions = [],
+        array $libraryOptions = []
     ) {
         $requestId = $this->_getRequestId();
 
@@ -1299,7 +1299,7 @@ class Client
         $requestId,
         $guzzleResponse,
         HttpRequestInterface $request,
-        array $libraryOptions = [],
+        array $libraryOptions = []
     ) {
         if ($this->_parent->logger !== null) {
             $this->_parent->logger->info(
@@ -1362,7 +1362,7 @@ class Client
      */
     public function api(
         HttpRequestInterface $request,
-        array $guzzleOptions = [],
+        array $guzzleOptions = []
     ) {
         $headers = [
             'set_headers' => [
@@ -1567,7 +1567,7 @@ class Client
     protected function _processResponseHeaders(
         $start,
         $request,
-        $response,
+        $response
     ) {
         $this->wwwClaim = $response->getHeaderLine('x-ig-set-www-claim');
         $this->_shbid = $response->getHeaderLine('ig-set-ig-u-shbid');
@@ -1652,7 +1652,7 @@ class Client
      */
     public static function api_body_decode(
         $json,
-        $assoc = true,
+        $assoc = true
     ) {
         return @json_decode($json, $assoc, 512, JSON_BIGINT_AS_STRING);
     }
@@ -1732,7 +1732,7 @@ class Client
      */
     public function generateFlowId(
         $val1,
-        $val2,
+        $val2
     ) {
         return $val1 | $val2 << 0x20;
     }
@@ -1745,7 +1745,7 @@ class Client
      * @return int
      */
     public function generateNewFlowId(
-        $val,
+        $val
     ) {
         return $val | $this->incrementAndGetUserFlowCounter() << 0x20;
     }
@@ -1771,7 +1771,7 @@ class Client
      * @return array
      */
     private function _orderHeaders(
-        $headers,
+        $headers
     ) {
         $headersOrder = [
             'Host',
@@ -1861,7 +1861,7 @@ class Client
      * @param Request $endpoint The last processed request
      */
     public function setLastRequest(
-        $endpoint,
+        $endpoint
     ) {
         $this->_lastRequest = $endpoint;
     }

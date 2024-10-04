@@ -139,7 +139,7 @@ class VideoDetails extends MediaDetails
      * @throws \RuntimeException         If FFmpeg isn't working properly.
      */
     public function __construct(
-        $filename,
+        $filename
     ) {
         // Check if input file exists.
         if (empty($filename) || !is_file($filename)) {
@@ -255,7 +255,7 @@ class VideoDetails extends MediaDetails
 
     /** {@inheritdoc} */
     public function validate(
-        ConstraintsInterface $constraints,
+        ConstraintsInterface $constraints
     ) {
         parent::validate($constraints);
 
@@ -340,7 +340,7 @@ class VideoDetails extends MediaDetails
      * @return int
      */
     private function _normalizeRotation(
-        $rotation,
+        $rotation
     ) {
         // The angle must be in 0..359 degrees range.
         $result = $rotation % 360;

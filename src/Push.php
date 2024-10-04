@@ -174,7 +174,7 @@ class Push implements EventEmitterInterface
         LoopInterface $loop,
         Instagram $instagram,
         ?LoggerInterface $logger = null,
-        $register = true,
+        $register = true
     ) {
         if (PHP_SAPI !== 'cli') {
             throw new \RuntimeException('The Push client can only run from the command line.');
@@ -198,7 +198,7 @@ class Push implements EventEmitterInterface
      * @param Notification $notification
      */
     protected function _onPush(
-        Notification $notification,
+        Notification $notification
     ) {
         $collapseKey = $notification->getCollapseKey();
         $this->_logger->info(sprintf('Received a push with collapse key "%s"', $collapseKey), [(string) $notification]);

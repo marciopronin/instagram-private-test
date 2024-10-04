@@ -26,7 +26,7 @@ class Usertag extends RequestCollection
         $mediaId,
         $userId,
         array $position,
-        $captionText = '',
+        $captionText = ''
     ) {
         $usertags = [
             'removed' => [],
@@ -53,7 +53,7 @@ class Usertag extends RequestCollection
     public function untagMedia(
         $mediaId,
         $userId,
-        $captionText = '',
+        $captionText = ''
     ) {
         $usertags = [
             'removed' => [
@@ -75,7 +75,7 @@ class Usertag extends RequestCollection
      * @return Response\MediaInfoResponse
      */
     public function removeTag(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request('usertags/remove/')
             ->addPost('media_to_untag', $mediaId)
@@ -95,7 +95,7 @@ class Usertag extends RequestCollection
      * @return Response\MediaInfoResponse
      */
     public function removeSelfTag(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("usertags/{$mediaId}/remove/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -116,7 +116,7 @@ class Usertag extends RequestCollection
      */
     public function getUserFeed(
         $userId,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("usertags/{$userId}/feed/");
 
@@ -137,7 +137,7 @@ class Usertag extends RequestCollection
      * @return Response\UsertagsResponse
      */
     public function getSelfUserFeed(
-        $maxId = null,
+        $maxId = null
     ) {
         return $this->getUserFeed($this->ig->account_id, $maxId);
     }
@@ -152,7 +152,7 @@ class Usertag extends RequestCollection
      * @return Response\ReviewPreferenceResponse
      */
     public function setReviewPreference(
-        $enabled,
+        $enabled
     ) {
         return $this->ig->request('usertags/review_preference/')
             ->addPost('_uuid', $this->ig->uuid)

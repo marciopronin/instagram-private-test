@@ -6,7 +6,7 @@ class SSIM
 {
     public static function getSsimAndMsssim(
         $inputImage,
-        $processedImage,
+        $processedImage
     ) {
         $ssim_index = self::ssim($inputImage, $processedImage);
         $msssim_index = self::msssim($inputImage, $processedImage);
@@ -16,7 +16,7 @@ class SSIM
 
     public static function ssim(
         $inputImage,
-        $processedImage,
+        $processedImage
     ) {
         $width = imagesx($inputImage);
         $height = imagesy($inputImage);
@@ -44,7 +44,7 @@ class SSIM
     public static function msssim(
         $inputImage,
         $processedImage,
-        $scale = 5,
+        $scale = 5
     ) {
         $msssim = 0;
         $weight = 1 / $scale;
@@ -64,7 +64,7 @@ class SSIM
         $inputImage,
         $processedImage,
         $meanInput,
-        $meanProcessed,
+        $meanProcessed
     ) {
         $width = imagesx($inputImage);
         $height = imagesy($inputImage);
@@ -83,7 +83,7 @@ class SSIM
 
     protected static function _imagegrayscaledistribution(
         $img,
-        $return_variance = false,
+        $return_variance = false
     ) {
         $sum = 0;
         $variance_sum = 0;

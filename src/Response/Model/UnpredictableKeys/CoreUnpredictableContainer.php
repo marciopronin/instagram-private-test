@@ -77,7 +77,7 @@ class CoreUnpredictableContainer extends AutoPropertyMapper
      * @return $this
      */
     public function setData(
-        array $value,
+        array $value
     ) {
         $this->_cache = $value;
 

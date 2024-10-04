@@ -26,7 +26,7 @@ class Creative extends RequestCollection
      */
     public function getStickerAssets(
         $stickerType = 'static_stickers',
-        ?array $location = null,
+        ?array $location = null
     ) {
         if ($stickerType != 'static_stickers') {
             throw new \InvalidArgumentException('You must provide a valid sticker type.');
@@ -159,7 +159,7 @@ class Creative extends RequestCollection
      * @return Response\FaceEffectsResponse
      */
     public function getFaceEffects(
-        ?array $location = null,
+        ?array $location = null
     ) {
         $request = $this->ig->request('creatives/face_effects/')
             ->addPost('_uuid', $this->ig->uuid)

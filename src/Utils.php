@@ -65,7 +65,7 @@ class Utils
      * @return string
      */
     public static function generateUploadId(
-        $useNano = false,
+        $useNano = false
     ) {
         $result = null;
         if (!$useNano) {
@@ -104,7 +104,7 @@ class Utils
      * @see https://en.wikipedia.org/wiki/Java_hashCode()#The_java.lang.String_hash_function
      */
     public static function hashCode(
-        $string,
+        $string
     ) {
         $result = 0;
         for ($i = 0, $len = strlen($string); $i < $len; $i++) {
@@ -129,7 +129,7 @@ class Utils
      * @return array
      */
     public static function reorderByHashCode(
-        array $data,
+        array $data
     ) {
         $hashCodes = [];
         foreach ($data as $key => $value) {
@@ -175,7 +175,7 @@ class Utils
      * @return string
      */
     public static function generateUserBreadcrumb(
-        $size,
+        $size
     ) {
         $key = 'iN4$aGr0m';
         $date = (int) (microtime(true) * 1000);
@@ -203,7 +203,7 @@ class Utils
      * @return string
      */
     public static function generateJazoest(
-        $phoneId,
+        $phoneId
     ) {
         $jazoestPrefix = '2';
         $array = str_split($phoneId);
@@ -240,7 +240,7 @@ class Utils
         $password,
         $publicKeyId,
         $publicKey,
-        $isBloks = false,
+        $isBloks = false
     ) {
         $key = openssl_random_pseudo_bytes(32);
         $iv = openssl_random_pseudo_bytes(12);
@@ -280,7 +280,7 @@ class Utils
     public static function encryptPasswordForBrowser(
         $password,
         $publicKey = '8dd9aad29d9a614c338cff479f850d3ec57c525c33b3f702ab65e9e057fc087e',
-        $publicKeyId = 87,
+        $publicKeyId = 87
     ) {
         $key = openssl_random_pseudo_bytes(32);
         $iv = "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00";
@@ -306,7 +306,7 @@ class Utils
      * @return float The number of seconds, with decimals (milliseconds).
      */
     public static function hmsTimeToSeconds(
-        $timeStr,
+        $timeStr
     ) {
         if (!is_string($timeStr)) {
             throw new \InvalidArgumentException('Invalid non-string timestamp.');
@@ -369,7 +369,7 @@ class Utils
      * @return string The time formatted as `HH:MM:SS.###` (`###` is millis).
      */
     public static function hmsTimeFromSeconds(
-        $sec,
+        $sec
     ) {
         if (!is_int($sec) && !is_float($sec)) {
             throw new \InvalidArgumentException('Seconds must be a number.');
@@ -408,7 +408,7 @@ class Utils
      * @return string The final JSON string ready to submit as an API parameter.
      */
     public static function buildMediaLocationJSON(
-        $location,
+        $location
     ) {
         if (!$location instanceof Location) {
             throw new \InvalidArgumentException('The location must be an instance of \InstagramAPI\Response\Model\Location.');
@@ -478,7 +478,7 @@ class Utils
      * @return bool if exiftool is present, otherwise FALSE.
      */
     public static function checkExiftoolAndRemoveExif(
-        $filepath,
+        $filepath
     ) {
         @exec('exiftool -ver 2>&1', $output, $statusCode);
         if ($statusCode === 0) {
@@ -503,7 +503,7 @@ class Utils
      * @throws \InvalidArgumentException If the tag is invalid.
      */
     public static function throwIfInvalidUserTag(
-        $userTag,
+        $userTag
     ) {
         // NOTE: We can use "array" typehint, but it doesn't give us enough freedom.
         if (!is_array($userTag)) {
@@ -556,7 +556,7 @@ class Utils
      * @throws \InvalidArgumentException If any tags are invalid.
      */
     public static function throwIfInvalidUsertags(
-        $usertags,
+        $usertags
     ) {
         // NOTE: We can use "array" typehint, but it doesn't give us enough freedom.
         if (!is_array($usertags)) {
@@ -622,7 +622,7 @@ class Utils
      * @throws \InvalidArgumentException If any tags are invalid.
      */
     public static function throwIfInvalidProductTags(
-        $productTags,
+        $productTags
     ) {
         // NOTE: We can use "array" typehint, but it doesn't give us enough freedom.
         if (!is_array($productTags)) {
@@ -690,7 +690,7 @@ class Utils
      * @throws \InvalidArgumentException If any tags are invalid.
      */
     public static function throwIfInvalidProductTag(
-        $productTag,
+        $productTag
     ) {
         // NOTE: We can use "array" typehint, but it doesn't give us enough freedom.
         if (!is_array($productTag)) {
@@ -737,7 +737,7 @@ class Utils
      * @throws \InvalidArgumentException
      */
     public static function throwIfInvalidPosition(
-        $position,
+        $position
     ) {
         if (!is_array($position)) {
             throw new \InvalidArgumentException('Position must be an array.');
@@ -778,7 +778,7 @@ class Utils
      * @throws \InvalidArgumentException
      */
     public static function throwIfInvalidHashtag(
-        $hashtag,
+        $hashtag
     ) {
         if (!is_string($hashtag) || !strlen($hashtag)) {
             throw new \InvalidArgumentException('Hashtag must be a non-empty string.');
@@ -801,7 +801,7 @@ class Utils
      * @throws \InvalidArgumentException
      */
     public static function throwIfInvalidRankToken(
-        $rankToken,
+        $rankToken
     ) {
         if (!Signatures::isValidUUID($rankToken)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid rank token.', $rankToken));
@@ -816,7 +816,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidStoryPoll(
-        array $storyPoll,
+        array $storyPoll
     ) {
         $requiredKeys = ['question', 'viewer_vote', 'viewer_can_vote', 'tallies', 'is_sticker', 'color', 'type', 'poll_id', 'tap_state_str_id', 'is_multi_option_poll'];
 
@@ -867,7 +867,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidStorySlider(
-        array $storySlider,
+        array $storySlider
     ) {
         $requiredKeys = ['viewer_vote', 'viewer_can_vote', 'slider_vote_average', 'slider_vote_count', 'emoji', 'background_color', 'text_color', 'is_sticker'];
 
@@ -928,7 +928,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidStoryQuestion(
-        array $storyQuestion,
+        array $storyQuestion
     ) {
         $requiredKeys = ['z', 'viewer_can_interact', 'background_color', 'profile_pic_url', 'question_type', 'question', 'text_color', 'is_sticker'];
 
@@ -994,7 +994,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidStoryCountdown(
-        array $storyCountdown,
+        array $storyCountdown
     ) {
         $requiredKeys = ['z', 'text', 'text_color', 'start_background_color', 'end_background_color', 'digit_color', 'digit_card_color', 'end_ts', 'following_enabled', 'is_sticker'];
 
@@ -1061,7 +1061,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidStoryQuiz(
-        array $storyQuiz,
+        array $storyQuiz
     ) {
         $requiredKeys = ['z', 'question', 'options', 'correct_answer', 'viewer_can_answer', 'viewer_answer', 'text_color', 'start_background_color', 'end_background_color', 'is_sticker'];
 
@@ -1137,7 +1137,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidChatSticker(
-        array $chatSticker,
+        array $chatSticker
     ) {
         $requiredKeys = ['z', 'type', 'text', 'start_background_color', 'end_background_color', 'is_pinned'];
 
@@ -1188,7 +1188,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     protected static function _throwIfInvalidStoryPollTallies(
-        array $tallies,
+        array $tallies
     ) {
         $requiredKeys = ['text', 'count', 'font_size'];
         if (count($tallies) < 2 || count($tallies) > 4) {
@@ -1235,7 +1235,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidStoryMentionSticker(
-        array $storyMentions,
+        array $storyMentions
     ) {
         $requiredKeys = ['user_id', 'display_type', 'is_sticker', 'tap_state', 'tap_state_str_id', 'type'];
 
@@ -1291,7 +1291,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidStoryLocationSticker(
-        array $locationSticker,
+        array $locationSticker
     ) {
         $requiredKeys = ['location_id', 'is_sticker', 'tap_state', 'tap_state_str_id', 'type'];
         $missingKeys = array_keys(array_diff_key(['location_id' => 1, 'is_sticker' => 1, 'tap_state' => 1, 'tap_state_str_id' => 1, 'type' => 1], $locationSticker));
@@ -1340,7 +1340,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidStoryLinkSticker(
-        array $linkSticker,
+        array $linkSticker
     ) {
         $requiredKeys = ['link_type', 'url', 'selected_index', 'is_sticker', 'tap_state', 'tap_state_str_id', 'type'];
         $missingKeys = array_keys(array_diff_key(['link_type' => 1, 'url' => 1, 'selected_index' => 1, 'is_sticker' => 1, 'tap_state' => 1, 'tap_state_str_id' => 1, 'type' => 1], $linkSticker));
@@ -1396,7 +1396,7 @@ class Utils
      *                                   or if any tags are invalid.
      */
     public static function throwIfInvalidStoryHashtagSticker(
-        array $hashtags,
+        array $hashtags
     ) {
         $requiredKeys = ['tag_name', 'is_sticker', 'tap_state', 'tap_state_str_id', 'type'];
 
@@ -1454,7 +1454,7 @@ class Utils
      * @throws \InvalidArgumentException If it's missing keys or has invalid values.
      */
     public static function throwIfInvalidAttachedMedia(
-        array $attachedMedia,
+        array $attachedMedia
     ) {
         $attachedMedia = reset($attachedMedia);
         $requiredKeys = ['media_id', 'is_sticker'];
@@ -1491,7 +1491,7 @@ class Utils
      */
     protected static function _throwIfInvalidStoryStickerPlacement(
         array $storySticker,
-        $type,
+        $type
     ) {
         $requiredKeys = ['x', 'y', 'z', 'width', 'height', 'rotation'];
 
@@ -1537,7 +1537,7 @@ class Utils
      * @return string The verified final type; either "PHOTO", "VIDEO" or "CAROUSEL".
      */
     public static function checkMediaType(
-        $mediaType,
+        $mediaType
     ) {
         if (ctype_digit($mediaType) || is_int($mediaType)) {
             if ($mediaType == Item::PHOTO) {
@@ -1557,7 +1557,7 @@ class Utils
 
     public static function formatBytes(
         $bytes,
-        $precision = 2,
+        $precision = 2
     ) {
         $units = ['B', 'kB', 'mB', 'gB', 'tB'];
 
@@ -1572,7 +1572,7 @@ class Utils
 
     public static function colouredString(
         $string,
-        $colour,
+        $colour
     ) {
         $colours['black'] = '0;30';
         $colours['dark_gray'] = '1;30';
@@ -1603,7 +1603,7 @@ class Utils
     }
 
     public static function getFilterCode(
-        $filter,
+        $filter
     ) {
         $filters = [];
         $filters[0] = 'Normal';
@@ -1664,7 +1664,7 @@ class Utils
      * @return bool TRUE if folder exists and is writable, otherwise FALSE.
      */
     public static function createFolder(
-        $folder,
+        $folder
     ) {
         // Test write-permissions for the folder and create/fix if necessary.
         if ((is_dir($folder) && is_writable($folder))
@@ -1686,7 +1686,7 @@ class Utils
      */
     public static function deleteTree(
         $folder,
-        $keepRootFolder = false,
+        $keepRootFolder = false
     ) {
         // Handle bad arguments.
         if (empty($folder) || !file_exists($folder)) {
@@ -1731,7 +1731,7 @@ class Utils
     public static function atomicWrite(
         $filename,
         $data,
-        $atomicSuffix = 'atomictmp',
+        $atomicSuffix = 'atomictmp'
     ) {
         // Perform an exclusive (locked) overwrite to a temporary file.
         $filenameTmp = sprintf('%s.%s', $filename, $atomicSuffix);
@@ -1767,7 +1767,7 @@ class Utils
      */
     public static function createTempFile(
         $outputDir,
-        $namePrefix = 'TEMP',
+        $namePrefix = 'TEMP'
     ) {
         // Automatically generates a name like "INSTATEMP_" or "INSTAVID_" etc.
         $finalPrefix = sprintf('INSTA%s_', $namePrefix);
@@ -1799,7 +1799,7 @@ class Utils
      * @return bool TRUE on success or FALSE on failure.
      */
     public static function safe_fclose(
-        $handle,
+        $handle
     ) {
         if (is_resource($handle)) {
             return fclose($handle);
@@ -1833,7 +1833,7 @@ class Utils
      * @return bool TRUE if valid web syntax, otherwise FALSE.
      */
     public static function hasValidWebURLSyntax(
-        $url,
+        $url
     ) {
         return (bool) preg_match('/^https?:\/\/[^\s.\/]+\.[^\s.\/]{2}\S*$/iu', $url);
     }
@@ -1850,7 +1850,7 @@ class Utils
      */
     public static function extractURLs(
         $text,
-        $excludeText = [],
+        $excludeText = []
     ) {
         if (!is_array($excludeText)) {
             $excludeText = [$excludeText];
@@ -1887,7 +1887,7 @@ class Utils
                     'baseUrl'  => $match[1], // "https://foo:bar@www.bing.com"
                     'protocol' => $match[2], // "https" (empty if no protocol)
                     'domain'   => $match[3], // "www.bing.com"
-                    'path'     => isset($match[4]) ? $match[4] : '', // "/?foo=#test"
+                    'path'     => $match[4] ?? '', // "/?foo=#test"
                 ];
             }
         }
@@ -1905,7 +1905,7 @@ class Utils
      * @return string               The country code.
      */
     public static function getCountryCode(
-        $countryLocale,
+        $countryLocale
     ) {
         $countries = [];
         $countries[] = ['code' => 'AF', 'name' => 'Afghanistan', 'd_code' => '+93'];
@@ -2156,7 +2156,7 @@ class Utils
      * @param string $device The Apple device model.
      */
     public static function checkIsValidiDevice(
-        $device,
+        $device
     ) {
         $iDevices = [
             'iPhone9,1', // iPhone 7 (Global)

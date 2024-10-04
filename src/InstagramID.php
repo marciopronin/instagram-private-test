@@ -53,7 +53,7 @@ class InstagramID
      * @return string The shortcode.
      */
     public static function toCode(
-        $id,
+        $id
     ) {
         // First we must convert the ID number to a binary string.
         // NOTE: Conversion speed depends on number size. With the most common
@@ -98,7 +98,7 @@ class InstagramID
      * @return string The numeric ID.
      */
     public static function fromCode(
-        $code,
+        $code
     ) {
         if (!is_string($code) || preg_match('/[^A-Za-z0-9\-_]/', $code)) {
             throw new \InvalidArgumentException('Input must be a valid Instagram shortcode.');
@@ -136,7 +136,7 @@ class InstagramID
      */
     public static function base10to2(
         $base10,
-        $padLeft = true,
+        $padLeft = true
     ) {
         $base10 = (string) $base10;
         if ($base10 === '' || preg_match('/[^0-9]/', $base10)) {
@@ -188,7 +188,7 @@ class InstagramID
      *               offset 1 has the value of bit 2, and so on.
      */
     public static function buildBinaryLookupTable(
-        $maxBitCount,
+        $maxBitCount
     ) {
         $table = [];
         for ($bitPosition = 0; $bitPosition < $maxBitCount; $bitPosition++) {
@@ -210,7 +210,7 @@ class InstagramID
      * @return string The decimal number as a string.
      */
     public static function base2to10(
-        $base2,
+        $base2
     ) {
         if (!is_string($base2) || preg_match('/[^01]/', $base2)) {
             throw new \InvalidArgumentException('Input must be a binary string.');

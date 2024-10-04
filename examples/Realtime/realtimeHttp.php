@@ -285,23 +285,23 @@ class RealtimeHttpServer
                 return $this->_handleClientContext($this->_rtc->sendTextToDirect($params['threadId'], $params['text']));
             case '/post':
                 return $this->_handleClientContext($this->_rtc->sendPostToDirect($params['threadId'], $params['mediaId'], [
-                    'text' => isset($params['text']) ? $params['text'] : null,
+                    'text' => $params['text'] ?? null,
                 ]));
             case '/story':
                 return $this->_handleClientContext($this->_rtc->sendStoryToDirect($params['threadId'], $params['storyId'], [
-                    'text' => isset($params['text']) ? $params['text'] : null,
+                    'text' => $params['text'] ?? null,
                 ]));
             case '/profile':
                 return $this->_handleClientContext($this->_rtc->sendProfileToDirect($params['threadId'], $params['userId'], [
-                    'text' => isset($params['text']) ? $params['text'] : null,
+                    'text' => $params['text'] ?? null,
                 ]));
             case '/location':
                 return $this->_handleClientContext($this->_rtc->sendLocationToDirect($params['threadId'], $params['locationId'], [
-                    'text' => isset($params['text']) ? $params['text'] : null,
+                    'text' => $params['text'] ?? null,
                 ]));
             case '/hashtag':
                 return $this->_handleClientContext($this->_rtc->sendHashtagToDirect($params['threadId'], $params['hashtag'], [
-                    'text' => isset($params['text']) ? $params['text'] : null,
+                    'text' => $params['text'] ?? null,
                 ]));
             case '/like':
                 return $this->_handleClientContext($this->_rtc->sendLikeToDirect($params['threadId']));

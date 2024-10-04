@@ -13,7 +13,7 @@ class PresenceHandler extends AbstractHandler implements HandlerInterface
 
     /** {@inheritdoc} */
     public function handleMessage(
-        Message $message,
+        Message $message
     ) {
         $data = $message->getData();
         if (!isset($data['presence_event']) || !is_array($data['presence_event'])) {

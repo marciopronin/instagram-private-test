@@ -52,7 +52,7 @@ class PDQHash
      */
     public function fromHexString(
         /* string */
-        $hex_string,
+        $hex_string
     ) {/* : PDQHash */
         if (strlen($hex_string) !== self::PDQHASH_HEX_LENGTH) {
             throw new MalformedPDQHashException(
@@ -133,7 +133,7 @@ class PDQHash
     }
 
     public function setBit(
-        $bit_index,
+        $bit_index
     ) {
         $slot_index = (int) ($bit_index / self::PDQHASH_NUM_SLOTS);
         $slot_bit_index = (int) ($bit_index % self::PDQHASH_NUM_SLOTS);
@@ -149,7 +149,7 @@ class PDQHash
      * @return int
      */
     public function hammingDistanceTo(
-        $that,
+        $that
     ) {
         $sum = 0;
         for ($i = 0; $i < self::PDQHASH_NUM_SLOTS; $i++) {
@@ -161,7 +161,7 @@ class PDQHash
 
     public function isWithinHammingDistanceOf(
         $that,
-        $threshold,
+        $threshold
     ) {
         $current = 0;
         for ($i = 0; $i < self::PDQHASH_NUM_SLOTS; $i++) {
@@ -185,7 +185,7 @@ class PDQHash
     }
 
     private static function __popCount16(
-        $n,
+        $n
     ) {
         $n -= (($n >> 1) & 0x5555);
         $n = ((($n >> 2) & 0x3333) + ($n & 0x3333));
@@ -196,7 +196,7 @@ class PDQHash
     }
 
     private static function __popCount16Slow(
-        $n,
+        $n
     ) {
         $count = 0;
         for ($count = 0; $n != 0; $count++, $n &= $n - 1) {

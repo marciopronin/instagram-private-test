@@ -71,7 +71,7 @@ class FakeCookies
     public function add(
         $name,
         $value,
-        $singleUse = true,
+        $singleUse = true
     ) {
         // This overwrites any existing fake cookie with the same name, which is
         // intentional since the names of cookies must be unique.
@@ -89,7 +89,7 @@ class FakeCookies
      * @param string $name The name of the cookie. CASE SENSITIVE!
      */
     public function delete(
-        $name,
+        $name
     ) {
         unset($this->_cookies[$name]);
     }
@@ -105,11 +105,11 @@ class FakeCookies
      * @return callable
      */
     public function __invoke(
-        callable $handler,
+        callable $handler
     ) {
         return function (
             RequestInterface $request,
-            array $options,
+            array $options
         ) use ($handler) {
             $fakeCookies = $this->cookies();
 

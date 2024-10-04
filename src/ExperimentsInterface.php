@@ -16,7 +16,7 @@ interface ExperimentsInterface
     public function isExperimentEnabled(
         $experiment,
         $param,
-        $default = false,
+        $default = false
     );
 
     /**
@@ -31,6 +31,6 @@ interface ExperimentsInterface
     public function getExperimentParam(
         $experiment,
         $param,
-        $default = null,
+        $default = null
     );
 }

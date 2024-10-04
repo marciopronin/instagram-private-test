@@ -40,7 +40,7 @@ class RealtimeFlowFactory
     public function __construct(
         ClientIdentifierGenerator $clientIdentifierGenerator,
         PacketIdentifierGenerator $packetIdentifierGenerator,
-        PacketFactory $packetFactory,
+        PacketFactory $packetFactory
     ) {
         $this->_clientIdentifierGenerator = $clientIdentifierGenerator;
         $this->_packetIdentifierGenerator = $packetIdentifierGenerator;
@@ -54,19 +54,19 @@ class RealtimeFlowFactory
 
     public function buildIncomingPublishFlow(
         Message $message,
-        ?int $identifier = null,
+        ?int $identifier = null
     ): IncomingPublishFlow {
         return new IncomingPublishFlow($this->_packetFactory, $message, $identifier);
     }
 
     public function buildOutgoingConnectFlow(
-        RealtimeConnection $connection,
+        RealtimeConnection $connection
     ): RealtimeConnectFlow {
         return new RealtimeConnectFlow($this->_packetFactory, $connection);
     }
 
     public function buildOutgoingDisconnectFlow(
-        Connection $connection,
+        Connection $connection
     ): OutgoingDisconnectFlow {
         return new OutgoingDisconnectFlow($this->_packetFactory, $connection);
     }
@@ -77,19 +77,19 @@ class RealtimeFlowFactory
     }
 
     public function buildOutgoingPublishFlow(
-        Message $message,
+        Message $message
     ): OutgoingPublishFlow {
         return new OutgoingPublishFlow($this->_packetFactory, $message, $this->_packetIdentifierGenerator);
     }
 
     public function buildOutgoingSubscribeFlow(
-        array $subscriptions,
+        array $subscriptions
     ): OutgoingSubscribeFlow {
         return new OutgoingSubscribeFlow($this->_packetFactory, $subscriptions, $this->_packetIdentifierGenerator);
     }
 
     public function buildOutgoingUnsubscribeFlow(
-        array $subscriptions,
+        array $subscriptions
     ): OutgoingUnsubscribeFlow {
         return new OutgoingUnsubscribeFlow($this->_packetFactory, $subscriptions, $this->_packetIdentifierGenerator);
     }

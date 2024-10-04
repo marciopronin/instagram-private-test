@@ -124,7 +124,7 @@ class Response extends AutoPropertyMapper
      * @param HttpResponseInterface $response
      */
     public function setHttpResponse(
-        HttpResponseInterface $response,
+        HttpResponseInterface $response
     ) {
         $this->httpResponse = $response;
     }

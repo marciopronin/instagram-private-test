@@ -58,7 +58,7 @@ class Internal extends RequestCollection
      * @param int $value Max Configure retries.
      */
     public function setMaxConfigureRetries(
-        $value,
+        $value
     ) {
         if (is_int($value) === false || ($value < 0 || $value > 25)) {
             throw new \InvalidArgumentException('The supplied value for max configure retries is not valid.');
@@ -96,7 +96,7 @@ class Internal extends RequestCollection
         $targetFeed,
         $photoFilename,
         ?InternalMetadata $internalMetadata = null,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         // Make sure we only allow these particular feeds for this function.
         if ($targetFeed !== Constants::FEED_TIMELINE
@@ -162,7 +162,7 @@ class Internal extends RequestCollection
             );
 
             try {
-                list($hash, $quality) = @PDQHasher::computeHashAndQualityFromFilename($photoFilename, false, false);
+                [$hash, $quality] = @PDQHasher::computeHashAndQualityFromFilename($photoFilename, false, false);
                 if ($hash !== null) {
                     $pdqHashes[] = $hash->toHexString();
                     $this->updateMediaWithPdqHashes($internalMetadata->getUploadId(), $pdqHashes);
@@ -199,7 +199,7 @@ class Internal extends RequestCollection
      */
     public function uploadPhotoData(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         // Make sure we have photo details.
         if ($internalMetadata->getPhotoDetails() === null) {
@@ -258,7 +258,7 @@ class Internal extends RequestCollection
     public function configureSinglePhoto(
         $targetFeed,
         InternalMetadata $internalMetadata,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         // Determine the target endpoint for the photo.
         switch ($targetFeed) {
@@ -281,9 +281,9 @@ class Internal extends RequestCollection
 
         // Available external metadata parameters:
         /** @var string Caption to use for the media. */
-        $captionText = isset($externalMetadata['caption']) ? $externalMetadata['caption'] : '';
+        $captionText = $externalMetadata['caption'] ?? '';
         /** @var string Accesibility caption to use for the media. */
-        $altText = isset($externalMetadata['custom_accessibility_caption']) ? $externalMetadata['custom_accessibility_caption'] : null;
+        $altText = $externalMetadata['custom_accessibility_caption'] ?? null;
         /** @var Response\Model\Location|null A Location object describing where
          * the media was taken. */
         $location = (isset($externalMetadata['location'])) ? $externalMetadata['location'] : null;
@@ -445,7 +445,7 @@ class Internal extends RequestCollection
                 if (isset($externalMetadata['share_to_fb_destination_id']) && isset($externalMetadata['fb_access_token'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
                             ->addPost('fb_access_token', $externalMetadata['fb_access_token'])
-                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+                            ->addPost('share_to_fb_destination_type', $externalMetadata['share_to_fb_destination_type'] ?? 'USER');
                 }
                 break;
             case Constants::FEED_STORY:
@@ -612,7 +612,7 @@ class Internal extends RequestCollection
                 if (isset($externalMetadata['share_to_fb_destination_id']) && $externalMetadata['crosspost']) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
                             ->addPost('share_to_facebook', '1')
-                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+                            ->addPost('share_to_fb_destination_type', $externalMetadata['share_to_fb_destination_type'] ?? 'USER');
 
                     if (isset($externalMetadata['fb_access_token'])) {
                         $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
@@ -727,7 +727,7 @@ class Internal extends RequestCollection
     public function uploadVideo(
         $targetFeed,
         $videoFilename,
-        ?InternalMetadata $internalMetadata = null,
+        ?InternalMetadata $internalMetadata = null
     ) {
         if ($internalMetadata === null) {
             $internalMetadata = new InternalMetadata();
@@ -801,7 +801,7 @@ class Internal extends RequestCollection
         $targetFeed,
         $videoFilename,
         ?InternalMetadata $internalMetadata = null,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         // Make sure we only allow these particular feeds for this function.
         if ($targetFeed !== Constants::FEED_TIMELINE
@@ -882,7 +882,7 @@ class Internal extends RequestCollection
     public function uploadVideoThumbnail(
         $targetFeed,
         InternalMetadata $internalMetadata,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         if ($internalMetadata->getVideoDetails() === null) {
             throw new \InvalidArgumentException('Video details are missing from the internal metadata.');
@@ -908,7 +908,7 @@ class Internal extends RequestCollection
                 try {
                     $options['thumbnailTimestamp'] = $timeFrame;
                     $frame = new InstagramThumbnail($internalMetadata->getVideoDetails()->getFilename(), $options);
-                    list($hash, $quality) = @PDQHasher::computeHashAndQualityFromFilename($frame->getFile(), false, false);
+                    [$hash, $quality] = @PDQHasher::computeHashAndQualityFromFilename($frame->getFile(), false, false);
                     if ($hash !== null) {
                         $pdqHashes[] = $hash->toHexString();
                     }
@@ -949,7 +949,7 @@ class Internal extends RequestCollection
      */
     protected function _requestVideoUploadURL(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         $request = $this->ig->request('upload/video/')
             ->setSignedPost(false)
@@ -988,7 +988,7 @@ class Internal extends RequestCollection
     public function configureSingleVideo(
         $targetFeed,
         InternalMetadata $internalMetadata,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         $uploadParams = $this->_getVideoUploadParams($targetFeed, $internalMetadata);
 
@@ -1020,7 +1020,7 @@ class Internal extends RequestCollection
 
         // Available external metadata parameters:
         /** @var string Caption to use for the media. */
-        $captionText = isset($externalMetadata['caption']) ? $externalMetadata['caption'] : '';
+        $captionText = $externalMetadata['caption'] ?? '';
         /** @var string[]|null Array of numerical UserPK IDs of people tagged in
          * your video. ONLY USED IN STORY VIDEOS! TODO: Actually, it's not even
          * implemented for stories. */
@@ -1337,7 +1337,7 @@ class Internal extends RequestCollection
                 if (isset($externalMetadata['share_to_fb_destination_id']) && $externalMetadata['crosspost']) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
                             ->addPost('share_to_facebook', '1')
-                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+                            ->addPost('share_to_fb_destination_type', $externalMetadata['share_to_fb_destination_type'] ?? 'USER');
 
                     if (isset($externalMetadata['fb_access_token'])) {
                         $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
@@ -1436,7 +1436,7 @@ class Internal extends RequestCollection
                 if (isset($externalMetadata['share_to_fb_destination_id'])) {
                     $request->addPost('share_to_fb_destination_id', $externalMetadata['share_to_fb_destination_id'])
                             ->addPost('share_to_facebook', '1')
-                            ->addPost('share_to_fb_destination_type', isset($externalMetadata['share_to_fb_destination_type']) ? $externalMetadata['share_to_fb_destination_type'] : 'USER');
+                            ->addPost('share_to_fb_destination_type', $externalMetadata['share_to_fb_destination_type'] ?? 'USER');
 
                     if (isset($externalMetadata['fb_access_token'])) {
                         $request->addPost('fb_access_token', $externalMetadata['fb_access_token']);
@@ -1574,7 +1574,7 @@ class Internal extends RequestCollection
     public function facebookUpload(
         $targetFeed,
         $filename,
-        ?InternalMetadata $internalMetadata = null,
+        ?InternalMetadata $internalMetadata = null
     ) {
         if ($internalMetadata === null) {
             $internalMetadata = new InternalMetadata();
@@ -1646,7 +1646,7 @@ class Internal extends RequestCollection
     public function configureTimelineAlbum(
         array $media,
         InternalMetadata $internalMetadata,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         $endpoint = 'media/configure_sidecar/';
 
@@ -1654,10 +1654,10 @@ class Internal extends RequestCollection
 
         // Available external metadata parameters:
         /** @var string Caption to use for the album. */
-        $captionText = isset($externalMetadata['caption']) ? $externalMetadata['caption'] : '';
+        $captionText = $externalMetadata['caption'] ?? '';
         /** @var Response\Model\Location|null A Location object describing where
          * the album was taken. */
-        $location = isset($externalMetadata['location']) ? $externalMetadata['location'] : null;
+        $location = $externalMetadata['location'] ?? null;
 
         // Fix very bad external user-metadata values.
         if (!is_string($captionText)) {
@@ -1818,7 +1818,7 @@ class Internal extends RequestCollection
      * @throws SettingsException
      */
     protected function _saveExperimentsMobileConfig(
-        $mobileConfigResponse,
+        $mobileConfigResponse
     ) {
         // $paramsMap = fopen(__DIR__.'/../data/params_map.txt', 'r');
         // $mappedExperiments = [];
@@ -1902,7 +1902,7 @@ class Internal extends RequestCollection
      * @return Response\MobileConfigResponse
      */
     public function getMobileConfig(
-        $prelogin,
+        $prelogin
     ) {
         $request = $this->ig->request('launcher/mobileconfig/')
             ->addPost('bool_opt_policy', 0)
@@ -2015,7 +2015,7 @@ class Internal extends RequestCollection
      */
     public function readMsisdnHeader(
         $usage,
-        $useCsrfToken = false,
+        $useCsrfToken = false
     ) {
         $request = $this->ig->request('accounts/read_msisdn_header/')
             ->setNeedsAuth(false)
@@ -2045,7 +2045,7 @@ class Internal extends RequestCollection
      * @since 10.24.0 app version.
      */
     public function bootstrapMsisdnHeader(
-        $usage = 'ig_select_app',
+        $usage = 'ig_select_app'
     ) {
         $request = $this->ig->request('accounts/msisdn_header_bootstrap/')
             ->setNeedsAuth(false)
@@ -2060,7 +2060,7 @@ class Internal extends RequestCollection
      * @param Response\Model\Token|null $token
      */
     protected function _saveZeroRatingToken(
-        ?Response\Model\Token $token = null,
+        ?Response\Model\Token $token = null
     ) {
         if ($token === null) {
             return;
@@ -2116,7 +2116,7 @@ class Internal extends RequestCollection
     public function fetchZeroRatingToken(
         $reason = 'token_expired',
         $result = true,
-        $prelogin = true,
+        $prelogin = true
     ) {
         if ($result === true) {
             $endpoint = 'zr/token/result/';
@@ -2263,7 +2263,7 @@ class Internal extends RequestCollection
      * @return Response\FetchQPDataResponse
      */
     public function getQPFetch(
-        $surfaces = null,
+        $surfaces = null
     ) {
         if ($surfaces !== null) {
             $qps = $this->_getQuickPromotionSurface($surfaces);
@@ -2330,7 +2330,7 @@ class Internal extends RequestCollection
      * @return Response\GenericResponse
      */
     public function reportProblem(
-        $feedbackUrl,
+        $feedbackUrl
     ) {
         return $this->ig->request($feedbackUrl)
              // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -2351,7 +2351,7 @@ class Internal extends RequestCollection
      */
     public function uploadBugReport(
         $postData,
-        $fileData = null,
+        $fileData = null
     ) {
         $request = $this->ig->request('https://graphql.instagram.com/bug_report_file_upload/')
             ->setSignedPost(false);
@@ -2376,7 +2376,7 @@ class Internal extends RequestCollection
      * @return Response\GetViewableStatusesResponse
      */
     public function getViewableStatuses(
-        $includeAuthors = false,
+        $includeAuthors = false
     ) {
         $request = $this->ig->request('status/get_viewable_statuses/');
 
@@ -2431,7 +2431,7 @@ class Internal extends RequestCollection
      */
     public function cdnRmd(
         $interface = 'Unknown',
-        $reason = 'SESSION_CHANGE',
+        $reason = 'SESSION_CHANGE'
     ) {
         $response = $this->ig->request('ti/cdn_rmd/')
             ->setAddDefaultHeaders(false)
@@ -2475,7 +2475,7 @@ class Internal extends RequestCollection
         $pretty,
         $clientLibrary = 'graphservice',
         $queryEndpoint = false,
-        $gzip = false,
+        $gzip = false
     ) {
         if (is_string($queryEndpoint)) {
             $endpoint = $queryEndpoint;
@@ -2568,7 +2568,7 @@ class Internal extends RequestCollection
     public function checkAgeEligibility(
         $day,
         $month,
-        $year,
+        $year
     ) {
         return $this->ig->request('consent/check_age_eligibility/')
             ->setSignedPost(false)
@@ -2599,7 +2599,7 @@ class Internal extends RequestCollection
         $regMethod = 'email',
         $seenSteps = [],
         $finish = false,
-        $tosAccepted = true,
+        $tosAccepted = true
     ) {
         if ($regMethod !== 'email' && $regMethod !== 'phone') {
             throw new \InvalidArgumentException(
@@ -2638,7 +2638,7 @@ class Internal extends RequestCollection
      * @return Response\GenericResponse
      */
     public function newAccountNuxSeen(
-        $waterfallId,
+        $waterfallId
     ) {
         return $this->ig->request('nux/new_account_nux_seen/')
             ->addPost('is_fb4a_installed', 'false')
@@ -2661,7 +2661,7 @@ class Internal extends RequestCollection
      * @return Response\GenericResponse
      */
     public function getCommonPushNdxScreen(
-        $postImporter = false,
+        $postImporter = false
     ) {
         $request = $this->ig->request('bloks/apps/com.instagram.ndx.common.push_ig_ndx_screen/')
             ->setSignedPost(false)
@@ -2724,7 +2724,7 @@ class Internal extends RequestCollection
      */
     public function sendPrivacyConsentPromptAction(
         $flowName,
-        $form = false,
+        $form = false
     ) {
         $request = $this->ig->request('bloks/apps/com.bloks.www.privacy.consent.prompt.action/')
             ->setSignedPost(false)
@@ -2784,7 +2784,7 @@ class Internal extends RequestCollection
      */
     public function sendPrivacyConsentPromptCallback(
         $response,
-        $init = false,
+        $init = false
     ) {
         $re = '/[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}/m';
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
@@ -2847,7 +2847,7 @@ class Internal extends RequestCollection
         $category,
         $reasons,
         $errorCode,
-        $extraData,
+        $extraData
     ) {
         return $this->ig->request('bloks/apps/com.instagram.sentry_block_dialogue_unification.screens.sentry_block_dialogue_unification/')
             ->setSignedPost(false)
@@ -2877,7 +2877,7 @@ class Internal extends RequestCollection
      */
     public function newUserFlow(
         $email,
-        $acceptedTos = false,
+        $acceptedTos = false
     ) {
         $request = $this->ig->request('consent/new_user_flow/')
             ->setNeedsAuth(false)
@@ -2914,7 +2914,7 @@ class Internal extends RequestCollection
         $screenKey = null,
         $day = null,
         $month = null,
-        $year = null,
+        $year = null
     ) {
         $request = $this->ig->request('consent/existing_user_flow/')
              ->setNeedsAuth(false)
@@ -3003,7 +3003,7 @@ class Internal extends RequestCollection
         array $items,
         $sourceId = null,
         $module = 'feed_timeline',
-        $skippedItems = [],
+        $skippedItems = []
     ) {
         // Build the list of seen media, with human randomization of seen-time.
         $reels = [];
@@ -3076,7 +3076,7 @@ class Internal extends RequestCollection
      * @return Response
      */
     public function configureWithRetries(
-        callable $configurator,
+        callable $configurator
     ) {
         $attempt = 0;
         $lastError = null;
@@ -3182,7 +3182,7 @@ class Internal extends RequestCollection
      */
     public function updateMediaWithPdqHashes(
         $uploadId,
-        $pdqHashes,
+        $pdqHashes
     ) {
         $request = $this->ig->request('media/update_media_with_pdq_hash_info/')
              ->addPost('upload_id', $uploadId)
@@ -3221,7 +3221,7 @@ class Internal extends RequestCollection
         MediaDetails $mediaDetails,
         Request $offsetTemplate,
         Request $uploadTemplate,
-        $skipGet,
+        $skipGet
     ) {
         // Open file handle.
         $handle = fopen($mediaDetails->getFilename(), 'rb');
@@ -3303,7 +3303,7 @@ class Internal extends RequestCollection
      */
     protected function _uploadPhotoInOnePiece(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         // Prepare payload for the upload request.
         $request = $this->ig->request('upload/photo/')
@@ -3340,7 +3340,7 @@ class Internal extends RequestCollection
      */
     protected function _uploadResumablePhoto(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         $photoDetails = $internalMetadata->getPhotoDetails();
 
@@ -3431,7 +3431,7 @@ class Internal extends RequestCollection
      */
     protected function _useResumablePhotoUploader(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE_ALBUM:
@@ -3458,7 +3458,7 @@ class Internal extends RequestCollection
      * @return array|null
      */
     protected function _getFirstMissingRange(
-        $ranges,
+        $ranges
     ) {
         preg_match_all('/(?<start>\d+)-(?<end>\d+)\/(?<total>\d+)/', $ranges, $matches, PREG_SET_ORDER);
         if (!count($matches)) {
@@ -3506,7 +3506,7 @@ class Internal extends RequestCollection
      */
     protected function _uploadVideoChunks(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         $videoFilename = $internalMetadata->getVideoDetails()->getFilename();
 
@@ -3695,7 +3695,7 @@ class Internal extends RequestCollection
      */
     protected function _uploadSegmentedVideo(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         $videoDetails = $internalMetadata->getVideoDetails();
 
@@ -3838,7 +3838,7 @@ class Internal extends RequestCollection
      */
     protected function _uploadSegmentedVideoFacebook(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         $videoDetails = $internalMetadata->getVideoDetails();
 
@@ -3905,7 +3905,7 @@ class Internal extends RequestCollection
      */
     protected function _uploadResumableVideo(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         $rurCookie = $this->ig->client->getCookie('rur', 'i.instagram.com');
         if ($rurCookie === null || $rurCookie->getValue() === '') {
@@ -3957,7 +3957,7 @@ class Internal extends RequestCollection
      */
     protected function _useSegmentedVideoUploader(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         // ffmpeg is required for video segmentation.
         try {
@@ -4043,7 +4043,7 @@ class Internal extends RequestCollection
      */
     protected function _useResumableVideoUploader(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         switch ($targetFeed) {
             case Constants::FEED_TIMELINE_ALBUM:
@@ -4114,7 +4114,7 @@ class Internal extends RequestCollection
      */
     protected function _getPhotoUploadParams(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         // Common params.
         $result = [
@@ -4132,7 +4132,7 @@ class Internal extends RequestCollection
                 $result['is_sidecar'] = '1';
                 break;
             case Constants::FEED_STORY:
-                list($hash, $quality) = PDQHasher::computeHashAndQualityFromFilename($internalMetadata->getPhotoDetails()->getFilename(), false, false);
+                [$hash, $quality] = PDQHasher::computeHashAndQualityFromFilename($internalMetadata->getPhotoDetails()->getFilename(), false, false);
                 $result['original_photo_pdq_hash'] = sprintf('%s:%d', $hash->toHexString(), 9);
                 break;
             case Constants::FEED_TV:
@@ -4167,7 +4167,7 @@ class Internal extends RequestCollection
      */
     protected function _getVideoUploadParams(
         $targetFeed,
-        InternalMetadata $internalMetadata,
+        InternalMetadata $internalMetadata
     ) {
         $videoDetails = $internalMetadata->getVideoDetails();
         // Common params.
@@ -4232,7 +4232,7 @@ class Internal extends RequestCollection
      */
     protected function _findSegments(
         $outputDirectory,
-        $prefix,
+        $prefix
     ) {
         // Video segments will be uploaded before the audio one.
         $result = glob("{$outputDirectory}/{$prefix}.video.*.mp4");
@@ -4262,7 +4262,7 @@ class Internal extends RequestCollection
         $targetFeed,
         VideoDetails $videoDetails,
         ?FFmpeg $ffmpeg = null,
-        $outputDirectory = null,
+        $outputDirectory = null
     ) {
         if ($ffmpeg === null) {
             $ffmpeg = FFmpeg::factory();
@@ -4416,7 +4416,7 @@ class Internal extends RequestCollection
      * @return Response\GenericResponse
      */
     public function getAsyncNdxIgSteps(
-        $source,
+        $source
     ) {
         return $this->ig->request('devices/ndx/api/async_get_ndx_ig_steps/')
             ->addParam('ndx_request_source', $source)
@@ -4478,7 +4478,7 @@ class Internal extends RequestCollection
      * @return int
      */
     protected function _getTargetSegmentDuration(
-        $targetFeed,
+        $targetFeed
     ) {
         switch ($targetFeed) {
             case Constants::FEED_DIRECT:
@@ -4512,7 +4512,7 @@ class Internal extends RequestCollection
      * @return string
      */
     protected function _getQuickPromotionSurface(
-        $surfaces,
+        $surfaces
     ) {
         $qps = [
             'queries'    => [],
@@ -4578,7 +4578,7 @@ class Internal extends RequestCollection
      * @return string
      */
     protected function _getQuickPromotionSurfaceQueryString(
-        $darkMode,
+        $darkMode
     ) {
         $query = 'Query QuickPromotionSurfaceQuery: Viewer{viewer(){eligible_promotions.trigger_context_v2(<trigger_context_v2>).ig_parameters(<ig_parameters>).trigger_name(<trigger_name>).surface_nux_id(<surface>).external_gating_permitted_qps(<external_gating_permitted_qps>).supports_client_filters(true).include_holdouts(true){edges{client_ttl_seconds,log_eligibility_waterfall,is_holdout,priority,time_range{start,end},node{id,promotion_id,logging_data,is_server_force_pass,max_impressions,triggers,contextual_filters{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}},clauses{clause_type,filters{filter_type,unknown_action,value{name,required,bool_value,int_value,string_value},extra_datas{name,required,bool_value,int_value,string_value}}}}}},is_uncancelable,template{name,parameters{name,required,bool_value,string_value,color_value}},creatives{title{text},content{text},footer{text},social_context{text},social_context_images,primary_action{title{text},url,limit,dismiss_promotion},secondary_action{title{text},url,limit,dismiss_promotion},dismiss_action{title{text},url,limit,dismiss_promotion},bullet_list{title,subtitle,icon{uri,width,height}}image.scale(<scale>){uri,width,height}';
         if ($darkMode) {

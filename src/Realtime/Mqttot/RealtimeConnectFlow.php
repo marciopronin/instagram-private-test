@@ -20,7 +20,7 @@ class RealtimeConnectFlow extends AbstractFlow
      */
     public function __construct(
         PacketFactory $packetFactory,
-        RealtimeConnection $connection,
+        RealtimeConnection $connection
     ) {
         parent::__construct($packetFactory);
 
@@ -41,13 +41,13 @@ class RealtimeConnectFlow extends AbstractFlow
     }
 
     public function accept(
-        Packet $packet,
+        Packet $packet
     ): bool {
         return $packet->getPacketType() === Packet::TYPE_CONNACK;
     }
 
     public function next(
-        Packet $packet,
+        Packet $packet
     ): ?Packet {
         /** @var ConnectResponsePacket $packet */
         if ($packet->isSuccess()) {

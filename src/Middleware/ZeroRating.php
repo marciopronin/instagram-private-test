@@ -40,7 +40,7 @@ class ZeroRating
      * @param mixed $parent
      */
     public function __construct(
-        $parent,
+        $parent
     ) {
         $this->reset();
         $this->_parent = $parent;
@@ -60,7 +60,7 @@ class ZeroRating
      * @param array $rules
      */
     public function update(
-        array $rules = [],
+        array $rules = []
     ) {
         $this->_rules = [];
         foreach ($rules as $from => $to) {
@@ -86,11 +86,11 @@ class ZeroRating
      * @return callable
      */
     public function __invoke(
-        callable $handler,
+        callable $handler
     ) {
         return function (
             RequestInterface $request,
-            array $options,
+            array $options
         ) use ($handler) {
             if (empty($this->_rules) || in_array($request->getUri()->getPath(), Constants::ZR_EXCLUSION)) {
                 return $handler($request, $options);
@@ -115,7 +115,7 @@ class ZeroRating
      * @return string
      */
     public function rewrite(
-        $uri,
+        $uri
     ) {
         foreach ($this->_rules as $from => $to) {
             $result = @preg_replace($from, $to, $uri);

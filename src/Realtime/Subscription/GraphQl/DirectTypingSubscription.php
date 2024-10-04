@@ -14,7 +14,7 @@ class DirectTypingSubscription extends GraphQlSubscription
      * @param string $accountId
      */
     public function __construct(
-        $accountId,
+        $accountId
     ) {
         parent::__construct(self::QUERY, [
             'user_id' => $accountId,

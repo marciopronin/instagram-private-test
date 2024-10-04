@@ -19,7 +19,7 @@ class Music extends RequestCollection
      * @return Response\MusicItemsResponse
      */
     public function getTrending(
-        $browseSessionId,
+        $browseSessionId
     ) {
         return $this->ig->request('music/trending/')
             ->setSignedPost(false)
@@ -52,7 +52,7 @@ class Music extends RequestCollection
         $query,
         $browseSessionId,
         array $excludeList = [],
-        $rankToken = null,
+        $rankToken = null
     ) {
         // Do basic query validation. Do NOT use throwIfInvalidHashtag here.
         if (!is_string($query) || $query === null) {
@@ -97,7 +97,7 @@ class Music extends RequestCollection
     public function search(
         $query,
         $browseSessionId,
-        $searchSessionId,
+        $searchSessionId
     ) {
         return $this->ig->request('music/search/')
             ->setSignedPost(false)
@@ -129,7 +129,7 @@ class Music extends RequestCollection
         $query,
         $browseSessionId,
         $searchSessionId,
-        $numberOfKeywords = 3,
+        $numberOfKeywords = 3
     ) {
         return $this->ig->request('music/keyword_search/')
             ->addParam('num_keywords', 3)
@@ -153,7 +153,7 @@ class Music extends RequestCollection
      * @return Response\GetLyricsResponse
      */
     public function getLyrics(
-        $trackId,
+        $trackId
     ) {
         return $this->ig->request("music/track/{$trackId}/lyrics/")
             ->getResponse(new Response\GetLyricsResponse());
@@ -169,7 +169,7 @@ class Music extends RequestCollection
      * @return Response\MusicGenresResponse
      */
     public function getGenres(
-        $browseSessionId,
+        $browseSessionId
     ) {
         return $this->ig->request('music/genres/')
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -189,7 +189,7 @@ class Music extends RequestCollection
      * @return Response\GenericResponse
      */
     public function getMoods(
-        $browseSessionId,
+        $browseSessionId
     ) {
         return $this->ig->request('music/moods/')
             // ->addPost('_csrftoken', $this->ig->client->getToken())

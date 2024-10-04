@@ -31,7 +31,7 @@ class Rectangle
         $x,
         $y,
         $width,
-        $height,
+        $height
     ) {
         $this->_x = (int) $x;
         $this->_y = (int) $y;
@@ -162,7 +162,7 @@ class Rectangle
      */
     public function withRescaling(
         $newScale = 1.0,
-        $roundingFunc = 'round',
+        $roundingFunc = 'round'
     ) {
         if (!is_float($newScale) && !is_int($newScale)) {
             throw new \InvalidArgumentException('The new scale must be a float or integer.');

@@ -25,7 +25,7 @@ class IrisSubscribe implements CommandInterface
      */
     public function __construct(
         $sequenceId,
-        $snapshotMs,
+        $snapshotMs
     ) {
         if ($sequenceId === self::INVALID_SEQUENCE_ID) {
             throw new \InvalidArgumentException('Invalid Iris sequence identifier.');

@@ -22,7 +22,7 @@ class Hashtag extends RequestCollection
      * @return Response\TagInfoResponse
      */
     public function getInfo(
-        $hashtag,
+        $hashtag
     ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
@@ -42,7 +42,7 @@ class Hashtag extends RequestCollection
      * @return Response\TagsStoryResponse
      */
     public function getStory(
-        $hashtag,
+        $hashtag
     ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
@@ -74,7 +74,7 @@ class Hashtag extends RequestCollection
         $tab = 'ranked',
         $maxId = null,
         $pageId = null,
-        $filter = 'default',
+        $filter = 'default'
     ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
@@ -161,7 +161,7 @@ class Hashtag extends RequestCollection
     public function search(
         $query,
         array $excludeList = [],
-        $rankToken = null,
+        $rankToken = null
     ) {
         // Do basic query validation. Do NOT use throwIfInvalidHashtag here.
         if (!is_string($query) || $query === '') {
@@ -203,7 +203,7 @@ class Hashtag extends RequestCollection
      * @return Response\GenericResponse
      */
     public function follow(
-        $hashtag,
+        $hashtag
     ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
@@ -226,7 +226,7 @@ class Hashtag extends RequestCollection
      * @return Response\GenericResponse
      */
     public function unfollow(
-        $hashtag,
+        $hashtag
     ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
@@ -249,7 +249,7 @@ class Hashtag extends RequestCollection
      * @return Response\FollowChainingRecsResponse
      */
     public function getFollowChainingRecs(
-        $hashtag,
+        $hashtag
     ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
@@ -269,7 +269,7 @@ class Hashtag extends RequestCollection
      * @return Response\FollowChainingRecsResponse
      */
     public function getAllFollowChainingRecs(
-        $hashtag,
+        $hashtag
     ) {
         Utils::throwIfInvalidHashtag($hashtag);
         $urlHashtag = urlencode($hashtag); // Necessary for non-English chars.
@@ -299,7 +299,7 @@ class Hashtag extends RequestCollection
     public function getFeed(
         $hashtag,
         $rankToken,
-        $maxId = null,
+        $maxId = null
     ) {
         Utils::throwIfInvalidHashtag($hashtag);
         Utils::throwIfInvalidRankToken($rankToken);
@@ -317,7 +317,7 @@ class Hashtag extends RequestCollection
      * @return Response\HashtagsResponse
      */
     public function getFollowing(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("users/{$userId}/following_tags_info/")
             ->getResponse(new Response\HashtagsResponse());
@@ -386,7 +386,7 @@ class Hashtag extends RequestCollection
     public function markStoryMediaSeen(
         Response\TagsStoryResponse $hashtagFeed,
         array $items,
-        array $skippedItems = [],
+        array $skippedItems = []
     ) {
         // Extract the Hashtag Story-Tray ID from the user's hashtag response.
         // NOTE: This can NEVER fail if the user has properly given us the exact

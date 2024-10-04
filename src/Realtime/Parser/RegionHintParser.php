@@ -20,7 +20,7 @@ class RegionHintParser implements ParserInterface
      */
     public function parseMessage(
         $topic,
-        $payload,
+        $payload
     ) {
         $region = null;
         $reader = new Reader($payload);
@@ -44,7 +44,7 @@ class RegionHintParser implements ParserInterface
      * @return Message
      */
     protected function _createMessage(
-        $region,
+        $region
     ) {
         if ($region === null) {
             throw new \RuntimeException('Incomplete region hint message.');

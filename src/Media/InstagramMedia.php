@@ -199,22 +199,22 @@ abstract class InstagramMedia
      */
     public function __construct(
         $inputFile,
-        array $options = [],
+        array $options = []
     ) {
         // Assign variables for all options, to avoid bulky code repetition.
-        $targetFeed = isset($options['targetFeed']) ? $options['targetFeed'] : Constants::FEED_TIMELINE;
-        $horCropFocus = isset($options['horCropFocus']) ? $options['horCropFocus'] : null;
-        $verCropFocus = isset($options['verCropFocus']) ? $options['verCropFocus'] : null;
+        $targetFeed = $options['targetFeed'] ?? Constants::FEED_TIMELINE;
+        $horCropFocus = $options['horCropFocus'] ?? null;
+        $verCropFocus = $options['verCropFocus'] ?? null;
         $minAspectRatio = isset($options['minAspectRatio']) ? floatval($options['minAspectRatio']) : null;
         $maxAspectRatio = isset($options['maxAspectRatio']) ? floatval($options['maxAspectRatio']) : null;
-        $userForceTargetAspectRatio = isset($options['forceAspectRatio']) ? $options['forceAspectRatio'] : null;
+        $userForceTargetAspectRatio = $options['forceAspectRatio'] ?? null;
         $useRecommendedRatio = isset($options['useRecommendedRatio']) ? (bool) $options['useRecommendedRatio'] : null;
         $allowNewAspectDeviation = isset($options['allowNewAspectDeviation']) ? (bool) $options['allowNewAspectDeviation'] : false;
-        $bgColor = isset($options['bgColor']) ? $options['bgColor'] : null;
-        $operation = isset($options['operation']) ? $options['operation'] : self::CROP;
+        $bgColor = $options['bgColor'] ?? null;
+        $operation = $options['operation'] ?? self::CROP;
         $tmpPath = isset($options['tmpPath']) ? (string) $options['tmpPath'] : null;
-        $debug = isset($options['debug']) ? $options['debug'] : false;
-        $this->_jpgOutput = isset($options['jpgOutput']) ? $options['jpgOutput'] : false;
+        $debug = $options['debug'] ?? false;
+        $this->_jpgOutput = $options['jpgOutput'] ?? false;
 
         // Debugging.
         $this->_debug = $debug === true;
@@ -926,7 +926,7 @@ abstract class InstagramMedia
     abstract protected function _createOutputFile(
         Rectangle $srcRect,
         Rectangle $dstRect,
-        Dimensions $canvas,
+        Dimensions $canvas
     );
 
     /**
@@ -982,7 +982,7 @@ abstract class InstagramMedia
         $minAspectRatio = null,
         $maxAspectRatio = null,
         $forceTargetAspectRatio = null,
-        $allowNewAspectDeviation = false,
+        $allowNewAspectDeviation = false
     ) {
         /*
          * WARNING TO POTENTIAL CONTRIBUTORS:
@@ -1247,7 +1247,7 @@ abstract class InstagramMedia
     protected function _accurateHeightRecalc(
         $useFloorHeightRecalc,
         $targetAspectRatio,
-        $targetWidth,
+        $targetWidth
     ) {
         // Read the docs above to understand this CRITICALLY IMPORTANT code.
         $targetHeight = $useFloorHeightRecalc
@@ -1301,7 +1301,7 @@ abstract class InstagramMedia
         $maxWidth = 99999,
         $minAspectRatio = null,
         $maxAspectRatio = null,
-        $allowNewAspectDeviation = false,
+        $allowNewAspectDeviation = false
     ) {
         // Initialize to the calculated canvas size.
         $mod2Width = $targetWidth;
@@ -1476,7 +1476,7 @@ abstract class InstagramMedia
      * @return bool
      */
     protected function _isNumberMod2(
-        $number,
+        $number
     ) {
         // NOTE: The modulo operator correctly returns ints even for float input such as 1.999.
         return $number % 2 === 0;
@@ -1492,7 +1492,7 @@ abstract class InstagramMedia
     protected function _debugText(
         $stepDescription,
         $formatMessage,
-        ...$args,
+        ...$args
     ) {
         if (!$this->_debug) {
             return;
@@ -1515,7 +1515,7 @@ abstract class InstagramMedia
     protected function _debugDimensions(
         $width,
         $height,
-        $stepDescription = null,
+        $stepDescription = null
     ) {
         if (!$this->_debug) {
             return;

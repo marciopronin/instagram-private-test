@@ -31,7 +31,7 @@ class Story extends RequestCollection
      */
     public function uploadPhoto(
         $photoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         return $this->ig->internal->uploadSinglePhoto(Constants::FEED_STORY, $photoFilename, null, $externalMetadata);
     }
@@ -53,7 +53,7 @@ class Story extends RequestCollection
      */
     public function uploadCloseFriendsPhoto(
         $photoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
         $internalMetadata->setBestieMedia(true);
@@ -78,7 +78,7 @@ class Story extends RequestCollection
      */
     public function uploadVideo(
         $videoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         return $this->ig->internal->uploadSingleVideo(Constants::FEED_STORY, $videoFilename, null, $externalMetadata);
     }
@@ -101,7 +101,7 @@ class Story extends RequestCollection
      */
     public function uploadCloseFriendsVideo(
         $videoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setBestieMedia(true);
@@ -129,7 +129,7 @@ class Story extends RequestCollection
     public function getReelsTrayFeed(
         $reason = 'pull_to_refresh',
         $requestId = null,
-        $traySessionId = null,
+        $traySessionId = null
     ) {
         $request = $this->ig->request('feed/reels_tray/')
             ->setSignedPost(false)
@@ -173,7 +173,7 @@ class Story extends RequestCollection
      * @return Response\ReelsTrayFeedResponse
      */
     public function getLatestStoryMedia(
-        $feedList,
+        $feedList
     ) {
         if (!is_array($feedList)) {
             $feedList = [$feedList];
@@ -204,7 +204,7 @@ class Story extends RequestCollection
      */
     public function getReelsMediaStream(
         $feedList,
-        $source = 'feed_timeline',
+        $source = 'feed_timeline'
     ) {
         if (!is_array($feedList)) {
             $feedList = [$feedList];
@@ -242,7 +242,7 @@ class Story extends RequestCollection
      * @see Story::getUserStoryFeed()
      */
     public function getUserReelMediaFeed(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("feed/user/{$userId}/reel_media/")
             ->getResponse(new Response\UserReelMediaFeedResponse());
@@ -268,7 +268,7 @@ class Story extends RequestCollection
      * @see Story::getUserReelMediaFeed()
      */
     public function getUserStoryFeed(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("feed/user/{$userId}/story/")
             ->addParam('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
@@ -296,7 +296,7 @@ class Story extends RequestCollection
      */
     public function getReelsMediaFeed(
         $feedList,
-        $source = 'feed_timeline',
+        $source = 'feed_timeline'
     ) {
         if (!is_array($feedList)) {
             $feedList = [$feedList];
@@ -331,7 +331,7 @@ class Story extends RequestCollection
     public function getInjectedStories(
         array $storyUserIds,
         $traySessionId,
-        $entryIndex = 0,
+        $entryIndex = 0
     ) {
         if ($entryIndex < 0) {
             throw new \InvalidArgumentException('Entry index must be a positive number.');
@@ -437,7 +437,7 @@ class Story extends RequestCollection
      */
     public function getStoryItemViewers(
         $storyPk,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("media/{$storyPk}/list_reel_media_viewer/")
             ->addParam('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities());
@@ -465,7 +465,7 @@ class Story extends RequestCollection
     public function votePollStory(
         $storyId,
         $pollId,
-        $votingOption,
+        $votingOption
     ) {
         if (($votingOption !== 0) && ($votingOption !== 1)) {
             throw new \InvalidArgumentException('You must provide a valid value for voting option.');
@@ -497,7 +497,7 @@ class Story extends RequestCollection
     public function voteSliderStory(
         $storyId,
         $sliderId,
-        $votingOption,
+        $votingOption
     ) {
         if ($votingOption < 0 || $votingOption > 1) {
             throw new \InvalidArgumentException('You must provide a valid value from 0 to 1 for voting option.');
@@ -532,7 +532,7 @@ class Story extends RequestCollection
         $storyId,
         $pollId,
         $votingOption,
-        $maxId = null,
+        $maxId = null
     ) {
         if (($votingOption !== 0) && ($votingOption !== 1)) {
             throw new \InvalidArgumentException('You must provide a valid value for voting option.');
@@ -566,7 +566,7 @@ class Story extends RequestCollection
         $questionId,
         $responseText,
         $clientContext,
-        $containerModule = 'reel_profile',
+        $containerModule = 'reel_profile'
     ) {
         $request = $this->ig->request("media/{$storyId}/{$questionId}/story_question_response/")
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -599,7 +599,7 @@ class Story extends RequestCollection
     public function getStoryAnswers(
         $storyId,
         $questionId,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("media/{$storyId}/{$questionId}/story_question_responses/");
 
@@ -625,7 +625,7 @@ class Story extends RequestCollection
      */
     public function deleteStoryQuestionAnswer(
         $storyId,
-        $answerId,
+        $answerId
     ) {
         return $this->ig->request("media/{$storyId}/delete_story_question_response/")
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -658,7 +658,7 @@ class Story extends RequestCollection
      * @return Response\GenericResponse
      */
     public function followStoryCountdown(
-        $countdownId,
+        $countdownId
     ) {
         return $this->ig->request("media/{$countdownId}/follow_story_countdown/")
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -677,7 +677,7 @@ class Story extends RequestCollection
      * @return Response\GenericResponse
      */
     public function unfollowStoryCountdown(
-        $countdownId,
+        $countdownId
     ) {
         return $this->ig->request("media/{$countdownId}/unfollow_story_countdown/")
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -702,7 +702,7 @@ class Story extends RequestCollection
     public function answerStoryQuiz(
         $storyId,
         $quizId,
-        $selectedOption,
+        $selectedOption
     ) {
         return $this->ig->request("media/{$storyId}/{$quizId}/story_quiz_answer/")
             ->setSignedPost(false)
@@ -726,7 +726,7 @@ class Story extends RequestCollection
     public function getStoryQuizAnswers(
         $storyId,
         $quizId,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("media/{$storyId}/{$quizId}/story_quiz_participants/");
 
@@ -751,7 +751,7 @@ class Story extends RequestCollection
     public function getStorySliderVoters(
         $storyId,
         $sliderId,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("media/{$storyId}/{$sliderId}/story_slider_voters/");
 
@@ -772,7 +772,7 @@ class Story extends RequestCollection
      * @return Response\CharitiesListResponse
      */
     public function getCharities(
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('fundraiser/story_charities_nullstate/');
 
@@ -795,7 +795,7 @@ class Story extends RequestCollection
      */
     public function searchCharities(
         $query,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('fundraiser/story_charities_search/')
             ->addParam('query', $query);
@@ -842,7 +842,7 @@ class Story extends RequestCollection
         $subtitleColor = '#999999ff',
         $buttonTextColor = '#3897f0',
         $startBackgroundColor = '#fafafa',
-        $endBackgroundColor = '#fafafa',
+        $endBackgroundColor = '#fafafa'
     ) {
         return [
             [
@@ -911,7 +911,7 @@ class Story extends RequestCollection
      * @see Hashtag::markStoryMediaSeen()
      */
     public function markMediaSeen(
-        array $items,
+        array $items
     ) {
         // NOTE: NULL = Use each item's owner ID as the "source ID".
         return $this->ig->internal->markStoryMediaSeen($items, null);
@@ -953,7 +953,7 @@ class Story extends RequestCollection
     public function setReelSettings(
         $messagePrefs,
         $allowStoryReshare = null,
-        $autoArchive = null,
+        $autoArchive = null
     ) {
         if (!in_array($messagePrefs, ['anyone', 'following', 'off'])) {
             throw new \InvalidArgumentException('You must provide a valid message preference value.');
@@ -1011,7 +1011,7 @@ class Story extends RequestCollection
     public function addPrivateStoriesMember(
         $userId,
         $module = 'audience_selection',
-        $source = 'story_share_sheet',
+        $source = 'story_share_sheet'
     ) {
         return $this->ig->request('stories/private_stories/add_member/')
             ->setSignedPost(false)
@@ -1038,7 +1038,7 @@ class Story extends RequestCollection
     public function removePrivateStoriesMember(
         $userId,
         $module = 'audience_selection',
-        $source = 'story_share_sheet',
+        $source = 'story_share_sheet'
     ) {
         return $this->ig->request('stories/private_stories/remove_member/')
             ->setSignedPost(false)
@@ -1067,7 +1067,7 @@ class Story extends RequestCollection
         array $add,
         array $remove,
         $module = 'audience_selection',
-        $source = 'story_share_sheet',
+        $source = 'story_share_sheet'
     ) {
         return $this->ig->request('stories/private_stories/bulk_update_members/')
             ->setSignedPost(false)
@@ -1091,7 +1091,7 @@ class Story extends RequestCollection
      * @return Response\PrivateStoriesMembersResponse
      */
     public function getStoryAllowlist(
-        $storyId,
+        $storyId
     ) {
         return $this->ig->request("stories/private_stories/media/{$storyId}/allowlist/")
             ->getResponse(new Response\PrivateStoriesMembersResponse());
@@ -1114,7 +1114,7 @@ class Story extends RequestCollection
         $storyId,
         $userId,
         $module = 'audience_selection',
-        $source = 'self_reel',
+        $source = 'self_reel'
     ) {
         return $this->ig->request("stories/private_stories/{$storyId}/add_viewer/")
             ->setSignedPost(false)
@@ -1143,7 +1143,7 @@ class Story extends RequestCollection
         $storyId,
         $userId,
         $module = 'audience_selection',
-        $source = 'self_reel',
+        $source = 'self_reel'
     ) {
         return $this->ig->request("stories/private_stories/{$storyId}/remove_viewer/")
             ->setSignedPost(false)
@@ -1175,7 +1175,7 @@ class Story extends RequestCollection
         array $add,
         array $remove,
         $module = 'audience_selection',
-        $source = 'self_reel',
+        $source = 'self_reel'
     ) {
         return $this->ig->request("stories/private_stories/media/{$storyId}/allowlist/edit/")
             ->setSignedPost(false)
@@ -1205,7 +1205,7 @@ class Story extends RequestCollection
         $storyId,
         $traySessionId,
         $viewerSessionId,
-        $containerModule = 'reel_profile',
+        $containerModule = 'reel_profile'
     ) {
         return $this->_sendStoryInteraction('send_story_like', $storyId, $traySessionId, $viewerSessionId, $containerModule);
     }
@@ -1226,7 +1226,7 @@ class Story extends RequestCollection
         $storyId,
         $traySessionId,
         $viewerSessionId,
-        $containerModule = 'reel_profile',
+        $containerModule = 'reel_profile'
     ) {
         return $this->_sendStoryInteraction('unsend_story_like', $storyId, $traySessionId, $viewerSessionId, $containerModule);
     }
@@ -1247,7 +1247,7 @@ class Story extends RequestCollection
         $storyId,
         $destinationId,
         $destinationType,
-        $containerModule = 'ig_self_story',
+        $containerModule = 'ig_self_story'
     ) {
         return $this->ig->request("media/{$storyId}/share/")
             ->addPost('xpost_surface', $containerModule)
@@ -1280,7 +1280,7 @@ class Story extends RequestCollection
         $storyId,
         $traySessionId,
         $viewerSessionId,
-        $containerModule = 'reel_profile',
+        $containerModule = 'reel_profile'
     ) {
         return $this->ig->request("story_interactions/{$endpoint}/")
             ->addPost('media_id', $storyId)

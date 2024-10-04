@@ -170,7 +170,7 @@ class StorageHandler
     public function __construct(
         $storageInstance,
         array $locationConfig = [],
-        array $callbacks = [],
+        array $callbacks = []
     ) {
         if (!$storageInstance instanceof StorageInterface) {
             throw new SettingsException(
@@ -225,7 +225,7 @@ class StorageHandler
      * @return string
      */
     public function getUserPath(
-        $username,
+        $username
     ) {
         return $this->_storage->getUserPath($username);
     }
@@ -240,7 +240,7 @@ class StorageHandler
      * @return bool TRUE if user exists, otherwise FALSE.
      */
     public function hasUser(
-        $username,
+        $username
     ) {
         $this->_throwIfEmptyValue($username);
 
@@ -272,7 +272,7 @@ class StorageHandler
      */
     public function moveUser(
         $oldUsername,
-        $newUsername,
+        $newUsername
     ) {
         $this->_throwIfEmptyValue($oldUsername);
         $this->_throwIfEmptyValue($newUsername);
@@ -295,7 +295,7 @@ class StorageHandler
      * @throws SettingsException
      */
     public function deleteUser(
-        $username,
+        $username
     ) {
         $this->_throwIfEmptyValue($username);
 
@@ -316,7 +316,7 @@ class StorageHandler
      * @throws SettingsException
      */
     public function setActiveUser(
-        $username,
+        $username
     ) {
         $this->_throwIfEmptyValue($username);
 
@@ -417,7 +417,7 @@ class StorageHandler
      *                     a NON-EMPTY string. Otherwise NULL.
      */
     public function get(
-        $key,
+        $key
     ) {
         $this->_throwIfNoActiveUser();
 
@@ -450,7 +450,7 @@ class StorageHandler
      */
     public function set(
         $key,
-        $value,
+        $value
     ) {
         $this->_throwIfNoActiveUser();
 
@@ -562,7 +562,7 @@ class StorageHandler
      * @throws SettingsException
      */
     public function setCookies(
-        $rawData,
+        $rawData
     ) {
         $this->_throwIfNoActiveUser();
         $this->_throwIfNotString($rawData);
@@ -628,7 +628,7 @@ class StorageHandler
      * @throws SettingsException
      */
     protected function _throwIfNotString(
-        $value,
+        $value
     ) {
         if (!is_string($value)) {
             throw new SettingsException('Parameter must be string.');
@@ -643,7 +643,7 @@ class StorageHandler
      * @throws SettingsException
      */
     protected function _throwIfEmptyValue(
-        $value,
+        $value
     ) {
         if (!is_string($value) || $value === '') {
             throw new SettingsException('Parameter must be non-empty string.');
@@ -675,7 +675,7 @@ class StorageHandler
      * @throws SettingsException
      */
     protected function _triggerCallback(
-        $cbName,
+        $cbName
     ) {
         // Reject anything that isn't in our list of VALID callbacks.
         if (!in_array($cbName, self::SUPPORTED_CALLBACKS)) {
@@ -710,7 +710,7 @@ class StorageHandler
      * @return array A list of "good" experiments.
      */
     public function setExperiments(
-        array $experiments,
+        array $experiments
     ) {
         $filtered = [];
         foreach (self::EXPERIMENT_KEYS as $key) {
@@ -744,7 +744,7 @@ class StorageHandler
      * @throws SettingsException
      */
     public function setRewriteRules(
-        array $rules,
+        array $rules
     ) {
         $this->set('zr_rules', $this->_packJson($rules));
     }
@@ -767,7 +767,7 @@ class StorageHandler
      * @param string $auth
      */
     public function setFbnsAuth(
-        $auth,
+        $auth
     ) {
         $this->set('fbns_auth', $auth);
     }
@@ -800,7 +800,7 @@ class StorageHandler
      * @return string
      */
     protected function _packJson(
-        $data,
+        $data
     ) {
         $json = json_encode($data);
         $gzipped = base64_encode(zlib_encode($json, ZLIB_ENCODING_DEFLATE, 9));
@@ -825,7 +825,7 @@ class StorageHandler
      */
     protected function _unpackJson(
         $packed,
-        $assoc = true,
+        $assoc = true
     ) {
         if ($packed === null || $packed === '') {
             return $assoc ? [] : new \stdClass();

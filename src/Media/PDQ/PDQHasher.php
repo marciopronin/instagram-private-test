@@ -63,7 +63,7 @@ class PDQHasher
     public static function imageToLumaMatrix(
         $image, // resource
         $num_rows,
-        $num_cols,
+        $num_cols
     ) {
         $luma_matrix = [];
         for ($i = 0; $i < $num_rows; $i++) {
@@ -97,7 +97,7 @@ class PDQHasher
 
     // ----------------------------------------------------------------
     public static function computeJaroszFilterWindowSize(
-        $dimension,
+        $dimension
     ) {
         return (int) (($dimension + self::PDQ_JAROSZ_WINDOW_SIZE_DIVISOR - 1)
       / self::PDQ_JAROSZ_WINDOW_SIZE_DIVISOR);
@@ -217,7 +217,7 @@ class PDQHasher
         &$out_image, // 2D array of float
         $num_rows,
         $num_cols,
-        $window_size,
+        $window_size
     ) {
         for ($j = 0; $j < $num_cols; $j++) {
             $half_window_size = (int) (($window_size + 2) / 2); // 7->4, 8->5
@@ -276,7 +276,7 @@ class PDQHasher
         &$out_image, // 2D array of float
         $num_rows,
         $num_cols,
-        $window_size,
+        $window_size
     ) {
         for ($i = 0; $i < $num_rows; $i++) {
             $half_window_size = (int) (($window_size + 2) / 2); // 7->4, 8->5
@@ -336,7 +336,7 @@ class PDQHasher
         $num_rows,
         $num_cols,
         $window_size_along_rows,
-        $window_size_along_cols,
+        $window_size_along_cols
     ) {
         $other_matrix = [];
         for ($i = 0; $i < $num_rows; $i++) {
@@ -359,7 +359,7 @@ class PDQHasher
     // ones. The constants are all manually selected, and tuned as described in the
     // document.
     public static function computeImageDomainQualityMetric(
-        &$buffer_64x64,
+        &$buffer_64x64
     ) {
         $int_gradient_sum = 0;
 
@@ -401,7 +401,7 @@ class PDQHasher
         &$buffer_64x64,
         &$buffer_16x64,
         &$buffer_16x16,
-        &$dct_16x64,
+        &$dct_16x64
     ) {
         // A = buffer_64x64
         // T = buffer_16x64
@@ -452,7 +452,7 @@ class PDQHasher
 
     public static function dct16OriginalToRotate90(
         &$A,
-        &$B,
+        &$B
     ) {
         for ($i = 0; $i < 16; $i++) {
             for ($j = 0; $j < 16; $j++) {
@@ -467,7 +467,7 @@ class PDQHasher
 
     public static function dct16OriginalToRotate180(
         &$A,
-        &$B,
+        &$B
     ) {
         for ($i = 0; $i < 16; $i++) {
             for ($j = 0; $j < 16; $j++) {
@@ -482,7 +482,7 @@ class PDQHasher
 
     public static function dct16OriginalToRotate270(
         &$A,
-        &$B,
+        &$B
     ) {
         for ($i = 0; $i < 16; $i++) {
             for ($j = 0; $j < 16; $j++) {
@@ -497,7 +497,7 @@ class PDQHasher
 
     public static function dct16OriginalToFlipX(
         &$A,
-        &$B,
+        &$B
     ) {
         for ($i = 0; $i < 16; $i++) {
             for ($j = 0; $j < 16; $j++) {
@@ -512,7 +512,7 @@ class PDQHasher
 
     public static function dct16OriginalToFlipY(
         &$A,
-        &$B,
+        &$B
     ) {
         for ($i = 0; $i < 16; $i++) {
             for ($j = 0; $j < 16; $j++) {
@@ -527,7 +527,7 @@ class PDQHasher
 
     public static function dct16OriginalToFlipPlus1(
         &$A,
-        &$B,
+        &$B
     ) {
         for ($i = 0; $i < 16; $i++) {
             for ($j = 0; $j < 16; $j++) {
@@ -538,7 +538,7 @@ class PDQHasher
 
     public static function dct16OriginalToFlipMinus1(
         &$A,
-        &$B,
+        &$B
     ) {
         for ($i = 0; $i < 16; $i++) {
             for ($j = 0; $j < 16; $j++) {
@@ -553,7 +553,7 @@ class PDQHasher
 
     // ----------------------------------------------------------------
     public static function computeHashFromDCTOutput(
-        &$buffer_16x16,
+        &$buffer_16x16
     ) {
         $flat_matrix = [];
         for ($k = 0, $i = 0; $i < 16; $i++) {
@@ -585,7 +585,7 @@ class PDQHasher
     // ================================================================
     public static function readImageFromFilename(
         $filename,
-        $downsample_first,
+        $downsample_first
     ) {
         /*
         $is_jpeg = false;
@@ -651,7 +651,7 @@ class PDQHasher
         /* bool */
         $show_timings,
         /* bool */
-        $dump,
+        $dump
     ) {
         $num_rows = imagesy($image);
         $num_cols = imagesx($image);
@@ -789,12 +789,12 @@ class PDQHasher
         /* bool */
         $show_timings,
         /* bool */
-        $dump,
+        $dump
     ) {
         $t01 = microtime(true);
 
         //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        list($buffer_16x16, $quality) = self::computeDCTAndQualityFromImage(
+        [$buffer_16x16, $quality] = self::computeDCTAndQualityFromImage(
             $image,
             $show_timings,
             $dump
@@ -823,12 +823,12 @@ class PDQHasher
         /* bool */
         $show_timings,
         /* bool */
-        $dump,
+        $dump
     ) {
         $t01 = microtime(true);
 
         //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        list($buffer_16x16, $quality) = self::computeDCTAndQualityFromImage(
+        [$buffer_16x16, $quality] = self::computeDCTAndQualityFromImage(
             $image,
             $show_timings,
             $dump
@@ -898,7 +898,7 @@ class PDQHasher
     public static function computeHashAndQualityFromFilename(
         $filename,
         $show_timings = false,
-        $dump = false,
+        $dump = false
     ) {
         $t01 = microtime(true);
 
@@ -935,7 +935,7 @@ class PDQHasher
         $filename,
         $which_flags = self::DIH_ALL,
         $show_timings = false,
-        $dump = false,
+        $dump = false
     ) {
         $t01 = microtime(true);
 

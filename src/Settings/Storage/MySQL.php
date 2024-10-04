@@ -31,7 +31,7 @@ class MySQL extends PDOStorage
      * {@inheritdoc}
      */
     protected function _createPDO(
-        array $locationConfig,
+        array $locationConfig
     ) {
         $username = ($locationConfig['dbusername'] ? $locationConfig['dbusername'] : 'root');
         $password = ($locationConfig['dbpassword'] ? $locationConfig['dbpassword'] : '');

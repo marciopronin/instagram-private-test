@@ -23,7 +23,7 @@ abstract class GraphQlSubscription implements SubscriptionInterface
      */
     public function __construct(
         $queryId,
-        $inputData,
+        $inputData
     ) {
         $this->_queryId = $queryId;
         $this->_inputData = $inputData;

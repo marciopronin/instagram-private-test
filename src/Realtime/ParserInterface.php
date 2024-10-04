@@ -14,6 +14,6 @@ interface ParserInterface
      */
     public function parseMessage(
         $topic,
-        $payload,
+        $payload
     );
 }

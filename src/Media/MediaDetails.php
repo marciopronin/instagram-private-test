@@ -129,7 +129,7 @@ abstract class MediaDetails
         $filename,
         $filesize,
         $width,
-        $height,
+        $height
     ) {
         $this->_filename = $filename;
         $this->_filesize = $filesize;
@@ -145,7 +145,7 @@ abstract class MediaDetails
      * @throws \InvalidArgumentException If Instagram won't allow this file.
      */
     public function validate(
-        ConstraintsInterface $constraints,
+        ConstraintsInterface $constraints
     ) {
         $mediaFilename = $this->getBasename();
 

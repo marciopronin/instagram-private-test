@@ -44,7 +44,7 @@ class FFmpeg
      * @throws \RuntimeException When a ffmpeg binary is missing.
      */
     protected function __construct(
-        $ffmpegBinary,
+        $ffmpegBinary
     ) {
         $this->_ffmpegBinary = $ffmpegBinary;
 
@@ -63,7 +63,7 @@ class FFmpeg
      * @return static
      */
     public static function factory(
-        $ffmpegBinary = null,
+        $ffmpegBinary = null
     ) {
         if ($ffmpegBinary === null) {
             return static::_autoDetectBinary();
@@ -89,7 +89,7 @@ class FFmpeg
      * @return string[]
      */
     public function run(
-        $command,
+        $command
     ) {
         $process = $this->runAsync($command);
 
@@ -116,7 +116,7 @@ class FFmpeg
      * @return Process
      */
     public function runAsync(
-        $command,
+        $command
     ) {
         $fullCommand = sprintf('%s -v error %s', Args::escape($this->_ffmpegBinary), $command);
 
@@ -192,7 +192,7 @@ class FFmpeg
      * @return bool
      */
     protected function _hasAudioEncoder(
-        $encoder,
+        $encoder
     ) {
         try {
             $this->run(sprintf(

@@ -18,7 +18,7 @@ class Signatures
      */
     public static function generateSignature(
         $data,
-        $platform = 'android',
+        $platform = 'android'
     ) {
         if ($platform === 'android') {
             if (version_compare(Constants::IG_VERSION, '138.0.0.28.117', '>=')) {
@@ -50,7 +50,7 @@ class Signatures
     public static function signData(
         array $data,
         array $exclude = [],
-        $platform = 'android',
+        $platform = 'android'
     ) {
         $result = [];
         // Exclude some params from signed body.
@@ -91,7 +91,7 @@ class Signatures
      * @return string
      */
     public static function generateDeviceId(
-        $platform,
+        $platform
     ) {
         if ($platform === 'android') {
             // Instagram's internal security IDs which no device is allowed to use.
@@ -117,7 +117,7 @@ class Signatures
      * @return bool
      */
     public static function isValidUUID(
-        $uuid,
+        $uuid
     ) {
         if (!is_string($uuid)) {
             return false;
@@ -128,7 +128,7 @@ class Signatures
 
     public static function generateUUID(
         $keepDashes = true,
-        $customUuid = false,
+        $customUuid = false
     ) {
         // Instagram generates the device's UUID in a special way which differs
         // from the way all other in-app UUIDs are generated. They insert a
@@ -162,7 +162,7 @@ class Signatures
     }
 
     public static function generateSpecialUUID(
-        $uuid = null,
+        $uuid = null
     ) {
         // do {
         if ($uuid === null) {

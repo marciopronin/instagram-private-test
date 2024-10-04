@@ -1,3 +1,10 @@
+# Stable release v22.25.4
+## Date: 04/10/2024
+
+### Updates and fixes
+
+Update code styling and support for PHP 7.x and PHP 8.x
+
 # Stable release v22.25.3
 ## Date: 02/10/2024
 

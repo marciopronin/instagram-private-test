@@ -28,7 +28,7 @@ class BadgeCount
      * @param string $json
      */
     protected function _parseJson(
-        $json,
+        $json
     ) {
         $data = Json::decode($json);
         $this->_json = $json;
@@ -50,7 +50,7 @@ class BadgeCount
      * @param string $json
      */
     public function __construct(
-        $json,
+        $json
     ) {
         $this->_parseJson($json);
     }

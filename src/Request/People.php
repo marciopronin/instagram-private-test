@@ -46,7 +46,7 @@ class People extends RequestCollection
         $userId,
         $module = null,
         $entrypoint = null,
-        $isPrefetch = false,
+        $isPrefetch = false
     ) {
         $request = $this->ig->request("users/{$userId}/info/");
 
@@ -97,7 +97,7 @@ class People extends RequestCollection
         $userId,
         $module = 'search_typeahead',
         $entrypoint = 'profile',
-        $isPrefetch = false,
+        $isPrefetch = false
     ) {
         $request = $this->ig->request("users/{$userId}/info_stream/")
             ->setSignedPost(false)
@@ -133,7 +133,7 @@ class People extends RequestCollection
      */
     public function getInfoByName(
         $username,
-        $module = 'feed_timeline',
+        $module = 'feed_timeline'
     ) {
         return $this->ig->request("users/{$username}/usernameinfo/")
             ->addParam('from_module', $module)
@@ -154,7 +154,7 @@ class People extends RequestCollection
      */
     public function getInfoByNameStream(
         $username,
-        $module = 'deep_link_util',
+        $module = 'deep_link_util'
     ) {
         return $this->ig->request("users/{$username}/usernameinfo_stream/")
             ->setSignedPost(false)
@@ -180,7 +180,7 @@ class People extends RequestCollection
      * @see People::getInfoByName()
      */
     public function getUserIdForName(
-        $username,
+        $username
     ) {
         return $this->getInfoByName($username)->getUser()->getPk();
     }
@@ -201,7 +201,7 @@ class People extends RequestCollection
      */
     public function getSelfInfo(
         $module = 'self_profile',
-        $entrypoint = null,
+        $entrypoint = null
     ) {
         $response = $this->getInfoById($this->ig->account_id, $module, $entrypoint);
         if ($response->getUser()->getFbidV2() !== null) {
@@ -228,7 +228,7 @@ class People extends RequestCollection
     public function getUserInfoQuery(
         $userId,
         $fromModule = 'search_typeahead',
-        $entrypoint = 'profile',
+        $entrypoint = 'profile'
     ) {
         $data = [
             'user_id'       => $userId,
@@ -263,7 +263,7 @@ class People extends RequestCollection
      * @return Response\AboutThisAccountResponse
      */
     public function getAboutThisAccountInfo(
-        $userId,
+        $userId
     ) {
         return $this->ig->request('bloks/apps/com.instagram.interactions.about_this_account/')
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -293,7 +293,7 @@ class People extends RequestCollection
         $prefetch = false,
         $markAsSeen = false,
         $feedType = 'all',
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('news/inbox/')
                             ->addParam('could_truncate_feed', 'true')
@@ -345,7 +345,7 @@ class People extends RequestCollection
     public function sendNewsLog(
         $newsPk,
         $tuuid,
-        $action = 'click',
+        $action = 'click'
     ) {
         if (!in_array($action, ['click', 'hide'], true)) {
             throw new \InvalidArgumentException('Invalid action value.');
@@ -374,7 +374,7 @@ class People extends RequestCollection
      * @return Response\FollowingRecentActivityResponse
      */
     public function getFollowingRecentActivity(
-        $maxId = null,
+        $maxId = null
     ) {
         $activity = $this->ig->request('news/');
         if ($maxId !== null) {
@@ -426,7 +426,7 @@ class People extends RequestCollection
      * @return Response\FriendshipsShowResponse
      */
     public function getFriendship(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/show/{$userId}/")->getResponse(new Response\FriendshipsShowResponse());
     }
@@ -441,7 +441,7 @@ class People extends RequestCollection
      * @return Response\FriendshipsShowManyResponse
      */
     public function getFriendships(
-        $userList,
+        $userList
     ) {
         if (is_array($userList)) {
             $userList = implode(',', $userList);
@@ -467,7 +467,7 @@ class People extends RequestCollection
      */
     public function getLeastInteractedWith(
         $rankToken,
-        $query = '',
+        $query = ''
     ) {
         return $this->ig->request('friendships/smart_groups/least_interacted_with/')
             ->addParam('search_surface', 'follow_list_page')
@@ -490,7 +490,7 @@ class People extends RequestCollection
      * @return Response\UnfollowChainingCountResponse
      */
     public function getUnfollowChainingCount(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/unfollow_chaining_count/{$userId}/")
                         ->getResponse(new Response\UnfollowChainingCountResponse());
@@ -513,7 +513,7 @@ class People extends RequestCollection
     public function getUnfollowChaining(
         $userId,
         $rankToken,
-        $query = '',
+        $query = ''
     ) {
         return $this->ig->request("friendships/unfollow_chaining/{$userId}/")
                         ->addParam('search_surface', 'follow_list_page')
@@ -565,7 +565,7 @@ class People extends RequestCollection
      * @return Response\FriendshipResponse
      */
     public function approveFriendship(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/approve/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -589,7 +589,7 @@ class People extends RequestCollection
      * @return Response\FriendshipResponse
      */
     public function rejectFriendship(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/ignore/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -627,7 +627,7 @@ class People extends RequestCollection
      * @return Response\FriendshipResponse
      */
     public function removeFollower(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/remove_follower/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -648,7 +648,7 @@ class People extends RequestCollection
      * @return Response\FriendshipResponse
      */
     public function markUserOverage(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/mark_user_overage/{$userId}/feed/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -681,7 +681,7 @@ class People extends RequestCollection
         $rankToken,
         $searchQuery = null,
         $maxId = null,
-        $order = null,
+        $order = null
     ) {
         Utils::throwIfInvalidRankToken($rankToken);
         $request = $this->ig->request("friendships/{$userId}/following/")
@@ -725,7 +725,7 @@ class People extends RequestCollection
         $userId,
         $rankToken,
         $searchQuery = '',
-        $maxId = null,
+        $maxId = null
     ) {
         Utils::throwIfInvalidRankToken($rankToken);
         $request = $this->ig->request("friendships/{$userId}/followers/")
@@ -758,7 +758,7 @@ class People extends RequestCollection
         $userId,
         $rankToken = '',
         $searchQuery = '',
-        $maxId = null,
+        $maxId = null
     ) {
         $data = [
             'query'                     => $searchQuery,
@@ -808,7 +808,7 @@ class People extends RequestCollection
         $userId,
         $rankToken = '',
         $searchQuery = '',
-        $maxId = null,
+        $maxId = null
     ) {
         $data = [
             'user_id'                   => $userId,
@@ -861,7 +861,7 @@ class People extends RequestCollection
         $rankToken,
         $searchQuery = null,
         $maxId = null,
-        $order = null,
+        $order = null
     ) {
         return $this->getFollowing($this->ig->account_id, $rankToken, $searchQuery, $maxId, $order);
     }
@@ -883,7 +883,7 @@ class People extends RequestCollection
     public function getSelfFollowers(
         $rankToken,
         $searchQuery = null,
-        $maxId = null,
+        $maxId = null
     ) {
         return $this->getFollowers($this->ig->account_id, $rankToken, $searchQuery, $maxId);
     }
@@ -912,7 +912,7 @@ class People extends RequestCollection
         $query,
         array $excludeList = [],
         $rankToken = null,
-        $searchSurface = 'user_serp',
+        $searchSurface = 'user_serp'
     ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
@@ -954,7 +954,7 @@ class People extends RequestCollection
      * @return Response\AccountDetailsResponse
      */
     public function getAccountDetails(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("users/{$userId}/account_details/")
             ->getResponse(new Response\AccountDetailsResponse());
@@ -970,7 +970,7 @@ class People extends RequestCollection
      * @return Response\FormerUsernamesResponse
      */
     public function getFormerUsernames(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("users/{$userId}/former_usernames/")
             ->getResponse(new Response\FormerUsernamesResponse());
@@ -986,7 +986,7 @@ class People extends RequestCollection
      * @return Response\SharedFollowersResponse
      */
     public function getSharedFollowers(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("users/{$userId}/shared_follower_accounts/")
             ->getResponse(new Response\SharedFollowersResponse());
@@ -1004,7 +1004,7 @@ class People extends RequestCollection
      */
     public function getActiveFeedAds(
         $targetUserId,
-        $maxId = null,
+        $maxId = null
     ) {
         return $this->_getActiveAds($targetUserId, '35', $maxId);
     }
@@ -1021,7 +1021,7 @@ class People extends RequestCollection
      */
     public function getActiveStoryAds(
         $targetUserId,
-        $maxId = null,
+        $maxId = null
     ) {
         return $this->_getActiveAds($targetUserId, '49', $maxId);
     }
@@ -1041,7 +1041,7 @@ class People extends RequestCollection
     protected function _getActiveAds(
         $targetUserId,
         $pageType,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('ads/view_ads/')
             ->setSignedPost(false)
@@ -1084,7 +1084,7 @@ class People extends RequestCollection
      */
     public function linkAddressBook(
         array $contacts,
-        $source = 'account_creation',
+        $source = 'account_creation'
     ) {
         return $this->ig->request('address_book/link/')
             ->setIsBodyCompressed(true)
@@ -1109,7 +1109,7 @@ class People extends RequestCollection
      * @return Response\UnlinkAddressBookResponse
      */
     public function unlinkAddressBook(
-        $userInitiated = true,
+        $userInitiated = true
     ) {
         return $this->ig->request('address_book/unlink/')
             ->setSignedPost(false)
@@ -1137,7 +1137,7 @@ class People extends RequestCollection
      */
     public function discoverPeople(
         $module = 'discover_people',
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('discover/ayml/')
             ->setSignedPost(false)
@@ -1164,7 +1164,7 @@ class People extends RequestCollection
      * @return Response\SuggestedUsersResponse
      */
     public function getSuggestedUsers(
-        $userId,
+        $userId
     ) {
         return $this->ig->request('discover/chaining/')
             ->addParam('target_id', $userId)
@@ -1185,7 +1185,7 @@ class People extends RequestCollection
      * @return Response\SuggestedUsersBadgeResponse
      */
     public function getSuggestedUsersBadge(
-        $module = 'discover_people',
+        $module = 'discover_people'
     ) {
         $request = $this->ig->request('discover/profile_su_badge/')
             ->addPost('_uuid', $this->ig->uuid);
@@ -1229,7 +1229,7 @@ class People extends RequestCollection
      */
     public function hideSuggestedUser(
         $userId,
-        $algorithm,
+        $algorithm
     ) {
         return $this->ig->request('discover/aysf_dismiss/')
             ->addPost('_uuid', $this->ig->uuid)
@@ -1249,7 +1249,7 @@ class People extends RequestCollection
      * @return Response\FriendshipsShowManyResponse
      */
     public function bulkFollow(
-        array $userIds,
+        array $userIds
     ) {
         $data = [
             'data' => [
@@ -1290,7 +1290,7 @@ class People extends RequestCollection
         $mediaId = null,
         $loggingInfoToken = null,
         $containerModule = 'profile',
-        $includeFollowFrictionCheck = '1',
+        $includeFollowFrictionCheck = '1'
     ) {
         $request = $this->ig->request("friendships/create/{$userId}/")
             ->addPost('include_follow_friction_check', $includeFollowFrictionCheck)
@@ -1330,7 +1330,7 @@ class People extends RequestCollection
      */
     public function unfollow(
         $userId,
-        $mediaId = null,
+        $mediaId = null
     ) {
         $request = $this->ig->request("friendships/destroy/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1363,7 +1363,7 @@ class People extends RequestCollection
      * @return Response\GenericResponse
      */
     public function favorite(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/favorite/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1383,7 +1383,7 @@ class People extends RequestCollection
      * @return Response\GenericResponse
      */
     public function unfavorite(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/unfavorite/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1403,7 +1403,7 @@ class People extends RequestCollection
      * @return Response\GenericResponse
      */
     public function favoriteForTv(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/favorite_for_igtv/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1423,7 +1423,7 @@ class People extends RequestCollection
      * @return Response\GenericResponse
      */
     public function unfavoriteForTv(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/unfavorite_for_igtv/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1443,7 +1443,7 @@ class People extends RequestCollection
      * @return Response\GenericResponse
      */
     public function favoriteForStories(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/favorite_for_stories/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1463,7 +1463,7 @@ class People extends RequestCollection
      * @return Response\GenericResponse
      */
     public function unfavoriteForStories(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/unfavorite_for_stories/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1485,7 +1485,7 @@ class People extends RequestCollection
      */
     public function report(
         $userId,
-        $sourceName = 'profile',
+        $sourceName = 'profile'
     ) {
         return $this->ig->request("users/{$userId}/flag_user/")
             ->addPost('reason_id', 1)
@@ -1508,7 +1508,7 @@ class People extends RequestCollection
      * @return Response\FriendshipResponse
      */
     public function block(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/block/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1528,7 +1528,7 @@ class People extends RequestCollection
      * @return Response\FriendshipResponse
      */
     public function restrict(
-        $userId,
+        $userId
     ) {
         return $this->ig->request('restrict_action/restrict/')
             ->setSignedPost(false)
@@ -1548,7 +1548,7 @@ class People extends RequestCollection
      * @return Response\FriendshipResponse
      */
     public function unrestrict(
-        $userId,
+        $userId
     ) {
         return $this->ig->request('restrict_action/unrestrict/')
             ->setSignedPost(false)
@@ -1574,7 +1574,7 @@ class People extends RequestCollection
      */
     public function muteUserMedia(
         $userId,
-        $option,
+        $option
     ) {
         return $this->_muteOrUnmuteUserMedia($userId, $option, 'friendships/mute_posts_or_story_from_follow/');
     }
@@ -1593,7 +1593,7 @@ class People extends RequestCollection
      */
     public function unmuteUserMedia(
         $userId,
-        $option,
+        $option
     ) {
         return $this->_muteOrUnmuteUserMedia($userId, $option, 'friendships/unmute_posts_or_story_from_follow/');
     }
@@ -1617,7 +1617,7 @@ class People extends RequestCollection
     protected function _muteOrUnmuteUserMedia(
         $userId,
         $option,
-        $endpoint,
+        $endpoint
     ) {
         $request = $this->ig->request($endpoint)
             ->addPost('_uuid', $this->ig->uuid)
@@ -1652,7 +1652,7 @@ class People extends RequestCollection
      * @return Response\FriendshipResponse
      */
     public function unblock(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/unblock/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1672,7 +1672,7 @@ class People extends RequestCollection
      * @return Response\BlockedListResponse
      */
     public function getBlockedList(
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('users/blocked_list/');
         if ($maxId !== null) {
@@ -1696,7 +1696,7 @@ class People extends RequestCollection
      */
     public function blockMyStory(
         $userId,
-        $source = 'profile',
+        $source = 'profile'
     ) {
         return $this->ig->request("friendships/block_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1718,7 +1718,7 @@ class People extends RequestCollection
      * @see People::unmuteFriendStory()
      */
     public function unblockMyStory(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/unblock_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1760,7 +1760,7 @@ class People extends RequestCollection
      * @see People::blockMyStory()
      */
     public function muteFriendStory(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/mute_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1783,7 +1783,7 @@ class People extends RequestCollection
      * @see People::unblockMyStory()
      */
     public function unmuteFriendStory(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("friendships/unmute_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1818,7 +1818,7 @@ class People extends RequestCollection
      * @return Response\GenericResponse
      */
     public function addCloseFriend(
-        $userId,
+        $userId
     ) {
         return $this->ig->request('stories/private_stories/add_member/')
             ->setSignedPost(false)
@@ -1840,7 +1840,7 @@ class People extends RequestCollection
      * @return Response\GenericResponse
      */
     public function removeCloseFriend(
-        $userId,
+        $userId
     ) {
         return $this->ig->request('stories/private_stories/remove_member/')
             ->setSignedPost(false)
@@ -1862,7 +1862,7 @@ class People extends RequestCollection
      * @return Response\SharePrefillResponse
      */
     public function getSharePrefill(
-        $nullState = false,
+        $nullState = false
     ) {
         $views = [
             'story_share_sheet',
@@ -1933,7 +1933,7 @@ class People extends RequestCollection
     public function getCreatorInfo(
         $userId,
         $surfaceType = 'android',
-        $entrypoint = 'self_profile',
+        $entrypoint = 'self_profile'
     ) {
         return $this->ig->request('creator/creator_info/')
             ->addParam('entry_point', $entrypoint)

@@ -20,7 +20,7 @@ class Auth implements AuthInterface
      * @param Instagram $instagram
      */
     public function __construct(
-        Instagram $instagram,
+        Instagram $instagram
     ) {
         $this->_instagram = $instagram;
     }

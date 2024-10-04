@@ -20,7 +20,7 @@ final class MarkSeen extends DirectCommand
     public function __construct(
         $threadId,
         $threadItemId,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct(self::ACTION, $threadId, $options);
 

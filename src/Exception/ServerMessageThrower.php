@@ -159,7 +159,7 @@ class ServerMessageThrower
         $prefixString,
         $serverMessage,
         ?Response $serverResponse = null,
-        ?HttpResponseInterface $httpResponse = null,
+        ?HttpResponseInterface $httpResponse = null
     ) {
         // We will analyze both the `message` AND `error_type` (if available).
         $messages = [$serverMessage];
@@ -187,7 +187,7 @@ class ServerMessageThrower
             }
             if ($serverResponse->hasEntryData()) {
                 $resp = $serverResponse->asArray();
-                $entryData = isset($resp['entry_data']) ? $resp['entry_data'] : [];
+                $entryData = $resp['entry_data'] ?? [];
                 if (isset($entryData['Challenge']) && !empty($entryData['Challenge'])) {
                     $serverErrorType = $serverResponse->getChallengeType();
                     $messages[] = $serverErrorType;
@@ -311,7 +311,7 @@ class ServerMessageThrower
      * @return string The cleaned-up message.
      */
     public static function prettifyMessage(
-        $message,
+        $message
     ) {
         // Some messages already have punctuation, and others need it. Prettify
         // the message by ensuring that it ALWAYS ends in punctuation, for

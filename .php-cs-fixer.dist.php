@@ -47,5 +47,7 @@ return (new Config())
         'ordered_imports'                     => ['sort_algorithm' => 'alpha'],
         'phpdoc_order'                        => true,
         'array_syntax'                        => ['syntax' => 'short'],
+        'trailing_comma_in_multiline'         => ['elements' => ['arrays']],
+        '@PHP73Migration'                     => true,
     ])
     ->setParallelConfig(new ParallelConfig(10, 120, 3600));

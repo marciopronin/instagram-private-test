@@ -27,7 +27,7 @@ class Checkpoint extends RequestCollection
     public function sendChallenge(
         $checkpointUrl,
         $context = null,
-        $post = false,
+        $post = false
     ) {
         $checkpointUrl = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
             return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
@@ -64,7 +64,7 @@ class Checkpoint extends RequestCollection
     public function requestVerificationCode(
         $checkpointUrl,
         $verificationMethod,
-        $replay = false,
+        $replay = false
     ) {
         if ($replay === true) {
             $checkpointUrl = str_replace('challenge/', 'challenge/replay/', $checkpointUrl);
@@ -90,7 +90,7 @@ class Checkpoint extends RequestCollection
      * @return Response\CheckpointResponse
      */
     public function sendAcceptScrapingWarning(
-        $checkpointUrl,
+        $checkpointUrl
     ) {
         return $this->ig->request($checkpointUrl)
            ->setNeedsAuth(false)
@@ -111,7 +111,7 @@ class Checkpoint extends RequestCollection
      * @return Response\CheckpointResponse
      */
     public function sendAcceptDummyStep(
-        $checkpointUrl,
+        $checkpointUrl
     ) {
         return $this->ig->request($checkpointUrl)
            ->setNeedsAuth(false)
@@ -132,7 +132,7 @@ class Checkpoint extends RequestCollection
      * @return Response\CheckpointResponse
      */
     public function sendAcceptReviewLinkedAccounts(
-        $checkpointUrl,
+        $checkpointUrl
     ) {
         return $this->ig->request($checkpointUrl)
            ->setNeedsAuth(false)
@@ -156,7 +156,7 @@ class Checkpoint extends RequestCollection
      */
     public function sendSetNewPasswordCheck(
         $checkpointUrl,
-        $password,
+        $password
     ) {
         return $this->ig->request($checkpointUrl)
            ->setNeedsAuth(false)
@@ -181,7 +181,7 @@ class Checkpoint extends RequestCollection
      */
     public function sendVerificationCode(
         $checkpointUrl,
-        $verificationCode,
+        $verificationCode
     ) {
         return $this->ig->request($checkpointUrl)
             ->setNeedsAuth(false)
@@ -209,7 +209,7 @@ class Checkpoint extends RequestCollection
     public function sendVerificationPhone(
         $checkpointUrl,
         $phoneNumber,
-        $afterLogin = false,
+        $afterLogin = false
     ) {
         $request = $this->ig->request($checkpointUrl)
             ->setSignedPost(false)
@@ -243,7 +243,7 @@ class Checkpoint extends RequestCollection
     public function sendVerificationEmail(
         $checkpointUrl,
         $email,
-        $afterLogin = false,
+        $afterLogin = false
     ) {
         $request = $this->ig->request($checkpointUrl)
             ->setSignedPost(false)
@@ -277,7 +277,7 @@ class Checkpoint extends RequestCollection
         $checkpointUrl,
         $day,
         $month,
-        $year,
+        $year
     ) {
         return $this->ig->request($checkpointUrl)
             ->setSignedPost(false)
@@ -304,7 +304,7 @@ class Checkpoint extends RequestCollection
      * @return Response\WebCheckpointResponse
      */
     public function sendAcceptEscalationInformational(
-        $checkpointUrl,
+        $checkpointUrl
     ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
@@ -314,7 +314,7 @@ class Checkpoint extends RequestCollection
     }
 
     protected function _getWebFormRequest(
-        $checkpointUrl,
+        $checkpointUrl
     ) {
         return $this->ig->request('https://i.instagram.com'.$checkpointUrl)
             ->setNeedsAuth(false)
@@ -354,7 +354,7 @@ class Checkpoint extends RequestCollection
      */
     public function sendCaptchaResponse(
         $checkpointUrl,
-        $response,
+        $response
     ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
@@ -376,7 +376,7 @@ class Checkpoint extends RequestCollection
      */
     public function selectVerificationMethodForm(
         $checkpointUrl,
-        $verificationMethod,
+        $verificationMethod
     ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
@@ -395,7 +395,7 @@ class Checkpoint extends RequestCollection
      * @return Response\GenericResponse
      */
     public function selectAcceptCorrectForm(
-        $checkpointUrl,
+        $checkpointUrl
     ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
@@ -417,7 +417,7 @@ class Checkpoint extends RequestCollection
      */
     public function sendWebFormPhoneNumber(
         $checkpointUrl,
-        $phoneNumber,
+        $phoneNumber
     ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
@@ -438,7 +438,7 @@ class Checkpoint extends RequestCollection
      */
     public function sendWebFormSecurityCode(
         $checkpointUrl,
-        $securityCode,
+        $securityCode
     ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
@@ -459,7 +459,7 @@ class Checkpoint extends RequestCollection
      */
     public function sendWebReviewLoginForm(
         $checkpointUrl,
-        $option,
+        $option
     ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
@@ -480,7 +480,7 @@ class Checkpoint extends RequestCollection
      */
     public function sendSetNewPassword(
         $checkpointUrl,
-        $password,
+        $password
     ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
@@ -501,7 +501,7 @@ class Checkpoint extends RequestCollection
      * @return Response\WebCheckpointResponse
      */
     public function sendWebAcceptScrapingWarning(
-        $checkpointUrl,
+        $checkpointUrl
     ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
@@ -519,7 +519,7 @@ class Checkpoint extends RequestCollection
      * @return Response\WebCheckpointResponse
      */
     public function getWebFormCheckpoint(
-        $checkpointUrl,
+        $checkpointUrl
     ) {
         return $this->ig->request($checkpointUrl)
             ->setNeedsAuth(false)

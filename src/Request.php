@@ -201,7 +201,7 @@ class Request
     public function __construct(
         Instagram $parent,
         $url,
-        $customResolver = null,
+        $customResolver = null
     ) {
         $this->_parent = $parent;
         $this->_url = $url;
@@ -244,7 +244,7 @@ class Request
      * @return self
      */
     public function setVersion(
-        $apiVersion,
+        $apiVersion
     ) {
         if (!array_key_exists($apiVersion, Constants::API_URLS)) {
             throw new \InvalidArgumentException(sprintf('"%d" is not a supported API version.', $apiVersion));
@@ -264,7 +264,7 @@ class Request
      */
     public function addParam(
         $key,
-        $value,
+        $value
     ) {
         if ($value === true) {
             $value = 'true';
@@ -286,7 +286,7 @@ class Request
      */
     public function addPost(
         $key,
-        $value,
+        $value
     ) {
         if ($value === true) {
             $value = 'true';
@@ -312,7 +312,7 @@ class Request
      */
     public function addUnsignedPost(
         $key,
-        $value,
+        $value
     ) {
         $this->addPost($key, $value);
         $this->_excludeSigned[] = $key;
@@ -336,7 +336,7 @@ class Request
         $key,
         $filepath,
         $filename = null,
-        array $headers = [],
+        array $headers = []
     ) {
         // Validate
         if (!is_file($filepath)) {
@@ -403,7 +403,7 @@ class Request
         $key,
         $data,
         $filename,
-        array $headers = [],
+        array $headers = []
     ) {
         $filename = basename($filename);
 
@@ -465,7 +465,7 @@ class Request
      */
     public function addHeader(
         $key,
-        $value,
+        $value
     ) {
         $this->_headers[$key] = $value;
 
@@ -546,7 +546,7 @@ class Request
      * @return self
      */
     public function setAddDefaultHeaders(
-        $flag,
+        $flag
     ) {
         $this->_defaultHeaders = $flag;
 
@@ -561,7 +561,7 @@ class Request
      * @return self
      */
     public function setGuzzleOptions(
-        array $guzzleOptions,
+        array $guzzleOptions
     ) {
         $this->_guzzleOptions = $guzzleOptions;
 
@@ -576,7 +576,7 @@ class Request
      * @return self
      */
     public function setBody(
-        StreamInterface $stream,
+        StreamInterface $stream
     ) {
         $this->_body = $stream;
 
@@ -591,7 +591,7 @@ class Request
      * @return self
      */
     public function setNeedsAuth(
-        $needsAuth,
+        $needsAuth
     ) {
         $this->_needsAuth = $needsAuth;
 
@@ -606,7 +606,7 @@ class Request
      * @return self
      */
     public function setSignedPost(
-        $signedPost = true,
+        $signedPost = true
     ) {
         $this->_signedPost = $signedPost;
 
@@ -621,7 +621,7 @@ class Request
      * @return self
      */
     public function setSignedGet(
-        $signedGet = false,
+        $signedGet = false
     ) {
         $this->_signedGet = $signedGet;
 
@@ -636,7 +636,7 @@ class Request
      * @return self
      */
     public function setIsSilentFail(
-        $silentFail = false,
+        $silentFail = false
     ) {
         $this->_silentFail = $silentFail;
 
@@ -651,7 +651,7 @@ class Request
      * @return self
      */
     public function checkDeprecatedVersion(
-        $deprecatedVersion,
+        $deprecatedVersion
     ) {
         if (Instagram::$overrideDeprecatedThrower !== true) {
             if (version_compare(Constants::IG_VERSION, $deprecatedVersion, '>=')) {
@@ -670,7 +670,7 @@ class Request
      * @return self
      */
     public function setIsMultiResponse(
-        $flag = false,
+        $flag = false
     ) {
         $this->_isMultiResponse = $flag;
 
@@ -685,7 +685,7 @@ class Request
      * @return self
      */
     public function setIsBodyCompressed(
-        $isBodyCompressed = false,
+        $isBodyCompressed = false
     ) {
         $this->_isBodyCompressed = $isBodyCompressed;
 
@@ -709,7 +709,7 @@ class Request
      * @return StreamInterface
      */
     protected function _getStreamForFile(
-        array $file,
+        array $file
     ) {
         if (isset($file['contents'])) {
             $result = GuzzleUtils::streamFor($file['contents']); // Throws.
@@ -753,8 +753,8 @@ class Request
                 $element = [
                     'name'     => $key,
                     'contents' => $this->_getStreamForFile($file), // Throws.
-                    'filename' => isset($file['filename']) ? $file['filename'] : null,
-                    'headers'  => isset($file['headers']) ? $file['headers'] : [],
+                    'filename' => $file['filename'] ?? null,
+                    'headers'  => $file['headers'] ?? [],
                 ];
             }
             $elements[] = $element;
@@ -973,7 +973,7 @@ class Request
      * @return string
      */
     protected function _getRawResponse(
-        $httpResponse,
+        $httpResponse
     ) {
         $body = (string) $httpResponse->getBody();
 
@@ -1020,7 +1020,7 @@ class Request
      * @return mixed
      */
     public function getDecodedResponse(
-        $assoc = true,
+        $assoc = true
     ) {
         // Important: Special JSON decoder.
         return Client::api_body_decode(
@@ -1041,7 +1041,7 @@ class Request
      * @return Response The provided responseObject with all JSON properties filled.
      */
     public function getResponse(
-        Response $responseObject,
+        Response $responseObject
     ) {
         foreach ($this->_parent->bypassCalls as $call) {
             if (str_contains($this->getUrl(), $call)) {
@@ -1118,7 +1118,7 @@ class Request
      * @param int $priority Request priority.
      */
     public function setRequestPriority(
-        $priority,
+        $priority
     ) {
         if ($priority < 0 || $priority > 7) {
             throw new InstagramException(sprintf('priority can be [0-7], 3 is default. Selected: %d', $priority));
@@ -1135,7 +1135,7 @@ class Request
      * @param bool $enable Enable.
      */
     public function setCombinedHttpEngine(
-        $enable,
+        $enable
     ) {
         $this->_combinedHttpEngine = $enable;
 

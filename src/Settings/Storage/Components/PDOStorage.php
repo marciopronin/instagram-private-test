@@ -41,7 +41,7 @@ abstract class PDOStorage implements StorageInterface
      * @throws SettingsException
      */
     public function __construct(
-        $backendName = 'PDO',
+        $backendName = 'PDO'
     ) {
         $this->_backendName = $backendName;
     }
@@ -52,11 +52,10 @@ abstract class PDOStorage implements StorageInterface
      * {@inheritdoc}
      */
     public function openLocation(
-        array $locationConfig,
+        array $locationConfig
     ) {
-        $this->_dbTableName = (isset($locationConfig['dbtablename'])
-                               ? $locationConfig['dbtablename']
-                               : 'user_sessions');
+        $this->_dbTableName = ($locationConfig['dbtablename']
+                               ?? 'user_sessions');
 
         if (isset($locationConfig['pdo'])) {
             // Pre-provided connection to re-use instead of creating a new one.
@@ -99,7 +98,7 @@ abstract class PDOStorage implements StorageInterface
      * @return \PDO The database connection.
      */
     abstract protected function _createPDO(
-        array $locationConfig,
+        array $locationConfig
     );
 
     /**
@@ -147,7 +146,7 @@ abstract class PDOStorage implements StorageInterface
      */
     protected function _setUserColumn(
         $column,
-        $data,
+        $data
     ) {
         if ($column != 'settings' && $column != 'cookies') {
             throw new SettingsException(sprintf(
@@ -190,7 +189,7 @@ abstract class PDOStorage implements StorageInterface
      * {@inheritdoc}
      */
     public function hasUser(
-        $username,
+        $username
     ) {
         // Check whether a row exists for that username.
         $sth = $this->_pdo->prepare("SELECT EXISTS(SELECT 1 FROM {$this->_dbTableName} WHERE (username=:username))");
@@ -208,7 +207,7 @@ abstract class PDOStorage implements StorageInterface
      */
     public function moveUser(
         $oldUsername,
-        $newUsername,
+        $newUsername
     ) {
         try {
             // Verify that the old username exists.
@@ -244,7 +243,7 @@ abstract class PDOStorage implements StorageInterface
      * {@inheritdoc}
      */
     public function deleteUser(
-        $username,
+        $username
     ) {
         try {
             // Just attempt to delete the row. Doesn't error if already missing.
@@ -262,7 +261,7 @@ abstract class PDOStorage implements StorageInterface
      * {@inheritdoc}
      */
     public function openUser(
-        $username,
+        $username
     ) {
         $this->_username = $username;
 
@@ -316,7 +315,7 @@ abstract class PDOStorage implements StorageInterface
      */
     public function saveUserSettings(
         array $userSettings,
-        $triggerKey,
+        $triggerKey
     ) {
         // Store the settings as a JSON blob.
         $encodedData = json_encode($userSettings);
@@ -352,9 +351,8 @@ abstract class PDOStorage implements StorageInterface
      */
     public function loadUserCookies()
     {
-        return isset($this->_cache['cookies'])
-                ? $this->_cache['cookies']
-                : null;
+        return $this->_cache['cookies']
+                ?? null;
     }
 
     /**
@@ -363,7 +361,7 @@ abstract class PDOStorage implements StorageInterface
      * {@inheritdoc}
      */
     public function saveUserCookies(
-        $rawData,
+        $rawData
     ) {
         // Store the raw cookie data as-provided.
         $this->_setUserColumn('cookies', $rawData);

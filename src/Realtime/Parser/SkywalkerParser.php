@@ -35,7 +35,7 @@ class SkywalkerParser implements ParserInterface
      */
     public function parseMessage(
         $topic,
-        $payload,
+        $payload
     ) {
         $msgTopic = $msgPayload = null;
         $reader = new Reader($payload);
@@ -63,7 +63,7 @@ class SkywalkerParser implements ParserInterface
      */
     protected function _createMessage(
         $topic,
-        $payload,
+        $payload
     ) {
         if ($topic === null || $payload === null) {
             throw new \RuntimeException('Incomplete Skywalker message.');

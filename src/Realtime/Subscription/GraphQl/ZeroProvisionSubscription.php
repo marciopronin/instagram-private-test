@@ -16,7 +16,7 @@ class ZeroProvisionSubscription extends GraphQlSubscription
      * @param string $deviceId
      */
     public function __construct(
-        $deviceId,
+        $deviceId
     ) {
         parent::__construct(self::QUERY, [
             'client_subscription_id' => Signatures::generateUUID(),

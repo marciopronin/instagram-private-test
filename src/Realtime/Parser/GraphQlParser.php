@@ -34,7 +34,7 @@ class GraphQlParser implements ParserInterface
      */
     public function parseMessage(
         $topic,
-        $payload,
+        $payload
     ) {
         $messageValues = [];
         $reader = new Reader($payload);
@@ -64,7 +64,7 @@ class GraphQlParser implements ParserInterface
      */
     protected function _createMessage(
         $topic,
-        $payload,
+        $payload
     ) {
         if ($topic === null || $payload === null) {
             throw new \RuntimeException('Incomplete GraphQL message.');

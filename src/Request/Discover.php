@@ -32,7 +32,7 @@ class Discover extends RequestCollection
         $sessionId,
         $maxId = null,
         $isPrefetch = false,
-        $clusterDisabled = true,
+        $clusterDisabled = true
     ) {
         $request = $this->ig->request('discover/topical_explore/')
             ->addHeader('X-IG-Prefetch-Request', 'foreground')
@@ -87,7 +87,7 @@ class Discover extends RequestCollection
      * @return Response\DiscoverChainingFeedResponse
      */
     public function getMixedMedia(
-        $containerModule = 'clips_viewer_clips_tab',
+        $containerModule = 'clips_viewer_clips_tab'
     ) {
         $request = $this->ig->request('mixed_media/discover/')
             ->setSignedPost(false)
@@ -134,7 +134,7 @@ class Discover extends RequestCollection
      * @return Response\ReelsResponse
      */
     public function getExploreReels(
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('discover/explore_clips/')
             ->setSignedPost(false)
@@ -182,7 +182,7 @@ class Discover extends RequestCollection
         $maxId = null,
         $index = 0,
         $surface = 'explore_media_grid',
-        ?array $options = null,
+        ?array $options = null
     ) {
         $pagingToken = [
             'last_organic_item' => [
@@ -228,7 +228,7 @@ class Discover extends RequestCollection
      */
     public function reportExploreMedia(
         $exploreSourceToken,
-        $userId,
+        $userId
     ) {
         return $this->ig->request('discover/explore_report/')
             ->addParam('explore_source_token', $exploreSourceToken)
@@ -264,7 +264,7 @@ class Discover extends RequestCollection
         $latitude = null,
         $longitude = null,
         array $excludeList = [],
-        $rankToken = null,
+        $rankToken = null
     ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
@@ -337,7 +337,7 @@ class Discover extends RequestCollection
         $reelsMaxId = null,
         $pageIndex = null,
         $pageToken = null,
-        $pagingToken = null,
+        $pagingToken = null
     ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
@@ -412,7 +412,7 @@ class Discover extends RequestCollection
         $latitude = null,
         $longitude = null,
         array $excludeList = [],
-        $rankToken = null,
+        $rankToken = null
     ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
@@ -462,7 +462,7 @@ class Discover extends RequestCollection
      */
     public function registerRecentSearchClick(
         $entityType,
-        $entityId,
+        $entityId
     ) {
         if (!in_array($entityType, ['user', 'hashtag', 'place'], true)) {
             throw new \InvalidArgumentException(sprintf('Unknown entity type: %s.', $entityType));
@@ -491,7 +491,7 @@ class Discover extends RequestCollection
      * @return Response\SuggestedSearchesResponse
      */
     public function getSuggestedSearches(
-        $type,
+        $type
     ) {
         if (!in_array($type, ['blended', 'users', 'hashtags', 'places'], true)) {
             throw new \InvalidArgumentException(sprintf('Unknown search type: %s.', $type));
@@ -578,7 +578,7 @@ class Discover extends RequestCollection
     public function getAyml(
         $module = 'following',
         $maxNumberToDisplay = 10,
-        $paginate = false,
+        $paginate = false
     ) {
         $request = $this->ig->request('discover/ayml/')
             ->setSignedPost(false)
@@ -624,7 +624,7 @@ class Discover extends RequestCollection
      * @return Response\GenericResponse
      */
     public function surfaceWithSu(
-        $targetId,
+        $targetId
     ) {
         return $this->ig->request('discover/surface_with_su/')
             ->setSignedPost(false)
@@ -648,7 +648,7 @@ class Discover extends RequestCollection
      */
     public function getChainingUsers(
         $targetId,
-        $module = null,
+        $module = null
     ) {
         $request = $this->ig->request('discover/chaining/')
             ->setSignedPost(false)
@@ -671,7 +671,7 @@ class Discover extends RequestCollection
      * @return Response\DiscoveryAccountsResponse
      */
     public function getDiscoveryAccounts(
-        $entryPoint = 'self_profile',
+        $entryPoint = 'self_profile'
     ) {
         return $this->ig->request('discover/account_discovery/')
             ->setSignedPost(false)
@@ -689,7 +689,7 @@ class Discover extends RequestCollection
      * @return Response\DiscoveryAccountsResponse
      */
     public function getRecommendedAccounts(
-        $fromNux = false,
+        $fromNux = false
     ) {
         return $this->ig->request('discover/sectioned_ayml/')
             ->setSignedPost(false)

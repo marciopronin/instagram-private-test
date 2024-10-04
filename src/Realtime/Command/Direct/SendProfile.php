@@ -18,7 +18,7 @@ final class SendProfile extends ShareItem
     public function __construct(
         $threadId,
         $userId,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($threadId, self::TYPE, $options);
 

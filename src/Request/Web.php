@@ -47,7 +47,7 @@ class Web extends RequestCollection
      */
     public function login(
         $username,
-        $password,
+        $password
     ) {
         if (extension_loaded('sodium') === false) {
             throw new \InstagramAPI\Exception\InternalException('You must have the sodium PHP extension to use web login.');
@@ -85,7 +85,7 @@ class Web extends RequestCollection
      */
     public function sendSignupSms(
         $phone,
-        $mid,
+        $mid
     ) {
         return $this->ig->request('https://www.instagram.com/accounts/send_signup_sms_code_ajax/')
             ->setNeedsAuth(false)
@@ -118,7 +118,7 @@ class Web extends RequestCollection
      */
     public function sendEmailVerificationCode(
         $email,
-        $mid,
+        $mid
     ) {
         return $this->ig->request('accounts/send_verify_email/')
             ->setNeedsAuth(false)
@@ -150,7 +150,7 @@ class Web extends RequestCollection
     public function checkEmailVerificationCode(
         $email,
         $code,
-        $mid,
+        $mid
     ) {
         return $this->ig->request('accounts/check_confirmation_code/')
             ->setNeedsAuth(false)
@@ -199,7 +199,7 @@ class Web extends RequestCollection
         $mid,
         $attempt,
         $smsCode = null,
-        $tos = 'row',
+        $tos = 'row'
     ) {
         if (extension_loaded('sodium') === false) {
             throw new \InstagramAPI\Exception\InternalException('You must have the sodium PHP extension to use web login.');
@@ -275,7 +275,7 @@ class Web extends RequestCollection
      * @return Response\GenericResponse
      */
     public function like(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("https://instagram.com/web/likes/{$mediaId}/like/")
             ->setAddDefaultHeaders(false)
@@ -302,7 +302,7 @@ class Web extends RequestCollection
      * @return Response\WebFollowResponse
      */
     public function follow(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("https://instagram.com/web/friendships/{$userId}/follow/")
             ->setAddDefaultHeaders(false)
@@ -329,7 +329,7 @@ class Web extends RequestCollection
      * @return Response\WebFollowResponse
      */
     public function unfollow(
-        $userId,
+        $userId
     ) {
         return $this->ig->request("https://instagram.com/web/friendships/{$userId}/unfollow/")
             ->setAddDefaultHeaders(false)
@@ -358,7 +358,7 @@ class Web extends RequestCollection
      */
     public function reportMedia(
         $mediaId,
-        $reason,
+        $reason
     ) {
         return $this->ig->request("https://instagram.com/media/{$mediaId}/flag/")
             ->setAddDefaultHeaders(false)
@@ -385,7 +385,7 @@ class Web extends RequestCollection
      * @return Response\WebUserInfoResponse
      */
     public function getUserInfo(
-        $username,
+        $username
     ) {
         return $this->ig->request('https://i.instagram.com/api/v1/users/web_profile_info/')
             ->setAddDefaultHeaders(false)
@@ -414,7 +414,7 @@ class Web extends RequestCollection
      */
     public function getTopSearch(
         $query,
-        $context = 'blended',
+        $context = 'blended'
     ) {
         return $this->ig->request('https://i.instagram.com/api/v1/users/web_profile_info/')
             ->setAddDefaultHeaders(false)
@@ -443,7 +443,7 @@ class Web extends RequestCollection
      * @return Response\MediaInfoResponse
      */
     public function getMediaInfo(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("https://www.instagram.com/api/v1/media/$mediaId/info/")
             ->setAddDefaultHeaders(false)
@@ -488,7 +488,7 @@ class Web extends RequestCollection
      */
     public function sendGraphqlQuery(
         $queryHash,
-        array $variables,
+        array $variables
     ) {
         return $this->ig->request('https://www.instagram.com/graphql/query/')
             ->setAddDefaultHeaders(false)
@@ -520,7 +520,7 @@ class Web extends RequestCollection
     public function updateDateOfBirth(
         $day,
         $month,
-        $year,
+        $year
     ) {
         return $this->ig->request('https://instagram.com/web/consent/update_dob/')
             ->setAddDefaultHeaders(false)
@@ -555,7 +555,7 @@ class Web extends RequestCollection
         $firstName = null,
         $email = null,
         $phoneNumber = null,
-        $biography = null,
+        $biography = null
     ) {
         $response = $this->ig->request('https://instagram.com/api/v1/accounts/edit/web_form_data/')
             ->setAddDefaultHeaders(false)
@@ -601,7 +601,7 @@ class Web extends RequestCollection
      * @see Story::getUserReelMediaFeed()
      */
     public function getUserStoryFeedQuery(
-        $userId,
+        $userId
     ) {
         return $this->ig->request('https://instagram.com/graphql/query')
             ->setAddDefaultHeaders(false)

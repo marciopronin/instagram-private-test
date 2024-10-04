@@ -41,7 +41,7 @@ class TV extends RequestCollection
      * @return Response\TVGuideResponse
      */
     public function getNonPrefetchFeed(
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('igtv/non_prefetch_browse_feed/');
 
@@ -76,7 +76,7 @@ class TV extends RequestCollection
      * @return Response\TVGuideResponse
      */
     public function getTvGuide(
-        ?array $options = null,
+        ?array $options = null
     ) {
         $request = $this->ig->request('igtv/tv_guide/')
             ->addHeader('X-Ads-Opt-Out', '0')
@@ -109,7 +109,7 @@ class TV extends RequestCollection
      * @return Response\TVGuideResponse
      */
     public function getBrowseFeed(
-        $prefetch = false,
+        $prefetch = false
     ) {
         $request = $this->ig->request('igtv/browse_feed/')
             ->addParam('prefetch', 1)
@@ -137,7 +137,7 @@ class TV extends RequestCollection
      */
     public function getChannel(
         $id = 'for_you',
-        $maxId = null,
+        $maxId = null
     ) {
         if (!in_array($id, ['for_you', 'chrono_following', 'popular', 'continue_watching'])
         && !preg_match('/^user_[1-9]\d*$/', $id)) {
@@ -178,7 +178,7 @@ class TV extends RequestCollection
      */
     public function uploadVideo(
         $videoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         return $this->ig->internal->uploadSingleVideo(Constants::FEED_TV, $videoFilename, null, $externalMetadata);
     }
@@ -193,7 +193,7 @@ class TV extends RequestCollection
      * @return Response\TVSearchResponse
      */
     public function search(
-        $query = '',
+        $query = ''
     ) {
         if ($query !== '') {
             $endpoint = 'igtv/search/';
@@ -221,7 +221,7 @@ class TV extends RequestCollection
     public function writeSeenState(
         $impression,
         $viewProgress = 0,
-        $gridImpressions = [],
+        $gridImpressions = []
     ) {
         if (!ctype_digit($viewProgress) && (!is_int($viewProgress) || $viewProgress < 0)) {
             throw new \InvalidArgumentException('View progress must be a positive integer.');
@@ -272,7 +272,7 @@ class TV extends RequestCollection
     public function createSeries(
         $title,
         $igtvSession,
-        $description = null,
+        $description = null
     ) {
         $request = $this->ig->request('igtv/series/create/')
             ->addPost('title', $title)

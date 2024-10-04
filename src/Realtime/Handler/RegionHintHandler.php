@@ -11,7 +11,7 @@ class RegionHintHandler extends AbstractHandler implements HandlerInterface
 
     /** {@inheritdoc} */
     public function handleMessage(
-        Message $message,
+        Message $message
     ) {
         $region = $message->getData();
         if ($region === null || $region === '') {

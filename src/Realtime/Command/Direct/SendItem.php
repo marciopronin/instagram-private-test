@@ -20,7 +20,7 @@ abstract class SendItem extends DirectCommand
     public function __construct(
         $threadId,
         $itemType,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct(self::ACTION, $threadId, $options);
 

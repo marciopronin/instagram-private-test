@@ -16,7 +16,7 @@ final class SendLike extends SendItem
      */
     public function __construct(
         $threadId,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($threadId, self::TYPE, $options);
     }

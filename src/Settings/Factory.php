@@ -27,7 +27,7 @@ class Factory
      */
     public static function createHandler(
         array $storageConfig,
-        array $callbacks = [],
+        array $callbacks = []
     ) {
         // Resolve the storage backend choice if none provided in array.
         if (!isset($storageConfig['storage'])) {
@@ -147,29 +147,24 @@ class Factory
                         // This ID will be passed to the \Memcached() constructor.
                         // NOTE: Memcached's "persistent ID" feature makes Memcached
                         // keep the settings even after you disconnect.
-                        'persistent_id' => (isset($storageConfig['persistent_id'])
-                                            ? $storageConfig['persistent_id']
-                                            : null),
+                        'persistent_id' => ($storageConfig['persistent_id']
+                                            ?? null),
                         // Array which will be passed to \Memcached::setOptions().
-                        'memcached_options' => (isset($storageConfig['memcached_options'])
-                                                ? $storageConfig['memcached_options']
-                                                : null),
+                        'memcached_options' => ($storageConfig['memcached_options']
+                                                ?? null),
                         // Array which will be passed to \Memcached::addServers().
                         // NOTE: Can contain one or multiple servers.
-                        'servers' => (isset($storageConfig['servers'])
-                                      ? $storageConfig['servers']
-                                      : null),
+                        'servers' => ($storageConfig['servers']
+                                      ?? null),
                         // SASL username and password to be used for SASL
                         // authentication with all of the Memcached servers.
                         // NOTE: PHP's Memcached API doesn't support individual
                         // authentication credentials per-server, so these values
                         // apply to all of your servers if you use this feature!
-                        'sasl_username' => (isset($storageConfig['sasl_username'])
-                                            ? $storageConfig['sasl_username']
-                                            : null),
-                        'sasl_password' => (isset($storageConfig['sasl_password'])
-                                            ? $storageConfig['sasl_password']
-                                            : null),
+                        'sasl_username' => ($storageConfig['sasl_username']
+                                            ?? null),
+                        'sasl_password' => ($storageConfig['sasl_password']
+                                            ?? null),
                     ];
                 }
 
@@ -276,7 +271,7 @@ class Factory
      * @return array
      */
     public static function getCmdOptions(
-        array $longOpts,
+        array $longOpts
     ) {
         $cmdOptions = getopt('', $longOpts);
         if (!is_array($cmdOptions)) {
@@ -298,7 +293,7 @@ class Factory
     public static function getUserConfig(
         $settingName,
         array $storageConfig,
-        array $cmdOptions,
+        array $cmdOptions
     ) {
         // Command line options have the highest precedence.
         // NOTE: Settings provided via cmd must have a "settings_" prefix.

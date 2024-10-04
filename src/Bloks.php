@@ -6,7 +6,7 @@ class Bloks
 {
     public function parseResponse(
         $array,
-        $str,
+        $str
     ) {
         $results = [];
 
@@ -32,7 +32,7 @@ class Bloks
     }
 
     public function getBloks(
-        $str,
+        $str
     ) {
         $matches = [];
         $open = 0;
@@ -61,7 +61,7 @@ class Bloks
 
     public function searchArray(
         $arr,
-        $value,
+        $value
     ) {
         $results = [];
         foreach ($arr as $key => $element) {
@@ -79,7 +79,7 @@ class Bloks
     public function findOffsets(
         $arr,
         $searchValue,
-        $offsets = [],
+        $offsets = []
     ) {
         foreach ($arr as $key => $value) {
             if ($value === $searchValue) {
@@ -100,7 +100,7 @@ class Bloks
     }
 
     protected function _fixJsonString(
-        $string,
+        $string
     ) {
         $search = ['\\\\', '\\"', "\n", '\\r', '\\t', '\\b', '\\f', "\x0d"];
         $replace = ['\\', '"', '\\n', "\r", "\t", "\b", "\f", ''];
@@ -113,7 +113,7 @@ class Bloks
     }
 
     protected function _extractJsonString(
-        $string,
+        $string
     ) {
         $jsonStart = strpos($string, '{');
         $jsonEnd = strrpos($string, '}');
@@ -128,7 +128,7 @@ class Bloks
     }
 
     public function parseMap(
-        $input,
+        $input
     ) {
         $output = [];
 
@@ -206,7 +206,7 @@ class Bloks
 
     public function map_arrays(
         $keys,
-        $values,
+        $values
     ) {
         $result = [];
         for ($i = 0; $i < count($keys); $i++) {
@@ -222,7 +222,7 @@ class Bloks
 
     public function recursiveArrayMerge(
         array $array1,
-        array $array2,
+        array $array2
     ) {
         $merged = $array1;
 
@@ -239,7 +239,7 @@ class Bloks
 
     public function findValueWithSubstringRecursive(
         $array,
-        $substring,
+        $substring
     ) {
         $results = [];
 
@@ -259,7 +259,7 @@ class Bloks
     }
 
     public function cleanData(
-        $array,
+        $array
     ) {
         $result = [];
         foreach ($array as $k=>$v) {
@@ -287,7 +287,7 @@ class Bloks
 
     public function parseBlok(
         $bloksResponse,
-        $blok,
+        $blok
     ) {
         $bloks = $this->getBloks($bloksResponse);
         $res = $this->searchArray($bloks, $blok);

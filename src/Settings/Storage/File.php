@@ -44,7 +44,7 @@ class File implements StorageInterface
      * {@inheritdoc}
      */
     public function openLocation(
-        array $locationConfig,
+        array $locationConfig
     ) {
         // Determine which base folder to store all per-user data in.
         $baseFolder = ((isset($locationConfig['basefolder'])
@@ -61,7 +61,7 @@ class File implements StorageInterface
      * {@inheritdoc}
      */
     public function hasUser(
-        $username,
+        $username
     ) {
         // Check whether the user's settings-file exists.
         $hasUser = $this->_generateUserPaths($username);
@@ -76,7 +76,7 @@ class File implements StorageInterface
      */
     public function moveUser(
         $oldUsername,
-        $newUsername,
+        $newUsername
     ) {
         // Verify the old and new username parameters.
         $oldUser = $this->_generateUserPaths($oldUsername);
@@ -123,7 +123,7 @@ class File implements StorageInterface
      * {@inheritdoc}
      */
     public function deleteUser(
-        $username,
+        $username
     ) {
         // Delete all files in the user folder, and the folder itself.
         $delUser = $this->_generateUserPaths($username);
@@ -136,7 +136,7 @@ class File implements StorageInterface
      * {@inheritdoc}
      */
     public function openUser(
-        $username,
+        $username
     ) {
         $this->_username = $username;
         $userPaths = $this->_generateUserPaths($username);
@@ -188,7 +188,7 @@ class File implements StorageInterface
      */
     public function saveUserSettings(
         array $userSettings,
-        $triggerKey,
+        $triggerKey
     ) {
         // Generate the storage version header.
         $versionHeader = 'FILESTORAGEv'.self::STORAGE_VERSION.';';
@@ -242,7 +242,7 @@ class File implements StorageInterface
      * {@inheritdoc}
      */
     public function saveUserCookies(
-        $rawData,
+        $rawData
     ) {
         // Never called for "cookiefile" format.
     }
@@ -278,7 +278,7 @@ class File implements StorageInterface
      * @return string
      */
     public function getUserPath(
-        $username,
+        $username
     ) {
         return $this->_baseFolder.'/'.$username;
     }
@@ -295,7 +295,7 @@ class File implements StorageInterface
      */
     private function _decodeStorage(
         $dataVersion,
-        $rawData,
+        $rawData
     ) {
         $loadedSettings = [];
 
@@ -351,7 +351,7 @@ class File implements StorageInterface
      * @return array An array with information about the user's paths.
      */
     private function _generateUserPaths(
-        $username,
+        $username
     ) {
         $userFolder = $this->_baseFolder.'/'.$username;
         $settingsFile = $userFolder.'/'.sprintf(self::SETTINGSFILE_NAME, $username);
@@ -375,7 +375,7 @@ class File implements StorageInterface
      *                any trailing slash.
      */
     private function _createFolder(
-        $folder,
+        $folder
     ) {
         if (!Utils::createFolder($folder)) {
             throw new SettingsException(sprintf(

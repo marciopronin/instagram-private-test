@@ -20,7 +20,7 @@ final class IndicateActivity extends DirectCommand
     public function __construct(
         $threadId,
         $status,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct(self::ACTION, $threadId, $options);
 

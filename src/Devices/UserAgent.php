@@ -33,7 +33,7 @@ class UserAgent
         $appVersion,
         $versionCode,
         $userLocale,
-        DeviceInterface $device,
+        DeviceInterface $device
     ) {
         // Build the appropriate "Manufacturer" or "Manufacturer/Brand" string.
         $manufacturerWithBrand = $device->getManufacturer();
@@ -72,7 +72,7 @@ class UserAgent
         $userLocale,
         $acceptLanguage,
         $iosModel = null,
-        $iosDpi = null,
+        $iosDpi = null
     ) {
         // Generate the final User-Agent string.
         return sprintf(
@@ -95,7 +95,7 @@ class UserAgent
      * @return string
      */
     protected static function _escapeFbString(
-        $string,
+        $string
     ) {
         $result = '';
         for ($i = 0; $i < strlen($string); $i++) {
@@ -131,9 +131,9 @@ class UserAgent
         $appVersion,
         $versionCode,
         $userLocale,
-        DeviceInterface $device,
+        DeviceInterface $device
     ) {
-        list($width, $height) = explode('x', $device->getResolution());
+        [$width, $height] = explode('x', $device->getResolution());
         $density = round(str_replace('dpi', '', $device->getDPI()) / 160, 1);
         $result = [
             'FBAN' => $appName,

@@ -28,7 +28,7 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function openLocation(
-        array $locationConfig,
+        array $locationConfig
     ) {
         if (isset($locationConfig['memcached'])) {
             // Pre-provided connection to re-use instead of creating a new one.
@@ -95,7 +95,7 @@ class Memcached implements StorageInterface
      */
     private function _getUserKey(
         $username,
-        $key,
+        $key
     ) {
         try {
             $realKey = $username.'_'.$key;
@@ -121,7 +121,7 @@ class Memcached implements StorageInterface
     private function _setUserKey(
         $username,
         $key,
-        $value,
+        $value
     ) {
         try {
             $realKey = $username.'_'.$key;
@@ -149,7 +149,7 @@ class Memcached implements StorageInterface
      */
     private function _delUserKey(
         $username,
-        $key,
+        $key
     ) {
         try {
             $realKey = $username.'_'.$key;
@@ -165,7 +165,7 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function hasUser(
-        $username,
+        $username
     ) {
         // Check whether the user's settings exist (empty string allowed).
         $hasUser = $this->_getUserKey($username, 'settings');
@@ -180,7 +180,7 @@ class Memcached implements StorageInterface
      */
     public function moveUser(
         $oldUsername,
-        $newUsername,
+        $newUsername
     ) {
         // Verify that the old username exists and fetch the old data.
         $oldSettings = $this->_getUserKey($oldUsername, 'settings');
@@ -216,7 +216,7 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function deleteUser(
-        $username,
+        $username
     ) {
         $this->_delUserKey($username, 'settings');
         $this->_delUserKey($username, 'cookies');
@@ -228,7 +228,7 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function openUser(
-        $username,
+        $username
     ) {
         // Just cache the username. We'll create storage later if necessary.
         $this->_username = $username;
@@ -264,7 +264,7 @@ class Memcached implements StorageInterface
      */
     public function saveUserSettings(
         array $userSettings,
-        $triggerKey,
+        $triggerKey
     ) {
         // Store the settings as a JSON blob.
         $encodedData = json_encode($userSettings);
@@ -309,7 +309,7 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function saveUserCookies(
-        $rawData,
+        $rawData
     ) {
         // Store the raw cookie data as-provided.
         $this->_setUserKey($this->_username, 'cookies', $rawData);

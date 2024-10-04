@@ -17,7 +17,7 @@ class IrisParser implements ParserInterface
      */
     public function parseMessage(
         $topic,
-        $payload,
+        $payload
     ) {
         $messages = Client::api_body_decode($payload);
         if (!is_array($messages)) {

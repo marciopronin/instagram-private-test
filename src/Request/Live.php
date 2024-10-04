@@ -41,7 +41,7 @@ class Live extends RequestCollection
      * @return Response\BroadcastInfoResponse
      */
     public function getInfo(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/info/")
             ->addParam('view_expired_broadcast', false)
@@ -60,7 +60,7 @@ class Live extends RequestCollection
      * @return Response\ViewerListResponse
      */
     public function getViewerList(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/get_viewer_list/")
             ->getResponse(new Response\ViewerListResponse());
@@ -76,7 +76,7 @@ class Live extends RequestCollection
      * @return Response\FinalViewerListResponse
      */
     public function getFinalViewerList(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/get_final_viewer_list/")
             ->getResponse(new Response\FinalViewerListResponse());
@@ -94,7 +94,7 @@ class Live extends RequestCollection
      */
     public function getPostLiveViewerList(
         $broadcastId,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("live/{$broadcastId}/get_post_live_viewers_list/");
         if ($maxId !== null) {
@@ -116,7 +116,7 @@ class Live extends RequestCollection
      */
     public function getHeartbeatAndViewerCount(
         $broadcastId,
-        $isViewer = false,
+        $isViewer = false
     ) {
         $request = $this->ig->request("live/{$broadcastId}/heartbeat_and_get_viewer_count/")
             ->setSignedPost(false)
@@ -150,7 +150,7 @@ class Live extends RequestCollection
         $broadcastId,
         $lastTotalCount = 0,
         $lastSeenTs = 0,
-        $lastFetchTs = 0,
+        $lastFetchTs = 0
     ) {
         try {
             return $this->ig->request("live/{$broadcastId}/get_join_request_counts/")
@@ -183,7 +183,7 @@ class Live extends RequestCollection
         $broadcastId,
         $sdpOffer,
         $targetHeight = 768,
-        $targetWidth = 400,
+        $targetWidth = 400
     ) {
         return $this->ig->request("live/{$broadcastId}/join/")
             ->addPost('sdp_offer', $sdpOffer)
@@ -212,7 +212,7 @@ class Live extends RequestCollection
         $broadcastId,
         $userId,
         $encodedServerDataInfo,
-        $videoOffset,
+        $videoOffset
     ) {
         return $this->ig->request("live/{$broadcastId}/invite/")
             ->addPost('invitees', $userId)
@@ -239,7 +239,7 @@ class Live extends RequestCollection
     public function kickFriend(
         $broadcastId,
         $userId,
-        $encodedServerDataInfo,
+        $encodedServerDataInfo
     ) {
         return $this->ig->request("live/{$broadcastId}/kickout/")
             ->addPost('users_to_be_removed', $userId)
@@ -266,7 +266,7 @@ class Live extends RequestCollection
     public function leaveConference(
         $broadcastId,
         $encodedServerDataInfo,
-        $numberOfParticipants = 0,
+        $numberOfParticipants = 0
     ) {
         return $this->ig->request("live/{$broadcastId}/kickout/")
             ->addPost('num_participants', $numberOfParticipants)
@@ -298,7 +298,7 @@ class Live extends RequestCollection
         $encodedServerDataInfo,
         $messageType,
         $curVersion,
-        $transactionId,
+        $transactionId
     ) {
         $messageTypes = [
             'CONFERENCE_STATE',
@@ -333,7 +333,7 @@ class Live extends RequestCollection
      */
     public function showQuestion(
         $broadcastId,
-        $questionId,
+        $questionId
     ) {
         return $this->ig->request("live/{$broadcastId}/question/{$questionId}/activate/")
             ->setSignedPost(false)
@@ -354,7 +354,7 @@ class Live extends RequestCollection
      */
     public function hideQuestion(
         $broadcastId,
-        $questionId,
+        $questionId
     ) {
         return $this->ig->request("live/{$broadcastId}/question/{$questionId}/deactivate/")
             ->setSignedPost(false)
@@ -377,7 +377,7 @@ class Live extends RequestCollection
      */
     public function question(
         $broadcastId,
-        $questionText,
+        $questionText
     ) {
         return $this->ig->request("live/{$broadcastId}/questions/")
             ->setSignedPost(false)
@@ -410,7 +410,7 @@ class Live extends RequestCollection
      * @return Response\BroadcastQuestionsResponse
      */
     public function getLiveBroadcastQuestions(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/questions/")
             ->addParam('sources', 'story_and_live')
@@ -448,7 +448,7 @@ class Live extends RequestCollection
     public function wave(
         $broadcastId,
         $viewerId,
-        $waveType = 0,
+        $waveType = 0
     ) {
         return $this->ig->request("live/{$broadcastId}/wave/")
             ->addPost('viewer_id', $viewerId)
@@ -471,7 +471,7 @@ class Live extends RequestCollection
      */
     public function comment(
         $broadcastId,
-        $commentText,
+        $commentText
     ) {
         return $this->ig->request("live/{$broadcastId}/comment/")
             ->addPost('user_breadcrumb', Utils::generateUserBreadcrumb(mb_strlen($commentText)))
@@ -497,7 +497,7 @@ class Live extends RequestCollection
      */
     public function pinComment(
         $broadcastId,
-        $commentId,
+        $commentId
     ) {
         return $this->ig->request("live/{$broadcastId}/pin_comment/")
             ->addPost('offset_to_video_start', 0)
@@ -520,7 +520,7 @@ class Live extends RequestCollection
      */
     public function unpinComment(
         $broadcastId,
-        $commentId,
+        $commentId
     ) {
         return $this->ig->request("live/{$broadcastId}/unpin_comment/")
             ->addPost('offset_to_video_start', 0)
@@ -547,7 +547,7 @@ class Live extends RequestCollection
         $broadcastId,
         $lastCommentTs = 0,
         $joinRequestLastTs = 0,
-        $joinRequestLastCount = 0,
+        $joinRequestLastCount = 0
     ) {
         return $this->ig->request("live/{$broadcastId}/get_comment/")
             ->addParam('last_comment_ts', $lastCommentTs)
@@ -571,7 +571,7 @@ class Live extends RequestCollection
     public function getPostLiveComments(
         $broadcastId,
         $startingOffset = 0,
-        $encodingTag = 'instagram_dash_remuxed',
+        $encodingTag = 'instagram_dash_remuxed'
     ) {
         return $this->ig->request("live/{$broadcastId}/get_post_live_comments/")
             ->addParam('starting_offset', $startingOffset)
@@ -589,7 +589,7 @@ class Live extends RequestCollection
      * @return Response\EnableDisableLiveCommentsResponse
      */
     public function enableComments(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/unmute_comment/")
             ->addPost('_uid', $this->ig->account_id)
@@ -608,7 +608,7 @@ class Live extends RequestCollection
      * @return Response\EnableDisableLiveCommentsResponse
      */
     public function disableComments(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/mute_comment/")
             ->addPost('_uid', $this->ig->account_id)
@@ -627,7 +627,7 @@ class Live extends RequestCollection
      * @return Response\EnableDisableLiveCommentsResponse
      */
     public function enableRequestToJoin(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/enable_request_to_join/")
             ->addPost('_uid', $this->ig->account_id)
@@ -646,7 +646,7 @@ class Live extends RequestCollection
      * @return Response\EnableDisableLiveCommentsResponse
      */
     public function disableRequestToJoin(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/disable_request_to_join/")
             ->addPost('_uid', $this->ig->account_id)
@@ -670,7 +670,7 @@ class Live extends RequestCollection
     public function like(
         $broadcastId,
         $likeCount = 1,
-        $burstLikeCount = 0,
+        $burstLikeCount = 0
     ) {
         if ($likeCount < 1 || $likeCount > 6) {
             throw new \InvalidArgumentException('Like count must be a number from 1 to 6.');
@@ -698,7 +698,7 @@ class Live extends RequestCollection
      */
     public function getLikeCount(
         $broadcastId,
-        $likeTs = 0,
+        $likeTs = 0
     ) {
         return $this->ig->request("live/{$broadcastId}/get_like_count/")
             ->addParam('like_ts', $likeTs)
@@ -719,7 +719,7 @@ class Live extends RequestCollection
     public function getPostLiveLikes(
         $broadcastId,
         $startingOffset = 0,
-        $encodingTag = 'instagram_dash_remuxed',
+        $encodingTag = 'instagram_dash_remuxed'
     ) {
         return $this->ig->request("live/{$broadcastId}/get_post_live_likes/")
             ->addParam('starting_offset', $startingOffset)
@@ -749,7 +749,7 @@ class Live extends RequestCollection
         $previewWidth = 1080,
         $previewHeight = 2076,
         $title = null,
-        $visibility = 0,
+        $visibility = 0
     ) {
         $request = $this->ig->request('live/create/')
             ->setSignedPost(false)
@@ -804,7 +804,7 @@ class Live extends RequestCollection
         $broadcastId,
         $latitude = null,
         $longitude = null,
-        $charityId = null,
+        $charityId = null
     ) {
         $request = $this->ig->request("live/{$broadcastId}/start/")
             ->setSignedPost(false)
@@ -839,7 +839,7 @@ class Live extends RequestCollection
      * @return Response\GenericResponse
      */
     private function _getQuestionStatus(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/question_status/")
             ->setSignedPost(false)
@@ -862,7 +862,7 @@ class Live extends RequestCollection
      * @return Response\GenericResponse
      */
     public function resumeBroadcastAfterContentMatch(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/resume_broadcast_after_content_match/")
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -889,7 +889,7 @@ class Live extends RequestCollection
      */
     public function end(
         $broadcastId,
-        $copyrightWarning = false,
+        $copyrightWarning = false
     ) {
         return $this->ig->request("live/{$broadcastId}/end_broadcast/")
             ->addPost('_uid', $this->ig->account_id)
@@ -911,7 +911,7 @@ class Live extends RequestCollection
      * @return Response\GetPostLiveThumbnailsResponse
      */
     public function getPostLiveThumbnails(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/get_post_live_thumbnails/")
             ->addParam('signed_body', Signatures::generateSignature(json_encode((object) []).'.{}'))
@@ -932,7 +932,7 @@ class Live extends RequestCollection
      * @return Response\GenericResponse
      */
     public function addToPostLive(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/add_to_post_live/")
             ->addPost('_uid', $this->ig->account_id)
@@ -953,7 +953,7 @@ class Live extends RequestCollection
      * @return Response\GenericResponse
      */
     public function deletePostLive(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/delete_post_live/")
             ->addPost('_uid', $this->ig->account_id)
@@ -976,7 +976,7 @@ class Live extends RequestCollection
     public function shareToIgtv(
         $broadcastId,
         $coverPhoto,
-        array $metadata = [],
+        array $metadata = []
     ) {
         if (!isset($metadata['igtv_title'])) {
             throw new \InvalidArgumentException('You must provide a valid title for IGTV.');
@@ -1002,7 +1002,7 @@ class Live extends RequestCollection
     public function shareToReels(
         $broadcastId,
         $coverPhoto,
-        array $metadata = [],
+        array $metadata = []
     ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setBroadcastId($broadcastId);
@@ -1025,7 +1025,7 @@ class Live extends RequestCollection
      */
     public function setSubscriptionPreference(
         $userId,
-        $preference = 'default',
+        $preference = 'default'
     ) {
         return $this->ig->request("live/{$userId}/set_subscription_preference/")
             ->addPost('_uid', $this->ig->account_id)
@@ -1044,7 +1044,7 @@ class Live extends RequestCollection
      * @return Response\FundraiserInfoResponse
      */
     public function getFundraiserInfo(
-        $maxId = null,
+        $maxId = null
     ) {
         return $this->ig->request("fundraiser/{$this->ig->account_id}/standalone_fundraiser_info/")
             ->getResponse(new Response\FundraiserInfoResponse());
@@ -1060,7 +1060,7 @@ class Live extends RequestCollection
      * @return Response\StoryCharitiesResponse
      */
     public function getDefaultCharities(
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('fundraiser/story_charities_nullstate/');
 
@@ -1081,7 +1081,7 @@ class Live extends RequestCollection
      * @return Response\StoryCharitiesResponse
      */
     public function searchCharity(
-        $query,
+        $query
     ) {
         return $this->ig->request('fundraiser/story_charities_search/')
             ->addParam('query', $query)
@@ -1098,7 +1098,7 @@ class Live extends RequestCollection
      * @return Response\CharityDonationsResponse
      */
     public function getCharityDonations(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/charity_donations/")
             ->getResponse(new Response\CharityDonationsResponse());
@@ -1127,7 +1127,7 @@ class Live extends RequestCollection
      * @return Response\LiveArchiveSettingsResponse
      */
     public function setLiveArchiveSettings(
-        $archive,
+        $archive
     ) {
         if (!is_bool($archive)) {
             throw new \InvalidArgumentException('You must provide a valid value for archive.');
@@ -1169,7 +1169,7 @@ class Live extends RequestCollection
      * @return Response\GenericResponse
      */
     public function deleteArchivedLive(
-        $archiveId,
+        $archiveId
     ) {
         return $this->ig->request('archive/live/delete/')
             ->addPost('archive_id', $archiveId)
@@ -1190,7 +1190,7 @@ class Live extends RequestCollection
      */
     public function addModerator(
         $broadcastId,
-        $userId,
+        $userId
     ) {
         return $this->ig->request("live/{$broadcastId}/moderator/assign/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1211,7 +1211,7 @@ class Live extends RequestCollection
      */
     public function revokeModerator(
         $broadcastId,
-        $userId,
+        $userId
     ) {
         return $this->ig->request("live/{$broadcastId}/moderator/revoke/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1230,7 +1230,7 @@ class Live extends RequestCollection
      * @return Response\GenericResponse
      */
     public function resignModeratorRequest(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("live/{$broadcastId}/moderator/resign/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1250,7 +1250,7 @@ class Live extends RequestCollection
      */
     public function removeUser(
         $broadcastId,
-        $userId,
+        $userId
     ) {
         return $this->ig->request("live/{$broadcastId}/remove_user/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1271,7 +1271,7 @@ class Live extends RequestCollection
      */
     public function scheduleEvent(
         $startTime,
-        $title = '',
+        $title = ''
     ) {
         return $this->ig->request('upcoming_events/create/')
             ->addPost('start_time', $startTime)
@@ -1296,7 +1296,7 @@ class Live extends RequestCollection
      * @return Response\LiveShareResponse
      */
     public function getShareUrl(
-        $broadcastId,
+        $broadcastId
     ) {
         return $this->ig->request("third_party_sharing/{$this->ig->username}/live/{$broadcastId}/get_live_url/")
             ->addParam('exposed_to_experiment', 'false')

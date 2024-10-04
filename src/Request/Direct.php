@@ -44,7 +44,7 @@ class Direct extends RequestCollection
         $limit = 15,
         $prefetch = false,
         $filter = 'all',
-        $fetchReason = null,
+        $fetchReason = null
     ) {
         if ($limit < 0 || $limit > 20) {
             throw new \InvalidArgumentException('Invalid value provided to limit.');
@@ -121,7 +121,7 @@ class Direct extends RequestCollection
      * @return Response\DirectPendingInboxResponse
      */
     public function getPendingInbox(
-        $cursorId = null,
+        $cursorId = null
     ) {
         $request = $this->ig->request('direct_v2/pending_inbox/')
             ->addParam('visual_message_return_type', 'unseen')
@@ -143,7 +143,7 @@ class Direct extends RequestCollection
      * @return Response\DirectPendingInboxResponse
      */
     public function getSpamInbox(
-        $cursorId = null,
+        $cursorId = null
     ) {
         $request = $this->ig->request('direct_v2/spam_inbox/')
             ->addParam('visual_message_return_type', 'unseen')
@@ -172,7 +172,7 @@ class Direct extends RequestCollection
     public function approvePendingThreads(
         array $threads,
         $folder = null,
-        array $options = [],
+        array $options = []
     ) {
         if (!count($threads)) {
             throw new \InvalidArgumentException('Please provide at least one thread to approve.');
@@ -229,7 +229,7 @@ class Direct extends RequestCollection
      * @return Response\GenericResponse
      */
     public function declinePendingThreads(
-        array $threads,
+        array $threads
     ) {
         if (!count($threads)) {
             throw new \InvalidArgumentException('Please provide at least one thread to decline.');
@@ -327,7 +327,7 @@ class Direct extends RequestCollection
     public function getRankedRecipients(
         $mode,
         $showThreads,
-        $query = null,
+        $query = null
     ) {
         try {
             $request = $this->ig->request('direct_v2/ranked_recipients/')
@@ -356,7 +356,7 @@ class Direct extends RequestCollection
      * @return Response\DirectThreadResponse
      */
     public function getThreadByParticipants(
-        array $users,
+        array $users
     ) {
         if (!count($users)) {
             throw new \InvalidArgumentException('Please provide at least one participant.');
@@ -398,7 +398,7 @@ class Direct extends RequestCollection
     public function getThread(
         $threadId,
         $cursorId = null,
-        $seqId = null,
+        $seqId = null
     ) {
         $request = $this->ig->request("direct_v2/threads/$threadId/")
             ->addParam('visual_message_return_type', 'unseen');
@@ -439,7 +439,7 @@ class Direct extends RequestCollection
      */
     public function getVisualThread(
         $threadId,
-        $cursorId = null,
+        $cursorId = null
     ) {
         $request = $this->ig->request("direct_v2/visual_threads/{$threadId}/");
         if ($cursorId !== null) {
@@ -461,7 +461,7 @@ class Direct extends RequestCollection
      */
     public function updateThreadTitle(
         $threadId,
-        $title,
+        $title
     ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/update_title/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -487,7 +487,7 @@ class Direct extends RequestCollection
      */
     public function moveThread(
         $threadId,
-        $folder,
+        $folder
     ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/move/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -507,7 +507,7 @@ class Direct extends RequestCollection
      * @return Response\GenericResponse
      */
     public function muteThread(
-        $threadId,
+        $threadId
     ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/mute/")
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -526,7 +526,7 @@ class Direct extends RequestCollection
      * @return Response\GenericResponse
      */
     public function unmuteThread(
-        $threadId,
+        $threadId
     ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/unmute/")
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -545,7 +545,7 @@ class Direct extends RequestCollection
      * @return Response\DirectPresenceResponse
      */
     public function fetchAndSubscribePresence(
-        $userId,
+        $userId
     ) {
         return $this->ig->request('direct_v2/fetch_and_subscribe_presence/')
             ->setSignedPost(false)
@@ -574,7 +574,7 @@ class Direct extends RequestCollection
      */
     public function createGroupThread(
         array $userIds,
-        $threadTitle = null,
+        $threadTitle = null
     ) {
         if (count($userIds) < 1) {
             throw new \InvalidArgumentException('You must invite at least 1 user to create a group.');
@@ -617,7 +617,7 @@ class Direct extends RequestCollection
      */
     public function addUsersToThread(
         $threadId,
-        array $users,
+        array $users
     ) {
         if (!count($users)) {
             throw new \InvalidArgumentException('Please provide at least one user.');
@@ -649,7 +649,7 @@ class Direct extends RequestCollection
      * @return Response\GenericResponse
      */
     public function leaveThread(
-        $threadId,
+        $threadId
     ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/leave/")
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -668,7 +668,7 @@ class Direct extends RequestCollection
      * @return Response\GenericResponse
      */
     public function hideThread(
-        $threadId,
+        $threadId
     ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/hide/")
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -700,7 +700,7 @@ class Direct extends RequestCollection
     public function sendText(
         array $recipients,
         $text,
-        array $options = [],
+        array $options = []
     ) {
         if (!strlen($text)) {
             throw new \InvalidArgumentException('Text can not be empty.');
@@ -749,7 +749,7 @@ class Direct extends RequestCollection
         array $recipients,
         $reaction,
         $mediaId,
-        $options = [],
+        $options = []
     ) {
         // TODO: Add emoji checker on $reaction.
 
@@ -789,7 +789,7 @@ class Direct extends RequestCollection
     public function sendPost(
         array $recipients,
         $mediaId,
-        array $options = [],
+        array $options = []
     ) {
         if (!preg_match('#^\d+_\d+$#D', $mediaId)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid media ID.', $mediaId));
@@ -825,7 +825,7 @@ class Direct extends RequestCollection
     public function sendPhoto(
         array $recipients,
         $photoFilename,
-        array $options = [],
+        array $options = []
     ) {
         // Direct videos use different upload IDs.
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
@@ -835,8 +835,8 @@ class Direct extends RequestCollection
         // We must use the same client_context and mutation_token for all attempts to prevent double-posting.
         if (!isset($options['client_context']) || !isset($options['mutation_token'])) {
             $clientContext = Utils::generateClientContext();
-            $options['client_context'] = isset($options['client_context']) ? $options['client_context'] : $clientContext;
-            $options['mutation_token'] = isset($options['mutation_token']) ? $options['mutation_token'] : $clientContext;
+            $options['client_context'] = $options['client_context'] ?? $clientContext;
+            $options['mutation_token'] = $options['mutation_token'] ?? $clientContext;
         }
 
         // Send the uploaded photo to recipients.
@@ -890,7 +890,7 @@ class Direct extends RequestCollection
     public function sendPermanentPhoto(
         array $recipients,
         $photoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
@@ -920,7 +920,7 @@ class Direct extends RequestCollection
     public function sendDisappearingPhoto(
         array $recipients,
         $photoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
@@ -950,7 +950,7 @@ class Direct extends RequestCollection
     public function sendReplayablePhoto(
         array $recipients,
         $photoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
@@ -980,7 +980,7 @@ class Direct extends RequestCollection
     public function sendVideo(
         array $recipients,
         $videoFilename,
-        array $options = [],
+        array $options = []
     ) {
         // Direct videos use different upload IDs.
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
@@ -990,8 +990,8 @@ class Direct extends RequestCollection
         // We must use the same client_context and mutation_token for all attempts to prevent double-posting.
         if (!isset($options['client_context']) || !isset($options['mutation_token'])) {
             $clientContext = Utils::generateClientContext();
-            $options['client_context'] = isset($options['client_context']) ? $options['client_context'] : $clientContext;
-            $options['mutation_token'] = isset($options['mutation_token']) ? $options['mutation_token'] : $clientContext;
+            $options['client_context'] = $options['client_context'] ?? $clientContext;
+            $options['mutation_token'] = $options['mutation_token'] ?? $clientContext;
         }
 
         // Send the uploaded video to recipients.
@@ -1048,7 +1048,7 @@ class Direct extends RequestCollection
     public function sendAudio(
         array $recipients,
         $videoFilename,
-        array $options = [],
+        array $options = []
     ) {
         // Direct videos use different upload IDs.
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
@@ -1058,8 +1058,8 @@ class Direct extends RequestCollection
         // We must use the same client_context and mutation_token for all attempts to prevent double-posting.
         if (!isset($options['client_context']) || !isset($options['mutation_token'])) {
             $clientContext = Utils::generateClientContext();
-            $options['client_context'] = isset($options['client_context']) ? $options['client_context'] : $clientContext;
-            $options['mutation_token'] = isset($options['mutation_token']) ? $options['mutation_token'] : $clientContext;
+            $options['client_context'] = $options['client_context'] ?? $clientContext;
+            $options['mutation_token'] = $options['mutation_token'] ?? $clientContext;
         }
 
         // Send the uploaded video to recipients.
@@ -1122,7 +1122,7 @@ class Direct extends RequestCollection
     public function sendDisappearingVideo(
         array $recipients,
         $videoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
@@ -1153,7 +1153,7 @@ class Direct extends RequestCollection
     public function sendReplayableVideo(
         array $recipients,
         $videoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setDirectRecipients($this->_prepareRecipients($recipients, true));
@@ -1178,7 +1178,7 @@ class Direct extends RequestCollection
      */
     public function sendLike(
         array $recipients,
-        array $options = [],
+        array $options = []
     ) {
         return $this->_sendDirectItem('like', $recipients, $options);
     }
@@ -1203,7 +1203,7 @@ class Direct extends RequestCollection
     public function sendHashtag(
         array $recipients,
         $hashtag,
-        array $options = [],
+        array $options = []
     ) {
         if (!strlen($hashtag)) {
             throw new \InvalidArgumentException('Hashtag can not be empty.');
@@ -1239,7 +1239,7 @@ class Direct extends RequestCollection
     public function sendLocation(
         array $recipients,
         $locationId,
-        array $options = [],
+        array $options = []
     ) {
         if (!ctype_digit($locationId) && (!is_int($locationId) || $locationId < 0)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid location ID.', $locationId));
@@ -1270,7 +1270,7 @@ class Direct extends RequestCollection
     public function sendProfile(
         array $recipients,
         $userId,
-        array $options = [],
+        array $options = []
     ) {
         if (!ctype_digit($userId) && (!is_int($userId) || $userId < 0)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid numerical UserPK ID.', $userId));
@@ -1299,7 +1299,7 @@ class Direct extends RequestCollection
         $threadId,
         $threadItemId,
         $reactionType,
-        array $options = [],
+        array $options = []
     ) {
         return $this->_handleReaction($threadId, $threadItemId, $reactionType, 'created', $options);
     }
@@ -1332,7 +1332,7 @@ class Direct extends RequestCollection
         array $recipients,
         $storyId,
         $reelId = null,
-        array $options = [],
+        array $options = []
     ) {
         if (!preg_match('#^\d+_\d+$#D', $storyId)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid story ID.', $storyId));
@@ -1382,7 +1382,7 @@ class Direct extends RequestCollection
     public function shareReel(
         array $recipients,
         $mediaId,
-        array $options = [],
+        array $options = []
     ) {
         if (!preg_match('#^\d+_\d+$#D', $mediaId)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid media ID.', $mediaId));
@@ -1415,7 +1415,7 @@ class Direct extends RequestCollection
     public function sendLive(
         array $recipients,
         $broadcastId,
-        array $options = [],
+        array $options = []
     ) {
         return $this->_sendDirectItem('live', $recipients, array_merge($options, [
             'broadcast_id'      => $broadcastId,
@@ -1441,7 +1441,7 @@ class Direct extends RequestCollection
         $threadId,
         $threadItemId,
         $reactionType,
-        array $options = [],
+        array $options = []
     ) {
         return $this->_handleReaction($threadId, $threadItemId, $reactionType, 'deleted', $options);
     }
@@ -1458,7 +1458,7 @@ class Direct extends RequestCollection
      */
     public function deleteItem(
         $threadId,
-        $threadItemId,
+        $threadItemId
     ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/items/{$threadItemId}/delete/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -1481,7 +1481,7 @@ class Direct extends RequestCollection
     public function markItemSeen(
         $threadId,
         $threadItemId,
-        $clientContext,
+        $clientContext
     ) {
         return $this->ig->request("direct_v2/threads/{$threadId}/items/{$threadItemId}/seen/")
             ->addPost('action', 'mark_seen')
@@ -1510,7 +1510,7 @@ class Direct extends RequestCollection
      */
     public function markVisualItemsSeen(
         $threadId,
-        $threadItemIds,
+        $threadItemIds
     ) {
         if (!is_array($threadItemIds)) {
             $threadItemIds = [$threadItemIds];
@@ -1541,7 +1541,7 @@ class Direct extends RequestCollection
      */
     public function markVisualItemsReplayed(
         $threadId,
-        $threadItemIds,
+        $threadItemIds
     ) {
         if (!is_array($threadItemIds)) {
             $threadItemIds = [$threadItemIds];
@@ -1572,7 +1572,7 @@ class Direct extends RequestCollection
      */
     protected function _prepareRecipients(
         array $recipients,
-        $useQuotes,
+        $useQuotes
     ) {
         $result = [];
         // users
@@ -1648,7 +1648,7 @@ class Direct extends RequestCollection
         $type,
         array $recipients,
         array $options = [],
-        $signedPost = false,
+        $signedPost = false
     ) {
         $recipients = $this->_prepareRecipients($recipients, false);
 
@@ -1741,7 +1741,7 @@ class Direct extends RequestCollection
                 }
                 $request->addPost('attachment_fbid', $options['attachment_fbid']);
 
-                $samplingFreq = (isset($options['waveform_sampling_frequency_hz']) ? $options['waveform_sampling_frequency_hz'] : 10);
+                $samplingFreq = ($options['waveform_sampling_frequency_hz'] ?? 10);
                 $waveform = [];
                 for ($i = 0; $i < 20; $i++) {
                     $waveform[] = round(sin($i * (M_PI / 10)) * 0.5 + 0.5, 2);
@@ -1847,9 +1847,9 @@ class Direct extends RequestCollection
             // WARNING: Must be random every time otherwise we can only
             // make a single post per direct-discussion thread.
             $clientContext = Utils::generateClientContext();
-            $options['client_context'] = isset($options['client_context']) ? $options['client_context'] : $clientContext;
-            $options['mutation_token'] = isset($options['mutation_token']) ? $options['mutation_token'] : $clientContext;
-            $options['offline_threading_id'] = isset($options['offline_threading_id']) ? $options['offline_threading_id'] : $clientContext;
+            $options['client_context'] = $options['client_context'] ?? $clientContext;
+            $options['mutation_token'] = $options['mutation_token'] ?? $clientContext;
+            $options['offline_threading_id'] = $options['offline_threading_id'] ?? $clientContext;
         }
 
         // Add some additional data if signed post.
@@ -1890,7 +1890,7 @@ class Direct extends RequestCollection
     protected function _sendDirectItems(
         $type,
         array $recipients,
-        array $options = [],
+        array $options = []
     ) {
         // Most requests are unsigned, but some use signing by overriding this.
         $signedPost = false;
@@ -1970,9 +1970,9 @@ class Direct extends RequestCollection
             // WARNING: Must be random every time otherwise we can only
             // make a single post per direct-discussion thread.
             $clientContext = Utils::generateClientContext();
-            $options['client_context'] = isset($options['client_context']) ? $options['client_context'] : $clientContext;
-            $options['mutation_token'] = isset($options['mutation_token']) ? $options['mutation_token'] : $clientContext;
-            $options['offline_threading_id'] = isset($options['offline_threading_id']) ? $options['offline_threading_id'] : $clientContext;
+            $options['client_context'] = $options['client_context'] ?? $clientContext;
+            $options['mutation_token'] = $options['mutation_token'] ?? $clientContext;
+            $options['offline_threading_id'] = $options['offline_threading_id'] ?? $clientContext;
         }
 
         // Add some additional data if signed post.
@@ -2013,7 +2013,7 @@ class Direct extends RequestCollection
         $threadItemId,
         $reactionType,
         $reactionStatus,
-        array $options = [],
+        array $options = []
     ) {
         if (!ctype_digit($threadId) && (!is_int($threadId) || $threadId < 0)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid thread ID.', $threadId));

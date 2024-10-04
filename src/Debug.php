@@ -22,7 +22,7 @@ class Debug
         $method,
         $endpoint,
         $path = null,
-        $cliDebug = false,
+        $cliDebug = false
     ) {
         if (PHP_SAPI === 'cli') {
             $cMethod = Utils::colouredString("{$method}:  ", 'light_blue');
@@ -40,7 +40,7 @@ class Debug
     public static function printUpload(
         $uploadBytes,
         $path = null,
-        $cliDebug = false,
+        $cliDebug = false
     ) {
         if (PHP_SAPI === 'cli') {
             $dat = Utils::colouredString('→ '.$uploadBytes, 'yellow');
@@ -59,7 +59,7 @@ class Debug
         $httpCode,
         $bytes,
         $path = null,
-        $cliDebug = false,
+        $cliDebug = false
     ) {
         if (PHP_SAPI === 'cli') {
             if ($cliDebug) {
@@ -79,7 +79,7 @@ class Debug
         $response,
         $truncated = false,
         $path = null,
-        $cliDebug = false,
+        $cliDebug = false
     ) {
         if (PHP_SAPI === 'cli') {
             $res = Utils::colouredString('RESPONSE: ', 'cyan');
@@ -113,7 +113,7 @@ class Debug
     public static function printPostData(
         $post,
         $path = null,
-        $cliDebug = false,
+        $cliDebug = false
     ) {
         $gzip = mb_strpos($post, "\x1f\x8b\x08", 0, 'US-ASCII') === 0;
         if (PHP_SAPI === 'cli') {
@@ -132,7 +132,7 @@ class Debug
     public static function printEvent(
         $eventBatch,
         $path = null,
-        $cliDebug = false,
+        $cliDebug = false
     ) {
         $eventBatch = json_encode($eventBatch, JSON_PRETTY_PRINT);
         if (PHP_SAPI === 'cli') {

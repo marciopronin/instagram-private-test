@@ -101,7 +101,7 @@ class Mqtt implements PersistentInterface
         Instagram $instagram,
         LoopInterface $loop,
         LoggerInterface $logger,
-        array $additionalOptions = [],
+        array $additionalOptions = []
     ) {
         $this->_target = $target;
         $this->_connector = $connector;
@@ -157,7 +157,7 @@ class Mqtt implements PersistentInterface
      * @param SubscriptionInterface $subscription
      */
     public function addSubscription(
-        SubscriptionInterface $subscription,
+        SubscriptionInterface $subscription
     ) {
         $this->_doAddSubscription($subscription, true);
     }
@@ -168,7 +168,7 @@ class Mqtt implements PersistentInterface
      * @param SubscriptionInterface $subscription
      */
     public function removeSubscription(
-        SubscriptionInterface $subscription,
+        SubscriptionInterface $subscription
     ) {
         $this->_doRemoveSubscription($subscription, true);
     }
@@ -181,7 +181,7 @@ class Mqtt implements PersistentInterface
      */
     public function setAdditionalOption(
         $option,
-        $value,
+        $value
     ) {
         $this->_additionalOptions[$option] = $value;
     }
@@ -194,7 +194,7 @@ class Mqtt implements PersistentInterface
      */
     protected function _doAddSubscription(
         SubscriptionInterface $subscription,
-        $sendCommand,
+        $sendCommand
     ) {
         $topic = $subscription->getTopic();
         $id = $subscription->getId();
@@ -226,7 +226,7 @@ class Mqtt implements PersistentInterface
      */
     protected function _doRemoveSubscription(
         SubscriptionInterface $subscription,
-        $sendCommand,
+        $sendCommand
     ) {
         $topic = $subscription->getTopic();
         $id = $subscription->getId();
@@ -353,7 +353,7 @@ class Mqtt implements PersistentInterface
      * @throws \LogicException
      */
     public function sendCommand(
-        CommandInterface $command,
+        CommandInterface $command
     ) {
         if (!$this->isConnected()) {
             throw new \LogicException('Tried to send the command while offline.');
@@ -372,7 +372,7 @@ class Mqtt implements PersistentInterface
      * @param int $timeout
      */
     public function setTimeout(
-        $timeout,
+        $timeout
     ) {
         $this->_timeout = $timeout;
     }
@@ -383,7 +383,7 @@ class Mqtt implements PersistentInterface
      * @param ExperimentsInterface $experiments
      */
     protected function _loadExperiments(
-        ExperimentsInterface $experiments,
+        ExperimentsInterface $experiments
     ) {
         $this->_experiments = $experiments;
     }
@@ -473,7 +473,7 @@ class Mqtt implements PersistentInterface
     protected function _updateSubscriptions(
         $topic,
         array $subscribe,
-        array $unsubscribe,
+        array $unsubscribe
     ) {
         if (count($subscribe)) {
             $this->_logger->info(sprintf('Subscribing to %s topics %s', $topic, implode(', ', $subscribe)));
@@ -517,7 +517,7 @@ class Mqtt implements PersistentInterface
      * @return string
      */
     protected function _mapTopic(
-        $topic,
+        $topic
     ) {
         if (array_key_exists($topic, Mqtt\Topics::TOPIC_TO_ID_MAP)) {
             $result = Mqtt\Topics::TOPIC_TO_ID_MAP[$topic];
@@ -538,7 +538,7 @@ class Mqtt implements PersistentInterface
      * @return string
      */
     protected function _unmapTopic(
-        $topic,
+        $topic
     ) {
         if (array_key_exists($topic, Mqtt\Topics::ID_TO_TOPIC_MAP)) {
             $result = Mqtt\Topics::ID_TO_TOPIC_MAP[$topic];
@@ -559,7 +559,7 @@ class Mqtt implements PersistentInterface
     protected function _publish(
         $topic,
         $payload,
-        $qosLevel,
+        $qosLevel
     ) {
         $this->_logger->info(sprintf('Sending message "%s" to topic "%s"', $payload, $topic));
         $payload = zlib_encode($payload, ZLIB_ENCODING_DEFLATE, 9);
@@ -574,7 +574,7 @@ class Mqtt implements PersistentInterface
      * @param MqttMessage $msg
      */
     protected function _onReceive(
-        MqttMessage $msg,
+        MqttMessage $msg
     ) {
         $payload = @zlib_decode($msg->getPayload());
         if ($payload === false) {
@@ -591,7 +591,7 @@ class Mqtt implements PersistentInterface
      */
     protected function _handleMessage(
         $topic,
-        $payload,
+        $payload
     ) {
         $this->_logger->debug(
             sprintf('Received a message from topic "%s"', $topic),

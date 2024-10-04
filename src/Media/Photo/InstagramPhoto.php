@@ -51,7 +51,7 @@ class InstagramPhoto extends InstagramMedia
      */
     public function __construct(
         $inputFile,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($inputFile, $options);
         $this->_details = new PhotoDetails($this->_inputFile);
@@ -68,7 +68,7 @@ class InstagramPhoto extends InstagramMedia
     protected function _createOutputFile(
         Rectangle $srcRect,
         Rectangle $dstRect,
-        Dimensions $canvas,
+        Dimensions $canvas
     ) {
         $outputFile = null;
 
@@ -163,7 +163,7 @@ class InstagramPhoto extends InstagramMedia
         $source,
         Rectangle $srcRect,
         Rectangle $dstRect,
-        Dimensions $canvas,
+        Dimensions $canvas
     ) {
         // If our input image pixels are stored rotated, swap all coordinates.
         if ($this->_details->hasSwappedAxes()) {
@@ -224,7 +224,7 @@ class InstagramPhoto extends InstagramMedia
      */
     protected function _rotateResource(
         $original,
-        $bgColor,
+        $bgColor
     ) {
         $angle = 0;
         $flip = null;

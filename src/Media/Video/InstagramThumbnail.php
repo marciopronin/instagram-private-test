@@ -28,7 +28,7 @@ class InstagramThumbnail extends InstagramVideo
     public function __construct(
         $inputFile,
         array $options = [],
-        ?FFmpeg $ffmpeg = null,
+        ?FFmpeg $ffmpeg = null
     ) {
         parent::__construct($inputFile, $options, $ffmpeg);
 
@@ -102,7 +102,7 @@ class InstagramThumbnail extends InstagramVideo
     /** {@inheritdoc} */
     protected function _ffmpegMustRunAgain(
         $attempt,
-        array $ffmpegOutput,
+        array $ffmpegOutput
     ) {
         // If this was the first run, we must look for the "first frame is no
         // keyframe" error. It is a rare error which can happen when the user
@@ -129,7 +129,7 @@ class InstagramThumbnail extends InstagramVideo
 
     /** {@inheritdoc} */
     protected function _getInputFlags(
-        $attempt,
+        $attempt
     ) {
         // The seektime *must* be specified here, before the input file.
         // Otherwise ffmpeg will do a slow conversion of the whole file
@@ -148,7 +148,7 @@ class InstagramThumbnail extends InstagramVideo
 
     /** {@inheritdoc} */
     protected function _getOutputFlags(
-        $attempt,
+        $attempt
     ) {
         return [
             '-vcodec libwebp',

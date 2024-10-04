@@ -22,7 +22,7 @@ class Business extends RequestCollection
      * @return Response\InsightsResponse
      */
     public function getInsights(
-        $day = null,
+        $day = null
     ) {
         if (empty($day)) {
             $day = date('d');
@@ -44,7 +44,7 @@ class Business extends RequestCollection
      * @return Response\MediaInsightsResponse
      */
     public function getMediaInsights(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("insights/media_organic_insights/{$mediaId}/")
             ->addParam('ig_sig_key_version', Constants::SIG_KEY_VERSION)
@@ -67,7 +67,7 @@ class Business extends RequestCollection
         $timezone = 'Atlantic/Canary',
         $activityTab = true,
         $audienceTab = true,
-        $contentTab = true,
+        $contentTab = true
     ) {
         return $this->ig->request('ads/graphql/')
             ->setSignedPost(false)
@@ -103,7 +103,7 @@ class Business extends RequestCollection
      * @return Response\GraphqlResponse
      */
     public function getPostInsights(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request('ads/graphql/')
             ->setSignedPost(false)
@@ -176,7 +176,7 @@ class Business extends RequestCollection
     public function updateWhitelistSettings(
         $addedUserIds = [],
         $removedUserIds = [],
-        $requireApproval = true,
+        $requireApproval = true
     ) {
         $userIds = count($addedUserIds) + count($removedUserIds);
 
@@ -320,7 +320,7 @@ class Business extends RequestCollection
     public function getCommonInsights(
         $startDate,
         $endDate,
-        $period,
+        $period
     ) {
         $response = $this->ig->request('bloks/apps/com.instagram.insights.common.date_picker.date_picker_surface/')
             ->setSignedPost(false)
@@ -372,7 +372,7 @@ class Business extends RequestCollection
      * @return array
      */
     public function getInsightsInteractions(
-        $period,
+        $period
     ) {
         $response = $this->ig->request('bloks/apps/com.instagram.insights.account.content_interactions_breakout.timeframe.container/')
             ->setSignedPost(false)

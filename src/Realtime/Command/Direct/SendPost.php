@@ -20,7 +20,7 @@ final class SendPost extends ShareItem
     public function __construct(
         $threadId,
         $mediaId,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($threadId, self::TYPE, $options);
 

@@ -16,7 +16,7 @@ class LiveHandler extends AbstractHandler implements HandlerInterface
 
     /** {@inheritdoc} */
     public function handleMessage(
-        Message $message,
+        Message $message
     ) {
         $data = $message->getData();
 
@@ -35,7 +35,7 @@ class LiveHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _processEvent(
-        array $message,
+        array $message
     ) {
         if ($message['event'] === RealtimeEvent::PATCH) {
             $event = new PatchEvent($message);
@@ -55,7 +55,7 @@ class LiveHandler extends AbstractHandler implements HandlerInterface
      * @throws HandlerException
      */
     protected function _handlePatchOp(
-        PatchEventOp $op,
+        PatchEventOp $op
     ) {
         switch ($op->getOp()) {
             case PatchEventOp::ADD:

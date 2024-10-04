@@ -70,7 +70,7 @@ class RealtimeConnection extends RtiConnection
      * @param Instagram $ig Instagram API object.
      */
     public function __construct(
-        $ig,
+        $ig
     ) {
         $this->_userId = $ig->account_id;
         $authorizationData = json_decode(base64_decode(explode(':', $ig->settings->get('authorization_header'))[2]), true);

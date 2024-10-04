@@ -33,7 +33,7 @@ class SQLite extends PDOStorage
      * {@inheritdoc}
      */
     protected function _createPDO(
-        array $locationConfig,
+        array $locationConfig
     ) {
         // Determine the filename for the SQLite database.
         $sqliteFile = ((isset($locationConfig['dbfilename'])

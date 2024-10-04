@@ -24,7 +24,7 @@ class Media extends RequestCollection
      * @return Response\MediaInfoResponse
      */
     public function getInfo(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("media/{$mediaId}/info/")
             ->getResponse(new Response\MediaInfoResponse());
@@ -40,7 +40,7 @@ class Media extends RequestCollection
      * @return Response\MediaInfoResponse
      */
     public function getOembedInfo(
-        $mediaUrl,
+        $mediaUrl
     ) {
         return $this->ig->request('instagram_oembed/')
             ->setIsSilentFail(true)
@@ -62,7 +62,7 @@ class Media extends RequestCollection
      */
     public function delete(
         $mediaId,
-        $mediaType = 'PHOTO',
+        $mediaType = 'PHOTO'
     ) {
         $mediaType = Utils::checkMediaType($mediaType);
 
@@ -101,7 +101,7 @@ class Media extends RequestCollection
         $mediaId,
         $captionText = '',
         ?array $metadata = null,
-        $mediaType = 'PHOTO',
+        $mediaType = 'PHOTO'
     ) {
         $mediaType = Utils::checkMediaType($mediaType);
 
@@ -170,7 +170,7 @@ class Media extends RequestCollection
         $feedPosition,
         $module = 'feed_timeline',
         $carouselBumped = false,
-        array $extraData = [],
+        array $extraData = []
     ) {
         $request = $this->ig->request("media/{$mediaId}/like/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -225,7 +225,7 @@ class Media extends RequestCollection
     public function unlike(
         $mediaId,
         $module = 'feed_timeline',
-        array $extraData = [],
+        array $extraData = []
     ) {
         $request = $this->ig->request("media/{$mediaId}/unlike/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -252,7 +252,7 @@ class Media extends RequestCollection
      * @return Response\LikeFeedResponse
      */
     public function getLikedFeed(
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('feed/liked/');
         if ($maxId !== null) {
@@ -272,7 +272,7 @@ class Media extends RequestCollection
      * @return Response\MediaLikersResponse
      */
     public function getLikers(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("media/{$mediaId}/likers/")->getResponse(new Response\MediaLikersResponse());
     }
@@ -300,7 +300,7 @@ class Media extends RequestCollection
      * @return Response\MediaLikersResponse
      */
     public function getLikersChrono(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("media/{$mediaId}/likers_chrono/")->getResponse(new Response\MediaLikersResponse());
     }
@@ -315,7 +315,7 @@ class Media extends RequestCollection
      * @return Response\GenericResponse
      */
     public function enableComments(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("media/{$mediaId}/enable_comments/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -334,7 +334,7 @@ class Media extends RequestCollection
      * @return Response\GenericResponse
      */
     public function disableComments(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("media/{$mediaId}/disable_comments/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -355,7 +355,7 @@ class Media extends RequestCollection
      */
     public function updateLikeAndViewCountsVisibility(
         $mediaId,
-        $disable,
+        $disable
     ) {
         return $this->ig->request('media/update_like_and_view_counts_visibility/')
             ->addPost('like_and_view_counts_disabled', $disable)
@@ -399,7 +399,7 @@ class Media extends RequestCollection
         $module = 'comments_v2',
         $carouselIndex = 0,
         $feedPosition = 0,
-        $feedBumped = false,
+        $feedBumped = false
     ) {
         $request = $this->ig->request("media/{$mediaId}/comment/")
             ->addPost('user_breadcrumb', Utils::generateUserBreadcrumb(mb_strlen($commentText)))
@@ -452,13 +452,13 @@ class Media extends RequestCollection
      */
     public function getComments(
         $mediaId,
-        array $options = [],
+        array $options = []
     ) {
         $request = $this->ig->request("media/{$mediaId}/comments/")
             ->addParam('can_support_threading', true)
-            ->addParam('analytics_module', isset($options['analytics_module']) ? $options['analytics_module'] : 'comments_v2_feed_timeline')
+            ->addParam('analytics_module', $options['analytics_module'] ?? 'comments_v2_feed_timeline')
             ->addParam('is_carousel_bumped_post', false)
-            ->addParam('feed_position', isset($options['feed_position']) ? $options['feed_position'] : 0);
+            ->addParam('feed_position', $options['feed_position'] ?? 0);
 
         if (isset($options['inventory_source'])) {
             $request->addParam('inventory_source', $options['inventory_source']);
@@ -513,7 +513,7 @@ class Media extends RequestCollection
     public function getCommentReplies(
         $mediaId,
         $commentId,
-        array $options = [],
+        array $options = []
     ) {
         $request = $this->ig->request("media/{$mediaId}/comments/{$commentId}/inline_child_comments/");
 
@@ -542,7 +542,7 @@ class Media extends RequestCollection
      */
     public function deleteComment(
         $mediaId,
-        $commentId,
+        $commentId
     ) {
         return $this->ig->request("media/{$mediaId}/comment/{$commentId}/delete/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -563,7 +563,7 @@ class Media extends RequestCollection
      */
     public function deleteComments(
         $mediaId,
-        $commentIds,
+        $commentIds
     ) {
         if (is_array($commentIds)) {
             $commentIds = implode(',', $commentIds);
@@ -591,7 +591,7 @@ class Media extends RequestCollection
     public function likeComment(
         $commentId,
         $feedPosition,
-        $module = 'self_comments_v2',
+        $module = 'self_comments_v2'
     ) {
         return $this->ig->request("media/{$commentId}/comment_like/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -618,7 +618,7 @@ class Media extends RequestCollection
     public function unlikeComment(
         $commentId,
         $feedPosition,
-        $module = 'self_comments_v2',
+        $module = 'self_comments_v2'
     ) {
         return $this->ig->request("media/{$commentId}/comment_unlike/")
             ->addPost('_uuid', $this->ig->uuid)
@@ -640,7 +640,7 @@ class Media extends RequestCollection
      * @return Response\CommentLikersResponse
      */
     public function getCommentLikers(
-        $commentId,
+        $commentId
     ) {
         return $this->ig->request("media/{$commentId}/comment_likers/")->getResponse(new Response\CommentLikersResponse());
     }
@@ -657,7 +657,7 @@ class Media extends RequestCollection
      * @return Response\TranslateResponse
      */
     public function translateComments(
-        $commentIds,
+        $commentIds
     ) {
         if (is_array($commentIds)) {
             $commentIds = implode(',', $commentIds);
@@ -677,7 +677,7 @@ class Media extends RequestCollection
      * @return Response\CommentInfoResponse
      */
     public function getCommentInfo(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("media/{$mediaId}/comment_info/")
             ->getResponse(new Response\CommentInfoResponse());
@@ -693,7 +693,7 @@ class Media extends RequestCollection
      * @return Response\CommentInfosResponse
      */
     public function getCommentInfos(
-        $mediaIds,
+        $mediaIds
     ) {
         if (is_array($mediaIds)) {
             $mediaIds = implode(',', $mediaIds);
@@ -716,7 +716,7 @@ class Media extends RequestCollection
      */
     public function checkOffensiveComment(
         $mediaId,
-        $comment,
+        $comment
     ) {
         return $this->ig->request('media/comment/check_offensive_comment/')
             ->addPost('media_id', $mediaId)
@@ -739,7 +739,7 @@ class Media extends RequestCollection
      */
     public function checkOffensiveMultiText(
         $textList,
-        $requestType = 'caption',
+        $requestType = 'caption'
     ) {
         return $this->ig->request('warning/check_offensive_multi_text/')
             ->addPost('request_type', $requestType)
@@ -763,7 +763,7 @@ class Media extends RequestCollection
      * @return Response\ValidateURLResponse
      */
     public function validateURL(
-        $url,
+        $url
     ) {
         return $this->ig->request('media/validate_reel_url/')
             ->addPost('_uuid', $this->ig->uuid)
@@ -783,7 +783,7 @@ class Media extends RequestCollection
      * @return Response\GenericResponse
      */
     public function pin(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request('users/pin_timeline_media/')
             ->setSignedPost(false)
@@ -803,7 +803,7 @@ class Media extends RequestCollection
      * @return Response\GenericResponse
      */
     public function unpin(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request('users/unpin_timeline_media/')
             ->setSignedPost(false)
@@ -827,14 +827,14 @@ class Media extends RequestCollection
     public function save(
         $mediaId,
         $module = 'feed_timeline',
-        array $options = [],
+        array $options = []
     ) {
         $request = $this->ig->request("media/{$mediaId}/save/")
             ->addPost('inventory_source', 'media_or_ad')
             ->addPost('starting_clips_media_id', null)
             ->addPost('delivery_class', 'organic')
             ->addPost('module_name', $module)
-            ->addPost('client_position', isset($options['client_position']) ? $options['client_position'] : 0)
+            ->addPost('client_position', $options['client_position'] ?? 0)
             ->addPost('radio_type', $this->ig->radio_type)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
@@ -862,14 +862,14 @@ class Media extends RequestCollection
     public function unsave(
         $mediaId,
         $module = 'feed_timeline',
-        array $options = [],
+        array $options = []
     ) {
         $request = $this->ig->request("media/{$mediaId}/unsave/")
             ->addPost('inventory_source', 'media_or_ad')
             ->addPost('starting_clips_media_id', null)
             ->addPost('delivery_class', 'organic')
             ->addPost('module_name', $module)
-            ->addPost('client_position', isset($options['client_position']) ? $options['client_position'] : 0)
+            ->addPost('client_position', $options['client_position'] ?? 0)
             ->addPost('radio_type', $this->ig->radio_type)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
@@ -893,7 +893,7 @@ class Media extends RequestCollection
      * @return Response\SavedFeedResponse
      */
     public function getSavedFeed(
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('feed/saved/');
         if ($maxId !== null) {
@@ -928,7 +928,7 @@ class Media extends RequestCollection
      */
     public function report(
         $mediaId,
-        $sourceName = 'feed_contextual_chain',
+        $sourceName = 'feed_contextual_chain'
     ) {
         return $this->ig->request("media/{$mediaId}/flag_media/")
             ->addPost('media_id', $mediaId)
@@ -952,7 +952,7 @@ class Media extends RequestCollection
      */
     public function reportComment(
         $mediaId,
-        $commentId,
+        $commentId
     ) {
         return $this->ig->request("media/{$mediaId}/comment/{$commentId}/flag/")
             ->addPost('media_id', $mediaId)
@@ -974,7 +974,7 @@ class Media extends RequestCollection
      * @return Response\PermalinkResponse
      */
     public function getPermalink(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request("media/{$mediaId}/permalink/")
             ->addParam('share_to_app', 'copy_link')
@@ -995,7 +995,7 @@ class Media extends RequestCollection
         $type,
         Request $request,
         $module,
-        array $extraData,
+        array $extraData
     ) {
         // Is this a "double-tap to like"? Note that Instagram doesn't have
         // "double-tap to unlike". So this can only be "1" if it's a "like".

@@ -25,7 +25,7 @@ class Highlight extends RequestCollection
      * @see Story::getReelsMediaFeed() To get highlight items when they aren't included in this response.
      */
     public function getUserFeed(
-        $userId,
+        $userId
     ) {
         $request = $this->ig->request("highlights/{$userId}/highlights_tray/")
             ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
@@ -83,7 +83,7 @@ class Highlight extends RequestCollection
         array $mediaIds,
         $title = 'Highlights',
         $coverMediaId = null,
-        $module = 'self_profile',
+        $module = 'self_profile'
     ) {
         if (empty($mediaIds)) {
             throw new \InvalidArgumentException('You must provide at least one media ID.');
@@ -130,7 +130,7 @@ class Highlight extends RequestCollection
     public function edit(
         $highlightReelId,
         array $params,
-        $module = 'self_profile',
+        $module = 'self_profile'
     ) {
         if (!isset($params['cover_media_id'])) {
             throw new \InvalidArgumentException('You must provide one media ID for the cover.');
@@ -174,7 +174,7 @@ class Highlight extends RequestCollection
      * @return Response\GenericResponse
      */
     public function delete(
-        $highlightReelId,
+        $highlightReelId
     ) {
         return $this->ig->request("highlights/{$highlightReelId}/delete_reel/")
             ->addPost('_uuid', $this->ig->uuid)

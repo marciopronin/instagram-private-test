@@ -39,7 +39,7 @@ class ExtendedThiftWriter
      */
     private function _toZigZag(
         $number,
-        $bits,
+        $bits
     ) {
         if (PHP_INT_SIZE === 4) {
             $number = gmp_init($number, 10);
@@ -56,7 +56,7 @@ class ExtendedThiftWriter
      * @param int $number
      */
     private function _writeByte(
-        $number,
+        $number
     ) {
         $this->_buffer .= chr($number);
     }
@@ -65,7 +65,7 @@ class ExtendedThiftWriter
      * @param int $number
      */
     private function _writeWord(
-        $number,
+        $number
     ) {
         $this->_writeVarInt($this->_toZigZag($number, 16));
     }
@@ -74,7 +74,7 @@ class ExtendedThiftWriter
      * @param int $number
      */
     private function _writeInt(
-        $number,
+        $number
     ) {
         $this->_writeVarInt($this->_toZigZag($number, 32));
     }
@@ -85,7 +85,7 @@ class ExtendedThiftWriter
      */
     private function _writeField(
         $field,
-        $type,
+        $type
     ) {
         $delta = $field - $this->_field;
         if (($delta > 0) && ($delta <= 15)) {
@@ -101,7 +101,7 @@ class ExtendedThiftWriter
      * @param int $number
      */
     private function _writeVarInt(
-        $number,
+        $number
     ) {
         if (PHP_INT_SIZE === 4) {
             $number = gmp_init($number, 10);
@@ -132,7 +132,7 @@ class ExtendedThiftWriter
      * @param int $value
      */
     private function _writeLongInt(
-        $value,
+        $value
     ) {
         $this->_writeVarInt($this->_toZigZag($value, 64));
     }
@@ -141,7 +141,7 @@ class ExtendedThiftWriter
      * @param string $data
      */
     private function _writeBinary(
-        $data,
+        $data
     ) {
         $this->_buffer .= $data;
     }
@@ -152,7 +152,7 @@ class ExtendedThiftWriter
      */
     public function writeBool(
         $field,
-        $value,
+        $value
     ) {
         $this->_writeField($field, $value ? Types::TRUE : Types::FALSE);
     }
@@ -163,7 +163,7 @@ class ExtendedThiftWriter
      */
     public function writeString(
         $field,
-        $string,
+        $string
     ) {
         $this->_writeField($field, Types::BINARY);
         $this->_writeStringDirect($string);
@@ -173,7 +173,7 @@ class ExtendedThiftWriter
      * @param string $string
      */
     protected function _writeStringDirect(
-        $string,
+        $string
     ) {
         $this->_writeVarInt(strlen($string));
         $this->_writeBinary($string);
@@ -193,7 +193,7 @@ class ExtendedThiftWriter
      */
     public function writeInt8(
         $field,
-        $number,
+        $number
     ) {
         $this->_writeField($field, Types::BYTE);
         $this->_writeByte($number);
@@ -205,7 +205,7 @@ class ExtendedThiftWriter
      */
     public function writeInt16(
         $field,
-        $number,
+        $number
     ) {
         $this->_writeField($field, Types::I16);
         $this->_writeWord($number);
@@ -217,7 +217,7 @@ class ExtendedThiftWriter
      */
     public function writeInt32(
         $field,
-        $number,
+        $number
     ) {
         $this->_writeField($field, Types::I32);
         $this->_writeInt($number);
@@ -229,7 +229,7 @@ class ExtendedThiftWriter
      */
     public function writeInt64(
         $field,
-        $number,
+        $number
     ) {
         $this->_writeField($field, Types::I64);
         $this->_writeLongInt($number);
@@ -241,7 +241,7 @@ class ExtendedThiftWriter
      */
     public function writeStrStrMap(
         $field,
-        $data,
+        $data
     ) {
         $this->_writeField($field, Types::MAP);
         $this->_writeVarInt(sizeof($data));
@@ -261,7 +261,7 @@ class ExtendedThiftWriter
     public function writeList(
         $field,
         $type,
-        array $list,
+        array $list
     ) {
         $this->_writeField($field, Types::LIST);
         $size = count($list);
@@ -312,7 +312,7 @@ class ExtendedThiftWriter
      * @param int $field
      */
     public function writeStruct(
-        $field,
+        $field
     ) {
         $this->_writeField($field, Types::STRUCT);
         $this->_stack[] = $this->_field;

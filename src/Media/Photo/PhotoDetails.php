@@ -96,7 +96,7 @@ class PhotoDetails extends MediaDetails
      * @throws \InvalidArgumentException If the photo file is missing or invalid.
      */
     public function __construct(
-        $filename,
+        $filename
     ) {
         // Check if input file exists.
         if (empty($filename) || !is_file($filename)) {
@@ -117,7 +117,7 @@ class PhotoDetails extends MediaDetails
         if ($result === false) {
             throw new \InvalidArgumentException(sprintf('The photo file "%s" is not a valid image.', $filename));
         }
-        list($width, $height, $this->_type) = $result;
+        [$width, $height, $this->_type] = $result;
 
         // Detect WEBP EXIF orientation if it exists.
         $this->_orientation = $this->_getExifOrientation($filename, $this->_type);
@@ -128,7 +128,7 @@ class PhotoDetails extends MediaDetails
     /** {@inheritdoc} */
     public function validate(
         ConstraintsInterface $constraints,
-        $validate = null,
+        $validate = null
     ) {
         parent::validate($constraints);
 
@@ -168,7 +168,7 @@ class PhotoDetails extends MediaDetails
      */
     protected function _getExifOrientation(
         $filename,
-        $type,
+        $type
     ) {
         if ($type !== IMAGETYPE_WEBP || !function_exists('exif_read_data')) {
             return self::DEFAULT_ORIENTATION;

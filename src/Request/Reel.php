@@ -27,7 +27,7 @@ class Reel extends RequestCollection
      */
     public function uploadVideo(
         $videoFilename,
-        array $externalMetadata = [],
+        array $externalMetadata = []
     ) {
         return $this->ig->internal->uploadSingleVideo(Constants::FEED_REELS, $videoFilename, null, $externalMetadata);
     }
@@ -49,7 +49,7 @@ class Reel extends RequestCollection
         $chainingMedia = null,
         $seenReels = null,
         $sessionInfo = null,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('clips/discover/')
             ->setSignedPost(false)
@@ -100,7 +100,7 @@ class Reel extends RequestCollection
      */
     public function discoverStream(
         $seenReels = null,
-        $sessionInfo = null,
+        $sessionInfo = null
     ) {
         $request = $this->ig->request('clips/discover/stream/')
             ->setSignedPost(false)
@@ -134,7 +134,7 @@ class Reel extends RequestCollection
      * @return Response\GenericResponse
      */
     public function sendSeenState(
-        ?array $mediaIds = null,
+        ?array $mediaIds = null
     ) {
         $request = $this->ig->request('clips/write_seen_state/')
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -158,7 +158,7 @@ class Reel extends RequestCollection
      */
     public function getHome(
         $maxId = null,
-        $module = 'clips_tab',
+        $module = 'clips_tab'
     ) {
         $request = $this->ig->request('clips/home/')
             ->setSignedPost(false)
@@ -186,7 +186,7 @@ class Reel extends RequestCollection
      */
     public function getUserReels(
         $userId,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('clips/user/')
             ->setSignedPost(false)
@@ -214,7 +214,7 @@ class Reel extends RequestCollection
      */
     public function getHashtagReels(
         $hashtag,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("clips/tags/{$hashtag}")
             ->setSignedPost(false)
@@ -238,7 +238,7 @@ class Reel extends RequestCollection
      * @return Response\ReelsResponse
      */
     public function getMusic(
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('clips/music/')
             ->setSignedPost(false)
@@ -265,7 +265,7 @@ class Reel extends RequestCollection
      */
     public function getLocationReels(
         $locationId,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request("clips/location/{$locationId}/")
             ->setSignedPost(false)
@@ -291,7 +291,7 @@ class Reel extends RequestCollection
      */
     public function getUserLikedReels(
         $userId,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('clips/liked/')
             ->setSignedPost(false)
@@ -345,7 +345,7 @@ class Reel extends RequestCollection
      */
     public function setDefaultShareToFbConfig(
         $enabled,
-        $sharingMode = 2,
+        $sharingMode = 2
     ) {
         return $this->ig->request('clips/user/set_default_share_to_fb_enabled/')
             // ->addPost('_csrftoken', $this->ig->client->getToken())
@@ -370,7 +370,7 @@ class Reel extends RequestCollection
      */
     public function allowRemixes(
         $mediaId,
-        $enabled,
+        $enabled
     ) {
         return $this->ig->request('clips/item/set_mashups_allowed/')
             ->setSignedPost(false)
@@ -392,7 +392,7 @@ class Reel extends RequestCollection
      * @return Response\GenericResponse
      */
     public function removeFromProfile(
-        $mediaId,
+        $mediaId
     ) {
         return $this->ig->request('feed/profile_grid/remove/')
             ->setSignedPost(false)
@@ -424,7 +424,7 @@ class Reel extends RequestCollection
      * @return Response\GenericResponse
      */
     public function checkOffensiveText(
-        $text = '',
+        $text = ''
     ) {
         return $this->ig->request('warning/check_offensive_text/')
             ->addPost('text', $text)
@@ -451,7 +451,7 @@ class Reel extends RequestCollection
         $chainingMedia = null,
         $seenReels = null,
         $sessionInfo = null,
-        $maxId = null,
+        $maxId = null
     ) {
         $request = $this->ig->request('clips/panavideochaining/')
             ->setSignedPost(false)
@@ -508,7 +508,7 @@ class Reel extends RequestCollection
         $query,
         array $excludeList = [],
         $rankToken = null,
-        $searchSurface = 'clips_serp_page',
+        $searchSurface = 'clips_serp_page'
     ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {

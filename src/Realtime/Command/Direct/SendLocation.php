@@ -18,7 +18,7 @@ final class SendLocation extends ShareItem
     public function __construct(
         $threadId,
         $locationId,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($threadId, self::TYPE, $options);
 

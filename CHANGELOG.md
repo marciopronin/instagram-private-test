@@ -1,3 +1,16 @@
+# Stable release v22.26.0
+## Date: 04/10/2024
+
+### New features
+
+- **Utils:** Add `checkArrayKeyDifferences()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Instagram:** Update `loginOauthTokenFetch()`
+- **Instagram:** Update `sendLoginTextInputTypeAhead()`
+
 # Stable release v22.25.4
 ## Date: 04/10/2024
 

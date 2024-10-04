@@ -2185,4 +2185,34 @@ class Utils
             throw new \InvalidArgumentException(sprintf('Invalid iPhone model %s.', $device));
         }
     }
+
+    /**
+     * Get differences in array keys.
+     *
+     * @param array $arrayA.
+     * @param array $arrayB.
+     */
+    public static function checkArrayKeyDifferences(
+        $arrayA,
+        $arrayB
+    ) {
+        $removed = [];
+        $added = [];
+
+        foreach ($arrayB as $element) {
+            if (!in_array($element, $arrayA)) {
+                $removed[] = $element;
+            }
+        }
+
+        foreach ($arrayA as $element) {
+            if (!in_array($element, $arrayB)) {
+                $added[] = $element;
+            }
+        }
+
+        if (!empty($added) || !empty($removed)) {
+            throw new \InvalidArgumentException(sprintf('Elements removed: %s. Elements added: ', implode(', ', $result['remoed']), implode(', ', $result['added'])));
+        }
+    }
 }

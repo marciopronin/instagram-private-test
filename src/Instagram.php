@@ -2076,6 +2076,21 @@ class Instagram implements ExperimentsInterface
                 // $this->loginAttemptCount = 1;
                 // $response = $this->getHomeTemplate();
                 $response = $this->processLoginClientDataAndRedirect();
+                $re = '/(\d+),\s(\d+),\s\\\\"(com[a-zA-Z0-9\._]+)\\\\"/m';
+                preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+                $internalLatencyData = [];
+                foreach ($matches as $entry) {
+                    $markerId = intval($entry[1]);
+                    $latencyId = intval($entry[2]);
+                    $controller = $entry[3];
+
+                    $internalLatencyData[$controller] = [
+                        'marker_id'   => $markerId,
+                        'instance_id' => $latencyId,
+                    ];
+                }
+
                 $responseArr = $response->asArray();
                 $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
                 $firstDataBlok = null;
@@ -2106,10 +2121,47 @@ class Instagram implements ExperimentsInterface
                     }
                 }
 
+                $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+                foreach ($mainBloks as $mainBlok) {
+                    if (str_contains($mainBlok, 'should_trigger_override_login_2fa_action')) {
+                        $paramBlok = $mainBlok;
+
+                        $parsed = $this->bloks->parseBlok($paramBlok, 'bk.action.map.Make');
+                        $offsets = array_slice($this->bloks->findOffsets($parsed, 'should_trigger_override_login_2fa_action'), 0, -2);
+
+                        foreach ($offsets as $offset) {
+                            if (isset($parsed[$offset])) {
+                                $parsed = $parsed[$offset];
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $serverMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                    }
+                    if (str_contains($mainBlok, 'should_show_nested_nta_from_aymh')) {
+                        $paramBlok = $mainBlok;
+
+                        $parsed = $this->bloks->parseBlok($paramBlok, 'bk.action.map.Make');
+                        $offsets = array_slice($this->bloks->findOffsets($parsed, 'should_show_nested_nta_from_aymh'), 0, -2);
+
+                        foreach ($offsets as $offset) {
+                            if (isset($parsed[$offset])) {
+                                $parsed = $parsed[$offset];
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $clientMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                    }
+                }
+
+                /*
                 if ($firstDataBlok === null) {
                     $firstDataBlok = $firstDataBlokBack;
-                    $this->bloksInfo['INTERNAL__latency_qpl_instance_id'] = [0, 0];
-                    $this->bloksInfo['INTERNAL__latency_qpl_marker_id'] = [0, 0];
+                    $this->bloksInfo['INTERNAL__latency_qpl_instance_id'] = [0,0];
+                    $this->bloksInfo['INTERNAL__latency_qpl_marker_id'] = [0,0];
                     $this->bloksInfo['INTERNAL_INFRA_THEME'] = 'HARMONIZATION_F';
                 } else {
                     $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
@@ -2126,6 +2178,7 @@ class Instagram implements ExperimentsInterface
                     $firstMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
                     $this->bloksInfo = array_merge($firstMap, $this->bloksInfo);
                 }
+                */
 
                 /*
                 if ($firstDataBlok === null) {
@@ -2187,10 +2240,10 @@ class Instagram implements ExperimentsInterface
                     $this->bloksInfo = array_merge($fourthMap, $this->bloksInfo);
                 }
 
-                $this->loginOauthTokenFetch();
+                $this->loginOauthTokenFetch($mainBloks, $internalLatencyData);
 
                 if ($loggedOut === false) {
-                    $response = $this->sendLoginTextInputTypeAhead($username);
+                    $response = $this->sendLoginTextInputTypeAhead($username, $mainBloks, $internalLatencyData);
                 } else {
                     $response = $this->getLoginPasswordEntry();
                 }
@@ -2209,6 +2262,36 @@ class Instagram implements ExperimentsInterface
 
                 $this->event->sendNavigation('button', 'com.bloks.www.caa.login.login_homepage', 'com.bloks.www.caa.login.login_homepage');
                 $this->event->sendPasswordEncryptionAttempt();
+
+                if ($this->apiDeveloperDebug) {
+                    $usedClientParams = [
+                        'should_show_nested_nta_from_aymh',
+                        'device_id',
+                        'sim_phones',
+                        'login_attempt_count',
+                        'secure_family_device_id',
+                        'machine_id',
+                        'accounts_list',
+                        'auth_secure_device_id',
+                        'has_whatsapp_installed',
+                        'password',
+                        'sso_token_map_json_string',
+                        'family_device_id',
+                        'fb_ig_device_id',
+                        'device_emails',
+                        'try_num',
+                        'lois_settings',
+                        'event_flow',
+                        'event_step',
+                        'headers_infra_flow_id',
+                        'openid_tokens',
+                        'client_known_key_hash',
+                        'contact_point',
+                        'encrypted_msisdn',
+                    ];
+
+                    Utils::checkArrayKeyDifferences(array_keys($clientMap), $usedClientParams);
+                }
 
                 $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/')
                     ->setNeedsAuth(false)
@@ -2244,35 +2327,35 @@ class Instagram implements ExperimentsInterface
                             'encrypted_msisdn'              => '',
                         ],
                         'server_params'         => [
-                            'should_trigger_override_login_2fa_action'      => 0,
-                            'is_from_logged_out'                            => intval($loggedOut),
-                            'should_trigger_override_login_success_action'  => 0,
-                            'login_credential_type'                         => 'none',
-                            'server_login_source'                           => $firstMap['server_login_source'] ?? 'login',
-                            'waterfall_id'                                  => $waterfallId, // $firstMap['waterfall_id'],
-                            'login_source'                                  => $firstMap['login_source'] ?? 'Login',
-                            'is_platform_login'                             => intval($this->bloksInfo['is_platform_login'][1]),
-                            'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                            'offline_experiment_group'                      => 'caa_iteration_v3_perf_ig_4',
-                            'is_from_landing_page'                          => 0,
-                            'password_text_input_id'                        => $firstMap['password_text_input_id'] ?? '',
-                            'is_from_empty_password'                        => 0,
-                            'qe_device_id'                                  => $this->uuid,
-                            'ar_event_source'                               => $firstMap['ar_event_source'] ?? 'login_home_page',
-                            'username_text_input_id'                        => $firstMap['username_text_input_id'] ?? '',
-                            'layered_homepage_experiment_group'             => null,
-                            'device_id'                                     => $this->device_id,
-                            'INTERNAL__latency_qpl_instance_id'             => '1.5544275200408E13', isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                            'reg_flow_source'                               => 'login_home_native_integration_point', // cacheable_aymh_screen
-                            'is_caa_perf_enabled'                           => 1,
-                            'credential_type'                               => $firstMap['credential_type'] ?? 'password',
-                            'is_from_password_entry_page'                   => 0,
-                            'caller'                                        => 'gslr',
+                            'should_trigger_override_login_2fa_action'      => intval($serverMap['should_trigger_override_login_2fa_action'] ?? 0),
+                            'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? $loggedOut),
+                            'should_trigger_override_login_success_action'  => intval($serverMap['should_trigger_override_login_success_action'] ?? 0),
+                            'login_credential_type'                         => $serverMap['login_credential_type'] ?? 'none',
+                            'server_login_source'                           => $serverMap['server_login_source'] ?? 'login',
+                            'waterfall_id'                                  => $serverMap['waterfall_id'] ?? $waterfallId, // $firstMap['waterfall_id'],
+                            'login_source'                                  => $serverMap['login_source'] ?? 'Login',
+                            'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+                            'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.bloks.caa.login.async.send_login_request']['marker_id']),
+                            'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? 'caa_iteration_v3_perf_ig_4',
+                            'is_from_landing_page'                          => intval($serverMap['is_from_landing_page'] ?? 0),
+                            'password_text_input_id'                        => $serverMap['password_text_input_id'] ?? '',
+                            'is_from_empty_password'                        => intval($serverMap['is_from_empty_password'] ?? 0),
+                            'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                            'ar_event_source'                               => $serverMap['ar_event_source'] ?? 'login_home_page',
+                            'username_text_input_id'                        => $serverMap['username_text_input_id'] ?? '',
+                            'layered_homepage_experiment_group'             => $serverMap['layered_homepage_experiment_group'] ?? null,
+                            'device_id'                                     => $serverMap['device_id'] ?? $this->device_id,
+                            'INTERNAL__latency_qpl_instance_id'             => $internalLatencyData['com.bloks.www.bloks.caa.login.async.send_login_request']['instance_id'],
+                            'reg_flow_source'                               => $serverMap['reg_flow_source'] ?? 'login_home_native_integration_point', // cacheable_aymh_screen
+                            'is_caa_perf_enabled'                           => intval($serverMap['is_caa_perf_enabled'] ?? 0),
+                            'credential_type'                               => $serverMap['credential_type'] ?? 'password',
+                            'is_from_password_entry_page'                   => intval($serverMap['is_from_password_entry_page'] ?? 0),
+                            'caller'                                        => $serverMap['caller'] ?? 'gslr',
                             'family_device_id'                              => null, // $this->phone_id,
-                            'INTERNAL_INFRA_THEME'                          => 'harm_f',
-                            'is_from_assistive_id'                          => 0,
-                            'access_flow_version'                           => 'F2_FLOW',
-                            'is_from_logged_in_switcher'                    => 0,
+                            'INTERNAL_INFRA_THEME'                          => $serverMap['INTERNAL_INFRA_THEME'] ?? 'harm_f',
+                            'is_from_assistive_id'                          => intval($serverMap['is_from_assistive_id'] ?? 0),
+                            'access_flow_version'                           => $serverMap['access_flow_version'] ?? 'F2_FLOW',
+                            'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
                         ],
                     ]))
                     ->addPost('bk_client_context', json_encode([
@@ -2680,12 +2763,36 @@ class Instagram implements ExperimentsInterface
     /**
      * Login OAuth token fetch.
      *
+     * @param array $mainBloks
+     * @param array $internalLatencyData
+     *
      * @throws Exception\InstagramException
      *
      * @return Response\GenericResponse
      */
-    public function loginOauthTokenFetch()
-    {
+    public function loginOauthTokenFetch(
+        $mainBloks,
+        $internalLatencyData
+    ) {
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'com.bloks.www.caa.login.oauth.token.fetch.async')) {
+                $paramBlok = $mainBlok;
+
+                $parsed = $this->bloks->parseBlok($paramBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->bloks->findOffsets($parsed, 'layered_homepage_experiment_group'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+
+                $serverMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            }
+        }
+
         return $this->request('bloks/apps/com.bloks.www.caa.login.oauth.token.fetch.async/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -2700,17 +2807,17 @@ class Instagram implements ExperimentsInterface
                 'server_params'         => [
                     'is_from_logged_out'                            => 0,
                     'layered_homepage_experiment_group'             => null,
-                    'device_id'                                     => null,
-                    'waterfall_id'                                  => null,
-                    'machine_id'                                    => null,
-                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'is_platform_login'                             => 0,
-                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'family_device_id'                              => null,
-                    'offline_experiment_group'                      => null,
-                    'INTERNAL_INFRA_THEME'                          => 'harm_f',
-                    'access_flow_version'                           => 'LEGACY_FLOW',
-                    'is_from_logged_in_switcher'                    => 0,
+                    'device_id'                                     => $serverMap['device_id'] ?? $this->device_id,
+                    'waterfall_id'                                  => $serverMap['waterfall_id'] ?? $this->loginWaterfallId,
+                    'INTERNAL__latency_qpl_instance_id'             => intval($internalLatencyData['com.bloks.www.caa.login.oauth.token.fetch.async']['instance_id'] ?? 0),
+                    'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+                    'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.caa.login.oauth.token.fetch.async']['marker_id'] ?? 0),
+                    'family_device_id'                              => $this->phone_id,
+                    'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? 'caa_iteration_v3_perf_ig_4',
+                    'INTERNAL_INFRA_THEME'                          => $serverMap['INTERNAL_INFRA_THEME'] ?? $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    'access_flow_version'                           => $serverMap['access_flow_version'] ?? 'F2_FLOW',
+                    'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2724,15 +2831,38 @@ class Instagram implements ExperimentsInterface
     /**
      * Send login text input typy ahead.
      *
-     * @param bool $username Username.
+     * @param bool  $username            Username.
+     * @param array $mainBloks
+     * @param array $internalLatencyData
      *
      * @throws Exception\InstagramException
      *
      * @return Response\GenericResponse
      */
     public function sendLoginTextInputTypeAhead(
-        $username
+        $username,
+        $mainBloks,
+        $internalLatencyData
     ) {
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'com.bloks.www.caa.login.cp_text_input_type_ahead')) {
+                $paramBlok = $mainBlok;
+
+                $parsed = $this->bloks->parseBlok($paramBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->bloks->findOffsets($parsed, 'text_component_id'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+
+                $serverMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            }
+        }
+
         return $this->request('bloks/apps/com.bloks.www.caa.login.cp_text_input_type_ahead/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -2770,15 +2900,23 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     'is_from_logged_out'                => 0,
-                    'text_input_id'                     => intval($this->bloksInfo['text_input_id'][1]),
-                    'typeahead_id'                      => intval($this->bloksInfo['typeahead_id'][1]),
-                    'text_component_id'                 => intval($this->bloksInfo['text_component_id'][1]),
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
-                    'fdid'                              => $this->bloksInfo['fdid'] ?? $this->phone_id,
-                    'waterfall_id'                      => $this->loginWaterfallId,
-                    'screen_id'                         => isset($this->bloksInfo['screen_id'][1]) ? intval($this->bloksInfo['screen_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                    'text_input_id'                     => intval($serverMap['text_input_id'][1] ?? $this->bloksInfo['text_input_id'][1]),
+                    'typeahead_id'                      => intval($serverMap['typeahead_id'][1] ?? $this->bloksInfo['typeahead_id'][1]),
+                    'layered_homepage_experiment_group' => null,
+                    'device_id'                         => $serverMap['device_id'] ?? $this->device_id,
+                    'waterfall_id'                      => $serverMap['waterfall_id'] ?? $this->loginWaterfallId,
+                    'INTERNAL__latency_qpl_instance_id' => intval($internalLatencyData['com.bloks.www.caa.login.cp_text_input_type_ahead']['instance_id'] ?? 0),
+                    'is_platform_login'                 => intval($serverMap['is_platform_login'] ?? 0),
+                    'text_component_id'                 => intval($serverMap['text_component_id'][1] ?? $this->bloksInfo['text_component_id'][1]),
+                    'INTERNAL__latency_qpl_marker_id'   => intval($internalLatencyData['com.bloks.www.caa.login.cp_text_input_type_ahead']['marker_id'] ?? 0),
+                    'family_device_id'                  => $this->phone_id,
+                    'offline_experiment_group'          => $serverMap['offline_experiment_group'] ?? 'caa_iteration_v3_perf_ig_4',
+                    'INTERNAL_INFRA_THEME'              => $serverMap['INTERNAL_INFRA_THEME'] ?? $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    // 'fdid'                            => isset($this->bloksInfo['fdid']) ? $this->bloksInfo['fdid'] : $this->phone_id,
+                    'screen_id'                         => intval($serverMap['screen_id'][1] ?? 0),
+                    'access_flow_version'               => $serverMap['access_flow_version'] ?? 'F2_FLOW',
+                    'is_from_logged_in_switcher'        => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
+                    'qe_device_id'                      => $serverMap['qe_device_id'] ?? $this->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([

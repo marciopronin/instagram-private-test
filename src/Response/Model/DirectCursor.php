@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectCursor extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'cursor_timestamp_seconds'               => 'string',
         'cursor_thread_v2_id'                    => 'string',
     ];

@@ -16,16 +16,16 @@ class Music extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MusicItemsResponse
+     * @return Response\MusicItemsResponse
      */
     public function getTrending(
-        $browseSessionId)
-    {
+        $browseSessionId
+    ) {
         return $this->ig->request('music/trending/')
             ->setSignedPost(false)
             ->addPost('browse_session_id', $browseSessionId)
             ->addPost('product', 'story_camera_music_overlay_post_capture')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\MusicItemsResponse());
     }
@@ -43,7 +43,7 @@ class Music extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MusicItemsResponse
+     * @return Response\MusicItemsResponse
      *
      * @see MusicItemsResponse::getRankToken() To get a rank token from the response.
      * @see examples/paginateWithExclusion.php For an example.
@@ -52,8 +52,8 @@ class Music extends RequestCollection
         $query,
         $browseSessionId,
         array $excludeList = [],
-        $rankToken = null)
-    {
+        $rankToken = null
+    ) {
         // Do basic query validation. Do NOT use throwIfInvalidHashtag here.
         if (!is_string($query) || $query === null) {
             throw new \InvalidArgumentException('Query must be a non-empty string.');
@@ -92,13 +92,13 @@ class Music extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MusicItemsResponse
+     * @return Response\MusicItemsResponse
      */
     public function search(
         $query,
         $browseSessionId,
-        $searchSessionId)
-    {
+        $searchSessionId
+    ) {
         return $this->ig->request('music/search/')
             ->setSignedPost(false)
             ->addPost('q', $query)
@@ -106,7 +106,7 @@ class Music extends RequestCollection
             ->addPost('search_session_id', $searchSessionId)
             ->addPost('from_typeahead', 'false')
             ->addPost('product', 'story_camera_music_overlay_post_capture')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\MusicItemsResponse());
     }
@@ -123,14 +123,14 @@ class Music extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MusicKeywordSearchResponse
+     * @return Response\MusicKeywordSearchResponse
      */
     public function keywordSearch(
         $query,
         $browseSessionId,
         $searchSessionId,
-        $numberOfKeywords = 3)
-    {
+        $numberOfKeywords = 3
+    ) {
         return $this->ig->request('music/keyword_search/')
             ->addParam('num_keywords', 3)
             ->addParam('q', $query)
@@ -150,11 +150,11 @@ class Music extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GetLyricsResponse
+     * @return Response\GetLyricsResponse
      */
     public function getLyrics(
-        $trackId)
-    {
+        $trackId
+    ) {
         return $this->ig->request("music/track/{$trackId}/lyrics/")
             ->getResponse(new Response\GetLyricsResponse());
     }
@@ -166,13 +166,13 @@ class Music extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MusicGenresResponse
+     * @return Response\MusicGenresResponse
      */
     public function getGenres(
-        $browseSessionId)
-    {
+        $browseSessionId
+    ) {
         return $this->ig->request('music/genres/')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('browse_session_id', $browseSessionId)
             ->addPost('product', 'story_camera_music_overlay_post_capture')
@@ -186,13 +186,13 @@ class Music extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getMoods(
-        $browseSessionId)
-    {
+        $browseSessionId
+    ) {
         return $this->ig->request('music/moods/')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('browse_session_id', $browseSessionId)
             ->addPost('product', 'story_camera_music_overlay_post_capture')

@@ -58,10 +58,10 @@ use InstagramAPI\Response;
  */
 class ExploreResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'num_results'            => 'int',
         'auto_load_more_enabled' => 'bool',
-    //  'items'                  => 'Model\ExploreItem[]', // Deprecated
+        //  'items'                  => 'Model\ExploreItem[]', // Deprecated
         'clusters'                      => 'Model\Cluster[]',
         'sectional_items'               => 'Model\Section[]',
         'more_available'                => 'bool',

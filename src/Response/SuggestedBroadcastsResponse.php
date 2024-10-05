@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class SuggestedBroadcastsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'broadcasts' => 'Model\Broadcast[]',
     ];
 }

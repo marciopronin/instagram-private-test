@@ -18,7 +18,7 @@ class Device implements DeviceInterface
      *
      * @see https://help.instagram.com/513067452056347
      */
-    const REQUIRED_ANDROID_VERSION = '2.2';
+    public const REQUIRED_ANDROID_VERSION = '2.2';
 
     /**
      * Which Instagram client app version this "device" is running.
@@ -135,8 +135,8 @@ class Device implements DeviceInterface
         $platform = 'android',
         $iosModel = null,
         $iosDpi = null,
-        $enableResolutionCheck = false)
-    {
+        $enableResolutionCheck = false
+    ) {
         $this->_appVersion = $appVersion;
         $this->_versionCode = $versionCode;
         $this->_userLocale = $userLocale;
@@ -166,8 +166,8 @@ class Device implements DeviceInterface
      */
     protected function _initFromDeviceString(
         $deviceString,
-        $platform)
-    {
+        $platform
+    ) {
         if ($platform === 'ios') {
             // Build our user agent.
             $this->_userAgent = UserAgent::buildiOSUserAgent($this->_userLocale, $this->_acceptLanguage, $this->_iosModel, $this->_iosDpi);
@@ -209,8 +209,7 @@ class Device implements DeviceInterface
         $this->_dpi = $parts[1];
         $this->_resolution = $parts[2];
         $this->_manufacturer = $manufacturerAndBrand[0];
-        $this->_brand = (isset($manufacturerAndBrand[1])
-                         ? $manufacturerAndBrand[1] : null);
+        $this->_brand = ($manufacturerAndBrand[1] ?? null);
         $this->_model = $parts[4];
         $this->_device = $parts[5];
         $this->_cpu = $parts[6];
@@ -237,8 +236,8 @@ class Device implements DeviceInterface
 
     /** {@inheritdoc} */
     public function getFbUserAgent(
-        $appName)
-    {
+        $appName
+    ) {
         if (!isset($this->_fbUserAgents[$appName])) {
             $this->_fbUserAgents[$appName] = UserAgent::buildFbUserAgent(
                 $appName,

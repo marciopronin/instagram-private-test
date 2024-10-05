@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class LiveShareResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'live_to_share_url'  => 'string',
     ];
 }

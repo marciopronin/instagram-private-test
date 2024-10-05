@@ -22,7 +22,7 @@ class InstagramID
      *
      * @see https://tools.ietf.org/html/rfc4648
      */
-    const BASE64URL_CHARMAP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+    public const BASE64URL_CHARMAP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
     /**
      * Internal map of the results of all base10 digits (0-9) modulo 2.
@@ -32,14 +32,14 @@ class InstagramID
      *
      * @var string
      */
-    const BASE10_MOD2 = ['0', '1', '0', '1', '0', '1', '0', '1', '0', '1'];
+    public const BASE10_MOD2 = ['0', '1', '0', '1', '0', '1', '0', '1', '0', '1'];
 
     /**
      * Runtime cached bit-value lookup table.
      *
      * @var array|null
      */
-    public static $bitValueTable = null;
+    public static $bitValueTable;
 
     /**
      * Converts an Instagram ID to their shortcode system.
@@ -53,8 +53,8 @@ class InstagramID
      * @return string The shortcode.
      */
     public static function toCode(
-        $id)
-    {
+        $id
+    ) {
         // First we must convert the ID number to a binary string.
         // NOTE: Conversion speed depends on number size. With the most common
         // number size used for Instagram's IDs, my old laptop can do ~18k/s.
@@ -98,8 +98,8 @@ class InstagramID
      * @return string The numeric ID.
      */
     public static function fromCode(
-        $code)
-    {
+        $code
+    ) {
         if (!is_string($code) || preg_match('/[^A-Za-z0-9\-_]/', $code)) {
             throw new \InvalidArgumentException('Input must be a valid Instagram shortcode.');
         }
@@ -136,8 +136,8 @@ class InstagramID
      */
     public static function base10to2(
         $base10,
-        $padLeft = true)
-    {
+        $padLeft = true
+    ) {
         $base10 = (string) $base10;
         if ($base10 === '' || preg_match('/[^0-9]/', $base10)) {
             throw new \InvalidArgumentException('Input must be a positive integer.');
@@ -148,7 +148,7 @@ class InstagramID
         $base2 = '';
         do {
             // Get the last digit.
-            $lastDigit = $base10[(strlen($base10) - 1)];
+            $lastDigit = $base10[strlen($base10) - 1];
 
             // If the last digit is uneven, put a one (1) in the base2 string,
             // otherwise use zero (0) instead. Array is 10x faster than bcmod.
@@ -188,8 +188,8 @@ class InstagramID
      *               offset 1 has the value of bit 2, and so on.
      */
     public static function buildBinaryLookupTable(
-        $maxBitCount)
-    {
+        $maxBitCount
+    ) {
         $table = [];
         for ($bitPosition = 0; $bitPosition < $maxBitCount; $bitPosition++) {
             $bitValue = bcpow('2', (string) $bitPosition, 0);
@@ -210,8 +210,8 @@ class InstagramID
      * @return string The decimal number as a string.
      */
     public static function base2to10(
-        $base2)
-    {
+        $base2
+    ) {
         if (!is_string($base2) || preg_match('/[^01]/', $base2)) {
             throw new \InvalidArgumentException('Input must be a binary string.');
         }

@@ -54,7 +54,7 @@ use InstagramAPI\Response;
  */
 class UsertagsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'num_results'            => 'int',
         'auto_load_more_enabled' => '',
         'items'                  => 'Model\Item[]',

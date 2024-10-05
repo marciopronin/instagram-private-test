@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class FundraiserInfoResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_active_fundraiser'        => 'bool',
         'fundraiser_id'                => 'string',
         'fundraiser_title'             => 'string',

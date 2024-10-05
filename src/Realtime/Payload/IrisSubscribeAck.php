@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class IrisSubscribeAck extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'seq_id'        => 'int',
         'succeeded'     => 'bool',
         'error_type'    => 'int',

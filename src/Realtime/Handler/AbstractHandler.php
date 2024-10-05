@@ -17,8 +17,8 @@ abstract class AbstractHandler
      * @param EventEmitterInterface $target
      */
     public function __construct(
-        EventEmitterInterface $target)
-    {
+        EventEmitterInterface $target
+    ) {
         $this->_target = $target;
     }
 
@@ -30,8 +30,8 @@ abstract class AbstractHandler
      * @return bool
      */
     protected function _hasListeners(
-        $event)
-    {
+        $event
+    ) {
         return (bool) count($this->_target->listeners($event));
     }
 }

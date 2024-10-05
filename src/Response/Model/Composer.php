@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Composer extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'nux_finished'          => 'bool',
         'aspect_ratio_finished' => 'bool',
     ];

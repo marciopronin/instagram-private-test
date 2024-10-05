@@ -25,7 +25,7 @@ class StorageHandler
      *
      * @var array
      */
-    const PERSISTENT_KEYS = [
+    public const PERSISTENT_KEYS = [
         'account_id', // The numerical UserPK ID of the account.
         'devicestring', // Which Android device they're identifying as.
         'device_id', // Hardware identifier.
@@ -79,7 +79,7 @@ class StorageHandler
      *
      * @see StorageHandler::eraseDeviceSettings()
      */
-    const KEEP_KEYS_WHEN_ERASING_DEVICE = [
+    public const KEEP_KEYS_WHEN_ERASING_DEVICE = [
         'account_id', // We don't really need to keep this, but it's a good example.
     ];
 
@@ -90,30 +90,30 @@ class StorageHandler
      *
      * @var array
      */
-    const EXPERIMENT_KEYS = [
-        //'ig_android_realtime_iris',
-        //'ig_android_skywalker_live_event_start_end',
-        //'ig_android_gqls_typing_indicator',
-        //'ig_android_upload_reliability_universe',
-        //'ig_android_photo_fbupload_universe',
-        //'ig_android_direct_video_segmented_upload_universe',
-        '34393', //'ig_android_reel_raven_video_segmented_upload_universe',
-        //'ig_android_ad_async_ads_universe',
-        //'ig_android_direct_inbox_presence',
-        //'ig_android_direct_thread_presence',
-        //'ig_android_rtc_reshare',
-        //'ig_android_sidecar_photo_fbupload_universe',
-        //'ig_android_fbupload_sidecar_video_universe',
-        //'ig_android_loom_universe',
-        //'ig_android_live_suggested_live_expansion',
-        //'ig_android_live_qa_broadcaster_v1_universe',
-        '34426', //ig_traffic_routing_universe',
-        '25215', //'ig_android_stories_tray_pagination_killswitch',
-        //'ig_android_video_segmented_upload_universe',
-        '26156', //ig_android_eu_configure_disabled',
-        '48235', //ig_android_panavision_consumption_launcher',
-        '32236', //ig_android_cameracore_world_tracker_v2,
-        '34393', //qe_ig_android_reel_raven_video_segmented_upload_universe,
+    public const EXPERIMENT_KEYS = [
+        // 'ig_android_realtime_iris',
+        // 'ig_android_skywalker_live_event_start_end',
+        // 'ig_android_gqls_typing_indicator',
+        // 'ig_android_upload_reliability_universe',
+        // 'ig_android_photo_fbupload_universe',
+        // 'ig_android_direct_video_segmented_upload_universe',
+        '34393', // 'ig_android_reel_raven_video_segmented_upload_universe',
+        // 'ig_android_ad_async_ads_universe',
+        // 'ig_android_direct_inbox_presence',
+        // 'ig_android_direct_thread_presence',
+        // 'ig_android_rtc_reshare',
+        // 'ig_android_sidecar_photo_fbupload_universe',
+        // 'ig_android_fbupload_sidecar_video_universe',
+        // 'ig_android_loom_universe',
+        // 'ig_android_live_suggested_live_expansion',
+        // 'ig_android_live_qa_broadcaster_v1_universe',
+        // '34426', //ig_traffic_routing_universe',
+        '25215', // 'ig_android_stories_tray_pagination_killswitch',
+        // 'ig_android_video_segmented_upload_universe',
+        '26156', // ig_android_eu_configure_disabled',
+        '48235', // ig_android_panavision_consumption_launcher',
+        '32236', // ig_android_cameracore_world_tracker_v2,
+        '34393', // qe_ig_android_reel_raven_video_segmented_upload_universe,
         '48862', // add extra params and header (topical explore)
         '58152', // used in feed timeline (can_support_carousel_mentions)
         '31167', // segmentation enabled
@@ -122,10 +122,13 @@ class StorageHandler
         '59489', // direct settings (batch_size, limit)
         '56394', // direct settings (limit)
         '45863', // direct settings (no_pending_badge) 0x8107C0000012F7
-        '26104', // direct settings (thread_message_limit)
+        '26104', // direct settings (thread_message_limit) (maybe limit)
         '41171', // igd_active_tray (suggestions_enabled, suggested_followers_limit)
         '56721', // banyan/banyan (views) 0x810DA0000023D2
         '72192', // device_status (post param) 0x810EA5000035AA
+        '67316', // X-IG-BLOKS-SERIALIZE-PAYLOAD
+        '76504', // X-Bloks-Prism-Button-Version 0x81117D00003FD1
+        '62246', // X-Bloks-Prism-Colors-Enabled 0x81093600052121
     ];
 
     /**
@@ -135,7 +138,7 @@ class StorageHandler
      *   end or when switching to a different user). Can be used for bulk-saving
      *   data at the end of a user's session, to avoid constant micro-updates.
      */
-    const SUPPORTED_CALLBACKS = [
+    public const SUPPORTED_CALLBACKS = [
         'onCloseUser',
     ];
 
@@ -162,13 +165,13 @@ class StorageHandler
      *                                          the storage backend location.
      * @param array            $callbacks       Optional callback functions.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     public function __construct(
         $storageInstance,
         array $locationConfig = [],
-        array $callbacks = [])
-    {
+        array $callbacks = []
+    ) {
         if (!$storageInstance instanceof StorageInterface) {
             throw new SettingsException(
                 'You must provide an instance of a StorageInterface class.'
@@ -191,7 +194,7 @@ class StorageHandler
     /**
      * Destructor.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     public function __destruct()
     {
@@ -222,8 +225,8 @@ class StorageHandler
      * @return string
      */
     public function getUserPath(
-        $username)
-    {
+        $username
+    ) {
         return $this->_storage->getUserPath($username);
     }
 
@@ -232,13 +235,13 @@ class StorageHandler
      *
      * @param string $username The Instagram username.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
      * @return bool TRUE if user exists, otherwise FALSE.
      */
     public function hasUser(
-        $username)
-    {
+        $username
+    ) {
         $this->_throwIfEmptyValue($username);
 
         return $this->_storage->hasUser($username);
@@ -265,12 +268,12 @@ class StorageHandler
      * @param string $oldUsername The old name that settings are stored as.
      * @param string $newUsername The new name to move the settings to.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     public function moveUser(
         $oldUsername,
-        $newUsername)
-    {
+        $newUsername
+    ) {
         $this->_throwIfEmptyValue($oldUsername);
         $this->_throwIfEmptyValue($newUsername);
 
@@ -289,11 +292,11 @@ class StorageHandler
      *
      * @param string $username The Instagram username.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     public function deleteUser(
-        $username)
-    {
+        $username
+    ) {
         $this->_throwIfEmptyValue($username);
 
         if ($username === $this->_username) {
@@ -310,11 +313,11 @@ class StorageHandler
      *
      * @param string $username The Instagram username.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     public function setActiveUser(
-        $username)
-    {
+        $username
+    ) {
         $this->_throwIfEmptyValue($username);
 
         // If that user is already loaded, there's no need to do anything.
@@ -367,7 +370,7 @@ class StorageHandler
      * Can only be executed after setActiveUser(). And the session it looks
      * for may be expired, so there's no guarantee that we are still logged in.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
      * @return bool TRUE if possibly logged in, otherwise FALSE.
      */
@@ -388,7 +391,7 @@ class StorageHandler
      *
      * Note that ALL cookies will be erased too, to clear out the old session.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     public function eraseDeviceSettings()
     {
@@ -408,14 +411,14 @@ class StorageHandler
      *
      * @param string $key Name of the setting.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
      * @return string|null The value as a string IF the setting exists AND is
      *                     a NON-EMPTY string. Otherwise NULL.
      */
     public function get(
-        $key)
-    {
+        $key
+    ) {
         $this->_throwIfNoActiveUser();
 
         // Reject anything that isn't in our list of VALID persistent keys.
@@ -443,12 +446,12 @@ class StorageHandler
      * @param string       $key   Name of the setting.
      * @param string|mixed $value The data to store. MUST be castable to string.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     public function set(
         $key,
-        $value)
-    {
+        $value
+    ) {
         $this->_throwIfNoActiveUser();
 
         // Reject anything that isn't in our list of VALID persistent keys.
@@ -486,7 +489,7 @@ class StorageHandler
      *
      * Can only be executed after setActiveUser().
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
      * @return bool TRUE if cookies exist, otherwise FALSE.
      */
@@ -502,7 +505,7 @@ class StorageHandler
      *
      * Can only be executed after setActiveUser().
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
      * @return string|null A previously-stored, raw cookie data string
      *                     (non-empty), or NULL if no cookies exist for
@@ -556,11 +559,11 @@ class StorageHandler
      * @param string $rawData An encoded string with all cookie data. Use an
      *                        empty string to erase currently stored cookies.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     public function setCookies(
-        $rawData)
-    {
+        $rawData
+    ) {
         $this->_throwIfNoActiveUser();
         $this->_throwIfNotString($rawData);
 
@@ -600,7 +603,7 @@ class StorageHandler
     /**
      * Ensures the whole directory path to the cookie file exists/is writable.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     protected function _createCookiesFileDirectory()
     {
@@ -622,11 +625,11 @@ class StorageHandler
      *
      * @param mixed $value The value to check.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     protected function _throwIfNotString(
-        $value)
-    {
+        $value
+    ) {
         if (!is_string($value)) {
             throw new SettingsException('Parameter must be string.');
         }
@@ -637,11 +640,11 @@ class StorageHandler
      *
      * @param mixed $value The value to check.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     protected function _throwIfEmptyValue(
-        $value)
-    {
+        $value
+    ) {
         if (!is_string($value) || $value === '') {
             throw new SettingsException('Parameter must be non-empty string.');
         }
@@ -650,7 +653,7 @@ class StorageHandler
     /**
      * Internal: Ensures that there is an active storage user.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     protected function _throwIfNoActiveUser()
     {
@@ -669,11 +672,11 @@ class StorageHandler
      *
      * @param string $cbName The name of the callback.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     protected function _triggerCallback(
-        $cbName)
-    {
+        $cbName
+    ) {
         // Reject anything that isn't in our list of VALID callbacks.
         if (!in_array($cbName, self::SUPPORTED_CALLBACKS)) {
             throw new SettingsException(sprintf(
@@ -702,13 +705,13 @@ class StorageHandler
      *
      * @param array $experiments
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
      * @return array A list of "good" experiments.
      */
     public function setExperiments(
-        array $experiments)
-    {
+        array $experiments
+    ) {
         $filtered = [];
         foreach (self::EXPERIMENT_KEYS as $key) {
             if (!isset($experiments[$key])) {
@@ -724,7 +727,7 @@ class StorageHandler
     /**
      * Return saved experiments.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
      * @return array
      */
@@ -738,18 +741,18 @@ class StorageHandler
      *
      * @param array $rules
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     public function setRewriteRules(
-        array $rules)
-    {
+        array $rules
+    ) {
         $this->set('zr_rules', $this->_packJson($rules));
     }
 
     /**
      * Return saved rewrite rules.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
      * @return array
      */
@@ -764,8 +767,8 @@ class StorageHandler
      * @param string $auth
      */
     public function setFbnsAuth(
-        $auth)
-    {
+        $auth
+    ) {
         $this->set('fbns_auth', $auth);
     }
 
@@ -797,8 +800,8 @@ class StorageHandler
      * @return string
      */
     protected function _packJson(
-        $data)
-    {
+        $data
+    ) {
         $json = json_encode($data);
         $gzipped = base64_encode(zlib_encode($json, ZLIB_ENCODING_DEFLATE, 9));
         // We must compare gzipped with double encoded JSON.
@@ -822,8 +825,8 @@ class StorageHandler
      */
     protected function _unpackJson(
         $packed,
-        $assoc = true)
-    {
+        $assoc = true
+    ) {
         if ($packed === null || $packed === '') {
             return $assoc ? [] : new \stdClass();
         }

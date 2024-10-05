@@ -40,14 +40,14 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function getInfoById(
         $userId,
         $module = null,
         $entrypoint = null,
-        $isPrefetch = false)
-    {
+        $isPrefetch = false
+    ) {
         $request = $this->ig->request("users/{$userId}/info/");
 
         if ($entrypoint !== null) {
@@ -91,14 +91,14 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function getInfoByIdStream(
         $userId,
         $module = 'search_typeahead',
         $entrypoint = 'profile',
-        $isPrefetch = false)
-    {
+        $isPrefetch = false
+    ) {
         $request = $this->ig->request("users/{$userId}/info_stream/")
             ->setSignedPost(false)
             ->addPost('is_prefetch', $isPrefetch === true ? 'true' : 'false');
@@ -127,14 +127,14 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      *
      * @see People::getInfoById() For the list of supported modules.
      */
     public function getInfoByName(
         $username,
-        $module = 'feed_timeline')
-    {
+        $module = 'feed_timeline'
+    ) {
         return $this->ig->request("users/{$username}/usernameinfo/")
             ->addParam('from_module', $module)
             ->getResponse(new Response\UserInfoResponse());
@@ -150,12 +150,12 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function getInfoByNameStream(
         $username,
-        $module = 'deep_link_util')
-    {
+        $module = 'deep_link_util'
+    ) {
         return $this->ig->request("users/{$username}/usernameinfo_stream/")
             ->setSignedPost(false)
             ->addPost('is_prefetch', 'false')
@@ -180,8 +180,8 @@ class People extends RequestCollection
      * @see People::getInfoByName()
      */
     public function getUserIdForName(
-        $username)
-    {
+        $username
+    ) {
         return $this->getInfoByName($username)->getUser()->getPk();
     }
 
@@ -195,14 +195,14 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      *
      * @see Account::getCurrentUser()
      */
     public function getSelfInfo(
         $module = 'self_profile',
-        $entrypoint = null)
-    {
+        $entrypoint = null
+    ) {
         $response = $this->getInfoById($this->ig->account_id, $module, $entrypoint);
         if ($response->getUser()->getFbidV2() !== null) {
             $this->ig->settings->set('fbid_v2', $response->getUser()->getFbidV2());
@@ -223,13 +223,13 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function getUserInfoQuery(
         $userId,
         $fromModule = 'search_typeahead',
-        $entrypoint = 'profile')
-    {
+        $entrypoint = 'profile'
+    ) {
         $data = [
             'user_id'       => $userId,
             'use_defer'     => false,
@@ -260,13 +260,13 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AboutThisAccountResponse
+     * @return Response\AboutThisAccountResponse
      */
     public function getAboutThisAccountInfo(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request('bloks/apps/com.instagram.interactions.about_this_account/')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('target_user_id', $userId)
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
@@ -287,17 +287,18 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ActivityNewsResponse
+     * @return Response\ActivityNewsResponse
      */
     public function getRecentActivityInbox(
         $prefetch = false,
         $markAsSeen = false,
         $feedType = 'all',
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request('news/inbox/')
+                            ->addParam('could_truncate_feed', 'true')
                             ->addParam('mark_as_seen', $markAsSeen)
-                            //->addParam('feed_type', $feedType)
+                            // ->addParam('feed_type', $feedType)
                             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
                             ->addParam('timezone_name', ($this->ig->getTimezoneName() !== null) ? $this->ig->getTimezoneName() : date_default_timezone_get());
 
@@ -318,13 +319,13 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ActivityNewsResponse
+     * @return Response\ActivityNewsResponse
      */
     public function getNewsInboxSeen()
     {
         return $this->ig->request('news/inbox_seen/')
                         ->setSignedPost(false)
-                        //->addUnsignedPost('_csrftoken', $this->ig->client->getToken())
+                        // ->addUnsignedPost('_csrftoken', $this->ig->client->getToken())
                         ->addUnsignedPost('_uuid', $this->ig->uuid)
                         ->getResponse(new Response\ActivityNewsResponse());
     }
@@ -332,20 +333,20 @@ class People extends RequestCollection
     /**
      * Send action news log.
      *
-     * @param $newsPk   The news PK. Example: "t+g+XAtK5RaGUdeQeL/V5roIgEM="
-     * @param $tuuid    The news UUID.
-     * @param $action   Action to perform: "hide" or "click".
+     * @param $newsPk The news PK. Example: "t+g+XAtK5RaGUdeQeL/V5roIgEM="
+     * @param $tuuid  The news UUID.
+     * @param $action Action to perform: "hide" or "click".
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function sendNewsLog(
         $newsPk,
         $tuuid,
-        $action = 'click')
-    {
+        $action = 'click'
+    ) {
         if (!in_array($action, ['click', 'hide'], true)) {
             throw new \InvalidArgumentException('Invalid action value.');
         }
@@ -355,7 +356,7 @@ class People extends RequestCollection
             ->addPost('action', $action)
             ->addPost('pk', $newsPk)
             ->addPost('tuuid', $tuuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -370,11 +371,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FollowingRecentActivityResponse
+     * @return Response\FollowingRecentActivityResponse
      */
     public function getFollowingRecentActivity(
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $activity = $this->ig->request('news/');
         if ($maxId !== null) {
             $activity->addParam('max_id', $maxId);
@@ -392,7 +393,7 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BootstrapUsersResponse|null Will be NULL if throttled by Instagram.
+     * @return Response\BootstrapUsersResponse|null Will be NULL if throttled by Instagram.
      */
     public function getBootstrapUsers()
     {
@@ -422,11 +423,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipsShowResponse
+     * @return Response\FriendshipsShowResponse
      */
     public function getFriendship(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/show/{$userId}/")->getResponse(new Response\FriendshipsShowResponse());
     }
 
@@ -437,11 +438,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipsShowManyResponse
+     * @return Response\FriendshipsShowManyResponse
      */
     public function getFriendships(
-        $userList)
-    {
+        $userList
+    ) {
         if (is_array($userList)) {
             $userList = implode(',', $userList);
         }
@@ -450,7 +451,7 @@ class People extends RequestCollection
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('user_ids', $userList)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\FriendshipsShowManyResponse());
     }
 
@@ -462,12 +463,12 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LeastInteractedWithResponse
+     * @return Response\LeastInteractedWithResponse
      */
     public function getLeastInteractedWith(
         $rankToken,
-        $query = '')
-    {
+        $query = ''
+    ) {
         return $this->ig->request('friendships/smart_groups/least_interacted_with/')
             ->addParam('search_surface', 'follow_list_page')
             ->addParam('query', $query)
@@ -486,11 +487,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UnfollowChainingCountResponse
+     * @return Response\UnfollowChainingCountResponse
      */
     public function getUnfollowChainingCount(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/unfollow_chaining_count/{$userId}/")
                         ->getResponse(new Response\UnfollowChainingCountResponse());
     }
@@ -507,13 +508,13 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UnfollowChainingResponse
+     * @return Response\UnfollowChainingResponse
      */
     public function getUnfollowChaining(
         $userId,
         $rankToken,
-        $query = '')
-    {
+        $query = ''
+    ) {
         return $this->ig->request("friendships/unfollow_chaining/{$userId}/")
                         ->addParam('search_surface', 'follow_list_page')
                         ->addParam('query', $query)
@@ -527,7 +528,7 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FollowerAndFollowingResponse
+     * @return Response\FollowerAndFollowingResponse
      */
     public function getPendingFriendships()
     {
@@ -561,15 +562,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function approveFriendship(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/approve/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('radio_type', $this->ig->radio_type)
             ->getResponse(new Response\FriendshipResponse());
@@ -585,15 +586,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function rejectFriendship(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/ignore/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('radio_type', $this->ig->radio_type)
             ->getResponse(new Response\FriendshipResponse());
@@ -604,14 +605,14 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function rejectAllFriendshipRequests()
     {
         return $this->ig->request('friendships/remove_all/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('radio_type', $this->ig->radio_type)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -623,15 +624,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function removeFollower(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/remove_follower/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('radio_type', $this->ig->radio_type)
             ->getResponse(new Response\FriendshipResponse());
@@ -644,15 +645,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function markUserOverage(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/mark_user_overage/{$userId}/feed/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -670,7 +671,7 @@ class People extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FollowerAndFollowingResponse
+     * @return Response\FollowerAndFollowingResponse
      *
      * @see Signatures::generateUUID() To create a UUID.
      * @see examples/rankTokenUsage.php For an example.
@@ -680,8 +681,8 @@ class People extends RequestCollection
         $rankToken,
         $searchQuery = null,
         $maxId = null,
-        $order = null)
-    {
+        $order = null
+    ) {
         Utils::throwIfInvalidRankToken($rankToken);
         $request = $this->ig->request("friendships/{$userId}/following/")
             ->addParam('includes_hashtags', true)
@@ -715,7 +716,7 @@ class People extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FollowerAndFollowingResponse
+     * @return Response\FollowerAndFollowingResponse
      *
      * @see Signatures::generateUUID() To create a UUID.
      * @see examples/rankTokenUsage.php For an example.
@@ -724,8 +725,8 @@ class People extends RequestCollection
         $userId,
         $rankToken,
         $searchQuery = '',
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         Utils::throwIfInvalidRankToken($rankToken);
         $request = $this->ig->request("friendships/{$userId}/followers/")
             ->addParam('search_surface', 'follow_list_page')
@@ -751,14 +752,14 @@ class People extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getFollowersQuery(
         $userId,
         $rankToken = '',
         $searchQuery = '',
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $data = [
             'query'                     => $searchQuery,
             'request_data'              => [
@@ -801,14 +802,14 @@ class People extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getFollowingQuery(
         $userId,
         $rankToken = '',
         $searchQuery = '',
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $data = [
             'user_id'                   => $userId,
             'exclude_unused_fields'     => false,
@@ -851,7 +852,7 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FollowerAndFollowingResponse
+     * @return Response\FollowerAndFollowingResponse
      *
      * @see Signatures::generateUUID() To create a UUID.
      * @see examples/rankTokenUsage.php For an example.
@@ -860,8 +861,8 @@ class People extends RequestCollection
         $rankToken,
         $searchQuery = null,
         $maxId = null,
-        $order = null)
-    {
+        $order = null
+    ) {
         return $this->getFollowing($this->ig->account_id, $rankToken, $searchQuery, $maxId, $order);
     }
 
@@ -874,7 +875,7 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FollowerAndFollowingResponse
+     * @return Response\FollowerAndFollowingResponse
      *
      * @see Signatures::generateUUID() To create a UUID.
      * @see examples/rankTokenUsage.php For an example.
@@ -882,8 +883,8 @@ class People extends RequestCollection
     public function getSelfFollowers(
         $rankToken,
         $searchQuery = null,
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         return $this->getFollowers($this->ig->account_id, $rankToken, $searchQuery, $maxId);
     }
 
@@ -902,7 +903,7 @@ class People extends RequestCollection
      *                                                    many user IDs.
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SearchUserResponse
+     * @return Response\SearchUserResponse
      *
      * @see SearchUserResponse::getRankToken() To get a rank token from the response.
      * @see examples/paginateWithExclusion.php For an example.
@@ -911,8 +912,8 @@ class People extends RequestCollection
         $query,
         array $excludeList = [],
         $rankToken = null,
-        $searchSurface = 'user_serp')
-    {
+        $searchSurface = 'user_serp'
+    ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
             throw new \InvalidArgumentException('Query must be a non-empty string.');
@@ -950,11 +951,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AccountDetailsResponse
+     * @return Response\AccountDetailsResponse
      */
     public function getAccountDetails(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("users/{$userId}/account_details/")
             ->getResponse(new Response\AccountDetailsResponse());
     }
@@ -966,11 +967,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FormerUsernamesResponse
+     * @return Response\FormerUsernamesResponse
      */
     public function getFormerUsernames(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("users/{$userId}/former_usernames/")
             ->getResponse(new Response\FormerUsernamesResponse());
     }
@@ -982,11 +983,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SharedFollowersResponse
+     * @return Response\SharedFollowersResponse
      */
     public function getSharedFollowers(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("users/{$userId}/shared_follower_accounts/")
             ->getResponse(new Response\SharedFollowersResponse());
     }
@@ -999,12 +1000,12 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ActiveFeedAdsResponse
+     * @return Response\ActiveFeedAdsResponse
      */
     public function getActiveFeedAds(
         $targetUserId,
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         return $this->_getActiveAds($targetUserId, '35', $maxId);
     }
 
@@ -1016,12 +1017,12 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ActiveReelAdsResponse
+     * @return Response\ActiveReelAdsResponse
      */
     public function getActiveStoryAds(
         $targetUserId,
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         return $this->_getActiveAds($targetUserId, '49', $maxId);
     }
 
@@ -1040,11 +1041,11 @@ class People extends RequestCollection
     protected function _getActiveAds(
         $targetUserId,
         $pageType,
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request('ads/view_ads/')
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('target_user_id', $targetUserId)
             ->addPost('page_type', $pageType);
@@ -1077,20 +1078,20 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LinkAddressBookResponse
+     * @return Response\LinkAddressBookResponse
      *
      * @see People::unlinkAddressBook()
      */
     public function linkAddressBook(
         array $contacts,
-        $source = 'account_creation')
-    {
+        $source = 'account_creation'
+    ) {
         return $this->ig->request('address_book/link/')
             ->setIsBodyCompressed(true)
             ->setSignedPost(false)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('contacts', json_encode($contacts))
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('device_id', $this->ig->uuid)
             ->addPost('module', 'find_friends_contacts')
             ->addPost('source', $source)
@@ -1105,11 +1106,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UnlinkAddressBookResponse
+     * @return Response\UnlinkAddressBookResponse
      */
     public function unlinkAddressBook(
-        $userInitiated = true)
-    {
+        $userInitiated = true
+    ) {
         return $this->ig->request('address_book/unlink/')
             ->setSignedPost(false)
             ->addPost('user_initiated', ($userInitiated) ? 'true' : 'false')
@@ -1117,7 +1118,7 @@ class People extends RequestCollection
             ->addPost('device_id', $this->ig->device_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\UnlinkAddressBookResponse());
     }
 
@@ -1132,19 +1133,19 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\DiscoverPeopleResponse
+     * @return Response\DiscoverPeopleResponse
      */
     public function discoverPeople(
         $module = 'discover_people',
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request('discover/ayml/')
             ->setSignedPost(false)
-            //->addPost('phone_id', $this->ig->phone_id)
+            // ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('module', 'discover_people')
             ->addPost('_uuid', $this->ig->uuid);
-        //->addPost('_csrftoken', $this->ig->client->getToken())
-        //->addPost('paginate', true);
+        // ->addPost('_csrftoken', $this->ig->client->getToken())
+        // ->addPost('paginate', true);
 
         if ($maxId !== null) {
             $request->addPost('max_id', $maxId);
@@ -1160,11 +1161,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SuggestedUsersResponse
+     * @return Response\SuggestedUsersResponse
      */
     public function getSuggestedUsers(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request('discover/chaining/')
             ->addParam('target_id', $userId)
             ->getResponse(new Response\SuggestedUsersResponse());
@@ -1181,14 +1182,14 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SuggestedUsersBadgeResponse
+     * @return Response\SuggestedUsersBadgeResponse
      */
     public function getSuggestedUsersBadge(
-        $module = 'discover_people')
-    {
+        $module = 'discover_people'
+    ) {
         $request = $this->ig->request('discover/profile_su_badge/')
             ->addPost('_uuid', $this->ig->uuid);
-        //->addPost('_csrftoken', $this->ig->client->getToken());
+        // ->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($module !== null) {
             $request->addPost('module', $module);
@@ -1224,15 +1225,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SuggestedUsersResponse
+     * @return Response\SuggestedUsersResponse
      */
     public function hideSuggestedUser(
         $userId,
-        $algorithm)
-    {
+        $algorithm
+    ) {
         return $this->ig->request('discover/aysf_dismiss/')
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addParam('target_id', $userId)
             ->addParam('algorithm', $algorithm)
             ->getResponse(new Response\SuggestedUsersResponse());
@@ -1245,11 +1246,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipsShowManyResponse
+     * @return Response\FriendshipsShowManyResponse
      */
     public function bulkFollow(
-        array $userIds)
-    {
+        array $userIds
+    ) {
         $data = [
             'data' => [
                 'user_ids'          => $userIds,
@@ -1282,20 +1283,20 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function follow(
         $userId,
         $mediaId = null,
         $loggingInfoToken = null,
         $containerModule = 'profile',
-        $includeFollowFrictionCheck = '1')
-    {
+        $includeFollowFrictionCheck = '1'
+    ) {
         $request = $this->ig->request("friendships/create/{$userId}/")
             ->addPost('include_follow_friction_check', $includeFollowFrictionCheck)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('device_id', $this->ig->device_id)
@@ -1325,16 +1326,16 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function unfollow(
         $userId,
-        $mediaId = null)
-    {
+        $mediaId = null
+    ) {
         $request = $this->ig->request("friendships/destroy/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('nav_chain', $this->ig->getNavChain())
             ->addPost('radio_type', $this->ig->radio_type);
@@ -1359,15 +1360,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function favorite(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/favorite/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1379,15 +1380,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function unfavorite(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/unfavorite/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1399,15 +1400,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function favoriteForTv(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/favorite_for_igtv/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1419,15 +1420,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function unfavoriteForTv(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/unfavorite_for_igtv/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1439,15 +1440,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function favoriteForStories(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/favorite_for_stories/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1459,15 +1460,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function unfavoriteForStories(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/unfavorite_for_stories/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
     }
@@ -1480,17 +1481,17 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function report(
         $userId,
-        $sourceName = 'profile')
-    {
+        $sourceName = 'profile'
+    ) {
         return $this->ig->request("users/{$userId}/flag_user/")
             ->addPost('reason_id', 1)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->addPost('source_name', $sourceName)
             ->addPost('is_spam', true)
@@ -1504,15 +1505,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function block(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/block/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1524,15 +1525,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function restrict(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request('restrict_action/restrict/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('target_user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1544,15 +1545,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function unrestrict(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request('restrict_action/unrestrict/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('target_user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1569,12 +1570,12 @@ class People extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function muteUserMedia(
         $userId,
-        $option)
-    {
+        $option
+    ) {
         return $this->_muteOrUnmuteUserMedia($userId, $option, 'friendships/mute_posts_or_story_from_follow/');
     }
 
@@ -1588,12 +1589,12 @@ class People extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function unmuteUserMedia(
         $userId,
-        $option)
-    {
+        $option
+    ) {
         return $this->_muteOrUnmuteUserMedia($userId, $option, 'friendships/unmute_posts_or_story_from_follow/');
     }
 
@@ -1608,7 +1609,7 @@ class People extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      *
      * @see People::muteUserMedia()
      * @see People::unmuteUserMedia()
@@ -1616,12 +1617,12 @@ class People extends RequestCollection
     protected function _muteOrUnmuteUserMedia(
         $userId,
         $option,
-        $endpoint)
-    {
+        $endpoint
+    ) {
         $request = $this->ig->request($endpoint)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id);
-        //->addPost('_csrftoken', $this->ig->client->getToken());
+        // ->addPost('_csrftoken', $this->ig->client->getToken());
 
         switch ($option) {
             case 'story':
@@ -1648,15 +1649,15 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      */
     public function unblock(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/unblock/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_id', $userId)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1668,11 +1669,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BlockedListResponse
+     * @return Response\BlockedListResponse
      */
     public function getBlockedList(
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request('users/blocked_list/');
         if ($maxId !== null) {
             $request->addParam('max_id', $maxId);
@@ -1689,18 +1690,18 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      *
      * @see People::muteFriendStory()
      */
     public function blockMyStory(
         $userId,
-        $source = 'profile')
-    {
+        $source = 'profile'
+    ) {
         return $this->ig->request("friendships/block_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('source', $source)
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1712,17 +1713,17 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      *
      * @see People::unmuteFriendStory()
      */
     public function unblockMyStory(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/unblock_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('source', 'profile')
             ->getResponse(new Response\FriendshipResponse());
     }
@@ -1732,14 +1733,14 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BlockedReelsResponse
+     * @return Response\BlockedReelsResponse
      */
     public function getBlockedStoryList()
     {
         return $this->ig->request('friendships/blocked_reels/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\BlockedReelsResponse());
     }
 
@@ -1754,17 +1755,17 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      *
      * @see People::blockMyStory()
      */
     public function muteFriendStory(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/mute_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\FriendshipResponse());
     }
 
@@ -1777,17 +1778,17 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FriendshipResponse
+     * @return Response\FriendshipResponse
      *
      * @see People::unblockMyStory()
      */
     public function unmuteFriendStory(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("friendships/unmute_friend_reel/{$userId}/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\FriendshipResponse());
     }
 
@@ -1796,7 +1797,7 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CloseFriendsResponse
+     * @return Response\CloseFriendsResponse
      */
     public function getCloseFriends()
     {
@@ -1814,16 +1815,16 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function addCloseFriend(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request('stories/private_stories/add_member/')
             ->setSignedPost(false)
             ->addPost('source', 'audience_selection')
             ->addPost('module', 'settings')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
@@ -1836,16 +1837,16 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function removeCloseFriend(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request('stories/private_stories/remove_member/')
             ->setSignedPost(false)
             ->addPost('source', 'audience_selection')
             ->addPost('module', 'settings')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('user_id', $userId)
             ->getResponse(new Response\GenericResponse());
@@ -1858,11 +1859,11 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SharePrefillResponse
+     * @return Response\SharePrefillResponse
      */
     public function getSharePrefill(
-        $nullState = false)
-    {
+        $nullState = false
+    ) {
         $views = [
             'story_share_sheet',
             'direct_user_search_nullstate',
@@ -1894,12 +1895,12 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MutedUsersResponse
+     * @return Response\MutedUsersResponse
      */
     public function getMutedUsers()
     {
         return $this->ig->request('bloks/apps/com.instagram.growth.screens.muted_users/')
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
             ->getResponse(new Response\MutedUsersResponse());
@@ -1910,7 +1911,7 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\NonExpiredRequestsInfoResponse
+     * @return Response\NonExpiredRequestsInfoResponse
      */
     public function getNonExpiredFriendRequests()
     {
@@ -1927,13 +1928,13 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserInfoResponse
+     * @return Response\UserInfoResponse
      */
     public function getCreatorInfo(
         $userId,
         $surfaceType = 'android',
-        $entrypoint = 'self_profile')
-    {
+        $entrypoint = 'self_profile'
+    ) {
         return $this->ig->request('creator/creator_info/')
             ->addParam('entry_point', $entrypoint)
             ->addParam('surface_type', $surfaceType)
@@ -1946,7 +1947,7 @@ class People extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getLimitedInteractionsReminder()
     {

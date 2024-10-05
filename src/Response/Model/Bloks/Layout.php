@@ -14,7 +14,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Layout extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'bk.components.Collection' => 'Collection',
     ];
 }

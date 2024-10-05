@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class MultiAccountsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'logged_in_accounts'        => 'Model\LoggedInAccount[]',
         'login_deferred_accounts'   => '',
         'device_based_header'       => '',

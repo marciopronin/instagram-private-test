@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class BusinessManagerStatus extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_insights'  => 'bool',
         'account_type'  => 'string',
     ];

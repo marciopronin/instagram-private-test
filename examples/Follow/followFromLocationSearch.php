@@ -5,30 +5,30 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $query = 'Madrid, Spain';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -76,7 +76,12 @@ try {
     $ig->event->sendSearchResults($query, $resultList, $resultTypeList, $rankToken, $searchSession, 'search_places');
     $ig->event->sendSearchResultsPage($query, $placeId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'PLACE', 'search_places');
 
-    $ig->event->sendNavigation('search_result', 'search_places', 'feed_location', null, null,
+    $ig->event->sendNavigation(
+        'search_result',
+        'search_places',
+        'feed_location',
+        null,
+        null,
         [
             'rank_token'        => $rankToken,
             'query_text'        => $query,
@@ -135,7 +140,7 @@ try {
 
     if (empty($sections)) {
         // No sections.
-        exit();
+        exit;
     }
 
     // Send thumbnail click impression (clickling on the selected media).
@@ -152,7 +157,12 @@ try {
     }
 
     $userId = $item->getUser()->getPk();
-    $ig->event->sendNavigation('media_owner', 'feed_contextual_location', 'profile', null, null,
+    $ig->event->sendNavigation(
+        'media_owner',
+        'feed_contextual_location',
+        'profile',
+        null,
+        null,
         [
             'rank_token'        => $rankToken,
             'query_text'        => $query,
@@ -165,7 +175,7 @@ try {
         ]
     );
 
-    $traySession = \InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
     $ig->story->getUserStoryFeed($userId);
     $ig->event->reelTrayRefresh(
@@ -183,7 +193,9 @@ try {
 
     sleep(2);
     $ig->event->sendProfileView($userId);
-    $ig->event->sendFollowButtonTapped($userId, 'profile',
+    $ig->event->sendFollowButtonTapped(
+        $userId,
+        'profile',
         [
             [
                 'module'        => 'feed_contextual_location',
@@ -221,7 +233,9 @@ try {
     );
     $ig->people->follow($userId);
 
-    $ig->event->sendProfileAction('follow', $userId,
+    $ig->event->sendProfileAction(
+        'follow',
+        $userId,
         [
             [
                 'module'        => 'feed_contextual_location',
@@ -258,6 +272,6 @@ try {
         ]
     );
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

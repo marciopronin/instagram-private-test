@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class TVSearchResult extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'type'          => 'string',
         'User'          => 'User',
         'channel'       => 'TVChannel',

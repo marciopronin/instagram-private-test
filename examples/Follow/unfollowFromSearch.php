@@ -5,29 +5,29 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $usernameToFollow = 'selenagomez';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -86,7 +86,12 @@ try {
         }
     }
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
-    $ig->event->sendNavigation('search_result', 'blended_search', 'profile', null, null,
+    $ig->event->sendNavigation(
+        'search_result',
+        'blended_search',
+        'profile',
+        null,
+        null,
         [
             'rank_token'            => null,
             'query_text'            => $queryUser,
@@ -97,7 +102,12 @@ try {
             'user_id'               => $userId,
         ]
     );
-    $ig->event->sendNavigation('button', 'profile', 'profile', null, null,
+    $ig->event->sendNavigation(
+        'button',
+        'profile',
+        'profile',
+        null,
+        null,
         [
             'rank_token'            => null,
             'query_text'            => $queryUser,
@@ -109,7 +119,7 @@ try {
             'class_selector'        => 'ProfileMediaTabFragment',
         ]
     );
-    $traySession = \InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
     $ig->highlight->getUserFeed($userId);
     $ig->story->getUserStoryFeed($userId);
     $userFeed = $ig->timeline->getUserFeed($userId);
@@ -137,7 +147,9 @@ try {
     }
     sleep(mt_rand(1, 2));
     $ig->event->sendProfileView($userId);
-    $ig->event->sendFollowButtonTapped($userId, 'profile',
+    $ig->event->sendFollowButtonTapped(
+        $userId,
+        'profile',
         [
             [
                 'module'        => 'blended_search',
@@ -156,11 +168,15 @@ try {
                 'click_point'   => 'main_search',
             ],
         ],
-    null, true);
+        null,
+        true
+    );
 
     if ($followStatus !== false) {
         $ig->people->unfollow($userId);
-        $ig->event->sendProfileAction('unfollow', $userId,
+        $ig->event->sendProfileAction(
+            'unfollow',
+            $userId,
             [
                 [
                     'module'        => 'blended_search',
@@ -182,6 +198,6 @@ try {
         );
         $ig->event->forceSendBatch();
     }
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

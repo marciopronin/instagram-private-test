@@ -4,9 +4,9 @@ namespace InstagramAPI\Realtime\Command\Direct;
 
 final class SendPost extends ShareItem
 {
-    const TYPE = 'media_share';
+    public const TYPE = 'media_share';
 
-    const MEDIA_REGEXP = '#^\d+_\d+$#D';
+    public const MEDIA_REGEXP = '#^\d+_\d+$#D';
 
     /**
      * Constructor.
@@ -20,8 +20,8 @@ final class SendPost extends ShareItem
     public function __construct(
         $threadId,
         $mediaId,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         parent::__construct($threadId, self::TYPE, $options);
 
         if (!preg_match(self::MEDIA_REGEXP, $mediaId)) {

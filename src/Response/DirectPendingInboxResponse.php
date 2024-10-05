@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class DirectPendingInboxResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'seq_id'                 => 'string',
         'pending_requests_total' => '',
         'spam_requests_total'    => '',

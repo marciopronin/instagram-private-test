@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class MediaDeleteResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'did_delete' => '',
     ];
 }

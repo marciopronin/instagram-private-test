@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class TVSearchResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'results'       => 'Model\TVSearchResult[]',
         'num_results'   => 'int',
         'rank_token'    => 'string',

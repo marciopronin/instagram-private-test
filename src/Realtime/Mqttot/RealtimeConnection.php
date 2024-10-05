@@ -10,28 +10,28 @@ use InstagramAPI\Instagram;
 
 class RealtimeConnection extends RtiConnection
 {
-    const CLIENT_ID = 1;
-    const CLIENT_INFO = 4;
-    const PASSWORD = 5;
-    const APP_SPECIFIC_INFO = 10;
+    public const CLIENT_ID = 1;
+    public const CLIENT_INFO = 4;
+    public const PASSWORD = 5;
+    public const APP_SPECIFIC_INFO = 10;
 
-    const USER_ID = 1;
-    const USER_AGENT = 2;
-    const CLIENT_CAPABILITIES = 3;
-    const ENDPOINT_CAPABILITIES = 4;
-    const PUBLISH_FORMAT = 5;
-    const NO_AUTOMATIC_FOREGROUND = 6;
-    const MAKE_USER_AVAILABLE_IN_FOREGROUND = 7;
-    const DEVICE_ID = 8;
-    const IS_INITIALLY_FOREGROUND = 9;
-    const NETWORK_TYPE = 10;
-    const NETWORK_SUBTYPE = 11;
-    const CLIENT_MQTT_SESSION_ID = 12;
-    const SUBSCRIBE_TOPICS = 14;
-    const CLIENT_TYPE = 15;
-    const APP_ID = 16;
-    const DEVICE_SECRET = 20;
-    const CLIENT_STACK = 21;
+    public const USER_ID = 1;
+    public const USER_AGENT = 2;
+    public const CLIENT_CAPABILITIES = 3;
+    public const ENDPOINT_CAPABILITIES = 4;
+    public const PUBLISH_FORMAT = 5;
+    public const NO_AUTOMATIC_FOREGROUND = 6;
+    public const MAKE_USER_AVAILABLE_IN_FOREGROUND = 7;
+    public const DEVICE_ID = 8;
+    public const IS_INITIALLY_FOREGROUND = 9;
+    public const NETWORK_TYPE = 10;
+    public const NETWORK_SUBTYPE = 11;
+    public const CLIENT_MQTT_SESSION_ID = 12;
+    public const SUBSCRIBE_TOPICS = 14;
+    public const CLIENT_TYPE = 15;
+    public const APP_ID = 16;
+    public const DEVICE_SECRET = 20;
+    public const CLIENT_STACK = 21;
 
     /** @var string */
     private $_userAgent;
@@ -70,14 +70,14 @@ class RealtimeConnection extends RtiConnection
      * @param Instagram $ig Instagram API object.
      */
     public function __construct(
-        $ig)
-    {
+        $ig
+    ) {
         $this->_userId = $ig->account_id;
         $authorizationData = json_decode(base64_decode(explode(':', $ig->settings->get('authorization_header'))[2]), true);
         if (!isset($authorizationData['sessionid'])) {
             throw new InstagramException('User cookies does not contain session_id');
         } else {
-            //$this->_sessionId = $ig->client->getCookie('sessionid')->getValue();
+            // $this->_sessionId = $ig->client->getCookie('sessionid')->getValue();
             $this->_sessionId = $authorizationData['sessionid'];
         }
         $this->_clientCapabilities = 183;
@@ -117,7 +117,7 @@ class RealtimeConnection extends RtiConnection
         $writer->writeInt32(self::NETWORK_TYPE, $this->_networkType);
         $writer->writeInt32(self::NETWORK_SUBTYPE, $this->_networkSubtype);
         if ($this->_clientMqttSessionId === null) {
-            $_sessionId = (int) ((microtime(true) - strtotime('Last Monday')));
+            $_sessionId = (int) (microtime(true) - strtotime('Last Monday'));
         } else {
             $_sessionId = $this->_clientMqttSessionId;
         }

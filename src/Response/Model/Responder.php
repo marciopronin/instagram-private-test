@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Responder extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'response'            => 'string',
         'has_shared_response' => 'bool',
         'id'                  => 'string',

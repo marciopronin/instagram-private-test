@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SearchList extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'position' => 'int',
         'user'     => 'User',
         'hashtag'  => 'Hashtag',

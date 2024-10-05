@@ -31,8 +31,8 @@ class ObsHelper
         bool $autoStream,
         bool $disable,
         bool $forceStreamlabs,
-        bool $iniModification)
-    {
+        bool $iniModification,
+    ) {
         $this->service_state = null;
         $this->settings_state = null;
         $this->attempted_service_save = false;
@@ -49,8 +49,8 @@ class ObsHelper
         }
 
         clearstatcache();
-        //Because never trust user input...
-        if (OBS_CUSTOM_PATH !== 'INSERT_PATH' && @file_exists((substr(str_replace('\\', '/', OBS_CUSTOM_PATH), -1) === '/' ? str_replace('\\', '/', OBS_CUSTOM_PATH) : str_replace('\\', '/', OBS_CUSTOM_PATH).'/'))) {
+        // Because never trust user input...
+        if (OBS_CUSTOM_PATH !== 'INSERT_PATH' && @file_exists(substr(str_replace('\\', '/', OBS_CUSTOM_PATH), -1) === '/' ? str_replace('\\', '/', OBS_CUSTOM_PATH) : str_replace('\\', '/', OBS_CUSTOM_PATH).'/')) {
             $this->obs_path = (substr(str_replace('\\', '/', OBS_CUSTOM_PATH), -1) === '/' ? str_replace('\\', '/', OBS_CUSTOM_PATH) : str_replace('\\', '/', OBS_CUSTOM_PATH).'/');
         } elseif (@file_exists('C:/Program Files/obs-studio/') && !$forceStreamlabs) {
             $this->obs_path = 'C:/Program Files/obs-studio/';
@@ -63,7 +63,7 @@ class ObsHelper
             $this->obs_path = 'C:/Program Files (x86)/Streamlabs OBS/';
             $this->slobsPresent = true;
         } else {
-            $this->obs_path = null; //OBS's path could not be found, the script will disable OBS integration.
+            $this->obs_path = null; // OBS's path could not be found, the script will disable OBS integration.
 
             return;
         }
@@ -174,8 +174,8 @@ class ObsHelper
      */
     public function setServiceState(
         string $uri,
-        string $key)
-    {
+        string $key,
+    ) {
         @file_put_contents($this->service_path, json_encode([
             'settings' => [
                 'key'    => $key,
@@ -240,8 +240,8 @@ class ObsHelper
     private function _searchAndReplaceSetting(
         $haystack,
         $setting,
-        $value)
-    {
+        $value,
+    ) {
         if (Utils::startsWith($haystack, $setting)) {
             $haystack = "$setting=$value\n";
         }

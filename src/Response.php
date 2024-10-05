@@ -3,7 +3,6 @@
 namespace InstagramAPI;
 
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
-use RuntimeException;
 
 /**
  * Core class for Instagram API responses.
@@ -24,11 +23,11 @@ use RuntimeException;
 class Response extends AutoPropertyMapper
 {
     /** @var string */
-    const STATUS_OK = 'ok';
+    public const STATUS_OK = 'ok';
     /** @var string */
-    const STATUS_FAIL = 'fail';
+    public const STATUS_FAIL = 'fail';
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         /*
          * Whether the API request succeeded or not.
          *
@@ -72,7 +71,7 @@ class Response extends AutoPropertyMapper
      * This function overrides the normal getter with some special processing
      * to handle unusual multi-error message values in certain responses.
      *
-     * @throws RuntimeException If the message object is of an unsupported type.
+     * @throws \RuntimeException If the message object is of an unsupported type.
      *
      * @return string|null A message string if one exists, otherwise NULL.
      */
@@ -102,10 +101,10 @@ class Response extends AutoPropertyMapper
 
                 return $str;
             } else {
-                throw new RuntimeException('Unknown message object. Expected errors subarray but found something else. Please submit a ticket about needing an Instagram-API library update!');
+                throw new \RuntimeException('Unknown message object. Expected errors subarray but found something else. Please submit a ticket about needing an Instagram-API library update!');
             }
         } else {
-            throw new RuntimeException('Unknown message type. Please submit a ticket about needing an Instagram-API library update!');
+            throw new \RuntimeException('Unknown message type. Please submit a ticket about needing an Instagram-API library update!');
         }
     }
 
@@ -125,8 +124,8 @@ class Response extends AutoPropertyMapper
      * @param HttpResponseInterface $response
      */
     public function setHttpResponse(
-        HttpResponseInterface $response)
-    {
+        HttpResponseInterface $response
+    ) {
         $this->httpResponse = $response;
     }
 

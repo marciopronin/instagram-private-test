@@ -70,7 +70,7 @@ use InstagramAPI\Response;
  */
 class CheckpointResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'url'                       => 'string',
         'api_path'                  => 'string',
         'lock'                      => 'bool',

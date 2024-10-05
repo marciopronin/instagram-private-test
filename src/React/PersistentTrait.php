@@ -40,8 +40,8 @@ trait PersistentTrait
      * @param callable $callback
      */
     protected function _setReconnectTimer(
-        callable $callback)
-    {
+        callable $callback
+    ) {
         $this->_cancelReconnectTimer();
         if (!$this->isActive()) {
             return;

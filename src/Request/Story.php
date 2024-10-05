@@ -25,14 +25,14 @@ class Story extends RequestCollection
      * @throws \RuntimeException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSinglePhoto() for available metadata fields.
      */
     public function uploadPhoto(
         $photoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = []
+    ) {
         return $this->ig->internal->uploadSinglePhoto(Constants::FEED_STORY, $photoFilename, null, $externalMetadata);
     }
 
@@ -46,15 +46,15 @@ class Story extends RequestCollection
      * @throws \RuntimeException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSinglePhoto() for available metadata fields.
      * @see https://help.instagram.com/2183694401643300
      */
     public function uploadCloseFriendsPhoto(
         $photoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = []
+    ) {
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
         $internalMetadata->setBestieMedia(true);
 
@@ -72,14 +72,14 @@ class Story extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSingleVideo() for available metadata fields.
      */
     public function uploadVideo(
         $videoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = []
+    ) {
         return $this->ig->internal->uploadSingleVideo(Constants::FEED_STORY, $videoFilename, null, $externalMetadata);
     }
 
@@ -94,15 +94,15 @@ class Story extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      * @throws \InstagramAPI\Exception\UploadFailedException If the video upload fails.
      *
-     * @return \InstagramAPI\Response\ConfigureResponse
+     * @return Response\ConfigureResponse
      *
      * @see Internal::configureSingleVideo() for available metadata fields.
      * @see https://help.instagram.com/2183694401643300
      */
     public function uploadCloseFriendsVideo(
         $videoFilename,
-        array $externalMetadata = [])
-    {
+        array $externalMetadata = []
+    ) {
         $internalMetadata = new InternalMetadata();
         $internalMetadata->setBestieMedia(true);
 
@@ -122,21 +122,21 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsTrayFeedResponse
+     * @return Response\ReelsTrayFeedResponse
      *
      * @see Story::getUserStoryFeed()
      */
     public function getReelsTrayFeed(
         $reason = 'pull_to_refresh',
         $requestId = null,
-        $traySessionId = null)
-    {
+        $traySessionId = null
+    ) {
         $request = $this->ig->request('feed/reels_tray/')
             ->setSignedPost(false)
             ->setRequestPriority(0)
             ->addPost('reason', $reason)
             ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('reel_tray_impressions', json_encode([], JSON_FORCE_OBJECT))
             ->addPost('_uuid', $this->ig->uuid);
 
@@ -170,11 +170,11 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsTrayFeedResponse
+     * @return Response\ReelsTrayFeedResponse
      */
     public function getLatestStoryMedia(
-        $feedList)
-    {
+        $feedList
+    ) {
         if (!is_array($feedList)) {
             $feedList = [$feedList];
         }
@@ -187,7 +187,7 @@ class Story extends RequestCollection
         return $this->ig->request('feed/get_latest_reel_media/')
             ->setSignedPost(false)
             ->addPost('user_ids', $feedList) // Must be string[] array.
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\ReelsTrayFeedResponse());
     }
@@ -200,12 +200,12 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsMediaResponse
+     * @return Response\ReelsMediaResponse
      */
     public function getReelsMediaStream(
         $feedList,
-        $source = 'feed_timeline')
-    {
+        $source = 'feed_timeline'
+    ) {
         if (!is_array($feedList)) {
             $feedList = [$feedList];
         }
@@ -218,7 +218,7 @@ class Story extends RequestCollection
         return $this->ig->request('feed/reels_media_stream/')
             ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('reel_ids', $feedList) // Must be string[] array.
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('source', $source)
@@ -237,13 +237,13 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserReelMediaFeedResponse
+     * @return Response\UserReelMediaFeedResponse
      *
      * @see Story::getUserStoryFeed()
      */
     public function getUserReelMediaFeed(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("feed/user/{$userId}/reel_media/")
             ->getResponse(new Response\UserReelMediaFeedResponse());
     }
@@ -263,13 +263,13 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UserStoryFeedResponse
+     * @return Response\UserStoryFeedResponse
      *
      * @see Story::getUserReelMediaFeed()
      */
     public function getUserStoryFeed(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("feed/user/{$userId}/story/")
             ->addParam('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->getResponse(new Response\UserStoryFeedResponse());
@@ -290,14 +290,14 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsMediaResponse
+     * @return Response\ReelsMediaResponse
      *
      * @see Highlight::getUserFeed() More info about when to use this API for highlight-details.
      */
     public function getReelsMediaFeed(
         $feedList,
-        $source = 'feed_timeline')
-    {
+        $source = 'feed_timeline'
+    ) {
         if (!is_array($feedList)) {
             $feedList = [$feedList];
         }
@@ -311,7 +311,7 @@ class Story extends RequestCollection
             ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('user_ids', $feedList) // Must be string[] array.
             ->addPost('source', $source)
             ->getResponse(new Response\ReelsMediaResponse());
@@ -326,13 +326,13 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsMediaResponse
+     * @return Response\ReelsMediaResponse
      */
     public function getInjectedStories(
         array $storyUserIds,
         $traySessionId,
-        $entryIndex = 0)
-    {
+        $entryIndex = 0
+    ) {
         if ($entryIndex < 0) {
             throw new \InvalidArgumentException('Entry index must be a positive number.');
         }
@@ -365,7 +365,7 @@ class Story extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('phone_id', $this->ig->phone_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('inserted_netego_indices', [])
             ->addPost('ad_and_netego_request_information', [])
             ->addPost('inserted_ad_indices', [])
@@ -393,7 +393,7 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ArchivedStoriesFeedResponse
+     * @return Response\ArchivedStoriesFeedResponse
      */
     public function getArchivedStoriesFeed()
     {
@@ -410,7 +410,7 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ArchiveBadgeCountResponse
+     * @return Response\ArchiveBadgeCountResponse
      */
     public function getArchiveBadgeCount()
     {
@@ -418,7 +418,7 @@ class Story extends RequestCollection
             ->setSignedPost(false)
             ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
             ->addPost('_uuid', $this->ig->uuid)
-            //->addParam('_csrftoken', $this->ig->client->getToken())
+            // ->addParam('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\ArchiveBadgeCountResponse());
     }
 
@@ -433,12 +433,12 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelMediaViewerResponse
+     * @return Response\ReelMediaViewerResponse
      */
     public function getStoryItemViewers(
         $storyPk,
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request("media/{$storyPk}/list_reel_media_viewer/")
             ->addParam('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities());
         if ($maxId !== null) {
@@ -460,13 +460,13 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelMediaViewerResponse
+     * @return Response\ReelMediaViewerResponse
      */
     public function votePollStory(
         $storyId,
         $pollId,
-        $votingOption)
-    {
+        $votingOption
+    ) {
         if (($votingOption !== 0) && ($votingOption !== 1)) {
             throw new \InvalidArgumentException('You must provide a valid value for voting option.');
         }
@@ -474,7 +474,7 @@ class Story extends RequestCollection
         return $this->ig->request("media/{$storyId}/{$pollId}/story_poll_vote/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('radio_type', $this->ig->radio_type)
             ->addPost('vote', $votingOption)
             ->getResponse(new Response\ReelMediaViewerResponse());
@@ -492,13 +492,13 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelMediaViewerResponse
+     * @return Response\ReelMediaViewerResponse
      */
     public function voteSliderStory(
         $storyId,
         $sliderId,
-        $votingOption)
-    {
+        $votingOption
+    ) {
         if ($votingOption < 0 || $votingOption > 1) {
             throw new \InvalidArgumentException('You must provide a valid value from 0 to 1 for voting option.');
         }
@@ -506,7 +506,7 @@ class Story extends RequestCollection
         return $this->ig->request("media/{$storyId}/{$sliderId}/story_slider_vote/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('radio_type', $this->ig->radio_type)
             ->addPost('vote', $votingOption)
             ->getResponse(new Response\ReelMediaViewerResponse());
@@ -526,14 +526,14 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StoryPollVotersResponse
+     * @return Response\StoryPollVotersResponse
      */
     public function getStoryPollVoters(
         $storyId,
         $pollId,
         $votingOption,
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         if (($votingOption !== 0) && ($votingOption !== 1)) {
             throw new \InvalidArgumentException('You must provide a valid value for voting option.');
         }
@@ -559,17 +559,17 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function answerStoryQuestion(
         $storyId,
         $questionId,
         $responseText,
         $clientContext,
-        $containerModule = 'reel_profile')
-    {
+        $containerModule = 'reel_profile'
+    ) {
         $request = $this->ig->request("media/{$storyId}/{$questionId}/story_question_response/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('response', $responseText)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('type', 'text')
@@ -594,13 +594,13 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StoryAnswersResponse
+     * @return Response\StoryAnswersResponse
      */
     public function getStoryAnswers(
-         $storyId,
-         $questionId,
-         $maxId = null)
-    {
+        $storyId,
+        $questionId,
+        $maxId = null
+    ) {
         $request = $this->ig->request("media/{$storyId}/{$questionId}/story_question_responses/");
 
         if ($maxId !== null) {
@@ -621,14 +621,14 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function deleteStoryQuestionAnswer(
         $storyId,
-        $answerId)
-    {
+        $answerId
+    ) {
         return $this->ig->request("media/{$storyId}/delete_story_question_response/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('question_id', $answerId)
@@ -640,7 +640,7 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StoryCountdownsResponse
+     * @return Response\StoryCountdownsResponse
      */
     public function getStoryCountdowns()
     {
@@ -655,13 +655,13 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function followStoryCountdown(
-        $countdownId)
-    {
+        $countdownId
+    ) {
         return $this->ig->request("media/{$countdownId}/follow_story_countdown/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -674,13 +674,13 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function unfollowStoryCountdown(
-        $countdownId)
-    {
+        $countdownId
+    ) {
         return $this->ig->request("media/{$countdownId}/unfollow_story_countdown/")
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
@@ -697,17 +697,17 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function answerStoryQuiz(
         $storyId,
         $quizId,
-        $selectedOption)
-    {
+        $selectedOption
+    ) {
         return $this->ig->request("media/{$storyId}/{$quizId}/story_quiz_answer/")
             ->setSignedPost(false)
             ->addPost('answer', $selectedOption)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -721,13 +721,13 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StoryQuizAnswersResponse
+     * @return Response\StoryQuizAnswersResponse
      */
     public function getStoryQuizAnswers(
         $storyId,
         $quizId,
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request("media/{$storyId}/{$quizId}/story_quiz_participants/");
 
         if ($maxId !== null) {
@@ -746,13 +746,13 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\StorySliderVotersResponse
+     * @return Response\StorySliderVotersResponse
      */
     public function getStorySliderVoters(
         $storyId,
         $sliderId,
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request("media/{$storyId}/{$sliderId}/story_slider_voters/");
 
         if ($maxId !== null) {
@@ -769,11 +769,11 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CharitiesListResponse
+     * @return Response\CharitiesListResponse
      */
     public function getCharities(
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request('fundraiser/story_charities_nullstate/');
 
         if ($maxId !== null) {
@@ -791,12 +791,12 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CharitiesListResponse
+     * @return Response\CharitiesListResponse
      */
     public function searchCharities(
         $query,
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request('fundraiser/story_charities_search/')
             ->addParam('query', $query);
 
@@ -810,18 +810,18 @@ class Story extends RequestCollection
     /**
      * Creates the array for a donation sticker.
      *
-     * @param \InstagramAPI\Response\Model\User $charityUser          The User object of the charity's Instagram account.
-     * @param float                             $x
-     * @param float                             $y
-     * @param float                             $width
-     * @param float                             $height
-     * @param float                             $rotation
-     * @param string|null                       $title                The title of the donation sticker.
-     * @param string                            $titleColor           Hex color code for the title color.
-     * @param string                            $subtitleColor        Hex color code for the subtitle color.
-     * @param string                            $buttonTextColor      Hex color code for the button text color.
-     * @param string                            $startBackgroundColor
-     * @param string                            $endBackgroundColor
+     * @param Response\Model\User $charityUser          The User object of the charity's Instagram account.
+     * @param float               $x
+     * @param float               $y
+     * @param float               $width
+     * @param float               $height
+     * @param float               $rotation
+     * @param string|null         $title                The title of the donation sticker.
+     * @param string              $titleColor           Hex color code for the title color.
+     * @param string              $subtitleColor        Hex color code for the subtitle color.
+     * @param string              $buttonTextColor      Hex color code for the button text color.
+     * @param string              $startBackgroundColor
+     * @param string              $endBackgroundColor
      *
      * @return array
      *
@@ -842,8 +842,8 @@ class Story extends RequestCollection
         $subtitleColor = '#999999ff',
         $buttonTextColor = '#3897f0',
         $startBackgroundColor = '#fafafa',
-        $endBackgroundColor = '#fafafa')
-    {
+        $endBackgroundColor = '#fafafa'
+    ) {
         return [
             [
                 'x'                      => $x,
@@ -905,14 +905,14 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MediaSeenResponse
+     * @return Response\MediaSeenResponse
      *
      * @see Location::markStoryMediaSeen()
      * @see Hashtag::markStoryMediaSeen()
      */
     public function markMediaSeen(
-        array $items)
-    {
+        array $items
+    ) {
         // NOTE: NULL = Use each item's owner ID as the "source ID".
         return $this->ig->internal->markStoryMediaSeen($items, null);
     }
@@ -926,7 +926,7 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelSettingsResponse
+     * @return Response\ReelSettingsResponse
      */
     public function getReelSettings()
     {
@@ -948,13 +948,13 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelSettingsResponse
+     * @return Response\ReelSettingsResponse
      */
     public function setReelSettings(
         $messagePrefs,
         $allowStoryReshare = null,
-        $autoArchive = null)
-    {
+        $autoArchive = null
+    ) {
         if (!in_array($messagePrefs, ['anyone', 'following', 'off'])) {
             throw new \InvalidArgumentException('You must provide a valid message preference value.');
         }
@@ -962,7 +962,7 @@ class Story extends RequestCollection
         $request = $this->ig->request('users/set_reel_settings/')
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('message_prefs', $messagePrefs);
 
         if ($allowStoryReshare !== null) {
@@ -988,7 +988,7 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PrivateStoriesMembersResponse
+     * @return Response\PrivateStoriesMembersResponse
      */
     public function getPrivateStoriesMembers()
     {
@@ -1006,13 +1006,13 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function addPrivateStoriesMember(
         $userId,
         $module = 'audience_selection',
-        $source = 'story_share_sheet')
-    {
+        $source = 'story_share_sheet'
+    ) {
         return $this->ig->request('stories/private_stories/add_member/')
             ->setSignedPost(false)
             ->addPost('module', $module)
@@ -1033,13 +1033,13 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function removePrivateStoriesMember(
         $userId,
         $module = 'audience_selection',
-        $source = 'story_share_sheet')
-    {
+        $source = 'story_share_sheet'
+    ) {
         return $this->ig->request('stories/private_stories/remove_member/')
             ->setSignedPost(false)
             ->addPost('module', $module)
@@ -1061,14 +1061,14 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function setPrivateStoriesMembers(
         array $add,
         array $remove,
         $module = 'audience_selection',
-        $source = 'story_share_sheet')
-    {
+        $source = 'story_share_sheet'
+    ) {
         return $this->ig->request('stories/private_stories/bulk_update_members/')
             ->setSignedPost(false)
             ->addPost('module', $module)
@@ -1088,11 +1088,11 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PrivateStoriesMembersResponse
+     * @return Response\PrivateStoriesMembersResponse
      */
     public function getStoryAllowlist(
-        $storyId)
-    {
+        $storyId
+    ) {
         return $this->ig->request("stories/private_stories/media/{$storyId}/allowlist/")
             ->getResponse(new Response\PrivateStoriesMembersResponse());
     }
@@ -1108,14 +1108,14 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function addViewerToAllowList(
         $storyId,
         $userId,
         $module = 'audience_selection',
-        $source = 'self_reel')
-    {
+        $source = 'self_reel'
+    ) {
         return $this->ig->request("stories/private_stories/{$storyId}/add_viewer/")
             ->setSignedPost(false)
             ->addPost('module', $module)
@@ -1137,14 +1137,14 @@ class Story extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function removeViewerToAllowList(
         $storyId,
         $userId,
         $module = 'audience_selection',
-        $source = 'self_reel')
-    {
+        $source = 'self_reel'
+    ) {
         return $this->ig->request("stories/private_stories/{$storyId}/remove_viewer/")
             ->setSignedPost(false)
             ->addPost('module', $module)
@@ -1168,15 +1168,15 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function setStoryAllowList(
         $storyId,
         array $add,
         array $remove,
         $module = 'audience_selection',
-        $source = 'self_reel')
-    {
+        $source = 'self_reel'
+    ) {
         return $this->ig->request("stories/private_stories/media/{$storyId}/allowlist/edit/")
             ->setSignedPost(false)
             ->addPost('module', $module)
@@ -1199,14 +1199,14 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function sendLike(
         $storyId,
         $traySessionId,
         $viewerSessionId,
-        $containerModule = 'reel_profile')
-    {
+        $containerModule = 'reel_profile'
+    ) {
         return $this->_sendStoryInteraction('send_story_like', $storyId, $traySessionId, $viewerSessionId, $containerModule);
     }
 
@@ -1220,14 +1220,14 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function unsendLike(
         $storyId,
         $traySessionId,
         $viewerSessionId,
-        $containerModule = 'reel_profile')
-    {
+        $containerModule = 'reel_profile'
+    ) {
         return $this->_sendStoryInteraction('unsend_story_like', $storyId, $traySessionId, $viewerSessionId, $containerModule);
     }
 
@@ -1241,14 +1241,14 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function crosspost(
         $storyId,
         $destinationId,
         $destinationType,
-        $containerModule = 'ig_self_story')
-    {
+        $containerModule = 'ig_self_story'
+    ) {
         return $this->ig->request("media/{$storyId}/share/")
             ->addPost('xpost_surface', $containerModule)
             ->addPost('share_to_fb_destination_type', $destinationType)
@@ -1273,15 +1273,15 @@ class Story extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     protected function _sendStoryInteraction(
         $endpoint,
         $storyId,
         $traySessionId,
         $viewerSessionId,
-        $containerModule = 'reel_profile')
-    {
+        $containerModule = 'reel_profile'
+    ) {
         return $this->ig->request("story_interactions/{$endpoint}/")
             ->addPost('media_id', $storyId)
             ->addPost('container_module', $containerModule)

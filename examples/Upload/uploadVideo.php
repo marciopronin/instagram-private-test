@@ -5,23 +5,23 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////// MEDIA ////////
+// ///// MEDIA ////////
 $videoFilename = '';
 $captionText = '';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -39,9 +39,9 @@ try {
     // processing, and it never overwrites your original file.
     //
     // Also note that it has lots of options, so read its class documentation!
-    $video = new \InstagramAPI\Media\Video\InstagramVideo($videoFilename);
+    $video = new InstagramAPI\Media\Video\InstagramVideo($videoFilename);
     $ig->timeline->uploadVideo($video->getFile(), ['caption' => $captionText]);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     if ($e instanceof InstagramAPI\Exception\LoginRequiredException) {
         echo 'Password was changed or cookie expired. Please login again.';
     } else {

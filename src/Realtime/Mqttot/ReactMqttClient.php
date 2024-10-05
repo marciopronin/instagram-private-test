@@ -14,8 +14,6 @@ use BinSoul\Net\Mqtt\Packet\PublishRequestPacket;
 use BinSoul\Net\Mqtt\StreamParser;
 use BinSoul\Net\Mqtt\Subscription;
 use Evenement\EventEmitter;
-use Exception;
-use LogicException;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\Timer\TimerInterface;
 use React\Promise\CancellablePromiseInterface;
@@ -24,7 +22,6 @@ use React\Promise\ExtendedPromiseInterface;
 use React\Promise\RejectedPromise;
 use React\Socket\ConnectorInterface;
 use React\Stream\DuplexStreamInterface;
-use RuntimeException;
 
 /**
  * Connects to a MQTT broker and subscribes to topics or publishes messages.
@@ -107,7 +104,7 @@ class ReactMqttClient extends EventEmitter
             $this->_parser = new StreamParser(new DefaultPacketFactory());
         }
 
-        $this->_parser->onError(function (Exception $e) {
+        $this->_parser->onError(function (\Exception $e) {
             $this->_emitWarning($e);
         });
 
@@ -172,11 +169,11 @@ class ReactMqttClient extends EventEmitter
     public function connect(
         string $host,
         int $port = 1883,
-        RealtimeConnection $connection = null,
-        int $timeout = 5): ExtendedPromiseInterface
-    {
+        ?RealtimeConnection $connection = null,
+        int $timeout = 5
+    ): ExtendedPromiseInterface {
         if ($this->_isConnected || $this->_isConnecting) {
-            return new RejectedPromise(new LogicException('The client is already connected.'));
+            return new RejectedPromise(new \LogicException('The client is already connected.'));
         }
 
         $this->_isConnecting = true;
@@ -202,7 +199,7 @@ class ReactMqttClient extends EventEmitter
                         $this->emit('connect', [$connection, $this]);
                         $deferred->resolve($result ?: $connection);
                     })
-                    ->otherwise(function (Exception $e) use ($connection, $deferred) {
+                    ->otherwise(function (\Exception $e) use ($connection, $deferred) {
                         $this->_isConnecting = false;
 
                         $this->_emitError($e);
@@ -215,7 +212,7 @@ class ReactMqttClient extends EventEmitter
                         $this->emit('close', [$connection, $this]);
                     });
             })
-            ->otherwise(function (Exception $e) use ($deferred) {
+            ->otherwise(function (\Exception $e) use ($deferred) {
                 $this->_isConnecting = false;
 
                 $this->_emitError($e);
@@ -233,10 +230,10 @@ class ReactMqttClient extends EventEmitter
      * @return ExtendedPromiseInterface
      */
     public function disconnect(
-        int $timeout = 5): ExtendedPromiseInterface
-    {
+        int $timeout = 5
+    ): ExtendedPromiseInterface {
         if (!$this->_isConnected || $this->_isDisconnecting) {
-            return new RejectedPromise(new LogicException('The client is not connected.'));
+            return new RejectedPromise(new \LogicException('The client is not connected.'));
         }
 
         $this->_isDisconnecting = true;
@@ -291,10 +288,10 @@ class ReactMqttClient extends EventEmitter
      * @return ExtendedPromiseInterface
      */
     public function subscribe(
-        Subscription $subscription): ExtendedPromiseInterface
-    {
+        Subscription $subscription
+    ): ExtendedPromiseInterface {
         if (!$this->_isConnected) {
-            return new RejectedPromise(new LogicException('The client is not connected.'));
+            return new RejectedPromise(new \LogicException('The client is not connected.'));
         }
 
         return $this->_startFlow($this->_flowFactory->buildOutgoingSubscribeFlow([$subscription]));
@@ -308,10 +305,10 @@ class ReactMqttClient extends EventEmitter
      * @return ExtendedPromiseInterface
      */
     public function unsubscribe(
-        Subscription $subscription): ExtendedPromiseInterface
-    {
+        Subscription $subscription
+    ): ExtendedPromiseInterface {
         if (!$this->_isConnected) {
-            return new RejectedPromise(new LogicException('The client is not connected.'));
+            return new RejectedPromise(new \LogicException('The client is not connected.'));
         }
 
         $deferred = new Deferred();
@@ -335,7 +332,7 @@ class ReactMqttClient extends EventEmitter
     public function sendPing()
     {
         if (!$this->_isConnected) {
-            return new RejectedPromise(new LogicException('The client is not connected.'));
+            return new RejectedPromise(new \LogicException('The client is not connected.'));
         }
 
         return $this->_startFlow($this->_flowFactory->buildOutgoingPingFlow());
@@ -349,10 +346,10 @@ class ReactMqttClient extends EventEmitter
      * @return ExtendedPromiseInterface
      */
     public function publish(
-        Message $message): ExtendedPromiseInterface
-    {
+        Message $message
+    ): ExtendedPromiseInterface {
         if (!$this->_isConnected) {
-            return new RejectedPromise(new LogicException('The client is not connected.'));
+            return new RejectedPromise(new \LogicException('The client is not connected.'));
         }
 
         return $this->_startFlow($this->_flowFactory->buildOutgoingPublishFlow($message));
@@ -370,10 +367,10 @@ class ReactMqttClient extends EventEmitter
     public function publishPeriodically(
         int $interval,
         Message $message,
-        callable $generator): ExtendedPromiseInterface
-    {
+        callable $generator
+    ): ExtendedPromiseInterface {
         if (!$this->_isConnected) {
-            return new RejectedPromise(new LogicException('The client is not connected.'));
+            return new RejectedPromise(new \LogicException('The client is not connected.'));
         }
 
         $deferred = new Deferred();
@@ -385,7 +382,7 @@ class ReactMqttClient extends EventEmitter
                     static function ($value) use ($deferred) {
                         $deferred->notify($value);
                     },
-                    static function (Exception $e) use ($deferred) {
+                    static function (\Exception $e) use ($deferred) {
                         $deferred->reject($e);
                     }
                 );
@@ -398,26 +395,26 @@ class ReactMqttClient extends EventEmitter
     /**
      * Emits warnings.
      *
-     * @param Exception $e
+     * @param \Exception $e
      *
      * @return void
      */
     private function _emitWarning(
-        Exception $e): void
-    {
+        \Exception $e
+    ): void {
         $this->emit('warning', [$e, $this]);
     }
 
     /**
      * Emits errors.
      *
-     * @param Exception $e
+     * @param \Exception $e
      *
      * @return void
      */
     private function _emitError(
-        Exception $e): void
-    {
+        \Exception $e
+    ): void {
         $this->emit('error', [$e, $this]);
     }
 
@@ -433,15 +430,15 @@ class ReactMqttClient extends EventEmitter
     private function _establishConnection(
         string $host,
         int $port,
-        int $timeout): ExtendedPromiseInterface
-    {
+        int $timeout
+    ): ExtendedPromiseInterface {
         $deferred = new Deferred();
 
         $future = null;
         $timer = $this->_loop->addTimer(
             $timeout,
             static function () use ($deferred, $timeout, &$future) {
-                $exception = new RuntimeException(sprintf('Connection timed out after %d seconds.', $timeout));
+                $exception = new \RuntimeException(sprintf('Connection timed out after %d seconds.', $timeout));
                 $deferred->reject($exception);
                 if ($future instanceof CancellablePromiseInterface) {
                     $future->cancel();
@@ -463,13 +460,13 @@ class ReactMqttClient extends EventEmitter
                     $this->_handleClose();
                 });
 
-                $stream->on('error', function (Exception $e) {
+                $stream->on('error', function (\Exception $e) {
                     $this->_handleError($e);
                 });
 
                 $deferred->resolve($stream);
             })
-            ->otherwise(static function (Exception $e) use ($deferred) {
+            ->otherwise(static function (\Exception $e) use ($deferred) {
                 $deferred->reject($e);
             });
 
@@ -486,14 +483,14 @@ class ReactMqttClient extends EventEmitter
      */
     private function _registerClient(
         RealtimeConnection $connection,
-        int $timeout): ExtendedPromiseInterface
-    {
+        int $timeout
+    ): ExtendedPromiseInterface {
         $deferred = new Deferred();
 
         $responseTimer = $this->_loop->addTimer(
             $timeout,
             static function () use ($deferred, $timeout) {
-                $exception = new RuntimeException(sprintf('No response after %d seconds.', $timeout));
+                $exception = new \RuntimeException(sprintf('No response after %d seconds.', $timeout));
                 $deferred->reject($exception);
             }
         );
@@ -510,7 +507,7 @@ class ReactMqttClient extends EventEmitter
                 );
 
                 $deferred->resolve($result ?: $connection);
-            })->otherwise(static function (Exception $e) use ($deferred) {
+            })->otherwise(static function (\Exception $e) use ($deferred) {
                 $deferred->reject($e);
             });
 
@@ -525,8 +522,8 @@ class ReactMqttClient extends EventEmitter
      * @return void
      */
     private function _handleReceive(
-        string $data): void
-    {
+        string $data
+    ): void {
         if (!$this->_isConnected && !$this->_isConnecting) {
             return;
         }
@@ -553,12 +550,12 @@ class ReactMqttClient extends EventEmitter
      * @return void
      */
     private function _handlePacket(
-        Packet $packet): void
-    {
+        Packet $packet
+    ): void {
         switch ($packet->getPacketType()) {
             case Packet::TYPE_PUBLISH:
                 if (!($packet instanceof PublishRequestPacket)) {
-                    throw new RuntimeException(sprintf('Expected %s but got %s.', PublishRequestPacket::class, get_class($packet)));
+                    throw new \RuntimeException(sprintf('Expected %s but got %s.', PublishRequestPacket::class, get_class($packet)));
                 }
 
                 $message = new DefaultMessage(
@@ -593,13 +590,13 @@ class ReactMqttClient extends EventEmitter
 
                 if (!$flowFound) {
                     $this->_emitWarning(
-                        new LogicException(sprintf('Received unexpected packet of type %d.', $packet->getPacketType()))
+                        new \LogicException(sprintf('Received unexpected packet of type %d.', $packet->getPacketType()))
                     );
                 }
                 break;
             default:
                 $this->_emitWarning(
-                    new LogicException(sprintf('Cannot handle packet of type %d.', $packet->getPacketType()))
+                    new \LogicException(sprintf('Cannot handle packet of type %d.', $packet->getPacketType()))
                 );
         }
     }
@@ -665,13 +662,13 @@ class ReactMqttClient extends EventEmitter
     /**
      * Handles errors of the stream.
      *
-     * @param Exception $e
+     * @param \Exception $e
      *
      * @return void
      */
     private function _handleError(
-        Exception $e): void
-    {
+        \Exception $e
+    ): void {
         $this->_emitError($e);
     }
 
@@ -685,11 +682,11 @@ class ReactMqttClient extends EventEmitter
      */
     private function _startFlow(
         Flow $flow,
-        bool $isSilent = false): ExtendedPromiseInterface
-    {
+        bool $isSilent = false
+    ): ExtendedPromiseInterface {
         try {
             $packet = $flow->start();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->_emitError($e);
 
             return new RejectedPromise($e);
@@ -725,11 +722,11 @@ class ReactMqttClient extends EventEmitter
      */
     private function _continueFlow(
         ReactFlow $flow,
-        Packet $packet): void
-    {
+        Packet $packet
+    ): void {
         try {
             $response = $flow->next($packet);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->_emitError($e);
 
             return;
@@ -758,8 +755,8 @@ class ReactMqttClient extends EventEmitter
      * @return void
      */
     private function _finishFlow(
-        ReactFlow $flow): void
-    {
+        ReactFlow $flow
+    ): void {
         if ($flow->isSuccess()) {
             if (!$flow->isSilent()) {
                 $this->emit($flow->getCode(), [$flow->getResult(), $this]);
@@ -767,7 +764,7 @@ class ReactMqttClient extends EventEmitter
 
             $flow->getDeferred()->resolve($flow->getResult());
         } else {
-            $result = new RuntimeException($flow->getErrorMessage());
+            $result = new \RuntimeException($flow->getErrorMessage());
             $this->_emitWarning($result);
 
             $flow->getDeferred()->reject($result);

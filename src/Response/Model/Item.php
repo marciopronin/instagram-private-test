@@ -758,12 +758,12 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Item extends AutoPropertyMapper
 {
-    const PHOTO = 1;
-    const VIDEO = 2;
-    const CAROUSEL = 8;
-    const AUDIO = 11;
+    public const PHOTO = 1;
+    public const VIDEO = 2;
+    public const CAROUSEL = 8;
+    public const AUDIO = 11;
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         /*
          * The Unix timestamp (UTC) of when the media was UPLOADED by the user.
          * It is NOT when the media was "taken". It's the upload time.

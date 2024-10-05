@@ -138,7 +138,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Broadcast extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'broadcast_owner'           => 'User',
         'cobroadcasters'            => '',
         /*

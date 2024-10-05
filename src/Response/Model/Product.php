@@ -62,11 +62,11 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Product extends AutoPropertyMapper
 {
-    const APPROVED = 'approved';
-    const PENDING = 'pending';
-    const REJECTED = 'rejected';
+    public const APPROVED = 'approved';
+    public const PENDING = 'pending';
+    public const REJECTED = 'rejected';
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'name'             => 'string',
         'price'            => 'string',
         'current_price'    => 'string',

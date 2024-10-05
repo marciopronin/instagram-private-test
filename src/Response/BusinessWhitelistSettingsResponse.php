@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class BusinessWhitelistSettingsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'require_approval'                      => 'bool',
         'whitelisted_users'                     => '',
     ];

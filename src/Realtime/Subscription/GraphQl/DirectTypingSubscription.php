@@ -6,7 +6,7 @@ use InstagramAPI\Realtime\Subscription\GraphQlSubscription;
 
 class DirectTypingSubscription extends GraphQlSubscription
 {
-    const QUERY = '17867973967082385';
+    public const QUERY = '17867973967082385';
 
     /**
      * Constructor.
@@ -14,8 +14,8 @@ class DirectTypingSubscription extends GraphQlSubscription
      * @param string $accountId
      */
     public function __construct(
-        $accountId)
-    {
+        $accountId
+    ) {
         parent::__construct(self::QUERY, [
             'user_id' => $accountId,
         ]);

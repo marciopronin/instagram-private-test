@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class BusinessManager extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'account_summary_unit'  => 'AccountSummaryUnit',
         'account_insights_unit' => 'BusinessNode',
         'followers_unit'        => 'FollowersUnit',

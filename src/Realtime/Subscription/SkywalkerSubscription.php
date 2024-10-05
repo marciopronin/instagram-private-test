@@ -16,8 +16,8 @@ abstract class SkywalkerSubscription implements SubscriptionInterface
      * @param string $accountId
      */
     public function __construct(
-        $accountId)
-    {
+        $accountId
+    ) {
         $this->_accountId = $accountId;
     }
 

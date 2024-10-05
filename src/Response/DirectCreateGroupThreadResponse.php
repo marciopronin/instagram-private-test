@@ -90,7 +90,7 @@ use InstagramAPI\Response;
  */
 class DirectCreateGroupThreadResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'thread_id'        => 'string',
         'users'            => 'Model\User[]',
         'left_users'       => 'Model\User[]',

@@ -5,29 +5,29 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $queryHashtag = 'dog'; // :)
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Search/explore session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -101,7 +101,12 @@ try {
 
     $ig->discover->registerRecentSearchClick('hashtag', $hashtagId);
 
-    $ig->event->sendNavigation('search_result', 'search_tags', 'feed_hashtag', $hashtagId, $queryHashtag,
+    $ig->event->sendNavigation(
+        'search_result',
+        'search_tags',
+        'feed_hashtag',
+        $hashtagId,
+        $queryHashtag,
         [
             'query_text'        => $queryHashtag,
             'search_session_id' => $searchSession,
@@ -109,7 +114,7 @@ try {
     );
 
     // Generate a random rank token.
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
     // Get sections and items.
     $sectionResponse = $ig->hashtag->getSection($queryHashtag, $rankToken);
     $persistentSections = $sectionResponse->getPersistentSections();
@@ -194,6 +199,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Suggested extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'position'     => 'int',
         'hashtag'      => 'Hashtag',
         'user'         => 'User',

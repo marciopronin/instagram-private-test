@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class SearchTagResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_more'   => 'bool',
         'results'    => 'Model\Tag[]',
         'rank_token' => 'string',

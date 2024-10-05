@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class SendSignupSmsCodeResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'tos_version'             => 'string',
         'gdpr_required'           => 'bool',
     ];

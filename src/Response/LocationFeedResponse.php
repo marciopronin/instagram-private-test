@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class LocationFeedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'sections'               => 'Model\Section[]',
         'next_page'              => 'int',
         'more_available'         => 'bool',

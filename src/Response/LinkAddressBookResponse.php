@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class LinkAddressBookResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'items' => 'Model\Suggestion[]',
     ];
 }

@@ -42,7 +42,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Flex extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'width'          => 'string',
         'height'         => 'string',
         'padding_top'    => 'string',

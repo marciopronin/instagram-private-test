@@ -5,30 +5,30 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $queryLocation = 'Paris'; // :)
 $reaction = '🎉';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Search/explore session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -56,7 +56,7 @@ try {
     $ig->event->sendNavigation('button', 'blended_search', 'search_places');
 
     $locationItems = $ig->location->findPlaces($queryLocation)->getItems();
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
 
     $resultList = [];
     $resultTypeList = [];
@@ -85,7 +85,12 @@ try {
 
     $ig->discover->registerRecentSearchClick('place', $locationId);
 
-    $ig->event->sendNavigation('search_result', 'search_places', 'feed_location', null, null,
+    $ig->event->sendNavigation(
+        'search_result',
+        'search_places',
+        'feed_location',
+        null,
+        null,
         [
             'rank_token'        => $rankToken,
             'query_text'        => $queryLocation,
@@ -99,7 +104,7 @@ try {
     );
 
     // Generate a random rank token.
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
     // Get sections and items.
     $sectionResponse = $ig->location->getFeed($locationId, $rankToken);
     $sections = $sectionResponse->getSections();
@@ -202,9 +207,9 @@ try {
             $following = $storyFeed->getReel()->getUser()->getFriendshipStatus()->getFollowing();
             $ig->event->sendNavigation('button', 'feed_contextual_location', 'reel_location_feed');
 
-            $viewerSession = \InstagramAPI\Signatures::generateUUID();
-            $traySession = \InstagramAPI\Signatures::generateUUID();
-            $rankToken = \InstagramAPI\Signatures::generateUUID();
+            $viewerSession = InstagramAPI\Signatures::generateUUID();
+            $traySession = InstagramAPI\Signatures::generateUUID();
+            $rankToken = InstagramAPI\Signatures::generateUUID();
 
             $ig->event->sendReelPlaybackEntry($items[$itemCounter]->getUser()->getPk(), $viewerSession, $traySession, 'reel_location_feed');
 
@@ -221,7 +226,8 @@ try {
                     $photosConsumed++;
                 }
 
-                $ig->event->sendOrganicMediaSubImpression($storyItem,
+                $ig->event->sendOrganicMediaSubImpression(
+                    $storyItem,
                     [
                         'tray_session_id'   => $traySession,
                         'viewer_session_id' => $viewerSession,
@@ -232,7 +238,10 @@ try {
                     'reel_location_feed'
                 );
 
-                $ig->event->sendOrganicViewedSubImpression($storyItem, $viewerSession, $traySession,
+                $ig->event->sendOrganicViewedSubImpression(
+                    $storyItem,
+                    $viewerSession,
+                    $traySession,
                     [
                         'tray_session_id'   => $traySession,
                         'viewer_session_id' => $viewerSession,
@@ -243,7 +252,12 @@ try {
                     'reel_location_feed'
                 );
 
-                $ig->event->sendOrganicTimespent($storyItem, $following, mt_rand(1000, 2000), 'reel_location_feed', [],
+                $ig->event->sendOrganicTimespent(
+                    $storyItem,
+                    $following,
+                    mt_rand(1000, 2000),
+                    'reel_location_feed',
+                    [],
                     [
                         'tray_session_id'        => $traySession,
                         'viewer_session_id'      => $viewerSession,
@@ -253,7 +267,8 @@ try {
                     ]
                 );
 
-                $ig->event->sendOrganicVpvdImpression($storyItem,
+                $ig->event->sendOrganicVpvdImpression(
+                    $storyItem,
                     [
                         'tray_session_id'       => $traySession,
                         'viewer_session_id'     => $viewerSession,
@@ -266,7 +281,9 @@ try {
                 );
 
                 $ig->event->sendOrganicReelImpression($storyItem, $viewerSession, $traySession, $rankToken, true, 'reel_location_feed');
-                $ig->event->sendOrganicMediaImpression($storyItem, 'reel_location_feed',
+                $ig->event->sendOrganicMediaImpression(
+                    $storyItem,
+                    'reel_location_feed',
                     [
                         'story_ranking_token'   => $rankToken,
                         'tray_session_id'       => $traySession,
@@ -292,7 +309,7 @@ try {
                 $mediaType = 'video';
             }
 
-            $clientContext = \InstagramAPI\Utils::generateClientContext();
+            $clientContext = InstagramAPI\Utils::generateClientContext();
 
             $ig->direct->sendStoryReaction($recipients, $reaction, end($storyItems)->getId(), ['client_context' => $clientContext]);
 
@@ -304,7 +321,11 @@ try {
 
             $ig->story->markMediaSeen($storyItems);
             $ig->event->sendReelPlaybackNavigation(end($storyItems), $viewerSession, $traySession, $rankToken, 'reel_location_feed');
-            $ig->event->sendReelSessionSummary(end($storyItems), $viewerSession, $traySession, 'reel_location_feed',
+            $ig->event->sendReelSessionSummary(
+                end($storyItems),
+                $viewerSession,
+                $traySession,
+                'reel_location_feed',
                 [
                     'tray_session_id'               => $traySession,
                     'viewer_session_id'             => $viewerSession,
@@ -322,6 +343,6 @@ try {
     }
 
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

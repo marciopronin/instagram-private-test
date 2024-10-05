@@ -18,7 +18,7 @@ class VideoDetails extends MediaDetails
      *
      * @var int
      */
-    const MIN_WIDTH = 432;
+    public const MIN_WIDTH = 432;
 
     /**
      * Maximum allowed video width.
@@ -29,7 +29,7 @@ class VideoDetails extends MediaDetails
      *
      * @var int
      */
-    const MAX_WIDTH = 1920;
+    public const MAX_WIDTH = 1920;
 
     /** @var float */
     private $_duration;
@@ -139,8 +139,8 @@ class VideoDetails extends MediaDetails
      * @throws \RuntimeException         If FFmpeg isn't working properly.
      */
     public function __construct(
-        $filename)
-    {
+        $filename
+    ) {
         // Check if input file exists.
         if (empty($filename) || !is_file($filename)) {
             throw new \InvalidArgumentException(sprintf('The video file "%s" does not exist on disk.', $filename));
@@ -255,8 +255,8 @@ class VideoDetails extends MediaDetails
 
     /** {@inheritdoc} */
     public function validate(
-        ConstraintsInterface $constraints)
-    {
+        ConstraintsInterface $constraints
+    ) {
         parent::validate($constraints);
 
         // WARNING TO CONTRIBUTORS: $mediaFilename is for ERROR DISPLAY to
@@ -275,7 +275,8 @@ class VideoDetails extends MediaDetails
         if ($this->_videoCodec !== 'h264') {
             throw new \InvalidArgumentException(sprintf(
                 'Instagram only accepts videos encoded with the H.264 video codec. Your file "%s" has "%s".',
-                $mediaFilename, $this->_videoCodec
+                $mediaFilename,
+                $this->_videoCodec
             ));
         }
 
@@ -283,7 +284,8 @@ class VideoDetails extends MediaDetails
         if ($this->_audioCodec !== null && $this->_audioCodec !== 'aac') {
             throw new \InvalidArgumentException(sprintf(
                 'Instagram only accepts videos encoded with the AAC audio codec. Your file "%s" has "%s".',
-                $mediaFilename, $this->_audioCodec
+                $mediaFilename,
+                $this->_audioCodec
             ));
         }
 
@@ -291,7 +293,8 @@ class VideoDetails extends MediaDetails
         if (strpos($this->_container, 'mp4') === false) {
             throw new \InvalidArgumentException(sprintf(
                 'Instagram only accepts videos packed into MP4 containers. Your file "%s" has "%s".',
-                $mediaFilename, $this->_container
+                $mediaFilename,
+                $this->_container
             ));
         }
 
@@ -306,7 +309,10 @@ class VideoDetails extends MediaDetails
         if ($width < self::MIN_WIDTH || $width > self::MAX_WIDTH) {
             throw new \InvalidArgumentException(sprintf(
                 'Instagram only accepts videos that are between %d and %d pixels wide. Your file "%s" is %d pixels wide.',
-                self::MIN_WIDTH, self::MAX_WIDTH, $mediaFilename, $width
+                self::MIN_WIDTH,
+                self::MAX_WIDTH,
+                $mediaFilename,
+                $width
             ));
         }
 
@@ -319,7 +325,11 @@ class VideoDetails extends MediaDetails
         if ($duration < $minDuration || $duration > $maxDuration) {
             throw new \InvalidArgumentException(sprintf(
                 'Instagram only accepts %s videos that are between %.3f and %.3f seconds long. Your video "%s" is %.3f seconds long.',
-                $constraints->getTitle(), $minDuration, $maxDuration, $mediaFilename, $duration
+                $constraints->getTitle(),
+                $minDuration,
+                $maxDuration,
+                $mediaFilename,
+                $duration
             ));
         }
     }
@@ -330,8 +340,8 @@ class VideoDetails extends MediaDetails
      * @return int
      */
     private function _normalizeRotation(
-        $rotation)
-    {
+        $rotation
+    ) {
         // The angle must be in 0..359 degrees range.
         $result = $rotation % 360;
         // Negative angle can be normalized by adding it to 360:

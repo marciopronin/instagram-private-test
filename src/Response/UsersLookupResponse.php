@@ -62,7 +62,7 @@ use InstagramAPI\Response;
  */
 class UsersLookupResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user'            => 'Model\User',
         'email_sent'      => 'bool',
         'has_valid_phone' => 'bool',

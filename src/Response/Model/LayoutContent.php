@@ -58,7 +58,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class LayoutContent extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'related_style'      => 'string',
         'related'            => 'Tag[]',
         'medias'             => 'SectionMedia[]',

@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class BlockedListResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'blocked_list' => 'Model\User[]',
         'next_max_id'  => 'string',
         'page_size'    => '',

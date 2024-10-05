@@ -150,7 +150,7 @@ use InstagramAPI\Response;
  */
 class BroadcastInfoResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         Model\Broadcast::class, // Import property map.
     ];
 }

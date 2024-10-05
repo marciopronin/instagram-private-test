@@ -25,8 +25,8 @@ class ExceptionsTest extends TestCase
      * @return GenericResponse
      */
     protected function _makeResponse(
-        $json)
-    {
+        $json,
+    ) {
         return new GenericResponse(Client::api_body_decode($json));
     }
 

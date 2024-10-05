@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class CreateCollectionResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         Model\Collection::class, // Import property map.
     ];
 }

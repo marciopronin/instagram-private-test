@@ -66,7 +66,7 @@ use InstagramAPI\Response;
  */
 class TagFeedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'sections'               => 'Model\Section[]',
         'persistent_sections'    => 'Model\Section[]',
         'num_results'            => 'int',

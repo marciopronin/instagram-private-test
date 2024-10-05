@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class CommentInfosResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'comment_infos'             => 'Model\UnpredictableKeys\MediaUnpredictableContainer',
     ];
 }

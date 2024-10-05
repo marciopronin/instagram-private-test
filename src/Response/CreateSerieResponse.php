@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class CreateSerieResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'            => 'string',
         'string'        => 'string',
         'description'   => 'string',

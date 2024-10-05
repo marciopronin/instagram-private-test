@@ -24,8 +24,8 @@ class Auth implements AuthInterface
      * @param Instagram $instagram
      */
     public function __construct(
-        Instagram $instagram)
-    {
+        Instagram $instagram
+    ) {
         $this->_instagram = $instagram;
         $this->_deviceAuth = $this->_instagram->settings->getFbnsAuth();
     }
@@ -86,8 +86,8 @@ class Auth implements AuthInterface
      * @throws \InvalidArgumentException
      */
     public function update(
-        $auth)
-    {
+        $auth
+    ) {
         /* @var DeviceAuth $auth */
         $this->_deviceAuth->read($auth);
         $this->_instagram->settings->setFbnsAuth($this->__toString());

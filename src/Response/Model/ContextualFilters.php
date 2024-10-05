@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ContextualFilters extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'clause_type' => 'string',
         'filters'     => '',
         'clauses'     => '',

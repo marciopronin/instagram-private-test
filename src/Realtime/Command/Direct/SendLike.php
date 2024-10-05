@@ -4,7 +4,7 @@ namespace InstagramAPI\Realtime\Command\Direct;
 
 final class SendLike extends SendItem
 {
-    const TYPE = 'like';
+    public const TYPE = 'like';
 
     /**
      * Constructor.
@@ -16,8 +16,8 @@ final class SendLike extends SendItem
      */
     public function __construct(
         $threadId,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         parent::__construct($threadId, self::TYPE, $options);
     }
 }

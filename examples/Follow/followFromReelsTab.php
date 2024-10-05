@@ -5,18 +5,18 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -24,7 +24,7 @@ try {
 try {
     $ig->event->sendNavigation('main_clips', 'feed_timeline', 'clips_viewer_clips_tab');
 
-    $sessionId = \InstagramAPI\Signatures::generateUUID();
+    $sessionId = InstagramAPI\Signatures::generateUUID();
 
     $discoverStream = $ig->reel->discover();
     $streamClips = $discoverStream->getItems();
@@ -61,7 +61,9 @@ try {
     $ig->event->sendFollowButtonTapped($userId, 'clips_viewer_clips_tab');
     $ig->people->follow($userId);
 
-    $ig->event->sendProfileAction('follow', $userId,
+    $ig->event->sendProfileAction(
+        'follow',
+        $userId,
         [
             [
                 'module'        => 'feed_timeline',
@@ -70,6 +72,6 @@ try {
         ]
     );
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Gating extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'gating_type' => 'string',
         'description' => 'string',
         'buttons'     => 'string[]',

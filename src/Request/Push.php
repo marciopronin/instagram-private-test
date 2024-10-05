@@ -18,12 +18,12 @@ class Push extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PushRegisterResponse
+     * @return Response\PushRegisterResponse
      */
     public function register(
         $pushChannel,
-        $token)
-    {
+        $token
+    ) {
         // Make sure we only allow these for push channels.
         if ($pushChannel != 'mqtt' && $pushChannel != 'fcm') {
             throw new \InvalidArgumentException(sprintf('Bad push channel "%s".', $pushChannel));
@@ -35,7 +35,7 @@ class Push extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('users', $this->ig->account_id)
             ->addPost('family_device_id', $this->ig->phone_id);
-        //->addPost('_csrftoken', $this->ig->client->getToken());
+        // ->addPost('_csrftoken', $this->ig->client->getToken());
 
         if ($this->ig->getIsAndroid()) {
             $request->addPost('device_type', $pushChannel === 'mqtt' ? 'android_mqtt' : 'android_fcm')
@@ -58,7 +58,7 @@ class Push extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PushPreferencesResponse
+     * @return Response\PushPreferencesResponse
      */
     public function getPreferences()
     {
@@ -73,11 +73,11 @@ class Push extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\PushPreferencesResponse
+     * @return Response\PushPreferencesResponse
      */
     public function setPreferences(
-        array $preferences)
-    {
+        array $preferences
+    ) {
         $request = $this->ig->request('push/preferences/');
         foreach ($preferences as $key => $value) {
             $request->addPost($key, $value);

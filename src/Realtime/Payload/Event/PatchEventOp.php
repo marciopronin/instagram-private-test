@@ -30,12 +30,12 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class PatchEventOp extends AutoPropertyMapper
 {
-    const ADD = 'add';
-    const REMOVE = 'remove';
-    const REPLACE = 'replace';
-    const NOTIFY = 'notify';
+    public const ADD = 'add';
+    public const REMOVE = 'remove';
+    public const REPLACE = 'replace';
+    public const NOTIFY = 'notify';
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'op'            => '',
         'path'          => '',
         'value'         => '',

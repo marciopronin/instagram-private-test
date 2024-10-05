@@ -14,7 +14,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ProductImage extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'image_versions2' => 'Image_Versions2',
     ];
 }

@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class InterestTopic extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'name'      => 'string',
         'emoji'     => 'string',
         'subtopics' => 'InterestSubtopic[]',

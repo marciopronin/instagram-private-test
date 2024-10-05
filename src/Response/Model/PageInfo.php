@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class PageInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'end_cursor'        => 'string',
         'has_next_page'     => 'bool',
         'has_previous_page' => 'bool',

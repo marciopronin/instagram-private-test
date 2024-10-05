@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class WebCheckpointResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'entry_data'           => 'Model\ChallengeEntryData',
         'challenge'            => 'Model\WebChallenge',
         'challengeType'        => 'string',

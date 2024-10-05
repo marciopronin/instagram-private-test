@@ -42,7 +42,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class AnimatedMediaImageFixedHeight extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'url'       => 'string',
         'width'     => 'string',
         'heigth'    => 'string',

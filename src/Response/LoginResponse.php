@@ -202,7 +202,7 @@ use InstagramAPI\Response;
  */
 class LoginResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'username'                      => 'string',
         'has_anonymous_profile_picture' => 'bool',
         'can_boost_post'                => 'bool',

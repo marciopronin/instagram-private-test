@@ -24,8 +24,8 @@ class CoreUnpredictableContainer extends AutoPropertyMapper
     // Let's disable direct access to this container via anything other than
     // the functions that WE define ourselves! That way, people cannot use
     // virtual properties/functions to manipulate the core data storage.
-    const ALLOW_VIRTUAL_PROPERTIES = false;
-    const ALLOW_VIRTUAL_FUNCTIONS = false;
+    public const ALLOW_VIRTUAL_PROPERTIES = false;
+    public const ALLOW_VIRTUAL_FUNCTIONS = false;
 
     /**
      * Data cache to avoid constant processing every time the getter is used.
@@ -77,8 +77,8 @@ class CoreUnpredictableContainer extends AutoPropertyMapper
      * @return $this
      */
     public function setData(
-        array $value)
-    {
+        array $value
+    ) {
         $this->_cache = $value;
 
         $newObjectData = [];

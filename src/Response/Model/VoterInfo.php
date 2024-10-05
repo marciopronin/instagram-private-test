@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class VoterInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'poll_id'           => 'string',
         'voters'            => 'Voter[]',
         'max_id'            => 'string',

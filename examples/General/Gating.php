@@ -5,29 +5,29 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $queryUser = 'selenagomez'; // :)
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -104,7 +104,12 @@ try {
     $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
 
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
-    $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
+    $ig->event->sendNavigation(
+        'button',
+        'blended_search',
+        'profile',
+        null,
+        null,
         [
             'rank_token'            => null,
             'query_text'            => $queryUser,
@@ -121,7 +126,7 @@ try {
     if ($userInfo->getGating() !== null) {
         if ($userInfo->getGating()->getGatingType() === 'unappealable') {
             echo $userInfo->getGating()->getDescription();
-            exit();
+            exit;
         }
         $ig->people->markUserOverage($userId);
     }
@@ -133,6 +138,6 @@ try {
         $ig->event->sendThumbnailImpression('instagram_thumbnail_impression', $item, 'profile');
     }
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

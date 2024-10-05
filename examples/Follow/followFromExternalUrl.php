@@ -5,22 +5,22 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////// URL ////////
+// ///// URL ////////
 $url = '';
-///////////////////
+// /////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -56,7 +56,7 @@ try {
     $items = array_slice($items, 0, 6);
     $ig->event->preparePerfWithImpressions($items, 'profile');
 
-    $traySession = \InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
     $ig->event->reelTrayRefresh(
         [
             'tray_session_id'   => $traySession,
@@ -69,7 +69,9 @@ try {
     $ig->event->sendFollowButtonTapped($userId, 'profile');
     $ig->people->follow($userId);
 
-    $ig->event->sendProfileAction('follow', $userId,
+    $ig->event->sendProfileAction(
+        'follow',
+        $userId,
         [
             [
                 'module'        => 'feed_short_url',
@@ -78,7 +80,7 @@ try {
         ]
     );
 
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
     $ig->event->sendSearchFollowButtonClicked($userId, 'profile', $rankToken);
 
     try {
@@ -87,12 +89,12 @@ try {
         foreach ($chainingUsers as $user) {
             $ig->event->sendSimilarUserImpression($userId, $user->getPk());
         }
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         // pass. No chaining.
     }
 
     $ig->event->updateAppState('background');
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

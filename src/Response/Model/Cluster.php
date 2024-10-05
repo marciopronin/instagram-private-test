@@ -58,7 +58,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Cluster extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                          => 'string',
         'title'                       => 'string',
         'context'                     => 'string',

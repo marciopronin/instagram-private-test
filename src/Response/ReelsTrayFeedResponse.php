@@ -62,7 +62,7 @@ use InstagramAPI\Response;
  */
 class ReelsTrayFeedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'story_ranking_token'                  => 'string',
         'broadcasts'                           => 'Model\Broadcast[]',
         'tray'                                 => 'Model\StoryTray[]',

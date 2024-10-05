@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Voter extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user'  => 'User',
         'vote'  => 'float',
     ];

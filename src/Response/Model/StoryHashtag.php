@@ -59,7 +59,7 @@ use InstagramAPI\Response\PropertyCollection;
  */
 class StoryHashtag extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         PropertyCollection\Sticker::class,
         'hashtag'       => 'Hashtag',
         'attribution'   => 'string',

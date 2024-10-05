@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class AccountDetailsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'date_joined'                   => 'string',
         'former_username_info'          => 'Model\FormerUsernameInfo',
         'primary_country_info'          => 'Model\PrimaryCountryInfo',

@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class CloseFriends extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'sections'  => '',
         'users'     => 'User[]',
         'big_list'  => '',

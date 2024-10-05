@@ -19,11 +19,11 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\InsightsResponse
+     * @return Response\InsightsResponse
      */
     public function getInsights(
-        $day = null)
-    {
+        $day = null
+    ) {
         if (empty($day)) {
             $day = date('d');
         }
@@ -41,11 +41,11 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MediaInsightsResponse
+     * @return Response\MediaInsightsResponse
      */
     public function getMediaInsights(
-        $mediaId)
-    {
+        $mediaId
+    ) {
         return $this->ig->request("insights/media_organic_insights/{$mediaId}/")
             ->addParam('ig_sig_key_version', Constants::SIG_KEY_VERSION)
             ->getResponse(new Response\MediaInsightsResponse());
@@ -61,14 +61,14 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GraphqlResponse
+     * @return Response\GraphqlResponse
      */
     public function getStatistics(
         $timezone = 'Atlantic/Canary',
         $activityTab = true,
         $audienceTab = true,
-        $contentTab = true)
-    {
+        $contentTab = true
+    ) {
         return $this->ig->request('ads/graphql/')
             ->setSignedPost(false)
             ->setIsMultiResponse(true)
@@ -100,18 +100,18 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GraphqlResponse
+     * @return Response\GraphqlResponse
      */
     public function getPostInsights(
-        $mediaId)
-    {
+        $mediaId
+    ) {
         return $this->ig->request('ads/graphql/')
             ->setSignedPost(false)
             ->setIsSilentFail(true)
             ->addParam('vc_policy', 'insights_policy')
             ->addPost('locale', $this->ig->getLocale())
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('variables', json_encode([
                 'surface'                       => 'post',
                 'query_params'                  => json_encode([
@@ -128,7 +128,7 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getAdsActivity()
     {
@@ -148,7 +148,7 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BusinessWhitelistSettingsResponse
+     * @return Response\BusinessWhitelistSettingsResponse
      *
      * @see https://help.instagram.com/116947042301556
      */
@@ -169,15 +169,15 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BusinessWhitelistSettingsResponse
+     * @return Response\BusinessWhitelistSettingsResponse
      *
      * @see https://help.instagram.com/116947042301556
      */
     public function updateWhitelistSettings(
         $addedUserIds = [],
         $removedUserIds = [],
-        $requireApproval = true)
-    {
+        $requireApproval = true
+    ) {
         $userIds = count($addedUserIds) + count($removedUserIds);
 
         if ($userIds > 0) {
@@ -196,7 +196,7 @@ class Business extends RequestCollection
             ->addPost('added_user_ids', $addedUserIds)
             ->addPost('removed_user_ids', $removedUserIds)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\BusinessWhitelistSettingsResponse());
     }
@@ -206,14 +206,14 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\BusinessWhitelistSettingsResponse
+     * @return Response\BusinessWhitelistSettingsResponse
      */
     public function setConvertToPublicProfile()
     {
         return $this->ig->request('business/branded_content/update_whitelist_settings/')
             ->addPost('to_account_type', 1)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\BusinessWhitelistSettingsResponse());
     }
@@ -223,7 +223,7 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ShouldRequireProfessionalAccountResponse
+     * @return Response\ShouldRequireProfessionalAccountResponse
      */
     public function getShouldRequireProfessionalAccount()
     {
@@ -236,7 +236,7 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MonetizationProductsEligibilityDataResponse
+     * @return Response\MonetizationProductsEligibilityDataResponse
      */
     public function getMonetizationProductsEligibilityData()
     {
@@ -250,7 +250,7 @@ class Business extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MonetizationProductsEligibilityDataResponse
+     * @return Response\MonetizationProductsEligibilityDataResponse
      */
     public function getMonetizationProductsGating()
     {
@@ -320,8 +320,8 @@ class Business extends RequestCollection
     public function getCommonInsights(
         $startDate,
         $endDate,
-        $period)
-    {
+        $period
+    ) {
         $response = $this->ig->request('bloks/apps/com.instagram.insights.common.date_picker.date_picker_surface/')
             ->setSignedPost(false)
             ->addPost('target_id', $this->ig->account_id)
@@ -372,8 +372,8 @@ class Business extends RequestCollection
      * @return array
      */
     public function getInsightsInteractions(
-        $period)
-    {
+        $period
+    ) {
         $response = $this->ig->request('bloks/apps/com.instagram.insights.account.content_interactions_breakout.timeframe.container/')
             ->setSignedPost(false)
             ->addPost('origin', 'unknown')

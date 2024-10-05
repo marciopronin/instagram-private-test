@@ -5,15 +5,15 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $loginResponse = $ig->login($username, $password);
@@ -26,6 +26,6 @@ try {
         $ig->finishTwoFactorVerification($username, $password, $twoFactorContext, $twoFactorChallenge, $verificationCode);
     }
     $user = $ig->people->getSelfInfo()->getUser();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     var_dump($e);
 }

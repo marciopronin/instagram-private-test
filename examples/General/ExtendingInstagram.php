@@ -2,7 +2,7 @@
 
 require __DIR__.'/../../vendor/autoload.php';
 
-class ExtendedInstagram extends \InstagramAPI\Instagram
+class ExtendedInstagram extends InstagramAPI\Instagram
 {
     /**
      * Set the active account for the class instance.
@@ -12,12 +12,12 @@ class ExtendedInstagram extends \InstagramAPI\Instagram
      * @param string $username Your Instagram username.
      * @param string $password Your Instagram password.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws InstagramAPI\Exception\InstagramException
      */
     public function setUser(
         $username,
-        $password)
-    {
+        $password,
+    ) {
         $this->_setUser('regular', $username, $password);
     }
 }

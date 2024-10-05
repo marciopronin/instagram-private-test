@@ -29,7 +29,7 @@ $debug = false;
 $username = '';
 $password = '';
 
-$ig = new \InstagramAPI\Instagram(
+$ig = new InstagramAPI\Instagram(
     $debug,
     false // Use non-truncated API debugging.
 );
@@ -83,7 +83,7 @@ $testDevices = array_merge(
         // class' REFUSAL to construct from anything lower than 1920x1080
         // devices, so we had to FAKE its resolution HERE just to get it to
         // even be testable! Its real User Agent string is supposed to be:
-        //'17/4.2.2; 240dpi; 480x800; samsung; SM-G350; cs02; hawaii_ss_cs02',
+        // '17/4.2.2; 240dpi; 480x800; samsung; SM-G350; cs02; hawaii_ss_cs02',
         // However, Instagram only checks the model identifier, in this case
         // "SM-G350", and the test shows that this bad device lacks HD videos.
         '17/4.2.2; 240dpi; 1080x1920; samsung; SM-G350; cs02; hawaii_ss_cs02',
@@ -115,7 +115,7 @@ foreach ($testDevices as $thisDevice) {
             try {
                 $mediaInfo = $ig->media->getInfo($videoId)->getItems()[0];
                 break;
-            } catch (\InstagramAPI\Exception\ThrottledException $e) {
+            } catch (InstagramAPI\Exception\ThrottledException $e) {
                 if ($attempt < 4) {
                     sleep(10);
                 } else {
@@ -154,13 +154,13 @@ foreach ($testDevices as $thisDevice) {
 /**
  * Changes the user-agent sent by the InstagramAPI library.
  *
- * @param \InstagramAPI\Instagram $ig
- * @param DeviceInterface|string  $value
+ * @param InstagramAPI\Instagram $ig
+ * @param DeviceInterface|string $value
  */
 function switchDevice(
     $ig,
-    $value)
-{
+    $value,
+) {
     // Create the new Device object, without automatic fallbacks.
     $device = ($value instanceof DeviceInterface ? $value : new Device(Constants::IG_VERSION, Constants::VERSION_CODE, Constants::USER_AGENT_LOCALE, $value, false));
 
@@ -193,13 +193,13 @@ function switchDevice(
  * someday allow 1080-width playback, in which case we will have to test and
  * revise all device identifiers again to make sure they all see the best URLs.
  *
- * @param \InstagramAPI\Instagram $ig
- * @param string                  $userPk
+ * @param InstagramAPI\Instagram $ig
+ * @param string                 $userPk
  */
 function buildVideoList(
     $ig,
-    $userPk)
-{
+    $userPk,
+) {
     // We must use a good device to get answers when scanning for HD videos.
     switchDevice($ig, GoodDevices::getRandomGoodDevice());
 
@@ -208,17 +208,19 @@ function buildVideoList(
     do {
         $feed = $ig->timeline->getUserFeed($userPk, $maxId);
         foreach ($feed->getItems() as $item) {
-            if ($item->getMediaType() != \InstagramAPI\Response\Model\Item::VIDEO) {
+            if ($item->getMediaType() != InstagramAPI\Response\Model\Item::VIDEO) {
                 continue;
             }
 
-            $code = \InstagramAPI\InstagramID::toCode($item->getPk());
+            $code = InstagramAPI\InstagramID::toCode($item->getPk());
             echo sprintf("    '%s' => [\n", $item->getId());
             $videoVersions = $item->getVideoVersions();
             foreach ($videoVersions as $version) {
                 echo sprintf(
                     "        ['width'=>%d, 'height'=>%d, 'url'=>'https://instagram.com/p/%s/'],\n",
-                    $version->getWidth(), $version->getHeight(), $code
+                    $version->getWidth(),
+                    $version->getHeight(),
+                    $code
                 );
             }
             echo "    ],\n";

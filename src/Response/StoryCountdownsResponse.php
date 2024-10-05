@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class StoryCountdownsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'countdowns' => 'Model\CountdownSticker[]',
     ];
 }

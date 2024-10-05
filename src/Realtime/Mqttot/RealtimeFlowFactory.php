@@ -54,20 +54,20 @@ class RealtimeFlowFactory
 
     public function buildIncomingPublishFlow(
         Message $message,
-        int $identifier = null): IncomingPublishFlow
-    {
+        ?int $identifier = null
+    ): IncomingPublishFlow {
         return new IncomingPublishFlow($this->_packetFactory, $message, $identifier);
     }
 
     public function buildOutgoingConnectFlow(
-        RealtimeConnection $connection): RealtimeConnectFlow
-    {
+        RealtimeConnection $connection
+    ): RealtimeConnectFlow {
         return new RealtimeConnectFlow($this->_packetFactory, $connection);
     }
 
     public function buildOutgoingDisconnectFlow(
-        Connection $connection): OutgoingDisconnectFlow
-    {
+        Connection $connection
+    ): OutgoingDisconnectFlow {
         return new OutgoingDisconnectFlow($this->_packetFactory, $connection);
     }
 
@@ -77,20 +77,20 @@ class RealtimeFlowFactory
     }
 
     public function buildOutgoingPublishFlow(
-        Message $message): OutgoingPublishFlow
-    {
+        Message $message
+    ): OutgoingPublishFlow {
         return new OutgoingPublishFlow($this->_packetFactory, $message, $this->_packetIdentifierGenerator);
     }
 
     public function buildOutgoingSubscribeFlow(
-        array $subscriptions): OutgoingSubscribeFlow
-    {
+        array $subscriptions
+    ): OutgoingSubscribeFlow {
         return new OutgoingSubscribeFlow($this->_packetFactory, $subscriptions, $this->_packetIdentifierGenerator);
     }
 
     public function buildOutgoingUnsubscribeFlow(
-        array $subscriptions): OutgoingUnsubscribeFlow
-    {
+        array $subscriptions
+    ): OutgoingUnsubscribeFlow {
         return new OutgoingUnsubscribeFlow($this->_packetFactory, $subscriptions, $this->_packetIdentifierGenerator);
     }
 }

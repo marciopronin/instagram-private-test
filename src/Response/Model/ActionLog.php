@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ActionLog extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'bold'        => 'Bold[]',
         'description' => '',
     ];

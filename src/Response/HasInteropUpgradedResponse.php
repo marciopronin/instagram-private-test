@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class HasInteropUpgradedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_interop_upgraded'             => 'bool',
     ];
 }

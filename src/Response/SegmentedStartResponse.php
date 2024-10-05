@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class SegmentedStartResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'stream_id' => 'string',
         'offset'    => 'int',
     ];
@@ -42,14 +42,14 @@ class SegmentedStartResponse extends Response
      */
     public function isOk()
     {
-        //$streamId = $this->_getProperty('stream_id');
+        // $streamId = $this->_getProperty('stream_id');
         $streamId = $this->_getProperty('offset');
         if ($streamId !== null && $streamId !== '') {
             return true;
         } else {
             // Set a nice message for exceptions.
             if ($this->getMessage() === null) {
-                //$this->setMessage('Stream ID for segmented uploader is missing or invalid.');
+                // $this->setMessage('Stream ID for segmented uploader is missing or invalid.');
                 $this->setMessage('Offset for segmented uploader is missing or invalid.');
             }
 

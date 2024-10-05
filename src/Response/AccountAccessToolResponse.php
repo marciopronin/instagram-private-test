@@ -66,7 +66,7 @@ use InstagramAPI\Response;
  */
 class AccountAccessToolResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'config'           => 'Model\AccountAccessToolConfig',
         'country_code'     => 'string',
         'language_code'    => 'string',

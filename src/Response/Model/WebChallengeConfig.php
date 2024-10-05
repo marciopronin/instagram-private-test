@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class WebChallengeConfig extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'csrf_token'    => 'string',
         'viewer'        => '',
         'viewerId'      => 'string',

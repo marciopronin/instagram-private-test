@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class BroadcastJoinResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'sdp_response'             => 'string',
         'server_data_info'         => 'Model\ServerDataInfo',
         'encoded_server_data_info' => 'string',

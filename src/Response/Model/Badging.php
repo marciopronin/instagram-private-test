@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Badging extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'ids'   => '',
         'items' => '',
     ];

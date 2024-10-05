@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class LiveMetadata extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'is_scheduled_live'     => 'bool',
         'live_notifs_enabled'   => 'bool',
         'is_broadcast_ended'    => 'bool',

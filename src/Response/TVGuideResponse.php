@@ -58,7 +58,7 @@ use InstagramAPI\Response;
  */
 class TVGuideResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'channels'          => 'Model\TVChannel[]',
         'my_channel'        => 'Model\TVChannel',
         'badging'           => 'Model\Badging',

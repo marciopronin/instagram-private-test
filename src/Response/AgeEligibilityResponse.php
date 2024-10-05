@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class AgeEligibilityResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'eligible_to_register'      => 'bool',
         'parental_consent_required' => 'bool',
     ];

@@ -764,7 +764,7 @@ namespace InstagramAPI\Response\Model;
  */
 class Media extends Item
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'image'                            => 'string',
         'id'                               => 'string',
         'user'                             => 'User',

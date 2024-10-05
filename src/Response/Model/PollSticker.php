@@ -46,7 +46,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class PollSticker extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                => 'string',
         'poll_id'           => 'string',
         'question'          => 'string',

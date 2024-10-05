@@ -6,6 +6,6 @@ use InstagramAPI\AutoPropertyMapper;
 
 class CameraModels extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
     ];
 }

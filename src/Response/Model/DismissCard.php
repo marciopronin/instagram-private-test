@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DismissCard extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'card_id'        => '',
         'image_url'      => 'string',
         'title'          => '',

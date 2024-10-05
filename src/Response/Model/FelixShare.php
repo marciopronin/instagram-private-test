@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class FelixShare extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'video' => '', // TODO
         'text'  => 'string',
     ];

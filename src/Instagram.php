@@ -24,7 +24,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var int
      */
-    const EXPERIMENTS_REFRESH = 7200;
+    public const EXPERIMENTS_REFRESH = 7200;
 
     /**
      * Currently active Instagram username.
@@ -50,7 +50,7 @@ class Instagram implements ExperimentsInterface
     /**
      * The Android device for the currently active user.
      *
-     * @var \InstagramAPI\Devices\DeviceInterface
+     * @var Devices\DeviceInterface
      */
     public $device;
 
@@ -187,6 +187,13 @@ class Instagram implements ExperimentsInterface
     public static $retryOnNetworkException = false;
 
     /**
+     * Retry on NetworkExpcetion sleep.
+     *
+     * @var int
+     */
+    public static $retryOnNetworkExceptionSleep = 5;
+
+    /**
      * Send async.
      *
      * @var bool
@@ -298,7 +305,7 @@ class Instagram implements ExperimentsInterface
     /**
      * The account settings storage.
      *
-     * @var \InstagramAPI\Settings\StorageHandler|null
+     * @var Settings\StorageHandler|null
      */
     public $settings;
 
@@ -324,21 +331,21 @@ class Instagram implements ExperimentsInterface
      *
      * @var string|null
      */
-    public $customDeviceString = null;
+    public $customDeviceString;
 
     /**
      * Custom Device string.
      *
      * @var string|null
      */
-    public $customDeviceId = null;
+    public $customDeviceId;
 
     /**
      * Version Code.
      *
      * @var string
      */
-    public $versionCode = null;
+    public $versionCode;
 
     /**
      * Login attempt counter.
@@ -352,7 +359,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var string
      */
-    public $customPigeonSessionId = null;
+    public $customPigeonSessionId;
 
     /**
      * The radio type used for requests.
@@ -366,14 +373,14 @@ class Instagram implements ExperimentsInterface
      *
      * @var int
      */
-    public $timezoneOffset = null;
+    public $timezoneOffset;
 
     /**
      * Timezone name.
      *
      * @var string
      */
-    public $timezoneName = null;
+    public $timezoneName;
 
     /**
      * The platform used for requests.
@@ -443,7 +450,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var string|null
      */
-    public $appStartupCountry = null;
+    public $appStartupCountry;
 
     /**
      * Event batch collection.
@@ -475,7 +482,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var string|null
      */
-    public $webUserAgent = null;
+    public $webUserAgent;
 
     /**
      * Logging events compression mode.
@@ -493,7 +500,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var string|null
      */
-    public $iosModel = null;
+    public $iosModel;
 
     /**
      * Dark mode enabled.
@@ -514,7 +521,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var string|null
      */
-    public $iosDpi = null;
+    public $iosDpi;
 
     /**
      * Navigation chain.
@@ -579,7 +586,7 @@ class Instagram implements ExperimentsInterface
      *
      * @var callable
      */
-    public $customResolver = null;
+    public $customResolver;
 
     /**
      * Number of retries to be made when retry
@@ -650,21 +657,21 @@ class Instagram implements ExperimentsInterface
      *
      * @var TimelineFeedResponse|null
      */
-    public $initTimelineFeed = null;
+    public $initTimelineFeed;
 
     /**
      * ReelsTrayFeed object from Login flow.
      *
      * @var ReelsTrayFeedResponse|null
      */
-    public $initTrayFeed = null;
+    public $initTrayFeed;
 
     /**
      * Middle forward proxy.
      *
      * @var string|null
      */
-    public $middleForwardProxy = null;
+    public $middleForwardProxy;
 
     /**
      * Middle proxy key.
@@ -732,15 +739,15 @@ class Instagram implements ExperimentsInterface
      * @param bool            $platform       The platform to be emulated. 'android' or 'ios'.
      * @param LoggerInterface $logger         Custom logger interface.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      */
     public function __construct(
         $debug = false,
         $truncatedDebug = false,
         array $storageConfig = [],
         $platform = 'android',
-        $logger = null)
-    {
+        $logger = null
+    ) {
         if ($platform !== 'android' && $platform !== 'ios') {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid platform.', $platform));
         } else {
@@ -771,14 +778,14 @@ class Instagram implements ExperimentsInterface
         // some people install the library at home and then move it somewhere
         // else without the requirements, and then blame us for their errors.
         if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50600) {
-            throw new \InstagramAPI\Exception\InternalException(
+            throw new Exception\InternalException(
                 'You must have PHP 5.6 or higher to use the Instagram API library.'
             );
         }
         static $extensions = ['curl', 'mbstring', 'gd', 'exif', 'zlib'];
         foreach ($extensions as $ext) {
             if (!@extension_loaded($ext)) {
-                throw new \InstagramAPI\Exception\InternalException(sprintf(
+                throw new Exception\InternalException(sprintf(
                     'You must have the "%s" PHP extension to use the Instagram API library.',
                     $ext
                 ));
@@ -847,8 +854,8 @@ class Instagram implements ExperimentsInterface
      *                           a custom CA bundle file.
      */
     public function setVerifySSL(
-        $state)
-    {
+        $state
+    ) {
         $this->client->setVerifySSL($state);
     }
 
@@ -872,8 +879,8 @@ class Instagram implements ExperimentsInterface
      *                                 proxying.
      */
     public function setProxy(
-        $value)
-    {
+        $value
+    ) {
         $this->client->setProxy($value);
     }
 
@@ -893,8 +900,8 @@ class Instagram implements ExperimentsInterface
      * @param string|null $value String.
      */
     public function setMiddleForwardProxy(
-        $value)
-    {
+        $value
+    ) {
         $this->middleForwardProxy = $value;
     }
 
@@ -914,8 +921,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value String.
      */
     public function setMiddleProxyKey(
-        $value)
-    {
+        $value
+    ) {
         $this->middleProxyKey = $value;
     }
 
@@ -935,8 +942,8 @@ class Instagram implements ExperimentsInterface
      * @param callable $value.
      */
     public function setCustomResolver(
-        $value)
-    {
+        $value
+    ) {
         $this->customResolver = $value;
     }
 
@@ -947,8 +954,8 @@ class Instagram implements ExperimentsInterface
      * @param int $value.
      */
     public function setRetriesOnNetworkFailure(
-        $value)
-    {
+        $value
+    ) {
         $this->retriesOnNetworkFailure = $value;
     }
 
@@ -960,8 +967,8 @@ class Instagram implements ExperimentsInterface
      * @param string|null $value String specifying the host used for resolving.
      */
     public function setResolveHost(
-        $value)
-    {
+        $value
+    ) {
         $this->client->setResolveHost($value);
     }
 
@@ -984,8 +991,8 @@ class Instagram implements ExperimentsInterface
      * @param string|null $value Device string.
      */
     public function setDeviceString(
-        $value)
-    {
+        $value
+    ) {
         $this->customDeviceString = $value;
     }
 
@@ -999,8 +1006,8 @@ class Instagram implements ExperimentsInterface
      * @param string[]|null $value Device string.
      */
     public function setCustomDevices(
-        $value)
-    {
+        $value
+    ) {
         if (is_array($value)) {
             $deviceString = $value[array_rand($value)];
             $this->customDeviceString = is_string($deviceString) ? $deviceString : null;
@@ -1013,8 +1020,8 @@ class Instagram implements ExperimentsInterface
      * @param string|null $value Device string.
      */
     public function setCustomDeviceId(
-        $value)
-    {
+        $value
+    ) {
         $this->customDeviceId = $value;
     }
 
@@ -1029,8 +1036,8 @@ class Instagram implements ExperimentsInterface
      */
     public function setVersionCode(
         $value,
-        $random = false)
-    {
+        $random = false
+    ) {
         if ($random === true) {
             $versionCode = Constants::VERSION_CODE[array_rand(Constants::VERSION_CODE)];
         } else {
@@ -1062,8 +1069,8 @@ class Instagram implements ExperimentsInterface
      *                           interface.
      */
     public function setOutputInterface(
-        $value)
-    {
+        $value
+    ) {
         $this->client->setOutputInterface($value);
     }
 
@@ -1086,8 +1093,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value custom pigeon session id.
      */
     public function setCustomPigeonSessionId(
-        $value)
-    {
+        $value
+    ) {
         $this->customPigeonSessionId = $value;
     }
 
@@ -1105,8 +1112,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value String specifying the radio type.
      */
     public function setRadioType(
-        $value)
-    {
+        $value
+    ) {
         if ($value !== 'wifi-none' && $value !== 'mobile-lte') {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid radio type.', $value));
         }
@@ -1130,8 +1137,8 @@ class Instagram implements ExperimentsInterface
      * @param int $value Timezone offset.
      */
     public function setTimezoneOffset(
-        $value)
-    {
+        $value
+    ) {
         $this->timezoneOffset = $value;
     }
 
@@ -1161,8 +1168,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value Timezone name.
      */
     public function setTimezoneName(
-        $value)
-    {
+        $value
+    ) {
         $this->timezoneName = $value;
     }
 
@@ -1182,8 +1189,8 @@ class Instagram implements ExperimentsInterface
      * @param string|string[] $value
      */
     public function setLocale(
-        $value)
-    {
+        $value
+    ) {
         if (!is_array($value)) {
             $value = [$value];
         }
@@ -1217,8 +1224,8 @@ class Instagram implements ExperimentsInterface
      * @param string|string[] $value
      */
     public function setAcceptLanguage(
-        $value)
-    {
+        $value
+    ) {
         if (!is_array($value)) {
             $value = [$value];
         }
@@ -1253,8 +1260,8 @@ class Instagram implements ExperimentsInterface
      * @param mixed $value
      */
     public function setAppStartupCountry(
-        $value)
-    {
+        $value
+    ) {
         if (preg_match_all('/^[A-Z]{2}$/m', $value, $matches)) {
             $this->appStartupCountry = $matches[0][0];
         } else {
@@ -1322,8 +1329,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value Connection Speed. Format: '53kbps'.
      */
     public function setConnectionSpeed(
-        $value)
-    {
+        $value
+    ) {
         $this->connectionSpeed = $value;
     }
 
@@ -1343,8 +1350,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value. 'true' or 'false'
      */
     public function setIsEUUser(
-        $value)
-    {
+        $value
+    ) {
         $this->isEUUser = $value;
     }
 
@@ -1364,8 +1371,8 @@ class Instagram implements ExperimentsInterface
      * @param int $value.
      */
     public function setBatteryLevel(
-        $value)
-    {
+        $value
+    ) {
         if ($value < 1 && $value > 100) {
             throw new \InvalidArgumentException(sprintf('"%d" is not a valid battery level.', $value));
         }
@@ -1389,8 +1396,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value.
      */
     public function setSoundEnabled(
-        $value)
-    {
+        $value
+    ) {
         $this->soundEnabled = $value;
     }
 
@@ -1410,8 +1417,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value.
      */
     public function setCameraEnabled(
-        $value)
-    {
+        $value
+    ) {
         $this->cameraEnabled = $value;
     }
 
@@ -1431,8 +1438,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value.
      */
     public function setIsDeviceCharging(
-        $value)
-    {
+        $value
+    ) {
         $this->isDeviceCharging = $value;
     }
 
@@ -1442,8 +1449,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value.
      */
     public function setWebUserAgent(
-        $value)
-    {
+        $value
+    ) {
         $this->webUserAgent = $value;
     }
 
@@ -1483,8 +1490,8 @@ class Instagram implements ExperimentsInterface
      * @param string $device iOS device model.
      */
     public function setIosModel(
-        $device)
-    {
+        $device
+    ) {
         Utils::checkIsValidiDevice($device);
         $this->iosModel = $device;
     }
@@ -1505,8 +1512,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value.
      */
     public function setIosDpi(
-        $value)
-    {
+        $value
+    ) {
         $this->iosDpi = $value;
     }
 
@@ -1536,8 +1543,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value
      */
     public function setIsDarkModeEnabled(
-        $value)
-    {
+        $value
+    ) {
         $this->darkModeEnabled = $value;
     }
 
@@ -1557,8 +1564,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value
      */
     public function setIsLowDataModeEnabled(
-        $value)
-    {
+        $value
+    ) {
         $this->lowDataModeEnabled = $value;
     }
 
@@ -1578,8 +1585,8 @@ class Instagram implements ExperimentsInterface
      * @param mixed $value
      */
     public function setNavChain(
-        $value)
-    {
+        $value
+    ) {
         if ($value === '') {
             $this->navChain = '';
         } else {
@@ -1603,8 +1610,8 @@ class Instagram implements ExperimentsInterface
      * @param mixed $value
      */
     public function setNavChainStep(
-        $value)
-    {
+        $value
+    ) {
         $this->navChainStep = $value;
     }
 
@@ -1640,8 +1647,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value
      */
     public function setPrevNavChainClass(
-        $value)
-    {
+        $value
+    ) {
         $this->prevNavChainClass = $value;
     }
 
@@ -1651,8 +1658,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value
      */
     public function disableAutoRetriesMediaUpload(
-        $value)
-    {
+        $value
+    ) {
         $this->disableAutoRetriesMediaUpload = $value;
     }
 
@@ -1682,8 +1689,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value
      */
     public function setCarrier(
-        $value)
-    {
+        $value
+    ) {
         $this->carrier = $value;
     }
 
@@ -1693,8 +1700,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value
      */
     public function setGyroscopeEnabled(
-        $value)
-    {
+        $value
+    ) {
         $this->gyroscopeEnabled = boolval($value);
     }
 
@@ -1712,8 +1719,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value
      */
     public function setBackgroundState(
-        $value)
-    {
+        $value
+    ) {
         $this->background = boolval($value);
     }
 
@@ -1731,8 +1738,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value
      */
     public function setDeviceInitState(
-        $value)
-    {
+        $value
+    ) {
         $this->devicecInitState = boolval($value);
     }
 
@@ -1750,8 +1757,8 @@ class Instagram implements ExperimentsInterface
      * @param bool $value
      */
     public function setGivenConsent(
-        $value)
-    {
+        $value
+    ) {
         $this->givenConsent = boolval($value);
     }
 
@@ -1769,8 +1776,8 @@ class Instagram implements ExperimentsInterface
      * @param string $value
      */
     public function enableResolutionCheck(
-        $value)
-    {
+        $value
+    ) {
         $this->enableResolutionCheck = $value;
     }
 
@@ -1784,8 +1791,8 @@ class Instagram implements ExperimentsInterface
      * @param string|string[] $endpoints Endpoints.
      */
     public function bypassCalls(
-        $endpoints)
-    {
+        $endpoints
+    ) {
         if (!is_array($endpoints)) {
             $endpoints = [$endpoints];
         }
@@ -1800,8 +1807,8 @@ class Instagram implements ExperimentsInterface
      * @param mixed $options
      */
     public function setUserGuzzleOptions(
-        $options)
-    {
+        $options
+    ) {
         $this->client = new Client($this, $options);
     }
 
@@ -1842,9 +1849,9 @@ class Instagram implements ExperimentsInterface
      * @param bool        $loggedOut          If account was forced to log out.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse|null A login response if a
+     * @return Response\LoginResponse|null A login response if a
      *                                                   full (re-)login
      *                                                   happens, otherwise
      *                                                   `NULL` if an existing
@@ -1855,8 +1862,8 @@ class Instagram implements ExperimentsInterface
         $password,
         $appRefreshInterval = 1800,
         $deletionToken = null,
-        $loggedOut = false)
-    {
+        $loggedOut = false
+    ) {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to login().');
         }
@@ -1896,19 +1903,19 @@ class Instagram implements ExperimentsInterface
      *                                   than the default 30 minutes!
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse|null A login response if a
+     * @return Response\LoginResponse|null A login response if a
      *                                                   full (re-)login
      *                                                   happens, otherwise
      *                                                   `NULL` if an existing
      *                                                   session is resumed.
      */
     public function loginWithFacebook(
-         $username,
-         $fbAccessToken,
-         $appRefreshInterval = 1800
-     ) {
+        $username,
+        $fbAccessToken,
+        $appRefreshInterval = 1800
+    ) {
         if (empty($username) || empty($fbAccessToken)) {
             throw new \InvalidArgumentException('You must provide a Facebook access token to loginWithFacebook().');
         }
@@ -1939,9 +1946,9 @@ class Instagram implements ExperimentsInterface
      *                                   than the default 30 minutes!
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse|null A login response if a
+     * @return Response\LoginResponse|null A login response if a
      *                                                   full (re-)login
      *                                                   happens, otherwise
      *                                                   `NULL` if an existing
@@ -1974,9 +1981,9 @@ class Instagram implements ExperimentsInterface
      * @param bool        $loggedOut          If account was forced to log out.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse|null
+     * @return Response\LoginResponse|null
      *
      * @see Instagram::login() The public login handler with a full description.
      */
@@ -1986,8 +1993,8 @@ class Instagram implements ExperimentsInterface
         $forceLogin = false,
         $appRefreshInterval = 1800,
         $deletionToken = null,
-        $loggedOut = false)
-    {
+        $loggedOut = false
+    ) {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to _login().');
         }
@@ -2002,7 +2009,7 @@ class Instagram implements ExperimentsInterface
             }
         }
 
-        $waterfallId = \InstagramAPI\Signatures::generateUUID();
+        $waterfallId = Signatures::generateUUID();
         $this->loginWaterfallId = $waterfallId;
         $startTime = round(microtime(true) * 1000);
 
@@ -2058,17 +2065,32 @@ class Instagram implements ExperimentsInterface
                         $loop->stop();
                     }
                 });
-                //$logger = new \Monolog\Logger('push');
-                //$logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stdout', \Monolog\Logger::INFO));
-                $push = new \InstagramAPI\Push($loop, $this, null, false);
+                // $logger = new \Monolog\Logger('push');
+                // $logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stdout', \Monolog\Logger::INFO));
+                $push = new Push($loop, $this, null, false);
                 $push->start();
                 $loop->run();
             }
 
             if (self::$useBloksLogin) {
-                //$this->loginAttemptCount = 1;
-                //$response = $this->getHomeTemplate();
+                // $this->loginAttemptCount = 1;
+                // $response = $this->getHomeTemplate();
                 $response = $this->processLoginClientDataAndRedirect();
+                $re = '/(\d+),\s(\d+),\s\\\\"(com[a-zA-Z0-9\._]+)\\\\"/m';
+                preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+                $internalLatencyData = [];
+                foreach ($matches as $entry) {
+                    $markerId = intval($entry[1]);
+                    $latencyId = intval($entry[2]);
+                    $controller = $entry[3];
+
+                    $internalLatencyData[$controller] = [
+                        'marker_id'   => $markerId,
+                        'instance_id' => $latencyId,
+                    ];
+                }
+
                 $responseArr = $response->asArray();
                 $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
                 $firstDataBlok = null;
@@ -2099,10 +2121,47 @@ class Instagram implements ExperimentsInterface
                     }
                 }
 
+                $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+                foreach ($mainBloks as $mainBlok) {
+                    if (str_contains($mainBlok, 'should_trigger_override_login_2fa_action')) {
+                        $paramBlok = $mainBlok;
+
+                        $parsed = $this->bloks->parseBlok($paramBlok, 'bk.action.map.Make');
+                        $offsets = array_slice($this->bloks->findOffsets($parsed, 'should_trigger_override_login_2fa_action'), 0, -2);
+
+                        foreach ($offsets as $offset) {
+                            if (isset($parsed[$offset])) {
+                                $parsed = $parsed[$offset];
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $serverMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                    }
+                    if (str_contains($mainBlok, 'should_show_nested_nta_from_aymh')) {
+                        $paramBlok = $mainBlok;
+
+                        $parsed = $this->bloks->parseBlok($paramBlok, 'bk.action.map.Make');
+                        $offsets = array_slice($this->bloks->findOffsets($parsed, 'should_show_nested_nta_from_aymh'), 0, -2);
+
+                        foreach ($offsets as $offset) {
+                            if (isset($parsed[$offset])) {
+                                $parsed = $parsed[$offset];
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $clientMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                    }
+                }
+
+                /*
                 if ($firstDataBlok === null) {
                     $firstDataBlok = $firstDataBlokBack;
-                    $this->bloksInfo['INTERNAL__latency_qpl_instance_id'] = [0, 0];
-                    $this->bloksInfo['INTERNAL__latency_qpl_marker_id'] = [0, 0];
+                    $this->bloksInfo['INTERNAL__latency_qpl_instance_id'] = [0,0];
+                    $this->bloksInfo['INTERNAL__latency_qpl_marker_id'] = [0,0];
                     $this->bloksInfo['INTERNAL_INFRA_THEME'] = 'HARMONIZATION_F';
                 } else {
                     $parsed = $this->bloks->parseBlok($firstDataBlok, 'bk.action.map.Make');
@@ -2119,6 +2178,7 @@ class Instagram implements ExperimentsInterface
                     $firstMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
                     $this->bloksInfo = array_merge($firstMap, $this->bloksInfo);
                 }
+                */
 
                 /*
                 if ($firstDataBlok === null) {
@@ -2180,10 +2240,10 @@ class Instagram implements ExperimentsInterface
                     $this->bloksInfo = array_merge($fourthMap, $this->bloksInfo);
                 }
 
-                $this->loginOauthTokenFetch();
+                $this->loginOauthTokenFetch($mainBloks, $internalLatencyData);
 
                 if ($loggedOut === false) {
-                    $response = $this->sendLoginTextInputTypeAhead($username);
+                    $response = $this->sendLoginTextInputTypeAhead($username, $mainBloks, $internalLatencyData);
                 } else {
                     $response = $this->getLoginPasswordEntry();
                 }
@@ -2202,6 +2262,36 @@ class Instagram implements ExperimentsInterface
 
                 $this->event->sendNavigation('button', 'com.bloks.www.caa.login.login_homepage', 'com.bloks.www.caa.login.login_homepage');
                 $this->event->sendPasswordEncryptionAttempt();
+
+                if ($this->apiDeveloperDebug) {
+                    $usedClientParams = [
+                        'should_show_nested_nta_from_aymh',
+                        'device_id',
+                        'sim_phones',
+                        'login_attempt_count',
+                        'secure_family_device_id',
+                        'machine_id',
+                        'accounts_list',
+                        'auth_secure_device_id',
+                        'has_whatsapp_installed',
+                        'password',
+                        'sso_token_map_json_string',
+                        'family_device_id',
+                        'fb_ig_device_id',
+                        'device_emails',
+                        'try_num',
+                        'lois_settings',
+                        'event_flow',
+                        'event_step',
+                        'headers_infra_flow_id',
+                        'openid_tokens',
+                        'client_known_key_hash',
+                        'contact_point',
+                        'encrypted_msisdn',
+                    ];
+
+                    Utils::checkArrayKeyDifferences(array_keys($clientMap), $usedClientParams);
+                }
 
                 $response = $this->request('bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/')
                     ->setNeedsAuth(false)
@@ -2237,35 +2327,35 @@ class Instagram implements ExperimentsInterface
                             'encrypted_msisdn'              => '',
                         ],
                         'server_params'         => [
-                            'should_trigger_override_login_2fa_action'      => 0,
-                            'is_from_logged_out'                            => intval($loggedOut),
-                            'should_trigger_override_login_success_action'  => 0,
-                            'login_credential_type'                         => 'none',
-                            'server_login_source'                           => isset($firstMap['server_login_source']) ? $firstMap['server_login_source'] : 'login',
-                            'waterfall_id'                                  => null, //$firstMap['waterfall_id'],
-                            'login_source'                                  => isset($firstMap['login_source']) ? $firstMap['login_source'] : 'Login',
-                            'is_platform_login'                             => intval($this->bloksInfo['is_platform_login'][1]),
-                            'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                            'offline_experiment_group'                      => 'caa_iteration_v3_perf_ig_4',
-                            'is_from_landing_page'                          => 0,
-                            'password_text_input_id'                        => isset($firstMap['password_text_input_id']) ? $firstMap['password_text_input_id'] : '',
-                            'is_from_empty_password'                        => 0,
-                            'ar_event_source'                               => isset($firstMap['ar_event_source']) ? $firstMap['ar_event_source'] : 'login_home_page',
-                            'username_text_input_id'                        => isset($firstMap['username_text_input_id']) ? $firstMap['username_text_input_id'] : '',
-                            'layered_homepage_experiment_group'             => null,
-                            'should_show_nested_nta_from_aymh'              => 1,
-                            'device_id'                                     => null,
-                            'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                            'reg_flow_source'                               => 'login_home_native_integration_point', // cacheable_aymh_screen
-                            'is_caa_perf_enabled'                           => 1,
-                            'credential_type'                               => isset($firstMap['credential_type']) ? $firstMap['credential_type'] : 'password',
-                            'is_from_password_entry_page'                   => 0,
-                            'caller'                                        => 'gslr',
-                            'family_device_id'                              => null, //$this->phone_id,
-                            'INTERNAL_INFRA_THEME'                          => 'harm_f',
-                            'is_from_assistive_id'                          => 0,
-                            'access_flow_version'                           => 'F2_FLOW',
-                            'is_from_logged_in_switcher'                    => 0,
+                            'should_trigger_override_login_2fa_action'      => intval($serverMap['should_trigger_override_login_2fa_action'] ?? 0),
+                            'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? $loggedOut),
+                            'should_trigger_override_login_success_action'  => intval($serverMap['should_trigger_override_login_success_action'] ?? 0),
+                            'login_credential_type'                         => $serverMap['login_credential_type'] ?? 'none',
+                            'server_login_source'                           => $serverMap['server_login_source'] ?? 'login',
+                            'waterfall_id'                                  => $serverMap['waterfall_id'] ?? $waterfallId, // $firstMap['waterfall_id'],
+                            'login_source'                                  => $serverMap['login_source'] ?? 'Login',
+                            'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+                            'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.bloks.caa.login.async.send_login_request']['marker_id']),
+                            'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? 'caa_iteration_v3_perf_ig_4',
+                            'is_from_landing_page'                          => intval($serverMap['is_from_landing_page'] ?? 0),
+                            'password_text_input_id'                        => $serverMap['password_text_input_id'] ?? '',
+                            'is_from_empty_password'                        => intval($serverMap['is_from_empty_password'] ?? 0),
+                            'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                            'ar_event_source'                               => $serverMap['ar_event_source'] ?? 'login_home_page',
+                            'username_text_input_id'                        => $serverMap['username_text_input_id'] ?? '',
+                            'layered_homepage_experiment_group'             => $serverMap['layered_homepage_experiment_group'] ?? null,
+                            'device_id'                                     => $serverMap['device_id'] ?? $this->device_id,
+                            'INTERNAL__latency_qpl_instance_id'             => $internalLatencyData['com.bloks.www.bloks.caa.login.async.send_login_request']['instance_id'],
+                            'reg_flow_source'                               => $serverMap['reg_flow_source'] ?? 'login_home_native_integration_point', // cacheable_aymh_screen
+                            'is_caa_perf_enabled'                           => intval($serverMap['is_caa_perf_enabled'] ?? 0),
+                            'credential_type'                               => $serverMap['credential_type'] ?? 'password',
+                            'is_from_password_entry_page'                   => intval($serverMap['is_from_password_entry_page'] ?? 0),
+                            'caller'                                        => $serverMap['caller'] ?? 'gslr',
+                            'family_device_id'                              => null, // $this->phone_id,
+                            'INTERNAL_INFRA_THEME'                          => $serverMap['INTERNAL_INFRA_THEME'] ?? 'harm_f',
+                            'is_from_assistive_id'                          => intval($serverMap['is_from_assistive_id'] ?? 0),
+                            'access_flow_version'                           => $serverMap['access_flow_version'] ?? 'F2_FLOW',
+                            'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
                         ],
                     ]))
                     ->addPost('bk_client_context', json_encode([
@@ -2376,7 +2466,7 @@ class Instagram implements ExperimentsInterface
                         $this->bloksInfo = array_merge($this->bloksInfo, $twoFactorMap);
 
                         $twoFactorResponse = [
-                            'two_factor_context'    => isset($twoFactorMap['two_step_verification_context']) ? $twoFactorMap['two_step_verification_context'] : $twoFactorMap['context_data'],
+                            'two_factor_context'    => $twoFactorMap['two_step_verification_context'] ?? $twoFactorMap['context_data'],
                             'two_factor_required'   => true,
                             'is_bloks'              => true,
                             'is_generic'            => isset($twoFactorMap['context_data']) && str_contains($response->asJson(), 'generic_code_entry'),
@@ -2435,7 +2525,7 @@ class Instagram implements ExperimentsInterface
                                     return new Response\LoginResponse($twoFactorResponse);
                                     break;
                                 default:
-                                    throw new \InstagramAPI\Exception\InstagramException('Two factor method not implemented yet.');
+                                    throw new Exception\InstagramException('Two factor method not implemented yet.');
                             }
                         }
                     }
@@ -2453,7 +2543,7 @@ class Instagram implements ExperimentsInterface
                         ->addPost('device_id', $this->device_id)
                         ->addPost('username', $this->username)
                         ->addPost('enc_password', Utils::encryptPassword($password, $this->settings->get('public_key_id'), $this->settings->get('public_key')))
-                        //->addPost('_csrftoken', $this->client->getToken())
+                        // ->addPost('_csrftoken', $this->client->getToken())
                         ->addPost('phone_id', $this->phone_id)
                         ->addPost('adid', $this->advertising_id)
                         ->addPost('login_attempt_count', $this->loginAttemptCount);
@@ -2482,11 +2572,11 @@ class Instagram implements ExperimentsInterface
                     if ($loginResponse->getLoggedInUser()->getIsBusiness() !== null) {
                         $this->settings->set('business_account', $loginResponse->getLoggedInUser()->getIsBusiness());
                     }
-                } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                     // Login failed because checkpoint is required.
                     // Return server response to tell user they to bypass checkpoint.
                     throw $e;
-                } catch (\InstagramAPI\Exception\InstagramException $e) {
+                } catch (Exception\InstagramException $e) {
                     if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
                         // Login failed because two-factor login is required.
                         // Return server response to tell user they need 2-factor.
@@ -2497,15 +2587,16 @@ class Instagram implements ExperimentsInterface
                         throw $e;
                     } else {
                         if ($e->getResponse() === null) {
-                            throw new \InstagramAPI\Exception\NetworkException($e);
+                            throw new Exception\NetworkException($e);
                         }
+
                         // Login failed for some other reason... Re-throw error.
                         throw $e;
                     }
                 }
 
                 if ($loginResponse->getLoggedInUser()->getUsername() === 'Instagram User') {
-                    throw new \InstagramAPI\Exception\AccountDisabledException('Account has been suspended.');
+                    throw new Exception\AccountDisabledException('Account has been suspended.');
                 }
             }
 
@@ -2550,13 +2641,13 @@ class Instagram implements ExperimentsInterface
      *
      * @param bool $isLoggedOut If states comes from logged_out.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function processLoginClientDataAndRedirect(
-        $isLoggedOut = false)
-    {
+        $isLoggedOut = false
+    ) {
         if ($isLoggedOut) {
             $accountList = [
                 [
@@ -2602,9 +2693,9 @@ class Instagram implements ExperimentsInterface
     /**
      * Get home template.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getHomeTemplate()
     {
@@ -2627,9 +2718,9 @@ class Instagram implements ExperimentsInterface
     /**
      * Login no click form controller.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function loginNoClickFormController()
     {
@@ -2672,12 +2763,36 @@ class Instagram implements ExperimentsInterface
     /**
      * Login OAuth token fetch.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @param array $mainBloks
+     * @param array $internalLatencyData
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @throws Exception\InstagramException
+     *
+     * @return Response\GenericResponse
      */
-    public function loginOauthTokenFetch()
-    {
+    public function loginOauthTokenFetch(
+        $mainBloks,
+        $internalLatencyData
+    ) {
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'com.bloks.www.caa.login.oauth.token.fetch.async')) {
+                $paramBlok = $mainBlok;
+
+                $parsed = $this->bloks->parseBlok($paramBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->bloks->findOffsets($parsed, 'layered_homepage_experiment_group'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+
+                $serverMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            }
+        }
+
         return $this->request('bloks/apps/com.bloks.www.caa.login.oauth.token.fetch.async/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -2692,17 +2807,17 @@ class Instagram implements ExperimentsInterface
                 'server_params'         => [
                     'is_from_logged_out'                            => 0,
                     'layered_homepage_experiment_group'             => null,
-                    'device_id'                                     => null,
-                    'waterfall_id'                                  => null,
-                    'machine_id'                                    => null,
-                    'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'is_platform_login'                             => 0,
-                    'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'family_device_id'                              => null,
-                    'offline_experiment_group'                      => null,
-                    'INTERNAL_INFRA_THEME'                          => 'harm_f',
-                    'access_flow_version'                           => 'LEGACY_FLOW',
-                    'is_from_logged_in_switcher'                    => 0,
+                    'device_id'                                     => $serverMap['device_id'] ?? $this->device_id,
+                    'waterfall_id'                                  => $serverMap['waterfall_id'] ?? $this->loginWaterfallId,
+                    'INTERNAL__latency_qpl_instance_id'             => intval($internalLatencyData['com.bloks.www.caa.login.oauth.token.fetch.async']['instance_id'] ?? 0),
+                    'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+                    'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.caa.login.oauth.token.fetch.async']['marker_id'] ?? 0),
+                    'family_device_id'                              => $this->phone_id,
+                    'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? 'caa_iteration_v3_perf_ig_4',
+                    'INTERNAL_INFRA_THEME'                          => $serverMap['INTERNAL_INFRA_THEME'] ?? $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    'access_flow_version'                           => $serverMap['access_flow_version'] ?? 'F2_FLOW',
+                    'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2716,15 +2831,38 @@ class Instagram implements ExperimentsInterface
     /**
      * Send login text input typy ahead.
      *
-     * @param bool $username Username.
+     * @param bool  $username            Username.
+     * @param array $mainBloks
+     * @param array $internalLatencyData
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function sendLoginTextInputTypeAhead(
-        $username)
-    {
+        $username,
+        $mainBloks,
+        $internalLatencyData
+    ) {
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'com.bloks.www.caa.login.cp_text_input_type_ahead')) {
+                $paramBlok = $mainBlok;
+
+                $parsed = $this->bloks->parseBlok($paramBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->bloks->findOffsets($parsed, 'text_component_id'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+
+                $serverMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+            }
+        }
+
         return $this->request('bloks/apps/com.bloks.www.caa.login.cp_text_input_type_ahead/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -2735,7 +2873,7 @@ class Instagram implements ExperimentsInterface
                         'lois_token'    => '',
                     ],
                     'account_centers'   => [
-                       /* [
+                        /* [
                             'profiles'  => [
                                 'id'    => [
                                     'is_derived'            => 0,
@@ -2762,15 +2900,23 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     'is_from_logged_out'                => 0,
-                    'text_input_id'                     => intval($this->bloksInfo['text_input_id'][1]),
-                    'typeahead_id'                      => intval($this->bloksInfo['typeahead_id'][1]),
-                    'text_component_id'                 => intval($this->bloksInfo['text_component_id'][1]),
-                    'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
-                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
-                    'fdid'                              => isset($this->bloksInfo['fdid']) ? $this->bloksInfo['fdid'] : $this->phone_id,
-                    'waterfall_id'                      => $this->loginWaterfallId,
-                    'screen_id'                         => isset($this->bloksInfo['screen_id'][1]) ? intval($this->bloksInfo['screen_id'][1]) : 0,
-                    'INTERNAL__latency_qpl_instance_id' => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
+                    'text_input_id'                     => intval($serverMap['text_input_id'][1] ?? $this->bloksInfo['text_input_id'][1]),
+                    'typeahead_id'                      => intval($serverMap['typeahead_id'][1] ?? $this->bloksInfo['typeahead_id'][1]),
+                    'layered_homepage_experiment_group' => null,
+                    'device_id'                         => $serverMap['device_id'] ?? $this->device_id,
+                    'waterfall_id'                      => $serverMap['waterfall_id'] ?? $this->loginWaterfallId,
+                    'INTERNAL__latency_qpl_instance_id' => intval($internalLatencyData['com.bloks.www.caa.login.cp_text_input_type_ahead']['instance_id'] ?? 0),
+                    'is_platform_login'                 => intval($serverMap['is_platform_login'] ?? 0),
+                    'text_component_id'                 => intval($serverMap['text_component_id'][1] ?? $this->bloksInfo['text_component_id'][1]),
+                    'INTERNAL__latency_qpl_marker_id'   => intval($internalLatencyData['com.bloks.www.caa.login.cp_text_input_type_ahead']['marker_id'] ?? 0),
+                    'family_device_id'                  => $this->phone_id,
+                    'offline_experiment_group'          => $serverMap['offline_experiment_group'] ?? 'caa_iteration_v3_perf_ig_4',
+                    'INTERNAL_INFRA_THEME'              => $serverMap['INTERNAL_INFRA_THEME'] ?? $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    // 'fdid'                            => isset($this->bloksInfo['fdid']) ? $this->bloksInfo['fdid'] : $this->phone_id,
+                    'screen_id'                         => intval($serverMap['screen_id'][1] ?? 0),
+                    'access_flow_version'               => $serverMap['access_flow_version'] ?? 'F2_FLOW',
+                    'is_from_logged_in_switcher'        => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
+                    'qe_device_id'                      => $serverMap['qe_device_id'] ?? $this->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2786,13 +2932,13 @@ class Instagram implements ExperimentsInterface
      *
      * @param string $endpoint Endpoint.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getTwoFactorBloksScreen(
-        $endpoint)
-    {
+        $endpoint
+    ) {
         if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || isset($this->bloksInfo['context_data']) || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker') {
             $serverParams = [
                 'context_data'                  => $this->bloksInfo['context_data'],
@@ -2824,9 +2970,9 @@ class Instagram implements ExperimentsInterface
     /**
      * Get login password entry.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getLoginPasswordEntry()
     {
@@ -2838,7 +2984,7 @@ class Instagram implements ExperimentsInterface
                     'user_id'   => $this->account_id,
                 ],
                 'server_params'         => [
-                    //'offline_experiment_group'          => $this->settings->get('offline_experiment'),
+                    // 'offline_experiment_group'          => $this->settings->get('offline_experiment'),
                     'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'device_id'                         => $this->device_id,
                     'is_platform_login'                 => 0,
@@ -2861,14 +3007,14 @@ class Instagram implements ExperimentsInterface
      * @param string $username Username.
      * @param string $method   Method. 'phone' or 'email'.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function getForgotPasswordLink(
         $username,
-        $method = 'phone')
-    {
+        $method = 'phone'
+    ) {
         $this->_setUser('regular', $username, 'nopass');
         $response = $this->processLoginClientDataAndRedirect();
         $responseArr = $response->asArray();
@@ -2968,7 +3114,7 @@ class Instagram implements ExperimentsInterface
             $this->bloksInfo = array_merge($fourthMap, $this->bloksInfo);
         }
 
-        $waterfallId = \InstagramAPI\Signatures::generateUUID();
+        $waterfallId = Signatures::generateUUID();
         $response = $this->request('bloks/apps/com.bloks.www.caa.ar.search.prefill.async/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -3124,7 +3270,7 @@ class Instagram implements ExperimentsInterface
                         'CALL_PHONE'        => 'GRANTED',
                     ],
                     'was_headers_prefill_available'     => 0,
-                    'sfdid'                             => isset($this->bloksInfo['sfdid']) ? $this->bloksInfo['sfdid'] : '',
+                    'sfdid'                             => $this->bloksInfo['sfdid'] ?? '',
                     'fetched_email_token_list'          => (object) [],
                     'search_query'                      => $username,
                     'android_build_type'                => 'release',
@@ -3143,7 +3289,7 @@ class Instagram implements ExperimentsInterface
                     'encrypted_msisdn'              => '',
                 ],
                 'server_params'         => [
-                    'event_request_id'                  => isset($this->bloksInfo['event_request_id']) ? $this->bloksInfo['event_request_id'] : '',
+                    'event_request_id'                  => $this->bloksInfo['event_request_id'] ?? '',
                     'is_from_logged_out'                => 0,
                     'layered_homepage_experiment_group' => null,
                     'device_id'                         => $this->device_id,
@@ -3155,7 +3301,7 @@ class Instagram implements ExperimentsInterface
                     'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'family_device_id'                  => $this->phone_id,
                     'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
-                    'INTERNAL_INFRA_THEME'              => 'harm_f', //$this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    'INTERNAL_INFRA_THEME'              => 'harm_f', // $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'access_flow_version'               => 'F2_FLOW',
                     'is_from_logged_in_switcher'        => 0,
                     'qe_device_id'                      => $this->uuid,
@@ -3348,7 +3494,7 @@ class Instagram implements ExperimentsInterface
             preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
 
             if (!$matches) {
-                throw new \InstagramAPI\Exception\InstagramException('Something went wrong, try again later.');
+                throw new Exception\InstagramException('Something went wrong, try again later.');
             }
         }
         $this->bloksInfo['cuid'] = $matches[0][1];
@@ -3414,18 +3560,18 @@ class Instagram implements ExperimentsInterface
      * @param int    $appRefreshInterval
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse|null
+     * @return Response\LoginResponse|null
      *
      * @see Instagram::loginWithFacebook() The public Facebook login handler with a full description.
      */
     protected function _loginWithFacebook(
-         $username,
-         $fbAccessToken,
-         $forceLogin = false,
-         $appRefreshInterval = 1800
-     ) {
+        $username,
+        $fbAccessToken,
+        $forceLogin = false,
+        $appRefreshInterval = 1800
+    ) {
         if (empty($fbAccessToken)) {
             throw new \InvalidArgumentException('You must provide an fb_access_token to _loginWithFacebook().');
         }
@@ -3448,7 +3594,7 @@ class Instagram implements ExperimentsInterface
                      ->addPost('waterfall_id', Signatures::generateUUID())
                      ->addPost('fb_access_token', $this->fb_access_token)
                      ->getResponse(new Response\LoginResponse());
-            } catch (\InstagramAPI\Exception\InstagramException $e) {
+            } catch (Exception\InstagramException $e) {
                 if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
                     // Login failed because two-factor login is required.
                     // Return server response to tell user they need 2-factor.
@@ -3457,8 +3603,9 @@ class Instagram implements ExperimentsInterface
                     $this->loginAttemptCount++;
                 } else {
                     if ($e->getResponse() === null) {
-                        throw new \InstagramAPI\Exception\NetworkException($e);
+                        throw new Exception\NetworkException($e);
                     }
+
                     // Login failed for some other reason... Re-throw error.
                     throw $e;
                 }
@@ -3470,6 +3617,7 @@ class Instagram implements ExperimentsInterface
             // Full (re-)login successfully completed. Return server response.
             return $response;
         }
+
         // Attempt to resume an existing session, or full re-login if necessary.
         // NOTE: The "return" here gives a LoginResponse in case of re-login.
         return $this->_sendLoginFlow(false, $appRefreshInterval);
@@ -3488,9 +3636,9 @@ class Instagram implements ExperimentsInterface
      * @param int    $appRefreshInterval
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse|null
+     * @return Response\LoginResponse|null
      *
      * @see Instagram::loginWithEmailLink() The public email with link login handler with a full description.
      */
@@ -3498,8 +3646,8 @@ class Instagram implements ExperimentsInterface
         $username,
         $link,
         $forceLogin = false,
-        $appRefreshInterval = 1800)
-    {
+        $appRefreshInterval = 1800
+    ) {
         // Switch the currently active user/pass if the details are different.
         if ($this->username !== $username) {
             $this->_setUser('regular', $username, 'NOPASSWORD');
@@ -3518,17 +3666,17 @@ class Instagram implements ExperimentsInterface
             try {
                 $str = explode('?', $link);
                 if (!isset($str[1])) {
-                    throw new \InstagramAPI\Exception\InvalidLoginLinkException();
+                    throw new Exception\InvalidLoginLinkException();
                 }
                 parse_str($str[1], $params);
                 if (!isset($params['uid']) && !isset($params['token'])) {
-                    throw new \InstagramAPI\Exception\InvalidLoginLinkException();
+                    throw new Exception\InvalidLoginLinkException();
                 }
 
                 $request = $this->request('accounts/one_click_login/')
                     ->setNeedsAuth(false)
                     ->addPost('source', 'email')
-                    //->addPost('_csrftoken', $this->client->getToken())
+                    // ->addPost('_csrftoken', $this->client->getToken())
                     ->addPost('uid', $params['uid'])
                     ->addPost('adid', $this->advertising_id)
                     ->addPost('guid', $this->uuid)
@@ -3538,7 +3686,7 @@ class Instagram implements ExperimentsInterface
 
                 $response = $request->getResponse(new Response\LoginResponse());
                 $this->settings->set('business_account', $response->getLoggedInUser()->getIsBusiness());
-            } catch (\InstagramAPI\Exception\InstagramException $e) {
+            } catch (Exception\InstagramException $e) {
                 if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
                     // Login failed because two-factor login is required.
                     // Return server response to tell user they need 2-factor.
@@ -3547,8 +3695,9 @@ class Instagram implements ExperimentsInterface
                     $this->loginAttemptCount++;
                 } else {
                     if ($e->getResponse() === null) {
-                        throw new \InstagramAPI\Exception\NetworkException($e);
+                        throw new Exception\NetworkException($e);
                     }
+
                     // Login failed for some other reason... Re-throw error.
                     throw $e;
                 }
@@ -3561,6 +3710,7 @@ class Instagram implements ExperimentsInterface
             // Full (re-)login successfully completed. Return server response.
             return $response;
         }
+
         // Attempt to resume an existing session, or full re-login if necessary.
         // NOTE: The "return" here gives a LoginResponse in case of re-login.
         return $this->_sendLoginFlow(false, $appRefreshInterval);
@@ -3591,9 +3741,9 @@ class Instagram implements ExperimentsInterface
      * @param string      $pollingNonce        Trusted polling nonce.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse
+     * @return Response\LoginResponse
      */
     public function finishTwoFactorLogin(
         $username,
@@ -3604,8 +3754,8 @@ class Instagram implements ExperimentsInterface
         $appRefreshInterval = 1800,
         $usernameHandler = null,
         $trustDevice = true,
-        $pollingNonce = null)
-    {
+        $pollingNonce = null
+    ) {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to finishTwoFactorLogin().');
         }
@@ -3635,7 +3785,7 @@ class Instagram implements ExperimentsInterface
             ->setNeedsAuth(false)
             ->addPost('verification_code', $verificationCode)
             ->addPost('phone_id', $this->phone_id)
-            //->addPost('_csrftoken', $this->client->getToken())
+            // ->addPost('_csrftoken', $this->client->getToken())
             ->addPost('two_factor_identifier', $twoFactorIdentifier)
             ->addPost('username', $username)
             ->addPost('trust_this_device', ($trustDevice) ? '1' : '0')
@@ -3673,16 +3823,16 @@ class Instagram implements ExperimentsInterface
      * @param string|null $usernameHandler     Instagram username sent in the login response.
      *                                         Email and phone aren't allowed here.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TwoFactorLoginSMSResponse
+     * @return Response\TwoFactorLoginSMSResponse
      */
     public function sendTwoFactorLoginSMS(
         $username,
         $password,
         $twoFactorIdentifier,
-        $usernameHandler = null)
-    {
+        $usernameHandler = null
+    ) {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to sendTwoFactorLoginSMS().');
         }
@@ -3708,7 +3858,7 @@ class Instagram implements ExperimentsInterface
             ->addPost('username', $username)
             ->addPost('device_id', $this->device_id)
             ->addPost('guid', $this->uuid)
-            //->addPost('_csrftoken', $this->client->getToken())
+            // ->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\TwoFactorLoginSMSResponse());
     }
 
@@ -3722,16 +3872,16 @@ class Instagram implements ExperimentsInterface
      * @param string|null $usernameHandler     Instagram username sent in the login response.
      *                                         Email and phone aren't allowed here.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TwoFactorLoginSMSResponse
+     * @return Response\TwoFactorLoginSMSResponse
      */
     public function sendTwoFactorLoginWhatsapp(
         $username,
         $password,
         $twoFactorIdentifier,
-        $usernameHandler = null)
-    {
+        $usernameHandler = null
+    ) {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to sendTwoFactorLoginSMS().');
         }
@@ -3757,7 +3907,7 @@ class Instagram implements ExperimentsInterface
             ->addPost('username', $username)
             ->addPost('device_id', $this->device_id)
             ->addPost('guid', $this->uuid)
-            //->addPost('_csrftoken', $this->client->getToken())
+            // ->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\TwoFactorLoginSMSResponse());
     }
 
@@ -3772,15 +3922,15 @@ class Instagram implements ExperimentsInterface
      *                                    `login()` response.
      * @param string $pollingNonce        Trusted polling nonce.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TwoFactorNotificationStatusResponse
+     * @return Response\TwoFactorNotificationStatusResponse
      */
     public function checkTrustedNotificationStatus(
         $username,
         $twoFactorIdentifier,
-        $pollingNonce)
-    {
+        $pollingNonce
+    ) {
         if (empty($username)) {
             throw new \InvalidArgumentException('You must provide a username.');
         }
@@ -3794,7 +3944,7 @@ class Instagram implements ExperimentsInterface
         ->addPost('username', $username)
         ->addPost('device_id', $this->device_id)
         ->addPost('trusted_notification_polling_nonces', json_encode([$pollingNonce]))
-        //->addPost('_csrftoken', $this->client->getToken())
+        // ->addPost('_csrftoken', $this->client->getToken())
         ->getResponse(new Response\TwoFactorNotificationStatusResponse());
     }
 
@@ -3814,9 +3964,9 @@ class Instagram implements ExperimentsInterface
      * @param mixed  $context
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse
+     * @return Response\LoginResponse
      */
     public function finishTwoFactorVerification(
         $username,
@@ -3824,8 +3974,8 @@ class Instagram implements ExperimentsInterface
         $context,
         $challenge,
         $verificationCode,
-        $trustDevice = true)
-    {
+        $trustDevice = true
+    ) {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to finishTwoFactorVerification().');
         }
@@ -3864,8 +4014,8 @@ class Instagram implements ExperimentsInterface
                     'challenge'                                     => $challenge,
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
-                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                    'two_step_verification_context'                 => $context, // $this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'two_factor_login', // $this->bloksInfo['flow_source'],
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -3893,14 +4043,14 @@ class Instagram implements ExperimentsInterface
 
         if (is_array($loginResponseWithHeaders)) {
             if (str_contains($response->asJson(), 'BLOKS_TWO_STEP_VERIFICATION_ENTER_CODE:error_message:')) {
-                throw new \InstagramAPI\Exception\InstagramException('Invalid 2FA code');
+                throw new Exception\InstagramException('Invalid 2FA code');
             }
             $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
             $this->_throwLoginException($response, $errorMap);
         }
         $response = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
-        //$this->_updateLoginState($response);
-        //$this->_sendLoginFlow(true, $appRefreshInterval);
+        // $this->_updateLoginState($response);
+        // $this->_sendLoginFlow(true, $appRefreshInterval);
 
         return $response;
     }
@@ -3921,16 +4071,16 @@ class Instagram implements ExperimentsInterface
      * @param mixed  $context
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse
+     * @return Response\LoginResponse
      */
     public function finishTwoFactorGenericVerification(
         $username,
         $password,
         $context,
-        $verificationCode)
-    {
+        $verificationCode
+    ) {
         if (empty($username) || empty($password)) {
             throw new \InvalidArgumentException('You must provide a username and password to finishTwoFactorVerification().');
         }
@@ -3960,7 +4110,7 @@ class Instagram implements ExperimentsInterface
                 'server_params'         => [
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'context_data'                                  => $context, //$this->bloksInfo['context_data'],
+                    'context_data'                                  => $context, // $this->bloksInfo['context_data'],
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -3988,17 +4138,17 @@ class Instagram implements ExperimentsInterface
 
         if (is_array($loginResponseWithHeaders)) {
             if (str_contains($response->asJson(), 'try a new one')) {
-                throw new \InstagramAPI\Exception\InstagramException('Invalid 2FA code');
+                throw new Exception\InstagramException('Invalid 2FA code');
             }
             if (str_contains($response->asJson(), 'Post login failed')) {
-                throw new \InstagramAPI\Exception\InstagramException('Post login failed. Retry again.');
+                throw new Exception\InstagramException('Post login failed. Retry again.');
             }
             $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
             $this->_throwLoginException($response, $errorMap);
         }
         $response = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
-        //$this->_updateLoginState($response);
-        //$this->_sendLoginFlow(true, $appRefreshInterval);
+        // $this->_updateLoginState($response);
+        // $this->_sendLoginFlow(true, $appRefreshInterval);
 
         return $response;
     }
@@ -4010,27 +4160,27 @@ class Instagram implements ExperimentsInterface
      * @param mixed  $method
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
      * @return string[]
      */
     public function getAvailableTwoFactorMethods(
         $context,
-        $method = false)
-    {
+        $method = false
+    ) {
         $endpoint = ($method === false) ? 'bloks/apps/com.bloks.www.two_step_verification.method_picker/' : 'bloks/apps/com.bloks.www.ap.two_step_verification.challenge_picker/';
 
         if ($method === false) {
             $serverParams = [
                 'INTERNAL_INFRA_screen_id'                      => isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
-                'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
-                'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                'two_step_verification_context'                 => $context, // $this->bloksInfo['two_step_verification_context'],
+                'flow_source'                                   => 'two_factor_login', // $this->bloksInfo['flow_source'],
             ];
         } else {
             $serverParams = [
-                'INTERNAL_INFRA_screen_id'                      => 'method_picker', //isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
-                'context_data'                                  => $context, //$this->bloksInfo['two_step_verification_context'],
-                //'flow_source'                                 => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                'INTERNAL_INFRA_screen_id'                      => 'method_picker', // isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e650di:116',
+                'context_data'                                  => $context, // $this->bloksInfo['two_step_verification_context'],
+                // 'flow_source'                                 => 'two_factor_login', //$this->bloksInfo['flow_source'],
             ];
         }
 
@@ -4127,14 +4277,14 @@ class Instagram implements ExperimentsInterface
      * @param mixed  $method
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function selectTwoFactorMethod(
         $context,
-        $method)
-    {
+        $method
+    ) {
         if (!in_array($method, ['totp', 'backup_codes', 'sms', 'email', 'whatsapp', 'notification'], true)) {
             throw new \InvalidArgumentException('You must provide a valid 2FA method type.');
         }
@@ -4148,8 +4298,8 @@ class Instagram implements ExperimentsInterface
                 'server_params'         => [
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-                    'two_step_verification_context'                 => isset($this->bloksInfo['two_step_verification_context']) ? $this->bloksInfo['two_step_verification_context'] : $context, //$this->bloksInfo['two_step_verification_context'],
-                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                    'two_step_verification_context'                 => $this->bloksInfo['two_step_verification_context'] ?? $context, // $this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'two_factor_login', // $this->bloksInfo['flow_source'],
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -4182,8 +4332,8 @@ class Instagram implements ExperimentsInterface
             ->addPost('params', json_encode([
                 'server_params'         => [
                     'INTERNAL_INFRA_screen_id'                      => isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) ? intval($this->bloksInfo['INTERNAL_INFRA_screen_id'][1]) : 'e8o7m7:2',
-                    'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
-                    'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+                    'two_step_verification_context'                 => $context, // $this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'two_factor_login', // $this->bloksInfo['flow_source'],
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -4231,13 +4381,13 @@ class Instagram implements ExperimentsInterface
      *
      * @param string $context 2FA context.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function checkTrustedNotificationBloksStatus(
-        $context)
-    {
+        $context
+    ) {
         $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.has_been_allowed.async/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -4253,8 +4403,8 @@ class Instagram implements ExperimentsInterface
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'device_id'                                     => null,
-                    'two_step_verification_context'                 => isset($this->bloksInfo['two_step_verification_context']) ? $this->bloksInfo['two_step_verification_context'] : $context, //$this->bloksInfo['two_step_verification_context'],
-                    'flow_source'                                   => 'two_factor_login', //'login_challenges', //$this->bloksInfo['flow_source'],
+                    'two_step_verification_context'                 => $this->bloksInfo['two_step_verification_context'] ?? $context, // $this->bloksInfo['two_step_verification_context'],
+                    'flow_source'                                   => 'two_factor_login', // 'login_challenges', //$this->bloksInfo['flow_source'],
                 ],
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -4297,14 +4447,14 @@ class Instagram implements ExperimentsInterface
      * @param mixed  $method
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function requestTwoFactorCode(
         $context,
-        $method)
-    {
+        $method
+    ) {
         if (!in_array($method, ['totp', 'backup_codes', 'sms', 'email', 'whatsapp', 'notification'], true)) {
             throw new \InvalidArgumentException('You must provide a valid 2FA method type.');
         }
@@ -4313,8 +4463,8 @@ class Instagram implements ExperimentsInterface
             'challenge'                                     => $method,
             'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
             'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
-            'two_step_verification_context'                 => $context, //$this->bloksInfo['two_step_verification_context'],
-            'flow_source'                                   => 'two_factor_login', //$this->bloksInfo['flow_source'],
+            'two_step_verification_context'                 => $context, // $this->bloksInfo['two_step_verification_context'],
+            'flow_source'                                   => 'two_factor_login', // $this->bloksInfo['flow_source'],
         ];
 
         if ($method === 'sms' || $method === 'whatsapp') {
@@ -4344,11 +4494,11 @@ class Instagram implements ExperimentsInterface
      *
      * @param Response\LoginResponse $verifyCodeResponse
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      */
     public function finishCheckpoint(
-        $verifyCodeResponse)
-    {
+        $verifyCodeResponse
+    ) {
         $this->_updateLoginState($verifyCodeResponse);
         $this->_sendLoginFlow(true, 1800);
     }
@@ -4366,16 +4516,16 @@ class Instagram implements ExperimentsInterface
      *
      * @param string $username Your Instagram username.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\UsersLookupResponse
+     * @return Response\UsersLookupResponse
      */
     public function userLookup(
-        $username)
-    {
+        $username
+    ) {
         // Set active user (without pwd), and create database entry if new user.
         $this->setUserWithoutPassword($username);
-        $waterfallId = \InstagramAPI\Signatures::generateUUID();
+        $waterfallId = Signatures::generateUUID();
 
         return $this->request('users/lookup/')
             ->setNeedsAuth(false)
@@ -4397,7 +4547,7 @@ class Instagram implements ExperimentsInterface
             ->addPost('guid', $this->uuid)
             ->addPost('waterfall_id', $waterfallId)
             ->addPost('directly_sign_in', 'true')
-            //->addPost('_csrftoken', $this->client->getToken())
+            // ->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\UsersLookupResponse());
     }
 
@@ -4411,17 +4561,17 @@ class Instagram implements ExperimentsInterface
      *
      * @param string $username Your Instagram username.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\RecoveryResponse
+     * @return Response\RecoveryResponse
      */
     public function sendRecoveryEmail(
-        $username)
-    {
+        $username
+    ) {
         // Verify that they can use the recovery email option.
         $userLookup = $this->userLookup($username);
         if (!$userLookup->getCanEmailReset()) {
-            throw new \InstagramAPI\Exception\InternalException('Email recovery is not available, since your account lacks a verified email address.');
+            throw new Exception\InternalException('Email recovery is not available, since your account lacks a verified email address.');
         }
 
         return $this->request('accounts/send_recovery_flow_email/')
@@ -4430,7 +4580,7 @@ class Instagram implements ExperimentsInterface
             ->addPost('adid', $this->advertising_id)
             ->addPost('device_id', $this->device_id)
             ->addPost('guid', $this->uuid)
-            //->addPost('_csrftoken', $this->client->getToken())
+            // ->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\RecoveryResponse());
     }
 
@@ -4444,23 +4594,23 @@ class Instagram implements ExperimentsInterface
      *
      * @param string $username Your Instagram username.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\RecoveryResponse
+     * @return Response\RecoveryResponse
      */
     public function sendRecoverySMS(
-        $username)
-    {
+        $username
+    ) {
         // Verify that they can use the recovery SMS option.
         $userLookup = $this->userLookup($username);
         if (!$userLookup->getHasValidPhone() || !$userLookup->getCanSmsReset()) {
-            throw new \InstagramAPI\Exception\InternalException('SMS recovery is not available, since your account lacks a verified phone number.');
+            throw new Exception\InternalException('SMS recovery is not available, since your account lacks a verified phone number.');
         }
 
         return $this->request('users/lookup_phone/')
             ->setNeedsAuth(false)
             ->addPost('query', $username)
-            //->addPost('_csrftoken', $this->client->getToken())
+            // ->addPost('_csrftoken', $this->client->getToken())
             ->getResponse(new Response\RecoveryResponse());
     }
 
@@ -4474,13 +4624,13 @@ class Instagram implements ExperimentsInterface
      * @param string $password  Your Instagram password.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      */
     protected function _setUser(
         $loginType,
         $username,
-        $password)
-    {
+        $password
+    ) {
         if ((empty($username) || empty($password)) && $loginType === 'regular') {
             throw new \InvalidArgumentException('You must provide a username and password to _setUser().');
         }
@@ -4539,7 +4689,7 @@ class Instagram implements ExperimentsInterface
         $resetCookieJar = false;
         if ($deviceString !== $savedDeviceString // Brand new device, or missing
             || empty($this->settings->get('uuid')) // one of the critically...
-            //|| $this->settings->get('phone_id') === null // ...important device... Empty string values could be valid.
+            // || $this->settings->get('phone_id') === null // ...important device... Empty string values could be valid.
             || empty($this->settings->get('device_id'))) { // ...parameters.
             // Erase all previously stored device-specific settings and cookies.
             $this->settings->eraseDeviceSettings();
@@ -4664,11 +4814,11 @@ class Instagram implements ExperimentsInterface
      * @param string $username Your Instagram username.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      */
     public function setUserWithoutPassword(
-        $username)
-    {
+        $username
+    ) {
         if (empty($username) || !is_string($username)) {
             throw new \InvalidArgumentException('You must provide a username.');
         }
@@ -4692,11 +4842,11 @@ class Instagram implements ExperimentsInterface
      * @param Response\LoginResponse $response The login response.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      */
     protected function _updateLoginState(
-        Response\LoginResponse $response)
-    {
+        Response\LoginResponse $response
+    ) {
         if (self::$skipAccountValidation === false) {
             // This check is just protection against accidental bugs. It makes sure
             // that we always call this function with a *successful* login response!
@@ -4715,7 +4865,7 @@ class Instagram implements ExperimentsInterface
     /**
      * Sends pre-login flow. This is required to emulate real device behavior.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      */
     protected function _sendPreLoginFlow()
     {
@@ -4738,7 +4888,7 @@ class Instagram implements ExperimentsInterface
                 try {
                     $this->internal->fetchZeroRatingToken('token_expired', false);
                     $this->internal->createAndroidKeystore();
-                    //$this->account->setContactPointPrefill('prefill');
+                    // $this->account->setContactPointPrefill('prefill');
                     /*
                     $this->internal->sendGraph('455411352809009551099714876', [
                         'input' => [
@@ -4751,9 +4901,9 @@ class Instagram implements ExperimentsInterface
                     // pass. Checkpoint wont happen on this step and if server is congested an HTML response will be returned. Exception EmptyResponseException.
                 }
 
-                //$this->event->sendZeroCarrierSignal();
-                //$this->internal->bootstrapMsisdnHeader();
-                //$this->internal->readMsisdnHeader('default');
+                // $this->event->sendZeroCarrierSignal();
+                // $this->internal->bootstrapMsisdnHeader();
+                // $this->internal->readMsisdnHeader('default');
 
                 /* QE SYNC DISABLED
                 try {
@@ -4773,7 +4923,7 @@ class Instagram implements ExperimentsInterface
                     $this->settings->set('public_key_id', $mobileConfigResponse->getHeaderLine('ig-set-password-encryption-key-id'));
                 }
 
-                //$this->internal->bootstrapMsisdnHeader();
+                // $this->internal->bootstrapMsisdnHeader();
                 /*
                 try {
                     //$this->internal->logAttribution();
@@ -4804,7 +4954,7 @@ class Instagram implements ExperimentsInterface
         }
 
         try {
-            //$this->internal->readMsisdnHeader('default', true);
+            // $this->internal->readMsisdnHeader('default', true);
             /*
             try {
                 $this->account->setContactPointPrefill('prefill');
@@ -4889,9 +5039,9 @@ class Instagram implements ExperimentsInterface
      *                                 parameter.
      *
      * @throws \InvalidArgumentException
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse|null A login response if a
+     * @return Response\LoginResponse|null A login response if a
      *                                                   full (re-)login is
      *                                                   needed during the login
      *                                                   flow attempt, otherwise
@@ -4899,8 +5049,8 @@ class Instagram implements ExperimentsInterface
      */
     protected function _sendLoginFlow(
         $justLoggedIn,
-        $appRefreshInterval = 21600)
-    {
+        $appRefreshInterval = 21600
+    ) {
         if (!is_int($appRefreshInterval) || $appRefreshInterval < 0) {
             throw new \InvalidArgumentException("Instagram's app state refresh interval must be a positive integer.");
         }
@@ -4952,7 +5102,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->internal->fetchZeroRatingToken('token_expired', false, false);
-            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+            } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
                 // pass
@@ -4972,11 +5122,11 @@ class Instagram implements ExperimentsInterface
                     $response = $this->internal->getBloksSaveCredentialsScreen();
                     sleep(mt_rand(1, 3));
                 }
-                //$this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', 'viewer', false, 'pando');
+                // $this->internal->sendGraph('4703444349433374284764063878', ['is_pando' => true], 'AREffectConsentStateQuery', 'viewer', false, 'pando');
 
                 $this->event->sendZeroCarrierSignal();
                 $this->internal->getMobileConfig(true);
-            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+            } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
                 // pass
@@ -5026,7 +5176,7 @@ class Instagram implements ExperimentsInterface
                 $this->settings->set('salt_ids', '220140399,332020310');
                 $this->people->getSharePrefill();
 
-                $requestId = \InstagramAPI\Signatures::generateUUID();
+                $requestId = Signatures::generateUUID();
                 $this->event->sendInstagramFeedRequestSent($requestId, 'cold_start_fetch');
                 $this->setNavChain('');
                 $this->settings->set('salt_ids', '220140399,332020310,974466465,974460658');
@@ -5053,13 +5203,20 @@ class Instagram implements ExperimentsInterface
                             case 8:
                                 $carouselItem = $item->getMediaOrAd()->getCarouselMedia()[0]; // First item of the carousel.
                                 if ($carouselItem->getMediaType() === 1) {
-                                    $this->event->sendOrganicMediaImpression($item->getMediaOrAd(), 'feed_timeline',
+                                    $this->event->sendOrganicMediaImpression(
+                                        $item->getMediaOrAd(),
+                                        'feed_timeline',
                                         [
                                             'feed_request_id'   => null,
                                         ]
                                     );
                                 } else {
-                                    $this->event->sendOrganicViewedImpression($item->getMediaOrAd(), 'feed_timeline', null, null, null,
+                                    $this->event->sendOrganicViewedImpression(
+                                        $item->getMediaOrAd(),
+                                        'feed_timeline',
+                                        null,
+                                        null,
+                                        null,
                                         [
                                             'feed_request_id'   => null,
                                         ]
@@ -5076,9 +5233,9 @@ class Instagram implements ExperimentsInterface
                         }
                     }
                 }
-            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+            } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
-            } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+            } catch (Exception\LoginRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
                 // pass
@@ -5087,10 +5244,10 @@ class Instagram implements ExperimentsInterface
             self::$sendAsync = true;
 
             try {
-                //$this->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', true);
+                // $this->internal->sendGraph('47034443410017494685272535358', [], 'AREffectConsentStateQuery', true);
 
-                $requestId = \InstagramAPI\Signatures::generateUUID();
-                $traySessionId = \InstagramAPI\Signatures::generateUUID();
+                $requestId = Signatures::generateUUID();
+                $traySessionId = Signatures::generateUUID();
                 $this->event->sendStoriesRequest($traySessionId, $requestId, 'cold_start');
 
                 $trayFeed = $this->story->getReelsTrayFeed('cold_start', $requestId, $traySessionId);
@@ -5100,7 +5257,7 @@ class Instagram implements ExperimentsInterface
                 $this->internal->sendGraph('35850666251457231147855668495', [], 'AFSOptInQuery', 'AFSStatusGraphQLWrapper', false, 'pando');
 
                 $this->internal->getAsyncNdxIgSteps('NDX_IG_IMMERSIVE');
-            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+            } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
                 // pass
@@ -5128,8 +5285,8 @@ class Instagram implements ExperimentsInterface
                     // pass
                 }
 
-                //$this->internal->cdnRmd();
-            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                // $this->internal->cdnRmd();
+            } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
                 // pass
@@ -5150,9 +5307,9 @@ class Instagram implements ExperimentsInterface
                         $this->people->getCreatorInfo($this->account_id);
                     }
                 }
-                //$this->internal->logResurrectAttribution();
-                //$this->internal->getDeviceCapabilitiesDecisions();
-                //$this->people->getBootstrapUsers();
+                // $this->internal->logResurrectAttribution();
+                // $this->internal->getDeviceCapabilitiesDecisions();
+                // $this->people->getBootstrapUsers();
 
                 self::$sendAsync = false;
                 $this->internal->getQPFetch(['LOGIN_INTERSTITIAL']);
@@ -5175,10 +5332,10 @@ class Instagram implements ExperimentsInterface
                 ], 'IGBloksAppRootQuery', 'bloks_app', false, 'pando', false, true);
 
                 $this->story->getInjectedStories([$this->account_id], $traySessionId);
-                //$this->internal->sendGraph('279018452917733073575656047369', [], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
-                //$this->reel->discover();
+                // $this->internal->sendGraph('279018452917733073575656047369', [], 'FetchAttributionEventComplianceAction', 'fetch_attribution_event_compliance_action', true, 'pando');
+                // $this->reel->discover();
                 $this->people->getInfoById($this->account_id);
-            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+            } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
                 // pass
@@ -5205,8 +5362,9 @@ class Instagram implements ExperimentsInterface
             $this->client->startEmulatingBatch();
 
             try {
-                //$this->timeline->getTimelineFeed(); TODO
-                $this->internal->sendGraph('97942539015262622076776956304',
+                // $this->timeline->getTimelineFeed(); TODO
+                $this->internal->sendGraph(
+                    '97942539015262622076776956304',
                     [
                         'usecase'           => 'IG_ADS_PREFETCH',
                         'test_id'           => '59705010009496',
@@ -5214,7 +5372,13 @@ class Instagram implements ExperimentsInterface
                         'version'           => '0.0.5',
                         'client_msg_type'   => 'INFER',
                     ],
-                    'OnDeviceFLFeatures', 'on_device_fl_features', false, 'pando', false, true);
+                    'OnDeviceFLFeatures',
+                    'on_device_fl_features',
+                    false,
+                    'pando',
+                    false,
+                    true
+                );
 
                 $rand = mt_rand(6000000000000000, 6099999999999999) / 10000000000000000;
                 $formatRand = rtrim(sprintf('%.16f', $rand), '0');
@@ -5223,7 +5387,8 @@ class Instagram implements ExperimentsInterface
                     $formatRand .= '0';
                 }
 
-                $this->internal->sendGraph('387719987211424210844178051540',
+                $this->internal->sendGraph(
+                    '387719987211424210844178051540',
                     [
                         'use_case_version'      => '0.0.5',
                         'use_case'              => 'IG_ADS_PREFETCH',
@@ -5262,31 +5427,44 @@ class Instagram implements ExperimentsInterface
                             ],
                         ],
                     ],
-                    'DcpFeaturesUpload', 'xfb_post_dcp_features_upload', false, 'pando', false, true);
+                    'DcpFeaturesUpload',
+                    'xfb_post_dcp_features_upload',
+                    false,
+                    'pando',
+                    false,
+                    true
+                );
 
-                $this->internal->sendGraph('21631519914279241558813005594',
-                [
-                    'service_names' => [
-                        'CROSS_POSTING_SETTING',
+                $this->internal->sendGraph(
+                    '21631519914279241558813005594',
+                    [
+                        'service_names' => [
+                            'CROSS_POSTING_SETTING',
+                        ],
+                        'custom_partner_params' => [
+                            [
+                                'value' => 'FB',
+                                'key'   => 'CROSSPOSTING_DESTINATION_APP',
+                            ],
+                            [
+                                'value' => '',
+                                'key'   => 'CROSSPOSTING_SHARE_TO_SURFACE',
+                            ],
+                            [
+                                'value' => 'true',
+                                'key'   => 'OVERRIDE_USER_VALIDATION_WITH_CXP_ELIGIBILITY_RULE',
+                            ],
+                        ],
+                        'client_caller_name'    => 'ig_android_service_cache_crossposting_setting',
+                        'caller_name'           => 'fx_product_foui_Afion_client_FXOnline_client_cache',
                     ],
-                    'custom_partner_params' => [
-                        [
-                            'value' => 'FB',
-                            'key'   => 'CROSSPOSTING_DESTINATION_APP',
-                        ],
-                        [
-                            'value' => '',
-                            'key'   => 'CROSSPOSTING_SHARE_TO_SURFACE',
-                        ],
-                        [
-                            'value' => 'true',
-                            'key'   => 'OVERRIDE_USER_VALIDATION_WITH_CXP_ELIGIBILITY_RULE',
-                        ],
-                    ],
-                    'client_caller_name'    => 'ig_android_service_cache_crossposting_setting',
-                    'caller_name'           => 'fx_product_foui_Afion_client_FXOnline_client_cache',
-                ],
-                'FxIgConnectedServicesInfoQuery', 'fx_service_cache', false, 'pando', false, true);
+                    'FxIgConnectedServicesInfoQuery',
+                    'fx_service_cache',
+                    false,
+                    'pando',
+                    false,
+                    true
+                );
 
                 /*
                 $this->internal->sendGraph('18293997046226642457734318433', [
@@ -5310,7 +5488,7 @@ class Instagram implements ExperimentsInterface
             self::$sendAsync = false;
 
             try {
-                //$this->discover->getMixedMedia();
+                // $this->discover->getMixedMedia();
                 $this->internal->writeSupportedCapabilities();
                 $this->reel->getShareToFbConfig();
             } catch (\Exception $e) {
@@ -5321,7 +5499,7 @@ class Instagram implements ExperimentsInterface
 
             try {
                 $this->internal->sendGraph('43230821013683556483393399494', [], 'IGFxLinkedAccountsQuery', 'fx_linked_accounts', false, 'pando');
-                //$this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
+                // $this->internal->sendGraph('171864746410373358862136873197', ['is_pando' => true, 'data' => (object) []], 'ListCallsQuery', 'list_ig_calls_paginated_query', false, 'pando');
                 /*$this->internal->sendGraph('13513772661704761708109730075', [
                     'is_pando' => true,
                     'input'    => [
@@ -5451,8 +5629,8 @@ class Instagram implements ExperimentsInterface
                     $this->internal->getViewableStatuses(true);
                     $this->account->getPresenceStatus();
                     $this->direct->getHasInteropUpgraded();
-                    //$this->internal->getNotificationsSettings();
-                } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                    // $this->internal->getNotificationsSettings();
+                } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {
                     // pass
@@ -5464,14 +5642,14 @@ class Instagram implements ExperimentsInterface
                 $this->client->stopEmulatingBatch();
 
                 try {
-                    $this->direct->getInbox(null, null, 0);
+                    // $this->direct->getInbox(null, null, 0);
                 } catch (\Exception $e) {
                     // pass
                 }
             }
 
             try {
-                $this->discover->getExploreFeed(null, \InstagramAPI\Signatures::generateUUID(), null, true);
+                $this->discover->getExploreFeed(null, Signatures::generateUUID(), null, true);
             } catch (\Exception $e) {
                 // pass
             }
@@ -5482,16 +5660,16 @@ class Instagram implements ExperimentsInterface
             try {
                 try {
                     $this->direct->getPresences();
-                    $this->direct->getInbox(null, null, 20, false, 'all', 'initial_snapshot');
+                    $this->direct->getInbox(null, null, 15, false, 'all', 'initial_snapshot');
 
-                    //$this->internal->sendGraph('243882031010379133527862780970', [], 'FBToIGDefaultAudienceBottomSheetQuery', false, 'graphservice');
-                    //$this->internal->sendGraph('338246149711919572858330660779', ['is_pando' => true], 'FBToIGDefaultAudienceSettingQuery', true, 'pando');
-                } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                    // $this->internal->sendGraph('243882031010379133527862780970', [], 'FBToIGDefaultAudienceBottomSheetQuery', false, 'graphservice');
+                    // $this->internal->sendGraph('338246149711919572858330660779', ['is_pando' => true], 'FBToIGDefaultAudienceSettingQuery', true, 'pando');
+                } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {
                     // pass
                 }
-            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+            } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
                 // pass
@@ -5508,9 +5686,10 @@ class Instagram implements ExperimentsInterface
             }
 
             $this->client->startEmulatingBatch();
+
             // Batch request 5
             try {
-                //$this->story->getReelsMediaFeed($this->account_id);
+                // $this->story->getReelsMediaFeed($this->account_id);
                 /*
                 try {
                     $this->internal->sendGraph('2360595178779351530479091981', ['is_pando' => true, 'fb_profile_image_size' => 200], 'FxIGMasterAccountQuery', 'fxcal_accounts', false, 'pando');
@@ -5557,7 +5736,7 @@ class Instagram implements ExperimentsInterface
                     $this->internal->getArlinkDownloadInfo();
                 }
                 */
-            } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+            } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                 throw $e;
             } catch (\Exception $e) {
                 // pass
@@ -5589,12 +5768,12 @@ class Instagram implements ExperimentsInterface
         }
         */
 
-            /*
-            try {
-                $this->internal->getFacebookOTA();
-            } catch (\Exception $e) {
-            }
-            */
+        /*
+        try {
+            $this->internal->getFacebookOTA();
+        } catch (\Exception $e) {
+        }
+        */
         } else {
             $lastLoginTime = $this->settings->get('last_login');
             $isSessionExpired = $lastLoginTime === null || (time() - $lastLoginTime) > $appRefreshInterval;
@@ -5611,13 +5790,13 @@ class Instagram implements ExperimentsInterface
                     try {
                         $trayFeed = $this->story->getReelsTrayFeed('cold_start');
                         $this->initTrayFeed = $trayFeed;
-                    } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                    } catch (Exception\LoginRequiredException $e) {
                         if (!self::$manuallyManageLoginException) {
                             if (isset($e->getResponse()->asArray()['logout_reason'])) {
                                 try {
                                     $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
                                 } catch (\Exception $e) {
-                                    //pass
+                                    // pass
                                 }
 
                                 return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
@@ -5629,7 +5808,7 @@ class Instagram implements ExperimentsInterface
                         } else {
                             throw $e;
                         }
-                    } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
+                    } catch (Exception\EmptyResponseException|Exception\ThrottledException $e) {
                         // This can have EmptyResponse, and that's ok.
                     }
                     $feed = $this->timeline->getTimelineFeed(null, [
@@ -5657,13 +5836,20 @@ class Instagram implements ExperimentsInterface
                                 case 8:
                                     $carouselItem = $item->getMediaOrAd()->getCarouselMedia()[0]; // First item of the carousel.
                                     if ($carouselItem->getMediaType() === 1) {
-                                        $this->event->sendOrganicMediaImpression($item->getMediaOrAd(), 'feed_timeline',
+                                        $this->event->sendOrganicMediaImpression(
+                                            $item->getMediaOrAd(),
+                                            'feed_timeline',
                                             [
                                                 'feed_request_id'   => null,
                                             ]
                                         );
                                     } else {
-                                        $this->event->sendOrganicViewedImpression($item->getMediaOrAd(), 'feed_timeline', null, null, null,
+                                        $this->event->sendOrganicViewedImpression(
+                                            $item->getMediaOrAd(),
+                                            'feed_timeline',
+                                            null,
+                                            null,
+                                            null,
                                             [
                                                 'feed_request_id'   => null,
                                             ]
@@ -5683,17 +5869,17 @@ class Instagram implements ExperimentsInterface
 
                     try {
                         $this->people->getSharePrefill();
-                        //$this->people->getRecentActivityInbox();
-                    } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                        // $this->people->getRecentActivityInbox();
+                    } catch (Exception\LoginRequiredException $e) {
                         throw $e;
-                    } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                    } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                         throw $e;
                     } catch (\Exception $e) {
-                        //pass
+                        // pass
                     }
-                } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
-                } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                } catch (Exception\LoginRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {
                     // pass
@@ -5707,13 +5893,13 @@ class Instagram implements ExperimentsInterface
                 $this->client->startEmulatingBatch();
 
                 try {
-                    //$this->people->getSharePrefill();
-                    //$this->people->getRecentActivityInbox();
+                    // $this->people->getSharePrefill();
+                    // $this->people->getRecentActivityInbox();
                     $this->people->getInfoById($this->account_id);
-                    //$this->internal->getDeviceCapabilitiesDecisions();
-                } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                    // $this->internal->getDeviceCapabilitiesDecisions();
+                } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
-                } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                } catch (Exception\LoginRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {
                     // pass
@@ -5727,11 +5913,11 @@ class Instagram implements ExperimentsInterface
 
                 try {
                     $this->direct->getPresences();
-                    $this->discover->getExploreFeed('', \InstagramAPI\Signatures::generateUUID(), null, true, true);
+                    $this->discover->getExploreFeed('', Signatures::generateUUID(), null, true, true);
                     $this->direct->getInbox();
-                } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
+                } catch (Exception\EmptyResponseException|Exception\ThrottledException $e) {
                     // This can have EmptyResponse, and that's ok.
-                } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                } catch (Exception\LoginRequiredException $e) {
                     throw $e;
                 } finally {
                     // Stops emulating batch requests.
@@ -5745,16 +5931,16 @@ class Instagram implements ExperimentsInterface
                 $this->settings->set('session_id', $this->session_id);
 
                 // Do the rest of the "user is re-opening the app" API flow...
-                //$this->people->getBootstrapUsers();
+                // $this->people->getBootstrapUsers();
 
                 // Start emulating batch requests with Pidgeon Raw Client Time.
                 $this->client->startEmulatingBatch();
 
                 try {
                     $this->internal->getQPFetch(['FLOATING_BANNER', 'MEGAPHONE', 'TOOLTIP', 'INTERSTITIAL', 'BOTTOMSHEET']);
-                    //$this->direct->getRankedRecipients('reshare', true);
-                    //$this->direct->getRankedRecipients('raven', true);
-                } catch (\InstagramAPI\Exception\Checkpoint\ChallengeRequiredException $e) {
+                    // $this->direct->getRankedRecipients('reshare', true);
+                    // $this->direct->getRankedRecipients('raven', true);
+                } catch (Exception\Checkpoint\ChallengeRequiredException $e) {
                     throw $e;
                 } catch (\Exception $e) {
                     // pass
@@ -5767,13 +5953,13 @@ class Instagram implements ExperimentsInterface
             } else {
                 try {
                     $this->story->getReelsTrayFeed('cold_start');
-                } catch (\InstagramAPI\Exception\LoginRequiredException $e) {
+                } catch (Exception\LoginRequiredException $e) {
                     if (!self::$manuallyManageLoginException) {
                         if (isset($e->getResponse()->asArray()['logout_reason'])) {
                             try {
                                 $this->performPostForceLogoutActions($e->getResponse()->asArray()['logout_reason'], 'feed/reels_tray/');
                             } catch (\Exception $e) {
-                                //pass
+                                // pass
                             }
 
                             return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
@@ -5785,7 +5971,7 @@ class Instagram implements ExperimentsInterface
                     } else {
                         throw $e;
                     }
-                } catch (\InstagramAPI\Exception\EmptyResponseException | \InstagramAPI\Exception\ThrottledException $e) {
+                } catch (Exception\EmptyResponseException|Exception\ThrottledException $e) {
                     // This can have EmptyResponse, and that's ok.
                 }
             }
@@ -5795,7 +5981,7 @@ class Instagram implements ExperimentsInterface
             $lastExperimentsTime = $this->settings->get('last_experiments');
             if ($lastExperimentsTime === null || (time() - intval($lastExperimentsTime)) > self::EXPERIMENTS_REFRESH) {
                 // Start emulating batch requests with Pidgeon Raw Client Time.
-                //$this->client->startEmulatingBatch();
+                // $this->client->startEmulatingBatch();
                 try {
                     $this->internal->getMobileConfig(true);
                     $this->internal->getMobileConfig(false);
@@ -5813,7 +5999,7 @@ class Instagram implements ExperimentsInterface
                     $this->internal->fetchZeroRatingToken($expired > 7200 ? 'token_stale' : 'token_expired', false, false);
                     $this->event->sendZeroCarrierSignal();
                 }
-            } catch (\InstagramAPI\Exception\InstagramException $e) {
+            } catch (Exception\InstagramException $e) {
                 // pass
             }
         }
@@ -5834,21 +6020,21 @@ class Instagram implements ExperimentsInterface
      * @param int    $logoutReason Logout reason.
      * @param string $path         Path.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      *
      * @see Instagram::login()
      */
     public function performPostForceLogoutActions(
         $logoutReason,
-        $path)
-    {
+        $path
+    ) {
         return $this->request('accounts/perform_post_force_logout_actions/')
             ->setNeedsAuth(false)
             ->addPost('user_id', $this->account_id)
             ->addPost('_uid', $this->account_id)
-            //->addPost('_csrftoken', $this->client->getToken())
+            // ->addPost('_csrftoken', $this->client->getToken())
             ->addPost('guid', $this->uuid)
             ->addPost('device_id', $this->device_id)
             ->addPost('path', $path)
@@ -5866,9 +6052,9 @@ class Instagram implements ExperimentsInterface
      * logging out of the APP. But you SHOULDN'T do that! In almost 100% of all
      * cases you want to *stay logged in* so that `login()` resumes your session!
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LogoutResponse
+     * @return Response\LogoutResponse
      *
      * @see Instagram::login()
      */
@@ -5877,7 +6063,7 @@ class Instagram implements ExperimentsInterface
         $response = $this->request('accounts/logout/')
             ->setSignedPost(false)
             ->addPost('phone_id', $this->phone_id)
-            //->addPost('_csrftoken', $this->client->getToken())
+            // ->addPost('_csrftoken', $this->client->getToken())
             ->addPost('guid', $this->uuid)
             ->addPost('device_id', $this->device_id)
             ->addPost('_uuid', $this->uuid)
@@ -5910,18 +6096,18 @@ class Instagram implements ExperimentsInterface
      *                                         than the default 30 minutes!
      * @param bool   $loginFlow                Perform login flow.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\AccountDisabledException
+     * @throws Exception\InstagramException
+     * @throws Exception\AccountDisabledException
      *
-     * @return \InstagramAPI\Response\LoginResponse
+     * @return Response\LoginResponse
      *
      * @see Instagram::login()
      */
     protected function _processSuccesfulLoginResponse(
         $loginResponseWithHeaders,
         $appRefreshInterval = 1800,
-        $loginFlow = true)
-    {
+        $loginFlow = true
+    ) {
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
         $re = '/"full_name":"(.*?)","/m';
         preg_match_all($re, $loginResponseWithHeaders['login_response'], $matches, PREG_SET_ORDER, 0);
@@ -5963,7 +6149,7 @@ class Instagram implements ExperimentsInterface
         }
 
         if ($loginResponse->getLoggedInUser()->getUsername() === 'Instagram User') {
-            throw new \InstagramAPI\Exception\AccountDisabledException('Account has been suspended.');
+            throw new Exception\AccountDisabledException('Account has been suspended.');
         }
         if ($loginResponse->getLoggedInUser()->getIsBusiness() !== null) {
             $this->settings->set('business_account', $loginResponse->getLoggedInUser()->getIsBusiness());
@@ -5986,15 +6172,15 @@ class Instagram implements ExperimentsInterface
      *
      * @param array $loginResponseWithHeaders Login bloks array.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
+     * @throws Exception\InstagramException
      *
      * @return array
      *
      * @see Instagram::login()
      */
     protected function _parseLoginErrors(
-        $loginResponseWithHeaders)
-    {
+        $loginResponseWithHeaders
+    ) {
         $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\login_error_dialog_shown\\'), 0, -2);
         if (empty($offsets)) {
             $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\exception_message\\'), 0, -2);
@@ -6014,6 +6200,14 @@ class Instagram implements ExperimentsInterface
             array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
                 if ($value === $check) {
                     $result = ['event_category' => 'FIRST_PASSWORD_FAILURE'];
+                }
+            });
+        }
+        if (empty($result)) {
+            $check = '\login_failure\\';
+            array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
+                if ($value === $check) {
+                    $result = ['event_category' => 'login_home_page_interaction'];
                 }
             });
         }
@@ -6047,24 +6241,24 @@ class Instagram implements ExperimentsInterface
     /**
      * Throw login exceptions (Bloks).
      *
-     * @param \InstagramAPI\Response\LoginResponse $response Login response.
-     * @param array                                $errorMap Error map.
+     * @param Response\LoginResponse $response Login response.
+     * @param array                  $errorMap Error map.
      *
-     * @throws \InstagramAPI\Exception\InstagramException
-     * @throws \InstagramAPI\Exception\AccountDeletionException
-     * @throws \InstagramAPI\Exception\InvalidUsernameException
-     * @throws \InstagramAPI\Exception\TooManyAttemptsException
-     * @throws \InstagramAPI\Exception\AccountDisabledException
-     * @throws \InstagramAPI\Exception\IncorrectPasswordException
-     * @throws \InstagramAPI\Exception\UnexpectedLoginErrorException
-     * @throws \InstagramAPI\Exception\Checkpoint\ChallengeRequiredException
+     * @throws Exception\InstagramException
+     * @throws Exception\AccountDeletionException
+     * @throws Exception\InvalidUsernameException
+     * @throws Exception\TooManyAttemptsException
+     * @throws Exception\AccountDisabledException
+     * @throws Exception\IncorrectPasswordException
+     * @throws Exception\UnexpectedLoginErrorException
+     * @throws Exception\Checkpoint\ChallengeRequiredException
      *
      * @see Instagram::login()
      */
     protected function _throwLoginException(
         $response,
-        $errorMap)
-    {
+        $errorMap
+    ) {
         if (isset($errorMap['exception_message']) || isset($errorMap['event_category'])) {
             if (!isset($errorMap['exception_message'])) {
                 $errorMap['exception_message'] = '';
@@ -6075,14 +6269,14 @@ class Instagram implements ExperimentsInterface
 
             switch ($errorMap['exception_message']) {
                 case 'Login Error: An unexpected error occurred. Please try logging in again.':
-                //case "Unmapped IG Error: This IG Error was not mapped to an Error Code. To fix it, update the error tool under 'CAA' to map it to an Error Code.";
-                    throw new \InstagramAPI\Exception\UnexpectedLoginErrorException($errorMap['exception_message']);
+                    // case "Unmapped IG Error: This IG Error was not mapped to an Error Code. To fix it, update the error tool under 'CAA' to map it to an Error Code.";
+                    throw new Exception\UnexpectedLoginErrorException($errorMap['exception_message']);
                     break;
                 case 'Incorrect Password: The password you entered is incorrect. Please try again.':
                 case 'The password you entered is incorrect. Please try again.':
                     $this->loginAttemptCount++;
 
-                    throw new \InstagramAPI\Exception\IncorrectPasswordException($errorMap['exception_message']);
+                    throw new Exception\IncorrectPasswordException($errorMap['exception_message']);
                     break;
                 default:
                     if (isset($errorMap['event_category'])) {
@@ -6096,7 +6290,7 @@ class Instagram implements ExperimentsInterface
                             }
                             $loginResponse = new Response\CheckpointResponse($loginResponse);
 
-                            $e = new \InstagramAPI\Exception\Checkpoint\ChallengeRequiredException();
+                            $e = new Exception\Checkpoint\ChallengeRequiredException();
                             $e->setResponse($loginResponse);
 
                             throw $e;
@@ -6133,7 +6327,7 @@ class Instagram implements ExperimentsInterface
                                 'status'        => 'fail',
                                 'message'       => $msg,
                             ]);
-                            $e = new \InstagramAPI\Exception\IncorrectPasswordException($msg);
+                            $e = new Exception\IncorrectPasswordException($msg);
                             $e->setResponse($loginResponse);
 
                             throw $e;
@@ -6145,7 +6339,7 @@ class Instagram implements ExperimentsInterface
                                     'status'        => 'fail',
                                     'message'       => $msg,
                                 ]);
-                                $e = new \InstagramAPI\Exception\AccountDisabledException($msg);
+                                $e = new Exception\AccountDisabledException($msg);
                                 $e->setResponse($loginResponse);
 
                                 throw $e;
@@ -6157,7 +6351,7 @@ class Instagram implements ExperimentsInterface
                                     'status'        => 'fail',
                                     'message'       => $msg,
                                 ]);
-                                $e = new \InstagramAPI\Exception\TooManyAttemptsException($msg);
+                                $e = new Exception\TooManyAttemptsException($msg);
                                 $e->setResponse($loginResponse);
 
                                 throw $e;
@@ -6169,7 +6363,7 @@ class Instagram implements ExperimentsInterface
                                     'status'        => 'fail',
                                     'message'       => sprintf('%s%s', $msg, $this->username),
                                 ]);
-                                $e = new \InstagramAPI\Exception\InvalidUsernameException(sprintf('%s%s', $msg, $this->username));
+                                $e = new Exception\InvalidUsernameException(sprintf('%s%s', $msg, $this->username));
                                 $e->setResponse($loginResponse);
 
                                 throw $e;
@@ -6181,7 +6375,7 @@ class Instagram implements ExperimentsInterface
                                     'status'        => 'fail',
                                     'message'       => $msg,
                                 ]);
-                                $e = new \InstagramAPI\Exception\UnexpectedLoginErrorException($msg);
+                                $e = new Exception\UnexpectedLoginErrorException($msg);
                                 $e->setResponse($loginResponse);
 
                                 throw $e;
@@ -6193,7 +6387,7 @@ class Instagram implements ExperimentsInterface
                                     'status'        => 'fail',
                                     'message'       => sprintf('You requested to delete your account: %s', $this->username),
                                 ]);
-                                $e = new \InstagramAPI\Exception\AccountDeletionException(sprintf('You requested to delete your account: %s', $this->username));
+                                $e = new Exception\AccountDeletionException(sprintf('You requested to delete your account: %s', $this->username));
                                 $e->setResponse($loginResponse);
 
                                 throw $e;
@@ -6205,7 +6399,7 @@ class Instagram implements ExperimentsInterface
                                     'status'        => 'fail',
                                     'message'       => $msg,
                                 ]);
-                                $e = new \InstagramAPI\Exception\TooManyAttemptsException('You entered the wrong code too many times. Wait a few minutes and try again.');
+                                $e = new Exception\TooManyAttemptsException('You entered the wrong code too many times. Wait a few minutes and try again.');
                                 $e->setResponse($loginResponse);
 
                                 throw $e;
@@ -6217,7 +6411,7 @@ class Instagram implements ExperimentsInterface
                                     'status'        => 'fail',
                                     'message'       => $msg.'Retry again.',
                                 ]);
-                                $e = new \InstagramAPI\Exception\InstagramException($msg);
+                                $e = new Exception\InstagramException($msg);
                                 $e->setResponse($loginResponse);
 
                                 throw $e;
@@ -6229,18 +6423,18 @@ class Instagram implements ExperimentsInterface
                                     'status'        => 'fail',
                                     'message'       => $msg,
                                 ]);
-                                $e = new \InstagramAPI\Exception\InvalidUserException(sprintf('%s If the username exists, it is very likely the IP used is flagged.', $msg));
+                                $e = new Exception\InvalidUserException(sprintf('%s If the username exists, it is very likely the IP used is flagged.', $msg));
                                 $e->setResponse($loginResponse);
 
                                 throw $e;
                             }
 
-                            throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
+                            throw new Exception\InstagramException($errorMap['event_category']);
                         } else {
-                            throw new \InstagramAPI\Exception\InstagramException($errorMap['event_category']);
+                            throw new Exception\InstagramException($errorMap['event_category']);
                         }
                     } else {
-                        throw new \InstagramAPI\Exception\InstagramException($errorMap['exception_message']);
+                        throw new Exception\InstagramException($errorMap['exception_message']);
                     }
             }
         }
@@ -6260,8 +6454,8 @@ class Instagram implements ExperimentsInterface
         $experiment,
         $param,
         $default = false,
-        $useDefault = false)
-    {
+        $useDefault = false
+    ) {
         if ($useDefault === false) {
             return isset($this->experiments[$experiment][$param])
                 ? in_array($this->experiments[$experiment][$param], ['enabled', 'true', '1'])
@@ -6285,12 +6479,11 @@ class Instagram implements ExperimentsInterface
         $experiment,
         $param,
         $default = null,
-        $useDefault = false)
-    {
+        $useDefault = false
+    ) {
         if ($useDefault === false) {
-            return isset($this->experiments[$experiment][$param])
-                ? $this->experiments[$experiment][$param]
-                : $default;
+            return $this->experiments[$experiment][$param]
+                ?? $default;
         } else {
             return $default;
         }
@@ -6304,11 +6497,11 @@ class Instagram implements ExperimentsInterface
      *
      * @param string $url
      *
-     * @return \InstagramAPI\Request
+     * @return Request
      */
     public function request(
-        $url)
-    {
+        $url
+    ) {
         return new Request($this, $url, $this->customResolver);
     }
 }

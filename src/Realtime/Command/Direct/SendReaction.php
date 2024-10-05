@@ -4,12 +4,12 @@ namespace InstagramAPI\Realtime\Command\Direct;
 
 final class SendReaction extends SendItem
 {
-    const TYPE = 'reaction';
+    public const TYPE = 'reaction';
 
-    const REACTION_LIKE = 'like';
+    public const REACTION_LIKE = 'like';
 
-    const STATUS_CREATED = 'created';
-    const STATUS_DELETED = 'deleted';
+    public const STATUS_CREATED = 'created';
+    public const STATUS_DELETED = 'deleted';
 
     /**
      * Constructor.
@@ -27,8 +27,8 @@ final class SendReaction extends SendItem
         $threadItemId,
         $reaction,
         $status,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         parent::__construct($threadId, self::TYPE, $options);
 
         // Handle thread item identifier.

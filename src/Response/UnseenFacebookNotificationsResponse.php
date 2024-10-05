@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class UnseenFacebookNotificationsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'notif_count'           => 'int',
         'last_seen_timestamp'   => 'int',
         'fbuid'                 => '',

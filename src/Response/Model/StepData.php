@@ -98,7 +98,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StepData extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'choice'                    => 'string',
         'country'                   => 'string',
         'enrollment_time'           => 'string',

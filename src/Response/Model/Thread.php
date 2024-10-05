@@ -42,7 +42,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Thread extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'thread_id'                          => 'string',
         'users'                              => 'User[]',
         'canonical'                          => 'bool',

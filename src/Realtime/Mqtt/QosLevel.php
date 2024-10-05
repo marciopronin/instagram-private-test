@@ -4,6 +4,6 @@ namespace InstagramAPI\Realtime\Mqtt;
 
 class QosLevel
 {
-    const FIRE_AND_FORGET = 0;
-    const ACKNOWLEDGED_DELIVERY = 1;
+    public const FIRE_AND_FORGET = 0;
+    public const ACKNOWLEDGED_DELIVERY = 1;
 }

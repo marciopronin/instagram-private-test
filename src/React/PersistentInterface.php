@@ -8,9 +8,9 @@ use React\EventLoop\LoopInterface;
 interface PersistentInterface
 {
     /** @var int Minimum reconnection interval (in sec) */
-    const MIN_RECONNECT_INTERVAL = 1;
+    public const MIN_RECONNECT_INTERVAL = 1;
     /** @var int Maximum reconnection interval (in sec) */
-    const MAX_RECONNECT_INTERVAL = 300; // 5 minutes
+    public const MAX_RECONNECT_INTERVAL = 300; // 5 minutes
 
     /**
      * Returns a minimum allowed reconnection interval.

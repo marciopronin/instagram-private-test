@@ -70,7 +70,7 @@ use InstagramAPI\Response;
  */
 class MediaCommentsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'comments'                   => 'Model\Comment[]',
         'comment_count'              => 'int',
         'comment_likes_enabled'      => 'bool',

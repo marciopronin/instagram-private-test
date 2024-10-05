@@ -34,7 +34,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SuspiciousLogin extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'        => 'string',
         'location'  => 'string',
         'latitude'  => 'float',

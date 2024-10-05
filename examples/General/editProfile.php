@@ -23,13 +23,13 @@ $newUsername = null;
 $profilePhoto = ''; // If you don't want to change it, leave it like this.
 // //////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
-$waterfallId = \InstagramAPI\Signatures::generateUUID();
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
+$waterfallId = InstagramAPI\Signatures::generateUUID();
 $startTime = round(microtime(true) * 1000);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -67,7 +67,7 @@ try {
     $emailCheck = $ig->account->sendConfirmEmail($email);
     if ($emailCheck->getTitle() === 'Email Not Confirmed') {
         echo 'Email being used in other account! Exit!';
-        exit();
+        exit;
     }
     $ig->event->sendNavigation('back', 'change_email', 'personal_information');
     $userData = $ig->account->getCurrentUser();
@@ -151,6 +151,6 @@ try {
     $ig->event->sendNavigation('button', 'edit_profile', 'self_profile');
 
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

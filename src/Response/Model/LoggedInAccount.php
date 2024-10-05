@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class LoggedInAccount extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'session_info'                        => 'SessionInfo',
         'login_response'                      => 'LoginResponse',
     ];

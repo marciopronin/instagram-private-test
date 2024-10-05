@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Phrase extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'start_time_in_ms'          => 'int',
         'end_time_in_ms'            => 'int',
         'phrase'                    => 'string',

@@ -1,5 +1,90 @@
+# Stable release v22.26.0
+## Date: 04/10/2024
+
+### New features
+
+- **Utils:** Add `checkArrayKeyDifferences()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+- **Instagram:** Update `loginOauthTokenFetch()`
+- **Instagram:** Update `sendLoginTextInputTypeAhead()`
+
+# Stable release v22.25.4
+## Date: 04/10/2024
+
+### Updates and fixes
+
+Update code styling and support for PHP 7.x and PHP 8.x
+
+# Stable release v22.25.3
+## Date: 02/10/2024
+
+### New features
+
+- **Instagram:** Add `retryOnNetworkExceptionSleep` static property. 
+
+### Updates and fixes
+
+- **Client:** Update `_guzzleRequest()`
+
+# Stable release v22.25.2
+## Date: 02/10/2024
+
+### Updates and fixes
+
+- **Direct:** Update `getInbox()`
+- **Instagram:** Update `_sendLoginFlow()`
+- **People:** Update `getRecentActivityInbox()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+
+# Stable release v22.25.1
+## Date: 02/10/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_parseLoginErrors()`
+
+# Stable release v22.25.0
+## Date: 01/10/2024
+
+### New features
+
+- **Account:** Add `getUnrecognizedLoginsBloks()`
+
+### Updates and fixes
+
+- **Account:** Update `getLoginActivityBloks`
+- **Constants:** Update to `351.0.0.41.106`
+- **Request:** Update `_addDefaultHeaders()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+
+# Stable release v22.24.1
+## Date: 01/10/2024
+
+### Updates and fixes
+
+- **Client:** Update `_buildGuzzleOptions()`. Replaced `array_merge_recursive` by `array_replace_recursive`. Keys were not updating on existing ones.
+
+# Stable release v22.24.0
+## Date: 01/10/2024
+
+### New features
+
+- **Account:** Add `getPersonalInfo()`
+
+# Stable release v22.23.2
+## Date: 01/10/2024
+
+### Updates and fixes
+
+Update codestyle
+
 # Stable release v22.23.1
 ## Date: 26/09/2024
+
+### Updates and fixes
 
 - **Request:** Update `getResponse()`
 

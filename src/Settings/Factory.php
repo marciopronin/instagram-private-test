@@ -21,14 +21,14 @@ class Factory
      *                             user settings storage backend.
      * @param array $callbacks     Optional StorageHandler callback functions.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
-     * @return \InstagramAPI\Settings\StorageHandler
+     * @return StorageHandler
      */
     public static function createHandler(
         array $storageConfig,
-        array $callbacks = [])
-    {
+        array $callbacks = []
+    ) {
         // Resolve the storage backend choice if none provided in array.
         if (!isset($storageConfig['storage'])) {
             $cmdOptions = self::getCmdOptions([
@@ -43,221 +43,216 @@ class Factory
 
         // Determine the user's final storage configuration.
         switch ($storageConfig['storage']) {
-        case 'file':
-            // Look for allowed command-line values related to this backend.
-            $cmdOptions = self::getCmdOptions([
-                'settings_basefolder::',
-            ]);
+            case 'file':
+                // Look for allowed command-line values related to this backend.
+                $cmdOptions = self::getCmdOptions([
+                    'settings_basefolder::',
+                ]);
 
-            // These settings are optional:
-            $baseFolder = self::getUserConfig('basefolder', $storageConfig, $cmdOptions);
+                // These settings are optional:
+                $baseFolder = self::getUserConfig('basefolder', $storageConfig, $cmdOptions);
 
-            // Generate the final storage location configuration.
-            $locationConfig = [
-                'basefolder' => $baseFolder,
-            ];
-
-            $storageInstance = new Storage\File();
-            break;
-        case 'mysql':
-            // Look for allowed command-line values related to this backend.
-            $cmdOptions = self::getCmdOptions([
-                'settings_dbusername::',
-                'settings_dbpassword::',
-                'settings_dbhost::',
-                'settings_dbport::',
-                'settings_dbname::',
-                'settings_dbtablename::',
-            ]);
-
-            // These settings are optional, and can be provided regardless of
-            // connection method:
-            $locationConfig = [
-                'dbtablename' => self::getUserConfig('dbtablename', $storageConfig, $cmdOptions),
-            ];
-
-            // These settings are required, but you only have to use one method:
-            if (isset($storageConfig['pdo'])) {
-                // If "pdo" is set in the factory config, assume the user wants
-                // to re-use an existing PDO connection. In that case we ignore
-                // the username/password/host/name parameters and use their PDO.
-                // NOTE: Beware that we WILL change attributes on the PDO
-                // connection to suit our needs! Primarily turning all error
-                // reporting into exceptions, and setting the charset to UTF-8.
-                // If you want to re-use a PDO connection, you MUST accept the
-                // fact that WE NEED exceptions and UTF-8 in our PDO! If that is
-                // not acceptable to you then DO NOT re-use your own PDO object!
-                $locationConfig['pdo'] = $storageConfig['pdo'];
-            } else {
-                // Make a new connection. Optional settings for it:
-                $locationConfig['dbusername'] = self::getUserConfig('dbusername', $storageConfig, $cmdOptions);
-                $locationConfig['dbpassword'] = self::getUserConfig('dbpassword', $storageConfig, $cmdOptions);
-                $locationConfig['dbhost'] = self::getUserConfig('dbhost', $storageConfig, $cmdOptions);
-                $locationConfig['dbport'] = self::getUserConfig('dbport', $storageConfig, $cmdOptions);
-                $locationConfig['dbname'] = self::getUserConfig('dbname', $storageConfig, $cmdOptions);
-            }
-
-            $storageInstance = new Storage\MySQL();
-            break;
-        case 'sqlite':
-            // Look for allowed command-line values related to this backend.
-            $cmdOptions = self::getCmdOptions([
-                'settings_dbfilename::',
-                'settings_dbtablename::',
-            ]);
-
-            // These settings are optional, and can be provided regardless of
-            // connection method:
-            $locationConfig = [
-                'dbtablename' => self::getUserConfig('dbtablename', $storageConfig, $cmdOptions),
-            ];
-
-            // These settings are required, but you only have to use one method:
-            if (isset($storageConfig['pdo'])) {
-                // If "pdo" is set in the factory config, assume the user wants
-                // to re-use an existing PDO connection. In that case we ignore
-                // the SQLite filename/connection parameters and use their PDO.
-                // NOTE: Beware that we WILL change attributes on the PDO
-                // connection to suit our needs! Primarily turning all error
-                // reporting into exceptions, and setting the charset to UTF-8.
-                // If you want to re-use a PDO connection, you MUST accept the
-                // fact that WE NEED exceptions and UTF-8 in our PDO! If that is
-                // not acceptable to you then DO NOT re-use your own PDO object!
-                $locationConfig['pdo'] = $storageConfig['pdo'];
-            } else {
-                // Make a new connection. Optional settings for it:
-                $locationConfig['dbfilename'] = self::getUserConfig('dbfilename', $storageConfig, $cmdOptions);
-            }
-
-            $storageInstance = new Storage\SQLite();
-            break;
-        case 'memcached':
-            // The memcached storage can only be configured via the factory
-            // configuration array (not via command line or environment vars).
-
-            // These settings are required, but you only have to use one method:
-            if (isset($storageConfig['memcached'])) {
-                // Re-use the user's own Memcached object.
+                // Generate the final storage location configuration.
                 $locationConfig = [
-                    'memcached' => $storageConfig['memcached'],
+                    'basefolder' => $baseFolder,
                 ];
-            } else {
-                // Make a new connection. Optional settings for it:
+
+                $storageInstance = new Storage\File();
+                break;
+            case 'mysql':
+                // Look for allowed command-line values related to this backend.
+                $cmdOptions = self::getCmdOptions([
+                    'settings_dbusername::',
+                    'settings_dbpassword::',
+                    'settings_dbhost::',
+                    'settings_dbport::',
+                    'settings_dbname::',
+                    'settings_dbtablename::',
+                ]);
+
+                // These settings are optional, and can be provided regardless of
+                // connection method:
                 $locationConfig = [
-                    // This ID will be passed to the \Memcached() constructor.
-                    // NOTE: Memcached's "persistent ID" feature makes Memcached
-                    // keep the settings even after you disconnect.
-                    'persistent_id' => (isset($storageConfig['persistent_id'])
-                                        ? $storageConfig['persistent_id']
-                                        : null),
-                    // Array which will be passed to \Memcached::setOptions().
-                    'memcached_options' => (isset($storageConfig['memcached_options'])
-                                            ? $storageConfig['memcached_options']
-                                            : null),
-                    // Array which will be passed to \Memcached::addServers().
-                    // NOTE: Can contain one or multiple servers.
-                    'servers' => (isset($storageConfig['servers'])
-                                  ? $storageConfig['servers']
-                                  : null),
-                    // SASL username and password to be used for SASL
-                    // authentication with all of the Memcached servers.
-                    // NOTE: PHP's Memcached API doesn't support individual
-                    // authentication credentials per-server, so these values
-                    // apply to all of your servers if you use this feature!
-                    'sasl_username' => (isset($storageConfig['sasl_username'])
-                                        ? $storageConfig['sasl_username']
-                                        : null),
-                    'sasl_password' => (isset($storageConfig['sasl_password'])
-                                        ? $storageConfig['sasl_password']
-                                        : null),
+                    'dbtablename' => self::getUserConfig('dbtablename', $storageConfig, $cmdOptions),
                 ];
-            }
 
-            $storageInstance = new Storage\Memcached();
-            break;
-        case 'redis':
-            // Look for allowed command-line values related to this backend.
-            $cmdOptions = self::getCmdOptions([
-                'settings_redishost::',
-                'settings_redisport::',
-                'settings_redisauth::',
-                'settings_redishash::',
-            ]);
+                // These settings are required, but you only have to use one method:
+                if (isset($storageConfig['pdo'])) {
+                    // If "pdo" is set in the factory config, assume the user wants
+                    // to re-use an existing PDO connection. In that case we ignore
+                    // the username/password/host/name parameters and use their PDO.
+                    // NOTE: Beware that we WILL change attributes on the PDO
+                    // connection to suit our needs! Primarily turning all error
+                    // reporting into exceptions, and setting the charset to UTF-8.
+                    // If you want to re-use a PDO connection, you MUST accept the
+                    // fact that WE NEED exceptions and UTF-8 in our PDO! If that is
+                    // not acceptable to you then DO NOT re-use your own PDO object!
+                    $locationConfig['pdo'] = $storageConfig['pdo'];
+                } else {
+                    // Make a new connection. Optional settings for it:
+                    $locationConfig['dbusername'] = self::getUserConfig('dbusername', $storageConfig, $cmdOptions);
+                    $locationConfig['dbpassword'] = self::getUserConfig('dbpassword', $storageConfig, $cmdOptions);
+                    $locationConfig['dbhost'] = self::getUserConfig('dbhost', $storageConfig, $cmdOptions);
+                    $locationConfig['dbport'] = self::getUserConfig('dbport', $storageConfig, $cmdOptions);
+                    $locationConfig['dbname'] = self::getUserConfig('dbname', $storageConfig, $cmdOptions);
+                }
 
-            // These settings are optional, and can be provided regardless of
-            // connection method:
-            $locationConfig['redishash'] = self::getUserConfig('redishash', $storageConfig, $cmdOptions);
+                $storageInstance = new Storage\MySQL();
+                break;
+            case 'sqlite':
+                // Look for allowed command-line values related to this backend.
+                $cmdOptions = self::getCmdOptions([
+                    'settings_dbfilename::',
+                    'settings_dbtablename::',
+                ]);
 
-            if (isset($storageConfig['redis'])) {
-                // If "redis" is set in the factory config, assume the user wants
-                // to re-use an existing Redis connection. In that case we ignore
-                // the host/port/auth parameters and use their Redis.
-                $locationConfig['redis'] = $storageConfig['redis'];
-            } else {
-                // Make a new connection. Optional settings for it:
-                $locationConfig['redishost'] = self::getUserConfig('redishost', $storageConfig, $cmdOptions);
-                $locationConfig['redisport'] = self::getUserConfig('redisport', $storageConfig, $cmdOptions);
-                $locationConfig['redisauth'] = self::getUserConfig('redisauth', $storageConfig, $cmdOptions);
-            }
+                // These settings are optional, and can be provided regardless of
+                // connection method:
+                $locationConfig = [
+                    'dbtablename' => self::getUserConfig('dbtablename', $storageConfig, $cmdOptions),
+                ];
 
-            $storageInstance = new Storage\Redis();
-            break;
-        case 'postgresql':
-            // Look for allowed command-line values related to this backend.
-            $cmdOptions = self::getCmdOptions([
-                'settings_dbusername::',
-                'settings_dbpassword::',
-                'settings_dbhost::',
-                'settings_dbname::',
-                'settings_dbtablename::',
-            ]);
-            // These settings are optional, and can be provided regardless of
-            // connection method:
-            $locationConfig = [
-                'dbtablename' => self::getUserConfig('dbtablename', $storageConfig, $cmdOptions),
-            ];
-            // These settings are required, but you only have to use one method:
-            if (isset($storageConfig['pdo'])) {
-                // If "pdo" is set in the factory config, assume the user wants
-                // to re-use an existing PDO connection. In that case we ignore
-                // the username/password/host/name parameters and use their PDO.
-                // NOTE: Beware that we WILL change attributes on the PDO
-                // connection to suit our needs! Primarily turning all error
-                // reporting into exceptions, and setting the charset to UTF-8.
-                // If you want to re-use a PDO connection, you MUST accept the
-                // fact that WE NEED exceptions and UTF-8 in our PDO! If that is
-                // not acceptable to you then DO NOT re-use your own PDO object!
-                $locationConfig['pdo'] = $storageConfig['pdo'];
-            } else {
-                // Make a new connection. Optional settings for it:
-                $locationConfig['dbusername'] = self::getUserConfig('dbusername', $storageConfig, $cmdOptions);
-                $locationConfig['dbpassword'] = self::getUserConfig('dbpassword', $storageConfig, $cmdOptions);
-                $locationConfig['dbhost'] = self::getUserConfig('dbhost', $storageConfig, $cmdOptions);
-                $locationConfig['dbport'] = self::getUserConfig('dbport', $storageConfig, $cmdOptions);
-                $locationConfig['dbname'] = self::getUserConfig('dbname', $storageConfig, $cmdOptions);
-            }
-            $storageInstance = new Storage\PostgreSQL();
-            break;
-        case 'custom':
-            // Custom storage classes can only be configured via the main array.
-            // When using a custom class, you must provide a StorageInterface:
-            if (!isset($storageConfig['class'])
-                || !$storageConfig['class'] instanceof StorageInterface) {
-                throw new SettingsException('Invalid custom storage class.');
-            }
+                // These settings are required, but you only have to use one method:
+                if (isset($storageConfig['pdo'])) {
+                    // If "pdo" is set in the factory config, assume the user wants
+                    // to re-use an existing PDO connection. In that case we ignore
+                    // the SQLite filename/connection parameters and use their PDO.
+                    // NOTE: Beware that we WILL change attributes on the PDO
+                    // connection to suit our needs! Primarily turning all error
+                    // reporting into exceptions, and setting the charset to UTF-8.
+                    // If you want to re-use a PDO connection, you MUST accept the
+                    // fact that WE NEED exceptions and UTF-8 in our PDO! If that is
+                    // not acceptable to you then DO NOT re-use your own PDO object!
+                    $locationConfig['pdo'] = $storageConfig['pdo'];
+                } else {
+                    // Make a new connection. Optional settings for it:
+                    $locationConfig['dbfilename'] = self::getUserConfig('dbfilename', $storageConfig, $cmdOptions);
+                }
 
-            // Create a clean storage location configuration array.
-            $locationConfig = $storageConfig;
-            unset($locationConfig['storage']);
-            unset($locationConfig['class']);
+                $storageInstance = new Storage\SQLite();
+                break;
+            case 'memcached':
+                // The memcached storage can only be configured via the factory
+                // configuration array (not via command line or environment vars).
 
-            $storageInstance = $storageConfig['class'];
-            break;
-        default:
-            throw new SettingsException(sprintf(
-                'Unknown settings storage type "%s".',
-                $storageConfig['storage']
-            ));
+                // These settings are required, but you only have to use one method:
+                if (isset($storageConfig['memcached'])) {
+                    // Re-use the user's own Memcached object.
+                    $locationConfig = [
+                        'memcached' => $storageConfig['memcached'],
+                    ];
+                } else {
+                    // Make a new connection. Optional settings for it:
+                    $locationConfig = [
+                        // This ID will be passed to the \Memcached() constructor.
+                        // NOTE: Memcached's "persistent ID" feature makes Memcached
+                        // keep the settings even after you disconnect.
+                        'persistent_id' => ($storageConfig['persistent_id']
+                                            ?? null),
+                        // Array which will be passed to \Memcached::setOptions().
+                        'memcached_options' => ($storageConfig['memcached_options']
+                                                ?? null),
+                        // Array which will be passed to \Memcached::addServers().
+                        // NOTE: Can contain one or multiple servers.
+                        'servers' => ($storageConfig['servers']
+                                      ?? null),
+                        // SASL username and password to be used for SASL
+                        // authentication with all of the Memcached servers.
+                        // NOTE: PHP's Memcached API doesn't support individual
+                        // authentication credentials per-server, so these values
+                        // apply to all of your servers if you use this feature!
+                        'sasl_username' => ($storageConfig['sasl_username']
+                                            ?? null),
+                        'sasl_password' => ($storageConfig['sasl_password']
+                                            ?? null),
+                    ];
+                }
+
+                $storageInstance = new Storage\Memcached();
+                break;
+            case 'redis':
+                // Look for allowed command-line values related to this backend.
+                $cmdOptions = self::getCmdOptions([
+                    'settings_redishost::',
+                    'settings_redisport::',
+                    'settings_redisauth::',
+                    'settings_redishash::',
+                ]);
+
+                // These settings are optional, and can be provided regardless of
+                // connection method:
+                $locationConfig['redishash'] = self::getUserConfig('redishash', $storageConfig, $cmdOptions);
+
+                if (isset($storageConfig['redis'])) {
+                    // If "redis" is set in the factory config, assume the user wants
+                    // to re-use an existing Redis connection. In that case we ignore
+                    // the host/port/auth parameters and use their Redis.
+                    $locationConfig['redis'] = $storageConfig['redis'];
+                } else {
+                    // Make a new connection. Optional settings for it:
+                    $locationConfig['redishost'] = self::getUserConfig('redishost', $storageConfig, $cmdOptions);
+                    $locationConfig['redisport'] = self::getUserConfig('redisport', $storageConfig, $cmdOptions);
+                    $locationConfig['redisauth'] = self::getUserConfig('redisauth', $storageConfig, $cmdOptions);
+                }
+
+                $storageInstance = new Storage\Redis();
+                break;
+            case 'postgresql':
+                // Look for allowed command-line values related to this backend.
+                $cmdOptions = self::getCmdOptions([
+                    'settings_dbusername::',
+                    'settings_dbpassword::',
+                    'settings_dbhost::',
+                    'settings_dbname::',
+                    'settings_dbtablename::',
+                ]);
+                // These settings are optional, and can be provided regardless of
+                // connection method:
+                $locationConfig = [
+                    'dbtablename' => self::getUserConfig('dbtablename', $storageConfig, $cmdOptions),
+                ];
+                // These settings are required, but you only have to use one method:
+                if (isset($storageConfig['pdo'])) {
+                    // If "pdo" is set in the factory config, assume the user wants
+                    // to re-use an existing PDO connection. In that case we ignore
+                    // the username/password/host/name parameters and use their PDO.
+                    // NOTE: Beware that we WILL change attributes on the PDO
+                    // connection to suit our needs! Primarily turning all error
+                    // reporting into exceptions, and setting the charset to UTF-8.
+                    // If you want to re-use a PDO connection, you MUST accept the
+                    // fact that WE NEED exceptions and UTF-8 in our PDO! If that is
+                    // not acceptable to you then DO NOT re-use your own PDO object!
+                    $locationConfig['pdo'] = $storageConfig['pdo'];
+                } else {
+                    // Make a new connection. Optional settings for it:
+                    $locationConfig['dbusername'] = self::getUserConfig('dbusername', $storageConfig, $cmdOptions);
+                    $locationConfig['dbpassword'] = self::getUserConfig('dbpassword', $storageConfig, $cmdOptions);
+                    $locationConfig['dbhost'] = self::getUserConfig('dbhost', $storageConfig, $cmdOptions);
+                    $locationConfig['dbport'] = self::getUserConfig('dbport', $storageConfig, $cmdOptions);
+                    $locationConfig['dbname'] = self::getUserConfig('dbname', $storageConfig, $cmdOptions);
+                }
+                $storageInstance = new Storage\PostgreSQL();
+                break;
+            case 'custom':
+                // Custom storage classes can only be configured via the main array.
+                // When using a custom class, you must provide a StorageInterface:
+                if (!isset($storageConfig['class'])
+                    || !$storageConfig['class'] instanceof StorageInterface) {
+                    throw new SettingsException('Invalid custom storage class.');
+                }
+
+                // Create a clean storage location configuration array.
+                $locationConfig = $storageConfig;
+                unset($locationConfig['storage']);
+                unset($locationConfig['class']);
+
+                $storageInstance = $storageConfig['class'];
+                break;
+            default:
+                throw new SettingsException(sprintf(
+                    'Unknown settings storage type "%s".',
+                    $storageConfig['storage']
+                ));
         }
 
         // Create the storage handler and connect to the storage location.
@@ -276,8 +271,8 @@ class Factory
      * @return array
      */
     public static function getCmdOptions(
-        array $longOpts)
-    {
+        array $longOpts
+    ) {
         $cmdOptions = getopt('', $longOpts);
         if (!is_array($cmdOptions)) {
             $cmdOptions = [];
@@ -298,8 +293,8 @@ class Factory
     public static function getUserConfig(
         $settingName,
         array $storageConfig,
-        array $cmdOptions)
-    {
+        array $cmdOptions
+    ) {
         // Command line options have the highest precedence.
         // NOTE: Settings provided via cmd must have a "settings_" prefix.
         if (array_key_exists("settings_{$settingName}", $cmdOptions)) {

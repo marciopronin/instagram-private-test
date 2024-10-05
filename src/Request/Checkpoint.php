@@ -11,7 +11,7 @@ use InstagramAPI\Utils;
  */
 class Checkpoint extends RequestCollection
 {
-    const MAX_CHALLENGE_ITERATIONS = 15;
+    public const MAX_CHALLENGE_ITERATIONS = 15;
 
     /**
      * Send checkpoint challenge.
@@ -22,13 +22,13 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckpointResponse
+     * @return Response\CheckpointResponse
      */
     public function sendChallenge(
         $checkpointUrl,
         $context = null,
-        $post = false)
-    {
+        $post = false
+    ) {
         $checkpointUrl = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
             return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
         }, $checkpointUrl);
@@ -59,13 +59,13 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckpointResponse
+     * @return Response\CheckpointResponse
      */
     public function requestVerificationCode(
         $checkpointUrl,
         $verificationMethod,
-        $replay = false)
-    {
+        $replay = false
+    ) {
         if ($replay === true) {
             $checkpointUrl = str_replace('challenge/', 'challenge/replay/', $checkpointUrl);
         }
@@ -76,7 +76,7 @@ class Checkpoint extends RequestCollection
            ->addPost('choice', $verificationMethod)
            ->addPost('guid', $this->ig->uuid)
            ->addPost('device_id', $this->ig->device_id)
-           //->addPost('_csrftoken', $this->ig->client->getToken())
+           // ->addPost('_csrftoken', $this->ig->client->getToken())
            ->getResponse(new Response\CheckpointResponse());
     }
 
@@ -87,17 +87,17 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckpointResponse
+     * @return Response\CheckpointResponse
      */
     public function sendAcceptScrapingWarning(
-        $checkpointUrl)
-    {
+        $checkpointUrl
+    ) {
         return $this->ig->request($checkpointUrl)
            ->setNeedsAuth(false)
            ->setSignedPost(false)
            ->addPost('guid', $this->ig->uuid)
            ->addPost('device_id', $this->ig->device_id)
-           //->addPost('_csrftoken', $this->ig->client->getToken())
+           // ->addPost('_csrftoken', $this->ig->client->getToken())
            ->getResponse(new Response\CheckpointResponse());
     }
 
@@ -108,17 +108,17 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckpointResponse
+     * @return Response\CheckpointResponse
      */
     public function sendAcceptDummyStep(
-        $checkpointUrl)
-    {
+        $checkpointUrl
+    ) {
         return $this->ig->request($checkpointUrl)
            ->setNeedsAuth(false)
            ->setSignedPost(false)
            ->addPost('guid', $this->ig->uuid)
            ->addPost('device_id', $this->ig->device_id)
-           //->addPost('_csrftoken', $this->ig->client->getToken())
+           // ->addPost('_csrftoken', $this->ig->client->getToken())
            ->getResponse(new Response\CheckpointResponse());
     }
 
@@ -129,18 +129,18 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckpointResponse
+     * @return Response\CheckpointResponse
      */
     public function sendAcceptReviewLinkedAccounts(
-        $checkpointUrl)
-    {
+        $checkpointUrl
+    ) {
         return $this->ig->request($checkpointUrl)
            ->setNeedsAuth(false)
            ->setSignedPost(false)
            ->addPost('guid', $this->ig->uuid)
            ->addPost('device_id', $this->ig->device_id)
            ->addPost('choice', 0)
-           //->addPost('_csrftoken', $this->ig->client->getToken())
+           // ->addPost('_csrftoken', $this->ig->client->getToken())
            ->getResponse(new Response\CheckpointResponse());
     }
 
@@ -152,12 +152,12 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckpointResponse
+     * @return Response\CheckpointResponse
      */
     public function sendSetNewPasswordCheck(
         $checkpointUrl,
-        $password)
-    {
+        $password
+    ) {
         return $this->ig->request($checkpointUrl)
            ->setNeedsAuth(false)
            ->setSignedPost(false)
@@ -165,7 +165,7 @@ class Checkpoint extends RequestCollection
            ->addPost('enc_new_password2', Utils::encryptPassword($password, '', '', true))
            ->addPost('guid', $this->ig->uuid)
            ->addPost('device_id', $this->ig->device_id)
-           //->addPost('_csrftoken', $this->ig->client->getToken())
+           // ->addPost('_csrftoken', $this->ig->client->getToken())
            ->getResponse(new Response\CheckpointResponse());
     }
 
@@ -177,19 +177,19 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\LoginResponse
+     * @return Response\LoginResponse
      */
     public function sendVerificationCode(
         $checkpointUrl,
-        $verificationCode)
-    {
+        $verificationCode
+    ) {
         return $this->ig->request($checkpointUrl)
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->addPost('security_code', $verificationCode)
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\LoginResponse());
     }
 
@@ -204,19 +204,19 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckpointResponse
+     * @return Response\CheckpointResponse
      */
     public function sendVerificationPhone(
         $checkpointUrl,
         $phoneNumber,
-        $afterLogin = false)
-    {
+        $afterLogin = false
+    ) {
         $request = $this->ig->request($checkpointUrl)
             ->setSignedPost(false)
             ->addPost('phone_number', $phoneNumber)
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id);
-        //->addPost('_csrftoken', $this->ig->client->getToken());
+        // ->addPost('_csrftoken', $this->ig->client->getToken());
         if ($afterLogin === false) {
             $request->setNeedsAuth(false);
         } else {
@@ -238,19 +238,19 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckpointResponse
+     * @return Response\CheckpointResponse
      */
     public function sendVerificationEmail(
         $checkpointUrl,
         $email,
-        $afterLogin = false)
-    {
+        $afterLogin = false
+    ) {
         $request = $this->ig->request($checkpointUrl)
             ->setSignedPost(false)
             ->addPost('email', $email)
             ->addPost('guid', $this->ig->uuid)
             ->addPost('device_id', $this->ig->device_id);
-        //->addPost('_csrftoken', $this->ig->client->getToken());
+        // ->addPost('_csrftoken', $this->ig->client->getToken());
         if ($afterLogin === false) {
             $request->setNeedsAuth(false);
         } else {
@@ -271,14 +271,14 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CheckpointResponse
+     * @return Response\CheckpointResponse
      */
     public function sendSetBirthDate(
         $checkpointUrl,
         $day,
         $month,
-        $year)
-    {
+        $year
+    ) {
         return $this->ig->request($checkpointUrl)
             ->setSignedPost(false)
             ->addPost('day', $day)
@@ -301,11 +301,11 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebCheckpointResponse
+     * @return Response\WebCheckpointResponse
      */
     public function sendAcceptEscalationInformational(
-        $checkpointUrl)
-    {
+        $checkpointUrl
+    ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
@@ -314,8 +314,8 @@ class Checkpoint extends RequestCollection
     }
 
     protected function _getWebFormRequest(
-        $checkpointUrl)
-    {
+        $checkpointUrl
+    ) {
         return $this->ig->request('https://i.instagram.com'.$checkpointUrl)
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -324,7 +324,7 @@ class Checkpoint extends RequestCollection
             ->addHeader('X-Requested-With', 'XMLHttpRequest')
             ->addHeader('X-IG-WWW-Claim', ($this->ig->settings->get('www_claim') !== null) ? $this->ig->settings->get('www_claim') : 0)
             ->addHeader('User-Agent', sprintf('%s %s', Constants::WEB_CHALLENGE_USER_AGENT, $this->ig->device->getUserAgent()))
-            //->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            // ->addHeader('X-CSRFToken', $this->ig->client->getToken())
             ->addHeader('X-CSRFToken', ($this->ig->settings->get('csrftoken') !== null) ? $this->ig->settings->get('csrftoken') : $this->ig->client->getToken())
             ->addHeader('X-IG-App-ID', '1217981644879628')
             ->addHeader('X-Instagram-AJAX', 'c795b4273c42');
@@ -350,12 +350,12 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebCheckpointResponse
+     * @return Response\WebCheckpointResponse
      */
     public function sendCaptchaResponse(
         $checkpointUrl,
-        $response)
-    {
+        $response
+    ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
@@ -372,12 +372,12 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebCheckpointResponse
+     * @return Response\WebCheckpointResponse
      */
     public function selectVerificationMethodForm(
         $checkpointUrl,
-        $verificationMethod)
-    {
+        $verificationMethod
+    ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
@@ -392,11 +392,11 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function selectAcceptCorrectForm(
-        $checkpointUrl)
-    {
+        $checkpointUrl
+    ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
@@ -413,12 +413,12 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebCheckpointResponse
+     * @return Response\WebCheckpointResponse
      */
     public function sendWebFormPhoneNumber(
         $checkpointUrl,
-        $phoneNumber)
-    {
+        $phoneNumber
+    ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
@@ -434,12 +434,12 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebCheckpointResponse
+     * @return Response\WebCheckpointResponse
      */
     public function sendWebFormSecurityCode(
         $checkpointUrl,
-        $securityCode)
-    {
+        $securityCode
+    ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
@@ -455,12 +455,12 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebCheckpointResponse
+     * @return Response\WebCheckpointResponse
      */
     public function sendWebReviewLoginForm(
         $checkpointUrl,
-        $option)
-    {
+        $option
+    ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
@@ -476,12 +476,12 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebCheckpointResponse
+     * @return Response\WebCheckpointResponse
      */
     public function sendSetNewPassword(
         $checkpointUrl,
-        $password)
-    {
+        $password
+    ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
@@ -498,11 +498,11 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebCheckpointResponse
+     * @return Response\WebCheckpointResponse
      */
     public function sendWebAcceptScrapingWarning(
-        $checkpointUrl)
-    {
+        $checkpointUrl
+    ) {
         $request = $this->_getWebFormRequest($checkpointUrl);
 
         return $request
@@ -516,11 +516,11 @@ class Checkpoint extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebCheckpointResponse
+     * @return Response\WebCheckpointResponse
      */
     public function getWebFormCheckpoint(
-        $checkpointUrl)
-    {
+        $checkpointUrl
+    ) {
         return $this->ig->request($checkpointUrl)
             ->setNeedsAuth(false)
             ->addParam('theme', 'light')

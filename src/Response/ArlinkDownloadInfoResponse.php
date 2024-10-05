@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class ArlinkDownloadInfoResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'checksum'             => 'string',
         'download_url'         => 'string',
         'file_size'            => 'string',

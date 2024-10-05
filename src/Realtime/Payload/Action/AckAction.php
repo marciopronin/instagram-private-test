@@ -26,7 +26,7 @@ use InstagramAPI\Realtime\Payload\RealtimeAction;
  */
 class AckAction extends RealtimeAction
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'status_code' => '',
         'payload'     => '\InstagramAPI\Response\Model\DirectSendItemPayload',
     ];

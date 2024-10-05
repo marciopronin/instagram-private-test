@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class UserPresence extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user_id'             => 'string',
         'last_activity_at_ms' => 'string',
         'is_active'           => 'bool',

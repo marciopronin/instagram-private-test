@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Section extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'type'              => 'string',
         'title'             => 'string',
         'items'             => 'Item[]',

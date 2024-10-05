@@ -34,7 +34,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Shopping extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                                     => 'string',
         'cluster'                                => 'Cluster',
         'cover_medias'                           => 'CoverMedia[]',

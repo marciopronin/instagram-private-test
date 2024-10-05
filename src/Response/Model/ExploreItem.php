@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ExploreItem extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'media'             => 'Item',
         'stories'           => 'Stories',
         'channel'           => 'Channel',

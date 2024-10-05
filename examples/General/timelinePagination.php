@@ -5,23 +5,23 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
-$requestId = \InstagramAPI\Signatures::generateUUID();
+$requestId = InstagramAPI\Signatures::generateUUID();
 
 try {
     $maxId = null;
@@ -46,13 +46,20 @@ try {
                     case 8:
                         $carouselItem = $item->getMediaOrAd()->getCarouselMedia()[0]; // First item of the carousel.
                         if ($carouselItem->getMediaType() === 1) {
-                            $ig->event->sendOrganicMediaImpression($item->getMediaOrAd(), 'feed_timeline',
+                            $ig->event->sendOrganicMediaImpression(
+                                $item->getMediaOrAd(),
+                                'feed_timeline',
                                 [
                                     'feed_request_id'   => ($maxId === null) ? null : $requestId,
                                 ]
                             );
                         } else {
-                            $ig->event->sendOrganicViewedImpression($item->getMediaOrAd(), 'feed_timeline', null, null, null,
+                            $ig->event->sendOrganicViewedImpression(
+                                $item->getMediaOrAd(),
+                                'feed_timeline',
+                                null,
+                                null,
+                                null,
                                 [
                                     'feed_request_id'   => ($maxId === null) ? null : $requestId,
                                 ]
@@ -74,6 +81,6 @@ try {
         $ig->event->sendMainFeedLoadingMore(round(microtime(true) * 1000), $mediaDepth);
     } while ($maxId !== null);
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

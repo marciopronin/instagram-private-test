@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class SendVerifyEmailResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'email_sent'        => 'bool',
         'title'             => 'string',
         'body'              => 'string',

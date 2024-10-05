@@ -47,8 +47,8 @@ class Web extends RequestCollection
      */
     public function login(
         $username,
-        $password)
-    {
+        $password
+    ) {
         if (extension_loaded('sodium') === false) {
             throw new \InstagramAPI\Exception\InternalException('You must have the sodium PHP extension to use web login.');
         }
@@ -85,8 +85,8 @@ class Web extends RequestCollection
      */
     public function sendSignupSms(
         $phone,
-        $mid)
-    {
+        $mid
+    ) {
         return $this->ig->request('https://www.instagram.com/accounts/send_signup_sms_code_ajax/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -118,8 +118,8 @@ class Web extends RequestCollection
      */
     public function sendEmailVerificationCode(
         $email,
-        $mid)
-    {
+        $mid
+    ) {
         return $this->ig->request('accounts/send_verify_email/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -150,8 +150,8 @@ class Web extends RequestCollection
     public function checkEmailVerificationCode(
         $email,
         $code,
-        $mid)
-    {
+        $mid
+    ) {
         return $this->ig->request('accounts/check_confirmation_code/')
             ->setNeedsAuth(false)
             ->setSignedPost(false)
@@ -199,8 +199,8 @@ class Web extends RequestCollection
         $mid,
         $attempt,
         $smsCode = null,
-        $tos = 'row')
-    {
+        $tos = 'row'
+    ) {
         if (extension_loaded('sodium') === false) {
             throw new \InstagramAPI\Exception\InternalException('You must have the sodium PHP extension to use web login.');
         }
@@ -252,7 +252,7 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AccountAccessToolResponse
+     * @return Response\AccountAccessToolResponse
      */
     public function getAccountData()
     {
@@ -272,11 +272,11 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function like(
-        $mediaId)
-    {
+        $mediaId
+    ) {
         return $this->ig->request("https://instagram.com/web/likes/{$mediaId}/like/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -299,11 +299,11 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebFollowResponse
+     * @return Response\WebFollowResponse
      */
     public function follow(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("https://instagram.com/web/friendships/{$userId}/follow/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -326,11 +326,11 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebFollowResponse
+     * @return Response\WebFollowResponse
      */
     public function unfollow(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request("https://instagram.com/web/friendships/{$userId}/unfollow/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -354,12 +354,12 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function reportMedia(
         $mediaId,
-        $reason)
-    {
+        $reason
+    ) {
         return $this->ig->request("https://instagram.com/media/{$mediaId}/flag/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -382,11 +382,11 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebUserInfoResponse
+     * @return Response\WebUserInfoResponse
      */
     public function getUserInfo(
-        $username)
-    {
+        $username
+    ) {
         return $this->ig->request('https://i.instagram.com/api/v1/users/web_profile_info/')
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -410,12 +410,12 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebUserInfoResponse
+     * @return Response\WebUserInfoResponse
      */
     public function getTopSearch(
         $query,
-        $context = 'blended')
-    {
+        $context = 'blended'
+    ) {
         return $this->ig->request('https://i.instagram.com/api/v1/users/web_profile_info/')
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -440,11 +440,11 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\MediaInfoResponse
+     * @return Response\MediaInfoResponse
      */
     public function getMediaInfo(
-        $mediaId)
-    {
+        $mediaId
+    ) {
         return $this->ig->request("https://www.instagram.com/api/v1/media/$mediaId/info/")
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -464,7 +464,7 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\AccountAccessToolResponse
+     * @return Response\AccountAccessToolResponse
      */
     public function getPasswordChanges()
     {
@@ -484,12 +484,12 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\WebUserInfoResponse
+     * @return Response\WebUserInfoResponse
      */
     public function sendGraphqlQuery(
         $queryHash,
-        array $variables)
-    {
+        array $variables
+    ) {
         return $this->ig->request('https://www.instagram.com/graphql/query/')
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -515,13 +515,13 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function updateDateOfBirth(
         $day,
         $month,
-        $year)
-    {
+        $year
+    ) {
         return $this->ig->request('https://instagram.com/web/consent/update_dob/')
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -549,14 +549,14 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function editProfile(
         $firstName = null,
         $email = null,
         $phoneNumber = null,
-        $biography = null)
-    {
+        $biography = null
+    ) {
         $response = $this->ig->request('https://instagram.com/api/v1/accounts/edit/web_form_data/')
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)
@@ -596,13 +596,13 @@ class Web extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      *
      * @see Story::getUserReelMediaFeed()
      */
     public function getUserStoryFeedQuery(
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request('https://instagram.com/graphql/query')
             ->setAddDefaultHeaders(false)
             ->setSignedPost(false)

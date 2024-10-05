@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class CatalogData extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'page_info'          => 'PageInfo',
         'edges'              => 'CatalogEdge[]',
     ];

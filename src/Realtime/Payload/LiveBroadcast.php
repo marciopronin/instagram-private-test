@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class LiveBroadcast extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user'                 => '\InstagramAPI\Response\Model\User',
         'broadcast_id'         => 'string',
         'is_periodic'          => '',

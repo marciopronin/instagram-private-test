@@ -31,16 +31,19 @@ class MySQL extends PDOStorage
      * {@inheritdoc}
      */
     protected function _createPDO(
-        array $locationConfig)
-    {
+        array $locationConfig
+    ) {
         $username = ($locationConfig['dbusername'] ? $locationConfig['dbusername'] : 'root');
         $password = ($locationConfig['dbpassword'] ? $locationConfig['dbpassword'] : '');
         $host = ($locationConfig['dbhost'] ? $locationConfig['dbhost'] : 'localhost');
         $port = ($locationConfig['dbport'] ? $locationConfig['dbport'] : '3306');
         $dbName = ($locationConfig['dbname'] ? $locationConfig['dbname'] : 'instagram');
 
-        return new PDO("mysql:host={$host};port={$port};dbname={$dbName}",
-                       $username, $password);
+        return new \PDO(
+            "mysql:host={$host};port={$port};dbname={$dbName}",
+            $username,
+            $password
+        );
     }
 
     /**

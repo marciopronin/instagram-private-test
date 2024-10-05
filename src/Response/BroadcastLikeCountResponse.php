@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class BroadcastLikeCountResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'like_ts'     => 'string',
         'likes'       => 'int',
         'burst_likes' => 'int',

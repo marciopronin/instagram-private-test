@@ -5,18 +5,18 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -37,7 +37,7 @@ try {
     $ig->event->sendVideoAction('video_displayed', $item, 'feed_contextual_profile');
     // We are sending an orgamic media impression, just the media itself (not viewing the video).
     $ig->event->sendOrganicMediaImpression($item, 'feed_contextual_profile');
-    $viewSession = \InstagramAPI\Signatures::generateUUID(); // view session ID.
+    $viewSession = InstagramAPI\Signatures::generateUUID(); // view session ID.
     $seq = 1; // Sequence ID.
     // Send event. Now video should start playing.
     $ig->event->sendVideoAction('video_should_start', $item, 'feed_contextual_profile', ['viewer_session_id' => $viewSession, 'seq' => $seq]);
@@ -63,6 +63,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

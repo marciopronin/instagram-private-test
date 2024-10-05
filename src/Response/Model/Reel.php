@@ -82,7 +82,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Reel extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                => 'string',
         /*
          * Unix "taken_at" timestamp of the newest item in their story reel.

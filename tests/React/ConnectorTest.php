@@ -13,7 +13,7 @@ use React\Socket\SecureConnector;
 
 class ConnectorTest extends TestCase
 {
-    const HOST = 'mqtt-edge.facebook.com';
+    public const HOST = 'mqtt-edge.facebook.com';
 
     /**
      * @param object $object
@@ -25,8 +25,8 @@ class ConnectorTest extends TestCase
     protected function _callProtectedMethod(
         $object,
         $method,
-        ...$args)
-    {
+        ...$args,
+    ) {
         $reflectionClass = new \ReflectionClass($object);
         $reflectionMethod = $reflectionClass->getMethod($method);
         $reflectionMethod->setAccessible(true);

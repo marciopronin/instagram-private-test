@@ -34,7 +34,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class In extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'position'                   => 'float[]',
         'user'                       => 'User',
         'time_in_video'              => '',

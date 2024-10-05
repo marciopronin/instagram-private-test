@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class ConsentRequiredResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'screen_key'             => 'string',
         'primary_button_text'    => 'string',
         'tos_version'            => 'string',

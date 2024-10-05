@@ -630,7 +630,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class User extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'username'                                  => 'string',
         'has_anonymous_profile_picture'             => 'bool',
         'has_highlight_reels'                       => 'bool',

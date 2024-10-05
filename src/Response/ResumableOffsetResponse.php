@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class ResumableOffsetResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'offset' => 'int',
     ];
 

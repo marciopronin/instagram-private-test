@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Groups extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'type'  => '',
         'items' => 'Item[]',
     ];

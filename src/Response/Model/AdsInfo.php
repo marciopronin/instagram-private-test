@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class AdsInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_ads' => 'bool',
         'ads_url' => 'string',
     ];

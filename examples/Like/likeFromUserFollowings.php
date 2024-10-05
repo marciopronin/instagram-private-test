@@ -5,29 +5,29 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $queryUser = 'selenagomez'; // :)
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -102,7 +102,12 @@ try {
     $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
 
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
-    $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
+    $ig->event->sendNavigation(
+        'button',
+        'blended_search',
+        'profile',
+        null,
+        null,
         [
             'rank_token'            => null,
             'query_text'            => $queryUser,
@@ -125,7 +130,9 @@ try {
     $items = array_slice($array, 0, 6);
     $ig->event->preparePerfWithImpressions($items, 'profile');
 
-    $ig->event->sendProfileAction('tap_follow_details', $userId,
+    $ig->event->sendProfileAction(
+        'tap_follow_details',
+        $userId,
         [
             [
                 'module'        => 'blended_search',
@@ -147,10 +154,14 @@ try {
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_search',
             ],
-    ], ['module' => 'profile']);
+        ],
+        ['module' => 'profile']
+    );
 
     $ig->event->sendNavigation('button', 'profile', 'unified_follow_lists');
-    $ig->event->sendProfileAction('tap_followers', $userId,
+    $ig->event->sendProfileAction(
+        'tap_followers',
+        $userId,
         [
             [
                 'module'        => 'profile',
@@ -176,9 +187,16 @@ try {
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_search',
             ],
-    ], ['module' => 'profile']);
+        ],
+        ['module' => 'profile']
+    );
 
-    $ig->event->sendNavigation('following', 'unified_follow_lists', 'unified_follow_lists', null, null,
+    $ig->event->sendNavigation(
+        'following',
+        'unified_follow_lists',
+        'unified_follow_lists',
+        null,
+        null,
         [
             'source_tab'    => 'following',
             'dest_tab'      => 'following',
@@ -187,7 +205,7 @@ try {
 
     $ig->discover->surfaceWithSu($userId);
 
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
     $followings = $ig->people->getFollowing($userId, $rankToken);
 
     $followingList = [];
@@ -245,6 +263,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class ArchivedStoriesFeedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'items'                  => 'Model\ArchivedStoriesFeedItem[]',
         'num_results'            => 'int',
         'more_available'         => 'bool',

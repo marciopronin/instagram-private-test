@@ -18,11 +18,11 @@ use InstagramAPI\AutoPropertyMapper;
  */
 abstract class RealtimeAction extends AutoPropertyMapper
 {
-    const ACK = 'item_ack';
-    const UNSEEN_COUNT = 'inbox_unseen_count';
-    const UNKNOWN = 'unknown';
+    public const ACK = 'item_ack';
+    public const UNSEEN_COUNT = 'inbox_unseen_count';
+    public const UNKNOWN = 'unknown';
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'status' => 'string',
         'action' => 'string',
     ];

@@ -25,25 +25,25 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ExploreResponse
+     * @return Response\ExploreResponse
      */
     public function getExploreFeed(
         $clusterId,
         $sessionId,
         $maxId = null,
         $isPrefetch = false,
-        $clusterDisabled = true)
-    {
+        $clusterDisabled = true
+    ) {
         $request = $this->ig->request('discover/topical_explore/')
             ->addHeader('X-IG-Prefetch-Request', 'foreground')
             ->addParam('is_prefetch', $isPrefetch)
-            //->addParam('omit_cover_media', true)
+            // ->addParam('omit_cover_media', true)
             ->addParam('is_ptr', 'false')
             ->addParam('reels_configuration', $this->ig->getExperimentParam('25215', 13) === null ? 'hide_hero' : 'default')
             ->addParam('is_nonpersonalized_explore', 'false')
             ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
             ->addParam('session_id', $sessionId);
-        //->addParam('paging_token', json_encode((Object)[]));
+        // ->addParam('paging_token', json_encode((Object)[]));
 
         if ($this->ig->isExperimentEnabled('48862', 7, true)) {
             $request->addHeader('X-Google-AD-ID', $this->ig->advertising_id)
@@ -66,11 +66,11 @@ class Discover extends RequestCollection
             if ($maxId !== null) {
                 $request->addParam('max_id', $maxId);
             }
-            //->addParam('module', 'explore_popular')
-            //$request->addParam('is_charging', $this->ig->getIsDeviceCharging())
+            // ->addParam('module', 'explore_popular')
+            // $request->addParam('is_charging', $this->ig->getIsDeviceCharging())
             //       ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
             //        ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled());
-                    //->addParam('panavision_mode', ''); // $this->ig->isExperimentEnabled('ig_android_panavision_consumption_launcher', 'is_immersive_enabled', ''));
+            // ->addParam('panavision_mode', ''); // $this->ig->isExperimentEnabled('ig_android_panavision_consumption_launcher', 'is_immersive_enabled', ''));
         }
 
         return $request->getResponse(new Response\ExploreResponse());
@@ -84,34 +84,40 @@ class Discover extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\DiscoverChainingFeedResponse
+     * @return Response\DiscoverChainingFeedResponse
      */
     public function getMixedMedia(
-        $containerModule = 'clips_viewer_clips_tab')
-    {
+        $containerModule = 'clips_viewer_clips_tab'
+    ) {
         $request = $this->ig->request('mixed_media/discover/')
             ->setSignedPost(false)
             ->addPost('seen_reels', json_encode([]))
             ->addPost('use_mmd_service', 'true')
             ->addPost('should_refetch_chaining_media', 'false')
             ->addPost('_uuid', $this->ig->uuid)
-            ->addPost('mixed_media_types', json_encode(
-                [
-                    'carousel_with_photo_in_first_position' => true,
-                    'carousel_with_video_in_first_position' => true,
-                    'carousel_with_music'                   => true,
-                    'photo_without_music'                   => true,
-                    'photo_with_music'                      => true,
-                ])
+            ->addPost(
+                'mixed_media_types',
+                json_encode(
+                    [
+                        'carousel_with_photo_in_first_position' => true,
+                        'carousel_with_video_in_first_position' => true,
+                        'carousel_with_music'                   => true,
+                        'photo_without_music'                   => true,
+                        'photo_with_music'                      => true,
+                    ]
+                )
             )
-            ->addPost('server_driven_cache_config', json_encode(
-                [
-                    'serve_from_server_cache'       => true,
-                    'cohort_to_ttl_map'             => '',
-                    'serve_on_foreground_prefetch'  => 'true',
-                    'serve_on_background_prefetch'  => 'true',
-                    'meta'                          => '',
-                ])
+            ->addPost(
+                'server_driven_cache_config',
+                json_encode(
+                    [
+                        'serve_from_server_cache'       => true,
+                        'cohort_to_ttl_map'             => '',
+                        'serve_on_foreground_prefetch'  => 'true',
+                        'serve_on_background_prefetch'  => 'true',
+                        'meta'                          => '',
+                    ]
+                )
             )
             ->addPost('container_module', $containerModule)
             ->getResponse(new Response\DiscoverChainingFeedResponse());
@@ -125,14 +131,14 @@ class Discover extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReelsResponse
+     * @return Response\ReelsResponse
      */
     public function getExploreReels(
-        $maxId = null)
-    {
+        $maxId = null
+    ) {
         $request = $this->ig->request('discover/explore_clips/')
             ->setSignedPost(false)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid);
 
         if ($maxId !== null) {
@@ -165,7 +171,7 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\DiscoverChainingFeedResponse
+     * @return Response\DiscoverChainingFeedResponse
      *
      * @see Signatures::generateUUID() To create the chaining session.
      */
@@ -176,8 +182,8 @@ class Discover extends RequestCollection
         $maxId = null,
         $index = 0,
         $surface = 'explore_media_grid',
-        array $options = null)
-    {
+        ?array $options = null
+    ) {
         $pagingToken = [
             'last_organic_item' => [
                 'id'    => $mediaItem->getId(),
@@ -188,7 +194,7 @@ class Discover extends RequestCollection
         $request = $this->ig->request('discover/chaining_experience_feed/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('surface', $surface)
             ->addPost('explore_source_token', $mediaItem->getExploreSourceToken())
             ->addPost('trigger', 'tap')
@@ -218,12 +224,12 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ReportExploreMediaResponse
+     * @return Response\ReportExploreMediaResponse
      */
     public function reportExploreMedia(
         $exploreSourceToken,
-        $userId)
-    {
+        $userId
+    ) {
         return $this->ig->request('discover/explore_report/')
             ->addParam('explore_source_token', $exploreSourceToken)
             ->addParam('m_pk', $this->ig->account_id)
@@ -248,7 +254,7 @@ class Discover extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\FBSearchResponse
+     * @return Response\FBSearchResponse
      *
      * @see FBSearchResponse::getRankToken() To get a rank token from the response.
      * @see examples/paginateWithExclusion.php For a rank token example (but with a different type of exclude list).
@@ -258,8 +264,8 @@ class Discover extends RequestCollection
         $latitude = null,
         $longitude = null,
         array $excludeList = [],
-        $rankToken = null)
-    {
+        $rankToken = null
+    ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
             throw new \InvalidArgumentException('Query must be a non-empty string.');
@@ -268,7 +274,7 @@ class Discover extends RequestCollection
             $this->ig->request('fbsearch/ig_typeahead/')
                 ->addParam('search_surface', 'typeahead_search_page')
                 ->addParam('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
-                ->addParam('count', 30) //hardcoded
+                ->addParam('count', 30) // hardcoded
                 ->addParam('query', $query)
                 ->addParam('context', 'blended'),
             $excludeList,
@@ -317,7 +323,7 @@ class Discover extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TopSearchResponse
+     * @return Response\TopSearchResponse
      *
      * @see TopSearchResponse::getRankToken() To get a rank token from the response.
      * @see examples/paginateWithExclusion.php For a rank token example (but with a different type of exclude list).
@@ -331,8 +337,8 @@ class Discover extends RequestCollection
         $reelsMaxId = null,
         $pageIndex = null,
         $pageToken = null,
-        $pagingToken = null)
-    {
+        $pagingToken = null
+    ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
             throw new \InvalidArgumentException('Query must be a non-empty string.');
@@ -396,7 +402,7 @@ class Discover extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\TopSearchResponse
+     * @return Response\TopSearchResponse
      *
      * @see TopSearchResponse::getRankToken() To get a rank token from the response.
      * @see examples/paginateWithExclusion.php For a rank token example (but with a different type of exclude list).
@@ -406,8 +412,8 @@ class Discover extends RequestCollection
         $latitude = null,
         $longitude = null,
         array $excludeList = [],
-        $rankToken = null)
-    {
+        $rankToken = null
+    ) {
         // Do basic query validation.
         if (!is_string($query) || $query === '') {
             throw new \InvalidArgumentException('Query must be a non-empty string.');
@@ -452,12 +458,12 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function registerRecentSearchClick(
         $entityType,
-        $entityId)
-    {
+        $entityId
+    ) {
         if (!in_array($entityType, ['user', 'hashtag', 'place'], true)) {
             throw new \InvalidArgumentException(sprintf('Unknown entity type: %s.', $entityType));
         }
@@ -466,7 +472,7 @@ class Discover extends RequestCollection
             ->setSignedPost(false)
             ->addPost('entity_type', $entityType)
             ->addPost('entity_id', $entityId)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->getResponse(new Response\GenericResponse());
     }
@@ -482,11 +488,11 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\SuggestedSearchesResponse
+     * @return Response\SuggestedSearchesResponse
      */
     public function getSuggestedSearches(
-        $type)
-    {
+        $type
+    ) {
         if (!in_array($type, ['blended', 'users', 'hashtags', 'places'], true)) {
             throw new \InvalidArgumentException(sprintf('Unknown search type: %s.', $type));
         }
@@ -503,7 +509,7 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\RecentSearchesResponse
+     * @return Response\RecentSearchesResponse
      */
     public function getRecentSearches()
     {
@@ -516,14 +522,14 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function clearSearchHistory()
     {
         return $this->ig->request('fbsearch/clear_search_history/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -532,7 +538,7 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\NullstateDynamicSectionsResponse
+     * @return Response\NullstateDynamicSectionsResponse
      */
     public function getNullStateDynamicSections()
     {
@@ -547,14 +553,14 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function markSuSeen()
     {
         return $this->ig->request('discover/mark_su_seen/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -567,19 +573,19 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\DiscoverPeopleResponse
+     * @return Response\DiscoverPeopleResponse
      */
     public function getAyml(
         $module = 'following',
         $maxNumberToDisplay = 10,
-        $paginate = false)
-    {
+        $paginate = false
+    ) {
         $request = $this->ig->request('discover/ayml/')
             ->setSignedPost(false)
             ->addPost('module', $module)
             ->addPost('phone_id', $this->ig->phone_id)
             ->addPost('_uuid', $this->ig->uuid);
-        //->addPost('_csrftoken', $this->ig->client->getToken())
+        // ->addPost('_csrftoken', $this->ig->client->getToken())
 
         if ($maxNumberToDisplay !== null) {
             $request->addPost('max_number_to_display', $maxNumberToDisplay);
@@ -597,14 +603,14 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function profileSuBadge()
     {
         return $this->ig->request('discover/profile_su_badge/')
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -615,18 +621,18 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function surfaceWithSu(
-        $targetId)
-    {
+        $targetId
+    ) {
         return $this->ig->request('discover/surface_with_su/')
             ->setSignedPost(false)
             ->addPost('target_id', $targetId)
             ->addPost('mutual_followers_limit', 12)
             ->addPost('module', 'profile_social_context')
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 
@@ -638,12 +644,12 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\ChainingUsersResponse
+     * @return Response\ChainingUsersResponse
      */
     public function getChainingUsers(
         $targetId,
-        $module = null)
-    {
+        $module = null
+    ) {
         $request = $this->ig->request('discover/chaining/')
             ->setSignedPost(false)
             ->addParam('target_id', $targetId);
@@ -662,11 +668,11 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\DiscoveryAccountsResponse
+     * @return Response\DiscoveryAccountsResponse
      */
     public function getDiscoveryAccounts(
-        $entryPoint = 'self_profile')
-    {
+        $entryPoint = 'self_profile'
+    ) {
         return $this->ig->request('discover/account_discovery/')
             ->setSignedPost(false)
             ->addParam('entry_point', $entryPoint)
@@ -680,11 +686,11 @@ class Discover extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\DiscoveryAccountsResponse
+     * @return Response\DiscoveryAccountsResponse
      */
     public function getRecommendedAccounts(
-        $fromNux = false)
-    {
+        $fromNux = false
+    ) {
         return $this->ig->request('discover/sectioned_ayml/')
             ->setSignedPost(false)
             ->addParam('request_from_nux', ($fromNux) ? 'true' : 'false')

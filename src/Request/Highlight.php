@@ -20,13 +20,13 @@ class Highlight extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\HighlightFeedResponse
+     * @return Response\HighlightFeedResponse
      *
      * @see Story::getReelsMediaFeed() To get highlight items when they aren't included in this response.
      */
     public function getUserFeed(
-        $userId)
-    {
+        $userId
+    ) {
         $request = $this->ig->request("highlights/{$userId}/highlights_tray/")
             ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
             ->addHeader('X-CM-Latency', '-1.000')
@@ -56,7 +56,7 @@ class Highlight extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\HighlightFeedResponse
+     * @return Response\HighlightFeedResponse
      *
      * @see Highlight::getUserFeed()
      * @see Story::getReelsMediaFeed() To get highlight items when they aren't included in this response.
@@ -77,14 +77,14 @@ class Highlight extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\CreateHighlightResponse
+     * @return Response\CreateHighlightResponse
      */
     public function create(
         array $mediaIds,
         $title = 'Highlights',
         $coverMediaId = null,
-        $module = 'self_profile')
-    {
+        $module = 'self_profile'
+    ) {
         if (empty($mediaIds)) {
             throw new \InvalidArgumentException('You must provide at least one media ID.');
         }
@@ -106,7 +106,7 @@ class Highlight extends RequestCollection
             ->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addPost('source', $module)
             ->addPost('creation_id', round(microtime(true) * 1000))
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('cover', json_encode($cover))
@@ -125,13 +125,13 @@ class Highlight extends RequestCollection
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\HighlightFeedResponse
+     * @return Response\HighlightFeedResponse
      */
     public function edit(
         $highlightReelId,
         array $params,
-        $module = 'self_profile')
-    {
+        $module = 'self_profile'
+    ) {
         if (!isset($params['cover_media_id'])) {
             throw new \InvalidArgumentException('You must provide one media ID for the cover.');
         }
@@ -156,7 +156,7 @@ class Highlight extends RequestCollection
             ->addPost('source', $module)
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('title', $params['title'])
             ->addPost('cover', json_encode($cover))
             ->addPost('added_media_ids', json_encode(array_values($params['add_media'])))
@@ -171,15 +171,15 @@ class Highlight extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GenericResponse
+     * @return Response\GenericResponse
      */
     public function delete(
-        $highlightReelId)
-    {
+        $highlightReelId
+    ) {
         return $this->ig->request("highlights/{$highlightReelId}/delete_reel/")
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
     }
 }

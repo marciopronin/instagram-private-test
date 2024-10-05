@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SuggestionCard extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user_card'            => 'UserCard',
         'upsell_ci_card'       => '',
         'upsell_fbc_card'      => '',

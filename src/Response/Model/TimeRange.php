@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class TimeRange extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'start' => 'string',
         'end'   => 'string',
     ];

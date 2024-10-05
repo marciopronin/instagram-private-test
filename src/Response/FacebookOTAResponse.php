@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class FacebookOTAResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'bundles'    => '',
         'request_id' => 'string',
     ];

@@ -34,7 +34,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DiscoveryAccountsCategories extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'name'                  => 'string',
         'title'                 => 'string',
         'suggestion_cards'      => 'SuggestionCard[]',

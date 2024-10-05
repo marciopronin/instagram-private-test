@@ -5,41 +5,41 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-/////// MEDIA ////////
+// ///// MEDIA ////////
 $videoFilename = '';
-//////////////////////
+// ////////////////////
 
-/////// QUERY ////////
+// ///// QUERY ////////
 $query = '';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
- /* IMPORTANT!!!
- *  This examples prepares the story to be uploaded with a story sticker
- *  BUT THE LYRICS AND THE AUDIO TRACK MUST BE COMPOSED BY THE USER AS A
- *  VIDEO.
- *
- *  The audio track can be downloaded from the music track item, 'progressive_download_url' property.
- *  Lyrics and its offsets are obtained using `getLyrics()` function from Music class.
- */
+/* IMPORTANT!!!
+*  This examples prepares the story to be uploaded with a story sticker
+*  BUT THE LYRICS AND THE AUDIO TRACK MUST BE COMPOSED BY THE USER AS A
+*  VIDEO.
+*
+*  The audio track can be downloaded from the music track item, 'progressive_download_url' property.
+*  Lyrics and its offsets are obtained using `getLyrics()` function from Music class.
+*/
 
-$browseSessionId = \InstagramAPI\Signatures::generateUUID();
-$searchSessionId = \InstagramAPI\Signatures::generateUUID();
+$browseSessionId = InstagramAPI\Signatures::generateUUID();
+$searchSessionId = InstagramAPI\Signatures::generateUUID();
 $musicItems = $ig->music->search($query, $browseSessionId, $searchSessionId)->getItems();
 
 // Music sticker
@@ -108,9 +108,9 @@ $metadata = [
 ];
 
 try {
-    $video = new \InstagramAPI\Media\Video\InstagramVideo($videoFilename, ['targetFeed' => \InstagramAPI\Constants::FEED_STORY]);
+    $video = new InstagramAPI\Media\Video\InstagramVideo($videoFilename, ['targetFeed' => InstagramAPI\Constants::FEED_STORY]);
     $ig->story->uploadVideo($video->getFile(), $metadata);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     if ($e instanceof InstagramAPI\Exception\LoginRequiredException) {
         echo 'Password was changed or cookie expired. Please login again.';
     } else {

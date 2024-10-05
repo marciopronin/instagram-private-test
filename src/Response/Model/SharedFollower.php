@@ -50,7 +50,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SharedFollower extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'pk'                            => 'string',
         'username'                      => 'string',
         'full_name'                     => 'string',

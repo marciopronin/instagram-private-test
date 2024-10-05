@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Ranking extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'view_name'               => 'string',
         'score_map'               => '',
         'expiration_ms'           => 'string',

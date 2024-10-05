@@ -5,18 +5,18 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -28,7 +28,7 @@ try {
     // Beauty: 'hashtag_inspired:3', DIY: 'hashtag_inspired:21', Auto: 'hashtag_inspired:19',
     // Music: 'hashtag_inspired:11', Nature: 'hashtag_inspired:24', Decor: 'hashtag_inspired:5',
     // Dance: 'hashtag_inspired:22'.
-    $feed = $ig->discover->getExploreFeed('explore_all:0', \InstagramAPI\Signatures::generateUUID());
+    $feed = $ig->discover->getExploreFeed('explore_all:0', InstagramAPI\Signatures::generateUUID());
 
     // Let's begin by looking at a beautiful debug output of what's available in
     // the response! This is very helpful for figuring out what a response has!
@@ -95,6 +95,6 @@ try {
     echo "The first item has media id: {$firstItem_mediaId}.\n";
     echo "The first item was uploaded by: {$firstItem_username}.\n";
     echo "The highest quality image URL is: {$firstItem_imageUrl}.\n";
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

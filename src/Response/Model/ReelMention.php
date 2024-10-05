@@ -55,7 +55,7 @@ use InstagramAPI\Response\PropertyCollection;
  */
 class ReelMention extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         PropertyCollection\Sticker::class,
         'user'         => 'User',
         'is_hidden'    => 'int',

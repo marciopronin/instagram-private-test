@@ -5,10 +5,10 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
 /*
  * This example demonstrates how to use and customize user settings storages.
@@ -30,31 +30,31 @@ exit;
 
 // 1. Choosing a built-in storage backend (one of "file", "mysql", "sqlite", "memcached"
 // or "redis"), and using the automatic, default settings for that backend:
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, [
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug, [
     'storage' => 'mysql',
 ]);
 
 // 2. You can read src/Settings/Factory.php for valid settings for each backend.
 // Here's an example of how to change the default storage location for "file":
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, [
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug, [
     'storage'    => 'file',
     'basefolder' => 'some/path/',
 ]);
 
 // 3. And here's some examples of how to change the default options
 // for some other backends:
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, [
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug, [
     'storage'     => 'sqlite',
     'dbfilename'  => 'some/path/foo.db',
     'dbtablename' => 'mysettings',
 ]);
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, [
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug, [
     'storage'        => 'redis',
     'redishost'      => 'some.redis.provider.com',
     'redisport'      => 1234,
     'redisauth'      => 'xXxMyPasSw0rdxXx',
 ]);
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, [
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug, [
     'storage'        => 'postgresql',
     'redishost'      => 'some.redis.provider.com',
     'redisport'      => 1234,
@@ -100,12 +100,12 @@ $migrateUsers = [
 // `Instagram()` constructor! And if you give an empty array, you'll use the
 // same default File backend that the main class uses! So if you want to migrate
 // from that, you should just set oldStorage to `createHandler([])`!
-$oldStorage = \InstagramAPI\Settings\Factory::createHandler([
+$oldStorage = InstagramAPI\Settings\Factory::createHandler([
     'storage'     => 'sqlite',
     'dbfilename'  => 'app/instagram.sqlite',
     'dbtablename' => 'instagram_sessions',
 ]);
-$newStorage = \InstagramAPI\Settings\Factory::createHandler([
+$newStorage = InstagramAPI\Settings\Factory::createHandler([
     'storage'     => 'file',
     'basefolder'  => 'some/path/',
 ]);
@@ -123,7 +123,7 @@ foreach ($migrateUsers as $user) {
     $newStorage->setActiveUser($user);
 
     $newStorage->setCookies((string) $oldStorage->getCookies());
-    foreach (\InstagramAPI\Settings\StorageHandler::PERSISTENT_KEYS as $key) {
+    foreach (InstagramAPI\Settings\StorageHandler::PERSISTENT_KEYS as $key) {
         $newStorage->set($key, (string) $oldStorage->get($key));
     }
 }
@@ -146,7 +146,7 @@ foreach ($migrateUsers as $user) {
 // src/Settings/Storage/ folder. Store your class inside your own project.
 //
 // Then simply provide your custom storage class instance as the storage class:
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, [
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug, [
     'storage' => 'custom',
     'class'   => new MyCustomStorage(), // Whatever you've named your class.
 ]);

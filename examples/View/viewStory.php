@@ -5,29 +5,29 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-////////////
+// //////////
 $queryUser = 'selenagomez';
-////////////
+// //////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -44,7 +44,7 @@ try {
     // Send navigation from 'explore_popular' to 'explore_popular'.
     $ig->event->sendNavigation('explore_topic_load', 'explore_popular', 'explore_popular', null, null, $topicData);
     // Get explore feed sections and items.
-    $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', \InstagramAPI\Signatures::generateUUID())->getSectionalItems();
+    $sectionalItems = $ig->discover->getExploreFeed('explore_all:0', InstagramAPI\Signatures::generateUUID())->getSectionalItems();
 
     $ig->event->prepareAndSendExploreImpression('explore_all:0', $searchSession, $sectionalItems);
 
@@ -102,7 +102,12 @@ try {
 
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
-    $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
+    $ig->event->sendNavigation(
+        'button',
+        'blended_search',
+        'profile',
+        null,
+        null,
         [
             'rank_token'            => null,
             'query_text'            => $queryUser,
@@ -117,15 +122,15 @@ try {
     $storyFeed = $ig->story->getUserStoryFeed($userId);
     if ($storyFeed->getReel() === null) {
         echo 'User has no active stories';
-        exit();
+        exit;
     }
     $storyItems = $storyFeed->getReel()->getItems();
     $following = $storyFeed->getReel()->getUser()->getFriendshipStatus()->getFollowing();
     $ig->event->sendNavigation('button', 'profile', 'reel_profile');
 
-    $viewerSession = \InstagramAPI\Signatures::generateUUID();
-    $traySession = \InstagramAPI\Signatures::generateUUID();
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $viewerSession = InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
 
     // Send impressions to all stories at once
     foreach ($storyItems as $storyItem) {
@@ -138,6 +143,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

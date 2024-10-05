@@ -46,7 +46,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class FollowersUnit extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'followers_unit_state'                  => 'string',
         'followers_delta_from_last_week'        => 'int',
         'gender_graph'                          => 'DataGraph',

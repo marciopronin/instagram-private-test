@@ -19,7 +19,7 @@ class PhotoDetails extends MediaDetails
      *
      * @see https://help.instagram.com/1631821640426723
      */
-    const MIN_WIDTH = 432;
+    public const MIN_WIDTH = 432;
 
     /**
      * Maximum allowed image width.
@@ -33,7 +33,7 @@ class PhotoDetails extends MediaDetails
      *
      * @var int
      */
-    const MAX_WIDTH = 1936;
+    public const MAX_WIDTH = 1936;
 
     /**
      * Default orientation to use if no EXIF JPG orientation exists.
@@ -42,7 +42,7 @@ class PhotoDetails extends MediaDetails
      *
      * @var int
      */
-    const DEFAULT_ORIENTATION = 1;
+    public const DEFAULT_ORIENTATION = 1;
 
     /** @var int */
     private $_type;
@@ -96,8 +96,8 @@ class PhotoDetails extends MediaDetails
      * @throws \InvalidArgumentException If the photo file is missing or invalid.
      */
     public function __construct(
-        $filename)
-    {
+        $filename
+    ) {
         // Check if input file exists.
         if (empty($filename) || !is_file($filename)) {
             throw new \InvalidArgumentException(sprintf('The photo file "%s" does not exist on disk.', $filename));
@@ -117,7 +117,7 @@ class PhotoDetails extends MediaDetails
         if ($result === false) {
             throw new \InvalidArgumentException(sprintf('The photo file "%s" is not a valid image.', $filename));
         }
-        list($width, $height, $this->_type) = $result;
+        [$width, $height, $this->_type] = $result;
 
         // Detect WEBP EXIF orientation if it exists.
         $this->_orientation = $this->_getExifOrientation($filename, $this->_type);
@@ -128,8 +128,8 @@ class PhotoDetails extends MediaDetails
     /** {@inheritdoc} */
     public function validate(
         ConstraintsInterface $constraints,
-        $validate = null)
-    {
+        $validate = null
+    ) {
         parent::validate($constraints);
 
         // WARNING TO CONTRIBUTORS: $mediaFilename is for ERROR DISPLAY to
@@ -150,7 +150,10 @@ class PhotoDetails extends MediaDetails
         if ($width < self::MIN_WIDTH || $width > self::MAX_WIDTH) {
             throw new \InvalidArgumentException(sprintf(
                 'Instagram only accepts photos that are between %d and %d pixels wide. Your file "%s" is %d pixels wide.',
-                self::MIN_WIDTH, self::MAX_WIDTH, $mediaFilename, $width
+                self::MIN_WIDTH,
+                self::MAX_WIDTH,
+                $mediaFilename,
+                $width
             ));
         }
     }
@@ -165,8 +168,8 @@ class PhotoDetails extends MediaDetails
      */
     protected function _getExifOrientation(
         $filename,
-        $type)
-    {
+        $type
+    ) {
         if ($type !== IMAGETYPE_WEBP || !function_exists('exif_read_data')) {
             return self::DEFAULT_ORIENTATION;
         }

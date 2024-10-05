@@ -173,9 +173,9 @@ class Push implements EventEmitterInterface
     public function __construct(
         LoopInterface $loop,
         Instagram $instagram,
-        LoggerInterface $logger = null,
-        $register = true)
-    {
+        ?LoggerInterface $logger = null,
+        $register = true
+    ) {
         if (PHP_SAPI !== 'cli') {
             throw new \RuntimeException('The Push client can only run from the command line.');
         }
@@ -198,8 +198,8 @@ class Push implements EventEmitterInterface
      * @param Notification $notification
      */
     protected function _onPush(
-        Notification $notification)
-    {
+        Notification $notification
+    ) {
         $collapseKey = $notification->getCollapseKey();
         $this->_logger->info(sprintf('Received a push with collapse key "%s"', $collapseKey), [(string) $notification]);
         $this->emit('incoming', [$notification]);
@@ -239,6 +239,7 @@ class Push implements EventEmitterInterface
             } catch (\Exception $e) {
                 $this->_logger->error(sprintf('Failed to write FBNS token timestamp: %s', $e->getMessage()));
             }
+
             // Read our old token. If an identical value exists, then we know
             // that we've already registered that token during this session.
             try {
@@ -258,6 +259,7 @@ class Push implements EventEmitterInterface
                     $this->emit('error', [$e]);
                 }
             }
+
             // Save the newly received token to the storage.
             // NOTE: We save it even if the registration failed, since we now
             // got it from the server and assume they've given us a good one.

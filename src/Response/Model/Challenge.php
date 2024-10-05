@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Challenge extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'url'                 => 'string',
         'api_path'            => 'string',
         'hide_webview_header' => 'bool',

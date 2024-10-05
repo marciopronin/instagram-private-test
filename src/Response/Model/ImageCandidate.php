@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ImageCandidate extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'url'                   => 'string',
         'width'                 => 'int',
         'height'                => 'int',

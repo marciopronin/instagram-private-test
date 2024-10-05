@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class StorySliderVotersResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'voter_info'           => 'Model\VoterInfo',
     ];
 }

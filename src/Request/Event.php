@@ -20,8 +20,8 @@ class Event extends RequestCollection
      * @return array
      */
     protected function _addBatchBody(
-        $batch)
-    {
+        $batch
+    ) {
         $body =
         [
             'time'              => ($batch[0]['time'] * 1000) - mt_rand(0, 500),
@@ -33,11 +33,11 @@ class Event extends RequestCollection
             'os_ver'            => $this->ig->device->getAndroidRelease(),
             'device_id'         => $this->ig->uuid,
             'session_id'        => $this->ig->client->getPigeonSession(),
-            //'channel'           => 'regular',
-            //'log_type'          => 'client_event',
-            //'app_uid'           => $this->ig->account_id,
-            //'config_version'    => 'v2',
-            //'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
+            // 'channel'           => 'regular',
+            // 'log_type'          => 'client_event',
+            // 'app_uid'           => $this->ig->account_id,
+            // 'config_version'    => 'v2',
+            // 'config_checksum'   => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
             'seq'               => $this->ig->batchIndex,
             'app_uid'           => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
             'data'              => $batch,
@@ -69,8 +69,8 @@ class Event extends RequestCollection
      * @return array
      */
     protected function _addCommonProperties(
-        $event)
-    {
+        $event
+    ) {
         $commonProperties =
         [
             'pk'                                            => empty($this->ig->settings->get('account_id')) ? 0 : $this->ig->settings->get('account_id'),
@@ -94,8 +94,8 @@ class Event extends RequestCollection
     protected function _addEventBody(
         $name,
         $module,
-        $extra)
-    {
+        $extra
+    ) {
         $event =
         [
             'log_type'      => 'client_event',
@@ -128,17 +128,17 @@ class Event extends RequestCollection
      */
     protected function _getModuleClass(
         $module,
-        $classSelector = null)
-    {
+        $classSelector = null
+    ) {
         switch ($module) {
             case 'feed_timeline':
-                $class = 'MainFeedFragment'; //'MainFeedFragment';
+                $class = 'MainFeedFragment'; // 'MainFeedFragment';
                 break;
             case 'newsfeed_you':
-                $class = 'NewsfeedYouFragment'; //'NewsfeedYouFragment';
+                $class = 'NewsfeedYouFragment'; // 'NewsfeedYouFragment';
                 break;
             case 'explore_popular':
-                $class = 'ExploreFragment'; //'ExploreFragment';
+                $class = 'ExploreFragment'; // 'ExploreFragment';
                 break;
             case 'discover_people':
                 $class = 'ExplorePeopleFragment';
@@ -150,18 +150,18 @@ class Event extends RequestCollection
                 $class = 'TopSearchChildFragment';
                 break;
             case 'search_typeahead':
-                $class = 'SingleSearchTypeaheadTabFragment'; //'SingleSearchTypeaheadTabFragment';
+                $class = 'SingleSearchTypeaheadTabFragment'; // 'SingleSearchTypeaheadTabFragment';
                 break;
             case 'serp_top':
                 $class = 'TopSerpGridFragment';
                 break;
-            //case 'search':
-            //case 'search_result':
-            //case 'search_result':
-            //    $class = 'ACK'; //'TopSerpGridFragment';
-            //    break;
+                // case 'search':
+                // case 'search_result':
+                // case 'search_result':
+                //    $class = 'ACK'; //'TopSerpGridFragment';
+                //    break;
             case 'serp_places':
-                $class = 'PlacesSerpGridFragment'; //'PlacesSerpGridFragment';
+                $class = 'PlacesSerpGridFragment'; // 'PlacesSerpGridFragment';
                 break;
             case 'search_places':
                 $class = 'PlacesSearchChildFragment';
@@ -170,7 +170,7 @@ class Event extends RequestCollection
                 $class = 'UsersSearchChildFragment';
                 break;
             case 'serp_users':
-                $class = 'UserSerpGridFragment'; //'UserSerpGridFragment';
+                $class = 'UserSerpGridFragment'; // 'UserSerpGridFragment';
                 break;
             case 'search_tags':
                 $class = 'HashtagSearchChildFragment';
@@ -192,7 +192,7 @@ class Event extends RequestCollection
                 break;
             case 'search_edit_recent':
             case 'search_typeahead_edit_recent':
-                $class = 'EditSearchHistoryFragment'; //'EditSearchHistoryFragment';
+                $class = 'EditSearchHistoryFragment'; // 'EditSearchHistoryFragment';
                 break;
             case 'feed_hashtag':
                 $class = 'HashtagPageFragment';
@@ -206,9 +206,9 @@ class Event extends RequestCollection
             case 'feed_contextual_chain':
                 $class = 'DiscoveryChainingFeedFragment';
                 break;
-            //case 'feed_contextual_place':
-            //case 'feed_contextual_location':
-            //case 'feed_contextual_hashtag':
+                // case 'feed_contextual_place':
+                // case 'feed_contextual_location':
+                // case 'feed_contextual_hashtag':
             case 'feed_contextual_profile':
             case 'feed_contextual_self_profile':
                 $class = 'ContextualFeedFragment'; // 'ContextualFeedFragment';
@@ -254,11 +254,11 @@ class Event extends RequestCollection
             case 'clips_viewer_clips_tab':
                 $class = 'ClipsViewerFragment';
                 break;
-            /*
-            case 'quick_capture_fragment':
-                $class = '155';
-                break;
-            */
+                /*
+                case 'quick_capture_fragment':
+                    $class = '155';
+                    break;
+                */
             case 'metadata_followers_share':
                 $class = 'FollowersShareFragment';
                 break;
@@ -297,7 +297,7 @@ class Event extends RequestCollection
             case 'self_following':
                 $class = 'FollowListFragment';
                 break;
-            // login_landing
+                // login_landing
             case 'video_profile':
                 $class = 'VideoProfileTabFragment';
                 break;
@@ -391,8 +391,8 @@ class Event extends RequestCollection
     protected function _generateNavChain(
         $module,
         $clickPoint,
-        $classSelector = null)
-    {
+        $classSelector = null
+    ) {
         $class = $this->_getModuleClass($module, $classSelector);
 
         /*
@@ -499,8 +499,8 @@ class Event extends RequestCollection
      */
     protected function _getTagsForNameAndModule(
         $name,
-        $module)
-    {
+        $module
+    ) {
         switch ($name) {
             case 'fx_access_library':
             case 'instagram_client_password_encryption_encrypt_attempt':
@@ -537,7 +537,7 @@ class Event extends RequestCollection
                 || $name === 'android_string_impressions' && $module === 'IgResourcesAnalyticsModule') ?
                 [
                     'tags'  => (
-                    $name === 'android_string_impressions'
+                        $name === 'android_string_impressions'
                     || $name === 'instagram_wellbeing_warning_system_success_creation'
                     || $name === 'direct_inbox_tab_impression'
                     || $name === 'ig_direct_inbox_fetch_success_rate'
@@ -556,8 +556,8 @@ class Event extends RequestCollection
      */
     protected function _addEventData(
         $event,
-        $batch = 2)
-    {
+        $batch = 2
+    ) {
         $this->ig->eventBatch[$batch][] = $event;
 
         foreach ($this->ig->eventBatch as $batch) {
@@ -605,8 +605,8 @@ class Event extends RequestCollection
      * @param mixed $response
      */
     protected function _updateChecksum(
-        $response)
-    {
+        $response
+    ) {
         if (!empty($response['checksum'])) {
             $this->ig->settings->set('checksum', $response['checksum']);
         }
@@ -655,7 +655,7 @@ class Event extends RequestCollection
                             gzdeflate($batch),
                             $batchFilename
                         );
-                        // no break
+                // no break
             case 1:
                 $message = [
                     'request_info'  => [
@@ -675,7 +675,7 @@ class Event extends RequestCollection
                 $request->addPost('compressed', 0)
                         ->addPost('multi_batch', 1)
                         ->addPost('message', json_encode($message, JSON_PRESERVE_ZERO_FRACTION));
-                        // no break
+                // no break
             case 2:
                 if (count($batches) > 1) {
                     $message = [
@@ -770,8 +770,8 @@ class Event extends RequestCollection
         $name,
         $waterfallId,
         $startTime,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $currentTime = round(microtime(true) * 1000);
 
         $extra = [
@@ -791,19 +791,19 @@ class Event extends RequestCollection
             $extra['has_permission'] = false;
             $extra['sim_state'] = 'ready';
             $extra['os_version'] = $this->ig->device->getAndroidVersion();
-            $extra['flow'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['flow'] = $options['flow'] ?? 'email';
         } elseif ($name === 'log_in') {
             $extra['instagram_id'] = $this->ig->account_id;
         } elseif ($name === 'register_full_name_focused' || $name === 'register_password_focused') {
-            $extra['flow'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['flow'] = $options['flow'] ?? 'email';
         } elseif ($name === 'reg_field_interacted') {
             $extra['field_name'] = $options['field_name'];
             $extra['interaction_type'] = 'tapped';
-            $extra['flow'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['flow'] = $options['flow'] ?? 'email';
         } elseif ($name === 'next_button_tapped') {
             $extra['keyboard'] = false;
-            $extra['flow'] = isset($options['flow']) ? $options['flow'] : 'email';
-            $extra['cp_type_given'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['flow'] = $options['flow'] ?? 'email';
+            $extra['cp_type_given'] = $options['flow'] ?? 'email';
             $extra['is_private'] = null;
             $extra['instagram_id'] = null;
             $extra['logged_in_accounts'] = [];
@@ -816,7 +816,7 @@ class Event extends RequestCollection
                 'one_page_registration',
             ];
         } elseif ($name === 'valid_password') {
-            $extra['contains_only_ascii'] = isset($options['contains_only_ascii']) ? $options['contains_only_ascii'] : true;
+            $extra['contains_only_ascii'] = $options['contains_only_ascii'] ?? true;
         } elseif ($name === 'ig_dynamic_onboarding_updated_steps_from_server') {
             $extra['update_duration'] = mt_rand(120, 300);
         } elseif ($name === 'register_with_ci_option') {
@@ -829,25 +829,25 @@ class Event extends RequestCollection
             ];
         } elseif ($name === 'register_account_request_submitted') {
             $extra['fb_family_device_id'] = $this->ig->phone_id;
-            $extra['chosen_signup_type'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['chosen_signup_type'] = $options['flow'] ?? 'email';
             $extra['retry_strategy'] = 'none';
             $extra['attempt_count'] = 1;
         } elseif ($name === 'register_account_created') {
             $extra['reg_type'] = 'consumer';
             $extra['instagram_id'] = $options['instagram_id'];
-            $extra['chosen_signup_type'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['chosen_signup_type'] = $options['flow'] ?? 'email';
             $extra['retry_strategy'] = 'none';
             $extra['attempt_count'] = 1;
         } elseif ($name === 'step_view_loaded') {
-            $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool) random_int(0, 1);
-            $extra['messenger_installed'] = isset($options['messenger_installed']) ? $options['messenger_installed'] : (bool) random_int(0, 1);
-            $extra['whatsapp_installed'] = isset($options['whatsapp_installed']) ? $options['whatsapp_installed'] : (bool) random_int(0, 1);
-            $extra['fb_lite_installed'] = isset($options['fb_lite_installed']) ? $options['fb_lite_installed'] : (bool) random_int(0, 1);
+            $extra['is_facebook_app_installed'] = $options['is_facebook_app_installed'] ?? (bool) random_int(0, 1);
+            $extra['messenger_installed'] = $options['messenger_installed'] ?? (bool) random_int(0, 1);
+            $extra['whatsapp_installed'] = $options['whatsapp_installed'] ?? (bool) random_int(0, 1);
+            $extra['fb_lite_installed'] = $options['fb_lite_installed'] ?? (bool) random_int(0, 1);
             $extra['source'] = null;
-            $extra['flow'] = isset($options['flow']) ? $options['flow'] : null;
+            $extra['flow'] = $options['flow'] ?? null;
             $extra['cp_type_given'] = null;
         } elseif ($name === 'landing_created') {
-            $extra['is_facebook_app_installed'] = isset($options['is_facebook_app_installed']) ? $options['is_facebook_app_installed'] : (bool) random_int(0, 1);
+            $extra['is_facebook_app_installed'] = $options['is_facebook_app_installed'] ?? (bool) random_int(0, 1);
             $extra['did_facebook_sso'] = false;
             $extra['did_log_in'] = false;
             $extra['network_type'] = Constants::X_IG_Connection_Type;
@@ -857,7 +857,7 @@ class Event extends RequestCollection
         } elseif ($name === 'switch_to_email') {
             $extra['flow'] = 'email';
         } elseif ($name === 'attempt_read_email_for_prefill') {
-            $extra['source'] = isset($options['flow']) ? $options['flow'] : 'email';
+            $extra['source'] = $options['flow'] ?? 'email';
         } elseif ($name === 'email_field_prefilled') {
             $extra['is_valid'] = false;
             $extra['source'] = null;
@@ -885,8 +885,8 @@ class Event extends RequestCollection
     public function sendFunnelRegistration(
         $waterfallId,
         $startTime,
-        $instanceId)
-    {
+        $instanceId
+    ) {
         $actions =
         [
             [
@@ -993,8 +993,8 @@ class Event extends RequestCollection
         $module,
         $hashtagId = null,
         $hashtagName = null,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         if ($type !== 'instagram_thumbnail_impression' && $type !== 'instagram_thumbnail_click') {
             throw new \InvalidArgumentException(sprintf('%s is not a valid event name.', $type));
         }
@@ -1003,7 +1003,7 @@ class Event extends RequestCollection
             $extra = [
                 'id'                        => $item->getId(),
                 'm_pk'                      => $item->getId(),
-                'position'                  => isset($options['position']) ? $options['position'] : '["0", "0"]',
+                'position'                  => $options['position'] ?? '["0", "0"]',
                 'media_type'                => $item->getMediaType(),
                 'entity_type'               => 'user',
                 'entity_id'                 => $item->getUser()->getPk(),
@@ -1033,16 +1033,16 @@ class Event extends RequestCollection
             $extra = [
                 'id'                        => $item->getId(),
                 'm_pk'                      => $item->getId(),
-                'position'                  => isset($options['position']) ? $options['position'] : '["0", "0"]',
+                'position'                  => $options['position'] ?? '["0", "0"]',
                 'media_type'                => $item->getMediaType(),
-                'type'                      => isset($options['type']) ? $options['type'] : '0',
+                'type'                      => $options['type'] ?? '0',
                 'entity_type'               => 'place',
                 'entity_id'                 => $item->getLocation()->getPk(),
                 'entity_name'               => $item->getLocation()->getName(),
                 'entity_page_name'          => $item->getLocation()->getName(),
                 'entity_page_id'            => $item->getLocation()->getPk(),
-                'feed_type'                 => isset($options['feed_type']) ? $options['feed_type'] : 'top',
-                'tab_index'                 => isset($options['tab_index']) ? $options['tab_index'] : 0,
+                'feed_type'                 => $options['feed_type'] ?? 'top',
+                'tab_index'                 => $options['tab_index'] ?? 0,
                 'media_thumbnail_section'   => 'grid',
             ];
         } elseif ($module === 'feed_hashtag') {
@@ -1058,14 +1058,14 @@ class Event extends RequestCollection
                 'hashtag_id'                => $hashtagId,
                 'hashtag_name'              => $hashtagName,
                 'hashtag_follow_status'     => isset($options['following']) ? 'following' : 'not_following',
-                'hashtag_feed_type'         => isset($options['feed_type']) ? $options['feed_type'] : 'top',
-                'tab_index'                 => isset($options['tab_index']) ? $options['tab_index'] : 0,
+                'hashtag_feed_type'         => $options['feed_type'] ?? 'top',
+                'tab_index'                 => $options['tab_index'] ?? 0,
                 'source_of_action'          => 'feed_contextual_hashtag',
                 'session_id'                => $this->ig->client->getPigeonSession(),
                 'media_type'                => $item->getMediaType(),
                 'type'                      => 0,
                 'section'                   => 0,
-                'position'                  => isset($options['position']) ? $options['position'] : '["0","0"]',
+                'position'                  => $options['position'] ?? '["0","0"]',
             ];
         } else {
             throw new \InvalidArgumentException('Module not supported.');
@@ -1104,8 +1104,8 @@ class Event extends RequestCollection
         $timespent,
         $module,
         array $clusterData = [],
-        array $options = null)
-    {
+        ?array $options = null
+    ) {
         if ($module === 'feed_contextual_profile' || $module === 'feed_contextual_self_profile' || $module === 'feed_short_url') {
             $extra = [
                 'm_pk'                      => $item->getId(),
@@ -1153,15 +1153,15 @@ class Event extends RequestCollection
                 'hashtag_id'                => $options['hashtag_id'],
                 'hashtag_name'              => $options['hashtag_name'],
                 'hashtag_follow_status'     => isset($options['following']) ? 'following' : 'not_following',
-                'hashtag_feed_type'         => isset($options['feed_type']) ? $options['feed_type'] : 'top',
-                'tab_index'                 => isset($options['tab_index']) ? $options['tab_index'] : 0,
+                'hashtag_feed_type'         => $options['feed_type'] ?? 'top',
+                'tab_index'                 => $options['tab_index'] ?? 0,
                 'source_of_action'          => $module,
                 'timespent'                 => $timespent,
                 'session_id'                => $this->ig->client->getPigeonSession(),
                 'media_type'                => $item->getMediaType(),
                 'type'                      => 0,
                 'section'                   => 0,
-                'position'                  => isset($options['position']) ? $options['position'] : '["0","0"]',
+                'position'                  => $options['position'] ?? '["0","0"]',
             ];
         } elseif ($module === 'feed_timeline') {
             $extra = [
@@ -1198,14 +1198,14 @@ class Event extends RequestCollection
                 'viewer_session_id'             => $options['viewer_session_id'],
                 'tray_session_id'               => $options['tray_session_id'],
                 'reel_id'                       => $item->getId(),
-                'reel_position'                 => isset($options['reel_position']) ? $options['reel_position'] : 0,
-                'reel_viewer_position'          => isset($options['reel_viewer_position']) ? $options['reel_viewer_position'] : 0,
+                'reel_position'                 => $options['reel_position'] ?? 0,
+                'reel_viewer_position'          => $options['reel_viewer_position'] ?? 0,
                 'reel_type'                     => 'story',
-                'reel_size'                     => isset($options['reel_size']) ? $options['reel_size'] : 1,
+                'reel_size'                     => $options['reel_size'] ?? 1,
                 'is_video_to_carousel'          => false,
-                'tray_position'                 => isset($options['tray_position']) ? $options['tray_position'] : 1,
-                'session_reel_counter'          => isset($options['session_reel_counter']) ? $options['session_reel_counter'] : 1,
-                'time_elapsed'                  => isset($options['time_elapsed']) ? $options['time_elapsed'] : mt_rand(1, 2),
+                'tray_position'                 => $options['tray_position'] ?? 1,
+                'session_reel_counter'          => $options['session_reel_counter'] ?? 1,
+                'time_elapsed'                  => $options['time_elapsed'] ?? mt_rand(1, 2),
                 'timespent'                     => $timespent,
                 'elapsed_time_since_last_item'  => -1,
                 'reel_start_position'           => 0,
@@ -1238,8 +1238,8 @@ class Event extends RequestCollection
         $traySessionId,
         $rankingToken,
         $followingUserStatus,
-        $source = 'reel_feed_timeline')
-    {
+        $source = 'reel_feed_timeline'
+    ) {
         $extra = [
             'm_pk'                      => $item->getId(),
             'a_pk'                      => $item->getUser()->getPk(),
@@ -1278,17 +1278,17 @@ class Event extends RequestCollection
         $traySessionId,
         $rankingToken,
         array $options = [],
-        $source = 'feed_timeline')
-    {
+        $source = 'feed_timeline'
+    ) {
         $extra = [
             'has_my_reel'                      => isset($options['has_my_reel']) ? strval($options['has_my_reel']) : '0',
             'has_my_replay_reel'               => isset($options['has_my_replay_reel']) ? strval($options['has_my_replay_reel']) : '0',
-            'viewed_reel_count'                => isset($options['viewed_reel_count']) ? $options['viewed_reel_count'] : 0,
-            'new_reel_count'                   => isset($options['new_reel_count']) ? $options['new_reel_count'] : 0,
-            'live_reel_count'                  => isset($options['live_reel_count']) ? $options['live_reel_count'] : 0,
-            'muted_replay_reel_count'          => isset($options['muted_replay_reel_count']) ? $options['muted_replay_reel_count'] : 0,
-            'unfetched_reel_count'             => isset($options['unfetched_reel_count']) ? $options['unfetched_reel_count'] : 0,
-            'tray_position'                    => isset($options['tray_position']) ? $options['tray_position'] : 1,
+            'viewed_reel_count'                => $options['viewed_reel_count'] ?? 0,
+            'new_reel_count'                   => $options['new_reel_count'] ?? 0,
+            'live_reel_count'                  => $options['live_reel_count'] ?? 0,
+            'muted_replay_reel_count'          => $options['muted_replay_reel_count'] ?? 0,
+            'unfetched_reel_count'             => $options['unfetched_reel_count'] ?? 0,
+            'tray_position'                    => $options['tray_position'] ?? 1,
             'tray_session_id'                  => $traySessionId,
             'viewer_session_id'                => null,
             'is_live_reel'                     => isset($options['is_live_reel']) ? strval($options['is_live_reel']) : '0',
@@ -1320,17 +1320,17 @@ class Event extends RequestCollection
         $item,
         $requestId,
         $sessionId,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'request_id'                      => $requestId,
             'session_id'                      => $sessionId,
-            'request_type'                    => isset($options['request_type']) ? $options['request_type'] : 'cold_start_fetch',
-            'view_info_count'                 => isset($options['view_info_count']) ? $options['view_info_count'] : 0,
+            'request_type'                    => $options['request_type'] ?? 'cold_start_fetch',
+            'view_info_count'                 => $options['view_info_count'] ?? 0,
             'feed_item_type'                  => 'media',
             'media_id'                        => $item->getPk(),
             'delivery_flags'                  => 'n',
-            'is_ad'                           => isset($options['is_ad']) ? $options['is_ad'] : false,
+            'is_ad'                           => $options['is_ad'] ?? false,
             'expected_position',
         ];
 
@@ -1355,8 +1355,8 @@ class Event extends RequestCollection
         $section,
         $position,
         $tab = 'You',
-        $extraType = 'USER_SIMPLE')
-    {
+        $extraType = 'USER_SIMPLE'
+    ) {
         $extra = [
             'story_id'                  => $newsfeedItem->getPk(),
             'story_type'                => $newsfeedItem->getStoryType(),
@@ -1388,8 +1388,8 @@ class Event extends RequestCollection
     public function sendOrganicNumberOfLikes(
         $item,
         $module,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'm_pk'                          => $item->getId(),
             'a_pk'                          => $item->getUser()->getPk(),
@@ -1398,8 +1398,8 @@ class Event extends RequestCollection
             'tracking_token'                => $item->getOrganicTrackingToken(),
             'elapsed_time_since_last_item'  => -1,
             'source_of_action'              => $module,
-            'follow_status'                 => isset($options['follow_status']) ? $options['follow_status'] : 'not_following',
-            'entity_follow_status'          => isset($options['entity_follow_status']) ? $options['entity_follow_status'] : 'not_following',
+            'follow_status'                 => $options['follow_status'] ?? 'not_following',
+            'entity_follow_status'          => $options['entity_follow_status'] ?? 'not_following',
             'entity_type'                   => 'user',
             'entity_id'                     => $item->getUser()->getPk(),
             'entity_page_id'                => $item->getUser()->getPk(),
@@ -1427,8 +1427,8 @@ class Event extends RequestCollection
         $module,
         $item,
         $feedSessionId,
-        $options)
-    {
+        $options
+    ) {
         $extra = [
             'm_pk'                          => $item->getId(),
             'a_pk'                          => $item->getUser()->getPk(),
@@ -1463,8 +1463,8 @@ class Event extends RequestCollection
      */
     public function reelTrayRefresh(
         $options,
-        $refreshType)
-    {
+        $refreshType
+    ) {
         $requiredKeys = ['tray_refresh_time', 'tray_session_id'];
         $missingKeys = array_diff($requiredKeys, array_keys($options));
         if (!empty($missingKeys)) {
@@ -1472,21 +1472,21 @@ class Event extends RequestCollection
         }
 
         $extra = [
-            'has_my_reel'               => isset($options['has_my_reel']) ? $options['has_my_reel'] : '0',
-            'has_my_replay_reel'        => isset($options['has_my_replay_reel']) ? $options['has_my_replay_reel'] : '0',
-            'viewed_reel_count'         => isset($options['viewed_reel_count']) ? $options['viewed_reel_count'] : 0,
-            'new_reel_count'            => isset($options['new_reel_count']) ? $options['new_reel_count'] : 0,
-            'live_reel_count'           => isset($options['live_reel_count']) ? $options['live_reel_count'] : 0,
-            'new_replay_reel_count'     => isset($options['new_replay_reel_count']) ? $options['new_replay_reel_count'] : 0,
-            'viewed_replay_reel_count'  => isset($options['viewed_replay_reel_count']) ? $options['viewed_replay_reel_count'] : 0,
-            'muted_reel_count'          => isset($options['muted_reel_count']) ? $options['muted_reel_count'] : 0,
-            'muted_live_reel_count'     => isset($options['muted_live_reel_count']) ? $options['muted_live_reel_count'] : 0,
-            'muted_replay_reel_count'   => isset($options['muted_replay_reel_count']) ? $options['muted_replay_reel_count'] : 0,
-            'suggested_reel_count'      => isset($options['suggested_reel_count']) ? $options['suggested_reel_count'] : 0,
-            'unfetched_reel_count'      => isset($options['unfetched_reel_count']) ? $options['unfetched_reel_count'] : 0,
+            'has_my_reel'               => $options['has_my_reel'] ?? '0',
+            'has_my_replay_reel'        => $options['has_my_replay_reel'] ?? '0',
+            'viewed_reel_count'         => $options['viewed_reel_count'] ?? 0,
+            'new_reel_count'            => $options['new_reel_count'] ?? 0,
+            'live_reel_count'           => $options['live_reel_count'] ?? 0,
+            'new_replay_reel_count'     => $options['new_replay_reel_count'] ?? 0,
+            'viewed_replay_reel_count'  => $options['viewed_replay_reel_count'] ?? 0,
+            'muted_reel_count'          => $options['muted_reel_count'] ?? 0,
+            'muted_live_reel_count'     => $options['muted_live_reel_count'] ?? 0,
+            'muted_replay_reel_count'   => $options['muted_replay_reel_count'] ?? 0,
+            'suggested_reel_count'      => $options['suggested_reel_count'] ?? 0,
+            'unfetched_reel_count'      => $options['unfetched_reel_count'] ?? 0,
             'tray_refresh_time'         => $options['tray_refresh_time'], // secs with millis. 0.335
             'tray_session_id'           => $options['tray_session_id'],
-            'was_successful'            => isset($options['was_successful']) ? $options['was_successful'] : true,
+            'was_successful'            => $options['was_successful'] ?? true,
             'story_ranking_token'       => null,
         ];
 
@@ -1518,8 +1518,8 @@ class Event extends RequestCollection
     public function sendStoriesRequest(
         $traySessionId,
         $requestId,
-        $requestType = 'auto_refresh')
-    {
+        $requestType = 'auto_refresh'
+    ) {
         $extra = [
             'tray_session_id'        => $traySessionId,
             'request_id'             => $requestId,
@@ -1543,8 +1543,8 @@ class Event extends RequestCollection
     public function reelInFeedTrayHide(
         $traySessionId,
         $hideReason,
-        $trayId)
-    {
+        $trayId
+    ) {
         $extra = [
             'tray_session_id'   => $traySessionId,
             'hide_reason'       => $hideReason,
@@ -1565,8 +1565,8 @@ class Event extends RequestCollection
      */
     public function sendStartMainFeedRequest(
         $mediaDepth,
-        $reason = 'pagination')
-    {
+        $reason = 'pagination'
+    ) {
         $extra = [
             'reason'                    => $reason,
             'is_background'             => false,
@@ -1591,8 +1591,8 @@ class Event extends RequestCollection
      */
     public function sendMainFeedLoadingMore(
         $paginationTime,
-        $position)
-    {
+        $position
+    ) {
         $extra = [
             'position'                  => $position,
             'last_feed_update_time'     => $paginationTime,
@@ -1612,8 +1612,8 @@ class Event extends RequestCollection
      */
     public function sendEndMainFeedRequest(
         $mediaDepth,
-        $reason = 'pagination')
-    {
+        $reason = 'pagination'
+    ) {
         $extra = [
             'reason'                    => $reason,
             'is_background'             => false,
@@ -1655,8 +1655,8 @@ class Event extends RequestCollection
         $hashtagName = null,
         $sessionId = null,
         array $options = [],
-        $unlike = false)
-    {
+        $unlike = false
+    ) {
         $extra = [
             'c_pk_list'                                     => [],
             'time'                                          => -1,
@@ -1674,13 +1674,13 @@ class Event extends RequestCollection
             'current_play_time'                             => -1,
             'ad_videos_consumed'                            => -1,
             'aspect_ratio'                                  => -1,
-            'source_of_like'                                => isset($options['source_of_like']) ? $options['source_of_like'] : 'button',
+            'source_of_like'                                => $options['source_of_like'] ?? 'button',
             'tagged_user_ids'                               => [$item->getUser()->getPk()],
             'source_of_action'                              => $module,
             'actual_insert_position'                        => -1,
             'comment_compose_duration'                      => -1,
             'is_demo'                                       => false,
-            'follow_status'                                 => isset($options['follow_status']) ? $options['follow_status'] : 'not_following',
+            'follow_status'                                 => $options['follow_status'] ?? 'not_following',
             'duration'                                      => -1,
             'reel_viewer_gestures_nux_impression_duration'  => -1,
             'is_acp_delivered'                              => false,
@@ -1701,21 +1701,21 @@ class Event extends RequestCollection
 
         if ($module === 'feed_contextual_profile' || $module === 'profile' || $module === 'feed_short_url' || $module === 'feed_contextual_location') {
             $extra['session_id'] = $sessionId;
-            $extra['m_ix'] = isset($options['m_ix']) ? $options['m_ix'] : 7;
+            $extra['m_ix'] = $options['m_ix'] ?? 7;
             $extra['entity_page_id'] = $item->getUser()->getPk();
             $extra['entity_page_name'] = $item->getUser()->getUsername();
             $extra['media_thumbnail_section'] = 'grid';
         } elseif ($module === 'feed_contextual_hashtag') {
             $extra['m_ix'] = 30; // ?
             $extra['hashtag_follow_status'] = isset($options['hashtag_follow']) ? 'following' : 'not_following';
-            $extra['hashtag_feed_type'] = isset($options['feed_type']) ? $options['feed_type'] : 'top';
-            $extra['tab_index'] = isset($options['tab_index']) ? $options['tab_index'] : 0;
+            $extra['hashtag_feed_type'] = $options['feed_type'] ?? 'top';
+            $extra['tab_index'] = $options['tab_index'] ?? 0;
             $extra['hashtag_id'] = $hashtagId;
             $extra['hashtag_name'] = $hashtagName;
         } elseif ($module === 'feed_timeline') {
             $extra['session_id'] = $sessionId;
             $extra['follow_status'] = 'following';
-            $extra['m_ix'] = isset($options['m_ix']) ? $options['m_ix'] : 2; // ?
+            $extra['m_ix'] = $options['m_ix'] ?? 2; // ?
             $extra['inventory_source'] = 'media_or_ad';
             $extra['is_eof'] = false;
         } elseif ($module === 'feed_contextual_chain') {
@@ -1761,8 +1761,8 @@ class Event extends RequestCollection
     public function sendOrganicComment(
         $item,
         $isFollowingUser,
-        $composeDuration)
-    {
+        $composeDuration
+    ) {
         $extra = [
             'm_pk'                      => $item->getId(),
             'a_pk'                      => $item->getUser()->getPk(),
@@ -1795,8 +1795,8 @@ class Event extends RequestCollection
         $item,
         $userId,
         $commentId,
-        $sessionId)
-    {
+        $sessionId
+    ) {
         $extra = [
             'm_pk'                      => $item->getId(),
             'a_pk'                      => $item->getUser()->getPk(),
@@ -1849,8 +1849,8 @@ class Event extends RequestCollection
         $userId,
         $commentId,
         $commentLikeCount,
-        $module = 'comments_v2')
-    {
+        $module = 'comments_v2'
+    ) {
         $extra = [
             'm_pk'              => $item->getId(),
             'a_pk'              => $item->getUser()->getPk(),
@@ -1888,8 +1888,8 @@ class Event extends RequestCollection
         $action,
         $userId,
         $navstack,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $actions = [
             'follow',
             'unfollow',
@@ -1932,9 +1932,9 @@ class Event extends RequestCollection
             case 'follow':
             case 'unfollow':
                 $followStatus = ($action === 'follow') ? 'not_following' : 'following';
-                $clickpoint = isset($options['click_point']) ? $options['click_point'] : 'button_tray';
-                $extra['media_id_attribution'] = isset($options['media_id_attribution']) ? $options['media_id_attribution'] : null;
-                $extra['media_tracking_token_attribution'] = isset($options['media_tracking_token_attribution']) ? $options['media_tracking_token_attribution'] : null;
+                $clickpoint = $options['click_point'] ?? 'button_tray';
+                $extra['media_id_attribution'] = $options['media_id_attribution'] ?? null;
+                $extra['media_tracking_token_attribution'] = $options['media_tracking_token_attribution'] ?? null;
                 $extra['hashtag_id'] = null;
                 $extra['hashtag_name'] = null;
                 $extra['product_id'] = null;
@@ -1968,28 +1968,28 @@ class Event extends RequestCollection
                 $module = 'media_mute_sheet';
                 break;
             case 'tap_grid_post':
-                $followStatus = isset($options['follow_status']) ? $options['follow_status'] : 'not_following';
+                $followStatus = $options['follow_status'] ?? 'not_following';
                 $clickpoint = 'grid_tab';
                 $module = 'profile';
                 break;
             case 'about_this_account':
-                $followStatus = isset($options['follow_status']) ? $options['follow_status'] : 'not_following';
+                $followStatus = $options['follow_status'] ?? 'not_following';
                 $clickpoint = 'more_menu';
                 $module = 'profile';
                 break;
             case 'tap_suggested_user_profile':
-                $followStatus = isset($options['follow_status']) ? $options['follow_status'] : 'not_following';
+                $followStatus = $options['follow_status'] ?? 'not_following';
                 $clickpoint = 'suggested_users_unit';
                 $module = 'profile';
                 break;
             case 'tap_follow_details':
-                $followStatus = isset($options['follow_status']) ? $options['follow_status'] : 'not_following';
+                $followStatus = $options['follow_status'] ?? 'not_following';
                 $clickpoint = 'user_profile_header';
                 $module = ($options['module'] === 'self') ? 'self_profile' : 'profile';
                 break;
             case 'tap_followers':
             case 'tap_following':
-                $followStatus = isset($options['follow_status']) ? $options['follow_status'] : 'not_following';
+                $followStatus = $options['follow_status'] ?? 'not_following';
                 $clickpoint = 'swipe';
                 $module = ($options['module'] === 'self') ? 'self_unified_follow_lists' : 'unified_follow_lists';
                 break;
@@ -1997,8 +1997,8 @@ class Event extends RequestCollection
                 $clickpoint = 'button_tray';
                 $module = 'profile';
                 $followStatus = 'following';
-                $extra['media_id_attribution'] = isset($options['media_id_attribution']) ? $options['media_id_attribution'] : null;
-                $extra['media_tracking_token_attribution'] = isset($options['media_tracking_token_attribution']) ? $options['media_tracking_token_attribution'] : null;
+                $extra['media_id_attribution'] = $options['media_id_attribution'] ?? null;
+                $extra['media_tracking_token_attribution'] = $options['media_tracking_token_attribution'] ?? null;
                 $extra['hashtag_id'] = null;
                 $extra['hashtag_name'] = null;
                 break;
@@ -2049,8 +2049,8 @@ class Event extends RequestCollection
     public function sendUserReport(
         $userId,
         $action,
-        $module = 'profile')
-    {
+        $module = 'profile'
+    ) {
         $extra = [
             'actor_id'         => $this->ig->account_id,
             'action'           => $action,
@@ -2084,8 +2084,8 @@ class Event extends RequestCollection
     public function sendPhoneId(
         $waterfallId,
         $startTime,
-        $type)
-    {
+        $type
+    ) {
         if (($type !== 'request') && ($type !== 'response')) {
             throw new \InvalidArgumentException(sprintf('Invalid request type %s.', $type));
         }
@@ -2093,18 +2093,18 @@ class Event extends RequestCollection
         $name = ($type === 'request') ? 'send_phone_id_request' : 'phone_id_response_received';
         $currentTime = round(microtime(true) * 1000);
         $extra = [
-             'waterfall_id'         => $waterfallId,
-             'start_time'           => $startTime,
-             'current_time'         => $currentTime,
-             'elapsed_time'         => $currentTime - $startTime,
-             'os_version'           => $this->ig->device->getAndroidVersion(),
-             'step'                 => 'landing',
-             'containermodule'      => 'landing_facebook',
-             'fb_family_device_id'  => $this->ig->phone_id,
-             'guid'                 => $this->ig->uuid,
-             'prefill_type'         => 'both',
-             'source'               => null,
-         ];
+            'waterfall_id'         => $waterfallId,
+            'start_time'           => $startTime,
+            'current_time'         => $currentTime,
+            'elapsed_time'         => $currentTime - $startTime,
+            'os_version'           => $this->ig->device->getAndroidVersion(),
+            'step'                 => 'landing',
+            'containermodule'      => 'landing_facebook',
+            'fb_family_device_id'  => $this->ig->phone_id,
+            'guid'                 => $this->ig->uuid,
+            'prefill_type'         => 'both',
+            'source'               => null,
+        ];
 
         $event = $this->_addEventBody($name, 'waterfall_log_in', $extra);
         $this->_addEventData($event, 1);
@@ -2118,8 +2118,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIGTvNotificationPreference(
-       $enable = true)
-    {
+        $enable = true
+    ) {
         $extra = [
             'elapsed_time_since_last_item'  => -1,
         ];
@@ -2142,8 +2142,8 @@ class Event extends RequestCollection
     public function sendUnfollowSuccessful(
         $userId,
         $userIsPrivate,
-        $module)
-    {
+        $module
+    ) {
         $extra = [
             'target_id'             => $userId,
             'target_is_private'     => $userIsPrivate,
@@ -2164,8 +2164,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendRemoveFollowerConfirmed(
-        $userId)
-    {
+        $userId
+    ) {
         $extra = [
             'target_id'             => $userId,
         ];
@@ -2191,8 +2191,8 @@ class Event extends RequestCollection
     public function sendOrganicMediaImpression(
         $item,
         $module,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'is_from_merlin_infra'              => false,
             'm_pk'                              => $item->getId(),
@@ -2235,13 +2235,13 @@ class Event extends RequestCollection
             $extra['hashtag_id'] = $options['hashtag_id'];
             $extra['hashtag_name'] = $options['hashtag_name'];
             $extra['hashtag_follow_status'] = isset($options['following']) ? 'following' : 'not_following';
-            $extra['hashtag_feed_type'] = isset($options['feed_type']) ? $options['feed_type'] : 'top';
-            $extra['tab_index'] = isset($options['tab_index']) ? $options['tab_index'] : 0;
+            $extra['hashtag_feed_type'] = $options['feed_type'] ?? 'top';
+            $extra['tab_index'] = $options['tab_index'] ?? 0;
             $extra['session_id'] = $this->ig->client->getPigeonSession();
             $extra['media_type'] = $item->getMediaType();
             $extra['type'] = 0;
             $extra['section'] = 0;
-            $extra['position'] = isset($options['position']) ? $options['position'] : '["0","0"]';
+            $extra['position'] = $options['position'] ?? '["0","0"]';
         } elseif ($module === 'feed_contextual_location') {
             $extra['follow_status'] = isset($options['following']) ? 'following' : 'not_following';
             $extra['m_ix'] = 3; // ?
@@ -2266,7 +2266,7 @@ class Event extends RequestCollection
             }
             $extra['reel_id'] = $item->getUser()->getPk();
             $extra['session_reel_counter'] = 1;
-            $extra['reel_size'] = isset($options['reel_size']) ? $options['reel_size'] : 0;
+            $extra['reel_size'] = $options['reel_size'] ?? 0;
             $extra['elapsed_time_since_last_item'] = -1;
             $extra['reel_start_position'] = 0;
             $extra['reel_position'] = 0;
@@ -2285,7 +2285,7 @@ class Event extends RequestCollection
 
         if ($item->getMediaType() === 8) {
             $event = 'instagram_organic_carousel_viewed_impression';
-            $extra['carousel_index'] = isset($options['carousel_index']) ? $options['carousel_index'] : 0;
+            $extra['carousel_index'] = $options['carousel_index'] ?? 0;
             $extra['carousel_media_id'] = isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getId() : $item->getCarouselMedia()[0]->getId();
             $extra['carousel_m_t'] = isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getMediaType() : $item->getCarouselMedia()[0]->getMediaType();
             $extra['carousel_size'] = $item->getCarouselMediaCount();
@@ -2315,8 +2315,8 @@ class Event extends RequestCollection
     public function sendOrganicMediaSubImpression(
         $item,
         array $options = [],
-        $module = 'reel_profile')
-    {
+        $module = 'reel_profile'
+    ) {
         if (!isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
             throw new \InvalidArgumentException('Required options were not set.');
         }
@@ -2333,10 +2333,10 @@ class Event extends RequestCollection
             'viewer_session_id'            => $options['viewer_session_id'],
             'tray_session_id'              => $options['tray_session_id'],
             'reel_id'                      => $item->getUser()->getPk(),
-            'reel_position'                => isset($options['reel_position']) ? $options['reel_position'] : 0,
+            'reel_position'                => $options['reel_position'] ?? 0,
             'reel_viewer_position'         => 0,
             'reel_type'                    => 'story',
-            'reel_size'                    => isset($options['reel_size']) ? $options['reel_size'] : 0,
+            'reel_size'                    => $options['reel_size'] ?? 0,
             'is_video_to_carousel'         => false,
             'tray_position'                => 1,
             'session_reel_counter'         => 1,
@@ -2368,8 +2368,8 @@ class Event extends RequestCollection
     public function sendOrganicVpvdImpression(
         $item,
         array $options = [],
-        $module = 'reel_profile')
-    {
+        $module = 'reel_profile'
+    ) {
         if (!isset($options['tray_session_id']) && !isset($options['viewer_session_id'])) {
             throw new \InvalidArgumentException('Required options were not set.');
         }
@@ -2381,12 +2381,12 @@ class Event extends RequestCollection
                 'm_pk'                      => $item->getId(),
                 'reel_id'                   => $item->getUser()->getPk(),
                 'tray_position'             => 1,
-                'reel_size'                 => isset($options['reel_size']) ? $options['reel_size'] : 0,
-                'reel_position'             => isset($options['reel_position']) ? $options['reel_position'] : 0,
+                'reel_size'                 => $options['reel_size'] ?? 0,
+                'reel_position'             => $options['reel_position'] ?? 0,
                 'reel_type'                 => 'story',
                 'tracking_token'            => $item->getOrganicTrackingToken(),
                 'm_t'                       => $item->getMediaType(),
-                'time_elapsed'              => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
+                'time_elapsed'              => $options['time_elapsed'] ?? 0,
                 'time_remaining'            => mt_rand(1, 2),
                 'time_paused'               => 0,
                 'client_sub_impression'     => isset($options['client_sub_impression']) ? true : false,
@@ -2441,18 +2441,18 @@ class Event extends RequestCollection
     public function sendOrganicCarouselImpression(
         $item,
         $requestId,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'm_pk'                              => $item->getId(),
             'a_pk'                              => $item->getUser()->getPk(),
             'm_ts'                              => (int) $item->getTakenAt(),
             'm_t'                               => $item->getMediaType(),
             'tracking_token'                    => $item->getOrganicTrackingToken(),
-            'source_of_action'                  => isset($options['module']) ? $options['module'] : 'feed_timeline',
+            'source_of_action'                  => $options['module'] ?? 'feed_timeline',
             'follow_status'                     => isset($options['following']) ? 'following' : 'not_following',
             'm_ix'                              => 0,
-            'carousel_index'                    => isset($options['carousel_index']) ? $options['carousel_index'] : 0,
+            'carousel_index'                    => $options['carousel_index'] ?? 0,
             'carousel_media_id'                 => isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getId() : $item->getCarouselMedia()[0]->getId(),
             'carousel_m_t'                      => isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getMediaType() : $item->getCarouselMedia()[0]->getMediaType(),
             'carousel_size'                     => $item->getCarouselMediaCount(),
@@ -2488,41 +2488,41 @@ class Event extends RequestCollection
         $traySessionId,
         $rankingToken,
         $module = 'reel_feed_timeline',
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'm_pk'                              => $item->getId(),
             'a_pk'                              => $item->getUser()->getPk(),
             'm_ts'                              => (int) $item->getTakenAt(),
             'm_t'                               => $item->getMediaType(),
             'tracking_token'                    => $item->getOrganicTrackingToken(),
-            'action'					                       => isset($options['action']) ? $options['action'] : 'tap_forward',
-            'elapsed_time_since_last_item'      => isset($options['elapsed_time_since_last_item']) ? $options['elapsed_time_since_last_item'] : -1,
+            'action'					                       => $options['action'] ?? 'tap_forward',
+            'elapsed_time_since_last_item'      => $options['elapsed_time_since_last_item'] ?? -1,
             'source_of_action'                  => $module,
             'follow_status'                     => isset($options['following']) ? 'following' : 'not_following',
             'viewer_session_id'                 => $viewerSessionId,
             'tray_session_id'                   => $traySessionId,
             'reel_tray_resorted_on_client_side' => false,
-            'has_media_loaded'                  => isset($options['has_media_loaded']) ? $options['has_media_loaded'] : false,
-            'tap_x_position'                    => isset($options['tap_x_position']) ? $options['tap_x_position'] : 1201.1658935546875,
-            'tap_y_position'                    => isset($options['tap_y_position']) ? $options['tap_y_position'] : 1081.6331787109375,
+            'has_media_loaded'                  => $options['has_media_loaded'] ?? false,
+            'tap_x_position'                    => $options['tap_x_position'] ?? 1201.1658935546875,
+            'tap_y_position'                    => $options['tap_y_position'] ?? 1081.6331787109375,
             'reel_id'                           => $item->getId(),
-            'reel_position'                     => isset($options['reel_position']) ? $options['reel_position'] : 1,
-            'reel_viewer_position'              => isset($options['reel_viewer_position']) ? $options['reel_viewer_position'] : 0,
+            'reel_position'                     => $options['reel_position'] ?? 1,
+            'reel_viewer_position'              => $options['reel_viewer_position'] ?? 0,
             'reel_type'                         => 'story',
-            'reel_size'                         => isset($options['reel_size']) ? $options['reel_size'] : 1,
-            'tray_position'                     => isset($options['tray_position']) ? $options['tray_position'] : 1,
-            'session_reel_counter'              => isset($options['session_reel_counter']) ? $options['session_reel_counter'] : 1,
-            'time_elapsed'                      => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
-            'reel_start_position'               => isset($options['reel_start_position']) ? $options['reel_start_position'] : 0,
+            'reel_size'                         => $options['reel_size'] ?? 1,
+            'tray_position'                     => $options['tray_position'] ?? 1,
+            'session_reel_counter'              => $options['session_reel_counter'] ?? 1,
+            'time_elapsed'                      => $options['time_elapsed'] ?? 0,
+            'reel_start_position'               => $options['reel_start_position'] ?? 0,
             'profile_tap_counter'               => 0,
             'election_tap_counter'              => 0,
             'anti_bully_tap_counter'            => 0,
             'source'                            => 1,
             'story_ranking_token'               => $rankingToken,
-            'first_view'                        => isset($options['first_view']) ? $options['first_view'] : '1',
-            'source_module'                     => isset($options['source_module']) ? $options['source_module'] : 'reel_feed_timeline',
-            'dest_module'                       => isset($options['dest_module']) ? $options['dest_module'] : 'reel_feed_timeline',
+            'first_view'                        => $options['first_view'] ?? '1',
+            'source_module'                     => $options['source_module'] ?? 'reel_feed_timeline',
+            'dest_module'                       => $options['dest_module'] ?? 'reel_feed_timeline',
             'a_i'                               => 'organic',
             'is_dark_mode'                      => 0,
             'dark_mode_state'                   => -1,
@@ -2565,43 +2565,43 @@ class Event extends RequestCollection
         $traySessionId,
         $rankingToken,
         $module = 'reel_feed_timeline',
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'a_pk'                                  => $item->getUser()->getPk(),
-            'action'					                           => isset($options['action']) ? $options['action'] : 'tap_forward',
-            'elapsed_time_since_last_item'          => isset($options['elapsed_time_since_last_item']) ? $options['elapsed_time_since_last_item'] : -1,
+            'action'					                           => $options['action'] ?? 'tap_forward',
+            'elapsed_time_since_last_item'          => $options['elapsed_time_since_last_item'] ?? -1,
             'source_of_action'                      => $module,
             'follow_status'                         => isset($options['following']) ? 'following' : 'not_following',
             'viewer_session_id'                     => $viewerSessionId,
             'tray_session_id'                       => $traySessionId,
             'story_ranking_token'                   => $rankingToken,
             'reel_type'                             => 'story',
-            'reel_size'                             => isset($options['reel_size']) ? $options['reel_size'] : 1,
-            'tray_position'                         => isset($options['tray_position']) ? $options['tray_position'] : 1,
-            'session_reel_counter'                  => isset($options['session_reel_counter']) ? $options['session_reel_counter'] : 1,
-            'pause_duration'                        => isset($options['pause_duration']) ? $options['pause_duration'] : 0,
-            'time_elapsed'                          => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
+            'reel_size'                             => $options['reel_size'] ?? 1,
+            'tray_position'                         => $options['tray_position'] ?? 1,
+            'session_reel_counter'                  => $options['session_reel_counter'] ?? 1,
+            'pause_duration'                        => $options['pause_duration'] ?? 0,
+            'time_elapsed'                          => $options['time_elapsed'] ?? 0,
             'ad_pause_duration'                     => 0,
             'ad_time_elapsed'                       => 0,
-            'viewer_session_media_consumed'         => isset($options['viewer_session_media_consumed']) ? $options['viewer_session_media_consumed'] : 0,
-            'viewer_session_reels_consumed'         => isset($options['viewer_session_reels_consumed']) ? $options['viewer_session_reels_consumed'] : 0,
-            'photos_consumed'                       => isset($options['photos_consumed']) ? $options['photos_consumed'] : 0,
-            'videos_consumed'                       => isset($options['videos_consumed']) ? $options['videos_consumed'] : 0,
+            'viewer_session_media_consumed'         => $options['viewer_session_media_consumed'] ?? 0,
+            'viewer_session_reels_consumed'         => $options['viewer_session_reels_consumed'] ?? 0,
+            'photos_consumed'                       => $options['photos_consumed'] ?? 0,
+            'videos_consumed'                       => $options['videos_consumed'] ?? 0,
             'viewer_session_ad_media_consumed'      => 0,
             'viewer_session_ad_reels_consumed'      => 0,
             'viewer_session_netego_reels_consumed'  => 0,
-            'viewer_session_replay_videos_consumed' => isset($options['viewer_session_replay_videos_consumed']) ? $options['viewer_session_replay_videos_consumed'] : 0,
-            'viewer_session_live_reels_consumed'    => isset($options['viewer_session_live_reels_consumed']) ? $options['viewer_session_live_reels_consumed'] : 0,
-            'viewer_session_replay_reels_consumed'  => isset($options['viewer_session_replay_reels_consumed']) ? $options['viewer_session_replay_reels_consumed'] : 0,
+            'viewer_session_replay_videos_consumed' => $options['viewer_session_replay_videos_consumed'] ?? 0,
+            'viewer_session_live_reels_consumed'    => $options['viewer_session_live_reels_consumed'] ?? 0,
+            'viewer_session_replay_reels_consumed'  => $options['viewer_session_replay_reels_consumed'] ?? 0,
             'ad_photos_consumed'                    => 0,
             'ad_videos_consumed'                    => 0,
-            'replay_videos_consumed'                => isset($options['replay_videos_consumed']) ? $options['replay_videos_consumed'] : 0,
-            'live_videos_consumed'                  => isset($options['live_videos_consumed']) ? $options['live_videos_consumed'] : 0,
-            'viewer_volume_on'                      => isset($options['viewer_volume_on']) ? $options['viewer_volume_on'] : false,
-            'viewer_volume_toggled'                 => isset($options['viewer_volume_toggled']) ? $options['viewer_volume_toggled'] : false,
-            'is_last_reel'                          => isset($options['is_last_reel']) ? $options['is_last_reel'] : false,
-            'is_acp_delivered'                      => isset($options['is_acp_delivered']) ? $options['is_acp_delivered'] : false,
+            'replay_videos_consumed'                => $options['replay_videos_consumed'] ?? 0,
+            'live_videos_consumed'                  => $options['live_videos_consumed'] ?? 0,
+            'viewer_volume_on'                      => $options['viewer_volume_on'] ?? false,
+            'viewer_volume_toggled'                 => $options['viewer_volume_toggled'] ?? false,
+            'is_last_reel'                          => $options['is_last_reel'] ?? false,
+            'is_acp_delivered'                      => $options['is_acp_delivered'] ?? false,
         ];
 
         $event = $this->_addEventBody('reel_session_summary', $module, $extra);
@@ -2624,8 +2624,8 @@ class Event extends RequestCollection
         $userId,
         $viewerSessionId,
         $traySessionId,
-        $module = 'reel_profile')
-    {
+        $module = 'reel_profile'
+    ) {
         $extra = [
             'a_pk'                                  => $userId,
             'source_of_action'                      => $module,
@@ -2663,16 +2663,16 @@ class Event extends RequestCollection
      */
     public function sendExploreHomeImpression(
         $item,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'm_pk'                      => $item->getId(),
             'media_type'                => $item->getMediaType(),
             'event_id'                  => $item->getId(),
             'tracking_token'            => $item->getOrganicTrackingToken(),
-            'connection_id'             => isset($options['connection_id']) ? $options['connection_id'] : 180,
+            'connection_id'             => $options['connection_id'] ?? 180,
             'position'                  => $options['position'], // [\"24\",\"1\"] (row, column).
-            'algorithm'                 => isset($options['algorithm']) ? $options['algorithm'] : 'edge_dedupe_unicorn',
+            'algorithm'                 => $options['algorithm'] ?? 'edge_dedupe_unicorn',
             'type'                      => 1,
             'size'                      => $options['size'], // [\"2\",\"2\"] Size in the media grid.
             'topic_cluster_id'          => $options['topic_cluster_id'], // example: 'explore_all:0'
@@ -2700,15 +2700,15 @@ class Event extends RequestCollection
      */
     public function sendExploreSwitch(
         $sessionId,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
-            'topic_nav_order'                      => isset($options['topic_nav_order']) ? $options['topic_nav_order'] : 0,
-            'dest_topic_cluster_position'          => isset($options['dest_topic_cluster_position']) ? $options['dest_topic_cluster_position'] : 0,
+            'topic_nav_order'                      => $options['topic_nav_order'] ?? 0,
+            'dest_topic_cluster_position'          => $options['dest_topic_cluster_position'] ?? 0,
             'dest_topic_cluster_debug_info'        => null,
-            'dest_topic_cluster_type'              => isset($options['dest_topic_cluster_type']) ? $options['dest_topic_cluster_type'] : 'explore_all',
-            'dest_topic_cluster_title'             => isset($options['dest_topic_cluster_title']) ? $options['dest_topic_cluster_title'] : 'For+You',
-            'dest_topic_cluster_id'	               => isset($options['dest_topic_cluster_id']) ? $options['dest_topic_cluster_id'] : 'explore_all:0',
+            'dest_topic_cluster_type'              => $options['dest_topic_cluster_type'] ?? 'explore_all',
+            'dest_topic_cluster_title'             => $options['dest_topic_cluster_title'] ?? 'For+You',
+            'dest_topic_cluster_id'	               => $options['dest_topic_cluster_id'] ?? 'explore_all:0',
             'action'                               => 'load',
             'session_id'                           => $sessionId,
         ];
@@ -2728,8 +2728,8 @@ class Event extends RequestCollection
      */
     public function preparePerfWithImpressions(
         $items,
-        $module)
-    {
+        $module
+    ) {
         foreach ($items as $item) {
             if ($item->getMediaType() === 1) {
                 $imageResponse = $this->ig->request($item->getImageVersions2()->getCandidates()[0]->getUrl());
@@ -2781,8 +2781,8 @@ class Event extends RequestCollection
         $sections,
         $hashtagId = null,
         $hashtagName = null,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $row = 1;
         $column = 1;
         foreach ($sections as $section) {
@@ -2898,8 +2898,8 @@ class Event extends RequestCollection
     public function prepareAndSendExploreImpression(
         $clusterId,
         $sessionId,
-        $sections)
-    {
+        $sections
+    ) {
         $clusters = [
             'For You'       => 'explore_all:0',
             'Animals'       => 'hashtag_inspired:1',
@@ -3080,8 +3080,8 @@ class Event extends RequestCollection
     public function sendSimilarUserImpression(
         $userId,
         $recommendedUserId,
-        $module = 'profile')
-    {
+        $module = 'profile'
+    ) {
         $extra = [
             'uid'           => $recommendedUserId,
             'uid_based_on'  => $userId,
@@ -3105,8 +3105,8 @@ class Event extends RequestCollection
     public function sendRecommendedUserImpression(
         $object,
         $position,
-        $module = 'newsfeed_you')
-    {
+        $module = 'newsfeed_you'
+    ) {
         if ($module === 'newsfeed_you' || $module === 'discover_people') {
             $extra = [
                 'position'           => $position,
@@ -3157,14 +3157,14 @@ class Event extends RequestCollection
         $recommendedUserId,
         $entityType = 'user',
         $module = 'profile',
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'entity_type'               => $entityType,
             'entity_id'                 => $recommendedUserId,
             'based_on_id'               => $userId,
             'based_on_type'             => $entityType,
-            'entity_follow_status'      => isset($options['entity_follow_status']) ? $options['entity_follow_status'] : 'not_following',
+            'entity_follow_status'      => $options['entity_follow_status'] ?? 'not_following',
             'entity_ix'                 => 2,
         ];
 
@@ -3192,8 +3192,8 @@ class Event extends RequestCollection
         $viewerSessionId = null,
         $traySessionId = null,
         $rankingToken = null,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'm_pk'                                      => $item->getId(),
             'a_pk'                                      => $item->getUser()->getPk(),
@@ -3261,8 +3261,8 @@ class Event extends RequestCollection
             $extra['media_thumbnail_section'] = 'grid';
             $extra['entity_page_name'] = $item->getUser()->getUsername();
             $extra['entity_page_id'] = $item->getUser()->getPk();
-        } elseif ($module === 'reel_feed_timeline' || $module === 'reel_profile' || $module === 'reel_follow_list' ||
-                  $module === 'reel_liker_list' || $module === 'reel_hashtag_feed' || $module === 'reel_location_feed' || $module === 'reel_comment') {
+        } elseif ($module === 'reel_feed_timeline' || $module === 'reel_profile' || $module === 'reel_follow_list'
+                  || $module === 'reel_liker_list' || $module === 'reel_hashtag_feed' || $module === 'reel_location_feed' || $module === 'reel_comment') {
             $event = 'instagram_organic_reel_viewed_impression';
             $extra['action'] = null;
             $extra['source_of_action'] = $module;
@@ -3288,13 +3288,13 @@ class Event extends RequestCollection
             $extra['hashtag_id'] = $options['hashtag_id'];
             $extra['hashtag_name'] = $options['hashtag_name'];
             $extra['hashtag_follow_status'] = isset($options['following']) ? 'following' : 'not_following';
-            $extra['hashtag_feed_type'] = isset($options['feed_type']) ? $options['feed_type'] : 'top';
-            $extra['tab_index'] = isset($options['tab_index']) ? $options['tab_index'] : 0;
+            $extra['hashtag_feed_type'] = $options['feed_type'] ?? 'top';
+            $extra['tab_index'] = $options['tab_index'] ?? 0;
             $extra['source_of_action'] = $module;
             $extra['session_id'] = $this->ig->client->getPigeonSession();
             $extra['type'] = 0;
             $extra['section'] = 0;
-            $extra['position'] = isset($options['position']) ? $options['position'] : '["0","0"]';
+            $extra['position'] = $options['position'] ?? '["0","0"]';
         } elseif ($module === 'feed_timeline') {
             $event = 'instagram_organic_viewed_impression';
             $extra['source_of_action'] = $module;
@@ -3311,7 +3311,7 @@ class Event extends RequestCollection
         } elseif ($module === 'feed_short_url') {
             $event = 'instagram_organic_viewed_impression';
             $extra['id'] = $item->getId();
-            $extra['position'] = isset($options['position']) ? $options['position'] : '["0", "0"]';
+            $extra['position'] = $options['position'] ?? '["0", "0"]';
             $extra['entity_type'] = 'user';
             $extra['entity_name'] = $item->getUser()->getUsername();
             $extra['entity_page_name'] = $item->getUser()->getUsername();
@@ -3323,7 +3323,7 @@ class Event extends RequestCollection
 
         if ($item->getMediaType() === 8) {
             $event = 'instagram_organic_carousel_viewed_impression';
-            $extra['carousel_index'] = isset($options['carousel_index']) ? $options['carousel_index'] : 0;
+            $extra['carousel_index'] = $options['carousel_index'] ?? 0;
             $extra['carousel_media_id'] = isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getId() : $item->getCarouselMedia()[0]->getId();
             $extra['carousel_m_t'] = isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getMediaType() : $item->getCarouselMedia()[0]->getMediaType();
             $extra['carousel_size'] = $item->getCarouselMediaCount();
@@ -3351,8 +3351,8 @@ class Event extends RequestCollection
         $viewerSessionId = null,
         $traySessionId = null,
         array $options = [],
-        $module = 'reel_profile')
-    {
+        $module = 'reel_profile'
+    ) {
         if ($module === 'reel_profile') {
             $extra = [
                 'm_pk'                         => $item->getId(),
@@ -3367,14 +3367,14 @@ class Event extends RequestCollection
                 'tray_session_id'              => $traySessionId,
                 'reel_id'                      => $item->getId(),
                 'is_highlights_sourced'        => false,
-                'reel_position'                => isset($options['reel_position']) ? $options['reel_position'] : 0,
+                'reel_position'                => $options['reel_position'] ?? 0,
                 'reel_viewer_position'         => 0,
                 'reel_type'                    => 'story',
-                'reel_size'                    => isset($options['reel_size']) ? $options['reel_size'] : 1,
+                'reel_size'                    => $options['reel_size'] ?? 1,
                 'tray_position'                => 1,
                 'session_reel_counter'         => 1,
-                'time_elapsed'                 => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
-                'media_time_elapsed'           => isset($options['time_elapsed']) ? $options['time_elapsed'] : 0,
+                'time_elapsed'                 => $options['time_elapsed'] ?? 0,
+                'media_time_elapsed'           => $options['time_elapsed'] ?? 0,
                 'media_time_remaining'         => mt_rand(1, 2),
                 'media_dwell_time'             => mt_rand(5, 6) + mt_rand(100, 900) * 0.001,
                 'media_time_paused'            => 0,
@@ -3421,8 +3421,8 @@ class Event extends RequestCollection
      */
     public function sendIgtvPreviewEnd(
         $item,
-        $module = 'feed_contextual_profile')
-    {
+        $module = 'feed_contextual_profile'
+    ) {
         $extra = [
             'm_pk'                          => $item->getId(),
             'elapsed_time_since_last_item'  => -1,
@@ -3452,8 +3452,8 @@ class Event extends RequestCollection
         $action,
         $entrypoint,
         $module = 'igtv_preview_feed_contextual_profile',
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'm_pk'                         => $item->getId(),
             'a_pk'                         => $item->getUser()->getPk(),
@@ -3466,7 +3466,7 @@ class Event extends RequestCollection
             'elapsed_time_since_last_item' => -1,
             'entry_point'                  => $entrypoint,
             'guide_open_status'            => false,
-            'igtv_viewer_session_id'       => isset($options['viewer_session_id']) ? $options['viewer_session_id'] : null,
+            'igtv_viewer_session_id'       => $options['viewer_session_id'] ?? null,
             'is_igtv'                      => 1,
             'is_ad'                        => false,
             'is_acp_delivered'             => false,
@@ -3502,8 +3502,8 @@ class Event extends RequestCollection
         $action,
         $item,
         $module,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         if ($module === 'feed_contextual_profile') {
             $extra = [
                 'video_type'                  => $item->getProductType(),
@@ -3524,7 +3524,7 @@ class Event extends RequestCollection
             $extra = [
                 'id'                        => $item->getId(),
                 'm_pk'                      => $item->getId(),
-                'position'                  => isset($options['position']) ? $options['position'] : '["0", "0"]',
+                'position'                  => $options['position'] ?? '["0", "0"]',
                 'media_type'                => $item->getMediaType(),
                 'entity_type'               => 'user',
                 'entity_name'               => $item->getUser()->getUsername(),
@@ -3541,14 +3541,14 @@ class Event extends RequestCollection
                 'hashtag_id'                => $options['hashtag_id'],
                 'hashtag_name'              => $options['hashtag_name'],
                 'hashtag_follow_status'     => isset($options['following']) ? 'following' : 'not_following',
-                'hashtag_feed_type'         => isset($options['feed_type']) ? $options['feed_type'] : 'top',
-                'tab_index'                 => isset($options['tab_index']) ? $options['tab_index'] : 0,
+                'hashtag_feed_type'         => $options['feed_type'] ?? 'top',
+                'tab_index'                 => $options['tab_index'] ?? 0,
                 'source_of_action'          => $module,
                 'session_id'                => $this->ig->client->getPigeonSession(),
                 'media_type'                => $item->getMediaType(),
                 'type'                      => 0,
                 'section'                   => 0,
-                'position'                  => isset($options['position']) ? $options['position'] : '["0","0"]',
+                'position'                  => $options['position'] ?? '["0","0"]',
             ];
         } elseif ($module === 'feed_timeline') {
             $extra = [
@@ -3639,15 +3639,15 @@ class Event extends RequestCollection
     public function sendProfileView(
         $userId,
         $mediaId = null,
-        $trackingToken = null)
-    {
+        $trackingToken = null
+    ) {
         $extra = [
-                'm_ix'                          => 0,
-                'carousel_index'                => 0,
-                'elapsed_time_since_last_item'  => -1.0,
-                'target_id'                     => $userId,
-                'actor_id'                      => $this->ig->account_id,
-                'is_acp_delivered'              => false,
+            'm_ix'                          => 0,
+            'carousel_index'                => 0,
+            'elapsed_time_since_last_item'  => -1.0,
+            'target_id'                     => $userId,
+            'actor_id'                      => $this->ig->account_id,
+            'is_acp_delivered'              => false,
         ];
 
         if (($mediaId !== null) && ($trackingToken !== null)) {
@@ -3670,8 +3670,8 @@ class Event extends RequestCollection
      */
     protected function _getNavDepthForModules(
         $fromModule,
-        $toModule)
-    {
+        $toModule
+    ) {
         $navDepth = null;
 
         switch ($fromModule) {
@@ -3765,8 +3765,8 @@ class Event extends RequestCollection
     protected function _validateNavigationOptions(
         $fromModule,
         $toModule,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         if ($fromModule === 'feed_timeline' && $toModule === 'explore_popular'
             || $fromModule === 'explore_popular' && $toModule === 'explore_popular'
             || $fromModule === 'profile' && $toModule === 'explore_popular') {
@@ -3846,8 +3846,8 @@ class Event extends RequestCollection
     protected function _validateNavigationPath(
         $fromModule,
         $toModule,
-        $clickPoint)
-    {
+        $clickPoint
+    ) {
         if (in_array($clickPoint, ['main_home', 'main_search', 'main_inbox', 'main_camera', 'main_profile', 'main_clips'])) {
             return;
         }
@@ -4861,8 +4861,8 @@ class Event extends RequestCollection
                     'dest_module'   => 'likers',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_chain',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_chain',
                 ],
                 [
                     'clickpoint'   => 'followers',
@@ -4987,28 +4987,28 @@ class Event extends RequestCollection
             ],
             'likers' => [
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_profile',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_profile',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_self_profile',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_self_profile',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_timeline',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_timeline',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_hashtag',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_hashtag',
                 ],
                 [
-                   'clickpoint'    => 'back',
-                   'dest_module'   => 'feed_contextual_chain',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_chain',
                 ],
                 [
-                   'clickpoint'    => 'button',
-                   'dest_module'   => 'profile',
+                    'clickpoint'    => 'button',
+                    'dest_module'   => 'profile',
                 ],
                 [
                     'clickpoint'    => 'button',
@@ -5051,12 +5051,12 @@ class Event extends RequestCollection
                     'dest_module'   => 'profile',
                 ],
                 [
-                     'clickpoint'    => 'back',
-                     'dest_module'   => 'feed_contextual_profile',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_contextual_profile',
                 ],
                 [
-                     'clickpoint'    => 'back',
-                     'dest_module'   => 'feed_timeline',
+                    'clickpoint'    => 'back',
+                    'dest_module'   => 'feed_timeline',
                 ],
                 [
                     'clickpoint'    => 'button',
@@ -5290,8 +5290,8 @@ class Event extends RequestCollection
         $toModule,
         $hashtagId = null,
         $hashtagName = null,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         if ($hashtagId !== null) {
             $options['hashtag_id'] = $hashtagId;
         }
@@ -5302,8 +5302,8 @@ class Event extends RequestCollection
         $this->_validateNavigationPath($fromModule, $toModule, $clickPoint);
         $this->_validateNavigationOptions($fromModule, $toModule, $options);
 
-        //$navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
-        $classSelector = isset($options['class_selector']) ? $options['class_selector'] : null;
+        // $navChain = $this->sendUpdateSessionChain($toModule, $clickPoint);
+        $classSelector = $options['class_selector'] ?? null;
         $navChain = $this->_generateNavChain($toModule, $clickPoint, $classSelector);
 
         $navDepth = $this->_getNavDepthForModules($fromModule, $toModule);
@@ -5408,7 +5408,7 @@ class Event extends RequestCollection
                     $extra['username'] = $options['username'];
                     $extra['user_id'] = $options['user_id'];
                 } elseif ($toModule === 'feed_location') {
-                    $extra['rank_token'] = isset($options['rank_token']) ? $options['rank_token'] : null;
+                    $extra['rank_token'] = $options['rank_token'] ?? null;
                     $extra['query_text'] = $options['query_text'];
                     $extra['search_session_id'] = $options['search_session_id'];
                     $extra['search_tab'] = $fromModule;
@@ -5450,8 +5450,8 @@ class Event extends RequestCollection
         $sourceSection,
         $destinationSection,
         $module,
-        $flag = 'tab')
-    {
+        $flag = 'tab'
+    ) {
         $extra = [
             'current_section'        => $sourceSection,
             'destination_section'    => $destinationSection,
@@ -5476,8 +5476,8 @@ class Event extends RequestCollection
      */
     public function sendUpdateSessionChain(
         $module,
-        $clickPoint)
-    {
+        $clickPoint
+    ) {
         $navChain = $this->_generateNavChain($module, $clickPoint);
         $extra = [
             'sessions_chain'  => $navChain,
@@ -5501,8 +5501,8 @@ class Event extends RequestCollection
     public function sendOpenPhotoCameraTab(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5526,8 +5526,8 @@ class Event extends RequestCollection
     public function sendShutterClickInCamera(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5550,8 +5550,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendStartGalleryEditSession(
-        $sessionId)
-    {
+        $sessionId
+    ) {
         $extra = [
             'ig_userid'     => $this->ig->account_id,
             'session_id'    => $sessionId,
@@ -5576,8 +5576,8 @@ class Event extends RequestCollection
     public function sendFilterPhoto(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5602,8 +5602,8 @@ class Event extends RequestCollection
     public function sendFilterFinish(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5631,8 +5631,8 @@ class Event extends RequestCollection
         $waterfallId,
         $startTime,
         $currentTime,
-        $mediaType)
-    {
+        $mediaType
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5660,8 +5660,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendEndGalleryEditSession(
-        $sessionId)
-    {
+        $sessionId
+    ) {
         $extra = [
             'ig_userid'     => $this->ig->account_id,
             'session_id'    => $sessionId,
@@ -5682,8 +5682,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendStartShareSession(
-        $sessionId)
-    {
+        $sessionId
+    ) {
         $extra = [
             'ig_userid'     => $this->ig->account_id,
             'session_id'    => $sessionId,
@@ -5708,8 +5708,8 @@ class Event extends RequestCollection
     public function sendShareMedia(
         $waterfallId,
         $startTime,
-        $currentTime)
-    {
+        $currentTime
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
             'start_time'    => $startTime,
@@ -5741,8 +5741,8 @@ class Event extends RequestCollection
         $clientContext,
         $type,
         $recipients,
-        $channel = 'rest')
-    {
+        $channel = 'rest'
+    ) {
         if ($action !== 'send_intent' && $action !== 'send_attempt' && $action !== 'sent') {
             throw new \InvalidArgumentException(sprintf('%s is not a valid action.', $action));
         }
@@ -5794,8 +5794,8 @@ class Event extends RequestCollection
         $threadId,
         $threadItem,
         $action,
-        $channel = 'rest')
-    {
+        $channel = 'rest'
+    ) {
         $extra = [
             'type'           => 'thread_item_seen',
             'client_context' => $clientContext,
@@ -5824,8 +5824,8 @@ class Event extends RequestCollection
         $threadId,
         $hasUnseen,
         $position,
-        $folder = -1)
-    {
+        $folder = -1
+    ) {
         $extra = [
             'thread_id'      => $threadId,
             'has_unseen'     => $hasUnseen,
@@ -5848,8 +5848,8 @@ class Event extends RequestCollection
      */
     public function sendThreadUnseenMessageImpression(
         $threadId,
-        $threadItem)
-    {
+        $threadItem
+    ) {
         $extra = [
             'message_id'     => $threadItem->getItemId(),
             'message_type'   => $threadItem->getItemType(),
@@ -5871,8 +5871,8 @@ class Event extends RequestCollection
      */
     public function sendDirectFetchPagination(
         $action,
-        $cursor)
-    {
+        $cursor
+    ) {
         $extra = [
             'action'     => $action,
             'fetch_uuid' => Signatures::generateUUID(),
@@ -5920,15 +5920,15 @@ class Event extends RequestCollection
         $userId,
         $position,
         $folder = 0,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'thread_id'                 => $threadId,
             'inviter'                   => $userId,
             'entry_point'               => 'inbox',
-            'is_request_pending'        => isset($options['is_request_pending']) ? $options['is_request_pending'] : false,
-            'should_show_permission'    => isset($options['should_show_permission']) ? $options['should_show_permission'] : false,
-            'is_unread'                 => isset($options['is_unread']) ? $options['is_unread'] : false,
+            'is_request_pending'        => $options['is_request_pending'] ?? false,
+            'should_show_permission'    => $options['should_show_permission'] ?? false,
+            'is_unread'                 => $options['is_unread'] ?? false,
             'folder'                    => $folder,
             'position'                  => $position,
         ];
@@ -5949,8 +5949,8 @@ class Event extends RequestCollection
     public function sendExternalShareOption(
         $mediaId,
         $shareLocation = 'direct_share_sheet',
-        $shareOption = 'add_to_your_story')
-    {
+        $shareOption = 'add_to_your_story'
+    ) {
         $extra = [
             'media_id'          => $mediaId,
             'share_location'    => $shareLocation,
@@ -5971,8 +5971,8 @@ class Event extends RequestCollection
      */
     public function sendDirectShareMedia(
         $userId,
-        $threadId = null)
-    {
+        $threadId = null
+    ) {
         $extra = [
             'thread_id' => $threadId,
             'a_pk'      => $userId,
@@ -6000,8 +6000,8 @@ class Event extends RequestCollection
         $useCase = 'activity_feed',
         $badgeValue = 0,
         $badgePosition = 'badge_position',
-        $badgeDisplayStyle = 'dot_badge')
-    {
+        $badgeDisplayStyle = 'dot_badge'
+    ) {
         $extra = [
             'event_type'            => $eventType,
             'use_case_id'           => $useCase,
@@ -6039,8 +6039,8 @@ class Event extends RequestCollection
         $followingUserStatus,
         $module,
         array $clusterData = [],
-        array $options = [])
-    {
+        array $options = []
+    ) {
         if ($module === 'feed_contextual_profile' || $module === 'feed_contextual_self_profile' || $module === 'feed_short_url') {
             $extra = [
                 'm_pk'                      => $item->getId(),
@@ -6088,14 +6088,14 @@ class Event extends RequestCollection
                 'hashtag_id'                => $options['hashtag_id'],
                 'hashtag_name'              => $options['hashtag_name'],
                 'hashtag_follow_status'     => isset($options['following']) ? 'following' : 'not_following',
-                'hashtag_feed_type'         => isset($options['feed_type']) ? $options['feed_type'] : 'top',
-                'tab_index'                 => isset($options['tab_index']) ? $options['tab_index'] : 0,
+                'hashtag_feed_type'         => $options['feed_type'] ?? 'top',
+                'tab_index'                 => $options['tab_index'] ?? 0,
                 'source_of_action'          => $module,
                 'session_id'                => $this->ig->client->getPigeonSession(),
                 'media_type'                => $item->getMediaType(),
                 'type'                      => 0,
                 'section'                   => 0,
-                'position'                  => isset($options['position']) ? $options['position'] : '["0","0"]',
+                'position'                  => $options['position'] ?? '["0","0"]',
             ];
         } elseif ($module === 'feed_timeline') {
             $extra = [
@@ -6141,8 +6141,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendStringImpressions(
-        $impressions)
-    {
+        $impressions
+    ) {
         $extra = [
             'impressions'   => $impressions,
             'string_locale' => $this->ig->getLocale(),
@@ -6159,8 +6159,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendNavigationTabImpression(
-        $mode)
-    {
+        $mode
+    ) {
         $extra = [
             'app_device_id' => $this->ig->uuid,
         ];
@@ -6213,8 +6213,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendDirectUserSearchPicker(
-        $query)
-    {
+        $query
+    ) {
         $extra = [
             'search_string'   => $query,
         ];
@@ -6240,8 +6240,8 @@ class Event extends RequestCollection
         $position,
         $uuid = null,
         $query = null,
-        $module = 'direct_recipient_picker')
-    {
+        $module = 'direct_recipient_picker'
+    ) {
         if ($module === 'direct_recipient_picker') {
             if ($uuid === null) {
                 throw new \InvalidArgumentException('UUID must not be null.');
@@ -6280,8 +6280,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendGroupCreation(
-        $groupSession)
-    {
+        $groupSession
+    ) {
         $extra = [
             'group_session_id'   => $groupSession,
         ];
@@ -6298,8 +6298,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendGroupCreationEnter(
-        $groupSession)
-    {
+        $groupSession
+    ) {
         $extra = [
             'group_session_id'   => $groupSession,
             'direct_module'      => 'inbox',
@@ -6324,8 +6324,8 @@ class Event extends RequestCollection
     public function sendEnterDirectThread(
         $threadId,
         $sessionId = null,
-        $entryPoint = 'inbox_new_message')
-    {
+        $entryPoint = 'inbox_new_message'
+    ) {
         $extra = [
             'entry_point'        => $entryPoint,
             'inviter'            => $this->ig->account_id,
@@ -6353,8 +6353,8 @@ class Event extends RequestCollection
      * @see follow example.
      */
     public function sendSearchInitiated(
-        $searchSession)
-    {
+        $searchSession
+    ) {
         $extra = [
             'search_session_id'                 => $searchSession,
             'shopping_session_id'               => null,
@@ -6387,8 +6387,8 @@ class Event extends RequestCollection
         $resultsTypeList,
         $rankToken,
         $searchSession,
-        $module)
-    {
+        $module
+    ) {
         $extra = [
             'search_session_id'                 => $searchSession,
             'results_list'                      => $results,
@@ -6432,8 +6432,8 @@ class Event extends RequestCollection
         $searchSession,
         $position,
         $selectedType,
-        $module)
-    {
+        $module
+    ) {
         $positionList = [];
         for ($c = 0; $c < count($results); $c++) {
             $positionList[] = $c;
@@ -6510,15 +6510,15 @@ class Event extends RequestCollection
         $entityId,
         $hashtagId,
         $hashtagName,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'entity_type'            => 'hashtag',
             'entity_name'            => '#'.$entityName,
             'entity_id'              => $entityId,
             'hashtag_id'             => $hashtagId,
             'hashtag_name'           => $hashtagName,
-            'hashtag_follow_status'  => isset($options['hashtag_follow_status']) ? $options['hashtag_follow_status'] : 'not_following',
+            'hashtag_follow_status'  => $options['hashtag_follow_status'] ?? 'not_following',
             'hashtag_feed_type'      => 'unspecified',
             'tab_index'              => -1,
         ];
@@ -6544,8 +6544,8 @@ class Event extends RequestCollection
         $userId,
         $module,
         $entryModule = null,
-        $unfollow = false)
-    {
+        $unfollow = false
+    ) {
         $extra = [
             'request_type'                    => ($unfollow === false) ? 'create' : 'destroy',
             'm_pk'                            => $userId,
@@ -6586,8 +6586,8 @@ class Event extends RequestCollection
         $position,
         $follow = true,
         $viewModule = 'hscroll_aymf_feed_unit',
-        $socialContext = 'Instagram recommended')
-    {
+        $socialContext = 'Instagram recommended'
+    ) {
         $extra = [
             'target_id'             => $userId,
             'position'              => $position,
@@ -6626,8 +6626,8 @@ class Event extends RequestCollection
         $userId,
         $module,
         $rankToken,
-        $unfollow = false)
-    {
+        $unfollow = false
+    ) {
         $extra = [
             'rank_token'                      => sprintf('%s|%s', $this->ig->account_id, $rankToken),
             'user_id'                         => $userId,
@@ -6651,8 +6651,8 @@ class Event extends RequestCollection
     public function sendFeedButtonTapped(
         $module,
         $tab = 'top',
-        array $options = [])
-    {
+        array $options = []
+    ) {
         if ($module === 'feed_hashtag') {
             $name = 'hashtag_feed_button_tapped';
             $extra = [
@@ -6660,7 +6660,7 @@ class Event extends RequestCollection
                 'hashtag_id'                => $options['hashtag_id'],
                 'hashtag_name'              => $options['hashtag_name'],
                 'hashtag_follow_status'     => isset($options['following']) ? 'following' : 'not_following',
-                'hashtag_feed_type'         => isset($options['feed_type']) ? $options['feed_type'] : 'top',
+                'hashtag_feed_type'         => $options['feed_type'] ?? 'top',
                 'tab_index'                 => ($tab === 'top') ? 0 : 1,
             ];
         } elseif ($module === 'feed_location') {
@@ -6693,8 +6693,8 @@ class Event extends RequestCollection
         $mute,
         $muted,
         $userId,
-        $targetPrivate)
-    {
+        $targetPrivate
+    ) {
         if ($type === 'post' && $mute === true) {
             $name = 'ig_mute_posts';
         } elseif ($type === 'posts' && $mute === false) {
@@ -6735,8 +6735,8 @@ class Event extends RequestCollection
     public function reportMediaAction(
         $action,
         $mediaId,
-        $module = 'feed_contextual_self_profile')
-    {
+        $module = 'feed_contextual_self_profile'
+    ) {
         $extra = [
             'actor_id'  => $this->ig->account_id,
             'action'    => $action,
@@ -6766,8 +6766,8 @@ class Event extends RequestCollection
         $option,
         $mediaId,
         $position,
-        $module = 'feed_contextual_self_profile')
-    {
+        $module = 'feed_contextual_self_profile'
+    ) {
         $extra = [
             'media_owner_id'    => $this->ig->account_id,
             'option'            => $option,
@@ -6793,8 +6793,8 @@ class Event extends RequestCollection
         $uploadId,
         $mediaType,
         $waterfallId,
-        $isCarousel)
-    {
+        $isCarousel
+    ) {
         $extra = [
             'upload_id'         => $uploadId,
             'session_id'        => $uploadId,
@@ -6827,8 +6827,8 @@ class Event extends RequestCollection
         $uploadId,
         $mediaType,
         $waterfallId,
-        $isCarousel)
-    {
+        $isCarousel
+    ) {
         if ($mediaType === 1) {
             $name = 'upload_photo_attempt';
         } else {
@@ -6865,8 +6865,8 @@ class Event extends RequestCollection
         $uploadId,
         $mediaType,
         $waterfallId,
-        $isCarousel)
-    {
+        $isCarousel
+    ) {
         if ($mediaType === 1) {
             $name = 'upload_photo_success';
         } else {
@@ -6906,8 +6906,8 @@ class Event extends RequestCollection
         $status,
         $uploadId,
         $mediaType,
-        $waterfallId)
-    {
+        $waterfallId
+    ) {
         if ($status === 'attempt') {
             $name = 'configure_media_attempt';
             $timeFromShare = 0;
@@ -6954,8 +6954,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIGStartCameraSession(
-        $sessionId)
-    {
+        $sessionId
+    ) {
         $extra = [
             'session_id'               => $sessionId,
             'entry_point'              => 12,
@@ -6988,8 +6988,8 @@ class Event extends RequestCollection
         $loggerId,
         $productSessionId,
         $module,
-        $time)
-    {
+        $time
+    ) {
         $extra = [
             'event'                                => $event,
             'product_name'                         => $product,
@@ -7031,8 +7031,8 @@ class Event extends RequestCollection
         $waterfallId,
         $startTime,
         $currentTime,
-        $origin)
-    {
+        $origin
+    ) {
         $extra = [
             'waterfall_id'                                => $waterfallId,
             'start_time'                                  => $startTime,
@@ -7060,8 +7060,8 @@ class Event extends RequestCollection
      */
     public function sendIgCameraShareMedia(
         $sessionId,
-        $mediaType)
-    {
+        $mediaType
+    ) {
         $extra = [
             'session_id'                                   => $sessionId,
             'entry_point'                                  => 12,
@@ -7090,8 +7090,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIgCameraEndPostCaptureSession(
-        $sessionId)
-    {
+        $sessionId
+    ) {
         $extra = [
             'session_id'                                   => $sessionId,
             'entry_point'                                  => 12,
@@ -7113,8 +7113,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIgCameraEndSession(
-        $sessionId)
-    {
+        $sessionId
+    ) {
         $extra = [
             'session_id'                                   => $sessionId,
             'entry_point'                                  => 12,
@@ -7153,8 +7153,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function enableNotificationSettings(
-        $channels)
-    {
+        $channels
+    ) {
         if (!is_array($channels)) {
             $channels = [$channels];
         }
@@ -7181,8 +7181,8 @@ class Event extends RequestCollection
      */
     public function sendNetegoDelivery(
         $item,
-        $sessionId)
-    {
+        $sessionId
+    ) {
         $extra = [
             'session_id'        => $sessionId,
             'id'                => $item->getId(),
@@ -7205,8 +7205,8 @@ class Event extends RequestCollection
      */
     public function sendAsyncAdControllerSuccess(
         $trackingToken,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'tracking_token'        => $trackingToken,
             'desired_action_pos'    => $options['desired_action_pos'],
@@ -7245,8 +7245,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendActiveInterval(
-        $startTime)
-    {
+        $startTime
+    ) {
         $extra = [
             'event_type'    => 'interval_start',
             'start_time'    => $startTime,
@@ -7266,8 +7266,8 @@ class Event extends RequestCollection
      */
     public function sendZeroUrlRewrite(
         $url,
-        $rewrittenUrl)
-    {
+        $rewrittenUrl
+    ) {
         $extra = [
             'url'               => $url,
             'rewritten_url'     => $rewrittenUrl,
@@ -7285,8 +7285,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendCellularDataOpt(
-        $dataSaver = false)
-    {
+        $dataSaver = false
+    ) {
         $extra = [
             'data_saver_mode'               => $dataSaver,
             'high_quality_network_setting'  => 1,
@@ -7305,8 +7305,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendDarkModeOpt(
-        $darkMode = false)
-    {
+        $darkMode = false
+    ) {
         $extra = [
             'os_dark_mode_settings'     => $darkMode,
             'dark_mode_in_app_toggle'   => intval($darkMode),
@@ -7346,20 +7346,20 @@ class Event extends RequestCollection
     public function sendPerfPercentPhotosRendered(
         $module,
         $mediaId,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         $extra = [
             'media_id'                          => $mediaId,
-            'is_grid_view'                      => isset($options['is_grid_view']) ? $options['is_grid_view'] : false,
-            'rendered'                          => isset($options['rendered']) ? $options['rendered'] : false,
-            'is_carousel'                       => isset($options['is_carousel']) ? $options['is_carousel'] : false,
-            'did_fallback_render'               => isset($options['did_fallback_render']) ? $options['did_fallback_render'] : false,
+            'is_grid_view'                      => $options['is_grid_view'] ?? false,
+            'rendered'                          => $options['rendered'] ?? false,
+            'is_carousel'                       => $options['is_carousel'] ?? false,
+            'did_fallback_render'               => $options['did_fallback_render'] ?? false,
             'is_ad'                             => false,
             'target_scan'                       => 8,
             'scan_number'                       => -1,
             'load_source'                       => 'network',
             'image_size_kb'                     => $options['image_size_kb'],
-            'load_time_ms'                      => isset($options['load_time']) ? $options['load_time'] : 0,
+            'load_time_ms'                      => $options['load_time'] ?? 0,
             'estimated_bandwidth'               => $options['estimated_bandwidth'],
             'estimated_bandwidth_totalBytes_b'  => $options['estimated_bandwidth_totalBytes_b'],
             'estimated_bandwidth_totalTime_ms'  => $options['estimated_bandwidth_totalTime_ms'],
@@ -7394,8 +7394,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function networkTrace(
-        $trace)
-    {
+        $trace
+    ) {
         $extra = $this->_addCommonProperties($trace);
         $event = $this->_addEventBody('network_trace', null, $extra);
         $this->_addEventData($event);
@@ -7413,8 +7413,8 @@ class Event extends RequestCollection
     public function qeExposure(
         $id,
         $experiment,
-        $group)
-    {
+        $group
+    ) {
         $extra = [
             'id'                => $id,
             'experiment'        => $experiment,
@@ -7469,8 +7469,8 @@ class Event extends RequestCollection
      */
     public function launcherBadge(
         $deviceId,
-        $badgeCount)
-    {
+        $badgeCount
+    ) {
         $extra = [
             'device_id'         => $deviceId,
             'launcher_name'     => 'com.meizu.flyme.launcher',
@@ -7492,8 +7492,8 @@ class Event extends RequestCollection
      */
     public function updateAppState(
         $state,
-        $module = 'feed_timeline')
-    {
+        $module = 'feed_timeline'
+    ) {
         if ($state !== 'background' && $state !== 'foreground') {
             throw new \InvalidArgumentException(sprintf('%s is an invalid state.', $state));
         }
@@ -7515,8 +7515,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendDobPick(
-        $date)
-    {
+        $date
+    ) {
         $extra = [
             'to_date' => $date,
         ];
@@ -7550,8 +7550,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendInstagramDeviceIds(
-        $waterfallId)
-    {
+        $waterfallId
+    ) {
         $extra = [
             'app_device_id'         => $this->ig->uuid,
             'analytics_device_id'   => null,
@@ -7571,8 +7571,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendApkTestingExposure(
-        $installer = null)
-    {
+        $installer = null
+    ) {
         $extra = [
             'build_num' => $this->ig->getVersionCode(),
             'installer' => $installer,
@@ -7590,8 +7590,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendApkSignatureV2(
-        $module = 'IgFamilyApplicationInitializer')
-    {
+        $module = 'IgFamilyApplicationInitializer'
+    ) {
         $extra = [
             'package_name'          => Constants::PACKAGE_NAME,
             'previous_signature'    => null,
@@ -7627,8 +7627,8 @@ class Event extends RequestCollection
      */
     public function sendInstagramInstallWithReferrer(
         $waterfallId,
-        $state)
-    {
+        $state
+    ) {
         $extra = [
             'waterfall_id'  => $waterfallId,
         ];
@@ -7663,8 +7663,8 @@ class Event extends RequestCollection
     public function legacyFbTokenOnIgAccessControl(
         $event,
         $name,
-        $class)
-    {
+        $class
+    ) {
         $extra = [
             'event_type'    => $event,
             'caller_name'   => $name,
@@ -7683,8 +7683,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendPhoneIdUpdate(
-        $type)
-    {
+        $type
+    ) {
         $extra = [
             'custom_uuid'   => $this->ig->uuid,
             'new_id'        => $this->ig->phone_id,
@@ -7728,8 +7728,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendQuickPromotion(
-        $qpLocation)
-    {
+        $qpLocation
+    ) {
         $extra = [
             'qp_location'   => 'PERSONAL_PROFILE',
             'extra_data'    => [
@@ -7759,8 +7759,8 @@ class Event extends RequestCollection
         $name,
         $eventType,
         $instanceId,
-        $annotations = null)
-    {
+        $annotations = null
+    ) {
         $extra = [
             'event_type'            => $eventType,
             'category'              => 'Sync',
@@ -7784,8 +7784,8 @@ class Event extends RequestCollection
      */
     public function sendAttributionSdkDebug(
         $message,
-        $logLevel = 'info')
-    {
+        $logLevel = 'info'
+    ) {
         $extra = [
             'log_level'             => $logLevel,
             'message'               => $message,
@@ -7811,8 +7811,8 @@ class Event extends RequestCollection
         $reason,
         $token,
         $targetApp = 'FACEBOOK_DEBUG',
-        $logLocation = 'AccessLibrarySharedStorageManager')
-    {
+        $logLocation = 'AccessLibrarySharedStorageManager'
+    ) {
         $extra = [
             'fx_sso_library_event'                  => $event,
             'fx_sso_library_failure_reason'         => $reason,
@@ -7841,8 +7841,8 @@ class Event extends RequestCollection
     public function sendInstagramFeedRequestSent(
         $requestId,
         $type,
-        $completed = false)
-    {
+        $completed = false
+    ) {
         $extra = [
             'request_id'        => $requestId,
             'session_id'        => $this->ig->client->getPigeonSession(),
@@ -7885,8 +7885,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendNdxAction(
-        $flowName)
-    {
+        $flowName
+    ) {
         $extra = [
             'flow_name'     => $flowName,
             'step_latency'  => mt_rand(1000, 3000),
@@ -7922,8 +7922,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendDevicePermissions(
-        $module)
-    {
+        $module
+    ) {
         $extra = [
             'event_target'                  => 'app_status',
             'event_type'                    => 'deny',
@@ -7990,8 +7990,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIgLauncherConfigExposure(
-        $configId)
-    {
+        $configId
+    ) {
         $extra = [
             'id'            => $this->ig->account_id,
             'config_name'   => '_',
@@ -8013,8 +8013,8 @@ class Event extends RequestCollection
      * @throws \InstagramAPI\Exception\InstagramException
      */
     public function sendIgClientDeliveryFunnelStart(
-        $viewerSessionId)
-    {
+        $viewerSessionId
+    ) {
         $extra = [
             'container_module'              => 'feed_timeline',
             'viewer_session_id'             => $viewerSessionId,

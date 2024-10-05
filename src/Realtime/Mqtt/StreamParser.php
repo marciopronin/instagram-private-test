@@ -45,8 +45,8 @@ class StreamParser extends BaseStreamParser
      * @param callable $callback
      */
     public function onError(
-       $callback): void
-    {
+        $callback
+    ): void {
         $this->_errorCallback = $callback;
     }
 
@@ -58,8 +58,8 @@ class StreamParser extends BaseStreamParser
      * @return Packet[]
      */
     public function push(
-        $data): array
-    {
+        $data
+    ): array {
         $this->_buffer->write($data);
 
         $result = [];
@@ -97,8 +97,8 @@ class StreamParser extends BaseStreamParser
      * @param \Throwable $exception
      */
     private function _handleError(
-        $exception)
-    {
+        $exception
+    ) {
         if ($this->_errorCallback !== null) {
             $callback = $this->_errorCallback;
             $callback($exception);

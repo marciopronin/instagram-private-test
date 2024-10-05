@@ -42,7 +42,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectSendItemPayload extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'client_request_id' => 'string',
         'client_context'    => 'string',
         'message'           => 'string',

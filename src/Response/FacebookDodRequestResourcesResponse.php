@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class FacebookDodRequestResourcesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'resource'           => 'Model\Resource',
     ];
 }

@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class QPSurface extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'surface_id'             => 'int',
         'cooldown'               => 'int',
     ];

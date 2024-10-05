@@ -110,7 +110,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Location extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'name'                 => 'string',
         'external_id_source'   => 'string',
         'external_source'      => 'string',

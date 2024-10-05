@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class TopLiveStatusResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'broadcast_status_items' => 'Model\BroadcastStatusItem[]',
     ];
 }

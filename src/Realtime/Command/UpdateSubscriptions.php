@@ -27,8 +27,8 @@ class UpdateSubscriptions implements CommandInterface
     public function __construct(
         $topic,
         array $subscribe,
-        array $unsubscribe)
-    {
+        array $unsubscribe
+    ) {
         $this->_topic = $topic;
         $this->_subscribe = $subscribe;
         $this->_unsubscribe = $unsubscribe;
@@ -54,8 +54,8 @@ class UpdateSubscriptions implements CommandInterface
      * @return array
      */
     private function _prepareSubscriptions(
-        array $subscriptions)
-    {
+        array $subscriptions
+    ) {
         $result = [];
         foreach ($subscriptions as $subscription) {
             $result[] = (string) $subscription;

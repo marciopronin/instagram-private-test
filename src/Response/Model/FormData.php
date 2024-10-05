@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class FormData extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'first_name'                  => 'string',
         'username'                    => 'string',
         'phone_number'                => 'string',

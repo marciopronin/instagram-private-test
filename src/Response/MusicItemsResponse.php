@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class MusicItemsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'items'                     => 'Model\Item[]',
         'page_info'                 => 'Model\PageInfo',
         'alacorn_session_id'        => 'string',

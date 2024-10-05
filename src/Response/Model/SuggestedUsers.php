@@ -66,7 +66,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class SuggestedUsers extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                    => 'string',
         'view_all_text'         => '',
         'title'                 => '',

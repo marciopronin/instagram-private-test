@@ -12,14 +12,14 @@ use InstagramAPI\Realtime\Subscription\GraphQl\ZeroProvisionSubscription;
 
 class GraphQlParser implements ParserInterface
 {
-    const FIELD_TOPIC = 1;
-    const FIELD_PAYLOAD = 2;
+    public const FIELD_TOPIC = 1;
+    public const FIELD_PAYLOAD = 2;
 
-    const TOPIC_DIRECT = 'direct';
+    public const TOPIC_DIRECT = 'direct';
 
-    const MODULE_DIRECT = 'direct';
+    public const MODULE_DIRECT = 'direct';
 
-    const TOPIC_TO_MODULE_ENUM = [
+    public const TOPIC_TO_MODULE_ENUM = [
         self::TOPIC_DIRECT                => self::MODULE_DIRECT,
         AppPresenceSubscription::QUERY    => AppPresenceSubscription::ID,
         AppPresenceSubscription::QUERY2   => AppPresenceSubscription::ID,
@@ -34,8 +34,8 @@ class GraphQlParser implements ParserInterface
      */
     public function parseMessage(
         $topic,
-        $payload)
-    {
+        $payload
+    ) {
         $messageValues = [];
         $reader = new Reader($payload);
         foreach ($reader()->value() as $id => $field) {
@@ -64,8 +64,8 @@ class GraphQlParser implements ParserInterface
      */
     protected function _createMessage(
         $topic,
-        $payload)
-    {
+        $payload
+    ) {
         if ($topic === null || $payload === null) {
             throw new \RuntimeException('Incomplete GraphQL message.');
         }

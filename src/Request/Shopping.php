@@ -19,14 +19,14 @@ class Shopping extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\OnTagProductResponse
+     * @return Response\OnTagProductResponse
      */
     public function getOnTagProductInfo(
         $productId,
         $mediaId,
         $merchantId,
-        $deviceWidth = 1080)
-    {
+        $deviceWidth = 1080
+    ) {
         return $this->ig->request("commerce/products/{$productId}/details/")
             ->addParam('source_media_id', $mediaId)
             ->addParam('merchant_id', $merchantId)
@@ -42,11 +42,11 @@ class Shopping extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GraphqlResponse
+     * @return Response\GraphqlResponse
      */
     public function getCatalogs(
-        $locale = 'en_US')
-    {
+        $locale = 'en_US'
+    ) {
         return $this->ig->request('wwwgraphql/ig/query/')
             ->addParam('locale', $locale)
             ->addUnsignedPost('access_token', 'undefined')
@@ -65,13 +65,13 @@ class Shopping extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\GraphqlResponse
+     * @return Response\GraphqlResponse
      */
     public function getCatalogItems(
         $catalogId,
         $query = '',
-        $offset = null)
-    {
+        $offset = null
+    ) {
         if ($offset !== null) {
             if ($offset % 20 !== 0) {
                 throw new \InvalidArgumentException('Offset must be multiple of 20.');
@@ -107,16 +107,16 @@ class Shopping extends RequestCollection
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
-     * @return \InstagramAPI\Response\OnBoardCatalogResponse
+     * @return Response\OnBoardCatalogResponse
      */
     public function setOnBoardCatalog(
-        $catalogId)
-    {
+        $catalogId
+    ) {
         return $this->ig->request('commerce/onboard/')
             ->addPost('current_catalog_id', $catalogId)
             ->addPost('_uid', $this->ig->account_id)
             ->addPost('_uuid', $this->ig->uuid)
-            //->addPost('_csrftoken', $this->ig->client->getToken())
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\OnBoardCatalogResponse());
     }
 }

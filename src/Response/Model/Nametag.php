@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Nametag extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'mode'                 => 'int',
         'gradient'             => 'int',
         'emoji'                => 'string',

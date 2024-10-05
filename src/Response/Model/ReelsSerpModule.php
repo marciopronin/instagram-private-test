@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ReelsSerpModule extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'module_type'   => 'string',
         'clips'         => 'Clip[]',
     ];

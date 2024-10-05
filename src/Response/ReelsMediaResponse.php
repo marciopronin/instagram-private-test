@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class ReelsMediaResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'reels_media' => 'Model\Reel[]',
         'reels'       => 'Model\UnpredictableKeys\ReelUnpredictableContainer',
     ];

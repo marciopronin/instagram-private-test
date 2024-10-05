@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class LinkingAuthBlobResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'json_serialized_blob'  => 'string',
     ];
 }

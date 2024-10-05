@@ -66,7 +66,7 @@ use InstagramAPI\Response;
  */
 class FriendshipsShowResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         Model\FriendshipStatus::class, // Import property map.
     ];
 }

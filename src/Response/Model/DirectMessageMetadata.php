@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectMessageMetadata extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'thread_id'       => 'string',
         'item_id'         => 'string',
         'timestamp'       => 'string',

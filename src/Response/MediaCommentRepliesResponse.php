@@ -58,7 +58,7 @@ use InstagramAPI\Response;
  */
 class MediaCommentRepliesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'parent_comment'               => 'Model\Comment',
         /*
          * Number of child comments in this comment thread.

@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class OnTagProductResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'product_item'              => 'Model\Product',
         'merchant'                  => 'Model\User',
         'other_product_items'       => 'Model\Product[]',

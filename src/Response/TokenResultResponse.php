@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class TokenResultResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'normal_token' => 'Model\Token',
         'free_token'   => 'Model\Token',
     ];

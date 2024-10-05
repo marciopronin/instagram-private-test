@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StoriesNetego extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'tracking_token'    => 'string',
         'hide_unit_if_seen' => 'string',
         'id'                => 'string',

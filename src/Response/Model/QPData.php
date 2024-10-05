@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class QPData extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'surface'   => 'int',
         'data'      => 'QPViewerData',
     ];

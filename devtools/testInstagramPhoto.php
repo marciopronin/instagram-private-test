@@ -19,12 +19,12 @@ use InstagramAPI\Media\Photo\InstagramPhoto;
 function runTest(
     $inputFile,
     $outputFile,
-    $options)
-{
+    $options,
+) {
     printf("* Processing: '%s'. Output: '%s'.\n", $inputFile, $outputFile);
     $photo = new InstagramPhoto($inputFile, $options);
     if (!copy($photo->getFile(), $outputFile)) {
-        throw new \RuntimeException(sprintf('Failed to write to "%s".', $outputFile));
+        throw new RuntimeException(sprintf('Failed to write to "%s".', $outputFile));
     }
 }
 

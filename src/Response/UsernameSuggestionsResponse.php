@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class UsernameSuggestionsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'suggestions_with_metadata'             => 'Model\SuggestionsWithMetadata',
     ];
 }

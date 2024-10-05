@@ -5,29 +5,29 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $queryLocation = 'Paris'; // :)
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Search/explore session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -55,7 +55,7 @@ try {
     $ig->event->sendNavigation('button', 'blended_search', 'search_places');
 
     $locationItems = $ig->location->findPlaces($queryLocation)->getItems();
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
 
     $resultList = [];
     $resultTypeList = [];
@@ -84,7 +84,12 @@ try {
 
     $ig->discover->registerRecentSearchClick('place', $locationId);
 
-    $ig->event->sendNavigation('search_result', 'search_places', 'feed_location', null, null,
+    $ig->event->sendNavigation(
+        'search_result',
+        'search_places',
+        'feed_location',
+        null,
+        null,
         [
             'rank_token'        => $rankToken,
             'query_text'        => $queryLocation,
@@ -98,7 +103,7 @@ try {
     );
 
     // Generate a random rank token.
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
     // Get sections and items.
     $sectionResponse = $ig->location->getFeed($locationId, $rankToken);
     $sections = $sectionResponse->getSections();
@@ -208,17 +213,22 @@ try {
         $ig->media->like($items[$itemCounter]->getId(), 0, 'feed_contextual_location', false, ['logging_info_token' => $items[$itemCounter]->getLoggingInfoToken(), 'entity_page_name' => $queryLocation, 'entity_page_id' => $locationId]);
         // Send organic like.
         $ig->event->sendOrganicLike($items[$itemCounter], 'feed_contextual_location', null, null, $ig->session_id);
-        $ig->event->sendNavigation('back', 'feed_contextual_location', 'feed_location', null, null,
-            ['entity_page_name' => $queryLocation,
-            'entity_page_id'    => $locationId,
-            'search_session_id' => $rankToken,
-            'query_text'        => $queryLocation,
-            'selected_type'     => 'place',
-            'position'          => $position, ]
+        $ig->event->sendNavigation(
+            'back',
+            'feed_contextual_location',
+            'feed_location',
+            null,
+            null,
+            ['entity_page_name'     => $queryLocation,
+                'entity_page_id'    => $locationId,
+                'search_session_id' => $rankToken,
+                'query_text'        => $queryLocation,
+                'selected_type'     => 'place',
+                'position'          => $position, ]
         );
     }
 
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

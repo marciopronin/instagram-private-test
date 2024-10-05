@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Children extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'bk.components.Flexbox' => 'Flexbox',
         'bk.components.Text'    => 'Text',
         'bk.components.Image'   => 'Image',

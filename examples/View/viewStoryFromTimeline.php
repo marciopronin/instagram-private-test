@@ -5,18 +5,18 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
@@ -25,9 +25,9 @@ try {
     $trays = $ig->story->getReelsTrayFeed()->getTray();
     $ig->event->sendNavigation('button', 'feed_timeline', 'reel_feed_timeline');
 
-    $viewerSession = \InstagramAPI\Signatures::generateUUID();
-    $traySession = \InstagramAPI\Signatures::generateUUID();
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $viewerSession = InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
 
     foreach ($trays as $tray) {
         if ($tray->getItems() === null) {
@@ -49,7 +49,8 @@ try {
                 $photosConsumed++;
             }
 
-            $ig->event->sendOrganicMediaSubImpression($storyItem,
+            $ig->event->sendOrganicMediaSubImpression(
+                $storyItem,
                 [
                     'tray_session_id'   => $traySession,
                     'viewer_session_id' => $viewerSession,
@@ -60,7 +61,10 @@ try {
                 'reel_feed_timeline'
             );
 
-            $ig->event->sendOrganicViewedSubImpression($storyItem, $viewerSession, $traySession,
+            $ig->event->sendOrganicViewedSubImpression(
+                $storyItem,
+                $viewerSession,
+                $traySession,
                 [
                     'tray_session_id'   => $traySession,
                     'viewer_session_id' => $viewerSession,
@@ -71,30 +75,38 @@ try {
                 'reel_feed_timeline'
             );
 
-            $ig->event->sendOrganicTimespent($storyItem, true, mt_rand(1000, 2000), 'reel_feed_timeline', [],
-                 [
+            $ig->event->sendOrganicTimespent(
+                $storyItem,
+                true,
+                mt_rand(1000, 2000),
+                'reel_feed_timeline',
+                [],
+                [
                     'tray_session_id'   => $traySession,
                     'viewer_session_id' => $viewerSession,
                     'following'         => true,
                     'reel_size'         => $reelsize,
                     'reel_position'     => $cnt,
-                 ]
+                ]
             );
 
-            $ig->event->sendOrganicVpvdImpression($storyItem,
-                 [
+            $ig->event->sendOrganicVpvdImpression(
+                $storyItem,
+                [
                     'tray_session_id'       => $traySession,
                     'viewer_session_id'     => $viewerSession,
                     'following'             => true,
                     'reel_size'             => $reelsize,
                     'reel_position'         => $cnt,
                     'client_sub_impression' => 1,
-                 ],
-                 'reel_feed_timeline'
+                ],
+                'reel_feed_timeline'
             );
 
             $ig->event->sendOrganicReelImpression($storyItem, $viewerSession, $traySession, $rankToken, true, 'reel_feed_timeline');
-            $ig->event->sendOrganicMediaImpression($storyItem, 'reel_feed_timeline',
+            $ig->event->sendOrganicMediaImpression(
+                $storyItem,
+                'reel_feed_timeline',
                 [
                     'story_ranking_token'   => $rankToken,
                     'tray_session_id'       => $traySession,
@@ -111,7 +123,11 @@ try {
         $ig->story->markMediaSeen($tray->getItems());
         $items = $tray->getItems();
         $ig->event->sendReelPlaybackNavigation(end($items), $viewerSession, $traySession, $rankToken);
-        $ig->event->sendReelSessionSummary($storyItem, $viewerSession, $traySession, 'reel_feed_timeline',
+        $ig->event->sendReelSessionSummary(
+            $storyItem,
+            $viewerSession,
+            $traySession,
+            'reel_feed_timeline',
             [
                 'tray_session_id'               => $traySession,
                 'viewer_session_id'             => $viewerSession,
@@ -130,6 +146,6 @@ try {
     // forceSendBatch() should be only used if you are "closing" the app so all the events that
     // are queued will be sent. Batch event will automatically be sent when it reaches 50 events.
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class BadgeNotificationsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         // Only exists if you have notifications; contains data keyed by userId:
         // TODO: Currently defined as a Core container, which means that all of
         // the data sub-values will be arrays (no type-conversion of the values

@@ -4,37 +4,37 @@ namespace InstagramAPI\Realtime\Mqtt;
 
 class Topics
 {
-    const PP = '/pp';
-    const PP_ID = '34';
+    public const PP = '/pp';
+    public const PP_ID = '34';
 
-    const PUBSUB = '/pubsub';
-    const PUBSUB_ID = '88';
+    public const PUBSUB = '/pubsub';
+    public const PUBSUB_ID = '88';
 
-    const SEND_MESSAGE = '/ig_send_message';
-    const SEND_MESSAGE_ID = '132';
+    public const SEND_MESSAGE = '/ig_send_message';
+    public const SEND_MESSAGE_ID = '132';
 
-    const SEND_MESSAGE_RESPONSE = '/ig_send_message_response';
-    const SEND_MESSAGE_RESPONSE_ID = '133';
+    public const SEND_MESSAGE_RESPONSE = '/ig_send_message_response';
+    public const SEND_MESSAGE_RESPONSE_ID = '133';
 
-    const IRIS_SUB = '/ig_sub_iris';
-    const IRIS_SUB_ID = '134';
+    public const IRIS_SUB = '/ig_sub_iris';
+    public const IRIS_SUB_ID = '134';
 
-    const IRIS_SUB_RESPONSE = '/ig_sub_iris_response';
-    const IRIS_SUB_RESPONSE_ID = '135';
+    public const IRIS_SUB_RESPONSE = '/ig_sub_iris_response';
+    public const IRIS_SUB_RESPONSE_ID = '135';
 
-    const MESSAGE_SYNC = '/ig_message_sync';
-    const MESSAGE_SYNC_ID = '146';
+    public const MESSAGE_SYNC = '/ig_message_sync';
+    public const MESSAGE_SYNC_ID = '146';
 
-    const REALTIME_SUB = '/ig_realtime_sub';
-    const REALTIME_SUB_ID = '149';
+    public const REALTIME_SUB = '/ig_realtime_sub';
+    public const REALTIME_SUB_ID = '149';
 
-    const GRAPHQL = '/graphql';
-    const GRAPHQL_ID = '9';
+    public const GRAPHQL = '/graphql';
+    public const GRAPHQL_ID = '9';
 
-    const REGION_HINT = '/t_region_hint';
-    const REGION_HINT_ID = '150';
+    public const REGION_HINT = '/t_region_hint';
+    public const REGION_HINT_ID = '150';
 
-    const ID_TO_TOPIC_MAP = [
+    public const ID_TO_TOPIC_MAP = [
         self::PP_ID                    => self::PP,
         self::PUBSUB_ID                => self::PUBSUB,
         self::SEND_MESSAGE_ID          => self::SEND_MESSAGE,
@@ -47,7 +47,7 @@ class Topics
         self::REGION_HINT_ID           => self::REGION_HINT,
     ];
 
-    const TOPIC_TO_ID_MAP = [
+    public const TOPIC_TO_ID_MAP = [
         self::PP                    => self::PP_ID,
         self::PUBSUB                => self::PUBSUB_ID,
         self::SEND_MESSAGE          => self::SEND_MESSAGE_ID,

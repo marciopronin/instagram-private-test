@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ThreadActivity extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'timestamp'       => '',
         'sender_id'       => 'string',
         'activity_status' => '',

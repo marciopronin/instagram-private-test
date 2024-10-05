@@ -30,7 +30,7 @@ use InstagramAPI\Response;
  */
 class StickerAssetsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'version'         => '',
         'static_stickers' => 'Model\StaticStickers[]',
     ];

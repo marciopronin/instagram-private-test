@@ -107,12 +107,12 @@ class GoodDevices
      *
      * @var string
      */
-    const CPU_ABI = 'armeabi-v7a:armeabi';
+    public const CPU_ABI = 'armeabi-v7a:armeabi';
 
     /*
      * LAST-UPDATED: MARCH 2017.
      */
-    const DEVICES = [
+    public const DEVICES = [
         // SAMSUNNG GALAXY S9 (EUR AND USA MODELS).
         '28/9.0; 560dpi; 1440x2960; samsung; SM-G960F; starlte; samsungexynos9810',
         '26/8.0; 560dpi; 1440x2960; samsung; SM-G960F; starlte; samsungexynos9810',
@@ -24791,7 +24791,7 @@ class GoodDevices
         '28/9; 544dpi; 1242x2688; samsung; SM-A320F; a3y17lte; samsungexy',
     ];
 
-    const VP9_COMPATIBLE_DEVICES = [
+    public const VP9_COMPATIBLE_DEVICES = [
         '24/7.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880',
         '24/7.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895',
         '24/7.0; 420dpi; 1080x2094; samsung; SM-G955F; dream2lte; samsungexynos8895',
@@ -24838,8 +24838,8 @@ class GoodDevices
      * @return bool
      */
     public static function isGoodDevice(
-        $deviceString)
-    {
+        $deviceString
+    ) {
         return in_array($deviceString, self::DEVICES, true);
     }
 
@@ -24851,8 +24851,8 @@ class GoodDevices
      * @return bool
      */
     public static function isVP9Compatible(
-        $deviceString)
-    {
+        $deviceString
+    ) {
         return in_array($deviceString, self::VP9_COMPATIBLE_DEVICES, true);
     }
 }

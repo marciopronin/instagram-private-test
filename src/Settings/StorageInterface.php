@@ -67,7 +67,8 @@ interface StorageInterface
      * @throws \InstagramAPI\Exception\SettingsException
      */
     public function openLocation(
-        array $locationConfig);
+        array $locationConfig
+    );
 
     /**
      * Whether the storage backend contains a specific user.
@@ -84,7 +85,8 @@ interface StorageInterface
      * @return bool TRUE if user exists, otherwise FALSE.
      */
     public function hasUser(
-        $username);
+        $username
+    );
 
     /**
      * Move the internal data for a username to a new username.
@@ -104,7 +106,8 @@ interface StorageInterface
      */
     public function moveUser(
         $oldUsername,
-        $newUsername);
+        $newUsername
+    );
 
     /**
      * Delete all internal data for a given username.
@@ -120,7 +123,8 @@ interface StorageInterface
      * @throws \InstagramAPI\Exception\SettingsException
      */
     public function deleteUser(
-        $username);
+        $username
+    );
 
     /**
      * Open the data storage for a specific user.
@@ -144,7 +148,8 @@ interface StorageInterface
      * @throws \InstagramAPI\Exception\SettingsException
      */
     public function openUser(
-        $username);
+        $username
+    );
 
     /**
      * Load all settings for the currently active user.
@@ -170,7 +175,8 @@ interface StorageInterface
      */
     public function saveUserSettings(
         array $userSettings,
-        $triggerKey);
+        $triggerKey
+    );
 
     /**
      * Whether the storage backend has cookies for the currently active user.
@@ -232,7 +238,8 @@ interface StorageInterface
      * @throws \InstagramAPI\Exception\SettingsException
      */
     public function saveUserCookies(
-        $rawData);
+        $rawData
+    );
 
     /**
      * Close the settings storage for the currently active user.

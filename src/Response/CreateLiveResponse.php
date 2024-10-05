@@ -126,7 +126,7 @@ use InstagramAPI\Response;
  */
 class CreateLiveResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'broadcast_id'                                          => 'string',
         'upload_url'                                            => 'string',
         'max_time_in_seconds'                                   => 'int',

@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class AboutThisAccountResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'layout'    => 'Model\Bloks\Layout',
     ];
 }

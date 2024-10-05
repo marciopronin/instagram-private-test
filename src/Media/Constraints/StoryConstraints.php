@@ -29,7 +29,7 @@ class StoryConstraints implements ConstraintsInterface
      *
      * @see https://github.com/mgp25/Instagram-API/issues/1420#issuecomment-318146010
      */
-    const MIN_RATIO = 0.56;
+    public const MIN_RATIO = 0.56;
 
     /**
      * Highest allowed story aspect ratio.
@@ -38,7 +38,7 @@ class StoryConstraints implements ConstraintsInterface
      *
      * @var float
      */
-    const MAX_RATIO = 0.67;
+    public const MAX_RATIO = 0.67;
 
     /**
      * The recommended story aspect ratio.
@@ -59,7 +59,7 @@ class StoryConstraints implements ConstraintsInterface
      *
      * @var float
      */
-    const RECOMMENDED_RATIO = 0.5625;
+    public const RECOMMENDED_RATIO = 0.5625;
 
     /**
      * The deviation for the recommended aspect ratio.
@@ -71,21 +71,21 @@ class StoryConstraints implements ConstraintsInterface
      *
      * @var float
      */
-    const RECOMMENDED_RATIO_DEVIATION = 0.0025;
+    public const RECOMMENDED_RATIO_DEVIATION = 0.0025;
 
     /**
      * Minimum allowed video duration.
      *
      * @var float
      */
-    const MIN_DURATION = 0.5;
+    public const MIN_DURATION = 0.5;
 
     /**
      * Maximum allowed video duration.
      *
      * @var float
      */
-    const MAX_DURATION = 60.1;
+    public const MAX_DURATION = 60.1;
 
     /** {@inheritdoc} */
     public function getTitle()

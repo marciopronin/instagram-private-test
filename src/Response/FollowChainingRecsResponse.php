@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class FollowChainingRecsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'title'                     => 'string',
         'type'                      => 'string',
         'suggestions_with_media'    => 'Model\Suggestion[]',

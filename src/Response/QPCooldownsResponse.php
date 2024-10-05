@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class QPCooldownsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'ttl'       => 'int',
         'global'    => 'int',
         'default'   => 'int',

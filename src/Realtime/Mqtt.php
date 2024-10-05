@@ -29,7 +29,7 @@ class Mqtt implements PersistentInterface
 {
     use PersistentTrait;
 
-    const REALTIME_CLIENT_TYPE = 'mqtt';
+    public const REALTIME_CLIENT_TYPE = 'mqtt';
 
     /** @var EventEmitterInterface */
     protected $_target;
@@ -101,8 +101,8 @@ class Mqtt implements PersistentInterface
         Instagram $instagram,
         LoopInterface $loop,
         LoggerInterface $logger,
-        array $additionalOptions = [])
-    {
+        array $additionalOptions = []
+    ) {
         $this->_target = $target;
         $this->_connector = $connector;
         $this->_auth = $auth;
@@ -157,8 +157,8 @@ class Mqtt implements PersistentInterface
      * @param SubscriptionInterface $subscription
      */
     public function addSubscription(
-        SubscriptionInterface $subscription)
-    {
+        SubscriptionInterface $subscription
+    ) {
         $this->_doAddSubscription($subscription, true);
     }
 
@@ -168,8 +168,8 @@ class Mqtt implements PersistentInterface
      * @param SubscriptionInterface $subscription
      */
     public function removeSubscription(
-        SubscriptionInterface $subscription)
-    {
+        SubscriptionInterface $subscription
+    ) {
         $this->_doRemoveSubscription($subscription, true);
     }
 
@@ -181,8 +181,8 @@ class Mqtt implements PersistentInterface
      */
     public function setAdditionalOption(
         $option,
-        $value)
-    {
+        $value
+    ) {
         $this->_additionalOptions[$option] = $value;
     }
 
@@ -194,8 +194,8 @@ class Mqtt implements PersistentInterface
      */
     protected function _doAddSubscription(
         SubscriptionInterface $subscription,
-        $sendCommand)
-    {
+        $sendCommand
+    ) {
         $topic = $subscription->getTopic();
         $id = $subscription->getId();
 
@@ -226,8 +226,8 @@ class Mqtt implements PersistentInterface
      */
     protected function _doRemoveSubscription(
         SubscriptionInterface $subscription,
-        $sendCommand)
-    {
+        $sendCommand
+    ) {
         $topic = $subscription->getTopic();
         $id = $subscription->getId();
 
@@ -353,8 +353,8 @@ class Mqtt implements PersistentInterface
      * @throws \LogicException
      */
     public function sendCommand(
-        CommandInterface $command)
-    {
+        CommandInterface $command
+    ) {
         if (!$this->isConnected()) {
             throw new \LogicException('Tried to send the command while offline.');
         }
@@ -372,8 +372,8 @@ class Mqtt implements PersistentInterface
      * @param int $timeout
      */
     public function setTimeout(
-        $timeout)
-    {
+        $timeout
+    ) {
         $this->_timeout = $timeout;
     }
 
@@ -383,8 +383,8 @@ class Mqtt implements PersistentInterface
      * @param ExperimentsInterface $experiments
      */
     protected function _loadExperiments(
-        ExperimentsInterface $experiments)
-    {
+        ExperimentsInterface $experiments
+    ) {
         $this->_experiments = $experiments;
     }
 
@@ -423,7 +423,7 @@ class Mqtt implements PersistentInterface
 
         $client->on('error', function (\Exception $e) {
             $this->_target->emit('error', [$e]);
-            //$this->_logger->error($e->getMessage());
+            // $this->_logger->error($e->getMessage());
         });
         $client->on('warning', function (\Exception $e) {
             $this->_logger->warning($e->getMessage());
@@ -473,8 +473,8 @@ class Mqtt implements PersistentInterface
     protected function _updateSubscriptions(
         $topic,
         array $subscribe,
-        array $unsubscribe)
-    {
+        array $unsubscribe
+    ) {
         if (count($subscribe)) {
             $this->_logger->info(sprintf('Subscribing to %s topics %s', $topic, implode(', ', $subscribe)));
         }
@@ -517,8 +517,8 @@ class Mqtt implements PersistentInterface
      * @return string
      */
     protected function _mapTopic(
-        $topic)
-    {
+        $topic
+    ) {
         if (array_key_exists($topic, Mqtt\Topics::TOPIC_TO_ID_MAP)) {
             $result = Mqtt\Topics::TOPIC_TO_ID_MAP[$topic];
             $this->_logger->debug(sprintf('Topic "%s" has been mapped to "%s"', $topic, $result));
@@ -538,8 +538,8 @@ class Mqtt implements PersistentInterface
      * @return string
      */
     protected function _unmapTopic(
-        $topic)
-    {
+        $topic
+    ) {
         if (array_key_exists($topic, Mqtt\Topics::ID_TO_TOPIC_MAP)) {
             $result = Mqtt\Topics::ID_TO_TOPIC_MAP[$topic];
             $this->_logger->debug(sprintf('Topic ID "%s" has been unmapped to "%s"', $topic, $result));
@@ -559,8 +559,8 @@ class Mqtt implements PersistentInterface
     protected function _publish(
         $topic,
         $payload,
-        $qosLevel)
-    {
+        $qosLevel
+    ) {
         $this->_logger->info(sprintf('Sending message "%s" to topic "%s"', $payload, $topic));
         $payload = zlib_encode($payload, ZLIB_ENCODING_DEFLATE, 9);
         // We need to map human readable topic name to its ID because of bandwidth saving.
@@ -574,8 +574,8 @@ class Mqtt implements PersistentInterface
      * @param MqttMessage $msg
      */
     protected function _onReceive(
-        MqttMessage $msg)
-    {
+        MqttMessage $msg
+    ) {
         $payload = @zlib_decode($msg->getPayload());
         if ($payload === false) {
             $this->_logger->warning('Failed to inflate the payload');
@@ -591,8 +591,8 @@ class Mqtt implements PersistentInterface
      */
     protected function _handleMessage(
         $topic,
-        $payload)
-    {
+        $payload
+    ) {
         $this->_logger->debug(
             sprintf('Received a message from topic "%s"', $topic),
             [base64_encode($payload)]

@@ -58,7 +58,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class AndroidLinks extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'linkType'                                => 'int',
         'webUri'                                  => 'string',
         'androidClass'                            => 'string',

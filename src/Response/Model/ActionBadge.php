@@ -22,18 +22,18 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ActionBadge extends AutoPropertyMapper
 {
-    const DELIVERED = 'raven_delivered';
-    const SENT = 'raven_sent';
-    const OPENED = 'raven_opened';
-    const SCREENSHOT = 'raven_screenshot';
-    const REPLAYED = 'raven_replayed';
-    const CANNOT_DELIVER = 'raven_cannot_deliver';
-    const SENDING = 'raven_sending';
-    const BLOCKED = 'raven_blocked';
-    const UNKNOWN = 'raven_unknown';
-    const SUGGESTED = 'raven_suggested';
+    public const DELIVERED = 'raven_delivered';
+    public const SENT = 'raven_sent';
+    public const OPENED = 'raven_opened';
+    public const SCREENSHOT = 'raven_screenshot';
+    public const REPLAYED = 'raven_replayed';
+    public const CANNOT_DELIVER = 'raven_cannot_deliver';
+    public const SENDING = 'raven_sending';
+    public const BLOCKED = 'raven_blocked';
+    public const UNKNOWN = 'raven_unknown';
+    public const SUGGESTED = 'raven_suggested';
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'action_type'      => '',
         'action_count'     => '',
         'action_timestamp' => '',

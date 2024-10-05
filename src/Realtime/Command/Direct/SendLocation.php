@@ -4,7 +4,7 @@ namespace InstagramAPI\Realtime\Command\Direct;
 
 final class SendLocation extends ShareItem
 {
-    const TYPE = 'location';
+    public const TYPE = 'location';
 
     /**
      * Constructor.
@@ -18,8 +18,8 @@ final class SendLocation extends ShareItem
     public function __construct(
         $threadId,
         $locationId,
-        array $options = [])
-    {
+        array $options = []
+    ) {
         parent::__construct($threadId, self::TYPE, $options);
 
         if (!ctype_digit($locationId) && (!is_int($locationId) || $locationId < 0)) {

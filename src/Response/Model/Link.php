@@ -34,7 +34,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Link extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'start'        => 'int',
         'end'          => 'int',
         'id'           => 'string',

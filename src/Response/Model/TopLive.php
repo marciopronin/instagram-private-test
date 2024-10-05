@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class TopLive extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'broadcast_owners' => 'User[]',
         'ranked_position'  => '',
     ];

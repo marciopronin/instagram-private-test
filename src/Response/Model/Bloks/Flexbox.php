@@ -34,7 +34,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Flexbox extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'on_click'       => 'string',
         'children'       => 'Children[]',
         '_style'         => 'Style',

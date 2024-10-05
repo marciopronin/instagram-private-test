@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class DiscoverPeopleResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'more_available'      => 'bool',
         'max_id'              => 'string',
         'suggested_users'     => 'Model\SuggestedUsers',

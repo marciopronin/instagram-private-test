@@ -9,12 +9,12 @@ if (php_sapi_name() !== 'cli') {
     exit('This script may not be run on a website!');
 }
 
-//Script version constants
+// Script version constants
 define('scriptVersion', '3.0.0');
 define('scriptVersionCode', '70');
 define('scriptFlavor', 'stable');
 
-//Command Line Argument Registration
+// Command Line Argument Registration
 $helpData = [];
 registerArgument($helpData, $argv, 'help', 'Help', 'Displays this message.', 'h', 'help');
 registerArgument($helpData, $argv, 'bypassCheck', 'Bypass OS Check', "Bypasses the operating system check. Please do not use this if don't know what you're doing!", 'b', 'bypass-check');
@@ -50,7 +50,7 @@ registerArgument($helpData, $argv, 'dumpCmds', '', 'Dumps current commands into 
 registerArgument($helpData, $argv, 'disableObsMsgs', '', 'Disable OBS detection messages', '-disableObsMsgs');
 registerArgument($helpData, $argv, 'authList', '', 'Authenticate by selecting existing sessions', '-authList');
 
-//Parse special command line arguments
+// Parse special command line arguments
 $streamTotalSec = 0;
 $autoPin = null;
 $setUser = null;
@@ -78,7 +78,7 @@ foreach ($argv as $curArg) {
     }
 }
 
-//Register commands
+// Register commands
 $commandData = [];
 $commandInfo = [];
 registerCommand($commandData, $commandInfo, 'ecomments', 'Enables comments', '', function (StreamTick $tick) {
@@ -96,9 +96,9 @@ registerCommand($commandData, $commandInfo, 'end', 'Ends the livestream', '(yes/
 });
 registerCommand($commandData, $commandInfo, 'pin', 'Pins a comment', 'Comment ID', function (StreamTick $tick) {
     $commentId = $tick->values[0];
-    if (strlen($commentId) === 17 && //Comment IDs are 17 digits
-        is_numeric($commentId) && //Comment IDs only contain numbers
-        strpos($commentId, '-') === false) { //Comment IDs are not negative
+    if (strlen($commentId) === 17 // Comment IDs are 17 digits
+        && is_numeric($commentId) // Comment IDs only contain numbers
+        && strpos($commentId, '-') === false) { // Comment IDs are not negative
         $tick->ig->live->pinComment($tick->broadcastId, $commentId);
 
         return 'Pinned a comment!';
@@ -170,9 +170,9 @@ registerCommand($commandData, $commandInfo, 'questions', 'Displays all questions
 });
 registerCommand($commandData, $commandInfo, 'showquestion', 'Shows a question on the stream', 'Question ID', function (StreamTick $tick) {
     $questionId = $tick->values[0];
-    if (strlen($questionId) === 17 && //Question IDs are 17 digits
-        is_numeric($questionId) && //Question IDs only contain numbers
-        strpos($questionId, '-') === false) { //Question IDs are not negative
+    if (strlen($questionId) === 17 // Question IDs are 17 digits
+        && is_numeric($questionId) // Question IDs only contain numbers
+        && strpos($questionId, '-') === false) { // Question IDs are not negative
         $tick->lastQuestion = $questionId;
         $tick->ig->live->showQuestion($tick->broadcastId, $questionId);
 
@@ -215,11 +215,11 @@ registerCommand($commandData, $commandInfo, 'hide', 'Hides your streams and stor
     return 'Hide streams and stories from user!';
 });
 
-//Load config and utils
+// Load config and utils
 require_once __DIR__.'/utils.php';
 require_once __DIR__.'/config.php';
 
-//Dump json-encoded command line arguments
+// Dump json-encoded command line arguments
 if (dumpCli) {
     echo json_encode($helpData);
     exit(0);
@@ -235,31 +235,31 @@ if (dumpCmds) {
     exit(0);
 }
 
-//Dump script semantic version
+// Dump script semantic version
 if (dumpVersion) {
     Utils::log(scriptVersion);
     exit(0);
 }
 
-//Dump script flavor (update channel)
+// Dump script flavor (update channel)
 if (dumpFlavor) {
     Utils::log(scriptFlavor);
     exit(0);
 }
 
-//Dump system info
+// Dump system info
 if (dump) {
     Utils::dump();
     exit(0);
 }
 
-//Ensure sub-modules exist
+// Ensure sub-modules exist
 Utils::existsOrError(VENDOR_PATH, 'Instagram API Files');
 Utils::existsOrError(__DIR__.'/obs.php', 'OBS Integration');
 
 Utils::log("\e[32m[*] Loading InstagramLive-PHP v".scriptVersion.'-'.scriptFlavor.' ('.scriptVersionCode.")...\e[0m");
 
-//Show command line arguments when --help is used
+// Show command line arguments when --help is used
 if (help) {
     Utils::log('Command Line Arguments:');
     foreach ($helpData as $option) {
@@ -269,11 +269,11 @@ if (help) {
     exit(0);
 }
 
-//Load composer and obs utils
+// Load composer and obs utils
 require_once VENDOR_PATH.'/autoload.php';
 require_once __DIR__.'/obs.php';
 
-//Imports
+// Imports
 use InstagramAPI\Instagram;
 use InstagramAPI\Request\Live;
 use InstagramAPI\Response\FinalViewerListResponse;
@@ -281,8 +281,8 @@ use InstagramAPI\Response\GenericResponse;
 use InstagramAPI\Response\Model\Comment;
 use InstagramAPI\Signatures;
 
-//Run preparation flow
-preparationFlow(new ObsHelper(!obsNoStream, disableObsAutomation, forceSlobs, (!obsNoIni && OBS_MODIFY_SETTINGS)), $argv, $commandData, $streamTotalSec, $autoPin, $setUser, $charity, $title);
+// Run preparation flow
+preparationFlow(new ObsHelper(!obsNoStream, disableObsAutomation, forceSlobs, !obsNoIni && OBS_MODIFY_SETTINGS), $argv, $commandData, $streamTotalSec, $autoPin, $setUser, $charity, $title);
 
 /**
  * Runs the preparation code such as logging in and creating the stream.
@@ -298,7 +298,7 @@ preparationFlow(new ObsHelper(!obsNoStream, disableObsAutomation, forceSlobs, (!
  */
 function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $autoPin = null, $setUser = null, $charity = null, $title = null)
 {
-    //Ensure that static files are here in webMode
+    // Ensure that static files are here in webMode
     if (webMode && !file_exists('static/')) {
         Utils::log('Web Server: Static files for the web server are missing, attempting to fetch them');
         exec('"'.PHP_BINARY.'" update.php');
@@ -320,7 +320,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             $sessionFolder = STORAGE_PATH;
         } else {
             Utils::log("\e[31m[x] Storage path: Please configure STORAGE_PATH in config.php.\e[0m");
-            exit();
+            exit;
         }
         $sessions = array_diff(scandir($sessionFolder), ['..', '.', '.DS_Store']);
         $sessions = array_values($sessions);
@@ -336,7 +336,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             $password = 'passwd';
         } else {
             Utils::log("\e[31m[x] Auth list: No authed sessions.\e[0m");
-            exit();
+            exit;
         }
     }
 
@@ -359,7 +359,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
 
     $debug = debugMode ? debugMode : DEBUG_MODE;
 
-    //Run our login flow to handle two-factor and challenges
+    // Run our login flow to handle two-factor and challenges
     $ig = Utils::loginFlow($username, $password, $debug, false, $storagePath);
     if (!$ig->isMaybeLoggedIn) {
         Utils::log("\e[31m[x] Login: Unsuccessful login.\e[0m");
@@ -368,7 +368,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
     }
     Utils::log("\e[96m[✓] Login: Successfully logged in as ".$ig->username."!\e[0m");
 
-    //Parse and validate recovery if present
+    // Parse and validate recovery if present
     try {
         if (Utils::isRecovery() && ($ig->live->getInfo(Utils::getRecovery()['broadcastId'])->getBroadcastStatus() !== 'interrupted') && !acceptRecovery) {
             Utils::log("\n\n\e[93mRecovery:\e[0m Detected recovery was outdated, deleting...");
@@ -394,10 +394,10 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
     }
 
     try {
-        //Livestream creation
+        // Livestream creation
         $obsAutomation = true;
         if (!Utils::isRecovery()) {
-            //Normal livestream creation flow
+            // Normal livestream creation flow
             $info = $ig->people->getSelfInfo();
             Utils::log('[>] Livestream: Creating livestream...');
             $stream = $ig->live->create(OBS_X, OBS_Y, $title);
@@ -407,14 +407,14 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             $broadcastId = $stream->getBroadcastId();
             $streamUploadUrl = $stream->getUploadUrl();
 
-            //Split the stream key from the stream url
+            // Split the stream key from the stream url
             $split = preg_split('['.$broadcastId.']', $streamUploadUrl);
             $streamUrl = trim($split[0]);
             $streamKey = trim($broadcastId.$split[1]);
 
             Utils::log("\e[96m[✓] Livestream: Created livestream!\e[0m");
         } else {
-            //Recovery livestream flow
+            // Recovery livestream flow
             Utils::log("\e[95m[*] Recovery: Restarting previous stream...\e[0m");
             $recoveryData = Utils::getRecovery();
             $broadcastId = $recoveryData['broadcastId'];
@@ -426,7 +426,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             define('heartbeatInterval', 2);
         }
 
-        //OBS integration prompt
+        // OBS integration prompt
         if (!Utils::isRecovery()) {
             if (($helper->obs_path === null) && !disableObsMsgs) {
                 Utils::log('OBS Integration: OBS not detected, disabling! '.(!Utils::isWindows() ? 'Please note macOS is not supported!' : 'Please make a ticket on GitHub if you have OBS installed.'));
@@ -448,7 +448,7 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
         Utils::log("\n\n\e[35m================================ Stream URL ================================\e[0m\n".$streamUrl."\n\e[35m================================ Stream URL ================================\e[0m");
         Utils::log("\e[93m============================ Current Stream Key ============================\e[0m\n".$streamKey."\n\e[93m============================ Current Stream Key ============================\e[0m\n");
 
-        //OBS integration
+        // OBS integration
         if (!Utils::isRecovery()) {
             if (!$obsAutomation) {
                 if (Utils::isWindows()) {
@@ -491,13 +491,13 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             }
         }
 
-        //Stream Pause
+        // Stream Pause
         if ((!$obsAutomation || obsNoStream || $helper->slobsPresent) && !Utils::isRecovery() && !bypassPause) {
             Utils::log('[?] Please '.($helper->slobsPresent ? 'launch Streamlabs OBS and ' : '').'start streaming to the url and key above! Once you are live, please press enter!');
             Utils::promptInput('');
         }
 
-        //Start stream
+        // Start stream
         if (!Utils::isRecovery()) {
             Utils::log('[>] Livestream: Starting livestream...');
             $ig->live->start($broadcastId, null, null, $charity);
@@ -517,13 +517,13 @@ function preparationFlow($helper, $args, $commandData, $streamTotalSec = 0, $aut
             }
         }
 
-        //Auto-pin comment
+        // Auto-pin comment
         if ($autoPin !== null) {
             $ig->live->pinComment($broadcastId, $ig->live->comment($broadcastId, $autoPin)->getComment()->getPk());
             Utils::log('Livestream: Automatically pinned requested comment.');
         }
 
-        //Auto disable comments
+        // Auto disable comments
         if (startDisableComments) {
             $ig->live->disableComments($broadcastId);
             Utils::log('Livestream: Automatically disabled comments.');
@@ -606,7 +606,7 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
         proc_close($process);
     }
 
-    //Initialize variables
+    // Initialize variables
     @cli_set_process_title('InstagramLive-PHP: Live Chat & Likes');
     $broadcastStatus = 'Unknown';
     $topLiveEligible = 0;
@@ -625,16 +625,16 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
     $likeCount = 0;
     $likeBurstCount = 0;
 
-    //Remove old command requests
+    // Remove old command requests
     @unlink(__DIR__.'/request');
     @unlink(__DIR__.'/webLink.json');
 
-    //Log new streaming session if comment output is enabled
+    // Log new streaming session if comment output is enabled
     if (logCommentOutput) {
         Utils::logOutput(PHP_EOL.'--- New Session At Epoch: '.time().' ---'.PHP_EOL);
     }
 
-    //Begin livestream loop
+    // Begin livestream loop
     $streamTick = new StreamTick();
     if ($startingQuestion !== -1) {
         $streamTick->lastQuestion = $startingQuestion;
@@ -659,15 +659,15 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
             }
         }
 
-        //Process Comments
+        // Process Comments
         try {
-            $commentsResponse = $ig->live->getComments($broadcastId, $lastCommentTs); //Request comments since the last time we checked
+            $commentsResponse = $ig->live->getComments($broadcastId, $lastCommentTs); // Request comments since the last time we checked
         } catch (Exception $e) {
             Utils::log('Error while getting comments:');
             Utils::dump($e->getMessage(), $ig->client->getLastRequest());
         }
-        $systemComments = $commentsResponse->getSystemComments(); //Metric data about comments and likes
-        $comments = $commentsResponse->getComments(); //Get the actual comments from the request we made
+        $systemComments = $commentsResponse->getSystemComments(); // Metric data about comments and likes
+        $comments = $commentsResponse->getComments(); // Get the actual comments from the request we made
         if (!empty($systemComments)) {
             $lastCommentTs = $systemComments[0]->getCreatedAt();
         }
@@ -709,16 +709,16 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
             }
         }
 
-        //Process Likes
+        // Process Likes
         $likesArray = [];
         $likeCount = 0;
         $likeBurstCount = 0;
 
         try {
-            $likeCountResponse = $ig->live->getLikeCount($broadcastId, $lastLikeTs); //Get our current batch for likes
+            $likeCountResponse = $ig->live->getLikeCount($broadcastId, $lastLikeTs); // Get our current batch for likes
             $lastLikeTs = $likeCountResponse->getLikeTs();
             foreach ($likeCountResponse->getLikers() as $user) {
-                addLike((isset($userCache[$user->getUserId()]) ? ('@'.$userCache[$user->getUserId()]) : 'An Unknown User'));
+                addLike(isset($userCache[$user->getUserId()]) ? ('@'.$userCache[$user->getUserId()]) : 'An Unknown User');
                 $likesArray[] = (isset($userCache[$user->getUserId()]) ? ('@'.$userCache[$user->getUserId()]) : 'An Unknown User').' has liked the stream!';
             }
 
@@ -728,8 +728,8 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
             // pass
         }
 
-        //Send Heartbeat and Fetch Info
-        $heartbeatResponse = $ig->live->getHeartbeatAndViewerCount($broadcastId); //Maintain :clap: comments :clap: and :clap: likes :clap: after :clap: stream
+        // Send Heartbeat and Fetch Info
+        $heartbeatResponse = $ig->live->getHeartbeatAndViewerCount($broadcastId); // Maintain :clap: comments :clap: and :clap: likes :clap: after :clap: stream
         $broadcastStatus = $heartbeatResponse->getBroadcastStatus();
         $topLiveEligible = $heartbeatResponse->getIsTopLiveEligible();
         $viewerCount = $heartbeatResponse->getViewerCount();
@@ -743,7 +743,7 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
         }
         */
 
-        //Handle Livestream Takedowns
+        // Handle Livestream Takedowns
         if ($heartbeatResponse->isIsPolicyViolation() && (int) $heartbeatResponse->getIsPolicyViolation() === 1) {
             Utils::log('Policy: Instagram has sent a policy violation'.((fightCopyright && !$attemptedFight) ? '.' : ' and you stream has been stopped!').' The following policy was broken: '.($heartbeatResponse->getPolicyViolationReason() == null ? 'Unknown' : $heartbeatResponse->getPolicyViolationReason()));
             if ($attemptedFight || !fightCopyright) {
@@ -754,7 +754,7 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
             $attemptedFight = true;
         }
 
-        //Calculate Times for Limiter Argument
+        // Calculate Times for Limiter Argument
         if ($streamTotalSec > 0 && (time() - $startTime) >= $streamTotalSec) {
             endLivestreamFlow($ig, $broadcastId, '', $obsAuto, $helper, $pid, $commentCount, $likeCount, $likeBurstCount, false);
             Utils::log("Livestream: The livestream has ended due to user requested stream limit of $streamTotalSec seconds!");
@@ -783,7 +783,7 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
             exit(0);
         }
 
-        //Calculate Times for Hour-Cutoff
+        // Calculate Times for Hour-Cutoff
         if (!bypassCutoff && (time() - $startTime) >= maxTime) {
             endLivestreamFlow($ig, $broadcastId, '', $obsAuto, $helper, $pid, $commentCount, $likeCount, $likeBurstCount, false);
             Utils::log("Livestream: The livestream has ended due to Instagram's one hour time limit!");
@@ -833,7 +833,7 @@ function livestreamingFlow($ig, $broadcastId, $streamUrl, $streamKey, $obsAuto, 
             ]));
         }
 
-        //Backup stream data
+        // Backup stream data
         if (!noBackup && STREAM_RECOVERY) {
             Utils::saveRecovery($broadcastId, $streamUrl, $streamKey, $lastCommentTs, $lastLikeTs, $streamTick->lastQuestion, $startTime, $obsAuto, serialize($helper));
         }
@@ -1247,8 +1247,8 @@ class StreamTick
         $pid,
         $commentCount,
         $likeCount,
-        $burstLikeCount): self
-    {
+        $burstLikeCount,
+    ): self {
         $this->values = $values;
         $this->ig = $ig;
         $this->broadcastId = $broadcastId;

@@ -34,7 +34,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Experiment extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'name'              => 'string',
         'group'             => 'string',
         'additional_params' => '', // TODO: Only seen as [] empty array so far.

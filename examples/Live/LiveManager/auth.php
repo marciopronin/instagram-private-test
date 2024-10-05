@@ -7,10 +7,10 @@ require __DIR__.'/config.php';
 require VENDOR_PATH.'/autoload.php';
 require_once __DIR__.'/utils.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $debug = DEBUG_MODE;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
 if ($argc > 2) {
     $username = $argv[1];
@@ -26,7 +26,7 @@ if ($argc > 2) {
     if ($username === null || $password === null) {
         echo 'Usage: php auth.php <username> <password>';
         echo 'Credentials for the accounts are missing.';
-        exit();
+        exit;
     }
 }
 
@@ -38,10 +38,10 @@ if (STORAGE_PATH !== '') {
         ];
 } else {
     Utils::log("\e[31m[x] Storage path: Please configure STORAGE_PATH in config.php.\e[0m");
-    exit();
+    exit;
 }
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug, $storagePath);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug, $storagePath);
 
 try {
     $loginResponse = $ig->login($username, $password);
@@ -166,7 +166,7 @@ try {
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\UFACBlockingFormException:
                         echo 'Account on moderation';
-                        exit();
+                        exit;
                         break 2;
                     case $e instanceof InstagramAPI\Exception\Checkpoint\SelectContactPointRecoveryFormException:
                         $ig->checkpoint->selectVerificationMethodForm($e->getResponse()->getChallengeUrl(), $e->getResponse()->getVerificationChoice());
@@ -187,7 +187,7 @@ try {
                 }
             } catch (InstagramAPI\Exception\Checkpoint\ChallengeIterationsLimitException $ex) {
                 echo 'Account likely to be blocked.';
-                exit();
+                exit;
             } catch (Exception $ex) {
                 $e = $ex;
             }
@@ -209,6 +209,6 @@ try {
         }
         system(sprintf('php %s/goLive.php --set-user=%s --disableObsMsgs', __DIR__, $username));
     }
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

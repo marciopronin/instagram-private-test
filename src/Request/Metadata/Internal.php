@@ -68,8 +68,8 @@ final class Internal
      * @param string|null $uploadId
      */
     public function __construct(
-        $uploadId = null)
-    {
+        $uploadId = null
+    ) {
         if ($uploadId !== null) {
             $this->_uploadId = $uploadId;
         } else {
@@ -107,8 +107,8 @@ final class Internal
      */
     public function setVideoDetails(
         $targetFeed,
-        $videoFilename)
-    {
+        $videoFilename
+    ) {
         // Figure out the video file details.
         // NOTE: We do this first, since it validates whether the video file is
         // valid and lets us avoid wasting time uploading totally invalid files!
@@ -133,8 +133,8 @@ final class Internal
      */
     public function setPhotoDetails(
         $targetFeed,
-        $photoFilename)
-    {
+        $photoFilename
+    ) {
         // Figure out the photo file details.
         // NOTE: We do this first, since it validates whether the photo file is
         // valid and lets us avoid wasting time uploading totally invalid files!
@@ -160,8 +160,8 @@ final class Internal
      * @param string $uploadId
      */
     public function setUploadId(
-        $uploadId)
-    {
+        $uploadId
+    ) {
         $this->_uploadId = $uploadId;
     }
 
@@ -179,8 +179,8 @@ final class Internal
      * @param string $fbAttachmentId
      */
     public function setFbAttachmentId(
-        $fbAttachmentId)
-    {
+        $fbAttachmentId
+    ) {
         $this->_fbAttachmentId = $fbAttachmentId;
     }
 
@@ -192,8 +192,8 @@ final class Internal
      * @return VideoUploadUrl[]
      */
     public function setVideoUploadUrls(
-        UploadJobVideoResponse $response)
-    {
+        UploadJobVideoResponse $response
+    ) {
         $this->_videoUploadUrls = [];
         if ($response->getVideoUploadUrls() !== null) {
             $this->_videoUploadUrls = $response->getVideoUploadUrls();
@@ -222,8 +222,8 @@ final class Internal
      * @param UploadVideoResponse $videoUploadResponse
      */
     public function setVideoUploadResponse(
-        UploadVideoResponse $videoUploadResponse)
-    {
+        UploadVideoResponse $videoUploadResponse
+    ) {
         $this->_videoUploadResponse = $videoUploadResponse;
     }
 
@@ -239,8 +239,8 @@ final class Internal
      * @param UploadPhotoResponse $photoUploadResponse
      */
     public function setPhotoUploadResponse(
-        UploadPhotoResponse $photoUploadResponse)
-    {
+        UploadPhotoResponse $photoUploadResponse
+    ) {
         $this->_photoUploadResponse = $photoUploadResponse;
     }
 
@@ -254,8 +254,8 @@ final class Internal
      * @return self
      */
     public function setDirectRecipients(
-        array $recipients)
-    {
+        array $recipients
+    ) {
         if (isset($recipients['users'])) {
             $this->_directUsers = $recipients['users'];
             $this->_directThreads = '[]';
@@ -291,8 +291,8 @@ final class Internal
      * @param bool $bestieMedia
      */
     public function setBestieMedia(
-        $bestieMedia)
-    {
+        $bestieMedia
+    ) {
         $this->_bestieMedia = $bestieMedia;
     }
 
@@ -314,8 +314,8 @@ final class Internal
      * @return string
      */
     public function setStoryViewMode(
-        $viewMode)
-    {
+        $viewMode
+    ) {
         if ($viewMode !== Constants::STORY_VIEW_MODE_ONCE
             && $viewMode !== Constants::STORY_VIEW_MODE_REPLAYABLE
             && $viewMode != Constants::STORY_VIEW_MODE_PERMANENT
@@ -346,8 +346,8 @@ final class Internal
      * @param string $waterfallId
      */
     public function setWaterfallID(
-        $waterfallId)
-    {
+        $waterfallId
+    ) {
         $this->_waterfallId = $waterfallId;
     }
 
@@ -367,8 +367,8 @@ final class Internal
      * @param bool $bool
      */
     public function setIsCarousel(
-        $bool)
-    {
+        $bool
+    ) {
         $this->_isCarousel = $bool;
     }
 
@@ -388,8 +388,8 @@ final class Internal
      * @param string $broadcastId
      */
     public function setBroadcastId(
-        $broadcastId)
-    {
+        $broadcastId
+    ) {
         $this->_broadcastId = $broadcastId;
     }
 
@@ -410,8 +410,8 @@ final class Internal
      * @param mixed $values
      */
     public function setMsssimAndSsim(
-        $values)
-    {
+        $values
+    ) {
         $this->_ssim = $values['ssim'];
         $this->_msssim = $values['msssim'];
     }

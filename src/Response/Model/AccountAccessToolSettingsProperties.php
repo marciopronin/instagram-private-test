@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class AccountAccessToolSettingsProperties extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'link'                 => 'string',
         'data'                 => 'AccountAccessToolSettingsData',
         'cursor'               => 'string',

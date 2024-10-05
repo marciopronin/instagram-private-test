@@ -5,29 +5,29 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $queryUser = 'selenagomez'; // :)
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -102,7 +102,12 @@ try {
     $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
 
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
-    $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
+    $ig->event->sendNavigation(
+        'button',
+        'blended_search',
+        'profile',
+        null,
+        null,
         [
             'rank_token'            => null,
             'query_text'            => $queryUser,
@@ -126,7 +131,9 @@ try {
     $ig->event->preparePerfWithImpressions($items, 'profile');
 
     $ig->event->sendThumbnailImpression('instagram_thumbnail_click', $items[0], 'profile');
-    $ig->event->sendProfileAction('tap_grid_post', $userId,
+    $ig->event->sendProfileAction(
+        'tap_grid_post',
+        $userId,
         [
             [
                 'module'        => 'blended_search',
@@ -148,7 +155,8 @@ try {
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_search',
             ],
-    ]);
+        ]
+    );
 
     $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
     $ig->event->sendOrganicMediaImpression($items[0], 'feed_contextual_profile');
@@ -185,7 +193,9 @@ try {
     $ig->event->preparePerfWithImpressions($items, 'profile');
 
     $ig->event->sendThumbnailImpression('instagram_thumbnail_click', $items[0], 'profile');
-    $ig->event->sendProfileAction('tap_grid_post', $userList[0]->getPk(),
+    $ig->event->sendProfileAction(
+        'tap_grid_post',
+        $userList[0]->getPk(),
         [
             [
                 'module'        => 'likers',
@@ -219,7 +229,8 @@ try {
                 'module'        => 'feed_timeline',
                 'click_point'   => 'main_search',
             ],
-        ]);
+        ]
+    );
 
     $ig->event->sendNavigation('button', 'profile', 'feed_contextual_profile');
 
@@ -246,6 +257,6 @@ try {
     }
 
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

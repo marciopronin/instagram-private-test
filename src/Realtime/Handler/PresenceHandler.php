@@ -9,12 +9,12 @@ use InstagramAPI\Response\Model\UserPresence;
 
 class PresenceHandler extends AbstractHandler implements HandlerInterface
 {
-    const MODULE = AppPresenceSubscription::ID;
+    public const MODULE = AppPresenceSubscription::ID;
 
     /** {@inheritdoc} */
     public function handleMessage(
-        Message $message)
-    {
+        Message $message
+    ) {
         $data = $message->getData();
         if (!isset($data['presence_event']) || !is_array($data['presence_event'])) {
             throw new HandlerException('Invalid presence (event data is missing).');

@@ -38,7 +38,7 @@ use InstagramAPI\Response;
  */
 class GetCollectionsListResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'items'                  => 'Model\Collection[]',
         'more_available'         => 'bool',
         'auto_load_more_enabled' => 'bool',

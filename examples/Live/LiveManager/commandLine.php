@@ -74,7 +74,7 @@ function sendRequest(string $cmd, $values)
     /* @noinspection PhpComposerExtensionStubsInspection */
     file_put_contents(__DIR__.'/request', json_encode([
         'cmd'    => $cmd,
-        'values' => isset($values) ? $values : [],
+        'values' => $values ?? [],
     ]));
     Utils::log('Command Line: Waiting up to 5 seconds for a response...');
 

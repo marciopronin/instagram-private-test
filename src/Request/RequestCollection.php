@@ -20,8 +20,8 @@ class RequestCollection
      * @param Instagram $parent The parent class instance we belong to.
      */
     public function __construct(
-        $parent)
-    {
+        $parent
+    ) {
         $this->ig = $parent;
     }
 
@@ -43,8 +43,8 @@ class RequestCollection
         Request $request,
         array $excludeList = [],
         $rankToken = null,
-        $limit = 30)
-    {
+        $limit = 30
+    ) {
         if (!count($excludeList)) {
             return $request->addParam('count', (string) $limit);
         }
@@ -78,8 +78,8 @@ class RequestCollection
         Request $request,
         array $excludeList = [],
         $rankToken = null,
-        $limit = 30)
-    {
+        $limit = 30
+    ) {
         if (!count($excludeList)) {
             return $request->addParam('count', (string) $limit);
         }

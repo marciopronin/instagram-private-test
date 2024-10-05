@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class TraceControl extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'max_trace_timeout_ms'             => 'int',
         'cold_start'                       => '',
         'timed_out_upload_sample_rate'     => 'int',

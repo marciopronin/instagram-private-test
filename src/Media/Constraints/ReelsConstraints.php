@@ -16,7 +16,7 @@ class ReelsConstraints extends StoryConstraints
      *
      * @var float
      */
-    const MIN_RATIO = 0.562;
+    public const MIN_RATIO = 0.562;
 
     /**
      * Highest allowed aspect ratio.
@@ -27,7 +27,7 @@ class ReelsConstraints extends StoryConstraints
      *
      * @var float
      */
-    const MAX_RATIO = 1.91;
+    public const MAX_RATIO = 1.91;
 
     /**
      * Minimum allowed video duration.
@@ -38,7 +38,7 @@ class ReelsConstraints extends StoryConstraints
      *
      * @var float
      */
-    const MIN_DURATION = 0.5;
+    public const MIN_DURATION = 0.5;
 
     /**
      * Maximum allowed video duration.
@@ -49,7 +49,7 @@ class ReelsConstraints extends StoryConstraints
      *
      * @var float
      */
-    const MAX_DURATION = 600.0;
+    public const MAX_DURATION = 600.0;
 
     /** {@inheritdoc} */
     public function getMinAspectRatio()

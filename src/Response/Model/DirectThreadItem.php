@@ -134,27 +134,27 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectThreadItem extends AutoPropertyMapper
 {
-    const PLACEHOLDER = 'placeholder';
-    const TEXT = 'text';
-    const HASHTAG = 'hashtag';
-    const LOCATION = 'location';
-    const PROFILE = 'profile';
-    const MEDIA = 'media';
-    const MEDIA_SHARE = 'media_share';
-    const EXPIRING_MEDIA = 'raven_media';
-    const LIKE = 'like';
-    const ACTION_LOG = 'action_log';
-    const REACTION = 'reaction';
-    const REEL_SHARE = 'reel_share';
-    const STORY_SHARE = 'story_share';
-    const LINK = 'link';
-    const LIVE_VIDEO_SHARE = 'live_video_share';
-    const LIVE_VIEWER_INVITE = 'live_viewer_invite';
-    const PRODUCT_SHARE = 'product_share';
-    const VIDEO_CALL_EVENT = 'video_call_event';
-    const VOICE_MEDIA = 'voice_media';
+    public const PLACEHOLDER = 'placeholder';
+    public const TEXT = 'text';
+    public const HASHTAG = 'hashtag';
+    public const LOCATION = 'location';
+    public const PROFILE = 'profile';
+    public const MEDIA = 'media';
+    public const MEDIA_SHARE = 'media_share';
+    public const EXPIRING_MEDIA = 'raven_media';
+    public const LIKE = 'like';
+    public const ACTION_LOG = 'action_log';
+    public const REACTION = 'reaction';
+    public const REEL_SHARE = 'reel_share';
+    public const STORY_SHARE = 'story_share';
+    public const LINK = 'link';
+    public const LIVE_VIDEO_SHARE = 'live_video_share';
+    public const LIVE_VIEWER_INVITE = 'live_viewer_invite';
+    public const PRODUCT_SHARE = 'product_share';
+    public const VIDEO_CALL_EVENT = 'video_call_event';
+    public const VOICE_MEDIA = 'voice_media';
 
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'item_id'                       => 'string',
         'item_type'                     => '',
         'text'                          => 'string',

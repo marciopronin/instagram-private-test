@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DataPoints extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'label'  => 'string',
         'value'  => 'int',
     ];

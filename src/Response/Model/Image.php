@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Image extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'uri'    => 'string',
         'width'  => 'int',
         'height' => 'int',

@@ -22,8 +22,8 @@ class Message
      */
     public function __construct(
         $module,
-        $payload)
-    {
+        $payload
+    ) {
         $this->_module = $module;
         $this->_data = $payload;
     }

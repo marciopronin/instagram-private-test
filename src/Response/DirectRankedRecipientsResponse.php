@@ -42,7 +42,7 @@ use InstagramAPI\Response;
  */
 class DirectRankedRecipientsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'expires'           => '',
         'ranked_recipients' => 'Model\DirectRankedRecipient[]',
         'filtered'          => '',

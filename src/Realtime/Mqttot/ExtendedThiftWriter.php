@@ -39,8 +39,8 @@ class ExtendedThiftWriter
      */
     private function _toZigZag(
         $number,
-        $bits)
-    {
+        $bits
+    ) {
         if (PHP_INT_SIZE === 4) {
             $number = gmp_init($number, 10);
         }
@@ -56,8 +56,8 @@ class ExtendedThiftWriter
      * @param int $number
      */
     private function _writeByte(
-        $number)
-    {
+        $number
+    ) {
         $this->_buffer .= chr($number);
     }
 
@@ -65,8 +65,8 @@ class ExtendedThiftWriter
      * @param int $number
      */
     private function _writeWord(
-        $number)
-    {
+        $number
+    ) {
         $this->_writeVarInt($this->_toZigZag($number, 16));
     }
 
@@ -74,8 +74,8 @@ class ExtendedThiftWriter
      * @param int $number
      */
     private function _writeInt(
-        $number)
-    {
+        $number
+    ) {
         $this->_writeVarInt($this->_toZigZag($number, 32));
     }
 
@@ -85,8 +85,8 @@ class ExtendedThiftWriter
      */
     private function _writeField(
         $field,
-        $type)
-    {
+        $type
+    ) {
         $delta = $field - $this->_field;
         if (($delta > 0) && ($delta <= 15)) {
             $this->_writeByte(($delta << 4) | $type);
@@ -101,13 +101,13 @@ class ExtendedThiftWriter
      * @param int $number
      */
     private function _writeVarInt(
-        $number)
-    {
+        $number
+    ) {
         if (PHP_INT_SIZE === 4) {
             $number = gmp_init($number, 10);
         }
         while (true) {
-            $byte = $number & (~0x7f);
+            $byte = $number & (~0x7F);
             if (PHP_INT_SIZE === 4) {
                 $byte = (int) gmp_strval($byte, 10);
             }
@@ -118,7 +118,7 @@ class ExtendedThiftWriter
                 $this->_buffer .= chr($number);
                 break;
             } else {
-                $byte = ($number & 0x7f) | 0x80;
+                $byte = ($number & 0x7F) | 0x80;
                 if (PHP_INT_SIZE === 4) {
                     $byte = (int) gmp_strval($byte, 10);
                 }
@@ -132,8 +132,8 @@ class ExtendedThiftWriter
      * @param int $value
      */
     private function _writeLongInt(
-        $value)
-    {
+        $value
+    ) {
         $this->_writeVarInt($this->_toZigZag($value, 64));
     }
 
@@ -141,8 +141,8 @@ class ExtendedThiftWriter
      * @param string $data
      */
     private function _writeBinary(
-        $data)
-    {
+        $data
+    ) {
         $this->_buffer .= $data;
     }
 
@@ -152,8 +152,8 @@ class ExtendedThiftWriter
      */
     public function writeBool(
         $field,
-        $value)
-    {
+        $value
+    ) {
         $this->_writeField($field, $value ? Types::TRUE : Types::FALSE);
     }
 
@@ -163,8 +163,8 @@ class ExtendedThiftWriter
      */
     public function writeString(
         $field,
-        $string)
-    {
+        $string
+    ) {
         $this->_writeField($field, Types::BINARY);
         $this->_writeStringDirect($string);
     }
@@ -173,8 +173,8 @@ class ExtendedThiftWriter
      * @param string $string
      */
     protected function _writeStringDirect(
-        $string)
-    {
+        $string
+    ) {
         $this->_writeVarInt(strlen($string));
         $this->_writeBinary($string);
     }
@@ -193,8 +193,8 @@ class ExtendedThiftWriter
      */
     public function writeInt8(
         $field,
-        $number)
-    {
+        $number
+    ) {
         $this->_writeField($field, Types::BYTE);
         $this->_writeByte($number);
     }
@@ -205,8 +205,8 @@ class ExtendedThiftWriter
      */
     public function writeInt16(
         $field,
-        $number)
-    {
+        $number
+    ) {
         $this->_writeField($field, Types::I16);
         $this->_writeWord($number);
     }
@@ -217,8 +217,8 @@ class ExtendedThiftWriter
      */
     public function writeInt32(
         $field,
-        $number)
-    {
+        $number
+    ) {
         $this->_writeField($field, Types::I32);
         $this->_writeInt($number);
     }
@@ -229,23 +229,23 @@ class ExtendedThiftWriter
      */
     public function writeInt64(
         $field,
-        $number)
-    {
+        $number
+    ) {
         $this->_writeField($field, Types::I64);
         $this->_writeLongInt($number);
     }
 
     /**
-     * @param $field
+     * @param                      $field
      * @param array<array<string>> $data
      */
     public function writeStrStrMap(
         $field,
-        $data)
-    {
+        $data
+    ) {
         $this->_writeField($field, Types::MAP);
         $this->_writeVarInt(sizeof($data));
-        $this->_writeByte(((Types::BINARY & 0xf) << 4) | (Types::BINARY & 0xf));
+        $this->_writeByte(((Types::BINARY & 0xF) << 4) | (Types::BINARY & 0xF));
 
         foreach ($data as $pair) {
             $this->_writeStringDirect($pair[0]);
@@ -261,14 +261,14 @@ class ExtendedThiftWriter
     public function writeList(
         $field,
         $type,
-        array $list)
-    {
+        array $list
+    ) {
         $this->_writeField($field, Types::LIST);
         $size = count($list);
-        if ($size < 0x0f) {
+        if ($size < 0x0F) {
             $this->_writeByte(($size << 4) | $type);
         } else {
-            $this->_writeByte(0xf0 | $type);
+            $this->_writeByte(0xF0 | $type);
             $this->_writeVarInt($size);
         }
 
@@ -312,8 +312,8 @@ class ExtendedThiftWriter
      * @param int $field
      */
     public function writeStruct(
-        $field)
-    {
+        $field
+    ) {
         $this->_writeField($field, Types::STRUCT);
         $this->_stack[] = $this->_field;
         $this->_field = 0;

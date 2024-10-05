@@ -26,15 +26,15 @@ class PostgreSQL extends PDOStorage
      * {@inheritdoc}
      */
     protected function _createPDO(
-        array $locationConfig)
-    {
+        array $locationConfig
+    ) {
         $username = ($locationConfig['dbusername'] ? $locationConfig['dbusername'] : 'root');
         $password = ($locationConfig['dbpassword'] ? $locationConfig['dbpassword'] : '');
         $host = ($locationConfig['dbhost'] ? $locationConfig['dbhost'] : 'localhost');
         $dbName = ($locationConfig['dbname'] ? $locationConfig['dbname'] : 'instagram');
         $port = ($locationConfig['dbport'] ? $locationConfig['dbport'] : '5432');
 
-        return new PDO("pgsql:host={$host};port={$port};dbname={$dbName};user={$username};password={$password}");
+        return new \PDO("pgsql:host={$host};port={$port};dbname={$dbName};user={$username};password={$password}");
     }
 
     /**

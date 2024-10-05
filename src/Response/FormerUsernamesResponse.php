@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class FormerUsernamesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'former_usernames' => 'Model\FormerUsername[]',
     ];
 }

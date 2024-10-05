@@ -68,15 +68,15 @@ class checkExperiments
     public function __construct(
         $baseDir,
         array $inspectFolders,
-        $onlyShowInvalidFiles)
-    {
+        $onlyShowInvalidFiles,
+    ) {
         $this->_baseDir = realpath($baseDir);
         if ($this->_baseDir === false) {
             throw new InvalidArgumentException(sprintf('"%s" is not a valid path.', $baseDir));
         }
         $this->_inspectFolders = $inspectFolders;
         $this->_onlyShowInvalidFiles = $onlyShowInvalidFiles;
-        $this->_experimentWhitelist = \InstagramAPI\Settings\StorageHandler::EXPERIMENT_KEYS;
+        $this->_experimentWhitelist = InstagramAPI\Settings\StorageHandler::EXPERIMENT_KEYS;
     }
 
     /**
@@ -87,8 +87,8 @@ class checkExperiments
      * @return bool TRUE if the file uses an un-whitelisted experiment, otherwise FALSE.
      */
     private function _processFile(
-        $filePath)
-    {
+        $filePath,
+    ) {
         $hasProblems = false;
         $processedExperiments = [];
         $inputLines = @file($filePath);

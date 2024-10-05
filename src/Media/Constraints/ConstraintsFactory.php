@@ -17,8 +17,8 @@ class ConstraintsFactory
      * @see Constants
      */
     public static function createFor(
-        $targetFeed)
-    {
+        $targetFeed
+    ) {
         switch ($targetFeed) {
             case Constants::FEED_STORY:
                 $result = new StoryConstraints();

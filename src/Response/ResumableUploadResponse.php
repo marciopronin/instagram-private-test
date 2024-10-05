@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class ResumableUploadResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'xsharing_nonces' => '',
         'upload_id'       => 'int',
         'media_id'        => 'int',

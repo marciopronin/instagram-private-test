@@ -46,7 +46,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StoryCountdowns extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'x'                 => 'float',
         'y'                 => 'float',
         'z'                 => 'float',

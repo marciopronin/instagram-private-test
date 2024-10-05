@@ -198,7 +198,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class BusinessNode extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'typename'                           => '',
         'profile_visits_metric_count'        => 'int',
         'profile_visits_metric_delta'        => 'int',

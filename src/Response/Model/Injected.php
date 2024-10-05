@@ -94,7 +94,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Injected extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'label'                        => 'string',
         'show_icon'                    => 'bool',
         'hide_label'                   => 'string',

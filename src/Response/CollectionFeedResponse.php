@@ -54,7 +54,7 @@ use InstagramAPI\Response;
  */
 class CollectionFeedResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'collection_id'          => 'string',
         'collection_name'        => 'string',
         'items'                  => 'Model\SavedFeedItem[]',

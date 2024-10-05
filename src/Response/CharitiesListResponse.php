@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class CharitiesListResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'followed_charities'                => 'Model\User[]',
         'suggested_charities'               => 'Model\User[]',
         'searched_charities'                => 'Model\User[]',

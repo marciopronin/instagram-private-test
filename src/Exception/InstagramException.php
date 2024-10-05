@@ -16,7 +16,7 @@ class InstagramException extends \RuntimeException
      *
      * @var Response|null
      */
-    private $_response = null;
+    private $_response;
 
     /**
      * Check whether the exception has a full server response.
@@ -46,8 +46,8 @@ class InstagramException extends \RuntimeException
      * @param Response|null $response The response value.
      */
     public function setResponse(
-        Response $response = null)
-    {
+        ?Response $response = null
+    ) {
         $this->_response = $response;
     }
 }

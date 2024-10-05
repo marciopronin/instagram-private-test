@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DiscoverySuggestions extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'groups'                 => 'DiscoverySuggestedGroup[]',
         'more_available'         => 'bool',
         'ranking_algorithm'      => 'string',

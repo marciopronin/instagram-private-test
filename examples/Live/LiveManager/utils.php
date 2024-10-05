@@ -6,7 +6,7 @@
 require __DIR__.'/config.php';
 if (VENDOR_PATH === '') {
     Utils::log("\e[31m[x] Storage path: Please configure VENDOR_PATH in config.php.\e[0m");
-    exit();
+    exit;
 }
 require_once VENDOR_PATH.'/autoload.php';
 
@@ -25,8 +25,8 @@ class Utils
      */
     public static function checkForUpdate(
         string $current,
-        string $flavor): bool
-    {
+        string $flavor,
+    ): bool {
         if ($flavor == 'custom') {
             self::log("Update: You're running an in-dev build; Please note update checks will not work!");
 
@@ -48,7 +48,7 @@ class Utils
             return false;
         }
 
-        //Don't override private API
+        // Don't override private API
         foreach (@json_decode(file_get_contents('composer.json'), true)['require'] as $key => $value) {
             if (strpos($key, '-private/instagram') !== false) {
                 return true;
@@ -57,9 +57,9 @@ class Utils
 
         $pass = false;
         foreach (@json_decode(file_get_contents('composer.lock'), true)['packages'] as $package) {
-            if (@$package['name'] === 'mgp25/instagram-php' &&
-                @$package['version'] === 'dev-master' &&
-                @$package['source']['reference'] === @explode('#', @json_decode(file_get_contents('composer.json'), true)['require']['mgp25/instagram-php'])[1]) {
+            if (@$package['name'] === 'mgp25/instagram-php'
+                && @$package['version'] === 'dev-master'
+                && @$package['source']['reference'] === @explode('#', @json_decode(file_get_contents('composer.json'), true)['require']['mgp25/instagram-php'])[1]) {
                 $pass = true;
                 break;
             }
@@ -76,8 +76,8 @@ class Utils
      * @return string The sanitized stream key.
      */
     public static function sanitizeStreamKey(
-        $streamKey): string
-    {
+        $streamKey,
+    ): string {
         return str_replace('&', '^^^&', $streamKey);
     }
 
@@ -88,9 +88,9 @@ class Utils
      * @param Request $request   Request object to log.
      */
     public static function dump(
-        string $exception = null,
-        Request $request = null)
-    {
+        ?string $exception = null,
+        ?Request $request = null,
+    ) {
         clearstatcache();
         self::log('===========BEGIN DUMP===========');
         self::log('InstagramLive-PHP Version: '.(defined('scriptVersion') ? scriptVersion : 'Unknown'));
@@ -140,21 +140,21 @@ class Utils
      */
     public static function logOutput(
         $message,
-        $file = 'output.txt')
-    {
+        $file = 'output.txt',
+    ) {
         file_put_contents($file, $message.PHP_EOL, FILE_APPEND | LOCK_EX);
     }
 
     /**
      * Checks for a file existance, if it doesn't exist throw a dump and exit the script.
      *
-     * @param $path string Path to the file.
+     * @param $path   string Path to the file.
      * @param $reason string Reason the file is needed.
      */
     public static function existsOrError(
         $path,
-        $reason)
-    {
+        $reason,
+    ) {
         if (!file_exists($path)) {
             self::log('The following file, `'.$path.'` is required and not found by the script for the following reason: '.$reason);
             self::log('Please make sure you follow the setup guide correctly.');
@@ -173,8 +173,8 @@ class Utils
      */
     public static function startsWith(
         $haystack,
-        $needle)
-    {
+        $needle,
+    ) {
         return substr($haystack, 0, strlen($needle)) === $needle;
     }
 
@@ -186,8 +186,8 @@ class Utils
      * @return string The collected input.
      */
     public static function promptInput(
-        $prompt = '>'): string
-    {
+        $prompt = '>',
+    ): string {
         echo "$prompt ";
 
         return stream_get_line(STDIN, 1024, PHP_EOL);
@@ -215,8 +215,8 @@ class Utils
         $lastQuestion,
         int $startTime,
         bool $obs,
-        string $obsObject)
-    {
+        string $obsObject,
+    ) {
         file_put_contents('backup.json', json_encode([
             'broadcastId'   => $broadcastId,
             'streamUrl'     => $streamUrl,
@@ -269,8 +269,8 @@ class Utils
      * @param $pid
      */
     public static function killPid(
-        $pid)
-    {
+        $pid,
+    ) {
         exec((self::isWindows() ? 'taskkill /F /PID' : 'kill -9')." $pid");
     }
 
@@ -290,8 +290,8 @@ class Utils
         $password,
         $debug = false,
         $truncatedDebug = false,
-        $storagePath = null): ExtendedInstagram
-    {
+        $storagePath = null,
+    ): ExtendedInstagram {
         $ig = new ExtendedInstagram($debug, $truncatedDebug, $storagePath);
 
         try {
@@ -333,7 +333,7 @@ class Utils
                 }
                 while (true) {
                     try {
-                        if (++$iterations >= InstagramAPI\Request\Checkpoint::MAX_CHALLENGE_ITERATIONS) {
+                        if (++$iterations >= Request\Checkpoint::MAX_CHALLENGE_ITERATIONS) {
                             throw new InstagramAPI\Exception\Checkpoint\ChallengeIterationsLimitException();
                         }
                         switch (true) {
@@ -402,7 +402,7 @@ class Utils
                             case $e instanceof InstagramAPI\Exception\Checkpoint\RecaptchaChallengeException:
                                 // $sitekey = $e->getResponse()->getSitekey();
                                 echo "\e[91m[x]\e[0m Catpcha required. Exiting...";
-                                exit();
+                                exit;
                                 $googleResponse = trim(fgets(STDIN));
                                 $ig->checkpoint->sendCaptchaResponse($e->getResponse()->getChallengeUrl(), $googleResponse);
                                 break;
@@ -426,14 +426,14 @@ class Utils
                                 break 2;
                             case $e instanceof InstagramAPI\Exception\Checkpoint\UFACBlockingFormException:
                                 echo "\e[91m[x]\e[0m Account on moderation";
-                                exit();
+                                exit;
                                 break 2;
                             default:
                                 throw new InstagramAPI\Exception\Checkpoint\UnknownChallengeStepException();
                         }
                     } catch (InstagramAPI\Exception\Checkpoint\ChallengeIterationsLimitException $ex) {
                         echo "\e[91m[x]\e[0m Account likely to be blocked.";
-                        exit();
+                        exit;
                     } catch (Exception $ex) {
                         $e = $ex;
                     }
@@ -452,8 +452,8 @@ class Utils
      */
     public static function log(
         $message,
-        $outputFile = '')
-    {
+        $outputFile = '',
+    ) {
         echo $message."\n";
         if ($outputFile !== '') {
             self::logOutput($message, $outputFile);
@@ -465,14 +465,14 @@ class ExtendedInstagram extends Instagram
 {
     public function changeUser(
         $username,
-        $password)
-    {
+        $password,
+    ) {
         $this->_setUser('regular', $username, $password);
     }
 
     public function updateLoginState(
-        $userId)
-    {
+        $userId,
+    ) {
         $this->isMaybeLoggedIn = true;
         $this->account_id = $userId;
         $this->settings->set('account_id', $this->account_id);
@@ -487,8 +487,8 @@ class ExtendedInstagram extends Instagram
     public function challengePublic(
         $response,
         $username,
-        $password)
-    {
+        $password,
+    ) {
         Utils::log('Suspicious Login: Please select your verification option by typing "sms" or "email" respectively. Otherwise press enter to abort.');
         $choice = Utils::promptInput();
         if ($choice === 'sms') {
@@ -556,8 +556,8 @@ class ExtendedInstagram extends Instagram
         $response,
         $ig,
         $username,
-        $password)
-    {
+        $password,
+    ) {
         $iterations = 0;
         $challenge = $response->getChallenge();
         if (!is_array($challenge)) {
@@ -567,7 +567,7 @@ class ExtendedInstagram extends Instagram
         }
         while (true) {
             try {
-                if (++$iterations >= InstagramAPI\Request\Checkpoint::MAX_CHALLENGE_ITERATIONS) {
+                if (++$iterations >= Request\Checkpoint::MAX_CHALLENGE_ITERATIONS) {
                     throw new InstagramAPI\Exception\Checkpoint\ChallengeIterationsLimitException();
                 }
                 switch (true) {
@@ -640,10 +640,10 @@ class ExtendedInstagram extends Instagram
                         break;
                     } else {
                         echo 'Iteration limit reached! Exiting...';
-                        exit();
+                        exit;
                     }
                 } else {
-                    throw new \InstagramAPI\Exception\InstagramException('Account likely to be blocked.');
+                    throw new InstagramAPI\Exception\InstagramException('Account likely to be blocked.');
                 }
             }
         }

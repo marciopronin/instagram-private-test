@@ -50,7 +50,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Thumbnail extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'video_length'              => 'float',
         'thumbnail_width'           => 'int',
         'thumbnail_height'          => 'int',

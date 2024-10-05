@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class BoxDecoration extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'corner_radius' => 'string',
         'clipping'      => 'bool',
     ];

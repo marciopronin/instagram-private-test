@@ -8,12 +8,12 @@ use Winbox\Args;
 
 class FFmpeg
 {
-    const BINARIES = [
+    public const BINARIES = [
         'ffmpeg',
         'avconv',
     ];
 
-    const WINDOWS_BINARIES = [
+    public const WINDOWS_BINARIES = [
         'ffmpeg.exe',
         'avconv.exe',
     ];
@@ -44,8 +44,8 @@ class FFmpeg
      * @throws \RuntimeException When a ffmpeg binary is missing.
      */
     protected function __construct(
-        $ffmpegBinary)
-    {
+        $ffmpegBinary
+    ) {
         $this->_ffmpegBinary = $ffmpegBinary;
 
         try {
@@ -63,8 +63,8 @@ class FFmpeg
      * @return static
      */
     public static function factory(
-        $ffmpegBinary = null)
-    {
+        $ffmpegBinary = null
+    ) {
         if ($ffmpegBinary === null) {
             return static::_autoDetectBinary();
         }
@@ -89,8 +89,8 @@ class FFmpeg
      * @return string[]
      */
     public function run(
-        $command)
-    {
+        $command
+    ) {
         $process = $this->runAsync($command);
 
         try {
@@ -116,8 +116,8 @@ class FFmpeg
      * @return Process
      */
     public function runAsync(
-        $command)
-    {
+        $command
+    ) {
         $fullCommand = sprintf('%s -v error %s', Args::escape($this->_ffmpegBinary), $command);
 
         $process = Process::fromShellCommandline($fullCommand);
@@ -192,8 +192,8 @@ class FFmpeg
      * @return bool
      */
     protected function _hasAudioEncoder(
-        $encoder)
-    {
+        $encoder
+    ) {
         try {
             $this->run(sprintf(
                 '-f lavfi -i anullsrc=channel_layout=stereo:sample_rate=44100 -c:a %s -t 1 -f null -',

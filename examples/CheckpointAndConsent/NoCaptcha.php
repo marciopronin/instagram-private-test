@@ -107,7 +107,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $taskInfo
      */
     public function setTaskInfo(
-        $taskInfo
+        $taskInfo,
     ): void {
         $this->taskInfo = $taskInfo;
     }
@@ -130,7 +130,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setWebsiteURL(
-        $value
+        $value,
     ): void {
         $this->_websiteUrl = $value;
     }
@@ -143,7 +143,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setWebsiteKey(
-        $value
+        $value,
     ): void {
         $this->_websiteKey = $value;
     }
@@ -156,7 +156,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setWebsiteSToken(
-        $value
+        $value,
     ): void {
         $this->_websiteSToken = $value;
     }
@@ -169,7 +169,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setProxyType(
-        $value
+        $value,
     ): void {
         $this->_proxyType = $value;
     }
@@ -182,7 +182,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setProxyAddress(
-        $value
+        $value,
     ): void {
         $this->_proxyAddress = $value;
     }
@@ -195,7 +195,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setProxyPort(
-        $value
+        $value,
     ): void {
         $this->_proxyPort = $value;
     }
@@ -208,7 +208,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setProxyLogin(
-        $value
+        $value,
     ): void {
         $this->_proxyLogin = $value;
     }
@@ -221,7 +221,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setProxyPassword(
-        $value
+        $value,
     ): void {
         $this->_proxyPassword = $value;
     }
@@ -234,7 +234,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setUserAgent(
-        $value
+        $value,
     ): void {
         $this->_userAgent = $value;
     }
@@ -247,7 +247,7 @@ class NoCaptcha extends Anticaptcha implements AntiCaptchaTaskProtocol
      * @param mixed $value
      */
     public function setCookies(
-        $value
+        $value,
     ): void {
         $this->_cookies = $value;
     }

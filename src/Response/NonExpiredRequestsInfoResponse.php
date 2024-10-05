@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class NonExpiredRequestsInfoResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'has_non_expired_request' => 'bool',
     ];
 }

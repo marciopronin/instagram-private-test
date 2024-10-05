@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class ShouldRequireProfessionalAccountResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'require_professional_account' => 'bool',
     ];
 }

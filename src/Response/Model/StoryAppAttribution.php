@@ -34,7 +34,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StoryAppAttribution extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'app_action_text'       => 'string',
         'app_icon_url'          => 'string',
         'content_url'           => 'string',

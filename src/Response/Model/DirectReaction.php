@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class DirectReaction extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'reaction_type'   => 'string',
         'timestamp'       => 'string',
         'sender_id'       => 'string',

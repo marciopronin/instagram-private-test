@@ -26,7 +26,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StoryQuizParticipantInfo extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'quiz_id'                         => 'string',
         'participants'                    => 'Participants[]',
         'max_id'                          => '',

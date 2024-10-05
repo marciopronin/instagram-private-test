@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class ThemedColor extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'light_color' => 'string',
         'dark_color'  => 'string',
     ];

@@ -5,30 +5,30 @@ date_default_timezone_set('UTC');
 
 require __DIR__.'/../../vendor/autoload.php';
 
-/////// CONFIG ///////
+// ///// CONFIG ///////
 $username = '';
 $password = '';
 $debug = true;
 $truncatedDebug = false;
-//////////////////////
+// ////////////////////
 
-//////////////////////
+// ////////////////////
 $queryUser = 'selenagomez'; // :)
 $recipientUserId = '';
-//////////////////////
+// ////////////////////
 
-$ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+$ig = new InstagramAPI\Instagram($debug, $truncatedDebug);
 
 try {
     $ig->login($username, $password);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
     exit(0);
 }
 
 try {
     // Explore and search session, will be used for the Graph API events.
-    $searchSession = \InstagramAPI\Signatures::generateUUID();
+    $searchSession = InstagramAPI\Signatures::generateUUID();
 
     $topicData =
     [
@@ -105,7 +105,12 @@ try {
     $ig->event->sendSearchResultsPage($queryUser, $userId, $resultList, $resultTypeList, $rankToken, $searchSession, $position, 'USER', 'blended_search');
 
     // When we clicked the user, we are navigating from 'blended_search' to 'profile'.
-    $ig->event->sendNavigation('button', 'blended_search', 'profile', null, null,
+    $ig->event->sendNavigation(
+        'button',
+        'blended_search',
+        'profile',
+        null,
+        null,
         [
             'rank_token'            => null,
             'query_text'            => $queryUser,
@@ -127,15 +132,15 @@ try {
     $storyFeed = $ig->story->getUserStoryFeed($userId);
     if ($storyFeed->getReel() === null) {
         echo 'User has no active stories';
-        exit();
+        exit;
     }
     $storyItems = $storyFeed->getReel()->getItems();
     $following = $storyFeed->getReel()->getUser()->getFriendshipStatus()->getFollowing();
     $ig->event->sendNavigation('button', 'profile', 'reel_profile');
 
-    $viewerSession = \InstagramAPI\Signatures::generateUUID();
-    $traySession = \InstagramAPI\Signatures::generateUUID();
-    $rankToken = \InstagramAPI\Signatures::generateUUID();
+    $viewerSession = InstagramAPI\Signatures::generateUUID();
+    $traySession = InstagramAPI\Signatures::generateUUID();
+    $rankToken = InstagramAPI\Signatures::generateUUID();
 
     $ig->event->sendOrganicReelImpression($storyItems[0], $viewerSession, $traySession, $rankToken, $following, 'reel_profile');
     $ig->event->sendOrganicMediaImpression($storyItems[0], 'reel_profile', ['story_ranking_token' => $rankToken, 'tray_session_id' => $traySession, 'viewer_session_id' => $viewerSession]);
@@ -153,7 +158,7 @@ try {
         $mediaType = 'video';
     }
 
-    $clientContext = \InstagramAPI\Utils::generateClientContext();
+    $clientContext = InstagramAPI\Utils::generateClientContext();
 
     $ig->direct->sendStory($recipients, $storyItems[0]->getId(), null, ['client_context' => $clientContext]);
 
@@ -164,6 +169,6 @@ try {
     $ig->event->sendNavigation('back', 'reel_profile', 'profile');
 
     $ig->event->forceSendBatch();
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo 'Something went wrong: '.$e->getMessage()."\n";
 }

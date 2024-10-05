@@ -74,7 +74,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class Track extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'audio_cluster_id'              => 'string',
         'id'                            => 'string',
         'title'                         => 'string',

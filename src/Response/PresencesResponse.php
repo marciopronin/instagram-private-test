@@ -26,7 +26,7 @@ use InstagramAPI\Response;
  */
 class PresencesResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'user_presence' => 'Model\UnpredictableKeys\PresenceUnpredictableContainer',
     ];
 }

@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class BlockedReels extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'users'     => 'User[]',
         'page_size' => 'int',
         'big_list'  => 'bool',

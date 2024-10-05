@@ -224,7 +224,7 @@ class Redis implements StorageInterface
      */
     public function loadUserCookies()
     {
-        return isset($this->_cache['cookies']) ? $this->_cache['cookies'] : null;
+        return $this->_cache['cookies'] ?? null;
     }
 
     /**
@@ -273,7 +273,7 @@ class Redis implements StorageInterface
     /**
      * Check the connection by pinging it.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     private function _checkConnection()
     {

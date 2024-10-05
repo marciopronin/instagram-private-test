@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class StoryCta extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'links'           => 'AndroidLinks[]',
         'felix_deep_link' => 'string',
     ];

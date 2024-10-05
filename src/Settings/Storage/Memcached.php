@@ -13,7 +13,7 @@ use Memcached as PHPMemcached;
  */
 class Memcached implements StorageInterface
 {
-    /** @var \Memcached Our connection to the database. */
+    /** @var PHPMemcached Our connection to the database. */
     private $_memcached;
 
     /** @var bool Whether we own Memcached's connection or are borrowing it. */
@@ -28,8 +28,8 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function openLocation(
-        array $locationConfig)
-    {
+        array $locationConfig
+    ) {
         if (isset($locationConfig['memcached'])) {
             // Pre-provided connection to re-use instead of creating a new one.
             if (!$locationConfig['memcached'] instanceof PHPMemcached) {
@@ -88,15 +88,15 @@ class Memcached implements StorageInterface
      * @param string $username The Instagram username.
      * @param string $key      Name of the subkey.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      *
      * @return string|null The value as a string IF the user's key exists,
      *                     otherwise NULL.
      */
     private function _getUserKey(
         $username,
-        $key)
-    {
+        $key
+    ) {
         try {
             $realKey = $username.'_'.$key;
             $result = $this->_memcached->get($realKey);
@@ -116,13 +116,13 @@ class Memcached implements StorageInterface
      * @param string       $key      Name of the subkey.
      * @param string|mixed $value    The data to store. MUST be castable to string.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     private function _setUserKey(
         $username,
         $key,
-        $value)
-    {
+        $value
+    ) {
         try {
             $realKey = $username.'_'.$key;
             $success = $this->_memcached->set($realKey, (string) $value);
@@ -145,12 +145,12 @@ class Memcached implements StorageInterface
      * @param string $username The Instagram username.
      * @param string $key      Name of the subkey.
      *
-     * @throws \InstagramAPI\Exception\SettingsException
+     * @throws SettingsException
      */
     private function _delUserKey(
         $username,
-        $key)
-    {
+        $key
+    ) {
         try {
             $realKey = $username.'_'.$key;
             $this->_memcached->delete($realKey);
@@ -165,8 +165,8 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function hasUser(
-        $username)
-    {
+        $username
+    ) {
         // Check whether the user's settings exist (empty string allowed).
         $hasUser = $this->_getUserKey($username, 'settings');
 
@@ -180,8 +180,8 @@ class Memcached implements StorageInterface
      */
     public function moveUser(
         $oldUsername,
-        $newUsername)
-    {
+        $newUsername
+    ) {
         // Verify that the old username exists and fetch the old data.
         $oldSettings = $this->_getUserKey($oldUsername, 'settings');
         $oldCookies = $this->_getUserKey($oldUsername, 'cookies');
@@ -216,8 +216,8 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function deleteUser(
-        $username)
-    {
+        $username
+    ) {
         $this->_delUserKey($username, 'settings');
         $this->_delUserKey($username, 'cookies');
     }
@@ -228,8 +228,8 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function openUser(
-        $username)
-    {
+        $username
+    ) {
         // Just cache the username. We'll create storage later if necessary.
         $this->_username = $username;
     }
@@ -264,8 +264,8 @@ class Memcached implements StorageInterface
      */
     public function saveUserSettings(
         array $userSettings,
-        $triggerKey)
-    {
+        $triggerKey
+    ) {
         // Store the settings as a JSON blob.
         $encodedData = json_encode($userSettings);
         $this->_setUserKey($this->_username, 'settings', $encodedData);
@@ -309,8 +309,8 @@ class Memcached implements StorageInterface
      * {@inheritdoc}
      */
     public function saveUserCookies(
-        $rawData)
-    {
+        $rawData
+    ) {
         // Store the raw cookie data as-provided.
         $this->_setUserKey($this->_username, 'cookies', $rawData);
     }

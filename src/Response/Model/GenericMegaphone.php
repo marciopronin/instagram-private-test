@@ -66,7 +66,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class GenericMegaphone extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'type'              => '',
         'title'             => '',
         'message'           => '',

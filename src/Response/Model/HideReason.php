@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class HideReason extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         /*
          * A human string such as "It's not relevant" and "I see it too often".
          */

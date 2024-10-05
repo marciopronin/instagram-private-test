@@ -50,7 +50,7 @@ use InstagramAPI\Response;
  */
 class CloseFriendsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         Model\CloseFriends::class, // Import property map.
         'next_max_id'       => 'string',
         'members'           => 'Model\User[]',

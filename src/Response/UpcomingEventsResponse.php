@@ -46,7 +46,7 @@ use InstagramAPI\Response;
  */
 class UpcomingEventsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'id'                        => 'string',
         'title'                     => 'string',
         'start_time'                => 'string',

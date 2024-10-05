@@ -22,7 +22,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class GraphNode extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         '__typename'    => 'string',
         'name'          => 'string',
         'catalog_items' => 'CatalogData',

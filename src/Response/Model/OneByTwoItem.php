@@ -18,7 +18,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class OneByTwoItem extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'stories' => 'Story',
         'clips'   => 'Clip',
     ];

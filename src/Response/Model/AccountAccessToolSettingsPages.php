@@ -30,7 +30,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class AccountAccessToolSettingsPages extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'date_joined'                 => 'AccountAccessToolSettingsProperties',
         'switched_to_business'        => 'AccountAccessToolSettingsProperties',
         'is_blocked'                  => 'bool',

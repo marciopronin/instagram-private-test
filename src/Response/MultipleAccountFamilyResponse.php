@@ -34,7 +34,7 @@ use InstagramAPI\Response;
  */
 class MultipleAccountFamilyResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'child_accounts'    => 'string[]',
         'main_accounts'     => 'string[]',
         'current_account'   => 'Model\User',

@@ -38,7 +38,7 @@ use InstagramAPI\AutoPropertyMapper;
  */
 class FeedItem extends AutoPropertyMapper
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'media_or_ad'            => 'Item',
         'stories_netego'         => 'StoriesNetego',
         'ad4ad'                  => 'Ad4ad',

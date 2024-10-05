@@ -74,7 +74,7 @@ use InstagramAPI\Response;
  */
 class BroadcastCommentsResponse extends Response
 {
-    const JSON_PROPERTY_MAP = [
+    public const JSON_PROPERTY_MAP = [
         'comments'                   => 'Model\Comment[]',
         'comment_count'              => 'int',
         'live_seconds_per_comment'   => 'int',

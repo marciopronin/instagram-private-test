@@ -1,3 +1,12 @@
+# Stable release v22.26.1
+## Date: 09/10/2024
+
+### Updates and fixes
+
+- **Client:** Update `_guzzleRequest()`
+- **Constants:** Update to 352.0.0.38.100
+- **Internal:** Update to `getMobileConfig()`
+
 # Stable release v22.26.0
 ## Date: 04/10/2024
 

@@ -1868,10 +1868,8 @@ class People extends RequestCollection
             $views = [
                 'reshare_share_sheet'                   => 'direct_target',
                 'direct_user_search_keypressed'         => 'direct_target',
-                'story_share_sheet'                     => 'direct_target',
                 'direct_user_search_nullstate'          => 'direct_target',
                 'direct_inbox_active_now'               => 'direct_target',
-                'forwarding_recipient_sheet'            => 'direct_target',
                 'call_recipients'                       => 'direct_target',
                 'direct_ibc_inbox_discovery'            => 'direct_target',
                 'direct_ibc_inbox_invitations'          => 'direct_target',
@@ -1880,8 +1878,10 @@ class People extends RequestCollection
             $views = [
                 'reshare_share_sheet'                   => 'direct_target',
                 'direct_user_search_keypressed'         => 'direct_target',
+                'story_share_sheet'                     => 'direct_target',
                 'direct_user_search_nullstate'          => 'direct_target',
                 'direct_inbox_active_now'               => 'direct_target',
+                'forwarding_recipient_sheet'            => 'direct_target',
                 'call_recipients'                       => 'direct_target',
                 'direct_ibc_inbox_discovery'            => 'direct_target',
                 'direct_ibc_inbox_invitations'          => 'direct_target',

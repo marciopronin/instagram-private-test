@@ -1,3 +1,10 @@
+# Stable release v22.26.3
+## Date: 12/10/2024
+
+### Updates and fixes
+
+- **People:** Update `getSharePrefill()`
+
 # Stable release v22.26.2
 ## Date: 12/10/2024
 

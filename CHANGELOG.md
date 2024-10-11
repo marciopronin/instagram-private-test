@@ -1,3 +1,11 @@
+# Stable release v22.26.2
+## Date: 12/10/2024
+
+### Updates and fixes
+
+- **People:** Update `getSharePrefill()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+
 # Stable release v22.26.1
 ## Date: 09/10/2024
 

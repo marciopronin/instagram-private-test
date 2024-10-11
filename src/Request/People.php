@@ -1864,23 +1864,46 @@ class People extends RequestCollection
     public function getSharePrefill(
         $nullState = false
     ) {
-        $views = [
-            'story_share_sheet',
-            'direct_user_search_nullstate',
-            'forwarding_recipient_sheet',
-            'direct_inbox_active_now',
-            'call_recipients',
-            'reshare_share_sheet',
-            'direct_user_search_keypressed',
-        ];
+        if ($this->ig->isExperimentEnabled('68215', 4, false)) {
+            $views = [
+                'reshare_share_sheet'                   => 'direct_target',
+                'direct_user_search_keypressed'         => 'direct_target',
+                'story_share_sheet'                     => 'direct_target',
+                'direct_user_search_nullstate'          => 'direct_target',
+                'direct_inbox_active_now'               => 'direct_target',
+                'forwarding_recipient_sheet'            => 'direct_target',
+                'call_recipients'                       => 'direct_target',
+                'direct_ibc_inbox_discovery'            => 'direct_target',
+                'direct_ibc_inbox_invitations'          => 'direct_target',
+            ];
+        } else {
+            $views = [
+                'reshare_share_sheet'                   => 'direct_target',
+                'direct_user_search_keypressed'         => 'direct_target',
+                'direct_user_search_nullstate'          => 'direct_target',
+                'direct_inbox_active_now'               => 'direct_target',
+                'call_recipients'                       => 'direct_target',
+                'direct_ibc_inbox_discovery'            => 'direct_target',
+                'direct_ibc_inbox_invitations'          => 'direct_target',
+            ];
+        }
 
-        if ($this->ig->isExperimentEnabled('56721', 0, false) !== true) {
-            unset($views[7]);
+        if (!$this->ig->isExperimentEnabled('55958', 28, false)) {
+            unset($views['direct_ibc_inbox_discovery']);
+        }
+
+        if (!$this->ig->isExperimentEnabled('55958', 25, false)) {
+            unset($views['direct_ibc_inbox_invitations']);
+        }
+
+        if ($this->ig->isExperimentEnabled('69705', 0, false)) {
+            unset($views['forwarding_recipient_sheet']);
+            unset($views['story_share_sheet']);
         }
 
         $request = $this->ig->request('banyan/banyan/')
             ->addParam('is_private_share', false)
-            ->addParam('views', ($nullState === false) ? '["direct_ibc_nullstate"]' : json_encode(array_values($views)));
+            ->addParam('views', ($nullState === false) ? '["direct_ibc_nullstate"]' : json_encode(array_keys($views)));
 
         if ($this->ig->isExperimentEnabled('54280', 0, false)) {
             $request->addParam('IBCShareSheetParams', json_encode(['size' => max($this->ig->getExperimentParam('54280', 2, 5), (int) $this->ig->getExperimentParam('54280', 5, 3))]));

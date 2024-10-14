@@ -31,14 +31,17 @@ class Highlight extends RequestCollection
             ->addHeader('X-CM-Bandwidth-KBPS', '-1.000')
             ->addHeader('X-CM-Latency', '-1.000')
             ->addHeader('X-Ads-Opt-Out', '0')
+            ->addHeader('X-Google-AD-ID', $this->ig->advertising_id)
             ->addHeader('X-DEVICE-ID', $this->ig->uuid)
             ->addParam('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities())
             ->addParam('phone_id', $this->ig->phone_id)
             ->addParam('battery_level', $this->ig->getBatteryLevel())
+            ->addParam('check_highlights_subtab_gating', false)
             ->addParam('is_charging', $this->ig->getIsDeviceCharging())
             ->addParam('is_dark_mode', (int) $this->ig->getIsDarkModeEnabled())
+            ->addParam('fetch_high_res_cover_image', false)
             ->addParam('will_sound_on', (int) $this->ig->getSoundEnabled())
-            ->addParam('should_include_my_week_preview', 'false');
+            ->addParam('should_include_my_week_preview', $this->ig->isExperimentEnabled('66089', 13, false));
 
         if ($userId !== $this->ig->account_id) {
             $request->addParam('max_highlights_to_fetch_on_pagination', 10);

@@ -6188,6 +6188,7 @@ class Instagram implements ExperimentsInterface
         if (empty($offsets)) {
             $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\account_recovery_lookup_client_rate_limited\\'), 0, -2);
         }
+
         $result = [];
         $check = '\checkpoint\\';
         array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {

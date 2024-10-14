@@ -116,9 +116,10 @@ class Story extends RequestCollection
      * still have stories. So it's always safer to call getUserStoryFeed() if
      * a specific user's story feed matters to you.
      *
-     * @param string     $reason        (optional) Reason for the request.
+     * @param string     $reason          (optional) Reason for the request.
      * @param mixed|null $requestId
      * @param mixed|null $traySessionId
+     * @param mixed|null $trayImpressions
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -129,7 +130,8 @@ class Story extends RequestCollection
     public function getReelsTrayFeed(
         $reason = 'pull_to_refresh',
         $requestId = null,
-        $traySessionId = null
+        $traySessionId = null,
+        $trayImpressions = null
     ) {
         $request = $this->ig->request('feed/reels_tray/')
             ->setSignedPost(false)
@@ -137,8 +139,11 @@ class Story extends RequestCollection
             ->addPost('reason', $reason)
             ->addPost('timezone_offset', ($this->ig->getTimezoneOffset() !== null) ? $this->ig->getTimezoneOffset() : date('Z'))
             // ->addPost('_csrftoken', $this->ig->client->getToken())
-            ->addPost('reel_tray_impressions', json_encode([], JSON_FORCE_OBJECT))
             ->addPost('_uuid', $this->ig->uuid);
+
+        if ($trayImpressions !== null) {
+            $request->addPost('reel_tray_impressions', json_encode($trayImpressions, JSON_FORCE_OBJECT));
+        }
 
         if ($reason === 'pull_to_refresh') {
             $request->addPost('supported_capabilities_new', $this->ig->internal->getSupportedCapabilities());
@@ -359,6 +364,7 @@ class Story extends RequestCollection
             ->addPost('num_items_in_pool', '0')
             ->addPost('has_camera_permission', $this->ig->getCameraEnabled())
             ->addPost('is_prefetch', 'true')
+            ->addPost('is_refresh', 'false')
             ->addPost('is_ads_sensitive', 'false')
             ->addPost('is_carry_over_first_page', 'false')
             ->addPost('client_doc_id', '33469793817914901585514067303')
@@ -376,11 +382,14 @@ class Story extends RequestCollection
             ->addPost('tray_session_id', $traySessionId)
             ->addPost('viewer_session_id', $traySessionId)
             ->addPost('reel_position', '0')
-            ->addPost('is_charging', $this->ig->getIsDeviceCharging())
+            ->addPost('is_charging', (int) $this->ig->getIsDeviceCharging())
             ->addPost('will_sound_on', (int) $this->ig->getSoundEnabled())
             ->addPost('is_dark_mode', '0')
             ->addPost('tray_user_ids', $storyUserIds)
             ->addPost('is_media_based_insertion_enabled', 'true')
+            // ->addPost('odml', [
+            //    'story_prefetch_score'  => 0.5974234342575073
+            // ])
             ->addPost('entry_point_index', ($entryIndex !== 0) ? strval($entryIndex) : '0')
             ->addPost('earliest_request_position', '0')
             ->addPost('is_first_page', ($entryIndex !== 0) ? 'false' : 'true');
@@ -900,7 +909,8 @@ class Story extends RequestCollection
      * came from any OTHER request-collections, such as Location-based stories!
      * Other request-collections have THEIR OWN special story-marking functions!
      *
-     * @param Response\Model\Item[] $items Array of one or more story media Items.
+     * @param Response\Model\Item[] $items  Array of one or more story media Items.
+     * @param mixed                 $module
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -911,10 +921,11 @@ class Story extends RequestCollection
      * @see Hashtag::markStoryMediaSeen()
      */
     public function markMediaSeen(
-        array $items
+        array $items,
+        $module = 'profile'
     ) {
         // NOTE: NULL = Use each item's owner ID as the "source ID".
-        return $this->ig->internal->markStoryMediaSeen($items, null);
+        return $this->ig->internal->markStoryMediaSeen($items, null, $module);
     }
 
     /**

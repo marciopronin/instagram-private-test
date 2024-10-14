@@ -1,3 +1,15 @@
+# Stable release v22.26.4
+## Date: 14/10/2024
+
+### Updates and fixes
+
+- **Timeline:** Update `getUserFeed()`
+- **Timeline:** Update `getUserFeedStream()`
+- **People:** Update `discoverPeople()`
+- **Highlight:** Update `getUserFeed()`
+- **Utils:** Update `checkArrayKeyDifferences()`
+- **Story:** Update `getReelsTrayFeed()`
+
 # Stable release v22.26.3
 ## Date: 12/10/2024
 

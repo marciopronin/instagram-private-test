@@ -384,8 +384,10 @@ class Timeline extends RequestCollection
     /**
      * Get a user's timeline feed stream.
      *
-     * @param string      $userId Numerical UserPK ID.
-     * @param string|null $maxId  Next "maximum ID", used for pagination.
+     * @param string      $userId                Numerical UserPK ID.
+     * @param string|null $maxId                 Next "maximum ID", used for pagination.
+     * @param mixed       $pullToRefresh
+     * @param mixed       $shouldDelayMediaFetch
      *
      * @throws InstagramException
      *
@@ -393,12 +395,35 @@ class Timeline extends RequestCollection
      */
     public function getUserFeedStream(
         $userId,
-        $maxId = null
+        $maxId = null,
+        $pullToRefresh = false,
+        $shouldDelayMediaFetch = false
     ) {
-        return $this->ig->request("feed/user_stream/{$userId}/")
+        $reqiest = $this->ig->request("feed/user_stream/{$userId}/")
             ->setSignedPost(false)
-            ->addPost('max_id', $maxId)
-            ->getResponse(new Response\UserFeedResponse());
+            ->addPost('_uuid', $this->ig->uuid);
+
+        if ($maxId !== null) {
+            $request->addParam('max_id', $maxId);
+        }
+
+        if ($this->ig->isExperimentEnabled('68047', 2, false)) {
+            $request->addPost('can_support_carousel_mentions', '1');
+        }
+
+        if ($this->ig->isExperimentEnabled('68905', 13, false)) {
+            $request->addHeader('X-IG-Accept-Hint', 'image-grid');
+        }
+
+        if ($pullToRefresh === true) {
+            $request->addParam('is_pull_to_refresh', true);
+        }
+
+        if ($shouldDelayMediaFetch === true) {
+            $request->addParam('should_delay_media_metadata_fetch', true);
+        }
+
+        return $request->getResponse(new Response\UserFeedResponse());
     }
 
     /**

@@ -1141,11 +1141,15 @@ class People extends RequestCollection
     ) {
         $request = $this->ig->request('discover/ayml/')
             ->setSignedPost(false)
-            // ->addPost('phone_id', $this->ig->phone_id)
-            ->addPost('module', 'discover_people')
+            ->addPost('phone_id', $this->ig->phone_id)
+            ->addPost('module', $module)
             ->addPost('_uuid', $this->ig->uuid);
         // ->addPost('_csrftoken', $this->ig->client->getToken())
         // ->addPost('paginate', true);
+
+        if ($this->ig->isExperimentEnabled('54870', 33, false)) {
+            $request->addPost('max_number_to_display', $this->ig->getExperimentParam('54870', 32, 0));
+        }
 
         if ($maxId !== null) {
             $request->addPost('max_id', $maxId);

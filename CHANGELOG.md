@@ -1,3 +1,48 @@
+# Stable release v22.26.5
+## Date: 15/10/2024
+
+### Updates and fixes
+
+- **People:** Update `getFollowingQuery()`
+- **People:** Update `getFollowersQuery()`
+- **Internal:** Update `_getPhotoUploadParams()`
+
+# Stable release v22.26.4
+## Date: 14/10/2024
+
+### Updates and fixes
+
+- **Timeline:** Update `getUserFeed()`
+- **Timeline:** Update `getUserFeedStream()`
+- **People:** Update `discoverPeople()`
+- **Highlight:** Update `getUserFeed()`
+- **Utils:** Update `checkArrayKeyDifferences()`
+- **Story:** Update `getReelsTrayFeed()`
+
+# Stable release v22.26.3
+## Date: 12/10/2024
+
+### Updates and fixes
+
+- **People:** Update `getSharePrefill()`
+
+# Stable release v22.26.2
+## Date: 12/10/2024
+
+### Updates and fixes
+
+- **People:** Update `getSharePrefill()`
+- **StorageHandler:** Update `EXPERIMENT_KEYS`
+
+# Stable release v22.26.1
+## Date: 09/10/2024
+
+### Updates and fixes
+
+- **Client:** Update `_guzzleRequest()`
+- **Constants:** Update to 352.0.0.38.100
+- **Internal:** Update to `getMobileConfig()`
+
 # Stable release v22.26.0
 ## Date: 04/10/2024
 

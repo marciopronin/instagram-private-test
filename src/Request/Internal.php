@@ -1918,13 +1918,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', 'd38b7b1e73baaa25cf56769d0594a227eec734eec4f858729e127dd61dc458a6')
+                ->addPost('query_hash', 'e5ff47dae27e219392b9f196977fd483b56782c6de36ef40a41f3e2e2dd58e64')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '07e151f1e3848ad023a197f2ff038b0d2965612e110d433b508a1a0f050f1e02')
+                ->addPost('query_hash', '297291ae1c3e698fa2dc6e4e7970b0a93b2ab37d4022c6a3a1ef4634a948d555')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -4116,15 +4116,31 @@ class Internal extends RequestCollection
         $targetFeed,
         InternalMetadata $internalMetadata
     ) {
+        if ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) {
+            $imageCompression = [
+                'lib_name'          => 'libwebp',
+                'lib_version'       => '26',
+                'quality'           => '96',
+                'original_width'    => $internalMetadata->getPhotoDetails()->getWidth(),
+                'original_width'    => $internalMetadata->getPhotoDetails()->getHeight(),
+            ];
+        } else {
+            $imageCompression = [
+                'lib_name'      => 'moz',
+                'lib_version'   => '3.1.m',
+                'quality'       => '90',
+            ];
+        }
         // Common params.
         $result = [
             'upload_id'         => (string) $internalMetadata->getUploadId(),
-            'retry_context'     => json_encode($this->_getRetryContext()),
-            'image_compression' => ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) ? '{"lib_name":"libwebp","lib_version":"26","quality":"96"}' : '{"lib_name":"moz","lib_version":"3.1.m","quality":"90"}',
-            'xsharing_user_ids' => json_encode([]),
             'media_type'        => $internalMetadata->getVideoDetails() !== null
-                ? (string) Response\Model\Item::VIDEO
-                : (string) Response\Model\Item::PHOTO,
+            ? (string) Response\Model\Item::VIDEO
+            : (string) Response\Model\Item::PHOTO,
+            'upload_engine_config_enum' => 0,
+            'image_compression'         => json_encode($imageCompression),
+            'xsharing_user_ids'         => json_encode([]),
+            'retry_context'             => json_encode($this->_getRetryContext()),
         ];
         // Target feed's specific params.
         switch ($targetFeed) {
@@ -4132,8 +4148,8 @@ class Internal extends RequestCollection
                 $result['is_sidecar'] = '1';
                 break;
             case Constants::FEED_STORY:
-                [$hash, $quality] = PDQHasher::computeHashAndQualityFromFilename($internalMetadata->getPhotoDetails()->getFilename(), false, false);
-                $result['original_photo_pdq_hash'] = sprintf('%s:%d', $hash->toHexString(), 9);
+                // list($hash, $quality) = PDQHasher::computeHashAndQualityFromFilename($internalMetadata->getPhotoDetails()->getFilename(), false, false);
+                // $result['original_photo_pdq_hash'] = sprintf('%s:%d', $hash->toHexString(), 9);
                 break;
             case Constants::FEED_TV:
                 if ($internalMetadata->getBroadcastId() !== null) {

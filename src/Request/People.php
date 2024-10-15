@@ -761,14 +761,14 @@ class People extends RequestCollection
         $maxId = null
     ) {
         $data = [
-            'query'                     => $searchQuery,
+            'user_id'                   => $userId,
+            'exclude_unused_fields'     => false,
             'request_data'              => [
                 'enableGroups'          => true,
                 'rank_token'            => $rankToken,
             ],
+            'query'                     => $searchQuery,
             'search_surface'            => 'follow_list_page',
-            'user_id'                   => $userId,
-            'exclude_unused_fields'     => false,
             'include_biography'         => false,
             'include_unseen_count'      => false,
         ];
@@ -777,7 +777,7 @@ class People extends RequestCollection
             $data['max_id'] = $maxId;
         }
 
-        $response = $this->ig->internal->sendGraph('28479704797981382276527875753', $data, 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true, true);
+        $response = $this->ig->internal->sendGraph('28479704797148835226143011613', $data, 'FollowersList', 'xdt_api__v1__friendships__followers', 'false', 'pando', true, true);
         $arr = $response->asArray();
         if (isset($arr['data'])) {
             $data = $arr['data'];
@@ -813,13 +813,13 @@ class People extends RequestCollection
         $data = [
             'user_id'                   => $userId,
             'exclude_unused_fields'     => false,
-            'include_biography'         => false,
             'query'                     => $searchQuery,
+            'include_biography'         => false,
             'include_unseen_count'      => false,
             'request_data'              => [
+                'search_surface'        => 'follow_list_page',
                 'rank_token'            => $rankToken,
                 'includes_hashtags'     => true,
-                'search_surface'        => 'follow_list_page',
             ],
             'enable_groups'             => true,
         ];
@@ -827,7 +827,7 @@ class People extends RequestCollection
         if ($maxId !== null) {
             $data['max_id'] = $maxId;
         }
-        $response = $this->ig->internal->sendGraph('16104639283671106146912599053', $data, 'FollowingList', 'xdt_api__v1__friendships__following', 'false', 'pando', true, true);
+        $response = $this->ig->internal->sendGraph('161046392812034960803496431073', $data, 'FollowingList', 'xdt_api__v1__friendships__following', 'false', 'pando', true, true);
         $arr = $response->asArray();
         if (isset($arr['data'])) {
             $data = $arr['data'];
@@ -1141,11 +1141,15 @@ class People extends RequestCollection
     ) {
         $request = $this->ig->request('discover/ayml/')
             ->setSignedPost(false)
-            // ->addPost('phone_id', $this->ig->phone_id)
-            ->addPost('module', 'discover_people')
+            ->addPost('phone_id', $this->ig->phone_id)
+            ->addPost('module', $module)
             ->addPost('_uuid', $this->ig->uuid);
         // ->addPost('_csrftoken', $this->ig->client->getToken())
         // ->addPost('paginate', true);
+
+        if ($this->ig->isExperimentEnabled('54870', 33, false)) {
+            $request->addPost('max_number_to_display', $this->ig->getExperimentParam('54870', 32, 0));
+        }
 
         if ($maxId !== null) {
             $request->addPost('max_id', $maxId);
@@ -1864,23 +1868,46 @@ class People extends RequestCollection
     public function getSharePrefill(
         $nullState = false
     ) {
-        $views = [
-            'story_share_sheet',
-            'direct_user_search_nullstate',
-            'forwarding_recipient_sheet',
-            'direct_inbox_active_now',
-            'call_recipients',
-            'reshare_share_sheet',
-            'direct_user_search_keypressed',
-        ];
+        if ($this->ig->isExperimentEnabled('68215', 4, false)) {
+            $views = [
+                'reshare_share_sheet'                   => 'direct_target',
+                'direct_user_search_keypressed'         => 'direct_target',
+                'direct_user_search_nullstate'          => 'direct_target',
+                'direct_inbox_active_now'               => 'direct_target',
+                'call_recipients'                       => 'direct_target',
+                'direct_ibc_inbox_discovery'            => 'direct_target',
+                'direct_ibc_inbox_invitations'          => 'direct_target',
+            ];
+        } else {
+            $views = [
+                'reshare_share_sheet'                   => 'direct_target',
+                'direct_user_search_keypressed'         => 'direct_target',
+                'story_share_sheet'                     => 'direct_target',
+                'direct_user_search_nullstate'          => 'direct_target',
+                'direct_inbox_active_now'               => 'direct_target',
+                'forwarding_recipient_sheet'            => 'direct_target',
+                'call_recipients'                       => 'direct_target',
+                'direct_ibc_inbox_discovery'            => 'direct_target',
+                'direct_ibc_inbox_invitations'          => 'direct_target',
+            ];
+        }
 
-        if ($this->ig->isExperimentEnabled('56721', 0, false) !== true) {
-            unset($views[7]);
+        if (!$this->ig->isExperimentEnabled('55958', 28, false)) {
+            unset($views['direct_ibc_inbox_discovery']);
+        }
+
+        if (!$this->ig->isExperimentEnabled('55958', 25, false)) {
+            unset($views['direct_ibc_inbox_invitations']);
+        }
+
+        if ($this->ig->isExperimentEnabled('69705', 0, false)) {
+            unset($views['forwarding_recipient_sheet']);
+            unset($views['story_share_sheet']);
         }
 
         $request = $this->ig->request('banyan/banyan/')
             ->addParam('is_private_share', false)
-            ->addParam('views', ($nullState === false) ? '["direct_ibc_nullstate"]' : json_encode(array_values($views)));
+            ->addParam('views', ($nullState === false) ? '["direct_ibc_nullstate"]' : json_encode(array_keys($views)));
 
         if ($this->ig->isExperimentEnabled('54280', 0, false)) {
             $request->addParam('IBCShareSheetParams', json_encode(['size' => max($this->ig->getExperimentParam('54280', 2, 5), (int) $this->ig->getExperimentParam('54280', 5, 3))]));

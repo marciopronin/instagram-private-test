@@ -129,6 +129,13 @@ class StorageHandler
         '67316', // X-IG-BLOKS-SERIALIZE-PAYLOAD
         '76504', // X-Bloks-Prism-Button-Version 0x81117D00003FD1
         '62246', // X-Bloks-Prism-Colors-Enabled 0x81093600052121
+        '55958', // banyan. direct_ibc_inbox_discovery and direct_ibc_inbox_invitations
+        '69705', // banyan. forwarding_recipient_sheet and story_share_sheet
+        '68215', // banyan. Banyan view selector
+        '66089', // highlights_tray. should_include_my_week_preview
+        '68047', // feed/user_stream. can_support_carousel_mentions
+        '68905', // X-IG-Accept-Hint
+        '54870', // discover/ayml/. max_number_to_display
     ];
 
     /**

@@ -2212,7 +2212,7 @@ class Utils
         }
 
         if (!empty($added) || !empty($removed)) {
-            throw new \InvalidArgumentException(sprintf('Elements removed: %s. Elements added: ', implode(', ', $result['remoed']), implode(', ', $result['added'])));
+            throw new \InvalidArgumentException(sprintf('Elements removed: %s. Elements added: ', implode(', ', $removed), implode(', ', $added)));
         }
     }
 }

@@ -1158,7 +1158,7 @@ class Client
                     break;
                 }
                 $retry++;
-                sleep(Instagram::$retryOnNetworkExceptionWait);
+                sleep(Instagram::$retryOnNetworkExceptionSleep);
             } while (Instagram::$retryOnNetworkException && $retry < $this->_parent->retriesOnNetworkFailure);
 
             $this->_detectHttpCode($response);

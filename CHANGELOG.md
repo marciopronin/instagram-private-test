@@ -1,3 +1,12 @@
+# Stable release v22.26.5
+## Date: 15/10/2024
+
+### Updates and fixes
+
+- **People:** Update `getFollowingQuery()`
+- **People:** Update `getFollowersQuery()`
+- **Internal:** Update `_getPhotoUploadParams()`
+
 # Stable release v22.26.4
 ## Date: 14/10/2024
 

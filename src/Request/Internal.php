@@ -4116,15 +4116,31 @@ class Internal extends RequestCollection
         $targetFeed,
         InternalMetadata $internalMetadata
     ) {
+        if ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) {
+            $imageCompression = [
+                'lib_name'          => 'libwebp',
+                'lib_version'       => '26',
+                'quality'           => '96',
+                'original_width'    => $internalMetadata->getPhotoDetails()->getWidth(),
+                'original_width'    => $internalMetadata->getPhotoDetails()->getHeight(),
+            ];
+        } else {
+            $imageCompression = [
+                'lib_name'      => 'moz',
+                'lib_version'   => '3.1.m',
+                'quality'       => '90',
+            ];
+        }
         // Common params.
         $result = [
             'upload_id'         => (string) $internalMetadata->getUploadId(),
-            'retry_context'     => json_encode($this->_getRetryContext()),
-            'image_compression' => ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) ? '{"lib_name":"libwebp","lib_version":"26","quality":"96"}' : '{"lib_name":"moz","lib_version":"3.1.m","quality":"90"}',
-            'xsharing_user_ids' => json_encode([]),
             'media_type'        => $internalMetadata->getVideoDetails() !== null
-                ? (string) Response\Model\Item::VIDEO
-                : (string) Response\Model\Item::PHOTO,
+            ? (string) Response\Model\Item::VIDEO
+            : (string) Response\Model\Item::PHOTO,
+            'upload_engine_config_enum' => 0,
+            'image_compression'         => json_encode($imageCompression),
+            'xsharing_user_ids'         => json_encode([]),
+            'retry_context'             => json_encode($this->_getRetryContext()),
         ];
         // Target feed's specific params.
         switch ($targetFeed) {
@@ -4132,8 +4148,8 @@ class Internal extends RequestCollection
                 $result['is_sidecar'] = '1';
                 break;
             case Constants::FEED_STORY:
-                [$hash, $quality] = PDQHasher::computeHashAndQualityFromFilename($internalMetadata->getPhotoDetails()->getFilename(), false, false);
-                $result['original_photo_pdq_hash'] = sprintf('%s:%d', $hash->toHexString(), 9);
+                // list($hash, $quality) = PDQHasher::computeHashAndQualityFromFilename($internalMetadata->getPhotoDetails()->getFilename(), false, false);
+                // $result['original_photo_pdq_hash'] = sprintf('%s:%d', $hash->toHexString(), 9);
                 break;
             case Constants::FEED_TV:
                 if ($internalMetadata->getBroadcastId() !== null) {

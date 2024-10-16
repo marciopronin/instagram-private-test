@@ -1,3 +1,11 @@
+# Stable release v22.26.6
+## Date: 16/10/2024
+
+### Updates and fixes
+
+- **Timeline:** Update `getUserFeedStream()`
+- **Music:** Update `use` statement
+
 # Stable release v22.26.5
 ## Date: 15/10/2024
 

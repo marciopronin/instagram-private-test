@@ -1,3 +1,10 @@
+# Stable release v22.26.7
+## Date: 17/10/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_processSuccesfulLoginResponse()`
+
 # Stable release v22.26.6
 ## Date: 16/10/2024
 

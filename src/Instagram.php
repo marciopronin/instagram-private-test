@@ -6108,6 +6108,7 @@ class Instagram implements ExperimentsInterface
         $appRefreshInterval = 1800,
         $loginFlow = true
     ) {
+        $loginResponseWithHeaders = str_replace('\"exact_profile_identified\":null}', '"exact_profile_identified":null}', $loginResponseWithHeaders);
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
         $re = '/"full_name":"(.*?)","/m';
         preg_match_all($re, $loginResponseWithHeaders['login_response'], $matches, PREG_SET_ORDER, 0);

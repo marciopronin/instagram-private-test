@@ -303,6 +303,11 @@ class Bloks
                 $bloks = $this->getBloks($bloksResponse);
                 $res = $this->searchArray($bloks, $blok);
                 // no break
+            case 'assistive_login_info':
+                if (str_contains($res[1], 'assistive_login_info')) {
+                    return stripcslashes($this->_extractJsonString($res[1]));
+                }
+                // no break
             case 'bk.action.map.Make':
                 $mapped = [];
                 foreach ($res as $map) {

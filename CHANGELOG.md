@@ -1,3 +1,12 @@
+# Stable release v22.26.8
+## Date: 18/10/2024
+
+### Updates and fixes
+
+- **Exception:** Add `IdentificationErrorException`
+- **Instagram:** Update `_processSuccesfulLoginResponse()`
+- **Bloks:** Update `parseBlok()`
+
 # Stable release v22.26.7
 ## Date: 17/10/2024
 

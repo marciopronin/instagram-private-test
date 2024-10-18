@@ -6110,6 +6110,20 @@ class Instagram implements ExperimentsInterface
     ) {
         $loginResponseWithHeaders = str_replace('\"exact_profile_identified\":null}', '"exact_profile_identified":null}', $loginResponseWithHeaders);
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
+
+        if (isset($loginResponseWithHeaders['assistive_id_type'])) {
+            $msg = sprintf('Identification error. Did you mean %s?', $loginResponseWithHeaders['username']);
+            $loginResponse = new Response\LoginResponse([
+                'error_type'    => 'identification_error',
+                'status'        => 'fail',
+                'message'       => $msg,
+            ]);
+            $e = new Exception\IdentificationErrorException($msg);
+            $e->setResponse($loginResponse);
+
+            throw $e;
+        }
+
         $re = '/"full_name":"(.*?)","/m';
         preg_match_all($re, $loginResponseWithHeaders['login_response'], $matches, PREG_SET_ORDER, 0);
         if ($matches) {

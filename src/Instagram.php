@@ -2383,7 +2383,7 @@ class Instagram implements ExperimentsInterface
 
                 $errorMap = [];
                 if (is_array($loginResponseWithHeaders)) {
-                    $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+                    $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders, $response);
 
                     $re = '/(com\.bloks\.www\.two_factor_login\.\w+)/m';
                     preg_match_all($re, $response->asJson(), $firstMatch, PREG_SET_ORDER, 0);
@@ -6185,7 +6185,8 @@ class Instagram implements ExperimentsInterface
     /**
      * Parse login errors (Bloks).
      *
-     * @param array $loginResponseWithHeaders Login bloks array.
+     * @param array         $loginResponseWithHeaders Login bloks array.
+     * @param LoginResponse $response
      *
      * @throws Exception\InstagramException
      *
@@ -6194,7 +6195,8 @@ class Instagram implements ExperimentsInterface
      * @see Instagram::login()
      */
     protected function _parseLoginErrors(
-        $loginResponseWithHeaders
+        $loginResponseWithHeaders,
+        $response = null
     ) {
         $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\login_error_dialog_shown\\'), 0, -2);
         if (empty($offsets)) {
@@ -6226,6 +6228,9 @@ class Instagram implements ExperimentsInterface
                     $result = ['event_category' => 'login_home_page_interaction'];
                 }
             });
+        }
+        if ($response !== null && str_contains($response->asJson(), 'An unexpected error occurred. Please try logging in again.')) {
+            $result = ['exception_message' => 'Login Error: An unexpected error occurred. Please try logging in again.'];
         }
         if (!empty($result)) {
             return $result;

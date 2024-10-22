@@ -2215,4 +2215,28 @@ class Utils
             throw new \InvalidArgumentException(sprintf('Elements removed: %s. Elements added: ', implode(', ', $removed), implode(', ', $added)));
         }
     }
+
+    /**
+     * Merge two arrays recursively.
+     *
+     * @param mixed $data1
+     * @param mixed $data2
+     */
+    public static function mergeArrayRecursive(
+        $data1,
+        $data2
+    ) {
+        foreach ($data2 as $key => $value) {
+            // If key exists in both and is an array, merge them recursively
+            if (array_key_exists($key, $data1) && is_array($data1[$key]) && is_array($value)) {
+                $data1[$key] = self::mergeArrayRecursive($data1[$key], $data2[$key]);
+            }
+            // Otherwise, overwrite or add the new key-value pair
+            else {
+                $data1[$key] = $value;
+            }
+        }
+
+        return $data1;
+    }
 }

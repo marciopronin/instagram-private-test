@@ -1,3 +1,14 @@
+# Stable release v22.26.11
+## Date: 22/10/2024
+
+### Utils
+
+- **Utils:** Add `mergeArrayRecursive()`
+
+### Updates and fixes
+
+- **Client:** Update `_mapServerResponse()`
+
 # Stable release v22.26.10
 ## Date: 22/10/2024
 

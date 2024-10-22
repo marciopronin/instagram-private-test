@@ -219,6 +219,264 @@ class Account extends RequestCollection
     }
 
     /**
+     * Start account registration process (Bloks).
+     *
+     * @param string $registrationFlowId UUID.
+     * @param string $phone              Phone.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return Response\GenericResponse
+     */
+    public function startAccountRegistration(
+        $registrationFlowId,
+        $phone
+    ) {
+        $response = $this->ig->processLoginClientDataAndRedirect();
+        $re = '/(\d+),\s(\d+),\s\\\\"(com[a-zA-Z0-9\._]+)\\\\"/m';
+        preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+
+        $internalLatencyData = [];
+        foreach ($matches as $entry) {
+            $markerId = intval($entry[1]);
+            $latencyId = intval($entry[2]);
+            $controller = $entry[3];
+
+            $internalLatencyData[$controller] = [
+                'marker_id'   => $markerId,
+                'instance_id' => $latencyId,
+            ];
+        }
+
+        $mainBloks = $this->ig->bloks->parseResponse($response->asArray(), '(bk.action.core.TakeLast');
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'should_trigger_override_login_2fa_action')) {
+                $paramBlok = $mainBlok;
+
+                $parsed = $this->ig->bloks->parseBlok($paramBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'should_trigger_override_login_2fa_action'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+
+                $serverMap = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            }
+        }
+
+        $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async/')
+            ->setSignedPost(false)
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode((object) [
+                'client_input_params'   => [
+                    'lois_settings' => [
+                        'lois_token'    => '',
+                        'lara_override' => '',
+                    ],
+                ],
+                'server_params' => [
+                    'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? 0),
+                    'layered_homepage_experiment_group'             => $serverMap['layered_homepage_experiment_group'] ?? null,
+                    'device_id'                                     => $serverMap['device_id'] ?? null,
+                    'waterfall_id'                                  => $serverMap['waterfall_id'] ?? null,
+                    'INTERNAL__latency_qpl_instance_id'             => $internalLatencyData['com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async']['instance_id'],
+                    'flow_info'                                     => json_encode(['flow_name'  =>  'new_to_family_ig_default', 'flow_type' => 'ntf']),
+                    'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+                    'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async']['marker_id']),
+                    'family_device_id'                              => null, // $this->phone_id,
+                    'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? null,
+                    'INTERNAL_INFRA_THEME'                          => $serverMap['INTERNAL_INFRA_THEME'] ?? 'harm_f',
+                    'access_flow_version'                           => $serverMap['access_flow_version'] ?? 'LEGACY_FLOW',
+                    'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'reg_info')) {
+                $parsed = $this->ig->bloks->parseBlok($mainBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'reg_info'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+                $serverMap = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            }
+        }
+
+        $regAndFlowInfo = $this->ig->bloks->getRegAndInfoFlow($response->asArray(), 'reg_info');
+        $regInfo = json_decode($regAndFlowInfo['reg_info'], true);
+        $regInfo['registration_flow_id'] = $registrationFlowId;
+
+        $response = $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.contactpoint_phone/')
+            ->setSignedPost(false)
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode((object) [
+                'client_input_params'   => [
+                    'family_device_id'  => $this->ig->phone_id,
+                    'device_id'         => $this->ig->device_id,
+                    'lois_settings'     => [
+                        'lois_token'    => '',
+                        'lara_override' => '',
+                    ],
+                    'waterfall_id'      => $serverMap['waterfall_id'] ?? null,
+                    'qe_device_id'      => $serverMap['qe_device_id'] ?? $this->uuid,
+                ],
+                'server_params' => [
+                    'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? 0),
+                    'reg_info'                                      => json_encode($regInfo),
+                    'INTERNAL_INFRA_screen_id'                      => 'CAA_REG_CONTACT_POINT_PHONE',
+                    'access_flow_version'                           => 'LEGACY_FLOW',
+                    'flow_info'                                     => json_encode(['flow_name'  =>  'new_to_family_ig_default', 'flow_type' => 'ntf']),
+                    'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+                    'current_step'                                  => 0,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+
+        $responseArr = $response->asArray();
+        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'reg_info')) {
+                $parsed = $this->ig->bloks->parseBlok($mainBlok, 'bk.action.map.Make');
+                $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'reg_info'), 0, -2);
+
+                foreach ($offsets as $offset) {
+                    if (isset($parsed[$offset])) {
+                        $parsed = $parsed[$offset];
+                    } else {
+                        break;
+                    }
+                }
+
+                $serverMap = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
+            }
+        }
+
+        $headersFlow = Signatures::generateUUID();
+
+        $regAndFlowInfo = $this->ig->bloks->getRegAndInfoFlow($response->asArray(), 'reg_info');
+        $regInfo = json_decode($regAndFlowInfo['reg_info'], true);
+        $regInfo['contactpoint'] = sprintf('+%s', $phone);
+        $regInfo['device_id'] = $this->ig->device_id;
+        $regInfo['family_device_id'] = $this->ig->phone_id;
+        $regInfo['contactpoint_type'] = 'phone';
+        $regInfo['registration_flow_id'] = $registrationFlowId;
+        $regInfo['flash_call_permissions_status'] = [
+            'CALL_PHONE'        => 'DENIED',
+            'READ_CALL_LOG'     => 'DENIED',
+            'READ_PHONE_STATE'  => 'DENIED',
+        ];
+        $regInfo['headers_flow_id'] = $headersFlow;
+
+        $fallbackCall = 0;
+        if (str_contains($response->asJson(), 'flash_call_educational_acreen')) {
+            $fallbackCall = 1;
+            $response = $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.confirmation.flash_call_educational_acreen.async/')
+                ->setSignedPost(false)
+                ->setNeedsAuth(false)
+                ->addPost('params', json_encode((object) [
+                    'client_input_params'   => [
+                        'permissions_status_after_requesting'   => [
+                            'CALL_PHONE'        => 'DENIED',
+                            'READ_CALL_LOG'     => 'DENIED',
+                            'READ_PHONE_STATE'  => 'DENIED',
+                        ],
+                        'lois_settings' => [
+                            'lois_token'    => '',
+                            'lara_override' => '',
+                        ],
+                    ],
+                    'server_params' => [
+                        'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? 0),
+                        'layered_homepage_experiment_group'             => null,
+                        'request_type'                                  => 'REROUTE_AFTER_PERMISSIONS_REQUEST',
+                        'device_id'                                     => $this->ig->device_id,
+                        'waterfall_id'                                  => $serverMap['waterfall_id'] ?? null,
+                        'INTERNAL__latency_qpl_instance_id'             => $internalLatencyData['com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async']['instance_id'],
+                        'flow_info'                                     => json_encode(['flow_name'  =>  'new_to_family_ig_default', 'flow_type' => 'ntf']),
+                        'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+                        'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async']['marker_id']),
+                        'reg_info'                                      => json_encode($regInfo),
+                        'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? null,
+                        'INTERNAL_INFRA_THEME'                          => 'harm_f,default,default,harm_f',
+                        'access_flow_version'                           => 'F2_FLOW',
+                        'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
+                        'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                        'current_step'                                  => 2,
+                    ],
+                ]))
+                ->addPost('bk_client_context', json_encode((object) [
+                    'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                    'styles_id'     => 'instagram',
+                ]))
+                ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+                ->addPost('_uuid', $this->ig->uuid)
+                // ->addPost('_csrftoken', $this->ig->client->getToken())
+                ->getResponse(new Response\GenericResponse());
+        }
+
+        $response = $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.confirmation/')
+            ->setSignedPost(false)
+            ->setNeedsAuth(false)
+            ->addPost('params', json_encode((object) [
+                'client_input_params'   => [
+                    'lois_settings' => [
+                        'lois_token'    => '',
+                        'lara_override' => '',
+                    ],
+                ],
+                'server_params' => [
+                    'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? 0),
+                    'is_fallback_from_flash_call'                   => $fallbackCall,
+                    'device_id'                                     => $this->ig->device_id,
+                    'waterfall_id'                                  => $serverMap['waterfall_id'] ?? null,
+                    'flow_info'                                     => json_encode(['flow_name'  =>  'new_to_family_ig_default', 'flow_type' => 'ntf']),
+                    'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+                    'family_device_id'                              => $this->ig->phone_id,
+                    'reg_info'                                      => json_encode($regInfo),
+                    'INTERNAL_INFRA_THEME'                          => 'harm_f,default,default,harm_f',
+                    'INTERNAL_INFRA_screen_id'                      => 'CAA_REG_CONTACT_POINT_PHONE',
+                    'access_flow_version'                           => 'F2_FLOW',
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                    'current_step'                                  => 0,
+                ],
+            ]))
+            ->addPost('bk_client_context', json_encode((object) [
+                'bloks_version' => Constants::BLOCK_VERSIONING_ID,
+                'styles_id'     => 'instagram',
+            ]))
+            ->addPost('bloks_versioning_id', Constants::BLOCK_VERSIONING_ID)
+            ->addPost('_uuid', $this->ig->uuid)
+            // ->addPost('_csrftoken', $this->ig->client->getToken())
+            ->getResponse(new Response\GenericResponse());
+    }
+
+    /**
      * Check if phone number is valid.
      *
      * @param string $phone Phone with country code. For example: '+34123456789'.

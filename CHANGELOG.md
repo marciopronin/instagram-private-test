@@ -1,3 +1,13 @@
+# Stable release v22.27.0
+## Date: 23/10/2024
+
+### New features
+
+- **Bloks:** Add `getRegAndInfoFlow()`
+- **Bloks:** Add `extractJsonFromBlockContainingKey()`
+- **Bloks:** Add `getMatchingKeyValue()`
+- **Account:** Add `startAccountRegistration()`
+
 # Stable release v22.26.11
 ## Date: 22/10/2024
 

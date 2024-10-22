@@ -127,6 +127,45 @@ class Bloks
         return null;
     }
 
+    protected function _getMatchingKeyValue(
+        $array,
+        $searchString
+    ) {
+        foreach ($array as $value) {
+            if (is_array($value)) {
+                $result = $this->_getMatchingKeyValue($value, $searchString);
+                if ($result !== null) {
+                    return $result;
+                }
+            } elseif (is_string($value)) {
+                if (strpos($value, $searchString) !== false) {
+                    return $value;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public function extractJsonFromBlockContainingKey(
+        $response,
+        $key
+    ) {
+        $stringBlok = $this->_getMatchingKeyValue($response, $key);
+
+        return $this->_extractJsonString($stringBlok);
+    }
+
+    public function getRegAndInfoFlow(
+        $response,
+        $key
+    ) {
+        $jsons = $this->extractJsonFromBlockContainingKey($response, $key);
+        $jsons = explode('||', str_replace('}", "{"', '}||{"', $jsons));
+
+        return ['reg_info'  =>  $jsons[0], 'flow_info'  =>  $jsons[1]];
+    }
+
     public function parseMap(
         $input
     ) {

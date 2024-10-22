@@ -904,7 +904,23 @@ class Client
                     if ($jsonArray === null && is_string($rawResponse) && strlen($rawResponse) > 0) {
                         $multiResponse = explode(PHP_EOL, $rawResponse);
                         if (!empty($multiResponse[1]) && !str_contains($multiResponse[0], '<!DOCTYPE html>')) {
-                            $jsonArray = array_merge($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));
+                            function merge_json_recursive($data1, $data2)
+                            {
+                                foreach ($data2 as $key => $value) {
+                                    // If key exists in both and is an array, merge them recursively
+                                    if (array_key_exists($key, $data1) && is_array($data1[$key]) && is_array($value)) {
+                                        $data1[$key] = merge_json_recursive($data1[$key], $data2[$key]);
+                                    }
+                                    // Otherwise, overwrite or add the new key-value pair
+                                    else {
+                                        $data1[$key] = $value;
+                                    }
+                                }
+
+                                return $data1;
+                            }
+
+                            $jsonArray = merge_json_recursive($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));
                         }
                     }
                     if (!is_array($jsonArray)) {

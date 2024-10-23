@@ -1,3 +1,15 @@
+# Stable release v22.28.0
+## Date: 23/10/2024
+
+### New features
+
+- **Instagram:** Add `processLoginResponse()`
+- **Account:** Add `finishAccountRegistration()`
+
+### Updates and fixes
+
+- **Account:** Update `startAccountRegistration()`
+
 # Stable release v22.27.0
 ## Date: 23/10/2024
 

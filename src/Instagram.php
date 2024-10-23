@@ -6260,6 +6260,47 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
+     * Process Login Response (bloks).
+     *
+     * @param Response\LoginResponse $response Login response.
+     *
+     * @throws Exception\InstagramException
+     * @throws Exception\AccountDeletionException
+     * @throws Exception\InvalidUsernameException
+     * @throws Exception\TooManyAttemptsException
+     * @throws Exception\AccountDisabledException
+     * @throws Exception\IncorrectPasswordException
+     * @throws Exception\UnexpectedLoginErrorException
+     * @throws Exception\Checkpoint\ChallengeRequiredException
+     */
+    public function processLoginResponse(
+        $response
+    ) {
+        $mainBloks = $this->bloks->parseResponse($response->asArray(), '(bk.action.caa.HandleLoginResponse');
+
+        $firstDataBlok = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'logged_in_user')) {
+                $firstDataBlok = $mainBlok;
+                break;
+            }
+        }
+
+        if ($firstDataBlok !== null) {
+            $loginResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
+        } else {
+            $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+        }
+
+        if (is_array($loginResponseWithHeaders)) {
+            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+            $this->_throwLoginException($response, $errorMap);
+        }
+
+        return $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
+    }
+
+    /**
      * Throw login exceptions (Bloks).
      *
      * @param Response\LoginResponse $response Login response.

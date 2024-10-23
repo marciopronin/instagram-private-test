@@ -6112,7 +6112,7 @@ class Instagram implements ExperimentsInterface
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
 
         if (isset($loginResponseWithHeaders['assistive_id_type'])) {
-            $msg = sprintf('Identification error. Did you mean %s?', $loginResponseWithHeaders['username']);
+            $msg = sprintf('Identification error. Identification error. Account suspended or shadow banned. Maybe you meant username: %s?', $loginResponseWithHeaders['username']);
             $loginResponse = new Response\LoginResponse([
                 'error_type'    => 'identification_error',
                 'status'        => 'fail',

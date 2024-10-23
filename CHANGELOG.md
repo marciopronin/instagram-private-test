@@ -1,3 +1,11 @@
+# Stable release v22.28.1
+## Date: 24/10/2024
+
+### Updates and fixes
+
+- **Bloks:** Update `parseBlok()`
+- **Instagram:** Update `_processSuccesfulLoginResponse()`
+
 # Stable release v22.28.0
 ## Date: 23/10/2024
 

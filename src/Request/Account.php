@@ -221,17 +221,13 @@ class Account extends RequestCollection
     /**
      * Start account registration process (Bloks).
      *
-     * @param string $registrationFlowId UUID.
-     * @param string $phone              Phone.
-     * @param mixed  $headersFlowId
+     * @param string $phone Phone.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return Response\GenericResponse
      */
     public function startAccountRegistration(
-        $registrationFlowId,
-        $headersFlowId,
         $phone
     ) {
         $response = $this->ig->processLoginClientDataAndRedirect();
@@ -270,6 +266,10 @@ class Account extends RequestCollection
             }
         }
 
+        $registrationFlowId = Signatures::generateUUID();
+        $headersFlowId = Signatures::generateUUID();
+        $eventRequestId = Signatures::generateUUID();
+
         $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async/')
             ->setSignedPost(false)
             ->setNeedsAuth(false)
@@ -305,50 +305,62 @@ class Account extends RequestCollection
             // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
-        $responseArr = $response->asArray();
-        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
-        foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'reg_info')) {
-                $parsed = $this->ig->bloks->parseBlok($mainBlok, 'bk.action.map.Make');
-                $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'reg_info'), 0, -2);
-
-                foreach ($offsets as $offset) {
-                    if (isset($parsed[$offset])) {
-                        $parsed = $parsed[$offset];
-                    } else {
-                        break;
-                    }
-                }
-                $serverMap = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
-            }
-        }
-
         $regAndFlowInfo = $this->ig->bloks->getRegAndInfoFlow($response->asArray(), 'reg_info');
         $regInfo = json_decode($regAndFlowInfo['reg_info'], true);
         $regInfo['registration_flow_id'] = $registrationFlowId;
 
-        $response = $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.contactpoint_phone/')
+        $response = $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.async.contactpoint_phone.async/')
             ->setSignedPost(false)
             ->setNeedsAuth(false)
             ->addPost('params', json_encode((object) [
-                'client_input_params'   => [
-                    'family_device_id'  => $this->ig->phone_id,
-                    'device_id'         => $this->ig->device_id,
-                    'lois_settings'     => [
+                'client_input_params'               => [
+                    'flash_call_permissions_status' => [
+                        'CALL_PHONE'        => 'DENIED',
+                        'READ_CALL_LOG'     => 'DENIED',
+                        'READ_PHONE_STATE'  => 'DENIED',
+                    ],
+                    'device_id'                     => $this->ig->device_id,
+                    'was_headers_prefill_available' => 0,
+                    'login_upsell_phone_list'       => [],
+                    'whatsapp_installed_on_client'  => 0,
+                    'msg_previous_cp'               => '',
+                    'switch_cp_first_time_loading'  => 1,
+                    'accounts_list'                 => [],
+                    'confirmed_cp_and_code'         => (object) [],
+                    'family_device_id'              => $this->ig->phone_id,
+                    'fb_ig_device_id'               => [],
+                    'phone'                         => sprintf('+%s', $phone),
+                    'lois_settings'                 => [
                         'lois_token'    => '',
                         'lara_override' => '',
                     ],
-                    'waterfall_id'      => $serverMap['waterfall_id'] ?? null,
-                    'qe_device_id'      => $serverMap['qe_device_id'] ?? $this->uuid,
+                    'was_headers_prefill_used'      => 0,
+                    'headers_infra_flow_id'         => '',
+                    'build_type'                    => 'release',
+                    'encrypted_msisdn'              => '',
+                    'switch_cp_have_seen_suma'      => 0,
                 ],
                 'server_params' => [
+                    'event_request_id'                              => $eventRequestId,
                     'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? 0),
-                    'reg_info'                                      => json_encode($regInfo),
-                    'INTERNAL_INFRA_screen_id'                      => 'CAA_REG_CONTACT_POINT_PHONE',
-                    'access_flow_version'                           => 'LEGACY_FLOW',
+                    'text_input_id'                                 => 167691366000078, // improve
+                    'layered_homepage_experiment_group'             => null,
+                    'device_id'                                     => $this->ig->device_id,
+                    'waterfall_id'                                  => $serverMap['waterfall_id'] ?? null,
+                    'INTERNAL__latency_qpl_instance_id'             => $internalLatencyData['com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async']['instance_id'],
                     'flow_info'                                     => json_encode(['flow_name'  =>  'new_to_family_ig_default', 'flow_type' => 'ntf']),
                     'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+                    'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async']['marker_id']),
+                    'reg_info'                                      => json_encode($regInfo),
+                    'family_device_id'                              => $this->ig->phone_id,
+                    'offline_experiment_group'                      => null,
+                    'cp_funnel'                                     => 0,
+                    'INTERNAL_INFRA_THEME'                          => 'harm_f',
+                    'cp_source'                                     => 0,
+                    'access_flow_version'                           => 'F2_FLOW',
+                    'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
                     'current_step'                                  => 0,
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [
@@ -360,25 +372,8 @@ class Account extends RequestCollection
             // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
-        $responseArr = $response->asArray();
-        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
-        foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'reg_info')) {
-                $parsed = $this->ig->bloks->parseBlok($mainBlok, 'bk.action.map.Make');
-                $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'reg_info'), 0, -2);
-
-                foreach ($offsets as $offset) {
-                    if (isset($parsed[$offset])) {
-                        $parsed = $parsed[$offset];
-                    } else {
-                        break;
-                    }
-                }
-
-                $serverMap = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
-            }
-        }
-
+        $regInfo['was_headers_prefill_available'] = false;
+        $regInfo['whatsapp_installed_on_client'] = false;
         $regInfo['contactpoint'] = sprintf('+%s', $phone);
         $regInfo['device_id'] = $this->ig->device_id;
         $regInfo['family_device_id'] = $this->ig->phone_id;
@@ -423,7 +418,7 @@ class Account extends RequestCollection
                         'INTERNAL_INFRA_THEME'                          => 'harm_f,default,default,harm_f',
                         'access_flow_version'                           => 'F2_FLOW',
                         'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
-                        'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                        'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
                         'current_step'                                  => 2,
                     ],
                 ]))
@@ -459,7 +454,7 @@ class Account extends RequestCollection
                     'INTERNAL_INFRA_THEME'                          => 'harm_f,default,default,harm_f',
                     'INTERNAL_INFRA_screen_id'                      => 'CAA_REG_CONTACT_POINT_PHONE',
                     'access_flow_version'                           => 'F2_FLOW',
-                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
                     'current_step'                                  => 2,
                 ],
             ]))
@@ -472,21 +467,18 @@ class Account extends RequestCollection
             // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
-        return ['response' => $response, 'latency_data'  => $internalLatencyData, 'reg_info' => $regInfo];
+        return ['response' => $response, 'latency_data'  => $internalLatencyData, 'reg_info' => $regInfo, 'event_request_id' => $eventRequestId, 'server_map' => $serverMap];
     }
 
     /**
      * Finish account registration process (Bloks).
      *
      * @param array  $startRegistrationData Data from start registration function.
-     * @param string $registrationFlowId    UUID.
      * @param string $code                  Received code.
-     * @param string $phone                 Phone.
+     * @param string $fullName              Full name.
      * @param string $username              Username.
+     * @param string $password              Password.
      * @param string $birthday              Birthday. Format dd-mm-yyyy
-     * @param mixed  $headersFlowId
-     * @param mixed  $fullName
-     * @param mixed  $password
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
@@ -494,34 +486,15 @@ class Account extends RequestCollection
      */
     public function finishAccountRegistration(
         $startRegistrationData,
-        $registrationFlowId,
-        $headersFlowId,
         $code,
-        $phone,
         $fullName,
         $username,
         $password,
         $birthday
     ) {
-        $responseArr = $startRegistrationData['response']->asArray();
-        $mainBloks = $this->ig->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
-        foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'reg_info')) {
-                $parsed = $this->ig->bloks->parseBlok($mainBlok, 'bk.action.map.Make');
-                $offsets = array_slice($this->ig->bloks->findOffsets($parsed, 'reg_info'), 0, -2);
-
-                foreach ($offsets as $offset) {
-                    if (isset($parsed[$offset])) {
-                        $parsed = $parsed[$offset];
-                    } else {
-                        break;
-                    }
-                }
-
-                $serverMap = $this->ig->bloks->map_arrays($parsed[0], $parsed[1]);
-            }
-        }
-
+        $serverMap = $startRegistrationData['server_map'];
+        $internalLatencyData = $startRegistrationData['latency_data'];
+        $eventRequestId = $startRegistrationData['event_request_id'];
         $regInfo = $startRegistrationData['reg_info'];
         $regInfo['caa_reg_flow_source'] = 'cacheable_aymh_screen';
         $regInfo['confirmation_medium'] = 'sms';
@@ -560,7 +533,7 @@ class Account extends RequestCollection
                     'access_flow_version'                           => 'F2_FLOW',
                     'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
                     'current_step'                                  => 3,
-                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [
@@ -579,7 +552,6 @@ class Account extends RequestCollection
         $ts = (string) (time() - random_int(3, 5));
         $nonce = base64_encode($username.'|'.$ts.'|'.random_bytes(24));
         $snResponse = sprintf('VERIFICATION_PENDING: request time is %s', $ts);
-        $eventRequestId = Signatures::generateUUID();
         $encryptedPassword = Utils::encryptPassword($password, '', '', true);
 
         $response = $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.password.async/')
@@ -625,7 +597,7 @@ class Account extends RequestCollection
                     'access_flow_version'                           => 'F2_FLOW',
                     'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
                     'current_step'                                  => 5, // this is okay from 3 to 5
-                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [
@@ -676,7 +648,7 @@ class Account extends RequestCollection
                     'access_flow_version'                           => 'F2_FLOW',
                     'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
                     'current_step'                                  => 7, // this is okay from 5 to 7
-                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [
@@ -721,8 +693,8 @@ class Account extends RequestCollection
                     'INTERNAL_INFRA_THEME'                          => 'harm_f,default,default,harm_f',
                     'access_flow_version'                           => 'F2_FLOW',
                     'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
-                    'current_step'                                  => 7, // this is okay from 5 to 7
-                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                    'current_step'                                  => 8,
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [
@@ -757,8 +729,7 @@ class Account extends RequestCollection
             }
         }
 
-        $regInfo['full_name'] = $name;
-
+        $regInfo['full_name'] = $fullName;
         $response = $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.username.async/')
             ->setSignedPost(false)
             ->setNeedsAuth(false)
@@ -771,12 +742,13 @@ class Account extends RequestCollection
                         'lois_token'    => '',
                         'lara_override' => '',
                     ],
-                    'qe_device_id'                 => $this->uuid,
+                    'qe_device_id'                 => $this->ig->uuid,
                 ],
                 'server_params' => [
+                    'event_request_id'                              => $eventRequestId,
                     'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? 0),
+                    'text_input_id'                                 => 169595097900031, // improve
                     'layered_homepage_experiment_group'             => $serverMap['layered_homepage_experiment_group'] ?? null,
-                    'text_input_id'                                 => $textInputMap['text_input_id'] ?? 0,
                     'device_id'                                     => $this->ig->device_id,
                     'waterfall_id'                                  => $serverMap['waterfall_id'] ?? null,
                     'INTERNAL__latency_qpl_instance_id'             => $internalLatencyData['com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async']['instance_id'],
@@ -785,12 +757,16 @@ class Account extends RequestCollection
                     'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async']['marker_id']),
                     'reg_info'                                      => json_encode($regInfo),
                     'family_device_id'                              => $this->ig->phone_id,
-                    'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? null,
+                    'offline_experiment_group'                      => null,
                     'INTERNAL_INFRA_THEME'                          => 'harm_f,default,default,harm_f',
+                    'suggestions_container_id'                      => 169595097900030,
+                    'action'                                        => 1,
+                    'screen_id'                                     => 169595097900017,
                     'access_flow_version'                           => 'F2_FLOW',
+                    'input_id'                                      => 169595097900032,
                     'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
-                    'current_step'                                  => 7, // this is okay from 5 to 7
-                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                    'current_step'                                  => 9,
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [
@@ -843,12 +819,12 @@ class Account extends RequestCollection
                     'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.bloks.caa.reg.async.ntf_start_experiment_exposure.async']['marker_id']),
                     'reg_info'                                      => json_encode($regInfo),
                     'family_device_id'                              => $this->ig->phone_id,
-                    'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? null,
+                    'offline_experiment_group'                      => null,
                     'INTERNAL_INFRA_THEME'                          => 'harm_f,default,default,harm_f',
                     'access_flow_version'                           => 'F2_FLOW',
                     'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
-                    'current_step'                                  => 10, // this is okay from 7 to 10
-                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
+                    'current_step'                                  => 10,
+                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
                 ],
             ]))
             ->addPost('bk_client_context', json_encode((object) [
@@ -860,7 +836,7 @@ class Account extends RequestCollection
             // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
-        $response = $this->ig->processLoginResponse($response);
+        $response = $this->ig->processCreateResponse($response);
 
         return $response;
     }

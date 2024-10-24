@@ -6273,7 +6273,7 @@ class Instagram implements ExperimentsInterface
      * @throws Exception\UnexpectedLoginErrorException
      * @throws Exception\Checkpoint\ChallengeRequiredException
      */
-    public function processLoginResponse(
+    public function processCreateResponse(
         $response
     ) {
         $mainBloks = $this->bloks->parseResponse($response->asArray(), '(bk.action.caa.HandleLoginResponse');
@@ -6287,17 +6287,48 @@ class Instagram implements ExperimentsInterface
         }
 
         if ($firstDataBlok !== null) {
-            $loginResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
+            $registrationResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
         } else {
-            $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+            $registrationResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
         }
 
-        if (is_array($loginResponseWithHeaders)) {
-            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+        if (is_array($registrationResponseWithHeaders)) {
+            $errorMap = $this->_parseLoginErrors($registrationResponseWithHeaders);
             $this->_throwLoginException($response, $errorMap);
         }
 
-        return $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
+        $registrationResponse = json_decode($registrationResponseWithHeaders['registration_response'], true);
+        if (!isset($registrationResponse['status'])) {
+            $registrationResponse['status'] = 'ok';
+        }
+        $accountCreateResponse = new Response\AccountCreateResponse($registrationResponse);
+
+        $headersJson = $registrationResponseWithHeaders['headers'];
+        $headers = json_decode($headersJson, true);
+
+        $this->settings->set('public_key', $headers['IG-Set-Password-Encryption-Pub-Key']);
+        $this->settings->set('public_key_id', $headers['IG-Set-Password-Encryption-Key-Id']);
+        $this->settings->set('authorization_header', $headers['IG-Set-Authorization']);
+
+        if (isset($headers['ig-set-ig-u-rur']) && $headers['ig-set-ig-u-rur'] !== '') {
+            $this->settings->set('rur', $headers['ig-set-ig-u-rur']);
+        }
+
+        if ($accountCreateResponse->getCreatedUser()->getUsername() === 'Instagram User') {
+            throw new Exception\AccountDisabledException('Account has been suspended.');
+        }
+        $this->settings->set('business_account', false);
+        $this->settings->set('fbid_v2', $accountCreateResponse->getCreatedUser()->getFbidV2());
+        if ($accountCreateResponse->accountCreateResponse()->getPhoneNumber() !== null) {
+            $this->settings->set('phone_number', $accountCreateResponse->getCreatedUser()->getPhoneNumber());
+        }
+
+        $this->isMaybeLoggedIn = true;
+        $this->account_id = $response->getCreatedUser()->getPk();
+        $this->settings->set('account_id', $this->account_id);
+        $this->settings->set('last_login', time());
+
+        return $accountCreateResponse;
     }
 
     /**

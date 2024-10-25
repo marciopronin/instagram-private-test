@@ -1,3 +1,10 @@
+# Stable release v22.29.1
+## Date: 25/10/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `processCreateResponse()`
+
 # Stable release v22.29.0
 ## Date: 24/10/2024
 

@@ -6297,7 +6297,8 @@ class Instagram implements ExperimentsInterface
             $this->_throwLoginException($response, $errorMap);
         }
 
-        $registrationResponse = json_decode($registrationResponseWithHeaders['registration_response'], true);
+        $registrationResponseWithHeaders = json_decode($registrationResponseWithHeaders, true);
+        $registrationResponse = $registrationResponseWithHeaders['registration_response'];
         if (!isset($registrationResponse['status'])) {
             $registrationResponse['status'] = 'ok';
         }

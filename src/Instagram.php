@@ -2383,7 +2383,7 @@ class Instagram implements ExperimentsInterface
 
                 $errorMap = [];
                 if (is_array($loginResponseWithHeaders)) {
-                    $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+                    $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders, $response);
 
                     $re = '/(com\.bloks\.www\.two_factor_login\.\w+)/m';
                     preg_match_all($re, $response->asJson(), $firstMatch, PREG_SET_ORDER, 0);
@@ -6108,7 +6108,22 @@ class Instagram implements ExperimentsInterface
         $appRefreshInterval = 1800,
         $loginFlow = true
     ) {
+        $loginResponseWithHeaders = str_replace('\"exact_profile_identified\":null}', '"exact_profile_identified":null}', $loginResponseWithHeaders);
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
+
+        if (isset($loginResponseWithHeaders['assistive_id_type'])) {
+            $msg = sprintf('Identification error. Identification error. Account suspended or shadow banned. Maybe you meant username: %s?', $loginResponseWithHeaders['username']);
+            $loginResponse = new Response\LoginResponse([
+                'error_type'    => 'identification_error',
+                'status'        => 'fail',
+                'message'       => $msg,
+            ]);
+            $e = new Exception\IdentificationErrorException($msg);
+            $e->setResponse($loginResponse);
+
+            throw $e;
+        }
+
         $re = '/"full_name":"(.*?)","/m';
         preg_match_all($re, $loginResponseWithHeaders['login_response'], $matches, PREG_SET_ORDER, 0);
         if ($matches) {
@@ -6170,7 +6185,8 @@ class Instagram implements ExperimentsInterface
     /**
      * Parse login errors (Bloks).
      *
-     * @param array $loginResponseWithHeaders Login bloks array.
+     * @param array         $loginResponseWithHeaders Login bloks array.
+     * @param LoginResponse $response
      *
      * @throws Exception\InstagramException
      *
@@ -6179,7 +6195,8 @@ class Instagram implements ExperimentsInterface
      * @see Instagram::login()
      */
     protected function _parseLoginErrors(
-        $loginResponseWithHeaders
+        $loginResponseWithHeaders,
+        $response = null
     ) {
         $offsets = array_slice($this->bloks->findOffsets($loginResponseWithHeaders, '\login_error_dialog_shown\\'), 0, -2);
         if (empty($offsets)) {
@@ -6212,6 +6229,9 @@ class Instagram implements ExperimentsInterface
                 }
             });
         }
+        if ($response !== null && str_contains($response->asJson(), 'An unexpected error occurred. Please try logging in again.')) {
+            $result = ['exception_message' => 'Login Error: An unexpected error occurred. Please try logging in again.'];
+        }
         if (!empty($result)) {
             return $result;
         }
@@ -6237,6 +6257,79 @@ class Instagram implements ExperimentsInterface
         }
 
         return $errorMap;
+    }
+
+    /**
+     * Process Login Response (bloks).
+     *
+     * @param Response\LoginResponse $response Login response.
+     *
+     * @throws Exception\InstagramException
+     * @throws Exception\AccountDeletionException
+     * @throws Exception\InvalidUsernameException
+     * @throws Exception\TooManyAttemptsException
+     * @throws Exception\AccountDisabledException
+     * @throws Exception\IncorrectPasswordException
+     * @throws Exception\UnexpectedLoginErrorException
+     * @throws Exception\Checkpoint\ChallengeRequiredException
+     */
+    public function processCreateResponse(
+        $response
+    ) {
+        $mainBloks = $this->bloks->parseResponse($response->asArray(), '(bk.action.caa.HandleLoginResponse');
+
+        $firstDataBlok = null;
+        foreach ($mainBloks as $mainBlok) {
+            if (str_contains($mainBlok, 'logged_in_user')) {
+                $firstDataBlok = $mainBlok;
+                break;
+            }
+        }
+
+        if ($firstDataBlok !== null) {
+            $registrationResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
+        } else {
+            $registrationResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+        }
+
+        if (is_array($registrationResponseWithHeaders)) {
+            $errorMap = $this->_parseLoginErrors($registrationResponseWithHeaders);
+            $this->_throwLoginException($response, $errorMap);
+        }
+
+        $registrationResponseWithHeaders = json_decode($registrationResponseWithHeaders, true);
+        $registrationResponse = $registrationResponseWithHeaders['registration_response'];
+        if (!isset($registrationResponse['status'])) {
+            $registrationResponse['status'] = 'ok';
+        }
+        $accountCreateResponse = new Response\AccountCreateResponse($registrationResponse);
+
+        $headersJson = $registrationResponseWithHeaders['headers'];
+        $headers = json_decode($headersJson, true);
+
+        $this->settings->set('public_key', $headers['IG-Set-Password-Encryption-Pub-Key']);
+        $this->settings->set('public_key_id', $headers['IG-Set-Password-Encryption-Key-Id']);
+        $this->settings->set('authorization_header', $headers['IG-Set-Authorization']);
+
+        if (isset($headers['ig-set-ig-u-rur']) && $headers['ig-set-ig-u-rur'] !== '') {
+            $this->settings->set('rur', $headers['ig-set-ig-u-rur']);
+        }
+
+        if ($accountCreateResponse->getCreatedUser()->getUsername() === 'Instagram User') {
+            throw new Exception\AccountDisabledException('Account has been suspended.');
+        }
+        $this->settings->set('business_account', false);
+        $this->settings->set('fbid_v2', $accountCreateResponse->getCreatedUser()->getFbidV2());
+        if ($accountCreateResponse->accountCreateResponse()->getPhoneNumber() !== null) {
+            $this->settings->set('phone_number', $accountCreateResponse->getCreatedUser()->getPhoneNumber());
+        }
+
+        $this->isMaybeLoggedIn = true;
+        $this->account_id = $response->getCreatedUser()->getPk();
+        $this->settings->set('account_id', $this->account_id);
+        $this->settings->set('last_login', time());
+
+        return $accountCreateResponse;
     }
 
     /**

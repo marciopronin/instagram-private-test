@@ -904,7 +904,7 @@ class Client
                     if ($jsonArray === null && is_string($rawResponse) && strlen($rawResponse) > 0) {
                         $multiResponse = explode(PHP_EOL, $rawResponse);
                         if (!empty($multiResponse[1]) && !str_contains($multiResponse[0], '<!DOCTYPE html>')) {
-                            $jsonArray = array_merge($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));
+                            $jsonArray = Utils::mergeArrayRecursive($this->api_body_decode($multiResponse[0], true), $this->api_body_decode($multiResponse[1], true));
                         }
                     }
                     if (!is_array($jsonArray)) {

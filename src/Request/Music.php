@@ -2,6 +2,7 @@
 
 namespace InstagramAPI\Request;
 
+use InstagramAPI\Exception\RequestHeadersTooLargeException;
 use InstagramAPI\Response;
 
 /**

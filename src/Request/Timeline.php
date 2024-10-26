@@ -399,7 +399,7 @@ class Timeline extends RequestCollection
         $pullToRefresh = false,
         $shouldDelayMediaFetch = false
     ) {
-        $reqiest = $this->ig->request("feed/user_stream/{$userId}/")
+        $request = $this->ig->request("feed/user_stream/{$userId}/")
             ->setSignedPost(false)
             ->addPost('_uuid', $this->ig->uuid);
 

@@ -1,3 +1,102 @@
+# Stable release v22.29.1
+## Date: 25/10/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `processCreateResponse()`
+
+# Stable release v22.29.0
+## Date: 24/10/2024
+
+### New features
+
+- **Instagram:** Add `processCreateResponse()`
+
+### Updates and fixes
+
+- **Bloks:** Update `_fixJsonString`
+- **Account:** Update `startAccountRegistration()`
+- **Account:** Update `finishAccountRegistration()`
+
+# Stable release v22.28.1
+## Date: 24/10/2024
+
+### Updates and fixes
+
+- **Bloks:** Update `parseBlok()`
+- **Instagram:** Update `_processSuccesfulLoginResponse()`
+
+# Stable release v22.28.0
+## Date: 23/10/2024
+
+### New features
+
+- **Instagram:** Add `processLoginResponse()`
+- **Account:** Add `finishAccountRegistration()`
+
+### Updates and fixes
+
+- **Account:** Update `startAccountRegistration()`
+
+# Stable release v22.27.0
+## Date: 23/10/2024
+
+### New features
+
+- **Bloks:** Add `getRegAndInfoFlow()`
+- **Bloks:** Add `extractJsonFromBlockContainingKey()`
+- **Bloks:** Add `getMatchingKeyValue()`
+- **Account:** Add `startAccountRegistration()`
+
+# Stable release v22.26.11
+## Date: 22/10/2024
+
+### Utils
+
+- **Utils:** Add `mergeArrayRecursive()`
+
+### Updates and fixes
+
+- **Client:** Update `_mapServerResponse()`
+
+# Stable release v22.26.10
+## Date: 22/10/2024
+
+### Updates and fixes
+
+- **Client:** Update `_mapServerResponse()`
+
+# Stable release v22.26.9
+## Date: 21/10/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_parseLoginErrors()`
+
+# Stable release v22.26.8
+## Date: 18/10/2024
+
+### Updates and fixes
+
+- **Exception:** Add `IdentificationErrorException`
+- **Instagram:** Update `_processSuccesfulLoginResponse()`
+- **Bloks:** Update `parseBlok()`
+
+# Stable release v22.26.7
+## Date: 17/10/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_processSuccesfulLoginResponse()`
+
+# Stable release v22.26.6
+## Date: 16/10/2024
+
+### Updates and fixes
+
+- **Timeline:** Update `getUserFeedStream()`
+- **Music:** Update `use` statement
+
 # Stable release v22.26.5
 ## Date: 15/10/2024
 

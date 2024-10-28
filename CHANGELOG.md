@@ -1,3 +1,10 @@
+# Stable release v22.29.3
+## Date: 28/10/2024
+
+### Updates and fixes
+
+- **Account:** Update `changeProfilePicture()`
+
 # Stable release v22.29.2
 ## Date: 28/10/2024
 

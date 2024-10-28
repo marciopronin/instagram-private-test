@@ -1573,6 +1573,7 @@ class Account extends RequestCollection
      * Changes your account's profile picture.
      *
      * @param string $photoFilename The photo filename.
+     * @param bool   $shareToFeed   Share the photo to feed.
      *
      * @throws \InvalidArgumentException
      * @throws \InstagramAPI\Exception\InstagramException
@@ -1580,21 +1581,27 @@ class Account extends RequestCollection
      * @return Response\UserInfoResponse
      */
     public function changeProfilePicture(
-        $photoFilename
+        $photoFilename,
+        $shareToFeed = false
     ) {
         $photo = new \InstagramAPI\Media\Photo\InstagramPhoto($photoFilename, ['jpgOutput' => true, 'targetFeed' => Constants::PROFILE_PIC]);
         $internalMetadata = new InternalMetadata(Utils::generateUploadId(true));
         $internalMetadata->setPhotoDetails(Constants::PROFILE_PIC, $photo->getFile());
         $uploadResponse = $this->ig->internal->uploadPhotoData(Constants::PROFILE_PIC, $internalMetadata);
 
-        return $this->ig->request('accounts/change_profile_picture/')
+        $request = $this->ig->request('accounts/change_profile_picture/')
             ->setSignedPost(false)
             // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('use_fbuploader', 'true')
             ->addPost('remove_birthday_selfie', 'False')
-            ->addPost('upload_id', $internalMetadata->getUploadId())
-            ->getResponse(new Response\UserInfoResponse());
+            ->addPost('upload_id', $internalMetadata->getUploadId());
+
+        if ($shareToFeed) {
+            $request->addPost('share_to_feed', 'true');
+        }
+
+        return $request->getResponse(new Response\UserInfoResponse());
     }
 
     /**

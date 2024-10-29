@@ -6276,21 +6276,7 @@ class Instagram implements ExperimentsInterface
     public function processCreateResponse(
         $response
     ) {
-        $mainBloks = $this->bloks->parseResponse($response->asArray(), '(bk.action.caa.HandleLoginResponse');
-
-        $firstDataBlok = null;
-        foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'logged_in_user')) {
-                $firstDataBlok = $mainBlok;
-                break;
-            }
-        }
-
-        if ($firstDataBlok !== null) {
-            $registrationResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
-        } else {
-            $registrationResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
-        }
+        $registrationResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
 
         if (is_array($registrationResponseWithHeaders)) {
             $errorMap = $this->_parseLoginErrors($registrationResponseWithHeaders);

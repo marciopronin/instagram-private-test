@@ -1,3 +1,12 @@
+# Stable release v22.29.5
+## Date: 29/10/2024
+
+### Updates and fixes
+
+- **Account:** Update `startAccountRegistration()`
+- **Account:** Update `finishAccountRegistration()`
+- **Instagram:** Update `processCreateResponse()`
+
 # Stable release v22.29.4
 ## Date: 29/10/2024
 

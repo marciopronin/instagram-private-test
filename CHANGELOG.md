@@ -1,3 +1,11 @@
+# Stable release v22.29.4
+## Date: 29/10/2024
+
+### Updates and fixes
+
+- **Constants:** Update to 354.2.0.47.100
+- **Internal:** Update `getMobileConfig()`
+
 # Stable release v22.29.3
 ## Date: 28/10/2024
 

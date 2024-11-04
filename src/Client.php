@@ -12,6 +12,7 @@ use InstagramAPI\Exception\InstagramException;
 use InstagramAPI\Exception\LoginRequiredException;
 use InstagramAPI\Exception\ServerMessageThrower;
 use InstagramAPI\Middleware\FakeCookies;
+use InstagramAPI\Middleware\ProxyHandler;
 use InstagramAPI\Middleware\ZeroRating;
 use LazyJsonMapper\Exception\LazyJsonMapperException;
 use Psr\Http\Message\RequestInterface as HttpRequestInterface;
@@ -459,6 +460,8 @@ class Client
 
         $this->_zeroRating = new ZeroRating($parent);
         $stack->push($this->_zeroRating, 'zero_rewrite');
+
+        $stack->push(new ProxyHandler($parent, Instagram::$onProxyHandler), 'proxy_handler');
 
         // Default request options (immutable after client creation).
         $defaultOptions = [

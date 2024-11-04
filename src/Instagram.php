@@ -194,6 +194,13 @@ class Instagram implements ExperimentsInterface
     public static $retryOnNetworkExceptionSleep = 5;
 
     /**
+     * Callbacks on ProxyHandler.
+     *
+     * @var array[]
+     */
+    public static $onProxyHandler = [];
+
+    /**
      * Send async.
      *
      * @var bool
@@ -5099,6 +5106,7 @@ class Instagram implements ExperimentsInterface
 
             // Batch request 1
             $this->client->startEmulatingBatch();
+            $feed = null;
 
             try {
                 $this->internal->fetchZeroRatingToken('token_expired', false, false);

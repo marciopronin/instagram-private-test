@@ -1,3 +1,16 @@
+# Stable release v22.30.0
+## Date: 04/11/2024
+
+### New features
+
+- **Client:** Add ProxyHandler
+- **Middleware:** Add ProxyHandler
+
+### Updates and fixes
+
+- **Bloks:** Update `_fixJsonString()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v22.29.5
 ## Date: 29/10/2024
 

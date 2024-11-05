@@ -6292,7 +6292,7 @@ class Instagram implements ExperimentsInterface
         }
 
         $registrationResponseWithHeaders = json_decode($registrationResponseWithHeaders, true);
-        $registrationResponse = $registrationResponseWithHeaders['registration_response'];
+        $registrationResponse = json_decode($registrationResponseWithHeaders['registration_response'], true);
         if (!isset($registrationResponse['status'])) {
             $registrationResponse['status'] = 'ok';
         }
@@ -6314,12 +6314,9 @@ class Instagram implements ExperimentsInterface
         }
         $this->settings->set('business_account', false);
         $this->settings->set('fbid_v2', $accountCreateResponse->getCreatedUser()->getFbidV2());
-        if ($accountCreateResponse->accountCreateResponse()->getPhoneNumber() !== null) {
-            $this->settings->set('phone_number', $accountCreateResponse->getCreatedUser()->getPhoneNumber());
-        }
 
         $this->isMaybeLoggedIn = true;
-        $this->account_id = $response->getCreatedUser()->getPk();
+        $this->account_id = $accountCreateResponse->getCreatedUser()->getPk();
         $this->settings->set('account_id', $this->account_id);
         $this->settings->set('last_login', time());
 

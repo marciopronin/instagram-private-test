@@ -1,3 +1,11 @@
+# Stable release v22.30.1
+## Date: 06/11/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `processCreateResponse()`
+- **Bloks:** Update `_fixJsonString()`
+
 # Stable release v22.30.0
 ## Date: 04/11/2024
 

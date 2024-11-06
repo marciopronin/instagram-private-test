@@ -4050,7 +4050,7 @@ class Instagram implements ExperimentsInterface
 
         if (is_array($loginResponseWithHeaders)) {
             if (str_contains($response->asJson(), 'BLOKS_TWO_STEP_VERIFICATION_ENTER_CODE:error_message:')) {
-                throw new Exception\InstagramException('Invalid 2FA code');
+                throw new Exception\Invalid2FACodeException('Invalid 2FA code');
             }
             $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
             $this->_throwLoginException($response, $errorMap);
@@ -4145,7 +4145,7 @@ class Instagram implements ExperimentsInterface
 
         if (is_array($loginResponseWithHeaders)) {
             if (str_contains($response->asJson(), 'try a new one')) {
-                throw new Exception\InstagramException('Invalid 2FA code');
+                throw new Exception\Invalid2FACodeException('Invalid 2FA code');
             }
             if (str_contains($response->asJson(), 'Post login failed')) {
                 throw new Exception\InstagramException('Post login failed. Retry again.');

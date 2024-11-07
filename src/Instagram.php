@@ -4254,7 +4254,11 @@ class Instagram implements ExperimentsInterface
 
         $responseJ = $response->asJson();
         $methods = [];
-        if (str_contains($responseJ, 'sms')) {
+
+        $matches = [];
+        $count = preg_match_all('/send a code to/m', $responseJ, $matches);
+
+        if (str_contains($responseJ, 'sms') || $count === 1 || $count === 2) {
             $methods[] = 'sms';
         }
         if (str_contains($responseJ, 'backup_codes')) {
@@ -4266,7 +4270,7 @@ class Instagram implements ExperimentsInterface
         if (str_contains($responseJ, 'totp')) {
             $methods[] = 'totp';
         }
-        if (str_contains($responseJ, 'whatsapp')) {
+        if (str_contains($responseJ, 'whatsapp') || $count === 2) {
             $methods[] = 'whatsapp';
         }
         if (str_contains($responseJ, 'approve_from_another_device')) {
@@ -4279,9 +4283,9 @@ class Instagram implements ExperimentsInterface
     /**
      * 2FA method picker.
      *
-     * @param string $context   2FA context.
-     * @param string $challenge 2FA challenge type.
-     * @param mixed  $method
+     * @param string $context           2FA context.
+     * @param string $method            2FA challenge type.
+     * @param bool   $verifiationMethod Login response.
      *
      * @throws \InvalidArgumentException
      * @throws Exception\InstagramException
@@ -4290,19 +4294,41 @@ class Instagram implements ExperimentsInterface
      */
     public function selectTwoFactorMethod(
         $context,
-        $method
+        $method,
+        $verifiationMethod = false
     ) {
         if (!in_array($method, ['totp', 'backup_codes', 'sms', 'email', 'whatsapp', 'notification'], true)) {
             throw new \InvalidArgumentException('You must provide a valid 2FA method type.');
         }
 
-        $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.method_picker.navigation.async/')
+        if ($verifiationMethod) {
+            $endpoint = 'bloks/apps/com.bloks.www.bloks.ap.two_step_verification.challenge_picker.async/';
+            switch ($method) {
+                case 'sms':
+                    $method = 'SMS';
+                    break;
+                case 'email':
+                    $method = 'EMAIL';
+                    break;
+                case 'notification':
+                    $method = 'AFAD';
+                    break;
+            }
+            $clientParams = [
+                'selected_challenge'    => $method,
+            ];
+        } else {
+            $endpoint = 'bloks/apps/com.bloks.www.two_step_verification.method_picker.navigation.async/';
+            $clientParams = [
+                'selected_method'    => $method,
+            ];
+        }
+
+        $response = $this->request($endpoint)
             ->setNeedsAuth(false)
             ->addPost('params', json_encode([
-                'client_input_params'           => [
-                    'selected_method'         => $method,
-                ],
-                'server_params'         => [
+                'client_input_params'           => $clientParams,
+                'server_params'                 => [
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'two_step_verification_context'                 => $this->bloksInfo['two_step_verification_context'] ?? $context, // $this->bloksInfo['two_step_verification_context'],

@@ -1,3 +1,9 @@
+# Stable release v22.30.3
+## Date: 07/11/2024
+
+- **Instagram:** Update `selectTwoFactorMethod()`
+- **Instagram:** Update `getAvailableTwoFactorMethods()`
+
 # Stable release v22.30.2
 ## Date: 06/11/2024
 

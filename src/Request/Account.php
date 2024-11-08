@@ -221,15 +221,20 @@ class Account extends RequestCollection
     /**
      * Start account registration process (Bloks).
      *
-     * @param string $phone Phone.
+     * @param string $contactpoint Contactpoint: email or phone.
      *
      * @throws \InstagramAPI\Exception\InstagramException
      *
      * @return Response\GenericResponse
      */
     public function startAccountRegistration(
-        $phone
+        $contactpoint
     ) {
+        $mode = 'phone';
+        if (preg_match('/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/', $contactpoint, $matches)) {
+            $mode = 'email';
+        }
+
         $response = $this->ig->processLoginClientDataAndRedirect();
         $re = '/(\d+),\s(\d+),\s\\\\"(com[a-zA-Z0-9\._]+)\\\\"/m';
         preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
@@ -310,38 +315,49 @@ class Account extends RequestCollection
         $regInfo = json_decode('{"registration_flow_id":null,"first_name":null,"last_name":null,"full_name":null,"contactpoint":null,"ar_contactpoint":null,"contactpoint_type":null,"is_using_unified_cp":false,"unified_cp_screen_variant":null,"is_cp_auto_confirmed":false,"is_cp_auto_confirmable":false,"confirmation_code":null,"birthday":null,"did_use_age":null,"gender":null,"use_custom_gender":false,"custom_gender":null,"encrypted_password":null,"username":null,"username_prefill":null,"fb_conf_source":null,"device_id":null,"ig4a_qe_device_id":null,"ig_nta_test_group":null,"family_device_id":null,"nta_eligibility_reason":null,"youth_consent_decision_time":null,"username_screen_experience":"control","user_id":null,"safetynet_token":null,"safetynet_response":null,"machine_id":null,"profile_photo":null,"profile_photo_id":null,"profile_photo_upload_id":null,"avatar":null,"email_oauth_token_no_contact_perm":null,"email_oauth_token":null,"email_oauth_tokens":[],"should_skip_two_step_conf":null,"openid_tokens_for_testing":null,"encrypted_msisdn":null,"encrypted_msisdn_for_safetynet":null,"cached_headers_safetynet_info":null,"should_skip_headers_safetynet":null,"headers_last_infra_flow_id":null,"headers_last_infra_flow_id_safetynet":null,"headers_flow_id":null,"was_headers_prefill_available":false,"sso_enabled":null,"existing_accounts":null,"used_ig_birthday":null,"sync_info":null,"create_new_to_app_account":null,"skip_session_info":null,"ck_error":null,"ck_id":null,"ck_nonce":null,"should_save_password":null,"horizon_synced_username":null,"fb_access_token":null,"horizon_synced_profile_pic":null,"is_identity_synced":false,"is_msplit_reg":null,"user_id_of_msplit_creator":null,"dma_data_combination_consent_given":null,"xapp_accounts":null,"fb_device_id":null,"fb_machine_id":null,"ig_device_id":null,"ig_machine_id":null,"should_skip_nta_upsell":null,"big_blue_token":null,"skip_sync_step_nta":null,"caa_reg_flow_source":null,"ig_authorization_token":null,"full_sheet_flow":false,"crypted_user_id":null,"is_caa_perf_enabled":true,"is_preform":true,"ignore_suma_check":false,"ignore_existing_login":false,"ignore_existing_login_from_suma":false,"ignore_existing_login_after_errors":false,"suggested_first_name":null,"suggested_last_name":null,"suggested_full_name":null,"replace_id_sync_variant":null,"is_redirect_from_nta_replace_id_sync_variant":false,"frl_authorization_token":null,"post_form_errors":null,"skip_step_without_errors":null,"existing_account_exact_match_checked":false,"existing_account_fuzzy_match_checked":false,"email_oauth_exists":false,"confirmation_code_send_error":null,"is_too_young":false,"source_account_type":null,"whatsapp_installed_on_client":null,"confirmation_medium":null,"source_credentials_type":null,"source_cuid":null,"source_account_reg_info":null,"soap_creation_source":null,"source_account_type_to_reg_info":null,"should_skip_youth_tos":false,"is_youth_regulation_flow_complete":false,"is_on_cold_start":false,"email_prefilled":false,"cp_confirmed_by_auto_conf":false,"auto_conf_info":null,"in_sowa_experiment":false,"eligible_to_flash_call_in_ig4a":false,"youth_regulation_config":null,"conf_allow_back_nav_after_change_cp":null,"conf_bouncing_cliff_screen_type":null,"conf_show_bouncing_cliff":null,"is_msplit_neutral_choice":false,"msg_previous_cp":null,"ntp_import_source_info":null,"flash_call_permissions_status":null,"attestation_result":null,"request_data_and_challenge_nonce_string":null,"confirmed_cp_and_code":null,"notification_callback_id":null,"reg_suma_state":null,"reduced_tos_test_group":"control","should_show_spi_before_conf":true,"google_oauth_account":null,"is_reg_request_from_ig_suma":false,"is_igios_spc_reg":false,"device_emails":[],"is_toa_reg":false,"is_threads_public":false,"spc_import_flow":false,"caa_play_integrity_attestation_result":null,"flash_call_provider":null,"name_prefill_variant":"control","spc_birthday_input":false,"failed_birthday_year_count":null,"user_presented_medium_source":null,"user_opted_out_of_ntp":null}', true);
         $regInfo['registration_flow_id'] = $registrationFlowId;
 
-        $response = $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.async.contactpoint_phone.async/')
+        $clientParams = [
+            'device_id'                     => $this->ig->device_id,
+            'msg_previous_cp'               => '',
+            'switch_cp_first_time_loading'  => 1,
+            'accounts_list'                 => [],
+            'confirmed_cp_and_code'         => (object) [],
+            'family_device_id'              => $this->ig->phone_id,
+            'fb_ig_device_id'               => [],
+            'lois_settings'                 => [
+                'lois_token'    => '',
+                'lara_override' => '',
+            ],
+        ];
+
+        if ($mode === 'phone') {
+            $endpoint = 'bloks/apps/com.bloks.www.bloks.caa.reg.async.contactpoint_phone.async/';
+            $clientParams['flash_call_permissions_status'] = [
+                'CALL_PHONE'        => 'DENIED',
+                'READ_CALL_LOG'     => 'DENIED',
+                'READ_PHONE_STATE'  => 'DENIED',
+            ];
+            $clientParams['phone'] = sprintf('+%s', $contactpoint);
+            $clientParams['was_headers_prefill_available'] = 0;
+            $clientParams['login_upsell_phone_list'] = [];
+            $clientParams['whatsapp_installed_on_client'] = 0;
+            $clientParams['was_headers_prefill_used'] = 0;
+            $clientParams['headers_infra_flow_id'] = '';
+            $clientParams['build_type'] = 'release';
+            $clientParams['encrypted_msisdn'] = '';
+            $clientParams['switch_cp_have_seen_suma'] = 0;
+        } else {
+            $endpoint = 'bloks/apps/com.bloks.www.bloks.caa.reg.async.contactpoint_email.async/';
+            $clientParams['email_prefilled'] = 0;
+            $clientParams['email'] = $contactpoint;
+            $clientParams['is_from_device_emails'] = 1;
+        }
+
+        $response = $this->ig->request($endpoint)
             ->setSignedPost(false)
             ->setNeedsAuth(false)
             ->addPost('params', json_encode((object) [
-                'client_input_params'               => [
-                    'flash_call_permissions_status' => [
-                        'CALL_PHONE'        => 'DENIED',
-                        'READ_CALL_LOG'     => 'DENIED',
-                        'READ_PHONE_STATE'  => 'DENIED',
-                    ],
-                    'device_id'                     => $this->ig->device_id,
-                    'was_headers_prefill_available' => 0,
-                    'login_upsell_phone_list'       => [],
-                    'whatsapp_installed_on_client'  => 0,
-                    'msg_previous_cp'               => '',
-                    'switch_cp_first_time_loading'  => 1,
-                    'accounts_list'                 => [],
-                    'confirmed_cp_and_code'         => (object) [],
-                    'family_device_id'              => $this->ig->phone_id,
-                    'fb_ig_device_id'               => [],
-                    'phone'                         => sprintf('+%s', $phone),
-                    'lois_settings'                 => [
-                        'lois_token'    => '',
-                        'lara_override' => '',
-                    ],
-                    'was_headers_prefill_used'      => 0,
-                    'headers_infra_flow_id'         => '',
-                    'build_type'                    => 'release',
-                    'encrypted_msisdn'              => '',
-                    'switch_cp_have_seen_suma'      => 0,
-                ],
-                'server_params' => [
+                'client_input_params'                               => $clientParams,
+                'server_params'                                     => [
                     'event_request_id'                              => $eventRequestId,
                     'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? 0),
                     'text_input_id'                                 => 167691366000078, // improve
@@ -373,17 +389,23 @@ class Account extends RequestCollection
             // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
 
-        $regInfo['was_headers_prefill_available'] = false;
-        $regInfo['whatsapp_installed_on_client'] = false;
-        $regInfo['contactpoint'] = sprintf('+%s', $phone);
+        if ($mode === 'phone') {
+            $regInfo['contactpoint'] = sprintf('+%s', $contactpoint);
+            $regInfo['contactpoint_type'] = 'phone';
+            $regInfo['flash_call_permissions_status'] = [
+                'CALL_PHONE'        => 'DENIED',
+                'READ_CALL_LOG'     => 'DENIED',
+                'READ_PHONE_STATE'  => 'DENIED',
+            ];
+            $regInfo['was_headers_prefill_available'] = false;
+        } else {
+            $regInfo['contactpoint'] = sprintf($contactpoint);
+            $regInfo['contactpoint_type'] = 'email';
+            $regInfo['email_prefilled'] = false;
+        }
         $regInfo['device_id'] = $this->ig->device_id;
         $regInfo['family_device_id'] = $this->ig->phone_id;
-        $regInfo['contactpoint_type'] = 'phone';
-        $regInfo['flash_call_permissions_status'] = [
-            'CALL_PHONE'        => 'DENIED',
-            'READ_CALL_LOG'     => 'DENIED',
-            'READ_PHONE_STATE'  => 'DENIED',
-        ];
+        $regInfo['whatsapp_installed_on_client'] = false;
         $regInfo['headers_flow_id'] = $headersFlowId;
 
         $fallbackCall = 0;
@@ -498,8 +520,31 @@ class Account extends RequestCollection
         $eventRequestId = $startRegistrationData['event_request_id'];
         $regInfo = $startRegistrationData['reg_info'];
         $regInfo['caa_reg_flow_source'] = 'cacheable_aymh_screen';
-        $regInfo['confirmation_medium'] = 'sms';
-        $regInfo['confirmation_code'] = $code;
+
+        $serverParams = [
+            'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? 0),
+            'layered_homepage_experiment_group'             => $serverMap['layered_homepage_experiment_group'] ?? null,
+            'device_id'                                     => $this->ig->device_id,
+            'waterfall_id'                                  => $serverMap['waterfall_id'] ?? null,
+            'wa_timer_id'                                   => 'wa_retriever',
+            'INTERNAL__latency_qpl_instance_id'             => $internalLatencyData['com.bloks.www.bloks.caa.reg.aymh_create_account_button.async']['instance_id'],
+            'flow_info'                                     => json_encode(['flow_name'  =>  'new_to_family_ig_default', 'flow_type' => 'ntf']),
+            'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
+            'sms_retriever_started_prior_step'              => 0,
+            'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.bloks.caa.reg.aymh_create_account_button.async']['marker_id']),
+            'reg_info'                                      => json_encode($regInfo),
+            'family_device_id'                              => $this->ig->phone_id,
+            'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? null,
+            'INTERNAL_INFRA_THEME'                          => 'harm_f,default,default,harm_f',
+            'access_flow_version'                           => 'F2_FLOW',
+            'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
+            'current_step'                                  => 3,
+            'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
+        ];
+
+        if ($regInfo['contactpoint_type'] === 'phone') {
+            $serverParams['confirmation_medium'] = 'sms';
+        }
 
         $response = $this->ig->request('bloks/apps/com.bloks.www.bloks.caa.reg.confirmation.async/')
             ->setSignedPost(false)
@@ -515,27 +560,7 @@ class Account extends RequestCollection
                         'lara_override' => '',
                     ],
                 ],
-                'server_params' => [
-                    'is_from_logged_out'                            => intval($serverMap['is_from_logged_out'] ?? 0),
-                    'layered_homepage_experiment_group'             => $serverMap['layered_homepage_experiment_group'] ?? null,
-                    'device_id'                                     => $this->ig->device_id,
-                    'waterfall_id'                                  => $serverMap['waterfall_id'] ?? null,
-                    'confirmation_medium'                           => 'sms',
-                    'wa_timer_id'                                   => 'wa_retriever',
-                    'INTERNAL__latency_qpl_instance_id'             => $internalLatencyData['com.bloks.www.bloks.caa.reg.aymh_create_account_button.async']['instance_id'],
-                    'flow_info'                                     => json_encode(['flow_name'  =>  'new_to_family_ig_default', 'flow_type' => 'ntf']),
-                    'is_platform_login'                             => intval($serverMap['is_platform_login'] ?? 0),
-                    'sms_retriever_started_prior_step'              => 0,
-                    'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.bloks.caa.reg.aymh_create_account_button.async']['marker_id']),
-                    'reg_info'                                      => json_encode($regInfo),
-                    'family_device_id'                              => $this->ig->phone_id,
-                    'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? null,
-                    'INTERNAL_INFRA_THEME'                          => 'harm_f,default,default,harm_f',
-                    'access_flow_version'                           => 'F2_FLOW',
-                    'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
-                    'current_step'                                  => 3,
-                    'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->ig->uuid,
-                ],
+                'server_params' => $serverParams,
             ]))
             ->addPost('bk_client_context', json_encode((object) [
                 'bloks_version' => Constants::BLOCK_VERSIONING_ID,
@@ -548,6 +573,17 @@ class Account extends RequestCollection
 
         if (!str_contains($response->asJson(), 'confirmation_success')) {
             throw new \InstagramAPI\Exception\InstagramException('SMS code not valid or expired.');
+        }
+
+        if ($regInfo['contactpoint_type'] === 'phone') {
+            $regInfo['confirmation_medium'] = 'sms';
+            $regInfo['confirmation_code'] = $code;
+        } else {
+            $re = '/confirmation_code\\\\\\\\\\\\":\\\\\\\\\\\\"(\w+)\\\\\\\\\\\\/m';
+            preg_match_all($re, $response->asJson(), $matches, PREG_SET_ORDER, 0);
+            if ($matches) {
+                $regInfo['confirmation_code'] = $matches[0][1];
+            }
         }
 
         $regInfo['confirmed_cp_and_code'] = [];
@@ -630,7 +666,7 @@ class Account extends RequestCollection
                     'is_youth_regulation_flow_complete'     => 0,
                     'client_timezone'                       => $this->ig->getTimezoneName(),
                     'birthday_or_current_date_string'       => $birthday,
-                    'birthday_timestamp'                    => strtotime($birthday),
+                    'birthday_timestamp'                    => \DateTime::createFromFormat('m-d-Y', $birthday)->getTimestamp(),
                     'lois_settings'                         => [
                         'lois_token'    => '',
                         'lara_override' => '',
@@ -839,6 +875,10 @@ class Account extends RequestCollection
             ->addPost('_uuid', $this->ig->uuid)
             // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->getResponse(new Response\GenericResponse());
+
+        if (!str_contains($response->asJson(), 'registration_response')) {
+            throw new \InstagramAPI\Exception\InstagramException('Something went wrong during account registration step.');
+        }
 
         $response = $this->ig->processCreateResponse($response);
 

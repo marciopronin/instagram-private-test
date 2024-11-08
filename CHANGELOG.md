@@ -1,8 +1,13 @@
+# Stable release v22.30.5
+## Date: 08/11/2024
+
+- **Instagram:** Update `_login()`
+
 # Stable release v22.30.4
 ## Date: 08/11/2024
 
-- **Instagram:** Update `startAccountRegistration()`
-- **Instagram:** Update `finishAccountRegistration()`
+- **Account:** Update `startAccountRegistration()`
+- **Account:** Update `finishAccountRegistration()`
 
 # Stable release v22.30.3
 ## Date: 07/11/2024

@@ -4053,7 +4053,7 @@ class Instagram implements ExperimentsInterface
             if (str_contains($response->asJson(), 'BLOKS_TWO_STEP_VERIFICATION_ENTER_CODE:error_message:')) {
                 throw new Exception\Invalid2FACodeException('Invalid 2FA code');
             }
-            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders, $response);
             $this->_throwLoginException($response, $errorMap);
         }
         $response = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
@@ -4151,7 +4151,7 @@ class Instagram implements ExperimentsInterface
             if (str_contains($response->asJson(), 'Post login failed')) {
                 throw new Exception\InstagramException('Post login failed. Retry again.');
             }
-            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders, $response);
             $this->_throwLoginException($response, $errorMap);
         }
         $response = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
@@ -6242,31 +6242,19 @@ class Instagram implements ExperimentsInterface
         }
 
         $result = [];
-        $check = '\checkpoint\\';
-        array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
-            if ($value === $check) {
-                $result = ['event_category' => 'checkpoint'];
-            }
-        });
-        if (empty($result)) {
-            $check = '\FIRST_PASSWORD_FAILURE\\';
-            array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
-                if ($value === $check) {
-                    $result = ['event_category' => 'FIRST_PASSWORD_FAILURE'];
-                }
-            });
+        if ($response !== null && str_contains($response->asJson(), 'checkpoint')) {
+            $result = ['event_category' => 'checkpoint'];
         }
-        if (empty($result)) {
-            $check = '\login_failure\\';
-            array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
-                if ($value === $check) {
-                    $result = ['event_category' => 'login_home_page_interaction'];
-                }
-            });
+        if ($response !== null && empty($result) && str_contains($response->asJson(), 'FIRST_PASSWORD_FAILURE')) {
+            $result = ['event_category' => 'FIRST_PASSWORD_FAILURE'];
         }
-        if ($response !== null && str_contains($response->asJson(), 'An unexpected error occurred. Please try logging in again.')) {
+        if ($response !== null && empty($result) && str_contains($response->asJson(), 'login_failure')) {
+            $result = ['event_category' => 'login_failure'];
+        }
+        if ($response !== null && empty($result) && str_contains($response->asJson(), 'An unexpected error occurred. Please try logging in again.')) {
             $result = ['exception_message' => 'Login Error: An unexpected error occurred. Please try logging in again.'];
         }
+
         if (!empty($result)) {
             return $result;
         }
@@ -6314,7 +6302,7 @@ class Instagram implements ExperimentsInterface
         $registrationResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
 
         if (is_array($registrationResponseWithHeaders)) {
-            $errorMap = $this->_parseLoginErrors($registrationResponseWithHeaders);
+            $errorMap = $this->_parseLoginErrors($registrationResponseWithHeaders, $response);
             $this->_throwLoginException($response, $errorMap);
         }
 

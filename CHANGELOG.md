@@ -1,16 +1,30 @@
+# Stable release v22.30.6
+## Date: 11/11/2024
+
+### Updates and fixes
+
+- **InstagramPhoto:** Update `_createOutputFile()`
+- **Internal:** Update `_getPhotoUploadParams()`
+
 # Stable release v22.30.5
 ## Date: 08/11/2024
+
+### Updates and fixes
 
 - **Instagram:** Update `_login()`
 
 # Stable release v22.30.4
 ## Date: 08/11/2024
 
+### Updates and fixes
+
 - **Account:** Update `startAccountRegistration()`
 - **Account:** Update `finishAccountRegistration()`
 
 # Stable release v22.30.3
 ## Date: 07/11/2024
+
+### Updates and fixes
 
 - **Instagram:** Update `selectTwoFactorMethod()`
 - **Instagram:** Update `getAvailableTwoFactorMethods()`

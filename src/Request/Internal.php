@@ -4118,12 +4118,19 @@ class Internal extends RequestCollection
     ) {
         if ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) {
             $imageCompression = [
-                'lib_name'          => 'libwebp',
-                'lib_version'       => '26',
-                'quality'           => '96',
-                'original_width'    => $internalMetadata->getPhotoDetails()->getWidth(),
-                'original_width'    => $internalMetadata->getPhotoDetails()->getHeight(),
+                'lib_name'           => 'libwebp',
+                'lib_version'        => '26',
+                'quality'            => '94',
+                'original_width'     => $internalMetadata->getPhotoDetails()->getWidth(),
+                'original_height'    => $internalMetadata->getPhotoDetails()->getHeight(),
             ];
+            if ($targetFeed === Constants::FEED_TIMELINE) {
+                $imageCompression['msssim'] = round(0.98 + (mt_rand() / mt_getrandmax()) * 0.01, 16);
+                $imageCompression['ssim'] = round(0.99 + (mt_rand() / mt_getrandmax()) * 0.01, 16);
+            }
+            if ($targetFeed === Constants::FEED_STORY) {
+                $imageCompression['quality'] = '84';
+            }
         } else {
             $imageCompression = [
                 'lib_name'      => 'moz',

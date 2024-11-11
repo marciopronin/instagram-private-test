@@ -79,7 +79,7 @@ class InstagramPhoto extends InstagramMedia
             try {
                 $output = $this->_processResource($resource, $srcRect, $dstRect, $canvas);
                 if (@$this->_options['targetFeed'] !== Constants::FEED_LIVE) {
-                    $this->ssimAndMsssim = SSIM::getSsimAndMsssim($resource, $output);
+                    // $this->ssimAndMsssim = SSIM::getSsimAndMsssim($resource, $output);
                 }
             } finally {
                 @imagedestroy($resource);

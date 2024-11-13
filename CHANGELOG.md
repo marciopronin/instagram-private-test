@@ -1,3 +1,11 @@
+# Stable release v22.31.1
+## Date: 13/11/2024
+
+### Updates and fixes
+
+- **Account:** Update `startAccountRegistration()`
+- **Account:** Update `finishAccountRegistration()`
+
 # Stable release v22.31.0
 ## Date: 13/11/2024
 

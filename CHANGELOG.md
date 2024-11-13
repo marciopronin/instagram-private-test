@@ -1,3 +1,10 @@
+# Stable release v22.31.0
+## Date: 13/11/2024
+
+### New features
+
+- **Reel:** Update `getUserReelsQuery()`
+
 # Stable release v22.30.7
 ## Date: 11/11/2024
 

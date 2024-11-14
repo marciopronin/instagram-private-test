@@ -1,3 +1,11 @@
+# Stable release v22.31.2
+## Date: 14/11/2024
+
+### Updates and fixes
+
+- **Event:** Update `_sendBatchEvents()`
+- **Middleware:** Update ProxyHandler
+
 # Stable release v22.31.1
 ## Date: 13/11/2024
 

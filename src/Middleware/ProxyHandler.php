@@ -54,11 +54,13 @@ class ProxyHandler
      * one and only argument.
      *
      * @param string $cbName The name of the callback.
+     * @param mixed  $data
      *
      * @throws \InstagramAPI\Exception\SettingsException
      */
     protected function _triggerCallback(
-        $cbName
+        $cbName,
+        $data = []
     ) {
         // Reject anything that isn't in our list of VALID callbacks.
         if (!in_array($cbName, self::SUPPORTED_CALLBACKS)) {
@@ -68,7 +70,7 @@ class ProxyHandler
         // Trigger the callback with a reference to our StorageHandler instance.
         if (isset($this->_callbacks[$cbName])) {
             try {
-                $this->_callbacks[$cbName]($this->_parent);
+                $this->_callbacks[$cbName]($this->_parent, $data);
             } catch (\Exception $e) {
                 // pass
             }
@@ -95,13 +97,19 @@ class ProxyHandler
             $this->_triggerCallback('onRequest');
 
             return $handler($request, $options)->then(
-                function (ResponseInterface $response) {
-                    $this->_triggerCallback('onResponse');
+                function (ResponseInterface $response) use ($request) {
+                    $this->_triggerCallback('onResponse', [
+                        'request'  => $request,
+                        'response' => $response,
+                    ]);
 
                     return $response;
                 },
-                function ($reason) {
-                    $this->_triggerCallback('onRejected');
+                function ($reason) use ($request) {
+                    $this->_triggerCallback('onRejected', [
+                        'request' => $request,
+                        'reason'  => $reason,
+                    ]);
 
                     return Promise\Create::rejectionFor($reason);
                 }

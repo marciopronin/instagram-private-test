@@ -1,3 +1,10 @@
+# Stable release v22.31.3
+## Date: 14/11/2024
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+
 # Stable release v22.31.2
 ## Date: 14/11/2024
 

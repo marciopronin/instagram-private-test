@@ -194,6 +194,13 @@ class Instagram implements ExperimentsInterface
     public static $retryOnNetworkExceptionSleep = 5;
 
     /**
+     * Callbacks on ProxyHandler.
+     *
+     * @var array[]
+     */
+    public static $onProxyHandler = [];
+
+    /**
      * Send async.
      *
      * @var bool
@@ -2378,7 +2385,8 @@ class Instagram implements ExperimentsInterface
                 if ($firstDataBlok !== null) {
                     $loginResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
                 } else {
-                    $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+                    // $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
+                    $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']), 'bk.action.map.Make');
                 }
 
                 $errorMap = [];
@@ -4043,9 +4051,9 @@ class Instagram implements ExperimentsInterface
 
         if (is_array($loginResponseWithHeaders)) {
             if (str_contains($response->asJson(), 'BLOKS_TWO_STEP_VERIFICATION_ENTER_CODE:error_message:')) {
-                throw new Exception\InstagramException('Invalid 2FA code');
+                throw new Exception\Invalid2FACodeException('Invalid 2FA code');
             }
-            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders, $response);
             $this->_throwLoginException($response, $errorMap);
         }
         $response = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
@@ -4138,12 +4146,12 @@ class Instagram implements ExperimentsInterface
 
         if (is_array($loginResponseWithHeaders)) {
             if (str_contains($response->asJson(), 'try a new one')) {
-                throw new Exception\InstagramException('Invalid 2FA code');
+                throw new Exception\Invalid2FACodeException('Invalid 2FA code');
             }
             if (str_contains($response->asJson(), 'Post login failed')) {
                 throw new Exception\InstagramException('Post login failed. Retry again.');
             }
-            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders);
+            $errorMap = $this->_parseLoginErrors($loginResponseWithHeaders, $response);
             $this->_throwLoginException($response, $errorMap);
         }
         $response = $this->_processSuccesfulLoginResponse($loginResponseWithHeaders, 1800);
@@ -4247,7 +4255,11 @@ class Instagram implements ExperimentsInterface
 
         $responseJ = $response->asJson();
         $methods = [];
-        if (str_contains($responseJ, 'sms')) {
+
+        $matches = [];
+        $count = preg_match_all('/send a code to/m', $responseJ, $matches);
+
+        if (str_contains($responseJ, 'sms') || $count === 1 || $count === 2) {
             $methods[] = 'sms';
         }
         if (str_contains($responseJ, 'backup_codes')) {
@@ -4259,7 +4271,7 @@ class Instagram implements ExperimentsInterface
         if (str_contains($responseJ, 'totp')) {
             $methods[] = 'totp';
         }
-        if (str_contains($responseJ, 'whatsapp')) {
+        if (str_contains($responseJ, 'whatsapp') || $count === 2) {
             $methods[] = 'whatsapp';
         }
         if (str_contains($responseJ, 'approve_from_another_device')) {
@@ -4272,9 +4284,9 @@ class Instagram implements ExperimentsInterface
     /**
      * 2FA method picker.
      *
-     * @param string $context   2FA context.
-     * @param string $challenge 2FA challenge type.
-     * @param mixed  $method
+     * @param string $context           2FA context.
+     * @param string $method            2FA challenge type.
+     * @param bool   $verifiationMethod Login response.
      *
      * @throws \InvalidArgumentException
      * @throws Exception\InstagramException
@@ -4283,19 +4295,41 @@ class Instagram implements ExperimentsInterface
      */
     public function selectTwoFactorMethod(
         $context,
-        $method
+        $method,
+        $verifiationMethod = false
     ) {
         if (!in_array($method, ['totp', 'backup_codes', 'sms', 'email', 'whatsapp', 'notification'], true)) {
             throw new \InvalidArgumentException('You must provide a valid 2FA method type.');
         }
 
-        $response = $this->request('bloks/apps/com.bloks.www.two_step_verification.method_picker.navigation.async/')
+        if ($verifiationMethod) {
+            $endpoint = 'bloks/apps/com.bloks.www.bloks.ap.two_step_verification.challenge_picker.async/';
+            switch ($method) {
+                case 'sms':
+                    $method = 'SMS';
+                    break;
+                case 'email':
+                    $method = 'EMAIL';
+                    break;
+                case 'notification':
+                    $method = 'AFAD';
+                    break;
+            }
+            $clientParams = [
+                'selected_challenge'    => $method,
+            ];
+        } else {
+            $endpoint = 'bloks/apps/com.bloks.www.two_step_verification.method_picker.navigation.async/';
+            $clientParams = [
+                'selected_method'    => $method,
+            ];
+        }
+
+        $response = $this->request($endpoint)
             ->setNeedsAuth(false)
             ->addPost('params', json_encode([
-                'client_input_params'           => [
-                    'selected_method'         => $method,
-                ],
-                'server_params'         => [
+                'client_input_params'           => $clientParams,
+                'server_params'                 => [
                     'INTERNAL__latency_qpl_marker_id'               => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'INTERNAL__latency_qpl_instance_id'             => isset($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? (is_array($this->bloksInfo['INTERNAL__latency_qpl_instance_id']) ? intval($this->bloksInfo['INTERNAL__latency_qpl_instance_id'][1]) : 1) : 1,
                     'two_step_verification_context'                 => $this->bloksInfo['two_step_verification_context'] ?? $context, // $this->bloksInfo['two_step_verification_context'],
@@ -5099,6 +5133,7 @@ class Instagram implements ExperimentsInterface
 
             // Batch request 1
             $this->client->startEmulatingBatch();
+            $feed = null;
 
             try {
                 $this->internal->fetchZeroRatingToken('token_expired', false, false);
@@ -6207,31 +6242,19 @@ class Instagram implements ExperimentsInterface
         }
 
         $result = [];
-        $check = '\checkpoint\\';
-        array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
-            if ($value === $check) {
-                $result = ['event_category' => 'checkpoint'];
-            }
-        });
-        if (empty($result)) {
-            $check = '\FIRST_PASSWORD_FAILURE\\';
-            array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
-                if ($value === $check) {
-                    $result = ['event_category' => 'FIRST_PASSWORD_FAILURE'];
-                }
-            });
+        if ($response !== null && str_contains($response->asJson(), 'checkpoint')) {
+            $result = ['event_category' => 'checkpoint'];
         }
-        if (empty($result)) {
-            $check = '\login_failure\\';
-            array_walk_recursive($loginResponseWithHeaders, function ($value) use ($check, &$result) {
-                if ($value === $check) {
-                    $result = ['event_category' => 'login_home_page_interaction'];
-                }
-            });
+        if ($response !== null && empty($result) && str_contains($response->asJson(), 'FIRST_PASSWORD_FAILURE')) {
+            $result = ['event_category' => 'FIRST_PASSWORD_FAILURE'];
         }
-        if ($response !== null && str_contains($response->asJson(), 'An unexpected error occurred. Please try logging in again.')) {
+        if ($response !== null && empty($result) && str_contains($response->asJson(), 'login_failure')) {
+            $result = ['event_category' => 'login_failure'];
+        }
+        if ($response !== null && empty($result) && str_contains($response->asJson(), 'An unexpected error occurred. Please try logging in again.')) {
             $result = ['exception_message' => 'Login Error: An unexpected error occurred. Please try logging in again.'];
         }
+
         if (!empty($result)) {
             return $result;
         }
@@ -6276,29 +6299,15 @@ class Instagram implements ExperimentsInterface
     public function processCreateResponse(
         $response
     ) {
-        $mainBloks = $this->bloks->parseResponse($response->asArray(), '(bk.action.caa.HandleLoginResponse');
-
-        $firstDataBlok = null;
-        foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'logged_in_user')) {
-                $firstDataBlok = $mainBlok;
-                break;
-            }
-        }
-
-        if ($firstDataBlok !== null) {
-            $registrationResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
-        } else {
-            $registrationResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
-        }
+        $registrationResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
 
         if (is_array($registrationResponseWithHeaders)) {
-            $errorMap = $this->_parseLoginErrors($registrationResponseWithHeaders);
+            $errorMap = $this->_parseLoginErrors($registrationResponseWithHeaders, $response);
             $this->_throwLoginException($response, $errorMap);
         }
 
         $registrationResponseWithHeaders = json_decode($registrationResponseWithHeaders, true);
-        $registrationResponse = $registrationResponseWithHeaders['registration_response'];
+        $registrationResponse = json_decode($registrationResponseWithHeaders['registration_response'], true);
         if (!isset($registrationResponse['status'])) {
             $registrationResponse['status'] = 'ok';
         }
@@ -6320,12 +6329,9 @@ class Instagram implements ExperimentsInterface
         }
         $this->settings->set('business_account', false);
         $this->settings->set('fbid_v2', $accountCreateResponse->getCreatedUser()->getFbidV2());
-        if ($accountCreateResponse->accountCreateResponse()->getPhoneNumber() !== null) {
-            $this->settings->set('phone_number', $accountCreateResponse->getCreatedUser()->getPhoneNumber());
-        }
 
         $this->isMaybeLoggedIn = true;
-        $this->account_id = $response->getCreatedUser()->getPk();
+        $this->account_id = $accountCreateResponse->getCreatedUser()->getPk();
         $this->settings->set('account_id', $this->account_id);
         $this->settings->set('last_login', time());
 

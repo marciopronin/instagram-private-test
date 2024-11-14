@@ -1,3 +1,116 @@
+# Stable release v22.31.1
+## Date: 13/11/2024
+
+### Updates and fixes
+
+- **Account:** Update `startAccountRegistration()`
+- **Account:** Update `finishAccountRegistration()`
+
+# Stable release v22.31.0
+## Date: 13/11/2024
+
+### New features
+
+- **Reel:** Update `getUserReelsQuery()`
+
+# Stable release v22.30.7
+## Date: 11/11/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_parseLoginErrors()`
+
+# Stable release v22.30.6
+## Date: 11/11/2024
+
+### Updates and fixes
+
+- **InstagramPhoto:** Update `_createOutputFile()`
+- **Internal:** Update `_getPhotoUploadParams()`
+
+# Stable release v22.30.5
+## Date: 08/11/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+
+# Stable release v22.30.4
+## Date: 08/11/2024
+
+### Updates and fixes
+
+- **Account:** Update `startAccountRegistration()`
+- **Account:** Update `finishAccountRegistration()`
+
+# Stable release v22.30.3
+## Date: 07/11/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `selectTwoFactorMethod()`
+- **Instagram:** Update `getAvailableTwoFactorMethods()`
+
+# Stable release v22.30.2
+## Date: 06/11/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `finishTwoFactorVerification()`
+- **Instagram:** Update `finishTwoFactorGenericVerification()`
+
+# Stable release v22.30.1
+## Date: 06/11/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `processCreateResponse()`
+- **Bloks:** Update `_fixJsonString()`
+
+# Stable release v22.30.0
+## Date: 04/11/2024
+
+### New features
+
+- **Client:** Add ProxyHandler
+- **Middleware:** Add ProxyHandler
+
+### Updates and fixes
+
+- **Bloks:** Update `_fixJsonString()`
+- **Instagram:** Update `_sendLoginFlow()`
+
+# Stable release v22.29.5
+## Date: 29/10/2024
+
+### Updates and fixes
+
+- **Account:** Update `startAccountRegistration()`
+- **Account:** Update `finishAccountRegistration()`
+- **Instagram:** Update `processCreateResponse()`
+
+# Stable release v22.29.4
+## Date: 29/10/2024
+
+### Updates and fixes
+
+- **Constants:** Update to 354.2.0.47.100
+- **Internal:** Update `getMobileConfig()`
+
+# Stable release v22.29.3
+## Date: 28/10/2024
+
+### Updates and fixes
+
+- **Account:** Update `changeProfilePicture()`
+
+# Stable release v22.29.2
+## Date: 28/10/2024
+
+### Updates and fixes
+
+- **Discover:** Update `getExploreFeed()`
+
 # Stable release v22.29.1
 ## Date: 25/10/2024
 

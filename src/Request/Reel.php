@@ -202,6 +202,59 @@ class Reel extends RequestCollection
     }
 
     /**
+     * Get user reels graph query.
+     *
+     * @param string      $userId Numerical UserPK ID.
+     * @param string|null $maxId  Next "maximum ID", used for pagination.
+     *
+     * @throws \InvalidArgumentException
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return Response\ReelsResponse
+     */
+    public function getUserReelsQuery(
+        $userId,
+        $maxId = null
+    ) {
+        $data = [
+            'enable_likers_in_full_media'           => false,
+            'use_defer'                             => true,
+            'exclude_main_user_field'               => false,
+            'enable_thumbnails_in_light_media'      => false,
+            'stream_use_customized_batch'           => true,
+            'enable_video_versions_in_light_media'  => true,
+            'enable_clips_metadata_in_light_media'  => true,
+            'data'                                  => [
+                'target_user_id'                => $userId,
+                'sort_by_views'                 => false,
+                'should_stream_response'        => true,
+                'max_id'                        => $maxId,
+                'page_size'                     => 12,
+                'include_feed_video'            => true,
+                'no_of_medias_in_each_chunk'    => 6,
+                'audience'                      => null,
+            ],
+            'initial_stream_count'                  => 6,
+            'enable_audience_in_light_media'        => false,
+            'use_stream'                            => true,
+            'exclude_caption_user_field'            => false,
+        ];
+
+        $response = $this->ig->internal->sendGraph('209049231617346558279910672644', $data, 'ClipsProfileQuery', 'xdt_user_clips_graphql', 'false', 'pando', true);
+        $arr = $response->asArray();
+        if (isset($arr['data'])) {
+            $data = $arr['data'];
+            foreach ($data as $k => $v) {
+                if ($k === '1$xdt_user_clips_graphql(data:$data)') {
+                    return new Response\ReelsResponse($data[$k]);
+                }
+            }
+        }
+
+        return $response;
+    }
+
+    /**
      * Get hashtag reels.
      *
      * @param string      $hashtag Hashtag.

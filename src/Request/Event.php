@@ -380,6 +380,34 @@ class Event extends RequestCollection
     }
 
     /**
+     * Determines and sets the follow status for a given item.
+     *
+     * @param object $item    The item to check.
+     * @param array  $options Options array that may contain a 'following' key to override the follow status.
+     *
+     * @throws \InvalidArgumentException If the item does not represent a user with a valid friendship status.
+     *
+     * @return string The determined follow status, either 'following' or 'not_following'.
+     */
+    protected function _setFollowStatus(
+        $item,
+        array $options
+    ) {
+        if (($item->getUser() === null || !$item->getUser()->isFriendshipStatus())
+            && !isset($options['follow_status'])) {
+            throw new \InvalidArgumentException(
+                'The item must have a valid user and friendship status, or follow_status must be provided in options.'
+            );
+        }
+
+        if ($item->getUser() && $item->getUser()->getFriendshipStatus()) {
+            return $item->getUser()->getFriendshipStatus()->getFollowing();
+        }
+
+        return $options['follow_status'] ?? 'not_following';
+    }
+
+    /**
      * Generate nav chain.
      *
      * @param string      $module        Module.
@@ -1057,7 +1085,7 @@ class Event extends RequestCollection
                 'm_pk'                      => $item->getId(),
                 'hashtag_id'                => $hashtagId,
                 'hashtag_name'              => $hashtagName,
-                'hashtag_follow_status'     => isset($options['following']) ? 'following' : 'not_following',
+                'hashtag_follow_status'     => $this->_setFollowStatus($item, $options),
                 'hashtag_feed_type'         => $options['feed_type'] ?? 'top',
                 'tab_index'                 => $options['tab_index'] ?? 0,
                 'source_of_action'          => 'feed_contextual_hashtag',
@@ -1114,7 +1142,7 @@ class Event extends RequestCollection
                 'm_t'                       => $item->getMediaType(),
                 'tracking_token'            => $item->getOrganicTrackingToken(),
                 'source_of_action'          => $module,
-                'follow_status'             => $followingUserStatus,
+                'follow_status'             => $this->_setFollowStatus($item, ['follow_status' => $followingUserStatus]),
                 'm_ix'                      => 1,
                 'timespent'                 => $timespent,
                 'avgViewPercent'            => 1,
@@ -1131,7 +1159,7 @@ class Event extends RequestCollection
                 'm_t'                       => $item->getMediaType(),
                 'tracking_token'            => $item->getOrganicTrackingToken(),
                 'source_of_action'          => $module,
-                'follow_status'             => $followingUserStatus,
+                'follow_status'             => $this->_setFollowStatus($item, ['follow_status' => $followingUserStatus]),
                 'connection_id'             => '180',
                 'imp_logger_ver'            => 16,
                 'timespent'                 => $timespent,
@@ -1194,7 +1222,7 @@ class Event extends RequestCollection
                 'tracking_token'                => $item->getOrganicTrackingToken(),
                 'action'					                   => 'webclick',
                 'source_of_action'              => $module,
-                'follow_status'                 => isset($options['following']) ? 'following' : 'not_following',
+                'follow_status'                 => ($module === 'reel_feed_timeline') ? 'following' : $this->_setFollowStatus($item, $options),
                 'viewer_session_id'             => $options['viewer_session_id'],
                 'tray_session_id'               => $options['tray_session_id'],
                 'reel_id'                       => $item->getId(),
@@ -1248,7 +1276,7 @@ class Event extends RequestCollection
             'tracking_token'            => $item->getOrganicTrackingToken(),
             'action'                    => 'webclick',
             'source_of_action'          => $source,
-            'follow_status'             => ($source === 'reel_feed_timeline') ? 'following' : $followingUserStatus,
+            'follow_status'             => ($source === 'reel_feed_timeline') ? 'following' : $this->_setFollowStatus($item, ['follow_status' => $followingUserStatus]),
             'viewer_session_id'         => $viewerSessionId,
             'tray_session_id'           => $traySessionId,
             'reel_id'                   => $item->getUser()->getPk(),
@@ -1398,8 +1426,8 @@ class Event extends RequestCollection
             'tracking_token'                => $item->getOrganicTrackingToken(),
             'elapsed_time_since_last_item'  => -1,
             'source_of_action'              => $module,
-            'follow_status'                 => $options['follow_status'] ?? 'not_following',
-            'entity_follow_status'          => $options['entity_follow_status'] ?? 'not_following',
+            'follow_status'                 => $this->_setFollowStatus($item, $options),
+            'entity_follow_status'          => $this->_setFollowStatus($item, $options), // entity_follow_status
             'entity_type'                   => 'user',
             'entity_id'                     => $item->getUser()->getPk(),
             'entity_page_id'                => $item->getUser()->getPk(),
@@ -1436,7 +1464,7 @@ class Event extends RequestCollection
             'm_t'                           => $item->getMediaType(),
             'tracking_token'                => $item->getOrganicTrackingToken(),
             'source_of_action'              => $module,
-            'follow_status'                 => ($module === 'feed_timeline') ? 'following' : $options['follow_status'],
+            'follow_status'                 => ($module === 'feed_timeline') ? 'following' : $this->_setFollowStatus($item, $options),
             'm_ix'                          => 1,
             'inventory_source'              => 'media_or_ad',
             'feed_request_id'               => $feedSessionId,
@@ -1680,7 +1708,7 @@ class Event extends RequestCollection
             'actual_insert_position'                        => -1,
             'comment_compose_duration'                      => -1,
             'is_demo'                                       => false,
-            'follow_status'                                 => $options['follow_status'] ?? 'not_following',
+            'follow_status'                                 => $this->_setFollowStatus($item, $options),
             'duration'                                      => -1,
             'reel_viewer_gestures_nux_impression_duration'  => -1,
             'is_acp_delivered'                              => false,
@@ -1770,7 +1798,7 @@ class Event extends RequestCollection
             'm_t'                       => $item->getMediaType(),
             'tracking_token'            => $item->getOrganicTrackingToken(),
             'source_of_action'          => 'comments_v2',
-            'follow_status'             => $isFollowingUser ? 'following' : 'not_following',
+            'follow_status'             => $this->_setFollowStatus($item, ['follow_status' => $isFollowingUser]),
             'comment_compose_duration'  => $composeDuration,
             'media_thumbnail_section'   => 'grid',
             'entity_page_name'          => $item->getUser()->getUsername(),
@@ -2215,7 +2243,7 @@ class Event extends RequestCollection
 
         if ($module === 'profile' || $module === 'feed_short_url'
             || $module === 'feed_contextual_profile' || $module === 'feed_contextual_self_profile' || $module === 'feed_timeline' || $module === 'reel_follow_list') {
-            $extra['follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['follow_status'] = ($module === 'feed_timeline') ? 'following' : $this->_setFollowStatus($item, $options);
             $extra['m_ix'] = 3; // ?
             $extra['imp_logger_ver'] = 16;
             $extra['is_app_backgrounded'] = 'false';
@@ -2243,7 +2271,7 @@ class Event extends RequestCollection
             $extra['section'] = 0;
             $extra['position'] = $options['position'] ?? '["0","0"]';
         } elseif ($module === 'feed_contextual_location') {
-            $extra['follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['follow_status'] = $this->_setFollowStatus($item, $options);
             $extra['m_ix'] = 3; // ?
             $extra['imp_logger_ver'] = 16;
             $extra['is_app_backgrounded'] = 'false';
@@ -2328,7 +2356,7 @@ class Event extends RequestCollection
             'm_t'                          => $item->getMediaType(),
             'tracking_token'               => $item->getOrganicTrackingToken(),
             'source_of_action'             => $module,
-            'follow_status'                => empty($options['following']) ? 'not_following' : 'following',
+            'follow_status'                => $this->_setFollowStatus($item, $options),
             'elapsed_time_since_last_item' => -1,
             'viewer_session_id'            => $options['viewer_session_id'],
             'tray_session_id'              => $options['tray_session_id'],
@@ -2407,7 +2435,7 @@ class Event extends RequestCollection
                 'm_t'                       => $item->getMediaType(),
                 'tracking_token'            => $item->getOrganicTrackingToken(),
                 'source_of_action'          => $module,
-                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
+                'follow_status'             => $this->_setFollowStatus($item, $options),
                 'm_ix'                      => 3, // ?
                 'imp_logger_ver'            => 16,
                 'is_app_backgrounded'       => 'false',
@@ -2450,7 +2478,7 @@ class Event extends RequestCollection
             'm_t'                               => $item->getMediaType(),
             'tracking_token'                    => $item->getOrganicTrackingToken(),
             'source_of_action'                  => $options['module'] ?? 'feed_timeline',
-            'follow_status'                     => isset($options['following']) ? 'following' : 'not_following',
+            'follow_status'                     => $this->_setFollowStatus($item, $options),
             'm_ix'                              => 0,
             'carousel_index'                    => $options['carousel_index'] ?? 0,
             'carousel_media_id'                 => isset($options['carousel_index']) ? $item->getCarouselMedia()[$options['carousel_index']]->getId() : $item->getCarouselMedia()[0]->getId(),
@@ -2499,7 +2527,7 @@ class Event extends RequestCollection
             'action'					                       => $options['action'] ?? 'tap_forward',
             'elapsed_time_since_last_item'      => $options['elapsed_time_since_last_item'] ?? -1,
             'source_of_action'                  => $module,
-            'follow_status'                     => isset($options['following']) ? 'following' : 'not_following',
+            'follow_status'                     => $this->_setFollowStatus($item, $options),
             'viewer_session_id'                 => $viewerSessionId,
             'tray_session_id'                   => $traySessionId,
             'reel_tray_resorted_on_client_side' => false,
@@ -2572,7 +2600,7 @@ class Event extends RequestCollection
             'action'					                           => $options['action'] ?? 'tap_forward',
             'elapsed_time_since_last_item'          => $options['elapsed_time_since_last_item'] ?? -1,
             'source_of_action'                      => $module,
-            'follow_status'                         => isset($options['following']) ? 'following' : 'not_following',
+            'follow_status'                         => $this->_setFollowStatus($item, $options),
             'viewer_session_id'                     => $viewerSessionId,
             'tray_session_id'                       => $traySessionId,
             'story_ranking_token'                   => $rankingToken,
@@ -3255,7 +3283,7 @@ class Event extends RequestCollection
         if ($module === 'feed_contextual_profile') {
             $event = 'instagram_organic_viewed_impression';
             $extra['source_of_action'] = $module;
-            $extra['follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['follow_status'] = $this->_setFollowStatus($item, $options);
             $extra['m_ix'] = 17; // ?
             $extra['imp_logger_ver'] = 21;
             $extra['media_thumbnail_section'] = 'grid';
@@ -3266,7 +3294,7 @@ class Event extends RequestCollection
             $event = 'instagram_organic_reel_viewed_impression';
             $extra['action'] = null;
             $extra['source_of_action'] = $module;
-            $extra['follow_status'] = isset($options['following']) ? 'following' : 'not_following';
+            $extra['follow_status'] = $this->_setFollowStatus($item, $options);
             $extra['viewer_session_id'] = $viewerSessionId;
             $extra['tray_session_id'] = $traySessionId;
             $extra['reel_id'] = $item->getId();
@@ -3361,7 +3389,7 @@ class Event extends RequestCollection
                 'm_t'                          => $item->getMediaType(),
                 'tracking_token'               => $item->getOrganicTrackingToken(),
                 'source_of_action'             => $module,
-                'follow_status'                => empty($options['following']) ? 'not_following' : 'following',
+                'follow_status'                => $this->_setFollowStatus($item, $options),
                 'elapsed_time_since_last_item' => -1,
                 'viewer_session_id'            => $viewerSessionId,
                 'tray_session_id'              => $traySessionId,
@@ -3390,7 +3418,7 @@ class Event extends RequestCollection
                 'm_t'                       => $item->getMediaType(),
                 'tracking_token'            => $item->getOrganicTrackingToken(),
                 'source_of_action'          => $module,
-                'follow_status'             => isset($options['following']) ? 'following' : 'not_following',
+                'follow_status'             => $this->_setFollowStatus($item, $options),
                 'm_ix'                      => 3, // ?
                 'imp_logger_ver'            => 16,
                 'is_app_backgrounded'       => 'false',
@@ -3461,7 +3489,7 @@ class Event extends RequestCollection
             'm_t'                          => $item->getMediaType(),
             'tracking_token'               => $item->getOrganicTrackingToken(),
             'source_of_action'             => $module,
-            'follow_status'                => empty($options['following']) ? 'not_following' : 'following',
+            'follow_status'                => $this->_setFollowStatus($item, $options),
             'action'                       => $action,
             'elapsed_time_since_last_item' => -1,
             'entry_point'                  => $entrypoint,
@@ -3513,7 +3541,7 @@ class Event extends RequestCollection
                 'm_t'                         => $item->getMediaType(),
                 'tracking_token'              => $item->getOrganicTrackingToken(),
                 'source_of_action'            => $module,
-                'follow_status'               => isset($options['following']) ? 'following' : 'not_following',
+                'follow_status'               => $this->_setFollowStatus($item, $options),
                 'm_ix'                        => 14, // ?
                 'is_dash_eligible'            => 1,
                 'video_codec'                 => $item->getVideoCodec(),
@@ -6057,7 +6085,7 @@ class Event extends RequestCollection
                 'entity_page_id'            => $item->getUser()->getPk(),
             ];
             if ($module !== 'feed_contextual_self_profile') {
-                $extra['follow_status'] = $followingUserStatus;
+                $extra['follow_status'] = $this->_setFollowStatus($item, ['follow_status'   => $followingUserStatus]);
             }
         } elseif ($module === 'feed_contextual_chain') {
             $extra = [
@@ -6067,7 +6095,7 @@ class Event extends RequestCollection
                 'm_t'                       => $item->getMediaType(),
                 'tracking_token'            => $item->getOrganicTrackingToken(),
                 'source_of_action'          => $module,
-                'follow_status'             => $followingUserStatus,
+                'follow_status'             => $this->_setFollowStatus($item, ['follow_status'   => $followingUserStatus]),
                 'connection_id'             => '180',
                 'imp_logger_ver'            => 16,
                 'avgViewPercent'            => 1,
@@ -6087,7 +6115,7 @@ class Event extends RequestCollection
                 'm_pk'                      => $item->getId(),
                 'hashtag_id'                => $options['hashtag_id'],
                 'hashtag_name'              => $options['hashtag_name'],
-                'hashtag_follow_status'     => isset($options['following']) ? 'following' : 'not_following',
+                'hashtag_follow_status'     => $this->_setFollowStatus($item, $options),
                 'hashtag_feed_type'         => $options['feed_type'] ?? 'top',
                 'tab_index'                 => $options['tab_index'] ?? 0,
                 'source_of_action'          => $module,

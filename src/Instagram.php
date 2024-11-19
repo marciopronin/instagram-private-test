@@ -341,6 +341,13 @@ class Instagram implements ExperimentsInterface
     public $customDeviceString;
 
     /**
+     * Custom filter for selecting devices.
+     *
+     * @var callable|null
+     */
+    public $deviceFilter;
+
+    /**
      * Custom Device string.
      *
      * @var string|null
@@ -4707,7 +4714,8 @@ class Instagram implements ExperimentsInterface
             $this->getPlatform(),
             $this->getIosModel(),
             $this->getIosDpi(),
-            $this->enableResolutionCheck
+            $this->enableResolutionCheck,
+            $this->deviceFilter
         );
 
         // Get active device string so that we can compare it to any saved one.
@@ -5987,7 +5995,8 @@ class Instagram implements ExperimentsInterface
                 self::$sendAsync = false;
             } else {
                 try {
-                    $this->story->getReelsTrayFeed('cold_start');
+                    $trayFeed = $this->story->getReelsTrayFeed('cold_start');
+                    $this->initTrayFeed = $trayFeed;
                 } catch (Exception\LoginRequiredException $e) {
                     if (!self::$manuallyManageLoginException) {
                         if (isset($e->getResponse()->asArray()['logout_reason'])) {

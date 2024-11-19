@@ -1,3 +1,17 @@
+# Stable release v22.32.0
+## Date: 19/11/2024
+
+### New features
+
+- **Event:** Add `_setFollowStatus()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_setUser()`
+- **GoodDevices:** Update `getRandomGoodDevice()`
+- **Device:** Update `__construct()`
+- **Instagram:** Update `_sendLoginFlow()`
+
 # Stable release v22.31.3
 ## Date: 14/11/2024
 

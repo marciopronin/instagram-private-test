@@ -5842,7 +5842,7 @@ class Instagram implements ExperimentsInterface
                                     // pass
                                 }
 
-                                return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
+                                return $this->_login($this->username, $this->password, true, $appRefreshInterval);
                             } else {
                                 // If our session cookies are expired, we were now told to login,
                                 // so handle that by running a forced relogin in that case!
@@ -6006,7 +6006,7 @@ class Instagram implements ExperimentsInterface
                                 // pass
                             }
 
-                            return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
+                            return $this->_login($this->username, $this->password, true, $appRefreshInterval);
                         } else {
                             // If our session cookies are expired, we were now told to login,
                             // so handle that by running a forced relogin in that case!

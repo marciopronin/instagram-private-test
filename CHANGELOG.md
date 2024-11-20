@@ -1,3 +1,10 @@
+# Stable release v22.33.0
+## Date: 20/11/2024
+
+### New features
+
+- **Web:** Add `getMediaInfoQuery()`
+
 # Stable release v22.32.2
 ## Date: 20/11/2024
 

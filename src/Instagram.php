@@ -2393,7 +2393,7 @@ class Instagram implements ExperimentsInterface
                     $loginResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
                 } else {
                     // $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
-                    $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']), 'bk.action.map.Make');
+                    $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']), 'bk.action.caa.HandleLoginResponse');
                 }
 
                 $errorMap = [];
@@ -6156,7 +6156,7 @@ class Instagram implements ExperimentsInterface
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
 
         if (isset($loginResponseWithHeaders['assistive_id_type'])) {
-            $msg = sprintf('Identification error. Identification error. Account suspended or shadow banned. Maybe you meant username: %s?', $loginResponseWithHeaders['username']);
+            $msg = sprintf('Identification error. Account suspended or shadow banned. Maybe you meant username: %s?', $loginResponseWithHeaders['username']);
             $loginResponse = new Response\LoginResponse([
                 'error_type'    => 'identification_error',
                 'status'        => 'fail',

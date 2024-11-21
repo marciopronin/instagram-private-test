@@ -401,10 +401,20 @@ class Event extends RequestCollection
         }
 
         if ($item->getUser() && $item->getUser()->getFriendshipStatus()) {
-            return $item->getUser()->getFriendshipStatus()->getFollowing();
+            return $item->getUser()->getFriendshipStatus()->getFollowing() ? 'following' : 'not_following';
         }
 
-        return $options['follow_status'] ?? 'not_following';
+        if (is_bool($options['follow_status'])) {
+            return $options['follow_status'] ? 'following' : 'not_following';
+        }
+
+        if (in_array($options['follow_status'], ['following', 'not_following'], true)) {
+            return $options['follow_status'];
+        } else {
+            throw new \InvalidArgumentException(
+                'Invalid value for follow_status. It must be either following or not_following.'
+            );
+        }
     }
 
     /**
@@ -660,8 +670,8 @@ class Event extends RequestCollection
         $request = $this->ig->request(Constants::GRAPH_API_URL)
           ->setSignedPost(false)
           ->setNeedsAuth(false)
-          ->addHeader('X-FB-Connection-Type', ($this->ig->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)')
-          ->addHeader('X-IG-Connection-Type', ($this->ig->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)')
+          ->addHeader('X-FB-Connection-Type', $this->ig->getConnectionType('fb'))
+          ->addHeader('X-IG-Connection-Type', $this->ig->getConnectionType('ig'))
           ->addHeader('X-IG-Capabilities', Constants::X_IG_Capabilities)
           ->addHeader('X-IG-APP-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
           ->addHeader('Priority', 'u=5, i')
@@ -689,7 +699,7 @@ class Event extends RequestCollection
                     'request_info'  => [
                         'tier'              => 'micro_batch',
                         'carrier'           => $this->ig->getCarrier(),
-                        'conn'              => Constants::X_IG_Connection_Type,
+                        'conn'              => $this->ig->getConnectionType('ig'),
                     ],
                     'config'        => [
                         'config_checksum'       => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
@@ -711,7 +721,7 @@ class Event extends RequestCollection
                             'tier'              => 'micro_batch',
                             'sent_time'         => str_replace('+', '', sprintf('%.12E', round(microtime(true), 2))),
                             'carrier'           => $this->ig->getCarrier(),
-                            'conn'              => Constants::X_IG_Connection_Type,
+                            'conn'              => $this->ig->getConnectionType('ig'),
                         ],
                         'config'        => [
                             'config_checksum'       => empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum'),
@@ -729,7 +739,7 @@ class Event extends RequestCollection
                     $batches[0]['tier'] = 'micro_batch';
                     $batches[0]['sent_time'] = str_replace('+', '', sprintf('%.12E', round(microtime(true), 2)));
                     $batches[0]['carrier'] = $this->ig->getCarrier();
-                    $batches[0]['conn'] = Constants::X_IG_Connection_Type;
+                    $batches[0]['conn'] = $this->ig->getConnectionType('ig');
                     $batches[0]['config_checksum'] = empty($this->ig->settings->get('checksum')) ? null : $this->ig->settings->get('checksum');
                     $batches[0]['config_version'] = 'v2';
                     $batches[0]['qpl_config_version'] = 'v7';
@@ -878,7 +888,7 @@ class Event extends RequestCollection
             $extra['is_facebook_app_installed'] = $options['is_facebook_app_installed'] ?? (bool) random_int(0, 1);
             $extra['did_facebook_sso'] = false;
             $extra['did_log_in'] = false;
-            $extra['network_type'] = Constants::X_IG_Connection_Type;
+            $extra['network_type'] = $this->ig->getConnectionType('ig');
             $extra['app_lang'] = $this->ig->getLocale();
             $extra['device_lang'] = $this->ig->getLocale();
             $extra['funnel_name'] = 'landing';
@@ -6828,7 +6838,7 @@ class Event extends RequestCollection
             'session_id'        => $uploadId,
             'media_type'        => $mediaType,
             'from'              => 'NOT_UPLOADED',
-            'connection'        => 'WIFI',
+            'connection'        => $this->ig->getConnectionType('ig'),
             'share_type'        => 'UNKNOWN',
             'waterfall_id'      => $waterfallId,
             'ingest_id'         => $uploadId,
@@ -6868,7 +6878,7 @@ class Event extends RequestCollection
             'session_id'        => $uploadId,
             'media_type'        => ($mediaType === 1) ? 'PHOTO' : 'VIDEO',
             'from'              => 'NOT_UPLOADED',
-            'connection'        => 'WIFI',
+            'connection'        => $this->ig->getConnectionType('ig'),
             'share_type'        => 'UNKNOWN',
             'waterfall_id'      => $waterfallId,
             'is_carousel_child' => (string) $isCarousel,
@@ -6906,7 +6916,7 @@ class Event extends RequestCollection
             'session_id'        => $uploadId,
             'media_type'        => ($mediaType === 1) ? 'PHOTO' : 'VIDEO',
             'from'              => 'UPLOADED',
-            'connection'        => 'WIFI',
+            'connection'        => $this->ig->getConnectionType('ig'),
             'share_type'        => 'UNKNOWN',
             'waterfall_id'      => $waterfallId,
             'is_carousel_child' => (string) $isCarousel,
@@ -6957,7 +6967,7 @@ class Event extends RequestCollection
             'session_id'                            => $uploadId,
             'media_type'                            => $mediaType,
             'from'                                  => 'UPLOADED',
-            'connection'                            => 'WIFI',
+            'connection'                            => $this->ig->getConnectionType('ig'),
             'share_type'                            => 'FOLLOWERS_SHARE',
             'source_type'                           => '4',
             'original_width'                        => 0,

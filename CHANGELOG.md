@@ -1,3 +1,21 @@
+# Stable release v22.34.0
+## Date: 21/11/2024
+
+### New features
+
+- **Instagram:** Add `getConnectionType()`
+
+### Fixes and updates
+
+- **Request:** Update `_addDefaultHeaders()`
+- **Internal:** Update `_uploadResumablePhoto()`
+- **Event:** Update `_sendBatchEvents()`
+- **Event:** Update `sendFlowSteps()`
+- **Event:** Update `startIngestMedia()`
+- **Event:** Update `startUploadAttempt()`
+- **Event:** Update `uploadMediaSuccess()`
+- **Event:** Update `sendConfigureMedia()`
+
 # Stable release v22.33.0
 ## Date: 20/11/2024
 

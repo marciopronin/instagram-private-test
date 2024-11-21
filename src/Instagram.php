@@ -1146,6 +1146,23 @@ class Instagram implements ExperimentsInterface
     }
 
     /**
+     * Get the connection type based on radio type.
+     *
+     * @param string $platform Platform.
+     *
+     * @return string
+     */
+    public function getConnectionType(
+        $platform = 'ig'
+    ) {
+        if ($this->getRadioType() === 'wifi-none') {
+            return Constants::X_IG_Connection_Type; // Default
+        } else {
+            return ($platform === 'ig') ? 'MOBILE(LTE)' : 'MOBILE.LTE';
+        }
+    }
+
+    /**
      * Set the timezone offset.
      *
      * @param int $value Timezone offset.

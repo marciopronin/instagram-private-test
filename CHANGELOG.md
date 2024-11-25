@@ -1,3 +1,11 @@
+# Stable release v22.34.1
+## Date: 25/11/2024
+
+### Fixes and updates
+
+- **Constants:** Update constants to 358.0.0.51.97
+- **Internal:** Update to `getMobileConfig()`
+
 # Stable release v22.34.0
 ## Date: 21/11/2024
 

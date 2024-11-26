@@ -2976,22 +2976,36 @@ class Instagram implements ExperimentsInterface
     ) {
         if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || isset($this->bloksInfo['context_data']) || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker') {
             $serverParams = [
-                'context_data'                  => $this->bloksInfo['context_data'],
-                'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
+                'context_data' => $this->bloksInfo['context_data'],
             ];
+
+            if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id'])) {
+                $serverParams['INTERNAL_INFRA_screen_id'] = $this->bloksInfo['INTERNAL_INFRA_screen_id'];
+            }
         } else {
             $serverParams = [
                 'two_step_verification_context' => $this->bloksInfo['two_step_verification_context'],
                 // 'INTERNAL_INFRA_THEME'          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
-                'flow_source'                   => $this->bloksInfo['flow_source'],
-                'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
+                'flow_source'                   => $this->bloksInfo['flow_source'] ?? 'two_factor_login',
             ];
+
+            if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id'])) {
+                $serverParams['INTERNAL_INFRA_screen_id'] = $this->bloksInfo['INTERNAL_INFRA_screen_id'];
+            }
         }
+
+        $serverParams['family_device_id'] = $this->phone_id;
+        $serverParams['device_id'] = $this->device_id;
 
         return $this->request("bloks/apps/{$endpoint}/")
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'device_id'             => $this->device_id,
+                    'is_whatsapp_installed' => 0,
+                    'machine_id'            => $this->settings->get('mid'),
+                ],
                 'server_params'         => $serverParams,
             ]))
             ->addPost('bk_client_context', json_encode([

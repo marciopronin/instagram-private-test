@@ -1,9 +1,16 @@
+# Stable release v22.34.3
+## Date: 26/11/2024
+
+### Fixes and updates
+
+- **Instagram:** Update `getTwoFactorBloksScreen()`
+
 # Stable release v22.34.2
 ## Date: 26/11/2024
 
 ### Fixes and updates
 
-- **Instagram:** Update `_login_()`
+- **Instagram:** Update `_login()`
 - **Instagram:** Update `getForgotPasswordLink()`
 - **Instagram:** Update `getTwoFactorBloksScreen()`
 

@@ -122,6 +122,8 @@ class Device implements DeviceInterface
      * @param string|null $iosModel              Custom iOS Model.
      * @param string|null $iosDpi                Custom iOS DPI.
      * @param bool        $enableResolutionCheck Enable resolution check.
+     * @param callable|null
+     * @param mixed|null $deviceFilter
      *
      * @throws \RuntimeException If fallback is disabled and device is invalid.
      */
@@ -135,7 +137,8 @@ class Device implements DeviceInterface
         $platform = 'android',
         $iosModel = null,
         $iosDpi = null,
-        $enableResolutionCheck = false
+        $enableResolutionCheck = false,
+        $deviceFilter = null
     ) {
         $this->_appVersion = $appVersion;
         $this->_versionCode = $versionCode;
@@ -147,7 +150,7 @@ class Device implements DeviceInterface
 
         // Use the provided device if a valid good device. Otherwise use random.
         if ($autoFallback && (!is_string($deviceString) || !GoodDevices::isGoodDevice($deviceString)) && $platform !== 'ios') {
-            $deviceString = GoodDevices::getRandomGoodDevice();
+            $deviceString = GoodDevices::getRandomGoodDevice($deviceFilter);
         }
 
         // Initialize ourselves from the device string.

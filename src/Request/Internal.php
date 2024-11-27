@@ -1918,13 +1918,13 @@ class Internal extends RequestCollection
                 ->setNeedsAuth(false)
                 ->addPost('mobileconfigsessionless', '')
                 ->addPost('unit_type', 1)
-                ->addPost('query_hash', 'e7dd2e40deeb3183a2c9e26eb5dc986261c97494e0b7dcfdc0d11a334fcd111b')
+                ->addPost('query_hash', 'e4d451e8f425b4ca9c721fb986b00d8c74d1ea8ea137da78da61d7513ce496ca')
                 ->addPost('family_device_id', $this->ig->phone_id === null ? 'EMPTY_FAMILY_DEVICE_ID' : strtoupper($this->ig->phone_id));
         } else {
             $request
                 ->addPost('mobileconfig', '')
                 ->addPost('unit_type', 2)
-                ->addPost('query_hash', '43d1dfeae9e5e3f4a945fed3161b8b2ebf025f482abd940152dd309b1e018468')
+                ->addPost('query_hash', 'e8837c0fd9527a52bc07e9dcc3a15301b70fbd9110b11e13ef1dd031ae2501b7')
                 ->addPost('_uid', $this->ig->account_id)
                 ->addPost('_uuid', $this->ig->uuid);
         }
@@ -3374,8 +3374,8 @@ class Internal extends RequestCollection
             ->addHeader('X-Entity-Type', ($targetFeed !== Constants::FEED_DIRECT && $targetFeed !== Constants::PROFILE_PIC) ? 'image/webp' : 'image/jpeg')
             ->addHeader('X-Entity-Name', basename(parse_url($endpoint, PHP_URL_PATH)))
             ->addHeader('X-Entity-Length', $photoDetails->getFilesize())
-            ->addHeader('X-FB-Connection-Type', ($this->ig->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)')
-            ->addHeader('X-IG-Connection-Type', ($this->ig->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)')
+            ->addHeader('X-FB-Connection-Type', $this->ig->getConnectionType('fb'))
+            ->addHeader('X-IG-Connection-Type', $this->ig->getConnectionType('ig'))
             ->addHeader('X-IG-App-ID', Constants::FACEBOOK_ANALYTICS_APPLICATION_ID)
             ->addHeader('X-IG-Capabilities', Constants::X_IG_Capabilities)
             ->addHeader('X-FB-HTTP-Engine', Constants::X_FB_HTTP_Engine)

@@ -1,3 +1,95 @@
+# Stable release v22.34.3
+## Date: 26/11/2024
+
+### Fixes and updates
+
+- **Instagram:** Update `getTwoFactorBloksScreen()`
+
+# Stable release v22.34.2
+## Date: 26/11/2024
+
+### Fixes and updates
+
+- **Instagram:** Update `_login()`
+- **Instagram:** Update `getForgotPasswordLink()`
+- **Instagram:** Update `getTwoFactorBloksScreen()`
+
+# Stable release v22.34.1
+## Date: 25/11/2024
+
+### Fixes and updates
+
+- **Constants:** Update constants to 358.0.0.51.97
+- **Internal:** Update to `getMobileConfig()`
+
+# Stable release v22.34.0
+## Date: 21/11/2024
+
+### New features
+
+- **Instagram:** Add `getConnectionType()`
+
+### Fixes and updates
+
+- **Request:** Update `_addDefaultHeaders()`
+- **Internal:** Update `_uploadResumablePhoto()`
+- **Event:** Update `_sendBatchEvents()`
+- **Event:** Update `sendFlowSteps()`
+- **Event:** Update `startIngestMedia()`
+- **Event:** Update `startUploadAttempt()`
+- **Event:** Update `uploadMediaSuccess()`
+- **Event:** Update `sendConfigureMedia()`
+
+# Stable release v22.33.0
+## Date: 20/11/2024
+
+### New features
+
+- **Web:** Add `getMediaInfoQuery()`
+
+# Stable release v22.32.2
+## Date: 20/11/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_processSuccesfulLoginResponse()`
+
+# Stable release v22.32.1
+## Date: 19/11/2024
+
+### Updates and fixes
+
+- **Instagram:** Update `_login()`
+
+# Stable release v22.32.0
+## Date: 19/11/2024
+
+### New features
+
+- **Event:** Add `_setFollowStatus()`
+
+### Updates and fixes
+
+- **Instagram:** Update `_setUser()`
+- **GoodDevices:** Update `getRandomGoodDevice()`
+- **Device:** Update `__construct()`
+- **Instagram:** Update `_sendLoginFlow()`
+
+# Stable release v22.31.3
+## Date: 14/11/2024
+
+### Updates and fixes
+
+- **ServerMessageThrower:** Update `EXCEPTION_MAP`
+
+# Stable release v22.31.2
+## Date: 14/11/2024
+
+### Updates and fixes
+
+- **Event:** Update `_sendBatchEvents()`
+- **Middleware:** Update ProxyHandler
+
 # Stable release v22.31.1
 ## Date: 13/11/2024
 

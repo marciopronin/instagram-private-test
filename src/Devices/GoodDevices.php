@@ -24820,11 +24820,23 @@ class GoodDevices
     /**
      * Retrieve the device string for a random good device.
      *
+     * @param callable|null $filter
+     *
      * @return string
      */
-    public static function getRandomGoodDevice()
-    {
+    public static function getRandomGoodDevice(
+        ?callable $filter = null
+    ) {
         $goodDevices = self::DEVICES;
+
+        if ($filter !== null) {
+            $goodDevices = array_filter($goodDevices, $filter);
+        }
+
+        if (empty($goodDevices)) {
+            throw new \Exception('No devices match the provided filter.');
+        }
+
         $randomIdx = array_rand($goodDevices, 1);
 
         return $goodDevices[$randomIdx];

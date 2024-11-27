@@ -341,6 +341,13 @@ class Instagram implements ExperimentsInterface
     public $customDeviceString;
 
     /**
+     * Custom filter for selecting devices.
+     *
+     * @var callable|null
+     */
+    public $deviceFilter;
+
+    /**
      * Custom Device string.
      *
      * @var string|null
@@ -1136,6 +1143,23 @@ class Instagram implements ExperimentsInterface
     public function getRadioType()
     {
         return $this->radio_type;
+    }
+
+    /**
+     * Get the connection type based on radio type.
+     *
+     * @param string $platform Platform.
+     *
+     * @return string
+     */
+    public function getConnectionType(
+        $platform = 'ig'
+    ) {
+        if ($this->getRadioType() === 'wifi-none') {
+            return Constants::X_IG_Connection_Type; // Default
+        } else {
+            return ($platform === 'ig') ? 'MOBILE(LTE)' : 'MOBILE.LTE';
+        }
     }
 
     /**
@@ -2106,13 +2130,13 @@ class Instagram implements ExperimentsInterface
                 $thirdDataBlok = null;
                 $fourthDataBlock = null;
                 foreach ($mainBloks as $mainBlok) {
-                    if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
+                    if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id')) {
                         $firstDataBlok = $mainBlok;
                     }
                     if (str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
                         $firstDataBlokBack = $mainBlok;
                     }
-                    if (str_contains($mainBlok, 'typeahead_id') && str_contains($mainBlok, 'text_input_id') && str_contains($mainBlok, 'text_component_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
+                    if (str_contains($mainBlok, 'typeahead_id') && str_contains($mainBlok, 'text_input_id') && str_contains($mainBlok, 'text_component_id')) {
                         $secondDataBlok = $mainBlok;
                     }
                     if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
@@ -2201,19 +2225,21 @@ class Instagram implements ExperimentsInterface
                 }
                 */
 
-                $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
-                $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL_INFRA_THEME'), 0, -2);
+                if ($secondDataBlok !== null) {
+                    $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
+                    $offsets = array_slice($this->bloks->findOffsets($parsed, 'text_input_id'), 0, -2);
 
-                foreach ($offsets as $offset) {
-                    if (isset($parsed[$offset])) {
-                        $parsed = $parsed[$offset];
-                    } else {
-                        break;
+                    foreach ($offsets as $offset) {
+                        if (isset($parsed[$offset])) {
+                            $parsed = $parsed[$offset];
+                        } else {
+                            break;
+                        }
                     }
-                }
 
-                $secondMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
-                $this->bloksInfo = array_merge($secondMap, $this->bloksInfo);
+                    $secondMap = $this->bloks->map_arrays($parsed[0], $parsed[1]);
+                    $this->bloksInfo = array_merge($secondMap, $this->bloksInfo);
+                }
 
                 if ($thirdDataBlok !== null) {
                     $parsed = $this->bloks->parseBlok($thirdDataBlok, 'bk.action.map.Make');
@@ -2347,6 +2373,7 @@ class Instagram implements ExperimentsInterface
                             'is_from_landing_page'                          => intval($serverMap['is_from_landing_page'] ?? 0),
                             'password_text_input_id'                        => $serverMap['password_text_input_id'] ?? '',
                             'is_from_empty_password'                        => intval($serverMap['is_from_empty_password'] ?? 0),
+                            'is_from_msplit_fallback'                       => intval($serverMap['is_from_msplit_fallback'] ?? 0),
                             'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
                             'ar_event_source'                               => $serverMap['ar_event_source'] ?? 'login_home_page',
                             'username_text_input_id'                        => $serverMap['username_text_input_id'] ?? '',
@@ -2359,7 +2386,7 @@ class Instagram implements ExperimentsInterface
                             'is_from_password_entry_page'                   => intval($serverMap['is_from_password_entry_page'] ?? 0),
                             'caller'                                        => $serverMap['caller'] ?? 'gslr',
                             'family_device_id'                              => null, // $this->phone_id,
-                            'INTERNAL_INFRA_THEME'                          => $serverMap['INTERNAL_INFRA_THEME'] ?? 'harm_f',
+                            // 'INTERNAL_INFRA_THEME'                          => $serverMap['INTERNAL_INFRA_THEME'] ?? 'harm_f',
                             'is_from_assistive_id'                          => intval($serverMap['is_from_assistive_id'] ?? 0),
                             'access_flow_version'                           => $serverMap['access_flow_version'] ?? 'F2_FLOW',
                             'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
@@ -2386,7 +2413,7 @@ class Instagram implements ExperimentsInterface
                     $loginResponseWithHeaders = $this->bloks->parseBlok($firstDataBlok, 'bk.action.caa.HandleLoginResponse');
                 } else {
                     // $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']['tree']), 'bk.action.caa.HandleLoginResponse');
-                    $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']), 'bk.action.map.Make');
+                    $loginResponseWithHeaders = $this->bloks->parseBlok(json_encode($response->asArray()['layout']['bloks_payload']), 'bk.action.caa.HandleLoginResponse');
                 }
 
                 $errorMap = [];
@@ -2822,7 +2849,7 @@ class Instagram implements ExperimentsInterface
                     'INTERNAL__latency_qpl_marker_id'               => intval($internalLatencyData['com.bloks.www.caa.login.oauth.token.fetch.async']['marker_id'] ?? 0),
                     'family_device_id'                              => $this->phone_id,
                     'offline_experiment_group'                      => $serverMap['offline_experiment_group'] ?? 'caa_iteration_v3_perf_ig_4',
-                    'INTERNAL_INFRA_THEME'                          => $serverMap['INTERNAL_INFRA_THEME'] ?? $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    // 'INTERNAL_INFRA_THEME'                          => $serverMap['INTERNAL_INFRA_THEME'] ?? $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'access_flow_version'                           => $serverMap['access_flow_version'] ?? 'F2_FLOW',
                     'is_from_logged_in_switcher'                    => intval($serverMap['is_from_logged_in_switcher'] ?? 0),
                     'qe_device_id'                                  => $serverMap['qe_device_id'] ?? $this->uuid,
@@ -2919,7 +2946,7 @@ class Instagram implements ExperimentsInterface
                     'INTERNAL__latency_qpl_marker_id'   => intval($internalLatencyData['com.bloks.www.caa.login.cp_text_input_type_ahead']['marker_id'] ?? 0),
                     'family_device_id'                  => $this->phone_id,
                     'offline_experiment_group'          => $serverMap['offline_experiment_group'] ?? 'caa_iteration_v3_perf_ig_4',
-                    'INTERNAL_INFRA_THEME'              => $serverMap['INTERNAL_INFRA_THEME'] ?? $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    // 'INTERNAL_INFRA_THEME'              => $serverMap['INTERNAL_INFRA_THEME'] ?? $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     // 'fdid'                            => isset($this->bloksInfo['fdid']) ? $this->bloksInfo['fdid'] : $this->phone_id,
                     'screen_id'                         => intval($serverMap['screen_id'][1] ?? 0),
                     'access_flow_version'               => $serverMap['access_flow_version'] ?? 'F2_FLOW',
@@ -2949,22 +2976,36 @@ class Instagram implements ExperimentsInterface
     ) {
         if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id']) && $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'generic_code_entry' || isset($this->bloksInfo['context_data']) || $this->bloksInfo['INTERNAL_INFRA_screen_id'] === 'method_picker') {
             $serverParams = [
-                'context_data'                  => $this->bloksInfo['context_data'],
-                'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
+                'context_data' => $this->bloksInfo['context_data'],
             ];
+
+            if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id'])) {
+                $serverParams['INTERNAL_INFRA_screen_id'] = $this->bloksInfo['INTERNAL_INFRA_screen_id'];
+            }
         } else {
             $serverParams = [
                 'two_step_verification_context' => $this->bloksInfo['two_step_verification_context'],
-                'INTERNAL_INFRA_THEME'          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
-                'flow_source'                   => $this->bloksInfo['flow_source'],
-                'INTERNAL_INFRA_screen_id'      => $this->bloksInfo['INTERNAL_INFRA_screen_id'],
+                // 'INTERNAL_INFRA_THEME'          => $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                'flow_source'                   => $this->bloksInfo['flow_source'] ?? 'two_factor_login',
             ];
+
+            if (isset($this->bloksInfo['INTERNAL_INFRA_screen_id'])) {
+                $serverParams['INTERNAL_INFRA_screen_id'] = $this->bloksInfo['INTERNAL_INFRA_screen_id'];
+            }
         }
+
+        $serverParams['family_device_id'] = $this->phone_id;
+        $serverParams['device_id'] = $this->device_id;
 
         return $this->request("bloks/apps/{$endpoint}/")
             ->setNeedsAuth(false)
             ->setSignedPost(false)
             ->addPost('params', json_encode([
+                'client_input_params'   => [
+                    'device_id'             => $this->device_id,
+                    'is_whatsapp_installed' => 0,
+                    'machine_id'            => $this->settings->get('mid'),
+                ],
                 'server_params'         => $serverParams,
             ]))
             ->addPost('bk_client_context', json_encode([
@@ -2993,7 +3034,7 @@ class Instagram implements ExperimentsInterface
                 ],
                 'server_params'         => [
                     // 'offline_experiment_group'          => $this->settings->get('offline_experiment'),
-                    'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    // 'INTERNAL_INFRA_THEME'              => $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'device_id'                         => $this->device_id,
                     'is_platform_login'                 => 0,
                     'qe_device_id'                      => $this->uuid,
@@ -3033,13 +3074,13 @@ class Instagram implements ExperimentsInterface
         $thirdDataBlok = null;
         $fourthDataBlock = null;
         foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
+            if (str_contains($mainBlok, 'INTERNAL__latency_qpl_instance_id') && str_contains($mainBlok, 'INTERNAL__latency_qpl_marker_id')) {
                 $firstDataBlok = $mainBlok;
             }
             if (str_contains($mainBlok, 'ar_event_source') && str_contains($mainBlok, 'event_step')) {
                 $firstDataBlokBack = $mainBlok;
             }
-            if (str_contains($mainBlok, 'typeahead_id') && str_contains($mainBlok, 'text_input_id') && str_contains($mainBlok, 'text_component_id') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
+            if (str_contains($mainBlok, 'typeahead_id') && str_contains($mainBlok, 'text_input_id') && str_contains($mainBlok, 'text_component_id')) {
                 $secondDataBlok = $mainBlok;
             }
             if (str_contains($mainBlok, 'INTERNAL_INFRA_screen_id')) {
@@ -3077,7 +3118,7 @@ class Instagram implements ExperimentsInterface
         }
 
         $parsed = $this->bloks->parseBlok($secondDataBlok, 'bk.action.map.Make');
-        $offsets = array_slice($this->bloks->findOffsets($parsed, 'INTERNAL_INFRA_THEME'), 0, -2);
+        $offsets = array_slice($this->bloks->findOffsets($parsed, 'text_component_id'), 0, -2);
 
         foreach ($offsets as $offset) {
             if (isset($parsed[$offset])) {
@@ -3151,7 +3192,7 @@ class Instagram implements ExperimentsInterface
                     'cds_screen_animation_type'         => 'default',
                     'family_device_id'                  => $this->phone_id,
                     'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
-                    'INTERNAL_INFRA_THEME'              => 'harm_f',
+                    // 'INTERNAL_INFRA_THEME'              => 'harm_f',
                     'access_flow_version'               => 'F2_FLOW',
                     'is_from_logged_in_switcher'        => 0,
                     'current_step'                      => 'LOGIN',
@@ -3309,7 +3350,7 @@ class Instagram implements ExperimentsInterface
                     'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'family_device_id'                  => $this->phone_id,
                     'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
-                    'INTERNAL_INFRA_THEME'              => 'harm_f', // $this->bloksInfo['INTERNAL_INFRA_THEME'],
+                    // 'INTERNAL_INFRA_THEME'              => 'harm_f', // $this->bloksInfo['INTERNAL_INFRA_THEME'],
                     'access_flow_version'               => 'F2_FLOW',
                     'is_from_logged_in_switcher'        => 0,
                     'qe_device_id'                      => $this->uuid,
@@ -3326,7 +3367,7 @@ class Instagram implements ExperimentsInterface
         $mainBloks = $this->bloks->parseResponse($responseArr, '(bk.action.core.TakeLast');
         $firstDataBlok = null;
         foreach ($mainBloks as $mainBlok) {
-            if (str_contains($mainBlok, 'context_data') && str_contains($mainBlok, 'INTERNAL_INFRA_THEME')) {
+            if (str_contains($mainBlok, 'context_data')) {
                 $firstDataBlok = $mainBlok;
             }
         }
@@ -3421,7 +3462,7 @@ class Instagram implements ExperimentsInterface
             'family_device_id'                  => $this->phone_id,
             'offline_experiment_group'          => 'caa_iteration_v3_perf_ig_4',
             'is_feta_account'                   => 0,
-            'INTERNAL_INFRA_THEME'              => 'harm_f,default,harm_f',
+            // 'INTERNAL_INFRA_THEME'              => 'harm_f,default,harm_f',
             'is_auth_method_rejected'           => 1,
             'access_flow_version'               => 'F2_FLOW',
             'is_from_logged_in_switcher'        => 0,
@@ -3540,7 +3581,7 @@ class Instagram implements ExperimentsInterface
                     'context_data'                      => $this->bloksInfo['context_data'],
                     'INTERNAL__latency_qpl_marker_id'   => isset($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && is_array($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) && count($this->bloksInfo['INTERNAL__latency_qpl_marker_id']) > 1 ? intval($this->bloksInfo['INTERNAL__latency_qpl_marker_id'][1]) : 0,
                     'family_device_id'                  => $this->phone_id,
-                    'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f,default,harm_f',
+                    // 'INTERNAL_INFRA_THEME'              => 'harm_f,default,default,harm_f,default,harm_f',
                     'auth_options'                      => ['push_to_session', 'email', 'password'],
                     'access_flow_version'               => 'F2_FLOW',
                     'is_from_logged_in_switcher'        => 0,
@@ -4707,7 +4748,8 @@ class Instagram implements ExperimentsInterface
             $this->getPlatform(),
             $this->getIosModel(),
             $this->getIosDpi(),
-            $this->enableResolutionCheck
+            $this->enableResolutionCheck,
+            $this->deviceFilter
         );
 
         // Get active device string so that we can compare it to any saved one.
@@ -5834,7 +5876,7 @@ class Instagram implements ExperimentsInterface
                                     // pass
                                 }
 
-                                return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
+                                return $this->_login($this->username, $this->password, true, $appRefreshInterval);
                             } else {
                                 // If our session cookies are expired, we were now told to login,
                                 // so handle that by running a forced relogin in that case!
@@ -5987,7 +6029,8 @@ class Instagram implements ExperimentsInterface
                 self::$sendAsync = false;
             } else {
                 try {
-                    $this->story->getReelsTrayFeed('cold_start');
+                    $trayFeed = $this->story->getReelsTrayFeed('cold_start');
+                    $this->initTrayFeed = $trayFeed;
                 } catch (Exception\LoginRequiredException $e) {
                     if (!self::$manuallyManageLoginException) {
                         if (isset($e->getResponse()->asArray()['logout_reason'])) {
@@ -5997,7 +6040,7 @@ class Instagram implements ExperimentsInterface
                                 // pass
                             }
 
-                            return $this->_login($this->username, $this->password, true, $appRefreshInterval, null, true);
+                            return $this->_login($this->username, $this->password, true, $appRefreshInterval);
                         } else {
                             // If our session cookies are expired, we were now told to login,
                             // so handle that by running a forced relogin in that case!
@@ -6147,7 +6190,7 @@ class Instagram implements ExperimentsInterface
         $loginResponseWithHeaders = json_decode($loginResponseWithHeaders, true);
 
         if (isset($loginResponseWithHeaders['assistive_id_type'])) {
-            $msg = sprintf('Identification error. Identification error. Account suspended or shadow banned. Maybe you meant username: %s?', $loginResponseWithHeaders['username']);
+            $msg = sprintf('Identification error. Account suspended or shadow banned. Maybe you meant username: %s?', $loginResponseWithHeaders['username']);
             $loginResponse = new Response\LoginResponse([
                 'error_type'    => 'identification_error',
                 'status'        => 'fail',

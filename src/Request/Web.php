@@ -460,6 +460,47 @@ class Web extends RequestCollection
     }
 
     /**
+     * Get media info.
+     *
+     * @param string $mediaId The media ID in Instagram's web format.
+     *
+     * @throws \InstagramAPI\Exception\InstagramException
+     *
+     * @return Response\GenericResponse
+     */
+    public function getMediaInfoQuery(
+        $mediaId
+    ) {
+        $response = $this->ig->request('https://instagram.com/graphql/query')
+            ->setAddDefaultHeaders(false)
+            ->setNeedsAuth(false)
+            ->setSignedPost(false)
+            ->setIsSilentFail(true)
+            ->addHeader('User-Agent', $this->ig->getWebUserAgent())
+            ->addHeader('X-CSRFToken', $this->ig->client->getToken())
+            ->addHeader('X-Fb-Friendly-Name', 'PolarisPostActionLoadPostQueryQuery')
+            ->addHeader('X-Bloks-Version-Id', '09d4437a3b9f5707ed0adf4614de5f4d546124576e17ba49716eb9823d803aea')
+            ->addPost('fb_api_caller_class', 'RelayModern')
+            ->addPost('fb_api_req_friendly_name', 'PolarisPostActionLoadPostQueryQuery')
+            ->addPost('variables', json_encode(['shortcode'  => $mediaId, 'fetch_tagged_user_count' => null, 'hoisted_comment_id' => null, 'hoisted_reply_id' => null]))
+            ->addPost('server_timestamps', 'true')
+            ->addPost('doc_id', '8845758582119845')
+            ->getResponse(new Response\GenericResponse());
+
+        $arr = $response->asArray();
+        if (isset($arr['data'])) {
+            $data = $arr['data'];
+            foreach ($data as $k => $v) {
+                if (is_array($data[$k])) {
+                    return new Response\MediaInfoResponse($data[$k]);
+                }
+            }
+        }
+
+        return $response;
+    }
+
+    /**
      * Gets information about password changes.
      *
      * @throws \InstagramAPI\Exception\InstagramException

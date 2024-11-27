@@ -480,8 +480,8 @@ class Request
     protected function _addDefaultHeaders()
     {
         if ($this->_defaultHeaders) {
-            $this->_headers['X-FB-Connection-Type'] = ($this->_parent->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)';
-            $this->_headers['X-IG-Connection-Type'] = ($this->_parent->getRadioType() === 'wifi-none') ? Constants::X_IG_Connection_Type : 'MOBILE(LTE)';
+            $this->_headers['X-FB-Connection-Type'] = $this->_parent->getConnectionType('fb');
+            $this->_headers['X-IG-Connection-Type'] = $this->_parent->getConnectionType('ig');
             // $this->_headers['X-IG-Connection-Speed'] = $this->_parent->getConnectionSpeed();
             $this->_headers['X-IG-Device-ID'] = $this->_parent->uuid;
             if ($this->_parent->phone_id !== null) {

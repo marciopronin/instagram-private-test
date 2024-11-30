@@ -140,7 +140,7 @@ class Reel extends RequestCollection
             // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
-            ->addPost('impressions', $mediaIds);
+            ->addPost('impressions', json_encode(json_encode($mediaIds)));
 
         return $request->getResponse(new Response\GenericResponse());
     }

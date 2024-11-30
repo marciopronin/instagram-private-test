@@ -140,6 +140,20 @@ class Reel extends RequestCollection
             // ->addPost('_csrftoken', $this->ig->client->getToken())
             ->addPost('_uuid', $this->ig->uuid)
             ->addPost('_uid', $this->ig->account_id)
+            ->addPost('device_status', json_encode([
+                'battery_level'     => $this->ig->getBatteryLevel(),
+                'is_charging'       => $this->ig->getIsDeviceCharging(),
+                'screen_brightness' => 100,
+                'on_wifi'           => true,
+                'thermal_status'    => -1,
+                'is_powersave'      => false,
+                'hw_av1_dec'        => false,
+                'hw_vp9_dec'        => false,
+                'hw_avc_dec'        => false,
+                '10bit_av1_dec'     => false,
+                '10bit_vp9_dec'     => false,
+                'is_hlg_supported'  => false,
+            ]))
             ->addPost('impressions', json_encode(json_encode($mediaIds)));
 
         return $request->getResponse(new Response\GenericResponse());
